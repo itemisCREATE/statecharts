@@ -17,6 +17,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Constructor;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Domain;
@@ -104,6 +105,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
 			case TypesPackage.TYPED_DECLARATION: return createTypedDeclaration();
 			case TypesPackage.META_COMPOSITE: return createMetaComposite();
+			case TypesPackage.CONSTRUCTOR: return createConstructor();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -179,22 +181,24 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Operation createOperation() {
 		OperationImpl operation = new OperationImpl();
+		operation.setAnnotationInfo(createDeclaration());
 		return operation;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
+		property.setAnnotationInfo(createDeclaration());
 		return property;
 	}
 
@@ -223,22 +227,24 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Event createEvent() {
 		EventImpl event = new EventImpl();
+		event.setAnnotationInfo(createDeclaration());
 		return event;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public EnumerationType createEnumerationType() {
 		EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
+		enumerationType.setAnnotationInfo(createDeclaration());
 		return enumerationType;
 	}
 
@@ -256,11 +262,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public ComplexType createComplexType() {
 		ComplexTypeImpl complexType = new ComplexTypeImpl();
+		complexType.setAnnotationInfo(createDeclaration());
 		return complexType;
 	}
 
@@ -311,11 +318,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public TypeAlias createTypeAlias() {
 		TypeAliasImpl typeAlias = new TypeAliasImpl();
+		typeAlias.setAnnotationInfo(createDeclaration());
 		return typeAlias;
 	}
 
@@ -355,11 +363,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public AnnotationType createAnnotationType() {
 		AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
+		annotationType.setAnnotationInfo(createDeclaration());
 		return annotationType;
 	}
 
@@ -383,6 +392,17 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public MetaComposite createMetaComposite() {
 		MetaCompositeImpl metaComposite = new MetaCompositeImpl();
 		return metaComposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Constructor createConstructor() {
+		ConstructorImpl constructor = new ConstructorImpl();
+		constructor.setAnnotationInfo(createDeclaration());
+		return constructor;
 	}
 
 	/**

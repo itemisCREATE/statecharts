@@ -19,7 +19,6 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfiguration
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator
@@ -51,7 +50,7 @@ class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfi
 			
 			val copyCT = p.eAllContents.filter(ComplexType).toList
 			copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Property).filter[const].toList)]
-			copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.isInnerConstructor) && !(it.isOcbDestructor)].toList)]
+			copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Operation).filter[body !== null].filter[!(it.isInnerConstructor) && !(it.isOcbDestructor)].toList)]
 			classContents.addAll(EcoreUtil.copy(p).member)
 			classContents.filter(ComplexType).forEach[ cT |
 				cT.removeBodysFromOperations

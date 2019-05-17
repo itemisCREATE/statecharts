@@ -69,10 +69,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
 			case StextPackage.INTERNAL_SCOPE: return createInternalScope();
 			case StextPackage.IMPORT_SCOPE: return createImportScope();
-			case StextPackage.EVENT_DEFINITION: return createEventDefinition();
-			case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
-			case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
-			case StextPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
 			case StextPackage.LOCAL_REACTION: return createLocalReaction();
 			case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
 			case StextPackage.GUARD: return createGuard();
@@ -259,50 +255,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public ImportScope createImportScope() {
 		ImportScopeImpl importScope = new ImportScopeImpl();
 		return importScope;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EventDefinition createEventDefinition() {
-		EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
-		return eventDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public VariableDefinition createVariableDefinition() {
-		VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
-		return variableDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public OperationDefinition createOperationDefinition() {
-		OperationDefinitionImpl operationDefinition = new OperationDefinitionImpl();
-		return operationDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public TypeAliasDefinition createTypeAliasDefinition() {
-		TypeAliasDefinitionImpl typeAliasDefinition = new TypeAliasDefinitionImpl();
-		return typeAliasDefinition;
 	}
 
 	/**

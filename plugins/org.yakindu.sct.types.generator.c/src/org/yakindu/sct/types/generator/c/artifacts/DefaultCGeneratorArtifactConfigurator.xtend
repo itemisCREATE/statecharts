@@ -21,7 +21,6 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfiguration
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfigurationExtensions
@@ -64,7 +63,7 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 				headerContents.add(it)
 			]
 			p.member.filter(Operation).forEach [ op |
-				if (op instanceof OperationDefinition) {
+				if (op.body === null) {
 					reqHeaderContents.add(op)
 				} else if (op.public) {
 					val opDecl = EcoreUtil.copy(op)

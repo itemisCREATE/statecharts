@@ -9,13 +9,8 @@
  */
 package org.yakindu.base.expressions.inferrer
 
-import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
-import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN
-import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER
-import static org.yakindu.base.types.typesystem.ITypeSystem.NULL
-import static org.yakindu.base.types.typesystem.ITypeSystem.REAL
-import static org.yakindu.base.types.typesystem.ITypeSystem.STRING
-import static org.yakindu.base.types.typesystem.ITypeSystem.VOID
+import com.google.common.collect.Maps
+import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import java.util.Map
@@ -33,6 +28,7 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.EventClearingExpression
 import org.yakindu.base.expressions.expressions.EventRaisingExpression
 import org.yakindu.base.expressions.expressions.EventValueReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -63,6 +59,8 @@ import org.yakindu.base.expressions.expressions.WhileExpression
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.AnnotationType
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
@@ -71,15 +69,22 @@ import org.yakindu.base.types.GenericElement
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeAlias
 import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer
-import org.yakindu.base.types.validation.IValidationIssueAcceptor
-import com.google.common.collect.Maps
-import com.google.inject.Inject
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.validation.IValidationIssueAcceptor
+
+import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
+import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN
+import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER
+import static org.yakindu.base.types.typesystem.ITypeSystem.NULL
+import static org.yakindu.base.types.typesystem.ITypeSystem.REAL
+import static org.yakindu.base.types.typesystem.ITypeSystem.STRING
+import static org.yakindu.base.types.typesystem.ITypeSystem.VOID
 
 /** 
  * 
@@ -272,6 +277,10 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 		assertAssignable(eventType, valueType, String.format(EVENT_DEFINITION, valueType, eventType))
 		return valueType
 	}
+	
+	def InferenceResult doInfer(EventClearingExpression e) {
+		getResultFor(VOID)
+	}
 
 	def InferenceResult doInfer(EventValueReferenceExpression e) {
 		var Event definition = null
@@ -294,6 +303,10 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 
 	def InferenceResult doInfer(Type type) {
 		return InferenceResult.from(type.getOriginType())
+	}
+	
+	def InferenceResult doInfer(Package pkg) {
+		return null
 	}
 
 	/** 
@@ -537,6 +550,10 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 
 	def InferenceResult doInfer(Operation e) {
 		return if(e.getTypeSpecifier() === null) getResultFor(VOID) else inferTypeDispatch(e.getTypeSpecifier())
+	}
+	
+	def InferenceResult doInfer(Constructor e) {
+		return  InferenceResult.from(EcoreUtil2.getContainerOfType(e, ComplexType)) 
 	}
 
 	def InferenceResult doInfer(Parameter e) {

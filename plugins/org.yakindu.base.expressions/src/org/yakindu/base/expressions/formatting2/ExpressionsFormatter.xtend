@@ -36,6 +36,7 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.WhileExpression
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeSpecifier
+import org.yakindu.base.expressions.expressions.EventClearingExpression
 
 class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 
@@ -47,6 +48,7 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 		]
 		expression.format
 		varRef.format
+		append[newLine]
 	}
 
 	def dispatch void format(ConditionalExpression it, extension IFormattableDocument document) {
@@ -147,11 +149,11 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 	def dispatch void format(BlockExpression it, extension IFormattableDocument document) {
 		interior[indent]
 		regionFor.keywordPairs('{', '}').forEach [
-			key.append[newLines]
+			key.append[newLine]
 			key.prepend[oneSpace]
 			value.prepend[newLine]
 		]
-		expressions.forEach[format]
+		expressions.forEach[format append[newLine]]
 	}
 
 	def dispatch void format(IfExpression it, extension IFormattableDocument document) {
@@ -160,32 +162,58 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 		condition.format
 		then.format
 		^else.format
-		append[newLines]
+		append[newLine]
 	}
 
-	def dispatch void format(SwitchExpression switchExpression, extension IFormattableDocument document) {
+	def dispatch void format(SwitchExpression it, extension IFormattableDocument document) {
+		regionFor.keywordPairs('{', '}').forEach [
+			key.append[newLine]
+			key.prepend[oneSpace]
+			value.prepend[newLine]
+		]
+		cases.forEach[format]
+		regionFor.keyword('default').prepend[newLine]
+		regionFor.keyword(':').surround[noSpace].append[newLine]
+		^default.format
 	}
 
-	def dispatch void format(SwitchCase switchCase, extension IFormattableDocument document) {
+	def dispatch void format(SwitchCase it, extension IFormattableDocument document) {
+		regionFor.keywordPairs('{', '}').forEach [
+			key.append[newLine]
+			key.prepend[oneSpace]
+			value.prepend[newLine]
+		]
+		interior[indent]
+		regionFor.keyword(':').surround[noSpace].append[newLine]
+		regionFor.keyword('case').prepend[newLine]
+		
 	}
 
-	def dispatch void format(EventRaisingExpression eventRaisingExpression, extension IFormattableDocument document) {
+	def dispatch void format(EventRaisingExpression it, extension IFormattableDocument document) {
+		append[newLine]
 	}
+	
+	def dispatch void format(EventClearingExpression it, extension IFormattableDocument document) {
+		append[newLine]
+	}
+	
 
 	def dispatch void format(WhileExpression it, extension IFormattableDocument document) {
+		prepend[newLine]
 		regionFor.keyword("while").append[oneSpace]
 		condition.format
 		body.format
-		append[newLines]
+		append[newLine]
 	}
 
 	def dispatch void format(ForExpression it, extension IFormattableDocument document) {
+		prepend[newLine]
 		regionFor.keyword("for").append[oneSpace]
 		it.varInits.forEach[prepend[noSpace]]
 		condition.format
 		varUpdates.forEach[prepend[noSpace]]
 		body.format
-		append[newLines]
+		append[newLine]
 	}
 
 	def dispatch void format(Property property, extension IFormattableDocument document) {

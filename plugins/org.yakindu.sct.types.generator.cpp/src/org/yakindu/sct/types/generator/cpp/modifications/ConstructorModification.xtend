@@ -16,13 +16,13 @@ import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.AnnotationType
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.CppSlangTypeValueProvider
 import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
@@ -54,7 +54,7 @@ class ConstructorModification implements IModification {
 				cT.features += cT.createOperation(defaultDestructorAnnotation, null)
 			} else {
 				// create constructor only with initialization list, if not abstract
-				if(cT.features.filter(OperationDefinition).nullOrEmpty) {
+				if(cT.features.filter(Operation).filter[body === null].nullOrEmpty) {
 					val parameter = createParentParameter(outerClass)
 					cT.features += cT.createOperation(innerConstructorAnnotation, parameter)
 					cT.features += outerClass.createParentProperty

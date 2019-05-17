@@ -31,7 +31,7 @@ class ModelSequencerNaming {
 	}
 
 	def enumeratorName(RegularState state) {
-		state.fullyQualifiedName.skipFirst(1).toString
+		state.fullyQualifiedName.skipFirst(1).toString.replaceAll("\\.", "_")
 	}
 
 	def noStateName() {

@@ -20,11 +20,11 @@ import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystemAccess
 
 class CExpressionsChecker {
@@ -49,11 +49,11 @@ class CExpressionsChecker {
 		leftOperand.infer.type.isString || rightOperand.infer.type.isString
 	}
 
-	def isConstString(VariableDefinition it) {
+	def isConstString(Property it) {
 		const && isStringType
 	}
 
-	def protected isStringType(VariableDefinition it) {
+	def protected isStringType(Property it) {
 		isString(typeSpecifier.type)
 	}
 
@@ -69,14 +69,14 @@ class CExpressionsChecker {
 	}
 
 	def dispatch CharSequence castToReciever(ElementReferenceExpression it) {
-		if (reference instanceof VariableDefinition) {
+		if (reference instanceof Property) {
 			val originalType = infer(reference)
 			return '''(«getTargetLanguageName(originalType.type)»)'''
 		}
 	}
 
 	def dispatch CharSequence castToReciever(FeatureCall it) {
-		if (feature instanceof VariableDefinition) {
+		if (feature instanceof Property) {
 			val originalType = infer(feature)
 			return '''(«getTargetLanguageName(originalType.type)»)'''
 		}

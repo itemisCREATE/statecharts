@@ -19,7 +19,7 @@ import org.yakindu.base.types.Package
 
 /**
  * The ModificationExecutor holds a set of {@link IModification} instances, obtained via injection
- * (see {@link org.yakindu.slang.SlangGeneratorModule}). It can be used to execute a number of 
+ * (see {@link org.yakindu.sct.types.TypesGeneratorModule}). It can be used to execute a number of 
  * IModification instances on a {@link Collection&lt;{@link org.yakindu.base.types.Package}&gt;.
  * The collection can explicitly be changed during this process.
  * 

@@ -20,6 +20,7 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -37,7 +38,6 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
@@ -94,21 +94,21 @@ class StatemachineMethods {
 	
 	protected def variableInits(Statechart sc) {
 		var List<Expression> inits = newArrayList
-		for (VariableDefinition vd : sc.variablesForInitSequence) {
+		for (Property vd : sc.variablesForInitSequence) {
 			inits += vd.initialization
 		}
 		inits
 	}
 	
 	protected def variablesForInitSequence(Statechart sc) {
-		val statechartVariables = sc.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition)).filter[!const]
+		val statechartVariables = sc.scopes.map(s|s.variables).flatten.filter(Property).filter[!const]
 //		val flow = sc.create
 //		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(
 //			d|d.declaration).filter(typeof(VariableDefinition))
 		return statechartVariables // + importedVariables
 	}
 	
-	protected def initialization(VariableDefinition vd) {
+	protected def initialization(Property vd) {
 		if (vd.effectiveInitialValue !== null) {
 			val owner = vd.eContainer
 			if (owner instanceof InterfaceScope) {
@@ -116,13 +116,13 @@ class StatemachineMethods {
 			} else if (owner instanceof InternalScope) {
 				return owner.property._ref._fc(vd.feature)._assign(vd.effectiveInitialValue.copy)
 			} else {
-				return vd.feature._ref._assign(vd.effectiveInitialValue.copy)
+				return vd.feature._ref._assign(vd.effectiveInitialValue.copy) 
 			}
 		}
 		null
 	}
 	
-	def effectiveInitialValue(VariableDefinition vd) {
+	def effectiveInitialValue(Property vd) {
 		if (vd.initialValue !== null) {
 			return vd.initialValue
 		} else {
@@ -131,7 +131,7 @@ class StatemachineMethods {
 	}
 	
 	def stateVectorInitialization(Statechart sc) {
-		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
+		val i = _variable("stateVectorIndex", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(sc.stateVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				stateVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
@@ -140,7 +140,7 @@ class StatemachineMethods {
 	}
 	
 	def historyStateVectorInitialization(Statechart sc) {
-		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
+		val i = _variable("historyVectorIndex", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(sc.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				historyVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))

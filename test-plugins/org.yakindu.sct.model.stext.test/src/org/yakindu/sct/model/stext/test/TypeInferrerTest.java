@@ -20,10 +20,10 @@ import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.EventRaisingExpression;
 import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
@@ -874,7 +874,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
 	@Test
 	public void testOperationCallWithOptionalParameter() {
-		OperationDefinition opDef = StextTestFactory._createOperation("opWithOptionals",
+		Operation opDef = StextTestFactory._createOperation("opWithOptionals",
 				StextFactory.eINSTANCE.createInternalScope());
 
 		Parameter pReq = typesFactory.createParameter("pReq", ITypeSystem.INTEGER, false);
@@ -1137,5 +1137,14 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		// target type from operation parameter
 		expectOk("cmo.concreteOp(cmo.genericOpWoParams())", scope);
+	}
+	
+	@Test
+	public void testInnerPackageTypeInferrence() {
+		String scope = ""
+			+ "internal: "
+			+ "var e : Types.EnumType = Types.EnumType.FOO";
+		
+		expectOk("e = Types.EnumType.BAR", scope);
 	}
 }

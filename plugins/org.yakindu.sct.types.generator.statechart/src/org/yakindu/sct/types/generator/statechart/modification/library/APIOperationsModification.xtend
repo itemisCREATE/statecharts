@@ -14,11 +14,10 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.base.types.TypeBuilder
 
 class APIOperationsModification implements IModification {
 
@@ -41,7 +40,7 @@ class APIOperationsModification implements IModification {
     }
 
     def modify(Package p) {
-        val ops = p.eAllContents.filter(Operation).filter[!(it instanceof OperationDefinition)].toList
+        val ops = p.eAllContents.filter(Operation).filter[body !== null].toList
         ops.filter[APIOperations.contains(name)].forEach [
             visibility = Visibility.PUBLIC
             static = false

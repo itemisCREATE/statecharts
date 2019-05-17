@@ -124,9 +124,6 @@ class TypeBuilder {
 	}
 
 	def _annotateWith(AnnotatableElement elem, AnnotationType annotationType) {
-		if (elem.annotationInfo === null) {
-			elem.annotationInfo = createAnnotatableElement
-		}
 		elem.annotationInfo.annotations += createAnnotation => [type = annotationType]
 	}
 

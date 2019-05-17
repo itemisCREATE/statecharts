@@ -90,6 +90,7 @@ PrimaryExpression returns types::Expression:
 	| ReturnExpression
 	| ThrowExpression
 	| EventRaisingExpression
+	| EventClearingExpression
 	| ParenthesizedExpression;
 
 PrimitiveValueExpression returns types::Expression:
@@ -116,7 +117,10 @@ SwitchCase:
 
 EventRaisingExpression returns types::Expression:
 	{EventRaisingExpression} 'raise' event=FeatureCall (=> ':' value=ConditionalExpression)?;
-
+	
+EventClearingExpression returns types::Expression:
+	{EventClearingExpression} 'clear' event=FeatureCall;
+	
 WhileExpression returns types::Expression:
 	{WhileExpression} 'while' '(' condition=Expression ')' body=BlockExpression;
 
@@ -144,11 +148,11 @@ Property returns types::Property:
 
 FeatureCall returns types::Expression:
 	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@'))
-	feature=[types::Declaration] (=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')' | =>
+	feature=[types::Declaration|IDOrKeyword] (=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')' | =>
 	(arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*)?)*;
 
 ElementReferenceExpression returns types::Expression:
-	{ElementReferenceExpression} reference=[ecore::EObject|ID] (=> operationCall?='(' (arguments+=Argument (','
+	{ElementReferenceExpression} reference=[ecore::EObject|IDOrKeyword] (=> operationCall?='(' (arguments+=Argument (','
 	arguments+=Argument)*)? ')' | => (arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression
 	']')*)?;
 
@@ -253,6 +257,10 @@ terminal DOUBLE returns ecore::EDouble:
 
 terminal FLOAT returns ecore::EFloat:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F')?;
+
+IDOrKeyword:
+	ID
+;
 
 QID:
 	ID ('.' ID)*;

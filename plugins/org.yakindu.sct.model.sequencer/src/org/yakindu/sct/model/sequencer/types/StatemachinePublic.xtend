@@ -13,9 +13,12 @@ package org.yakindu.sct.model.sequencer.types
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.util.ExpressionBuilder
+import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
@@ -24,10 +27,6 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.base.types.TypeBuilder
-import org.yakindu.sct.model.sequencer.util.SequencerAnnotationConstants
-import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
-import org.yakindu.base.expressions.util.PackageNavigationExtensions
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -44,6 +43,7 @@ import org.yakindu.base.expressions.util.PackageNavigationExtensions
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	
 	@Inject extension IStatemachine 
+	@Inject extension ExpressionBuilder
 	
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension StatemachineInterfaceMethods
@@ -63,6 +63,7 @@ import org.yakindu.base.expressions.util.PackageNavigationExtensions
 			
 			name = sc.name
 			superTypes += createTypeSpecifier => [ type = statemachineInterfaceType ]
+			sc.statemachinePackage.member += statemachineInterfaceType
 			sc.statemachinePackage.member += it
 
 			features += interfaceGroupAnnotation
@@ -91,7 +92,6 @@ import org.yakindu.base.expressions.util.PackageNavigationExtensions
 	def create createEnumerationType statesEnumeration(Statechart sc) {
 		it => [
 			name = sc.statesEnumerationName
-			annotationInfo = createAnnotatableElement
 			enumerator += sc.noState
 			sc.eAllContents.filter(RegularState).forEach [ state |
 				enumerator += state.enumerator
@@ -126,24 +126,27 @@ import org.yakindu.base.expressions.util.PackageNavigationExtensions
 	}
 	
 	def create createProperty property(InterfaceScope iface) {
-		it.typeSpecifier = createTypeSpecifier => [
+		typeSpecifier = createTypeSpecifier => [
 			type = createInterfaceType(iface)
 		]
-		it.name = type.name.toFirstLower
-		it.visibility = Visibility.PUBLIC
+		name = type.name.toFirstLower
+		visibility = Visibility.PUBLIC
+		initialValue = (type as ComplexType)._new
+		
 	}
 	
 	def create createProperty property(InternalScope internal) {
 		it.typeSpecifier = createTypeSpecifier => [
 			type = createInternalType(internal)
 		]
-		it.name = type.name.toFirstLower
-		it.visibility = Visibility.PROTECTED
+		name = type.name.toFirstLower
+		visibility = Visibility.PROTECTED
+		initialValue = (type as ComplexType)._new
 	}
 
 	protected def create createComplexType createInterfaceType(InterfaceScope iface) {
 		it.name = iface.interfaceTypeName
-		
+		it.features += createConstructor
 		iface.declarations.forEach[decl|features += decl.feature]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
@@ -155,7 +158,7 @@ import org.yakindu.base.expressions.util.PackageNavigationExtensions
 	
 	protected def create createComplexType createInternalType(InternalScope internal) {
 		it.name = internalTypeName
-		
+		it.features += createConstructor
 		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		

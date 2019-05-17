@@ -47,7 +47,7 @@ class EventTriggerCreationCommand extends AbstractTransactionalCommand {
 
 	override protected doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) {
 		try {
-			val createdEvent = createEventDefinition() => [
+			val createdEvent = createEvent() => [
 				direction = desiredDirection
 				annotationInfo = createAnnotatableElement;
 			]

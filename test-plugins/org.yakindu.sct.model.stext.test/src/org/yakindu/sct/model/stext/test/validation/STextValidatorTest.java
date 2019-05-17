@@ -55,7 +55,6 @@ import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
@@ -86,7 +85,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	 * @see STextValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
 	@Test
-	public void checkVariableDefinition() {
+	public void checkProperty() {
 		Scope context = (Scope) parseExpression("interface if : var i : void", InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
 		validationResult.assertErrorContains(STextTypeInferrer.VARIABLE_VOID_TYPE);
@@ -269,7 +268,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	@Test
 	public void checkOptionalArgumentsAreLast() {
 		Scope scope = (Scope) super.parseExpression("internal: ", InternalScope.class.getSimpleName());
-		OperationDefinition op = StextTestFactory._createOperation("op", scope);
+		Operation op = StextTestFactory._createOperation("op", scope);
 		tester.validate(scope).assertOK();
 		
 		// optional parameter last => no error
@@ -515,7 +514,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	 * @see STextValidator#checkEventDefinition(org.yakindu.sct.model.stext.stext.EventDefinition)
 	 */
 	@Test
-	public void checkEventDefinition() {
+	public void checkEvent() {
 		// No local declarations in interface scope
 		EObject model = super.parseExpression("interface MyInterface: event Event1",
 				InterfaceScope.class.getSimpleName());

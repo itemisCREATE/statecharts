@@ -6,11 +6,11 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.TypeBuilder
+import org.yakindu.base.types.Visibility
+import org.yakindu.sct.model.sequencer.types.ICycleBasedMachine
 import org.yakindu.sct.model.sequencer.types.StatemachineMethods
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.model.sequencer.types.ICycleBasedMachine
-import org.yakindu.base.types.Visibility
 
 class CycleBasedModification implements IModification {
 	

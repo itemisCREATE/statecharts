@@ -5,6 +5,19 @@ h1(#release_notes). Release Notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.4). YAKINDU Statechart Tools  3.5.4 (May 15, 2019)
+
+This is a bugfix release, containing the following:
+
+* Fixed C code generation when _@ShortCIdentifiers_ annotation is used. In version 3.5.3, this resulted in generation of duplicate react methods.
+* Fixed usage of enumerations within namespaces in C/C++ domain. Enumeration types can now be accessed by qualifiying them with their namespace, and enumerators can be assigned to corresponding variables.
+* Fixed a bug in headless code generation for C/C++ domain statecharts causing header files not being found in certain scenarios.
+* Fixed a bug in Python code generator causing generation errors when variables are used as arguments in operation calls.
+
+h3(#release_notes_3.5.4_c_sharp). Event-driven execution support for C# code generator
+
+The C# code generator now also supports statecharts with event-driven execution semantics. The generated code now contains corresponding run-cycle calls when events are triggered as well as a queue for internal events.
+
 h2(#release_notes_3.5.3). YAKINDU Statechart Tools  3.5.3 (Mar 29, 2019)
 
 This release adds in&#45;event queue support for C and Java code generators as well as some usability improvements.
@@ -414,7 +427,7 @@ For this release, the YAKINDU team fixed 66 Standard Edition and 28 Professional
 * *Built&#45;in variables for the generator model:* Built&#45;in variables like USER, SCTVERSION and TIMESTAMP can be used in the generator model.
 * *C&#43;&#43; domain (beta):* First beta release of deep C&#43;&#43; integration is available. C&#43;&#43; headers can be accessed from the statechart model now.
 
-We also changed the licence management for this release. After 30 days of trial you _need a valid licence file for non&#45;commercial_ use now. YAKINDU Statechart Tools still is and always be free of charge for non&#45;commercial and academic use. You can apply for a non commercial licence here:
+We also changed the license management for this release. After 30 days of trial you _need a valid license file for non&#45;commercial_ use now. YAKINDU Statechart Tools still is and always be free of charge for non&#45;commercial and academic use. You can apply for a non commercial license here:
 
 "_https://info.itemis.com/yakindu/statecharts/non&#45;commercial/order/_":https://info.itemis.com/yakindu/statecharts/non-commercial/order/
 
@@ -441,7 +454,7 @@ With the October release 3.1.0 we introduced "properties and expressions for the
 * USER: Returns the name of the current user 
 * HOSTNAME: Returns the host name of the machine 
 
-These properties can be used within generator model expressions, for example, to add timestamp, user, and version to the licence header in the generated code.
+These properties can be used within generator model expressions, for example, to add timestamp, user, and version to the license header in the generated code.
 
 bc.. 
 feature LicenseHeader {
@@ -586,7 +599,7 @@ This release is the first major release introducing the YAKINDU Statechart Tools
 
 In the last years, YAKINDU Statechart Tools has become more and more popular. This is shown by an ever increasing number of users who use the tool for both commercial and non-commercial purposes, e.g. in academic research. This goes hand in hand with increasing demand for new features and professional support.
 
-In addition to this continuous growth, we also want to ensure sustainable support for the future. So the _Standard Edition_ complements the _Professional Edition_ and we believe that both editions better address our users demand for statechart modeling and development solutions. Both editions are intended for commercial use. For academic and non-commercial use free licences are available.
+In addition to this continuous growth, we also want to ensure sustainable support for the future. So the _Standard Edition_ complements the _Professional Edition_ and we believe that both editions better address our users demand for statechart modeling and development solutions. Both editions are intended for commercial use. For academic and non-commercial use free licenses are available.
 
 The _Standard Edition_ comes with:
 * statechart unit testing support - a widely requested feature (BETA)

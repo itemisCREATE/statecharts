@@ -10,12 +10,9 @@
  */
 package org.yakindu.sct.ui.editor;
 
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.validation.DomainValidator;
 
 /**
  * 
@@ -40,7 +37,6 @@ public class DiagramActivator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT, getPreferenceStore());
-		EValidator.Registry.INSTANCE.put(SGraphPackage.eINSTANCE, new DomainValidator());
 	}
 
 	@Override

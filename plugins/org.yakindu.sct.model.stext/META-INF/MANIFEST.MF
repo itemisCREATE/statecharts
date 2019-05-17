@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SText Model
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.5.3.qualifier
+Bundle-Version: 3.5.4.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.antlr.runtime,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
  org.yakindu.base.types,
  org.yakindu.base.expressions;visibility:=reexport,

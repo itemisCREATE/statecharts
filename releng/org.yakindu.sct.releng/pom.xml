@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>3.5.3-SNAPSHOT</version>
+	<version>3.5.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
@@ -214,7 +214,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.5.3-SNAPSHOT</version>
+									<version>3.5.4-SNAPSHOT</version>
 									<classifier>Neon</classifier>
 								</artifact>
 							</target>
@@ -251,6 +251,11 @@
 								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
 								<version>1.1.100</version>
 							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen</artifactId>
+								<version>2.11.0</version>
+							</dependency>
 						</dependencies>
 					</plugin>
 					<!-- Workaround for https://github.com/eclipse/xtext/issues/1231 -->
@@ -284,6 +289,11 @@
 								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
 								<version>1.1.100</version>
 							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen</artifactId>
+								<version>2.11.0</version>
+							</dependency>
 						</dependencies>
 					</plugin>
 				</plugins>
@@ -312,7 +322,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.5.3-SNAPSHOT</version>
+									<version>3.5.4-SNAPSHOT</version>
 									<classifier>Oxygen</classifier>
 								</artifact>
 							</target>
@@ -349,6 +359,11 @@
 								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
 								<version>1.2.101</version>
 							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen</artifactId>
+								<version>2.11.0</version>
+							</dependency>
 						</dependencies>
 					</plugin>
 					<!-- Workaround for https://github.com/eclipse/xtext/issues/1231 -->
@@ -382,6 +397,11 @@
 								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
 								<version>1.2.101</version>
 							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen</artifactId>
+								<version>2.11.0</version>
+							</dependency>
 						</dependencies>
 					</plugin>
 				</plugins>
@@ -410,7 +430,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.5.3-SNAPSHOT</version>
+									<version>3.5.4-SNAPSHOT</version>
 									<classifier>Photon</classifier>
 								</artifact>
 							</target>
@@ -508,7 +528,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.5.3-SNAPSHOT</version>
+									<version>3.5.4-SNAPSHOT</version>
 									<classifier>2018-09</classifier>
 								</artifact>
 							</target>
@@ -551,7 +571,6 @@
 			</activation>
 			<modules>
 				<!-- test plugins -->
-				<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>
 				<module>../../test-plugins/org.yakindu.sct.generator.genmodel.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.resource.test</module>
@@ -559,10 +578,10 @@
 				<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
 				<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
 				<module>../../test-plugins/org.yakindu.sct.test.models</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.java.test</module>
 				<module>../../test-plugins/org.yakindu.sct.refactoring.tests</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.c.test</module>
+				<!-- <module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module> -->
+				<!-- <module>../../test-plugins/org.yakindu.sct.generator.java.test</module> -->
+				<!-- <module>../../test-plugins/org.yakindu.sct.generator.c.test</module> -->
 				<module>../../plugins/org.yakindu.base.types.test</module>
 				<!-- test feature -->
 				<module>../../features/org.yakindu.sct.test-feature</module>
@@ -633,10 +652,6 @@
 		<module>../../plugins/org.yakindu.sct.ui.editor</module>
 		<module>../../plugins/org.yakindu.sct.ui.intro</module>
 		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
-		<module>../../plugins/org.yakindu.sct.generator.c</module>
-		<module>../../plugins/org.yakindu.sct.generator.cpp</module>
-		<module>../../plugins/org.yakindu.sct.generator.csharp</module>
-		<module>../../plugins/org.yakindu.sct.generator.java</module>
 		<module>../../plugins/org.yakindu.sct.refactoring</module>
 		<module>../../plugins/org.yakindu.sct.branding</module>
 		<module>../../plugins/org.yakindu.sct.examples.wizard</module>

@@ -10,16 +10,14 @@ package org.yakindu.sct.types.generator.statechart.cpp.artifacts
 
 import com.google.inject.Inject
 import java.util.Collection
-import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfiguration
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfigurationExtensions
@@ -30,7 +28,6 @@ import org.yakindu.sct.types.generator.cpp.files.CppStatemachineInterface
 import org.yakindu.sct.types.generator.cpp.files.CppTypes
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 
 class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfigurator {
 
@@ -62,7 +59,7 @@ class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfig
 				statemachineHeader.addDependency(scTypes)
 				
 				statemachineSource.content.addAll(
-					statemachine.eAllContents.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList
+					statemachine.eAllContents.filter(Operation).filter[body !== null].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList
 				)
 				
 				val pkgCopy = EcoreUtil.copy(p)

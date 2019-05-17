@@ -130,42 +130,6 @@ public interface StextFactory extends EFactory {
 	ImportScope createImportScope();
 
 	/**
-	 * Returns a new object of class '<em>Event Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event Definition</em>'.
-	 * @generated
-	 */
-	EventDefinition createEventDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Variable Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Definition</em>'.
-	 * @generated
-	 */
-	VariableDefinition createVariableDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Operation Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Definition</em>'.
-	 * @generated
-	 */
-	OperationDefinition createOperationDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Type Alias Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Alias Definition</em>'.
-	 * @generated
-	 */
-	TypeAliasDefinition createTypeAliasDefinition();
-
-	/**
 	 * Returns a new object of class '<em>Local Reaction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -19,8 +19,8 @@ import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator
 import org.yakindu.sct.types.modification.ModificationExecutor
 
 /**
- * The base implementation of {@link ISlangGenerator}.
- * An instance of this class should be obtained via injection (see {@link SlangGeneratorModule}), because it needs a
+ * The base implementation of {@link ITypesGenerator}.
+ * An instance of this class should be obtained via injection (see {@link TypesGeneratorModule}), because it needs a
  * {@link ModificationExecutor} and a {@link IGeneratorArtifactConfigurator} to adapt the model contents
  * and to decide where the actual files should go.
  */

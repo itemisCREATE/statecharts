@@ -48,19 +48,19 @@ InterfaceScope:
 	{InterfaceScope} 'interface' (name=IDWithKeywords)? ':' (members+=ScopeDeclaration)*;
 
 ScopeDeclaration returns types::AnnotatableElement:
-	{types::AnnotatableElement} annotations+=Annotation*
+	{types::Declaration} annotations+=Annotation*
 	(
-		{VariableDefinition.annotationInfo=current} 
+		{types::Property.annotationInfo=current} 
 		(const?='const' | 'var') ((readonly?='readonly')?) name=IDWithKeywords
 		':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
 	|
-		{EventDefinition.annotationInfo=current}
+		{types::Event.annotationInfo=current}
 		(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?
 	|
-		{TypeAliasDefinition.annotationInfo=current} 
+		{types::TypeAlias.annotationInfo=current} 
 		'alias' name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
 	|
-		{OperationDefinition.annotationInfo=current}
+		{types::Operation.annotationInfo=current}
 		'operation' name=IDWithKeywords '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' 
 		(':' typeSpecifier=TypeSpecifier)?
 	);

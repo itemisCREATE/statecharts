@@ -13,8 +13,8 @@ package org.yakindu.sct.types.generator.modification.library
 import java.util.Collection
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.TypeAlias
 import org.yakindu.base.types.TypeSpecifier
-import org.yakindu.sct.model.stext.stext.TypeAliasDefinition
 import org.yakindu.sct.types.modification.IModification
 
 class AliasReplacementModification implements IModification {
@@ -25,11 +25,11 @@ class AliasReplacementModification implements IModification {
 		}
 	
 		def modify(Package p) {
-		p.eAllContents.filter(TypeSpecifier).filter[type instanceof TypeAliasDefinition].toList.forEach [ typeSpec |
-			val alias = typeSpec.type as TypeAliasDefinition
+		p.eAllContents.filter(TypeSpecifier).filter[type instanceof TypeAlias].toList.forEach [ typeSpec |
+			val alias = typeSpec.type as TypeAlias
 			typeSpec.type = alias.originType
 		]
-		p.eAllContents.filter(TypeAliasDefinition).toList.forEach [ alias |
+		p.eAllContents.filter(TypeAlias).toList.forEach [ alias |
 			EcoreUtil.remove(alias)
 		]
 

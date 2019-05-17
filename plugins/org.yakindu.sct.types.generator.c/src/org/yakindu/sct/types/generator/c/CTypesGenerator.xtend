@@ -17,7 +17,6 @@ import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.AbstractTypesGenerator
 import org.yakindu.sct.types.generator.ITargetPlatform
 import org.yakindu.sct.types.generator.ITypesGenerator
@@ -117,10 +116,10 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
 	'''
 
-	// TODO: add const flag to Parameters
-	def dispatch String doGenerate(OperationDefinition it) '''
-		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»const «p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
-	'''
+//	// TODO: add const flag to Parameters
+//	def dispatch String doGenerate(OperationDefinition it) '''
+//		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»const «p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
+//	'''
 
 	def dispatch String doGenerate(Object o) {
 		'''//Unknown object «o»'''

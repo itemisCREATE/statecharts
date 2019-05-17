@@ -24,7 +24,6 @@ import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
 
@@ -43,21 +42,17 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 	 */
 	protected Stack<String> nameStack = new Stack()
 
-	override dispatch ExecutionSlot create createExecutionSlotFor(variable) transform(VariableDefinition variable) {
-		it.writable = it.writable && !variable.const
-	}
-
 	/**
 	 * Do not use <code>create</code> here because properties within complex types are the same for multiple variables 
 	 * of same complex type
 	 */
-	def dispatch ExecutionSlot transform(Property prop) {
+	override dispatch ExecutionSlot transform(Property prop) {
 		val slot = createExecutionSlotFor(prop)
 		slot.writable = slot.writable && !prop.const
 		slot
 	}
 
-	def dispatch ExecutionSlot transform(Operation op) {
+	override dispatch ExecutionSlot transform(Operation op) {
 		val slot = createExecutionSlotFor(op)
 		slot
 	}

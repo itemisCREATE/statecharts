@@ -22,6 +22,7 @@ import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
@@ -29,7 +30,6 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
@@ -59,7 +59,7 @@ class OCBModification implements IModification {
 		val ocbClasses = newArrayList
 		val ocbSetters = newArrayList
 		outerClass.complexTypes.filter[!(it instanceof EnumerationType)].toList.forEach [ cT |
-			val operationDefinitions = cT.features.filter(OperationDefinition).toList
+			val operationDefinitions = cT.features.filter(Operation).filter[body === null].toList
 			if (!operationDefinitions.nullOrEmpty) {
 				ocbClasses += createComplexType => [ iface |
 					iface._annotateWith(interfaceGroupAnnotation)
