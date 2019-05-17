@@ -39,10 +39,10 @@ class CppSCTGeneratorModule extends SCTGeneratorModule {
 			APIOperationsModification,
 			
 			// C++ modifications
-			CreateDefaultPackage,
-			InterfaceRenamingModification,
-			RenameSCTInterfacesModification,
-			FlattenInnerTypesModification,
+			CreateDefaultPackage, // should go to sequencer
+			InterfaceRenamingModification, // find general naming convention
+			RenameSCTInterfacesModification, // can be removed
+			FlattenInnerTypesModification, // move flatten of unnecessary types to sequencer
 			OCBModification,
 			CppNextStateIndexModification,
 			CppPropertyAccessModification
