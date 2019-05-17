@@ -27,14 +27,21 @@
    </requires>
 
    <plugin
-         id="org.yakindu.sct.generator.cpp"
+         id="org.yakindu.sct.generator.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.generator.core"
+         id="org.yakindu.sct.types.generator.cpp"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.types.generator.statechart.cpp"
          download-size="0"
          install-size="0"
          version="0.0.0"
