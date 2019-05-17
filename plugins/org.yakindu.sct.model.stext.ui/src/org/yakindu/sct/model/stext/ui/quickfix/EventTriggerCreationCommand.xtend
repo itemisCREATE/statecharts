@@ -49,7 +49,6 @@ class EventTriggerCreationCommand extends AbstractTransactionalCommand {
 		try {
 			val createdEvent = createEvent() => [
 				direction = desiredDirection
-				annotationInfo = createAnnotatableElement;
 			]
 			val sc = EcoreUtil.getRootContainer(contextElement) as Statechart
 
