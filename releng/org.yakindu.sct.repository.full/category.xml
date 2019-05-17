@@ -18,9 +18,6 @@
    <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator.csharp_0.0.0.jar" id="org.yakindu.sct.generator.csharp" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
    <category-def name="YAKINDU SCT" label="YAKINDU SCT">
       <description>
          YAKINDU Statechart Tools (SCT)
