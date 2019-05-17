@@ -13,7 +13,7 @@ class ICycleBasedMachine {
  	@Inject extension TypeBuilder
  	@Inject extension ITypeSystem tSystem
  	
- 	public static val String NAME = "ICycleBasedMachine"
+ 	public static val String NAME = "ICycleBasedStatemachine"
  
  
  	def create createPackage scrPackage() {

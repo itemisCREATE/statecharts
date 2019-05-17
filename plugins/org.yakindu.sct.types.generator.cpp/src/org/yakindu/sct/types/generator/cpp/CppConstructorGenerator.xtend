@@ -55,7 +55,7 @@ class CppConstructorGenerator {
 	def dispatch protected getInitializationList(BlockExpression it) {
 		val propExpressions = expressions.filter(Property)
 		'''«FOR property : propExpressions SEPARATOR ','»
-		«property.name»«IF (property.type !== null && ITypeSystem.ARRAY.equals(property.type.name))»{/*TODO*/}«ELSE»(«initialCode(property)»)«ENDIF»
+		«property.name»«IF (property.type !== null && ITypeSystem.ARRAY.equals(property.type.name))»()«ELSE»(«initialCode(property)»)«ENDIF»
 		«ENDFOR»'''
 	}
 

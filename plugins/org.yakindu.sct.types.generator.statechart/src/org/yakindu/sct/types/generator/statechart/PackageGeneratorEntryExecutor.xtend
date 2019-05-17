@@ -32,7 +32,7 @@ class PackageGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor {
 	def protected Collection<Package> createPackages(GeneratorEntry entry) {
 		val elementRef = entry.elementRef
 		if(elementRef instanceof Statechart) {
-			#[sequencer.transform(elementRef, null)]	
+			newArrayList(sequencer.transform(elementRef, null))	
 		} else {
 			null
 		}

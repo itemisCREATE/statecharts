@@ -10,7 +10,7 @@
  */
 
 SctUnitRunner::SctUnitRunner(
-		StatemachineInterface * statemachine,
+		CycleBasedStatemachineInterface * statemachine,
 		bool event_driven,
 		sc_integer cycle_period
 		) :

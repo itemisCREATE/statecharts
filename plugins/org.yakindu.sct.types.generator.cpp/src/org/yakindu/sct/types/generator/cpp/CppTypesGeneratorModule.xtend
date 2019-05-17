@@ -17,6 +17,7 @@ import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationType
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 import org.yakindu.sct.types.generator.cpp.modifications.ComplexTypeUpperCaseModification
+import org.yakindu.sct.types.generator.cpp.modifications.ConstMemberModification
 
 class CppTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -39,6 +40,7 @@ class CppTypesGeneratorModule extends TypesGeneratorModule {
 			ConstructorModification,
 			InterfaceGetterModification,
 			AliasReplacementModification,
+			ConstMemberModification,
 			
 			// base modifications
 			TypesReplacementModification

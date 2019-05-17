@@ -14,6 +14,10 @@ class CppInterfaceNaming extends CInterfaceNaming {
 	def getInterfaceName() {
 		"StatemachineInterface"
 	}
+	
+	def getCycleBasedInterfaceName() {
+		"CycleBasedStatemachineInterface"
+	}
 
 	def getDefaultSCI() {
 		"DefaultSCI"

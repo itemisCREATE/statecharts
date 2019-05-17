@@ -79,7 +79,7 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 	'''
 
 	def dispatch String doGenerate(ComplexType it) '''
-	class «name» «FOR i : superTypes BEFORE ': public ' SEPARATOR ', '»«i.code»«ENDFOR»
+	class «name» «FOR i : superTypes BEFORE ': ' SEPARATOR ', '»public «i.code»«ENDFOR»
 	{
 		public:
 			«FOR declaration : features.filter[visibility == Visibility.PUBLIC] SEPARATOR '\n'»

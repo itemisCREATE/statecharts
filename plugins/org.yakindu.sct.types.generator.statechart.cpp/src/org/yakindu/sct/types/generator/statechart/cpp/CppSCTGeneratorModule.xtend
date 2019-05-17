@@ -25,21 +25,21 @@ import org.yakindu.sct.types.generator.statechart.modification.library.event.InE
 import org.yakindu.sct.types.generator.statechart.modification.library.event.LocalEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.OutEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.APIOperationsModification
-import org.yakindu.sct.types.generator.statechart.cpp.modifications.RenameSidePackage
+import org.yakindu.sct.types.generator.statechart.cpp.modifications.CreateDefaultPackage
 
 class CppSCTGeneratorModule extends SCTGeneratorModule {
 
 	override getModifications() {
 		return #[ 
 			// base modifications
-			APIOperationsModification,
 			PropertyAccessModification,
 			InEventModification,
 			OutEventModification,
 			LocalEventModification,
+			APIOperationsModification,
 			
 			// C++ modifications
-			RenameSidePackage,
+			CreateDefaultPackage,
 			InterfaceRenamingModification,
 			RenameSCTInterfacesModification,
 			FlattenInnerTypesModification,

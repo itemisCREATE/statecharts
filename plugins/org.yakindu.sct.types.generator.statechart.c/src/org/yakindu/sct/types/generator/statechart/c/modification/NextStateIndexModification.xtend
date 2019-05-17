@@ -46,6 +46,9 @@ class NextStateIndexModification implements IModification {
 
 	def modify(Package p) {
 		val stateVectorProp = p.eAllContents.filter(Property).findFirst[name == "stateVector"]
+		if(stateVectorProp === null) {
+			return null
+		}
 		val orthogonalStates = typesFactory.createProperty => [ prop |
 			prop.name = "maxOrthogonalStates"
 			prop.initialValue = EcoreUtil.copy(

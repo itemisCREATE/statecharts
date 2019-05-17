@@ -22,6 +22,6 @@ class TypesGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor impleme
 	@Inject ITypesGenerator generator
 
 	override protected void execute(ISCTFileSystemAccess access, GeneratorEntry generatorEntry) {
-		generator.generate(#[generatorEntry.getElementRef() as Package], access)
+		generator.generate(newArrayList(generatorEntry.getElementRef() as Package), access)
 	}
 }

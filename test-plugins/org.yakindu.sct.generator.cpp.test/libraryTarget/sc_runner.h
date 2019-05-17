@@ -8,7 +8,7 @@
 #include <list>
 
 #include "sc_types.h"
-#include "StatemachineInterface.h"
+#include "CycleBasedStatemachineInterface.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,14 +16,14 @@ extern "C" {
 
 class SctUnitRunner {
 	public:
-		SctUnitRunner(StatemachineInterface * statemachine, bool event_driven, sc_integer cycle_period);
+		SctUnitRunner(CycleBasedStatemachineInterface * statemachine, bool event_driven, sc_integer cycle_period);
 		virtual ~SctUnitRunner(){};
 		void proceed_time(sc_integer time_ms);
 		void proceed_cycles(sc_integer cycles);
 		virtual void cancel();
 	private:
 		class SctTimer;
-		StatemachineInterface * statemachine;
+		CycleBasedStatemachineInterface * statemachine;
 		
 		bool event_driven;
 		sc_integer cycle_period;

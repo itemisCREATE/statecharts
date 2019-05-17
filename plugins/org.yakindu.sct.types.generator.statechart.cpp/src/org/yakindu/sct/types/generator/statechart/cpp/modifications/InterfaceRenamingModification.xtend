@@ -16,6 +16,7 @@ import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.sct.types.generator.statechart.cpp.naming.CppInterfaceNaming
 import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.model.sequencer.types.IStatemachine
+import org.yakindu.sct.model.sequencer.types.ICycleBasedMachine
 
 class InterfaceRenamingModification implements IModification {
 
@@ -27,12 +28,16 @@ class InterfaceRenamingModification implements IModification {
 	}
 
 	def modify(Package p) {
-		p.member.filter(ComplexType).map[superTypes].flatten.filter(TypeSpecifier).map[type].filter [
-			name == IStatemachine.NAME
-		].forEach [
-			name = interfaceName
-		]
+		p.member.filter(ComplexType).map[superTypes].flatten.filter(TypeSpecifier).map[type].forEach[name = getName(name)]
 		p
+	}
+	
+	def getName(String name) {
+		switch(name) {
+			case IStatemachine.NAME: interfaceName
+			case ICycleBasedMachine.NAME: cycleBasedInterfaceName
+			default: name
+		}
 	}
 
 }
