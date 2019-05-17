@@ -579,10 +579,10 @@
 				<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
 				<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
 				<module>../../test-plugins/org.yakindu.sct.test.models</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.java.test</module>
 				<module>../../test-plugins/org.yakindu.sct.refactoring.tests</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.c.test</module>
+				<!-- <module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module> -->
+				<!-- <module>../../test-plugins/org.yakindu.sct.generator.java.test</module> -->
+				<!-- <module>../../test-plugins/org.yakindu.sct.generator.c.test</module> -->
 				<module>../../plugins/org.yakindu.base.types.test</module>
 				<!-- test feature -->
 				<module>../../features/org.yakindu.sct.test-feature</module>
