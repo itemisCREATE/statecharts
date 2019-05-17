@@ -13,10 +13,7 @@ Require-Bundle: org.yakindu.base.types,
  org.yakindu.sct.types.modification,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtend.lib,
- org.eclipse.xtend.lib.macro,
- org.yakindu.sct.model.stext,
- org.yakindu.sct.generator.core
+ org.eclipse.xtend.lib
 Export-Package: org.yakindu.sct.types.generator.c,
  org.yakindu.sct.types.generator.c.annotation,
  org.yakindu.sct.types.generator.c.artifacts,

@@ -10,7 +10,6 @@ Require-Bundle: com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
- org.yakindu.sct.types.generator,
- org.yakindu.sct.model.sequencer
+ org.yakindu.sct.types.generator
 Export-Package: org.yakindu.sct.types.generator.java,
  org.yakindu.sct.types.generator.java.modifications
