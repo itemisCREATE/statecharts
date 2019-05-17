@@ -15,9 +15,6 @@
    <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
       <category name="YAKINDU Statechart Tools Open Source Edition"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator.csharp_0.0.0.jar" id="org.yakindu.sct.generator.csharp" version="0.0.0">
-      <category name="YAKINDU Statechart Tools Open Source Edition"/>
-   </feature>
    <category-def name="YAKINDU Statechart Tools Open Source Edition" label="YAKINDU Statechart Tools Open Source Edition">
       <description>
          YAKINDU Statechart Tools Open Source Edition bundles all features that are part of the open source repository.

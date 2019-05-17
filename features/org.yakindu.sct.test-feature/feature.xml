@@ -16,17 +16,10 @@
    <license url="%licenseURL">
       %license
    </license>
-   
+
    <url>
       <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.com/statecharts/releases/"/>
    </url>
-
-   <plugin
-         id="org.yakindu.sct.generator.c.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.yakindu.sct.generator.genmodel.test"
@@ -37,20 +30,6 @@
 
    <plugin
          id="org.yakindu.sct.model.stext.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.java.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.sexec.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
