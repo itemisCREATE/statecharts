@@ -4,7 +4,6 @@ Bundle-Name: YAKINDU Java Generator Tests
 Bundle-SymbolicName: org.yakindu.sct.generator.java.test
 Bundle-Version: 3.5.3.qualifier
 Require-Bundle: org.yakindu.sct.test.models,
- org.yakindu.sct.generator.java,
  org.junit,
  org.yakindu.sct.generator.core,
  com.google.inject,
