@@ -43,7 +43,9 @@ class UnusedFunctionsModification implements IModification {
 				opsToRemove.add(op)
 			}
 		]
-		EcoreUtil.removeAll(opsToRemove)
+		opsToRemove.forEach[op |
+			EcoreUtil.remove(op)
+		]
 		if(!opsToRemove.nullOrEmpty){
 			p.removeUnusedFunctions
 		}
