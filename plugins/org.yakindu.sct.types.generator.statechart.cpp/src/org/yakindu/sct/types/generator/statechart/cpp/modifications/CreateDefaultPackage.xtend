@@ -22,8 +22,12 @@ class CreateDefaultPackage implements IModification {
 		packages
 	}
 	
-	def protected Package create typesFactory.createPackage getDefaultPackage(Collection<Package> packages) {
-		it.name = "default"
+	def protected Package getDefaultPackage(Collection<Package> packages) {
+		return packages.findFirst[name == "default"]?:createDefaultPackage(packages)
+	}
+	
+	def protected Package create typesFactory.createPackage createDefaultPackage(Collection<Package> packages) {
+		name = "default"
 		packages.add(it)
 	}
 }
