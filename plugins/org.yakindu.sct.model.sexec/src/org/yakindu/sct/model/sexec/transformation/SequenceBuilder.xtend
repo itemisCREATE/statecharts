@@ -24,6 +24,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
@@ -39,7 +40,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
-import org.yakindu.sct.model.stext.stext.VariableDefinition
+
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 class SequenceBuilder {
@@ -454,7 +455,7 @@ class SequenceBuilder {
 		initSequence.name = "staticInit"
 		initSequence.comment = "The statecharts init sequence for constants." + sc.name
 
-		for (VariableDefinition vd : flow.getVariablesForInitSequence(true)) {
+		for (Property vd : flow.getVariablesForInitSequence(true)) {
 			initSequence.addVariableInitializationStep(vd)
 		}
 
@@ -473,7 +474,7 @@ class SequenceBuilder {
 		initSequence.name = "init"
 		initSequence.comment = "Default init sequence for statechart " + sc.name
 
-		for (VariableDefinition vd : flow.getVariablesForInitSequence(false)) {
+		for (Property vd : flow.getVariablesForInitSequence(false)) {
 			initSequence.addVariableInitializationStep(vd)
 		}
 
@@ -482,21 +483,21 @@ class SequenceBuilder {
 	}
 
 	protected def getVariablesForInitSequence(ExecutionFlow flow, boolean const) {
-		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition)).filter(
+		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(Property)).filter(
 			v|v.const == const)
 		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(
-			d|d.declaration).filter(typeof(VariableDefinition))
+			d|d.declaration).filter(typeof(Property))
 		return statechartVariables + importedVariables
 	}
 
-	def addVariableInitializationStep(Sequence initSequence, VariableDefinition vd) {
+	def addVariableInitializationStep(Sequence initSequence, Property vd) {
 		if (vd.effectiveInitialValue !== null) {
 			initSequence.steps.add(vd.createInitialization)
 		}
 	}
 
 	//TODO: Move to type system
-	def effectiveInitialValue(VariableDefinition vd) {
+	def effectiveInitialValue(Property vd) {
 		if (vd.initialValue !== null) {
 			return vd.initialValue
 		} else {
@@ -506,7 +507,7 @@ class SequenceBuilder {
 
 	var factory = ExpressionsFactory.eINSTANCE
 
-	def createInitialization(VariableDefinition vd) {
+	def createInitialization(Property vd) {
 		val execution = sexec.factory.createExecution
 		val assignment = factory.createAssignmentExpression
 		val reference = factory.createElementReferenceExpression

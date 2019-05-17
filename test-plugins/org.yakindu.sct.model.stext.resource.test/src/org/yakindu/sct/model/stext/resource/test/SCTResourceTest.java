@@ -46,7 +46,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.stext.resource.StextResource;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -126,7 +125,7 @@ public class SCTResourceTest {
 		assertTrue(scope instanceof InternalScope);
 		EList<Declaration> declarations = ((InternalScope) scope).getDeclarations();
 		Declaration declaration = declarations.get(0);
-		assertTrue(declaration instanceof EventDefinition);
+		assertTrue(declaration instanceof Event);
 		assertEquals("" + res.getSyntaxDiagnostics(), 0, res.getSyntaxDiagnostics().size());
 	}
 
@@ -211,7 +210,7 @@ public class SCTResourceTest {
 		ReactionTrigger trigger = (ReactionTrigger) transition.getTrigger();
 		RegularEventSpec eventSpec = (RegularEventSpec) trigger.getTriggers().get(0);
 		ElementReferenceExpression expression = (ElementReferenceExpression) eventSpec.getEvent();
-		EventDefinition reference = (EventDefinition) expression.getReference();
+		Event reference = (Event) expression.getReference();
 		assertNotNull(reference);
 		assertEquals("Event1", reference.getName());
 	}
@@ -259,7 +258,7 @@ public class SCTResourceTest {
 		ReactionTrigger trigger = (ReactionTrigger) transition.getTrigger();
 		RegularEventSpec eventSpec = (RegularEventSpec) trigger.getTriggers().get(0);
 		ElementReferenceExpression expression = (ElementReferenceExpression) eventSpec.getEvent();
-		EventDefinition reference = (EventDefinition) expression.getReference();
+		Event reference = (Event) expression.getReference();
 		assertNotNull(reference);
 		assertEquals("Event1", reference.getName());
 	}

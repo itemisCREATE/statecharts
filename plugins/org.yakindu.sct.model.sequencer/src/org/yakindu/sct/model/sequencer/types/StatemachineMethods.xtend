@@ -130,7 +130,7 @@ class StatemachineMethods {
 	}
 	
 	def stateVectorInitialization(Statechart sc) {
-		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
+		val i = _variable("stateVectorIndex", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(sc.stateVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				stateVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
@@ -139,7 +139,7 @@ class StatemachineMethods {
 	}
 	
 	def historyStateVectorInitialization(Statechart sc) {
-		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
+		val i = _variable("historyVectorIndex", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(sc.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				historyVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))

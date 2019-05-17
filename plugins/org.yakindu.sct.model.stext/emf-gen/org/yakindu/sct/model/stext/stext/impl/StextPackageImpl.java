@@ -7,17 +7,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.yakindu.base.base.BasePackage;
-
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
-
 import org.yakindu.base.types.TypesPackage;
-
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -25,7 +19,6 @@ import org.yakindu.sct.model.stext.stext.DefRoot;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
@@ -34,7 +27,6 @@ import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
@@ -53,8 +45,6 @@ import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionRoot;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
-import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -146,34 +136,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	private EClass importScopeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eventDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass variableDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass operationDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeAliasDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -571,46 +533,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getEventDefinition() {
-		return eventDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVariableDefinition() {
-		return variableDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getOperationDefinition() {
-		return operationDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getTypeAliasDefinition() {
-		return typeAliasDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getLocalReaction() {
 		return localReactionEClass;
 	}
@@ -965,14 +887,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		importScopeEClass = createEClass(IMPORT_SCOPE);
 		createEAttribute(importScopeEClass, IMPORT_SCOPE__IMPORTS);
 
-		eventDefinitionEClass = createEClass(EVENT_DEFINITION);
-
-		variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
-
-		operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
-
-		typeAliasDefinitionEClass = createEClass(TYPE_ALIAS_DEFINITION);
-
 		localReactionEClass = createEClass(LOCAL_REACTION);
 
 		transitionReactionEClass = createEClass(TRANSITION_REACTION);
@@ -1066,11 +980,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		interfaceScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		internalScopeEClass.getESuperTypes().add(this.getStatechartScope());
 		importScopeEClass.getESuperTypes().add(this.getStatechartScope());
-		eventDefinitionEClass.getESuperTypes().add(theTypesPackage.getEvent());
-		variableDefinitionEClass.getESuperTypes().add(theTypesPackage.getProperty());
-		operationDefinitionEClass.getESuperTypes().add(theTypesPackage.getOperation());
-		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getTypeAlias());
-		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getDeclaration());
 		localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
 		transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
 		entryPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());
@@ -1118,14 +1027,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		initEClass(importScopeEClass, ImportScope.class, "ImportScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImportScope_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, ImportScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(typeAliasDefinitionEClass, TypeAliasDefinition.class, "TypeAliasDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

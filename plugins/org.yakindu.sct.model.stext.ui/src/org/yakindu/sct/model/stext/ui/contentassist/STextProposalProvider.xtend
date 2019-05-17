@@ -49,6 +49,7 @@ import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper
 import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.base.types.MetaComposite
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.Exit
@@ -67,7 +68,6 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification
 import org.yakindu.sct.model.stext.stext.StextPackage
 import org.yakindu.sct.model.stext.stext.TransitionReaction
 import org.yakindu.sct.model.stext.stext.TransitionSpecification
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.ui.internal.StextActivator
 
 /** 
@@ -297,8 +297,8 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	def protected ICompletionProposalAcceptor getCustomAcceptor(EObject model, String typeName,
 		ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposalAcceptor priorityOptimizer = acceptor
-		if (model instanceof VariableDefinition) {
-			var VariableDefinition vd = model
+		if (model instanceof Property) {
+			var vd = model
 			if (vd.getType() !== null && typeName.equalsIgnoreCase(vd.getType().getName())) {
 				priorityOptimizer = new ICompletionProposalAcceptor.Delegate(acceptor) {
 					override void accept(ICompletionProposal proposal) {

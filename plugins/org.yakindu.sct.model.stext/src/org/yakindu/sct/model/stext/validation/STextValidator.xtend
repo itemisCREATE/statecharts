@@ -89,7 +89,6 @@ import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
@@ -98,14 +97,12 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.StatechartSpecification
 import org.yakindu.sct.model.stext.stext.StextPackage
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_ANNOTATION
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION
@@ -332,7 +329,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	}
 	
 	@Check(CheckType.FAST)
-	def void checkNotRaisedOutEvent(EventDefinition event) {
+	def void checkNotRaisedOutEvent(Event event) {
 		if (event.direction != Direction.OUT) {
 			return;
 		}
@@ -365,13 +362,13 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 								internalDeclarationUsed=true 
 								//TODO end loop
 							}
-						} else if (elementReference.getReference() instanceof EventDefinition) {
-							if (((elementReference.getReference() as EventDefinition)).getName().equals(internalDeclaration.getName()) && internalDeclaration instanceof EventDefinition) {
+						} else if (elementReference.getReference() instanceof Event) {
+							if (((elementReference.getReference() as Event)).getName().equals(internalDeclaration.getName()) && internalDeclaration instanceof Event) {
 								internalDeclarationUsed=true 
 								//TODO end loop
 							}
-						} else if (elementReference.getReference() instanceof OperationDefinition) {
-							if (((elementReference.getReference() as OperationDefinition)).getName().equals(internalDeclaration.getName()) && internalDeclaration instanceof OperationDefinition) {
+						} else if (elementReference.getReference() instanceof Operation) {
+							if (((elementReference.getReference() as Operation)).getName().equals(internalDeclaration.getName()) && internalDeclaration instanceof Operation) {
 								internalDeclarationUsed=true 
 								//TODO end loop
 							}
@@ -379,7 +376,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 					}
 				}
 				if (!internalDeclarationUsed) {
-					if (internalDeclaration instanceof VariableDefinition || internalDeclaration instanceof EventDefinition || internalDeclaration instanceof OperationDefinition) warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1) 
+					if (internalDeclaration instanceof Property || internalDeclaration instanceof Event || internalDeclaration instanceof Operation) warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1) 
 				}
 			}
 		}
@@ -407,8 +404,8 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		var EList<Declaration> declarations=scope.getDeclarations() 
 		var Set<QualifiedName> defined=Sets.newHashSet() 
 		for (Declaration declaration : declarations) {
-			if (declaration instanceof VariableDefinition) {
-				var VariableDefinition definition = declaration 
+			if (declaration instanceof Property) {
+				var Property definition = declaration 
 				if (!definition.isConst()) return;
 				var Expression initialValue=definition.getInitialValue() 
 				var List<Expression> toCheck=Lists.newArrayList(initialValue) 
@@ -420,7 +417,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 				for (Expression expression : toCheck) {
 					var EObject referencedObject=null 
 					if (expression instanceof FeatureCall) referencedObject = expression.getFeature()  else if (expression instanceof ElementReferenceExpression) referencedObject = expression.getReference() 
-					if (referencedObject instanceof VariableDefinition) {
+					if (referencedObject instanceof Property) {
 						if (!defined.contains(nameProvider.getFullyQualifiedName(referencedObject))) error(REFERENCE_CONSTANT_BEFORE_DEFINED, definition, TypesPackage.Literals.PROPERTY__INITIAL_VALUE) 
 					}
 				}
@@ -728,7 +725,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		return null 
 	}
 	@Check(CheckType.FAST)
-	def void checkEventDefinition(EventDefinition event) {
+	def void checkEvent(Event event) {
 		if (event.eContainer() instanceof InterfaceScope && event.getDirection() === Direction.LOCAL) {
 			error(LOCAL_DECLARATIONS, TypesPackage.Literals.EVENT__DIRECTION) 
 		}

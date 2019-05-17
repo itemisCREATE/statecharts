@@ -11,11 +11,10 @@
 package org.yakindu.sct.generator.core.extensions
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.core.extensions.AnnotationExtensions
+import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 abstract class GeneratorPredicate {
 	@Inject protected extension SExecExtensions
@@ -51,7 +50,7 @@ abstract class GeneratorPredicate {
 		needsInEventQueue
 	}
 	
-	def boolean isQueued(EventDefinition it) {
+	def boolean isQueued(Event it) {
 		isEventDriven && (isLocalEvent || (isInEvent && useInEventQueue))
 	}
 	

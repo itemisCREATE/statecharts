@@ -181,22 +181,24 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Operation createOperation() {
 		OperationImpl operation = new OperationImpl();
+		operation.setAnnotationInfo(createDeclaration());
 		return operation;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
+		property.setAnnotationInfo(createDeclaration());
 		return property;
 	}
 
@@ -225,22 +227,24 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Event createEvent() {
 		EventImpl event = new EventImpl();
+		event.setAnnotationInfo(createDeclaration());
 		return event;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public EnumerationType createEnumerationType() {
 		EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
+		enumerationType.setAnnotationInfo(createDeclaration());
 		return enumerationType;
 	}
 
@@ -258,11 +262,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public ComplexType createComplexType() {
 		ComplexTypeImpl complexType = new ComplexTypeImpl();
+		complexType.setAnnotationInfo(createDeclaration());
 		return complexType;
 	}
 
@@ -313,11 +318,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public TypeAlias createTypeAlias() {
 		TypeAliasImpl typeAlias = new TypeAliasImpl();
+		typeAlias.setAnnotationInfo(createDeclaration());
 		return typeAlias;
 	}
 
@@ -357,11 +363,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public AnnotationType createAnnotationType() {
 		AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
+		annotationType.setAnnotationInfo(createDeclaration());
 		return annotationType;
 	}
 
@@ -390,10 +397,11 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Constructor createConstructor() {
 		ConstructorImpl constructor = new ConstructorImpl();
+		constructor.setAnnotationInfo(createDeclaration());
 		return constructor;
 	}
 

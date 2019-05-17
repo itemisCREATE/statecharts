@@ -20,17 +20,16 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.ImportDeclaration
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class RetargetReferences {
 	
@@ -99,24 +98,20 @@ class RetargetReferences {
 		null;
 	}
 	
-	def dispatch replaced(VariableDefinition vd) {
+	def dispatch replaced(Property vd) {
 		vd.create	
 	}
 	
-	def dispatch replaced(OperationDefinition vd) {
+	def dispatch replaced(Operation vd) {
 		vd.create	
 	}
 	
-	def dispatch replaced(EventDefinition ed) {
+	def dispatch replaced(Event ed) {
 		ed.create
 	}
 
 	def dispatch replaced(TimeEvent ed) {
 		ed
-	}
-	
-	def dispatch replaced(Property prop) {
-		prop
 	}
 	
 	def dispatch replaced(Parameter prop) {

@@ -368,101 +368,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDefinition} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected EventDefinitionItemProvider eventDefinitionItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventDefinition}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createEventDefinitionAdapter()
-  {
-		if (eventDefinitionItemProvider == null) {
-			eventDefinitionItemProvider = new EventDefinitionItemProvider(this);
-		}
-
-		return eventDefinitionItemProvider;
-	}
-
-  /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.VariableDefinition} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected VariableDefinitionItemProvider variableDefinitionItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.VariableDefinition}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createVariableDefinitionAdapter()
-  {
-		if (variableDefinitionItemProvider == null) {
-			variableDefinitionItemProvider = new VariableDefinitionItemProvider(this);
-		}
-
-		return variableDefinitionItemProvider;
-	}
-
-  /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.OperationDefinition} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected OperationDefinitionItemProvider operationDefinitionItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.OperationDefinition}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createOperationDefinitionAdapter()
-  {
-		if (operationDefinitionItemProvider == null) {
-			operationDefinitionItemProvider = new OperationDefinitionItemProvider(this);
-		}
-
-		return operationDefinitionItemProvider;
-	}
-
-  /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TypeAliasDefinition} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeAliasDefinitionItemProvider typeAliasDefinitionItemProvider;
-
-		/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TypeAliasDefinition}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypeAliasDefinitionAdapter() {
-		if (typeAliasDefinitionItemProvider == null) {
-			typeAliasDefinitionItemProvider = new TypeAliasDefinitionItemProvider(this);
-		}
-
-		return typeAliasDefinitionItemProvider;
-	}
-
-		/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LocalReaction} instances.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -996,10 +901,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
 		if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
 		if (importScopeItemProvider != null) importScopeItemProvider.dispose();
-		if (eventDefinitionItemProvider != null) eventDefinitionItemProvider.dispose();
-		if (variableDefinitionItemProvider != null) variableDefinitionItemProvider.dispose();
-		if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();
-		if (typeAliasDefinitionItemProvider != null) typeAliasDefinitionItemProvider.dispose();
 		if (localReactionItemProvider != null) localReactionItemProvider.dispose();
 		if (transitionReactionItemProvider != null) transitionReactionItemProvider.dispose();
 		if (guardItemProvider != null) guardItemProvider.dispose();
