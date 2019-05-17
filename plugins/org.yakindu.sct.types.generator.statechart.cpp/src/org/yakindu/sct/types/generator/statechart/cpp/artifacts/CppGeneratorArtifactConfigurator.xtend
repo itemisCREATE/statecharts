@@ -62,7 +62,7 @@ class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfig
 				statemachineHeader.addDependency(scTypes)
 				
 				statemachineSource.content.addAll(
-					statemachine.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList
+					statemachine.eAllContents.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList
 				)
 				
 				val pkgCopy = EcoreUtil.copy(p)

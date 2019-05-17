@@ -120,8 +120,8 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 	def protected accessType(Operation it) {
 		val typeArguments = typeSpecifier.typeArguments
 		var namespaces = newArrayList
-		for (typeSepcifier : typeArguments) {
-			var cT = typeSepcifier.type.eContainer
+		for (typeSpecifier : typeArguments) {
+			var cT = typeSpecifier.type.eContainer
 			while (cT instanceof ComplexType) {
 				namespaces.add(0, cT.name.toFirstUpper)
 				cT = cT.eContainer
@@ -145,7 +145,8 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 			namespaces.add(0, cT.name.toFirstUpper)
 			cT = cT.eContainer
 		}
-		return namespaces.join("", "::", "::", [it.toString])
+		
+		return namespaces.filterNull.join("", "::", "::", [it.toString])
 	}
 
 	def protected getFriendClass(ComplexType it) {

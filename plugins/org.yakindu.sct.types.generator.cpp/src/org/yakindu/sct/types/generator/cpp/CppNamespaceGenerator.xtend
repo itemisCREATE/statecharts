@@ -34,12 +34,19 @@ class CppNamespaceGenerator {
 	def dispatch String namespace(ArrayList<?> list) {
 		val head = list.head
 		if (head instanceof EObject) {
-			val package = EcoreUtil.getRootContainer(head) as Package
-			val namespace = package.name
-			if (namespace !== "default") {
-				return namespace
-			}
+			return namespace(head)
 		}
 		return null
+	}
+
+	def dispatch String namespace(EObject eo) {
+		val package = EcoreUtil.getRootContainer(eo) as Package
+		val namespace = package.name
+		if (namespace !== "default") {
+			return namespace
+		} else {
+			return null
+
+		}
 	}
 }
