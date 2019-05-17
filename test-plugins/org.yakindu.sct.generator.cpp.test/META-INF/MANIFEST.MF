@@ -8,7 +8,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.sct.test.models,
  org.yakindu.sct.generator.c.test,
  org.junit,
- org.yakindu.sct.generator.cpp,
  org.yakindu.sct.model.resource,
  org.yakindu.sct.domain.generic.resource
 Automatic-Module-Name: org.yakindu.sct.generator.cpp.test
