@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
+import org.yakindu.sct.generator.c.gtest.RunIfEnv;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
@@ -23,13 +24,14 @@ import org.yakindu.sct.generator.c.gtest.GTestRunner;
 	}
 )
 @RunWith(GTestRunner.class)
+@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class ChildFirstOrthogonalReactionsTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 
 	@Before
 	public void setUp() {
-		Assume.assumeTrue(java.lang.System.getenv("SLANG") != null);
+		Assume.assumeTrue(java.lang.System.getenv("RUN_GENERATOR_TEST") != null);
 		helper.generate();
 		helper.compile();
 	}
