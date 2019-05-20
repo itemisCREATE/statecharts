@@ -145,9 +145,6 @@ ExitEvent:
 AlwaysEvent:
 	{AlwaysEvent} ('always' | 'oncycle');
 
-EventValueReferenceExpression returns types::Expression:
-	{exp::EventValueReferenceExpression} 'valueof' '(' value=FeatureCall ')';
-
 ActiveStateReferenceExpression returns types::Expression:
 	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::State|FQN] ')';
 

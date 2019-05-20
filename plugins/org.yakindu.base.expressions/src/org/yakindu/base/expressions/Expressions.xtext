@@ -91,6 +91,7 @@ PrimaryExpression returns types::Expression:
 	| ThrowExpression
 	| EventRaisingExpression
 	| EventClearingExpression
+	| EventValueReferenceExpression
 	| ParenthesizedExpression;
 
 PrimitiveValueExpression returns types::Expression:
@@ -120,7 +121,10 @@ EventRaisingExpression returns types::Expression:
 	
 EventClearingExpression returns types::Expression:
 	{EventClearingExpression} 'clear' event=FeatureCall;
-	
+
+EventValueReferenceExpression returns types::Expression:
+	{EventValueReferenceExpression} 'valueof' '(' value=FeatureCall ')';
+
 WhileExpression returns types::Expression:
 	{WhileExpression} 'while' '(' condition=Expression ')' body=BlockExpression;
 
