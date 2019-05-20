@@ -10,7 +10,6 @@
 package org.yakindu.sct.generator.genmodel.ui.contentassist
 
 import java.util.Optional
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.jface.text.contentassist.ICompletionProposal
@@ -73,11 +72,6 @@ class SGenProposalProvider extends AbstractSGenProposalProvider {
 		var StyledString firstPart = new StyledString(qualifiedName)
 		var StyledString secondPart = getPackageImportStyleString(EcoreUtil.getURI(sct))
 		return firstPart.append(secondPart)
-	}
-
-	def protected StyledString getPackageImportStyleString(URI uri) {
-		var String filePath = if(uri.isPlatform()) uri.toPlatformString(true) else uri.toFileString()
-		return new StyledString(''' - «filePath»''', new GreyoutStyler())
 	}
 
 	override protected ConfigurableCompletionProposal doCreateProposal(String proposal, StyledString displayString,
