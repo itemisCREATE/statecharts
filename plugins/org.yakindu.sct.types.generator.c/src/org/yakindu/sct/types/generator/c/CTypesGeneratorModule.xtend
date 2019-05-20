@@ -26,6 +26,7 @@ import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.c.modifications.ExtractForLoopInitializers
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
+import org.yakindu.sct.types.generator.c.modifications.RemoveInitialValueModification
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -38,16 +39,17 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 			// base modifications
 			IdentifierModification,
 			// c specific modifcations
+			RemoveInitialValueModification,
 			FlattenComplexTypesModification,
 			ExtractOperationsModification,
 			ExtractConstantsModification,
 			RemoveAnnotationTypeModification,
-			RenamePackageModification,
 			RenameOperationsModification,
+			RemoveUnusedTypesModification,
+			RenamePackageModification,
 			ReorderComplexTypesModification,
 			RenameComplexTypes,
 			RenameStateEnumModification,
-			RemoveUnusedTypesModification,
 			AliasReplacementModification,
 			// base modification
 			TypesReplacementModification,

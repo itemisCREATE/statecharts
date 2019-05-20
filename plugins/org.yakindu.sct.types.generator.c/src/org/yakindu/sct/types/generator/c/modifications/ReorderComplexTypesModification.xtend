@@ -12,7 +12,9 @@ import com.google.inject.Inject
 import java.util.Collection
 import java.util.Comparator
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
+import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Package
@@ -39,8 +41,8 @@ class ReorderComplexTypesModification implements IModification {
 
 	static class MemberComparator implements Comparator<Declaration> {
 		override compare(Declaration o1, Declaration o2) {
-			val o1Contents = o1.eAllContents.map[mapTypeSpecifierToType].filterNull.toList
-			val o2Contents = o2.eAllContents.map[mapTypeSpecifierToType].filterNull.toList
+			val o1Contents = o1.contents
+			val o2Contents = o2.contents
 			if (o1Contents.contains(o2)) {
 				return 1
 			}
@@ -50,12 +52,21 @@ class ReorderComplexTypesModification implements IModification {
 			return 0
 		}
 
-		def mapTypeSpecifierToType(EObject o) {
+		def protected mapTypeSpecifierToType(EObject o) {
 			if (o instanceof TypeSpecifier) {
 				return o.type
 			}
 			return o
 		}
+		
+		def protected getContents(Declaration decl) {
+			decl.eAllContents.filter[!annotationDescendant].map[mapTypeSpecifierToType].filter[!(it instanceof Annotation)].filterNull.toList
+		}
+		
+		def protected isAnnotationDescendant(EObject it) {
+			EcoreUtil2.getContainerOfType(it, Annotation) !== null
+		}
+		
 	}
 
 }

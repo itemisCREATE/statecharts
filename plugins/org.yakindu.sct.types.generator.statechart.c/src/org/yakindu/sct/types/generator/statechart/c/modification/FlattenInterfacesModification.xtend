@@ -12,9 +12,11 @@ package org.yakindu.sct.types.generator.statechart.c.modification
 
 import com.google.inject.Inject
 import java.util.Collection
+import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 /*
@@ -22,6 +24,7 @@ import org.yakindu.sct.types.modification.IModification
  */
 class FlattenInterfacesModification implements IModification {
 	@Inject protected extension SequencerAnnotationLibrary
+	@Inject protected extension CoreCGeneratorAnnotationLibrary
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -31,6 +34,7 @@ class FlattenInterfacesModification implements IModification {
 	def modify(Package p) {
 		p.eAllContents.filter(ComplexType).filter[isInterfaceGroup].toList.forEach [ct | // additional filter on "InterfaceGroup" annotation
 			ct.name = ct.getContainmentHierarchy
+			ct.rootType = EcoreUtil2.getAllContainers(ct).filter(ComplexType).last
 			p.member += ct
 		]
 
