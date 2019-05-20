@@ -2,7 +2,6 @@ package org.yakindu.sct.model.sequencer.modification
 
 import com.google.inject.Inject
 import java.util.Collection
-import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Direction
@@ -22,11 +21,7 @@ class EventDrivenModification implements IModification {
 	@Inject protected TypesLibrary typesLibrary
 	@Inject protected extension StatemachineMethods
 	
-	
-	Collection<Package> packages
-	
 	override modify(Collection<Package> packages) {
-		this.packages = packages
 		packages.forEach[modify]
 		packages
 	}
