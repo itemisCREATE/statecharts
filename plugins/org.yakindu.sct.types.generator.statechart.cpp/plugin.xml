@@ -9,7 +9,7 @@
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             executor="org.yakindu.sct.types.generator.statechart.PackageGeneratorEntryExecutor"
             id="yakindu::cpp"
-            name="Types SCT C++ Generator">
+            name="YAKINDU SCT C++ Code Generator">
          <FeatureLibrary
                library_id="org.yakindu.generator.core.features">
          </FeatureLibrary>

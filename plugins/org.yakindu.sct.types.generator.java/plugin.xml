@@ -4,12 +4,12 @@
    <extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
-            bindings="org.yakindu.sct.types.generator.cpp.CppTypesGeneratorModule"
+            bindings="org.yakindu.sct.types.generator.java.JavaTypesGeneratorModule"
             contentType="slang"
             elementRefType="org.yakindu.base.types.Package"
             executor="org.yakindu.sct.types.generator.TypesGeneratorEntryExecutor"
-            id="slang::cpp"
-            name="SLANG C++">
+            id="slang::java"
+            name="SLANG Java">
       </SCTGenerator>
    </extension>
 
