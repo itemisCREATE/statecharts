@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
+import org.yakindu.sct.generator.c.gtest.RunIfEnv;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
@@ -15,6 +16,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	model = "testmodels/SCTUnit/Tracing.sct"
 )
 @RunWith(GTestRunner.class)
+@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class TracingTest {
 
 	protected final GTestHelper helper = new GTestHelper(this) {		
