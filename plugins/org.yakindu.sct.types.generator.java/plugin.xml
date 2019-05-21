@@ -10,6 +10,9 @@
             executor="org.yakindu.sct.types.generator.TypesGeneratorEntryExecutor"
             id="slang::java"
             name="SLANG Java">
+             <FeatureLibrary
+               library_id="org.yakindu.generator.core.features">
+         </FeatureLibrary>
       </SCTGenerator>
    </extension>
 
