@@ -6,7 +6,7 @@
 * 	Johannes Dicks - itemis AG
 *
 */
-package org.yakindu.sct.model.stext.ui.contentassist;
+package org.yakindu.base.expressions.ui.contentassist;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;

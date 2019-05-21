@@ -17,19 +17,13 @@ import java.util.List
 import java.util.Set
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory
 import org.eclipse.emf.edit.provider.IItemLabelProvider
-import org.eclipse.jface.resource.ImageRegistry
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.jface.viewers.StyledString
-import org.eclipse.jface.viewers.StyledString.Styler
-import org.eclipse.swt.SWT
 import org.eclipse.swt.graphics.Image
-import org.eclipse.swt.graphics.TextStyle
-import org.eclipse.swt.widgets.Display
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.EnumLiteralDeclaration
@@ -47,6 +41,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper
 import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper.PackageImport
+import org.yakindu.base.expressions.ui.contentassist.StringProposalDelegate
 import org.yakindu.base.types.MetaComposite
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
@@ -68,14 +63,12 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification
 import org.yakindu.sct.model.stext.stext.StextPackage
 import org.yakindu.sct.model.stext.stext.TransitionReaction
 import org.yakindu.sct.model.stext.stext.TransitionSpecification
-import org.yakindu.sct.model.stext.ui.internal.StextActivator
 
 /** 
  * Several filters to make proposals more useful.
  * @author muehlbrandt
  */
 class STextProposalProvider extends AbstractSTextProposalProvider {
-	protected static final String ICONS_INCLUDE = "icons/Package.png"
 	
 	@Inject 
 	protected STextGrammarAccess grammarAccess
@@ -88,18 +81,6 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	@Inject IPackageImport2URIMapper mapper
 	@Inject STextExtensions utils
-
-	static class StrikeThroughStyler extends Styler {
-		override void applyStyles(TextStyle textStyle) {
-			textStyle.strikeout = true
-		} 
-	}
-
-	static class GreyoutStyler extends Styler {
-		override void applyStyles(TextStyle textStyle) {
-			textStyle.foreground = Display.getDefault().getSystemColor(SWT.COLOR_GRAY)
-		}
-	}
 
 	/** 
 	 * Validates if a keyword should be viewed by the proposal view.
@@ -276,24 +257,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		return createCompletionProposal(proposal, displayString, image, getPriorityHelper().getDefaultPriority(),
 			contentAssistContext.getPrefix(), contentAssistContext)
 	}
-
-	def protected Image getIncludeImage(PackageImport pkgImport) {
-		val ImageRegistry imageRegistry = StextActivator.getInstance().getImageRegistry()
-		return imageRegistry.get(ICONS_INCLUDE)
-	}
-
-	def protected StyledString computePackageStyledString(PackageImport pkgImport) {
-		var StyledString firstPart = new StyledString(pkgImport.getName())
-		var StyledString secondPart = getPackageImportStyleString(pkgImport.getUri())
-		return firstPart.append(secondPart)
-	}
-
-	def protected StyledString getPackageImportStyleString(URI uri) {
-		var String filePath = if(uri.isPlatform()) uri.toPlatformString(true) else uri.toFileString()
-		var StyledString secondPart = new StyledString(''' - «filePath»''', new GreyoutStyler())
-		return secondPart
-	}
-
+	
 	def protected ICompletionProposalAcceptor getCustomAcceptor(EObject model, String typeName,
 		ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposalAcceptor priorityOptimizer = acceptor
