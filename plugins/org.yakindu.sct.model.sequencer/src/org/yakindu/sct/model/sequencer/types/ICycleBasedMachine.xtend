@@ -15,20 +15,12 @@ class ICycleBasedMachine {
  	
  	public static val String NAME = "ICycleBasedStatemachine"
  
- 
- 	def create createPackage scrPackage() {
- 		it => [
- 			name = "sct"
- 		]	
- 	}
- 	
  	def create createComplexType cycleBasedMachineType() {
 		it => [
 			name = NAME
 			features += createRunCycleMethod
 		]
 		abstract = true
-		scrPackage.member += it
 	}
 
 	
