@@ -73,7 +73,7 @@ public class ExpressionsImportAwareScopeProvider extends ImportedNamespaceAwareL
 			EObject context) {
 		Optional<PackageImport> pkgImport = mapper.findPackageImport(context.eResource(), importStatement);
 		if (pkgImport.isPresent()) {
-			ImportNormalizer resolver = createImportedNamespaceResolver(pkgImport.get().getName(), ignoreCase);
+			ImportNormalizer resolver = createImportedNamespaceResolver(pkgImport.get().getNamespace(), ignoreCase);
 			return Collections.singletonList(resolver);
 		}
 		return Lists.newArrayList();

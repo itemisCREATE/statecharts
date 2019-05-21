@@ -49,6 +49,7 @@ public interface CompositeSlot extends ExecutionSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model unique="false" doResolveUnique="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return this.getSlots();'"
 	 * @generated
 	 */
 	List<ExecutionSlot> getSlots(boolean doResolve);

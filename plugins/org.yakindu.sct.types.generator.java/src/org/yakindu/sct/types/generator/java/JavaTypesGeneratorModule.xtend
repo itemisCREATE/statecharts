@@ -12,9 +12,13 @@ package org.yakindu.sct.types.generator.java
 
 import org.yakindu.sct.types.generator.java.artifacts.DefaultJavaGeneratorArtifactConfigurator
 import org.yakindu.sct.types.generator.java.modifications.NamingConventionModification
+import org.yakindu.sct.types.generator.java.naming.JavaEventNaming
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
+import org.yakindu.sct.types.generator.modification.library.event.InEventModification
+import org.yakindu.sct.types.generator.modification.library.event.LocalEventModification
+import org.yakindu.sct.types.generator.modification.library.event.OutEventModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 
 class JavaTypesGeneratorModule extends TypesGeneratorModule {
@@ -32,6 +36,9 @@ class JavaTypesGeneratorModule extends TypesGeneratorModule {
 			 * after NamingConventionModification to avoid underscores in names that would be keywords
 			 */
 			IdentifierModification,
+			InEventModification,
+			OutEventModification,
+			LocalEventModification,
 			
 			AliasReplacementModification,
 			
@@ -55,4 +62,7 @@ class JavaTypesGeneratorModule extends TypesGeneratorModule {
 		DefaultJavaGeneratorArtifactConfigurator
 	}
 	
+	override bindEventNaming(){
+		JavaEventNaming
+	}
 }

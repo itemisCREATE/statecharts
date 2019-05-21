@@ -6,9 +6,9 @@
 * 	itemis AG
 *
 */
-package org.yakindu.sct.types.generator.statechart.java.naming
+package org.yakindu.sct.types.generator.java.naming
 
-import org.yakindu.sct.types.generator.statechart.naming.IEventNaming
+import org.yakindu.sct.types.generator.naming.IEventNaming
 
 class JavaEventNaming implements IEventNaming {
 	

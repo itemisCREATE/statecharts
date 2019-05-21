@@ -6,7 +6,7 @@
 * 	itemis AG
 *
 */
-package org.yakindu.sct.types.generator.statechart.modification.library.event
+package org.yakindu.sct.types.generator.modification.library.event
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.util.EcoreUtil

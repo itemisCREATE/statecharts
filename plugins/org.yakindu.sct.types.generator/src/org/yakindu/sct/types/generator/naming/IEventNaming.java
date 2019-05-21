@@ -6,7 +6,7 @@
 * 	itemis AG
 *
 */
-package org.yakindu.sct.types.generator.statechart.naming;
+package org.yakindu.sct.types.generator.naming;
 
 public interface IEventNaming {
 	public String nameEventRaiser(CharSequence s);

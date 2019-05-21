@@ -12,21 +12,25 @@ package org.yakindu.sct.types.generator.c
 
 import org.yakindu.sct.types.generator.c.artifacts.DefaultCGeneratorArtifactConfigurator
 import org.yakindu.sct.types.generator.c.modifications.ExtractConstantsModification
+import org.yakindu.sct.types.generator.c.modifications.ExtractForLoopInitializers
 import org.yakindu.sct.types.generator.c.modifications.ExtractOperationsModification
 import org.yakindu.sct.types.generator.c.modifications.FlattenComplexTypesModification
+import org.yakindu.sct.types.generator.c.modifications.RemoveInitialValueModification
 import org.yakindu.sct.types.generator.c.modifications.RenameComplexTypes
 import org.yakindu.sct.types.generator.c.modifications.RenameOperationsModification
 import org.yakindu.sct.types.generator.c.modifications.RenamePackageModification
 import org.yakindu.sct.types.generator.c.modifications.RenameStateEnumModification
 import org.yakindu.sct.types.generator.c.modifications.ReorderComplexTypesModification
+import org.yakindu.sct.types.generator.c.naming.CEventNaming
+import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
 import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
 import org.yakindu.sct.types.generator.modification.library.RemoveUnusedTypesModification
-import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
-import org.yakindu.sct.types.generator.c.modifications.ExtractForLoopInitializers
-import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
-import org.yakindu.sct.types.generator.c.modifications.RemoveInitialValueModification
+import org.yakindu.sct.types.generator.modification.library.event.InEventModification
+import org.yakindu.sct.types.generator.modification.library.event.LocalEventModification
+import org.yakindu.sct.types.generator.modification.library.event.OutEventModification
+import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -38,6 +42,9 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 		return #[
 			// base modifications
 			IdentifierModification,
+			InEventModification,
+			OutEventModification,
+			LocalEventModification,
 			// c specific modifcations
 			RemoveInitialValueModification,
 			FlattenComplexTypesModification,
@@ -67,6 +74,10 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 
 	override bindOutputConfigurator() {
 		DefaultCGeneratorArtifactConfigurator
+	}
+	
+	override bindEventNaming(){
+		CEventNaming
 	}
 
 }

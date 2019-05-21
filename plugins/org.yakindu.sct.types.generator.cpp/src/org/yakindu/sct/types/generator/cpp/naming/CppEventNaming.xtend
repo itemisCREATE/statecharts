@@ -6,9 +6,9 @@
  * 	itemis AG
  * 
  */
-package org.yakindu.sct.types.generator.statechart.cpp.naming
+package org.yakindu.sct.types.generator.cpp.naming
 
-import org.yakindu.sct.types.generator.statechart.naming.IEventNaming
+import org.yakindu.sct.types.generator.naming.IEventNaming
 
 class CppEventNaming implements IEventNaming {
 

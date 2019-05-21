@@ -18,6 +18,7 @@ import org.yakindu.sct.types.generator.Expressions;
 import org.yakindu.sct.types.generator.ITargetPlatform;
 import org.yakindu.sct.types.generator.ITypesGenerator;
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator;
+import org.yakindu.sct.types.generator.naming.IEventNaming;
 import org.yakindu.sct.types.modification.IModification;
 import org.yakindu.sct.types.modification.ModificationExecutor;
 
@@ -36,6 +37,7 @@ public abstract class TypesGeneratorModule implements IGeneratorModule {
 		binder.bind(Expressions.class).to(bindExpressions());
 		binder.bind(ITargetPlatform.class).to(bindTargetPlatform());
 		binder.bind(IGeneratorArtifactConfigurator.class).to(bindOutputConfigurator());
+		binder.bind(IEventNaming.class).to(bindEventNaming());
 	}
 
 	private void bindModifications(Binder binder) {
@@ -58,6 +60,8 @@ public abstract class TypesGeneratorModule implements IGeneratorModule {
 	 *         requested (used in {@link ModificationExecutor}).
 	 */
 	public abstract List<Class<? extends IModification>> getModifications();
+	
+	public abstract Class<? extends IEventNaming> bindEventNaming();
 
 	public abstract Class<? extends ITypesGenerator> bindITypesGenerator();
 
