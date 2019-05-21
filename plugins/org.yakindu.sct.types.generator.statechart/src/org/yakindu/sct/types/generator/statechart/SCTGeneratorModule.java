@@ -21,6 +21,7 @@ import org.yakindu.sct.types.generator.ITargetPlatform;
 import org.yakindu.sct.types.generator.ITypesGenerator;
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator;
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule;
+import org.yakindu.sct.types.generator.naming.IEventNaming;
 import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming;
 import org.yakindu.sct.types.modification.IModification;
 import org.yakindu.sct.types.modification.ModificationExecutor;
@@ -48,7 +49,7 @@ public abstract class SCTGeneratorModule implements IGeneratorModule {
 		binder.bind(ITypesGenerator.class).to(coreModule.bindITypesGenerator());
 		binder.bind(Expressions.class).to(coreModule.bindExpressions());
 		binder.bind(ITargetPlatform.class).to(coreModule.bindTargetPlatform());
-
+		binder.bind(IEventNaming.class).to(coreModule.bindEventNaming());
 		binder.bind(IGeneratorArtifactConfigurator.class).to(bindOutputConfigurator());
 		binder.bind(IPropertyAccessNaming.class).to(bindPropertyAccessNaming());
 		binder.bind(INamingService.class).to(bindNamingService());
