@@ -7,7 +7,7 @@
             bindings="org.yakindu.sct.types.generator.c.CTypesGeneratorModule"
             contentType="slang"
             elementRefType="org.yakindu.base.types.Package"
-            executor="org.yakindu.sct.types.generator.core.TypesGeneratorEntryExecutor"
+            executor="org.yakindu.sct.types.generator.TypesGeneratorEntryExecutor"
             id="slang::c"
             name="SLANG C">
                <FeatureLibrary
