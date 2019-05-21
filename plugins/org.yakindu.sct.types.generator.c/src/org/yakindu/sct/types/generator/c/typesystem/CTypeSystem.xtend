@@ -10,6 +10,8 @@ package org.yakindu.sct.types.generator.c.typesystem;
 
 import com.google.inject.Singleton
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypeSpecifier
+import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 
@@ -151,5 +153,15 @@ import static org.yakindu.base.types.TypesFactory.*
 	def declareRangedInteger(String name, long lowerBound, long upperBound) {
 		val type = declarePrimitive(name)
 		type
+	}
+	
+	def boolean isPointer(TypedElement it) {
+		return isSame(type, getType(POINTER))
+	}
+	
+	def TypeSpecifier pointsTo(TypedElement it) {
+		if(isPointer) {
+			return typeSpecifier.typeArguments.head
+		}
 	}
 }

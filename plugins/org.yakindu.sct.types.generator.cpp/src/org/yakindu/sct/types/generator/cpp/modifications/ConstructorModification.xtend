@@ -11,12 +11,16 @@ package org.yakindu.sct.types.generator.cpp.modifications
 import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.base.expressions.expressions.impl.ArgumentImpl
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.AnnotationType
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Constructor
-import org.yakindu.base.types.Operation
+import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
@@ -28,7 +32,6 @@ import org.yakindu.sct.types.generator.cpp.CppSlangTypeValueProvider
 import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.naming.CppClassNaming
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.base.types.EnumerationType
 
 class ConstructorModification implements IModification {
 	@Inject protected extension CTypeSystem cts
@@ -40,10 +43,45 @@ class ConstructorModification implements IModification {
 	@Inject protected extension TypeBuilder
 
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE
+	protected ExpressionsFactory expFactory = ExpressionsFactory.eINSTANCE
 
 	override modify(Collection<Package> packages) {
-		packages.map[eAllContents.toList].flatten.filter(ComplexType).filter[!(it instanceof EnumerationType)].forEach[modify]
+		packages.map[eAllContents.toList].flatten.filter(ComplexType).filter[!(it instanceof EnumerationType)].forEach[
+			modify
+		]
+		packages.map[eAllContents.toList].flatten.filter(ElementReferenceExpression).filter[reference instanceof Constructor].forEach[
+			updateConstructorCall
+		]
 		packages
+	}
+	
+	def updateConstructorCall(ElementReferenceExpression ctorCall) {
+		val ctor = ctorCall.reference as Constructor
+		val args = ctorCall.arguments
+		val params = ctor.parameters
+		params.forEach[param, index | 
+			if (index >= args.size()) {
+				args.add(argument(ctorCall, param))
+			}
+		]
+	}
+	
+	def argument(ElementReferenceExpression call, Parameter parameter) {
+		if(parameter.isPointer) {
+			val ts = parameter.pointsTo
+			val callOwner = EcoreUtil2.getContainerOfType(call, ComplexType) {
+				if(ts.type == callOwner) {
+					expFactory.createArgument => [
+						value = callOwner.thisProperty._ref
+					]
+				}
+			}
+		}
+	}
+	
+	def Property create _variable("this", cT) thisProperty(ComplexType cT) {
+		cT.features += it
+		_annotateWith(invisibleAnnotation)
 	}
 
 	def modify(ComplexType cT) {
@@ -51,50 +89,40 @@ class ConstructorModification implements IModification {
 		val container = cT.eContainer
 		if (container instanceof Package) {
 			// create constructor and destructor
-			if (constructors.empty) {
-				cT.features += cT.createOperation(defaultConstructorAnnotation, null)
-			} else {
-				constructors.forEach[modify]
-			}
-			cT.features += cT.createOperation(defaultDestructorAnnotation, null)
+			constructors.forEach[createInitializer]
+			cT.createDestructor
 		} else if(container instanceof ComplexType) {
 			// create constructor only with initialization list, if not abstract
-			cT.features += container.createParentProperty
-			val parameter = createParentParameter(container)
-			if (constructors.empty) {
-				cT.features += cT.createOperation(innerConstructorAnnotation, parameter)
-			} else {
-				constructors.forEach[modify(parameter)]
-			}
+			cT.createParentProperty
+			val parameter = createParentParameter(cT)
+			constructors.forEach[createInitializer(parameter)]
 
 		}
 	}
 
-	protected def modify(Constructor ctor, Parameter... parameters) {
+	protected def createInitializer(Constructor ctor, Parameter... parameters) {
 		val cT = ctor.eContainer
 		if (cT instanceof ComplexType) {
-
-			ctor.parameters += parameters
+			
+			if(!parameters.nullOrEmpty) {
+				ctor.parameters += parameters
+			}
 			if (cT.eContainer instanceof Package) {
 				ctor._annotateWith(defaultConstructorAnnotation)
 			} else {
 				ctor._annotateWith(innerConstructorAnnotation)
 			}
-			
-			val variables = EcoreUtil.copyAll(cT.features.filter(Property).filter [ feature |
+			val variables = cT.features.filter(Property).filter [ feature |
 				feature.const == false || (feature.const == true && feature.static == false)
-			].toList)
-			variables.forEach [ prop |
-				prop.initialValue = {
-					if(prop.initialValue !== null) {
-						prop.initialValue
+			].toList
+			val properties = EcoreUtil.copyAll(variables)
+			properties.forEach [ prop |
+				prop.initialValue = prop.initialValue?: {
+					val param = ctor.parameters.findFirst[ p | p.name == prop.name]
+					if(param !== null) {
+						param._ref
 					} else {
-						val param = ctor.parameters.findFirst[ p | p.name == prop.name]
-						if(param !== null) {
-							param._ref
-						} else {
-							prop.type.defaultValue.value
-						}
+						prop.type.defaultValue.value
 					}
 				}
 				if (prop.initialValue === null) {
@@ -102,27 +130,33 @@ class ConstructorModification implements IModification {
 				}
 			]
 			ctor.body = _block => [
-					expressions += variables
+					expressions += properties
 				]
 		}
 	}
 
-	protected def Property createParentProperty(ComplexType outerClass) {
-		typesFactory.createProperty => [ prop |
-			prop.visibility = Visibility.PROTECTED
-			prop.typeSpecifier = outerClass.createPointerType
-			prop.name = parentParameter
-		]
+	protected def createParentProperty(ComplexType it) {
+		val outerType = eContainer
+		if(outerType instanceof ComplexType) {
+			features += typesFactory.createProperty => [ prop |
+				prop.visibility = Visibility.PROTECTED
+				prop.typeSpecifier = outerType.createPointerType
+				prop.name = parentParameter
+			]
+		}
 	}
 
-	def protected createParentParameter(ComplexType cT) {
-		typesFactory.createParameter => [
-			it.name = "parent"
-			typeSpecifier = typesFactory.createTypeSpecifier => [ ts |
-				ts.type = cts.getType(CTypeSystem.POINTER)
-				ts.typeArguments += cT.typeSpecifier
+	def protected createParentParameter(ComplexType it) {
+		val outerType = eContainer
+		if(outerType instanceof ComplexType) {
+			return typesFactory.createParameter => [
+				it.name = "parent"
+				typeSpecifier = typesFactory.createTypeSpecifier => [ ts |
+						ts.type = cts.getType(CTypeSystem.POINTER)
+						ts.typeArguments += outerType.typeSpecifier
+				]
 			]
-		]
+		}
 	}
 
 	def protected createPointerType(ComplexType cT) {
@@ -132,6 +166,18 @@ class ConstructorModification implements IModification {
 		]
 	}
 
+	def createDestructor(ComplexType it) {
+		it.features += typesFactory.createOperation => [ op |
+			op.name = "~" + it.name
+			op._annotateWith(defaultDestructorAnnotation)
+			op._annotateWith(virtualAnnotation)
+			op.body = _block => [
+				
+			]
+			_annotateWith(virtualAnnotation)
+		]
+	}
+	
 	def createOperation(ComplexType cT, AnnotationType annotationType, Parameter param) {
 		val privateVariables = EcoreUtil.copyAll(cT.features.filter(Property).filter [
 			visibility == Visibility.PROTECTED && const == false

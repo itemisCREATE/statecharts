@@ -2,10 +2,10 @@ package org.yakindu.sct.types.generator.cpp.annotation
 
 import com.google.inject.Singleton
 import org.yakindu.base.types.AnnotatableElement
-import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationLibrary
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 
 @Singleton
-class CoreCppGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary implements CoreCppGeneratorAnnotationConstants {
+class CoreCppGeneratorAnnotationLibrary extends CoreCGeneratorAnnotationLibrary implements CoreCppGeneratorAnnotationConstants {
 	
 	def virtualAnnotation() {
 		annotation(VIRTUAL)
@@ -13,6 +13,14 @@ class CoreCppGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary i
 	
 	def isVirtual(AnnotatableElement it) {
 		isAnnotatedWith(VIRTUAL)
+	}
+	
+	def pureAnnotation() {
+		annotation(PURE)
+	}
+	
+	def isPure(AnnotatableElement it) {
+		isAnnotatedWith(PURE)
 	}
 	
 	def defaultConstructorAnnotation() {
@@ -46,5 +54,13 @@ class CoreCppGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary i
 	
 	def isOcbDestructor(AnnotatableElement it) {
 		isAnnotatedWith(OCB_DESTRUCTOR)
+	}
+	
+	def invisibleAnnotation() {
+		annotation(INVISIBLE)
+	}
+	
+	def isInvisible(AnnotatableElement it) {
+		isAnnotatedWith(INVISIBLE)
 	}
 }

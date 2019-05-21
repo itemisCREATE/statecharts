@@ -78,7 +78,7 @@ class PropertyAccessModification implements IModification {
 	protected def create _op readAccess(Property prop) {
 		name = prop.nameReadAccess
 		_type(prop.typeSpecifier)
-		body = _block(_return(_fc(prop.ownerInstance._ref, prop)))
+		body = _block(_return(prop._ref))
 		visibility = prop.visibility
 		annotateWithAPI(prop)
 	}
@@ -87,7 +87,7 @@ class PropertyAccessModification implements IModification {
 		name = prop.nameWriteAccess
 		_type(ts.getType(ITypeSystem.VOID))
 		_param("value", prop.typeSpecifier)
-		body = _block(_fc(prop.ownerInstance._ref, prop)._assign(parameters.head._ref))
+		body = _block(prop._ref._assign(parameters.head._ref))
 		visibility = prop.visibility
 		annotateWithAPI(prop)
 	}
@@ -96,7 +96,7 @@ class PropertyAccessModification implements IModification {
 		name = prop.nameAssign
 		_type(prop.typeSpecifier)
 		_param("value", prop.typeSpecifier)
-		body = _block(_return(_fc(prop.ownerInstance._ref, prop)._assign(parameters.head._ref)))
+		body = _block(_return(prop._ref._assign(parameters.head._ref)))
 		visibility = prop.visibility
 	}
 	

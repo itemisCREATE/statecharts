@@ -30,7 +30,7 @@ class CppConstructorGenerator {
 	
 	val ts = CTypeSystem.instance
 
-	def generateConstructor(Operation it) {
+	def String generateConstructor(Operation it) {
 		if(isConstructor) {
 			doGenerateConstructor
 		} else if(isDeconstructor) {
@@ -38,24 +38,16 @@ class CppConstructorGenerator {
 		}
 	}
 	
-	def protected doGenerateConstructor(Operation it) {
-		if (isDefaultConstructor) {
-			if (!isStatic) {
-				return '''«access»«constructorName»«generateParameters»«body.initializationList»{}'''
-			} else {
-				return '''«constructorName»«generateParameters»;'''
-			}
-		} else if (isInnerConstructor) {
-			'''«constructorName»«generateParameters»«body.initializationList»{}'''
-		} 
+	def protected String doGenerateConstructor(Operation it) {
+		'''«constructorName»«generateParameters»«body.initializationList»{}'''
 	}
 	
-	def protected doGenerateDestructor(Operation it) {
+	def protected String doGenerateDestructor(Operation it) {
 		if (isDefaultDestructor) {
 			if (!isStatic) {
 				return '''virtual «access»«constructorName»(){}'''
 			} else {
-				return '''virtual «constructorName»();'''
+				return '''virtual «constructorName»(){};'''
 			}
 		} else if (isOcbDestructor) {
 			return '''virtual «constructorName»(){}'''
@@ -67,7 +59,7 @@ class CppConstructorGenerator {
 	}
 	
 	def protected isConstructor(Operation it) {
-		return (it instanceof Constructor) || isDefaultConstructor || defaultDestructor
+		return (it instanceof Constructor) || isDefaultConstructor || isInnerConstructor
 	}
 	
 	def protected isDeconstructor(Operation it) {
@@ -75,19 +67,19 @@ class CppConstructorGenerator {
 	}
 
 	def dispatch protected getInitializationList(BlockExpression it) {
-		if(it === null) {
-			""
-		} else {
-			val propExpressions = expressions.filter(Property)
-			
-			// The "\t" was the only way to get the correct indentation.
-			'''
-			 :
-			«FOR property : propExpressions SEPARATOR ','»
-			«"\t"»«property.name»(«initialCode(property)»)
-			«ENDFOR»
-			'''
-		}
+		val propExpressions = expressions.filter(Property)
+		
+		// The "\t" was the only way to get the correct indentation.
+		'''
+		 :
+		«FOR property : propExpressions SEPARATOR ','»
+		«"\t"»«property.name»(«initialCode(property)»)
+		«ENDFOR»
+		'''
+	}
+	
+	def dispatch protected getInitializationList(Void it) {
+		""
 	}
 
 	def dispatch protected getInitializationList(Expression it) {
@@ -99,12 +91,17 @@ class CppConstructorGenerator {
 			if (ts.isSame(property.typeSpecifier.type, ts.getType(CTypeSystem.POINTER))) {
 				return NULL_LITERAL
 			}
-			if( ts.getType(ITypeSystem.ARRAY) == property.type.name) {
+			if( ts.getType(ITypeSystem.ARRAY).name == property.type.name) {
 				return ""
 			}
 			return "this"
 		}
-		property.initialValue.code ?: getThis
+		if( ts.getType(ITypeSystem.ARRAY).name == property.type.name) {
+				return ""
+		} else {
+			property.initialValue.code ?: getThis
+			
+		}
 	}
 	
 	def protected String constructorName(Operation it) {

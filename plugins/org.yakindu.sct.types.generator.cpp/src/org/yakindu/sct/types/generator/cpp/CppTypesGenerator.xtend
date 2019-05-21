@@ -24,6 +24,7 @@ import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 
 import static org.eclipse.xtext.util.Strings.*
 import org.yakindu.sct.types.generator.c.CTypesGeneratorExtensions
+import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 
 class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator {
 
@@ -32,6 +33,7 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 	@Inject protected extension CppConstructorGenerator
 	@Inject protected extension CppNamespaceGenerator
 	@Inject protected extension CTypesGeneratorExtensions
+	@Inject protected extension CoreCppGeneratorAnnotationLibrary
 
 	override generate(GeneratorArtifact<?> artifact) {
 		artifact.doGenerate
@@ -102,20 +104,16 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 	'''
 
 	def dispatch String doGenerate(Property it) '''
-		«code.toString»
+		«IF !invisible»«code.toString»«ENDIF»
 	'''
 
 	def dispatch String doGenerate(Operation it) '''
 		«IF isConstructorOrDeconstructor»
 			«generateConstructor»
 		«ELSE»
-			«IF isVirtual»virtual «ENDIF»«IF type === null»void«ELSE»«IF body !== null»«accessType»«ENDIF»«typeSpecifier.code»«ENDIF» «IF body !== null»«access»«ENDIF»«name»«generateParameters»«IF body !== null»«body.code»«ELSE»«IF isVirtual» = 0«ENDIF»;«ENDIF»
+			«IF isVirtual || isPure»virtual «ENDIF»«IF type === null»void«ELSE»«IF body !== null»«accessType»«ENDIF»«typeSpecifier.code»«ENDIF» «IF body !== null»«access»«ENDIF»«name»«generateParameters»«IF body !== null»«body.code»«ELSE»«IF isPure» = 0«ENDIF»;«ENDIF»
 		«ENDIF»
 	'''
-
-	def protected isVirtual(Operation it) {
-		getAnnotationOfType("VIRTUAL") !== null
-	}
 
 	def String generateParameters(Operation it) {
 		'''(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)'''

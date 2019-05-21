@@ -39,7 +39,7 @@ class InEventModification extends BaseEventModification {
 			val prop = createEventFlag(e)
 			e.eContainer.add(prop)
 			
-			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true))
+			val op = operation(nameEventRaiser(e.name), assign(prop, true))
 			op._annotateWith(APIAnnotation)
 			e.eContainer.add(op)
 	
@@ -59,8 +59,8 @@ class InEventModification extends BaseEventModification {
 
 			val op = _op(nameEventRaiser(e.name), ITypeSystem.VOID)._param("value", e.type) => [
 				body = _block(
-					assign(_fc(e.ownerInstance._ref, prop), true),
-					_assign(_fc(e.ownerInstance._ref, valueProp), it.parameters.last._ref)
+					assign(prop, true),
+					_assign(valueProp._ref, it.parameters.last._ref)
 				)
 			]
 			op._annotateWith(APIAnnotation)

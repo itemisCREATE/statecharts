@@ -53,11 +53,12 @@ class CExpressions extends Expressions {
 	}
 
 	def array(Property it) {
+		val arrSize = getArraySize?:initialValue?.size?:""
 		'''
-			«IF static»static«ENDIF»«typeSpecifier.typeArguments.head.type.name» «name»[«IF initialValue !== null»«initialValue.size»«ENDIF»]«terminator»
+			«IF static»static«ENDIF»«typeSpecifier.typeArguments.head.type.name» «name»[«arrSize»]«terminator»
 		'''.toString
 	}
-
+	
 	override dispatch String code(AssignmentExpression it) {
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
