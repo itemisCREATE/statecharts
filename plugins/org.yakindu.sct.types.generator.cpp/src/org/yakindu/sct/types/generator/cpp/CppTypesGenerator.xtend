@@ -109,12 +109,16 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 		«IF isConstructorOrDeconstructor»
 			«generateConstructor»
 		«ELSE»
-			«IF isVirtual»virtual «ENDIF»«IF type === null»void«ELSE»«IF body !== null»«accessType»«ENDIF»«typeSpecifier.code»«ENDIF» «IF body !== null»«access»«ENDIF»«name»(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»«IF isVirtual» = 0«ENDIF»;«ENDIF»
+			«IF isVirtual»virtual «ENDIF»«IF type === null»void«ELSE»«IF body !== null»«accessType»«ENDIF»«typeSpecifier.code»«ENDIF» «IF body !== null»«access»«ENDIF»«name»«generateParameters»«IF body !== null»«body.code»«ELSE»«IF isVirtual» = 0«ENDIF»;«ENDIF»
 		«ENDIF»
 	'''
 
 	def protected isVirtual(Operation it) {
-		it.getAnnotationOfType("VIRTUAL") !== null
+		getAnnotationOfType("VIRTUAL") !== null
+	}
+
+	def String generateParameters(Operation it) {
+		'''(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)'''
 	}
 
 	def protected accessType(Operation it) {

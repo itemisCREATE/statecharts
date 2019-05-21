@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Operation
@@ -59,7 +60,7 @@ class OCBModification implements IModification {
 		val ocbClasses = newArrayList
 		val ocbSetters = newArrayList
 		outerClass.complexTypes.filter[!(it instanceof EnumerationType)].toList.forEach [ cT |
-			val operationDefinitions = cT.features.filter(Operation).filter[body === null].toList
+			val operationDefinitions = cT.features.filter(Operation).filter[!(it instanceof Constructor)].filter[body === null].toList
 			if (!operationDefinitions.nullOrEmpty) {
 				ocbClasses += createComplexType => [ iface |
 					iface._annotateWith(interfaceGroupAnnotation)

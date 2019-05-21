@@ -15,7 +15,7 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.AnnotationType
 import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
@@ -28,6 +28,7 @@ import org.yakindu.sct.types.generator.cpp.CppSlangTypeValueProvider
 import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.naming.CppClassNaming
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.base.types.EnumerationType
 
 class ConstructorModification implements IModification {
 	@Inject protected extension CTypeSystem cts
@@ -41,28 +42,69 @@ class ConstructorModification implements IModification {
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE
 
 	override modify(Collection<Package> packages) {
-		packages.forEach[modify]
+		packages.map[eAllContents.toList].flatten.filter(ComplexType).filter[!(it instanceof EnumerationType)].forEach[modify]
 		packages
 	}
 
-	def modify(Package it) {
-		val outerClass = (member.head as ComplexType)
-		eAllContents.filter(ComplexType).filter[!(it instanceof EnumerationType)].toList.forEach [ cT |
-			if (cT.eContainer instanceof Package) {
-				// create constructor and destructor
+	def modify(ComplexType cT) {
+		val constructors = cT.features.filter(Constructor).toList
+		val container = cT.eContainer
+		if (container instanceof Package) {
+			// create constructor and destructor
+			if (constructors.empty) {
 				cT.features += cT.createOperation(defaultConstructorAnnotation, null)
-				cT.features += cT.createOperation(defaultDestructorAnnotation, null)
 			} else {
-				// create constructor only with initialization list, if not abstract
-				if(cT.features.filter(Operation).filter[body === null].nullOrEmpty) {
-					val parameter = createParentParameter(outerClass)
-					cT.features += cT.createOperation(innerConstructorAnnotation, parameter)
-					cT.features += outerClass.createParentProperty
-				}
-
+				constructors.forEach[modify]
 			}
-		]
-		return it
+			cT.features += cT.createOperation(defaultDestructorAnnotation, null)
+		} else if(container instanceof ComplexType) {
+			// create constructor only with initialization list, if not abstract
+			cT.features += container.createParentProperty
+			val parameter = createParentParameter(container)
+			if (constructors.empty) {
+				cT.features += cT.createOperation(innerConstructorAnnotation, parameter)
+			} else {
+				constructors.forEach[modify(parameter)]
+			}
+
+		}
+	}
+
+	protected def modify(Constructor ctor, Parameter... parameters) {
+		val cT = ctor.eContainer
+		if (cT instanceof ComplexType) {
+
+			ctor.parameters += parameters
+			if (cT.eContainer instanceof Package) {
+				ctor._annotateWith(defaultConstructorAnnotation)
+			} else {
+				ctor._annotateWith(innerConstructorAnnotation)
+			}
+			
+			val variables = EcoreUtil.copyAll(cT.features.filter(Property).filter [ feature |
+				feature.const == false || (feature.const == true && feature.static == false)
+			].toList)
+			variables.forEach [ prop |
+				prop.initialValue = {
+					if(prop.initialValue !== null) {
+						prop.initialValue
+					} else {
+						val param = ctor.parameters.findFirst[ p | p.name == prop.name]
+						if(param !== null) {
+							param._ref
+						} else {
+							prop.type.defaultValue.value
+						}
+					}
+				}
+				if (prop.initialValue === null) {
+					prop.initialValue = prop.type.defaultValue.value
+				}
+			]
+			ctor.body = _block => [
+					expressions += variables
+				]
+		}
 	}
 
 	protected def Property createParentProperty(ComplexType outerClass) {

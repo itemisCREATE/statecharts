@@ -115,6 +115,7 @@ class ModelSequencer implements IModelSequencer {
 		sctype.defineSingleStepMethod(sc)
 		
 		sctype._annotateWith(statemachineTypeAnnotation)
+		sctype.features += sctype.createConstructor
 		pkg.member.add(statemachineTypeAnnotation)
 
 		pkg.retargetReferences
