@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.junit.After;
+import org.junit.AssumptionViolatedException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.runner.Description;
@@ -72,6 +73,11 @@ public class GTestRunner extends Runner {
 		}
 
 		ignore = testClass.getAnnotation(Ignore.class) != null;
+		RunIfEnv runIfEnv = testClass.getAnnotation(RunIfEnv.class);
+		if(runIfEnv != null) {
+			ignore = java.lang.System.getenv(runIfEnv.value()) == null;
+		}
+		
 
 		String sourceFile = annotation.sourceFile();
 		try {

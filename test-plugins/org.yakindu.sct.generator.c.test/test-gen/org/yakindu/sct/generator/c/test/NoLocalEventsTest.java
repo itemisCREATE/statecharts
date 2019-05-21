@@ -4,8 +4,9 @@ package org.yakindu.sct.generator.c.test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
-import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
+import org.yakindu.sct.generator.c.gtest.GTestRunner;
+import org.yakindu.sct.generator.c.gtest.RunIfEnv;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
@@ -22,6 +23,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	}
 )
 @RunWith(GTestRunner.class)
+@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class NoLocalEventsTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);

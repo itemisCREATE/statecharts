@@ -48,6 +48,14 @@ class ExpressionsHelper {
 		]
 	}
 	
+	def dispatch primitiveLiteral(String value) {
+		primitiveValueExpression => [ prim |
+			prim.value = expFactory.createStringLiteral => [ s |
+				s.value = value
+			]
+		]
+	}
+	
 	def protected primitiveValueExpression() {
 		expFactory.createPrimitiveValueExpression
 	}

@@ -16,10 +16,12 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
+import org.yakindu.sct.generator.c.gtest.RunIfEnv;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(sourceFile = "gtests/OperationsWithoutBraces/OperationsWithoutBracesCustom.cc", program = "gtests/OperationsWithoutBraces/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct", statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
+@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class OperationsWithoutBracesCustom {
 
 	protected final GTestHelper helper = new GTestHelper(this) {

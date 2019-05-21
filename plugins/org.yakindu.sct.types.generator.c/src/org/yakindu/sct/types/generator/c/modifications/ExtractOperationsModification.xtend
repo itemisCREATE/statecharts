@@ -34,11 +34,13 @@ import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 
 class ExtractOperationsModification implements IModification {
 	@Inject protected extension PackageNavigationExtensions
 	@Inject protected extension CTypeSystem cts
 	@Inject protected extension ExpressionsHelper
+	@Inject protected extension CoreCGeneratorAnnotationLibrary
 
 	protected ExpressionsFactory expFactory = ExpressionsFactory.eINSTANCE
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE
@@ -50,7 +52,7 @@ class ExtractOperationsModification implements IModification {
 
 	def modify(Package p) {
 		p.allOperations.forEach [ op |
-			val cT = (EcoreUtil.getRootContainer(op) as Package).member.get(0)
+			val cT = op.findRootType
 			if (cT instanceof ComplexType) {
 				val parentParameter = createParameter(cT, cT.name.toFirstLower)
 				op.parameters.add(0, parentParameter)
@@ -71,6 +73,12 @@ class ExtractOperationsModification implements IModification {
 			]
 		]
 		return p
+	}
+	
+	def Type findRootType(Operation it) {
+		val containers = EcoreUtil2.getAllContainers(it).filter(ComplexType).toList
+		return containers.head.getRootType?:EcoreUtil2.getAllContainers(it).filter(ComplexType).last
+		
 	}
 
 	def protected addArgument(ElementReferenceExpression expression, Parameter parameter) {
