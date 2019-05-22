@@ -23,7 +23,6 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	}
 )
 @RunWith(GTestRunner.class)
-@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class ParentFirstOrthogonalReactionsTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);
