@@ -16,7 +16,7 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.base.types.TypeBuilder
 
 /**
  * Adds immutable annotation to all operations without body, as they are generated into the RequiredHeader.h file
