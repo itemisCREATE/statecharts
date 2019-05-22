@@ -66,11 +66,11 @@ class ExtractOperationsModification implements IModification {
 			}
 		]
 		// add handle to operation calls
-		p.allOperations.forEach [ op |
-			op.eAllContents.filter(ElementReferenceExpression).filter[operationCall].forEach [
-				addArgument(op.parameters.head)
-			]
-		]
+//		p.allOperations.forEach [ op |
+//			op.eAllContents.filter(ElementReferenceExpression).filter[operationCall].forEach [
+//				addArgument(op.parameters.head)
+//			]
+//		]
 		return p
 	}
 	
