@@ -20,7 +20,6 @@ import org.yakindu.sct.types.generator.statechart.cpp.modifications.OCBModificat
 import org.yakindu.sct.types.generator.statechart.cpp.modifications.RenameSCTInterfacesModification
 import org.yakindu.sct.types.generator.statechart.cpp.naming.CppPropertyAccessNaming
 import org.yakindu.sct.types.generator.statechart.modification.library.APIOperationsModification
-import org.yakindu.sct.types.generator.statechart.modification.library.FlattenInnerTypesModification
 import org.yakindu.sct.types.generator.statechart.modification.library.PropertyAccessModification
 
 class CppSCTGeneratorModule extends SCTGeneratorModule {
@@ -35,7 +34,6 @@ class CppSCTGeneratorModule extends SCTGeneratorModule {
 			CreateDefaultPackage, // should go to sequencer
 			InterfaceRenamingModification, // find general naming convention
 			RenameSCTInterfacesModification, // can be removed
-			FlattenInnerTypesModification, // move flatten of unnecessary types to sequencer
 			OCBModification,
 			CppNextStateIndexModification,
 			CppPropertyAccessModification

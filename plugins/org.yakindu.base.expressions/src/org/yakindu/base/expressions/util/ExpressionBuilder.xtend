@@ -8,6 +8,7 @@
  */
 package org.yakindu.base.expressions.util
 
+import org.eclipse.core.runtime.Assert
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AdditiveOperator
 import org.yakindu.base.expressions.expressions.ArgumentExpression
@@ -65,6 +66,7 @@ class ExpressionBuilder {
 	}
 
 	def ElementReferenceExpression _call(Operation op, Expression... arguments) {
+		Assert.isNotNull(op)
 		createElementReferenceExpression => [
 			it.reference = op
 			it.operationCall = true
@@ -78,6 +80,7 @@ class ExpressionBuilder {
 	}
 
 	def ElementReferenceExpression _ref(EObject p) {
+		Assert.isNotNull(p)
 		createElementReferenceExpression => [
 			reference = p
 			operationCall = false
@@ -91,6 +94,8 @@ class ExpressionBuilder {
 	}
 
 	def FeatureCall _fc(Expression owner, Declaration feature, Expression... arguments) {
+		Assert.isNotNull(owner)
+		Assert.isNotNull(feature)
 		createFeatureCall => [ fc |
 			fc.owner = owner
 			fc.feature = feature

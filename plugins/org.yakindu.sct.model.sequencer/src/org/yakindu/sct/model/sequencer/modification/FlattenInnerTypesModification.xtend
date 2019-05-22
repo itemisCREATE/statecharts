@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator.statechart.modification.library
+package org.yakindu.sct.model.sequencer.modification
 
 import com.google.inject.Inject
 import java.util.Collection

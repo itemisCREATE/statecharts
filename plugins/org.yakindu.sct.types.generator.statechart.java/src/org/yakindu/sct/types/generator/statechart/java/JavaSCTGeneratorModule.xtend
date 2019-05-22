@@ -21,7 +21,6 @@ import org.yakindu.sct.types.generator.statechart.java.modification.ReplaceInteg
 import org.yakindu.sct.types.generator.statechart.java.modification.UnwrapInternalInterfaceModification
 import org.yakindu.sct.types.generator.statechart.java.naming.JavaNamingService
 import org.yakindu.sct.types.generator.statechart.java.naming.JavaPropertyAccessNaming
-import org.yakindu.sct.types.generator.statechart.modification.library.FlattenInnerTypesModification
 import org.yakindu.sct.types.generator.statechart.modification.library.PropertyAccessModification
 import org.yakindu.sct.types.generator.statechart.modification.library.PropertyReferenceModification
 
@@ -52,7 +51,6 @@ class JavaSCTGeneratorModule extends SCTGeneratorModule {
 			UnwrapInternalInterfaceModification,
 			DefaultInterfacePropertyAccessModification,
 			InitializeInterfacePropertiesModification,
-			FlattenInnerTypesModification,
 			InterfaceLiftingModification,
 			OperationCallbackModification
 		]
