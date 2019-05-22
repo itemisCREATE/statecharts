@@ -18,4 +18,5 @@ Export-Package: org.yakindu.sct.types.generator.c,
  org.yakindu.sct.types.generator.c.annotation,
  org.yakindu.sct.types.generator.c.artifacts,
  org.yakindu.sct.types.generator.c.files,
+ org.yakindu.sct.types.generator.c.modifications,
  org.yakindu.sct.types.generator.c.typesystem

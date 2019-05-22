@@ -12,7 +12,7 @@ package org.yakindu.sct.types.generator.modification.library
 
 import com.google.inject.Inject
 import java.util.Collection
-import org.yakindu.base.types.Declaration
+import org.yakindu.base.base.NamedElement
 import org.yakindu.base.types.Package
 import org.yakindu.sct.types.generator.ITargetPlatform
 import org.yakindu.sct.types.modification.IModification
@@ -29,7 +29,7 @@ class IdentifierModification implements IModification{
 	}
 
 	def modify(Package p) {
-		p.eAllContents.filter(Declaration).forEach[ decl | 
+		p.eAllContents.filter(NamedElement).forEach[ decl | 
 			decl.name = decl.name.asIdentifier
 			if(languageKeywords.contains(decl.name)) {
 				decl.name = "_" + decl.name

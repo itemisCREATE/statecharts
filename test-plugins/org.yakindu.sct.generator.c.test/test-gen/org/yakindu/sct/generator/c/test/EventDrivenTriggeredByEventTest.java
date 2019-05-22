@@ -2,7 +2,6 @@
 package org.yakindu.sct.generator.c.test;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;

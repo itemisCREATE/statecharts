@@ -12,6 +12,7 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
@@ -59,7 +60,7 @@ class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfig
 				statemachineHeader.addDependency(scTypes)
 				
 				statemachineSource.content.addAll(
-					statemachine.eAllContents.filter(Operation).filter[body !== null].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList
+					statemachine.eAllContents.filter(Operation).filter[body !== null].filter[!constructorOrDeconstructor].toList
 				)
 				
 				val pkgCopy = EcoreUtil.copy(p)

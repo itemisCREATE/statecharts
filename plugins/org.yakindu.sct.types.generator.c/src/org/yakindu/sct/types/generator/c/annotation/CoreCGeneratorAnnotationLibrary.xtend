@@ -17,6 +17,8 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationLibrary
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.IntLiteral
 
 class CoreCGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary implements CoreCGeneratorAnnotationConstants {
 	@Inject protected ITypeSystem ts
@@ -49,13 +51,38 @@ class CoreCGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary imp
 	}
 	
 	def getRootType(AnnotatableElement it) {
-		val _annotation = getAnnotationOfType(ROOT_TYPE) {
-			val prop = _annotation?.arguments?.head
-			if(prop instanceof Property) {
-				return prop.type
-			}
+		val _annotation = getAnnotationOfType(ROOT_TYPE)
+		val prop = _annotation?.arguments?.head
+		if(prop instanceof Property) {
+			return prop.type
 		}
 		return null
+	}
+	
+	def arraySizeAnnotation() {
+		annotation(ARRAY_SIZE)
+	}
+	
+	def isArraySize(AnnotatableElement it) {
+		isAnnotatedWith(ARRAY_SIZE)
+	}
+	
+	def setArraySize(AnnotatableElement it, int size) {
+		if(!isArraySize) {
+			_annotateWith(arraySizeAnnotation)
+		}
+		
+		val _annotation = getAnnotationOfType(ARRAY_SIZE)
+		_annotation.arguments += primitiveLiteral(size)
+	}
+	
+	def getArraySize(AnnotatableElement it) {
+		val _annotation = getAnnotationOfType(ARRAY_SIZE)
+		val prop = _annotation?.arguments?.head
+		if(prop instanceof PrimitiveValueExpression) {
+			return (prop.value as IntLiteral).value
+		}
+		null
 	}
 	
 	

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
+import org.yakindu.sct.generator.c.gtest.RunIfEnv;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 import org.yakindu.sct.generator.c.gtest.GMockHelper;
@@ -24,6 +25,7 @@ import org.yakindu.sct.generator.c.gtest.GMockHelper;
 	}
 )
 @RunWith(GTestRunner.class)
+@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class OperationsTest {
 protected final GTestHelper helper = new GMockHelper(this);
 

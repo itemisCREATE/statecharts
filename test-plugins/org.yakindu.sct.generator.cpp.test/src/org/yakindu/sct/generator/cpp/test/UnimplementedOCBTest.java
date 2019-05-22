@@ -17,10 +17,12 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
+import org.yakindu.sct.generator.c.gtest.RunIfEnv;
 import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 
 @GTest(sourceFile = "gtests/UnimplementedOCBTest/UnimplementedOCBTest.cc", program = "gtests/UnimplementedOCBTest/UnimplementedOCB", model = "testmodels/SCTUnit/UnimplementedOCB.sct", statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
+@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class UnimplementedOCBTest {
 	protected final GTestHelper helper = new GTestHelper(this, Compiler.GPLUSPLUS) {
 

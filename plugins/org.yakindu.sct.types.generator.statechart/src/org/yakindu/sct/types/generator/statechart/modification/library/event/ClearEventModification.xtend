@@ -9,6 +9,7 @@ import org.yakindu.base.expressions.expressions.EventClearingExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
@@ -17,12 +18,13 @@ import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 class ClearEventModification {
 
 	@Inject protected extension ExpressionBuilder
+	@Inject protected extension ExpressionsHelper
 	@Inject protected extension ExpressionExtensions
 	@Inject protected extension ModificationHelper
 	
 	def modifyClearEvent(Property prop, Event e) {
 		for (clear : e.clearExpressions) {
-			EcoreUtil.replace(clear, clear.event.toAssignment(_fc(prop.ownerInstance._ref, prop), _false))
+			EcoreUtil.replace(clear, assign(prop, false))
 		}
 	}
 

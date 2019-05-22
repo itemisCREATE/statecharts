@@ -39,8 +39,8 @@ class LocalEventModification extends BaseEventModification{
 			val valueProp = createEventValueProp(e)
 			val op = _op(nameEventRaiser(e.name))._param("value", e.type) => [
 				body = _block(
-					assign(_fc(e.ownerInstance._ref, prop), true),
-					assign(_fc(e.ownerInstance._ref, valueProp), it.parameters.head._ref)
+					assign(prop, true),
+					assign(valueProp, it.parameters.head._ref)
 				)
 				visibility = Visibility.PROTECTED
 			]
@@ -50,7 +50,7 @@ class LocalEventModification extends BaseEventModification{
 			
 			modifyRaiseEvent(op, e)
 		} else {
-			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true)) => [
+			val op = operation(nameEventRaiser(e.name), assign(prop, true)) => [
 				visibility = Visibility.PROTECTED
 			]
 			e.eContainer.add(op)

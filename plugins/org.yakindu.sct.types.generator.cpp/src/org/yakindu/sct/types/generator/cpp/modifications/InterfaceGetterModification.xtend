@@ -36,25 +36,26 @@ class InterfaceGetterModification implements IModification {
 	}
 
 	def modify(Package p) {
-		val annotationType = typesFactory.createAnnotationType => [ at |
-			at.name = "PointerEleRef"
-		]
-		val outerClass = p.member.filter(ComplexType).head
-		val properties = p.eAllContents.filter(Property).filter[eContainer instanceof ComplexType].toList
-		val interfaces = outerClass.eAllContents.filter(ComplexType).filter[!(it instanceof EnumerationType)].filter [
-			visibility == Visibility.PUBLIC
-		].toList
+		p.member.filter(ComplexType).forEach [ outerClass |
+			val annotationType = typesFactory.createAnnotationType => [ at |
+				at.name = "PointerEleRef"
+			]
+			val properties = outerClass.features.filter(Property).filter[eContainer instanceof ComplexType].toList
+			val innerClasses = outerClass.features.filter(ComplexType).filter[!(it instanceof EnumerationType)].filter [
+				visibility == Visibility.PUBLIC
+			].toList
 
-		interfaces.forEach [ cT |
-			properties.forEach [ prop |
-				if (prop.type == cT) {
-					outerClass.features += typesFactory.createOperation => [ op |
-						op.name = "get" + cT.name
-						op.typeSpecifier = cT.createPointerType
-						prop._annotateWith(annotationType)
-						op.body = _block(_return(prop._ref))
-					]
-				}
+			innerClasses.forEach [ innerClass |
+				properties.forEach [ prop |
+					if (prop.type == innerClass) {
+						outerClass.features += typesFactory.createOperation => [ op |
+							op.name = "get" + innerClass.name
+							op.typeSpecifier = innerClass.createPointerType
+							prop._annotateWith(annotationType)
+							op.body = _block(_return(prop._ref))
+						]
+					}
+				]
 			]
 		]
 		return p

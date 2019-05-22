@@ -201,6 +201,7 @@ public class GTestRunner extends Runner {
 		IFile programFile = ResourcesPlugin.getWorkspace().getRoot().getFile(programPath);
 		
 		GTestExecutor executor = new GTestExecutor(testClass) {
+			boolean failed = false;
 			@Override
 			protected void testStarted(Description desc) {
 				notifier.fireTestStarted(desc);
@@ -208,9 +209,14 @@ public class GTestRunner extends Runner {
 			@Override
 			protected void testFinished(Description desc) {
 				notifier.fireTestFinished(desc);
+				RunIfEnv runIfEnv = testClass.getAnnotation(RunIfEnv.class);
+				if(runIfEnv != null && !failed) {
+					System.out.println("[INFO] Test " + testClass.getSimpleName() + " runs, but is @RunIfEnv!");
+				}
 			}
 			@Override
 			protected void testFailed(Description desc, String message) {
+				failed = true;
 				notifier.fireTestFailure(
 						new Failure(desc, new AssertionFailedError(message.toString())));
 			}

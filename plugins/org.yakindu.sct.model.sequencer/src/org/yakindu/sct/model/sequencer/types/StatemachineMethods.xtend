@@ -102,10 +102,8 @@ class StatemachineMethods {
 	
 	protected def variablesForInitSequence(Statechart sc) {
 		val statechartVariables = sc.scopes.map(s|s.variables).flatten.filter(Property).filter[!const]
-//		val flow = sc.create
-//		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(
-//			d|d.declaration).filter(typeof(VariableDefinition))
-		return statechartVariables // + importedVariables
+
+		return statechartVariables
 	}
 	
 	protected def initialization(Property vd) {
@@ -277,12 +275,7 @@ class StatemachineMethods {
 		it.features += createClearEventsMethod(it) => [
 			body = _block => [
 				expressions += sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearEvents)]
-				// clear internal events directly
-				val internalEventClears = newArrayList
-				sc.scopes.filter(InternalScope).forEach[iface | 
-					internalEventClears += iface.members.filter(Event).map[event | _clearEvent(iface.property._ref._fc(event))]
-				]
-				expressions += internalEventClears
+				expressions += sc.scopes.filter(InternalScope).map[iface | iface.property._ref._fc(iface.createInternalType.clearLocalEvents)]
 			]
 		]
 	}
