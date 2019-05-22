@@ -10,7 +10,5 @@ Require-Bundle: org.yakindu.sct.types.generator;visibility:=reexport,
  org.yakindu.sct.model.sequencer,
  org.yakindu.sct.model.stext
 Export-Package: org.yakindu.sct.types.generator.statechart,
- org.yakindu.sct.types.generator.statechart.annotation,
  org.yakindu.sct.types.generator.statechart.modification.library,
- org.yakindu.sct.types.generator.statechart.modification.library.event,
  org.yakindu.sct.types.generator.statechart.naming

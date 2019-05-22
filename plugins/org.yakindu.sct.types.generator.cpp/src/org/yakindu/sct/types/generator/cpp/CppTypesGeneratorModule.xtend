@@ -9,16 +9,19 @@
 package org.yakindu.sct.types.generator.cpp
 
 import org.yakindu.sct.types.generator.cpp.artifacts.DefaultCppGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.cpp.modifications.ComplexTypeUpperCaseModification
+import org.yakindu.sct.types.generator.cpp.modifications.ConstMemberModification
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
 import org.yakindu.sct.types.generator.cpp.modifications.InterfaceGetterModification
+import org.yakindu.sct.types.generator.cpp.modifications.RemoveInitialValuesModification
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
 import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
+import org.yakindu.sct.types.generator.modification.library.event.InEventModification
+import org.yakindu.sct.types.generator.modification.library.event.LocalEventModification
+import org.yakindu.sct.types.generator.modification.library.event.OutEventModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
-import org.yakindu.sct.types.generator.cpp.modifications.ComplexTypeUpperCaseModification
-import org.yakindu.sct.types.generator.cpp.modifications.ConstMemberModification
-import org.yakindu.sct.types.generator.cpp.modifications.RemoveInitialValuesModification
 
 class CppTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -34,6 +37,9 @@ class CppTypesGeneratorModule extends TypesGeneratorModule {
 		return #[
 			// base modifications
 			IdentifierModification,
+			InEventModification,
+			OutEventModification,
+			LocalEventModification,
 			
 			// C++ modifications
 			RemoveAnnotationTypeModification,
@@ -55,6 +61,10 @@ class CppTypesGeneratorModule extends TypesGeneratorModule {
 
 	override bindITypesGenerator() {
 		CppTypesGenerator
+	}
+	
+	override bindEventNaming() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 }

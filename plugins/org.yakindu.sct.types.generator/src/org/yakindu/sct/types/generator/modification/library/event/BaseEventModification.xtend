@@ -6,7 +6,7 @@
 * 	itemis AG
 *
 */
-package org.yakindu.sct.types.generator.statechart.modification.library.event
+package org.yakindu.sct.types.generator.modification.library.event
 
 import com.google.inject.Inject
 import java.util.Collection
@@ -19,7 +19,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.types.generator.statechart.naming.IEventNaming
+import org.yakindu.sct.types.generator.naming.IEventNaming
 import org.yakindu.sct.types.modification.IModification
 
 abstract class BaseEventModification implements IModification {

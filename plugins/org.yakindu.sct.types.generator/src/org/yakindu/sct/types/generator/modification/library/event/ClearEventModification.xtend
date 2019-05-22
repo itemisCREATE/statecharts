@@ -1,4 +1,4 @@
-package org.yakindu.sct.types.generator.statechart.modification.library.event
+package org.yakindu.sct.types.generator.modification.library.event
 
 import com.google.inject.Inject
 import java.util.List

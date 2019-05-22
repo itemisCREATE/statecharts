@@ -8,9 +8,9 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator.statechart.c.naming
+package org.yakindu.sct.types.generator.c.naming
 
-import org.yakindu.sct.types.generator.statechart.naming.IEventNaming
+import org.yakindu.sct.types.generator.naming.IEventNaming
 
 class CEventNaming implements IEventNaming {
 	override String nameEventRaiser(CharSequence s) {
