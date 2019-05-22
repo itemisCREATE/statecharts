@@ -205,11 +205,12 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
+		parameter.setAnnotationInfo(createDeclaration());
 		return parameter;
 	}
 
