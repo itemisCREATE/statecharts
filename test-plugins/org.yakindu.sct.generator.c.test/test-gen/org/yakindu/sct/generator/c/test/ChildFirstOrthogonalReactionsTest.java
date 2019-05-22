@@ -24,14 +24,12 @@ import org.yakindu.sct.generator.c.gtest.RunIfEnv;
 	}
 )
 @RunWith(GTestRunner.class)
-@RunIfEnv("FAILING_GENERATOR_TESTS")
 public class ChildFirstOrthogonalReactionsTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 
 	@Before
 	public void setUp() {
-		Assume.assumeTrue(java.lang.System.getenv("RUN_GENERATOR_TEST") != null);
 		helper.generate();
 		helper.compile();
 	}
