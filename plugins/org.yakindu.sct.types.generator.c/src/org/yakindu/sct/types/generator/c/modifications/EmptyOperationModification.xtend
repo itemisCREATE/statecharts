@@ -21,9 +21,6 @@ class EmptyOperationModification implements IModification{
 		x.forEach[param | 
 			param._annotateWith(immutableTypeAnnotation)
 		]
-//		p.eAllContents.filter(Operation).filter[body === null].map[parameters].toList.flatten.toList.forEach[
-//			_annotateWith(immutableTypeAnnotation)
-//		]
 		return p
 	}
 	

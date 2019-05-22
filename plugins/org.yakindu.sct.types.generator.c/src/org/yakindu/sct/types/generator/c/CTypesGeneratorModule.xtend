@@ -27,6 +27,9 @@ import org.yakindu.sct.types.generator.modification.library.TypesReplacementModi
 import org.yakindu.sct.types.generator.c.modifications.ExtractForLoopInitializers
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
 import org.yakindu.sct.types.generator.c.modifications.RemoveInitialValueModification
+import org.yakindu.sct.types.generator.c.modifications.ConstructorModification
+import org.yakindu.sct.types.generator.c.modifications.EmptyConstructorModification
+import org.yakindu.sct.types.generator.c.modifications.EmptyOperationModification
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -53,7 +56,9 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 			AliasReplacementModification,
 			// base modification
 			TypesReplacementModification,
-			ExtractForLoopInitializers
+			ExtractForLoopInitializers,
+			EmptyConstructorModification,
+			EmptyOperationModification
 		]
 	}
 
