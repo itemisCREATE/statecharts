@@ -18,6 +18,9 @@ import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibr
 import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 
+/**
+ * Adds immutable annotation to all operations without body, as they are generated into the RequiredHeader.h file
+ */
 class EmptyOperationModification implements IModification{
 	@Inject protected extension CoreCGeneratorAnnotationLibrary
 	@Inject protected extension TypeBuilder
@@ -27,8 +30,7 @@ class EmptyOperationModification implements IModification{
 	}
 	
 	def protected modify(Package p){
-		val x = p.eAllContents.filter(Operation).filter[body === null].map[parameters].toList.flatten.toList
-		x.forEach[param | 
+		p.eAllContents.filter(Operation).filter[body === null].map[parameters].toList.flatten.toList.forEach[param | 
 			param._annotateWith(immutableTypeAnnotation)
 		]
 		return p
