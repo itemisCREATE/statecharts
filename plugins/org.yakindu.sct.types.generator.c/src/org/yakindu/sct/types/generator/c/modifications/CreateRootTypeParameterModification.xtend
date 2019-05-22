@@ -53,7 +53,7 @@ class CreateRootTypeParameterModification implements IModification {
 			val instanceHierarchy = containerTypes.map[instanceInContainer].filterNull.toList
 			
 			// Get all features of the container type and find their usages in this operation
-			val siblingFeatures = ownContainer.features.reject[it === op].toSet
+			val siblingFeatures = ownContainer.features.filter[it !== op].toSet
 			val usages = op.eAllContents.filter(ArgumentExpression).filter[siblingFeatures.contains(declaration)].toList
 			
 			// Replace all feature usages with appropriate feature calls.

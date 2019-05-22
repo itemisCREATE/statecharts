@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
-import org.yakindu.base.expressions.expressions.impl.ArgumentImpl
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.AnnotationType

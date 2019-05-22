@@ -67,6 +67,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 			sc.statemachinePackage.member += it
 
 			features += interfaceGroupAnnotation
+			
+			features += createConstructor
 
 			features += statesEnumeration(sc)
 			
