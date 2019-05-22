@@ -277,12 +277,7 @@ class StatemachineMethods {
 		it.features += createClearEventsMethod(it) => [
 			body = _block => [
 				expressions += sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearEvents)]
-				// clear internal events directly
-				val internalEventClears = newArrayList
-				sc.scopes.filter(InternalScope).forEach[iface | 
-					internalEventClears += iface.members.filter(Event).map[event | _clearEvent(iface.property._ref._fc(event))]
-				]
-				expressions += internalEventClears
+				expressions += sc.scopes.filter(InternalScope).map[iface | iface.property._ref._fc(iface.createInternalType.clearLocalEvents)]
 			]
 		]
 	}

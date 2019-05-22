@@ -162,6 +162,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
+		features += clearLocalEvents
+		
 		it._annotateWith(interfaceGroupAnnotation)
 		it._annotateWith(internalScopeAnnotation)
 		it.visibility = Visibility.PROTECTED
