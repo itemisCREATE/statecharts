@@ -39,6 +39,14 @@ class CoreCGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary imp
 		isAnnotatedWith(ROOT_TYPE)
 	}
 	
+	def AnnotationType immutableTypeAnnotation() {
+		annotation(IMMUTABLE)
+	}
+	
+	def isImmutable(AnnotatableElement it) {
+		isAnnotatedWith(IMMUTABLE)
+	}
+	
 	def setRootType(AnnotatableElement it, Type rootType) {
 		if(rootType === null) {
 			return

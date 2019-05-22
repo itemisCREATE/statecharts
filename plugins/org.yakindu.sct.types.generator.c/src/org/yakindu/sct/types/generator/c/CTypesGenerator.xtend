@@ -16,6 +16,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.sct.types.generator.AbstractTypesGenerator
 import org.yakindu.sct.types.generator.ITargetPlatform
@@ -23,6 +24,7 @@ import org.yakindu.sct.types.generator.ITypesGenerator
 import org.yakindu.sct.types.generator.artifacts.Dependency.ArtifactDependency
 import org.yakindu.sct.types.generator.artifacts.Dependency.StaticDependency
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.c.files.CTypes
 
 import static org.eclipse.xtext.util.Strings.*
@@ -33,6 +35,7 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 	@Inject protected extension CTypesGeneratorExtensions
 	@Inject protected extension CTypes
 	@Inject protected ITargetPlatform platform
+	@Inject protected extension CoreCGeneratorAnnotationLibrary
 
 	override generate(GeneratorArtifact<?> artifact) {
 		artifact.doGenerate
@@ -113,13 +116,18 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 	}
 
 	def dispatch String doGenerate(Operation it) '''
-		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
+		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»«generateParameters»«IF body !== null»«body.code»«ELSE»;«ENDIF» 
 	'''
-
-//	// TODO: add const flag to Parameters
-//	def dispatch String doGenerate(OperationDefinition it) '''
-//		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»const «p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
-//	'''
+	
+	protected def CharSequence generateParameters(Operation it)
+		'''(«FOR p : parameters SEPARATOR ', '»«p.const»«p.typeSpecifier.code» «p.name»«ENDFOR»)'''
+	
+	
+	def getConst(Parameter it) {
+		if(isImmutable) {
+			return "const "
+		}
+	}
 
 	def dispatch String doGenerate(Object o) {
 		'''//Unknown object «o»'''
