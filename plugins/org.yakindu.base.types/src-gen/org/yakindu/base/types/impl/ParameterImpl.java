@@ -314,7 +314,10 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @generated NOT
 	 */
 	public Annotation getAnnotationOfType(final String typeName) {
-		EList<Annotation> annotations = getAnnotations();
+		if (getAnnotationInfo() == null) {
+			return null;
+		}
+		EList<Annotation> annotations = getAnnotationInfo().getAnnotations();
 		for (Annotation annotation : annotations) {
 			if (typeName.equals(annotation.getType().getName())) {
 				return annotation;
