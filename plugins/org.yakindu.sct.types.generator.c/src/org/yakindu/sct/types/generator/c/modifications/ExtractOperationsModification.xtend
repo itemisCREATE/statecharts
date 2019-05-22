@@ -12,6 +12,7 @@ package org.yakindu.sct.types.generator.c.modifications
 
 import com.google.inject.Inject
 import java.util.Collection
+import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -20,6 +21,7 @@ import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.ComplexType
@@ -32,14 +34,15 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.TypesFactory
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 
 class ExtractOperationsModification implements IModification {
 	@Inject protected extension PackageNavigationExtensions
 	@Inject protected extension CTypeSystem cts
 	@Inject protected extension ExpressionsHelper
+	@Inject protected extension ExpressionBuilder
 	@Inject protected extension CoreCGeneratorAnnotationLibrary
 
 	protected ExpressionsFactory expFactory = ExpressionsFactory.eINSTANCE
@@ -54,13 +57,9 @@ class ExtractOperationsModification implements IModification {
 		p.allOperations.forEach [ op |
 			val cT = op.findRootType
 			if (cT instanceof ComplexType) {
-				val parentParameter = createParameter(cT, cT.name.toFirstLower)
-				op.parameters.add(0, parentParameter)
-				op.eAllContents.filter(ElementReferenceExpression).toList.filter [
-					reference instanceof Property && cT === reference.eContainer
-				].forEach [
-					replaceElementReferenceExpressionWithFeatureCall(parentParameter, arraySelector)
-				]
+//				val parentParameter = createParameter(cT, cT.name.toFirstLower)
+//				op.parameters.add(0, parentParameter)
+
 				op.replaceFeatureCallWithElementReferenceExpression(p)
 				op.renameOperation
 				p.member.add(op)
@@ -150,12 +149,14 @@ class ExtractOperationsModification implements IModification {
 		Parameter parentParameter, EList<Expression> arraySelector) {
 		val reference = exp.reference
 		val containerType = reference.eContainer
+		val rootContainer = EcoreUtil2.getAllContainers(reference).filter(ComplexType).last
 		// Use nested if instead of '&&' for automatic type casting
 		if (reference instanceof Property) {
 			if (containerType instanceof ComplexType) {
-				if (isTypeOrPointerOnType(parentParameter, containerType)) {
-					val fc = createFeatureCall(parentParameter, reference)
-					exp.reference = fc
+				if (isTypeOrPointerOnType(parentParameter, rootContainer)) {
+					val containers = getContainerInstances(reference)
+					containers.add(reference)
+					val fc = containers.fold(parentParameter._ref as Expression, [owner, feature | _fc(owner, feature)]) as FeatureCall
 					fc.arrayAccess = !arraySelector.nullOrEmpty
 					fc.arraySelector += arraySelector
 					EcoreUtil.replace(exp, fc)
@@ -199,5 +200,17 @@ class ExtractOperationsModification implements IModification {
 		param.name = name
 
 		param
+	}
+	
+	def protected List<Property> getContainerInstances(Declaration decl) {
+		val containers = EcoreUtil2.getAllContainers(decl)
+		containers.filter(ComplexType).map[containerInstance].filterNull.toList
+	}
+	
+	def protected Property getContainerInstance(ComplexType cT) {
+		val eC = cT.eContainer
+		if(eC instanceof ComplexType) {
+			eC.features.filter(Property).findFirst[type == cT]
+		}
 	}
 }

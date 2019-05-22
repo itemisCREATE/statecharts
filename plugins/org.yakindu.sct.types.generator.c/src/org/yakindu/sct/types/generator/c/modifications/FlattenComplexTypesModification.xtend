@@ -34,6 +34,11 @@ class FlattenComplexTypesModification implements IModification {
 			ct.rootType = EcoreUtil2.getAllContainers(ct).filter(ComplexType).last
 		]
 		p.eAllContents.filter(ComplexType).toList.forEach [ ct |
+			val outerType = ct.eContainer
+			if(outerType instanceof ComplexType) {
+				// when moving 
+			}
+			
 			ct.name = ct.getContainmentHierarchy.join("_")
 			ct.rootType = EcoreUtil2.getAllContainers(ct).filter(ComplexType).last
 			p.member += ct

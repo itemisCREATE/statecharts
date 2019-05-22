@@ -54,7 +54,7 @@ class TypeBuilder {
 	}
 
 	def _param(Operation it, String pName, String typeName) {
-		_param(pName, typeSystem.getType(typeName))
+		it._param(pName, typeSystem.getType(typeName))
 	}
 
 	def _param(Operation it, String pName, Type type) {

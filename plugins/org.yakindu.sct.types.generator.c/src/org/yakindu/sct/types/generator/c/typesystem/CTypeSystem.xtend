@@ -164,4 +164,11 @@ import static org.yakindu.base.types.TypesFactory.*
 			return typeSpecifier.typeArguments.head
 		}
 	}
+	
+	def TypeSpecifier makePointer(TypeSpecifier ts) {
+		eINSTANCE.createTypeSpecifier => [
+			type = getType(POINTER)
+			typeArguments += ts
+		]
+	}
 }
