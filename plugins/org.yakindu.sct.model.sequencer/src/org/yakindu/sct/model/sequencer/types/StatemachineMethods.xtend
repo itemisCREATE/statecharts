@@ -102,10 +102,8 @@ class StatemachineMethods {
 	
 	protected def variablesForInitSequence(Statechart sc) {
 		val statechartVariables = sc.scopes.map(s|s.variables).flatten.filter(Property).filter[!const]
-//		val flow = sc.create
-//		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(
-//			d|d.declaration).filter(typeof(VariableDefinition))
-		return statechartVariables // + importedVariables
+
+		return statechartVariables
 	}
 	
 	protected def initialization(Property vd) {

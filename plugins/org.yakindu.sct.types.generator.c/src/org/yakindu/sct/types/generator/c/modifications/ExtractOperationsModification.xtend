@@ -57,20 +57,12 @@ class ExtractOperationsModification implements IModification {
 		p.allOperations.forEach [ op |
 			val cT = op.findRootType
 			if (cT instanceof ComplexType) {
-//				val parentParameter = createParameter(cT, cT.name.toFirstLower)
-//				op.parameters.add(0, parentParameter)
 
 				op.replaceFeatureCallWithElementReferenceExpression(p)
 				op.renameOperation
 				p.member.add(op)
 			}
 		]
-		// add handle to operation calls
-//		p.allOperations.forEach [ op |
-//			op.eAllContents.filter(ElementReferenceExpression).filter[operationCall].forEach [
-//				addArgument(op.parameters.head)
-//			]
-//		]
 		return p
 	}
 	
