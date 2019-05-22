@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sequencer
 import com.google.inject.Inject
 import com.google.inject.Injector
 import java.util.Collection
+import java.util.List
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
@@ -21,6 +22,7 @@ import org.yakindu.sct.model.sequencer.expressions.ExpressionOptimizer
 import org.yakindu.sct.model.sequencer.expressions.RetargetReferences
 import org.yakindu.sct.model.sequencer.modification.CycleBasedModification
 import org.yakindu.sct.model.sequencer.modification.EventDrivenModification
+import org.yakindu.sct.model.sequencer.modification.FlattenInnerTypesModification
 import org.yakindu.sct.model.sequencer.operations.EnterDeepOperation
 import org.yakindu.sct.model.sequencer.operations.EnterOperation
 import org.yakindu.sct.model.sequencer.operations.EnterShallowOperation
@@ -122,16 +124,15 @@ class ModelSequencer implements IModelSequencer {
 		pkg.optimize
 	}
 
-	protected def Collection<Class<? extends IModification>> getModifications(Statechart it) {
+	protected def getModifications(Statechart it) {
+		var List<Class<? extends IModification>> modifications = newArrayList
+		modifications += FlattenInnerTypesModification
 		if (isEventDriven) {
-			#[
-				EventDrivenModification
-			]
+			modifications += EventDrivenModification
 		} else {
-			#[
-				CycleBasedModification
-			]
+			modifications += CycleBasedModification
 		}
+		modifications
 	}
 
 }

@@ -18,6 +18,7 @@ import org.yakindu.sct.types.modification.IModification
 
 class CppNextStateIndexModification extends NextStateIndexModification implements IModification {
 	override boolean addConstant(Package p, Property orthogonalStates) {
-		p.member.filter(ComplexType).head.features += orthogonalStates
+		val stateVectorProp = p.eAllContents.filter(Property).findFirst[name == "stateVector"]
+		(stateVectorProp.eContainer as ComplexType).features.add(orthogonalStates)
 	}
 }

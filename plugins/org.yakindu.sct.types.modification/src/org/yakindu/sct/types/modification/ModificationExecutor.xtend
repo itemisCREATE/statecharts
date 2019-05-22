@@ -13,6 +13,9 @@ package org.yakindu.sct.types.modification
 import com.google.inject.Inject
 import java.util.Collection
 import java.util.Set
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.transaction.RunnableWithResult
 import org.eclipse.emf.transaction.util.TransactionUtil
 import org.yakindu.base.types.Package
@@ -31,9 +34,15 @@ class ModificationExecutor implements IModification {
 	@Inject Set<IModification> modifications;
 
 	def protected Collection<Package> modifyInternal(Collection<Package> packages) {
+		if(ResourcesPlugin.workspace.root.getProject("Debug").exists){
+			packages.forEach[p, i| p.serialize(URI.createPlatformResourceURI('''Debug/«p.name»_«i»_.slang''',true))]
+		}
 		var result = packages
 		for(modification : modifications) {
 			result = modification.modify(result)
+			if(ResourcesPlugin.workspace.root.getProject("Debug").exists){
+				result.forEach[p, i| p.serialize(URI.createPlatformResourceURI('''Debug/«p.name»_«i»_«modification.class.simpleName».slang''',true))]
+			}
 		}
 		packages
 	}
@@ -51,6 +60,13 @@ class ModificationExecutor implements IModification {
 			editingDomain.runExclusive(runnable);
 			return runnable.result
 		}
+	}
+	
+	def serialize(Package p, URI uri) {
+		val set = new ResourceSetImpl();
+		val resource = set.createResource(uri);
+			resource.contents += p
+			resource.save(null)
 	}
 
 }

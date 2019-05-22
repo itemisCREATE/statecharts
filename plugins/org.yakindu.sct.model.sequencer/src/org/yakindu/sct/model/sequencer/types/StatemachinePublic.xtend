@@ -67,6 +67,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 			sc.statemachinePackage.member += it
 
 			features += interfaceGroupAnnotation
+			
+			features += createConstructor
 
 			features += statesEnumeration(sc)
 			
@@ -161,6 +163,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		it.features += createConstructor
 		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
+		
+		features += clearLocalEvents
 		
 		it._annotateWith(interfaceGroupAnnotation)
 		it._annotateWith(internalScopeAnnotation)

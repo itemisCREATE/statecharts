@@ -17,7 +17,6 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
-import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 
 /**
  * Transforms <code>raise e</code> into <code>raise_e()</code>.
@@ -26,7 +25,6 @@ class RaiseEventModification {
 
 	@Inject extension ExpressionBuilder
 	@Inject extension ExpressionExtensions
-	@Inject extension ModificationHelper
 
 	def modifyRaiseEvent(Operation op, Event e) {
 		for (raise : e.raiseExpressions) {
@@ -36,9 +34,9 @@ class RaiseEventModification {
 
 	protected def getRaiseCall(Operation op, EventRaisingExpression raise) {
 		if (raise.value !== null) {
-			op.ownerInstance._ref._fc(op, raise.value)
+			op._ref._with(raise.value)
 		} else {
-			op.ownerInstance._ref._fc(op)
+			op._ref
 		}
 	}
 

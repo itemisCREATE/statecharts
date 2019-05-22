@@ -14,6 +14,7 @@ import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
@@ -28,12 +29,14 @@ import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotation
 import org.yakindu.sct.types.generator.cpp.files.CppTypes
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import org.yakindu.base.types.TypeBuilder
 
 class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
 
 	@Inject extension CppTypes
 	@Inject protected extension CExpressionsChecker
 	@Inject protected extension CoreCppGeneratorAnnotationLibrary
+	@Inject protected extension TypeBuilder
 	protected GeneratorArtifactConfiguration config
 	
 	override configure(Collection<Package> packages, ISCTFileSystemAccess fileSystemAccess) {
@@ -79,7 +82,10 @@ class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfi
 			innerCT.removeBodysFromOperations
 		]
 		cT.features.filter(Operation).forEach [ op | 
-			if(!(op.isInnerConstructor)) {
+			if(!(op.isInnerConstructor || op.isDefaultConstructor || (op instanceof Constructor))) {
+				if(op.body === null) {
+					op._annotateWith(pureAnnotation)
+				}
 				op.body = null
 			}
 			if(op.isDefaultConstructor || op.isDefaultDestructor){

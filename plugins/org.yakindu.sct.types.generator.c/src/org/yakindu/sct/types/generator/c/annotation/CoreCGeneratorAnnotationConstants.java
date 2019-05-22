@@ -14,4 +14,5 @@ public interface CoreCGeneratorAnnotationConstants {
 	public static final String DEFINE = "DEFINE";
 	public static final String ROOT_TYPE = "RootType";
 	public static final String IMMUTABLE = "Immutable";
+	public static final String ARRAY_SIZE = "ArraySize";
 }

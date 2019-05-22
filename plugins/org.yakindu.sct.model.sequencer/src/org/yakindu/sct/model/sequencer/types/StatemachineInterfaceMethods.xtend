@@ -45,12 +45,26 @@ class StatemachineInterfaceMethods {
 		)
 	}
 	
+	def create _op clearLocalEvents(ComplexType ct) {
+		name = "clearEvents"
+		_type(ITypeSystem.VOID)
+		visibility = Visibility.PROTECTED
+		body = _block(
+			ct.localEvents.map[_clearEvent]
+			// TODO: also clear time events?
+		)
+	}
+	
 	def outEvents(ComplexType ct) {
 		ct.features.filter(Event).filter[direction == Direction.OUT]
 	}
 	
 	def inEvents(ComplexType ct) {
 		ct.features.filter(Event).filter[direction == Direction.IN]
+	}
+	
+	def localEvents(ComplexType ct) {
+		ct.features.filter(Event).filter[direction == Direction.LOCAL]
 	}
 	
 	

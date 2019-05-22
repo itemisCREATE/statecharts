@@ -13,6 +13,7 @@ import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
@@ -40,6 +41,9 @@ class CppExpressions extends CExpressions {
 						return '''&«((reference as NamedElement).name)»'''
 					}
 				}
+			}
+			if (reference instanceof Constructor) {
+				return '''«((reference.eContainer as NamedElement).name)»«argumentList(reference)»'''
 			}
 		}
 		return super.argumentCall(it, reference)

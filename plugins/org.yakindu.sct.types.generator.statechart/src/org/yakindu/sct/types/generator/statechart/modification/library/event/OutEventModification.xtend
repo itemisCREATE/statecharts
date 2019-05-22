@@ -46,15 +46,15 @@ class OutEventModification extends BaseEventModification {
 			
 			val op = _op(nameEventRaiser(e.name))._param("value", e.type) => [
 				body = _block(
-					assign(_fc(e.ownerInstance._ref, prop), true),
-					assign(_fc(e.ownerInstance._ref, valueProp), it.parameters.head._ref)
+					assign(prop, true),
+					assign(valueProp, it.parameters.head._ref)
 				)
 				visibility = Visibility.PROTECTED
 			]
 			
 			val valueGetter = _op(nameEventValueGetter(e.name), e.type) => [
 				body = _block(
-					_return( _fc(e.getOwnerInstance._ref, valueProp))
+					_return(valueProp._ref)
 				)
 			]
 			e.eContainer.add(valueGetter)
@@ -62,7 +62,7 @@ class OutEventModification extends BaseEventModification {
 
 			modifyRaiseEvent(op, e)
 		} else {
-			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true)) => [
+			val op = operation(nameEventRaiser(e.name), assign(prop, true)) => [
 				visibility = Visibility.PROTECTED
 			]
 			e.eContainer.add(op)
@@ -70,7 +70,7 @@ class OutEventModification extends BaseEventModification {
 		}
 		modifyClearEvent(prop, e)
 		
-		val op = operation(nameEventIsRaised(e.name), ts.getType(ITypeSystem.BOOLEAN), _fc(e.getOwnerInstance._ref, prop).returnExpression)
+		val op = operation(nameEventIsRaised(e.name), ts.getType(ITypeSystem.BOOLEAN), prop.returnExpression)
 		op._annotateWith(APIAnnotation)
 		e.eContainer.add(op)
 
