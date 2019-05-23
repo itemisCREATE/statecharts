@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.base.xtext.utils.gmf"
       label="Xtext GMF Integration (XGI) Feature"
-      version="3.5.4.qualifier"
+      version="4.0.0.qualifier"
       provider-name="itemis AG">
 
    <description>
