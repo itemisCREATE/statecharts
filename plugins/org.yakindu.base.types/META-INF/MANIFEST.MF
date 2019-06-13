@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.base.types;singleton:=true
 Automatic-Module-Name: org.yakindu.base.types
-Bundle-Version: 3.5.4.qualifier
+Bundle-Version: 3.5.5.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
