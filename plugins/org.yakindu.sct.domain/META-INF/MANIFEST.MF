@@ -15,6 +15,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain,
  org.yakindu.sct.domain.extension,
- org.yakindu.sct.domain.extension.impl
+ org.yakindu.sct.domain.extension.impl,
+ org.yakindu.sct.domain.validation
 Bundle-ClassPath: .
 Automatic-Module-Name: org.yakindu.sct.domain
