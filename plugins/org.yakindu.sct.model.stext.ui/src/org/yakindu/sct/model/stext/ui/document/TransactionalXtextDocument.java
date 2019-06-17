@@ -26,7 +26,6 @@ import com.google.inject.name.Named;
 @SuppressWarnings("unchecked")
 public class TransactionalXtextDocument extends ParallelReadXtextDocument {
 
-	
 	public class UnitOfWorkOnTransactionalEditingDomain<T> implements IUnitOfWork<T, XtextResource> {
 
 		private IUnitOfWork<T, XtextResource> delegate;
@@ -56,15 +55,21 @@ public class TransactionalXtextDocument extends ParallelReadXtextDocument {
 				return null;
 			}
 		}
-		
+
 	}
-	
+
 	public class CancelableUnitOfWorkOnTransactionalEditingDomain<T> extends CancelableUnitOfWork<T, XtextResource> {
 
 		private CancelableUnitOfWork<T, XtextResource> delegate;
 
 		public CancelableUnitOfWorkOnTransactionalEditingDomain(CancelableUnitOfWork<T, XtextResource> delegate) {
 			this.delegate = delegate;
+		}
+
+		@Override
+		public void setCancelIndicator(CancelIndicator cancelIndicator) {
+			super.setCancelIndicator(cancelIndicator);
+			delegate.setCancelIndicator(cancelIndicator);
 		}
 
 		@Override
@@ -88,9 +93,9 @@ public class TransactionalXtextDocument extends ParallelReadXtextDocument {
 				return null;
 			}
 		}
-		
+
 	}
-	
+
 	@Inject
 	@Named("domain.id")
 	protected String domainId;
@@ -107,24 +112,27 @@ public class TransactionalXtextDocument extends ParallelReadXtextDocument {
 	@Override
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		if (work instanceof CancelableUnitOfWork) {
-			return super.readOnly(new CancelableUnitOfWorkOnTransactionalEditingDomain<T>((CancelableUnitOfWork<T, XtextResource>) work));
+			return super.readOnly(new CancelableUnitOfWorkOnTransactionalEditingDomain<T>(
+					(CancelableUnitOfWork<T, XtextResource>) work));
 		}
-		return super.readOnly(new UnitOfWorkOnTransactionalEditingDomain<T>(work)); 
+		return super.readOnly(new UnitOfWorkOnTransactionalEditingDomain<T>(work));
 	}
 
 	@Override
 	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
 		if (work instanceof CancelableUnitOfWork) {
-			return super.priorityReadOnly(new CancelableUnitOfWorkOnTransactionalEditingDomain<T>((CancelableUnitOfWork<T, XtextResource>) work));
+			return super.priorityReadOnly(new CancelableUnitOfWorkOnTransactionalEditingDomain<T>(
+					(CancelableUnitOfWork<T, XtextResource>) work));
 		}
-		return super.priorityReadOnly(new UnitOfWorkOnTransactionalEditingDomain<T>(work)); 
+		return super.priorityReadOnly(new UnitOfWorkOnTransactionalEditingDomain<T>(work));
 	}
 
 	@Override
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 		if (work instanceof CancelableUnitOfWork) {
-			return super.modify(new CancelableUnitOfWorkOnTransactionalEditingDomain<T>((CancelableUnitOfWork<T, XtextResource>) work));
+			return super.modify(new CancelableUnitOfWorkOnTransactionalEditingDomain<T>(
+					(CancelableUnitOfWork<T, XtextResource>) work));
 		}
-		return super.modify(new UnitOfWorkOnTransactionalEditingDomain<T>(work)); 
+		return super.modify(new UnitOfWorkOnTransactionalEditingDomain<T>(work));
 	}
 }
