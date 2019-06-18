@@ -5,6 +5,14 @@ h1(#release_notes). Release Notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.5). YAKINDU Statechart Tools  3.5.5 (June 18, 2019)
+
+This is a bugfix release, containing the following:
+
+* Fixed error with latest Xtext release 2.18 to ensure compatibility with upcoming Eclipse 2019-06.
+* Licencemanagement: When restarting or switching workspace in Eclipse, the currently used licenses are not returned (on Windows).
+* Licencemanagement: Startup crash in conjunction with osgi.dataAreaRequiresExplicitInit=true.
+
 h2(#release_notes_3.5.4). YAKINDU Statechart Tools  3.5.4 (May 15, 2019)
 
 This is a bugfix release, containing the following:
