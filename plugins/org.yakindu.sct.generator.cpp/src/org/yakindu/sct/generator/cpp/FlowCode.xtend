@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -32,9 +33,9 @@ import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
@@ -43,6 +44,7 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	@Inject extension SExecExtensions
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
+	@Inject extension CLiterals
 	
 	@Inject GeneratorEntry entry
 	
@@ -84,13 +86,17 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	override dispatch CharSequence code(TraceStateEntered it) '''
 		«IF entry.tracingEnterState»
-		«flow.tracingInstance»->«flow.enterStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		if(«flow.tracingInstance» != «NULL_LITERAL») {
+			«flow.tracingInstance»->«flow.enterStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		}
 		«ENDIF»
 	'''
 	
 	override dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
-		«flow.tracingInstance»->«flow.exitStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		if(«flow.tracingInstance» != «NULL_LITERAL») {
+			«flow.tracingInstance»->«flow.exitStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		}
 		«ENDIF»
 	'''
 
