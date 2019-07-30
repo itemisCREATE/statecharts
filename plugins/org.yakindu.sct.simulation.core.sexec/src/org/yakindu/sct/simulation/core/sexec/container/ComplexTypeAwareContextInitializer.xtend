@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * Execution context initializer which recursively builds composite slots for variables with complex types.
@@ -46,6 +47,8 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 	override dispatch ExecutionSlot create createExecutionSlotFor(variable) transform(VariableDefinition variable) {
 		it.writable = it.writable && !variable.const
 	}
+	
+	override dispatch ExecutionSlot create createExecutionSlotFor(op) transform(OperationDefinition op) {}
 
 	/**
 	 * Do not use <code>create</code> here because properties within complex types are the same for multiple variables 
