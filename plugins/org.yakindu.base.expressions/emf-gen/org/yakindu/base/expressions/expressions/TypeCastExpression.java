@@ -4,6 +4,7 @@ package org.yakindu.base.expressions.expressions;
 
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeSpecifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +17,7 @@ import org.yakindu.base.types.Type;
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getOperand <em>Operand</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getType <em>Type</em>}</li>
+ *   <li>{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getTypeSpecifier <em>Type Specifier</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getTypeCastExpression()
@@ -58,21 +60,36 @@ public interface TypeCastExpression extends Expression {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Type)
 	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getTypeCastExpression_Type()
-	 * @model
+	 * @model transient="true" changeable="false" derived="true"
 	 * @generated
 	 */
 	Type getType();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getType <em>Type</em>}' reference.
+	 * Returns the value of the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Specifier</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
+	 * @return the value of the '<em>Type Specifier</em>' containment reference.
+	 * @see #setTypeSpecifier(TypeSpecifier)
+	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getTypeCastExpression_TypeSpecifier()
+	 * @model containment="true"
 	 * @generated
 	 */
-	void setType(Type value);
+	TypeSpecifier getTypeSpecifier();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getTypeSpecifier <em>Type Specifier</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Specifier</em>' containment reference.
+	 * @see #getTypeSpecifier()
+	 * @generated
+	 */
+	void setTypeSpecifier(TypeSpecifier value);
 
 } // TypeCastExpression

@@ -68,7 +68,7 @@ class ExpressionsGenerator {
 
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
 
-	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
+	def dispatch CharSequence code(TypeCastExpression it) '''((«typeSpecifier.getTargetLanguageName») «operand.code»)'''
 
 	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 

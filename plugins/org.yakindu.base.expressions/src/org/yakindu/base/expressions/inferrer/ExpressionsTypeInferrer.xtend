@@ -197,9 +197,9 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 
 	def InferenceResult doInfer(TypeCastExpression e) {
 		var InferenceResult result1 = inferTypeDispatch(e.getOperand())
-		var InferenceResult result2 = inferTypeDispatch(e.getType())
+		var InferenceResult result2 = inferTypeDispatch(e.getTypeSpecifier())
 		assertCompatible(result1, result2, String.format(CAST_OPERATORS, result1, result2))
-		return inferTypeDispatch(e.getType())
+		return result2
 	}
 
 	def InferenceResult doInfer(EnumerationType enumType) {

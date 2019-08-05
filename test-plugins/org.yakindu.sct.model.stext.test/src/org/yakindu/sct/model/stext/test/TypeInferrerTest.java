@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.model.stext.test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.xtext.junit4.InjectWith;
@@ -958,6 +959,9 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		expectNoErrors("b = t.op2()", "internal: var t:ComplexParameterizedType<integer, boolean> var b: boolean");
 
+		assertFalse(isAnyType(inferTypeResultForExpression("t.prop1",
+				"internal var t:ComplexParameterizedType<ComplexParameterizedType<>, integer>").getType()));
+		
 		assertTrue(isAnyType(inferTypeResultForExpression("t.prop1.prop1",
 				"internal var t:ComplexParameterizedType<ComplexParameterizedType<>, integer>").getType()));
 		

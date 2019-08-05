@@ -1,5 +1,5 @@
 /** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
+s * Copyright (c) 2015 committers of YAKINDU and others. 
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -94,6 +95,7 @@ public class TypeCastExpressionItemProvider extends ExpressionItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND);
+			childrenFeatures.add(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__TYPE_SPECIFIER);
 		}
 		return childrenFeatures;
 	}
@@ -147,6 +149,7 @@ public class TypeCastExpressionItemProvider extends ExpressionItemProvider {
 
 		switch (notification.getFeatureID(TypeCastExpression.class)) {
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__OPERAND:
+			case ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE_SPECIFIER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -263,6 +266,16 @@ public class TypeCastExpressionItemProvider extends ExpressionItemProvider {
 			(createChildParameter
 				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
 	}
 
 	/**

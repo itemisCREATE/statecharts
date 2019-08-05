@@ -60,6 +60,7 @@ public class PrimitiveValueExpressionImpl extends ExpressionImpl implements Prim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Literal getValue() {
 		return value;
 	}
@@ -84,6 +85,7 @@ public class PrimitiveValueExpressionImpl extends ExpressionImpl implements Prim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Literal newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;

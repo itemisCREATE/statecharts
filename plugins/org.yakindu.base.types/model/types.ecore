@@ -112,9 +112,9 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypedDeclaration" eSuperTypes="#//Declaration #//TypedElement"/> 
+  <eClassifiers xsi:type="ecore:EClass" name="TypedDeclaration" eSuperTypes="#//Declaration #//TypedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="MetaComposite">
-  <eStructuralFeatures xsi:type="ecore:EReference" name="metaFeatures" upperBound="-1"
-  eType="#//Declaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaFeatures" upperBound="-1"
+        eType="#//Declaration" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

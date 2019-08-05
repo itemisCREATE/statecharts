@@ -162,7 +162,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeCastExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Type"
+        changeable="false" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeSpecifier" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//TypeSpecifier"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Argument">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Parameter"/>
