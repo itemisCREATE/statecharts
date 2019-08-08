@@ -66,6 +66,7 @@ public class PostFixUnaryExpressionImpl extends UnaryExpressionImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PostFixOperator getOperator() {
 		return operator;
 	}
@@ -75,6 +76,7 @@ public class PostFixUnaryExpressionImpl extends UnaryExpressionImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperator(PostFixOperator newOperator) {
 		PostFixOperator oldOperator = operator;
 		operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

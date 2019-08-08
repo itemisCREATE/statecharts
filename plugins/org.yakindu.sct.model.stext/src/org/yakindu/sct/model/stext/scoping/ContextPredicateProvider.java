@@ -26,6 +26,8 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.SHIFT_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__TYPE_SPECIFIER;
 import static org.yakindu.base.types.TypesPackage.Literals.TYPE_SPECIFIER__TYPE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
@@ -128,6 +130,7 @@ public class ContextPredicateProvider {
 		filter.put(key(VARIABLE_DEFINITION, TYPE_SPECIFIER__TYPE), TYPES);
 		filter.put(key(VARIABLE_DEFINITION, ELEMENT_REFERENCE_EXPRESSION__REFERENCE),
 				or(VARIABLES, OPERATIONS, EVENTS, ENUMERATIONS));
+		filter.put(key(TYPE_CAST_EXPRESSION, TYPE_CAST_EXPRESSION__TYPE_SPECIFIER), TYPES);
 		filter.put(key(STATE_SPECIFICATION), EVENTS);
 	}
 

@@ -67,6 +67,7 @@ public class LogicalRelationExpressionImpl extends BinaryExpressionImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationalOperator getOperator() {
 		return operator;
 	}
@@ -76,6 +77,7 @@ public class LogicalRelationExpressionImpl extends BinaryExpressionImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperator(RelationalOperator newOperator) {
 		RelationalOperator oldOperator = operator;
 		operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

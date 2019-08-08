@@ -132,6 +132,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getOwner() {
 		return owner;
 	}
@@ -156,6 +157,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(Expression newOwner) {
 		if (newOwner != owner) {
 			NotificationChain msgs = null;
@@ -175,6 +177,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Declaration getFeature() {
 		if (feature != null && feature.eIsProxy()) {
 			InternalEObject oldFeature = (InternalEObject)feature;
@@ -201,6 +204,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFeature(Declaration newFeature) {
 		Declaration oldFeature = feature;
 		feature = newFeature;
@@ -213,6 +217,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isOperationCall() {
 		return operationCall;
 	}
@@ -222,6 +227,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperationCall(boolean newOperationCall) {
 		boolean oldOperationCall = operationCall;
 		operationCall = newOperationCall;
@@ -234,6 +240,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getArraySelector() {
 		if (arraySelector == null) {
 			arraySelector = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR);
@@ -246,6 +253,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isArrayAccess() {
 		return arrayAccess;
 	}
@@ -255,6 +263,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setArrayAccess(boolean newArrayAccess) {
 		boolean oldArrayAccess = arrayAccess;
 		arrayAccess = newArrayAccess;

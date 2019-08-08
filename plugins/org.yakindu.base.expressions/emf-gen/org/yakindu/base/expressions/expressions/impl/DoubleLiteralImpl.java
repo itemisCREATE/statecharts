@@ -66,6 +66,7 @@ public class DoubleLiteralImpl extends LiteralImpl implements DoubleLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public double getValue() {
 		return value;
 	}
@@ -75,6 +76,7 @@ public class DoubleLiteralImpl extends LiteralImpl implements DoubleLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(double newValue) {
 		double oldValue = value;
 		value = newValue;

@@ -67,6 +67,7 @@ public class NumericalAddSubtractExpressionImpl extends BinaryExpressionImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AdditiveOperator getOperator() {
 		return operator;
 	}
@@ -76,6 +77,7 @@ public class NumericalAddSubtractExpressionImpl extends BinaryExpressionImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperator(AdditiveOperator newOperator) {
 		AdditiveOperator oldOperator = operator;
 		operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

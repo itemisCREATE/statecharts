@@ -1252,13 +1252,22 @@ public interface ExpressionsPackage extends EPackage {
 	int TYPE_CAST_EXPRESSION__TYPE = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_CAST_EXPRESSION__TYPE_SPECIFIER = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Type Cast Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CAST_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+	int TYPE_CAST_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' reference.
@@ -1977,6 +1986,17 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypeCastExpression_Type();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getTypeSpecifier <em>Type Specifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type Specifier</em>'.
+	 * @see org.yakindu.base.expressions.expressions.TypeCastExpression#getTypeSpecifier()
+	 * @see #getTypeCastExpression()
+	 * @generated
+	 */
+	EReference getTypeCastExpression_TypeSpecifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.Argument <em>Argument</em>}'.
@@ -2728,6 +2748,14 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_CAST_EXPRESSION__TYPE = eINSTANCE.getTypeCastExpression_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Specifier</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_CAST_EXPRESSION__TYPE_SPECIFIER = eINSTANCE.getTypeCastExpression_TypeSpecifier();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ArgumentImpl <em>Argument</em>}' class.

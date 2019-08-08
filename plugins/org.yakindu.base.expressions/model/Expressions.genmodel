@@ -153,6 +153,7 @@
     <genClasses ecoreClass="Expressions.ecore#//TypeCastExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//TypeCastExpression/operand"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//TypeCastExpression/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//TypeCastExpression/typeSpecifier"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Argument">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//Argument/parameter"/>

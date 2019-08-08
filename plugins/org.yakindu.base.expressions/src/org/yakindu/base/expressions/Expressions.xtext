@@ -77,7 +77,7 @@ PostFixUnaryExpression returns types::Expression:
 	TypeCastExpression ({PostFixUnaryExpression.operand=current} operator=PostFixOperator)*;
 
 TypeCastExpression returns types::Expression:
-	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|QID])*;
+	PrimaryExpression (({TypeCastExpression.operand=current} 'as') typeSpecifier=TypeSpecifier)*;
 
 PrimaryExpression returns types::Expression:
 	PrimitiveValueExpression
@@ -111,7 +111,7 @@ ParenthesizedExpression returns types::Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
 TypeSpecifier returns types::TypeSpecifier:
-	type=[types::Type|QID] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
+	type=[types::Type|QID] => ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*)? '>')?;
 
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral | BinaryLiteral | DoubleLiteral | FloatLiteral | StringLiteral | NullLiteral;

@@ -63,6 +63,7 @@ public abstract class ArgumentExpressionImpl extends ExpressionImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Argument> getArguments() {
 		if (arguments == null) {
 			arguments = new EObjectContainmentEList<Argument>(Argument.class, this, ExpressionsPackage.ARGUMENT_EXPRESSION__ARGUMENTS);
