@@ -33,8 +33,14 @@ import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
 import org.yakindu.sct.generator.c.test.utils.TestFileCopier;
 import org.yakindu.sct.generator.core.execution.GeneratorExecutorLookup;
+import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
+
+import com.google.inject.Binder;
+import com.google.inject.Module;
+import com.google.inject.name.Names;
+import com.google.inject.util.Modules;
 
 /**
  * @author Andreas Unger - Initial contribution and API
@@ -126,7 +132,18 @@ public class GTestHelper {
 	}
 	
 	protected GeneratorExecutorLookup getGeneratorExecutorLookup() {
-		return new EclipseContextGeneratorExecutorLookup();
+		return new EclipseContextGeneratorExecutorLookup() {
+			@Override
+			protected Module getContextModule() {
+				return Modules.override(super.getContextModule()).with(new Module() {
+					@Override
+					public void configure(Binder binder) {
+						binder.bind(boolean.class).annotatedWith(Names.named(IGeneratorEntryExecutor.SKIP_VALIDATION))
+								.toInstance(true);
+					}
+				});
+			}
+		};
 	}
 	
 	protected String getSgenFileName(String testProgram) {
