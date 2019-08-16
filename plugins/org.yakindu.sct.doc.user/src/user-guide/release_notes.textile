@@ -5,6 +5,16 @@ h1(#release_notes). Release Notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.6). YAKINDU Statechart Tools  3.5.6 (Aug 23, 2019)
+
+This is a bugfix release, containing the following:
+
+* It is now possible to use generic types in type cast expressions. In case of C/C++ domain statecharts, this allows casting to void pointers, for example.
+* For statechart operations with complex return types there was no way to mock the return values in the simulation. This is now fixed and especially helpful for the C/C++ and Java domains.
+* The generated C++ code now contains a null-check for the trace observer to avoid runtime crashes, especially in combination with generated SCTUnit test code.
+* In SCTUnit, when mocking operations with enum return types, the generated C++ code did not compile. This is fixed now.
+* Fixed a problem when importing external C++ headers where in some cases types were not properly transformed.
+
 h2(#release_notes_3.5.5). YAKINDU Statechart Tools  3.5.5 (June 18, 2019)
 
 This is a bugfix release, containing the following:
