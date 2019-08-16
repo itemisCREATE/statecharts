@@ -13,6 +13,7 @@ package org.yakindu.sct.domain.generic;
 import java.util.Map;
 
 import org.yakindu.sct.domain.extension.DomainStatus;
+import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomainStatusProvider;
 
 /**
@@ -28,7 +29,7 @@ public class GenericDomainStatusProvider implements IDomainStatusProvider {
 		if (delegate != null) {
 			return delegate.getDomainStatus();
 		}
-		return DomainStatus.OK;
+		return new DomainStatus(Severity.ERROR, "Installation is currupt. License feature is missing.");
 	}
 	
 	public void bindProvider(IDomainStatusProvider provider, Map<String, Object> properties) {
