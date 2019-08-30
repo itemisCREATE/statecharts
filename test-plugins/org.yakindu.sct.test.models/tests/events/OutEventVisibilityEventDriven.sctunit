@@ -1,0 +1,34 @@
+testclass OutEventVisibilityEventDriven for statechart events.OutEventVisibilityEventDriven {
+	
+	@Test operation out_events_must_be_collected_during_local_event_processing_steps () {
+		enter
+		
+		raise i: 1
+		
+		assert o1
+		assert o2
+		
+		exit
+	}
+
+	@Test operation all_out_events_that_are_raised_within_a_single_step_must_be_visible() {
+		enter
+
+		assert !o1
+		assert !o2
+		
+		raise i: 2
+		assert o1
+		assert !o2
+		
+		raise i: 2
+		assert !o1
+		assert o2
+
+		raise i: 2
+		assert o1
+		assert o2
+		
+		exit
+	}
+}
