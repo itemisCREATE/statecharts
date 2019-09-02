@@ -156,6 +156,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		try {
 			if(cycleAdapter !== null )
 				executionContext.eAdapters.remove(cycleAdapter)
+				
+		executionContext.clearOutEvents
+		
 		var Event event = null
 		do {
 			traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
@@ -177,11 +180,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		}
 	}
 
-	def rtcStep() {
-		
+	def rtcStep() {		
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
-		executionContext.clearOutEvents
 		while (activeStateIndex < activeStateConfiguration.size) {
 			var state = activeStateConfiguration.get(activeStateIndex)
 			state?.reactSequence?.scheduleAndRun

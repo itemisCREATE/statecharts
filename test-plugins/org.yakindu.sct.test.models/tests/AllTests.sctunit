@@ -15,6 +15,9 @@ testsuite AllTests {
 	LocalEvents,
 	NoLocalEvents,
 		
+	// events
+	OutEventVisibilityEventDriven,
+		
 	// executionorder
 	ChildFirstExecutionHierarchy,
 	ChildFirstLocalReactions,
