@@ -15,6 +15,7 @@ This is a bugfix release, containing the following:
 * The generated C++ code now contains a null-check for the trace observer to avoid runtime crashes, especially in combination with generated SCTUnit test code.
 * In SCTUnit, when mocking operations with enum return types, the generated C++ code did not compile. This is fixed now.
 * Fixed a problem when importing external C++ headers where in some cases types were not properly transformed.
+* The news feed feature is disabled as it produces severe problems with Java 11.
 
 h2(#release_notes_3.5.5). YAKINDU Statechart Tools  3.5.5 (June 18, 2019)
 
