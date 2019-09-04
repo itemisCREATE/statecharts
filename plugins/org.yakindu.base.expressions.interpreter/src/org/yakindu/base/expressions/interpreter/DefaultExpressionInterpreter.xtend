@@ -339,6 +339,14 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		return slot.value
 	}
 	
+	def dispatch doExecute(Operation feature, CompositeSlot slot, ArgumentExpression exp) {
+		val executor = operationExecutors.findFirst[canExecute(exp)]
+		if (executor !== null) {
+			return executor.executeOperation(exp)
+		}
+		return slot
+	}
+	
 	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
 		new Long(feature.literalValue)
 	}
