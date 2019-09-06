@@ -14,6 +14,8 @@ import java.util.Collections;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -50,10 +52,15 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 		injector.injectMembers(controller);
 
 		// For restoring execution context
-		String attribute = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.EXECUTION_CONTEXT, "");
+		ILaunchConfiguration configuration = launch.getLaunchConfiguration();
+		String attribute = configuration.getAttribute(ISCTLaunchParameters.EXECUTION_CONTEXT, "");
 		if (attribute != null && attribute.trim().length() > 0) {
 			ExecutionContext context = restore(attribute, statechart);
 			controller.setExecutionContext(context);
+			if(configuration instanceof ILaunchConfigurationWorkingCopy) {
+				ILaunchConfigurationWorkingCopy copy = (ILaunchConfigurationWorkingCopy) configuration;
+				copy.setAttribute(ISCTLaunchParameters.EXECUTION_CONTEXT, "");
+			}
 		}
 
 		return controller;
