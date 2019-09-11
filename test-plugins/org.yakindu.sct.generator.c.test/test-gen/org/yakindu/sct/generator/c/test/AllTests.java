@@ -16,6 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	LocalEventsTest.class,
 	NoLocalEventsTest.class,
 	OutEventVisibilityEventDrivenTest.class,
+	OutEventWithPayloadTest.class,
 	ChildFirstExecutionHierarchyTest.class,
 	ChildFirstLocalReactionsTest.class,
 	ChildFirstOrthogonalReactionsTest.class,
