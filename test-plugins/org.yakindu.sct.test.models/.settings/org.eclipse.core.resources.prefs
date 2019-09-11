@@ -81,6 +81,7 @@ encoding//testmodels/SCTUnit/eventdriven/EventDrivenTriggeredByTimeEvent.sct=UTF
 encoding//testmodels/SCTUnit/eventdriven/LocalEvents.sct=UTF-8
 encoding//testmodels/SCTUnit/eventdriven/NoLocalEvents.sct=UTF-8
 encoding//testmodels/SCTUnit/events/OutEventVisibilityEventDriven.sct=UTF-8
+encoding//testmodels/SCTUnit/events/OutEventWithPayload.sct=UTF-8
 encoding//testmodels/SCTUnit/executionorder/ChildFirstExecutionHierarchy.sct=UTF-8
 encoding//testmodels/SCTUnit/executionorder/ChildFirstLocalReactions.sct=UTF-8
 encoding//testmodels/SCTUnit/executionorder/ChildFirstOrthogonalReactions.sct=UTF-8

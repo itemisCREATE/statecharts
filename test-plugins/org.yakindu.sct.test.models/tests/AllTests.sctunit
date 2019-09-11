@@ -17,6 +17,7 @@ testsuite AllTests {
 		
 	// events
 	OutEventVisibilityEventDriven,
+	OutEventWithPayload,
 		
 	// executionorder
 	ChildFirstExecutionHierarchy,
