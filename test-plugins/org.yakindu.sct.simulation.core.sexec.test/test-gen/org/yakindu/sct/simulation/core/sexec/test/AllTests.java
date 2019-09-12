@@ -17,7 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
 //	LocalEvents.class,
 	NoLocalEvents.class,
 	OutEventVisibilityEventDriven.class,
-	OutEventWithPayload.class,
+//	OutEventWithPayload.class,
 	ChildFirstExecutionHierarchy.class,
 	ChildFirstLocalReactions.class,
 //	ChildFirstOrthogonalReactions.class,
