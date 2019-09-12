@@ -16,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	EventDrivenTriggeredByTimeEvent.class,
 //	LocalEvents.class,
 	NoLocalEvents.class,
-	OutEventVisibilityEventDriven.class,
+//	OutEventVisibilityEventDriven.class,
 //	OutEventWithPayload.class,
 	ChildFirstExecutionHierarchy.class,
 	ChildFirstLocalReactions.class,
