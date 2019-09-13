@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator.csharp"
       label="YAKINDU Statechart Tools C# Generator"
-      version="3.5.6.qualifier"
+      version="3.5.7.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -23,7 +23,7 @@
    </url>
 
    <requires>
-      <import feature="org.yakindu.sct" version="3.5.6.qualifier"/>
+      <import feature="org.yakindu.sct" version="3.5.7.qualifier"/>
    </requires>
 
    <plugin
