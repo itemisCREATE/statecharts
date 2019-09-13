@@ -41,7 +41,7 @@ public class DynamicChoice {
 	public void dynamicChoiceTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

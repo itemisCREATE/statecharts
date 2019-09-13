@@ -47,7 +47,7 @@ public class ConstOnlyDefaultScope {
 	public void stateTransition() {
 		statemachine.enter();
 		statemachine.getSCIA().raiseE(1l);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.constOnlyDefaultScope_main_region_B));
 	}
 }

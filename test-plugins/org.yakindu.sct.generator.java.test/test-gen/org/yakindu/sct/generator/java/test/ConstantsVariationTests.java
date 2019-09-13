@@ -49,7 +49,7 @@ public class ConstantsVariationTests {
 		assertTrue(statemachine.getSCINamed().getR() == 5l);
 		assertTrue(statemachine.getStr2().equals("String"));
 		assertTrue(statemachine.getSCINamed().getStr().equals("String"));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isFinal());
 	}
 }

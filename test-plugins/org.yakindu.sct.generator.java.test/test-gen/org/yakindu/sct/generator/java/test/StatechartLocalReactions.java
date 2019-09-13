@@ -51,7 +51,7 @@ public class StatechartLocalReactions {
 			else {
 				assertTrue(statemachine.isStateActive(State.main_region_S2));
 			}
-			timer.cycleLeap(1);
+			timer.cycleLeap(1l);
 			cycles += 1l;
 			assertTrue((statemachine.getMyInt() == cycles));
 		}

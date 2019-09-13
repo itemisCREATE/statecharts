@@ -42,7 +42,7 @@ public class CKeywords {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.auto_char));
 		statemachine.getSCInterface().raiseAuto();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.auto_loop));
 		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case));
 		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case_enum_asm));

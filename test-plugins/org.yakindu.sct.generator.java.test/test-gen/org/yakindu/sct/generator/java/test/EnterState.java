@@ -42,7 +42,7 @@ public class EnterState {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}
 	
@@ -51,7 +51,7 @@ public class EnterState {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.getSCInterface().raiseF();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.r_B_r_F));
 	}
 	
@@ -60,7 +60,7 @@ public class EnterState {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.getSCInterface().raiseG();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}
 }

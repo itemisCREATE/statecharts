@@ -42,13 +42,13 @@ public class TypeAlias {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		assertTrue(statemachine.getMyVar() == 1l);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Mid));
 		assertTrue(statemachine.getMyString().equals("TypeSystem"));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Mid2));
 		statemachine.getSCInterface().raiseMyEvent();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}
 }

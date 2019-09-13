@@ -40,8 +40,8 @@ public class EntryChoice {
 	@Test
 	public void entryChoiceTest() {
 		statemachine.enter();
-		timer.cycleLeap(1);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

@@ -69,12 +69,12 @@ public class GuardedEntry {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		statemachine.getSCInterface().setGuard(guardVar);
 		statemachine.getSCInterface().setDone(doneVar);
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

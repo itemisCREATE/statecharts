@@ -42,9 +42,9 @@ public class CastExpressions {
 		statemachine.enter();
 		assertTrue(statemachine.getRealValue() == 5l);
 		assertTrue(statemachine.getIntValue() == 5l);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getRealValue() == 15l);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		assertTrue(statemachine.getRealValue() == 757l);
 	}

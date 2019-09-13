@@ -52,7 +52,7 @@ public class EventDrivenTriggeredByEvent {
 	public void proceedTimeDoesNotTriggerRunCycle() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_A));
-		timer.timeLeap(120000);
+		timer.timeLeap(120l*1000l);
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}

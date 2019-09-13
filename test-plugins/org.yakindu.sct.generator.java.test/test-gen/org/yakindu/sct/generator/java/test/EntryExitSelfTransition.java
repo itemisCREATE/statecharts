@@ -41,7 +41,7 @@ public class EntryExitSelfTransition {
 	public void selfTransitionToChildState() {
 		init();
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.getExits() == 1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
@@ -52,12 +52,12 @@ public class EntryExitSelfTransition {
 	public void selfTransitionFromChildState() {
 		init();
 		statemachine.getSCInterface().raiseE1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 0l);
 		assertTrue(statemachine.getExits() == 0l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
 		statemachine.getSCInterface().raiseE1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.getExits() == 1l);
@@ -66,7 +66,7 @@ public class EntryExitSelfTransition {
 	
 	public void init() {
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
 		statemachine.getSCInterface().setEntries(0l);

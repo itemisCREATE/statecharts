@@ -145,7 +145,7 @@ public class ChildFirstTransitionsinSubchart {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getAa_check() == 1l);
 		assertTrue(statemachine.getAa_local() == 2l);
 		assertTrue(statemachine.getAc_check() == 3l);
@@ -210,7 +210,7 @@ public class ChildFirstTransitionsinSubchart {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getAa_check() == 1l);
 		assertTrue(statemachine.getAa_local() == 0l);
 		assertTrue(statemachine.getAc_check() == 2l);
@@ -275,7 +275,7 @@ public class ChildFirstTransitionsinSubchart {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getAa_check() == 1l);
 		assertTrue(statemachine.getAa_local() == 2l);
 		assertTrue(statemachine.getAc_check() == 3l);
@@ -340,7 +340,7 @@ public class ChildFirstTransitionsinSubchart {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getAa_check() == 1l);
 		assertTrue(statemachine.getAa_local() == 0l);
 		assertTrue(statemachine.getA_local() == 3l);

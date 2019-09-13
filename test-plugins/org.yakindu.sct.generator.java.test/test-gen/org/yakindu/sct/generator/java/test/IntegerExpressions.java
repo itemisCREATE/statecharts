@@ -44,7 +44,7 @@ public class IntegerExpressions {
 		assertTrue(statemachine.getMyInt1() == 10l);
 		assertTrue(statemachine.getMyInt2() == 5l);
 		statemachine.getSCInterface().raiseE1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getLess() == false);
 		assertTrue(statemachine.getGreater() == true);
 		assertTrue(statemachine.getEqualOrLess() == false);

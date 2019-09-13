@@ -140,7 +140,7 @@ public class ParentFirstOrthogonalReactions {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_check() == 2l);
 		assertTrue(statemachine.getA_local() == 3l);
@@ -208,7 +208,7 @@ public class ParentFirstOrthogonalReactions {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_check() == 2l);
 		assertTrue(statemachine.getA_local() == 3l);
@@ -276,7 +276,7 @@ public class ParentFirstOrthogonalReactions {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_check() == 2l);
 		assertTrue(statemachine.getA_local() == 3l);
@@ -344,7 +344,7 @@ public class ParentFirstOrthogonalReactions {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_check() == 2l);
 		assertTrue(statemachine.getA_local() == 0l);
@@ -412,7 +412,7 @@ public class ParentFirstOrthogonalReactions {
 		});
 		 
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_check() == 2l);
 		assertTrue(statemachine.getA_local() == 3l);

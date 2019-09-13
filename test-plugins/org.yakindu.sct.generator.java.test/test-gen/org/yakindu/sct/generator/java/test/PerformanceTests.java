@@ -68,7 +68,7 @@ public class PerformanceTests {
 					statemachine.getSCInterface().raiseE3();
 				}
 			}
-			timer.cycleLeap(1);
+			timer.cycleLeap(1l);
 		}
 		assertTrue(statemachine.getA() > 2l);
 	}

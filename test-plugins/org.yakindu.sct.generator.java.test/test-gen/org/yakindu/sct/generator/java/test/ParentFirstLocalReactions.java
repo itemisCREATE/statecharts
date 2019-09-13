@@ -41,7 +41,7 @@ public class ParentFirstLocalReactions {
 	public void expectBottomUpLocalReactionOrder() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAA));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAA));
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_local() == 2l);
@@ -56,7 +56,7 @@ public class ParentFirstLocalReactions {
 		statemachine.getSCInterface().raiseE();
 		statemachine.getSCInterface().setDisable_a(true);
 		statemachine.getSCInterface().setDisable_aa(true);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAB));
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_local() == 2l);
@@ -70,7 +70,7 @@ public class ParentFirstLocalReactions {
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAA));
 		statemachine.getSCInterface().setDisable_a(true);
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AB));
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_local() == 2l);
@@ -85,7 +85,7 @@ public class ParentFirstLocalReactions {
 		statemachine.getSCInterface().setDisable_aaa(true);
 		statemachine.getSCInterface().setDisable_aa(true);
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_B));
 		assertTrue(statemachine.getSm_local() == 1l);
 		assertTrue(statemachine.getA_local() == 0l);

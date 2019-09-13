@@ -42,11 +42,11 @@ public class SameNameDifferentRegion {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		statemachine.getSCInterface().raiseE1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.isStateActive(State.main_region_StateB_r1_StateA));
 		statemachine.getSCInterface().raiseE1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.isStateActive(State.main_region_StateB_r1_StateB));
 	}

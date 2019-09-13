@@ -41,7 +41,7 @@ public class LocalReactions {
 	public void localReactionsTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getX() == 1l);
 	}
 }

@@ -43,8 +43,8 @@ public class RaiseEvent {
 		assertTrue(statemachine.isStateActive(State.second_region_SateA));
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		statemachine.getSCInterface().raiseE2();
-		timer.cycleLeap(1);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.second_region_StateB));
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 	}

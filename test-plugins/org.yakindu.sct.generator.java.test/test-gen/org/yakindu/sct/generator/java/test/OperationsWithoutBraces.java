@@ -73,10 +73,10 @@ public class OperationsWithoutBraces {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.another_region_A));
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.another_region_C));
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		assertTrue(statemachine.isStateActive(State.another_region_D));
 	}

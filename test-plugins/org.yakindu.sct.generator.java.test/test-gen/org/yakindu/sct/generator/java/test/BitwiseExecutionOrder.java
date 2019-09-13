@@ -40,7 +40,7 @@ public class BitwiseExecutionOrder {
 	@Test
 	public void test() {
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isFinal());
 		statemachine.exit();
 	}

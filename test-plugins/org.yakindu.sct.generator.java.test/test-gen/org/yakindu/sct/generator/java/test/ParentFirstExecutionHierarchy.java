@@ -44,7 +44,7 @@ public class ParentFirstExecutionHierarchy {
 		statemachine.getSCInterface().setDisable_a(true);
 		statemachine.getSCInterface().setDisable_aa(true);
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstExecutionHierarchy_r_B));
 		assertTrue(!statemachine.getA_reacted());
 		assertTrue(!statemachine.getAa_reacted());
@@ -60,7 +60,7 @@ public class ParentFirstExecutionHierarchy {
 		assertTrue(statemachine.isStateActive(State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 		statemachine.getSCInterface().setDisable_a(true);
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstExecutionHierarchy_r_B));
 		assertTrue(!statemachine.getA_reacted());
 		assertTrue(statemachine.getAa_reacted());
@@ -75,7 +75,7 @@ public class ParentFirstExecutionHierarchy {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstExecutionHierarchy_r_B));
 		assertTrue(statemachine.getA_reacted());
 		assertTrue(!statemachine.getAa_reacted());
@@ -87,7 +87,7 @@ public class ParentFirstExecutionHierarchy {
 	public void expectLocalReactrionsExecuteWithNoTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 		assertTrue(statemachine.getA_local());
 		assertTrue(statemachine.getAa_local());
