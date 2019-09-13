@@ -42,8 +42,8 @@ public class TimedTransitions {
 	public void timer01() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		timer.timeLeap(2030);
-		timer.cycleLeap(1);
+		timer.timeLeap(2030l);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}
 	
@@ -51,7 +51,7 @@ public class TimedTransitions {
 	public void timer02() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		timer.timeLeap(2000);
+		timer.timeLeap(2l*1000l);
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}
 	
@@ -59,9 +59,9 @@ public class TimedTransitions {
 	public void noAdditionalCycle() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		timer.timeLeap(1950);
+		timer.timeLeap(1950l);
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		timer.timeLeap(100);
+		timer.timeLeap(100l);
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}
 	
@@ -71,13 +71,13 @@ public class TimedTransitions {
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		assertTrue((statemachine.getCycles() == 0l));
 		assertTrue((statemachine.getSeconds() == 0l));
-		timer.timeLeap(100);
+		timer.timeLeap(100l);
 		assertTrue((statemachine.getCycles() == 0l));
 		assertTrue((statemachine.getSeconds() == 0l));
-		timer.timeLeap(100);
+		timer.timeLeap(100l);
 		assertTrue((statemachine.getCycles() == 1l));
 		assertTrue((statemachine.getSeconds() == 0l));
-		timer.timeLeap(800);
+		timer.timeLeap(800l);
 		assertTrue((statemachine.getCycles() == 5l));
 		assertTrue((statemachine.getSeconds() == 1l));
 	}

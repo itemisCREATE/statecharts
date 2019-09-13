@@ -42,7 +42,7 @@ public class TriggerExpressionPrecedence {
 		statemachine.enter();
 		statemachine.getSCInterface().setC1(false);
 		statemachine.getSCInterface().setC2(false);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}
 	
@@ -51,7 +51,7 @@ public class TriggerExpressionPrecedence {
 		statemachine.enter();
 		statemachine.getSCInterface().setC1(true);
 		statemachine.getSCInterface().setC2(false);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}
 	
@@ -60,7 +60,7 @@ public class TriggerExpressionPrecedence {
 		statemachine.enter();
 		statemachine.getSCInterface().setC1(false);
 		statemachine.getSCInterface().setC2(true);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}
 	
@@ -69,7 +69,7 @@ public class TriggerExpressionPrecedence {
 		statemachine.enter();
 		statemachine.getSCInterface().setC1(true);
 		statemachine.getSCInterface().setC2(true);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}
 }

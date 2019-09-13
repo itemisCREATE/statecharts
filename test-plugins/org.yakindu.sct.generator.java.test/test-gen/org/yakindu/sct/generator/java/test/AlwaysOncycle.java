@@ -43,24 +43,24 @@ public class AlwaysOncycle {
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		long count = 0l;
 		while (count < 5l) {
-			timer.cycleLeap(1);
+			timer.cycleLeap(1l);
 			assertTrue(statemachine.isStateActive(State.main_region_StateA));
 			count++;
 		}
 		assertTrue((statemachine.getValue() == 5l));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getValue() == 0l);
 		count = 0l;
 		while (count < 5l) {
-			timer.cycleLeap(1);
+			timer.cycleLeap(1l);
 			assertTrue(statemachine.isStateActive(State.main_region_StateB));
 			count++;
 		}
 		assertTrue((statemachine.getValue() == 5l));
 		assertTrue((statemachine.getX() == 5l));
 		assertTrue((statemachine.getY() == 5l));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getValue() == 0l);
 	}

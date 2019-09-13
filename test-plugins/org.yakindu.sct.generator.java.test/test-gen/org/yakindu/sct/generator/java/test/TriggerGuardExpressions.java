@@ -43,18 +43,18 @@ public class TriggerGuardExpressions {
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseE1();
 		statemachine.getSCInterface().setB(true);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseE2();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseE1();
 		statemachine.getSCInterface().raiseE2();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 	
@@ -64,14 +64,14 @@ public class TriggerGuardExpressions {
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().setB(false);
 		statemachine.getSCInterface().raiseE1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseE2();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseE1();
 		statemachine.getSCInterface().raiseE2();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

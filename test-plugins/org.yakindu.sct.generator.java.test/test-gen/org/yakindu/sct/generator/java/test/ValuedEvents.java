@@ -40,13 +40,13 @@ public class ValuedEvents {
 	@Test
 	public void valuedEventsTest() {
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getMyString().equals("sct"));
 		statemachine.getSCInterface().raiseIntegerEvent(23l);
 		statemachine.getSCInterface().raiseBooleanEvent(false);
 		statemachine.getSCInterface().raiseRealEvent(20l);
 		statemachine.getSCInterface().raiseStringEvent("tool");
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.integer_region_D));
 		assertTrue(statemachine.isStateActive(State.string_region_D));
 		assertTrue(statemachine.isStateActive(State.boolean_region_D));

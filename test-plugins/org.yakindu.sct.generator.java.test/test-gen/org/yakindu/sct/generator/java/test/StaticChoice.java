@@ -41,6 +41,6 @@ public class StaticChoice {
 	public void staticChoiceTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 	}
 }

@@ -42,7 +42,7 @@ public class InEventLifeCycle {
 		statemachine.enter();
 		statemachine.getSCInterface().raiseE();
 		assertTrue(statemachine.getI() == 0l);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getI() == 1l);
 	}
 }

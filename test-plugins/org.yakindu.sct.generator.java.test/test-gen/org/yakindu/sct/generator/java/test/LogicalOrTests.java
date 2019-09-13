@@ -40,7 +40,7 @@ public class LogicalOrTests {
 	@Test
 	public void operandEvaluationOrder() {
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue("logical or expression was executed in wrong order...",statemachine.getX() == 4l && statemachine.getB());
 	}
 }

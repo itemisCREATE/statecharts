@@ -45,14 +45,14 @@ public class ConstantsTests {
 		assertTrue(statemachine.getY() == 20l);
 		assertTrue(statemachine.getSCINamed().getY().equals("Hello World"));
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getResult() == 20l);
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		assertTrue(statemachine.getResult() == 100l);
 		statemachine.getSCInterface().raiseE2(statemachine.getX());
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getResult() == 1000l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}

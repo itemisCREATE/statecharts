@@ -43,9 +43,9 @@ public class SimpleEvent {
 		assertTrue("Expected A to be active",statemachine.isStateActive(State.main_region_A));
 		assertTrue(5l == 5l);
 		statemachine.getSCInterface().raiseEvent1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue("Expected B to be active",statemachine.isStateActive(State.main_region_B));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(!statemachine.isStateActive(State.main_region_B));
 	}
 }

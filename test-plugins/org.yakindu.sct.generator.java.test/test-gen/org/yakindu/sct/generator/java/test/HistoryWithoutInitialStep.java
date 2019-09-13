@@ -42,7 +42,7 @@ public class HistoryWithoutInitialStep {
 		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 		statemachine.getSCInterface().raiseNext();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
 	
@@ -51,10 +51,10 @@ public class HistoryWithoutInitialStep {
 		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 		statemachine.getSCInterface().raiseToA();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseToHistory();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
 	
@@ -62,13 +62,13 @@ public class HistoryWithoutInitialStep {
 	public void enterDThroughHistory() {
 		init();
 		statemachine.getSCInterface().raiseNext();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 		statemachine.getSCInterface().raiseToA();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseToHistory();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
 	
@@ -77,7 +77,7 @@ public class HistoryWithoutInitialStep {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseToHistory();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
 	
@@ -85,6 +85,6 @@ public class HistoryWithoutInitialStep {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseToB();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 	}
 }

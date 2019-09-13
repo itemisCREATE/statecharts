@@ -44,11 +44,11 @@ public class ExitOnSelfTransition {
 		assertTrue(statemachine.getEntryCount() == 1l);
 		assertTrue(statemachine.getExitCount() == 0l);
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntryCount() == 2l);
 		assertTrue(statemachine.getExitCount() == 1l);
 		statemachine.getSCInterface().raiseF();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntryCount() == 2l);
 		assertTrue(statemachine.getExitCount() == 2l);
 	}

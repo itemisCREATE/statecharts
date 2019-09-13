@@ -42,7 +42,7 @@ public class ExitState {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 		statemachine.getSCInterface().raiseE();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.exitState_r_E));
 	}
 	
@@ -51,7 +51,7 @@ public class ExitState {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 		statemachine.getSCInterface().raiseF();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.exitState_r_F));
 	}
 	
@@ -60,7 +60,7 @@ public class ExitState {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 		statemachine.getSCInterface().raiseG();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.exitState_r_E));
 	}
 	
@@ -68,7 +68,7 @@ public class ExitState {
 	public void remainInA() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.exitState_r_A));
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 	}
 }

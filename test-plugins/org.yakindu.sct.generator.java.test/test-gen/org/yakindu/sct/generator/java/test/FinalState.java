@@ -40,7 +40,7 @@ public class FinalState {
 	@Test
 	public void statechartNameTest() {
 		statemachine.enter();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isFinal());
 	}
 }

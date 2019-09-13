@@ -49,7 +49,7 @@ public class ReadOnlyVariable {
 		assertTrue(statemachine.getSCIA().getMyString().equals("testString"));
 		assertTrue(statemachine.getSCIA().getMyBool() == true);
 		assertTrue(statemachine.getSCIA().getMyReal() == 1.1);
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getMyInt() == 100l);
 		assertTrue(statemachine.getMyString().equals("fail"));

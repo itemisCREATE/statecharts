@@ -44,7 +44,7 @@ public class SimpleHierachy {
 		statemachine.getSCInterface().raiseEvent1();
 		statemachine.getSCInterface().raiseEvent1();
 		statemachine.getSCInterface().raiseEvent1();
-		timer.cycleLeap(1);
+		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_subregion1_B1));
 	}
