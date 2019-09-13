@@ -11,6 +11,7 @@ This is a bugfix release, containing the following:
 
 * The SCTUnit code generators now properly handle "valueOf" expressions. This allows you to test the value of an outgoing event, e.g. "assert valueof(myEvent) == 42".
 * In SCTUnit, it is now possible to use all kinds of expressions inside of "proceed" statements. For example, you can now write "proceed x ms" where x is a variable defined in the statechart.
+* The C code generator now adds a cast to void in isFinal function to avoid warnings about unused parameters.
 
 h2(#release_notes_3.5.6). YAKINDU Statechart Tools  3.5.6 (Sep 3, 2019)
 
