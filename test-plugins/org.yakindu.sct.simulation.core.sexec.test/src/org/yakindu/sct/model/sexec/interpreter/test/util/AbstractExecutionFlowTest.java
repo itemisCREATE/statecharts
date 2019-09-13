@@ -183,6 +183,10 @@ public abstract class AbstractExecutionFlowTest {
 	protected boolean isRaised(String eventName) {
 		return context().getEvent(eventName).isRaised();
 	}
+	
+	protected Object valueOf(String eventName) {
+		return context().getEvent(eventName).getValue();
+	}
 
 	protected boolean isEventDriven() {
 		StatechartAnnotations annotations = new StatechartAnnotations();

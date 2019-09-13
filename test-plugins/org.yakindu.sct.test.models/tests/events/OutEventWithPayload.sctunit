@@ -1,0 +1,14 @@
+testclass OutEventWithPayload for statechart events.OutEventWithPayload {
+	
+	@Test operation out_events_must_have_payload () {
+		enter
+		
+		raise i: 21
+		
+		assert o
+		assert valueof(o) == 42
+
+		exit
+	}
+
+}

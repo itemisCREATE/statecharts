@@ -31,6 +31,35 @@ GeneratorModel for sctunit::cpp {
 		}
 	}
 	
+	test OutEventWithPayload{
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/OutEventWithPayload"	
+			libraryTargetFolder = "libraryTarget"		
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
+	
 
 
 }
