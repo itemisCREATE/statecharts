@@ -47,4 +47,8 @@
          class="org.yakindu.sct.examples.wizard.drop.ExampleDropSupportRegistrar">
       </startup>
    </extension>
+   <extension
+         id="org.eclipse.ui.browser.editor"
+         point="org.eclipse.ui.browser.browsers">
+   </extension>
 </plugin>
