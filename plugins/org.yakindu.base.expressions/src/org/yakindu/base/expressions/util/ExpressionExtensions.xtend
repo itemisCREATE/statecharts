@@ -53,7 +53,7 @@ class ExpressionExtensions {
 	/**
 	 * Returns getFeature() for FeatureCall and getReference() for ElementReferenceExpression
 	 */
-	def dispatch EObject featureOrReference(ArgumentExpression it) {
+	def dispatch EObject featureOrReference(Expression it) {
 		null
 	}
 	
