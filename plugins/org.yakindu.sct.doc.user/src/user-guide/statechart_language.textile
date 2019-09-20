@@ -5,10 +5,9 @@ h1(#sclang_statechart_language_reference). Statechart language reference
 
 The statechart language is used to describe statecharts. It consists both of graphical and of textual elements.
 
-
-
-
 h2(#sclang_state_machine_basics). State machine basics
+
+This is a short overview over basic state machine concepts. For a more thorough explanation, see "What are State Machines?":../user-guide/overview.html#overview_what_are_state_machines
 
 h3(#sclang_words_and_definitions). Words and definitions
 

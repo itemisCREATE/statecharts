@@ -1,6 +1,86 @@
 
 p. 
 
+h1(#overview_what_are_state_machines). What are State Machines?
+
+State machines are used as behavior models. They consist of different so called states. Because the amount of states of a state machine is finite it is called finite state machine (FSM). There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts. This introduction gives a short overview of the common basis and the differences between state machine types.
+
+In automata theory a state is a situation of a system depending on previous inputs and causes a reaction on following inputs. Automata theory uses the terms input/output for simple text input/output. Modern state machines use an extended definition of inputs and outputs. These can be events or more complex reactions than simply printing a certain text. Another important element of  state machines are transitions. A transition, as the name says, describes the transition from one state to another.
+
+To explain this concept we introduce a common example:
+
+Let's watch a ferry that sails from the northern port to the southern port and back. We build a state machine that demonstrates the behavior of the ferry. When the latter reaches the northern port the state machine is in state *NorthernPort*. The moving ferry makes up the states *Northwards* and *Southwards*.
+
+h2(#overview_moore). States and transitions – The ferry as a Moore machine
+
+In automata theory, there are two basic types of finite state machines (FSM). One of those is called "_Moore_ machine":https://en.wikipedia.org/wiki/Moore_machine, named after its inventor Edward Moore. Moore machines consist of states and transitions. States are able to produce outputs, and the output is determined solely by the current state, not by any input. Modeled as a Moore machine the ferry example looks like the following:
+
+!(large)images/ferry_moore.png(Ferry example as a Moore machine, modeled with YAKINDU Statechart Tools)!
+
+p=. Ferry example as a Moore machine, modeled with YAKINDU Statechart Tools
+
+The state diagram has four states: *NorthernPort*, *SouthernPort*, *Northwards* and *Southwards*. Each of these states produces an output which is an action of the ferry. The ferry can either stop when one of the two ports is reached (_ferry.stop_) or move from one port to another (_ferry.moveSouthwards_ and _ferry.moveNorthwards_). In Moore machines the output *only* relies on the current state. This means that the output will not change unless the state also changes. This happens when a transition is taken. In our example, we have two kinds of inputs that may trigger a state transition: The ship’s mate who can decide where to sail (e.g. _mate.sailSouthwards_) and the quay which can detect an arriving ferry (e.g. _quay.reachedSouthernBank_).
+
+h2(#overview_mealy). Compact state machines by George H. Mealy
+
+In comparison with the Moore machines seen above, "_Mealy_ machines":https://en.wikipedia.org/wiki/Mealy_machine produce outputs only on transitions and not in states. This often results in state diagrams with fewer states because more logic can be put on transitions. As a Mealy machine, the ferry example looks like the following image:
+
+!(large)images/ferry_mealy_1.png(Ferry example as a Mealy machine)!
+
+p=. Ferry example as a Mealy machine
+
+States do not produce outputs anymore, but the transitions do. Whether the ferry moves northwards or southwards is now expressed by the corresponding transitions. The input event mate.sail may lead to the output _ferry.moveSouthwards_ or _ferry.moveNorthwards_ depending on the active state. The state machine offers an extended logic: the states *Northwards* and *Southwards* have two transitions that lead to different states depending on the input event: If the event _mate.sail_ is raised in *Northwards* the output is _ferry.moveSouthwards_, if _quay.reachedNorthernBank_ is raised the ferry stops. The same logic as a Moore machine would lead to additional states like the following image shows:
+
+!(large)images/ferry_moore2.png(The ferry as an extended Moore machine)!
+
+p=. The ferry as an extended Moore machine
+
+Be aware that both state diagrams, the Moore machine above and the Mealy one, describe exactly the same system. Indeed, automata theory states that you can always translate a Moore machine into a Mealy machine and vice versa, without losing any expressiveness.  
+
+h2(#overview_harel). Representing complex systems with Harel statecharts
+
+David Harel realized that:
+
+_“A complex system cannot be beneficially described in this naive fashion, because of the unmanageable, exponentially growing multitude of states, all of which have to be arranged in a ‘flat’ unstratified fashion, resulting in an unstructured, unrealistic, and chaotic state diagram.”_
+
+He concluded the following:
+
+_“To be useful, a state approach must be modular, hierarchical and well-structured.”_
+
+Harel introduced elements for modeling complex systems with finite state diagrams and also introduced the term “statecharts”, defined as:
+
+_“statecharts = state-diagrams + depth + orthogonality + broadcast communication”_
+
+Using composite states and substate machines, we are able to bring more *depth* into state diagrams, while keeping the diagrams clear and well-structured. Regions help us to express *orthogonality*: Different substate machines that can be executed side by side. Events allow us to achieve *broadcast communication* and give us a strong means to describe complex behavior. Using conditions, we can state that a certain event is fired only if a given condition is met. Inter-level transitions, history states, temporal logic as well as entry, exit and throughout actions are further Harel statechart elements.
+
+h3(#overview_harel_vs_mealy). Harel vs Mealy
+
+Now let us extend the *Mealy* statechart with more details about what is happening on the ferry at habor: The ferry can take three cars. The mate has to admit these or let them out after arrival. At sea the lifts to the parking spaces shall be locked, so that the passengers stay on deck. The resulting state machine looks like the following:
+
+!(large)images/ferry_mealy_2.png(Extended Ferry example as basic state machine)!
+
+p=. Extended Ferry example as basic state machine
+
+For every car that leaves or enters and also for both sides we use a state. This blows up the state machine. With the means of *composite states* and *conditions* we are able to minimize the state machine again by describing the same behavior. The following image describes the ferry behavior as a *Harel* statechart. It illustrates *composite states*, *guard conditions* and *inter-level transitions*.
+
+!(large)images/ferry_harel_1.png(Ferry example as a Harel statechart)!
+
+p=. Ferry example as a Harel statechart
+
+The *carEnter* / *carLeave* states were substituted by a composite state *FerryStops* with a substate machine that describes the behavior of the ferry at harbor. The lifts to the car deck shall be locked, because passengers must be there during transfer. There are transitions crossing the hierarchy from the substate machine to the upper-level states (inter-level transitions) like the one from state *LockLifts* to *Northwards* .
+
+h2(#overview_uml). The present age: UML state machines
+
+UML state machines are based on the statechart notation introduced by David Harel. Furthermore, the UML extends the notation of Harel statecharts by object-oriented principles. Mapping this to our ferry example, in UML we can model the possible actions of the ferry as an interface with operations stop, moveNorthwards, moveSouthwards and so on.
+
+The following table illustrates the differences between the previously described types at a glance:
+
+!(large)images/statemachine_types.png(Differences between state machine types)!
+
+p=. Differences between the state machine types
+
+The examples of this article were designed with the YAKINDU Statechart Tools, whose documentation you are reading just now.
+
 h1(#overview_what_are_yakindu_statechart_tools). What are YAKINDU Statechart Tools?
 
 YAKINDU Statechart Tools (YAKINDU SCT) is a modular toolkit for developing, simulating, and generating executable "_finite-state machines (FSM)_":https://en.wikipedia.org/wiki/Finite-state_machine or simply _state machines_.
