@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 
 public class PathHelper {
@@ -47,8 +47,20 @@ public class PathHelper {
 		return toPath(uri.toFileString(), options);
 	}
 
-	public Path toPath(IFile file, LinkOption... options) {
+	public Path toPath(IResource file, LinkOption... options) {
 		return toPath(file.getLocation().toOSString(), options);
+	}
+	
+	public Path toWorkspaceRelativePath(IResource file, LinkOption... options) {
+		Path filePath = toPath(file, options);
+		Path wsPath = toPath(file.getWorkspace().getRoot(), options);
+		return wsPath.relativize(filePath);
+	}
+	
+	public Path toProjectRelativePath(IResource file, LinkOption... options) {
+		Path filePath = toPath(file, options);
+		Path prjPath = toPath(file.getProject(), options);
+		return prjPath.relativize(filePath);
 	}
 
 	public boolean pathsEqual(String p1, String p2) {
