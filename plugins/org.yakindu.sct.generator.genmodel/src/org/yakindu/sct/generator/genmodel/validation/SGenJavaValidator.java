@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.Check;
@@ -37,12 +38,13 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.TypeValidator;
+import org.yakindu.sct.commons.EmfUriUtil;
 import org.yakindu.sct.commons.ErrorCodeStatus;
+import org.yakindu.sct.commons.PathHelper;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -58,6 +60,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -77,7 +80,7 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 	public static final String DEPRECATED = "Element '%s' is deprecated and will be removed in the next version. ";
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
-	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates.";
+	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates: %s";
 
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature"; 
 	public static final String CODE_REQUIRED_DOMAIN = "code_req_domain";
@@ -94,6 +97,8 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 	protected IScopeProvider scopeProvider;
 	@Inject
 	protected IQualifiedNameProvider nameProvider;
+	@Inject 
+	protected PathHelper pathHelper; 
 
 	@Check
 	public void checkInitialValue(Property property) {
@@ -130,9 +135,18 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 			return;
 		}
 		IScope scope = scopeProvider.getScope(entry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
-		if (Iterables
-				.size(Iterables.filter(scope.getAllElements(), (e) -> elementName.equals(e.getQualifiedName()))) > 1) {
-			warning(String.format(DUPLICATE_ELEMENT, entry.getContentType(), elementName),
+
+		Iterable<IEObjectDescription> duplicateNames = Iterables.filter(scope.getAllElements(),
+				e -> elementName.equals(e.getQualifiedName()));
+
+		Iterable<String> duplicatePaths = Iterables.transform(duplicateNames,
+				e -> pathHelper.toPath(EmfUriUtil.toFile(e.getEObjectURI())).toString());
+		
+		Set<String> uniquePaths = Sets.newHashSet(duplicatePaths);
+		if (uniquePaths.size() > 1) {
+
+			warning(String.format(DUPLICATE_ELEMENT, entry.getContentType(), elementName,
+					System.lineSeparator() + String.join(System.lineSeparator(), uniquePaths)),
 					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
 		}
 	}
