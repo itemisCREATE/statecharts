@@ -30,39 +30,7 @@
                id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
          </newWizardShortcut>
          
-         <hiddenMenuItem
-               id="edit">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="navigate">
-         </hiddenMenuItem>
-       	<hiddenMenuItem
-               id="project">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="org.eclipse.ui.run">
-         </hiddenMenuItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.project.buildAll">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.debug.internal.ui.actions.DebugDropDownAction">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.debug.internal.ui.actions.RunDropDownAction">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.externaltools.ExternalToolMenuDelegateToolbar">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.emf.facet.util.emf.ui.OpenModelFromEmfRegistryCommand">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.mylyn.tasks.ui.command.openTask">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.papyrus.infra.discovery.ui.menu.toolbars.discoveryCommand">
-         </hiddenToolBarItem>
+         
          <hiddenToolBarItem
                id="org.eclipse.ui.navigate.next">
          </hiddenToolBarItem>
@@ -78,56 +46,6 @@
          <hiddenToolBarItem
                id="org.eclipse.ui.edit.text.gotoLastEditPosition">
          </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="undoredo.undo">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="undoredo.redo">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.search.OpenSearchDialogPage">
-         </hiddenToolBarItem>
-         <hiddenMenuItem
-               id="org.eclipse.search.menu">
-         </hiddenMenuItem>
-         <hiddenToolBarItem
-               id="print">
-         </hiddenToolBarItem>
-         <hiddenMenuItem
-               id="print">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="move">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="properties">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="shortcuts">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="org.eclipse.ui.edit.text.delimiter.windows">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="revert">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="org.eclipse.mylyn.tasks.ui.bug.report">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="org.eclipse.ui.edit.text.delimiter.unix">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="org.eclipse.ui.editors">
-         </hiddenMenuItem>
-         <hiddenMenuItem
-               id="help">
-         </hiddenMenuItem>
-
-         
          
       </perspectiveExtension>
    </extension>
