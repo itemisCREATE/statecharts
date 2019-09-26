@@ -10,6 +10,15 @@
  */
 package org.yakindu.sct.examples.wizard.service;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
@@ -22,7 +31,9 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.browser.IWebBrowser;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.internal.browser.DefaultWorkbenchBrowserSupport;
 import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.common.collect.Lists;
@@ -38,23 +49,48 @@ public class ExampleModelOpener {
 
 	public void openModelFiles(IProject project) {
 		List<IFile> filesToOpen = Lists.newArrayList();
-
-		addExampleDesc(project, filesToOpen);
 		addStatecharts(project, filesToOpen);
 
-		if (filesToOpen != null) {
-			IWorkbenchPage page = getPage();
-			if (page != null) {
-				Display.getDefault().asyncExec(() -> {
-					for (IFile file : filesToOpen) {
-						try {
-							IDE.openEditor(page, file, true);
-						} catch (PartInitException e) {
-							e.printStackTrace();
-						}
-					}
-				});
+		if (filesToOpen == null || getPage() == null) {
+			return;
+		}
+		Display.getDefault().asyncExec(() -> {
+			try {
+				for (IFile file : filesToOpen) {
+					IDE.openEditor(getPage(), file, false);
+				}
+
+				if (online()) {
+					String browserid = "org.eclipse.ui.browser.editor";
+					String baseURL = "https://itemis.com/en/yakindu/state-machine/documentation/examples/example/";
+					URL url = new URL((baseURL + project.getName().replace(".", "-")));
+					final IWebBrowser browser = PlatformUI.getWorkbench().getBrowserSupport().createBrowser(browserid);
+					browser.openURL(url);
+				} else {
+					openExampleReadme(project);
+				}
+			} catch (PartInitException | MalformedURLException e) {
+				e.printStackTrace();
+				return;
 			}
+		});
+	}
+
+	protected void openExampleReadme(IProject project) throws PartInitException {
+		IResource indexFile = project.findMember(ExampleData.DESC_FILE);
+		if (indexFile != null) {
+			IDE.openEditor(getPage(), (IFile) indexFile, true);
+		}
+	}
+
+	private boolean online() {
+		try (Socket socket = new Socket()) {
+			InetSocketAddress socketAddress = new InetSocketAddress("itemis.com", 80);
+			socket.connect(socketAddress, 500);
+			socket.close();
+			return true;
+		} catch (IOException unknownHost) {
+			return false;
 		}
 	}
 
@@ -75,15 +111,6 @@ public class ExampleModelOpener {
 			filesToOpen.addAll(findAllFilesRecursively(project, SCT_FILE_EXTENSION));
 		} catch (CoreException e) {
 			e.printStackTrace();
-		}
-	}
-
-	protected void addExampleDesc(IProject project, List<IFile> filesToOpen) {
-		if (ExampleData.DESC_FILE != null) {
-			IResource indexFile = project.findMember(ExampleData.DESC_FILE);
-			if (indexFile != null) {
-				filesToOpen.add((IFile) indexFile);
-			}
 		}
 	}
 

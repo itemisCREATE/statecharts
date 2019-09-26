@@ -11,6 +11,8 @@
 package org.yakindu.sct.examples.wizard.service.git;
 
 import java.io.IOException;
+
+import static org.yakindu.sct.examples.wizard.service.IExampleService.UpdateResult.*;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitResult;
@@ -66,7 +68,7 @@ public class GitRepositoryExampleService implements IExampleService {
 		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
 				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
 	}
-	
+
 	private enum BranchType {
 		LOCAL, REMOTE
 	}
@@ -204,7 +206,7 @@ public class GitRepositoryExampleService implements IExampleService {
 			Git git = Git.open(storageLocation.toFile());
 			FetchCommand fetch = git.fetch();
 			FetchResult result = fetch.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
-			
+
 			if (doesBranchExist(git, BranchType.REMOTE, remoteBranch)) {
 				CheckoutCommand checkout = git.checkout();
 				checkout.setName(remoteBranch);
@@ -212,25 +214,24 @@ public class GitRepositoryExampleService implements IExampleService {
 				try {
 					checkout.call();
 				} catch (CheckoutConflictException e) {
-					return IExampleService.UpdateResult.REPO_CONTAINS_CONFLICTS;			
+					return REPO_CONTAINS_CONFLICTS;
 				}
 			} else {
-				return IExampleService.UpdateResult.REMOTE_BRANCH_NOT_FOUND;
+				return REMOTE_BRANCH_NOT_FOUND;
 			}
 			if (result.getTrackingRefUpdates().isEmpty()) {
-				return IExampleService.UpdateResult.NO_UPDATES;
+				return NO_UPDATES;
 			} else {
-				return IExampleService.UpdateResult.UPDATE_AVAILABLE;
+				return UPDATE_AVAILABLE;
 			}
 		} catch (RepositoryNotFoundException ex) {
 			// This is the case when the examples are imported manually
-			return IExampleService.UpdateResult.NO_UPDATES;
+			return NO_UPDATES;
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			return IExampleService.UpdateResult.NO_UPDATES;
+			return NO_UPDATES;
 		}
 	}
-	
+
 	private boolean doesBranchExist(Git git, BranchType type, String remoteBranch) throws GitAPIException {
 		if (type == GitRepositoryExampleService.BranchType.LOCAL) {
 			return git.branchList().setListMode(ListMode.ALL).call().stream()
