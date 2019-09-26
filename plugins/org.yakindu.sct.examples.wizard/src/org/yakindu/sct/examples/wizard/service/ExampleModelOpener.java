@@ -77,11 +77,9 @@ public class ExampleModelOpener {
 	}
 
 	protected void openExampleReadme(IProject project) throws PartInitException {
-		if (ExampleData.DESC_FILE != null) {
-			IResource indexFile = project.findMember(ExampleData.DESC_FILE);
-			if (indexFile != null) {
-				IDE.openEditor(getPage(), (IFile) indexFile, true);
-			}
+		IResource indexFile = project.findMember(ExampleData.DESC_FILE);
+		if (indexFile != null) {
+			IDE.openEditor(getPage(), (IFile) indexFile, true);
 		}
 	}
 
