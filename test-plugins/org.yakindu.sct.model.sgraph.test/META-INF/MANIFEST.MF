@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SGraph Tests
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph.test
-Bundle-Version: 3.5.7.qualifier
+Bundle-Version: 3.5.8.qualifier
 Require-Bundle: org.yakindu.sct.model.sgraph,
  org.junit,
  org.eclipse.ui,
