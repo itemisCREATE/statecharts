@@ -36,6 +36,7 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	private String[] images;
 	private File projectDir;
 	private Dependency[] dependencies;
+	private int rank;
 
 	public static class Dependency {
 		
@@ -56,13 +57,8 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 		}
 	}
 	
-	public ExampleData(String category[], String id, String title, String description, String[] images, Dependency[] dependencies) {
-		this.category = category;
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.images = images;
-		this.dependencies = dependencies;
+	public ExampleData() {
+		this.rank = 100;
 	}
 	
 	public Dependency[] getDependencies() {
@@ -205,7 +201,12 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 
 	@Override
 	public int compareTo(ExampleData other) {
-		return Collator.getInstance().compare(this.title, other.title);
+		int byRank = this.rank - other.rank;
+		if (byRank == 0) {
+			return Collator.getInstance().compare(this.title, other.title);
+		}
+		return byRank;
+		
 	}
 
 }
