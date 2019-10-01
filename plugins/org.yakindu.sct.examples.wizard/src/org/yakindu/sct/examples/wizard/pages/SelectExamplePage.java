@@ -232,7 +232,7 @@ public class SelectExamplePage extends WizardPage
 						return exampleIdToInstall.equals(((ExampleData) element).getId());
 					}
 					if (element instanceof ExampleCategory) {
-						return ((ExampleCategory) element).getChildren().contains(exampleToInstall);
+						return ExampleCategory.get(exampleToInstall).equals(element);
 					}
 					return true;
 				}

@@ -38,6 +38,7 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	private Dependency[] dependencies;
 
 	public static class Dependency {
+		
 		private String updateSite;
 		private String[] features;
 
@@ -125,12 +126,10 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 		this.projectDir = projectDir;
 	}
 
-	@Override
 	public boolean isProfessional() {
 		return Arrays.asList(getCategory()).contains(PRO_CATEGORY);
 	}
 	
-	@Override
 	public boolean isLabs() {
 		return Arrays.asList(getCategory()).contains(LABS_CATEGORY);
 	}
@@ -142,9 +141,7 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	public boolean isPlatform() {
 		return Arrays.asList(getCategory()).contains(PLATFORM_CATEGORY);
 	}
-	
 
-	@Override
 	public boolean isHeadless() {
 		return Arrays.asList(getCategory()).contains(HEADLESS_CATEGORY);
 	}
