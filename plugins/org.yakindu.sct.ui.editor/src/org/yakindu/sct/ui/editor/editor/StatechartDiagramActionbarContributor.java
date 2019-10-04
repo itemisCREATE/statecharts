@@ -23,10 +23,16 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IPerspectiveListener;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.ViewSite;
 import org.yakindu.sct.ui.editor.commands.DocumentationMenuAction;
 import org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives;
 
@@ -39,20 +45,19 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 
 	@Override
 	public void init(IActionBars bars) {
-		System.out.println("blaaaaa");
 		super.init(bars);
-		
+
 		List<IContributionItem> items = new ArrayList<IContributionItem>();
 		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_FILL_COLOR));
 		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_SIZE));
 		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_LINE_COLOR));
 		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_ZOOM));
-		
+
 		bars.getToolBarManager().add(new DocumentationMenuAction());
 
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
-		
+
 		items.forEach(item -> {
 			bars.getToolBarManager().add(item);
 		});
@@ -61,20 +66,45 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
 		IWorkbenchPage page = win.getActivePage();
 
-		IPerspectiveDescriptor bla = page.getPerspective();
+		win.addPerspectiveListener(new IPerspectiveListener() {
+			@Override
+			public void perspectiveActivated(IWorkbenchPage page, IPerspectiveDescriptor perspective) {
 
-//		   if (IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION.equals(bla.getId())) {
-		IToolBarManager toolBarManager = bars.getToolBarManager();
-		bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
+				if (!IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION.equals(perspective.getId()))
+					return;
 
-		 
-		List<IContributionItem> list = Arrays.stream(toolBarManager.getItems()).filter(
-				x -> x.getId() != null && x.getId().toLowerCase().contains("next")).collect(Collectors.toList());
-		List<IContributionItem> history = Arrays.stream(toolBarManager.getItems()).filter(
-				x -> x.getId() != null && x.getId().toLowerCase().contains("history")).collect(Collectors.toList());
-		
+				IWorkbench wb = PlatformUI.getWorkbench();
+				IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
 
-//		   }
+				for (IViewReference view : page.getViewReferences()) {
+
+					if (!"Simulation".equals(view.getPartName()) || view.getPart(false) == null) {
+						continue;
+					}
+
+					IWorkbenchPart part = view.getPart(false);
+					IWorkbenchPartSite site = part.getSite();
+
+					if (site instanceof IViewSite) {
+						IViewSite viewSite = (IViewSite) site;
+						IActionBars bla = viewSite.getActionBars();
+						bla.getToolBarManager().remove(ActionIds.ACTION_FONT_BOLD);
+						bla.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
+						bla.updateActionBars();
+						System.out.println();
+
+					}
+				}
+
+			}
+
+			@Override
+			public void perspectiveChanged(IWorkbenchPage page, IPerspectiveDescriptor perspective, String changeId) {
+				System.out.println("changed -> " + changeId);
+//					perspectiveActivated(page, perspective);
+
+			}
+		});
 
 		// remove 'arrange all' and 'arrange selection' actions
 		bars.getToolBarManager().remove(ActionIds.MENU_ARRANGE);
@@ -90,4 +120,5 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	protected Class<StatechartDiagramEditor> getEditorClass() {
 		return StatechartDiagramEditor.class;
 	}
-}
+
+}
