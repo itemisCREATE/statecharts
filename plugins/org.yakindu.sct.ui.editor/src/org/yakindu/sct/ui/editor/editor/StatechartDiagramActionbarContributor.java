@@ -10,9 +10,16 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.eclipse.gmf.runtime.common.ui.action.global.GlobalActionId;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IPerspectiveDescriptor;
@@ -32,29 +39,43 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 
 	@Override
 	public void init(IActionBars bars) {
+		System.out.println("blaaaaa");
 		super.init(bars);
+		
+		List<IContributionItem> items = new ArrayList<IContributionItem>();
+		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_FILL_COLOR));
+		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_SIZE));
+		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_LINE_COLOR));
+		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_ZOOM));
+		
+		bars.getToolBarManager().add(new DocumentationMenuAction());
+
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
-		bars.getToolBarManager().add(new DocumentationMenuAction());
 		
-		   IWorkbench wb = PlatformUI.getWorkbench();
-		   IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
-		   IWorkbenchPage page = win.getActivePage();
-		   
-		   IPerspectiveDescriptor bla = page.getPerspective();
-		   
+		items.forEach(item -> {
+			bars.getToolBarManager().add(item);
+		});
+
+		IWorkbench wb = PlatformUI.getWorkbench();
+		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+		IWorkbenchPage page = win.getActivePage();
+
+		IPerspectiveDescriptor bla = page.getPerspective();
+
 //		   if (IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION.equals(bla.getId())) {
-			   IToolBarManager toolBarManager = bars.getToolBarManager();
-			   bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
-			   bars.getToolBarManager().remove(ActionIds.CUSTOM_FILL_COLOR);
-			   bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_SIZE);
-			   bars.getToolBarManager().remove(ActionIds.CUSTOM_LINE_COLOR);
-			   bars.getToolBarManager().remove(ActionIds.CUSTOM_ZOOM);
+		IToolBarManager toolBarManager = bars.getToolBarManager();
+		bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
+
+		 
+		List<IContributionItem> list = Arrays.stream(toolBarManager.getItems()).filter(
+				x -> x.getId() != null && x.getId().toLowerCase().contains("next")).collect(Collectors.toList());
+		List<IContributionItem> history = Arrays.stream(toolBarManager.getItems()).filter(
+				x -> x.getId() != null && x.getId().toLowerCase().contains("history")).collect(Collectors.toList());
+		
+
 //		   }
-		   
-		   
-		
-		
+
 		// remove 'arrange all' and 'arrange selection' actions
 		bars.getToolBarManager().remove(ActionIds.MENU_ARRANGE);
 		bars.getMenuManager().findMenuUsingPath(ActionIds.MENU_DIAGRAM).remove(ActionIds.MENU_ARRANGE);
@@ -69,5 +90,4 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	protected Class<StatechartDiagramEditor> getEditorClass() {
 		return StatechartDiagramEditor.class;
 	}
-	
-}
+}
