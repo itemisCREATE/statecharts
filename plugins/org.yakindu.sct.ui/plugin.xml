@@ -29,24 +29,6 @@
          <newWizardShortcut
                id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
          </newWizardShortcut>
-         
-         
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.next">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.previous">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.backwardHistory">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.forwardHistory">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.edit.text.gotoLastEditPosition">
-         </hiddenToolBarItem>
-         
       </perspectiveExtension>
    </extension>
    <extension

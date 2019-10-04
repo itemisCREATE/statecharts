@@ -13,8 +13,15 @@ package org.yakindu.sct.ui.editor.editor;
 import org.eclipse.gmf.runtime.common.ui.action.global.GlobalActionId;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.ui.editor.commands.DocumentationMenuAction;
+import org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives;
 
 /**
  * 
@@ -29,6 +36,24 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
 		bars.getToolBarManager().add(new DocumentationMenuAction());
+		
+		   IWorkbench wb = PlatformUI.getWorkbench();
+		   IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+		   IWorkbenchPage page = win.getActivePage();
+		   
+		   IPerspectiveDescriptor bla = page.getPerspective();
+		   
+//		   if (IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION.equals(bla.getId())) {
+			   IToolBarManager toolBarManager = bars.getToolBarManager();
+			   bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
+			   bars.getToolBarManager().remove(ActionIds.CUSTOM_FILL_COLOR);
+			   bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_SIZE);
+			   bars.getToolBarManager().remove(ActionIds.CUSTOM_LINE_COLOR);
+			   bars.getToolBarManager().remove(ActionIds.CUSTOM_ZOOM);
+//		   }
+		   
+		   
+		
 		
 		// remove 'arrange all' and 'arrange selection' actions
 		bars.getToolBarManager().remove(ActionIds.MENU_ARRANGE);
