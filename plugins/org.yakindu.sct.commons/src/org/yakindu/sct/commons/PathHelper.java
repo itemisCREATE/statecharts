@@ -51,18 +51,6 @@ public class PathHelper {
 		return toPath(file.getLocation().toOSString(), options);
 	}
 	
-	public Path toWorkspaceRelativePath(IResource file, LinkOption... options) {
-		Path filePath = toPath(file, options);
-		Path wsPath = toPath(file.getWorkspace().getRoot(), options);
-		return wsPath.relativize(filePath);
-	}
-	
-	public Path toProjectRelativePath(IResource file, LinkOption... options) {
-		Path filePath = toPath(file, options);
-		Path prjPath = toPath(file.getProject(), options);
-		return prjPath.relativize(filePath);
-	}
-
 	public boolean pathsEqual(String p1, String p2) {
 		Path path1 = toPath(p1);
 		Path path2 = toPath(p2);
