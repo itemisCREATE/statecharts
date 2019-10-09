@@ -23,7 +23,7 @@ import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
  */
 public enum ExampleCategory implements IExampleData {
 
-	TUTORIAL("Tutorials", "tutorials.html"),
+	TUTORIAL("Getting Started", "basic.html"),
 
 	CODE_GENERATORS("Code Generation", "codegen.html"),
 
