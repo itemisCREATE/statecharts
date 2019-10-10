@@ -29,11 +29,11 @@ public enum ExampleCategory implements IExampleData {
 
 	ADVANCED("Advanced Examples", "advanced.html"),
 
-	EMBEDDED("Embedded Systems", "deep-c.html"),
+	EMBEDDED("Embedded Systems", "embedded.html"),
 
-	HMI("Human Machine Interfaces", "deep-java.html"),
+	HMI("Human Machine Interfaces", "hmi.html"),
 
-	TESTING("Testing", "testing.html"),
+	TESTING("Testing & Coverage", "testing.html"),
 
 	HEADLESS("Headless Code Generation", "headless.html"),
 
