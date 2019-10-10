@@ -15,12 +15,13 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
+import org.eclipse.gef.editpolicies.GraphicalEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.internal.commands.SetConnectionBendpointsCommand;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Edge;
@@ -28,7 +29,7 @@ import org.yakindu.base.gmf.runtime.router.RubberBandRoutingSupport;
 
 import com.google.common.collect.Lists;
 
-public class FixedBendpointEditPolicy extends ResizableEditPolicyEx {
+public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
 	public static final String ROLE = "Fixed_Bendpoints";
 	
@@ -37,7 +38,21 @@ public class FixedBendpointEditPolicy extends ResizableEditPolicyEx {
 
 	private RubberBandRoutingSupport router = new RubberBandRoutingSupport();
 
+
 	@Override
+	public void showSourceFeedback(Request request) {
+		if(request instanceof ChangeBoundsRequest) {
+			showChangeBoundsFeedback((ChangeBoundsRequest) request);
+		}
+	}
+	@Override
+	public void eraseSourceFeedback(Request request) {
+		if(request instanceof ChangeBoundsRequest) {
+			eraseChangeBoundsFeedback((ChangeBoundsRequest) request);
+		}
+	}
+	
+	
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
 		if (connectionStart) {
 			IFigure figure = getHostFigure();
@@ -50,7 +65,6 @@ public class FixedBendpointEditPolicy extends ResizableEditPolicyEx {
 		}
 	}
 
-	@Override
 	protected void eraseChangeBoundsFeedback(ChangeBoundsRequest request) {
 		connectionStart = true;
 		router.commitBoxDrag();
@@ -84,14 +98,13 @@ public class FixedBendpointEditPolicy extends ResizableEditPolicyEx {
 	}
 
 	@Override
-	protected Command getMoveCommand(ChangeBoundsRequest request) {
-		return createUpdateAllBendpointsCommand();
+	public Command getCommand(Request request) {
+		if(request instanceof ChangeBoundsRequest) {
+			return createUpdateAllBendpointsCommand();
+		}
+		return super.getCommand(request);
 	}
-
-	@Override
-	protected Command getResizeCommand(ChangeBoundsRequest request) {
-		return createUpdateAllBendpointsCommand();
-	}
+	
 
 	@SuppressWarnings("unchecked")
 	private Command createUpdateAllBendpointsCommand() {
