@@ -41,6 +41,7 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 				Dimension prefSize = figure.getPreferredSize().getCopy();
 				figure.translateToAbsolute(prefSize);
 				Rectangle bounds = originalBounds.getCopy();
+				bounds = bounds.expand(-8,-8);
 				figure.translateToAbsolute(bounds);
 				bounds = request.getTransformedRectangle(bounds);
 				if (bounds.width < prefSize.width) {
