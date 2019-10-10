@@ -20,7 +20,7 @@ YSCT also includes a "statechart image generator":../user-guide/code_generation_
 
 Additionally, you can install a couple of code generators from the "YAKINDU Labs update site":https://updates.yakindu.com/statecharts/labs/. To do so, select _Help → Install new software …_ in the main menu, and use "https://updates.yakindu.com/statecharts/labs/":https://updates.yakindu.com/statecharts/labs/ as the site location. The following code generators are available; click on the link to find more information about the respective generator:
 * "Python":https://blogs.itemis.com/en/python-code-generation-with-yakindu-statechart-tools
-* "Swift":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/example/SwiftExample
+* "Swift":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-swift
 * "TypeScript":https://blogs.itemis.com/en/typescript-code-generation-with-yakindu-statechart-tools
 
 ###. CHECK: YAKINDU Labs generators: Python, Swift, TypeScript

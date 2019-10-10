@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.base.types.edit;singleton:=true
 Automatic-Module-Name: org.yakindu.base.types.edit
-Bundle-Version: 3.5.7.qualifier
+Bundle-Version: 3.5.8.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.base.types.provider.TypesEditPlugin$Implementation
 Bundle-Vendor: %providerName

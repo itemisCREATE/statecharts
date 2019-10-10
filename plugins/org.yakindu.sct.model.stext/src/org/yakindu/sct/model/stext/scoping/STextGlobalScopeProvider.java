@@ -26,7 +26,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.MultimapBasedScope;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -151,7 +151,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			IScope scope = createLazyResourceScope(IScope.NULLSCOPE, uri, descriptions, type, filter, ignoreCase);
 			Iterables.addAll(objectDescriptions, scope.getAllElements());
 		}
-		return MapBasedScope.createScope(IScope.NULLSCOPE, objectDescriptions);
+		return MultimapBasedScope.createScope(IScope.NULLSCOPE, objectDescriptions, ignoreCase);
 	}
 
 	@Override
