@@ -60,6 +60,7 @@ public class EntryEditPart extends BorderedShapeEditPart {
 		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new ContextSensitiveHelpPolicy(
 				HelpContextIds.SC_PROPERTIES_ENTRY_ENTRYKIND));
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
+		installEditPolicy(FixedBendpointEditPolicy.ROLE, new FixedBendpointEditPolicy());
 	}
 
 	@Override

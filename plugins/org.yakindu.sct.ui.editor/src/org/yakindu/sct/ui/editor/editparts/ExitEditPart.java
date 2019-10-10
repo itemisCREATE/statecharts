@@ -43,6 +43,7 @@ public class ExitEditPart extends BorderedShapeEditPart {
 				HandleDirection.INCOMING));
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new LiveFeedbackNonResizableEditPolicy());
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
+		installEditPolicy(FixedBendpointEditPolicy.ROLE, new FixedBendpointEditPolicy());
 	}
 
 	@Override

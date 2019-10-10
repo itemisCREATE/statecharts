@@ -174,7 +174,7 @@ public class RubberBandRoutingSupport {
 	}
 
 	protected void cutOffStart(List<PrecisionPoint> points, Rectangle rect, boolean isSelfAssoc) {
-		// find first intersection with source box, walking form end to start
+		// find first intersection with source box, walking from end to start
 		final List<Line> segs = geom.getOutlineSegments(geom.toRectangle(rect));
 		PrecisionPoint p2 = geom.toPP(points.get(points.size() - 1));
 		for (int i = points.size() - 2; i >= 0; i--) {
