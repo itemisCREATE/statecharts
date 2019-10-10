@@ -36,7 +36,7 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	@Override
 	public void init(IActionBars bars) {
 		super.init(bars);
-		
+
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
 		bars.getToolBarManager().add(new DocumentationMenuAction());
@@ -78,10 +78,17 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 				tb.find(ActionIds.CUSTOM_FONT_COLOR).setVisible(b);
 				tb.find(ActionIds.ACTION_FONT_BOLD).setVisible(b);
 				tb.find(ActionIds.ACTION_FONT_ITALIC).setVisible(b);
+				tb.find(ActionIds.ACTION_AUTOSIZE).setVisible(b);
+				tb.find(ActionIds.MENU_ROUTER).setVisible(b);
+				tb.find(ActionIds.MENU_SELECT).setVisible(b);
+				tb.find(ActionIds.MENU_COMPARTMENT).setVisible(b);
+				tb.find(ActionIds.MENU_ALIGN).setVisible(b);
+				tb.find(ActionIds.ACTION_HIDE_CONNECTION_LABELS).setVisible(b);
+				tb.find(ActionIds.ACTION_SHOW_CONNECTION_LABELS).setVisible(b);
+				tb.find(ActionIds.ACTION_COPY_APPEARANCE_PROPERTIES).setVisible(b);
 				tb.update(true);
 			}
 		});
-
 	}
 
 	@Override
