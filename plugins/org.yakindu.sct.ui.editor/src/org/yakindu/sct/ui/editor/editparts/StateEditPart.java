@@ -117,6 +117,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
+		installEditPolicy(FixedBendpointEditPolicy.ROLE, new FixedBendpointEditPolicy());
 	}
 
 	@Override
