@@ -12,6 +12,10 @@ package org.yakindu.sct.examples.wizard.pages;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +36,8 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.LocationEvent;
+import org.eclipse.swt.browser.LocationListener;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -43,6 +49,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
@@ -305,6 +313,35 @@ public class SelectExamplePage extends WizardPage
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setLayout(new FillLayout());
 		browser = new Browser(composite, SWT.NONE);
+		browser.addLocationListener(new LocationListener() {
+			
+			@Override
+			public void changing(LocationEvent event) {
+				try {
+					String loc = event.location;
+					URI uri = new URI(loc);
+					String scheme = uri.getScheme();
+					if ("https".equals(scheme) || "http".equals(scheme)) {
+						openExternalBrowser(uri.toURL());
+						event.doit = false;
+					}
+				} catch (URISyntaxException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void changed(LocationEvent event) {}
+			
+		});
+	}
+
+	protected void openExternalBrowser(URL url) {
+		try {
+			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(url);
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ExampleData getSelection() {
