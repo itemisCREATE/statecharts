@@ -42,6 +42,7 @@ public class ChoiceEditPart extends ShapeNodeEditPart {
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new FixedAspectRatioResizableEditPolicy());
+		installEditPolicy(FixedBendpointEditPolicy.ROLE, new FixedBendpointEditPolicy());
 	}
 
 	@Override
