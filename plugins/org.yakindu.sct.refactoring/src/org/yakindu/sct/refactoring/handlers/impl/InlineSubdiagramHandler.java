@@ -17,12 +17,12 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.CommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
 import org.yakindu.sct.refactoring.handlers.AbstractViewRefactoringHandler;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.InlineSubdiagramRefactoring;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-import org.yakindu.sct.ui.editor.policies.SetPreferredSizeRequest;
 
 /**
  * Handler for {@link InlineSubdiagramRefactoring}.

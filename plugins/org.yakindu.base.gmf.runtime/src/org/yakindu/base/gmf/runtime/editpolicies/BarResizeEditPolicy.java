@@ -20,7 +20,7 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.yakindu.base.gmf.runtime.editparts.LiveFeedbackResizableEditPolicy;
 
 /**
  * resize edit policy for fixed width or height.
@@ -28,7 +28,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
  * @author benjamin.schwertfeger@itemis.de
  * 
  */
-public class BarResizeEditPolicy extends ResizableEditPolicyEx {
+public class BarResizeEditPolicy extends LiveFeedbackResizableEditPolicy {
 
 	private final int thickness;
 

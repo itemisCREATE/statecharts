@@ -12,11 +12,9 @@ package org.yakindu.sct.ui.editor.policies;
 
 import java.util.List;
 
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.RelativeLocator;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.GraphicalEditPart;
@@ -27,7 +25,8 @@ import org.eclipse.gef.handles.SquareHandle;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.tools.SimpleDragTracker;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.yakindu.base.gmf.runtime.editparts.LiveFeedbackResizableEditPolicy;
+import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
 
 /**
  * Adds a square selection handle that set the bounds to the preferred size
@@ -36,7 +35,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
  * 
  */
 @SuppressWarnings("all")
-public class PreferredSizeHandlerEditPolicy extends PreferredSizeCompartmentEditPolicy {
+public class PreferredSizeHandlerEditPolicy extends LiveFeedbackResizableEditPolicy {
 
 	public class PreferredSizeDragTracker extends SimpleDragTracker {
 		@Override

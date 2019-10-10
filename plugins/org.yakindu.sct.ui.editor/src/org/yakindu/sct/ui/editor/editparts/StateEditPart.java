@@ -16,8 +16,6 @@ import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Insets;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.DragTracker;
@@ -69,8 +67,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	}
 
 	/**
-	 * Delegates all {@link CreateViewAndElementRequest}s to the figure
-	 * compartment.
+	 * Delegates all {@link CreateViewAndElementRequest}s to the figure compartment.
 	 */
 	@Override
 	public EditPart getTargetEditPart(Request request) {
@@ -98,17 +95,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 
 	@Override
 	protected NodeFigure createNodeFigure() {
-		NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize()) {
-			@Override
-			// StateFigure is drawed smaller (Blurshadow size)
-			public Rectangle getHandleBounds() {
-				Insets insets = new Insets(0, 0, StateFigure.BLUR_SHADOW_WIDTH, StateFigure.BLUR_SHADOW_WIDTH);
-				return new Rectangle(getBounds().x + insets.left, getBounds().y + insets.top,
-						getBounds().width - (insets.right + insets.left),
-						getBounds().height - (insets.bottom + insets.top));
-			}
-
-		};
+		NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize());
 		figure.setLayoutManager(new StackLayout());
 		figure.setMinimumSize(getDefaultSize());
 		figure.add(createPrimaryShape());
@@ -244,7 +231,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	public State resolveSemanticElement() {
 		return (State) super.resolveSemanticElement();
 	}
-	
+
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return new NonRevealingDragEditPartsTrackerEx(this);
