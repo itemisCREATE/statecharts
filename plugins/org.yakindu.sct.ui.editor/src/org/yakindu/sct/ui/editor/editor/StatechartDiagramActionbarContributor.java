@@ -26,10 +26,11 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	@Override
 	public void init(IActionBars bars) {
 		super.init(bars);
+		bars.getToolBarManager().insertBefore(ActionIds.CUSTOM_ZOOM, new DocumentationMenuAction());
+
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
-		bars.getToolBarManager().add(new DocumentationMenuAction());
-		
+
 		// remove 'arrange all' and 'arrange selection' actions
 		bars.getToolBarManager().remove(ActionIds.MENU_ARRANGE);
 		bars.getMenuManager().findMenuUsingPath(ActionIds.MENU_DIAGRAM).remove(ActionIds.MENU_ARRANGE);
@@ -44,5 +45,5 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	protected Class<StatechartDiagramEditor> getEditorClass() {
 		return StatechartDiagramEditor.class;
 	}
-	
+
 }
