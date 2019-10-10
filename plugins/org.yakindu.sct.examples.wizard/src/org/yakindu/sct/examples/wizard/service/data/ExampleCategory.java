@@ -23,15 +23,17 @@ import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
  */
 public enum ExampleCategory implements IExampleData {
 
-	TUTORIAL("Getting Started", "basic.html"),
+	MODELING("Getting Started - Modeling", "modeling.html"),
 
-	CODE_GENERATORS("Code Generation", "codegen.html"),
+	CODE_GENERATORS("Getting Started - Code Generation", "codegen.html"),
+	
+	HEADLESS("Headless Code Generation", "headless.html"),
 
-	APPLICATIONS("Applications", "applications.html"),
+	ADVANCED("Advanced Examples", "advanced.html"),
 
-	DEEP_C("Deep C Integration", "deep-c.html"),
+	EMBEDDED("Embedded Systems", "deep-c.html"),
 
-	DEEP_JAVA("Deep Java Integration", "deep-java.html"),
+	HMI("Human Machine Interfaces", "deep-java.html"),
 
 	TESTING("Testing", "testing.html"),
 
@@ -61,20 +63,23 @@ public enum ExampleCategory implements IExampleData {
 	}
 
 	public static ExampleCategory get(ExampleData data) {
-		if (Arrays.asList(data.getCategory()).contains("tutorial")) {
-			return TUTORIAL;
+		if (Arrays.asList(data.getCategory()).contains("modeling")) {
+			return MODELING;
 		}
 		if (Arrays.asList(data.getCategory()).contains("code-generation")) {
 			return CODE_GENERATORS;
 		}
-		if (Arrays.asList(data.getCategory()).contains("application")) {
-			return APPLICATIONS;
+		if (Arrays.asList(data.getCategory()).contains("headless")) {
+			return HEADLESS;
 		}
-		if (Arrays.asList(data.getCategory()).contains("c-domain")) {
-			return DEEP_C;
+		if (Arrays.asList(data.getCategory()).contains("advanced")) {
+			return ADVANCED;
 		}
-		if (Arrays.asList(data.getCategory()).contains("java-domain")) {
-			return DEEP_JAVA;
+		if (Arrays.asList(data.getCategory()).contains("embedded")) {
+			return EMBEDDED;
+		}
+		if (Arrays.asList(data.getCategory()).contains("hmi")) {
+			return HMI;
 		}
 		if (Arrays.asList(data.getCategory()).contains("testing")) {
 			return TESTING;
@@ -82,7 +87,7 @@ public enum ExampleCategory implements IExampleData {
 		if (Arrays.asList(data.getCategory()).contains("labs")) {
 			return LABS;
 		}
-		return TUTORIAL;
+		return MODELING;
 	}
 	
 }
