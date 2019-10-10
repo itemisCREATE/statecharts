@@ -10,11 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION;
 
 import org.eclipse.gmf.runtime.common.ui.action.global.GlobalActionId;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
@@ -24,17 +20,11 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveListener;
-import org.eclipse.ui.IViewReference;
-import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.ViewSite;
 import org.yakindu.sct.ui.editor.commands.DocumentationMenuAction;
-import org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives;
 
 /**
  * 
@@ -46,83 +36,52 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	@Override
 	public void init(IActionBars bars) {
 		super.init(bars);
-
-		List<IContributionItem> items = new ArrayList<IContributionItem>();
-		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_FILL_COLOR));
-		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_FONT_SIZE));
-		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_LINE_COLOR));
-		items.add(bars.getToolBarManager().remove(ActionIds.CUSTOM_ZOOM));
-
-		bars.getToolBarManager().add(new DocumentationMenuAction());
-
+		
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
+		bars.getToolBarManager().add(new DocumentationMenuAction());
 
-		items.forEach(item -> {
-			bars.getToolBarManager().add(item);
-		});
-
-		IWorkbench wb = PlatformUI.getWorkbench();
-		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
-		IWorkbenchPage page = win.getActivePage();
-
-		win.addPerspectiveListener(new IPerspectiveListener() {
-			@Override
-			public void perspectiveActivated(IWorkbenchPage page, IPerspectiveDescriptor perspective) {
-
-				if (IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION.equals(perspective.getId())) {
-					setFontButtons(false);
-					return;
-				}
-				if (IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING.equals(perspective.getId())) {
-					setFontButtons(true);
-					return;
-				}
-			}
-
-			@Override
-			public void perspectiveChanged(IWorkbenchPage page, IPerspectiveDescriptor perspective, String changeId) {
-				System.out.println("changed -> " + changeId);
-				perspectiveActivated(page, perspective);
-
-			}
-
-			private void setFontButtons(boolean b) {
-				IWorkbench wb = PlatformUI.getWorkbench();
-				IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
-
-				for (IViewReference view : page.getViewReferences()) {
-
-					if (view.getPart(false) == null) {
-						continue;
-					}
-
-					IWorkbenchPart part = view.getPart(false);
-					IWorkbenchPartSite site = part.getSite();
-
-					if (site instanceof IViewSite) {
-						IViewSite viewSite = (IViewSite) site;
-						IActionBars bla = viewSite.getActionBars();
-
-						if (b) {
-//							bla.getToolBarManager().add(ActionIds.ACTION_FONT_BOLD);
-//							bla.getToolBarManager().add(ActionIds.CUSTOM_FONT_NAME);
-//							bla.updateActionBars();
-							System.out.println("setFontButtons(true)");
-						} else {
-							bla.getToolBarManager().remove(ActionIds.ACTION_FONT_BOLD);
-							bla.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
-							bla.updateActionBars();
-						}
-					}
-				}
-			}
-
-		});
+		removeAppearanceButtonsInSimulationAndTestingPerspective(bars);
 
 		// remove 'arrange all' and 'arrange selection' actions
 		bars.getToolBarManager().remove(ActionIds.MENU_ARRANGE);
 		bars.getMenuManager().findMenuUsingPath(ActionIds.MENU_DIAGRAM).remove(ActionIds.MENU_ARRANGE);
+	}
+
+	private void removeAppearanceButtonsInSimulationAndTestingPerspective(IActionBars bars) {
+		IWorkbench wb = PlatformUI.getWorkbench();
+		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+
+		win.addPerspectiveListener(new IPerspectiveListener() {
+
+			@Override
+			public void perspectiveActivated(IWorkbenchPage page, IPerspectiveDescriptor perspective) {
+				setToolbarButtons(bars, perspective);
+			}
+
+			@Override
+			public void perspectiveChanged(IWorkbenchPage page, IPerspectiveDescriptor perspective, String changeId) {
+				setToolbarButtons(bars, perspective);
+			}
+
+			private void setToolbarButtons(IActionBars bars, IPerspectiveDescriptor perspective) {
+				boolean isSimulationPers = ID_PERSPECTIVE_SCT_SIMULATION.equals(perspective.getId());
+				enableAppearanceButtons(bars.getToolBarManager(), !isSimulationPers);
+			}
+
+			private void enableAppearanceButtons(IToolBarManager tb, boolean b) {
+				tb.find(ActionIds.CUSTOM_FONT_NAME).setVisible(b);
+				tb.find(ActionIds.CUSTOM_FONT_SIZE).setVisible(b);
+				tb.find(ActionIds.CUSTOM_ZOOM).setVisible(b);
+				tb.find(ActionIds.CUSTOM_FILL_COLOR).setVisible(b);
+				tb.find(ActionIds.CUSTOM_LINE_COLOR).setVisible(b);
+				tb.find(ActionIds.CUSTOM_FONT_COLOR).setVisible(b);
+				tb.find(ActionIds.ACTION_FONT_BOLD).setVisible(b);
+				tb.find(ActionIds.ACTION_FONT_ITALIC).setVisible(b);
+				tb.update(true);
+			}
+		});
+
 	}
 
 	@Override
