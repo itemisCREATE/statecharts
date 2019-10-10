@@ -32,6 +32,7 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.SetBoundsCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
 import org.yakindu.sct.ui.editor.editparts.RegionEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 
@@ -246,8 +247,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 		for (IGraphicalEditPart editPart : editParts) {
 			PrecisionRectangle transformedRect = new PrecisionRectangle(editPart.getFigure().getBounds());
 			editPart.getFigure().translateToAbsolute(transformedRect);
-			transformedRect.translate(request.getMoveDelta());
-			transformedRect.resize(request.getSizeDelta());
 			transformedRect.expand(SPACEING * level, SPACEING * level);
 			result.union(transformedRect);
 			Dimension preferredSize = containerFigure.getPreferredSize().getCopy();

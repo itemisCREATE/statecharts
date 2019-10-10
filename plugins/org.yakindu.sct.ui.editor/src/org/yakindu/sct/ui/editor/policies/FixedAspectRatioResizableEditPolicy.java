@@ -19,16 +19,16 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.handles.ResizeHandle;
 import org.eclipse.gef.tools.ResizeTracker;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
+import org.yakindu.base.gmf.runtime.editparts.LiveFeedbackResizableEditPolicy;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class FixedAspectRatioResizableEditPolicy extends ResizableEditPolicyEx {
+public class FixedAspectRatioResizableEditPolicy extends LiveFeedbackResizableEditPolicy {
 
 	@SuppressWarnings("rawtypes")
 	protected List createSelectionHandles() {
