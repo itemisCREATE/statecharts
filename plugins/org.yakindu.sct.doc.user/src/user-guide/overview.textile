@@ -3,11 +3,11 @@ p.
 
 h1(#overview_what_are_state_machines). What is a State Machine?
 
-A State Machine is used as behavior model. It consists of different so called states. Because the amount of states of a state machine is finite it is called finite state machine (FSM). There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts. This introduction gives a short overview of the common basis and the differences between state machine types.
+A State Machine is a behavior model. It consists of different so called states. Because the amount of states of a state machine is finite it is called finite state machine (FSM). There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts. This introduction gives a short overview of the common basis and the differences between state machine types.
 
 !(large)images/simple_moore.png(Simple example as a Moore machine)!
 
-p=. Simple example as a Moore machine
+p=. Simple State Machine
 
 In automata theory a state is a situation of a system depending on previous inputs and causes a reaction on following inputs. Automata theory uses the terms input/output for simple text input/output. Modern state machines use an extended definition of inputs and outputs. These can be events or more complex reactions than simply printing a certain text. Another important element of  state machines are transitions. A transition, as the name says, describes the transition from one state to another.
 
