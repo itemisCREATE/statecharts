@@ -70,15 +70,30 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 			@Override
 			public void perspectiveActivated(IWorkbenchPage page, IPerspectiveDescriptor perspective) {
 
-				if (!IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION.equals(perspective.getId()))
+				if (IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION.equals(perspective.getId())) {
+					setFontButtons(false);
 					return;
+				}
+				if (IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING.equals(perspective.getId())) {
+					setFontButtons(true);
+					return;
+				}
+			}
 
+			@Override
+			public void perspectiveChanged(IWorkbenchPage page, IPerspectiveDescriptor perspective, String changeId) {
+				System.out.println("changed -> " + changeId);
+				perspectiveActivated(page, perspective);
+
+			}
+
+			private void setFontButtons(boolean b) {
 				IWorkbench wb = PlatformUI.getWorkbench();
 				IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
 
 				for (IViewReference view : page.getViewReferences()) {
 
-					if (!"Simulation".equals(view.getPartName()) || view.getPart(false) == null) {
+					if (view.getPart(false) == null) {
 						continue;
 					}
 
@@ -88,22 +103,21 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 					if (site instanceof IViewSite) {
 						IViewSite viewSite = (IViewSite) site;
 						IActionBars bla = viewSite.getActionBars();
-						bla.getToolBarManager().remove(ActionIds.ACTION_FONT_BOLD);
-						bla.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
-						bla.updateActionBars();
-						System.out.println();
 
+						if (b) {
+//							bla.getToolBarManager().add(ActionIds.ACTION_FONT_BOLD);
+//							bla.getToolBarManager().add(ActionIds.CUSTOM_FONT_NAME);
+//							bla.updateActionBars();
+							System.out.println("setFontButtons(true)");
+						} else {
+							bla.getToolBarManager().remove(ActionIds.ACTION_FONT_BOLD);
+							bla.getToolBarManager().remove(ActionIds.CUSTOM_FONT_NAME);
+							bla.updateActionBars();
+						}
 					}
 				}
-
 			}
 
-			@Override
-			public void perspectiveChanged(IWorkbenchPage page, IPerspectiveDescriptor perspective, String changeId) {
-				System.out.println("changed -> " + changeId);
-//					perspectiveActivated(page, perspective);
-
-			}
 		});
 
 		// remove 'arrange all' and 'arrange selection' actions
