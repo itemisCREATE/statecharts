@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -324,16 +325,46 @@ public class SelectExamplePage extends WizardPage
 					if ("https".equals(scheme) || "http".equals(scheme)) {
 						openExternalBrowser(uri.toURL());
 						event.doit = false;
+					} else if ("file".equals(scheme)) {
+						String exampleId = parseExampleId(uri);
+						if (exampleId != null) {
+							selectExample(exampleId);
+							event.doit = false;
+						}
 					}
 				} catch (URISyntaxException | MalformedURLException e) {
 					e.printStackTrace();
 				}
 			}
 
+			private String parseExampleId(URI uri) {
+				String query = uri.getQuery();
+				if (query == null) return null;
+				String[] split = query.split("=");
+				if (split.length == 2) {
+					if (split[0].equals("exampleId")) {
+						return split[1];
+					}
+				}
+				return null;
+			}
+
 			@Override
 			public void changed(LocationEvent event) {}
 			
 		});
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void selectExample(String exampleId) {
+		Object input = viewer.getInput();
+		if (input instanceof List<?>) {
+			List<ExampleData> data = (List<ExampleData>) input;
+			Optional<ExampleData> example = data.stream().filter(e -> e.getId().equals(exampleId)).findFirst();
+			if (example.isPresent()) {
+				viewer.setSelection(new StructuredSelection(example.get()), true);
+			}
+		}
 	}
 
 	protected void openExternalBrowser(URL url) {
