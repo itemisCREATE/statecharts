@@ -26,8 +26,6 @@ public enum ExampleCategory implements IExampleData {
 	MODELING("Getting Started - Modeling", "modeling.html"),
 
 	CODE_GENERATORS("Getting Started - Code Generation", "codegen.html"),
-	
-	HEADLESS("Headless Code Generation", "headless.html"),
 
 	ADVANCED("Advanced Examples", "advanced.html"),
 
@@ -36,6 +34,8 @@ public enum ExampleCategory implements IExampleData {
 	HMI("Human Machine Interfaces", "deep-java.html"),
 
 	TESTING("Testing", "testing.html"),
+
+	HEADLESS("Headless Code Generation", "headless.html"),
 
 	LABS("Lab Projects", "lab-projects.html");
 
