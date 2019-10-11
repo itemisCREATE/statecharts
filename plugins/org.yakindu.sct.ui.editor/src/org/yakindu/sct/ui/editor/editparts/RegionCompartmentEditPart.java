@@ -48,18 +48,6 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CompartmentCreationEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RegionCompartmentCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
-		installEditPolicy(EditPolicy.LAYOUT_ROLE, new XYLayoutEditPolicy() {
-			@Override
-			protected Command getResizeChildrenCommand(ChangeBoundsRequest request) {
-				//Remove dithering connection anchors 
-				CompoundCommand result = new CompoundCommand();
-				result.add(super.getResizeChildrenCommand(request));
-				AdjustIdentityAnchorCommand command = new AdjustIdentityAnchorCommand(
-						TransactionUtil.getEditingDomain(resolveSemanticElement()), request);
-				result.add(new ICommandProxy(command));
-				return result;
-			}
-		});
 		// Removes the collapse expand handler
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableEditPolicyEx());
 		installEditPolicy(EditPolicyRoles.SNAP_FEEDBACK_ROLE, new SimpleSnapFeedbackPolicy());

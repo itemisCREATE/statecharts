@@ -28,7 +28,7 @@ import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
 public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
 	private boolean connectionStart = true;
-	private Rectangle originalBounds = null;
+	protected Rectangle originalBounds = null;
 	private final ChangeBoundsRequest NULL_REQUEST = new ChangeBoundsRequest(REQ_MOVE_CHILDREN);
 
 	@Override
