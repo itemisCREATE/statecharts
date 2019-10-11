@@ -59,6 +59,14 @@ public class DefaultOperationMockup extends AbstractOperationExecutor implements
 		}
 		return getOperationCallCount(operation, parameters) >= t;
 	}
+	
+	public boolean wasCalledExactly(String operation, List<Object> parameters, IntLiteral times) {
+		int t = 1;
+		if (times != null) {
+			t = times.getValue();
+		}
+		return getOperationCallCount(operation, parameters) == t;
+	}
 
 	public boolean wasNotCalled(String operation, List<Object> parameters) {
 		return getOperationCallCount(operation, parameters) == 0;
