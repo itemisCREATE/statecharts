@@ -109,7 +109,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		private static final GC gc = new GC(dummy);
 		private Font boldFont;
 		private double zoom = 1.0;
-		private boolean highlight = true;
+		private boolean highlight = false;
 		private int fromIndex = 0;
 
 		public void setHighlight(boolean highlight) {

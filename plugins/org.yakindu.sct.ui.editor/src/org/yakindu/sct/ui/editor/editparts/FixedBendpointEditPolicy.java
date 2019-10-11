@@ -107,7 +107,7 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	
 
 	@SuppressWarnings("unchecked")
-	private Command createUpdateAllBendpointsCommand() {
+	public Command createUpdateAllBendpointsCommand() {
 		CompoundCommand result = new CompoundCommand();
 		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
 		for (IGraphicalEditPart part : sourceConnections) {
@@ -117,6 +117,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		for (IGraphicalEditPart part : targetConnections) {
 			result.add(getBendpointsChangedCommand((Connection) part.getFigure(), (Edge) part.getModel()));
 		}
+		if(result.size() == 0)
+			return null;
 		return result;
 	}
 

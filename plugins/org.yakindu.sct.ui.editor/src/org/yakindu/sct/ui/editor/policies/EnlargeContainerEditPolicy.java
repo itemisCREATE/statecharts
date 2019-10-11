@@ -34,7 +34,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
-import org.yakindu.base.gmf.runtime.router.RubberBandRoutingSupport;
 import org.yakindu.sct.ui.editor.editparts.FixedBendpointEditPolicy;
 import org.yakindu.sct.ui.editor.editparts.RegionEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
@@ -55,8 +54,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	private Map<IFigure, Rectangle> boundsCache = new HashMap<IFigure, Rectangle>();
 
 	private List<IGraphicalEditPart> containerHierachy;
-
-	private RubberBandRoutingSupport routingSupport = new RubberBandRoutingSupport();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -81,6 +78,12 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 						DiagramUIMessages.SetLocationCommand_Label_Resize,
 						new EObjectAdapter(currentContainer.getNotationView()), figure.getBounds());
 				result.add(new ICommandProxy(boundsCommand));
+				FixedBendpointEditPolicy editPolicy = (FixedBendpointEditPolicy) currentContainer
+						.getEditPolicy(FixedBendpointEditPolicy.ROLE);
+				if (editPolicy != null) {
+					Command command = editPolicy.getCommand(cbr);
+					result.add(command);
+				}
 
 				// Update child bounds of elements that stand in the way...
 				List<IGraphicalEditPart> children = currentContainer.getParent().getChildren();
