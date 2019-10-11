@@ -35,7 +35,7 @@ public enum ExampleCategory implements IExampleData {
 
 	TESTING("Testing & Coverage", "testing.html"),
 
-	HEADLESS("Headless Code Generation", "headless.html"),
+	HEADLESS("Command Line Code Generation", "headless.html"),
 
 	LABS("Lab Projects", "lab-projects.html");
 
