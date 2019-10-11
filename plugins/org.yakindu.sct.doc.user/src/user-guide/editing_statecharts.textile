@@ -554,7 +554,7 @@ h2(#edit_exporting_a_statechart_as_an_image_file). Exporting a statechart as an 
 A complete statechart or parts of it can be saved as an image file as shown in the following steps:
 
 * In the statechart editor:
-** To create an image file _of the whole statechart_ with all regions and definition section, right-click on the q.
+** To create an image file _of the whole statechart_ with all regions and definition sections, inline the definition section via the button on the top right of it and then right-click on the main region and select _File → Save As Image File..._.
 ** To create an image file _of some statechart elements_, select these elements and right-click on one of them. In the example below, the main region has been selected.
 * The context menu appears.<br/>!images/docu_exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
 * In the context menu, select _File → Save As Image File..._.
