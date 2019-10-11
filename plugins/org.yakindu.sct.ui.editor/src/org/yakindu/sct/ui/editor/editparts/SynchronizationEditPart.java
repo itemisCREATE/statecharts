@@ -41,6 +41,7 @@ public class SynchronizationEditPart extends ShapeNodeEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
+		installEditPolicy(FixedBendpointEditPolicy.ROLE, new FixedBendpointEditPolicy());
 	}
 
 	@Override
