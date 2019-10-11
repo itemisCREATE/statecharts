@@ -614,7 +614,7 @@ p=. The rectangle comparison statechart
 
 The state machine's definitions are as follows:
 
-bc.. import: rectangle
+bc.. import: "rectangle.h"
 
 interface:
     var a: Rectangle
