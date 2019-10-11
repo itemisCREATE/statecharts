@@ -424,8 +424,8 @@ typedef struct {
 #endif /* TRIANGLE_H_ */
 p. Similar to the _Triangle_ type or any other C type, the _Color_ enumeration type can be used in the statechart, e.g., by declaring an additional interface variable:
 
-bc.. import: color
-import: triangle
+bc.. import: "color.h"
+import: "triangle.h"
 
 interface:
     var t: Triangle
