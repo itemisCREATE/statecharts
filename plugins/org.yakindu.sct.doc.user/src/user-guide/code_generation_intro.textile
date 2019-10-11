@@ -108,7 +108,7 @@ In order to have a better code generator support for specific usage patterns, yo
 
 h3(#codegen_thread-safe_execution). Thread-safe execution
 
-In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper&quot;":../user-guide/code_generation_generators.html#codegen_java_runnablewrapper_feature. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere by can simply be used.
+In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper&quot;":../user-guide/code_generation_generators.html#codegen_java_runnablewrapper_feature. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere and can simply be used.
 
 The C programming language, however, does not have any standardized threading features. Therefore a general solution cannot be given. Specific solutions for specific threading libraries would require the implementation of a suitable code generator extension.
 
