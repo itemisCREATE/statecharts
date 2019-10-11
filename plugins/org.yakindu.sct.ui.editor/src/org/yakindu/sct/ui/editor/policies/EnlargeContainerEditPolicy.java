@@ -21,6 +21,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
@@ -33,6 +34,8 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
+import org.yakindu.base.gmf.runtime.router.RubberBandRoutingSupport;
+import org.yakindu.sct.ui.editor.editparts.FixedBendpointEditPolicy;
 import org.yakindu.sct.ui.editor.editparts.RegionEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 
@@ -52,6 +55,8 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	private Map<IFigure, Rectangle> boundsCache = new HashMap<IFigure, Rectangle>();
 
 	private List<IGraphicalEditPart> containerHierachy;
+
+	private RubberBandRoutingSupport routingSupport = new RubberBandRoutingSupport();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -73,10 +78,10 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 			for (IGraphicalEditPart currentContainer : containerHierachy) {
 				IFigure figure = currentContainer.getFigure();
 				SetBoundsCommand boundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
-						DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
-								currentContainer.getNotationView()), figure.getBounds());
+						DiagramUIMessages.SetLocationCommand_Label_Resize,
+						new EObjectAdapter(currentContainer.getNotationView()), figure.getBounds());
 				result.add(new ICommandProxy(boundsCommand));
-				
+
 				// Update child bounds of elements that stand in the way...
 				List<IGraphicalEditPart> children = currentContainer.getParent().getChildren();
 				for (IGraphicalEditPart childPart : children) {
@@ -86,8 +91,8 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 					if (childPart == currentContainer)
 						continue;
 					SetBoundsCommand childBoundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
-							DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
-									childPart.getNotationView()), childFigure.getBounds());
+							DiagramUIMessages.SetLocationCommand_Label_Resize,
+							new EObjectAdapter(childPart.getNotationView()), childFigure.getBounds());
 					result.add(new ICommandProxy(childBoundsCommand));
 				}
 			}
@@ -114,6 +119,12 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	@Override
 	public void eraseSourceFeedback(Request request) {
 		boundsCache.clear();
+		for (IGraphicalEditPart iGraphicalEditPart : containerHierachy) {
+			EditPolicy editPolicy = iGraphicalEditPart.getEditPolicy(FixedBendpointEditPolicy.ROLE);
+			if (editPolicy != null) {
+				editPolicy.eraseSourceFeedback(request);
+			}
+		}
 		containerHierachy = null;
 		super.eraseSourceFeedback(request);
 	}
@@ -128,6 +139,10 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 			showChildrenFeedback(containerEditPart, containerFigure, feedbackBounds, request);
 			containerFigure.translateToRelative(feedbackBounds);
 			setBounds(containerFigure, feedbackBounds);
+			EditPolicy editPolicy = containerEditPart.getEditPolicy(FixedBendpointEditPolicy.ROLE);
+			if (editPolicy != null) {
+				editPolicy.showSourceFeedback(request);
+			}
 		}
 	}
 
