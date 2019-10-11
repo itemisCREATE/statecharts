@@ -255,7 +255,7 @@ The *FunctionInlining* feature enables the inlining of expressions instead of ge
 * _inlineExitRegion_ (Boolean, optional): inlines the expression for region-exiting sequences
 * _inlineEntries_ (Boolean, optional): inlines the expression for entries
 
-ALl parameters of the *FunctionInlining* feature are _false_ by default.
+All parameters of the *FunctionInlining* feature are _false_ by default.
 
 ==<div class="example">==
 
