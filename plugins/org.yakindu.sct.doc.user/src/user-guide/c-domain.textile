@@ -254,7 +254,7 @@ typedef struct {
 #endif /* TRIANGLE_H_ */
 p. A _Triangle_ consists of the three _Points_ _a_, _b_, and _c_. Let's define a _Triangle_ _t_ in a statechart's definition section as follows:
 
-bc.. import: triangle
+bc.. import: "triangle.hs"
 
 interface:
     var t: Triangle
