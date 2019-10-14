@@ -12,6 +12,7 @@ This is mainly a bugfix release, containing the following:
 * Fixed a bug in the C++ code generator where namespaced elements were incorrectly accessed in the generated code.
 * In some use cases, overloaded functions could not be properly used in the statechart model. This is fixed now.
 * Fixed import resolution of C domain statecharts located in linked folders.
+* Command-line code generator (scc) now also works when the project name in .project file differs from project's folder name.
 * In the Java domain, it is now possible to use arrays. Although it is not yet possible to directly initialize them in the statechart model, you can initialize them by calling a Java operation, for example.
 * In Java domain statecharts, you can now also import code from JARs that are located in the same project.
 * Besides bugfixing, we also continued to improve the usability of the Statechart Tools products. In this regards, we have started to clean-up several menus and toolbars from rather useless, distracting items. This is an ongoing process and will be continued in the upcoming releases.
