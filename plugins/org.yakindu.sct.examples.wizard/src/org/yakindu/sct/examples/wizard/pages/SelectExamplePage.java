@@ -322,7 +322,7 @@ public class SelectExamplePage extends WizardPage
 					String loc = event.location;
 					URI uri = new URI(loc);
 					String scheme = uri.getScheme();
-					if ("https".equals(scheme) || "http".equals(scheme)) {
+					if (("https".equals(scheme) || "http".equals(scheme)) && !loc.startsWith("https://www.youtube.com/embed/")) {
 						openExternalBrowser(uri.toURL());
 						event.doit = false;
 					} else if ("file".equals(scheme)) {
