@@ -27,7 +27,7 @@ public enum ExampleCategory implements IExampleData {
 
 	CODE_GENERATORS("Getting Started - Code Generation", "codegen.html"),
 
-	ADVANCED("Advanced Examples", "advanced.html"),
+	ADVANCED("Application Examples", "advanced.html"),
 
 	EMBEDDED("Embedded Systems", "embedded.html"),
 
@@ -37,7 +37,9 @@ public enum ExampleCategory implements IExampleData {
 
 	HEADLESS("Command Line Code Generation", "headless.html"),
 
-	LABS("Lab Projects", "lab-projects.html");
+	LABS("Lab Projects", "lab-projects.html"),
+	
+	OTHER("Other", "other.html");
 
 	private String title;
 	private String desc;
@@ -87,7 +89,7 @@ public enum ExampleCategory implements IExampleData {
 		if (Arrays.asList(data.getCategory()).contains("labs")) {
 			return LABS;
 		}
-		return MODELING;
+		return OTHER;
 	}
 	
 }
