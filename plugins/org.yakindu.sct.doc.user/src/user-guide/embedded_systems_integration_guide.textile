@@ -44,6 +44,9 @@ p=. High level description of bare metal cycle based state machine integration
 * Timed Events
 * Out Events
 
+
+h3(#main-function). Main Function
+
 The main function could be realized as following. The hardware will be initialized. Then the timers will take into account. After this the state machine will be initialized and entered. With these steps, the initialization is has been done. 
 At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events, which are actually also in events. Then the runCycle will be called, which handles the logical execution of the state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
 
@@ -84,6 +87,8 @@ void main() {
 }
 p. 
 
+h3(#handle-in-events). Handle In Events 
+
 For now on, there are two different ways of how the events should be interact on the embedded system. One design pattern is polling. The other one is the usage of interrupts.
 
 bc.. 
@@ -107,7 +112,11 @@ Sensor2_ISR{
 	inEvent2Value = readSensor2();
 }
 p. 
-handle timer
+
+h3(#handle-timer). Handle Timer
+
+Handling the timer is more comprehensive. As in the state diagram can be used multiple time events, they all must be handled correctly. A good approach is a seperated timer library, which handles timed events. This will be explained in detail later on. At this point, they are straight forward as in events, except that a eplased time of the timer must be updated.
+In this example it is assumed, that an timer interrupt occurs periodically every 32 seconds, which is used at as the elapsed time for the timer.
 
 bc.. 
 void handleTimer() {
@@ -123,7 +132,9 @@ Timer_ISR{
 }
 p. 
 
-handle out events
+h3(#handle-out-events). Handle Out Events
+
+Out events, that are raised by the state machine, can be checked. If an out event gets raised, it's returning value is true, as long as the next runCycle is be executed. This is why the out events should be handled <b>after</b> every runCycle call. They can be used to wire up different actuators. Mapping values, e.g. integers, to the out events, is also possible.
 
 bc.. 
 void handleOutEvents() {
@@ -136,4 +147,8 @@ void handleOutEvents() {
 }
 p. 
 
+h3(#execution-as-state-machien). Execution As State Machine
 
+!(large)images/images_embedded_systems_integration_guide/platform_integration.png(Complete execution shown as State Machine)!
+
+p=. Complete execution shown as State Machine
