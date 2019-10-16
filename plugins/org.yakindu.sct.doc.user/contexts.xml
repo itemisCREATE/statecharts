@@ -3,21 +3,21 @@
 <contexts>
    <context id="sc_properties_entry_entrykind" title="Entry">
       <description>An entry, possibly with a shallow or deep history, defines which state is to be activated first in a state machine or region.</description>
-      <topic href="help/user-guide/statechart_language.html#entry" label="Entry"/>
-      <topic href="help/user-guide/statechart_language.html#shallow-history" label="Shallow history state"/>
-        <topic href="help/user-guide/statechart_language.html#deep-history" label="Deep history state"/>
+      <topic href="help/user-guide/statechart_language.html#sclang_entry_points" label="Entry points"/>
+      <topic href="help/user-guide/statechart_language.html#sclang_shallow_history_states" label="Shallow history state"/>
+      <topic href="help/user-guide/statechart_language.html#sclang_deep_history_states" label="Deep history state"/>
    </context>
    <context id="sc_properties_state_expression" title="State">
       <description>States are central elements of a state machine.</description>
-      <topic href="help/user-guide/statechart_language.html#state" label="State"/>
+      <topic href="help/user-guide/statechart_language.html#sclang_states" label="State reference"/>
    </context>
    <context id="sc_properties_statechart_expression" title="Expressions">
       <description>Expressions are used to declare events, variables etc. and to define behavior.</description>
-      <topic href="help/user-guide/statechart_language.html#expressions" label="Expression reference"/>
+      <topic href="help/user-guide/statechart_language.html#sclang_expressions" label="Expression reference"/>
    </context>
    <context id="sc_properties_transition_expression" title="Transition">
       <description>A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can carry events and actions, but don't need to.</description>
-      <topic href="help/user-guide/statechart_language.html#transition" label="Transition reference"/>
+      <topic href="help/user-guide/statechart_language.html#sclang_transitions" label="Transition reference"/>
    </context>
    <context id="sgen_feature" title="Genmodel Features">
       <topic href="help/user-guide/code_generation_intro.html" label="Generating state machine code"/>
