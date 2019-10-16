@@ -22,14 +22,14 @@ public class FontScalingUtil {
 	public static FontData scaleFont(FontData fontData, int style) {
 		if (OPERATING_SYSTEM.indexOf("win") == -1 || DiagramActivator.getDefault().getPreferenceStore()
 				.getBoolean(StatechartPreferenceConstants.PREF_FONT_SCALING)) {
-			return fontData;
+			return new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle() | style);
 		}
 		int DPI = Display.getCurrent().getDPI().y;
 		if (DPI != WINDOWS_DEFAULT_DPI) {
 			double factor = (double) WINDOWS_DEFAULT_DPI / DPI;
 			return new FontData(fontData.getName(), (int) (fontData.getHeight() * factor), fontData.getStyle() | style);
 		}
-		return fontData;
+		return new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle() | style);
 
 	}
 }
