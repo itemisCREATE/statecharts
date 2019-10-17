@@ -10,13 +10,15 @@ import org.eclipse.ui.IPerspectiveListener;
 import org.eclipse.ui.IWorkbenchPage;
 
 public class DisableButtonsByPerspectiveListener implements IPerspectiveListener {
-	
+
+	public static final String TESTING_PERSPECTIVE = "com.yakindu.sct.ui.TestingPerspective";
+
 	private IActionBars bars;
 
 	public DisableButtonsByPerspectiveListener(IActionBars bars) {
 		this.bars = bars;
 	}
-	
+
 	@Override
 	public void perspectiveActivated(IWorkbenchPage page, IPerspectiveDescriptor perspective) {
 		setToolbarButtons(bars, perspective);
@@ -28,14 +30,15 @@ public class DisableButtonsByPerspectiveListener implements IPerspectiveListener
 	}
 
 	void setToolbarButtons(IActionBars bars, IPerspectiveDescriptor perspective) {
-		enableAppearanceButtons(bars.getToolBarManager(), !simulationPerspective(perspective));
-	}
-	
-	public boolean simulationPerspective(IPerspectiveDescriptor perspective) {
-		return ID_PERSPECTIVE_SCT_SIMULATION.equals(perspective.getId());
+		enableEditingButtons(bars.getToolBarManager(), !relevantPerspective(perspective));
 	}
 
-	private void enableAppearanceButtons(IToolBarManager tb, boolean b) {
+	public boolean relevantPerspective(IPerspectiveDescriptor perspective) {
+		return ID_PERSPECTIVE_SCT_SIMULATION.equals(perspective.getId())
+				|| TESTING_PERSPECTIVE.equals(perspective.getId());
+	}
+
+	private void enableEditingButtons(IToolBarManager tb, boolean b) {
 		tb.find(ActionIds.CUSTOM_FONT_NAME).setVisible(b);
 		tb.find(ActionIds.CUSTOM_FONT_SIZE).setVisible(b);
 		tb.find(ActionIds.CUSTOM_ZOOM).setVisible(b);

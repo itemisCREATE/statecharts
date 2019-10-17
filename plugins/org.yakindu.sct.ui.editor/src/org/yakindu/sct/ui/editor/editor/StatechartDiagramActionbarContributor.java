@@ -33,7 +33,6 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
-		bars.getToolBarManager().add(new DocumentationMenuAction());
 
 		showButtonsByPerspective(bars);
 
