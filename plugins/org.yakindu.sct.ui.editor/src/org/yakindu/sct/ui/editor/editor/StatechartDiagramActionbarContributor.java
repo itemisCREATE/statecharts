@@ -15,7 +15,6 @@ import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPEC
 import org.eclipse.gmf.runtime.common.ui.action.global.GlobalActionId;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
-import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IPerspectiveDescriptor;
@@ -36,19 +35,20 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	@Override
 	public void init(IActionBars bars) {
 		super.init(bars);
+		bars.getToolBarManager().insertBefore(ActionIds.CUSTOM_ZOOM, new DocumentationMenuAction());
 
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
 		bars.getToolBarManager().add(new DocumentationMenuAction());
 
-		removeAppearanceButtonsInSimulationAndTestingPerspective(bars);
+		showButtonsByPerspective(bars);
 
 		// remove 'arrange all' and 'arrange selection' actions
 		bars.getToolBarManager().remove(ActionIds.MENU_ARRANGE);
 		bars.getMenuManager().findMenuUsingPath(ActionIds.MENU_DIAGRAM).remove(ActionIds.MENU_ARRANGE);
 	}
 
-	private void removeAppearanceButtonsInSimulationAndTestingPerspective(IActionBars bars) {
+	private void showButtonsByPerspective(IActionBars bars) {
 		IWorkbench wb = PlatformUI.getWorkbench();
 		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
 

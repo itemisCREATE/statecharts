@@ -36,8 +36,10 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	private String[] images;
 	private File projectDir;
 	private Dependency[] dependencies;
+	private int rank;
 
 	public static class Dependency {
+		
 		private String updateSite;
 		private String[] features;
 
@@ -55,13 +57,8 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 		}
 	}
 	
-	public ExampleData(String category[], String id, String title, String description, String[] images, Dependency[] dependencies) {
-		this.category = category;
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.images = images;
-		this.dependencies = dependencies;
+	public ExampleData() {
+		this.rank = 100;
 	}
 	
 	public Dependency[] getDependencies() {
@@ -125,12 +122,10 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 		this.projectDir = projectDir;
 	}
 
-	@Override
 	public boolean isProfessional() {
 		return Arrays.asList(getCategory()).contains(PRO_CATEGORY);
 	}
 	
-	@Override
 	public boolean isLabs() {
 		return Arrays.asList(getCategory()).contains(LABS_CATEGORY);
 	}
@@ -142,9 +137,7 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	public boolean isPlatform() {
 		return Arrays.asList(getCategory()).contains(PLATFORM_CATEGORY);
 	}
-	
 
-	@Override
 	public boolean isHeadless() {
 		return Arrays.asList(getCategory()).contains(HEADLESS_CATEGORY);
 	}
@@ -208,7 +201,12 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 
 	@Override
 	public int compareTo(ExampleData other) {
-		return Collator.getInstance().compare(this.title, other.title);
+		int byRank = this.rank - other.rank;
+		if (byRank == 0) {
+			return Collator.getInstance().compare(this.title, other.title);
+		}
+		return byRank;
+		
 	}
 
 }

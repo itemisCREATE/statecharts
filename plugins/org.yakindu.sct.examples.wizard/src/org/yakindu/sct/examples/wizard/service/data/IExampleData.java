@@ -19,11 +19,4 @@ public interface IExampleData {
 
 	String getDescriptionPath();
 
-	boolean isProfessional();
-	
-	boolean isLabs();
-	
-	boolean isPlatform();
-	
-	boolean isHeadless();
 }
