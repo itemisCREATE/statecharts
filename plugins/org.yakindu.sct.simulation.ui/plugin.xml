@@ -125,6 +125,8 @@
          <hiddenMenuItem id="properties"></hiddenMenuItem>
          <hiddenMenuItem id="revert"></hiddenMenuItem>
          <hiddenMenuItem id="move"></hiddenMenuItem>
+         <hiddenMenuItem id="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"></hiddenMenuItem>
+         <hiddenMenuItem id="org.eclipse.ui.window.togglestatusbar"></hiddenMenuItem>
          
          <hiddenToolBarItem id="org.eclipse.ui.navigate.next"></hiddenToolBarItem>
          <hiddenToolBarItem id="org.eclipse.ui.navigate.previous"></hiddenToolBarItem>
