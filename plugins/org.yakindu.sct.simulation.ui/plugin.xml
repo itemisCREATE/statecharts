@@ -117,30 +117,20 @@
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="org.yakindu.sct.ui.SimulationPerspective">
-         <newWizardShortcut
-               id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
-         </newWizardShortcut>
-         <newWizardShortcut
-               id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
-         </newWizardShortcut>
+      <perspectiveExtension targetID="org.yakindu.sct.ui.SimulationPerspective">
+         <newWizardShortcut id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"></newWizardShortcut>
+         <newWizardShortcut id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard"></newWizardShortcut>
          
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.next">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.previous">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.backwardHistory">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.navigate.forwardHistory">
-         </hiddenToolBarItem>
-         <hiddenToolBarItem
-               id="org.eclipse.ui.edit.text.gotoLastEditPosition">
-         </hiddenToolBarItem>
+         <hiddenMenuItem id="org.eclipse.e4.ui.importer.openDirectory.menu"></hiddenMenuItem>
+         <hiddenMenuItem id="properties"></hiddenMenuItem>
+         <hiddenMenuItem id="revert"></hiddenMenuItem>
+         <hiddenMenuItem id="move"></hiddenMenuItem>
+         
+         <hiddenToolBarItem id="org.eclipse.ui.navigate.next"></hiddenToolBarItem>
+         <hiddenToolBarItem id="org.eclipse.ui.navigate.previous"></hiddenToolBarItem>
+         <hiddenToolBarItem id="org.eclipse.ui.navigate.backwardHistory"></hiddenToolBarItem>
+         <hiddenToolBarItem id="org.eclipse.ui.navigate.forwardHistory"></hiddenToolBarItem>
+         <hiddenToolBarItem id="org.eclipse.ui.edit.text.gotoLastEditPosition"></hiddenToolBarItem>
       </perspectiveExtension>
    </extension> 
 </plugin>
