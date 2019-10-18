@@ -580,7 +580,7 @@ class Statemachine {
 	'''
 	
 	def protected runCycleFunction(ExecutionFlow flow) {
-		if(isEventDriven) {
+		if(flow.needsEventClasses) {
 			'''
 			public void runCycle()
 			{
