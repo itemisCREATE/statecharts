@@ -12,8 +12,13 @@ package org.yakindu.sct.examples.wizard.pages;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -32,6 +37,8 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.LocationEvent;
+import org.eclipse.swt.browser.LocationListener;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -43,6 +50,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
@@ -232,7 +241,7 @@ public class SelectExamplePage extends WizardPage
 						return exampleIdToInstall.equals(((ExampleData) element).getId());
 					}
 					if (element instanceof ExampleCategory) {
-						return ((ExampleCategory) element).getChildren().contains(exampleToInstall);
+						return ExampleCategory.get(exampleToInstall).equals(element);
 					}
 					return true;
 				}
@@ -305,6 +314,65 @@ public class SelectExamplePage extends WizardPage
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setLayout(new FillLayout());
 		browser = new Browser(composite, SWT.NONE);
+		browser.addLocationListener(new LocationListener() {
+			
+			@Override
+			public void changing(LocationEvent event) {
+				try {
+					String loc = event.location;
+					URI uri = new URI(loc);
+					String scheme = uri.getScheme();
+					if (("https".equals(scheme) || "http".equals(scheme)) && !loc.startsWith("https://www.youtube.com/embed/")) {
+						openExternalBrowser(uri.toURL());
+						event.doit = false;
+					} else if ("file".equals(scheme)) {
+						String exampleId = parseExampleId(uri);
+						if (exampleId != null) {
+							selectExample(exampleId);
+							event.doit = false;
+						}
+					}
+				} catch (URISyntaxException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			private String parseExampleId(URI uri) {
+				String query = uri.getQuery();
+				if (query == null) return null;
+				String[] split = query.split("=");
+				if (split.length == 2) {
+					if (split[0].equals("exampleId")) {
+						return split[1];
+					}
+				}
+				return null;
+			}
+
+			@Override
+			public void changed(LocationEvent event) {}
+			
+		});
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void selectExample(String exampleId) {
+		Object input = viewer.getInput();
+		if (input instanceof List<?>) {
+			List<ExampleData> data = (List<ExampleData>) input;
+			Optional<ExampleData> example = data.stream().filter(e -> e.getId().equals(exampleId)).findFirst();
+			if (example.isPresent()) {
+				viewer.setSelection(new StructuredSelection(example.get()), true);
+			}
+		}
+	}
+
+	protected void openExternalBrowser(URL url) {
+		try {
+			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(url);
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ExampleData getSelection() {
