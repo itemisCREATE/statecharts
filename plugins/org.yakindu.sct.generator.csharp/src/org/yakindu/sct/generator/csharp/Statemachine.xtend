@@ -409,7 +409,7 @@ class Statemachine {
 			}
 		
 		«IF event.type !== null && !isVoid(event.type)»
-				private void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
+				internal void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 					«event.symbol» = true;
 					«event.valueIdentifier» = value;
 					«IF entry.createInterfaceObserver»
@@ -423,7 +423,7 @@ class Statemachine {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
-			«ELSE»	private void raise«event.name.asName»() {
+			«ELSE»	internal void raise«event.name.asName»() {
 				«event.symbol» = true;
 				«IF entry.createInterfaceObserver»
 					foreach («scope.interfaceListenerName» listener in listeners) {
@@ -580,7 +580,7 @@ class Statemachine {
 	'''
 	
 	def protected runCycleFunction(ExecutionFlow flow) {
-		if(isEventDriven) {
+		if(flow.needsEventClasses) {
 			'''
 			public void runCycle()
 			{
