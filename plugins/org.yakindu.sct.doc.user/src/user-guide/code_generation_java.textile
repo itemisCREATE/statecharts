@@ -3,145 +3,6 @@ p.
 
 h2(#codegen_java_code_generator). Java code generator
 
-h3(#codegen_java_code_generator_features). Java code generator features
-
-==<!-- Start sgen_feature_naming -->==
-
-h4(#codegen_java_naming_feature). Naming feature
-
-The *Naming* feature allows the configuration of package names for the generated classes (and interfaces) as well as a prefix and/or a suffix for their names.
-
-It is an _optional_ feature and has the following parameters:
-
-* _basePackage_ (String, required): Package name for the generated Java classes
-* _implementationSuffix_ (String, optional): Name suffix for the implementing classes
-
-==<div class="example">==
-
-Example:
-
-bc. feature Naming {
-    basePackage = "org.ourproject.sct"
-    implementationSuffix = "Impl"
-}
-
-==</div>==
-
-==<!-- End sgen_feature_naming -->==
-
-
-
-==<!-- Start sgen_feature_synchronizedwrapper -->==
-
-h4(#codegen_java_synchronizedwrapper_feature). SynchronizedWrapper feature
-
-This feature is deprecated. Use @GeneralFeatures { synchronized=true}@ instead.
-
-The *SynchronizedWrapper* feature generates a synchronized wrapper for the state machine. This is an additional Java class providing thread-safe access to the generated state machine implementation. As the wrapper adds thread safety any number of client threads may call the state machine.
-
-It is an _optional_ feature and has the following parameters:
-
-* _namePrefix_ (String, optional): Name prefix for the generated wrapper class
-* _nameSuffix_ (String, optional): Name suffix for the generated wrapper class
-
-==<div class="example">==
-
-Example:
-
-bc. feature SynchronizedWrapper {
-    namePrefix = "Synchronized"
-    nameSuffix = "Wrapper"
-}
-
-==</div>==
-
-==<!-- End sgen_feature_synchronizedwrapper -->==
-
-
-
-==<!-- Start sgen_feature_runnablewrapper -->==
-
-h4(#codegen_java_runnablewrapper_feature). RunnableWrapper feature
-
-This feature is deprecated. Use @GeneralFeatures { Runnable=true}@ instead.
-
-The *RunnableWrapper* feature generates a runnable wrapper for the state machine. This is an additional Java class providing a thread-safe wrapper for the generated state machine implementation. In addition to the specific state machine interface it implements the _Runnable_ interface and can be executed in a thread. It implements an event queue and event-driven execution semantics. As the wrapper adds thread safety any number of client threads may call the state machine.
-
-It is an _optional_ feature and has the following parameters:
-
-* _namePrefix_ (String, optional): Name prefix for the generated wrapper class
-* _nameSuffix_ (String, optional): Name suffix for the generated wrapper class
-
-Instead of using the *RunnableWrapper*, you can also use the option "*InEventQueue*":#codegen_java_generalfeatures if the statemachine uses the eventdriven execution model.
-
-==<div class="example">==
-
-Example:
-
-bc. feature RunnableWrapper {
-    namePrefix = "Runnable"
-    nameSuffix = "Wrapper"
-}
-
-==</div>==
-
-==<!-- End sgen_feature_runnablewrapper -->==
-
-
-
-==<!-- Start sgen_feature_generalfeatures -->==
-
-h4(#codegen_java_generalfeatures). GeneralFeatures feature
-
-The *GeneralFeatures* feature allows to configure additional services to be generated along with the state machine. Per default, all parameters are _false_, meaning to disable the corresponding features, respectively.
-
-*GeneralFeatures* is an _optional_ feature and has the following parameters:
-
-* _InterfaceObserverSupport_ (Boolean, optional): Enables/disables the generation of listener interfaces for the state machine.
-* _RuntimeService_ (Boolean, optional): Enables/disables the generation of a runtime service that triggers the run cycle of a cycle-based state machine.
-* _TimerService_ (Boolean, optional): Enables/disables the generation of a timer service implementation using _java.util.Timer_.
-* _InEventQueue_ (Boolean, optional): Enables queuing of in-events in the statemachine (for event-driven execution). You can use this instead of the "*RunnableWrapper*":#codegen_java_runnablewrapper_feature.
-* _synchronized_ (Boolean, optional): Sets all methods where it is appropriate to "synchronized". This replaces the "*SynchronizedWrapper*":#codegen_java_synchronizedwrapper_feature.
-* _Runnable_ (Boolean, optional): Makes the statemachine implement _java.lang.Runnable_. Works only for event-driven statemachines. This implies _synchronized_ and _InEventQueue_. This replaces the "*RunnableWrapper*":#codegen_java_runnablewrapper_feature.
-
-==<div class="example">==
-
-Example:
-
-bc. feature GeneralFeatures {
-    InterfaceObserverSupport = true
-    RuntimeService = true
-    TimerService = true
-}
-
-==</div>==
-
-==<!-- End sgen_feature_generalfeatures -->==
-
-
-==<!-- Start sgen_feature_tracing -->==
-
-h4(#codegen_c_tracing_feature). Tracing feature
-
-The *Tracing* feature enables the generation of tracing callback functions:
-
-* _enterState_ (boolean, optional): Specifies whether to generate a callback function that is used to notify about state-entering events.
-* _exitState_ (boolean, optional): Specifies whether to generate a callback that is used to notify about state-exiting events.
-
-==<div class="example">==
-
-Example:
-
-bc. feature Tracing {
-    enterState = true
-    exitState  = true
-}
-
-==</div>==
-
-==<!-- End sgen_feature_tracing -->==
-
-
 h3(#codegen_java_specification_of_java_code). Specification of Java code
 
 In order to describe the API specifications of the code generated by the YAKINDU Java generator, the explanations below are using the _Traffic Light_ sample state machine, see "figure &quot;The _Traffic Light_ sample statechart model&quot;":#codegen_java_fig_the_traffic_light_sample_statechart_model. It models a pedestrian crossing with push-button operated traffic lights ("pelican crossing").
@@ -1012,3 +873,144 @@ When the simulation is executed, the variable _result_ gets the value 2.
 !images/docu_java_simulating_operation_020_run_configuration.png(Configuring an operations class)!
 
 p=. Configuring an operations class
+
+
+h3(#codegen_java_code_generator_features). Java code generator features
+
+==<!-- Start sgen_feature_naming -->==
+
+h4(#codegen_java_naming_feature). Naming feature
+
+The *Naming* feature allows the configuration of package names for the generated classes (and interfaces) as well as a prefix and/or a suffix for their names.
+
+It is an _optional_ feature and has the following parameters:
+
+* _basePackage_ (String, required): Package name for the generated Java classes
+* _implementationSuffix_ (String, optional): Name suffix for the implementing classes
+
+==<div class="example">==
+
+Example:
+
+bc. feature Naming {
+    basePackage = "org.ourproject.sct"
+    implementationSuffix = "Impl"
+}
+
+==</div>==
+
+==<!-- End sgen_feature_naming -->==
+
+
+
+==<!-- Start sgen_feature_synchronizedwrapper -->==
+
+h4(#codegen_java_synchronizedwrapper_feature). SynchronizedWrapper feature
+
+This feature is deprecated. Use @GeneralFeatures { synchronized=true}@ instead.
+
+The *SynchronizedWrapper* feature generates a synchronized wrapper for the state machine. This is an additional Java class providing thread-safe access to the generated state machine implementation. As the wrapper adds thread safety any number of client threads may call the state machine.
+
+It is an _optional_ feature and has the following parameters:
+
+* _namePrefix_ (String, optional): Name prefix for the generated wrapper class
+* _nameSuffix_ (String, optional): Name suffix for the generated wrapper class
+
+==<div class="example">==
+
+Example:
+
+bc. feature SynchronizedWrapper {
+    namePrefix = "Synchronized"
+    nameSuffix = "Wrapper"
+}
+
+==</div>==
+
+==<!-- End sgen_feature_synchronizedwrapper -->==
+
+
+
+==<!-- Start sgen_feature_runnablewrapper -->==
+
+h4(#codegen_java_runnablewrapper_feature). RunnableWrapper feature
+
+This feature is deprecated. Use @GeneralFeatures { Runnable=true}@ instead.
+
+The *RunnableWrapper* feature generates a runnable wrapper for the state machine. This is an additional Java class providing a thread-safe wrapper for the generated state machine implementation. In addition to the specific state machine interface it implements the _Runnable_ interface and can be executed in a thread. It implements an event queue and event-driven execution semantics. As the wrapper adds thread safety any number of client threads may call the state machine.
+
+It is an _optional_ feature and has the following parameters:
+
+* _namePrefix_ (String, optional): Name prefix for the generated wrapper class
+* _nameSuffix_ (String, optional): Name suffix for the generated wrapper class
+
+Instead of using the *RunnableWrapper*, you can also use the option "*InEventQueue*":#codegen_java_generalfeatures if the statemachine uses the eventdriven execution model.
+
+==<div class="example">==
+
+Example:
+
+bc. feature RunnableWrapper {
+    namePrefix = "Runnable"
+    nameSuffix = "Wrapper"
+}
+
+==</div>==
+
+==<!-- End sgen_feature_runnablewrapper -->==
+
+
+
+==<!-- Start sgen_feature_generalfeatures -->==
+
+h4(#codegen_java_generalfeatures). GeneralFeatures feature
+
+The *GeneralFeatures* feature allows to configure additional services to be generated along with the state machine. Per default, all parameters are _false_, meaning to disable the corresponding features, respectively.
+
+*GeneralFeatures* is an _optional_ feature and has the following parameters:
+
+* _InterfaceObserverSupport_ (Boolean, optional): Enables/disables the generation of listener interfaces for the state machine.
+* _RuntimeService_ (Boolean, optional): Enables/disables the generation of a runtime service that triggers the run cycle of a cycle-based state machine.
+* _TimerService_ (Boolean, optional): Enables/disables the generation of a timer service implementation using _java.util.Timer_.
+* _InEventQueue_ (Boolean, optional): Enables queuing of in-events in the statemachine (for event-driven execution). You can use this instead of the "*RunnableWrapper*":#codegen_java_runnablewrapper_feature.
+* _synchronized_ (Boolean, optional): Sets all methods where it is appropriate to "synchronized". This replaces the "*SynchronizedWrapper*":#codegen_java_synchronizedwrapper_feature.
+* _Runnable_ (Boolean, optional): Makes the statemachine implement _java.lang.Runnable_. Works only for event-driven statemachines. This implies _synchronized_ and _InEventQueue_. This replaces the "*RunnableWrapper*":#codegen_java_runnablewrapper_feature.
+
+==<div class="example">==
+
+Example:
+
+bc. feature GeneralFeatures {
+    InterfaceObserverSupport = true
+    RuntimeService = true
+    TimerService = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_generalfeatures -->==
+
+
+==<!-- Start sgen_feature_tracing -->==
+
+h4(#codegen_c_tracing_feature). Tracing feature
+
+The *Tracing* feature enables the generation of tracing callback functions:
+
+* _enterState_ (boolean, optional): Specifies whether to generate a callback function that is used to notify about state-entering events.
+* _exitState_ (boolean, optional): Specifies whether to generate a callback that is used to notify about state-exiting events.
+
+==<div class="example">==
+
+Example:
+
+bc. feature Tracing {
+    enterState = true
+    exitState  = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_tracing -->==
+
+
