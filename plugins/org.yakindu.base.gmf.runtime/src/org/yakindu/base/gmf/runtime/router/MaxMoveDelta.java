@@ -2,7 +2,7 @@ package org.yakindu.base.gmf.runtime.router;
 
 public class MaxMoveDelta {
 
-	public boolean isVertical;
+	public boolean isVerticalMove;
 	public double minDeltaPos;
 	public double maxDeltaPos;
 
@@ -10,17 +10,17 @@ public class MaxMoveDelta {
 	}
 
 	public MaxMoveDelta(boolean isVertical) {
-		this.isVertical = isVertical;
+		this.isVerticalMove = isVertical;
 	}
 
-	public MaxMoveDelta(boolean isVertical, double minDelta, double maxDelta) {
+	public MaxMoveDelta(boolean isVerticalMove, double minDelta, double maxDelta) {
 		if (minDelta > 0) {
 			minDelta = 0;
 		}
 		if (maxDelta < 0) {
 			maxDelta = 0;
 		}
-		this.isVertical = isVertical;
+		this.isVerticalMove = isVerticalMove;
 		this.minDeltaPos = minDelta;
 		this.maxDeltaPos = maxDelta;
 	}
@@ -30,7 +30,7 @@ public class MaxMoveDelta {
 	}
 
 	public void merge(MaxMoveDelta mmd) {
-		if (isVertical != mmd.isVertical) {
+		if (isVerticalMove != mmd.isVerticalMove) {
 			throw new IllegalArgumentException("Cannot merge MaxMoveDelta with different direction.");
 		}
 		if ((minDeltaPos == 0) || ((mmd.minDeltaPos < 0) && (mmd.minDeltaPos > minDeltaPos))) {
@@ -55,7 +55,7 @@ public class MaxMoveDelta {
 
 	@Override
 	public String toString() {
-		return isVertical ? "{minDy=" + minDeltaPos + ",maxDy=" + maxDeltaPos + "}"
+		return isVerticalMove ? "{minDy=" + minDeltaPos + ",maxDy=" + maxDeltaPos + "}"
 				: "{minDx=" + minDeltaPos + ",maxDx=" + maxDeltaPos + "}";
 	}
 }

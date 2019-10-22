@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.yakindu.base.gmf.runtime.router.test
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: org.yakindu.base.gmf.runtime.router.test
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.yakindu.base.gmf.runtime;bundle-version="3.5.8",
+ org.junit,
+ org.eclipse.draw2d

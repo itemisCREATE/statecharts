@@ -1,13 +1,14 @@
 /**
 * Copyright (c) 2019 itemis AG - All rights Reserved
 * Unauthorized copying of this file, via any medium is strictly prohibited
-* 
+*
 * Contributors:
 * 	andreas muelder - itemis AG
 *
 */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.Connection;
@@ -27,84 +28,16 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.yakindu.base.gmf.runtime.router.RubberBandRoutingSupport;
 
-import com.google.common.collect.Lists;
-
 public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
 	public static final String ROLE = "Fixed_Bendpoints";
-	
+
 	private boolean connectionStart = true;
 	private Rectangle originalBounds = null;
 
 	private RubberBandRoutingSupport router = new RubberBandRoutingSupport();
 
-
-	@Override
-	public void showSourceFeedback(Request request) {
-		if(request instanceof ChangeBoundsRequest) {
-			showChangeBoundsFeedback((ChangeBoundsRequest) request);
-		}
-	}
-	@Override
-	public void eraseSourceFeedback(Request request) {
-		if(request instanceof ChangeBoundsRequest) {
-			eraseChangeBoundsFeedback((ChangeBoundsRequest) request);
-		}
-	}
-	
-	
-	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
-		if (connectionStart) {
-			IFigure figure = getHostFigure();
-			originalBounds = getHostFigure().getBounds().getCopy();
-			figure.getParent().translateToAbsolute(originalBounds);
-			startConnection(originalBounds, getAllTransitions());
-			connectionStart = false;
-		} else {
-			updateConnection(request.getTransformedRectangle(originalBounds.getCopy()));
-		}
-	}
-
-	protected void eraseChangeBoundsFeedback(ChangeBoundsRequest request) {
-		connectionStart = true;
-		router.commitBoxDrag();
-	}
-
-	@SuppressWarnings("unchecked")
-	private List<Connection> getAllTransitions() {
-		List<Connection> result = Lists.newArrayList();
-		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
-		for (IGraphicalEditPart iGraphicalEditPart : sourceConnections) {
-			result.add((Connection) iGraphicalEditPart.getFigure());
-		}
-		List<IGraphicalEditPart> targetConnections = getHost().getTargetConnections();
-		for (IGraphicalEditPart iGraphicalEditPart : targetConnections) {
-			result.add((Connection) iGraphicalEditPart.getFigure());
-		}
-		return result;
-	}
-
-	@Override
-	public IGraphicalEditPart getHost() {
-		return (IGraphicalEditPart) super.getHost();
-	}
-
-	public void startConnection(Rectangle original, List<Connection> connections) {
-		router.initBoxDrag(original, connections);
-	}
-
-	public void updateConnection(Rectangle newBounds) {
-		router.updateBoxDrag(newBounds);
-	}
-
-	@Override
-	public Command getCommand(Request request) {
-		if(request instanceof ChangeBoundsRequest) {
-			return createUpdateAllBendpointsCommand();
-		}
-		return super.getCommand(request);
-	}
-	
+	private Rectangle origBoundsRel;
 
 	@SuppressWarnings("unchecked")
 	public Command createUpdateAllBendpointsCommand() {
@@ -117,9 +50,22 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		for (IGraphicalEditPart part : targetConnections) {
 			result.add(getBendpointsChangedCommand((Connection) part.getFigure(), (Edge) part.getModel()));
 		}
-		if(result.size() == 0)
+		if (result.size() == 0) {
 			return null;
+		}
 		return result;
+	}
+
+	protected void eraseChangeBoundsFeedback(ChangeBoundsRequest request) {
+		connectionStart = true;
+		router.commitBoxDrag();
+	}
+
+	@Override
+	public void eraseSourceFeedback(Request request) {
+		if (request instanceof ChangeBoundsRequest) {
+			eraseChangeBoundsFeedback((ChangeBoundsRequest) request);
+		}
 	}
 
 	@SuppressWarnings("restriction")
@@ -130,13 +76,73 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		Point ptRef2 = connection.getTargetAnchor().getReferencePoint();
 		connection.translateToRelative(ptRef2);
 
-		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
+		TransactionalEditingDomain editingDomain = getHost().getEditingDomain();
 
 		SetConnectionBendpointsCommand sbbCommand = new SetConnectionBendpointsCommand(editingDomain);
 		sbbCommand.setEdgeAdapter(new EObjectAdapter(edge));
 		sbbCommand.setNewPointList(connection.getPoints(), ptRef1, ptRef2);
 
 		return new ICommandProxy(sbbCommand);
+	}
+
+	@Override
+	public Command getCommand(Request request) {
+		if (request instanceof ChangeBoundsRequest) {
+			return createUpdateAllBendpointsCommand();
+		}
+		return super.getCommand(request);
+	}
+
+	@Override
+	public IGraphicalEditPart getHost() {
+		return (IGraphicalEditPart) super.getHost();
+	}
+
+	private List<Connection> getSourceConnections() {
+		List<Connection> result = new ArrayList<>();
+		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
+		for (IGraphicalEditPart iGraphicalEditPart : sourceConnections) {
+			result.add((Connection) iGraphicalEditPart.getFigure());
+		}
+		return result;
+	}
+
+	private List<Connection> getTargetConnections() {
+		List<Connection> result = new ArrayList<>();
+		List<IGraphicalEditPart> targetConnections = getHost().getTargetConnections();
+		for (IGraphicalEditPart iGraphicalEditPart : targetConnections) {
+			result.add((Connection) iGraphicalEditPart.getFigure());
+		}
+		return result;
+	}
+
+	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
+		if (connectionStart) {
+			IFigure figure = getHostFigure();
+			originalBounds = getHostFigure().getBounds().getCopy();
+			origBoundsRel = originalBounds.getCopy();
+			figure.translateToAbsolute(originalBounds);
+			originalBounds.translate(request.getMoveDelta().getNegated()).resize(request.getSizeDelta().getNegated());
+			startConnection(originalBounds, getSourceConnections(), getTargetConnections());
+			connectionStart = false;
+		} else {
+			updateConnection(request.getTransformedRectangle(originalBounds.getCopy()));
+		}
+	}
+
+	@Override
+	public void showSourceFeedback(Request request) {
+		if (request instanceof ChangeBoundsRequest) {
+			showChangeBoundsFeedback((ChangeBoundsRequest) request);
+		}
+	}
+
+	public void startConnection(Rectangle original, List<Connection> source, List<Connection> target) {
+		router.initBoxDrag(original, source, target);
+	}
+
+	public void updateConnection(Rectangle newBounds) {
+		router.updateBoxDrag(newBounds);
 	}
 
 }

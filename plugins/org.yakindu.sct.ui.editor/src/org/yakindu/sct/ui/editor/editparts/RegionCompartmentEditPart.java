@@ -6,28 +6,21 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayoutAnimator;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.commands.CompoundCommand;
-import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.base.xtext.utils.gmf.commands.AdjustIdentityAnchorCommand;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.CompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentCanonicalEditPolicy;
@@ -54,11 +47,6 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 	}
 
 	@Override
-	public PreferencesHint getDiagramPreferencesHint() {
-		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
-	}
-
-	@Override
 	protected IFigure createFigure() {
 		ShapeCompartmentFigure figure = new ShapeCompartmentFigure(getCompartmentName(), getMapMode());
 		figure.getContentPane().setLayoutManager(getLayoutManager());
@@ -67,6 +55,11 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		figure.setFitContents(true);
 		figure.setToolTip((String) null);
 		return figure;
+	}
+
+	@Override
+	public PreferencesHint getDiagramPreferencesHint() {
+		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 	}
 
 	@Override
