@@ -3,7 +3,9 @@ p.
 
 h1(#overview_what_are_state_machines). What is a State Machine?
 
-A state machine is a behavior model. It consists of different so called states. Because the amount of states of a state machine is finite it is called finite state machine (FSM). There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts. This introduction gives a short overview of the common basis and the differences between state machine types.
+A state machine is a behavior model. It consists of different so called states. Because the amount of states of a state machine is finite it is called finite state machine (FSM). There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts. 
+
+This introduction gives a short overview of the common basis and the differences between state machine types.
 
 !(large)images/simple_moore.png(Simple example as a Moore machine)!
 
