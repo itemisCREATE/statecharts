@@ -40,6 +40,15 @@ import org.yakindu.base.xtext.utils.gmf.routing.EdgeLabelQuery;
  * @author <a href="mailto:laurent.redor@obeo.fr">Laurent Redor</a>
  */
 public class SetLabelsOffsetOperation {
+	public static boolean isEdgeWithObliqueRoutingStyle(org.eclipse.gef.ConnectionEditPart part) {
+		Edge edge = (Edge) part.getModel();
+		ConnectorStyle style = (ConnectorStyle) edge.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
+		if (style != null) {
+			return Routing.MANUAL_LITERAL == style.getRouting();
+		}
+		return false;
+	}
+
 	/**
 	 * The labels with their offset computed during the call to
 	 * {@link #setLabelsToUpdate(ConnectionEditPart)}. This list is then used during
@@ -54,35 +63,54 @@ public class SetLabelsOffsetOperation {
 	private PointList newPointList;
 
 	/**
-	 * Method to set the newPointList.
+	 * Update {@link Bounds} of a label {@link Node}.
 	 *
-	 * @param newPointList
-	 *            The new points list
+	 * @param labelEdgeEditPart  the editPart of the edge label to be updated
+	 * @param connectionEditPart The connection having these labels
 	 */
-	public void setNewPointList(PointList newPointList) {
-		this.newPointList = new PointList(newPointList.size());
-		for (int i = 0; i < newPointList.size(); i++) {
-			this.newPointList.addPoint(newPointList.getPoint(i));
+	private void computeGMFLabelOffset(LabelEditPart labelEditPartToUpdate, ConnectionEditPart connectionEditPart) {
+		Point newLabelOffset = null;
+		Node labelNodeToUpdate = (Node) labelEditPartToUpdate.getModel();
+		if (connectionEditPart.getModel() instanceof Edge) {
+			PointList oldBendpoints = oldBendPointsList;
+			if (oldBendpoints == null) {
+//				System.out.println("read current points");
+				oldBendpoints = connectionEditPart.getConnectionFigure().getPoints();
+			}
+			boolean isEdgeWithObliqueRoutingStyle = isEdgeWithObliqueRoutingStyle(connectionEditPart);
+			LayoutConstraint layoutConstraint = labelNodeToUpdate.getLayoutConstraint();
+			if (layoutConstraint instanceof Location) {
+				Location point = (Location) layoutConstraint;
+				newLabelOffset = new EdgeLabelQuery(oldBendpoints, newPointList, isEdgeWithObliqueRoutingStyle,
+						new Point(point.getX(), point.getY()), labelEditPartToUpdate.getFigure().getSize(),
+						labelEditPartToUpdate.getKeyPoint(), false).calculateGMFLabelOffset();
+//				System.out.println("queried label offset = " + newLabelOffset);
+				if ((newLabelOffset.x == 0) && (newLabelOffset.y == 0)) {
+					newLabelOffset = null;
+				}
+			}
+		}
+
+		if (newLabelOffset != null) {
+//			System.out.println("store label offset");
+			labelsWithNewOffset.put(labelNodeToUpdate, newLabelOffset);
 		}
 	}
 
 	/**
-	 * Set labels to update according to a connectionEditPart (all labels of this
-	 * connection will be update). This method must be used if the edge figure is
-	 * updated (through feedback) during the move. Indeed, in this case, we can not
-	 * use the figure to retrieve the old points.<BR>
-	 * This method must be called after having called the
-	 * {@link #setNewPointList(PointList)} method.
+	 * Update {@link Bounds} of the labels {@link Node}.
 	 *
-	 * @param connectionEditPart
-	 *            The connection from which to get the potential three labels to
-	 *            update
-	 * @param originalPoints
-	 *            The points of the edge before the move.
+	 * @param labelEditPartsToUpdate List of labels to update
+	 * @param connectionEditPart     The connection having these labels
 	 */
-	public void setLabelsToUpdate(ConnectionEditPart connectionEditPart, PointList originalPoints) {
-		oldBendPointsList = originalPoints;
-		setLabelsToUpdate(connectionEditPart);
+	private void computeGMFLabelsOffset(List<LabelEditPart> labelEditPartsToUpdate,
+			ConnectionEditPart connectionEditPart) {
+		labelsWithNewOffset = new HashMap<>();
+		// For each label, compute the new offset
+		for (LabelEditPart labelEditPartToUpdate : labelEditPartsToUpdate) {
+			computeGMFLabelOffset(labelEditPartToUpdate, connectionEditPart);
+		}
+
 	}
 
 	/**
@@ -91,9 +119,8 @@ public class SetLabelsOffsetOperation {
 	 * This method must be called after having called the
 	 * {@link #setNewPointList(PointList)} method.
 	 *
-	 * @param connectionEditPart
-	 *            The connection from which to get the potential three labels to
-	 *            update
+	 * @param connectionEditPart The connection from which to get the potential
+	 *                           three labels to update
 	 */
 	public void setLabelsToUpdate(ConnectionEditPart connectionEditPart) {
 		List<LabelEditPart> labelEditPartsToUpdate = new ArrayList<>();
@@ -111,61 +138,33 @@ public class SetLabelsOffsetOperation {
 	}
 
 	/**
-	 * Update {@link Bounds} of the labels {@link Node}.
+	 * Set labels to update according to a connectionEditPart (all labels of this
+	 * connection will be update). This method must be used if the edge figure is
+	 * updated (through feedback) during the move. Indeed, in this case, we can not
+	 * use the figure to retrieve the old points.<BR>
+	 * This method must be called after having called the
+	 * {@link #setNewPointList(PointList)} method.
 	 *
-	 * @param labelEditPartsToUpdate
-	 *            List of labels to update
-	 * @param connectionEditPart
-	 *            The connection having these labels
+	 * @param connectionEditPart The connection from which to get the potential
+	 *                           three labels to update
+	 * @param originalPoints     The points of the edge before the move.
 	 */
-	private void computeGMFLabelsOffset(List<LabelEditPart> labelEditPartsToUpdate,
-			ConnectionEditPart connectionEditPart) {
-		labelsWithNewOffset = new HashMap<>();
-		// For each label, compute the new offset
-		for (LabelEditPart labelEditPartToUpdate : labelEditPartsToUpdate) {
-			computeGMFLabelOffset(labelEditPartToUpdate, connectionEditPart);
-		}
-
+	public void setLabelsToUpdate(ConnectionEditPart connectionEditPart, PointList originalPoints) {
+		oldBendPointsList = originalPoints;
+		setLabelsToUpdate(connectionEditPart);
+//		System.out.println("set labels to update");
 	}
 
 	/**
-	 * Update {@link Bounds} of a label {@link Node}.
+	 * Method to set the newPointList.
 	 *
-	 * @param labelEdgeEditPart
-	 *            the editPart of the edge label to be updated
-	 * @param connectionEditPart
-	 *            The connection having these labels
+	 * @param newPointList The new points list
 	 */
-	private void computeGMFLabelOffset(LabelEditPart labelEditPartToUpdate, ConnectionEditPart connectionEditPart) {
-		Point newLabelOffset = null;
-		Node labelNodeToUpdate = (Node) labelEditPartToUpdate.getModel();
-		if (connectionEditPart.getModel() instanceof Edge) {
-			PointList oldBendpoints = oldBendPointsList;
-			if (oldBendpoints == null) {
-				oldBendpoints = connectionEditPart.getConnectionFigure().getPoints();
-			}
-			boolean isEdgeWithObliqueRoutingStyle = isEdgeWithObliqueRoutingStyle(connectionEditPart);
-			LayoutConstraint layoutConstraint = labelNodeToUpdate.getLayoutConstraint();
-			if (layoutConstraint instanceof Location) {
-				Location point = (Location) layoutConstraint;
-				newLabelOffset = new EdgeLabelQuery(oldBendpoints, newPointList, isEdgeWithObliqueRoutingStyle,
-						new Point(point.getX(), point.getY()), labelEditPartToUpdate.getFigure().getSize(),
-						labelEditPartToUpdate.getKeyPoint(), false).calculateGMFLabelOffset();
-			}
+	public void setNewPointList(PointList newPointList) {
+		this.newPointList = new PointList(newPointList.size());
+		for (int i = 0; i < newPointList.size(); i++) {
+			this.newPointList.addPoint(newPointList.getPoint(i));
 		}
-
-		if (newLabelOffset != null) {
-			labelsWithNewOffset.put(labelNodeToUpdate, newLabelOffset);
-		}
-	}
-
-	public static boolean isEdgeWithObliqueRoutingStyle(org.eclipse.gef.ConnectionEditPart part) {
-		Edge edge = (Edge) part.getModel();
-		ConnectorStyle style = (ConnectorStyle) edge.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
-		if (style != null) {
-			return Routing.MANUAL_LITERAL == style.getRouting();
-		}
-		return false;
 	}
 
 	/**
@@ -176,6 +175,7 @@ public class SetLabelsOffsetOperation {
 	 * this method has no effect.
 	 */
 	public void updateGMFLabelsOffset() {
+//		System.out.println("update label offsets");
 		if (labelsWithNewOffset != null) {
 			// Update Bounds of the three labels Node (Center, Begin and End)
 			Set<Entry<Node, Point>> entries = labelsWithNewOffset.entrySet();
