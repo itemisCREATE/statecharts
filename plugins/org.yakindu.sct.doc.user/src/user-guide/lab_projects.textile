@@ -1,7 +1,7 @@
 
 p. 
 
-h1(#lab_projects). Lab Projects
+h1(#lab_projects). Lab Features
 
 Researching, prototyping, and putting our ideas into code, aside from the day-to-day business, is an essential part of our development culture. YAKINDU Labs is a collection of projects that are currently in beta phase and therefore not yet released with any YAKINDU product bundles. As we love early feedback, we regularly blog about what's going on behind the scenes. So try it, and get in touch with us!
 
