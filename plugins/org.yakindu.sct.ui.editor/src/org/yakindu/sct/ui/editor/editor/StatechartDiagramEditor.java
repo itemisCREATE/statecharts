@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor;
 
@@ -19,8 +19,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -98,37 +96,70 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super(true);
 	}
 
-	public boolean isEditable() {
-		DomainStatus domainStatus = getDomainStatus();
-		if (domainStatus == null || domainStatus.getSeverity() == Severity.ERROR) {
-			return false;
+	public void addNature(IProject project) {
+		try {
+			IProjectDescription description = project.getDescription();
+			String[] natures = description.getNatureIds();
+			String[] newNatures = new String[natures.length + 1];
+			System.arraycopy(natures, 0, newNatures, 0, natures.length);
+			newNatures[natures.length] = XtextProjectHelper.NATURE_ID;
+			description.setNatureIds(newNatures);
+			project.setDescription(description, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
 		}
-		return super.isEditable();
 	}
 
-	protected DomainStatus getDomainStatus() {
-		EObject element = getDiagram().getElement();
-		DomainElement domainElement = EcoreUtil2.getContainerOfType(element, DomainElement.class);
-		if (domainElement != null) {
-			DomainStatus domainStatus = DomainRegistry.getDomainStatus(domainElement.getDomainID());
-			return domainStatus;
+	protected void checkXtextNature() {
+		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
+		if ((editorInput == null) || (editorInput.getFile() == null)) {
+			return;
 		}
-		return null;
+		IProject project = editorInput.getFile().getProject();
+		if ((project != null) && !XtextProjectHelper.hasNature(project) && project.isAccessible()
+				&& !project.isHidden()) {
+			addNature(project);
+		}
+	}
+
+	@Override
+	protected void configureGraphicalViewer() {
+		super.configureGraphicalViewer();
+		disableAnimatedZoom();
+		createContentProposalViewerKeyHandler();
+		super.constructPaletteViewer();
 	}
 
 	@Override
 	protected void createBreadcrumbViewer(Composite parent) {
 		DomainStatus domainStatus = getDomainStatus();
-		if (domainStatus != null && !(domainStatus.getSeverity() == Severity.OK)) {
+		if ((domainStatus != null) && !(domainStatus.getSeverity() == Severity.OK)) {
 			createStatusLabel(parent, domainStatus);
 		}
 		super.createBreadcrumbViewer(parent);
 	}
 
-	protected void createStatusLabel(Composite parent, DomainStatus domainStatus) {
-		DomainStatusLabel label = new DomainStatusLabel(domainStatus, parent);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
-		parent.pack(true);
+	protected void createContentProposalViewerKeyHandler() {
+		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
+				getGraphicalViewer());
+		contentProposalHandler
+				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
+		getGraphicalViewer().setKeyHandler(contentProposalHandler);
+	}
+
+	@Override
+	protected TransactionalEditingDomain createEditingDomain() {
+		TransactionalEditingDomain domain = DiagramPartitioningUtil.getSharedDomain();
+		domainAdapter = new DirtyStateListener();
+		domain.addResourceSetListener(domainAdapter);
+		return domain;
+	}
+
+	@Override
+	protected void createGraphicalViewer(Composite parent) {
+		super.createGraphicalViewer(parent);
+		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
+		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 	}
 
 	protected Object createOutline(Class<?> type) {
@@ -143,31 +174,111 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	@Override
-	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		super.init(site, input);
-		checkXtextNature();
-		registerValidationListener();
+	public void createPartControl(Composite parent) {
+		super.createPartControl(parent);
+		toggleDefinitionSection();
 	}
 
-	protected void registerValidationListener() {
-		issueStore = getIssueStore();
-		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
-		validationListener.setResource(getDiagram().eResource());
-		validationListener.setValidationIssueProcessor(issueStore);
-		getEditingDomain().addResourceSetListener(validationListener);
-		validationListener.scheduleValidation();
+	protected void createStatusLabel(Composite parent, DomainStatus domainStatus) {
+		DomainStatusLabel label = new DomainStatusLabel(domainStatus, parent);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
+		parent.pack(true);
 	}
 
-	protected IValidationIssueStore getIssueStore() {
-		Optional<IEditorPart> editorWithSameResource = getEditorWithSameResource();
-		if (editorWithSameResource.isPresent()) {
-			IValidationIssueStore sharedStore = editorWithSameResource.get().getAdapter(IValidationIssueStore.class);
-			return sharedStore;
-		} else {
-			IValidationIssueStore newStore = getEditorInjector().getInstance(IValidationIssueStore.class);
-			newStore.connect(getDiagram().eResource());
-			return newStore;
+	@Override
+	protected void createTextEditor(Composite parent) {
+		if (isStatechart()) {
+			definitionSection = new StatechartDefinitionSection(parent, SWT.BORDER, this);
 		}
+	}
+
+	// Disable the animated zoom, it is too slow for bigger models
+	protected void disableAnimatedZoom() {
+		AnimatableZoomManager zoomManager = (AnimatableZoomManager) getGraphicalViewer()
+				.getProperty(ZoomManager.class.toString());
+		zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
+	}
+
+	@Override
+	public void dispose() {
+		if ((definitionSection != null) && !definitionSection.isDisposed()) {
+			definitionSection.dispose();
+		}
+		if (validationListener != null) {
+			validationListener.dispose();
+		}
+		if ((issueStore != null) && !getEditorWithSameResource().isPresent()) {
+			issueStore.disconnect(getDiagram().eResource());
+		}
+		getEditingDomain().removeResourceSetListener(validationListener);
+		getEditingDomain().removeResourceSetListener(domainAdapter);
+		if (domainAdapter != null) {
+			domainAdapter.dispose();
+		}
+		super.dispose();
+	}
+
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		if (definitionSection != null) {
+			definitionSection.validateEmbeddedEditorContext();
+		}
+		super.doSave(progressMonitor);
+	}
+
+	protected boolean equalsLocationURI(IEditorInput otherInput, IEditorInput thisInput) {
+		URI otherLocationURI = ((IFileEditorInput) otherInput).getFile().getLocationURI();
+		URI thisLocationURI = ((IFileEditorInput) thisInput).getFile().getLocationURI();
+		// location URI can be null if project was deleted from workspace
+		return (otherLocationURI != null) && otherLocationURI.equals(thisLocationURI);
+	}
+
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
+		if (IContentOutlinePage.class.equals(type)) {
+			return createOutline(type);
+		} else if (IValidationIssueStore.class.equals(type)) {
+			return issueStore;
+		} else if (EObject.class.equals(type)) {
+			return this.getContextObject();
+		} else if (TransactionalEditingDomain.class.equals(type)) {
+			return getTransactionalEditingDomain();
+		} else if (Diagram.class.equals(type)) {
+			return getDiagram();
+		} else if (DiagramEditPart.class.equals(type)) {
+			return getDiagramEditPart();
+		}
+		return super.getAdapter(type);
+	}
+
+	@Override
+	public EObject getContextObject() {
+		if ((getDiagram() == null) || (getDiagram().getElement() == null)) {
+			return null;
+		}
+		EObject element = getDiagram().getElement();
+		return element;
+	}
+
+	@Override
+	public String getContributorId() {
+		return ID;
+	}
+
+	protected DomainStatus getDomainStatus() {
+		EObject element = getDiagram().getElement();
+		DomainElement domainElement = EcoreUtil2.getContainerOfType(element, DomainElement.class);
+		if (domainElement != null) {
+			DomainStatus domainStatus = DomainRegistry.getDomainStatus(domainElement.getDomainID());
+			return domainStatus;
+		}
+		return null;
+	}
+
+	protected Injector getEditorInjector() {
+		IDomain domain = DomainRegistry.getDomain(getDiagram().getElement());
+		Injector injector = domain.getInjector(IDomain.FEATURE_EDITOR);
+		return injector;
 	}
 
 	protected Optional<IEditorPart> getEditorWithSameResource() {
@@ -189,89 +300,21 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return editorWithSameResource;
 	}
 
-	protected boolean equalsLocationURI(IEditorInput otherInput, IEditorInput thisInput) {
-		URI otherLocationURI = ((IFileEditorInput) otherInput).getFile().getLocationURI();
-		URI thisLocationURI = ((IFileEditorInput) thisInput).getFile().getLocationURI();
-		// location URI can be null if project was deleted from workspace
-		return otherLocationURI != null && otherLocationURI.equals(thisLocationURI);
+	@Override
+	protected int getInitialPaletteSize() {
+		return INITIAL_PALETTE_SIZE;
 	}
 
-	protected Injector getEditorInjector() {
-		IDomain domain = DomainRegistry.getDomain(getDiagram().getElement());
-		Injector injector = domain.getInjector(IDomain.FEATURE_EDITOR);
-		return injector;
-	}
-
-	protected void checkXtextNature() {
-		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
-		if (editorInput == null || editorInput.getFile() == null)
-			return;
-		IProject project = editorInput.getFile().getProject();
-		if (project != null && !XtextProjectHelper.hasNature(project) && project.isAccessible()
-				&& !project.isHidden()) {
-			addNature(project);
+	protected IValidationIssueStore getIssueStore() {
+		Optional<IEditorPart> editorWithSameResource = getEditorWithSameResource();
+		if (editorWithSameResource.isPresent()) {
+			IValidationIssueStore sharedStore = editorWithSameResource.get().getAdapter(IValidationIssueStore.class);
+			return sharedStore;
+		} else {
+			IValidationIssueStore newStore = getEditorInjector().getInstance(IValidationIssueStore.class);
+			newStore.connect(getDiagram().eResource());
+			return newStore;
 		}
-	}
-
-	public void addNature(IProject project) {
-		try {
-			IProjectDescription description = project.getDescription();
-			String[] natures = description.getNatureIds();
-			String[] newNatures = new String[natures.length + 1];
-			System.arraycopy(natures, 0, newNatures, 0, natures.length);
-			newNatures[natures.length] = XtextProjectHelper.NATURE_ID;
-			description.setNatureIds(newNatures);
-			project.setDescription(description, null);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	protected TransactionalEditingDomain createEditingDomain() {
-		TransactionalEditingDomain domain = DiagramPartitioningUtil.getSharedDomain();
-		domainAdapter = new DirtyStateListener();
-		domain.addResourceSetListener(domainAdapter);
-		return domain;
-	}
-
-	public void gotoMarker(IMarker marker) {
-		MarkerNavigationService.getInstance().gotoMarker(this, marker);
-	}
-
-	@Override
-	protected PreferencesHint getPreferencesHint() {
-		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
-	}
-
-	@Override
-	protected void createGraphicalViewer(Composite parent) {
-		super.createGraphicalViewer(parent);
-		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
-		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
-	}
-
-	@Override
-	protected void configureGraphicalViewer() {
-		super.configureGraphicalViewer();
-		disableAnimatedZoom();
-		createContentProposalViewerKeyHandler();
-		super.constructPaletteViewer();
-	}
-
-	// Disable the animated zoom, it is too slow for bigger models
-	protected void disableAnimatedZoom() {
-		AnimatableZoomManager zoomManager = (AnimatableZoomManager) getGraphicalViewer()
-				.getProperty(ZoomManager.class.toString());
-		zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
-	}
-
-	protected void createContentProposalViewerKeyHandler() {
-		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
-				getGraphicalViewer());
-		contentProposalHandler
-				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
-		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
 
 	/**
@@ -330,10 +373,57 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return keyHandler;
 	}
 
-	protected void resetZoom() {
-		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(ZoomManager.class.toString());
-		if (manager != null)
-			manager.setZoom(1.0d);
+	@Override
+	protected PreferencesHint getPreferencesHint() {
+		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
+	}
+
+	protected TransactionalEditingDomain getTransactionalEditingDomain() {
+		return TransactionUtil.getEditingDomain(getDiagram());
+	}
+
+	@Override
+	public void gotoMarker(IMarker marker) {
+		MarkerNavigationService.getInstance().gotoMarker(this, marker);
+	}
+
+	@Override
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
+		super.init(site, input);
+		checkXtextNature();
+		registerValidationListener();
+	}
+
+	@Override
+	public boolean isDirty() {
+		if ((getDiagram() == null) || !(getContextObject() instanceof SpecificationElement)) {
+			return super.isDirty();
+		}
+		SpecificationElement contextObject = (SpecificationElement) getContextObject();
+		return super.isDirty() || ((definitionSection != null) && ((definitionSection.getDefinition() != null)
+				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
+	}
+
+	@Override
+	public boolean isEditable() {
+		DomainStatus domainStatus = getDomainStatus();
+		if ((domainStatus == null) || (domainStatus.getSeverity() == Severity.ERROR)) {
+			return false;
+		}
+		return super.isEditable();
+	}
+
+	protected boolean isStatechart() {
+		return getContextObject() instanceof Statechart;
+	}
+
+	protected void registerValidationListener() {
+		issueStore = getIssueStore();
+		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
+		validationListener.setResource(getDiagram().eResource());
+		validationListener.setValidationIssueProcessor(issueStore);
+		getEditingDomain().addResourceSetListener(validationListener);
+		validationListener.scheduleValidation();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -352,101 +442,17 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		getSelectionActions().add(action.getId());
 	}
 
-	@Override
-	public String getContributorId() {
-		return ID;
-	}
-
-	@Override
-	public void dispose() {
-		if (definitionSection != null && !definitionSection.isDisposed())
-			definitionSection.dispose();
-		if (validationListener != null) {
-			validationListener.dispose();
+	protected void resetZoom() {
+		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(ZoomManager.class.toString());
+		if (manager != null) {
+			manager.setZoom(1.0d);
 		}
-		if (issueStore != null && !getEditorWithSameResource().isPresent()) {
-			issueStore.disconnect(getDiagram().eResource());
-		}
-		getEditingDomain().removeResourceSetListener(validationListener);
-		getEditingDomain().removeResourceSetListener(domainAdapter);
-		if (domainAdapter != null)
-			domainAdapter.dispose();
-		super.dispose();
-	}
-
-	@Override
-	protected int getInitialPaletteSize() {
-		return INITIAL_PALETTE_SIZE;
-	}
-
-	@Override
-	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
-		if (IContentOutlinePage.class.equals(type)) {
-			return createOutline(type);
-		} else if (IValidationIssueStore.class.equals(type)) {
-			return issueStore;
-		} else if (EObject.class.equals(type)) {
-			return this.getContextObject();
-		} else if (TransactionalEditingDomain.class.equals(type)) {
-			return getTransactionalEditingDomain();
-		} else if (Diagram.class.equals(type)) {
-			return getDiagram();
-		} else if (DiagramEditPart.class.equals(type)) {
-			return getDiagramEditPart();
-		}
-		return super.getAdapter(type);
-	}
-
-	@Override
-	protected void createTextEditor(Composite parent) {
-		if (isStatechart()) {
-			definitionSection = new StatechartDefinitionSection(parent, SWT.BORDER, this);
-		}
-	}
-
-	@Override
-	public void createPartControl(Composite parent) {
-		super.createPartControl(parent);
-		toggleDefinitionSection();
 	}
 
 	public void toggleDefinitionSection() {
-		if (definitionSection != null && !definitionSection.isDisposed() && isStatechart()) {
+		if ((definitionSection != null) && !definitionSection.isDisposed() && isStatechart()) {
 			definitionSection.updateStyle();
 			definitionSection.restoreSashWidths();
 		}
-	}
-
-	protected boolean isStatechart() {
-		return getContextObject() instanceof Statechart;
-	}
-
-	@Override
-	public EObject getContextObject() {
-		if (getDiagram() == null || getDiagram().getElement() == null)
-			return null;
-		EObject element = getDiagram().getElement();
-		return element;
-	}
-
-	protected TransactionalEditingDomain getTransactionalEditingDomain() {
-		return TransactionUtil.getEditingDomain(getDiagram());
-	}
-
-	@Override
-	public boolean isDirty() {
-		if (getDiagram() == null || !(getContextObject() instanceof SpecificationElement))
-			return super.isDirty();
-		SpecificationElement contextObject = (SpecificationElement) getContextObject();
-		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
-				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
-	}
-
-	@Override
-	public void doSave(IProgressMonitor progressMonitor) {
-		if (definitionSection != null) {
-			definitionSection.validateEmbeddedEditorContext();
-		}
-		super.doSave(progressMonitor);
 	}
 }

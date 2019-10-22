@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.gmf.runtime.editparts;
 
@@ -21,9 +21,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
@@ -32,51 +32,10 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 	private final ChangeBoundsRequest NULL_REQUEST = new ChangeBoundsRequest(REQ_MOVE_CHILDREN);
 
 	@Override
-	protected ResizeTracker getResizeTracker(int direction) {
-		
-		return new ResizeTracker((GraphicalEditPart) getHost(), direction) {
-			@Override
-			protected void enforceConstraintsForResize(ChangeBoundsRequest request) {
-				final IFigure figure = getHostFigure();
-				Dimension prefSize = figure.getPreferredSize().getCopy();
-				figure.translateToAbsolute(prefSize);
-				Rectangle bounds = originalBounds.getCopy();
-				bounds = bounds.expand(-8,-8);
-				figure.translateToAbsolute(bounds);
-				bounds = request.getTransformedRectangle(bounds);
-				if (bounds.width < prefSize.width) {
-					request.getSizeDelta().width = request.getSizeDelta().width + (prefSize.width - bounds.width);
-				}
-				if (bounds.height < prefSize.height) {
-					request.getSizeDelta().height = request.getSizeDelta().height + (prefSize.height - bounds.height);
-				}
-				request.setSizeDelta(request.getSizeDelta());
-			}
-		};
-	}
-
-	@Override
 	public void activate() {
 		super.activate();
 		originalBounds = getPreferredSizeFigure().getBounds().getCopy();
 		getHostFigure().translateToAbsolute(originalBounds);
-	}
-	
-	protected IFigure getPreferredSizeFigure() {
-		return getHostFigure();
-	}
-
-	@Override
-	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
-		if (connectionStart) {
-			originalBounds = getPreferredSizeFigure().getBounds().getCopy();
-			getHostFigure().translateToAbsolute(originalBounds);
-			connectionStart = false;
-		}
-		Rectangle rect = request.getTransformedRectangle(originalBounds.getCopy());
-		getHostFigure().getParent().translateToRelative(rect);
-		getHostFigure().setBounds(rect);
-		getHostFigure().getParent().setConstraint(getHostFigure(), rect);
 	}
 
 	@Override
@@ -91,12 +50,54 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 		return getHost().getParent().getCommand(NULL_REQUEST);
 	}
 
+	protected IFigure getPreferredSizeFigure() {
+		return getHostFigure();
+	}
+
+	@Override
 	protected Command getResizeCommand(ChangeBoundsRequest request) {
 		if (request instanceof SetPreferredSizeRequest) {
 			return super.getResizeCommand(request);
 		}
 		NULL_REQUEST.setEditParts(getHost());
 		return getHost().getParent().getCommand(NULL_REQUEST);
+	}
+
+	@Override
+	protected ResizeTracker getResizeTracker(int direction) {
+
+		return new ResizeTracker((GraphicalEditPart) getHost(), direction) {
+			@Override
+			protected void enforceConstraintsForResize(ChangeBoundsRequest request) {
+				final IFigure figure = getHostFigure();
+				Dimension prefSize = figure.getPreferredSize().getCopy();
+				figure.translateToAbsolute(prefSize);
+				Rectangle bounds = originalBounds.getCopy();
+				bounds = bounds.expand(-8, -8);
+				figure.translateToAbsolute(bounds);
+				bounds = request.getTransformedRectangle(bounds);
+				if (bounds.width < prefSize.width) {
+					request.getSizeDelta().width = request.getSizeDelta().width + (prefSize.width - bounds.width);
+				}
+				if (bounds.height < prefSize.height) {
+					request.getSizeDelta().height = request.getSizeDelta().height + (prefSize.height - bounds.height);
+				}
+				request.setSizeDelta(request.getSizeDelta());
+			}
+		};
+	}
+
+	@Override
+	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
+		if (connectionStart) {
+			originalBounds = getPreferredSizeFigure().getBounds().getCopy();
+			getHostFigure().translateToAbsolute(originalBounds);
+			connectionStart = false;
+		}
+		Rectangle rect = request.getTransformedRectangle(originalBounds.getCopy());
+		getHostFigure().getParent().translateToRelative(rect);
+		getHostFigure().setBounds(rect);
+		getHostFigure().getParent().setConstraint(getHostFigure(), rect);
 	}
 
 }

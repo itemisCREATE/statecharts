@@ -181,17 +181,17 @@ public class RubberBandRoutingSupport {
 		return sourceBox;
 	}
 
-	public void initBoxDrag(Rectangle original, List<Connection> sourceConnections,
+	public void initBoxDrag(Rectangle originalAbs, List<Connection> sourceConnections,
 			List<Connection> targetConnections) {
 		// save original bounds in asbolute coordinates
-		origDraggedBoundsAbs = original.getCopy();
+		origDraggedBoundsAbs = originalAbs.getCopy();
 
 		// clear connection data (FIXME: do this at the end of interaction, not at the
 		// start)
 		conn.clear();
 
 		for (int i = 0; i < mmds.length; i++) {
-			mmds[i] = new MaxMoveDelta((i % 2) == 0);
+			mmds[i] = new MaxMoveDelta((i % 2) != 0);
 		}
 
 		Map<Connection, Boolean> isSource = new IdentityHashMap<>();
@@ -217,12 +217,12 @@ public class RubberBandRoutingSupport {
 				pureTarget.add(c);
 			}
 		}
-		initDrag(original, pureSource, true, false);
-		initDrag(original, pureTarget, false, true);
-		initDrag(original, reflexive, true, true);
+		initDrag(originalAbs, pureSource, true, false);
+		initDrag(originalAbs, pureTarget, false, true);
+		initDrag(originalAbs, reflexive, true, true);
 	}
 
-	private void initDrag(Rectangle original, List<Connection> connections, boolean isSource, boolean isTarget) {
+	private void initDrag(Rectangle originalAbc, List<Connection> connections, boolean isSource, boolean isTarget) {
 		for (Connection connection : connections) {
 			// disable repaint so that first drag does not let connection jump
 //			((TransitionFigure) connection).disableRepaint();
@@ -232,9 +232,7 @@ public class RubberBandRoutingSupport {
 			conn.put(connection, cd);
 
 			// compute max move deltas
-//			Rectangle relBounds = original.getCopy();
-//			connection.translateToRelative(relBounds);
-			MaxMoveDelta[] mmds = cd.getMaxMoveDeltas(original);
+			MaxMoveDelta[] mmds = cd.getMaxMoveDeltas(originalAbc);
 
 			// merge with current mmds
 			for (int i = 0; i < this.mmds.length; i++) {
@@ -243,89 +241,72 @@ public class RubberBandRoutingSupport {
 		}
 	}
 
-	public void updateBoxDrag(Rectangle newBounds) {
-		double dx = newBounds.preciseX() - origDraggedBoundsAbs.preciseX();
-		double dy = newBounds.preciseY() - origDraggedBoundsAbs.preciseY();
-		double dw = newBounds.preciseWidth() - origDraggedBoundsAbs.preciseWidth();
-		double dh = newBounds.preciseHeight() - origDraggedBoundsAbs.preciseHeight();
+	public void updateBoxDrag(Rectangle newBoundsAbs) {
+		double dx = newBoundsAbs.preciseX() - origDraggedBoundsAbs.preciseX();
+		double dy = newBoundsAbs.preciseY() - origDraggedBoundsAbs.preciseY();
+		double dw = newBoundsAbs.preciseWidth() - origDraggedBoundsAbs.preciseWidth();
+		double dh = newBoundsAbs.preciseHeight() - origDraggedBoundsAbs.preciseHeight();
 
 		if ((dx == 0) && (dy == 0) && (dw == 0) && (dh == 0)) {
 			return;
 		} else {
-			System.out.println("bounds changed " + dx + ", " + dy + ", " + dw + ", " + dh);
+//			System.out.println("bounds changed " + dx + ", " + dy + ", " + dw + ", " + dh);
 		}
 
 		for (ConnData cd : conn.values()) {
-//			PrecisionRectangle deltaRect = new PrecisionRectangle(dx, dy, dw, dh);
-//			cd.conn.translateToRelative(deltaRect);
+			// compute deltas in local coordinate system
+			Rectangle brel = origDraggedBoundsAbs.getCopy();
+			cd.conn.translateToRelative(brel);
+			Rectangle bnrel = newBoundsAbs.getCopy();
+			cd.conn.translateToRelative(bnrel);
+			double localDx = bnrel.preciseX() - brel.preciseX();
+			double localDy = bnrel.preciseY() - brel.preciseY();
+			double localDw = bnrel.preciseWidth() - brel.preciseWidth();
+			double localDh = bnrel.preciseHeight() - brel.preciseHeight();
 
 			// drag anchored segment if necessary
 			List<PrecisionPoint> pointsCopy = cd.getInitialVisualPointsCopy();
-
 			if (cd.isSource) {
 				if (cd.isSourceVertical) {
-					double localDx = mmds[cd.sourceSideIndex].reqDelta(dx, dw);
-					if (localDx != 0) {
-						PrecisionPoint origin = new PrecisionPoint(0, 0);
-						PrecisionPoint move = new PrecisionPoint(localDx, 0);
-						cd.conn.translateToRelative(origin);
-						cd.conn.translateToRelative(move);
-						double relDx = move.preciseX() - origin.preciseX();
-
+					double reqDx = mmds[cd.sourceSideIndex].reqDelta(localDx, localDw);
+					if (reqDx != 0) {
 						PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
-						ap.setPreciseX(ap.preciseX() + relDx);
+						ap.setPreciseX(ap.preciseX() + reqDx);
 						PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
-						np.setPreciseX(np.preciseX() + relDx);
+						np.setPreciseX(np.preciseX() + reqDx);
 					}
 				} else {
-					double localDy = mmds[cd.sourceSideIndex].reqDelta(dy, dh);
-					if (localDy != 0) {
-						PrecisionPoint origin = new PrecisionPoint(0, 0);
-						PrecisionPoint move = new PrecisionPoint(0, localDy);
-						cd.conn.translateToRelative(origin);
-						cd.conn.translateToRelative(move);
-						double relDy = move.preciseY() - origin.preciseY();
-
+					double reqDy = mmds[cd.sourceSideIndex].reqDelta(localDy, localDh);
+					if (reqDy != 0) {
 						PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
-						ap.setPreciseY(ap.preciseY() + relDy);
+						ap.setPreciseY(ap.preciseY() + reqDy);
 						PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
-						np.setPreciseY(np.preciseY() + relDy);
+						np.setPreciseY(np.preciseY() + reqDy);
 					}
 				}
 			}
 			if (cd.isTarget) {
 				if (cd.isTargetVertical) {
-					double localDx = mmds[cd.targetSideIndex].reqDelta(dx, dw);
-					if (localDx != 0) {
-						PrecisionPoint origin = new PrecisionPoint(0, 0);
-						PrecisionPoint move = new PrecisionPoint(localDx, 0);
-						cd.conn.translateToRelative(origin);
-						cd.conn.translateToRelative(move);
-						double relDx = move.preciseX() - origin.preciseX();
-
+					double reqDx = mmds[cd.targetSideIndex].reqDelta(localDx, localDw);
+					if (reqDx != 0) {
 						PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
-						ap.setPreciseX(ap.preciseX() + relDx);
+						ap.setPreciseX(ap.preciseX() + reqDx);
 						PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
-						np.setPreciseX(np.preciseX() + relDx);
+						np.setPreciseX(np.preciseX() + reqDx);
 					}
 				} else {
-					double localDy = mmds[cd.targetSideIndex].reqDelta(dy, dh);
-					if (localDy != 0) {
-						PrecisionPoint origin = new PrecisionPoint(0, 0);
-						PrecisionPoint move = new PrecisionPoint(0, localDy);
-						cd.conn.translateToRelative(origin);
-						cd.conn.translateToRelative(move);
-						double relDy = move.preciseY() - origin.preciseY();
-
+					double reqDy = mmds[cd.targetSideIndex].reqDelta(localDy, localDh);
+					if (reqDy != 0) {
 						PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
-						ap.setPreciseY(ap.preciseY() + relDy);
+						ap.setPreciseY(ap.preciseY() + reqDy);
 						PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
-						np.setPreciseY(np.preciseY() + relDy);
+						np.setPreciseY(np.preciseY() + reqDy);
 					}
 				}
 			}
 
 //			cd.printVisualPoints();
+//			cd.printPoints(pointsCopy);
 
 			List<RelativeBendpoint> constraint = createConstraint(cd.conn, pointsCopy);
 			ConnectionRouter router = cd.conn.getConnectionRouter();

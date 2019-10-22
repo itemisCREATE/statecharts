@@ -13,6 +13,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 public class ConnData {
 	public Connection conn;
 	public List<PrecisionPoint> initialVisualPoints = new ArrayList<>();
+	public List<PrecisionPoint> initialVisualPointsAbs = new ArrayList<>();
 	public List<PrecisionPoint> initialBendpointLocations = new ArrayList<>();
 	public List<PrecisionPoint> finalVisualPoints = new ArrayList<>();
 	public boolean isSource;
@@ -26,6 +27,9 @@ public class ConnData {
 	public boolean isTargetVertical = false;
 	public int sourceSideIndex = -1;
 	public int targetSideIndex = -1;
+//	public double scale = 1d;
+//	public double tx = 0d;
+//	public double ty = 0d;
 
 	public double SideDistance = 10d;
 
@@ -39,11 +43,25 @@ public class ConnData {
 		this.isTarget = isTarget;
 		this.isReflexive = isSource && isTarget;
 
+		// determine transformations
+//		PrecisionPoint origin = new PrecisionPoint(0, 0);
+//		PrecisionPoint oneZero = new PrecisionPoint(1, 0);
+//		conn.translateToRelative(origin);
+//		conn.translateToRelative(oneZero);
+//		this.tx = origin.preciseX();
+//		this.ty = origin.preciseY();
+//		this.scale = oneZero.preciseX();
+
 		// initial points
 		PointList pl = conn.getPoints();
 		for (int i = 0; i < pl.size(); i++) {
 			Point p = pl.getPoint(i);
 			initialVisualPoints.add(new PrecisionPoint(p));
+		}
+		for (int i = 0; i < initialVisualPoints.size(); i++) {
+			PrecisionPoint p = new PrecisionPoint(initialVisualPoints.get(i));
+			conn.translateToAbsolute(p);
+			initialVisualPointsAbs.add(p);
 		}
 
 		// anchored segment
@@ -89,63 +107,65 @@ public class ConnData {
 		return copy;
 	}
 
-	private MaxMoveDelta getMaxMoveDelta(Rectangle relBounds, boolean isVertical, PrecisionPoint anchorPoint) {
-		if (isVertical) {
+	private MaxMoveDelta getMaxMoveDelta(Rectangle bounds, boolean isVerticalSegment, PrecisionPoint anchorPoint) {
+		if (isVerticalSegment) {
 			// move in X
 			double x = anchorPoint.preciseX();
-			double bx = relBounds.preciseX() + SideDistance;
-			double bx2 = (bx + relBounds.preciseWidth()) - SideDistance - SideDistance;
+			double bx = bounds.preciseX() + SideDistance;
+			double bx2 = (bx + bounds.preciseWidth()) - SideDistance - SideDistance;
 			if (x < bx) {
 				x = bx;
 			}
 			if (x > bx2) {
 				x = bx2;
 			}
-			return new MaxMoveDelta(true, x - bx2, x - bx);
+			return new MaxMoveDelta(false, x - bx2, x - bx);
 		} else {
 			// move in Y
 			double y = anchorPoint.preciseY();
-			double by = relBounds.preciseY() + SideDistance;
-			double by2 = (by + relBounds.preciseHeight()) - SideDistance - SideDistance;
+			double by = bounds.preciseY() + SideDistance;
+			double by2 = (by + bounds.preciseHeight()) - SideDistance - SideDistance;
 			if (y < by) {
 				y = by;
 			}
 			if (y > by2) {
 				y = by2;
 			}
-			return new MaxMoveDelta(false, y - by2, y - by);
+			return new MaxMoveDelta(true, y - by2, y - by);
 		}
 	}
 
-	public MaxMoveDelta[] getMaxMoveDeltas(Rectangle relBounds) {
-		MaxMoveDelta[] mmds = new MaxMoveDelta[] { new MaxMoveDelta(true), new MaxMoveDelta(), new MaxMoveDelta(true),
-				new MaxMoveDelta() };
-		if (initialVisualPoints.size() < 2) {
+	public MaxMoveDelta[] getMaxMoveDeltas(Rectangle boundsAbs) {
+		MaxMoveDelta[] mmds = new MaxMoveDelta[] { new MaxMoveDelta(), new MaxMoveDelta(true), new MaxMoveDelta(),
+				new MaxMoveDelta(true) };
+		if (initialVisualPointsAbs.size() < 2) {
 			// need two points for max-move-deltas
 			return mmds;
 		}
+		Rectangle boundsRel = boundsAbs.getCopy();
+		conn.translateToRelative(boundsRel);
 		// merge in deltas for source and/or target
 		if (isSource) {
 			boolean isVertical = isSourceVertical;
 			PrecisionPoint anchorPoint = initialVisualPoints.get(sourceAnchorIndex);
-			MaxMoveDelta mmd = getMaxMoveDelta(relBounds, isVertical, anchorPoint);
-			sourceSideIndex = getSideIndex(relBounds, isVertical, anchorPoint);
+			MaxMoveDelta mmd = getMaxMoveDelta(boundsRel, isVertical, anchorPoint);
+			sourceSideIndex = getSideIndex(boundsRel, isVertical, anchorPoint);
 			mmds[sourceSideIndex].merge(mmd);
 		}
 		if (isTarget) {
 			boolean isVertical = isTargetVertical;
 			PrecisionPoint anchorPoint = initialVisualPoints.get(targetAnchorIndex);
-			MaxMoveDelta mmd = getMaxMoveDelta(relBounds, isVertical, anchorPoint);
-			targetSideIndex = getSideIndex(relBounds, isVertical, anchorPoint);
+			MaxMoveDelta mmd = getMaxMoveDelta(boundsRel, isVertical, anchorPoint);
+			targetSideIndex = getSideIndex(boundsRel, isVertical, anchorPoint);
 			mmds[targetSideIndex].merge(mmd);
 		}
 		return mmds;
 	}
 
-	private int getSideIndex(Rectangle relBounds, boolean isVertical, PrecisionPoint anchorPoint) {
+	private int getSideIndex(Rectangle bounds, boolean isVerticalSegment, PrecisionPoint anchorPoint) {
 		int index;
-		if (isVertical) {
-			if (relBounds.getTop().getDistance(anchorPoint) < relBounds.getBottom().getDistance(anchorPoint)) {
+		if (isVerticalSegment) {
+			if (bounds.getTop().getDistance(anchorPoint) < bounds.getBottom().getDistance(anchorPoint)) {
 				// top
 				index = 0;
 			} else {
@@ -153,16 +173,20 @@ public class ConnData {
 				index = 2;
 			}
 		} else {
-			if (relBounds.getLeft().getDistance(anchorPoint) < relBounds.getRight().getDistance(anchorPoint)) {
+			if (bounds.getLeft().getDistance(anchorPoint) < bounds.getRight().getDistance(anchorPoint)) {
 				// left
-				index = 1;
+				index = 3;
 			} else {
 				// right
-				index = 3;
+				index = 1;
 			}
 		}
 		return index;
 	}
+
+//	public PrecisionPoint getTransformed(PrecisionPoint p) {
+//		return new PrecisionPoint((p.preciseX() * scale) + tx, (p.preciseY() * scale) + ty);
+//	}
 
 	public List<PrecisionPoint> getVisualPoints() {
 		List<PrecisionPoint> list = new ArrayList<>();
