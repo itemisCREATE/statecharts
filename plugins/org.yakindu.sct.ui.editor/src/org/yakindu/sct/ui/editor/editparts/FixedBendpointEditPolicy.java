@@ -28,7 +28,7 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
-import org.yakindu.base.gmf.runtime.router.ConnData;
+import org.yakindu.base.gmf.runtime.router.RelativeBendpointUtil;
 import org.yakindu.base.gmf.runtime.router.RubberBandRoutingSupport;
 import org.yakindu.base.xtext.utils.gmf.commands.SetLabelsOffsetOperation;
 import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
@@ -41,10 +41,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
 	private boolean connectionStart = true;
 	private Rectangle originalBounds = null;
-
 	private RubberBandRoutingSupport router = new RubberBandRoutingSupport();
-
-	private Rectangle origBoundsRel;
+	private RelativeBendpointUtil relbpUtil = new RelativeBendpointUtil();
 
 	@SuppressWarnings("unchecked")
 	public Command createUpdateAllBendpointsCommand() {
@@ -90,7 +88,7 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		sbbCommand.setEdgeAdapter(new EObjectAdapter((EObject) part.getModel()));
 		sbbCommand.setNewPointList(connection.getPoints(), ptRef1, ptRef2);
 		sbbCommand.setLabelsToUpdate(part,
-				router.getCD(part.getFigure()).convertToPointList(router.getCD(part.getFigure()).initialVisualPoints));
+				relbpUtil.convertToPointList(router.getCD(part.getFigure()).initialVisualPoints));
 
 		return new ICommandProxy(sbbCommand);
 	}
@@ -154,14 +152,13 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 			if (connectionStart) {
 				IFigure figure = getHostFigure();
 				originalBounds = getHostFigure().getBounds().getCopy();
-				origBoundsRel = originalBounds.getCopy();
 				figure.translateToAbsolute(originalBounds);
 				originalBounds.translate(request.getMoveDelta().getNegated())
 						.resize(request.getSizeDelta().getNegated());
 				startConnection(originalBounds, getSourceConnections(), getTargetConnections());
 				connectionStart = false;
 			} else {
-				updateConnection(request.getTransformedRectangle(originalBounds.getCopy()));
+				updateConnection(request.getTransformedRectangle(originalBounds));
 			}
 		}
 	}
@@ -176,8 +173,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 				if (currentConstraint instanceof EdgeLabelLocator) {
 					EdgeLabelLocator edgeLabelLocator = (EdgeLabelLocator) currentConstraint;
 
-					ConnData cd = router.getCD(connection);
-					PointList initialPoints = cd.convertToPointList(cd.initialVisualPoints);
+					PointList initialPoints = relbpUtil
+							.convertToPointList(router.getCD(connection).initialVisualPoints);
 
 					edgeLabelLocator.setFeedbackData(initialPoints,
 							new Vector(edgeLabelLocator.getOffset().x, edgeLabelLocator.getOffset().y),

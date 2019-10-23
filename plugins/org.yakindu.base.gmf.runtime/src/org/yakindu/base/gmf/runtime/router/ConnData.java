@@ -99,14 +99,6 @@ public class ConnData {
 		}
 	}
 
-	public PointList convertToPointList(List<? extends Point> points) {
-		PointList pl = new PointList(points.size());
-		for (Point p : points) {
-			pl.addPoint(p.getCopy());
-		}
-		return pl;
-	}
-
 	public List<PrecisionPoint> getInitialVisualPointsCopy() {
 		List<PrecisionPoint> copy = new ArrayList<>();
 		for (PrecisionPoint p : initialVisualPoints) {

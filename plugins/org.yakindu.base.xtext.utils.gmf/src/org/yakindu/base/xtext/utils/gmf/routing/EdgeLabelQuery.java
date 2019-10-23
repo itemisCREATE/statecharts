@@ -507,9 +507,9 @@ public class EdgeLabelQuery {
 			Point newOffset = offsetFromRelativeCoordinate(newLabelCenter, newBendPointList, newAnchorPoint);
 			if ((newLabelCenter.x != oldLabelCenter.x) && (newLabelCenter.y != oldLabelCenter.y)) {
 				// rectilinear & both coordinates change => newOffset is 0,0
-				System.out.println("[ERR] Label JUMP oldLabelCenter=" + oldLabelCenter + ", oldAnchorPoint="
-						+ oldAnchorPoint + ", oldOffset=" + oldLabelOffset + ", newAnchorPoint=" + newAnchorPoint
-						+ ", newLabelCenter=" + newLabelCenter + ", newOffset=" + newOffset);
+//				System.out.println("[ERR] Label JUMP oldLabelCenter=" + oldLabelCenter + ", oldAnchorPoint="
+//						+ oldAnchorPoint + ", oldOffset=" + oldLabelOffset + ", newAnchorPoint=" + newAnchorPoint
+//						+ ", newLabelCenter=" + newLabelCenter + ", newOffset=" + newOffset);
 			}
 			return newOffset;
 		}
@@ -630,9 +630,9 @@ public class EdgeLabelQuery {
 			}
 		}
 		if (fromOldToNewCenterVector == null) {
-			System.out.println("[WARN] Fallback to anchor point. Case0=" + case0 + ", Case1=" + case1 + ", Case2="
-					+ case2 + ", Opt1=" + opt1 + ", Opt2=" + opt2 + " Cond1=" + cond1 + ", Cond2=" + cond2 + ", Cond3="
-					+ cond3);
+//			System.out.println("[WARN] Fallback to anchor point. Case0=" + case0 + ", Case1=" + case1 + ", Case2="
+//					+ case2 + ", Opt1=" + opt1 + ", Opt2=" + opt2 + " Cond1=" + cond1 + ", Cond2=" + cond2 + ", Cond3="
+//					+ cond3);
 			return newDefaultLocation;
 		} else {
 			return oldCenterLabel.getTranslated(fromOldToNewCenterVector.x, fromOldToNewCenterVector.y);
