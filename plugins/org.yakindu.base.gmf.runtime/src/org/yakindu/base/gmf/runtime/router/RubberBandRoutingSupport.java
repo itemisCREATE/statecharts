@@ -153,6 +153,50 @@ public class RubberBandRoutingSupport {
 		}
 	}
 
+	private List<PrecisionPoint> dragAnchoredSegments(ConnData cd, double localDx, double localDy, double localDw,
+			double localDh) {
+		List<PrecisionPoint> pointsCopy = cd.getInitialVisualPointsCopy();
+		if (cd.isSource) {
+			if (cd.isSourceVertical) {
+				double reqDx = mmds[cd.sourceSideIndex].reqDelta(localDx, localDw);
+				if (reqDx != 0) {
+					PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
+					ap.setPreciseX(ap.preciseX() + reqDx);
+					PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
+					np.setPreciseX(np.preciseX() + reqDx);
+				}
+			} else {
+				double reqDy = mmds[cd.sourceSideIndex].reqDelta(localDy, localDh);
+				if (reqDy != 0) {
+					PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
+					ap.setPreciseY(ap.preciseY() + reqDy);
+					PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
+					np.setPreciseY(np.preciseY() + reqDy);
+				}
+			}
+		}
+		if (cd.isTarget) {
+			if (cd.isTargetVertical) {
+				double reqDx = mmds[cd.targetSideIndex].reqDelta(localDx, localDw);
+				if (reqDx != 0) {
+					PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
+					ap.setPreciseX(ap.preciseX() + reqDx);
+					PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
+					np.setPreciseX(np.preciseX() + reqDx);
+				}
+			} else {
+				double reqDy = mmds[cd.targetSideIndex].reqDelta(localDy, localDh);
+				if (reqDy != 0) {
+					PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
+					ap.setPreciseY(ap.preciseY() + reqDy);
+					PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
+					np.setPreciseY(np.preciseY() + reqDy);
+				}
+			}
+		}
+		return pointsCopy;
+	}
+
 	protected void forceInitialLocations(ConnData cd) {
 		Object routingConstraint = cd.conn.getRoutingConstraint();
 		if (routingConstraint instanceof List) {
@@ -248,6 +292,10 @@ public class RubberBandRoutingSupport {
 		double dh = newBoundsAbs.preciseHeight() - origDraggedBoundsAbs.preciseHeight();
 
 		if ((dx == 0) && (dy == 0) && (dw == 0) && (dh == 0)) {
+			// force locations only
+			for (ConnData cd : conn.values()) {
+				forceInitialLocations(cd);
+			}
 			return;
 		} else {
 //			System.out.println("bounds changed " + dx + ", " + dy + ", " + dw + ", " + dh);
@@ -265,45 +313,7 @@ public class RubberBandRoutingSupport {
 			double localDh = bnrel.preciseHeight() - brel.preciseHeight();
 
 			// drag anchored segment if necessary
-			List<PrecisionPoint> pointsCopy = cd.getInitialVisualPointsCopy();
-			if (cd.isSource) {
-				if (cd.isSourceVertical) {
-					double reqDx = mmds[cd.sourceSideIndex].reqDelta(localDx, localDw);
-					if (reqDx != 0) {
-						PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
-						ap.setPreciseX(ap.preciseX() + reqDx);
-						PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
-						np.setPreciseX(np.preciseX() + reqDx);
-					}
-				} else {
-					double reqDy = mmds[cd.sourceSideIndex].reqDelta(localDy, localDh);
-					if (reqDy != 0) {
-						PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
-						ap.setPreciseY(ap.preciseY() + reqDy);
-						PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
-						np.setPreciseY(np.preciseY() + reqDy);
-					}
-				}
-			}
-			if (cd.isTarget) {
-				if (cd.isTargetVertical) {
-					double reqDx = mmds[cd.targetSideIndex].reqDelta(localDx, localDw);
-					if (reqDx != 0) {
-						PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
-						ap.setPreciseX(ap.preciseX() + reqDx);
-						PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
-						np.setPreciseX(np.preciseX() + reqDx);
-					}
-				} else {
-					double reqDy = mmds[cd.targetSideIndex].reqDelta(localDy, localDh);
-					if (reqDy != 0) {
-						PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
-						ap.setPreciseY(ap.preciseY() + reqDy);
-						PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
-						np.setPreciseY(np.preciseY() + reqDy);
-					}
-				}
-			}
+			List<PrecisionPoint> pointsCopy = dragAnchoredSegments(cd, localDx, localDy, localDw, localDh);
 
 //			cd.printVisualPoints();
 //			cd.printPoints(pointsCopy);

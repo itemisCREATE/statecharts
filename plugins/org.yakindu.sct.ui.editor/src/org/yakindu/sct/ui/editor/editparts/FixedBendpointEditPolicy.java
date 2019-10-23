@@ -102,7 +102,14 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		List<Connection> result = new ArrayList<>();
 		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
 		for (IGraphicalEditPart iGraphicalEditPart : sourceConnections) {
-			result.add((Connection) iGraphicalEditPart.getFigure());
+			Connection connection = (Connection) iGraphicalEditPart.getFigure();
+//			if (connection.getSourceAnchor().getOwner() != getHostFigure()) {
+//				continue;
+//			}
+			result.add(connection);
+//			System.out.println(System.identityHashCode(this) + " :: source connection: "
+//					+ connection.getSourceAnchor().getOwner().getBounds() + " TO "
+//					+ connection.getTargetAnchor().getOwner().getBounds());
 		}
 		return result;
 	}
@@ -111,22 +118,41 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		List<Connection> result = new ArrayList<>();
 		List<IGraphicalEditPart> targetConnections = getHost().getTargetConnections();
 		for (IGraphicalEditPart iGraphicalEditPart : targetConnections) {
-			result.add((Connection) iGraphicalEditPart.getFigure());
+			Connection connection = (Connection) iGraphicalEditPart.getFigure();
+//			if (connection.getTargetAnchor().getOwner() != getHostFigure()) {
+//				continue;
+//			}
+			result.add(connection);
+//			System.out.println(System.identityHashCode(this) + " :: target connection: "
+//					+ connection.getSourceAnchor().getOwner().getBounds() + " TO "
+//					+ connection.getTargetAnchor().getOwner().getBounds());
 		}
 		return result;
 	}
 
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
-		if (connectionStart) {
-			IFigure figure = getHostFigure();
-			originalBounds = getHostFigure().getBounds().getCopy();
-			origBoundsRel = originalBounds.getCopy();
-			figure.translateToAbsolute(originalBounds);
-			originalBounds.translate(request.getMoveDelta().getNegated()).resize(request.getSizeDelta().getNegated());
-			startConnection(originalBounds, getSourceConnections(), getTargetConnections());
-			connectionStart = false;
+		if (request.getEditParts().get(0) != getHost()) {
+			// keep all connections in place
+			if (connectionStart) {
+				originalBounds = getHostFigure().getBounds().getCopy();
+				startConnection(originalBounds, getSourceConnections(), getTargetConnections());
+				connectionStart = false;
+			} else {
+				updateConnection(originalBounds);
+			}
 		} else {
-			updateConnection(request.getTransformedRectangle(originalBounds.getCopy()));
+			if (connectionStart) {
+				IFigure figure = getHostFigure();
+				originalBounds = getHostFigure().getBounds().getCopy();
+				origBoundsRel = originalBounds.getCopy();
+				figure.translateToAbsolute(originalBounds);
+				originalBounds.translate(request.getMoveDelta().getNegated())
+						.resize(request.getSizeDelta().getNegated());
+				startConnection(originalBounds, getSourceConnections(), getTargetConnections());
+				connectionStart = false;
+			} else {
+				updateConnection(request.getTransformedRectangle(originalBounds.getCopy()));
+			}
 		}
 	}
 
@@ -144,5 +170,4 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	public void updateConnection(Rectangle newBounds) {
 		router.updateBoxDrag(newBounds);
 	}
-
 }
