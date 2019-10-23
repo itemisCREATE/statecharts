@@ -14,7 +14,10 @@ import java.util.List;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.geometry.Vector;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
@@ -22,11 +25,15 @@ import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editpolicies.GraphicalEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.internal.commands.SetConnectionBendpointsCommand;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
-import org.eclipse.gmf.runtime.notation.Edge;
+import org.yakindu.base.gmf.runtime.router.ConnData;
 import org.yakindu.base.gmf.runtime.router.RubberBandRoutingSupport;
+import org.yakindu.base.xtext.utils.gmf.commands.SetLabelsOffsetOperation;
+import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
+import org.yakindu.base.xtext.utils.gmf.routing.EdgeLabelLocator;
+import org.yakindu.sct.ui.editor.commands.SetConnectionBendpointsAndLabelCommmand;
 
 public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
@@ -44,11 +51,11 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		CompoundCommand result = new CompoundCommand();
 		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
 		for (IGraphicalEditPart part : sourceConnections) {
-			result.add(getBendpointsChangedCommand((Connection) part.getFigure(), (Edge) part.getModel()));
+			result.add(getBendpointsChangedCommand((ConnectionEditPart) part));
 		}
 		List<IGraphicalEditPart> targetConnections = getHost().getTargetConnections();
 		for (IGraphicalEditPart part : targetConnections) {
-			result.add(getBendpointsChangedCommand((Connection) part.getFigure(), (Edge) part.getModel()));
+			result.add(getBendpointsChangedCommand((ConnectionEditPart) part));
 		}
 		if (result.size() == 0) {
 			return null;
@@ -69,7 +76,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	}
 
 	@SuppressWarnings("restriction")
-	protected Command getBendpointsChangedCommand(Connection connection, Edge edge) {
+	protected Command getBendpointsChangedCommand(ConnectionEditPart part) {
+		Connection connection = part.getConnectionFigure();
 		Point ptRef1 = connection.getSourceAnchor().getReferencePoint();
 		connection.translateToRelative(ptRef1);
 
@@ -78,9 +86,11 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
 		TransactionalEditingDomain editingDomain = getHost().getEditingDomain();
 
-		SetConnectionBendpointsCommand sbbCommand = new SetConnectionBendpointsCommand(editingDomain);
-		sbbCommand.setEdgeAdapter(new EObjectAdapter(edge));
+		SetConnectionBendpointsAndLabelCommmand sbbCommand = new SetConnectionBendpointsAndLabelCommmand(editingDomain);
+		sbbCommand.setEdgeAdapter(new EObjectAdapter((EObject) part.getModel()));
 		sbbCommand.setNewPointList(connection.getPoints(), ptRef1, ptRef2);
+		sbbCommand.setLabelsToUpdate(part,
+				router.getCD(part.getFigure()).convertToPointList(router.getCD(part.getFigure()).initialVisualPoints));
 
 		return new ICommandProxy(sbbCommand);
 	}
@@ -156,10 +166,38 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		}
 	}
 
+	private void showLineFeedback(ConnectionEditPart connectionEditPart) {
+		List<?> children = connectionEditPart.getChildren();
+		Connection connection = connectionEditPart.getConnectionFigure();
+		for (Object child : children) {
+			if (child instanceof ExternalXtextLabelEditPart) {
+				IFigure figure = ((ExternalXtextLabelEditPart) child).getFigure();
+				Object currentConstraint = connection.getLayoutManager().getConstraint(figure);
+				if (currentConstraint instanceof EdgeLabelLocator) {
+					EdgeLabelLocator edgeLabelLocator = (EdgeLabelLocator) currentConstraint;
+
+					ConnData cd = router.getCD(connection);
+					PointList initialPoints = cd.convertToPointList(cd.initialVisualPoints);
+
+					edgeLabelLocator.setFeedbackData(initialPoints,
+							new Vector(edgeLabelLocator.getOffset().x, edgeLabelLocator.getOffset().y),
+							SetLabelsOffsetOperation.isEdgeWithObliqueRoutingStyle(connectionEditPart));
+
+				}
+			}
+		}
+	}
+
 	@Override
 	public void showSourceFeedback(Request request) {
 		if (request instanceof ChangeBoundsRequest) {
 			showChangeBoundsFeedback((ChangeBoundsRequest) request);
+			for (Object object : getHost().getSourceConnections()) {
+				showLineFeedback((ConnectionEditPart) object);
+			}
+			for (Object object : getHost().getTargetConnections()) {
+				showLineFeedback((ConnectionEditPart) object);
+			}
 		}
 	}
 
