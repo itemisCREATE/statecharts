@@ -27,6 +27,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 	private final IMapMode mapMode;
 
 	protected static final int TOLERANCE = 4;
+	protected static final int ROUNDED_RADIUS = 5;
 
 	public TransitionFigure(IMapMode mapMode) {
 		this(mapMode, false);
@@ -36,6 +37,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 		this.mapMode = mapMode;
 		setTolerance();
 		setLineWidth(mapMode.DPtoLP(1));
+		setRoundedBendpointsRadius(ROUNDED_RADIUS);
 		if (reversed)
 			setSourceDecoration(createTargetDecoration());
 		else
@@ -57,7 +59,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 	protected IMapMode getMapMode() {
 		return mapMode;
 	}
-
+	
 	private RotatableDecoration createTargetDecoration() {
 		PolygonDecoration df = new PolygonDecoration();
 		df.setFill(true);
