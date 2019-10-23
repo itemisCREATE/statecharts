@@ -21,12 +21,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -39,7 +40,7 @@ import com.google.inject.name.Named;
 public class XtextFakeResourceContext {
 
 	@Inject
-	private IResourceSetProvider resourceSetProvider;
+	private Provider<XtextResourceSet> resourceSetProvider;
 	private ResourceSet fakeResourceSet;
 	@Inject
 	private XtextResource fakeResource;
@@ -75,7 +76,7 @@ public class XtextFakeResourceContext {
 	}
 
 	protected void createXtextFakeResourceSet() {
-		fakeResourceSet = resourceSetProvider.get(getActiveProject());
+		fakeResourceSet = resourceSetProvider.get();
 	}
 
 	protected void initXtextFakeResource() {
