@@ -44,16 +44,10 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	private RubberBandRoutingSupport router = new RubberBandRoutingSupport();
 	private RelativeBendpointUtil relbpUtil = new RelativeBendpointUtil();
 
-	@SuppressWarnings("unchecked")
 	public Command createUpdateAllBendpointsCommand() {
 		CompoundCommand result = new CompoundCommand();
-		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
-		for (IGraphicalEditPart part : sourceConnections) {
-			result.add(getBendpointsChangedCommand((ConnectionEditPart) part));
-		}
-		List<IGraphicalEditPart> targetConnections = getHost().getTargetConnections();
-		for (IGraphicalEditPart part : targetConnections) {
-			result.add(getBendpointsChangedCommand((ConnectionEditPart) part));
+		for (ConnectionEditPart part : getAllConnectionParts()) {
+			result.add(getBendpointsChangedCommand(part));
 		}
 		if (result.size() == 0) {
 			return null;
@@ -73,6 +67,14 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<ConnectionEditPart> getAllConnectionParts() {
+		List<ConnectionEditPart> conns = new ArrayList<>();
+		conns.addAll(getHost().getSourceConnections());
+		conns.addAll(getHost().getTargetConnections());
+		return conns;
+	}
+
 	@SuppressWarnings("restriction")
 	protected Command getBendpointsChangedCommand(ConnectionEditPart part) {
 		Connection connection = part.getConnectionFigure();
@@ -87,8 +89,7 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		SetConnectionBendpointsAndLabelCommmand sbbCommand = new SetConnectionBendpointsAndLabelCommmand(editingDomain);
 		sbbCommand.setEdgeAdapter(new EObjectAdapter((EObject) part.getModel()));
 		sbbCommand.setNewPointList(connection.getPoints(), ptRef1, ptRef2);
-		sbbCommand.setLabelsToUpdate(part,
-				relbpUtil.convertToPointList(router.getCD(part.getFigure()).initialVisualPoints));
+		sbbCommand.setLabelsToUpdate(part, getInitialPoints(connection));
 
 		return new ICommandProxy(sbbCommand);
 	}
@@ -106,64 +107,66 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		return (IGraphicalEditPart) super.getHost();
 	}
 
+	private PointList getInitialPoints(Connection connection) {
+		return relbpUtil.convertToPointList(router.getCD(connection).initialVisualPoints);
+	}
+
 	private List<Connection> getSourceConnections() {
 		List<Connection> result = new ArrayList<>();
+		@SuppressWarnings("unchecked")
 		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
 		for (IGraphicalEditPart iGraphicalEditPart : sourceConnections) {
 			Connection connection = (Connection) iGraphicalEditPart.getFigure();
-//			if (connection.getSourceAnchor().getOwner() != getHostFigure()) {
-//				continue;
-//			}
 			result.add(connection);
-//			System.out.println(System.identityHashCode(this) + " :: source connection: "
-//					+ connection.getSourceAnchor().getOwner().getBounds() + " TO "
-//					+ connection.getTargetAnchor().getOwner().getBounds());
 		}
 		return result;
 	}
 
 	private List<Connection> getTargetConnections() {
 		List<Connection> result = new ArrayList<>();
+		@SuppressWarnings("unchecked")
 		List<IGraphicalEditPart> targetConnections = getHost().getTargetConnections();
 		for (IGraphicalEditPart iGraphicalEditPart : targetConnections) {
 			Connection connection = (Connection) iGraphicalEditPart.getFigure();
-//			if (connection.getTargetAnchor().getOwner() != getHostFigure()) {
-//				continue;
-//			}
 			result.add(connection);
-//			System.out.println(System.identityHashCode(this) + " :: target connection: "
-//					+ connection.getSourceAnchor().getOwner().getBounds() + " TO "
-//					+ connection.getTargetAnchor().getOwner().getBounds());
 		}
 		return result;
 	}
 
+	private void justKeepConnectionsInPlace() {
+		if (connectionStart) {
+			originalBounds = getHostFigure().getBounds().getCopy();
+			router.initBoxDrag(originalBounds, getSourceConnections(), getTargetConnections());
+			connectionStart = false;
+		} else {
+			router.updateBoxDrag(originalBounds);
+		}
+	}
+
+	private void routeInResponseToBoxDrag(ChangeBoundsRequest request) {
+		if (connectionStart) {
+			IFigure figure = getHostFigure();
+			originalBounds = getHostFigure().getBounds().getCopy();
+			figure.translateToAbsolute(originalBounds);
+			originalBounds.translate(request.getMoveDelta().getNegated()).resize(request.getSizeDelta().getNegated());
+			router.initBoxDrag(originalBounds, getSourceConnections(), getTargetConnections());
+			connectionStart = false;
+		} else {
+			router.updateBoxDrag(request.getTransformedRectangle(originalBounds));
+		}
+	}
+
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
 		if (request.getEditParts().get(0) != getHost()) {
-			// keep all connections in place
-			if (connectionStart) {
-				originalBounds = getHostFigure().getBounds().getCopy();
-				startConnection(originalBounds, getSourceConnections(), getTargetConnections());
-				connectionStart = false;
-			} else {
-				updateConnection(originalBounds);
-			}
+			// XXX: policy is also called for composites
+			justKeepConnectionsInPlace();
 		} else {
-			if (connectionStart) {
-				IFigure figure = getHostFigure();
-				originalBounds = getHostFigure().getBounds().getCopy();
-				figure.translateToAbsolute(originalBounds);
-				originalBounds.translate(request.getMoveDelta().getNegated())
-						.resize(request.getSizeDelta().getNegated());
-				startConnection(originalBounds, getSourceConnections(), getTargetConnections());
-				connectionStart = false;
-			} else {
-				updateConnection(request.getTransformedRectangle(originalBounds));
-			}
+			routeInResponseToBoxDrag(request);
 		}
 	}
 
 	private void showLineFeedback(ConnectionEditPart connectionEditPart) {
+		// XXX: copied from InitialPointsOfRequestDataManager
 		List<?> children = connectionEditPart.getChildren();
 		Connection connection = connectionEditPart.getConnectionFigure();
 		for (Object child : children) {
@@ -172,14 +175,9 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 				Object currentConstraint = connection.getLayoutManager().getConstraint(figure);
 				if (currentConstraint instanceof EdgeLabelLocator) {
 					EdgeLabelLocator edgeLabelLocator = (EdgeLabelLocator) currentConstraint;
-
-					PointList initialPoints = relbpUtil
-							.convertToPointList(router.getCD(connection).initialVisualPoints);
-
-					edgeLabelLocator.setFeedbackData(initialPoints,
+					edgeLabelLocator.setFeedbackData(getInitialPoints(connection),
 							new Vector(edgeLabelLocator.getOffset().x, edgeLabelLocator.getOffset().y),
 							SetLabelsOffsetOperation.isEdgeWithObliqueRoutingStyle(connectionEditPart));
-
 				}
 			}
 		}
@@ -189,20 +187,9 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	public void showSourceFeedback(Request request) {
 		if (request instanceof ChangeBoundsRequest) {
 			showChangeBoundsFeedback((ChangeBoundsRequest) request);
-			for (Object object : getHost().getSourceConnections()) {
-				showLineFeedback((ConnectionEditPart) object);
-			}
-			for (Object object : getHost().getTargetConnections()) {
-				showLineFeedback((ConnectionEditPart) object);
+			for (ConnectionEditPart cep : getAllConnectionParts()) {
+				showLineFeedback(cep);
 			}
 		}
-	}
-
-	public void startConnection(Rectangle original, List<Connection> source, List<Connection> target) {
-		router.initBoxDrag(original, source, target);
-	}
-
-	public void updateConnection(Rectangle newBounds) {
-		router.updateBoxDrag(newBounds);
 	}
 }
