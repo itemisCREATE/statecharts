@@ -19,6 +19,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.internal.editpolicies.TreeConnectionBendpointEditPolicy;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.routers.ForestRouter;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.routers.OrthogonalRouter;
 import org.eclipse.gmf.runtime.gef.ui.internal.editpolicies.LineMode;
@@ -94,6 +95,11 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 	@Override
 	public TransitionFigure getFigure() {
 		return (TransitionFigure) super.getFigure();
+	}
+	
+	@Override
+	protected void refreshRoundedBendpoints() {
+		
 	}
 	
 	@Override
