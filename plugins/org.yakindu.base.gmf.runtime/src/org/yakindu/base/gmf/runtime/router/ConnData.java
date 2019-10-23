@@ -99,6 +99,14 @@ public class ConnData {
 		}
 	}
 
+	public PointList convertToPointList(List<? extends Point> points) {
+		PointList pl = new PointList(points.size());
+		for (Point p : points) {
+			pl.addPoint(p.getCopy());
+		}
+		return pl;
+	}
+
 	public List<PrecisionPoint> getInitialVisualPointsCopy() {
 		List<PrecisionPoint> copy = new ArrayList<>();
 		for (PrecisionPoint p : initialVisualPoints) {
@@ -162,6 +170,10 @@ public class ConnData {
 		return mmds;
 	}
 
+//	public PrecisionPoint getTransformed(PrecisionPoint p) {
+//		return new PrecisionPoint((p.preciseX() * scale) + tx, (p.preciseY() * scale) + ty);
+//	}
+
 	private int getSideIndex(Rectangle bounds, boolean isVerticalSegment, PrecisionPoint anchorPoint) {
 		int index;
 		if (isVerticalSegment) {
@@ -183,10 +195,6 @@ public class ConnData {
 		}
 		return index;
 	}
-
-//	public PrecisionPoint getTransformed(PrecisionPoint p) {
-//		return new PrecisionPoint((p.preciseX() * scale) + tx, (p.preciseY() * scale) + ty);
-//	}
 
 	public List<PrecisionPoint> getVisualPoints() {
 		List<PrecisionPoint> list = new ArrayList<>();

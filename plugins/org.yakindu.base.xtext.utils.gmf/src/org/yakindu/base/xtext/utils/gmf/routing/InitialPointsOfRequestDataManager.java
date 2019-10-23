@@ -42,8 +42,38 @@ public class InitialPointsOfRequestDataManager {
 	 */
 	private static final String INITIAL_POINTS_KEY = "InitialPointsManagerForEdgePolicy.initialPointsKey"; //$NON-NLS-1$
 
+	/**
+	 * Get the initial points list of the edge stored in the <code>request</code>.
+	 *
+	 * @param request The request to query
+	 * @return the original points list or null if no original points are stored in
+	 *         this request.
+	 */
+	public static PointList getOriginalPoints(LocationRequest request) {
+		return (PointList) request.getExtendedData().get(INITIAL_POINTS_KEY);
+	}
+
 	/** The list of points before feedback drawing. */
 	private PointList initialPoints;
+
+	/**
+	 * Reset the initial points stored in this manager and also erase the feedback
+	 * data from all the {@link EdgeLabelLocator} of the labels of the current
+	 * connection.
+	 *
+	 * @param connection The connection from which to erase feedback data
+	 */
+	public void eraseInitialPoints(Connection connection) {
+		initialPoints = null;
+		for (Object object : connection.getChildren()) {
+			if (object instanceof WrappingLabel) {
+				Object currentConstraint = connection.getLayoutManager().getConstraint((WrappingLabel) object);
+				if (currentConstraint instanceof EdgeLabelLocator) {
+					((EdgeLabelLocator) currentConstraint).eraseFeedbackData();
+				}
+			}
+		}
+	}
 
 	/**
 	 * Store the initial points of the edge in the request (before feedback
@@ -53,10 +83,9 @@ public class InitialPointsOfRequestDataManager {
 	 * labels of the current connection to correctly draw the label feedback during
 	 * the label move.
 	 *
-	 * @param request
-	 *            the request in which to store the original points of the edge.
-	 * @param connectionEditPart
-	 *            the editPart of the edge
+	 * @param request            the request in which to store the original points
+	 *                           of the edge.
+	 * @param connectionEditPart the editPart of the edge
 	 */
 	@SuppressWarnings("unchecked")
 	public void storeInitialPointsInRequest(LocationRequest request, ConnectionEditPart connectionEditPart) {
@@ -83,37 +112,5 @@ public class InitialPointsOfRequestDataManager {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Reset the initial points stored in this manager and also erase the feedback
-	 * data from all the {@link EdgeLabelLocator} of the labels of the current
-	 * connection.
-	 *
-	 * @param connection
-	 *            The connection from which to erase feedback data
-	 */
-	public void eraseInitialPoints(Connection connection) {
-		initialPoints = null;
-		for (Object object : connection.getChildren()) {
-			if (object instanceof WrappingLabel) {
-				Object currentConstraint = connection.getLayoutManager().getConstraint((WrappingLabel) object);
-				if (currentConstraint instanceof EdgeLabelLocator) {
-					((EdgeLabelLocator) currentConstraint).eraseFeedbackData();
-				}
-			}
-		}
-	}
-
-	/**
-	 * Get the initial points list of the edge stored in the <code>request</code>.
-	 *
-	 * @param request
-	 *            The request to query
-	 * @return the original points list or null if no original points are stored in
-	 *         this request.
-	 */
-	public static PointList getOriginalPoints(LocationRequest request) {
-		return (PointList) request.getExtendedData().get(INITIAL_POINTS_KEY);
 	}
 }

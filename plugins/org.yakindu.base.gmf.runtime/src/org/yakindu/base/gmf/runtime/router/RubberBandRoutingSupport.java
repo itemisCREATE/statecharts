@@ -225,6 +225,10 @@ public class RubberBandRoutingSupport {
 		return sourceBox;
 	}
 
+	public ConnData getCD(IFigure figure) {
+		return conn.get(figure);
+	}
+
 	public void initBoxDrag(Rectangle originalAbs, List<Connection> sourceConnections,
 			List<Connection> targetConnections) {
 		// save original bounds in asbolute coordinates
