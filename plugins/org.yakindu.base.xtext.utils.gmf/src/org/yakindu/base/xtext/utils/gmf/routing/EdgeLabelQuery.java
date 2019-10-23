@@ -609,7 +609,7 @@ public class EdgeLabelQuery {
 							.getLength() < fromOldToNewCenterVector.getLength())) {
 						cond3 = true;
 //						System.out.println("COND 3");
-						System.out.println("[WARN] Label relocation: prevent fallback to anchor point.");
+//						System.out.println("[WARN] Label relocation: prevent fallback to anchor point.");
 //						fromOldToNewCenterVector = null;
 					} else {
 						case2 = true;
