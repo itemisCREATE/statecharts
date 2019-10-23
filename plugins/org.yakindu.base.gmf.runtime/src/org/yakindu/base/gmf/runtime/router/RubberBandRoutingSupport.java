@@ -1,3 +1,11 @@
+/**
+* Copyright (c) 2019 itemis AG - All rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+*
+* Contributors:
+* 	matthias wienand - itemis AG
+*
+*/
 package org.yakindu.base.gmf.runtime.router;
 
 import java.util.ArrayList;
@@ -17,7 +25,6 @@ import org.yakindu.base.gmf.runtime.router.GeometryUtil.Line;
 
 public class RubberBandRoutingSupport {
 
-	// TODO: injection
 	protected RelativeBendpointUtil relbpUtil = new RelativeBendpointUtil();
 	protected GeometryUtil geom = new GeometryUtil();
 	protected Map<Connection, ConnData> conn = new HashMap<>();
