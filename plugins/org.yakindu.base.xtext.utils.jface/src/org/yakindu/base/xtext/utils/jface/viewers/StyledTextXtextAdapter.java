@@ -121,6 +121,10 @@ public class StyledTextXtextAdapter {
 	}
 
 	public void adapt(StyledText styledText) {
+		adapt(styledText, true);
+	}
+
+	public void adapt(StyledText styledText, boolean decorate) {
 		this.styledText = styledText;
 
 		// perform initialization of fake resource context
@@ -170,8 +174,10 @@ public class StyledTextXtextAdapter {
 		IFocusService service = (IFocusService) PlatformUI.getWorkbench().getService(IFocusService.class);
 		service.addFocusTracker(styledText, StyledText.class.getCanonicalName());
 
-		// add JDT Style code completion hint decoration
-		this.decoration = createContentAssistDecoration(styledText);
+		if (decorate) {
+			// add JDT Style code completion hint decoration
+			this.decoration = createContentAssistDecoration(styledText);
+		}
 
 		initSelectionProvider();
 	}
@@ -240,9 +246,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	/**
-	 * Creates decoration support for the sourceViewer. code is entirely copied
-	 * from {@link XtextEditor} and its super class
-	 * {@link AbstractDecoratedTextEditor}.
+	 * Creates decoration support for the sourceViewer. code is entirely copied from
+	 * {@link XtextEditor} and its super class {@link AbstractDecoratedTextEditor}.
 	 *
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
@@ -418,7 +423,7 @@ public class StyledTextXtextAdapter {
 			}
 
 			text.setSelection(text.getCaretOffset());
-			
+
 		}
 
 		protected void setIgnoreNextFocusLost(boolean b) {

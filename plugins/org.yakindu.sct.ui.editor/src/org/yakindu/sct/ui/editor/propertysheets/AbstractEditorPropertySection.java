@@ -130,7 +130,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(injector);
 		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
 				.add(new ContextElementAdapter(getEObject()));
-		xtextAdapter.adapt((StyledText) styledText);
+		xtextAdapter.adapt((StyledText) styledText, false);
 
 		initContextMenu(styledText);
 
