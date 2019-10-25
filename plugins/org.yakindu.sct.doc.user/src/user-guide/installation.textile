@@ -3,16 +3,15 @@ p.
 
 h1(#inst_installing_yakindu_statechart_tools). Installing YAKINDU Statechart Tools
 
-In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
+In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. The installation process is pretty simple, just download the archive, unpack it, and start the executable.
 
-The installation process boils down to
-# checking the "system requirements":#inst_system-requirements,
-# unpacking the downloaded ZIP file containing YAKINDU Statechart Tools, and
-# executing the _SCT_ application.
+Watch the following screencast if you want to know what happens after filling out the download form:
 
-This is explained in more detail in section "&quot;Platform overview&quot;":#inst_platform-overview and the following sections.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UmdQPZvP5x4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 
-Java developers might want to read section "JRE not found":#inst_jre-not-found, in case they encounter a certain problem.
+Please note, that you need to have Java installed on your system. For more details, read section "System requirements":#inst_system-requirements.
+
+In case you want to install YAKINDU Statechart Tools into an existing Eclipse instance, read section "Installing to an existing Eclipse instance":#inst_installing_to_an_existing_eclipse_instance.
 
 
 
@@ -27,13 +26,11 @@ Installation of Java is beyond the scope of this document. You can find more inf
 
 h3(#inst_eclipse). Eclipse
 
-Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently it is the *Oxygen* release.
-
-###. CHECK: Is Oxygen still the current Eclipse release?
+Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer.
 
 If you are new to Eclipse, you might find the "Eclipse Help":http://help.eclipse.org/ useful, especially the "Workbench User Guide".
 
-If you are an experienced Eclipse user, you can install YAKINDU Statechart Tools into a existing Eclipse instance from an update site.
+If you are an experienced Eclipse user, you can install YAKINDU Statechart Tools into an existing Eclipse instance from an update site. Read more about this in section "Installing to an existing Eclipse instance":#inst_installing_to_an_existing_eclipse_instance.
 
 
 
@@ -48,7 +45,6 @@ You can install YAKINDU Statechart Tools as a stand-alone software package under
 Alternatively, you can install YAKINDU Statechart Tools into an existing Eclipse instance.
 
 * "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#inst_installing_to_an_existing_eclipse_instance
-
 
 
 
@@ -438,7 +434,7 @@ h2(#inst_installing_to_an_existing_eclipse_instance). Installing to an existing 
 
 This chapter describes the steps that are needed to install YAKINDU Statechart Tools to an existing Eclipse instance. Let's assume you already have Eclipse up and running and now you want to install YAKINDU Statechart Tools as an additional software item (plugin).
 
-bq. *Please note:* On macOS, this only works if your _.app_ file is located in your _app_ folder.
+bq. *Please note:* On macOS, this only works if your _.app_ file is located in your _Applications_ folder.
 
 In the the _Help_ menu, select the _Install New Software_ menu item:
 
@@ -454,11 +450,9 @@ p=. The _Install_ wizard
 
 Click on the _Add..._ button near the upper right corner of the wizard.
 
-A dialog opens, asking you to specify the update repository you want to install the new software from. The appropriate update repository depends on your Eclipse version. Please enter the URL of the respective update repository into the _Location_ field.
+A dialog opens, asking you to specify the update repository you want to install the new software from.
 
 bq. *Please note:* Update site URLs are available online via the "YAKINDU Statechart Tools download page":https://info.itemis.com/state-machine/download-yakindu-statechart-tools.
-
-Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i.e., Eclipse 4.4).
 
 !images/inst_eclipse_030_eclipse_add_repository.png(Adding a software repository)!
 
