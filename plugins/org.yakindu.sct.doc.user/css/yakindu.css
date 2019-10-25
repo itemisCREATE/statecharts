@@ -68,6 +68,16 @@ body.eclipsehelp {
 }
 
 /*
+ * Embedded videos (iframe) should be centered
+ */
+.body-container .primary iframe {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
  * Use the CSS class "inlinemediaobject" to include small images like symbols or buttons within a paragraph of text
  * similar to a character. The image is scaled to have the height of the line.
  */
