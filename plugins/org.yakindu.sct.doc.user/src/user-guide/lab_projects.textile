@@ -5,7 +5,7 @@ h1(#lab_projects). Lab Features
 
 Researching, prototyping, and putting our ideas into code, aside from the day-to-day business, is an essential part of our development culture. YAKINDU Labs is a collection of projects that are currently in beta phase and therefore not yet released with any YAKINDU product bundles. As we love early feedback, we regularly blog about what's going on behind the scenes. So try it, and get in touch with us!
 
-!images/lab_projects_yakindu_labs_icon.png(Lab Projects Icon)!
+!(small)images/lab_projects_yakindu_labs_icon.png(Lab Projects Icon)!
 
 h2(#lab_projects_python_codegen). Python Code Generator
 
@@ -65,13 +65,13 @@ h2(#lab_projects_howto_install_codegen). How to Install More Code Generators
 
 The code generators listed in this chapter are not part of our official product bundles as their are currently in a beta phase. This means that you need to install them separately if you want to use them. The easiest way is to use the generator model wizard and select _Install More…_ This will list all available code generators that are not yet installed.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gpINwwyfnqk"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gpINwwyfnqk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
 
 
 h2(#lab_projects_howto_import_examples). How to Import Code Generator Examples
 
 For most of the code generators listed here we also provide example projects. The easiest way is to open the example wizard in YAKINDU Statechart Tools. In case an example needs some additional dependencies you can install them directly from the example wizard.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VXq_g-Mz2BQ"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VXq_g-Mz2BQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
 
 
