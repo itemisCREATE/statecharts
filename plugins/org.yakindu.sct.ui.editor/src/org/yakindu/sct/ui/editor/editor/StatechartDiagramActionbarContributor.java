@@ -10,10 +10,13 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+
 import org.eclipse.gmf.runtime.common.ui.action.global.GlobalActionId;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.ui.editor.commands.DocumentationMenuAction;
 
 /**
@@ -31,9 +34,16 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
 
+		showButtonsByPerspective(bars);
+
 		// remove 'arrange all' and 'arrange selection' actions
 		bars.getToolBarManager().remove(ActionIds.MENU_ARRANGE);
 		bars.getMenuManager().findMenuUsingPath(ActionIds.MENU_DIAGRAM).remove(ActionIds.MENU_ARRANGE);
+	}
+
+	private void showButtonsByPerspective(IActionBars bars) {
+		IWorkbenchWindow win = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		win.addPerspectiveListener(new DisableButtonsByPerspectiveListener(bars));
 	}
 
 	@Override

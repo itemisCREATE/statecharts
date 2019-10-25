@@ -440,7 +440,7 @@ The first assertion checks whether the operation _myOperation_ has been called d
 
 The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g., @myOperation(1, 2)@.
 
-The third assertion checks whether the operation _myOperation_ has been called exactly 4 times, no matter the arguments, while the fourth assertion checks if the operation has been called exactly one time with the specified parameters.
+The third assertion checks whether the operation _myOperation_ has been called at least 4 times, no matter the arguments, while the fourth assertion checks if the operation has been called at least one time with the specified parameters.
 
 The fifth assertion checks if the "forbidden" operation @myError@ has been called, and fails in that case. 
 
