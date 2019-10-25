@@ -70,6 +70,11 @@ public class ModelCreationWizardPage extends WizardNewFileCreationPage {
 			setErrorMessage(NLS.bind("file extension is not valid! The valid extension is: " + "." + fileExtension, extension));
 			return false;
 		}
+		String name = getFileName();
+		if (name != null && !name.matches("^[-a-zA-Z0-9._]+")) {
+			setErrorMessage("file name is not valid!");
+			return false;
+		}
 		return true;
 	}
 
