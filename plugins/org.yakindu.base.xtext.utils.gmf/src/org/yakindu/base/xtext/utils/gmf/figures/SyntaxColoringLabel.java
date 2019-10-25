@@ -78,7 +78,15 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 	}
 
 	public void setRanges(StyleRange[] ranges) {
+		textFlow.clearCache();
 		textFlow.setRanges(ranges);
+	}
+
+	@Override
+	public void setText(String text) {
+		if (textFlow != null)
+			textFlow.clearCache();
+		super.setText(text);
 	}
 
 	public void mouseEntered(MouseEvent me) {
@@ -109,7 +117,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		private static final GC gc = new GC(dummy);
 		private Font boldFont;
 		private double zoom = 1.0;
-		private boolean highlight = true;
+		private boolean highlight = false;
 		private int fromIndex = 0;
 
 		public void setHighlight(boolean highlight) {
@@ -245,12 +253,10 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			return flowUtilities;
 		}
 
-		@Override
-		public void invalidate() {
+		public void clearCache() {
 			if (textUtilities != null) {
 				textUtilities.invalidate();
 			}
-			super.invalidate();
 		}
 
 		protected class StyleTextUtilities extends TextUtilitiesEx {
@@ -264,6 +270,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 					public Dimension load(String key) throws Exception {
 						return getTextExtentsInternal(key, getFont());
 					}
+
 				});
 			}
 
