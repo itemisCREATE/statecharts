@@ -12,12 +12,17 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayoutAnimator;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
@@ -44,6 +49,15 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		// Removes the collapse expand handler
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableEditPolicyEx());
 		installEditPolicy(EditPolicyRoles.SNAP_FEEDBACK_ROLE, new SimpleSnapFeedbackPolicy());
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new XYLayoutEditPolicy() {
+			//This is required when live feedback is used 
+			@Override
+			protected Object getConstraintFor(ChangeBoundsRequest request, GraphicalEditPart child) {
+				request.setSizeDelta(new Dimension(0,0));
+				request.setMoveDelta(new Point(0,0));
+				return super.getConstraintFor(request, child);
+			}
+		});
 	}
 
 	@Override

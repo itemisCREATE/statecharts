@@ -28,6 +28,7 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.yakindu.base.gmf.runtime.router.ConnData;
 import org.yakindu.base.gmf.runtime.router.RelativeBendpointUtil;
 import org.yakindu.base.gmf.runtime.router.RubberBandRoutingSupport;
 import org.yakindu.base.xtext.utils.gmf.commands.SetLabelsOffsetOperation;
@@ -108,7 +109,10 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	}
 
 	private PointList getInitialPoints(Connection connection) {
-		return relbpUtil.convertToPointList(router.getCD(connection).initialVisualPoints);
+		ConnData cd = router.getCD(connection);
+		if(cd != null)
+			return relbpUtil.convertToPointList(cd.initialVisualPoints);
+		return connection.getPoints();
 	}
 
 	private List<Connection> getSourceConnections() {
