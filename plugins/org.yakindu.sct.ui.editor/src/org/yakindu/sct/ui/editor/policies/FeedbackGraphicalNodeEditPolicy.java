@@ -32,10 +32,15 @@ public class FeedbackGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 	protected Connection createDummyConnection(Request req) {
 		if (req instanceof CreateUnspecifiedTypeConnectionRequest) {
 			if (((CreateUnspecifiedTypeConnectionRequest) req).isDirectionReversed()) {
-				return new TransitionFigure(getMapMode(), true);
+				TransitionFigure figure =  new TransitionFigure(getMapMode(), true);
+				figure.setRoundedBendpointsRadius(0);
+				return figure;
 			}
 		}
-		return new TransitionFigure(getMapMode());
+		
+		TransitionFigure figure = new TransitionFigure(getMapMode());
+		figure.setRoundedBendpointsRadius(0);
+		return figure;
 	}
 
 	protected IMapMode getMapMode() {
@@ -44,8 +49,8 @@ public class FeedbackGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 			DiagramRootEditPart dgrmRoot = (DiagramRootEditPart) root;
 			return dgrmRoot.getMapMode();
 		}
-
 		return MapModeUtil.getMapMode();
+
 	}
 
 	@Override
