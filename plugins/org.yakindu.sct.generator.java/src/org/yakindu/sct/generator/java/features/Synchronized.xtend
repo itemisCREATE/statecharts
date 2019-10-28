@@ -9,4 +9,16 @@ class Synchronized {
 	def sync() {
 		if(needsSynchronized) "synchronized " else ""
 	}
+	
+	def sync(String object, CharSequence code) {
+		if(needsSynchronized) {
+			'''
+			synchronized(«object») {
+				«code»
+			}
+			'''
+		} else {
+			code
+		}
+	}
 }

@@ -35,7 +35,8 @@ class EventDrivenEventCode extends EventCode {
 	override inEventRaiser(EventDefinition it) {
 		if(needsInEventQueue(flow)) {
 			'''
-			public «sync»void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+			public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+				«sync(flow.statemachineClassName + ".this", '''
 				inEventQueue.add(
 					new Runnable() {
 						@Override
@@ -53,14 +54,17 @@ class EventDrivenEventCode extends EventCode {
 				«IF !needsRunnable»
 				runCycle();
 				«ENDIF»
+				''')»
 			}
 			'''
 		} else {
 			'''
-			public «sync»void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+			public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+				«sync(flow.statemachineClassName + ".this", '''
 				«IF hasValue»«valueIdentifier» = value;«ENDIF»
 				«identifier» = true;
 				runCycle();
+				''')»
 			}
 			'''
 		}
