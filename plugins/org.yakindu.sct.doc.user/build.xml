@@ -196,7 +196,6 @@
             <fileset id="fileset.eclipsehelp" dir="${src.dir}">
                 <include name="tutorials/tutorials.textile"/>
                 <include name="user-guide/overview.textile"/>
-                <include name="user-guide/installation.textile"/>
                 <include name="user-guide/editing_statecharts.textile"/>
                 <include name="user-guide/simulating_statecharts.textile"/>
                 <include name="user-guide/c-domain.textile"/>
@@ -212,6 +211,7 @@
                 <include name="user-guide/sctunit.textile"/>
                 <include name="user-guide/search_and_navigate.textile"/>
             	<include name="user-guide/lab_projects.textile"/>
+                <include name="user-guide/installation.textile"/>
             	<include name="user-guide/release_notes.textile"/>
                 <!-- <include name="user-guide/glossary.textile" /> -->
             </fileset>
@@ -378,7 +378,6 @@
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="user-guide/overview.textile"/>
-                        <file name="user-guide/installation.textile"/>
                         <file name="user-guide/editing_statecharts.textile"/>
                         <file name="user-guide/simulating_statecharts.textile"/>
                         <file name="user-guide/c-domain.textile"/>
@@ -394,6 +393,7 @@
                         <file name="user-guide/sctunit.textile"/>
                         <file name="user-guide/search_and_navigate.textile"/>
                     	<file name="user-guide/lab_projects.textile"/>
+                        <file name="user-guide/installation.textile"/>
                     	<file name="user-guide/release_notes.textile"/>
                         <!-- file name="user-guide/glossary.textile" / -->
                     </filelist>
