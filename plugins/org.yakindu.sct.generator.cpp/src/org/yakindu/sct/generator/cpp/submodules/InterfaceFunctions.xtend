@@ -87,7 +87,7 @@ class InterfaceFunctions {
 				«IF !variable.readonly && !variable.const»
 					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
 					{
-						«variable.localAccess» = value;
+						this->«variable.localAccess» = value;
 					}
 					
 					«IF scope.defaultInterface»

@@ -1,0 +1,10 @@
+testclass ShadowValueParameter for statechart ShadowValueParameter {
+	
+	@Test
+	operation shadowValueParameterTest() {
+		enter
+		value = 2
+		assert(value == 2)
+		exit
+	}
+}

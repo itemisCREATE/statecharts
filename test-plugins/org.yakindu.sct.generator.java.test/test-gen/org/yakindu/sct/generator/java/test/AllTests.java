@@ -76,6 +76,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SameNameDifferentRegion.class,
 	ShallowHistory.class,
 	ShallowHistoryWithDeepEntry.class,
+	ShadowValueParameter.class,
 	SimpleEvent.class,
 	SimpleHierachy.class,
 	StatechartActive.class,

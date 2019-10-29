@@ -75,6 +75,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SameNameDifferentRegionTest.class,
 	ShallowHistoryTest.class,
 	ShallowHistoryWithDeepEntryTest.class,
+	ShadowValueParameterTest.class,
 	SimpleEventTest.class,
 	SimpleHierachyTest.class,
 	StatechartActiveTest.class,
