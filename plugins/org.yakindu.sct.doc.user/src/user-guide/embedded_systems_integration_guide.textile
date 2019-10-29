@@ -25,9 +25,13 @@ h2(#Bare-Metal-vs-Operation-System). Bare-Metal vs. RTOS
 Bare metal -> schneller, effizienter, aber nicht skalierbar
 OS -> Skalierbar, mehr Funktionalität, aber langsamer
 
-h2(#Bare-metal-cycle-based-integration). Bare-Metal CycleBased Integration
+h2(#Example-State-Machine-for-Integration). Example State Machine for Integration
 
-This section describes how to integrate a state machine with a cycle based execution semantic on any microcontroller, so on any embedded device. The integration can be structured in three parts, which results the main part of your program.
+s
+
+h2(#Bare-metal-cycle-based-integration). Bare-Metal Integration
+
+This section describes how to integrate a state machine with a cycle based or event driven execution semantic on any microcontroller, so on any embedded device. The integration can be structured in three parts, which results the main part of your program.
 * Initialization - called once
 * While loop - calling the state machine until it's final
 * Final - called if the state machine is final
@@ -47,7 +51,7 @@ p=. High level description of bare metal cycle based state machine integration
 h3(#main-function). Main Function
 
 The main function could be realized as following. The hardware will be initialized. Then the timers will take into account. After this the state machine will be initialized and entered. With these steps, the initialization is has been done. 
-At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events, which are actually also in events. Then the runCycle will be called, which handles the logical execution of the state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
+At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events, which are actually also in events. Then the runCycle will be called, which handles the logical execution of the state machine. This only needed, if the execution semantics is cycle based. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
 
 bc.. 
 void main() {
@@ -106,7 +110,13 @@ void handleInEvents() {
 
 Sensor1_ISR{
 	inEvent1 = true;
-}
+}ne
+
+Create a digital watch for Arduino combined with a 16x2 LCD Keypad Shield and using YAKINDU Statechart Tools.
+Intermediate
+Full instructions provided
+3 hours
+7,050
 
 Sensor2_ISR{
 	inEvent2 = true;
@@ -148,7 +158,7 @@ void handleOutEvents() {
 }
 p. 
 
-h3(#execution-as-state-machien). Execution As State Machine
+h3(#execution-as-state-machine). Execution As State Machine
 
 This is a expanded view on the implementation, of how it can be realized as a state machine.
 
@@ -156,11 +166,71 @@ This is a expanded view on the implementation, of how it can be realized as a st
 
 p=. Complete execution shown as State Machine
 
-h2(#arduino-integration-interrupts). Arduino Integration Polling
+h3(#arduino-integration-polling). Arduino Integration Polling
+
+Polling is a common design pattern to execute yo
+
+bc.. 
+#include "Arduino.h"
+
+#include "src/hw_impl.h"
+#include "src/timer_impl.h"
+#include "src-gen/StateMachineRequired.h"
+
+/*! Define the state machine object */
+StateMachine stateMachine;
+
+/*! Setup the Arduino */
+void setup() {
+	/*! Setup the hardware you're using.
+	 * Digital/Analog Ports, Sensors, Actuators, Communication */
+	hw_init();
+
+	/*! Initialize the timer service. Here you must define,
+	 * how many time events you're using.
+	 * The default value is 10. */
+	timer_init();
+
+	/*! Initialize and enter the state machine */
+	stateMachine_init(&stateMachine);
+	stateMachine_enter(&stateMachine);
+}
+
+/*! Runs forever */
+void loop() {
+	/*! Runs until the state machine is final.
+	 * Always true, if there is no final state defined */
+	while (!stateMachine_isFinal(&stateMachine)) {
+		/*! Update timer with elapsed time using millis()*/
+		handle_timer(millis());
+
+		/*! Poll the inputs/sensors */
+		handle_in_events(&stateMachine);
+
+		/*! For @EventDriven state machines, runCycle must not be called.
+		 * Use runCycle for @CycleBased state machines */
+		//stateMachine_runCycle(&stateMachine);
+
+		/*! Update your actuators */
+		handle_out_events(&stateMachine);
+	}
+}
+
+p. 
+
+Die libs dann erklären
 
 
-h2(#arduino-integration-interrupts). Arduino Integration Interrupts
 
-h2(#arduino-integration-freeRTOS). Arduino Integration freeRTOS
+
+h3(#arduino-integration-interrupt). Arduino Integration Interrupt
+
+h2(#RTOS-based-integration). RTOS Integration
+
+
+
+h3(#arduino-integration-freeRTOS-polling). Arduino Integration FreeRTOS Polling
+
+h3(#arduino-integration-freeRTOS-interrupt). Arduino Integration FreeRTOS Interrupt
 
 
