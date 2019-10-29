@@ -1509,7 +1509,36 @@ GeneratorModel for sctunit::cpp {
 		feature SGenModel {
 			GenerateSGen =  true
 		}
-	}	
+	}
+	
+	test ShadowValueParameter{
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/ShallowHistoryTest"			
+			libraryTargetFolder = "libraryTarget"
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
 	
 	
 	test ShallowHistory{
