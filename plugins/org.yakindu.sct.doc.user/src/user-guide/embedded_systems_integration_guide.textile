@@ -17,17 +17,53 @@ In the environment:
 * Usage of interrupts
 * Usage of sleep modes
 
-This guide will give an overview of the most common and well known design patterns in a generic way and provides examples for an Arduino, a MSP430 and a STM32.
+This guide will give an overview of the most common and well known design patterns in a generic way and initially provides examples for an Arduino and only starts with the bare-metal integration. It will be continuously expanded.
 
-h2(#Bare-Metal-vs-Operation-System). Bare-Metal vs. RTOS
+h2(#polling-vs-interrupts). Polling vs.Interrupts
 
-?
-Bare metal -> schneller, effizienter, aber nicht skalierbar
-OS -> Skalierbar, mehr Funktionalität, aber langsamer
+Programming bare-metal microcontrollers without any kind of RTOS or scheduler mainly leads to the architectural decision: Polling or Interrupts.
+This section will give a short overview, of how both design patterns work.
+
+h3(#polling). Polling
+
+Polling is a simple approach to get a first prototype running. Most programs look like this:
+
+bc.. 
+int main() {
+	init();
+	while(true){
+		readInputs();
+		doStuff();
+		updateOutputs();
+		delay_ms(100);
+	}
+	retun 0;
+}
+
+p. 
+The program starts with an initialization. After this, everything will be handled in a while loop, where the inputs will be polled cyclic - in this case very 100 milliseconds plus the execution time the program. Wating for x milliseconds must not be realized in a blocking delay function, it also can be done by using sleep modes and a timer interrupt. But the main idea of polling is cyclic reacting on events.
+For applications with where events/inputs only rarely occur, this is not a good design choice, as the sensor are frequently read. This will lead to higher power consumption.
+
+h3(#interrupts). Interrupts
+
+Using interrupts is a little bit more complex. 
 
 h2(#Example-State-Machine-for-Integration). Example State Machine for Integration
 
-s
+The complexity of the state machine can raise in a development process. Thus, it's recommended to specify of how the API (Applicable Programming Interface) should be accessed. While the API depends on the execution and used event types, this guide tries to break down the main elements and define a expandable design pattern. Therefore, the following example will be used for all integration guides.
+!(large)images/images_embedded_systems_integration_guide/platform_integration_example.jpeg(Example State Machine)!
+
+p=. Example State Machine
+
+The state machine contains three types of events: two __in events__ (inEvent1, inEvent2), two __out events__ (outEvent1, outEvent2) and one __timed event__ (after 2 s). Two states are connected with the inEvent1 and the after 2 s event. Each state raises one of __out event__. Additionally, a final state has been added, which also is part of the API. It only can be reached by raising the __in event__ inEvent2, if the state machine's __state__ StateA is active.
+
+These are the main parts of the state machine, which can be used and must be handled:
+* raise in events
+* raise timed events
+* handle out events
+* check if the state machine is final
+
+
 
 h2(#Bare-metal-cycle-based-integration). Bare-Metal Integration
 
@@ -46,7 +82,6 @@ p=. High level description of bare metal cycle based state machine integration
 * In Events 
 * Timed Events
 * Out Events
-
 
 h3(#main-function). Main Function
 
@@ -168,7 +203,6 @@ p=. Complete execution shown as State Machine
 
 h3(#arduino-integration-polling). Arduino Integration Polling
 
-Polling is a common design pattern to execute yo
 
 bc.. 
 #include "Arduino.h"
@@ -217,10 +251,6 @@ void loop() {
 }
 
 p. 
-
-Die libs dann erklären
-
-
 
 
 h3(#arduino-integration-interrupt). Arduino Integration Interrupt
