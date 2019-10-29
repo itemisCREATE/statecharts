@@ -1515,7 +1515,7 @@ GeneratorModel for sctunit::cpp {
 		
 		feature Outlet{ 
 			targetProject = targetProject
-			targetFolder = "gtests/ShallowHistoryTest"			
+			targetFolder = "gtests/ShadowValueParameterTest"			
 			libraryTargetFolder = "libraryTarget"
 		}		
 		

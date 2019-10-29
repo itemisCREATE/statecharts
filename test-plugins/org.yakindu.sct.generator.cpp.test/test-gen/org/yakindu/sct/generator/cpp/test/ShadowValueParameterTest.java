@@ -10,8 +10,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ShallowHistoryTest/ShadowValueParameterTest.cc",
-	program = "gtests/ShallowHistoryTest/ShadowValueParameter",
+	sourceFile = "gtests/ShadowValueParameterTest/ShadowValueParameterTest.cc",
+	program = "gtests/ShadowValueParameterTest/ShadowValueParameter",
 	model = "testmodels/SCTUnit/ShadowValueParameter.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
