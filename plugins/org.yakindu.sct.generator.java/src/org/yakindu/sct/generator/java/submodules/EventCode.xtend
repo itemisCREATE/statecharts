@@ -62,8 +62,8 @@ class EventCode {
 	}
 			
 	def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
-		public «sync»boolean isRaised«event.name.asName»() {
-			return «event.identifier»;
+		public boolean isRaised«event.name.asName»() {
+			«sync(scope.flow.statemachineClassName + ".this", '''return «event.identifier»;''')»
 		}
 		
 		«outEventRaiser(event, entry, scope)»
@@ -82,9 +82,11 @@ class EventCode {
 	
 	def eventValueGetter(EventDefinition it) {
 		'''
-		«eventValueGetterVisibility» «sync»«typeSpecifier.targetLanguageName» get«name.asName»Value() {
+		«eventValueGetterVisibility» «typeSpecifier.targetLanguageName» get«name.asName»Value() {
+			«sync(flow.statemachineClassName + ".this", '''
 			«getIllegalAccessValidation»
 			return «valueIdentifier»;
+			''')»
 		}
 		'''
 	}
@@ -123,19 +125,23 @@ class EventCode {
 	def protected eventRaiser(EventDefinition it, String visibility, String interfaceListenerName) {
 		'''
 			«IF hasValue»
-			«visibility» «sync»void raise«name.asName»(«typeSpecifier.targetLanguageName» value) {
-				«valueIdentifier» = value;
+			«visibility» void raise«name.asName»(«typeSpecifier.targetLanguageName» value) {
 			«ELSE»
 				«visibility» void raise«name.asName»() {
 			«ENDIF»
+				«sync(flow.statemachineClassName + ".this", '''
+				«IF hasValue»
+					«valueIdentifier» = value;
+				«ENDIF»
 				«identifier» = true;
 				«IF !interfaceListenerName.nullOrEmpty»
 					for («interfaceListenerName» listener : listeners) {
 						listener.on«event.name.asEscapedName»Raised(«IF hasValue»value«ENDIF»);
 					}
 				«ENDIF»
+				''')»
 			}
-		'''	
+		''' 
 	}
 	
 	def getIllegalAccessValidation(EventDefinition it) '''

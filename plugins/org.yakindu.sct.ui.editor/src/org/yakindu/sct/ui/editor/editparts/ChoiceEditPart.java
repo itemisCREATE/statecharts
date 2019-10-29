@@ -51,11 +51,10 @@ public class ChoiceEditPart extends ShapeNodeEditPart {
 			public PointList getPolygonPoints() {
 				PointList points = new PointList(5);
 				Rectangle handleBounds = getHandleBounds();
-				points.addPoint(handleBounds.x + (handleBounds.width / 2), handleBounds.y);
-				points.addPoint(handleBounds.x + handleBounds.width, handleBounds.y + (handleBounds.height / 2));
+				points.addPoint(handleBounds.x + (handleBounds.width / 2), handleBounds.y - 1);
+				points.addPoint(handleBounds.x + handleBounds.width - 1, handleBounds.y + (handleBounds.height / 2));
 				points.addPoint(handleBounds.x + (handleBounds.width / 2), handleBounds.y + handleBounds.height);
 				points.addPoint(handleBounds.x, handleBounds.y + handleBounds.height / 2);
-				points.addPoint(handleBounds.x + (handleBounds.width / 2), handleBounds.y);
 				return points;
 			}
 		};

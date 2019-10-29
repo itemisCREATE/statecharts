@@ -42,18 +42,18 @@ class VariableCode {
 			
 		«ENDIF»
 		«getterVisibility» «typeSpecifier.targetLanguageName» «getter» {
-			return «identifier»;
+			«sync(flow.statemachineClassName + ".this", '''return «identifier»;''')»
 		}
 		«IF needsSetter»
 		
 		«setterVisibility» void «setter»(«typeSpecifier.targetLanguageName» value) {
-			this.«identifier» = value;
+			«sync(flow.statemachineClassName + ".this", '''this.«identifier» = value;''')»
 		}
 		«ENDIF»
 		«IF needsAssignMethod»
 		
 		protected «sync»«typeSpecifier.targetLanguageName» «assign»(«typeSpecifier.targetLanguageName» value) {
-			return this.«identifier» = value;
+			«sync(flow.statemachineClassName + ".this", '''return this.«identifier» = value;''')»
 		}
 		«ENDIF»
 	'''
@@ -84,6 +84,6 @@ class VariableCode {
 	}
 	
 	protected def setterVisibility(VariableDefinition it) {
-		if(needsPublicSetter) '''public «sync»'''.toString.trim else "protected"
+		if(needsPublicSetter) '''public''' else "protected"
 	}
 }

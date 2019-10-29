@@ -5,7 +5,6 @@
 
     <topic label="User guide">
 	    <link toc="help/user-guide/overview-toc.xml"/>
-	    <link toc="help/user-guide/installation-toc.xml"/>
 	    <link toc="help/user-guide/editing_statecharts-toc.xml"/>
 	    <link toc="help/user-guide/simulating_statecharts-toc.xml"/>
 	    <link toc="help/user-guide/search_and_navigate-toc.xml"/>
@@ -22,6 +21,7 @@
 	        <link toc="help/user-guide/generating_code_headless-toc.xml"/>
 	    </topic>
 	    <link toc="help/user-guide/sctunit-toc.xml"/>
+	    <link toc="help/user-guide/lab_projects-toc.xml"/>
 	    <link toc="help/user-guide/release_notes-toc.xml"/>
     </topic>
 

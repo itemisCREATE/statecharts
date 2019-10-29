@@ -415,7 +415,11 @@ In the _CallHandling_ example, we have two actors: the user and the phone. Let's
 
 We have to enter the respective definitions in textual form into the statechart editor. Here's how the interface definitions look like:
 
-bc.. interface User:
+bc.. 
+@EventDriven
+@ChildFirstExecution
+
+interface User:
     in event accept_call
     in event dismiss_call
 
@@ -541,46 +545,46 @@ Let's establish a new Java class _CallHandlingClient_ and integrate the state ma
 Next, copy the following code into the created class:
 
 bc.. 
-  import org.yakindu.scr.TimerService;
-  import org.yakindu.scr.callhandling.CallHandlingStatemachine;
+package callhandling;
 
-  public class CallHandlingClient {
+import callhandling.callhandling.CallHandlingStatemachine;
 
-      public static void main(String[] args) throws InterruptedException {
+public class CallHandlingClient {
 
-          // Create the state machine:
-          CallHandlingStatemachine sm = new CallHandlingStatemachine();
-          sm.setTimer(new TimerService());
+	public static void main(String[] args) throws InterruptedException {
 
-          // Initialize the state machine:
-          sm.init();
+		// Create the state machine:
+		CallHandlingStatemachine sm = new CallHandlingStatemachine();
+		sm.setTimer(new TimerService());
 
-          // Enter the state machine and implicitly activate its "Idle" state:
-          sm.enter();
+		// Initialize the state machine:
+		sm.init();
 
-          // Raise an incoming call:
-          sm.getSCIPhone().raiseIncoming_call();
-          sm.runCycle();
+		// Enter the state machine and implicitly activate its "Idle" state:
+		sm.enter();
 
-          // Accept the call:
-          sm.getSCIUser().raiseAccept_call();
-          sm.runCycle();
+		// Raise an incoming call:
+		sm.getSCIPhone().raiseIncoming_call();
+		sm.runCycle();
 
-          // Keep the phone conversation busy for a while:
-          for (int i = 0; i < 50; i++) {
-              Thread.sleep(200);
-              sm.runCycle();
-          }
+		// Accept the call:
+		sm.getSCIUser().raiseAccept_call();
+		sm.runCycle();
 
-          // Before hang-up, output the duration of the call:
-          System.out.println(String.format("The phone call took %d seconds.",
-                  sm.getSCIPhone().getDuration()));
+		// Keep the phone conversation busy for a while:
+		for (int i = 0; i < 50; i++) {
+			Thread.sleep(200);
+			sm.runCycle();
+		}
 
-          // Hang up the phone:
-          sm.getSCIUser().raiseDismiss_call();
-          sm.runCycle();
-      }
-  }
+		// Before hang-up, output the duration of the call:
+		System.out.println(String.format("The phone call took %d seconds.", sm.getSCIPhone().getDuration()));
+
+		// Hang up the phone:
+		sm.getSCIUser().raiseDismiss_call();
+		sm.runCycle();
+	}
+}
 
 p. Let's have a detailed look at this client code:
 
