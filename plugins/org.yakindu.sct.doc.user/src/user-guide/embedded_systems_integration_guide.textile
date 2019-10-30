@@ -29,7 +29,7 @@ h3(#polling). Polling
 Polling is a simple approach to get a first prototype running. Most programs look like this:
 
 bc.. 
-int main() {
+void main() {
 	init();
 	while(true){
 		readInputs();
@@ -37,7 +37,6 @@ int main() {
 		updateOutputs();
 		delay_ms(100);
 	}
-	retun 0;
 }
 
 p. 
@@ -46,7 +45,33 @@ For applications with where events/inputs only rarely occur, this is not a good 
 
 h3(#interrupts). Interrupts
 
-Using interrupts is a little bit more complex. 
+Using interrupts is the second approach, where the system reacts on interrupts, which can occur asynchronously. Thus, the system must not cyclic poll the inputs. The normal execution of the program will be interrupted and jumps to the Interrupt Service Routine (ISR), which will be executed. Typically, the execution of the ISR should be as fast as possible, as other interrupts could occur while executing the ISR. Therefore, bool flags are commonly used, which serve as memory. A simple implementation look like this:
+
+bc.. 
+int main() {
+	while(true) {
+		if(bool_flag1 == true) {
+			doStuff();
+			bool_flag1 = false;
+		}
+		if(bool_flag2 == true) {
+			doDiffferentStuff();
+			bool_flag2 = false;
+		}
+		// sleep_mode();
+	}
+}
+
+ISR_1 {
+	bool_flag1 = true;
+}
+
+ISR_2 {
+	bool_flag2 = true;
+}
+
+p. 
+Each ISR uses one specific boolean flag, which stores wherever an interrupt has occurred. This pattern is often combined with a sleep mode, so that the microcontroller's CPU is only active after an interrupt. This pattern is often used for low power applications, which are powered by batteries.
 
 h2(#Example-State-Machine-for-Integration). Example State Machine for Integration
 
@@ -145,13 +170,7 @@ void handleInEvents() {
 
 Sensor1_ISR{
 	inEvent1 = true;
-}ne
-
-Create a digital watch for Arduino combined with a 16x2 LCD Keypad Shield and using YAKINDU Statechart Tools.
-Intermediate
-Full instructions provided
-3 hours
-7,050
+}
 
 Sensor2_ISR{
 	inEvent2 = true;
@@ -201,66 +220,15 @@ This is a expanded view on the implementation, of how it can be realized as a st
 
 p=. Complete execution shown as State Machine
 
-h3(#arduino-integration-polling). Arduino Integration Polling
+h3(#arduino-bare-metal). Arduino Bare-Metal Integration
 
+There are two examples for a bare-metal integration using interrupts and polling for Arduino. They have been tested with an Arduino Uno (ATmega328p) and an Arduino Mega (ATmega2560):
 
-bc.. 
-#include "Arduino.h"
-
-#include "src/hw_impl.h"
-#include "src/timer_impl.h"
-#include "src-gen/StateMachineRequired.h"
-
-/*! Define the state machine object */
-StateMachine stateMachine;
-
-/*! Setup the Arduino */
-void setup() {
-	/*! Setup the hardware you're using.
-	 * Digital/Analog Ports, Sensors, Actuators, Communication */
-	hw_init();
-
-	/*! Initialize the timer service. Here you must define,
-	 * how many time events you're using.
-	 * The default value is 10. */
-	timer_init();
-
-	/*! Initialize and enter the state machine */
-	stateMachine_init(&stateMachine);
-	stateMachine_enter(&stateMachine);
-}
-
-/*! Runs forever */
-void loop() {
-	/*! Runs until the state machine is final.
-	 * Always true, if there is no final state defined */
-	while (!stateMachine_isFinal(&stateMachine)) {
-		/*! Update timer with elapsed time using millis()*/
-		handle_timer(millis());
-
-		/*! Poll the inputs/sensors */
-		handle_in_events(&stateMachine);
-
-		/*! For @EventDriven state machines, runCycle must not be called.
-		 * Use runCycle for @CycleBased state machines */
-		//stateMachine_runCycle(&stateMachine);
-
-		/*! Update your actuators */
-		handle_out_events(&stateMachine);
-	}
-}
-
-p. 
-
-
-h3(#arduino-integration-interrupt). Arduino Integration Interrupt
-
-h2(#RTOS-based-integration). RTOS Integration
+Add them to YAKINDU Statechart Tool with the example wizard: 
+__File__ -> __New__ -> __Example...__ -> __YAKINDU Statechart Examples__ -> __Embedded Systems Integration Guide__ -> __Arduino - ...__
 
 
 
-h3(#arduino-integration-freeRTOS-polling). Arduino Integration FreeRTOS Polling
 
-h3(#arduino-integration-freeRTOS-interrupt). Arduino Integration FreeRTOS Interrupt
 
 
