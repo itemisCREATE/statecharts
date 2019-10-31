@@ -14,7 +14,7 @@ In the statechart:
 ** Out events
 In the environment:
 * Bare-metal or RTOS
-* Usage of interrupts
+* Usage of interrupts or polling
 * Usage of sleep modes
 
 This guide will give an overview of the most common and well known design patterns in a generic way and initially provides examples for an Arduino and only starts with the bare-metal integration. It will be continuously expanded.
@@ -41,11 +41,11 @@ void main() {
 
 p. 
 The program starts with an initialization. After this, everything will be handled in a while loop, where the inputs will be polled cyclic - in this case very 100 milliseconds plus the execution time the program. Wating for x milliseconds must not be realized in a blocking delay function, it also can be done by using sleep modes and a timer interrupt. But the main idea of polling is cyclic reacting on events.
-For applications with where events/inputs only rarely occur, this is not a good design choice, as the sensor are frequently read. This will lead to higher power consumption.
+For applications where events/inputs only rarely occur, this is not a good design choice, as the sensor are frequently read. This will lead to higher power consumption.
 
 h3(#interrupts). Interrupts
 
-Using interrupts is the second approach, where the system reacts on interrupts, which can occur asynchronously. Thus, the system must not cyclic poll the inputs. The normal execution of the program will be interrupted and jumps to the Interrupt Service Routine (ISR), which will be executed. Typically, the execution of the ISR should be as fast as possible, as other interrupts could occur while executing the ISR. Therefore, bool flags are commonly used, which serve as memory. A simple implementation look like this:
+Using interrupts is the second approach, where the system reacts on interrupts, which can occur asynchronously. Thus, the system must not cyclic poll the inputs. The normal execution of the program will be interrupted and it jumps to the Interrupt Service Routine (ISR), which then will be executed. Typically, the execution of the ISR should be as fast as possible, as other interrupts could occur while executing the ISR. Therefore, bool flags are commonly used, which serve as memory. A simple implementation look like this:
 
 bc.. 
 int main() {
@@ -88,8 +88,6 @@ These are the main parts of the state machine, which can be used and must be han
 * handle out events
 * check if the state machine is final
 
-
-
 h2(#Bare-metal-cycle-based-integration). Bare-Metal Integration
 
 This section describes how to integrate a state machine with a cycle based or event driven execution semantic on any microcontroller, so on any embedded device. The integration can be structured in three parts, which results the main part of your program.
@@ -110,8 +108,8 @@ p=. High level description of bare metal cycle based state machine integration
 
 h3(#main-function). Main Function
 
-The main function could be realized as following. The hardware will be initialized. Then the timers will take into account. After this the state machine will be initialized and entered. With these steps, the initialization is has been done. 
-At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events, which are actually also in events. Then the runCycle will be called, which handles the logical execution of the state machine. This only needed, if the execution semantics is cycle based and must only be executed based on the elapsed time, e.g. 200 ms for a CycleBased(200) state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
+The main function could be realized as following: First, the hardware will be initialized. Then the timers will take into account. After this the state machine will be initialized and entered. 
+At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events. The behavior equals an in events. Then the runCycle will be called, which handles the logical execution of the state machine. This only needed, if the execution semantics is cycle based and must only be executed based on the elapsed time, e.g. 200 ms for a CycleBased(200) state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
 
 bc.. 
 void main() {
@@ -157,6 +155,21 @@ h3(#handle-in-events). Handle In Events
 
 For now on, there are two different ways of how the events should be interact on the embedded system. One design pattern is polling. The other one is the usage of interrupts.
 
+A design using polling cyclic updates the status of the inputs and raise the according event.
+
+bc.. 
+void handleInEvents() {
+	if(readGPIO(1)) {
+		statemachine_raise_inEvent1();
+	}
+	if(readGPIO(2)) {
+		statemachine_raise_inEvent2();
+	}
+}
+p. 
+
+As already described in the Interrupt section, a design using interrupts recommends bool flags as storage of the event.
+
 bc.. 
 void handleInEvents() {
 	if(inEvent1) {
@@ -181,8 +194,26 @@ p.
 
 h3(#handle-timer). Handle Timer
 
-Handling the timer is more comprehensive. As in the state diagram can be used multiple time events, they all must be handled correctly. A good approach is a seperated timer library, which handles timed events. This will be explained in detail later on. At this point, they are straight forward as in events, except that a eplased time of the timer must be updated.
-In this example it is assumed, that an timer interrupt occurs periodically every 32 seconds, which is used at as the elapsed time for the timer.
+Handling the timer is more comprehensive. Each time event of the state machine must be updated and handled, because in detail there are nothing else than a in event. This means that for every timed trigger there must be one in event. Therefore, a timer service is provided in the examples. This timer service must be updated with the elapsed time since the its last call, which leads to the next implementation point: Determining the time.
+On a pure bare-metal implementation there is no such thing as elapsed time. Everything depends on cycles. 
+
+Imagine a microcontroller running with a clock of 16MHz. Running one instruction needs 1/16MHz = 625ns. A delay() function 1000000 would need 6,25 ms.A first approach updating the timer could be:
+
+bc.. 
+void main() {
+	while(true) {
+		delay(1000000);
+		updateTimer(6,25);
+		runCycle();
+	}
+}
+p. 
+
+But using this implementations got two big drawbacks:
+* the delay function is blocking
+* the execution time of the updateTimer and runCycle are not taking into account
+
+A much more precise design is using timer interrupts, which can generate a periodic interrupt ever x cycles:
 
 bc.. 
 void handleTimer() {
@@ -198,9 +229,23 @@ Timer_ISR{
 }
 p. 
 
+Some microcontrollers, like the Arduino, support functions like millis(), which are in fact using the a similar method, but storing the elapsed time since starting the device. This time can be used to determine the elapsed time between two cycles in a loop:
+
+bc.. 
+void loop() {
+	current_millies = millis();
+	updateTimer(current_millies - last_cycle_time);
+	statemachine_runCycle();
+	last_cycle_time = current_millies;
+}
+
+p. 
+
+For prototyping, this implementation can be used, but it should be considered that the timer will overflow after approximately 50 days. That's why we highly recommend a implementation with interrupts as described before.
+
 h3(#handle-out-events). Handle Out Events
 
-Out events, that are raised by the state machine, can be checked. If an out event gets raised, it's returning value is true, as long as the next runCycle is be executed. This is why the out events should be handled <b>after</b> every runCycle call. They can be used to wire up different actuators. Mapping values, e.g. integers, to the out events, is also possible.
+Out events are raised by the state machine can be checked by using the state machine's API. If an out event gets raised its returning value is true, as long as the next runCycle is be executed. This is why the out events should be handled <b>after</b> every runCycle call. They can be used to wire up different actuators. Mapping values, e.g. integers, to the out events, is also possible.
 
 bc.. 
 void handleOutEvents() {
