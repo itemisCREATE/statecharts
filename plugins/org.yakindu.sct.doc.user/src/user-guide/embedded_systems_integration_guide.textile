@@ -111,7 +111,7 @@ p=. High level description of bare metal cycle based state machine integration
 h3(#main-function). Main Function
 
 The main function could be realized as following. The hardware will be initialized. Then the timers will take into account. After this the state machine will be initialized and entered. With these steps, the initialization is has been done. 
-At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events, which are actually also in events. Then the runCycle will be called, which handles the logical execution of the state machine. This only needed, if the execution semantics is cycle based. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
+At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events, which are actually also in events. Then the runCycle will be called, which handles the logical execution of the state machine. This only needed, if the execution semantics is cycle based and must only be executed based on the elapsed time, e.g. 200 ms for a CycleBased(200) state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
 
 bc.. 
 void main() {
@@ -136,7 +136,8 @@ void main() {
 			handleTimer();
 		}
 		
-		if(isCycleBased) {
+		if(isCycleBased && elapsedTime >= cyclePeriod) {
+			elapsedTime = 0;
 			statemachine_runCycle();
 		}
 		
@@ -215,6 +216,7 @@ p.
 h3(#execution-as-state-machine). Execution As State Machine
 
 This is a expanded view on the implementation, of how it can be realized as a state machine.
+(needs to be updated)!
 
 !(large)images/images_embedded_systems_integration_guide/platform_integration.png(Complete execution shown as State Machine)!
 
@@ -222,7 +224,7 @@ p=. Complete execution shown as State Machine
 
 h3(#arduino-bare-metal). Arduino Bare-Metal Integration
 
-There are two examples for a bare-metal integration using interrupts and polling for Arduino. They have been tested with an Arduino Uno (ATmega328p) and an Arduino Mega (ATmega2560):
+There are two examples for a bare-metal integration using interrupts and polling for Arduino and can be used fo r both execution semantics: CycleBased and EventDriven. They have been tested with an Arduino Uno (ATmega328p) and an Arduino Mega (ATmega2560):
 
 Add them to YAKINDU Statechart Tool with the example wizard: 
 __File__ -> __New__ -> __Example...__ -> __YAKINDU Statechart Examples__ -> __Embedded Systems Integration Guide__ -> __Arduino - ...__
