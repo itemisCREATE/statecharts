@@ -217,10 +217,10 @@ A much more precise design is using timer interrupts, which can generate a perio
 
 bc.. 
 void handleTimer() {
-		if(updateTimerFlag) {
-			updateTimer(TIMER_TICK_MS);
-			updateTimerFlag = false;
-		}
+	if(updateTimerFlag) {
+		updateTimer(TIMER_TICK_MS);
+		updateTimerFlag = false;
+	}
 }
 
 #define TIMER_TICK_MS 32 // 32 ms for example
