@@ -245,7 +245,7 @@ For prototyping, this implementation can be used, but it should be considered th
 
 h3(#handle-out-events). Handle Out Events
 
-Out events are raised by the state machine can be checked by using the state machine's API. If an out event gets raised its returning value is true, as long as the next runCycle is be executed. This is why the out events should be handled <b>after</b> every runCycle call. They can be used to wire up different actuators. Mapping values, e.g. integers, to the out events, is also possible.
+Out events raised by the state machine can be checked by using the state machine's API. If an out event gets raised its returning value is true, until the next runCycle is executed. This is why the out events should be handled <b>after</b> every runCycle call. They can be used to wire up different actuators. Mapping values, e.g. integers, to the out events, is also possible.
 
 bc.. 
 void handleOutEvents() {
