@@ -41,7 +41,7 @@ void main() {
 
 p. 
 The program starts with an initialization. After this, everything will be handled in a while loop, where the inputs will be polled cyclically - in this case every 100 milliseconds plus the execution time the program. Waiting for x milliseconds does not need to be realized in a blocking delay function, it also can be done by using sleep modes and a timer interrupt. But the main idea of polling is cyclic reacting on events.
-For applications where events/inputs only rarely occur, this is not a good design choice, as the sensor are frequently read. This will lead to higher power consumption.
+For applications where events/inputs only rarely occur, this is not a good design choice, as the sensors are read frequently. This will lead to higher power consumption.
 
 h3(#interrupts). Interrupts
 
