@@ -229,7 +229,7 @@ Timer_ISR{
 }
 p. 
 
-Some microcontrollers, like the Arduino, support functions like millis(), which are in fact using the a similar method, but storing the elapsed time since starting the device. This time can be used to determine the elapsed time between two cycles in a loop:
+Some microcontrollers, like the Arduino, support functions like millis(), which are in fact using a similar method, but storing the elapsed time since starting the device. This time can be used to determine the elapsed time between two cycles in a loop:
 
 bc.. 
 void loop() {
