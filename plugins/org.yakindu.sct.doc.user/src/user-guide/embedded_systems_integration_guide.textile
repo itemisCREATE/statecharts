@@ -233,7 +233,7 @@ Some microcontrollers, like the Arduino, support functions like millis(), which 
 
 bc.. 
 void loop() {
-	current_millies = millis();
+	current_millis = millis();
 	updateTimer(current_millies - last_cycle_time);
 	statemachine_runCycle();
 	last_cycle_time = current_millies;
