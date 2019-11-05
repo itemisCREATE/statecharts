@@ -22,7 +22,7 @@ This guide will give an overview of the most common and well known design patter
 h2(#polling-vs-interrupts). Polling vs.Interrupts
 
 Programming bare-metal microcontrollers without any kind of RTOS or scheduler mainly leads to the architectural decision: Polling or Interrupts.
-This section will give a short overview, of how both design patterns work.
+This section will give a short overview of how both design patterns work.
 
 h3(#polling). Polling
 
