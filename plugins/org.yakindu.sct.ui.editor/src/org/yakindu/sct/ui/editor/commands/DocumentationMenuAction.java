@@ -38,9 +38,12 @@ public class DocumentationMenuAction extends Action implements IMenuCreator {
 
 	private Menu fMenu;
 	private List<Action> actions;
+	
+	public static final String ID = "org.yakindu.sct.ui.editor.commands.toggleDocumentation";
 
 	public DocumentationMenuAction() {
 		super("Toggle Documentation", IAction.AS_DROP_DOWN_MENU);
+		setId(ID);
 		setMenuCreator(this);
 		setImageDescriptor(StatechartImages.MENU.imageDescriptor());
 		actions = new ArrayList<Action>();

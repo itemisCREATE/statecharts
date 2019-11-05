@@ -36,6 +36,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveListener;
 import org.eclipse.ui.IWorkbenchPage;
+import org.yakindu.sct.ui.editor.commands.DocumentationMenuAction;
 
 import com.google.common.collect.Lists;
 
@@ -62,7 +63,8 @@ public class DisableButtonsByPerspectiveListener implements IPerspectiveListener
 			MENU_ALIGN,
 			ACTION_HIDE_CONNECTION_LABELS,
 			ACTION_SHOW_CONNECTION_LABELS,
-			ACTION_COPY_APPEARANCE_PROPERTIES
+			ACTION_COPY_APPEARANCE_PROPERTIES,
+			DocumentationMenuAction.ID
 	);
 	
 	private IActionBars bars;
