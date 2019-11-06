@@ -163,7 +163,7 @@ p.
 
 This is a minimal configuration that is required to generate state machine code. There are many other configuration options which are identical to those of the standard "C++ code generator":code_generation_cpp.html#codegen_cpp_code_generator.  If you activate automated build on the Eclipse project then the code will be automatically regenerated whenever you change and save the statechart. The synchronization between YAKINDU SCT and QtCreator works painlessly. QtCreator will ask you to update the editor contents if any opened file changed. 
 
-If the code generator is not yet installed then YAKINDU shows error markers on the .sgen file. In this case simply install  the “YAKINDU Statechart Tools Qt/C++ Code Generator”. Follow the steps in "How to Install More Code Generators":#lab_projects_howto_install_codegen generators
+If the code generator is not yet installed then YAKINDU shows error markers on the .sgen file. In this case simply install the “YAKINDU Statechart Tools Qt/C++ Code Generator”. Follow the steps in "How to Install More Code Generators":#lab_projects_howto_install_codegen generators.
 
  
 h3. Examples
