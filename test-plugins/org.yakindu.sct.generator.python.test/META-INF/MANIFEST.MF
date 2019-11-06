@@ -11,3 +11,4 @@ Require-Bundle: org.junit,
  org.yakindu.sct.generator.genmodel.ui,
  org.yakindu.sct.model.resource,
  org.yakindu.sct.generator.builder
+Export-Package: org.yakindu.sct.generator.python.test
