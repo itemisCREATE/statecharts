@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart Parenthesis {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

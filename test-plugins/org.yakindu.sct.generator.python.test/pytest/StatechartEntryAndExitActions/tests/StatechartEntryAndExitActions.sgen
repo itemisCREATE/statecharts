@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart statechartactions.StatechartEntryAndExitActions {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart declarations.ConstOnlyInternalScope {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

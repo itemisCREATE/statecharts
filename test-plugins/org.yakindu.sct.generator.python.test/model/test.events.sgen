@@ -1,0 +1,35 @@
+GeneratorModel for sctunit::python {
+
+	test OutEventVisibilityEventDriven {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test OutEventWithPayload {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+}

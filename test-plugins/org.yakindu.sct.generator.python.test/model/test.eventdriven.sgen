@@ -1,0 +1,83 @@
+GeneratorModel for sctunit::python {
+
+	test EventDrivenInternalEvent {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test EventDrivenTriggeredByEvent {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test EventDrivenTriggeredByTimeEvent {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test LocalEvents {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test NoLocalEvents {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+}

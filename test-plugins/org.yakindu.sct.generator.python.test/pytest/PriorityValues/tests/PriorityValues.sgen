@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart PriorityValues {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

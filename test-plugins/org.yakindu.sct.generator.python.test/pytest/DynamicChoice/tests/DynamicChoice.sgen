@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart DynamicChoice {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

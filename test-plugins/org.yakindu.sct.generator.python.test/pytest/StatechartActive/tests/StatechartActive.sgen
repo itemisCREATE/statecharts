@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart StatechartActive {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

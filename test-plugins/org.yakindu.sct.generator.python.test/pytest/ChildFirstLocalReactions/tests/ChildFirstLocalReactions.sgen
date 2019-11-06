@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart executionorder.ChildFirstLocalReactions {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

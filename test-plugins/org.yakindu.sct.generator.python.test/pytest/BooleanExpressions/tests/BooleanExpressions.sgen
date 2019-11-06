@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart BooleanExpressions {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

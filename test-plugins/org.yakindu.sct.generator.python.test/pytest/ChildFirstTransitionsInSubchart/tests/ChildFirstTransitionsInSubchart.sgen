@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart executionorder.ChildFirstTransitionsInSubchart {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart CastExpressions {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

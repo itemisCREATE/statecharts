@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart EntryExitSelfTransition {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

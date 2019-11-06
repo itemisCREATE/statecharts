@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart ShadowValueParameter {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}

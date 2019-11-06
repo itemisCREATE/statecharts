@@ -1,0 +1,1128 @@
+GeneratorModel for sctunit::python {
+
+	test AllTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test AlwaysOncycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test AssignmentAsExpression {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test BitExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test BitwiseExecutionOrder {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test BooleanExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test CastExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test Choice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test CKeywords {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ConditionalExpression {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ConstantsTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ConstantsVariationTests {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ConstOnlyInternalScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ConstOnlyDefaultScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ConstOnlyNamedScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test Declarations {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test DeepEntry {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test DeepHistory {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test DynamicChoice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+	test EmptyTransition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test EnterState {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test EntryChoice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test EntryExitSelfTransition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test EntryReactionAction {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ExitOnSelfTransition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test EventDriven {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+	test EventDrivenOutEvents {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ExitSequence {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test FeatureCalls {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test FinalState {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test FloatModulo {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test Guard {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test GuardedEntry {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test GuardedExit {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test HistoryWithExitPoint {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test HistoryWithoutInitialStep {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test InEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test IntegerExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test InternalEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+	test LocalReactions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test LogicalAndTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test LogicalOrTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test OperationsTest {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test NamedInterfaceAccess {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test NullCheck {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test OutEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test Parenthesis {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test PriorityValues {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ReadOnlyVariable {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test RaiseEvent {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test SameNameDifferentRegion {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ShadowValueParameter {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ShallowHistory {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ShallowHistoryWithDeepEntry {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test SimpleEvent {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test SimpleHierachy {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test StatechartLocalReactions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test StatechartActive {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test StateIsActive {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test StaticChoice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test STextKeywordsInStatesAndRegions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test StringExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test SyncFork {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test SyncJoin {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test TimedTransitions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test TransitionWithoutCondition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test TriggerExpressionPrecedence {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test TriggerGuardExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test ValuedEvents {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test StatemachineKeywords {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+	test TypeAlias {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.python.test"
+			targetFolder = "pytest"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature Naming {
+			basePackage = "MyPackage"
+		}
+	}
+
+}

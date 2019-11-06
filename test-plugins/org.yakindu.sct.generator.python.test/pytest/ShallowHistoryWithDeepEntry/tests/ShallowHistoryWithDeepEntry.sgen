@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::python {
+
+    statechart ShallowHistoryWithDeepEntry {
+
+        feature Outlet {
+            targetProject = "pytest"
+            targetFolder = ""
+        }
+    }
+}
