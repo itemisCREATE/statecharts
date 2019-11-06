@@ -7,11 +7,6 @@ h1(#scxml_integration). SCXML Domain
 
 YAKINDU Statechart Tools Professional Edition comes with an _SCXML domain_ which allows to generate SCXML code from your statechart, as well as to simulate and test it in a way that is compliant to the SCXML execution semantics. 
 
-
-
-
-h2(#scxml_introduction). Introduction
-
 SCXML, short for State Chart XML, is a statechart interchange format. It is based on XML and has been "standardized by the W3C":https://www.w3.org/TR/scxml/. This standardization makes statecharts highly portable and independent of a particular implementation. The prerequisite is of course that the respective execution environment corresponds to the SCXML specification.
 
 The current version of the specification was released by the W3C in September 2015. A “hello world” in SCXML looks like this:

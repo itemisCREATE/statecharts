@@ -1,14 +1,9 @@
 
 p. 
 
-h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
+h1(#sctunit_test-driven_statechart_development_with_sctunit). Testing state machines
 
 Learn more about test-driven statechart modelling and how to use SCTUnit to develop your statechart model step by step using a test-driven approach.
-
-
-
-
-h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development
 
 In "test-driven development":https://en.wikipedia.org/wiki/Test-driven_development, before writing any code the developer creates a _unit test_ that checks the to-be-established implementation for correctness. Only after that, the developer codes the implementation and executes the test. If the test fails, the developer has to fix the implementation – perhaps repeatedly – until the test succeeds.
 
