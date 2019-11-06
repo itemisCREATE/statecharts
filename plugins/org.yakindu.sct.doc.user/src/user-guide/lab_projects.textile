@@ -182,6 +182,8 @@ h2(#lab_projects_howto_install_codegen). How to Install More Code Generators
 
 The code generators listed in this chapter are not part of our official product bundles as their are currently in a beta phase. This means that you need to install them separately if you want to use them. The easiest way is to use the generator model wizard and select _Install More…_ This will list all available code generators that are not yet installed.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gpINwwyfnqk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+
 
 Alternatively you can follow the standard Eclipse plugin installation procedure to install generators from the YAKINDU Labs update site. 
 
