@@ -3,7 +3,7 @@ h1{%EARLY_SEPARATOR%}.
 
 ==<div class="pro-feature">==
 
-h1(#scxml_integration). SCXML Domain
+h1(#scxml_integration). SCXML domain
 
 YAKINDU Statechart Tools Professional Edition comes with an _SCXML domain_ which allows to generate SCXML code from your statechart, as well as to simulate and test it in a way that is compliant to the SCXML execution semantics. 
 
