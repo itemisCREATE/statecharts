@@ -73,9 +73,9 @@ Signals and slots are a perfect match to statechart events. A state machine typi
 !images/lab_projects_qt_codegen_signal_slot_mapping.png(Qt Event Mapping To Signals and Slots)!
 
 
-This simple example statechart defines the incoming event ping and the outgoing event pong. These events directly map to the ping slot and pong signal in the Qt class definition.
+This simple example statechart defines the incoming event __ping__ and the outgoing event __pong__. These events directly map to the __ping__ slot and __pong__ signal in the Qt class definition.
 
-When the statechart raises an outgoing event e.g. ‘raise pong’ then this translates to ‘emit pong();’ in the generated state machine code. So events support the same level of abstraction and loose coupling of objects as signals and slots do. And this is exactly what the YAKINDU Statechart Tools code generator for Qt supports: Simply generate the C++ code from the state machine diagram and use it like any other class in Qt.
+When the statechart raises an outgoing event e.g. @raise pong@ then this translates to @emit pong();@ in the generated state machine code. So events support the same level of abstraction and loose coupling of objects as signals and slots do. And this is exactly what the YAKINDU Statechart Tools code generator for Qt supports: Simply generate the C++ code from the state machine diagram and use it like any other class in Qt.
 
 h3. Statechart modeling rules
 
@@ -105,20 +105,20 @@ bc.
 PingPong *machine = new PingPong(someParent);
 
 
-The generator will generate a PingPong class from the identically named statechart. It inherits from QObject and you can initialize the instance with a parent.  
+The generator will generate a PingPong class from the identically named statechart. It inherits from __QObject__ and you can initialize the instance with a parent.  
 
 *2. Setup timer service*
 
-The example statechart uses an after trigger to specify timed state transitions. If after or every time triggers are used then the generated state machine requires a timer service. 
+The example statechart uses an __after__ trigger to specify timed state transitions. If after or every time triggers are used then the generated state machine requires a timer service. 
 
 bc. 
 ysc::SCTimerService *timerService = new ysc::SCTimerService(machine);   
 machine->setTimer(timerService);
 
-There is a predefined timer service implementation SCTimerService which can directly be used. It makes use of QTimer. Simply allocate an instance and call the state machines setTimer() method with a pointer to that timer service. The timer service can be used for any number of state machine instances. 
+There is a predefined timer service implementation __SCTimerService__ which can directly be used. It makes use of __QTimer__. Simply allocate an instance and call the state machines __setTimer()__ method with a pointer to that timer service. The timer service can be used for any number of state machine instances. 
 
 *3. Initialize the state machine*
-The initialization of the state machine is not completely done within the constructor but requires an additional call to its init() method. This call initializes all internal data structures.
+The initialization of the state machine is not completely done within the constructor but requires an additional call to its __init()__ method. This call initializes all internal data structures.
 
 bc. 
 machine->init();
@@ -126,7 +126,7 @@ machine->init();
 
    
 *4.  Connect signals and slots*
-Connect the machine instance as you would do with any other QObject. 
+Connect the machine instance as you would do with any other __QObject__. 
 
 bc. 
 QObject::connect(someObj, SIGNAL(do()), machine, SLOT(ping()));
@@ -141,7 +141,7 @@ machine->enter();
 
 The machine will activate its initial states and will respond to incoming events (slot calls) and will care about starting timers for processing time events. You can also activate the state machine directly after initialization. But connecting signals and slots first makes sure that you won’t miss signals which are emitted before connecting them.
 
-You can deactivate and reactivate the state machine by subsequent calls to the exit() and enter() methods.
+You can deactivate and reactivate the state machine by subsequent calls to the __exit()__ and __enter()__ methods.
 
 
 h3. Setting up the generator
@@ -168,7 +168,7 @@ If the code generator is not yet installed then YAKINDU shows error markers on t
  
 h3. Examples
 
-For a quick start simply install the following example: "QT/C++ State Machine of a Traffic Light":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-trafficlight-cpp-qt
+For a quick start simply install the following example: "Qt/C++ State Machine of a Traffic Light":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-trafficlight-cpp-qt
 
 
 h3. Summary
@@ -191,7 +191,7 @@ Alternatively you can follow the standard Eclipse plugin installation procedure 
 # Select the Yakindu Labs entry from the Work with: pull down list. If there is no such entry then
 ## Choose Add
 ## Enter http://updates.yakindu.com/statecharts/labs in the Location field and optionally choose a name.
-#Press OK.
+## Press OK.
 # Unfold the top level node and check the Qt/C++ code generator feature.
 # Finish the installation wizard by choosing Next > until finished.
 # Restart.
