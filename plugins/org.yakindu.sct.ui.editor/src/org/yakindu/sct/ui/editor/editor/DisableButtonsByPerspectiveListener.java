@@ -10,14 +10,35 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.ACTION_AUTOSIZE;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.ACTION_COPY_APPEARANCE_PROPERTIES;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.ACTION_FONT_BOLD;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.ACTION_FONT_ITALIC;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.ACTION_HIDE_CONNECTION_LABELS;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.ACTION_SHOW_CONNECTION_LABELS;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.CUSTOM_FILL_COLOR;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.CUSTOM_FONT_COLOR;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.CUSTOM_FONT_NAME;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.CUSTOM_FONT_SIZE;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.CUSTOM_LINE_COLOR;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.CUSTOM_ZOOM;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.MENU_ALIGN;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.MENU_COMPARTMENT;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.MENU_ROUTER;
+import static org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds.MENU_SELECT;
 import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION;
 
-import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
+import java.util.List;
+
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveListener;
 import org.eclipse.ui.IWorkbenchPage;
+import org.yakindu.sct.ui.editor.commands.DocumentationMenuAction;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author tobias angele - Initial contribution and API
@@ -26,6 +47,26 @@ public class DisableButtonsByPerspectiveListener implements IPerspectiveListener
 
 	public static final String TESTING_PERSPECTIVE = "com.yakindu.sct.ui.TestingPerspective";
 
+	private static final List<String> BUTTON_IDS = Lists.newArrayList(
+			CUSTOM_FONT_NAME,
+			CUSTOM_FONT_SIZE,
+			CUSTOM_ZOOM,
+			CUSTOM_FILL_COLOR,
+			CUSTOM_LINE_COLOR,
+			CUSTOM_FONT_COLOR,
+			ACTION_FONT_BOLD,
+			ACTION_FONT_ITALIC,
+			ACTION_AUTOSIZE,
+			MENU_ROUTER,
+			MENU_SELECT,
+			MENU_COMPARTMENT,
+			MENU_ALIGN,
+			ACTION_HIDE_CONNECTION_LABELS,
+			ACTION_SHOW_CONNECTION_LABELS,
+			ACTION_COPY_APPEARANCE_PROPERTIES,
+			DocumentationMenuAction.ID
+	);
+	
 	private IActionBars bars;
 
 	public DisableButtonsByPerspectiveListener(IActionBars bars) {
@@ -51,23 +92,13 @@ public class DisableButtonsByPerspectiveListener implements IPerspectiveListener
 				|| TESTING_PERSPECTIVE.equals(perspective.getId());
 	}
 
-	private void enableEditingButtons(IToolBarManager tb, boolean b) {
-		tb.find(ActionIds.CUSTOM_FONT_NAME).setVisible(b);
-		tb.find(ActionIds.CUSTOM_FONT_SIZE).setVisible(b);
-		tb.find(ActionIds.CUSTOM_ZOOM).setVisible(b);
-		tb.find(ActionIds.CUSTOM_FILL_COLOR).setVisible(b);
-		tb.find(ActionIds.CUSTOM_LINE_COLOR).setVisible(b);
-		tb.find(ActionIds.CUSTOM_FONT_COLOR).setVisible(b);
-		tb.find(ActionIds.ACTION_FONT_BOLD).setVisible(b);
-		tb.find(ActionIds.ACTION_FONT_ITALIC).setVisible(b);
-		tb.find(ActionIds.ACTION_AUTOSIZE).setVisible(b);
-		tb.find(ActionIds.MENU_ROUTER).setVisible(b);
-		tb.find(ActionIds.MENU_SELECT).setVisible(b);
-		tb.find(ActionIds.MENU_COMPARTMENT).setVisible(b);
-		tb.find(ActionIds.MENU_ALIGN).setVisible(b);
-		tb.find(ActionIds.ACTION_HIDE_CONNECTION_LABELS).setVisible(b);
-		tb.find(ActionIds.ACTION_SHOW_CONNECTION_LABELS).setVisible(b);
-		tb.find(ActionIds.ACTION_COPY_APPEARANCE_PROPERTIES).setVisible(b);
+	private void enableEditingButtons(IToolBarManager tb, boolean isVisible) {
+		for (String id : BUTTON_IDS) {
+			IContributionItem item = tb.find(id);
+			if (item != null) {
+				item.setVisible(isVisible);
+			}
+		}
 		tb.update(true);
 	}
 }
