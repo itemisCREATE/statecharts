@@ -61,6 +61,123 @@ h3(#lab_projects_rkh_codegen_examples). Examples
 
 "Blinky LED for RKH Framework on Linux":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-rkh-blinky
 
+
+h2(#lab_projects_qt_codegen). Generate Qt C++ State Machine Code from Statecharts
+
+
+__The Qt framework provides a rich set of concepts which define how applications are implemented. Among these concept “signals and slots” is surely the most central one. Signals and slots allow objects of any kind to communicate with each other in a loosely coupled fashion. YAKINDU Statechart Tools provides a Qt specific C++ code generator that generates Qt style state machine code from state diagrams.__
+
+Signals and slots are a perfect match to statechart events. A state machine typically reacts to incoming events which trigger state transitions. It can also raise outgoing events which can be processed by other objects. So out events defined in a statechart match to signals in Qt and in events correspond to slots. 
+
+
+!images/lab_projects_qt_codegen_signal_slot_mapping.png(Qt Event Mapping To Signals and Slots)!
+
+
+This simple example statechart defines the incoming event __ping__ and the outgoing event __pong__. These events directly map to the __ping__ slot and __pong__ signal in the Qt class definition.
+
+When the statechart raises an outgoing event e.g. @raise pong@ then this translates to @emit pong();@ in the generated state machine code. So events support the same level of abstraction and loose coupling of objects as signals and slots do. And this is exactly what the YAKINDU Statechart Tools code generator for Qt supports: Simply generate the C++ code from the state machine diagram and use it like any other class in Qt.
+
+h3. Statechart modeling rules
+
+You can use any YAKINDU default statechart as input. Nevertheless you should consider the following rules:
+
+
+# The statechart should be event driven. This fits best to the event driven nature of the Qt framework. So don’t forget to add the __@EventDriven__ annotation to the statechart if it’s not already in place. If you omit this then the generated state machine will follow cycle based execution semantics and will wait for a call to its __runCycle()__ method.<br/><br/> 
+# Currently the ‘default statechart domain’ with the simple type system is supported with the following type mapping rules between statechart and C++ types:
+## __integer__ maps to __int__
+## __real__ maps to __double__
+## __boolean__ maps to __bool__
+## __string__ maps to __char*__
+    
+    
+Except for these rules there is nothing else that must be considered. You can simply use any modeling feature. Support for QString and access to other C++ types using the deep C++ integration will be added in future versions.
+
+
+h3. Integrating the generated state machine
+
+As stated above integration of the generated state machine is straightforward if you are familiar with the Qt framework. (Please refer to the "Qt documentation":https://doc.qt.io/ if this is not the case). Of course there are a few steps required to setup the state machine.
+
+*1. Allocate the state machine instance*
+
+First the state machine instance must be allocated. You have the choice to do that dynamically or statically.
+
+bc. 
+PingPong *machine = new PingPong(someParent);
+
+
+The generator will generate a PingPong class from the identically named statechart. It inherits from __QObject__ and you can initialize the instance with a parent.  
+
+*2. Setup timer service*
+
+The example statechart uses an __after__ trigger to specify timed state transitions. If after or every time triggers are used then the generated state machine requires a timer service. 
+
+bc. 
+ysc::SCTimerService *timerService = new ysc::SCTimerService(machine);   
+machine->setTimer(timerService);
+
+There is a predefined timer service implementation __SCTimerService__ which can directly be used. It makes use of __QTimer__. Simply allocate an instance and call the state machines __setTimer()__ method with a pointer to that timer service. The timer service can be used for any number of state machine instances. 
+
+*3. Initialize the state machine*
+The initialization of the state machine is not completely done within the constructor but requires an additional call to its __init()__ method. This call initializes all internal data structures.
+
+bc. 
+machine->init();
+  
+
+   
+*4.  Connect signals and slots*
+Connect the machine instance as you would do with any other __QObject__. 
+
+bc. 
+QObject::connect(someObj, SIGNAL(do()), machine, SLOT(ping()));
+QObject::connect(machine, SIGNAL(pong()), someObj, SLOT(done()));
+
+
+*5. Activate the state machine*
+Finally, the state machine instance must be activated.
+
+bc. 
+machine->enter();
+
+The machine will activate its initial states and will respond to incoming events (slot calls) and will care about starting timers for processing time events. You can also activate the state machine directly after initialization. But connecting signals and slots first makes sure that you won’t miss signals which are emitted before connecting them.
+
+You can deactivate and reactivate the state machine by subsequent calls to the __exit()__ and __enter()__ methods.
+
+
+h3. Setting up the generator
+
+Using the Qt/C++ code generator is as simple as using any other code generator. Create a generator configuration file - e.g. pingpong.sgen with the following content:
+
+
+bc.. 
+GeneratorModel for yakindu::cpp::qt {
+
+	statechart PingPong {
+		feature Outlet {
+			targetProject = "PingPongProject"
+			targetFolder = "src/machine"
+		}
+	}
+}
+p. 
+
+This is a minimal configuration that is required to generate state machine code. There are many other configuration options which are identical to those of the standard "C++ code generator":code_generation_cpp.html#codegen_cpp_code_generator.  If you activate automated build on the Eclipse project then the code will be automatically regenerated whenever you change and save the statechart. The synchronization between YAKINDU SCT and QtCreator works painlessly. QtCreator will ask you to update the editor contents if any opened file changed. 
+
+If the code generator is not yet installed then YAKINDU shows error markers on the .sgen file. In this case simply install the “YAKINDU Statechart Tools Qt/C++ Code Generator”. Follow the steps in "How to Install More Code Generators":#lab_projects_howto_install_codegen generators.
+
+ 
+h3. Examples
+
+For a quick start simply install the following example: "Qt/C++ State Machine of a Traffic Light":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-trafficlight-cpp-qt
+
+
+h3. Summary
+
+Generating Qt specific C++ code is simple and straightforward. The generated code adapts to the Qt signal and slot concepts and thus can be easily integrated as any other Qt class. 
+
+
+
+
 h2(#lab_projects_howto_install_codegen). How to Install More Code Generators
 
 The code generators listed in this chapter are not part of our official product bundles as their are currently in a beta phase. This means that you need to install them separately if you want to use them. The easiest way is to use the generator model wizard and select _Install More…_ This will list all available code generators that are not yet installed.
@@ -68,10 +185,26 @@ The code generators listed in this chapter are not part of our official product 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gpINwwyfnqk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 
 
+Alternatively you can follow the standard Eclipse plugin installation procedure to install generators from the YAKINDU Labs update site. 
+
+# Open Help > Install New Software ... from the menu.
+# Select the Yakindu Labs entry from the Work with: pull down list. If there is no such entry then
+## Choose Add
+## Enter http://updates.yakindu.com/statecharts/labs in the Location field and optionally choose a name.
+## Press OK.
+# Unfold the top level node and check the Qt/C++ code generator feature.
+# Finish the installation wizard by choosing Next > until finished.
+# Restart.
+
+After restarting the workbench the generator will be present.
+
+
+
 h2(#lab_projects_howto_import_examples). How to Import Code Generator Examples
 
 For most of the code generators listed here we also provide example projects. The easiest way is to open the example wizard in YAKINDU Statechart Tools. In case an example needs some additional dependencies you can install them directly from the example wizard.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VXq_g-Mz2BQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+
 
 
