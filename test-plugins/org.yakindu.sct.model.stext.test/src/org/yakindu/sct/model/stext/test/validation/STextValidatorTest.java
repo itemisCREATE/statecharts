@@ -868,6 +868,13 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 		validationResult
 		.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
 	}
+	@Test
+	public void checkIfDomainAllowsForImport() {
+		Scope context = (Scope) parseExpression("import:", ImportScope.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(context);
+		validationResult
+		.assertWarningContains(String.format(STextValidationMessages.OTHER_DOMAIN_FOR_IMPORT));
+	}
 	
 	@Test
 	public void checkDuplicateImport() {
