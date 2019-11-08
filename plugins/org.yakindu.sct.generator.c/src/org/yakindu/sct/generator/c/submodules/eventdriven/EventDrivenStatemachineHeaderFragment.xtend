@@ -23,6 +23,8 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
+
 class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
@@ -34,9 +36,6 @@ class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 	
 	override defines(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		'''
-		#ifndef «bufferSize»
-		#define «bufferSize» «CGeneratorConstants.EVENT_QUEUE_BUFFER_SIZE»
-		#endif
 		#ifndef «invalidEvent»
 		#define «invalidEvent» 0
 		#endif
@@ -69,7 +68,10 @@ class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 		
 		«IF needsQueues»
 		«generateEventQueue»
+		
+		void «eventQueueInitFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» *buffer, «INT_TYPE» capacity);
 		«ENDIF»
+		
 		'''
 	}
 }

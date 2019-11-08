@@ -47,7 +47,7 @@ class EventNaming {
 	}
 
 	def internalEventStructTypeName(ExecutionFlow it) {
-		'''«name»_internal_event'''.toString.toLowerCase
+		'''«name»_event'''.toString.toLowerCase
 	}
 
 	def eventQueueTypeName(ExecutionFlow it) {
