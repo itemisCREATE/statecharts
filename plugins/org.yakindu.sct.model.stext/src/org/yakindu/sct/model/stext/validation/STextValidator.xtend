@@ -776,10 +776,10 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			}
 		}
 	}
-	@Check()
+    @Check()
 	def void checkIfDomainAllowsForImport(ImportScope importScope){
-		var defaultDomain = "org.yakindu.domain.default"
-		var Statechart statechart=utils.getStatechart(importScope)
+		var Statechart statechart = utils.getStatechart(importScope)
+		var defaultDomain = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
 		if ((statechart !== null) && statechart.getDomainID().equals(defaultDomain)) {
 			warning(OTHER_DOMAIN_FOR_IMPORT, importScope, null, -1)
 		}
