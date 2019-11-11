@@ -108,7 +108,7 @@ p=. High level description of bare metal cycle based state machine integration
 
 h3(#main-function). Main Function
 
-The main function could be realized as following: First, the hardware will be initialized. Then the timers will take into account. After this the state machine will be initialized and entered. 
+The main function could be realized as following: First, the hardware will be initialized. Then the timers will be taken into account. After this the state machine will be initialized and entered. 
 At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events. The behavior equals an in events. Then the runCycle will be called, which handles the logical execution of the state machine. This only needed, if the execution semantics is cycle based and must only be executed based on the elapsed time, e.g. 200 ms for a CycleBased(200) state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
 
 bc.. 
