@@ -1,17 +1,17 @@
 
 p. 
 
-h1(#lab_projects). Lab Features
+h1(#lab_projects). Lab features
 
 Researching, prototyping, and putting our ideas into code, aside from the day-to-day business, is an essential part of our development culture. YAKINDU Labs is a collection of projects that are currently in beta phase and therefore not yet released with any YAKINDU product bundles. As we love early feedback, we regularly blog about what's going on behind the scenes. So try it, and get in touch with us!
 
 !(small)images/lab_projects_yakindu_labs_icon.png(Lab Projects Icon)!
 
-h2(#lab_projects_python_codegen). Python Code Generator
+h2(#lab_projects_python_codegen). Python code generator
 
 As Python is one of the most favoured programming languages, we have developed a code generator for Python. Read our blog article on that topic, or just try out our examples. We have also one example showing how to make the generated Python code run on a Raspberry Pi.
 
-h3(#lab_projects_python_codegen_blogs). Blog Articles
+h3(#lab_projects_python_codegen_blogs). Blog articles
 
 "Python Code Generation With YAKINDU Statechart Tools":https://blogs.itemis.com/en/python-code-generation-with-yakindu-statechart-tools
 
@@ -21,11 +21,11 @@ h3(#lab_projects_python_codegen_examples). Examples
 
 "Traffic Light on the Raspberry Pi":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-trafficlight-python-raspberry
 
-h2(#lab_projects_typescript_codegen). Typescript Code Generator
+h2(#lab_projects_typescript_codegen). Typescript code generator
 
 The typescript code generator was developed in the context of an HMI usecase in which a car infotainment system was prototypically implemented with web technologies. The generated state machine code was seemlessly integrated into an Angular application. Read also our blog articles and import our example to learn more.
 
-h3(#lab_projects_typescript_codegen_blogs). Blog Articles
+h3(#lab_projects_typescript_codegen_blogs). Blog articles
 
 "Typescript Code Generation With YAKINDU Statechart Tools":https://blogs.itemis.com/en/typescript-code-generation-with-yakindu-statechart-tools
 
@@ -33,7 +33,7 @@ h3(#lab_projects_typescript_codegen_examples). Examples
 
 "Web-based Car HMI":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-ycar
 
-h2(#lab_projects_swift_codegen). Swift Code Generator
+h2(#lab_projects_swift_codegen). Swift code generator
 
 The swift code generator was built as part of a student project. It is in a beta phase. Feel free to try out our example.
 
@@ -41,15 +41,15 @@ h3(#lab_projects_swift_codegen_examples). Examples
 
 "Swift Showcase App":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-swift
 
-h2(#lab_projects_csharp_codegen). C# Code Generator
+h2(#lab_projects_csharp_codegen). C# code generator
 
 The C# code generator is an external contribution and therefore open-source. Currently we have no resources on the C# code generator but we are working on providing a simple example. See How to install code generators for installation details.
 
-h2(#lab_projects_rkh_codegen). RKH Code Generator
+h2(#lab_projects_rkh_codegen). RKH code generator
 
 RKH (Reative frameworK for Hierarchical state machines) is a state machine framework used to build software for reactive and real-time embedded systems in a safely and timely way. In a cooperation with its developers at "VortexMakes":https://github.com/vortexmakes we created created a code generator which directly generates RKH compliant code out of YAKINDU statecharts. Read our blog articles and try out our examples if you want to know more:
 
-h3(#lab_projects_rkh_codegen_blogs). Blog Articles
+h3(#lab_projects_rkh_codegen_blogs). Blog articles
 
 "Introduced: New RKH State Machine Framework for Reactive and Real-Time Embedded Systems":https://blogs.itemis.com/en/rkh-state-machine-framework-for-reactive-and-real-time-embedded-systems
 
@@ -62,7 +62,7 @@ h3(#lab_projects_rkh_codegen_examples). Examples
 "Blinky LED for RKH Framework on Linux":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-rkh-blinky
 
 
-h2(#lab_projects_qt_codegen). Generate Qt C++ State Machine Code from Statecharts
+h2(#lab_projects_qt_codegen). Generate Qt C++ state machine code from statecharts
 
 
 __The Qt framework provides a rich set of concepts which define how applications are implemented. Among these concept “signals and slots” is surely the most central one. Signals and slots allow objects of any kind to communicate with each other in a loosely coupled fashion. YAKINDU Statechart Tools provides a Qt specific C++ code generator that generates Qt style state machine code from state diagrams.__
@@ -178,7 +178,7 @@ Generating Qt specific C++ code is simple and straightforward. The generated cod
 
 
 
-h2(#lab_projects_howto_install_codegen). How to Install More Code Generators
+h2(#lab_projects_howto_install_codegen). How to install more code generators
 
 The code generators listed in this chapter are not part of our official product bundles as their are currently in a beta phase. This means that you need to install them separately if you want to use them. The easiest way is to use the generator model wizard and select _Install More…_ This will list all available code generators that are not yet installed.
 
@@ -200,7 +200,7 @@ After restarting the workbench the generator will be present.
 
 
 
-h2(#lab_projects_howto_import_examples). How to Import Code Generator Examples
+h2(#lab_projects_howto_import_examples). How to import code generator examples
 
 For most of the code generators listed here we also provide example projects. The easiest way is to open the example wizard in YAKINDU Statechart Tools. In case an example needs some additional dependencies you can install them directly from the example wizard.
 

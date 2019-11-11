@@ -10,7 +10,6 @@
         <toc file="help/user-guide/overview-toc.xml" primary="false"/>
         <toc file="help/user-guide/editing_statecharts-toc.xml" primary="false"/>
         <toc file="help/user-guide/simulating_statecharts-toc.xml" primary="false"/>
-        <toc file="help/user-guide/search_and_navigate-toc.xml" primary="false"/>
         <toc file="help/user-guide/c-domain-toc.xml" primary="false"/>
         <toc file="help/user-guide/scxml_domain-toc.xml" primary="false"/>
         <!-- <toc file="help/user-guide/typescript-domain-toc.xml" primary="false"/> -->

@@ -1,7 +1,7 @@
 
 p. 
 
-h1(#release_notes). Release Notes
+h1(#release_notes). Release notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 

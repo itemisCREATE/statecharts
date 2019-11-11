@@ -138,7 +138,7 @@ Depending on your screen resolution and font size settings, you might not be abl
 
 
 
-h2(#simu_controlling_a_simulation). Controlling a simulation
+h3(#simu_controlling_a_simulation). Controlling a simulation
 
 * To terminate the simulation, click on the _Terminate_ button !(inlinemediaobject)images/symbol_terminate.png(Symbol: Terminate)!.
 * To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/symbol_suspend.png(Symbol: Suspend)!.
@@ -148,7 +148,7 @@ h2(#simu_controlling_a_simulation). Controlling a simulation
 
 
 
-h2(#simu_interacting_with_a_simulation). Interacting with a simulation
+h3(#simu_interacting_with_a_simulation). Interacting with a simulation
 
 You can interact with a running simulation by manually raising events and by inspecting and modifying variables. You can do so at any point in time, but in most cases you will do it while the simulation "sits idle" at its active state and waits for an event to trigger a transition.
 

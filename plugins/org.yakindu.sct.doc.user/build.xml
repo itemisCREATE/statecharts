@@ -209,7 +209,6 @@
                 <include name="user-guide/code_generation_statechart_image.textile"/>
                 <include name="user-guide/generating_code_headless.textile"/>
                 <include name="user-guide/sctunit.textile"/>
-                <include name="user-guide/search_and_navigate.textile"/>
             	<include name="user-guide/lab_projects.textile"/>
                 <include name="user-guide/installation.textile"/>
             	<include name="user-guide/release_notes.textile"/>
@@ -219,7 +218,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="18"/>
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="17"/>
                 </condition>
             </fail>
 
@@ -380,10 +379,6 @@
                         <file name="user-guide/overview.textile"/>
                         <file name="user-guide/editing_statecharts.textile"/>
                         <file name="user-guide/simulating_statecharts.textile"/>
-                        <file name="user-guide/c-domain.textile"/>
-                        <file name="user-guide/scxml_domain.textile" />
-                        <!-- file name="user-guide/typescript-domain.textile" / -->
-                        <file name="user-guide/statechart_language.textile"/>
                         <file name="user-guide/code_generation_intro.textile"/>
                         <file name="user-guide/code_generation_c.textile"/>
                         <file name="user-guide/code_generation_cpp.textile"/>
@@ -391,7 +386,10 @@
                         <file name="user-guide/code_generation_statechart_image.textile"/>
                         <file name="user-guide/generating_code_headless.textile"/>
                         <file name="user-guide/sctunit.textile"/>
-                        <file name="user-guide/search_and_navigate.textile"/>
+                        <file name="user-guide/c-domain.textile"/>
+                        <file name="user-guide/scxml_domain.textile" />
+                        <!-- file name="user-guide/typescript-domain.textile" / -->
+                        <file name="user-guide/statechart_language.textile"/>
                     	<file name="user-guide/lab_projects.textile"/>
                         <file name="user-guide/installation.textile"/>
                     	<file name="user-guide/release_notes.textile"/>
