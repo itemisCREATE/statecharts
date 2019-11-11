@@ -80,7 +80,7 @@ The complexity of the state machine can increase in a development process. Thus,
 
 p=. Example State Machine
 
-The state machine contains three types of events: two __in events__ (inEvent1, inEvent2), two __out events__ (outEvent1, outEvent2) and one __timed event__ (after 2 s). Two states are connected with the inEvent1 and the after 2 s event. Each state raises one of __out event__. Additionally, a final state has been added, which also is part of the API. It only can be reached by raising the __in event__ inEvent2, if the state machine's __state__ StateA is active.
+The state machine contains three types of events: two __in events__ (inEvent1, inEvent2), two __out events__ (outEvent1, outEvent2) and one __timed event__ (after 2 s). Two states are connected with the inEvent1 and the `after 2 s` event. Each state raises one of __out event__. Additionally, a final state has been added, which also is part of the API. It only can be reached by raising the __in event__ inEvent2, if the state machine's __state__ StateA is active.
 
 These are the main parts of the state machine, which can be used and must be handled:
 * raise in events
@@ -101,15 +101,15 @@ The execution of the program can be visualized as a state machine:
 p=. High level description of bare metal cycle based state machine integration
 
 
- According to the used State Machine, there are different parts, which must be take into account:
+ According to the used State Machine, there are different parts, which must be taken into account:
 * In Events 
 * Timed Events
 * Out Events
 
 h3(#main-function). Main Function
 
-The main function could be realized as following: First, the hardware will be initialized. Then the timers will take into account. After this the state machine will be initialized and entered. 
-At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events. The behavior equals an in events. Then the runCycle will be called, which handles the logical execution of the state machine. This only needed, if the execution semantics is cycle based and must only be executed based on the elapsed time, e.g. 200 ms for a CycleBased(200) state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
+The main function could be realized as following: First, the hardware will be initialized. Then the timers will be taken into account. After this the state machine will be initialized and entered. 
+At this point the state machine will be called as long as the state machine is not final. Note: If there is no final state defined the behavior is equals a while(true) loop. At first all in events will be raised. After this the timer will be updated, which internally raises time events. The behavior is similar to in events. Then the runCycle will be called, which handles the logical execution of the state machine. This is only needed if the execution semantics is cycle based and must only be executed based on the elapsed time, e.g. 200 ms for a CycleBased(200) state machine. After proceeding, the out events will be handled. The last step, if wanted, is setting the microcontroller into a sleep mode.
 
 bc.. 
 void main() {
@@ -153,9 +153,9 @@ p.
 
 h3(#handle-in-events). Handle In Events 
 
-For now on, there are two different ways of how the events should be interact on the embedded system. One design pattern is polling. The other one is the usage of interrupts.
+For now on, there are two different ways of how the events should interact on the embedded system. One design pattern is polling. The other one is the usage of interrupts.
 
-A design using polling cyclic updates the status of the inputs and raise the according event.
+A design using polling cyclically updates the status of the inputs and raises the respective event.
 
 bc.. 
 void handleInEvents() {
@@ -194,15 +194,15 @@ p.
 
 h3(#handle-timer). Handle Timer
 
-Handling the timer is more comprehensive. Each time event of the state machine must be updated and handled, because in detail there are nothing else than a in event. This means that for every timed trigger there must be one in event. Therefore, a timer service is provided in the examples. This timer service must be updated with the elapsed time since the its last call, which leads to the next implementation point: Determining the time.
+Handling the timer is more comprehensive. Each time event of the state machine must be updated and handled, because in detail they are nothing else than an in event. Therefore, a timer service is provided in the examples. This timer service must be updated with the elapsed time since its last call, which leads to the next implementation point: Determining the time.
 On a pure bare-metal implementation there is no such thing as elapsed time. Everything depends on cycles. 
 
-Imagine a microcontroller running with a clock of 16MHz. Running one instruction needs 1/16MHz = 625ns. A delay() function 1000000 would need 6,25 ms.A first approach updating the timer could be:
+Imagine a microcontroller running with a clock of 16MHz. Running one instruction needs 1/16MHz = 62.5ns. A delay() function 100000 would need 6,25 ms. A first approach updating the timer could be:
 
 bc.. 
 void main() {
 	while(true) {
-		delay(1000000);
+		delay(100000);
 		updateTimer(6,25);
 		runCycle();
 	}
@@ -211,9 +211,9 @@ p.
 
 But using this implementations got two big drawbacks:
 * the delay function is blocking
-* the execution time of the updateTimer and runCycle are not taking into account
+* the execution time of the updateTimer and runCycle are not taken into account
 
-A much more precise design is using timer interrupts, which can generate a periodic interrupt ever x cycles:
+A much more precise design is using timer interrupts, which can generate a periodic interrupt every x cycles:
 
 bc.. 
 void handleTimer() {
