@@ -94,7 +94,11 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 * Queue that holds the raised events.
 		 */
 		typedef struct «eventQueueTypeName»_s {
+			«IF userAllocatesInQueue || userAllocatesInternalQueue»
 			«internalEventStructTypeName» *events;
+			«ELSE»
+			«internalEventStructTypeName» events[«bufferSize»];
+			«ENDIF»
 			«INT_TYPE» capacity;
 			«INT_TYPE» pop_index;
 			«INT_TYPE» push_index;

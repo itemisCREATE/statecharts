@@ -18,7 +18,6 @@ public:
 protected:
 	sc_unit_timer_service_t timer_service;
 	virtual void SetUp();
-	eventdriveninternalevent_event queue[20];
 };
 
 static EventDrivenInternalEventTest * tc;
@@ -26,7 +25,7 @@ static EventDrivenInternalEventTest * tc;
 
 void EventDrivenInternalEventTest::SetUp()
 {
-	eventDrivenInternalEvent_init(&statechart, queue, 20);
+	eventDrivenInternalEvent_init(&statechart);
 	sc_timer_service_init(
 		&timer_service,
 		0,

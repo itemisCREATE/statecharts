@@ -19,7 +19,6 @@ public:
 protected:
 	sc_unit_timer_service_t timer_service;
 	virtual void SetUp();
-	outeventvisibilityeventdriven_event queue[20];
 };
 
 static OutEventVisibilityEventDrivenTest * tc;
@@ -27,7 +26,7 @@ static OutEventVisibilityEventDrivenTest * tc;
 
 void OutEventVisibilityEventDrivenTest::SetUp()
 {
-	outEventVisibilityEventDriven_init(&statechart, queue, 20);
+	outEventVisibilityEventDriven_init(&statechart);
 	sc_timer_service_init(
 		&timer_service,
 		0,

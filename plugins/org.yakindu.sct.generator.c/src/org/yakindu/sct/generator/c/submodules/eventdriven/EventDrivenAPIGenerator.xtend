@@ -36,20 +36,20 @@ class EventDrivenAPIGenerator extends APIGenerator {
 	override protected initSignature(ExecutionFlow it) {
 		val internalArgs = ''', «internalEventStructTypeName» *internal_queue_buffer, «INT_TYPE» internal_queue_capacity'''
 		val inArgs = ''', «internalEventStructTypeName» *in_queue_buffer, «INT_TYPE» in_queue_capacity'''
-		'''void «initFctID»(«scHandleDecl»«IF needsInternalEventQueue»«internalArgs»«ENDIF»«IF needsInEventQueue»«inArgs»«ENDIF»)'''
+		'''void «initFctID»(«scHandleDecl»«IF userAllocatesInternalQueue»«internalArgs»«ENDIF»«IF userAllocatesInQueue»«inArgs»«ENDIF»)'''
 	}
 	
 	override protected initFunctionBody(ExecutionFlow it) {
 		'''
 		«super.initFunctionBody(it)»
 		«IF needsInternalEventQueue»
-		«eventQueueInitFunction»(&«scHandle»->«internalQueue», internal_queue_buffer, internal_queue_capacity);
+			«eventQueueInitFunction»(&«scHandle»->«internalQueue»«IF userAllocatesInternalQueue», internal_queue_buffer, internal_queue_capacity«ENDIF»);
 		«ENDIF»
 		«IF needsInEventQueue»
-		«eventQueueInitFunction»(&«scHandle»->«inEventQueue», in_queue_buffer, in_queue_capacity);
+			«eventQueueInitFunction»(&«scHandle»->«inEventQueue»«IF userAllocatesInQueue», in_queue_buffer, in_queue_capacity«ENDIF»);
 		«ENDIF»
 		«IF needsRunCycleGuard»
-		«scHandle»->is_running_cycle = «FALSE_LITERAL»;
+			«scHandle»->is_running_cycle = «FALSE_LITERAL»;
 		«ENDIF»
 		'''
 	}
