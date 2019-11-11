@@ -153,7 +153,7 @@ p.
 
 h3(#handle-in-events). Handle In Events 
 
-For now on, there are two different ways of how the events should be interact on the embedded system. One design pattern is polling. The other one is the usage of interrupts.
+For now on, there are two different ways of how the events should interact on the embedded system. One design pattern is polling. The other one is the usage of interrupts.
 
 A design using polling cyclic updates the status of the inputs and raise the according event.
 
