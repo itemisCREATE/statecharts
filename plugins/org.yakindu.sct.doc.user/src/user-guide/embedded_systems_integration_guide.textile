@@ -45,7 +45,7 @@ For applications where events/inputs only rarely occur, this is not a good desig
 
 h3(#interrupts). Interrupts
 
-Using interrupts is the second approach, where the system reacts on interrupts, which can occur asynchronously. Thus, the system must not cyclic poll the inputs. The normal execution of the program will be interrupted and it jumps to the Interrupt Service Routine (ISR), which then will be executed. Typically, the execution of the ISR should be as fast as possible, as other interrupts could occur while executing the ISR. Therefore, bool flags are commonly used, which serve as memory. A simple implementation look like this:
+Using interrupts is the second approach, where the system reacts on interrupts, which can occur asynchronously. Thus, the system does not need to cyclically poll the inputs. The normal execution of the program will be interrupted and it jumps to the Interrupt Service Routine (ISR), which then will be executed. Typically, the execution of the ISR should be as fast as possible, as other interrupts could occur while executing the ISR. Therefore, bool flags are commonly used, which serve as memory. A simple implementation look like this:
 
 bc.. 
 int main() {
