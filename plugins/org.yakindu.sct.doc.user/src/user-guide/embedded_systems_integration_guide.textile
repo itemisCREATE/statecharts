@@ -55,7 +55,7 @@ int main() {
 			bool_flag1 = false;
 		}
 		if(bool_flag2 == true) {
-			doDiffferentStuff();
+			doDifferentStuff();
 			bool_flag2 = false;
 		}
 		// sleep_mode();
