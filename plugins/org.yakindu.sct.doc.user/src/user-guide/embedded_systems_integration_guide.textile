@@ -197,7 +197,7 @@ h3(#handle-timer). Handle Timer
 Handling the timer is more comprehensive. Each time event of the state machine must be updated and handled, because in detail there are nothing else than a in event. This means that for every timed trigger there must be one in event. Therefore, a timer service is provided in the examples. This timer service must be updated with the elapsed time since the its last call, which leads to the next implementation point: Determining the time.
 On a pure bare-metal implementation there is no such thing as elapsed time. Everything depends on cycles. 
 
-Imagine a microcontroller running with a clock of 16MHz. Running one instruction needs 1/16MHz = 625ns. A delay() function 1000000 would need 6,25 ms.A first approach updating the timer could be:
+Imagine a microcontroller running with a clock of 16MHz. Running one instruction needs 1/16MHz = 62.5ns. A delay() function 100000 would need 6,25 ms. A first approach updating the timer could be:
 
 bc.. 
 void main() {
