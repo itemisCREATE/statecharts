@@ -18,6 +18,7 @@ public:
 protected:
 	sc_unit_timer_service_t timer_service;
 	virtual void SetUp();
+	localevents_event queue[20];
 };
 
 static LocalEventsTest * tc;
@@ -25,7 +26,7 @@ static LocalEventsTest * tc;
 
 void LocalEventsTest::SetUp()
 {
-	localEvents_init(&statechart);
+	localEvents_init(&statechart, queue, 20);
 	sc_timer_service_init(
 		&timer_service,
 		0,
