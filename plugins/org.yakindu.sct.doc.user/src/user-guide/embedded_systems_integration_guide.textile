@@ -101,7 +101,7 @@ The execution of the program can be visualized as a state machine:
 p=. High level description of bare metal cycle based state machine integration
 
 
- According to the used State Machine, there are different parts, which must be take into account:
+ According to the used State Machine, there are different parts, which must be taken into account:
 * In Events 
 * Timed Events
 * Out Events
