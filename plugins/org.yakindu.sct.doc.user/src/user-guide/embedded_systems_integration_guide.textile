@@ -80,7 +80,7 @@ The complexity of the state machine can increase in a development process. Thus,
 
 p=. Example State Machine
 
-The state machine contains three types of events: two __in events__ (inEvent1, inEvent2), two __out events__ (outEvent1, outEvent2) and one __timed event__ (after 2 s). Two states are connected with the inEvent1 and the after 2 s event. Each state raises one of __out event__. Additionally, a final state has been added, which also is part of the API. It only can be reached by raising the __in event__ inEvent2, if the state machine's __state__ StateA is active.
+The state machine contains three types of events: two __in events__ (inEvent1, inEvent2), two __out events__ (outEvent1, outEvent2) and one __timed event__ (after 2 s). Two states are connected with the inEvent1 and the `after 2 s` event. Each state raises one of __out event__. Additionally, a final state has been added, which also is part of the API. It only can be reached by raising the __in event__ inEvent2, if the state machine's __state__ StateA is active.
 
 These are the main parts of the state machine, which can be used and must be handled:
 * raise in events
