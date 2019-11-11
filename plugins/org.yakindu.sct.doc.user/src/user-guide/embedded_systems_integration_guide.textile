@@ -213,7 +213,7 @@ But using this implementations got two big drawbacks:
 * the delay function is blocking
 * the execution time of the updateTimer and runCycle are not taken into account
 
-A much more precise design is using timer interrupts, which can generate a periodic interrupt ever x cycles:
+A much more precise design is using timer interrupts, which can generate a periodic interrupt every x cycles:
 
 bc.. 
 void handleTimer() {
