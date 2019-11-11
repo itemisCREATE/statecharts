@@ -75,7 +75,7 @@ Each ISR uses one specific boolean flag, which stores wherever an interrupt has 
 
 h2(#Example-State-Machine-for-Integration). Example State Machine for Integration
 
-The complexity of the state machine can increase in a development process. Thus, it's recommended to specify how the API (Application Programming Interface) should be accessed. While the API depends on the execution and used event types, this guide tries to break down the main elements and define am expandable design pattern. Therefore, the following example will be used for all integration guides.
+The complexity of the state machine can increase in a development process. Thus, it's recommended to specify how the API (Application Programming Interface) should be accessed. While the API depends on the execution and used event types, this guide tries to break down the main elements and define an expandable design pattern. Therefore, the following example will be used for all integration guides.
 !(large)images/images_embedded_systems_integration_guide/platform_integration_example.jpeg(Example State Machine)!
 
 p=. Example State Machine
