@@ -258,10 +258,10 @@ p.
 
 h3(#arduino-bare-metal). Arduino Bare-Metal Integration
 
-There are two examples for a bare-metal integration using interrupts and polling for Arduino and can be used fo r both execution semantics: CycleBased and EventDriven. They have been tested with an Arduino Uno (ATmega328p) and an Arduino Mega (ATmega2560):
+There are two examples for a bare-metal integration using interrupts and polling for Arduino and can be used fo r both execution semantics: @CycleBased and @EventDriven. They have been tested with an Arduino Uno (ATmega328p) and an Arduino Mega (ATmega2560):
 
 Add them to YAKINDU Statechart Tool with the example wizard: 
-__File__ -> __New__ -> __Example...__ -> __YAKINDU Statechart Examples__ -> __Embedded Systems Integration Guide__ -> __Arduino - ...__
+__File__ -> __New__ -> __Example...__ -> __YAKINDU Statechart Examples__ -> __Embedded Systems Integration Guide__ -> __Arduino - Bare-Metal Interrupts/Polling (C)__
 
 
 
