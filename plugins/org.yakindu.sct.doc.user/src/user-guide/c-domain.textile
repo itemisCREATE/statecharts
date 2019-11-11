@@ -3,14 +3,7 @@ h1{%EARLY_SEPARATOR%}.
 
 ==<div class="pro-feature">==
 
-h1(#cdom_deep_c_integration). Deep C/C++ Integration: Integrating your C/C++ source code with your state machines
-
-The Deep C/C++ Integration feature allows using C/C++ types, variables, and operations directly within the statechart model.
-
-
-
-
-h2(#cdom_introduction). Introduction
+h1(#cdom_deep_c_integration). Using C/C++ code in statecharts
 
 The YAKINDU Statechart Tools Professional Edition comes with a _Deep C/C++ Integration_ feature, which allows for using C/C++ types, variables, and operations directly within the statechart model. C/C++ header files located in your workspace are automatically recognized by the tool, and all contained type and operation declarations are made accessible in the statechart editor with all its editing features like code completion and validation. In addition to your custom C/C++ types, the C99 standard primitive types, like _int16_t_, are also available out of the box. 
 
