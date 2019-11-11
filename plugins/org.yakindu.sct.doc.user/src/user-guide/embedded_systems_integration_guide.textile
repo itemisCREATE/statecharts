@@ -76,7 +76,7 @@ Each ISR uses one specific boolean flag, which stores wherever an interrupt has 
 h2(#Example-State-Machine-for-Integration). Example State Machine for Integration
 
 The complexity of the state machine can increase in a development process. Thus, it's recommended to specify how the API (Application Programming Interface) should be accessed. While the API depends on the execution and used event types, this guide tries to break down the main elements and define an expandable design pattern. Therefore, the following example will be used for all integration guides.
-!(large)images/images_embedded_systems_integration_guide/platform_integration_example.jpeg(Example State Machine)!
+!(large)images/platform_integration_example.jpeg(Example State Machine)!
 
 p=. Example State Machine
 
@@ -94,17 +94,13 @@ This section describes how to integrate a state machine with a cycle based or ev
 * Initialization - called once
 * While loop - calling the state machine until it's final
 * Final - called if the state machine is final
-The execution of the program can be visualized as a state machine:
-
-!(large)images/images_embedded_systems_integration_guide/platform_integration_simple.png(High level description of bare metal cycle based state machine integration)!
-
-p=. High level description of bare metal cycle based state machine integration
 
 
  According to the used State Machine, there are different parts, which must be taken into account:
 * In Events 
 * Timed Events
 * Out Events
+
 
 h3(#main-function). Main Function
 
@@ -117,36 +113,38 @@ void main() {
 	
 	hardwareInit();
 	
-	if(hasTimeEvents) {
+	#ifdef IN_EVENTS
 		timerInit();
-	}
+	#endif
 	
 	statemachine_init();
 	statemachine_enter();
 
 	// While loop
 	while(!statemachine_isFinal()) {
-		if(hasInEvents) {
+		#ifdef IN_EVENTS
 			handleInEvents();
-		}
+		#endif
 		
-		if(hasTimeEvents) {
+		#ifdef TIME_EVENTS
 			handleTimer();
-		}
+		#endif
 		
-		if(isCycleBased && elapsedTime >= cyclePeriod) {
+		#ifdef CYCLE_BASED
+		if(elapsedTime >= cyclePeriod) {
 			elapsedTime = 0;
 			statemachine_runCycle();
 		}
+		#endif
 		
-		if(hasOutEvents) {
+		#ifdef OUT_EVENTS
 			handleOutEvents();
-		}
+		#endif
 		
-		if(usingSleepMode) {
+		#ifdef SLEEP_MODE
 			goToSleep()
 			// wait for Interrupt
-		}
+		#endif
 	}
 }
 p. 
@@ -257,15 +255,6 @@ void handleOutEvents() {
 	}
 }
 p. 
-
-h3(#execution-as-state-machine). Execution As State Machine
-
-This is a expanded view on the implementation, of how it can be realized as a state machine.
-(needs to be updated)!
-
-!(large)images/images_embedded_systems_integration_guide/platform_integration.png(Complete execution shown as State Machine)!
-
-p=. Complete execution shown as State Machine
 
 h3(#arduino-bare-metal). Arduino Bare-Metal Integration
 
