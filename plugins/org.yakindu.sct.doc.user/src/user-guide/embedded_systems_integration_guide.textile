@@ -202,7 +202,7 @@ Imagine a microcontroller running with a clock of 16MHz. Running one instruction
 bc.. 
 void main() {
 	while(true) {
-		delay(1000000);
+		delay(100000);
 		updateTimer(6,25);
 		runCycle();
 	}
