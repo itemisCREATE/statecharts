@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -111,7 +112,10 @@ public class DomainRegistry {
 
 	public static String determineDomainID(URI uri) {
 		if (URIConverter.INSTANCE.exists(uri, null)) {
-			return FastStatechartAttributeParser.parse(uri, "domainID");
+			Optional<String> domainID = FastStatechartAttributeParser.parse(uri, "domainID");
+			if(domainID.isPresent()) {
+				return domainID.get();
+			}
 		}
 		return BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 	}

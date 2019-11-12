@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sgraph.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -40,18 +41,17 @@ public class FastStatechartAttributeParser {
 
 	}
 	
-	public static String parse(URI uri, String attributeID) {
-		final StringBuilder result = new StringBuilder();
+	public static Optional<String> parse(URI uri, String attributeID) {
 		try (InputStream is = URIConverter.INSTANCE.createInputStream(uri, null)) {
-			parse(result, is, attributeID);
+			return Optional.of(parse(is, attributeID));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return result.toString();
+		return Optional.empty();
 	}
 
-	protected static String parse(StringBuilder result, InputStream is, String attributeID) {
+	protected static String parse(InputStream is, String attributeID) {
+		final StringBuilder result = new StringBuilder();
 		SAXParserFactory f = SAXParserFactory.newInstance();
 		try {
 			SAXParser newSAXParser = f.newSAXParser();
