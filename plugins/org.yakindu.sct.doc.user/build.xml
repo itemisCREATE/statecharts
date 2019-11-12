@@ -211,6 +211,7 @@
                 <include name="user-guide/sctunit.textile"/>
             	<include name="user-guide/lab_projects.textile"/>
                 <include name="user-guide/installation.textile"/>
+            	<include name="user-guide/embedded_systems_integration_guide.textile"/>
             	<include name="user-guide/release_notes.textile"/>
                 <!-- <include name="user-guide/glossary.textile" /> -->
             </fileset>
@@ -218,7 +219,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="17"/>
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="18"/>
                 </condition>
             </fail>
 
@@ -392,6 +393,7 @@
                         <file name="user-guide/statechart_language.textile"/>
                     	<file name="user-guide/lab_projects.textile"/>
                         <file name="user-guide/installation.textile"/>
+						<file name="user-guide/embedded_systems_integration_guide.textile"/>
                     	<file name="user-guide/release_notes.textile"/>
                         <!-- file name="user-guide/glossary.textile" / -->
                     </filelist>

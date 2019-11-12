@@ -30,6 +30,8 @@ public enum ExampleCategory implements IExampleData {
 	ADVANCED("Application Examples", "advanced.html"),
 
 	EMBEDDED("Embedded Systems", "embedded.html"),
+	
+	INTEGRATION("Embedded Systems Integration Guide", "integration.html"),
 
 	HMI("Human Machine Interfaces", "hmi.html"),
 
@@ -79,6 +81,9 @@ public enum ExampleCategory implements IExampleData {
 		}
 		if (Arrays.asList(data.getCategory()).contains("embedded")) {
 			return EMBEDDED;
+		}
+		if (Arrays.asList(data.getCategory()).contains("integration")) {
+			return INTEGRATION;
 		}
 		if (Arrays.asList(data.getCategory()).contains("hmi")) {
 			return HMI;
