@@ -22,7 +22,7 @@ This is mainly a bugfix release, containing the following:
 
 h3(#release_notes_3.5.9_documentation). Documentation
 
-For this release we also spend some additional time on our documentation. We restructured the user-guide and updated some parts. We also added two new chapters:
+For this release we also spent some additional time on our documentation. We restructured the user-guide and updated some parts. We also added two new chapters:
 * Embedded Systems Integration Guide: Demonstrates how to integrate the generated C code with code running on an embedded device
 * Lab Features: Lists our lab features and corresponding resources to get started with them
 
