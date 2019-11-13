@@ -48,4 +48,11 @@
 		  	 </contextualLaunch>
 	    </shortcut>
 	</extension>
+	 <extension point="org.eclipse.core.runtime.adapters">
+         <factory 
+            class="" 
+            adaptableType="org.eclipse.ui.IPathEditorInput">
+            <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
+         </factory>
+   </extension>
 </plugin>
