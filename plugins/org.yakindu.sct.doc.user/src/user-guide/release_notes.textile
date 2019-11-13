@@ -5,6 +5,28 @@ h1(#release_notes). Release notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.9). YAKINDU Statechart Tools  3.5.9 (Nov 14, 2019)
+
+This is mainly a bugfix release, containing the following:
+
+* Fixed the C++ code generation for setter function when variables with name 'value' were used.
+* Fixed a bug causing an exception in the C/C++ domain.
+* Fixed a bug in the Java code generator where operation calls were not properly synchronized in a multi-thread scenario.
+* Fixed a bug in the Java code generator when elements with name 'switch' were used.
+* When creating new statechart models the name is now properly validated.
+* Fixed a small rendering bug for choice nodes.
+* State names are bold again.
+* The links in the context help now link to some useful part of the documentation.
+* Cleaned-up menus and toolbars.
+* Removed JVM argument '-server' to avoid problems with some Java installations. 
+
+h3(#release_notes_3.5.9_documentation). Documentation
+
+For this release we also spend some additional time on our documentation. We restructured the user-guide and updated some parts. We also added two new chapters:
+* Embedded Systems Integration Guide: Demonstrates how to integrate the generated C code with code running on an embedded device
+* Lab Features: Lists our lab features and corresponding resources to get started with them
+
+
 h2(#release_notes_3.5.8). YAKINDU Statechart Tools  3.5.8 (Oct 10, 2019)
 
 This is mainly a bugfix release, containing the following:
@@ -17,7 +39,7 @@ This is mainly a bugfix release, containing the following:
 * In Java domain statecharts, you can now also import code from JARs that are located in the same project.
 * Besides bugfixing, we also continued to improve the usability of the Statechart Tools products. In this regards, we have started to clean-up several menus and toolbars from rather useless, distracting items. This is an ongoing process and will be continued in the upcoming releases.
 
-h3(#release_notes_3.5.3_examples). Example Wizard
+h3(#release_notes_3.5.8_examples). Example Wizard
 
 We have restructured the examples from the example wizard and added new ones. Please make sure that you update your examples (click on Update button in example wizard) in order to benefit from the new structure. In particular, we added new examples to explain some more advanced statechart concepts like histories, statechart hierarchies, orthogonality and our execution schemes (event-driven, cycle-based, parent-first, child-first). In addition we added new simple examples for code generation in C, C++ and Java.
 
