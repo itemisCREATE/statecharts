@@ -21,6 +21,7 @@
         <toc file="help/user-guide/code_generation_statechart_image-toc.xml" primary="false"/>
         <toc file="help/user-guide/generating_code_headless-toc.xml" primary="false"/>
         <toc file="help/user-guide/sctunit-toc.xml" primary="false"/>
+        <toc file="help/user-guide/embedded_systems_integration_guide-toc.xml"/>
         <toc file="help/user-guide/installation-toc.xml" primary="false"/>
         <toc file="help/user-guide/lab_projects-toc.xml" primary="false"/>
         <toc file="help/user-guide/release_notes-toc.xml" primary="false"/>
