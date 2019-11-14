@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.install;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,6 +31,7 @@ import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.equinox.p2.ui.ProvisioningUI;
 import org.eclipse.swt.widgets.Display;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -42,6 +44,8 @@ import com.google.common.collect.Sets;
  */
 public class InstallWizardOpener {
 
+	private static final String WILDCARD = "*";
+	
 	private ProvisioningAgentProvider agentProvider = new ProvisioningAgentProvider();
 
 	public void open(Map<String, Set<String>> features, IProgressMonitor monitor) {
@@ -63,7 +67,10 @@ public class InstallWizardOpener {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * 
+	 * This also adds all new repositories listed in feature map to the known repositories
+	 */
 	protected Set<IInstallableUnit> collectIUs(Map<String, Set<String>> features, IMetadataRepositoryManager manager,
 			IProgressMonitor monitor) {
 
@@ -73,15 +80,29 @@ public class InstallWizardOpener {
 				if (monitor.isCanceled()) {
 					return units;
 				}
-				IMetadataRepository repo = manager.loadRepository(URI.create(entry.getKey()), monitor);
-
+				List<IMetadataRepository> repos = Lists.newArrayList();
+				if (entry.getKey().equals(WILDCARD)) {
+					List<URI> knownRepos = Arrays.asList(manager.getKnownRepositories(IRepositoryManager.REPOSITORIES_ALL));
+					for (URI repoUri : knownRepos) {
+						repos.add(manager.loadRepository(repoUri, monitor));
+					}
+				} else {
+					repos = Collections.singletonList(manager.loadRepository(URI.create(entry.getKey()), monitor));
+				}
+				
 				for (String featureId : entry.getValue()) {
-					units.addAll(repo.query(QueryUtil.createLatestQuery(QueryUtil.createIUQuery(featureId)), monitor)
-							.toUnmodifiableSet());
+					for (IMetadataRepository repo : repos) {
+						Set<IInstallableUnit> unmodifiableSet = repo.query(QueryUtil.createLatestQuery(QueryUtil.createIUQuery(featureId)), monitor).toUnmodifiableSet();
+						units.addAll(unmodifiableSet);
+					}
 				}
+				
 				if (entry.getValue().isEmpty()) {
-					units.addAll(repo.query(QueryUtil.createIUGroupQuery(), monitor).toUnmodifiableSet());
+					for (IMetadataRepository repo : repos) {
+						units.addAll(repo.query(QueryUtil.createIUGroupQuery(), monitor).toUnmodifiableSet());
+					}
 				}
+				
 			} catch (ProvisionException | OperationCanceledException e) {
 				e.printStackTrace();
 				continue;

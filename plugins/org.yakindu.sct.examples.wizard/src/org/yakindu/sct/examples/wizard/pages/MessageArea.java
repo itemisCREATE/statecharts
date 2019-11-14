@@ -142,7 +142,7 @@ public class MessageArea extends Composite {
 	
 	public void showDependenciesMissing() {
 		state = State.INSTALL;
-		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
+		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_WARNING));
 		textLabel.setText("This example requires additional features. Do you want to install them?");
 		textLabel.requestLayout();
 		button.setText("Install Dependencies...");
