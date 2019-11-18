@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -42,13 +41,14 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
-import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 
 /**
  * 
@@ -92,6 +92,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected List<Step> executionStack
 	protected int activeStateIndex
 	protected boolean useInternalEventQueue
+	
+	protected boolean useSuperStep
+	protected boolean stateVectorChanged
 
 	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
 	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
@@ -108,6 +111,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		activeStateIndex = 0
 		historyStateConfiguration = newHashMap()
 		this.useInternalEventQueue = useInternalEventQueue
+		useSuperStep = (flow.sourceElement as Statechart).isSuperStep
 
 		if (!executionContext.snapshot) {
 			flow.staticInitSequence.scheduleAndRun
@@ -169,7 +173,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 				event = null
 			}
 			// perform a run to completion step
-			rtcStep
+			if (useSuperStep) {
+				superStepLoop([rtcStep])
+			} else {
+				rtcStep
+			}
+			
 			// get next event if available
 			if(! internalEventQueue.empty) event = internalEventQueue.poll
 			traceInterpreter.evaluate(endRunCycleTrace, executionContext)
@@ -178,6 +187,13 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			if(cycleAdapter !== null)
 				executionContext.eAdapters.add(cycleAdapter)
 		}
+	}
+	
+	def superStepLoop(()=>void microStep) {
+		do {
+			stateVectorChanged = false
+			microStep.apply
+		} while (stateVectorChanged)
 	}
 
 	def rtcStep() {		
@@ -188,7 +204,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			state?.reactSequence?.scheduleAndRun
 			activeStateIndex = activeStateIndex + 1
 		}
-		executionContext.clearLocalAndInEvents
+		if (!useSuperStep || !stateVectorChanged)
+			executionContext.clearLocalAndInEvents
 	}
 
 	override exit() {
@@ -238,7 +255,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	def dispatch Object execute(EnterState enterState) {
 		activeStateConfiguration.set(enterState.state.stateVector.offset, enterState.state)
 		executionContext.activeStates += enterState.state.sourceElement as RegularState
-		activeStateIndex = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...		
+		activeStateIndex = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...
+		stateVectorChanged = true
 		null
 	}
 
