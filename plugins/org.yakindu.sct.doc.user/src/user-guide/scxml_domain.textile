@@ -33,7 +33,7 @@ To use the SCXML domain, just select it on the domain selection page when creati
 
 
 
-h3(#scxml_codegen). SCXML code generation
+h2(#scxml_codegen). SCXML code generation
 
 Generating SCXML code works like with any other code generator. You need to create a generator model and select the SCXML code generator. Please note, that your statechart must have the SCXML domain enabled.
 
@@ -63,7 +63,7 @@ You can also omit the _targetProject_ attribute and specify a path on your file 
 
 
 
-h3(#scxml_simulation). Simulating and testing SCXML statecharts
+h2(#scxml_simulation). Simulating and testing SCXML statecharts
 
 Statecharts with the SCXML domain can also be simulated in the same way standard statecharts are simulated. The only difference is that the YAKINDU simulation engine will use the Apache Commons SCXML engine under the hood. This ensures that the simulation shows the same behavior as when using the SCXML model in other contexts. The same holds for using our test framework _SCTUnit_ with an SCXML statechart.
 
