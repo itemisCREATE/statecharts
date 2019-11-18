@@ -1,0 +1,65 @@
+GeneratorModel for sctunit::cpp {
+
+	test CycleBasedSuperStep {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "gtests/CycleBasedSuperStep"
+			libraryTargetFolder = "libraryTarget"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}		
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen = true
+		}
+	}
+	
+	test EventDrivenSuperStep {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "gtests/EventDrivenSuperStep"
+			libraryTargetFolder = "libraryTarget"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}		
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen = true
+		}
+	}
+		
+		
+
+
+
+}
