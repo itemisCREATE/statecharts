@@ -120,9 +120,20 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 		{
 			
 			«clearOutEventsFctID»();
-			«runCycleFunctionForLoop»			
+			«IF statechart.isSuperStep»
+			«superStepLoop(runCycleFunctionForLoop)»
+			«ELSE»
+			«runCycleFunctionForLoop»
+			«ENDIF»
 			«clearInEventsFctID»();
 		}
+	'''
+	
+	protected def superStepLoop(CharSequence microStep) '''
+		do {
+			«STATEVECTOR_CHANGED» = false;
+			«microStep»
+		} while(«STATEVECTOR_CHANGED»);
 	'''
 	
 	def runCycleFunctionForLoop(ExecutionFlow it) {
