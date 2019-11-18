@@ -12,14 +12,14 @@ h2(#quick_ref_statechart_element_overview). Statechart elements overview
 A statechart consists of a number of different elements. The following list gives an overview of these elements in the order they are listed in the editor palette.
 
 |{width:320px}_. Statechart Element |_. Description |
-| !images/docu_editor_palette_210_tool_transition.png(Editor palette element tool "Transition")! | Transitions connect states with each other. Transition reactions define under which conditions a transition is taken. Read more in section "States and transitions":#quick_ref_statechart_elements. |
-| !images/docu_editor_palette_220_tool_state.png(Editor palette element tool "State")! | A state is the most basic building block of a statechart. A state can define reactions for when it gets entered or left. Read more in section "States and transitions":#quick_ref_statechart_elements. |
+| !images/docu_editor_palette_210_tool_transition.png(Editor palette element tool "Transition")! | Transitions connect states with each other. Transition reactions define under which conditions a transition is taken. Read more in section "States and transitions":#quick_ref_states_transitions. |
+| !images/docu_editor_palette_220_tool_state.png(Editor palette element tool "State")! | A state is the most basic building block of a statechart. A state can define reactions for when it gets entered or left. Read more in section "States and transitions":#quick_ref_states_transitions. |
 | !images/docu_editor_palette_230_tool_composite_state.png(Editor palette element tool "Composite state")! | A composite state groups a number of substates. It can be used to express state hierarchies. Read more in section "Composite states":#quick_ref_composite_states. |
 | !images/docu_editor_palette_240_tool_orthogonal_state.png(Editor palette element tool "Orthogonal state")! | An orthogonal state is used to express concurrency. Read more in section "Orthogonality":#quick_ref_orthogonality. |
 | !images/docu_editor_palette_250_tool_region.png(Editor palette element tool "Region")! | A region is a container for states and transitions. Regions can exist as top-level elements or inside of a composite or orthogonal state. Multiple regions that coexist on the same level express concurrency as in an orthogonal state. |
 | !images/docu_editor_palette_260_tool_entry.png(Editor palette element tool "Entry point")! | Entry points mark the initial state of a region. A region can have multiple named entry points to specify different execution flows. Learn more about them in section "Composite states":#quick_ref_composite_states. |
-| !images/docu_editor_palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! | A shallow history remembers the last active state inside a composite state. Read more in section "History nodes":#quick_ref_histories. |
-| !images/docu_editor_palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! | A deep history remembers all nested active state inside a composite state. Read more in section "History nodes":#quick_ref_histories. |
+| !images/docu_editor_palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! | A shallow history remembers the last active state inside a composite state. Read more in section "History nodes":#quick_ref_history_nodes. |
+| !images/docu_editor_palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! | A deep history remembers all nested active state inside a composite state. Read more in section "History nodes":#quick_ref_history_nodes. |
 | !images/docu_editor_palette_290_tool_final_state.png(Editor palette element tool "Final state")! | A final state denotes the end of the execution flow. Read more in chapter "final state":../user-guide/statechart_language.html#sclang_final_state of the complete reference. |
 | !images/docu_editor_palette_300_tool_exit_point.png(Editor palette element tool "Exit point")! | Exit points are used to leave a composite state and are the counterparts of entry points. Read more about them in section "Composite states":#quick_ref_composite_states. |
 | !images/docu_editor_palette_310_tool_choice.png(Editor palette element tool "Choice")! | A choice node is used to model a conditional path. Read more in section "Choices":#quick_ref_choices. |
@@ -65,7 +65,7 @@ The internal scope declares the entities that are only used internally by the st
 For more details on the definition section, consult the "language reference":../user-guide/statechart_language.html#sclang_definition_section.
 
 
-h2(#quick_ref_statechart_elements). States and transitions
+h2(#quick_ref_states_transitions). States and transitions
 
 States and transitions are the basic building blocks of a statechart. States and transitions are contained in "regions":../user-guide/statechart_language.html#sclang_regions. At each point of a statechart's execution, there is at most one active state per region.
 
@@ -204,7 +204,7 @@ h3(#quick_ref_forks_joins). Synchronizations (forks and joins)
 
 Orthogonal regions can be defined on top level or within composite states. The semantics explained above are the same. The example model above uses a synchronization node to fork the execution flow into both orthogonal regions @r1@ and @r2@. After both regions have executed their state transitions, the execution flow is joined again by a synchronization node. A joining synchronization is only executed when all incoming transitions can be taken within the same run-to-completion cycle. Read more about synchronization nodes in the "language reference":../user-guide/statechart_language.html#sclang_synchronizations.
 
-h2(#quick_ref_histories). History nodes
+h2(#quick_ref_history_nodes). History nodes
 
 A _shallow history_ state is a pseudo state that is placed inside the region of a composite state. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the initial substate again.
 

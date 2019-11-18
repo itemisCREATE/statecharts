@@ -220,7 +220,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="18"/>
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="19"/>
                 </condition>
             </fail>
 
