@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * @author rbeckmann
@@ -36,17 +37,29 @@ class APIGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
+	@Inject protected extension StatechartAnnotations
 
 	def runCycle(ExecutionFlow it) {
 		'''
 			«runCycleSignature»
 			{
 				«clearOutEventsFctID»(«scHandle»);
+				«IF statechart.isSuperStep»
+				«superStepLoop(runCycleForLoop(it))»
+				«ELSE»
 				«runCycleForLoop(it)»
+				«ENDIF»
 				«clearInEventsFctID»(«scHandle»);
 			}
 		'''
 	}
+	
+	protected def superStepLoop(CharSequence microStep) '''
+		do {
+			«scHandle»->«STATEVECTOR_CHANGED» = false;
+			«microStep»
+		} while(«scHandle»->«STATEVECTOR_CHANGED»);
+	'''
 
 	protected def CharSequence runCycleForLoop(ExecutionFlow it) '''
 		for («scHandle»->«STATEVECTOR_POS» = 0;

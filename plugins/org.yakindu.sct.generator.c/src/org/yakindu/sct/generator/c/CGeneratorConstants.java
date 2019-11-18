@@ -56,6 +56,7 @@ public abstract class CGeneratorConstants {
 	 */
 	public static final String STATEVECTOR = "stateConfVector";
 	public static final String STATEVECTOR_POS = "stateConfVectorPosition";
+	public static final String STATEVECTOR_CHANGED = "stateVectorChanged";
 	public static final String HISTORYVECTOR = "historyVector";
 	public static final String HANDLE = "handle";
 

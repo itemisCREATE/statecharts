@@ -35,6 +35,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 import org.yakindu.sct.generator.cpp.FlowCode
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActive, Exit, IsFinal {
 	
@@ -46,6 +47,7 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	@Inject protected extension CppExpressionsGenerator
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
+	@Inject protected extension StatechartAnnotations
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -91,6 +93,10 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 			
 			«ENDIF»
 			«STATEVECTOR_POS» = 0;
+			
+			«IF statechart.isSuperStep»
+			«STATEVECTOR_CHANGED» = false;
+			«ENDIF»
 		
 			«clearInEventsFctID»();
 			«clearOutEventsFctID»();
