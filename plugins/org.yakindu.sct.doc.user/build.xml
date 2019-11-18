@@ -196,6 +196,7 @@
             <fileset id="fileset.eclipsehelp" dir="${src.dir}">
                 <include name="tutorials/tutorials.textile"/>
                 <include name="user-guide/overview.textile"/>
+            	<include name="user-guide/quick_ref.textile"/>
                 <include name="user-guide/editing_statecharts.textile"/>
                 <include name="user-guide/simulating_statecharts.textile"/>
                 <include name="user-guide/c-domain.textile"/>
@@ -378,6 +379,7 @@
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="user-guide/overview.textile"/>
+                    	<file name="user-guide/quick_ref.textile"/>
                         <file name="user-guide/editing_statecharts.textile"/>
                         <file name="user-guide/simulating_statecharts.textile"/>
                         <file name="user-guide/code_generation_intro.textile"/>

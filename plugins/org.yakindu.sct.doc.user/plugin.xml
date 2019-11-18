@@ -8,6 +8,7 @@
         <!-- List all files constituting the documentation here: -->
         <toc file="help/tutorials/tutorials-toc.xml" primary="false"/>
         <toc file="help/user-guide/overview-toc.xml" primary="false"/>
+        <toc file="help/user-guide/quick_ref-toc.xml" primary="false"/>
         <toc file="help/user-guide/editing_statecharts-toc.xml" primary="false"/>
         <toc file="help/user-guide/simulating_statecharts-toc.xml" primary="false"/>
         <toc file="help/user-guide/c-domain-toc.xml" primary="false"/>
