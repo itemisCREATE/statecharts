@@ -44,11 +44,7 @@ class APIGenerator {
 			«runCycleSignature»
 			{
 				«clearOutEventsFctID»(«scHandle»);
-				«IF statechart.isSuperStep»
-				«superStepLoop(runCycleForLoop(it))»
-				«ELSE»
 				«runCycleForLoop(it)»
-				«ENDIF»
 				«clearInEventsFctID»(«scHandle»);
 			}
 		'''
@@ -61,7 +57,8 @@ class APIGenerator {
 		} while(«scHandle»->«STATEVECTOR_CHANGED»);
 	'''
 
-	protected def CharSequence runCycleForLoop(ExecutionFlow it) '''
+	protected def CharSequence runCycleForLoop(ExecutionFlow it) {
+		val microStep = '''
 		for («scHandle»->«STATEVECTOR_POS» = 0;
 			«scHandle»->«STATEVECTOR_POS» < «maxOrthogonalStates»;
 			«scHandle»->«STATEVECTOR_POS»++)
@@ -82,8 +79,9 @@ class APIGenerator {
 				break;
 			}
 		}
-		
-	'''
+		'''
+		return if (statechart.isSuperStep) superStepLoop(microStep) else microStep
+	} 
 
 
 	def declareRunCycle(ExecutionFlow it) {

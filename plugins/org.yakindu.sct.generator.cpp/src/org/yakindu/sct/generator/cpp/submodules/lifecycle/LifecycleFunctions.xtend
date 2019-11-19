@@ -118,13 +118,8 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	override runCycle(ExecutionFlow it) '''
 		void «module»::«runCycleFctID»()
 		{
-			
 			«clearOutEventsFctID»();
-			«IF statechart.isSuperStep»
-			«superStepLoop(runCycleFunctionForLoop)»
-			«ELSE»
 			«runCycleFunctionForLoop»
-			«ENDIF»
 			«clearInEventsFctID»();
 		}
 	'''
@@ -137,7 +132,7 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	'''
 	
 	def runCycleFunctionForLoop(ExecutionFlow it) {
-		'''
+		val microStep = '''
 		for («STATEVECTOR_POS» = 0;
 			«STATEVECTOR_POS» < «orthogonalStatesConst»;
 			«STATEVECTOR_POS»++)
@@ -159,6 +154,7 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 			}
 		}
 		'''
+		return if (statechart.isSuperStep) superStepLoop(microStep) else microStep
 	}
 	
 	override isActive(ExecutionFlow it) '''

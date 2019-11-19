@@ -32,7 +32,7 @@ class EventDrivenSuperStepTest : public ::testing::Test{
 };
 
 
-TEST_F(EventDrivenSuperStepTest, superStepTakesTwoTransitionsUsingSameEvent) {
+TEST_F(EventDrivenSuperStepTest, superStepOnInternalEventQueue) {
 	
 	statechart->enter();
 	
@@ -41,6 +41,8 @@ TEST_F(EventDrivenSuperStepTest, superStepTakesTwoTransitionsUsingSameEvent) {
 	statechart->getDefaultSCI()->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_C));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 17);
 	
 	statechart->exit();
 	
@@ -70,7 +72,7 @@ TEST_F(EventDrivenSuperStepTest, superStepIteratesUsingSameEventAndGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_C));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 42);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 17);
 	
 	statechart->getDefaultSCI()->raise_f();
 	

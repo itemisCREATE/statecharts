@@ -12,7 +12,7 @@ class EventDrivenSuperStepTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void superStepTakesTwoTransitionsUsingSameEvent();
+	void superStepOnInternalEventQueue();
 	void superStepIteratesUsingAlwaysTrigger();
 	void superStepIteratesUsingSameEventAndGuard();
 	void setTimer(EventDrivenSuperStep* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
@@ -40,12 +40,13 @@ void EventDrivenSuperStepTest::SetUp()
 	
 	tc = this;
 }
-void EventDrivenSuperStepTest::superStepTakesTwoTransitionsUsingSameEvent()
+void EventDrivenSuperStepTest::superStepOnInternalEventQueue()
 {
 	eventDrivenSuperStep_enter(&statechart);
 	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_A));
 	eventDrivenSuperStepIface_raise_e(&statechart);
 	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_C));
+	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 17);
 	eventDrivenSuperStep_exit(&statechart);
 }
 void EventDrivenSuperStepTest::superStepIteratesUsingAlwaysTrigger()
@@ -62,7 +63,7 @@ void EventDrivenSuperStepTest::superStepIteratesUsingSameEventAndGuard()
 	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_A));
 	eventDrivenSuperStepIface_raise_e(&statechart);
 	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_C));
-	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 42);
+	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 17);
 	eventDrivenSuperStepIface_raise_f(&statechart);
 	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_I));
 	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 0);
@@ -79,8 +80,8 @@ void EventDrivenSuperStepTest::unsetTimer(EventDrivenSuperStep* handle, const sc
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 
-TEST_F(EventDrivenSuperStepTest, superStepTakesTwoTransitionsUsingSameEvent) {
-	superStepTakesTwoTransitionsUsingSameEvent();
+TEST_F(EventDrivenSuperStepTest, superStepOnInternalEventQueue) {
+	superStepOnInternalEventQueue();
 }
 TEST_F(EventDrivenSuperStepTest, superStepIteratesUsingAlwaysTrigger) {
 	superStepIteratesUsingAlwaysTrigger();
