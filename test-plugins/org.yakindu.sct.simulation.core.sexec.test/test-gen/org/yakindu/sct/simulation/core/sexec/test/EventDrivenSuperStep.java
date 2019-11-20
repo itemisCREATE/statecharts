@@ -23,14 +23,15 @@ public class EventDrivenSuperStep extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("supersteps/EventDrivenSuperStep.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
-	public void superStepTakesTwoTransitionsUsingSameEvent() throws Exception {
+	public void superStepOnInternalEventQueue() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("e");
 		assertTrue(isStateActive("C"));
+		assertTrue(getInteger("x") == 17l);
 		interpreter.exit();
 	}
 	@Test
@@ -47,7 +48,7 @@ public class EventDrivenSuperStep extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("A"));
 		raiseEvent("e");
 		assertTrue(isStateActive("C"));
-		assertTrue(getInteger("x") == 42l);
+		assertTrue(getInteger("x") == 17l);
 		raiseEvent("f");
 		assertTrue(isStateActive("I"));
 		assertTrue(getInteger("x") == 0l);

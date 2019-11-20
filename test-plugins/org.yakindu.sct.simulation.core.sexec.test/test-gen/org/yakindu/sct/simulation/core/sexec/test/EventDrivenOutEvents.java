@@ -23,7 +23,7 @@ public class EventDrivenOutEvents extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("EventDrivenOutEvents.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void test() throws Exception {
