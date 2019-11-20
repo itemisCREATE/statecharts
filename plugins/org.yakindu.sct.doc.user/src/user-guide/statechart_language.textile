@@ -219,6 +219,8 @@ p(#sclang_fig_exit_transitions).
 
 p=. The event @e@ leads to the unnamed (default) exit point, which is connected to the blank transition. The event @g@ activates the transition to the exit point named @g@, for which no specific transition exists, so the blank transition to state @E@ is taken. The event @f@ leads to the named exit @f@. The lower outgoing transition is connected to this exit point via @# f >@ and takes precedence over the blank transition, thus state @F@ becomes active. Named exit points take precedence over the actual transition priority.
 
+==<!-- Start stext_keyword_# -->==
+
 The syntax to connect a transition to an "entry point":#sclang_entry_points with the name _entry-point-1_ of a target composite state is as follows:
 
 <code># ><em>entry-point-1</em></code>
@@ -231,6 +233,8 @@ It is also possible to specify both entry and exit points in a single transition
 
 * If the @>@ character is to the _right_ of a name, like in @exit_name>@, that name denotes an _exit point_.
 * If the @>@ character is to the _left_ of a name, like in @>entry_name@, that name denotes an _entry point_.
+
+==<!-- End stext_keyword_# -->==
 
 ==<div class="example">==
 
