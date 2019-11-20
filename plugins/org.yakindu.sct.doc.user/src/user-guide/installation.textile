@@ -9,230 +9,55 @@ Watch the following screencast if you want to know what happens after filling ou
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UmdQPZvP5x4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
 
-Please note, that you need to have Java installed on your system. For more details, read section "System requirements":#inst_system-requirements.
-
 In case you want to install YAKINDU Statechart Tools into an existing Eclipse instance, read section "Installing to an existing Eclipse instance":#inst_installing_to_an_existing_eclipse_instance.
-
-
-
-h2(#inst_system-requirements). System requirements
-
-h3(#inst_java). Java
-
-YAKINDU Statechart Tools is based on the Java programming language and requires *Java 8* or higher. A Java Runtime Environment (JRE) must be installed on your computer.
-
-Installation of Java is beyond the scope of this document. You can find more information on Java and download it for free from Oracle Corporation at "https://www.java.com/":https://www.java.com/. Before downloading Java, make sure you are picking the variant with the correct bit size, i.&nbsp;e. either 32 or 64 bit, whichever is appropriate for your computer.
-
-
-h3(#inst_eclipse). Eclipse
-
-Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer.
-
-If you are new to Eclipse, you might find the "Eclipse Help":http://help.eclipse.org/ useful, especially the "Workbench User Guide".
-
-If you are an experienced Eclipse user, you can install YAKINDU Statechart Tools into an existing Eclipse instance from an update site. Read more about this in section "Installing to an existing Eclipse instance":#inst_installing_to_an_existing_eclipse_instance.
-
-
-
-h2(#inst_platform-overview). Platform overview
-
-You can install YAKINDU Statechart Tools as a stand-alone software package under the following operating systems:
-
-* "Installing YAKINDU Statechart Tools on Windows":#inst_installing_on_windows
-* "Installing YAKINDU Statechart Tools on macOS":#inst_installing_on_macosx
-* "Installing YAKINDU Statechart Tools on Linux":#inst_installing_on_linux
-
-Alternatively, you can install YAKINDU Statechart Tools into an existing Eclipse instance.
-
-* "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#inst_installing_to_an_existing_eclipse_instance
 
 
 
 h2(#inst_installing_on_windows). Installing on Windows
 
-This chapter describes how to install YAKINDU Statechart Tools on a Windows 7 machine.
+Installing YAKINDU Statechart Tools on a Windows machine boils down to the following steps:
 
+# Unpack the downloaded archive (just double-click on it)
+# Start the application with a double-click on the executable _SCT.exe_.
+# Upon the first start you will be asked to select a workspace. This is the folder where your project data will be located. Choose a folder as you like. You can still change the workspace later via _File → Switch Workspace_ in the main menu.
 
-h3(#inst_installing_on_windows_unpacking-the-downloaded-file). Unpacking the downloaded file
+Congratulations, you have just installed and started YAKINDU Statechart Tools!
 
-Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract All..._ in the context menu.
-
-p(#inst_fig_installing_on_windows_unpacking_the_downloaded_file_on_Windows_1). 
-
-!images/inst_windows7_010_eclipse_extract_1.png(Unpacking the downloaded file on Windows [1])!
-
-p=. Unpacking the downloaded file on Windows &#91;1]
-
-Choose a directory for YAKINDU Statechart Tools (YAKINDU SCT). The example below assumes you want to install the software in the _C:\Program Files\YAKINDU_ directory.
-
-Depending on your permissions, you might not be able to create a directory and install software under _C:\Program Files_. In this case, please choose another installation directory at a location you are allowed to write to.
-
-p(#inst_fig_installing_on_windows_unpacking_the_downloaded_file_on_Windows_2). 
-
-!images/inst_windows7_020_eclipse_extract_2.png(Unpacking the downloaded file on Windows [2])!
-
-p=. Unpacking the downloaded file on Windows &#91;2]
-
-Click on _Extract_ to start the extraction process. With Window's built-in unpacker, this will take a surprisingly long period of time. Alternatively, you can use a 3rd-party unpacker like "7-Zip":http://www.7-zip.org/. Saves you a lot of time!
-
-After unpacking, you will find a folder _yakindu-sct_ in your installation directory, i.e., _C:\Program Files\YAKINDU\yakindu-sct_ in our example, as shown in figure "&quot;The extracted _yakindu-sct_ folder&quot;":#inst_fig_installing_on_windows_the_extracted_yakindu_sct_folder.
-
-p(#inst_fig_installing_on_windows_the_extracted_yakindu_sct_folder). 
-
-!(standard-image)images/inst_windows7_030_eclipse_folder.png(The extracted "yakindu-sct" folder)!
-
-p=. The extracted _yakindu-sct_ folder
-
-The contents of the _yakindu-sct_ folder looks like this:
-
-p(#inst_fig_installing_on_windows_contents_of_the_extracted_yakindu-sct_folder). 
-
-!images/inst_windows7_040_eclipse_contents.png(Contents of the extracted "yakindu-sct" folder)!
-
-p=. Contents of the extracted _yakindu-sct_ folder
-
-There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
-
-
-
-h3(#inst_installing_on_windows_starting-yakindu-statechart-tools). Starting YAKINDU Statechart Tools
-
-Start YAKINDU Statechart Tools by running the _SCT.exe_ executable.
-
-To do so, please double-click (or single-click, depending on your Windows settings) on the _YAKINDU_ symbol shown in figure "&quot;Contents of the extracted _yakindu-sct_ folder&quot;":#inst_fig_installing_on_windows_contents_of_the_extracted_yakindu-sct_folder.
-
-Depending on the Windows settings and your permissions, you might get the following security warning, indicating that you downloaded the application from a potentially unsecure source:
-
-p(#inst_fig_installing_on_windows_windows_security_warning). 
-
-!(standard-image)images/inst_windows7_045_security_warning.png(Windows security warning)!
-
-p=. Windows security warning
-
-Uncheck the _Always ask before opening this file_ option. Click _Run_ to continue starting the application. Subsequently starting YAKINDU Statechart Tools will not show this security warning again.
-
-While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
-
-p(#inst_fig_installing_on_windows_yakindu_sct_starting_up_and_showing_a_splash_screen). 
-
-!images/inst_windows7_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
-
-p=. YAKINDU Statechart Tools starting up and showing a splash screen
-
-The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
-
-In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, YAKINDU Statechart Tools won't ask for a workspace directory again. Instead it will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the main menu.)
-
-!(standard-image)images/inst_windows7_060_eclipse_workspace_dialog.png(Selecting a workspace)!
-
-p=. Selecting a workspace
-
-Click on the _OK_ button to proceed.
-
-On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
-
-p(#inst_fig_installing_on_windows_yakindu_statechart_tools_presenting_the_welcome_window). 
-
-!images/inst_windows7_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
-
-p=. YAKINDU Statechart Tools presenting the _Welcome_ window
-
-You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
-
-!images/inst_windows7_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
-
-p(#inst_fig_installing_on_windows_yakindu_statechart_tools_workbench). 
-
-p=. The YAKINDU Statechart Tools workbench
-
-This is your working environment now. Congratulations, you have just installed and started YAKINDU Statechart Tools!
-
-You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorials.html.
-
+You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorial_five-minutes_tutorial.html.
 
 
 
 h2(#inst_installing_on_macosx). Installing on macOS
 
-This chapter describes how to install YAKINDU Statechart Tools on a Mac computer under Mac OS X.
+Installing YAKINDU Statechart Tools on macOS boils down to the following steps:
 
+# Unpack the downloaded archive (just double-click on it)
+# Move the unpacked application bundle to your _Applications_ folder. This is required to successfully perform updates later on.
+# Start the application with a double-click. Upon the first start, Mac OS X will verify the application and show you a security warning, indicating that you did not download the application from Apple's App Store. Just click _Open_ and ignore that warning.
+# Upon the first start you will be asked to select a workspace. This is the folder where your project data will be located. Choose a folder as you like. You can still change the workspace later via _File → Switch Workspace_ in the main menu.
 
+Congratulations, you have just installed and started YAKINDU Statechart Tools!
 
-h3(#inst_installing_on_macosx_unpacking-the-downloaded-file). Unpacking the downloaded file
-
-When downloading the ZIP file containing the software distribution in a browser to your local disk, the _Archive Utility_ automatically unpacks it by default. Upon success, the ZIP file is removed. Alternatively, you can unpack the ZIP file manually by double-clicking it.
-
-Unpacking will provide you with the _YAKINDU SCT_ application bundle.
-
-Move the unpacked application bundle to your _Applications_ folder. Alternatively, you can also move it somewhere else as you see fit. The screenshot below shows the _YAKINDU SCT_ application bundle having been moved to _Applications_.
-
-p(#inst_fig_installing_on_macos_the_yakindu_statechart_tools_application_in_the_applications_directory). 
-
-!(shadowless)images/inst_macosx_010_applications.png(The YAKINDU Statecharts Tools application in the "Applications" directory)!
-
-p=. The YAKINDU Statecharts Tools application in the _Applications_ directory
-
-There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
-
-
-
-h3(#inst_installing_on_macosx_starting-yakindu-statechart-tools). Starting YAKINDU Statechart Tools
-
-Start YAKINDU Statechart Tools by running the _YAKINDU SCT_ application.
-
-To do so, please double-click on the _YAKINDU_ symbol shown in the sample screenshot above.
-
-Upon the first start, Mac OS X will verify the application and show you the following security warning, indicating that you did not download the application from Apple's App Store, but from a potentially unsecure source instead:
-
-!(shadowless)images/inst_macosx_020_security_warning.png(macOS security warning)!
-
-p=. macOS security warning
-
-Click _Open_ to continue starting the application. Subsequently starting YAKINDU Statechart Tools will not show that security warning again.
-
-While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
-
-!(small shadowless)images/inst_macosx_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
-
-p=. YAKINDU Statechart Tools starting up and showing a splash screen
-
-The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
-
-In the example below, we chose the _/Users/joedoe/workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, YAKINDU Statechart Tools won't ask for a workspace directory again. Instead it will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the main menu.)
-
-!(shadowless)images/inst_macosx_060_eclipse_workspace_dialog.png(Selecting a workspace)!
-
-p=. Selecting a workspace
-
-Click on the _OK_ button to proceed.
-
-On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
-
-!(shadowless)images/inst_macosx_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
-
-p=. YAKINDU Statechart Tools presenting the _Welcome_ window
-
-You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
-
-!(shadowless)images/inst_macosx_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
-
-p=. The YAKINDU Statechart Tools workbench
-
-This is your working environment now. Congratulations, you have just installed and started YAKINDU Statechart Tools!
-
-You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorials.html.
-
+You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorial_five-minutes_tutorial.html.
 
 
 
 h2(#inst_installing_on_linux). Installing on Linux
 
-This chapter describes how to install YAKINDU Statechart Tools on a Linux machine using a command-line tool.
+Installing YAKINDU Statechart Tools on a Linux machine boils down to the following steps:
+
+# Unpack the downloaded archive (just double-click on it)
+# Start the application with a double-click on the executable _SCT.exe_ or with _./SCT_ command in your command-line tool.
+# Upon the first start you will be asked to select a workspace. This is the folder where your project data will be located. Choose a folder as you like. You can still change the workspace later via _File → Switch Workspace_ in the main menu.
+
+Congratulations, you have just installed and started YAKINDU Statechart Tools!
+
+You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorial_five-minutes_tutorial.html.
 
 
-h3(#inst_installing_on_linux_installing_required_packages). Installing required packages
+h3(#inst_installing_on_linux_installing_required_packages). Troubleshooting
 
-Depending on your Linux distribution and version, you might need to install additional packages for *Webkit GTK* and *Java* from your distribution's repository (or elsewhere). Below please find the necessary commands for some Linux distributions. To execute them, you have to have system administrator permissions. So please create a _root_ command-line shell or use the _sudo_ command, which is the typical procedure on Linux.
+Depending on your Linux distribution and version, you might need to install additional packages for *Webkit GTK* from your distribution's repository (or elsewhere). Below please find the necessary commands for some Linux distributions. To execute them, you have to have system administrator permissions. So please create a _root_ command-line shell or use the _sudo_ command, which is the typical procedure on Linux.
 
 The list of Linux distributions mentioned below is in no way meant to be exhaustive. If your Linux distribution is not yet among them and you manage to find out the proper commands for it, please let us know!
 
@@ -251,7 +76,7 @@ You can use GTK2 instead of GTK3 on a case-by-case basis by having the environme
 
 bc. ./SCT
 
-This assumes your current directory is the tool's installation folder. Please also see section "&quot;Starting YAKINDU Statechart Tools&quot;":#inst_installing_on_linux_starting_yakindu_statechart_tools.
+This assumes your current directory is the tool's installation folder.
 
 To use GTK2, execute this command instead:
 
@@ -335,98 +160,6 @@ _Works out of the box; nothing to be done._
 bc. rpm -ihv /opt/software/webkitgtk-2.4.9-1.el7.x86_64.rpm
 
 ==</div>==
-
-h4(#inst_installing_on_linux_java). Java
-
-*Ubuntu Desktop 16.04 LTS:*
-
-bc. 
-sudo apt-get install default-jre
-
-
-
-h3(#inst_installing_on_linux_unpacking-the-downloaded-file). Unpacking the downloaded file
-
-Choose a directory for YAKINDU Statechart Tools. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to install somewhere else!
-
-Go to the installation directory:
-
-bc. cd /my/software/
-
-Unpack the software distribution file. If the downloaded file is located in _/download/sct-linux.gtk.x86&#95;64.zip_, use the following command to unpack in the installation directory:
-
-bc. unzip /download/sct-linux.gtk.x86_64.zip
-
-This will create a folder _yakindu-sct_ in your installation directory, i.e., _/my/software/yakindu-sct_ in our example, as shown in the image below:
-
-p(#inst_fig_installing_on_linux_unpacking_the_downloaded_file). 
-
-!images/inst_linux_010_eclipse_folder.png(The extracted "yakindu-sct" folder)!
-
-p=. The extracted _yakindu-sct_ folder
-
-The contents of the _yakindu-sct_ folder looks like this:
-
-p(#inst_fig_installing_on_linux_contents_of_the_extracted_yakindu-sct_folder). 
-
-!images/inst_linux_020_eclipse_contents.png(Contents of the extracted "yakindu-sct" folder)!
-
-p=. Contents of the extracted _yakindu-sct_ folder
-
-There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
-
-
-
-h3(#inst_installing_on_linux_starting_yakindu_statechart_tools). Starting YAKINDU Statechart Tools
-
-Start YAKINDU Statechart Tools by running the _SCT_ executable.
-
-To do so, please _cd_ to the _yakindu-sct_ folder and enter this command:
-
-bc. ./SCT
-
-If your command shell is in some other working directory, issue this command:
-
-bc. /my/software/yakindu-sct/SCT
-
-From a graphical file browser, you can start YAKINDU Statechart Tools by clicking on the _SCT_ symbol.
-
-While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
-
-p(#inst_fig_installing_on_linux_yakindu_statechart_tools_starting_up_and_showing_a_splash_screen). 
-
-!images/inst_linux_030_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
-
-p=. YAKINDU Statechart Tools starting up and showing a splash screen
-
-The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
-
-In the example below, we chose the _/my/workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, YAKINDU Statechart Tools won't ask for a workspace directory again. Instead it will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the main menu.)
-
-!images/inst_linux_040_eclipse_workspace_dialog.png(Selecting a workspace)!
-
-p=. Selecting a workspace
-
-Click on the _OK_ button to proceed.
-
-On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
-
-!images/inst_linux_050_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
-
-p=. YAKINDU Statechart Tools presenting the _Welcome_ window
-
-You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
-
-p(#inst_fig_installing_on_windows_yakindu_statechart_tools_workbench). 
-
-!images/inst_linux_060_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
-
-p=. The YAKINDU Statechart Tools workbench
-
-This is your working environment now. Congratulations, you have just installed and started YAKINDU Statechart Tools!
-
-You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorials.html.
-
 
 
 
@@ -536,7 +269,6 @@ p=. Configuring automatic update
 
 
 
-
 h2(#inst_installing_a_yakindu_statechart_tools_license). Installing a YAKINDU Statechart Tools license
 
 YAKINDU Statechart Tools Professional and Standard Edition come with an evaluation license that is valid for 30 days. If you want to continue working with YAKINDU Statechart Tools Professional or Standard Edition beyond that period of time you have to "*acquire a license*":https://www.itemis.com/en/yakindu/state-machine/licenses/.
@@ -545,23 +277,3 @@ We offer academic licenses for the Professional Edition and non-commercial licen
 
 The license manager documentation describes how you can install a license file or configure a license server for floating licenses. To access that documentation, select Help → Help Contents from YAKINDU Statechart Tools’ main menu, then open the YAKINDU License Management documentation. 
 
-
-
-h2(#inst_jre-not-found). JRE not found
-
-If you want to develop Java source code, you need a Java Runtime Environment (JRE) or Java Development Kit (JDK) in your workspace.
-
-Usually Eclipse's Java Development Toolkit (JDT), which is bundled with YAKINDU Statechart Tools, automatically finds one or more JREs on your machine. However, under certain circumstances this won't work and even the JRE that is used to run Eclipse cannot be found. In this case, you will have to add a JRE definition to your workspace by hand.
-
-In order to check whether you are affected, proceed as follows:
-
-# In the main menu, select _Window → Preferences_. The _Preferences_ window opens.
-# In the _Preferences_ window, select _Java → Installed JREs_.
-
-If the list of installed JREs is empty, you are affected by the problem and will have to manually add a JRE definition. Click on the _Add…_ button and follow the _Add JRE_ wizard. The Eclipse documentation explains in more detail how to "add a new JRE definition":http://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-add_new_jre.htm to your workspace.
-
-###. CHECK Does the link http://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-add_new_jre.htm still point to how to add a JRE?
-
-!images/inst_installed_jres_010.png(Installed JREs)!
-
-p=. Installed JREs
