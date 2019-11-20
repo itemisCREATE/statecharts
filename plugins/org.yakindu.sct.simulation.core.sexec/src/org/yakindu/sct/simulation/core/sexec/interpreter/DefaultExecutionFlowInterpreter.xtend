@@ -178,6 +178,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			} else {
 				rtcStep
 			}
+			executionContext.clearLocalAndInEvents
 			
 			// get next event if available
 			if(! internalEventQueue.empty) event = internalEventQueue.poll
@@ -204,8 +205,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			state?.reactSequence?.scheduleAndRun
 			activeStateIndex = activeStateIndex + 1
 		}
-		if (!useSuperStep || !stateVectorChanged)
-			executionContext.clearLocalAndInEvents
 	}
 
 	override exit() {
