@@ -811,7 +811,7 @@ do {
 
 Please note, the flag @stateEntered@ is set to @true@ inside a @microStep@ whenever a state is entered.
 
-h5(#sclang_superstep). @SuperStep and @EventDriven
+h5(#sclang_superstep_eventdriven). @SuperStep and @EventDriven
 
 In combination with the event-driven execution semantic things get slightly more complicated, as internal events are queued and need to be also processed. Internal events are processed after incoming events. Internal events are also processed with the superstep semantic. Take a look at the corresponding pseudo code (the loop from the previous code snippet is called @superStepLoop@ here):
 
@@ -827,8 +827,6 @@ To sum up, let's take a look at a slightly more complicated example for the even
 !{small}images/docu_superstep_example_eventdriven.png(Example model for superstep semantic in event-driven statechart)!
 
 What happens when state _A_ is active and event _e_ is raised? First, event _e_ invokes a superstep like in the previous example. While taking the state transition to _B_ and _C_, the local events _local1_ and _local2_ are put into the internal event queue. However, they are not visible until the processing of event _e_ is finished. That means that the local reaction in state _C_ is executed because no outgoing transition can be taken. Hence, _x_ is set to 42. Afterwards, the internal event queue is processed, event by event, starting with _local1_. This again invokes a superstep and state _L_ is entered. As with each self-transition, state _L_ is exited and re-entered again, the superstep loop continues until _x_ equals to 17. Next, internal event _local2_ is processed and state _C_ is entered. The local reaction in state _C_ is not executed, as event _e_ is no more raised.
-
-==<!-- End stext_keyword_superstep -->==
 
 
 
