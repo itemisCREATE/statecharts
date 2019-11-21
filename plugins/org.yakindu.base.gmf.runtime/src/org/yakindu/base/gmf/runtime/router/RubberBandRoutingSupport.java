@@ -36,7 +36,7 @@ public class RubberBandRoutingSupport {
 	}
 
 	protected void clearState() {
-		// conn.clear();
+		 conn.clear();
 	}
 
 	public void commitBoxDrag() {
