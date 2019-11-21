@@ -57,7 +57,18 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 	@Override
 	protected Command getResizeCommand(ChangeBoundsRequest request) {
 		if (request instanceof SetPreferredSizeRequest) {
-			return super.getResizeCommand(request);
+			SetPreferredSizeRequest req = new SetPreferredSizeRequest(REQ_RESIZE_CHILDREN);
+			req.setEditParts(getHost());
+			req.setCenteredResize(request.isCenteredResize());
+			req.setConstrainedMove(request.isConstrainedMove());
+			req.setConstrainedResize(request.isConstrainedResize());
+			req.setSnapToEnabled(request.isSnapToEnabled());
+			req.setMoveDelta(request.getMoveDelta());
+			req.setSizeDelta(request.getSizeDelta());
+			req.setLocation(request.getLocation());
+			req.setExtendedData(request.getExtendedData());
+			req.setResizeDirection(request.getResizeDirection());
+			return getHost().getParent().getCommand(req);
 		}
 		NULL_REQUEST.setEditParts(getHost());
 		return getHost().getParent().getCommand(NULL_REQUEST);

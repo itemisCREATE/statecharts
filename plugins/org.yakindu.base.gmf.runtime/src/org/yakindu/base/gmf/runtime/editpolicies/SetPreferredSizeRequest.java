@@ -25,6 +25,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
  */
 public class SetPreferredSizeRequest extends ChangeBoundsRequest {
 
+	public SetPreferredSizeRequest(String reqResizeChildren) {
+		super(reqResizeChildren);
+	}
+
 	public SetPreferredSizeRequest(IGraphicalEditPart host) {
 		super(RequestConstants.REQ_RESIZE);
 		setEditParts(host);
@@ -37,5 +41,6 @@ public class SetPreferredSizeRequest extends ChangeBoundsRequest {
 				prefSize.height - currentSize.height);
 		setSizeDelta(newDimension);
 	}
+
 
 }
