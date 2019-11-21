@@ -48,7 +48,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	public Command createUpdateAllBendpointsCommand() {
 		CompoundCommand result = new CompoundCommand();
 		for (ConnectionEditPart part : getAllConnectionParts()) {
-			result.add(getBendpointsChangedCommand(part));
+			if (!isSelfConnection(part.getConnectionFigure()))
+				result.add(getBendpointsChangedCommand(part));
 		}
 		if (result.size() == 0) {
 			return null;
@@ -121,7 +122,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		List<IGraphicalEditPart> sourceConnections = getHost().getSourceConnections();
 		for (IGraphicalEditPart iGraphicalEditPart : sourceConnections) {
 			Connection connection = (Connection) iGraphicalEditPart.getFigure();
-			result.add(connection);
+			if (!isSelfConnection(connection))
+				result.add(connection);
 		}
 		return result;
 	}
@@ -132,7 +134,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		List<IGraphicalEditPart> targetConnections = getHost().getTargetConnections();
 		for (IGraphicalEditPart iGraphicalEditPart : targetConnections) {
 			Connection connection = (Connection) iGraphicalEditPart.getFigure();
-			result.add(connection);
+			if (!isSelfConnection(connection))
+				result.add(connection);
 		}
 		return result;
 	}
@@ -191,8 +194,14 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		if (request instanceof ChangeBoundsRequest) {
 			showChangeBoundsFeedback((ChangeBoundsRequest) request);
 			for (ConnectionEditPart cep : getAllConnectionParts()) {
-				showLineFeedback(cep);
+				if (!isSelfConnection(cep.getConnectionFigure())) {
+					showLineFeedback(cep);
+				}
 			}
 		}
+	}
+
+	protected boolean isSelfConnection(Connection conn) {
+		return conn.getTargetAnchor().getOwner() == conn.getSourceAnchor().getOwner();
 	}
 }
