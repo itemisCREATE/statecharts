@@ -110,7 +110,7 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
 	private PointList getInitialPoints(Connection connection) {
 		ConnData cd = router.getCD(connection);
-		if(cd != null)
+		if (cd != null)
 			return relbpUtil.convertToPointList(cd.initialVisualPoints);
 		return connection.getPoints();
 	}
@@ -155,9 +155,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 			originalBounds.translate(request.getMoveDelta().getNegated()).resize(request.getSizeDelta().getNegated());
 			router.initBoxDrag(originalBounds, getSourceConnections(), getTargetConnections());
 			connectionStart = false;
-		} else {
-			router.updateBoxDrag(request.getTransformedRectangle(originalBounds));
 		}
+		router.updateBoxDrag(request.getTransformedRectangle(originalBounds));
 	}
 
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
