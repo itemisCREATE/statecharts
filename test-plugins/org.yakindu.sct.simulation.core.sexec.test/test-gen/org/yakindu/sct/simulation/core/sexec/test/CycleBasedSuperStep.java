@@ -13,42 +13,48 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for EventDrivenTriggeredByTimeEvent
+ * Unit TestCase for CycleBasedSuperStep
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class EventDrivenTriggeredByTimeEvent extends AbstractExecutionFlowTest {
+public class CycleBasedSuperStep extends AbstractExecutionFlowTest {
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByTimeEvent.sct");
-		initInterpreter(flow, true);
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("supersteps/CycleBasedSuperStep.sct");
+		initInterpreter(flow);
 	}
 	@Test
-	public void timeEventTriggersRunCycle() throws Exception {
+	public void superStepTakesTwoTransitionsUsingSameEvent() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
+		raiseEvent("e");
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("C"));
+		interpreter.exit();
+	}
+	@Test
+	public void superStepIteratesUsingAlwaysTrigger() throws Exception {
+		interpreter.enter();
+		raiseEvent("f");
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("I"));
 		assertTrue(getInteger("x") == 0l);
-		timer.timeLeap(999l);
+		interpreter.exit();
+	}
+	@Test
+	public void superStepIteratesUsingSameEventAndGuard() throws Exception {
+		interpreter.enter();
 		assertTrue(isStateActive("A"));
+		raiseEvent("e");
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("C"));
+		assertTrue(getInteger("x") == 42l);
+		raiseEvent("f");
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("I"));
 		assertTrue(getInteger("x") == 0l);
-		timer.timeLeap(1l);
-		assertTrue(isStateActive("B"));
-		assertTrue(getInteger("x") == 0l);
-		assertTrue(getInteger("transition_count") == 1l);
-		timer.timeLeap(1l*1000l);
-		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("x") == 0l);
-		assertTrue(getInteger("transition_count") == 2l);
-		timer.timeLeap(999l*1000l);
-		assertTrue(isStateActive("B"));
-		assertTrue(getInteger("x") == 0l);
-		assertTrue(getInteger("transition_count") == 1001l);
-		timer.timeLeap(999l*1000l);
-		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("x") == 0l);
-		assertTrue(getInteger("transition_count") == 2000l);
 		interpreter.exit();
 	}
 }

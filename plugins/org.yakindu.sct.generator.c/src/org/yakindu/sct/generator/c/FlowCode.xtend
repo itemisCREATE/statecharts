@@ -40,6 +40,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * @author axel terfloth
@@ -52,6 +53,7 @@ class FlowCode {
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
 	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension StatechartAnnotations
 	
 	@Inject protected extension CLiterals
 	
@@ -163,6 +165,9 @@ class FlowCode {
 	def dispatch CharSequence code(EnterState it) '''
 		«scHandle»->«STATEVECTOR»[«state.stateVector.offset»] = «state.stateName»;
 		«scHandle»->«STATEVECTOR_POS» = «state.stateVector.offset»;
+		«IF flow.statechart.isSuperStep»
+		«scHandle»->«STATEVECTOR_CHANGED» = true;
+		«ENDIF»
 	'''
 
 	def dispatch CharSequence code(ExitState it) '''

@@ -23,7 +23,7 @@ public class ChildFirstTransitionTaking extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("executionorder/ChildFirstTransitionTaking.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void testParentTransitionFromSimpleState() throws Exception {

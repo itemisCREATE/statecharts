@@ -24,6 +24,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * @author rbeckmann
@@ -34,6 +35,7 @@ class StatechartTypes {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
+	@Inject protected extension StatechartAnnotations
 	
 	def statemachineStruct(ExecutionFlow it) {
 		'''
@@ -53,7 +55,9 @@ class StatechartTypes {
 		«statesEnumType» «STATEVECTOR»[«maxOrthogonalStates»];
 		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«maxHistoryStates»];«ENDIF»
 		«USHORT_TYPE» «STATEVECTOR_POS»; 
-		
+		«IF statechart.isSuperStep»
+		«BOOL_TYPE» «STATEVECTOR_CHANGED»;
+		«ENDIF»
 		«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
 			«iScope.type» «iScope.instance»;
 		«ENDFOR»

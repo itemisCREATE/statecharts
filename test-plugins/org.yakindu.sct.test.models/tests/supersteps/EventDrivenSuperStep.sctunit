@@ -1,0 +1,48 @@
+testclass EventDrivenSuperStep for statechart supersteps.EventDrivenSuperStep {
+	
+	@Test
+	operation superStepOnInternalEventQueue() {
+		enter
+		
+		assert active(supersteps.EventDrivenSuperStep.main_region.A)
+
+		raise e
+		
+		assert active(supersteps.EventDrivenSuperStep.main_region.C)
+		assert x==17
+		
+		exit
+	}
+	
+	@Test
+	operation superStepIteratesUsingAlwaysTrigger() {
+		enter
+		
+		raise f
+		
+		assert active(supersteps.EventDrivenSuperStep.main_region.I)
+		assert x==0
+		
+		exit
+		
+	}
+	
+	@Test
+	operation superStepIteratesUsingSameEventAndGuard() {
+		enter
+		
+		assert active(supersteps.EventDrivenSuperStep.main_region.A)
+
+		raise e
+		
+		assert active(supersteps.EventDrivenSuperStep.main_region.C)
+		assert x==17
+		
+		raise f
+		
+		assert active(supersteps.EventDrivenSuperStep.main_region.I)
+		assert x==0
+		
+		exit
+	}
+}
