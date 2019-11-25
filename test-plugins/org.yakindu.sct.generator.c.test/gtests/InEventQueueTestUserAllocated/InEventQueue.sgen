@@ -4,11 +4,12 @@ GeneratorModel for yakindu::c {
 
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "InEventQueueTest"
+			targetFolder = "InEventQueueTestUserAllocated"
 		}
 		
 		feature GeneratorOptions {
 			inEventQueue = true
+			userAllocatedQueue = true
 		}
 		
 		feature FunctionInlining {

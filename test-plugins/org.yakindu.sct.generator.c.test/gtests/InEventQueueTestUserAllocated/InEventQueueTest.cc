@@ -37,7 +37,9 @@ void inEventQueueIface_askOracle(InEventQueue* handle) {
 
 
 TEST(InEventQueue, InEventQueue) {
-	inEventQueue_init(&machine);
+	ineventqueue_event internal_queue[20];
+	ineventqueue_event in_queue[20];
+	inEventQueue_init(&machine, internal_queue, 20, in_queue, 20);
 	inEventQueue_enter(&machine);
 	
 	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_InEventQueue_main_region_A) );

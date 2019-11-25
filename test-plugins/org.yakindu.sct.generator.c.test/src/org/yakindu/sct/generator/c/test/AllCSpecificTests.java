@@ -29,7 +29,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	VariadicOperations.class,
 	StateNumTest.class,
 	TracingTest.class,
-	InEventQueueTest.class
+	InEventQueueTest.class,
+	InEventQueueTestUserAllocated.class
 })
 public class AllCSpecificTests {
 }
