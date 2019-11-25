@@ -50,6 +50,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsPackage
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.expressions.validation.ExpressionsValidator
 import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.Declaration
@@ -135,7 +136,15 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	@Inject(optional=true)
 	IPackageImport2URIMapper mapper
 	@Inject 
-	protected STextExtensions utils
+	protected extension STextExtensions utils
+	
+	@Inject 
+	protected extension ExpressionExtensions
+	
+	def protected getContextElementURI() {
+		val fake = super.getCurrentObject()
+		EcoreUtil.getURI(fake.contextElement)
+	}
 	
 	@Check(CheckType.FAST)
 	def void checkExpression(TimeEventSpec expression) {
@@ -151,6 +160,19 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	def void checkNoAssignmentInGuard(Guard guard) {
 		if(!guard.eAllContents.filter(AssignmentExpression).empty || !guard.eAllContents.filter(PostFixUnaryExpression).empty){
 			error(GUARD_CONTAINS_ASSIGNMENT, guard, null) 
+		}
+	}
+
+	
+	@Check(CheckType.FAST)
+	def void checkRaisingExpressionEvent(EventRaisingExpression expression) {
+		var EObject element=unwrap(expression.getEvent()) 
+		if (element !== null && (!(element instanceof Event))) {
+			var String elementName="" 
+			if (element instanceof NamedElement) {
+				elementName = element.getName() 
+			}
+			error(String.format("'%s' is not an event.", elementName), StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1) 
 		}
 	}
 
@@ -374,7 +396,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		if (element !== null && (!(element instanceof Event))) {
 			var String msg="Could not find event declaration." 
 			if (element instanceof NamedElement) {
-				msg=''''«»«element.getName()»' is no event.''' 
+				msg=''''«element.getName()»' is no event.''' 
 			}
 			error(msg, StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0, VALUE_OF_REQUIRES_EVENT) 
 		}
@@ -632,28 +654,20 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		for (var int i=0; i < reactionTrigger.getTriggers().size(); i++) {
 			var EventSpec eventSpec=reactionTrigger.getTriggers().get(i) 
 			if (eventSpec instanceof RegularEventSpec) {
-				var EObject element=unwrap(eventSpec.getEvent()) 
+				var EObject element = unwrap(eventSpec.getEvent()) 
 				if (element !== null && (!(element instanceof Event))) {
-					var String elementName="" 
-					if (element instanceof NamedElement) {
-						elementName=''''«»«element.getName()»' ''' 
-					}
-					error('''Trigger «elementName»is no event.''', StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, i, TRIGGER_IS_NO_EVENT) 
+					val triggerNode = NodeModelUtils.getNode(eventSpec);
+					val elementName = NodeModelUtils.getTokenText(triggerNode);
+
+					error('''Trigger '«elementName»' is no event.''', reactionTrigger,
+						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, i, TRIGGER_IS_NO_EVENT, 
+						#[contextElementURI.toPlatformString(true) + "#" + contextElementURI.fragment, elementName]
+					) 
 				}
 			}
 		}
 	}
-	@Check(CheckType.FAST)
-	def void checkRaisingExpressionEvent(EventRaisingExpression expression) {
-		var EObject element=unwrap(expression.getEvent()) 
-		if (element !== null && (!(element instanceof Event))) {
-			var String elementName="" 
-			if (element instanceof NamedElement) {
-				elementName = element.getName() 
-			}
-			error(String.format("'%s' is not an event.", elementName), StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1) 
-		}
-	}
+
 	def protected EObject unwrap(Expression eventExpression) {
 		var EObject element=null 
 		if (eventExpression instanceof ElementReferenceExpression) {
@@ -663,6 +677,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		}
 		return element 
 	}
+	
 	@Check(CheckType.FAST)
 	def void checkSyncNoTriggersOnOutgoingTransition(Synchronization synchronization) {
 		var List<Transition> outgoing=synchronization.outgoingTransitions 

@@ -21,6 +21,8 @@ import org.yakindu.sct.refactoring.refactor.impl.InlineSubdiagramRefactoringTest
 import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldEntryActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTest;
+import org.yakindu.sct.refactoring.refactor.quickfix.STextEventRaiseQuickfixTest;
+import org.yakindu.sct.refactoring.refactor.quickfix.STextTriggerQuickfixTest;
 
 /**
  * 
@@ -29,7 +31,10 @@ import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTes
  */
 @RunWith(Suite.class)
 @SuiteClasses({ FoldIncomingActionsRefactoringTest.class,
-		FoldOutgoingActionsRefactoringTest.class, RenameRefactoringTest.class,
+		FoldOutgoingActionsRefactoringTest.class, 
+		RenameRefactoringTest.class,
+		STextTriggerQuickfixTest.class,
+		STextEventRaiseQuickfixTest.class,
 		UnfoldEntryActionsRefactoringTest.class,
 		UnfoldExitActionsRefactoringTest.class,
 		GroupStatesIntoCompositeRefactoringTest.class,
