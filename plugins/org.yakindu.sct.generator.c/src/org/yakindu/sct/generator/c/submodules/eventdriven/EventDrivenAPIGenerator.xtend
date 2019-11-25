@@ -43,10 +43,10 @@ class EventDrivenAPIGenerator extends APIGenerator {
 		'''
 		«super.initFunctionBody(it)»
 		«IF needsInternalEventQueue»
-			«eventQueueInitFunction»(&«scHandle»->«internalQueue»«IF userAllocatesInternalQueue», internal_queue_buffer, internal_queue_capacity«ENDIF»);
+			«eventQueueInitFunction»(&«scHandle»->«internalQueue», «IF userAllocatesInternalQueue»internal_queue_buffer, internal_queue_capacity«ELSE»«scHandle»->internal_buffer, «internalBufferSize»«ENDIF»);
 		«ENDIF»
 		«IF needsInEventQueue»
-			«eventQueueInitFunction»(&«scHandle»->«inEventQueue»«IF userAllocatesInQueue», in_queue_buffer, in_queue_capacity«ENDIF»);
+			«eventQueueInitFunction»(&«scHandle»->«inEventQueue», «IF userAllocatesInQueue»in_queue_buffer, in_queue_capacity«ELSE»«scHandle»->in_buffer, «inBufferSize»«ENDIF»);
 		«ENDIF»
 		«IF needsRunCycleGuard»
 			«scHandle»->is_running_cycle = «FALSE_LITERAL»;

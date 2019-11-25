@@ -64,7 +64,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	override declarations(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«IF needsQueues»
-			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq«IF userAllocatesInQueue || userAllocatesInternalQueue», «internalEventStructTypeName» *buffer, «INT_TYPE» capacity«ENDIF»);
+			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» *buffer, «INT_TYPE» capacity);
 			static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
 			static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
 			static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
@@ -157,16 +157,10 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	
 	def eventQueueFunctions(ExecutionFlow it) {
 		'''
-			«IF userAllocatesInQueue || userAllocatesInternalQueue»
 			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» *buffer, «INT_TYPE» capacity)
 			{
 				eq->events = buffer;
 				eq->capacity = capacity;
-			«ELSE»
-			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq)
-			{
-				eq->capacity = «bufferSize»;
-			«ENDIF»
 				eq->push_index = 0;
 				eq->pop_index = 0;
 				eq->size = 0;
