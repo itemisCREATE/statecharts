@@ -5,6 +5,7 @@
 
     <topic label="User guide">
 	    <link toc="help/user-guide/overview-toc.xml"/>
+	    <link toc="help/user-guide/quick_ref-toc.xml"/>
 	    <link toc="help/user-guide/editing_statecharts-toc.xml"/>
 	    <link toc="help/user-guide/simulating_statecharts-toc.xml"/>
 	    <topic label="Generating state machine code" href="help/user-guide/code_generation_intro.html">
