@@ -27,7 +27,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.StatechartTextFigure;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
-import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * 
