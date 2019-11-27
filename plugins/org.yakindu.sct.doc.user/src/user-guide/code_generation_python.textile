@@ -1,0 +1,95 @@
+
+p. 
+
+h2(#codegen_python_code_generator). Python code generator
+
+State machines are a good approach to generate code for different languages based on the underlying model.
+This chapter describes the required steps for Python code generation with YAKINDU Statechart Tools. Furthermore, all components of the generated code will be described in detail and each configurable generator features will be described.
+
+p. 
+
+In order to get a good overview the 'Python Code Generation' example will be used in further explanations. It can be found in the example wizard:
+__File__ -> __New__ -> __Example...__ -> __YAKINDU Statechart Examples__ -> __Getting Started - Code Generation__ -> __Python Code Generation__
+
+p. 
+Table of content:
+* Example model
+* Generate Python Code
+** Generated files
+*** Operation Callbacks
+*** Timer
+* Python code generator features
+** Feature A
+** Feature B
+
+h3(#codegen_python_example_model). Python example model
+
+The example model has two states: An __Off__ and an __On__ state. Bla bla bla
+
+!images/codegen_example_model.png(Python example model)!
+
+p=. Python example model
+
+
+h3(#codegen_python_generator). Generate Python code
+
+p. 
+
+bc.. 
+GeneratorModel for yakindu::python {
+
+	statechart TrafficLightCtrl {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.examples.trafficlight.python"
+			targetFolder = "src-gen"
+		}
+	}
+}
+
+p. 
+-> sgen file
+
+h4(#codegen_generated_files). Generated files
+
+-> output
+
+h5(#codegen_operation_callbacks). Operation callbacks
+
+h5(#codegen_timer). Timer
+
+h3(#codegen_python_code_generator_features). Python code generator features
+
+Beside the general code generator features (link), there are language specific generator features, which are listed in the following chapter.
+
+h4(#codegen_python_pypackaging_feature). PyPackaging feature
+
+==<!-- Start sgen_feature_pypackaging -->==
+
+The *PyPackaging* feature allows the configuration of ......:
+
+* _CreateFiles_ (Boolean, optional): Specifies whether to generate a _setup.py_ file.
+* _Author_ (String, optional): Defines the author name.
+* _Version_ (String, optional): Defines the version number.
+* _ShortDescription_ (String, optional): Defines the description.
+* _License_ (String, optional): Defines the license.
+* _URL_ (String, optional): Defines the URL.
+
+
+==<div class="example">==
+
+Example:
+
+bc. 	
+feature PyPackaging {
+	CreateFiles = false
+	Author = ""
+	Version = ""
+	ShortDescription = ""
+	License = ""
+	URL = ""
+	}
+}
+
+==</div>==
+
