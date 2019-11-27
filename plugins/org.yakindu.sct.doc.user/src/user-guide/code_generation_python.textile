@@ -52,11 +52,284 @@ p.
 
 h4(#codegen_generated_files). Generated files
 
--> output
+The statechart interface:
 
-h5(#codegen_operation_callbacks). Operation callbacks
+bc.. 
+"""Interfaces defined in the state chart model.
 
-h5(#codegen_timer). Timer
+The interfaces defined in the state chart model are represented
+as separate classes.
+
+"""
+
+class SCI_user:
+
+	"""Implementation of scope sci_user.
+	"""
+	
+	def __init__(self, statemachine):
+		self.on_button = None
+		self.off_button = None
+		self.brightness = None
+		self.statemachine = statemachine
+	
+	
+	
+	def raise_on_button(self):
+		self.on_button = True
+		self.statemachine.run_cycle()
+		
+	def raise_off_button(self):
+		self.off_button = True
+		self.statemachine.run_cycle()
+		
+	def clear_events(self):
+		self.on_button = False
+		self.off_button = False
+		
+
+
+p. 
+
+The generated state machine:
+
+bc.. 
+# Implementation of statechart lightswitch_statemachine.
+
+import warnings
+# implemented interfaces:
+from .lightswitch_statemachine_interfaces import SCI_user
+# to store states:
+from enum import Enum
+
+class LightSwitch:
+
+	"""
+	
+	Implementation of the state machine 'LightSwitch'.
+	
+	"""
+	
+	def __init__(self):
+		""" Declares all necessary variables including list of states, histories etc. 
+		"""
+		self.sci_user = SCI_user(self)
+		self.initialized = False
+		self.state_vector = [None] * 1		
+		self.next_state_index = None		
+		# enumeration of all states:
+		self.State = Enum('State', '\
+		main_region_off,\
+		main_region_on,\
+		null_state')
+	
+	def init(self):
+		"""	Initializes the state machine by checking the timer, 
+		initializing states and clearing events.
+		"""
+		self.initialized = True
+		for state_index in range(1):
+			self.state_vector[state_index] = self.State.null_state
+		self._clear_events()
+		self.sci_user.brightness = 0
+	
+	def enter(self):
+		if self.initialized is not True:
+			raise ValueError(
+					'The state machine needs to be initialized first by calling the init() function.')
+		self.enter_sequence_main_region_default()
+	
+	def exit(self):
+		"""	Exit the the state machine.
+		"""
+		self.exit_sequence_main_region()
+	
+	def is_active(self):
+		""" @see IStatemachine#is_active()
+		"""
+		return (self.state_vector[0] is not self.State.null_state)
+	
+	def is_final(self):
+		"""Always returns 'false' since this state machine can never become final.
+		@see IStatemachine#is_final()
+		"""
+		return False
+			
+	def _clear_events(self):
+		""" Resets incoming events (time events included).
+		"""
+		self.sci_user.clear_events()
+	
+	def is_state_active(self, state):
+		""" Returns True if the given state is currently active otherwise false.
+		"""
+		s = state.name
+		if s == 'main_region_off':
+			return self.state_vector[0] == self.State.main_region_off
+		elif s == 'main_region_on':
+			return self.state_vector[0] == self.State.main_region_on
+		else:
+			return False
+	
+	def entry_action_main_region_off(self):
+		self.sci_user.brightness = 0
+		
+	def enter_sequence_main_region_off_default(self):
+		self.entry_action_main_region_off()
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.main_region_off
+		
+	def enter_sequence_main_region_on_default(self):
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.main_region_on
+		
+	def enter_sequence_main_region_default(self):
+		self.react_main_region__entry_default()
+		
+	def exit_sequence_main_region_off(self):
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.null_state
+		
+	def exit_sequence_main_region_on(self):
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.null_state
+		
+	def exit_sequence_main_region(self):
+		state = self.state_vector[0].name
+		if state == 'main_region_off':
+			self.exit_sequence_main_region_off()		
+		elif state == 'main_region_on':
+			self.exit_sequence_main_region_on()
+		
+	def react_main_region__entry_default(self):
+		self.enter_sequence_main_region_off_default()
+		
+	def react(self):
+		return False
+	
+	
+	def main_region_off_react(self,  try_transition):
+		did_transition = try_transition
+		
+		if try_transition:
+			if (self.react()) == False:
+				if self.sci_user.on_button:
+					self.exit_sequence_main_region_off()
+					self.sci_user.brightness = 1
+					self.enter_sequence_main_region_on_default()
+				else:
+					did_transition = False
+		
+		return did_transition
+	
+	
+	def main_region_on_react(self,  try_transition):
+		did_transition = try_transition
+		
+		if try_transition:
+			if (self.react()) == False:
+				if self.sci_user.off_button:
+					self.exit_sequence_main_region_on()
+					self.enter_sequence_main_region_off_default()
+				elif ((self.sci_user.on_button) and ((self.sci_user.brightness) < 10)):
+					self.exit_sequence_main_region_on()
+					self.sci_user.brightness = self.sci_user.brightness + 1
+					self.enter_sequence_main_region_on_default()
+				else:
+					did_transition = False
+		
+		return did_transition
+	
+	
+	def run_cycle(self):
+		""" Starts a cycle in the state machine. 
+		"""
+		if self.initialized is not True:
+			raise ValueError(
+					'The state machine needs to be initialized first by calling the init() function.')
+		self.next_state_index = 0
+		while self.next_state_index < len(self.state_vector):
+			if self.state_vector[self.next_state_index].name == 'main_region_off' :
+				self.main_region_off_react(True)
+			elif self.state_vector[self.next_state_index].name == 'main_region_on' :
+				self.main_region_on_react(True)
+			self.next_state_index += 1
+			
+		self._clear_events()
+
+p. 
+
+h4(#codegen_operation_callbacks). Operation callbacks
+
+YAKINDU Statechart Tools support _operations_ that are executed by a state machine as actions, but are implemented by client-side code.
+As a simple example a function __myOp__ can be defined in the definition section of the __LightSwitch__ example:
+
+bc.. 
+	interface:
+	operation myOp()
+p. 
+
+Calling the operation __myOp__ in the __On__ state of the __LightSwitch__ example generates following operation call:
+
+bc.. 
+def entry_action_main_region_on(self):
+	self.sci_interface.operationCallback.myOp()
+p. 
+
+The operation callback must be set through the state machine's API. At first the Callback must be implemented:
+
+bc.. 
+class Callback
+	def _init_(self):
+		#empty constructor
+		pass
+	
+	def myOp(self):
+		print('Operation myOp has been called by the state machine')
+p. 
+
+After this, the callback must be set while before running the state machine. This could be realized like this:
+
+bc.. 
+class Main:
+    def __init__(self):
+        self.sm = LightSwitch()
+        self.cb = Callback()
+
+    def setup(self):
+        self.sm.sci_interface.operationCallback = self.cb
+        self.sm.init()
+        self.sm.enter()
+p. 
+
+h4(#codegen_java_time_controlled_state_machines). Time-controlled state machines
+
+h5(#codegen_timer). DefaultTimer
+
+The python code generator supports timer out of the box. __DefaultTimer__ can be used by setting the sgen feature __GeneralFeatures__.
+
+bc.. 
+feature GeneralFeatures {
+	DefaultTimer = true
+}
+p. 
+
+Activating this feature provides a generated timer implementation ready to use for timed state machines. State machines using timed triggers, for example __after 10 s__, are timed and need a timer service. The timer instance must be created and set using the state machine's API.
+
+
+bc.. 
+
+from lightswitch.timer.sct_timer import Timer
+
+class Main:
+    def __init__(self):
+        self.sm = LightSwitch()
+        self.ti = Timer()
+
+    def setup(self):
+        self.sm.set_timer(self.ti)
+        self.sm.init()
+        self.sm.enter()
 
 h3(#codegen_python_code_generator_features). Python code generator features
 
