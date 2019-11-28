@@ -53,7 +53,7 @@ class StatemachineClassDeclaration implements ISourceFragment {
 
 	def generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs,
 		ClassDeclaration classDecl) {
-		classDecl.name(module).constructorDeclaration().destructorDeclaration()
+		classDecl.name(module).constructorDeclaration().destructorDeclaration(true, false)
 		interfaceExtensions.forEach[classDecl.superType(it)]
 
 		classDecl.member(entry.innerClassVisibility, fragmentProvider.get(CLASS_INNER_TARGET, it, artifactConfigs))
@@ -65,10 +65,6 @@ class StatemachineClassDeclaration implements ISourceFragment {
 		classDecl.privateMember(fragmentProvider.get(CLASS_PRIVATE_TARGET, it, artifactConfigs))
 
 		classDecl
-	}
-
-	def protected constructors(ClassDeclaration classDecl) {
-		classDecl.constructorDeclaration().destructorDeclaration()
 	}
 
 	def protected getInterfaceExtensions(ExecutionFlow flow) {
