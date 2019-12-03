@@ -3,7 +3,7 @@ p.
 
 h1(#overview_what_are_state_machines). What is a state machine?
 
-A state machine is a behavior model. It consists of different so called states. Because the amount of states of a state machine is finite it is called finite state machine (FSM). There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts.
+A state machine is a bahavior model. It consists of a finite number of states and is therefore also called finite-state machine (FSM). Based on the current state and a given input the machine performs state transitions and produces outputs. There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts.
 
 This introduction gives a short overview of the common basis and the differences between state machine types.
 
@@ -11,11 +11,11 @@ This introduction gives a short overview of the common basis and the differences
 
 p=. Simple state machine
 
-The basic building blocks of a state machine are states and transitions. A state is a situation of a system depending on previous inputs and causes a reaction on following inputs. Transitions define for which external input and under which condition a state change occurs.
+The basic building blocks of a state machine are states and transitions. A state is a situation of a system depending on previous inputs and causes a reaction on following inputs. One state is marked as the initial state; this is where the execution of the machine starts. A state transition defines when a state is changed from one to another. This can be an input, like pressing a button, and/or a condition that needs to be fulfilled. Depending on the state machine type, states and/or transitions produce outputs.
 
-Consider the simple state machine above. It consists of two states, *Off* and *On*. *Off* is the initial state, i.e. it is activated when the state machine is executed. The arrows between the states denote the possible state transitions. They define for which input a state change occurs. Here, the active state is changed from *Off* to *On* for the input *buttonpressed*, and back again to *Off* for the same input. 
+Consider the simple state machine above. It consists of two states, *Off* and *On*. *On* is the initial state; it is activated when the state machine is executed. The arrows between the states denote the possible state transitions. They define for which input a state change occurs. Here, the active state is changed from *Off* to *On* for the input *buttonpressed*, and back again to *Off* for the same input. 
 
-bq. *Please note:* In automata theory an automaton reacts on inputs and produces outputs. There, the terms input and output are usually used for text inputs/outputs. Modern state machines use an extended definition of inputs and outputs. Inputs can be events like a button click or a time trigger while outputs can be all kinds of expressions or operation calls.
+bq. *Please note:* In automata theory an automaton reacts on inputs and produces outputs. There, the terms input and output are usually used for text inputs/outputs. Modern state machines use an extended definition of inputs and outputs. Inputs can be events like a button click or a time trigger while outputs are actions like an operation call or a variable assignment.
 
 In the following, we will extend the simple switch example to explain the differences between Mealy and Moore machines as well as Harel statecharts and UML state machines.
 
@@ -24,7 +24,7 @@ In the following, we will extend the simple switch example to explain the differ
 
 In automata theory, there are two basic types of finite-state machines (FSM). One of those is called "_Moore_ machine":https://en.wikipedia.org/wiki/Moore_machine, named after its inventor Edward Moore. Moore machines consist of states and transitions. *States are able to produce outputs*, and the output is determined solely by the current state, not by any input.
 
-We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. The output of the state machine is the brightness value. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
+We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. This behavior is modeled by the state machine below. Pressing a button raises a corresponding event (_ON_pressed_ or _OFF_pressed_) upon which the machine reacts with a state change and corresponding outputs/actions. The output of the state machine is simply the brightness value. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
 
 !(small)images/overview_moore.png(Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools)!
 
@@ -46,21 +46,19 @@ Be aware that both state diagrams, the Moore machine above and the Mealy one, de
 
 *Harel statecharts*
 
-Although Mealy machines can already reduce the number of required states, for complex systems such automatons get easily unmanageable. This is also what Prof David Harel realized and put in the following statement:
+Although Mealy machines can already reduce the number of required states, for complex systems such automatons get easily unmanageable. Or to put it in David Harel's words:
 
 _“A complex system cannot be beneficially described in this naive fashion, because of the unmanageable, exponentially growing multitude of states, all of which have to be arranged in a ‘flat’ unstratified fashion, resulting in an unstructured, unrealistic, and chaotic state diagram.”_
 
-He concluded the following:
+Harel concluded that "_a state approach must be modular, hierarchical and well-structured"_ and introduced additional concepts like state composition and orthogonality.
 
-_“To be useful, a state approach must be modular, hierarchical and well-structured.”_
-
-Harel introduced elements for modeling complex systems with finite-state diagrams and also introduced the term “statecharts”, defined as:
+He coined the term “statechart”, and defined it as:
 
 _“statecharts = state-diagrams + depth + orthogonality + broadcast communication”_
 
-So basically "Harel statecharts":http://www.wisdom.weizmann.ac.il/~dharel/SCANNED.PAPERS/Statecharts.pdf are Mealy/Moore machines extended by further concepts that allow us to model complex systems in a practical manner.
+So basically "Harel statecharts":http://www.wisdom.weizmann.ac.il/~dharel/SCANNED.PAPERS/Statecharts.pdf are Mealy/Moore machines extended by further concepts that allow us to model complex systems in a practical way.
 
-Using composite states and sub diagrams, we are able to bring more *depth* into state diagrams, while keeping the diagrams clear and well-structured. Regions help us to express *orthogonality*: Different substate machines that can be executed side by side. Events allow us to achieve *broadcast communication* and give us a strong means to describe complex behavior. Using conditions, we can state that a certain event is fired only if a given condition is met. Inter-level transitions, history states, temporal logic as well as entry, exit and throughout actions are further Harel statechart elements.
+Using composite states and sub diagrams, we are able to bring more *depth* into state diagrams, while keeping the diagrams clear and well-structured. Regions help us to express *orthogonality*: Different substate machines that can be executed side by side. Events allow us to achieve *broadcast communication* and give us a strong means to describe complex behavior. Using guards, we can state that a certain event triggers a transition only if a given condition is met. Inter-level transitions, history states, temporal logic as well as entry, exit and throughout actions are further Harel statechart elements.
 
 To showcase some of these enhancements we extend the light switch example by a motion detection mode. When the _MOT_ button is pressed, the motion sensor is activated. Once the sensor detects any motion (event @motion_detected@), the light is switched on at the highest brightness level (@brightness = 3@).
 
@@ -82,7 +80,7 @@ Further concepts like orthogonality, entry/exit actions or history states are le
 
 *The present age: UML state machines*
 
-UML state machines are based on the statechart notation introduced by David Harel. Furthermore, the UML extends the notation of Harel statecharts by object-oriented principles. Mapping this to our light switch example, in UML we can model the possible actions of the light switch as a type with operations turnOn, turnOff, setBrightness and so on.
+UML state machines are based on the statechart notation introduced by David Harel. Furthermore, the UML extends the notation of Harel statecharts by object-oriented principles. Mapping this to our light switch example, in UML we can model the possible actions of the light switch as a type with operations @turnOn()@, @turnOff()@, @setBrightness(value)@ and so on.
 
 The following table illustrates the differences between the previously described types at a glance:
 
@@ -90,7 +88,7 @@ The following table illustrates the differences between the previously described
 
 p=. Differences between the state machine types
 
-The examples of this article were designed with the YAKINDU Statechart Tools, whose documentation you are reading just now.
+The examples of this article were designed with the "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now.
 
 h1(#overview_what_are_yakindu_statechart_tools). What are YAKINDU Statechart Tools?
 
