@@ -35,8 +35,36 @@ public class RubberBandRoutingSupport {
 		clearState();
 	}
 
+	private double clamp(boolean isVertical, PrecisionPoint p, double dv, Rectangle box, double sideDistance) {
+		if (isVertical) {
+			double c = p.preciseX() + dv;
+			double x = box.preciseX();
+			double left = x + sideDistance;
+			if (c < left) {
+				return left;
+			}
+			double right = (x + box.preciseWidth()) - sideDistance;
+			if (c > right) {
+				return right;
+			}
+			return c;
+		} else {
+			double c = p.preciseY() + dv;
+			double y = box.preciseY();
+			double top = y + sideDistance;
+			if (c < top) {
+				return top;
+			}
+			double bot = (y + box.preciseHeight()) - sideDistance;
+			if (c > bot) {
+				return bot;
+			}
+			return c;
+		}
+	}
+
 	protected void clearState() {
-		 conn.clear();
+		conn.clear();
 	}
 
 	public void commitBoxDrag() {
@@ -160,44 +188,96 @@ public class RubberBandRoutingSupport {
 		}
 	}
 
-	private List<PrecisionPoint> dragAnchoredSegments(ConnData cd, double localDx, double localDy, double localDw,
-			double localDh) {
+	private List<PrecisionPoint> dragAnchoredSegments(ConnData cd, Rectangle targetBox, double localDx, double localDy,
+			double localDw, double localDh) {
 		List<PrecisionPoint> pointsCopy = cd.getInitialVisualPointsCopy();
-		if (cd.isSource) {
+		if (cd.isReflexive) {
+			double dx = localDx + localDw;
+			double dy = localDy + localDh;
 			if (cd.isSourceVertical) {
-				double reqDx = mmds[cd.sourceSideIndex].reqDelta(localDx, localDw);
-				if (reqDx != 0) {
+				double x = clamp(true, pointsCopy.get(cd.sourceAnchorIndex), dx, targetBox, cd.SideDistance);
+				if (x != 0) {
 					PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
-					ap.setPreciseX(ap.preciseX() + reqDx);
+					ap.setPreciseX(x);
+					ap.setPreciseY(ap.preciseY() + dy);
 					PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
-					np.setPreciseX(np.preciseX() + reqDx);
+					np.setPreciseX(x);
+					np.setPreciseY(np.preciseY() + dy);
 				}
 			} else {
-				double reqDy = mmds[cd.sourceSideIndex].reqDelta(localDy, localDh);
-				if (reqDy != 0) {
+				double y = clamp(false, pointsCopy.get(cd.sourceAnchorIndex), dy, targetBox, cd.SideDistance);
+				if (y != 0) {
 					PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
-					ap.setPreciseY(ap.preciseY() + reqDy);
+					ap.setPreciseY(y);
+					ap.setPreciseX(ap.preciseX() + dx);
 					PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
-					np.setPreciseY(np.preciseY() + reqDy);
+					np.setPreciseY(y);
+					np.setPreciseX(np.preciseX() + dx);
 				}
 			}
-		}
-		if (cd.isTarget) {
 			if (cd.isTargetVertical) {
-				double reqDx = mmds[cd.targetSideIndex].reqDelta(localDx, localDw);
-				if (reqDx != 0) {
+				double x = clamp(true, pointsCopy.get(cd.targetAnchorIndex), dx, targetBox, cd.SideDistance);
+				if (x != 0) {
 					PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
-					ap.setPreciseX(ap.preciseX() + reqDx);
+					ap.setPreciseX(x);
+					ap.setPreciseY(ap.preciseY() + dy);
 					PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
-					np.setPreciseX(np.preciseX() + reqDx);
+					np.setPreciseX(x);
+					np.setPreciseY(np.preciseY() + dy);
 				}
 			} else {
-				double reqDy = mmds[cd.targetSideIndex].reqDelta(localDy, localDh);
-				if (reqDy != 0) {
+				double y = clamp(false, pointsCopy.get(cd.targetAnchorIndex), dy, targetBox, cd.SideDistance);
+				if (y != 0) {
 					PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
-					ap.setPreciseY(ap.preciseY() + reqDy);
+					ap.setPreciseY(y);
+					ap.setPreciseX(ap.preciseX() + dx);
 					PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
-					np.setPreciseY(np.preciseY() + reqDy);
+					np.setPreciseY(y);
+					np.setPreciseX(np.preciseX() + dx);
+				}
+			}
+			if (pointsCopy.size() > 4) {
+				for (PrecisionPoint p : pointsCopy.subList(2, pointsCopy.size() - 2)) {
+					p.setPreciseLocation(geom.getAdded(p, dx, dy));
+				}
+			}
+		} else {
+			if (cd.isSource) {
+				if (cd.isSourceVertical) {
+					double reqDx = mmds[cd.sourceSideIndex].reqDelta(localDx, localDw);
+					if (reqDx != 0) {
+						PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
+						ap.setPreciseX(ap.preciseX() + reqDx);
+						PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
+						np.setPreciseX(np.preciseX() + reqDx);
+					}
+				} else {
+					double reqDy = mmds[cd.sourceSideIndex].reqDelta(localDy, localDh);
+					if (reqDy != 0) {
+						PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
+						ap.setPreciseY(ap.preciseY() + reqDy);
+						PrecisionPoint np = pointsCopy.get(cd.sourceNeighborIndex);
+						np.setPreciseY(np.preciseY() + reqDy);
+					}
+				}
+			}
+			if (cd.isTarget) {
+				if (cd.isTargetVertical) {
+					double reqDx = mmds[cd.targetSideIndex].reqDelta(localDx, localDw);
+					if (reqDx != 0) {
+						PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
+						ap.setPreciseX(ap.preciseX() + reqDx);
+						PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
+						np.setPreciseX(np.preciseX() + reqDx);
+					}
+				} else {
+					double reqDy = mmds[cd.targetSideIndex].reqDelta(localDy, localDh);
+					if (reqDy != 0) {
+						PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
+						ap.setPreciseY(ap.preciseY() + reqDy);
+						PrecisionPoint np = pointsCopy.get(cd.targetNeighborIndex);
+						np.setPreciseY(np.preciseY() + reqDy);
+					}
 				}
 			}
 		}
@@ -324,7 +404,9 @@ public class RubberBandRoutingSupport {
 			double localDh = bnrel.preciseHeight() - brel.preciseHeight();
 
 			// drag anchored segment if necessary
-			List<PrecisionPoint> pointsCopy = dragAnchoredSegments(cd, localDx, localDy, localDw, localDh);
+			IFigure targetOwner = cd.conn.getTargetAnchor().getOwner();
+			Rectangle targetBox = getBounds(cd.conn, targetOwner);
+			List<PrecisionPoint> pointsCopy = dragAnchoredSegments(cd, targetBox, localDx, localDy, localDw, localDh);
 
 //			cd.printVisualPoints();
 //			cd.printPoints(pointsCopy);
@@ -341,9 +423,7 @@ public class RubberBandRoutingSupport {
 			// cut source, target, and loops
 			List<PrecisionPoint> list = cd.getVisualPoints();
 
-			IFigure targetOwner = cd.conn.getTargetAnchor().getOwner();
 			IFigure sourceOwner = cd.conn.getSourceAnchor().getOwner();
-			Rectangle targetBox = getBounds(cd.conn, targetOwner);
 			boolean isSelfAssoc = targetOwner == sourceOwner;
 			Rectangle sourceBox = isSelfAssoc ? targetBox : getBounds(cd.conn, sourceOwner);
 
