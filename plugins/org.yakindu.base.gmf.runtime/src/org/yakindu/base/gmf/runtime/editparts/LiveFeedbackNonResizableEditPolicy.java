@@ -27,6 +27,7 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 	private boolean connectionStart = true;
 	private Rectangle originalBounds = null;
 	private ChangeBoundsRequest NULL_REQUEST = new ChangeBoundsRequest(REQ_MOVE_CHILDREN);
+	private String lastRequest = "";
 
 	@Override
 	public void activate() {
@@ -34,14 +35,17 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 		originalBounds = getHostFigure().getBounds().getCopy();
 		getHostFigure().translateToAbsolute(originalBounds);
 	}
-	
+
 	@Override
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
-		if (RequestConstants.REQ_DROP.equals(request.getType())) {
+		// If REQ_DROP is delivered 2 times in a row it is a "real" drop and not only a
+		// hover over existing elements in the same region
+		if (RequestConstants.REQ_DROP.equals(request.getType()) && RequestConstants.REQ_DROP.equals(lastRequest)) {
 			Rectangle rect = originalBounds.getCopy();
 			getHostFigure().getParent().translateToRelative(rect);
 			getHostFigure().setBounds(rect);
 			super.showChangeBoundsFeedback(request);
+			lastRequest = (String) request.getType();
 			return;
 		}
 		super.eraseChangeBoundsFeedback(request);
@@ -55,6 +59,7 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 		getHostFigure().getParent().translateToRelative(bounds);
 		getHostFigure().setBounds(bounds);
 		getHostFigure().getParent().setConstraint(getHostFigure(), bounds);
+		lastRequest = (String) request.getType();
 	}
 
 	@Override
