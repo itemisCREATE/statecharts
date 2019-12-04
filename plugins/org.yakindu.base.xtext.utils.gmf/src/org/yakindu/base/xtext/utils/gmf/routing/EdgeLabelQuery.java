@@ -749,8 +749,10 @@ public class EdgeLabelQuery {
 						oldNearestSeg.getTerminus().y - oldNearestSeg.getOrigin().y);
 				Vector newVector = new Vector(newNearestSegment.getTerminus().x - newNearestSegment.getOrigin().x,
 						newNearestSegment.getTerminus().y - newNearestSegment.getOrigin().y);
-				fromOldToNewCenterVector = applyOldRatioOnNewSegment(oldNearestSeg, oldNearestPoint, oldCenterLabel,
-						newNearestSegment, oldVector.getAngle(newVector) == 180, false);
+				if (!oldVector.equals(newVector)) {
+					fromOldToNewCenterVector = applyOldRatioOnNewSegment(oldNearestSeg, oldNearestPoint, oldCenterLabel,
+							newNearestSegment, oldVector.getAngle(newVector) == 180, false);
+				}
 			}
 		}
 		return fromOldToNewCenterVector;
