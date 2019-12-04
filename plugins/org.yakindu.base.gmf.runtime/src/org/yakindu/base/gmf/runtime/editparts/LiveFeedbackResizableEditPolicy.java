@@ -12,12 +12,14 @@ package org.yakindu.base.gmf.runtime.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.tools.ResizeTracker;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
 
 /**
@@ -46,6 +48,9 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
 	@Override
 	protected Command getMoveCommand(ChangeBoundsRequest request) {
+		if (RequestConstants.REQ_DROP.equals(request.getType())) {
+			return super.getMoveCommand(request);
+		}
 		NULL_REQUEST.setEditParts(getHost());
 		return getHost().getParent().getCommand(NULL_REQUEST);
 	}
@@ -56,6 +61,10 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
 	@Override
 	protected Command getResizeCommand(ChangeBoundsRequest request) {
+		if (RequestConstants.REQ_DROP.equals(request.getType())) {
+			return super.getMoveCommand(request);
+		}
+
 		if (request instanceof SetPreferredSizeRequest) {
 			SetPreferredSizeRequest req = new SetPreferredSizeRequest(REQ_RESIZE_CHILDREN);
 			req.setEditParts(getHost());
@@ -78,6 +87,13 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 	protected ResizeTracker getResizeTracker(int direction) {
 
 		return new ResizeTracker((GraphicalEditPart) getHost(), direction) {
+
+			@Override
+			protected void updateSourceRequest() {
+				enforceConstraintForMove((ChangeBoundsRequest) getSourceRequest());
+				super.updateSourceRequest();
+			}
+
 			@Override
 			protected void enforceConstraintsForResize(ChangeBoundsRequest request) {
 				final IFigure figure = getHostFigure();
@@ -93,13 +109,38 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 				if (bounds.height < prefSize.height) {
 					request.getSizeDelta().height = request.getSizeDelta().height + (prefSize.height - bounds.height);
 				}
+
 				request.setSizeDelta(request.getSizeDelta());
 			}
+
 		};
+	}
+
+	protected void enforceConstraintForMove(ChangeBoundsRequest request) {
+		Rectangle relativeBounds = originalBounds.getCopy();
+		Rectangle transformed = request.getTransformedRectangle(relativeBounds);
+		getHostFigure().getParent().translateToRelative(transformed);
+		if (transformed.x < 0) {
+			Point moveDelta = request.getMoveDelta();
+			moveDelta.x -= transformed.x;
+		}
+		if (transformed.y < 0) {
+			Point moveDelta = request.getMoveDelta();
+			moveDelta.y -= transformed.y;
+		}
 	}
 
 	@Override
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
+		if (RequestConstants.REQ_DROP.equals(request.getType())) {
+			Rectangle rect = originalBounds.getCopy();
+			getHostFigure().getParent().translateToRelative(rect);
+			getHostFigure().setBounds(rect);
+			super.showChangeBoundsFeedback(request);
+			return;
+		}
+		super.eraseChangeBoundsFeedback(request);
+		enforceConstraintForMove(request);
 		if (connectionStart) {
 			originalBounds = getPreferredSizeFigure().getBounds().getCopy();
 			getHostFigure().translateToAbsolute(originalBounds);

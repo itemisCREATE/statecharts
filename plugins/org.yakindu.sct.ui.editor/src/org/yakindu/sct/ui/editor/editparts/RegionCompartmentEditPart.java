@@ -25,6 +25,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -54,7 +55,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 			// This is required when live feedback is used
 			@Override
 			protected Object getConstraintFor(ChangeBoundsRequest request, GraphicalEditPart child) {
-				if (request instanceof SetPreferredSizeRequest) {
+				if (request instanceof SetPreferredSizeRequest || RequestConstants.REQ_ADD.equals(request.getType())) {
 					return super.getConstraintFor(request, child);
 				}
 				request.setSizeDelta(new Dimension(0, 0));

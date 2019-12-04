@@ -27,6 +27,7 @@ import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.yakindu.base.gmf.runtime.router.ConnData;
 import org.yakindu.base.gmf.runtime.router.RelativeBendpointUtil;
@@ -142,9 +143,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 			originalBounds = getHostFigure().getBounds().getCopy();
 			router.initBoxDrag(originalBounds, getSourceConnections(), getTargetConnections());
 			connectionStart = false;
-		} else {
-			router.updateBoxDrag(originalBounds);
 		}
+		router.updateBoxDrag(originalBounds);
 	}
 
 	private void routeInResponseToBoxDrag(ChangeBoundsRequest request) {
@@ -188,6 +188,10 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
 	@Override
 	public void showSourceFeedback(Request request) {
+		if (RequestConstants.REQ_DROP.equals(request.getType())) {
+			router.abortBoxDrag();
+			return;
+		}
 		if (request instanceof ChangeBoundsRequest) {
 			showChangeBoundsFeedback((ChangeBoundsRequest) request);
 			for (ConnectionEditPart cep : getAllConnectionParts()) {
