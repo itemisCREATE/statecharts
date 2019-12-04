@@ -115,7 +115,7 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
 		};
 	}
-
+	
 	protected void enforceConstraintForMove(ChangeBoundsRequest request) {
 		Rectangle relativeBounds = originalBounds.getCopy();
 		Rectangle transformed = request.getTransformedRectangle(relativeBounds);
@@ -129,6 +129,7 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 			moveDelta.y -= transformed.y;
 		}
 	}
+	
 
 	@Override
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {

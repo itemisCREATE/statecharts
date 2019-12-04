@@ -10,10 +10,12 @@
  */
 package org.yakindu.base.gmf.runtime.editparts;
 
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 
 /**
  * 
@@ -27,7 +29,23 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 	private ChangeBoundsRequest NULL_REQUEST = new ChangeBoundsRequest(REQ_MOVE_CHILDREN);
 
 	@Override
+	public void activate() {
+		super.activate();
+		originalBounds = getHostFigure().getBounds().getCopy();
+		getHostFigure().translateToAbsolute(originalBounds);
+	}
+	
+	@Override
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
+		if (RequestConstants.REQ_DROP.equals(request.getType())) {
+			Rectangle rect = originalBounds.getCopy();
+			getHostFigure().getParent().translateToRelative(rect);
+			getHostFigure().setBounds(rect);
+			super.showChangeBoundsFeedback(request);
+			return;
+		}
+		super.eraseChangeBoundsFeedback(request);
+		enforceConstraintForMove(request);
 		if (connectionStart) {
 			originalBounds = getHostFigure().getBounds().getCopy();
 			getHostFigure().translateToAbsolute(originalBounds);
@@ -47,8 +65,25 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 
 	@Override
 	protected Command getMoveCommand(ChangeBoundsRequest request) {
+		if (RequestConstants.REQ_DROP.equals(request.getType())) {
+			return super.getMoveCommand(request);
+		}
 		NULL_REQUEST.setEditParts(getHost());
 		return getHost().getParent().getCommand(NULL_REQUEST);
+	}
+
+	protected void enforceConstraintForMove(ChangeBoundsRequest request) {
+		Rectangle relativeBounds = originalBounds.getCopy();
+		Rectangle transformed = request.getTransformedRectangle(relativeBounds);
+		getHostFigure().getParent().translateToRelative(transformed);
+		if (transformed.x < 0) {
+			Point moveDelta = request.getMoveDelta();
+			moveDelta.x -= transformed.x;
+		}
+		if (transformed.y < 0) {
+			Point moveDelta = request.getMoveDelta();
+			moveDelta.y -= transformed.y;
+		}
 	}
 
 }
