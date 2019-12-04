@@ -8,11 +8,13 @@
          name="YAKINDU SCT">
       </category>
       <wizard
-         category="org.eclipse.ui.Examples/YAKINDU"
-         class="org.yakindu.sct.examples.wizard.ExampleWizard"
-         icon="icons/logo-16.png"
-         id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
-         name="YAKINDU Statechart Examples">
+            category="org.eclipse.ui.Examples/YAKINDU"
+            class="org.yakindu.sct.examples.wizard.ExampleWizard"
+            finalPerspective="org.yakindu.sct.ui.ModelingPerspective"
+            icon="icons/logo-16.png"
+            id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+            name="YAKINDU Statechart Examples"
+            project="true">
       </wizard>
    </extension>
    <extension point="org.eclipse.ui.newWizards">
@@ -21,14 +23,30 @@
          name="YAKINDU SCT">
       </category>
       <wizard
-          category="YAKINDU"
-          class="org.yakindu.sct.examples.wizard.ExampleWizard"
-          icon="icons/logo-16.png"
-          id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
-          name="Examples">
+            category="YAKINDU"
+            class="org.yakindu.sct.examples.wizard.ExampleWizard"
+            finalPerspective="org.yakindu.sct.ui.ModelingPerspective"
+            icon="icons/logo-16.png"
+            id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+            name="Examples"
+            project="true">
       </wizard>
     </extension>
-   
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.yakindu.sct.ui.ModelingPerspective">
+         <newWizardShortcut
+               id="org.yakindu.sct.examples.ui.wizards.ExampleWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.yakindu.sct.ui.SimulationPerspective">
+         <newWizardShortcut
+               id="org.yakindu.sct.examples.ui.wizards.ExampleWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
    <extension point="org.eclipse.ui.preferencePages">
       <page
          category="org.yakindu.sct.ui.preferences.root"
