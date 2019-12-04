@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
@@ -139,7 +138,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 			Rectangle feedbackBounds = getOriginalBounds(containerFigure);
 			containerFigure.getParent().translateToAbsolute(feedbackBounds);
 			feedbackBounds = calculateFeedbackBounds(request, feedbackBounds, level, containerFigure);
-			showChildrenFeedback(containerEditPart, containerFigure, feedbackBounds, request);
 			containerFigure.translateToRelative(feedbackBounds);
 			setBounds(containerFigure, feedbackBounds);
 			EditPolicy editPolicy = containerEditPart.getEditPolicy(FixedBendpointEditPolicy.ROLE);
@@ -158,54 +156,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 				result.add(containerEditPart);
 		}
 		return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	/**
-	 * containerFeedbackBounds as absolute
-	 * 
-	 * @param containerEditPart
-	 * @param containerFigure
-	 * @param containerFeedbackBounds
-	 */
-	protected void showChildrenFeedback(final IGraphicalEditPart containerEditPart, final IFigure containerFigure,
-			final Rectangle containerFeedbackBounds, ChangeBoundsRequest request) {
-		Rectangle originalBounds = getOriginalBounds(containerFigure);
-
-		Point moveDelta = new Point(containerFeedbackBounds.width - originalBounds.width,
-				containerFeedbackBounds.height - originalBounds.height);
-
-		List<IGraphicalEditPart> children = containerEditPart.getParent().getChildren();
-
-		for (IGraphicalEditPart childPart : children) {
-			if (request.getEditParts().contains(childPart)) {
-				continue;
-			}
-			if (childPart == containerEditPart)
-				continue;
-			showChildFeedback(childPart, moveDelta, containerFeedbackBounds);
-		}
-	}
-
-	protected void showChildFeedback(IGraphicalEditPart childPart, Point moveDelta, Rectangle containerFeedbackBounds) {
-
-		IFigure childFigure = childPart.getFigure();
-		Rectangle originalChildBounds = getOriginalBounds(childFigure);
-		childFigure.getParent().translateToAbsolute(originalChildBounds);
-
-		boolean horizontalAffected = isHorizontalAffected(containerFeedbackBounds, moveDelta, originalChildBounds);
-		boolean verticalAffected = isVerticalAffected(containerFeedbackBounds, moveDelta, originalChildBounds);
-		if (!(horizontalAffected || verticalAffected)) {
-			return;
-		}
-		if (horizontalAffected) {
-			originalChildBounds.x += moveDelta.x;
-		}
-		if (verticalAffected) {
-			originalChildBounds.y += moveDelta.y;
-		}
-		childFigure.getParent().translateToRelative(originalChildBounds);
-		setBounds(childFigure, originalChildBounds);
 	}
 
 	/**
@@ -233,25 +183,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 		return containerEditPart;
 	}
 
-	private boolean isVerticalAffected(Rectangle newBounds, Point moveDelta, Rectangle bounds) {
-		boolean verticalAffected = (bounds.x > newBounds.x || bounds.x + bounds.width > newBounds.x)
-				&& bounds.x < newBounds.x + newBounds.width || bounds.x + bounds.width < newBounds.x + newBounds.width;
-		if (verticalAffected) {
-			verticalAffected = bounds.y + moveDelta.y > newBounds.y + newBounds.height;
-		}
-		return verticalAffected;
-	}
-
-	private boolean isHorizontalAffected(Rectangle newBounds, Point moveDelta, Rectangle bounds) {
-		boolean horizontalAffected = (bounds.y > newBounds.y || bounds.y + bounds.height > newBounds.y)
-				&& bounds.y < newBounds.y + newBounds.height
-				|| bounds.y + bounds.height < newBounds.y + newBounds.height;
-		if (horizontalAffected) {
-			horizontalAffected = bounds.x + moveDelta.x > newBounds.x + newBounds.width;
-		}
-		return horizontalAffected;
-	}
-
 	protected void setBounds(IFigure figure, Rectangle bounds) {
 		figure.setBounds(bounds);
 		figure.getParent().setConstraint(figure, bounds);
@@ -271,9 +202,13 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 			editPart.getFigure().translateToAbsolute(preferredSize);
 			Dimension max = Dimension.max(result.getSize(), preferredSize);
 			result.setSize(max);
-			if (result.x < feedbackBounds.x || result.y < feedbackBounds.y) {
-				return feedbackBounds;
-			}
+		}
+		
+		if (result.x < feedbackBounds.x) {
+			result.x = feedbackBounds.x;
+		}
+		if (result.y < feedbackBounds.y) {
+			result.y = feedbackBounds.y;
 		}
 		return result;
 	}
