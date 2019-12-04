@@ -10,36 +10,22 @@
  */
 package org.yakindu.sct.ui.editor.wizards;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.requests.DirectEditRequest;
-import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -56,9 +42,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.gmf.runtime.util.EditPartUtils;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomain;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
@@ -148,7 +131,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
 
-				diagram = createDiagram(create, monitor);
+				diagram = new DiagramCreator().createDiagram(create, monitor);
 				if (isOpenOnCreate() && diagram != null) {
 					try {
 						openDiagram(diagram);
@@ -207,61 +190,6 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	protected String getEditorID() {
 		return StatechartDiagramEditor.ID;
-	}
-
-	protected Resource createDiagram(final DiagramCreationDesccription create, IProgressMonitor progressMonitor) {
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
-		progressMonitor.beginTask("Creating diagram file ...", 3);
-
-		final Resource resource = editingDomain.getResourceSet().createResource(create.getModelURI());
-
-		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain,
-				"Creating diagram file ...", Collections.EMPTY_LIST) {
-			@Override
-			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
-					throws ExecutionException {
-				IModelCreator creator = DomainRegistry.getDomain(create.getDomainID())
-						.getInjector(IDomain.FEATURE_EDITOR).getInstance(IModelCreator.class);
-				creator.createStatechartModel(resource, preferencesHint);
-				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
-						SGraphPackage.Literals.STATECHART);
-				statechart.setDomainID(create.getDomainID());
-
-				try {
-					resource.save(getSaveOptions());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				return CommandResult.newOKCommandResult();
-			}
-
-		};
-		try {
-			command.execute(progressMonitor, null);
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		setCharset(WorkspaceSynchronizer.getFile(resource));
-		editingDomain.dispose();
-		return resource;
-	}
-
-	protected Map<String, String> getSaveOptions() {
-		Map<String, String> saveOptions = new HashMap<String, String>();
-		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
-		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-		return saveOptions;
-	}
-
-	protected void setCharset(IFile file) {
-		if (file == null) {
-			return;
-		}
-		try {
-			file.setCharset("UTF-8", new NullProgressMonitor());
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public IStructuredSelection getSelection() {
