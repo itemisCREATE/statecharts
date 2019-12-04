@@ -183,29 +183,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 		return containerEditPart;
 	}
 
-//	private boolean isVerticalAffected(Rectangle newBounds, Point moveDelta, Rectangle bounds) {
-//		boolean verticalAffected = (bounds.x > newBounds.x || bounds.x + bounds.width > newBounds.x)
-//				&& bounds.x < newBounds.x + newBounds.width || bounds.x + bounds.width < newBounds.x + newBounds.width;
-//		if (verticalAffected) {
-//			verticalAffected = bounds.y + moveDelta.y > newBounds.y + newBounds.height;
-//		}
-//		return verticalAffected;
-//	}
-//
-//	private boolean isHorizontalAffected(Rectangle newBounds, Point moveDelta, Rectangle bounds) {
-//		
-//		System.out.println("New "+ newBounds);
-//		System.out.println("Bounds "+ bounds);
-//		
-//		boolean horizontalAffected = (bounds.y > newBounds.y || bounds.y + bounds.height > newBounds.y)
-//				&& bounds.y < newBounds.y + newBounds.height
-//				|| bounds.y + bounds.height < newBounds.y + newBounds.height;
-//		if (horizontalAffected) {
-//			horizontalAffected = bounds.x + moveDelta.x > newBounds.x + newBounds.width;
-//		}
-//		return horizontalAffected;
-//	}
-
 	protected void setBounds(IFigure figure, Rectangle bounds) {
 		figure.setBounds(bounds);
 		figure.getParent().setConstraint(figure, bounds);
