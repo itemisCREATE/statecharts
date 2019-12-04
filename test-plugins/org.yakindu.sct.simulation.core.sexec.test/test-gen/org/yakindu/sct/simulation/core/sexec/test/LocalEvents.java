@@ -23,7 +23,7 @@ public class LocalEvents extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/LocalEvents.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void test() throws Exception {

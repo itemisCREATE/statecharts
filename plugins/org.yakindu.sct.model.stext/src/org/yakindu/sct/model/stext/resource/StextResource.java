@@ -34,6 +34,8 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
  */
 public class StextResource extends AbstractSCTResource {
 
+	private static final String NEWLINE = System.getProperty("line.separator");
+
 	public StextResource() {
 		this(null);
 	}
@@ -49,10 +51,15 @@ public class StextResource extends AbstractSCTResource {
 			builder.append("namespace " + statechart.getNamespace());
 		}
 		for (Annotation annotation : statechart.getAnnotations()) {
-			builder.append(serialize(annotation));
+			String serializedAnnotation = serialize(annotation);
+			builder.append(serializedAnnotation);
 		}
 		for (Scope scope : statechart.getScopes()) {
-			builder.append(serialize(scope));
+			String serializedScope = serialize(scope);
+			if (builder.length() > 0 && !(serializedScope.startsWith(NEWLINE))) {
+				builder.append(NEWLINE);
+			}
+			builder.append(serializedScope);
 		}
 		statechart.setSpecification(builder.toString());
 	}

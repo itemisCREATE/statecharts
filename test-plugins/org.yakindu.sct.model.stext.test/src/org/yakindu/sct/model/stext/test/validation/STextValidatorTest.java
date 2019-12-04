@@ -27,11 +27,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +45,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
+import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -863,10 +866,19 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	
 	@Test
 	public void checkImportExists() {
-		Scope context = (Scope) parseExpression("import: \"does.not.exist\"", ImportScope.class.getSimpleName());
+		String importName = "does.not.exist";
+		Scope context = (Scope) parseExpression("import: \"" + importName + "\"", ImportScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
-		validationResult
-		.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
+		DiagnosticPredicate predicate_IMPORT_NOT_RESOLVED_MSG = errorMsg(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, importName));
+		DiagnosticPredicate predicate_OTHER_DOMAIN_FOR_IMPORT = warningMsg(STextValidationMessages.OTHER_DOMAIN_FOR_IMPORT);
+		validationResult.assertAll(predicate_IMPORT_NOT_RESOLVED_MSG, predicate_OTHER_DOMAIN_FOR_IMPORT);
+	}
+	@Test
+	public void checkIfDomainAllowsForImport() {
+		Scope context = (Scope) parseExpression("import:", ImportScope.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(context);
+		DiagnosticPredicate predicate = warningMsg(STextValidationMessages.OTHER_DOMAIN_FOR_IMPORT);
+		validationResult.assertAll(predicate);
 	}
 	
 	@Test

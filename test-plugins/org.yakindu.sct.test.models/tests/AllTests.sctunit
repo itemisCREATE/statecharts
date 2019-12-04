@@ -38,6 +38,10 @@ testsuite AllTests {
 	
 	// statechartactions
     StatechartEntryExitActions, 
+    
+    // supersteps
+    CycleBasedSuperStep,
+    EventDrivenSuperStep,
 
 	// not grouped
 	AlwaysOncycle,

@@ -196,6 +196,7 @@
             <fileset id="fileset.eclipsehelp" dir="${src.dir}">
                 <include name="tutorials/tutorials.textile"/>
                 <include name="user-guide/overview.textile"/>
+            	<include name="user-guide/quick_ref.textile"/>
                 <include name="user-guide/editing_statecharts.textile"/>
                 <include name="user-guide/simulating_statecharts.textile"/>
                 <include name="user-guide/c-domain.textile"/>
@@ -219,7 +220,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="18"/>
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="19"/>
                 </condition>
             </fail>
 
@@ -378,6 +379,7 @@
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="user-guide/overview.textile"/>
+                    	<file name="user-guide/quick_ref.textile"/>
                         <file name="user-guide/editing_statecharts.textile"/>
                         <file name="user-guide/simulating_statecharts.textile"/>
                         <file name="user-guide/code_generation_intro.textile"/>

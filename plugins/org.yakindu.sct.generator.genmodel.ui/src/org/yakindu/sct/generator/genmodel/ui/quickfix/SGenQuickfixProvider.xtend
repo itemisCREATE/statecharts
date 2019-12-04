@@ -25,10 +25,12 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
+import org.yakindu.sct.commons.EmfUriUtil
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions
+import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider
 import org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator
@@ -39,9 +41,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgen.GeneratorModel
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil
-import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.sct.commons.EmfUriUtil
-import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider
 
 /** 
  * @author andreas muelder - Initial contribution and API

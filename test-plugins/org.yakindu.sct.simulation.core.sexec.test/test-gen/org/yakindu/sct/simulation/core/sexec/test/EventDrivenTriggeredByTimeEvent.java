@@ -23,29 +23,29 @@ public class EventDrivenTriggeredByTimeEvent extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByTimeEvent.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void timeEventTriggersRunCycle() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
-		timer.timeLeap(999);
+		timer.timeLeap(999l);
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
-		timer.timeLeap(1);
+		timer.timeLeap(1l);
 		assertTrue(isStateActive("B"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 1l);
-		timer.timeLeap(1000);
+		timer.timeLeap(1l*1000l);
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 2l);
-		timer.timeLeap(999000);
+		timer.timeLeap(999l*1000l);
 		assertTrue(isStateActive("B"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 1001l);
-		timer.timeLeap(999000);
+		timer.timeLeap(999l*1000l);
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 2000l);

@@ -23,7 +23,7 @@ public class EventDrivenInternalEvent extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenInternalEvent.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void checkInternlEventQueueing() throws Exception {

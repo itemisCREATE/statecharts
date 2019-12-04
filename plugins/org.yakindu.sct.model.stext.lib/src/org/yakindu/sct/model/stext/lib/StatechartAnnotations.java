@@ -23,6 +23,7 @@ public class StatechartAnnotations {
 	public static final String EVENT_DRIVEN_ANNOTATION = "EventDriven";
 	public static final String PARENT_FIRST_ANNOTATION = "ParentFirstExecution";
 	public static final String CHILD_FIRST_ANNOTATION = "ChildFirstExecution";
+	public static final String SUPERSTEP_ANNOTATION = "SuperStep";
 
 	public boolean isCycleBased(Statechart statechart) {
 		return statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) == null;
@@ -38,5 +39,9 @@ public class StatechartAnnotations {
 	
 	public boolean isChildFirstExecution(Statechart statechart) {
 		return statechart.getAnnotationOfType(CHILD_FIRST_ANNOTATION) != null;
+	}
+	
+	public boolean isSuperStep(Statechart statechart) {
+		return statechart.getAnnotationOfType(SUPERSTEP_ANNOTATION) != null;
 	}
 }

@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * @author rbeckmann
@@ -36,6 +37,7 @@ class APIGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
+	@Inject protected extension StatechartAnnotations
 
 	def runCycle(ExecutionFlow it) {
 		'''
@@ -47,8 +49,16 @@ class APIGenerator {
 			}
 		'''
 	}
+	
+	protected def superStepLoop(CharSequence microStep) '''
+		do {
+			«scHandle»->«STATEVECTOR_CHANGED» = false;
+			«microStep»
+		} while(«scHandle»->«STATEVECTOR_CHANGED»);
+	'''
 
-	protected def CharSequence runCycleForLoop(ExecutionFlow it) '''
+	protected def CharSequence runCycleForLoop(ExecutionFlow it) {
+		val microStep = '''
 		for («scHandle»->«STATEVECTOR_POS» = 0;
 			«scHandle»->«STATEVECTOR_POS» < «maxOrthogonalStates»;
 			«scHandle»->«STATEVECTOR_POS»++)
@@ -69,8 +79,9 @@ class APIGenerator {
 				break;
 			}
 		}
-		
-	'''
+		'''
+		return if (statechart.isSuperStep) superStepLoop(microStep) else microStep
+	} 
 
 
 	def declareRunCycle(ExecutionFlow it) {

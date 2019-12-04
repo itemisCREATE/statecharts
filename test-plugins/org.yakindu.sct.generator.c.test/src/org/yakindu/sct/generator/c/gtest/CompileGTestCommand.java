@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.c.gtest;
 
+import static org.eclipse.core.runtime.Platform.OS_MACOSX;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,9 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 
 import com.google.common.collect.Lists;
-
 public class CompileGTestCommand {
 	
 	private String dir;
@@ -148,6 +150,9 @@ public class CompileGTestCommand {
 		}	
 		if(wnoUnusedFunction) {
 			command.add("-Wno-unused-function");
+		}
+		if (OS_MACOSX.equals(Platform.getOS())) {
+			command.add("-Wno-unused-private-field");
 		}
 		
 		for(String compilerFlag:compilerFlags) {

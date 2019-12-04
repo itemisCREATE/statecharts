@@ -23,7 +23,7 @@ public class ExitSequence extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("ExitSequence.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void exitStatechartFromLeafSlimState() throws Exception {

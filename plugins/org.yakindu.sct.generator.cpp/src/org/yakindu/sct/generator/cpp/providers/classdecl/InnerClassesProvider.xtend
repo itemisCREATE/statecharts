@@ -28,12 +28,14 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InternalScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class InnerClassesProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension StatechartExtensions
+	@Inject protected extension StatechartAnnotations
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -90,6 +92,10 @@ class InnerClassesProvider implements ISourceFragment {
 		
 		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«historyStatesConst»];«ENDIF»
 		«USHORT_TYPE» «STATEVECTOR_POS»;
+		
+		«IF statechart.isSuperStep»
+		«BOOL_TYPE» «STATEVECTOR_CHANGED»;
+		«ENDIF»
 		
 		«FOR s : getInterfaces»
 			«s.interfaceName» «s.instance»;
