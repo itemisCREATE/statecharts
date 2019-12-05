@@ -32,6 +32,10 @@ public class RubberBandRoutingSupport {
 	private MaxMoveDelta[] mmds = new MaxMoveDelta[4];
 
 	public void abortBoxDrag() {
+		// force locations only
+		for (ConnData cd : conn.values()) {
+			forceInitialLocations(cd);
+		}
 		clearState();
 	}
 
