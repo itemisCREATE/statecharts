@@ -86,20 +86,6 @@ public class RubberBandRoutingSupport {
 		return constraint;
 	}
 
-	protected List<RelativeBendpoint> createConstraintAbs(Connection conn, List<PrecisionPoint> list) {
-		List<RelativeBendpoint> constraint = new ArrayList<>();
-		for (Point p : list) {
-			PrecisionPoint pRel = new PrecisionPoint(p);
-			conn.translateToParent(pRel);
-			System.out.println("rel " + pRel);
-			RelativeBendpoint relbp = new RelativeBendpoint();
-			relbp.setConnection(conn);
-			relbpUtil.forceLocation(conn, relbp, pRel.preciseX(), pRel.preciseY());
-			constraint.add(relbp);
-		}
-		return constraint;
-	}
-
 	/**
 	 * Find first intersection with target box, walking from start to end.
 	 *

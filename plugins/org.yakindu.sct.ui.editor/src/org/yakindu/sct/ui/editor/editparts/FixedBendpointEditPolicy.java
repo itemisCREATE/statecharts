@@ -140,7 +140,7 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	}
 
 	private void justKeepConnectionsInPlace(ChangeBoundsRequest request) {
-		System.out.println("keeping them in place...");
+//		System.out.println("keeping them in place...");
 		if (connectionStart) {
 			IFigure figure = getHostFigure();
 			originalBounds = getHostFigure().getBounds().getCopy();
