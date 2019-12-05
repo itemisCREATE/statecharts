@@ -200,7 +200,7 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		}
 		if (request instanceof ChangeBoundsRequest) {
 			ChangeBoundsRequest cbr = ((ChangeBoundsRequest) request);
-			System.out.println("CBR " + cbr.getMoveDelta() + ", " + cbr.getSizeDelta());
+//			System.out.println("CBR " + cbr.getMoveDelta() + ", " + cbr.getSizeDelta());
 			showChangeBoundsFeedback((ChangeBoundsRequest) request);
 			for (ConnectionEditPart cep : getAllConnectionParts()) {
 				showLineFeedback(cep);
