@@ -139,12 +139,17 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 		return result;
 	}
 
-	private void justKeepConnectionsInPlace() {
+	private void justKeepConnectionsInPlace(ChangeBoundsRequest request) {
+		System.out.println("keeping them in place...");
 		if (connectionStart) {
+			IFigure figure = getHostFigure();
 			originalBounds = getHostFigure().getBounds().getCopy();
+			figure.translateToAbsolute(originalBounds);
+			originalBounds.translate(request.getMoveDelta().getNegated()).resize(request.getSizeDelta().getNegated());
 			router.initBoxDrag(originalBounds, getSourceConnections(), getTargetConnections());
 			connectionStart = false;
 		}
+		// XXX: always pass in original bounds so that initial locations are forced
 		router.updateBoxDrag(originalBounds);
 	}
 
@@ -163,7 +168,7 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
 		if (request.getEditParts().get(0) != getHost()) {
 			// XXX: policy is also called for composites
-			justKeepConnectionsInPlace();
+			justKeepConnectionsInPlace(request);
 		} else {
 			routeInResponseToBoxDrag(request);
 		}
@@ -194,6 +199,8 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 			return;
 		}
 		if (request instanceof ChangeBoundsRequest) {
+			ChangeBoundsRequest cbr = ((ChangeBoundsRequest) request);
+			System.out.println("CBR " + cbr.getMoveDelta() + ", " + cbr.getSizeDelta());
 			showChangeBoundsFeedback((ChangeBoundsRequest) request);
 			for (ConnectionEditPart cep : getAllConnectionParts()) {
 				showLineFeedback(cep);

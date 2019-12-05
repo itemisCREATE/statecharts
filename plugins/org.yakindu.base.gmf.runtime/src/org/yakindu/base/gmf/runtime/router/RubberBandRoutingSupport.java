@@ -86,6 +86,20 @@ public class RubberBandRoutingSupport {
 		return constraint;
 	}
 
+	protected List<RelativeBendpoint> createConstraintAbs(Connection conn, List<PrecisionPoint> list) {
+		List<RelativeBendpoint> constraint = new ArrayList<>();
+		for (Point p : list) {
+			PrecisionPoint pRel = new PrecisionPoint(p);
+			conn.translateToParent(pRel);
+			System.out.println("rel " + pRel);
+			RelativeBendpoint relbp = new RelativeBendpoint();
+			relbp.setConnection(conn);
+			relbpUtil.forceLocation(conn, relbp, pRel.preciseX(), pRel.preciseY());
+			constraint.add(relbp);
+		}
+		return constraint;
+	}
+
 	/**
 	 * Find first intersection with target box, walking from start to end.
 	 *
@@ -289,24 +303,28 @@ public class RubberBandRoutingSupport {
 	}
 
 	protected void forceInitialLocations(ConnData cd) {
-		Object routingConstraint = cd.conn.getRoutingConstraint();
-		if (routingConstraint instanceof List) {
-			List<?> bendpointList = (List<?>) routingConstraint;
-			int index = 0;
-			for (Object bpobj : bendpointList) {
-				if (bpobj instanceof RelativeBendpoint) {
-					RelativeBendpoint relBp = (RelativeBendpoint) bpobj;
-					Point location = cd.initialBendpointLocations.get(index++);
-					relbpUtil.forceLocation(cd.conn, relBp, location.preciseX(), location.preciseY());
-				} else {
-					System.err.println("[ERR] unknown bend point " + bpobj);
-				}
-			}
-		} else if (routingConstraint != null) {
-			System.out.println("[ERR] unknown routing constraint " + routingConstraint);
-		}
-		// request visual update
-		cd.conn.invalidate();
+		List<RelativeBendpoint> constraint = createConstraint(cd.conn, cd.initialVisualPoints);
+		ConnectionRouter router = cd.conn.getConnectionRouter();
+		router.setConstraint(cd.conn, constraint);
+		router.route(cd.conn);
+//		Object routingConstraint = cd.conn.getRoutingConstraint();
+//		if (routingConstraint instanceof List) {
+//			List<?> bendpointList = (List<?>) routingConstraint;
+//			int index = 0;
+//			for (Object bpobj : bendpointList) {
+//				if (bpobj instanceof RelativeBendpoint) {
+//					RelativeBendpoint relBp = (RelativeBendpoint) bpobj;
+//					Point location = cd.initialBendpointLocations.get(index++);
+//					relbpUtil.forceLocation(cd.conn, relBp, location.preciseX(), location.preciseY());
+//				} else {
+//					System.err.println("[ERR] unknown bend point " + bpobj);
+//				}
+//			}
+//		} else if (routingConstraint != null) {
+//			System.out.println("[ERR] unknown routing constraint " + routingConstraint);
+//		}
+//		// request visual update
+//		cd.conn.invalidate();
 	}
 
 	private Rectangle getBounds(Connection conn, IFigure sourceOwner) {
