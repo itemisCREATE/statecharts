@@ -35,13 +35,6 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 	private String lastRequest = "";
 
 	@Override
-	public void activate() {
-		super.activate();
-		originalBounds = getPreferredSizeFigure().getBounds().getCopy();
-		getHostFigure().translateToAbsolute(originalBounds);
-	}
-
-	@Override
 	protected void eraseChangeBoundsFeedback(ChangeBoundsRequest request) {
 		connectionStart = true;
 		super.eraseChangeBoundsFeedback(request);
@@ -134,6 +127,9 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
 	@Override
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
+		if(originalBounds == null) {
+			updateOriginalBounds();
+		}
 		//If REQ_DROP is delivered 2 times in a row it is a "real" drop and not only a hover over existing elements in the same region
 		if (RequestConstants.REQ_DROP.equals(request.getType()) && RequestConstants.REQ_DROP.equals(lastRequest)) {
 			Rectangle rect = originalBounds.getCopy();
@@ -146,8 +142,7 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 		super.eraseChangeBoundsFeedback(request);
 		enforceConstraintForMove(request);
 		if (connectionStart) {
-			originalBounds = getPreferredSizeFigure().getBounds().getCopy();
-			getHostFigure().translateToAbsolute(originalBounds);
+			updateOriginalBounds();
 			connectionStart = false;
 		}
 		Rectangle rect = request.getTransformedRectangle(originalBounds.getCopy());
@@ -155,6 +150,11 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 		getHostFigure().setBounds(rect);
 		getHostFigure().getParent().setConstraint(getHostFigure(), rect);
 		lastRequest = (String) request.getType();
+	}
+
+	private void updateOriginalBounds() {
+		originalBounds = getPreferredSizeFigure().getBounds().getCopy();
+		getHostFigure().translateToAbsolute(originalBounds);
 	}
 
 }
