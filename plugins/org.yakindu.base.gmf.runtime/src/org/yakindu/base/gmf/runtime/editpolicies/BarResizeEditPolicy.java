@@ -35,7 +35,7 @@ public class BarResizeEditPolicy extends LiveFeedbackResizableEditPolicy {
 		return new ResizeTracker((GraphicalEditPart) getHost(), direction) {
 			@Override
 			protected void enforceConstraintsForResize(ChangeBoundsRequest request) {
-				Rectangle locationAndSize = originalBounds.getCopy();
+				Rectangle locationAndSize = getOriginalBounds();
 				
 				final Rectangle origRequestedBounds = request.getTransformedRectangle(locationAndSize);
 				final Rectangle modified = origRequestedBounds.getCopy();
