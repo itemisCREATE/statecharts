@@ -427,8 +427,12 @@ public class RubberBandRoutingSupport {
 			boolean isSelfAssoc = targetOwner == sourceOwner;
 			Rectangle sourceBox = isSelfAssoc ? targetBox : getBounds(cd.conn, sourceOwner);
 
-			cutOffEnd(list, targetBox, isSelfAssoc);
-			cutOffStart(list, sourceBox, isSelfAssoc);
+			if (!targetBox.contains(sourceBox)) {
+				cutOffEnd(list, targetBox, isSelfAssoc);
+			}
+			if (!sourceBox.contains(targetBox)) {
+				cutOffStart(list, sourceBox, isSelfAssoc);
+			}
 
 			cutOutLoops(list);
 
