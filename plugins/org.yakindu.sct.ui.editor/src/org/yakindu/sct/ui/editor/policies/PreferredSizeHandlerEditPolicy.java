@@ -56,7 +56,9 @@ public class PreferredSizeHandlerEditPolicy extends LiveFeedbackResizableEditPol
 		@Override
 		protected boolean handleButtonDown(int button) {
 			setCurrentCommand(getCommand());
+			showSourceFeedback();
 			executeCurrentCommand();
+			eraseSourceFeedback();
 			getHost().refresh();
 			return true;
 		}
