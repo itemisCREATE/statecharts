@@ -6,6 +6,10 @@ public class MaxMoveDelta {
 	public double minDeltaPos;
 	public double maxDeltaPos;
 
+	// TODO: differentiate 0 vs. non-initialized
+	private boolean isMinInit = false;
+	private boolean isMaxInit = false;
+
 	public MaxMoveDelta() {
 	}
 

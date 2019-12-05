@@ -113,11 +113,11 @@ public class ConnData {
 			double x = anchorPoint.preciseX();
 			double bx = bounds.preciseX() + SideDistance;
 			double bx2 = (bx + bounds.preciseWidth()) - SideDistance - SideDistance;
-			if (x < bx) {
-				x = bx;
+			if (x <= bx) {
+				x = bx + 1;
 			}
-			if (x > bx2) {
-				x = bx2;
+			if (x >= bx2) {
+				x = bx2 - 1;
 			}
 			return new MaxMoveDelta(false, x - bx2, x - bx);
 		} else {
@@ -125,11 +125,12 @@ public class ConnData {
 			double y = anchorPoint.preciseY();
 			double by = bounds.preciseY() + SideDistance;
 			double by2 = (by + bounds.preciseHeight()) - SideDistance - SideDistance;
-			if (y < by) {
-				y = by;
+//			System.out.println("Y at " + y + ", by=" + by + " to " + by2);
+			if (y <= by) {
+				y = by + 1;
 			}
-			if (y > by2) {
-				y = by2;
+			if (y >= by2) {
+				y = by2 - 1;
 			}
 			return new MaxMoveDelta(true, y - by2, y - by);
 		}
