@@ -49,8 +49,16 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 		return getHost().getParent().getCommand(NULL_REQUEST);
 	}
 
-	protected IFigure getPreferredSizeFigure() {
-		return getHostFigure();
+	protected Rectangle getOriginalBounds() {
+		if (originalBounds == null) {
+			updateOriginalBounds();
+		}
+		return originalBounds.getCopy();
+	}
+
+	protected void updateOriginalBounds() {
+		originalBounds = getHostFigure().getBounds().getCopy();
+		getHostFigure().translateToAbsolute(originalBounds);
 	}
 
 	@Override
@@ -93,9 +101,7 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 				final IFigure figure = getHostFigure();
 				Dimension prefSize = figure.getPreferredSize().getCopy();
 				figure.translateToAbsolute(prefSize);
-				Rectangle bounds = originalBounds.getCopy();
-				bounds = bounds.expand(-8, -8);
-				figure.translateToAbsolute(bounds);
+				Rectangle bounds = getOriginalBounds();
 				bounds = request.getTransformedRectangle(bounds);
 				if (bounds.width < prefSize.width) {
 					request.getSizeDelta().width = request.getSizeDelta().width + (prefSize.width - bounds.width);
@@ -111,7 +117,7 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 	}
 
 	protected void enforceConstraintForMove(ChangeBoundsRequest request) {
-		Rectangle relativeBounds = originalBounds.getCopy();
+		Rectangle relativeBounds = getOriginalBounds();
 		Rectangle transformed = request.getTransformedRectangle(relativeBounds);
 		getHostFigure().getParent().translateToRelative(transformed);
 		if (transformed.x < 0) {
@@ -124,15 +130,12 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 		}
 	}
 
-
 	@Override
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
-		if(originalBounds == null) {
-			updateOriginalBounds();
-		}
-		//If REQ_DROP is delivered 2 times in a row it is a "real" drop and not only a hover over existing elements in the same region
+		// If REQ_DROP is delivered 2 times in a row it is a "real" drop and not only a
+		// hover over existing elements in the same region
 		if (RequestConstants.REQ_DROP.equals(request.getType()) && RequestConstants.REQ_DROP.equals(lastRequest)) {
-			Rectangle rect = originalBounds.getCopy();
+			Rectangle rect = getOriginalBounds();
 			getHostFigure().getParent().translateToRelative(rect);
 			getHostFigure().setBounds(rect);
 			super.showChangeBoundsFeedback(request);
@@ -145,16 +148,11 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 			updateOriginalBounds();
 			connectionStart = false;
 		}
-		Rectangle rect = request.getTransformedRectangle(originalBounds.getCopy());
+		Rectangle rect = request.getTransformedRectangle(getOriginalBounds());
 		getHostFigure().getParent().translateToRelative(rect);
 		getHostFigure().setBounds(rect);
 		getHostFigure().getParent().setConstraint(getHostFigure(), rect);
 		lastRequest = (String) request.getType();
-	}
-
-	private void updateOriginalBounds() {
-		originalBounds = getPreferredSizeFigure().getBounds().getCopy();
-		getHostFigure().translateToAbsolute(originalBounds);
 	}
 
 }

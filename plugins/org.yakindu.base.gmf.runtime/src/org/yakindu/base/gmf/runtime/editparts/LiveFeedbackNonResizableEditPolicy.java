@@ -29,6 +29,14 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 	private ChangeBoundsRequest NULL_REQUEST = new ChangeBoundsRequest(REQ_MOVE_CHILDREN);
 	private String lastRequest = "";
 
+	
+	protected Rectangle getOriginalBounds() {
+		if (originalBounds == null) {
+			updateOriginalBounds();
+		}
+		return originalBounds.getCopy();
+	}
+	
 	protected void updateOriginalBounds() {
 		originalBounds = getHostFigure().getBounds().getCopy();
 		getHostFigure().translateToAbsolute(originalBounds);
@@ -36,13 +44,10 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 
 	@Override
 	protected void showChangeBoundsFeedback(ChangeBoundsRequest request) {
-		if(originalBounds == null) {
-			updateOriginalBounds();
-		}
 		// If REQ_DROP is delivered 2 times in a row it is a "real" drop and not only a
 		// hover over existing elements in the same region
 		if (RequestConstants.REQ_DROP.equals(request.getType()) && RequestConstants.REQ_DROP.equals(lastRequest)) {
-			Rectangle rect = originalBounds.getCopy();
+			Rectangle rect = getOriginalBounds();
 			getHostFigure().getParent().translateToRelative(rect);
 			getHostFigure().setBounds(rect);
 			super.showChangeBoundsFeedback(request);
@@ -55,7 +60,7 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 			updateOriginalBounds();
 			connectionStart = false;
 		}
-		Rectangle bounds = request.getTransformedRectangle(originalBounds.getCopy());
+		Rectangle bounds = request.getTransformedRectangle(getOriginalBounds());
 		getHostFigure().getParent().translateToRelative(bounds);
 		getHostFigure().setBounds(bounds);
 		getHostFigure().getParent().setConstraint(getHostFigure(), bounds);
@@ -78,7 +83,7 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 	}
 
 	protected void enforceConstraintForMove(ChangeBoundsRequest request) {
-		Rectangle relativeBounds = originalBounds.getCopy();
+		Rectangle relativeBounds = getOriginalBounds();
 		Rectangle transformed = request.getTransformedRectangle(relativeBounds);
 		getHostFigure().getParent().translateToRelative(transformed);
 		if (transformed.x < 0) {
