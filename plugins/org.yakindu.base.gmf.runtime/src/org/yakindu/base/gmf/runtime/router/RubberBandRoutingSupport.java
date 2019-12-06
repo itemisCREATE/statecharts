@@ -249,7 +249,6 @@ public class RubberBandRoutingSupport {
 					}
 				} else {
 					double reqDy = mmds[cd.sourceSideIndex].reqDelta(localDy, localDh);
-					System.out.println("source req dy = " + reqDy + ", mmd = " + mmds[cd.sourceSideIndex]);
 					if (reqDy != 0) {
 						PrecisionPoint ap = pointsCopy.get(cd.sourceAnchorIndex);
 						ap.setPreciseY(ap.preciseY() + reqDy);
@@ -282,7 +281,6 @@ public class RubberBandRoutingSupport {
 					}
 				} else {
 					double reqDy = mmds[cd.targetSideIndex].reqDelta(localDy, localDh);
-					System.out.println("target req dy = " + reqDy);
 					if (reqDy != 0) {
 						PrecisionPoint ap = pointsCopy.get(cd.targetAnchorIndex);
 						ap.setPreciseY(ap.preciseY() + reqDy);
@@ -313,24 +311,6 @@ public class RubberBandRoutingSupport {
 		ConnectionRouter router = cd.conn.getConnectionRouter();
 		router.setConstraint(cd.conn, constraint);
 		router.route(cd.conn);
-//		Object routingConstraint = cd.conn.getRoutingConstraint();
-//		if (routingConstraint instanceof List) {
-//			List<?> bendpointList = (List<?>) routingConstraint;
-//			int index = 0;
-//			for (Object bpobj : bendpointList) {
-//				if (bpobj instanceof RelativeBendpoint) {
-//					RelativeBendpoint relBp = (RelativeBendpoint) bpobj;
-//					Point location = cd.initialBendpointLocations.get(index++);
-//					relbpUtil.forceLocation(cd.conn, relBp, location.preciseX(), location.preciseY());
-//				} else {
-//					System.err.println("[ERR] unknown bend point " + bpobj);
-//				}
-//			}
-//		} else if (routingConstraint != null) {
-//			System.out.println("[ERR] unknown routing constraint " + routingConstraint);
-//		}
-//		// request visual update
-//		cd.conn.invalidate();
 	}
 
 	private Rectangle getBounds(Connection conn, IFigure sourceOwner) {
@@ -384,18 +364,18 @@ public class RubberBandRoutingSupport {
 		initDrag(originalAbs, pureTarget, false, true);
 		initDrag(originalAbs, reflexive, true, true);
 
-		if (conn.size() > 1) {
-			System.out.println("boundsAbs = " + originalAbs);
-			for (ConnData cd : conn.values()) {
-				Rectangle boundsRel = originalAbs.getCopy();
-				cd.conn.translateToRelative(boundsRel);
-				System.out.println("boundsRel = " + boundsRel);
-				cd.printPoints(cd.initialVisualPoints);
-			}
-			for (int i = 0; i < mmds.length; i++) {
-				System.out.println("mmds[" + i + "] = " + mmds[i]);
-			}
-		}
+//		if (conn.size() > 1) {
+//			System.out.println("boundsAbs = " + originalAbs);
+//			for (ConnData cd : conn.values()) {
+//				Rectangle boundsRel = originalAbs.getCopy();
+//				cd.conn.translateToRelative(boundsRel);
+//				System.out.println("boundsRel = " + boundsRel);
+//				cd.printPoints(cd.initialVisualPoints);
+//			}
+//			for (int i = 0; i < mmds.length; i++) {
+//				System.out.println("mmds[" + i + "] = " + mmds[i]);
+//			}
+//		}
 	}
 
 	private void initDrag(Rectangle originalAbs, List<Connection> connections, boolean isSource, boolean isTarget) {
@@ -430,7 +410,7 @@ public class RubberBandRoutingSupport {
 			}
 			return;
 		} else {
-			System.out.println("bounds changed " + dx + ", " + dy + ", " + dw + ", " + dh);
+//			System.out.println("bounds changed " + dx + ", " + dy + ", " + dw + ", " + dh);
 		}
 
 		for (ConnData cd : conn.values()) {
