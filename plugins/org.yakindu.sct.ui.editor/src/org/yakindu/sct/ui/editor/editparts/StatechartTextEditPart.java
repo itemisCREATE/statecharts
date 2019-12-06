@@ -27,7 +27,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.StatechartTextFigure;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
-import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * 
@@ -76,11 +75,6 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements IPrimar
 		installEditPolicy(EditPolicy.COMPONENT_ROLE, new RootComponentEditPolicy());
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy() {
-			@Override
-			protected IFigure getPreferredSizeFigure() {
-				return getChildBySemanticHint(SemanticHints.STATECHART_NAME).getFigure();
-			}
-
 		});
 	}
 

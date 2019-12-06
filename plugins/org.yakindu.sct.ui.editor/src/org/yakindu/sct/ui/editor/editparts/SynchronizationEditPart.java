@@ -39,8 +39,10 @@ public class SynchronizationEditPart extends ShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new BarResizeEditPolicy());
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
+		installEditPolicy(FixedBendpointEditPolicy.ROLE, new FixedBendpointEditPolicy());
 	}
 
 	@Override
@@ -52,11 +54,6 @@ public class SynchronizationEditPart extends ShapeNodeEditPart {
 		nodeFigure.setForegroundColor(ColorConstants.black);
 		nodeFigure.setBackgroundColor(ColorConstants.black);
 		return nodeFigure;
-	}
-
-	@Override
-	public EditPolicy getPrimaryDragEditPolicy() {
-		return new BarResizeEditPolicy();
 	}
 
 }

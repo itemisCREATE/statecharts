@@ -10,17 +10,14 @@
  */
 package org.yakindu.base.gmf.runtime.editpolicies;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.eclipse.gef.tools.ResizeTracker;
+import org.yakindu.base.gmf.runtime.editparts.LiveFeedbackResizableEditPolicy;
 
 /**
  * resize edit policy for fixed width or height.
@@ -28,73 +25,32 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
  * @author benjamin.schwertfeger@itemis.de
  * 
  */
-public class BarResizeEditPolicy extends ResizableEditPolicyEx {
+public class BarResizeEditPolicy extends LiveFeedbackResizableEditPolicy {
 
-	private final int thickness;
-
-	/**
-	 * Default thickness of 8.
-	 */
-	public BarResizeEditPolicy() {
-		thickness = 8;
-	}
-
-	public BarResizeEditPolicy(int thickness) {
-		this.thickness = thickness;
-	}
+	private static final int thickness = 8;
 
 	@Override
-	protected void showChangeBoundsFeedback(final ChangeBoundsRequest request) {
-		final IFigure feedback = getDragSourceFeedbackFigure();
+	protected ResizeTracker getResizeTracker(int direction) {
 
-		final PrecisionRectangle rect = new PrecisionRectangle(
-				getInitialFeedbackBounds().getCopy());
-		getHostFigure().translateToAbsolute(rect);
-		rect.translate(request.getMoveDelta());
-		rect.resize(request.getSizeDelta());
-		// the unchanged value can be set to zero, because
-		// the size will be recalculated later
-		checkAndPrepareConstraint(request, rect);
-
-		feedback.translateToRelative(rect);
-		feedback.setBounds(rect);
+		return new ResizeTracker((GraphicalEditPart) getHost(), direction) {
+			@Override
+			protected void enforceConstraintsForResize(ChangeBoundsRequest request) {
+				Rectangle locationAndSize = getOriginalBounds();
+				
+				final Rectangle origRequestedBounds = request.getTransformedRectangle(locationAndSize);
+				final Rectangle modified = origRequestedBounds.getCopy();
+				checkAndPrepareConstraint(request, modified);
+				Dimension newDelta = new Dimension(modified.width - locationAndSize.width,
+						modified.height - locationAndSize.height);
+				request.setSizeDelta(newDelta);
+				final Point moveDelta = request.getMoveDelta();
+				request.setMoveDelta(new Point(moveDelta.x - origRequestedBounds.x + modified.x,
+						moveDelta.y - origRequestedBounds.y + modified.y));
+			}
+		};
 	}
 
-	@Override
-	protected Command getResizeCommand(final ChangeBoundsRequest request) {
-		GraphicalEditPart editPart = (IGraphicalEditPart) getHost();
-		Rectangle locationAndSize = new PrecisionRectangle(editPart.getFigure()
-				.getBounds());
-		editPart.getFigure().translateToAbsolute(locationAndSize);
-
-		final Rectangle origRequestedBounds = request
-				.getTransformedRectangle(locationAndSize);
-		final Rectangle modified = origRequestedBounds.getCopy();
-		checkAndPrepareConstraint(request, modified);
-		// final Dimension sizeDelta = request.getSizeDelta();
-
-		Dimension newDelta = new Dimension(modified.width
-				- locationAndSize.width, modified.height
-				- locationAndSize.height);
-		// ((IGraphicalEditPart) getHost()).getFigure()
-		// .translateToAbsolute(newDelta);
-		request.setSizeDelta(newDelta);
-		final Point moveDelta = request.getMoveDelta();
-		request.setMoveDelta(new Point(moveDelta.x - origRequestedBounds.x
-				+ modified.x, moveDelta.y - origRequestedBounds.y + modified.y));
-		return super.getResizeCommand(request);
-	}
-
-	/**
-	 * Modifies the rectangle dependant of the given request and the compartment
-	 * which is a child of this host.
-	 * 
-	 * @param request
-	 * @param rect
-	 * @param c
-	 */
-	private void checkAndPrepareConstraint(final ChangeBoundsRequest request,
-			final Rectangle rect) {
+	private void checkAndPrepareConstraint(final ChangeBoundsRequest request, final Rectangle rect) {
 		GraphicalEditPart editPart = null;
 		for (Object ep : request.getEditParts()) {
 			if (editPart == null && ep instanceof GraphicalEditPart) {
@@ -102,7 +58,6 @@ public class BarResizeEditPolicy extends ResizableEditPolicyEx {
 				editPart.getFigure().translateToRelative(rect);
 			}
 		}
-
 		if (rect.width / rect.height < 1) {
 			if ((request.getResizeDirection() & PositionConstants.WEST) != 0) {
 				rect.x += rect.width - thickness;
@@ -118,7 +73,6 @@ public class BarResizeEditPolicy extends ResizableEditPolicyEx {
 		if (editPart != null) {
 			editPart.getFigure().translateToAbsolute(rect);
 		}
-		// rect.setSize(size);
 	}
 
 }

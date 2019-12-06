@@ -57,7 +57,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 	protected IMapMode getMapMode() {
 		return mapMode;
 	}
-
+	
 	private RotatableDecoration createTargetDecoration() {
 		PolygonDecoration df = new PolygonDecoration();
 		df.setFill(true);

@@ -14,11 +14,11 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
+import org.yakindu.base.gmf.runtime.editparts.LiveFeedbackNonResizableEditPolicy;
 import org.yakindu.base.gmf.runtime.editpolicies.OneWayConnectionHandlesEditPolicy;
 import org.yakindu.base.gmf.runtime.figures.EllipseAnchorDefaultSizeNodeFigure;
 import org.yakindu.sct.ui.editor.editor.figures.ExitFigure;
@@ -41,8 +41,9 @@ public class ExitEditPart extends BorderedShapeEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE, new OneWayConnectionHandlesEditPolicy(
 				HandleDirection.INCOMING));
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new LiveFeedbackNonResizableEditPolicy());
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
+		installEditPolicy(FixedBendpointEditPolicy.ROLE, new FixedBendpointEditPolicy());
 	}
 
 	@Override

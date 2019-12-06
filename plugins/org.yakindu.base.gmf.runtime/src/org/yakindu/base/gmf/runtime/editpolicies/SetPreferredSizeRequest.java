@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.policies;
+package org.yakindu.base.gmf.runtime.editpolicies;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -25,16 +25,22 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
  */
 public class SetPreferredSizeRequest extends ChangeBoundsRequest {
 
+	public SetPreferredSizeRequest(String reqResizeChildren) {
+		super(reqResizeChildren);
+	}
+
 	public SetPreferredSizeRequest(IGraphicalEditPart host) {
 		super(RequestConstants.REQ_RESIZE);
 		setEditParts(host);
 		double zoom = ((DiagramRootEditPart) host.getRoot()).getZoomManager().getZoom();
 		IFigure figure = host.getFigure();
 		Dimension prefSize = figure.getLayoutManager().getPreferredSize(figure, -1, -1).getCopy().scale(zoom);
+		prefSize.expand(8,8);
 		Dimension currentSize = figure.getSize().scale(zoom);
 		Dimension newDimension = new Dimension(prefSize.width - currentSize.width,
 				prefSize.height - currentSize.height);
 		setSizeDelta(newDimension);
 	}
+
 
 }
