@@ -88,7 +88,13 @@ The following table illustrates the differences between the previously described
 
 p=. Differences between the state machine types
 
-The examples of this article were designed with the "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now.
+The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now.
+
+Learn more about how to model your system with state machines in our free whitepaper:
+
+<a href="https://info.itemis.com/en/yakindu/state-machine/whitepaper/" class="btn btn-warning">Download Whitepaper</a>
+
+
 
 h1(#overview_what_are_yakindu_statechart_tools). What are YAKINDU Statechart Tools?
 
