@@ -17,13 +17,13 @@ Currently YAKINDU Statechart Tools support code generation for the following pro
 
 YSCT also includes a "statechart image generator":../user-guide/code_generation_generators.html#codegen_statechart_images_generator.
 
-###. CHECK: YSCT supports code generation for C, C++, Java, and statechart images.
+###. CHECK: YSCT supports code generation for C, C++, Java, Python, and statechart images.
 
 Additionally, you can install a couple of code generators from the "YAKINDU Labs update site":https://updates.yakindu.com/statecharts/labs/. To do so, select _Help → Install new software …_ in the main menu, and use "https://updates.yakindu.com/statecharts/labs/":https://updates.yakindu.com/statecharts/labs/ as the site location. The following code generators are available; click on the link to find more information about the respective generator:
 * "Swift":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-swift
 * "TypeScript":https://blogs.itemis.com/en/typescript-code-generation-with-yakindu-statechart-tools
 
-###. CHECK: YAKINDU Labs generators: Python, Swift, TypeScript
+###. CHECK: YAKINDU Labs generators: Swift, TypeScript
 
 bq. *Please note:* Code generators in YAKINDU Labs are still in their beta phase and might well contain some rough edges. If you encounter any problems, please let us know!
 
