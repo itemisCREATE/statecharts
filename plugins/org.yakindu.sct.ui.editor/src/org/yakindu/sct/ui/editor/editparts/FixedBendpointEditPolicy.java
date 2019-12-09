@@ -60,6 +60,21 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	protected void eraseChangeBoundsFeedback(ChangeBoundsRequest request) {
 		connectionStart = true;
 		router.commitBoxDrag();
+		for (ConnectionEditPart connectionEditPart : getAllConnectionParts()) {
+			List<?> children = connectionEditPart.getChildren();
+			Connection connection = connectionEditPart.getConnectionFigure();
+			for (Object child : children) {
+				if (child instanceof ExternalXtextLabelEditPart) {
+					IFigure figure = ((ExternalXtextLabelEditPart) child).getFigure();
+					Object currentConstraint = connection.getLayoutManager().getConstraint(figure);
+					if (currentConstraint instanceof EdgeLabelLocator) {
+						EdgeLabelLocator edgeLabelLocator = (EdgeLabelLocator) currentConstraint;
+						edgeLabelLocator.eraseFeedbackData();
+					}
+				}
+			}
+		}
+
 	}
 
 	@Override
@@ -140,7 +155,6 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	}
 
 	private void justKeepConnectionsInPlace(ChangeBoundsRequest request) {
-//		System.out.println("keeping them in place...");
 		if (connectionStart) {
 			IFigure figure = getHostFigure();
 			originalBounds = getHostFigure().getBounds().getCopy();
@@ -195,12 +209,9 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 	@Override
 	public void showSourceFeedback(Request request) {
 		if (RequestConstants.REQ_DROP.equals(request.getType())) {
-//			router.abortBoxDrag();
 			return;
 		}
 		if (request instanceof ChangeBoundsRequest) {
-			ChangeBoundsRequest cbr = ((ChangeBoundsRequest) request);
-//			System.out.println("CBR " + cbr.getMoveDelta() + ", " + cbr.getSizeDelta());
 			showChangeBoundsFeedback((ChangeBoundsRequest) request);
 			for (ConnectionEditPart cep : getAllConnectionParts()) {
 				showLineFeedback(cep);
