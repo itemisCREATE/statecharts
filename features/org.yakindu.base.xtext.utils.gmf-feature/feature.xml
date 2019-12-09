@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.base.xtext.utils.gmf"
       label="Xtext GMF Integration (XGI) Feature"
-      version="3.5.9.qualifier"
+      version="4.0.0.qualifier"
       provider-name="itemis AG">
 
    <description>
@@ -17,13 +17,13 @@
       %license
    </license>
 
-   <requires>
-      <import feature="org.yakindu.base.xtext.utils.jface" version="3.1.1" match="compatible"/>
-   </requires>
-   
    <url>
       <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.com/statecharts/releases/"/>
    </url>
+
+   <requires>
+      <import feature="org.yakindu.base.xtext.utils.jface" version="3.1.1" match="greaterOrEqual"/>
+   </requires>
 
    <plugin
          id="org.yakindu.base.xtext.utils.gmf"
