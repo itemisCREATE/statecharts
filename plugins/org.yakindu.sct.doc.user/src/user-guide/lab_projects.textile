@@ -7,20 +7,6 @@ Researching, prototyping, and putting our ideas into code, aside from the day-to
 
 !(small)images/lab_projects_yakindu_labs_icon.png(Lab Projects Icon)!
 
-h2(#lab_projects_python_codegen). Python code generator
-
-As Python is one of the most favoured programming languages, we have developed a code generator for Python. Read our blog article on that topic, or just try out our examples. We have also one example showing how to make the generated Python code run on a Raspberry Pi.
-
-h3(#lab_projects_python_codegen_blogs). Blog articles
-
-"Python Code Generation With YAKINDU Statechart Tools":https://blogs.itemis.com/en/python-code-generation-with-yakindu-statechart-tools
-
-h3(#lab_projects_python_codegen_examples). Examples
-
-"Traffic Light with Python":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-trafficlight-python
-
-"Traffic Light on the Raspberry Pi":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/org-yakindu-sct-examples-trafficlight-python-raspberry
-
 h2(#lab_projects_typescript_codegen). Typescript code generator
 
 The typescript code generator was developed in the context of an HMI usecase in which a car infotainment system was prototypically implemented with web technologies. The generated state machine code was seemlessly integrated into an Angular application. Read also our blog articles and import our example to learn more.
