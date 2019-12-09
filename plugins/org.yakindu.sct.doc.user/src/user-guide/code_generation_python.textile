@@ -3,8 +3,7 @@ p.
 
 h2(#codegen_python_code_generator). Python code generator
 
-State machines are a good approach to generate code for different languages based on the underlying model.
-This chapter describes the required steps for Python code generation with YAKINDU Statechart Tools. Furthermore, all components of the generated code will be described in detail and each configurable generator features will be described.
+State machines are a good approach to generate code for different languages based on the underlying model. This chapter describes the required steps for Python code generation with YAKINDU Statechart Tools. Furthermore, all components of the generated code will be described in detail and each configurable generator features will be described.
 
 p. 
 Table of content:
@@ -19,8 +18,7 @@ Table of content:
 
 h3(#codegen_python_example_model). Python example model
 
-For documentation purpose this simple example will be used to explain the code generation, the generated code and the code output.
-The example model has two states:
+For documentation purpose this simple example will be used to explain the code generation, the generated code and the code output. The example model has two states:
 * The "on" button turns on the light and, upon repeated pushing, turn the brightness higher until the latter's maximum is reached.
 * The "off" button turns off the light.
 
@@ -281,12 +279,12 @@ p.
 
 h4(#codegen_operation_callbacks). Serving Operation Callbacks
 
-YAKINDU Statechart Tools support _operations_ that are executed by a state machine as actions, but are implemented by client-side code.
+YAKINDU Statechart Tools supports _operations_ that are executed by a state machine as actions, but are implemented by client-side code.
 As a simple example a function __myOp__ can be defined in the definition section of the __LightSwitch__ example:
 
 bc.. 
-	interface:
-	operation myOp()
+interface:
+operation myOp()
 p. 
 
 Calling the operation __myOp__ in the __On__ state of the __LightSwitch__ example generates following operation call:
@@ -409,16 +407,17 @@ if __name__ == "__main__":
 	sr.run()
 	sr.shutdown()
 p. 
+/org.yakindu.sct.doc.user/src/user-guide/code_generation_intro.textile
 
 h3(#codegen_python_code_generator_features). Python code generator features
 
-Beside the general code generator features (link), there are language specific generator features, which are listed in the following chapter.
+Beside the "*general code generator features,*":../user-guide/code_generation_intro.html#codegen_configuring_a_generator there are language specific generator features, which are listed in the following chapter.
 
 h4(#codegen_python_pypackaging_feature). PyPackaging feature
 
 ==<!-- Start sgen_feature_pypackaging -->==
 
-The *PyPackaging* feature allows the configuration of ......:
+The *PyPackaging* feature allows the configuration of:
 
 * _CreateFiles_ (Boolean, optional): Specifies whether to generate a _setup.py_ file.
 * _Author_ (String, optional): Defines the author name.
