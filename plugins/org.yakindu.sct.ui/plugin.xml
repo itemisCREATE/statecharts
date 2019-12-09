@@ -25,6 +25,7 @@
       
          <newWizardShortcut id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"></newWizardShortcut>
          <newWizardShortcut id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard"></newWizardShortcut>
+         <newWizardShortcut id="org.yakindu.sct.ui.wizards.NewStatechartProjectWizard"></newWizardShortcut>
          
          <hiddenMenuItem id="org.eclipse.e4.ui.importer.openDirectory.menu"></hiddenMenuItem>
          <hiddenMenuItem id="properties"></hiddenMenuItem>
