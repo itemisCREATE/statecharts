@@ -144,6 +144,9 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	override dispatch CharSequence code(EnterState it) '''
 		«STATEVECTOR»[«state.stateVector.offset»] = «state.shortName»;
 		«STATEVECTOR_POS» = «state.stateVector.offset»;
+		«IF flow.statechart.isSuperStep» 
+		«STATEVECTOR_CHANGED» = true;
+		«ENDIF»
 	'''
 
 	override dispatch CharSequence code(ExitState it) '''

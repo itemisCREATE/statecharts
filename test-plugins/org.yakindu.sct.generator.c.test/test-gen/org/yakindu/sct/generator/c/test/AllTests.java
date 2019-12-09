@@ -91,7 +91,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	ValuedEventsTest.class,
 	TypeAliasTest.class,
 	StatemachineKeywords.class,
-	TimedTransitionsTest.class
+	TimedTransitionsTest.class,
+	CycleBasedSuperStepTest.class,
+	EventDrivenSuperStepTest.class
 })
 public class AllTests {
 }

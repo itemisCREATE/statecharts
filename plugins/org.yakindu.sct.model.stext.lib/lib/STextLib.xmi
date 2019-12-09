@@ -11,11 +11,12 @@
   <member xsi:type="types:AnnotationType"
       name="CycleBased">
     <properties
-        name="period">
-    </properties>
+        name="period"/>
   </member>
   <member xsi:type="types:AnnotationType"
       name="ChildFirstExecution"/>
   <member xsi:type="types:AnnotationType"
       name="ParentFirstExecution"/>
+  <member xsi:type="types:AnnotationType"
+      name="SuperStep"/>
 </types:Package>

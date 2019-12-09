@@ -23,7 +23,7 @@ public class EventDrivenTriggeredByEvent extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByEvent.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void internalEventTriggersRunCycle() throws Exception {
@@ -41,7 +41,7 @@ public class EventDrivenTriggeredByEvent extends AbstractExecutionFlowTest {
 	public void proceedTimeDoesNotTriggerRunCycle() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		timer.timeLeap(120000);
+		timer.timeLeap(120l*1000l);
 		assertTrue(getInteger("x") == 0l);
 		interpreter.exit();
 	}

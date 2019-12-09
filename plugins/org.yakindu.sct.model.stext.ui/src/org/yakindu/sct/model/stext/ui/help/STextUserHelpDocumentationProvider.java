@@ -13,6 +13,7 @@ package org.yakindu.sct.model.stext.ui.help;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.utils.jface.help.AbstractUserHelpDocumentationProvider;
 
 /**
@@ -30,15 +31,30 @@ public class STextUserHelpDocumentationProvider extends
 	
 	public String getDocumentation(EObject o) {
 		if (o instanceof Keyword) {
-			String name = CONTEXT_ID + "_" + ((Keyword) o).getValue();
-			String helpContent = getHelp(PLUGIN_ID + "." + CONTEXT_ID);
-			int beginIndex = helpContent.indexOf("<!-- Start " + name + " -->");
-			int endIndex = helpContent.indexOf("<!-- End " + name + " -->");
-			if (beginIndex >= 0 && endIndex >= 0 && endIndex > beginIndex) {
-				return helpContent.substring(beginIndex, endIndex);
-			}
+			return getHelpText(getHelpId((Keyword) o));
+		}
+		if (o instanceof AnnotationType) {
+			return getHelpText(getHelpId((AnnotationType) o));
 		}
 		return EMPTY_DOCUMENTATION;
+	}
+
+	protected String getHelpText(String name) {
+		String helpContent = getHelp(PLUGIN_ID + "." + CONTEXT_ID);
+		int beginIndex = helpContent.indexOf("<!-- Start " + name + " -->");
+		int endIndex = helpContent.indexOf("<!-- End " + name + " -->");
+		if (beginIndex >= 0 && endIndex >= 0 && endIndex > beginIndex) {
+			return helpContent.substring(beginIndex, endIndex);
+		}
+		return EMPTY_DOCUMENTATION;
+	}
+	
+	protected String getHelpId(Keyword keyword) {
+		return CONTEXT_ID + "_" + keyword.getValue();
+	}
+	
+	protected String getHelpId(AnnotationType annot) {
+		return CONTEXT_ID + "_" + annot.getName().toLowerCase();
 	}
 
 }

@@ -1,0 +1,51 @@
+testclass CycleBasedSuperStep for statechart supersteps.CycleBasedSuperStep {
+	
+	@Test
+	operation superStepTakesTwoTransitionsUsingSameEvent() {
+		enter
+		
+		assert active(supersteps.CycleBasedSuperStep.main_region.A)
+
+		raise e
+		proceed 1 cycle
+		
+		assert active(supersteps.CycleBasedSuperStep.main_region.C)
+		
+		exit
+	}
+	
+	@Test
+	operation superStepIteratesUsingAlwaysTrigger() {
+		enter
+		
+		raise f
+		proceed 1 cycle
+		
+		assert active(supersteps.CycleBasedSuperStep.main_region.I)
+		assert x==0
+		
+		exit
+		
+	}
+	
+	@Test
+	operation superStepIteratesUsingSameEventAndGuard() {
+		enter
+		
+		assert active(supersteps.CycleBasedSuperStep.main_region.A)
+
+		raise e
+		proceed 1 cycle
+		
+		assert active(supersteps.CycleBasedSuperStep.main_region.C)
+		assert x==42
+		
+		raise f
+		proceed 1 cycle
+		
+		assert active(supersteps.CycleBasedSuperStep.main_region.I)
+		assert x==0
+		
+		exit
+	}
+}

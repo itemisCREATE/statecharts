@@ -29,7 +29,7 @@ public class TimedTransitions extends AbstractExecutionFlowTest {
 	public void timer01() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("Start"));
-		timer.timeLeap(2030);
+		timer.timeLeap(2030l);
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("End"));
 	}
@@ -37,16 +37,16 @@ public class TimedTransitions extends AbstractExecutionFlowTest {
 	public void timer02() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("Start"));
-		timer.timeLeap(2000);
+		timer.timeLeap(2l*1000l);
 		assertTrue(isStateActive("End"));
 	}
 	@Test
 	public void noAdditionalCycle() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("Start"));
-		timer.timeLeap(1950);
+		timer.timeLeap(1950l);
 		assertTrue(isStateActive("Start"));
-		timer.timeLeap(100);
+		timer.timeLeap(100l);
 		assertTrue(isStateActive("End"));
 	}
 	@Test
@@ -55,13 +55,13 @@ public class TimedTransitions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("Start"));
 		assertTrue((getInteger("cycles") == 0l));
 		assertTrue((getInteger("seconds") == 0l));
-		timer.timeLeap(100);
+		timer.timeLeap(100l);
 		assertTrue((getInteger("cycles") == 0l));
 		assertTrue((getInteger("seconds") == 0l));
-		timer.timeLeap(100);
+		timer.timeLeap(100l);
 		assertTrue((getInteger("cycles") == 1l));
 		assertTrue((getInteger("seconds") == 0l));
-		timer.timeLeap(800);
+		timer.timeLeap(800l);
 		assertTrue((getInteger("cycles") == 5l));
 		assertTrue((getInteger("seconds") == 1l));
 	}

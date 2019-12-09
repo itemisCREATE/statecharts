@@ -144,6 +144,8 @@ h3(#simu_controlling_a_simulation). Controlling a simulation
 * To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/symbol_suspend.png(Symbol: Suspend)!.
 * To resume a suspended simulation, click on the _Resume_ button !(inlinemediaobject)images/symbol_resume.png(Symbol: Resume)!.
 * Use the _Step Over_ button !(inlinemediaobject)images/symbol_stepover.png(Symbol: Step Over)! to execute a single run-to-completion step.
+* To terminate the current simulation and run it again from the start, use the _Terminate and Relaunch_ button !(inlinemediaobject)images/symbol_terminate_relaunch.png(Symbol: Terminate and Relaunch)!.
+* To start a new simulation while keeping the current one active, use the _Restart_ button !(inlinemediaobject)images/symbol_restart.png(Symbol: Restart)!. 
 
 
 

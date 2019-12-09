@@ -23,7 +23,7 @@ public class TransitionHandlesMultipleExists extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("exits/TransitionHandlesMultipleExits.sct");
-		initInterpreter(flow);
+		initInterpreter(flow, true);
 	}
 	@Test
 	public void testTransitionHandling2Of2Exits() throws Exception {

@@ -21,12 +21,14 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class ConstructorProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension CLiterals
+	@Inject protected extension StatechartAnnotations
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -52,6 +54,7 @@ class ConstructorProvider implements ISourceFragment {
 		if(timed) toInit.add(timerInstance, NULL_LITERAL)
 		if(entry.tracingUsed) toInit.add(tracingInstance, "0")
 		toInit.add(STATEVECTOR_POS, "0")
+		if(statechart.isSuperStep) toInit.add(STATEVECTOR_CHANGED, "false")
 		interfaces.forEach[
 			toInit.add(instance, "")
 			if(hasOperations && !entry.useStaticOPC) {
@@ -65,6 +68,7 @@ class ConstructorProvider implements ISourceFragment {
 		val List<Pair<String, String>> toInit = newArrayList
 		if(timed) toInit.add(timerInstance, '''rhs.«timerInstance»''')
 		toInit.add(STATEVECTOR_POS, '''rhs.«STATEVECTOR_POS»''')
+		if(statechart.isSuperStep) toInit.add(STATEVECTOR_CHANGED, '''rhs.«STATEVECTOR_CHANGED»''')
 		interfaces.forEach[
 			toInit.add(instance, '''rhs.«instance»''')
 			if(hasOperations && !entry.useStaticOPC) {
