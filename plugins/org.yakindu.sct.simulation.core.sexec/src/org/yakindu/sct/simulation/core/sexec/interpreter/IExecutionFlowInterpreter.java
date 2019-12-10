@@ -35,5 +35,7 @@ public interface IExecutionFlowInterpreter {
 	public boolean isActive();
 	
 	public boolean isFinal();
+	
+	public ExecutionContext getExecutionContext();
 
 }

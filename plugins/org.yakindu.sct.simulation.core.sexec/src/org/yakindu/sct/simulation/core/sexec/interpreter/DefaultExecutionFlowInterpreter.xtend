@@ -56,7 +56,6 @@ import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
  * @author axel terfloth - minimized changes on execution context
  * 
  */
-@Singleton
 class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEventRaiser {
 
 	@Data static class Event {
@@ -360,5 +359,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			}
 			return true;
 		}
+	}
+	
+	override getExecutionContext(){
+		executionContext
 	}
 }
