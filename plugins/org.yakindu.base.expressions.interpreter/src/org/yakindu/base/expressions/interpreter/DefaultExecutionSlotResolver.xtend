@@ -72,7 +72,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		}
 		//Multi-SM
 		if(featureSlot.get instanceof ExecutionContext){
-			return packageNamespaceAwareResolve(context, e.feature)
+			return packageNamespaceAwareResolve(featureSlot.get as ExecutionContext, e.feature)
 		}
 		return resolveFromSlot(featureSlot.get, e)
 	}
