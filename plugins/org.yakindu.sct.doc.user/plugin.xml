@@ -19,6 +19,7 @@
         <toc file="help/user-guide/code_generation_c-toc.xml" primary="false"/>
         <toc file="help/user-guide/code_generation_cpp-toc.xml" primary="false"/>
         <toc file="help/user-guide/code_generation_java-toc.xml" primary="false"/>
+        <toc file="help/user-guide/code_generation_python-toc.xml" primary="false"/>
         <toc file="help/user-guide/code_generation_statechart_image-toc.xml" primary="false"/>
         <toc file="help/user-guide/generating_code_headless-toc.xml" primary="false"/>
         <toc file="help/user-guide/sctunit-toc.xml" primary="false"/>

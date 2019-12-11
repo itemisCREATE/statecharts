@@ -13,6 +13,7 @@
 	        <link toc="help/user-guide/code_generation_c-toc.xml"/>
 	        <link toc="help/user-guide/code_generation_cpp-toc.xml"/>
 	        <link toc="help/user-guide/code_generation_java-toc.xml"/>
+	        <link toc="help/user-guide/code_generation_python-toc.xml"/>
 	        <link toc="help/user-guide/code_generation_statechart_image-toc.xml"/>
 	        <link toc="help/user-guide/generating_code_headless-toc.xml"/>
 	    </topic>

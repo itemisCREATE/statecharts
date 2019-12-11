@@ -1,0 +1,451 @@
+
+p. 
+
+h2(#codegen_python_code_generator). Python code generator
+
+State machines are a good approach to generate code for different languages based on the underlying model. This chapter describes the required steps for Python code generation with YAKINDU Statechart Tools. Furthermore, all components of the generated code will be described in detail and each configurable generator feature will be explained.
+
+p. 
+Table of content:
+* "*Python example model*":../user-guide/code_generation_python.html#codegen_python_python_example_model
+* "*Generate Python code*":../user-guide/code_generation_python.html#codegen_python_generate_python_code
+** "*Generated files*":../user-guide/code_generation_python.html#codegen_python_generated_files
+** "*Serving Operation Callbacks*":../user-guide/code_generation_python.html#codegen_python_serving_operation_callbacks
+** "*Time-controlled state machines*":../user-guide/code_generation_python.html#codegen_python_time_controlled_state_machines
+** "*Runtime template*":../user-guide/code_generation_python.html#codegen_python_runtime_template
+* "*Python code generator features*":../user-guide/code_generation_python.html#codegen_python_python_code_generator_features
+** "*PyPackaging*":../user-guide/code_generation_python.html#codegen_python_pypackaging_feature
+
+h3(#codegen_python_python_example_model). Python example model
+
+For documentation purpose this simple example will be used to explain the code generation, the generated code and the code output. The example model has two states:
+* The "on" button turns on the light and, upon repeated pushing, turn the brightness higher until the latter's maximum is reached.
+* The "off" button turns off the light.
+
+The 'Python Code Generation' example can be found in the example wizard:
+__File__ -> __New__ -> __Example...__ -> __YAKINDU Statechart Examples__ -> __Getting Started - Code Generation__ -> __Python Code Generation__
+
+!images/codegen_example_model.png(Python example model)!
+
+p=. Python example model
+
+
+h3(#codegen_python_generate_python_code). Generate Python code
+
+p. 
+Generating Python code from a statechart requires a generator file. It must at least specify the __yakindu::python__ generator model, reference a statechart and define the __targetProject__ and __targetFolder__ in the __Outlet__ feature. By specifying these attributes, python state machine code can be generated.
+
+==<div class="example">==
+
+Example:
+
+bc.. 
+GeneratorModel for yakindu::python {
+
+	statechart LightSwitch {
+
+		feature Outlet {
+			targetProject = "org.yakindu.examples.python.lightswitch"
+			targetFolder = "src-gen"
+		}
+	}
+}
+p. 
+
+==</div>==
+
+
+h4(#codegen_python_generated_files). Generated files
+
+Depending on the state machine and the configuration, python state machine code will be generated. Without any features the basic variant is splitted up into two parts. An interface and the state machine implementation.
+
+The client code can read and write state machine variables and raise state machine events. In a YAKINDU statechart, variables and events are contained in so-called interfaces. There can be at most one default, unnamed interface plus zero or more named interfaces. According to the example, this is the generated class for the "user" interface:
+
+bc.. 
+"""Interfaces defined in the state chart model.
+
+The interfaces defined in the state chart model are represented
+as separate classes.
+
+"""
+
+class SCI_user:
+
+	"""Implementation of scope sci_user.
+	"""
+	
+	def __init__(self, statemachine):
+		self.on_button = None
+		self.off_button = None
+		self.brightness = None
+		self.statemachine = statemachine
+	
+	
+	
+	def raise_on_button(self):
+		self.on_button = True
+		self.statemachine.run_cycle()
+		
+	def raise_off_button(self):
+		self.off_button = True
+		self.statemachine.run_cycle()
+		
+	def clear_events(self):
+		self.on_button = False
+		self.off_button = False
+		
+
+
+p. 
+
+The generated code contains fundamental methods to initialize, enter, and exit a state machine, as well as a method to execute a run-to-completion step.
+* The init() method is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines any initialized variables, these initializations are also done in the init() method.
+* The enter() method must be called to enter the state machine. It brings the state machine to a well-defined state.
+* The exit() method is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via exit(). Re-entering it via enter() continues to work with the saved state.
+* The runCycle() method is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:
+** Clear the list of outgoing events.
+** Check whether any events have occurred which are leading to a state change.
+** If a state change has to be done:
+*** Make the present state inactive.
+*** Execute exit actions of the present state.
+*** Save history state, if necessary.
+*** Execute transition actions, if any.
+*** Execute entry actions of the new state.
+*** Make the new state active.
+** Clear the list of incoming events.
+
+
+
+bc.. 
+# Implementation of statechart lightswitch_statemachine.
+
+import warnings
+# implemented interfaces:
+from .lightswitch_statemachine_interfaces import SCI_user
+# to store states:
+from enum import Enum
+
+class LightSwitch:
+
+	"""
+	
+	Implementation of the state machine 'LightSwitch'.
+	
+	"""
+	
+	def __init__(self):
+		""" Declares all necessary variables including list of states, histories etc. 
+		"""
+		self.sci_user = SCI_user(self)
+		self.initialized = False
+		self.state_vector = [None] * 1		
+		self.next_state_index = None		
+		# enumeration of all states:
+		self.State = Enum('State', '\
+		main_region_off,\
+		main_region_on,\
+		null_state')
+	
+	def init(self):
+		"""	Initializes the state machine by checking the timer, 
+		initializing states and clearing events.
+		"""
+		self.initialized = True
+		for state_index in range(1):
+			self.state_vector[state_index] = self.State.null_state
+		self._clear_events()
+		self.sci_user.brightness = 0
+	
+	def enter(self):
+		if self.initialized is not True:
+			raise ValueError(
+					'The state machine needs to be initialized first by calling the init() function.')
+		self.enter_sequence_main_region_default()
+	
+	def exit(self):
+		"""	Exit the the state machine.
+		"""
+		self.exit_sequence_main_region()
+	
+	def is_active(self):
+		""" @see IStatemachine#is_active()
+		"""
+		return (self.state_vector[0] is not self.State.null_state)
+	
+	def is_final(self):
+		"""Always returns 'false' since this state machine can never become final.
+		@see IStatemachine#is_final()
+		"""
+		return False
+			
+	def _clear_events(self):
+		""" Resets incoming events (time events included).
+		"""
+		self.sci_user.clear_events()
+	
+	def is_state_active(self, state):
+		""" Returns True if the given state is currently active otherwise false.
+		"""
+		s = state.name
+		if s == 'main_region_off':
+			return self.state_vector[0] == self.State.main_region_off
+		elif s == 'main_region_on':
+			return self.state_vector[0] == self.State.main_region_on
+		else:
+			return False
+	
+	def entry_action_main_region_off(self):
+		self.sci_user.brightness = 0
+		
+	def enter_sequence_main_region_off_default(self):
+		self.entry_action_main_region_off()
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.main_region_off
+		
+	def enter_sequence_main_region_on_default(self):
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.main_region_on
+		
+	def enter_sequence_main_region_default(self):
+		self.react_main_region__entry_default()
+		
+	def exit_sequence_main_region_off(self):
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.null_state
+		
+	def exit_sequence_main_region_on(self):
+		self.next_state_index = 0
+		self.state_vector[0] = self.State.null_state
+		
+	def exit_sequence_main_region(self):
+		state = self.state_vector[0].name
+		if state == 'main_region_off':
+			self.exit_sequence_main_region_off()		
+		elif state == 'main_region_on':
+			self.exit_sequence_main_region_on()
+		
+	def react_main_region__entry_default(self):
+		self.enter_sequence_main_region_off_default()
+		
+	def react(self):
+		return False
+	
+	
+	def main_region_off_react(self,  try_transition):
+		did_transition = try_transition
+		
+		if try_transition:
+			if (self.react()) == False:
+				if self.sci_user.on_button:
+					self.exit_sequence_main_region_off()
+					self.sci_user.brightness = 1
+					self.enter_sequence_main_region_on_default()
+				else:
+					did_transition = False
+		
+		return did_transition
+	
+	
+	def main_region_on_react(self,  try_transition):
+		did_transition = try_transition
+		
+		if try_transition:
+			if (self.react()) == False:
+				if self.sci_user.off_button:
+					self.exit_sequence_main_region_on()
+					self.enter_sequence_main_region_off_default()
+				elif ((self.sci_user.on_button) and ((self.sci_user.brightness) < 10)):
+					self.exit_sequence_main_region_on()
+					self.sci_user.brightness = self.sci_user.brightness + 1
+					self.enter_sequence_main_region_on_default()
+				else:
+					did_transition = False
+		
+		return did_transition
+	
+	
+	def run_cycle(self):
+		""" Starts a cycle in the state machine. 
+		"""
+		if self.initialized is not True:
+			raise ValueError(
+					'The state machine needs to be initialized first by calling the init() function.')
+		self.next_state_index = 0
+		while self.next_state_index < len(self.state_vector):
+			if self.state_vector[self.next_state_index].name == 'main_region_off' :
+				self.main_region_off_react(True)
+			elif self.state_vector[self.next_state_index].name == 'main_region_on' :
+				self.main_region_on_react(True)
+			self.next_state_index += 1
+			
+		self._clear_events()
+
+p. 
+
+h4(#codegen_python_serving_operation_callbacks). Serving Operation Callbacks
+
+YAKINDU Statechart Tools supports _operations_ that are executed by a state machine as actions, but are implemented by client-side code.
+As a simple example a function __myOp__ can be defined in the definition section of the __LightSwitch__ example:
+
+bc.. 
+interface:
+operation myOp()
+p. 
+
+Calling the operation __myOp__ in the __On__ state of the __LightSwitch__ example generates following operation call:
+
+bc.. 
+def entry_action_main_region_on(self):
+	self.sci_interface.operationCallback.myOp()
+p. 
+
+The operation callback must be set through the state machine's API. At first, the Callback must be implemented:
+
+bc.. 
+class Callback
+	def _init_(self):
+		#empty constructor
+		pass
+	
+	def myOp(self):
+		print('Operation myOp has been called by the state machine')
+p. 
+
+After this, the callback must be set while before running the state machine. This could be realized like this:
+
+bc.. 
+class Main:
+    def __init__(self):
+        self.sm = LightSwitch()
+        self.cb = Callback()
+
+    def setup(self):
+        self.sm.sci_interface.operationCallback = self.cb
+        self.sm.init()
+        self.sm.enter()
+p. 
+
+h4(#codegen_python_time_controlled_state_machines). Time-controlled state machines
+
+State machines using timed triggers, for example __after 10 s__, are timed and need a timer service. The timer service needs to be set by the client code before entering the state machine.
+
+h5(#codegen_timer). DefaultTimer
+
+The python code generator comes with a timer out of the box. To generate the default timer, the property __DefaultTimer__ can be set in __GeneralFeatures__.
+
+bc.. 
+feature GeneralFeatures {
+	DefaultTimer = true
+}
+p. 
+
+Activating this feature provides a generated timer implementation ready to use for timed state machines. To use the timer, create an instance and hand it over using the state machine's API.
+
+bc.. 
+
+from lightswitch.timer.sct_timer import Timer
+
+class Main:
+    def __init__(self):
+        self.sm = LightSwitch()
+        self.ti = Timer()
+
+    def setup(self):
+        self.sm.set_timer(self.ti)
+        self.sm.init()
+        self.sm.enter()
+p. 
+
+h4(#codegen_python_runtime_template). Runtime template
+
+The python code generator comes with a runtime service template. To generate it, set the __RuntimeTemplate__ flag in __GeneralFeatures__.
+
+bc.. 
+feature GeneralFeatures {
+	RuntimeTemplate = true
+}
+
+p. 
+
+Activating the runtime template feature generates a __default_runtime.py__ file, which supports basic functionalities to run a state machine. Custom code for use case depending projects can be added at the commented areas. Calling the state machine using the template ensures initializing and entering the state machine. After this, the state machine will be called in a __while True__ loop:
+
+bc.. 
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from lightswitch.lightswitch_statemachine import LightSwitch
+
+class LightSwitchRuntime:
+	
+	def __init__(self):
+		self.sm = LightSwitch()
+		# Enter custom init code here..
+		
+		
+	"""
+	Enter custom methods here..
+	"""
+	
+	
+	def setup(self):
+		""" Get statemachine ready and enter it.
+		"""
+		self.sm.init()
+		self.sm.enter()
+		
+	def run(self):
+		""" Include your interface actions here
+		"""
+		while True:
+			# enter what you like to do
+			self.sm.run_cycle()
+		
+	def shutdown(self):
+		""" Unset timer and exit statemachine.
+		"""
+		print('State machine shuts down.')
+		self.sm.exit()
+		print('Bye!')
+		
+		
+if __name__ == "__main__":
+	sr = LightSwitchRuntime()
+	sr.setup()
+	sr.run()
+	sr.shutdown()
+p. 
+
+h3(#codegen_python_python_code_generator_features). Python code generator features
+
+Beside the "*general code generator features,*":../user-guide/code_generation_intro.html#codegen_configuring_a_generator there are language specific generator features, which are listed in the following chapter.
+
+h4(#codegen_python_pypackaging_feature). PyPackaging feature
+
+==<!-- Start sgen_feature_pypackaging -->==
+
+Using the *PyPackaging* feature allows the user to specify a __setup.py__ file, which can be used for packaging. The *PyPackaging* feature allows the configuration of:
+
+* _CreateFiles_ (Boolean, optional): Specifies whether to generate a _setup.py_ file.
+* _Author_ (String, optional): Defines the author name.
+* _Version_ (String, optional): Defines the version number.
+* _ShortDescription_ (String, optional): Defines the description.
+* _License_ (String, optional): Defines the license.
+* _URL_ (String, optional): Defines the URL.
+
+
+==<div class="example">==
+
+Example:
+
+bc. 	
+feature PyPackaging {
+	CreateFiles = false
+	Author = "admin"
+	Version = "0.0.1"
+	ShortDescription = "Some description"
+	License = "WTFPL"
+	URL = "www.your-homepage.com"
+	}
+}
+
+==</div>==
+
