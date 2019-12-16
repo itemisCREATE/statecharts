@@ -215,6 +215,9 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	 */
 	@Override
 	public Annotation getAnnotationOfType(final String typeName) {
+		if(getAnnotationInfo() == null) {
+			return null;
+		}
 		EList<Annotation> annotations = getAnnotationInfo().getAnnotations();
 		for (Annotation annotation : annotations) {
 			if (typeName.equals(annotation.getType().getName())) {

@@ -29,7 +29,6 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.naming.StextNameProvider
@@ -136,6 +135,10 @@ class Naming {
 	def dispatch instance(InterfaceScope it) {
 		'iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
+	
+	def dispatch String instance(Void it) {
+		'''null :/'''
+	}
 
 	def dispatch instance(Scope it) {
 		'timeEvents'
@@ -155,7 +158,8 @@ class Naming {
 	}
 
 	protected def boolean isUniqueName(Scope scope, Declaration decl) {
-		(scope.eContainer as ScopedElement).scopes.map[declarations].flatten.filter[it.name == decl.name].size == 1
+		true
+		//(scope.eContainer as ScopedElement).scopes.map[declarations].flatten.filter[it.name == decl.name].size == 1
 	}
 
 	def functionPrefix(ExecutionFlow it) {
@@ -378,6 +382,8 @@ class Naming {
 	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
 
 	def dispatch access(EObject it) '''#error cannot access elements of type «getClass().name»'''
+	
+	def dispatch access (Void it) '''null :('''
 
 	def valueAccess(Event it) '''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
 
