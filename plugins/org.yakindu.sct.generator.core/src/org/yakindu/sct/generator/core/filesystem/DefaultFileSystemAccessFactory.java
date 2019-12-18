@@ -16,10 +16,12 @@ import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.LIB
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
 import java.io.File;
+import java.nio.file.FileSystemAlreadyExistsException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.yakindu.sct.generator.core.console.IConsoleLogger;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -32,6 +34,8 @@ import com.google.inject.Provider;
  * 
  */
 public class DefaultFileSystemAccessFactory {
+	@Inject
+	protected IConsoleLogger logger;
 
 	@Inject
 	protected Provider<ISCTFileSystemAccess> fileSystemProvider;
@@ -90,7 +94,7 @@ public class DefaultFileSystemAccessFactory {
 		if (uri.isFile()) {
 			File file = new File(uri.path());
 			if (!file.canWrite()) {
-				throw new IllegalStateException("Folder '" + folderName + "' is not accessable.");
+				logger.log(String.format("Can not generated files to read-only folder '%s'. ", folderName));
 			}
 
 		}
