@@ -10,7 +10,6 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.IFigure;
@@ -38,7 +37,8 @@ import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import org.yakindu.base.xtext.utils.gmf.routing.EdgeLabelLocator;
 import org.yakindu.sct.ui.editor.commands.SetConnectionBendpointsAndLabelCommmand;
 
-import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+
 
 public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 
@@ -226,13 +226,13 @@ public class FixedBendpointEditPolicy extends GraphicalEditPolicy {
 			ChangeBoundsRequest request) {
 		if (request.getEditParts() == null)
 			return allConnectionParts;
-		List<ConnectionEditPart> result = allConnectionParts.stream().filter(new Predicate<ConnectionEditPart>() {
-			@Override
-			public boolean apply(ConnectionEditPart input) {
-				return !(request.getEditParts().contains(input.getTarget())
-						&& request.getEditParts().contains(input.getSource()));
+		List<ConnectionEditPart> result = Lists.newArrayList();
+		for (ConnectionEditPart input : allConnectionParts) {
+			if(!(request.getEditParts().contains(input.getTarget())
+					&& request.getEditParts().contains(input.getSource()))) {
+				result.add(input);
 			}
-		}).collect(Collectors.toList());
+		}
 		return result;
 	}
 }
