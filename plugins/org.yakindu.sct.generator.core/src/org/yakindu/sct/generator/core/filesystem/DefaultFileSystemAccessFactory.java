@@ -15,6 +15,9 @@ import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.API
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.LIBRARY_TARGET_FOLDER_OUTPUT;
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
+import java.io.File;
+
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
@@ -51,16 +54,20 @@ public class DefaultFileSystemAccessFactory {
 	}
 
 	protected void initDefaultOutput(ISCTFileSystemAccess access, GeneratorEntry entry) {
+		String folderName = helper.getTargetFolderValue(entry).getStringValue();
 		access.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
 				helper.getTargetFolderValue(entry).getStringValue());
 		access.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
+		checkWriteAccess(access, IFileSystemAccess.DEFAULT_OUTPUT, folderName);
 	}
 
 	protected void initLibraryTargetFolder(ISCTFileSystemAccess access, GeneratorEntry entry) {
 		FeatureParameterValue libraryTargetFolderValue = helper.getLibraryTargetFolderValue(entry);
 		if (libraryTargetFolderValue != null) {
+			String folderName = libraryTargetFolderValue.getStringValue();
 			access.setOutputPath(LIBRARY_TARGET_FOLDER_OUTPUT, libraryTargetFolderValue.getStringValue());
 			OutputConfiguration output = access.getOutputConfigurations().get(LIBRARY_TARGET_FOLDER_OUTPUT);
+			checkWriteAccess(access, LIBRARY_TARGET_FOLDER_OUTPUT, folderName);
 			output.setCreateOutputDirectory(true);
 			output.setCanClearOutputDirectory(false);
 			output.setOverrideExistingResources(false);
@@ -70,9 +77,22 @@ public class DefaultFileSystemAccessFactory {
 	protected void initApiTargetFolder(ISCTFileSystemAccess access, GeneratorEntry entry) {
 		FeatureParameterValue apiTargetFolderValue = helper.getApiTargetFolderValue(entry);
 		if (apiTargetFolderValue != null) {
-			access.setOutputPath(API_TARGET_FOLDER_OUTPUT, apiTargetFolderValue.getStringValue());
+			String folderName = apiTargetFolderValue.getStringValue();
+			access.setOutputPath(API_TARGET_FOLDER_OUTPUT, folderName);
 			OutputConfiguration output = access.getOutputConfigurations().get(API_TARGET_FOLDER_OUTPUT);
+			checkWriteAccess(access, API_TARGET_FOLDER_OUTPUT, folderName);
 			output.setCreateOutputDirectory(true);
+		}
+	}
+	
+	private void checkWriteAccess(ISCTFileSystemAccess access, String outputConfiguration, String folderName) {
+		URI uri = access.getURI("", outputConfiguration);
+		if (uri.isFile()) {
+			File file = new File(uri.path());
+			if (!file.canWrite()) {
+				throw new IllegalStateException("Folder '" + folderName + "' is not accessable.");
+			}
+
 		}
 	}
 }
