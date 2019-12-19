@@ -786,7 +786,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		var EList<String> imports=scope.getImports() 
 		for (String packageImport : imports) {
 			var Optional<PackageImport> pkImport=mapper.findPackageImport(scope.eResource(), packageImport) 
-			if (!pkImport.isPresent() || !getResource(scope).getResourceSet().getURIConverter().exists(pkImport.get().getUri().trimQuery(), null)) {
+			if (!pkImport.isPresent()) {
 				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope, StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport)) 
 			}
 		}
