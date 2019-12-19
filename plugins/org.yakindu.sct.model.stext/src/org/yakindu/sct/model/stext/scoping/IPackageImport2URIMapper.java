@@ -37,6 +37,8 @@ public interface IPackageImport2URIMapper {
 		private String name;
 
 		private URI uri;
+		
+		private URI fileURI;
 
 		public PackageImport(String name, URI uri, String namespace) {
 			this.name = name;
@@ -54,6 +56,16 @@ public interface IPackageImport2URIMapper {
 
 		public String getNamespace() {
 			return namespace;
+		}
+		
+		public void setFileURI(URI fileURI) {
+			this.fileURI = fileURI;
+		}
+		
+		public URI getFileURI() {
+			if(fileURI != null)
+				return fileURI;
+			return getUri();
 		}
 
 		@Override
