@@ -20,7 +20,7 @@ import org.eclipse.swt.graphics.Color;
  */
 public interface StatechartColorConstants {
 
-	Color STATE_BG_COLOR = new Color(null, 205, 220, 243);
+	Color STATE_BG_COLOR = new Color(null, 208, 223, 239);
 
 	Color REGION_BG_COLOR = new Color(null, 250, 250, 250);
 

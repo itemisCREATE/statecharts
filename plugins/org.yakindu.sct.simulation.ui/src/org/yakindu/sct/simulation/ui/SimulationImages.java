@@ -47,7 +47,9 @@ public enum SimulationImages {
 	
 	VARIABLE_LOCK("icons/Variable_lock.gif"),
 	
-	SIMULATION_CLOCK("icons/Clock-16.png");
+	SIMULATION_CLOCK("icons/Clock-16.png"),
+	
+	SUB_STATECHART_PICTOGRAM("icons/Statechart-Pictogram-16.png");
 	
 	private final String path;
 

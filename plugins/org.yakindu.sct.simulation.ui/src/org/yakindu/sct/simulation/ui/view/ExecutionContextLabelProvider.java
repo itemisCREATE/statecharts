@@ -36,6 +36,7 @@ import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionOperation;
 import org.yakindu.sct.model.sruntime.ExecutionSlot;
@@ -100,7 +101,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			}
 		}
 	}
-	
+
 	protected boolean needsCheckbox(ExecutionSlot slot) {
 		if (slot.isWritable() && !isReadOnly && isPrimitiveType(slot)) {
 			return isBooleanType(slot.getValue(), (PrimitiveType) slot.getType().getOriginType());
@@ -165,6 +166,9 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 				cell.setImage(SimulationImages.VARIABLE.image());
 			else
 				cell.setImage(SimulationImages.VARIABLE_LOCK.image());
+		} else if (element instanceof ExecutionContext) {
+			cell.setText(((CompositeSlot) element).getName());
+			cell.setImage(SimulationImages.SUB_STATECHART_PICTOGRAM.image());
 		} else if (element instanceof CompositeSlot) {
 			cell.setText(((CompositeSlot) element).getName());
 			cell.setImage(SimulationImages.SCOPE.image());
