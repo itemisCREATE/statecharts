@@ -78,6 +78,10 @@ class EventNaming {
 		'''«eventQueueTypeName»_push'''
 	}
 	
+	def queueBufferSize(ExecutionFlow it) {
+		'''«name»_eventqueue_buffersize'''.toString.toUpperCase
+	}
+	
 	def internalBufferSize(ExecutionFlow it) {
 		'''«name»_internal_eventqueue_buffersize'''.toString.toUpperCase
 	}
