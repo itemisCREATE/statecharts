@@ -13,6 +13,14 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 		entries.getInEventQueueUsed(entry)
 	}
 	
+	def userAllocatesInQueue(ExecutionFlow it) {
+		needsInEventQueue && entries.getQueueAllocatedByUser(entry)
+	}
+
+	def userAllocatesInternalQueue(ExecutionFlow it) {
+		needsInternalEventQueue && entries.getQueueAllocatedByUser(entry)
+	}
+	
 	def needsValueUnion(ExecutionFlow it) {
 		hasQueuedEventsWithValue
 	}

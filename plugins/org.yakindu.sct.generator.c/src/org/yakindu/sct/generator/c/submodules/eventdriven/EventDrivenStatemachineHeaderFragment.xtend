@@ -34,9 +34,21 @@ class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 	
 	override defines(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		'''
-		#ifndef «bufferSize»
-		#define «bufferSize» «CGeneratorConstants.EVENT_QUEUE_BUFFER_SIZE»
+		«IF needsInEventQueue || needsInternalEventQueue»
+		#ifndef «queueBufferSize»
+		#define «queueBufferSize» «CGeneratorConstants.EVENT_QUEUE_BUFFER_SIZE»
 		#endif
+		«ENDIF»
+		«IF needsInEventQueue»
+		#ifndef «inBufferSize»
+		#define «inBufferSize» «queueBufferSize»
+		#endif
+		«ENDIF»
+		«IF needsInternalEventQueue»
+		#ifndef «internalBufferSize»
+		#define «internalBufferSize» «queueBufferSize»
+		#endif
+		«ENDIF»
 		#ifndef «invalidEvent»
 		#define «invalidEvent» 0
 		#endif

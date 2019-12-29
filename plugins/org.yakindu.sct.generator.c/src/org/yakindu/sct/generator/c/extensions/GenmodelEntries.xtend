@@ -113,4 +113,13 @@ class GenmodelEntries {
 			false
 		}
 	}
+	
+	def getQueueAllocatedByUser(GeneratorEntry it) {
+		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_USER_ALLOCATED_QUEUE)
+		if(parameter !== null) {
+			parameter.booleanValue
+		} else {
+			false
+		}
+	}
 }

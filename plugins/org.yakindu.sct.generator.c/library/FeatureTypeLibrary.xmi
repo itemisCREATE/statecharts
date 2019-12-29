@@ -50,6 +50,12 @@
       optional="true">
     <parameters
         name="inEventQueue"
+        comment="If set to true, a queue for incoming events is generated."
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="userAllocatedQueue"
+        comment="If set to true, the buffers for the event queues are not allocated by the state machine, but have to be provided to the init function instead."
         optional="true"
         parameterType="BOOLEAN"/>
   </types>

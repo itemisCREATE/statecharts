@@ -569,6 +569,32 @@ bc. feature IdentifierSettings {
 
 ==<!-- Start sgen_feature_tracing -->==
 
+==<!-- Start sgen_feature_generatoroptions -->==
+
+h4(#codegen_c_generatoroptions_feature). GeneratorOptions feature
+
+The *GeneratorOptions* feature allows the configuration of additional aspects concerning the behavior of the generated code:
+
+* _inEventQueue_ (Boolean, optional): For @EventDriven statecharts, use a queue for in events. Defaults to false. This is useful (with further synchronization) in multi-threaded environments or when you want to raise in events from operations declared in the statechart.
+* _userAllocatedQueue_ (Boolean, optional): If you want to allocate the buffer used by queues yourself, use this option. Defaults to false.
+
+==<div class="example">==
+
+Example:
+
+bc. feature GeneratorOptions {
+    inEventQueue = true
+    userAllocatedQueue = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_generatoroptions -->==
+
+
+
+==<!-- Start sgen_feature_tracing -->==
+
 h4(#codegen_c_tracing_feature). Tracing feature
 
 The *Tracing* feature enables the generation of tracing callback functions:

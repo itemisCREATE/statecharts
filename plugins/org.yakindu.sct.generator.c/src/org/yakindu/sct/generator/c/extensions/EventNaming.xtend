@@ -47,7 +47,7 @@ class EventNaming {
 	}
 
 	def internalEventStructTypeName(ExecutionFlow it) {
-		'''«name»_internal_event'''.toString.toLowerCase
+		'''«name»_event'''.toString.toLowerCase
 	}
 
 	def eventQueueTypeName(ExecutionFlow it) {
@@ -78,8 +78,16 @@ class EventNaming {
 		'''«eventQueueTypeName»_push'''
 	}
 	
-	def bufferSize(ExecutionFlow it) {
+	def queueBufferSize(ExecutionFlow it) {
 		'''«name»_eventqueue_buffersize'''.toString.toUpperCase
+	}
+	
+	def internalBufferSize(ExecutionFlow it) {
+		'''«name»_internal_eventqueue_buffersize'''.toString.toUpperCase
+	}
+	
+	def inBufferSize(ExecutionFlow it) {
+		'''«name»_in_eventqueue_buffersize'''.toString.toUpperCase
 	}
 	
 	def invalidEvent() {
