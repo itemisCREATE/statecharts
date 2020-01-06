@@ -24,7 +24,7 @@ In the following, we will extend the simple switch example to explain the differ
 
 In automata theory, there are two basic types of finite-state machines (FSM). One of those is called "_Moore_ machine":https://en.wikipedia.org/wiki/Moore_machine, named after its inventor Edward Moore. Moore machines consist of states and transitions. *States are able to produce outputs*, and the output is determined solely by the current state, not by any input.
 
-We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. This behavior is modeled by the state machine below. Pressing a button raises a corresponding event (_ON_pressed_ or _OFF_pressed_) upon which the machine reacts with a state change and corresponding outputs/actions. The output of the state machine is simply the brightness value. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
+We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. This behavior is modeled by the state machine below. Pressing a button raises a corresponding event (_ON_pressed_ or _OFF_pressed_) upon which the machine reacts with a state change and corresponding outputs/actions. The output of the state machine is simply the brightness level. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
 
 !(small)images/overview_moore.png(Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools)!
 
@@ -34,8 +34,6 @@ p=. Light switch example as a Moore machine, modeled with YAKINDU Statechart Too
 *Mealy machines*
 
 In comparison with Moore machines, "_Mealy_ machines":https://en.wikipedia.org/wiki/Mealy_machine *produce outputs only on transitions* and not in states. This often results in state diagrams with fewer states because more logic can be put on transitions. 
-
-In the light switch example we can now merge all _Light On_ states into one and produce the output on a transition. Here we just increment the brightness value each time the transition is taken. We use the modulo expression to ensure the brightness value stays between 1 and 3.
 
 !(small)images/overview_mealy.png(Light switch example as a Mealy machine)!
 
@@ -60,23 +58,22 @@ So basically "Harel statecharts":http://www.wisdom.weizmann.ac.il/~dharel/SCANNE
 
 Using composite states and sub diagrams, we are able to bring more *depth* into state diagrams, while keeping the diagrams clear and well-structured. Regions help us to express *orthogonality*: Different substate machines that can be executed side by side. Events allow us to achieve *broadcast communication* and give us a strong means to describe complex behavior. Using guards, we can state that a certain event triggers a transition only if a given condition is met. Inter-level transitions, history states, temporal logic as well as entry, exit and throughout actions are further Harel statechart elements.
 
-To showcase some of these enhancements we extend the light switch example by a motion detection mode. When the _MOT_ button is pressed, the motion sensor is activated. Once the sensor detects any motion (event @motion_detected@), the light is switched on at the highest brightness level (@brightness = 3@).
+Since Harel statecharts allow to use variable assignments as output actions, we can simplify the light switch example by merging all _Light On_ states into one and executing the output actions on a self-transition. Here we just increment the brightness value each time the transition is taken. We use the modulo expression to ensure the brightness value stays between 1 and 3. 
 
-The corresponding Mealy machine looks like the following:
+!(small)images/overview_harel_1.png(Light switch example as a Harel statechart)!
 
-!(medium)images/overview_mealy_2.png(Extended light switch example as a Mealy machine)!
+To showcase the use of composite states we extend the light switch example by a motion detection mode. When the _MOT_ button is pressed, the motion sensor is activated. Once the sensor detects any motion (event @motion_detected@), the light is switched on at the highest brightness level (@brightness = 3@). This can be modeled with a composite state that groups the two states _Motion Detected_ and _No Motion Detected_ together.
 
-Because only transitions can produce outputs, many actions need to be duplicated. For example, from each state there is a transition @OFF_pressed / brightness = 0@ to the _Light Off_ state. These redundancies make this rather simple system already harder to read and maintain as necessary.
+!(medium)images/overview_harel_2.png(Extended light switch example as a Harel statechart with composite states)!
 
-Harel statecharts combine Mealy and Moore machines, hence outputs can be produced by states and transitions. Furthermore, states can be grouped together to form a hierarchy. As a Harel statechart the light switch example looks like the following:
-
-!(medium)images/overview_harel.png(Extended light switch example as a Harel statechart)!
+Please also note that Harel statecharts combine the characteristics of Mealy and Moore machines, hence outputs can be produced by states as well as transitions as indicated in the statechart above.
 
 We can even go one step further and hide the logic of the _Motion Detection Mode_ into a sub diagram. In that way, the system gets more comprehensive as one can directly see the different modes and how to switch between them.
 
-!(medium)images/overview_harel_2.png(Extended light switch example as a Harel statechart with sub diagrams)!
+!(medium)images/overview_harel_3.png(Extended light switch example as a Harel statechart with sub diagrams)!
 
-Further concepts like orthogonality, entry/exit actions or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.html.
+Further concepts like orthogonality or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.html.
+
 
 *The present age: UML state machines*
 
@@ -90,7 +87,7 @@ p=. Differences between the state machine types
 
 The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now.
 
-Learn more about how to model your system with state machines in our free whitepaper:
+Learn more about modeling systems with state machines in our free whitepaper:
 
 <a href="https://info.itemis.com/en/yakindu/state-machine/whitepaper/" class="btn btn-warning">Download Whitepaper</a>
 

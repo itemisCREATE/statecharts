@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_FOXjEBEfEeqvItpcjC7b0g" specification="&#xA;interface:&#xA;in event ON_pressed&#xA;in event OFF_pressed&#xA;var brightness : integer" name="light-switch">
+  <sgraph:Statechart xmi:id="_FOXjEBEfEeqvItpcjC7b0g" specification="&#xA;interface:&#xA;in event ON_pressed&#xA;in event OFF_pressed&#xA;var brightness : integer&#xA;&#xA;operation brightnessOff()&#xA;operation brightnessLow()&#xA;operation brightnessMedium()&#xA;operation brightnessHigh()" name="light-switch">
     <regions xmi:id="_FOYKKBEfEeqvItpcjC7b0g" name="Moore ">
       <vertices xsi:type="sgraph:Entry" xmi:id="_FOYxNhEfEeqvItpcjC7b0g">
         <outgoingTransitions xmi:id="_FOZ_WREfEeqvItpcjC7b0g" specification="" target="_FOZYRxEfEeqvItpcjC7b0g"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_FOZYRxEfEeqvItpcjC7b0g" specification="&#xA;entry / brightness = 0" name="Light Off" incomingTransitions="_FOZ_WREfEeqvItpcjC7b0g _da3jUBEfEeqvItpcjC7b0g _esIW4BEfEeqvItpcjC7b0g _f-nScBEfEeqvItpcjC7b0g">
+      <vertices xsi:type="sgraph:State" xmi:id="_FOZYRxEfEeqvItpcjC7b0g" specification="&#xA;brightnessOff" name="Light Off" incomingTransitions="_FOZ_WREfEeqvItpcjC7b0g _da3jUBEfEeqvItpcjC7b0g _esIW4BEfEeqvItpcjC7b0g _f-nScBEfEeqvItpcjC7b0g">
         <outgoingTransitions xmi:id="_O-yUQBEfEeqvItpcjC7b0g" specification="ON_pressed" target="_KPCAkBEfEeqvItpcjC7b0g"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_KPCAkBEfEeqvItpcjC7b0g" specification="&#xA;entry / brightness = 1" name="Light On - Dimmed " incomingTransitions="_O-yUQBEfEeqvItpcjC7b0g _WAFWUBErEeqDiINkDxzL-Q">
+      <vertices xsi:type="sgraph:State" xmi:id="_KPCAkBEfEeqvItpcjC7b0g" specification="&#xA;brightnessLow" name="Light On - Dimmed " incomingTransitions="_O-yUQBEfEeqvItpcjC7b0g _WAFWUBErEeqDiINkDxzL-Q">
         <outgoingTransitions xmi:id="_PtyIQBEfEeqvItpcjC7b0g" specification="ON_pressed" target="_Nw6y_REfEeqvItpcjC7b0g"/>
         <outgoingTransitions xmi:id="_f-nScBEfEeqvItpcjC7b0g" specification="OFF_pressed" target="_FOZYRxEfEeqvItpcjC7b0g"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_Nw6y_REfEeqvItpcjC7b0g" specification="&#xA;entry / brightness = 2" name="Light On - Medium" incomingTransitions="_PtyIQBEfEeqvItpcjC7b0g">
+      <vertices xsi:type="sgraph:State" xmi:id="_Nw6y_REfEeqvItpcjC7b0g" specification="&#xA;brightnessMedium" name="Light On - Medium" incomingTransitions="_PtyIQBEfEeqvItpcjC7b0g">
         <outgoingTransitions xmi:id="_Vk9XABEfEeqvItpcjC7b0g" specification="ON_pressed" target="_OGSmABEfEeqvItpcjC7b0g"/>
         <outgoingTransitions xmi:id="_esIW4BEfEeqvItpcjC7b0g" specification="OFF_pressed" target="_FOZYRxEfEeqvItpcjC7b0g"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_OGSmABEfEeqvItpcjC7b0g" specification="&#xA;entry / brightness = 3" name="Light On - Bright " incomingTransitions="_Vk9XABEfEeqvItpcjC7b0g">
+      <vertices xsi:type="sgraph:State" xmi:id="_OGSmABEfEeqvItpcjC7b0g" specification="&#xA;brightnessHigh" name="Light On - Bright " incomingTransitions="_Vk9XABEfEeqvItpcjC7b0g">
         <outgoingTransitions xmi:id="_da3jUBEfEeqvItpcjC7b0g" specification="OFF_pressed" target="_FOZYRxEfEeqvItpcjC7b0g"/>
         <outgoingTransitions xmi:id="_WAFWUBErEeqDiINkDxzL-Q" specification="ON_pressed" target="_KPCAkBEfEeqvItpcjC7b0g"/>
       </vertices>
