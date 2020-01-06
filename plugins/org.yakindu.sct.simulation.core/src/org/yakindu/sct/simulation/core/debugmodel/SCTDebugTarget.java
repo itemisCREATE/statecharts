@@ -43,6 +43,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	private boolean stepping = false;
 	private boolean terminated = false;
 	private boolean suspended = false;
+	private boolean primary = true;
 
 	private final NamedElement element;
 	private String name;
@@ -222,5 +223,12 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	public void stepReturn() throws DebugException {
 
 	}
+	
+	public void setPrimary(boolean primary) {
+		this.primary = primary;
+	}
 
+	public boolean isPrimary() {
+		return primary;
+	}
 }
