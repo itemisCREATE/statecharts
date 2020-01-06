@@ -163,11 +163,17 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	}
 	
 	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
-		if(target.eContainer instanceof ComplexType) {
-			val owner = owner
+		val container = target.eContainer
+		if(container instanceof ComplexType) {
+			print("First")
+			val fcontainer = it.eContainer
+			if(fcontainer instanceof FeatureCall) {
+				val x = fcontainer.accessComplexType(target)
+				print(x)
+			}
 			return '''«owner.accessComplexType(target)».«target.name»'''
 		}
-		return '''«target.access»'''
+		return '''Second: «target.access»'''
 	}
 	
 	protected def CharSequence accessComplexType(Expression owner, VariableDefinition target) {
