@@ -1,13 +1,12 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
-import org.eclipse.emf.ecore.EObject
 
 class CMultiStatemachine {
 	@Inject protected extension MultiStatemachineHelper
