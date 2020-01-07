@@ -43,13 +43,13 @@ void ConstantsVariationTests::constantDefinition()
 	constantsVariation_enter(&statechart);
 	EXPECT_TRUE(constantsVariation_isStateActive(&statechart, ConstantsVariation_main_region_StateA));
 	EXPECT_TRUE(constantsVariationIface_get_b2(&statechart)== true);
-	EXPECT_TRUE(constantsVariationIfaceNamed_get_b(&statechart) == true);
+	EXPECT_TRUE(constantsVariationIfaceNamed_get_b(&statechart)== true);
 	EXPECT_TRUE(constantsVariationIface_get_i2(&statechart)== 5);
-	EXPECT_TRUE(constantsVariationIfaceNamed_get_i(&statechart) == 5);
+	EXPECT_TRUE(constantsVariationIfaceNamed_get_i(&statechart)== 5);
 	EXPECT_TRUE(constantsVariationIface_get_r2(&statechart)== 5);
-	EXPECT_TRUE(constantsVariationIfaceNamed_get_r(&statechart) == 5);
+	EXPECT_TRUE(constantsVariationIfaceNamed_get_r(&statechart)== 5);
 	EXPECT_TRUE(strcmp(constantsVariationIface_get_str2(&statechart), "String") == 0);
-	EXPECT_TRUE(strcmp(constantsVariationIfaceNamed_get_str(&statechart) , "String") == 0);
+	EXPECT_TRUE(strcmp(constantsVariationIfaceNamed_get_str(&statechart), "String") == 0);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(constantsVariation_isFinal(&statechart));
 }
