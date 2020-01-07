@@ -335,14 +335,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override boolean isActive() {
-		var List<RegularState> activeStates = executionContext.getAllActiveStates()
-
-		for (RegularState regularState : activeStates) {
-			if (!(regularState instanceof FinalState)) {
-				return true;
-			}
-		}
-		return false;
+		return executionContext.getAllActiveStates().size > 0
 	}
 
 	override boolean isFinal() {
