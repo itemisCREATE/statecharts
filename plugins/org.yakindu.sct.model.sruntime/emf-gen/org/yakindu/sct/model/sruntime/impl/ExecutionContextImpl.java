@@ -530,8 +530,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				boolean _add = visited.add(it);
 				if (_add) {
 					result.add(it);
-					if ((it instanceof CompositeSlot)) {
-						ExecutionContextImpl.this.addSlots(result, ((CompositeSlot)it).getSlots(false), visited);
+					if ((!(it instanceof ExecutionContext))) {
+						if ((it instanceof CompositeSlot)) {
+							ExecutionContextImpl.this.addSlots(result, ((CompositeSlot)it).getSlots(false), visited);
+						}
 					}
 				}
 			}

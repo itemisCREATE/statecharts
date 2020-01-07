@@ -53,10 +53,11 @@ class ExecutionContext extends NamedElement, CompositeSlot {
 		slots.forEach [
 			if (visited.add(it)) {
 				result.add(it)
-				if (it instanceof CompositeSlot) {
-					addSlots(result, it.getSlots(false), visited)
+				if (!(it instanceof ExecutionContext)) {
+					if (it instanceof CompositeSlot) {
+						addSlots(result, it.getSlots(false), visited)
+					}
 				}
-
 			}
 		]
 	}
@@ -79,7 +80,6 @@ class ExecutionVariable extends ExecutionSlot {
 
 class CompositeSlot extends ExecutionSlot {
 	contains ExecutionSlot[] slots
-	
 	op ExecutionSlot[] getSlots(boolean doResolve) {
 		return getSlots();
 	}
