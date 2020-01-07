@@ -37,6 +37,8 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
@@ -147,6 +149,8 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 				return getStaticContext + identifier
 			Property case exp.isPropertyContained:
 				return getStaticContext + identifier
+			Property case exp.isPostFixContained:
+				return getStaticContext + identifier
 			Declaration:
 				return exp.definition.code
 		}
@@ -222,6 +226,10 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			return isPropertyContained(eContainer as Expression)
 		}
 		return false // default
+	}
+	
+	def boolean isPostFixContained(Expression it) {
+		return EcoreUtil2.getContainerOfType(it, PostFixUnaryExpression) !== null
 	}
 	
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
