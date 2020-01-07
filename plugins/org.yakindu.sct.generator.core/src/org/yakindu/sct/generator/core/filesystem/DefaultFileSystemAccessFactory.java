@@ -16,7 +16,6 @@ import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.LIB
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
 import java.io.File;
-import java.nio.file.FileSystemAlreadyExistsException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.IFileSystemAccess;
@@ -59,8 +58,7 @@ public class DefaultFileSystemAccessFactory {
 
 	protected void initDefaultOutput(ISCTFileSystemAccess access, GeneratorEntry entry) {
 		String folderName = helper.getTargetFolderValue(entry).getStringValue();
-		access.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				helper.getTargetFolderValue(entry).getStringValue());
+		access.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, folderName);
 		access.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
 		checkWriteAccess(access, IFileSystemAccess.DEFAULT_OUTPUT, folderName);
 	}
@@ -69,7 +67,7 @@ public class DefaultFileSystemAccessFactory {
 		FeatureParameterValue libraryTargetFolderValue = helper.getLibraryTargetFolderValue(entry);
 		if (libraryTargetFolderValue != null) {
 			String folderName = libraryTargetFolderValue.getStringValue();
-			access.setOutputPath(LIBRARY_TARGET_FOLDER_OUTPUT, libraryTargetFolderValue.getStringValue());
+			access.setOutputPath(LIBRARY_TARGET_FOLDER_OUTPUT, folderName);
 			OutputConfiguration output = access.getOutputConfigurations().get(LIBRARY_TARGET_FOLDER_OUTPUT);
 			checkWriteAccess(access, LIBRARY_TARGET_FOLDER_OUTPUT, folderName);
 			output.setCreateOutputDirectory(true);
@@ -88,13 +86,13 @@ public class DefaultFileSystemAccessFactory {
 			output.setCreateOutputDirectory(true);
 		}
 	}
-	
+
 	private void checkWriteAccess(ISCTFileSystemAccess access, String outputConfiguration, String folderName) {
 		URI uri = access.getURI("", outputConfiguration);
 		if (uri.isFile()) {
 			File file = new File(uri.path());
 			if (!file.canWrite()) {
-				logger.log(String.format("Can not generated files to read-only folder '%s'. ", folderName));
+				logger.log(String.format("Can not generate files to read-only folder '%s'. ", folderName));
 			}
 
 		}
