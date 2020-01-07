@@ -51,8 +51,8 @@ public class IntegerExpressions extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("minusAssign") == - 8l );
 		assertTrue(getInteger("moduloAssign") == 0l);
 		assertTrue(getInteger("decrementAssign") == 0l);
-		assertTrue(getInteger("decrement") == 1l);
+		assertTrue(getInteger("decrement") == - 2l );
 		assertTrue(getInteger("incrementAssign") == 0l);
-		assertTrue(getInteger("increment") == 1l);
+		assertTrue(getInteger("increment") == 2l);
 	}
 }
