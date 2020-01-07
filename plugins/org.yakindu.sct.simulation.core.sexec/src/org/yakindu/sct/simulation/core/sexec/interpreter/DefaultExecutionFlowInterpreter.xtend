@@ -345,6 +345,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			return false;
 		} else {
 			var List<RegularState> activeStates = executionContext.getAllActiveStates();
+			if(activeStates.isEmpty){
+				return false;
+			}
 			for (RegularState regularState : activeStates) {
 				if (!(regularState instanceof FinalState)) {
 					return false;
