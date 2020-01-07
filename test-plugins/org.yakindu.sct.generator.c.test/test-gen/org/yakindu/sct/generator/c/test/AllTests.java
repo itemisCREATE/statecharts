@@ -29,6 +29,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	TransitionHandlesMultipleExists.class,
 	TriggerExpressionPrecedenceTest.class,
 	StatechartEntryExitActions.class,
+	CycleBasedSuperStepTest.class,
+	EventDrivenSuperStepTest.class,
 	AlwaysOncycleTest.class,
 	AssignmentAsExpressionTest.class,
 	BitExpressionsTest.class,
@@ -91,9 +93,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ValuedEventsTest.class,
 	TypeAliasTest.class,
 	StatemachineKeywords.class,
-	TimedTransitionsTest.class,
-	CycleBasedSuperStepTest.class,
-	EventDrivenSuperStepTest.class
+	TimedTransitionsTest.class
 })
 public class AllTests {
 }

@@ -54,7 +54,7 @@ void TimedTransitionsTest::Timer02()
 {
 	timedTransitions_enter(&statechart);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
-	sc_timer_service_proceed_time(&timer_service, 2000);
+	sc_timer_service_proceed_time(&timer_service, 2*1000);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_End));
 }
 void TimedTransitionsTest::noAdditionalCycle()
