@@ -652,7 +652,11 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		
 		sCInterface.setIncrementAssign(sCInterface.increment++);
 		
-		sCInterface.setDecrementAssign(sCInterface.decrement++);
+		sCInterface.setDecrementAssign(sCInterface.decrement--);
+		
+		sCInterface.getIncrement()++;
+		
+		sCInterface.getDecrement()--;
 	}
 	
 	/* 'default' enter sequence for state StateA */
