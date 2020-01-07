@@ -56,7 +56,7 @@ void EventDrivenTriggeredByEventTest::proceedTimeDoesNotTriggerRunCycle()
 {
 	eventDrivenTriggeredByEvent_enter(&statechart);
 	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_A));
-	sc_timer_service_proceed_time(&timer_service, 120000);
+	sc_timer_service_proceed_time(&timer_service, 120*1000);
 	EXPECT_TRUE(eventDrivenTriggeredByEventIface_get_x(&statechart)== 0);
 	eventDrivenTriggeredByEvent_exit(&statechart);
 }

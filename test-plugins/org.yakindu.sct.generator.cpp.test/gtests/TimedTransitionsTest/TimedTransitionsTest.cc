@@ -53,7 +53,7 @@ TEST_F(TimedTransitionsTest, Timer02) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_Start));
 	
-	runner->proceed_time(2000);
+	runner->proceed_time(2*1000);
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_End));
 	
