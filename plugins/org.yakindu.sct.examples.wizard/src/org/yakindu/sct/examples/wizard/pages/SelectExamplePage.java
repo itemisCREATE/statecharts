@@ -16,10 +16,12 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -65,6 +67,7 @@ import org.yakindu.sct.ui.install.InstallationChecker;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -85,7 +88,7 @@ public class SelectExamplePage extends WizardPage
 	@Inject
 	private IExampleService exampleService;
 	private TreeViewer viewer;
-	private ExampleData selection;
+	private List<ExampleData> selection = Lists.newArrayList();
 	private Browser browser;
 	private MessageArea messageArea;
 
@@ -153,7 +156,7 @@ public class SelectExamplePage extends WizardPage
 			initAsync();
 		} else {
 			setPageComplete(false);
-			selection = null;
+			selection = Lists.newArrayList();
 			viewer.setInput(null);
 			browser.setUrl("about:blank");
 		}
@@ -252,28 +255,29 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	protected void createTreeViewer(Composite container) {
-		viewer = new TreeViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+		viewer = new TreeViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(viewer.getControl());
 		viewer.setContentProvider(new ExampleContentProvider());
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new ExampleLabelProvider()));
 		viewer.addSelectionChangedListener(this);
 	}
 
-	protected void updateSelection(IExampleData data) {
-		if (data instanceof ExampleData) {
-			selection = (ExampleData) data;
-			setPageComplete(true);
-		} else {
-			selection = null;
-			setPageComplete(false);
+	protected void updateSelection(List<IExampleData> examples) {
+		selection.clear();
+		for (IExampleData example : examples) {
+			if (example instanceof ExampleData) {
+				selection.add((ExampleData) example);
+			}
 		}
-		setDetailPaneContent(data);
+		setPageComplete(!selection.isEmpty());
+		
+		setDetailPaneContent(selection);
 		setErrorMessage(null);
-		checkInstalledPlugins(data);
+		checkInstalledPlugins(selection);
 		viewer.refresh();
 	}
 
-	private void checkInstalledPlugins(IExampleData data) {
+	private void checkInstalledPlugins(List<ExampleData> data) {
 		if (isDependenciesMissing(data)) {
 			messageArea.showDependenciesMissing();
 		} else {
@@ -283,10 +287,10 @@ public class SelectExamplePage extends WizardPage
 		this.getControl().update();
 	}
 
-	protected boolean isDependenciesMissing(IExampleData data) {
+	protected boolean isDependenciesMissing(List<ExampleData> examples) {
 		InstallationChecker checker = new InstallationChecker();
-		if (data instanceof ExampleData) {
-			Dependency[] dependencies = ((ExampleData) data).getDependencies();
+		for (ExampleData example : examples) {
+			Dependency[] dependencies = example.getDependencies();
 			if (dependencies != null) {
 				for (Dependency dependency : dependencies) {
 					for (String featureId : dependency.getFeatures()) {
@@ -300,10 +304,14 @@ public class SelectExamplePage extends WizardPage
 		return false;
 	}
 
-	protected void setDetailPaneContent(IExampleData data) {
-		String path = data.getDescriptionPath();
-		if (path != null && new File(path).exists()) {
-			browser.setUrl(path);
+	protected void setDetailPaneContent(List<ExampleData> examples) {
+		if (examples.size() == 1) {
+			String path = examples.get(0).getDescriptionPath();
+			if (path != null && new File(path).exists()) {
+				browser.setUrl(path);
+			} else {
+				browser.setUrl("about:blank");
+			}
 		} else {
 			browser.setUrl("about:blank");
 		}
@@ -375,16 +383,23 @@ public class SelectExamplePage extends WizardPage
 		}
 	}
 
-	public ExampleData getSelection() {
+	public List<ExampleData> getSelection() {
 		return selection;
 	}
 
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
-		Object firstElement = ((StructuredSelection) event.getSelection()).getFirstElement();
-		if (firstElement instanceof IExampleData) {
-			updateSelection((IExampleData) firstElement);
+		StructuredSelection structuredSelection = (StructuredSelection) event.getSelection();
+		
+		Iterator<?> iter = structuredSelection.iterator();
+		List<IExampleData> selectedItems = Lists.newArrayList();
+		while(iter.hasNext()) {
+			Object next = iter.next();
+			if (next instanceof IExampleData) {
+				selectedItems.add((IExampleData)next);
+			}
 		}
+		updateSelection(selectedItems);
 	}
 	
 	@Override
@@ -407,8 +422,8 @@ public class SelectExamplePage extends WizardPage
 
 	protected void installDependencies() {
 		if (selection != null) {
-			Dependency[] dependencies = selection.getDependencies();
-			
+			List<Dependency> dependencies = selection.stream()
+					.flatMap(s -> Lists.newArrayList(s.getDependencies()).stream()).collect(Collectors.toList());
 			Map<String, Set<String>> dependencyMap = Maps.newHashMap();
 			for (Dependency dependency : dependencies) {
 				dependencyMap.put(dependency.getUpdateSite(), Sets.newHashSet(dependency.getFeatures()));
