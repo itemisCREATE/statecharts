@@ -44,7 +44,7 @@ public class JavaOperationMockup extends AbstractOperationExecutor implements IO
 	@Inject
 	protected IExecutionSlotResolver resolver;
 
-	private List<Object> callbacks;
+	private List<Object> callbacks = Lists.newArrayList();
 
 	public void initOperationCallbacks(IProject project, String[] classes) {
 		callbacks = Lists.newArrayList();

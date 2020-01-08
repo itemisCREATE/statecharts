@@ -65,9 +65,9 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		launch.addDebugTarget(target);
 		try {
 			target.init();
-			target.start();
 			if (delegate != null)
 				delegate.launch(configuration, mode, launch, monitor);
+			target.start();
 		} catch (InitializationException e) {
 			// handled in AbstractExecutionFlowSimulationEngine
 		}
