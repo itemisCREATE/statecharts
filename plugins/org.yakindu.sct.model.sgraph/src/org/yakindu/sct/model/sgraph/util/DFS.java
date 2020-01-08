@@ -58,7 +58,7 @@ abstract public class DFS {
 			Object element = myElements.next();
 
 			if (!isVisited(element)) {
-				visit(element, 1);
+				visit(element, null, 1);
 			}
 		}
 	}
@@ -90,7 +90,7 @@ abstract public class DFS {
 
 
 	/** Visits an element. */
-	private int visit(Object element, int depth) {
+	private int visit(Object element, Object parent, int depth) {
 		int minDepth = depth;
 
 		if (isVisited(element)) {
@@ -99,12 +99,12 @@ abstract public class DFS {
 
 		setVisited(element, depth);
 
-		beginVisit(element, depth);
+		beginVisit(element, parent, depth );
 
 		Iterator itr = getElementLinks(element);
 		if (itr != null) {
 			while (itr.hasNext()) {
-				int childDepth = visit(itr.next(), depth + 1);
+				int childDepth = visit(itr.next(), element, depth + 1);
 				minDepth = ((childDepth < minDepth) && (childDepth > -1)) ? childDepth : minDepth;
 				linkCount++;
 			}
@@ -112,7 +112,7 @@ abstract public class DFS {
 
 		setVisited(element, -1);
 
-		endVisit(element, depth, minDepth);
+		endVisit(element, parent, depth, minDepth);
 
 		return (minDepth < depth) ? minDepth : depth;
 	}
@@ -122,22 +122,24 @@ abstract public class DFS {
 	 * behaviour.
 	 *
 	 * @param element The element wich will be visited.
+	 * @Param parent The parent of the element
 	 * @param depth The distance to a root element of the graph traversion.
 	 */
-	public void beginVisit(Object element, int depth) {
+	public void beginVisit(Object element, Object parent, int depth) {
 	}
 
 	/** This hook method will be invoked when the DFS finishes the visit of an element.
 	 * Since there is no return parameter this method will not effect the algorithms
 	 * behaviour.
 	 *
-	 * @param element The element wich will be visited.
+	 * @param element The element which will be visited.
+	 * @param parent The parent of the element
 	 * @param depth The distance to a root element of the graph traversion.
 	 * @param minDepth If this parameter is smaller than the depth parameter then
 	 * an element is reachable from the current element from which the current element is
-	 * reachable, which means there is a reachablitiy cycle within the graph.
+	 * reachable, which means there is a reachability cycle within the graph.
 	 */
-	public void endVisit(Object element, int depth, int minDepth) {
+	public void endVisit(Object element, Object parent,  int depth, int minDepth) {
 	}
 
 
