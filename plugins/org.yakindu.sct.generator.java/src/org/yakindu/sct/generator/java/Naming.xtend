@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.java
 import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -22,7 +23,7 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.base.types.Enumerator
 
 class Naming {
 
@@ -128,6 +129,14 @@ class Naming {
 	
 	def dispatch identifier(Method it){
 		'''«shortName»'''
+	}
+	
+	def dispatch identifier(Operation it) {
+		name
+	}
+	
+	def dispatch identifier(Enumerator it) {
+		name
 	}
 	
 	def dispatch identifier(Declaration it){

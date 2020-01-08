@@ -22,7 +22,9 @@ import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
@@ -31,11 +33,13 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
@@ -47,7 +51,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
-
+	
 	var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
@@ -118,22 +122,22 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String code(EventRaisingExpression it) {
 		if (value !== null) {
-			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "(" + value.code + ")"
+			event.getContext + "raise" + event.definition.name.toFirstUpper + "(" + value.code + ")"
 		} else {
-			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "()"
+			event.getContext + "raise" + event.definition.name.toFirstUpper + "()"
 		}
 	}
 
 	def dispatch String code(EventValueReferenceExpression it) {
-		value.definition.getContext + value.definition.event.getter
+		value.getContext + value.definition.event.getter
 	}
 
 	def protected dispatch String code(ElementReferenceExpression it) {
-		if(it.reference instanceof Parameter) {
-			(it.reference as Parameter).name
-		}
-		else {
-			(it.reference as Declaration).codeDeclaration(it).toString
+		val ref = it.reference
+		switch ref {
+			Parameter: return ref.name
+			ComplexType: return ref.name
+			Declaration: return codeDeclaration(ref, it).toString // static class references like System.out
 		}
 	}
 
@@ -143,8 +147,14 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
 		switch it {
-			Operation:
+			Method:
 				return operationCall(it, exp)
+			Operation:
+				return exp.getContext + operationCall(it, exp)
+			Event case exp.isComplexTypeContained:
+				return exp.getContext + "isRaised" + name.toFirstUpper + "()"
+			Declaration case exp.isComplexTypeContained:
+				return exp.getContext + exp.definition.code
 			Property case exp.isAssignmentContained:
 				return getStaticContext + identifier
 			Property case exp.isPropertyContained:
@@ -155,7 +165,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 				return exp.definition.code
 		}
 	}
-
+	
 	def protected String operationCall(Operation it, ArgumentExpression exp) {
 		'''«code»(«FOR arg : exp.expressions SEPARATOR ", "»«arg.code»«ENDFOR»)'''
 	}
@@ -165,6 +175,9 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(Property it) {
+		if (it.eContainer instanceof ComplexType) {
+			return getContext + it.name
+		}
 		if(eContainer instanceof LocalVariableDefinition){
 			return it.name
 		}
@@ -180,6 +193,21 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
+	}
+	
+	def dispatch String getContext(FeatureCall it) {
+		val owner = it.owner
+		if (owner instanceof ElementReferenceExpression) {
+			if (owner.reference instanceof InterfaceScope) {
+				// interface context
+				return it.definition.getContext
+			}
+		}
+		return it.owner.code + "."
+	}
+	
+	def dispatch String getContext(ElementReferenceExpression it) {
+		return it.definition.getContext
 	}
 
 	def dispatch String getStaticContext(Property it) {
@@ -230,6 +258,10 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	
 	def boolean isPostFixContained(Expression it) {
 		return EcoreUtil2.getContainerOfType(it, PostFixUnaryExpression) !== null
+	}
+	
+	def boolean isComplexTypeContained(ArgumentExpression exp) {
+		return exp.definition.eContainer instanceof ComplexType && (exp instanceof FeatureCall)
 	}
 	
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
