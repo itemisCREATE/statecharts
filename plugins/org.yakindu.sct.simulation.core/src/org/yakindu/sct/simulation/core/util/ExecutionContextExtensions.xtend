@@ -27,7 +27,7 @@ class ExecutionContextExtensions {
 	}
 
 	def clearLocalAndInEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
+		executionContext.allEvents.filter[executionContext.isOwner(it)].filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
 			if(raised) raised = false
 		]
 	}
