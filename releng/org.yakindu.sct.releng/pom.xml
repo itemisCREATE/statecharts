@@ -11,8 +11,8 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>1.2.0</tycho-version>
-		<tycho-extras-version>1.2.0</tycho-extras-version>
+		<tycho-version>1.5.0</tycho-version>
+		<tycho-extras-version>1.5.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>false</testFailureIgnore>
@@ -162,17 +162,7 @@
 							<environment>
 								<os>linux</os>
 								<ws>gtk</ws>
-								<arch>x86</arch>
-							</environment>
-							<environment>
-								<os>linux</os>
-								<ws>gtk</ws>
 								<arch>x86_64</arch>
-							</environment>
-							<environment>
-								<os>win32</os>
-								<ws>win32</ws>
-								<arch>x86</arch>
 							</environment>
 							<environment>
 								<os>win32</os>
@@ -453,7 +443,7 @@
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
 									<version>4.0.0-SNAPSHOT</version>
-									<classifier>2018-09</classifier>
+									<classifier>2019-12</classifier>
 								</artifact>
 							</target>
 						</configuration>
