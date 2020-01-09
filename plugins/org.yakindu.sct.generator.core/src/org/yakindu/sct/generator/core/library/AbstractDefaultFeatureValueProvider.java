@@ -37,6 +37,8 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 	protected static final SGenFactory factory = SGenFactory.eINSTANCE;
 	
 	public static final String CODE_MISSING_PROJECT = "error_code_missing_project";
+	
+	protected static final String INVALID_IDENTIFIER_REGEX = "[[^a-z]&&[^A-Z]&&[^0-9]]";
 
 	
 	@Inject
