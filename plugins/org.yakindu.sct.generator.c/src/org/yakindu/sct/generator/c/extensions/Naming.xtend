@@ -39,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.types.ComplexType
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -314,11 +315,24 @@ class Naming {
 	}
 
 	def asFunction(OperationDefinition it) {
-		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
+		var prefix = ""
+		if (scope !== null) 
+			prefix = scope.functionPrefix(it)
+		prefix +  separator + name.asIdentifier.toFirstLower
 	}
 	
 	def accessFunction(Declaration it, String funcName) {
-		scope.functionPrefix(it) + separator + funcName + separator + name.asIdentifier.toFirstLower
+		var prefix = ""
+		if (scope !== null) 
+			prefix = scope.functionPrefix(it)
+		else{
+			prefix = ct.name.toFirstLower + "Iface"
+		}
+		prefix + separator + funcName + separator + name.asIdentifier.toFirstLower
+	}
+	
+	def ct(Declaration it) {
+		it.eContainer as ComplexType
 	}
 	
 	def variable(VariableDefinition it) {

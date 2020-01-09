@@ -37,7 +37,7 @@ public class CompileGTestCommand {
 	private boolean wExtra = false;
 	private boolean wError = false;
 	private boolean wConversion = false;
-	private boolean wnoUnusedParameter = false;
+	private boolean wnoUnusedParameter = true;
 	private boolean wnoUnusedFunction = false;
 	
 	public CompileGTestCommand directory(String dir) {
