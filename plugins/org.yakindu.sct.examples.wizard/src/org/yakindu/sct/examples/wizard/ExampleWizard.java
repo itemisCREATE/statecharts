@@ -11,6 +11,7 @@
 package org.yakindu.sct.examples.wizard;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -71,15 +72,17 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 	}
 
 	public boolean performFinish() {
-		final ExampleData selection = page.getSelection();
+		final List<ExampleData> selection = page.getSelection();
 		if (selection != null) {
 			try {
 				getContainer().run(true, true, new IRunnableWithProgress() {
 					@Override
 					public void run(IProgressMonitor monitor) throws InvocationTargetException {
-						if (overrideIfExists(selection)) {
-							IProject project = importer.importExample(selection, monitor);
-							opener.openModelFiles(project);
+						for (ExampleData exampleData : selection) {
+							if (overrideIfExists(exampleData)) {
+								IProject project = importer.importExample(exampleData, monitor);
+								opener.openModelFiles(project);
+							}
 						}
 					}
 				});

@@ -34,9 +34,15 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		«super.statemachineStructContent(it)»
 		«IF needsInternalEventQueue»
 		«eventQueueTypeName» «internalQueue»;
+		«IF !userAllocatesInternalQueue»
+		«internalEventStructTypeName» internal_buffer[«internalBufferSize»];
+		«ENDIF»
 		«ENDIF»
 		«IF needsInEventQueue»
 		«eventQueueTypeName» «inEventQueue»;
+		«IF !userAllocatesInternalQueue»
+		«internalEventStructTypeName» in_buffer[«inBufferSize»];
+		«ENDIF»
 		«ENDIF»
 		«IF needsRunCycleGuard»
 		«BOOL_TYPE» is_running_cycle;
@@ -94,7 +100,8 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 * Queue that holds the raised events.
 		 */
 		typedef struct «eventQueueTypeName»_s {
-			«internalEventStructTypeName» events[«bufferSize»];
+			«internalEventStructTypeName» *events;
+			«INT_TYPE» capacity;
 			«INT_TYPE» pop_index;
 			«INT_TYPE» push_index;
 			«INT_TYPE» size;

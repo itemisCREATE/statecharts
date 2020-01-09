@@ -50,13 +50,11 @@ class ExecutionContext extends NamedElement, CompositeSlot {
 		result
 	}
 	op void addSlots(ExecutionSlot[] result, ExecutionSlot[] slots, unique ExecutionSlot[] visited) {
+		result += slots.filter[!visited.contains(it)]
 		slots.forEach [
 			if (visited.add(it)) {
-				result.add(it)
-				if (!(it instanceof ExecutionContext)) {
-					if (it instanceof CompositeSlot) {
-						addSlots(result, it.getSlots(false), visited)
-					}
+				if (it instanceof CompositeSlot) {
+					addSlots(result, it.getSlots(false), visited)
 				}
 			}
 		]

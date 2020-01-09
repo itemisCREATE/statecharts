@@ -11,7 +11,6 @@
 package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
@@ -23,8 +22,6 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
@@ -67,7 +64,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	override declarations(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«IF needsQueues»
-			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
+			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» *buffer, «INT_TYPE» capacity);
 			static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
 			static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
 			static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
@@ -160,8 +157,10 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	
 	def eventQueueFunctions(ExecutionFlow it) {
 		'''
-			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq)
+			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» *buffer, «INT_TYPE» capacity)
 			{
+				eq->events = buffer;
+				eq->capacity = capacity;
 				eq->push_index = 0;
 				eq->pop_index = 0;
 				eq->size = 0;
@@ -181,7 +180,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				else {
 					event = eq->events[eq->pop_index];
 					
-					if(eq->pop_index < «bufferSize» - 1) {
+					if(eq->pop_index < eq->capacity - 1) {
 						eq->pop_index++;
 					} 
 					else {
@@ -194,13 +193,13 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			
 			static «BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev)
 			{
-				if(«eventQueueSizeFunction»(eq) == «bufferSize») {
+				if(«eventQueueSizeFunction»(eq) == eq->capacity) {
 					return «FALSE_LITERAL»;
 				}
 				else {
 					eq->events[eq->push_index] = ev;
 					
-					if(eq->push_index < «bufferSize» - 1) {
+					if(eq->push_index < eq->capacity - 1) {
 						eq->push_index++;
 					}
 					else {

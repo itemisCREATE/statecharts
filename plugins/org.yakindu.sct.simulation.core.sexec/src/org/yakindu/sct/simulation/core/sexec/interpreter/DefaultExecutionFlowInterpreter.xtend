@@ -79,7 +79,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
 	@Inject protected extension ExecutionContextExtensions
-	@Inject 
+	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
 	@Inject
 	protected extension StatechartAnnotations
@@ -91,7 +91,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected List<Step> executionStack
 	protected int activeStateIndex
 	protected boolean useInternalEventQueue
-	
+
 	protected boolean useSuperStep
 	protected boolean stateVectorChanged
 
@@ -155,40 +155,41 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 
 	override runCycle() {
 		// TODO Should not care about cycle adapter here - move to simulation engine where it is defined.  
-		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter) as EventDrivenCycleAdapter
+		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext,
+			EventDrivenCycleAdapter) as EventDrivenCycleAdapter
 		try {
-			if(cycleAdapter !== null )
+			if (cycleAdapter !== null)
 				executionContext.eAdapters.remove(cycleAdapter)
-				
-		executionContext.clearOutEvents
-		
-		var Event event = null
-		do {
-			traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
-			// activate an event if there is one
-			if (event !== null) {
-				event.event.raised = true
-				event.event.value = event.value
-				event = null
-			}
-			// perform a run to completion step
-			if (useSuperStep) {
-				superStepLoop([rtcStep])
-			} else {
-				rtcStep
-			}
-			executionContext.clearLocalAndInEvents
-			
-			// get next event if available
-			if(! internalEventQueue.empty) event = internalEventQueue.poll
-			traceInterpreter.evaluate(endRunCycleTrace, executionContext)
-		} while (event !== null)
-		}finally{
-			if(cycleAdapter !== null)
+
+			executionContext.clearOutEvents
+
+			var Event event = null
+			do {
+				traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
+				// activate an event if there is one
+				if (event !== null) {
+					event.event.value = event.value
+					event.event.raised = true
+					event = null
+				}
+				// perform a run to completion step
+				if (useSuperStep) {
+					superStepLoop([rtcStep])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				} else {
+					rtcStep
+				}
+				executionContext.clearLocalAndInEvents
+
+				// get next event if available
+				if(! internalEventQueue.empty) event = internalEventQueue.poll
+				traceInterpreter.evaluate(endRunCycleTrace, executionContext)
+			} while (event !== null)
+		} finally {
+			if (cycleAdapter !== null)
 				executionContext.eAdapters.add(cycleAdapter)
 		}
 	}
-	
+
 	def superStepLoop(()=>void microStep) {
 		do {
 			stateVectorChanged = false
@@ -196,7 +197,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		} while (stateVectorChanged)
 	}
 
-	def rtcStep() {		
+	def rtcStep() {
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		while (activeStateIndex < activeStateConfiguration.size) {
@@ -329,8 +330,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			internalEventQueue.add(new Event(ev, value));
 
 		} else {
-			ev.raised = true
 			ev.value = value
+			ev.raised = true
 		}
 	}
 
@@ -345,7 +346,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			return false;
 		} else {
 			var List<RegularState> activeStates = executionContext.getAllActiveStates();
-			if(activeStates.isEmpty){
+			if (activeStates.isEmpty) {
 				return false;
 			}
 			for (RegularState regularState : activeStates) {
@@ -356,8 +357,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			return true;
 		}
 	}
-	
-	override getExecutionContext(){
+
+	override getExecutionContext() {
 		executionContext
 	}
 }

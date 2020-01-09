@@ -239,7 +239,7 @@ class TreeNamingService implements INamingService {
 	}
 
 	override asIdentifier(String string) {
-		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
+		string.replaceAll('[[^a-z]&&[^A-Z]&&[^0-9]]', separator.toString)
 	}
 
 	override isKeyword(String string) {

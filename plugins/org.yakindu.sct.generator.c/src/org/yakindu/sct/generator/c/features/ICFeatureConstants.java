@@ -50,4 +50,7 @@ public interface ICFeatureConstants {
 	public static final String FEATURE_GENERATOR_OPTIONS = "GeneratorOptions";
 
 	public static final String PARAMETER_IN_EVENT_QUEUE = "inEventQueue";
+	
+	public static final String PARAMETER_USER_ALLOCATED_QUEUE = "userAllocatedQueue";
+	
 }

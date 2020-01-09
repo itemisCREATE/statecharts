@@ -61,7 +61,7 @@ TEST_F(EventDrivenTriggeredByEventTest, proceedTimeDoesNotTriggerRunCycle) {
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
 	
-	runner->proceed_time(120000);
+	runner->proceed_time(120*1000);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	

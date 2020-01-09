@@ -64,9 +64,9 @@ void IntegerExpressionsTest::integerExpressions()
 	EXPECT_TRUE(integerExpressionsIface_get_minusAssign(&statechart)== - 8 );
 	EXPECT_TRUE(integerExpressionsIface_get_moduloAssign(&statechart)== 0);
 	EXPECT_TRUE(integerExpressionsIface_get_decrementAssign(&statechart)== 0);
-	EXPECT_TRUE(integerExpressionsIface_get_decrement(&statechart)== 1);
+	EXPECT_TRUE(integerExpressionsIface_get_decrement(&statechart)== - 2 );
 	EXPECT_TRUE(integerExpressionsIface_get_incrementAssign(&statechart)== 0);
-	EXPECT_TRUE(integerExpressionsIface_get_increment(&statechart)== 1);
+	EXPECT_TRUE(integerExpressionsIface_get_increment(&statechart)== 2);
 }
 
 void IntegerExpressionsTest::setTimer(IntegerExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

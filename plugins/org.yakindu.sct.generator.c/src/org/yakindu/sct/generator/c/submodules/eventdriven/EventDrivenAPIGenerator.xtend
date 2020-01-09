@@ -17,6 +17,7 @@ import org.yakindu.sct.generator.c.submodules.APIGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.INTPTR_TYPE
+import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.c.GeneratorPredicate
@@ -32,17 +33,23 @@ class EventDrivenAPIGenerator extends APIGenerator {
 	@Inject protected extension CLiterals
 	@Inject protected extension GeneratorPredicate
 	
+	override protected initSignature(ExecutionFlow it) {
+		val internalArgs = ''', «internalEventStructTypeName» *internal_queue_buffer, «INT_TYPE» internal_queue_capacity'''
+		val inArgs = ''', «internalEventStructTypeName» *in_queue_buffer, «INT_TYPE» in_queue_capacity'''
+		'''void «initFctID»(«scHandleDecl»«IF userAllocatesInternalQueue»«internalArgs»«ENDIF»«IF userAllocatesInQueue»«inArgs»«ENDIF»)'''
+	}
+	
 	override protected initFunctionBody(ExecutionFlow it) {
 		'''
 		«super.initFunctionBody(it)»
 		«IF needsInternalEventQueue»
-		«eventQueueInitFunction»(&(«scHandle»->«internalQueue»));
+			«eventQueueInitFunction»(&«scHandle»->«internalQueue», «IF userAllocatesInternalQueue»internal_queue_buffer, internal_queue_capacity«ELSE»«scHandle»->internal_buffer, «internalBufferSize»«ENDIF»);
 		«ENDIF»
 		«IF needsInEventQueue»
-		«eventQueueInitFunction»(&(«scHandle»->«inEventQueue»));
+			«eventQueueInitFunction»(&«scHandle»->«inEventQueue», «IF userAllocatesInQueue»in_queue_buffer, in_queue_capacity«ELSE»«scHandle»->in_buffer, «inBufferSize»«ENDIF»);
 		«ENDIF»
 		«IF needsRunCycleGuard»
-		«scHandle»->is_running_cycle = «FALSE_LITERAL»;
+			«scHandle»->is_running_cycle = «FALSE_LITERAL»;
 		«ENDIF»
 		'''
 	}

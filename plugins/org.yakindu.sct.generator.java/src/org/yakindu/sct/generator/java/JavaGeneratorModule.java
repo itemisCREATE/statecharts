@@ -53,6 +53,7 @@ public class JavaGeneratorModule implements IGeneratorModule {
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		includeProviderBinder = Multibinder.newSetBinder(binder, JavaIncludeProvider.class);
+		includeProviderBinder.addBinding().to(JavaStatechartIncludeProvider.class);
 		configureGeneratorRoot(entry, binder);
 		configureForExecutionStyle(entry, binder);
 		configureServices(entry, binder);

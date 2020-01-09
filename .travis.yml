@@ -1,8 +1,10 @@
 sudo: false
 language: java
-dist: precise
+dist: bionic
 jdk: 
- - oraclejdk8
+ - openjdk11
+services:
+ - xvfb
 addons:
  apt:
   packages:
@@ -20,13 +22,9 @@ env:
   - GMOCK_HOME
 matrix:
   include:
-  - env: TARGET=Neon.target
-    if: branch = master
   - env: TARGET=Oxygen.target
     if: branch = master
-  - env: TARGET=Photon.target
-    if: branch = master
-  - env: TARGET=2018-09.target
+  - env: TARGET=2019-12.target
 before_script:
  - wget https://github.com/google/googletest/archive/release-1.8.0.zip
  - unzip release-1.8.0.zip
@@ -57,8 +55,6 @@ before_script:
 # Display ccache usage statistics before build
  - ccache -s
  - cd $TRAVIS_BUILD_DIR
-before_install:
-- sh -e /etc/init.d/xvfb start - sleep 10
 script:
 - cd releng/org.yakindu.sct.releng
 - mvn clean verify -P$TARGET,tests

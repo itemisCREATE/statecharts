@@ -35,6 +35,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import org.yakindu.sct.model.sgen.GeneratorModel
 
 class StatemachineInterface {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -71,7 +72,7 @@ class StatemachineInterface {
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
 			.addImport(entry.basePackageName.dot(iTimerCallback), flow.timed)
 			.addImport(entry.basePackageName.dot(iStatemachine))
-			.addImports(includeProviders.map[getImports(flow)].flatten)
+			.addImports(includeProviders.map[getImports(flow, entry.eContainerOfType(GeneratorModel))].flatten)
 			.classTemplate(
 				ClassTemplate
 					.create
