@@ -2,7 +2,7 @@ sudo: false
 language: java
 dist: bionic
 jdk: 
- - oraclejdk8
+ - openjdk11
 addons:
  apt:
   packages:
