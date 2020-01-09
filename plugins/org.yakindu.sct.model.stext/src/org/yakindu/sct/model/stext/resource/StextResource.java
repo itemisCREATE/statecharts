@@ -56,6 +56,7 @@ public class StextResource extends AbstractSCTResource {
 		}
 		for (Scope scope : statechart.getScopes()) {
 			String serializedScope = serialize(scope);
+			// if scope has a node model (was parsed), serializer will add a newline himself
 			if (builder.length() > 0 && !(serializedScope.startsWith(NEWLINE))) {
 				builder.append(NEWLINE);
 			}
@@ -71,7 +72,12 @@ public class StextResource extends AbstractSCTResource {
 		EList<Reaction> reactions = scope.getReactions();
 		StringBuilder builder = new StringBuilder();
 		for (Reaction reaction : reactions) {
-			builder.append(serializeReaction(reaction));
+			String serializedReaction = serializeReaction(reaction);
+			// if reaction has a node model (was parsed), serializer will add a newline himself
+			if (builder.length() > 0 && !(serializedReaction.startsWith(NEWLINE))) {
+				builder.append(NEWLINE);
+			}
+			builder.append(serializedReaction);
 		}
 		state.setSpecification(builder.toString());
 	}

@@ -38,6 +38,12 @@ public class FoldOutgoingActionsRefactoringTest extends
 	}
 	
 	@Test
+	public void testFoldOutgoingActionsWithExistingEntryReaction() {
+		testRefactoringOnState(FOLD_OUTGOING_ACTIONS + "before_existingEntryReaction.sct",
+				FOLD_OUTGOING_ACTIONS + "after_existingEntryReaction.sct", "A");
+	}
+	
+	@Test
 	public void testIsExecutable() {
 		testRefactoringIsExecutableOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
 				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "A", true);
