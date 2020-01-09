@@ -44,7 +44,9 @@ public class SCTFileEditorOpener implements IURIEditorOpener {
 			if (fileToOpen != null) {
 				IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 						.openEditor(new FileEditorInput(fileToOpen), getEditorID());
-
+				if (uri.fragment() == null || uri.fragment().isEmpty()) {
+					return editor;
+				}
 				if (editor instanceof DiagramEditor) {
 					DiagramEditor diagramEditor = (DiagramEditor) editor;
 					EObject targetElement = (EObject) diagramEditor.getDiagram().eResource().getEObject(uri.fragment());

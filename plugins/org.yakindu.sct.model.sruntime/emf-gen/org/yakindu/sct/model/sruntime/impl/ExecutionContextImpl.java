@@ -525,18 +525,25 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	@Override
 	public void addSlots(final List<ExecutionSlot> result, final List<ExecutionSlot> slots, final List<ExecutionSlot> visited) {
-		final Consumer<ExecutionSlot> _function = new Consumer<ExecutionSlot>() {
+		final Function1<ExecutionSlot, Boolean> _function = new Function1<ExecutionSlot, Boolean>() {
+			public Boolean apply(final ExecutionSlot it) {
+				boolean _contains = visited.contains(it);
+				return Boolean.valueOf((!_contains));
+			}
+		};
+		Iterable<ExecutionSlot> _filter = IterableExtensions.<ExecutionSlot>filter(slots, _function);
+		Iterables.<ExecutionSlot>addAll(result, _filter);
+		final Consumer<ExecutionSlot> _function_1 = new Consumer<ExecutionSlot>() {
 			public void accept(final ExecutionSlot it) {
 				boolean _add = visited.add(it);
 				if (_add) {
-					result.add(it);
 					if ((it instanceof CompositeSlot)) {
 						ExecutionContextImpl.this.addSlots(result, ((CompositeSlot)it).getSlots(false), visited);
 					}
 				}
 			}
 		};
-		slots.forEach(_function);
+		slots.forEach(_function_1);
 	}
 
 	/**

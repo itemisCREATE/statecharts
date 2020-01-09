@@ -95,9 +95,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 		_createCache_createCheck.clear
 		_createCache_createDerivedEvent.clear
 		_createCache_create_1.clear
-		_createCache_create_10.clear
-		_createCache_createScope.clear
-		_createCache_createScope_1.clear
 		_createCache_create_2.clear
 		_createCache_create_3.clear
 		_createCache_create_4.clear
@@ -106,6 +103,12 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 		_createCache_create_7.clear
 		_createCache_create_8.clear
 		_createCache_create_9.clear
+		_createCache_create_10.clear
+		_createCache_create_11.clear
+		_createCache_createScope.clear
+		_createCache_createScope_1.clear
+		_createCache_createScope_2.clear
+		
 		_createCache_timeEventScope.clear
 	}
 	

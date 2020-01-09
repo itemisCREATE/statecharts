@@ -108,6 +108,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private static final int FONT_SIZE = 11;
 	private static final String FONT = "Courier New";
 
+	private SessionSelectionChangedListener listener;
+
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
@@ -182,7 +184,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			}
 		});
 
-		this.sessionDropdown.addPostSelectionChangedListener(new SessionSelectionChangedListener());
+		listener = new SessionSelectionChangedListener();
+		this.sessionDropdown.addPostSelectionChangedListener(listener);
 
 		targets.clear();
 		for (ILaunch iLaunch : DebugPlugin.getDefault().getLaunchManager().getLaunches()) {
@@ -246,13 +249,13 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected void handleDebugEvent(DebugEvent debugEvent) {
 		updateActions();
 		switch (debugEvent.getKind()) {
-			case DebugEvent.TERMINATE :
-				setViewerInput(null);
-				break;
-			case DebugEvent.SUSPEND :
-				break;
-			case DebugEvent.RESUME :
-				break;
+		case DebugEvent.TERMINATE:
+			setViewerInput(null);
+			break;
+		case DebugEvent.SUSPEND:
+			break;
+		case DebugEvent.RESUME:
+			break;
 		}
 		Display.getDefault().asyncExec(() -> {
 			if (debugEvent.getSource() != null) {
@@ -281,7 +284,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	protected void openEditorForTarget(final IDebugTarget debugTarget) {
-		if (this.debugTarget != null) {
+		if (this.debugTarget != null && debugTarget instanceof SCTDebugTarget
+				&& ((SCTDebugTarget) debugTarget).isPrimary()) {
 			EObject adapter = debugTarget.getAdapter(EObject.class);
 			if (adapter instanceof Statechart) {
 				Statechart statechart = (Statechart) adapter;
@@ -301,6 +305,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			if (debugTarget != null) {
 				if (!targets.contains(debugTarget)) {
 					targets.add(debugTarget);
+
 					sessionDropdown.setInput(targets);
 					sessionDropdown.setSelection(new StructuredSelection(debugTarget), true);
 					changeTarget(debugTarget);

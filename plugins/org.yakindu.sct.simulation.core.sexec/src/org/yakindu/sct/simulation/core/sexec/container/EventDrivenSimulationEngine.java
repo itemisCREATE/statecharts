@@ -12,9 +12,12 @@
 package org.yakindu.sct.simulation.core.sexec.container;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.types.Direction;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.SRuntimePackage;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
@@ -84,9 +87,13 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 		public EventDrivenCycleAdapter(IExecutionFlowInterpreter interpreter) {
 			this.interpreter = interpreter;
 		}
-
+		
 		@Override
 		public void notifyChanged(Notification notification) {
+			//Only run cycle if responsible for this kind of notification
+			if(EcoreUtil2.getContainerOfType((EObject)notification.getNotifier(), ExecutionContext.class) != interpreter.getExecutionContext()){
+				return;
+			}
 			super.notifyChanged(notification);
 			if (notification.getNotifier() instanceof ExecutionEvent
 					&& notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {

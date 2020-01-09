@@ -63,7 +63,7 @@ public class PackageImportHyperlinkHelper extends HyperlinkHelper {
 
 	protected IHyperlink createHyperlink(INode node, final PackageImport pkgImport) {
 		XtextHyperlink result = getHyperlinkProvider().get();
-		result.setURI(pkgImport.getUri());
+		result.setURI(pkgImport.getFileURI());
 		Region region = new Region(node.getOffset(), node.getLength());
 		result.setHyperlinkRegion(region);
 		result.setHyperlinkText(pkgImport.getUri().toString());

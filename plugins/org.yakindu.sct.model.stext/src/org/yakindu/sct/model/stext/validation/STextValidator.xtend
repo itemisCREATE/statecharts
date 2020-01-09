@@ -786,17 +786,9 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		var EList<String> imports=scope.getImports() 
 		for (String packageImport : imports) {
 			var Optional<PackageImport> pkImport=mapper.findPackageImport(scope.eResource(), packageImport) 
-			if (!pkImport.isPresent() || !getResource(scope).getResourceSet().getURIConverter().exists(pkImport.get().getUri().trimQuery(), null)) {
+			if (!pkImport.isPresent()) {
 				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope, StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport)) 
 			}
-		}
-	}
-    @Check()
-	def void checkIfDomainAllowsForImport(ImportScope importScope){
-		var Statechart statechart = utils.getStatechart(importScope)
-		var defaultDomain = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
-		if ((statechart !== null) && statechart.getDomainID().equals(defaultDomain)) {
-			warning(OTHER_DOMAIN_FOR_IMPORT, importScope, null, -1)
 		}
 	}
 	
