@@ -11,20 +11,20 @@ This introduction gives a short overview of the common basis and the differences
 
 p=. Simple state machine
 
-The basic building blocks of a state machine are states and transitions. A state is a situation of a system depending on previous inputs and causes a reaction on following inputs. One state is marked as the initial state; this is where the execution of the machine starts. A state transition defines when a state is changed from one to another. This can be an input, like pressing a button, and/or a condition that needs to be fulfilled. Depending on the state machine type, states and/or transitions produce outputs.
+The basic building blocks of a state machine are states and transitions. A state is a situation of a system depending on previous inputs and causes a reaction on following inputs. One state is marked as the initial state; this is where the execution of the machine starts. A state transition defines for which input a state is changed from one to another. Depending on the state machine type, states and/or transitions produce outputs.
 
 Consider the simple state machine above. It consists of two states, _Off_ and _On_. _On_ is the initial state here; it is activated when the state machine is executed. The arrows between the states denote the possible state transitions. They define for which input a state change occurs. Here, the active state is changed from _On_ to _Off_ for the input _buttonpressed_, and back again to _On_ for the same input. 
 
-bq. *Please note:* In automata theory an automaton reacts on inputs and produces outputs. There, the terms input and output are usually used for text inputs/outputs. Modern state machines use an extended definition of inputs and outputs. Inputs can be events like a button click or a time trigger while outputs are actions like an operation call or a variable assignment.
+bq. *Please note:* In automata theory an automaton reacts on inputs and produces outputs. There, the terms input and output are usually used for symbols which belong to an alphabet. Modern state machines use an extended definition of inputs and outputs. Inputs can be events like a button click or a time trigger while outputs are actions like an operation call or a variable assignment.
 
 In the following, we will extend the simple switch example to explain the differences between Mealy and Moore machines as well as Harel statecharts and UML state machines.
 
 
 *Moore machines*
 
-In automata theory, there are two basic types of finite-state machines (FSM). One of those is called "_Moore_ machine":https://en.wikipedia.org/wiki/Moore_machine, named after its inventor Edward Moore. Moore machines consist of states and transitions. *States are able to produce outputs*, and the output is determined solely by the current state, not by any input.
+In automata theory, there are two basic types of finite-state machines (FSM). One of those is called "_Moore_ machine":https://en.wikipedia.org/wiki/Moore_machine, named after its inventor Edward Moore, who introduced the concept in 1956. Moore machines consist of states and transitions. *States are able to produce outputs*, and the output is determined solely by the current state, not by any input.
 
-We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. This behavior is modeled by the state machine below. Pressing a button raises a corresponding event (_ON_pressed_ or _OFF_pressed_) upon which the machine reacts with a state change and corresponding outputs/actions. The output of the state machine is simply the brightness level. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
+We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. This behavior is modeled by the state machine below. Pressing a button raises a corresponding event (_ON_pressed_ or _OFF_pressed_) upon which the machine reacts with a state change and corresponding outputs. The output of the state machine is simply the brightness level. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
 
 !(small)images/overview_moore.png(Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools)!
 
@@ -33,7 +33,7 @@ p=. Light switch example as a Moore machine, modeled with YAKINDU Statechart Too
 
 *Mealy machines*
 
-In comparison with Moore machines, "_Mealy_ machines":https://en.wikipedia.org/wiki/Mealy_machine *produce outputs only on transitions* and not in states. This often results in state diagrams with fewer states because more logic can be put on transitions. 
+"_Mealy_ machines":https://en.wikipedia.org/wiki/Mealy_machine were invented by George H. Mealy in 1955. In comparison with Moore machines, Mealy machines *produce outputs only on transitions* and not in states. This often results in state diagrams with fewer states because more logic can be put on transitions. 
 
 !(small)images/overview_mealy.png(Light switch example as a Mealy machine)!
 
@@ -58,7 +58,7 @@ So basically "Harel statecharts":http://www.wisdom.weizmann.ac.il/~dharel/SCANNE
 
 Using composite states and sub diagrams, we are able to bring more *depth* into state diagrams, while keeping the diagrams clear and well-structured. Regions help us to express *orthogonality*: Different substate machines that can be executed side by side. Events allow us to achieve *broadcast communication* and give us a strong means to describe complex behavior. Using guards, we can state that a certain event triggers a transition only if a given condition is met. Inter-level transitions, history states, temporal logic as well as entry, exit and throughout actions are further Harel statechart elements.
 
-Since Harel statecharts allow to use variable assignments as output actions, we can simplify the light switch example by merging all _Light On_ states into one and executing the output actions on a self-transition. Here we just increment the brightness value each time the transition is taken. We use the modulo expression to ensure the brightness value stays between 1 and 3. 
+Harel statecharts can define variables which can be used in input and output expressions. Regarding the light switch example, this allows us to store the brightness level in a variable instead of a number of states. In that way, we can simplify the statechart by merging all _Light On_ states into one and executing the output actions on a self-transition. Here we just increment the brightness value each time the transition is taken. We use the modulo expression to ensure the brightness value stays between 1 and 3. This has the benefit that we can change the number of brightness levels without adding new states.
 
 !(small)images/overview_harel_1.png(Light switch example as a Harel statechart)!
 
@@ -85,7 +85,7 @@ The following table illustrates the differences between the previously described
 
 p=. Differences between the state machine types
 
-The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now.
+The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now. YAKINDU statecharts are based on Harel statecharts and are very close but not identical to UML state machines. The concrete differences are explained in the documentation where they exist. YAKINDU Statechart Tools come with a simulator which allows to directly execute the modelled statecharts. 
 
 Learn more about modeling systems with state machines in our free whitepaper:
 
