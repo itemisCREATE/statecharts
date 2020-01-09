@@ -33,7 +33,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 public class CDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
-	private static final String INVALID_IDENTIFIER_REGEX = "[^a-z&&[^A-Z&&[^0-9]]]";
 	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
 	@Override

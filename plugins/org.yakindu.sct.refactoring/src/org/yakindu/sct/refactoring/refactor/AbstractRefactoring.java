@@ -212,7 +212,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	}
 
 	protected String asIdentifier(String string) {
-		return string.replaceAll("[^a-z&&[^A-Z&&[^0-9]]]", "_");
+		return string.replaceAll("[[^a-z]&&[^A-Z]&&[^0-9]]", "_");
 	}
 
 }

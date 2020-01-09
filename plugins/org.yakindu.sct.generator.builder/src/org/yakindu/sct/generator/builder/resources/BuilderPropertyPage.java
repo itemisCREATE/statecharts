@@ -164,8 +164,7 @@ public class BuilderPropertyPage extends PropertyPage {
 	}
 
 	private IProject getActualProject() {
-		// cast necessary for Luna, in Mars&Neon getAdapter is generic
-		return (IProject) getElement().getAdapter(IProject.class);
+		return getElement().getAdapter(IProject.class);
 	}
 
 	protected final class CheaderBlacklistSelectionStatusValidator implements ISelectionStatusValidator {
