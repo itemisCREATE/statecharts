@@ -3,6 +3,8 @@ language: java
 dist: bionic
 jdk: 
  - openjdk11
+services:
+ - xvfb
 addons:
  apt:
   packages:
@@ -53,8 +55,6 @@ before_script:
 # Display ccache usage statistics before build
  - ccache -s
  - cd $TRAVIS_BUILD_DIR
-before_install:
-- sh -e /etc/init.d/xvfb start - sleep 10
 script:
 - cd releng/org.yakindu.sct.releng
 - mvn clean verify -P$TARGET,tests
