@@ -37,9 +37,9 @@ testclass IntegerExpressions for statechart IntegerExpressions {
 		assert moduloAssign == 0
 		
 		assert decrementAssign == 0
-		assert decrement == 1
+		assert decrement == -2
 		assert incrementAssign == 0
-		assert increment == 1
+		assert increment == 2
 		
 		}
 	}

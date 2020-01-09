@@ -82,11 +82,11 @@ TEST_F(IntegerExpressionsTest, integerExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_decrementAssign()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_decrement()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_decrement()== - 2 );
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_incrementAssign()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_increment()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_increment()== 2);
 	
 	
 }

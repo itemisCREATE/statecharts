@@ -63,8 +63,8 @@ public class IntegerExpressions {
 		assertTrue(statemachine.getMinusAssign() == - 8l );
 		assertTrue(statemachine.getModuloAssign() == 0l);
 		assertTrue(statemachine.getDecrementAssign() == 0l);
-		assertTrue(statemachine.getDecrement() == 1l);
+		assertTrue(statemachine.getDecrement() == - 2l );
 		assertTrue(statemachine.getIncrementAssign() == 0l);
-		assertTrue(statemachine.getIncrement() == 1l);
+		assertTrue(statemachine.getIncrement() == 2l);
 	}
 }

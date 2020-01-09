@@ -30,6 +30,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	TransitionHandlesMultipleExists.class,
 	TriggerExpressionPrecedence.class,
 	StatechartEntryExitActions.class,
+	// not yet implemented
+//	CycleBasedSuperStep.class,
+//	EventDrivenSuperStep.class,
 	AlwaysOncycle.class,
 	AssignmentAsExpression.class,
 	BitExpressions.class,
