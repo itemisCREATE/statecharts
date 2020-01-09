@@ -13,7 +13,7 @@ class CMultiStatemachine {
 	@Inject extension Naming
 
 	def dispatch CharSequence getFunctionId(Operation op, ComplexType type) {
-		val flow = type.refFlow
+		val flow = type.executionFlow
 		// TODO: Reuse Statechart2Type names here..
 		switch(op.name) {
 			case "init": return flow.initFctID
