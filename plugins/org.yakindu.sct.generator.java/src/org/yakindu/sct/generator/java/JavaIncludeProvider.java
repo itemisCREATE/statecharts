@@ -13,9 +13,11 @@ package org.yakindu.sct.generator.java;
 import java.util.Collections;
 
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sgen.GeneratorModel;
 
 public class JavaIncludeProvider {
-	public Iterable<String> getImports(ExecutionFlow it) {
+	
+	public Iterable<String> getImports(ExecutionFlow it, GeneratorModel genModel) {
 		return Collections.emptyList();
 	}
 }

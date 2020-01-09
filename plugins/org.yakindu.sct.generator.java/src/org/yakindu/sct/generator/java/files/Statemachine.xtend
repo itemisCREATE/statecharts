@@ -42,6 +42,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.java.submodules.eventdriven.RunnableExtension
+import org.yakindu.sct.model.sgen.GeneratorModel
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -88,7 +89,7 @@ class Statemachine {
 			.fileComment(entry.licenseText)
 			.packageName(getImplementationPackageName(flow, entry))
 			.addImports(imports)
-			.addImports(includeProviders.map[getImports(flow)].flatten)
+			.addImports(includeProviders.map[getImports(flow, entry.eContainerOfType(GeneratorModel))].flatten)
 			.classTemplate(
 				classTemplate
 			)
@@ -152,7 +153,7 @@ class Statemachine {
 		}
 		
 		for(JavaIncludeProvider jip : includeProviders) {
-			importSet += jip.getImports(flow).map[toString]
+			importSet += jip.getImports(flow, entry.eContainerOfType(GeneratorModel)).map[toString]
 		}
 		
 		if (tracingUsed(entry)) {
