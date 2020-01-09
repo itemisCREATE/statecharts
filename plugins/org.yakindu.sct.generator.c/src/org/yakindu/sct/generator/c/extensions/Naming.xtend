@@ -29,6 +29,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.naming.StextNameProvider
@@ -39,7 +40,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.base.types.ComplexType
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -136,10 +136,6 @@ class Naming {
 	def dispatch instance(InterfaceScope it) {
 		'iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
-	
-	def dispatch String instance(Void it) {
-		'''null :/'''
-	}
 
 	def dispatch instance(Scope it) {
 		'timeEvents'
@@ -159,8 +155,7 @@ class Naming {
 	}
 
 	protected def boolean isUniqueName(Scope scope, Declaration decl) {
-		true
-		//(scope.eContainer as ScopedElement).scopes.map[declarations].flatten.filter[it.name == decl.name].size == 1
+		(scope.eContainer as ScopedElement).scopes.map[declarations].flatten.filter[it.name == decl.name].size == 1
 	}
 
 	def functionPrefix(ExecutionFlow it) {
@@ -315,24 +310,11 @@ class Naming {
 	}
 
 	def asFunction(OperationDefinition it) {
-		var prefix = ""
-		if (scope !== null) 
-			prefix = scope.functionPrefix(it)
-		prefix +  separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
 	}
 	
 	def accessFunction(Declaration it, String funcName) {
-		var prefix = ""
-		if (scope !== null) 
-			prefix = scope.functionPrefix(it)
-		else{
-			prefix = ct.name.toFirstLower + "Iface"
-		}
-		prefix + separator + funcName + separator + name.asIdentifier.toFirstLower
-	}
-	
-	def ct(Declaration it) {
-		it.eContainer as ComplexType
+		scope.functionPrefix(it) + separator + funcName + separator + name.asIdentifier.toFirstLower
 	}
 	
 	def variable(VariableDefinition it) {
@@ -396,8 +378,6 @@ class Naming {
 	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
 
 	def dispatch access(EObject it) '''#error cannot access elements of type «getClass().name»'''
-	
-	def dispatch access (Void it) '''null :('''
 
 	def valueAccess(Event it) '''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
 

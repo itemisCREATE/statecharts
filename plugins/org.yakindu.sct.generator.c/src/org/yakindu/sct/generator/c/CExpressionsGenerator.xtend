@@ -25,7 +25,6 @@ import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
-import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
@@ -38,20 +37,15 @@ import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.submodules.EventCode
 import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.Declaration
-import org.yakindu.base.types.TypedDeclaration
-import org.yakindu.base.expressions.util.ExpressionExtensions
 
 /**
  * @author axel terfloth
@@ -69,11 +63,6 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
 	
-	@Inject protected extension CMultiStatemachine
-	@Inject protected extension MultiStatemachineHelper
-	
-	@Inject extension ExpressionExtensions
-		
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
 		val target = it.definition
@@ -110,24 +99,9 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Parameter target) 
 		'''«target.name»'''
-	
-	def dispatch CharSequence code(ElementReferenceExpression it, ComplexType target) {
-		'''«target.name» //new'''
-	}
 
-	def dispatch CharSequence code(EventRaisingExpression it) {
-		val event = event
-		if (event instanceof FeatureCall) {
-			val feature = event.feature
-			if (feature instanceof EventDefinition) {
-				val type = feature.eContainer
-				if (type instanceof ComplexType) {
-					return '''«type.name.toFirstLower»Iface«getSeparator»raise«getSeparator»«feature.name.asIdentifier.toFirstLower»(&«event.owner.code»«IF value !== null», «value.code»«ENDIF»)'''
-				}
-			}
-		}
-		eventRaisingCode(this)
-	}
+
+	def dispatch CharSequence code(EventRaisingExpression it) {eventRaisingCode(this)}
 
 	def dispatch CharSequence code(
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
@@ -161,53 +135,18 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(FeatureCall it) {
 		it.code(it.definition)
 	}
-	
-	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
-		val container = target.eContainer
-		if(container instanceof ComplexType) {
-			print("First")
-			val fcontainer = it.eContainer
-			if(fcontainer instanceof FeatureCall) {
-				val x = fcontainer.accessComplexType(target)
-				print(x)
-			}
-			return '''«owner.accessComplexType(target)».«target.name»'''
-		}
-		return '''Second: «target.access»'''
-	}
-	
-	protected def CharSequence accessComplexType(Expression owner, VariableDefinition target) {
-		if(owner instanceof FeatureCall) {
-			return '''«owner.code(owner.feature)»«target.accessUnnamedIface»'''
-		} else if (owner instanceof ElementReferenceExpression) {
-			return '''«owner.code»«target.accessUnnamedIface»'''
-		}
-		return '''Cannot access ComplexType for Expression '«owner»' with target '«target»'.'''
-	}
-	
-	
-	protected def CharSequence accessUnnamedIface(VariableDefinition target)
-		'''«IF !(target.getAnnotationOfType("unnamedInterface") === null)».iface«ENDIF»'''
-	
-	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) {
-		val type = target.eContainer
-		if (type instanceof ComplexType) {
-			return '''«type.name.toFirstLower»Iface«getSeparator»«target.name.asIdentifier.toFirstLower»(&«it.owner.code»«IF !expressions.nullOrEmpty», «ENDIF»«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
-		}
-		return '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
-	}
 
-	def dispatch CharSequence code(FeatureCall it, Operation target) {
-		if(target.eContainer instanceof ComplexType) {
-			return '''«target.getFunctionId(owner.featureOrReference)»(&«owner.code»)'''
-		} 
-		return '''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
+	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«target.access»'''
+
+	def dispatch CharSequence code(FeatureCall it,
+		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
-				
-	}
-	
 
-	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code».«IF target.eContainer instanceof ComplexType»iface«target.access.toString.toFirstUpper»«ELSE»«target.access»«ENDIF»'''
+	def dispatch CharSequence code(FeatureCall it,
+		Operation target) '''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
+		code»«ENDFOR»)'''
+
+	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
