@@ -41,7 +41,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
@@ -62,26 +61,27 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(OperationDefinition it) {
-		return getContext + "operationCallback." + name.asEscapedIdentifier;
+		return "operationCallback." + name.asEscapedIdentifier;
 	}
 
 	/* Assignment */
 	override dispatch String code(AssignmentExpression it) {
-		if (varRef.definition instanceof Property) {
-			var property = varRef.definition as Property
+		val property = varRef.definition
+		if (property instanceof Property) {
 			if (property.eContainer instanceof LocalVariableDefinition) {
 				return '''«property.getContext»«property.name» = «assignCmdArgument(property)»'''
-			} else {
-				if (eContainer instanceof Expression) {
-					return '''«property.getContext»«property.assign»(«assignCmdArgument(property)»)'''
-				} else {
-					return '''«property.getContext»«property.setter»(«assignCmdArgument(property)»)'''
-				}
 			}
+			if (property.eContainer instanceof ComplexType) {
+				return '''«varRef.getContext»«property.name» = «assignCmdArgument(property)»'''
+			}
+			if (eContainer instanceof Expression) {
+				return '''«property.getContext»«property.assign»(«assignCmdArgument(property)»)'''
+			}
+			return '''«varRef.getContext»«property.setter»(«assignCmdArgument(property)»)'''
 		}
 	}
 
-	def assignCmdArgument(AssignmentExpression it, Property property) {
+	def protected assignCmdArgument(AssignmentExpression it, Property property) {
 		var cmd = ""
 		if (!AssignmentOperator.ASSIGN.equals(operator)) {
 			cmd = property.getContext + property.getter + " " + operator.literal.replaceFirst("=", "") + " "
@@ -106,7 +106,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			expression.leftOperand.code + expression.operator.literal + expression.rightOperand.code;
 	}
 
-	def String logicalString(LogicalRelationExpression expression) {
+	def protected String logicalString(LogicalRelationExpression expression) {
 		if (expression.operator == RelationalOperator::EQUALS) {
 			"(" + expression.leftOperand.code + "== null?" + expression.rightOperand.code + " ==null :" +
 				expression.leftOperand.code + ".equals(" + expression.rightOperand.code + "))"
@@ -132,25 +132,23 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		value.getContext + value.definition.event.getter
 	}
 
-	def protected dispatch String code(ElementReferenceExpression it) {
+	def dispatch String code(ElementReferenceExpression it) {
 		val ref = it.reference
 		switch ref {
 			Parameter: return ref.name
 			ComplexType: return ref.name
-			Declaration: return codeDeclaration(ref, it).toString // static class references like System.out
+			Declaration: return codeDeclaration(ref, it).toString
 		}
 	}
 
-	def protected dispatch String code(FeatureCall it) {
+	def dispatch String code(FeatureCall it) {
 		it.feature.codeDeclaration(it).toString
 	}
 
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
 		switch it {
-			Method:
-				return operationCall(it, exp)
 			Operation:
-				return exp.getContext + operationCall(it, exp)
+				return operationCall(it, exp)
 			Event case exp.isComplexTypeContained:
 				return exp.getContext + "isRaised" + name.toFirstUpper + "()"
 			Declaration case exp.isComplexTypeContained:
@@ -166,8 +164,12 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 	}
 	
-	def protected String operationCall(Operation it, ArgumentExpression exp) {
+	def dispatch protected String operationCall(Method it, ArgumentExpression exp) {
 		'''«code»(«FOR arg : exp.expressions SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+	}
+	
+	def dispatch protected String operationCall(Operation it, ArgumentExpression exp) {
+		'''«exp.getContext»«code»(«FOR arg : exp.expressions SEPARATOR ", "»«arg.code»«ENDFOR»)'''
 	}
 
 	def dispatch String code(Declaration it) {
@@ -175,10 +177,10 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(Property it) {
-		if (it.eContainer instanceof ComplexType) {
-			return getContext + it.name
+		if (eContainer instanceof ComplexType) {
+			return it.name
 		}
-		if(eContainer instanceof LocalVariableDefinition){
+		if (eContainer instanceof LocalVariableDefinition) {
 			return it.name
 		}
 		getContext + getter
@@ -213,14 +215,12 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch String getStaticContext(Property it) {
 		if (it.const) {
 			if (interfaceScope !== null) {
-				var result = interfaceScope.interfaceName + "."
-				return result
+				return interfaceScope.interfaceName + "."
 			} else {
-				var result = it.flow.statemachineInterfaceName + "."
-				return result
+				return it.flow.statemachineInterfaceName + "."
 			}
 		}
-		return getContext()
+		return getContext
 	}
 
 	def dispatch String getContext(Declaration it) {
@@ -238,31 +238,25 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		return "//ERROR: No context for " + it
 	}
 
-	def boolean isAssignmentContained(Expression it) {
-		if (it instanceof AssignmentExpression) {
-			return true
-		} else if (eContainer instanceof Expression) {
-			return isAssignmentContained(eContainer as Expression)
-		}
-		return false // default
+	def protected boolean isAssignmentContained(Expression it) {
+		eContainerOfType(AssignmentExpression) !== null
 	}
 
-	def boolean isPropertyContained(Expression it) {
-		if (eContainer instanceof Property) {
-			return true
-		} else if (eContainer instanceof Expression) {
-			return isPropertyContained(eContainer as Expression)
-		}
-		return false // default
+	def protected boolean isPropertyContained(Expression it) {
+		eContainerOfType(Property) !== null
 	}
 	
-	def boolean isPostFixContained(Expression it) {
-		return EcoreUtil2.getContainerOfType(it, PostFixUnaryExpression) !== null
+	def protected dispatch boolean isComplexTypeContained(FeatureCall it) {
+		definition.eContainer instanceof ComplexType
 	}
 	
-	def boolean isComplexTypeContained(ArgumentExpression exp) {
-		return exp.definition.eContainer instanceof ComplexType && (exp instanceof FeatureCall)
+	def protected dispatch boolean isComplexTypeContained(ElementReferenceExpression it) {
+		false
 	}
-	
+
+    def protected boolean isPostFixContained(Expression it) {
+       eContainerOfType(PostFixUnaryExpression) !== null
+    }
+
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
 }
