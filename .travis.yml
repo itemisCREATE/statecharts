@@ -1,6 +1,6 @@
 sudo: false
 language: java
-dist: precise
+dist: bionic
 jdk: 
  - oraclejdk8
 addons:
