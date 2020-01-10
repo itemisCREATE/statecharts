@@ -332,10 +332,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 	
 	def dispatch doExecute(Operation feature, ExecutionSlot slot, ArgumentExpression exp) {
-		val executor = operationExecutors.findFirst[canExecute(exp)]
-		if (executor !== null) {
+		val executors = operationExecutors.filter[canExecute(exp)]
+		executors.forEach[executor|
 			slot.value = executor.executeOperation(exp)
-		}
+		]
 		return slot.value
 	}
 	
@@ -348,7 +348,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 	
 	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
-		new Long(feature.literalValue)
+		Long.valueOf(feature.literalValue)
 	}
 	
 	def dispatch doExecute(Type feature, Void slot, ArgumentExpression exp) {
