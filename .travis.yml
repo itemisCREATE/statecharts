@@ -16,19 +16,17 @@ env:
   global:
   - SWT_GTK3=0
   - DISPLAY=:99.0
-  - GTEST_DIR=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest
-  - LIBRARY_PATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest/build:${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googlemock/build:$LIBRARY_PATH
-  - CPATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest/include:${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googlemock/include:$CPATH
+  - GTEST_DIR=${TRAVIS_BUILD_DIR}/googletest-release-1.8.1/googletest
+  - LIBRARY_PATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.1/googletest/build:${TRAVIS_BUILD_DIR}/googletest-release-1.8.1/googlemock/build:$LIBRARY_PATH
+  - CPATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.1/googletest/include:${TRAVIS_BUILD_DIR}/googletest-release-1.8.1/googlemock/include:$CPATH
   - GMOCK_HOME
 matrix:
   include:
-  - env: TARGET=Oxygen.target
-    if: branch = master
   - env: TARGET=2019-12.target
 before_script:
- - wget https://github.com/google/googletest/archive/release-1.8.0.zip
- - unzip release-1.8.0.zip
- - cd googletest-release-1.8.0/googlemock
+ - wget https://github.com/google/googletest/archive/release-1.8.1.zip
+ - unzip release-1.8.1.zip
+ - cd googletest-release-1.8.1/googlemock
  - mkdir build && cd build && cmake .. && make
  - export LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH
  - cd ../../googletest
