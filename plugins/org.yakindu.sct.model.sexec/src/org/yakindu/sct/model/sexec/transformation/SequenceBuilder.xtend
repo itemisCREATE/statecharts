@@ -41,8 +41,6 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.TypedDeclaration
 
 class SequenceBuilder {
 
@@ -494,26 +492,9 @@ class SequenceBuilder {
 	def addVariableInitializationStep(Sequence initSequence, VariableDefinition vd) {
 		if (vd.effectiveInitialValue !== null) {
 			initSequence.steps.add(vd.createInitialization)
-		} else if (vd.statemachineType !== null) {
-			initSequence.steps.add(vd.createInitCall)
 		}
 	}
 
-	def getStatemachineType(TypedDeclaration it) {
-		return type.superTypes.findFirst[it.type.name === "Statemachine"]?.type as ComplexType
-	}
-	
-	def createInitCall(VariableDefinition vd) {
-		val execution = sexec.factory.createExecution
-		val fc = factory.createFeatureCall => [ fc |
-			fc.feature = vd.statemachineType.features.findFirst[name == "init"]
-			fc.owner = factory.createElementReferenceExpression => [reference = vd]
-			fc.operationCall = true
-		]
-		execution.statement = fc
-		return execution
-	}
-	
 	//TODO: Move to type system
 	def effectiveInitialValue(VariableDefinition vd) {
 		if (vd.initialValue !== null) {
