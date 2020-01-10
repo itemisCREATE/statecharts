@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- * 
- */
+ *
+*/
 package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
@@ -498,7 +498,7 @@ class SequenceBuilder {
 			initSequence.steps.add(vd.createInitCall)
 		}
 	}
-	
+
 	def getStatemachineType(TypedDeclaration it) {
 		return type.superTypes.findFirst[it.type.name === "Statemachine"]?.type as ComplexType
 	}
