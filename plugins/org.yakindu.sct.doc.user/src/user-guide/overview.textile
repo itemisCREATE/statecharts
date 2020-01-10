@@ -3,81 +3,81 @@ p.
 
 h1(#overview_what_are_state_machines). What is a state machine?
 
-A state machine is a behavior model. It consists of different so called states. Because the amount of states of a state machine is finite it is called finite state machine (FSM). There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts. 
+A state machine is a behavior model. It consists of a finite number of states and is therefore also called finite-state machine (FSM). Based on the current state and a given input the machine performs state transitions and produces outputs. There are basic types like Mealy and Moore machines and more complex types like Harel and UML statecharts.
 
 This introduction gives a short overview of the common basis and the differences between state machine types.
 
-!(large)images/simple_moore.png(Simple example as a Moore machine)!
+!(small)images/simple_moore.png(Simple example as a Moore machine)!
 
 p=. Simple state machine
 
-In automata theory a state is a situation of a system depending on previous inputs and causes a reaction on following inputs. Automata theory uses the terms input/output for simple text input/output. Modern state machines use an extended definition of inputs and outputs. These can be events or more complex reactions than simply printing a certain text. Another important element of  state machines are transitions. A transition, as the name says, describes the transition from one state to another.
+The basic building blocks of a state machine are states and transitions. A state is a situation of a system depending on previous inputs and causes a reaction on following inputs. One state is marked as the initial state; this is where the execution of the machine starts. A state transition defines for which input a state is changed from one to another. Depending on the state machine type, states and/or transitions produce outputs.
 
-To explain this concept we introduce a common example:
+Consider the simple state machine above. It consists of two states, _Off_ and _On_. _On_ is the initial state here; it is activated when the state machine is executed. The arrows between the states denote the possible state transitions. They define for which input a state change occurs. Here, the active state is changed from _On_ to _Off_ for the input _buttonpressed_, and back again to _On_ for the same input. 
 
-Let's watch a ferry that sails from the northern port to the southern port and back. We build a state machine that demonstrates the behavior of the ferry. When the latter reaches the northern port the state machine is in state *NorthernPort*. The moving ferry makes up the states *Northwards* and *Southwards*.
+bq. *Please note:* In automata theory an automaton reacts on inputs and produces outputs. There, the terms input and output are usually used for symbols which belong to an alphabet. Modern state machines use an extended definition of inputs and outputs. Inputs can be events like a button click or a time trigger while outputs are actions like an operation call or a variable assignment.
 
-h2(#overview_moore). States and transitions – The ferry as a Moore machine
+In the following, we will extend the simple switch example to explain the differences between Mealy and Moore machines as well as Harel statecharts and UML state machines.
 
-In automata theory, there are two basic types of finite state machines (FSM). One of those is called "_Moore_ machine":https://en.wikipedia.org/wiki/Moore_machine, named after its inventor Edward Moore. Moore machines consist of states and transitions. States are able to produce outputs, and the output is determined solely by the current state, not by any input. Modeled as a Moore machine the ferry example looks like the following:
 
-!(large)images/ferry_moore.png(Ferry example as a Moore machine, modeled with YAKINDU Statechart Tools)!
+*Moore machines*
 
-p=. Ferry example as a Moore machine, modeled with YAKINDU Statechart Tools
+In automata theory, there are two basic types of finite-state machines (FSM). One of those is called "_Moore_ machine":https://en.wikipedia.org/wiki/Moore_machine, named after its inventor Edward Moore, who introduced the concept in 1956. Moore machines consist of states and transitions. *States are able to produce outputs*, and the output is determined solely by the current state, not by any input.
 
-The state diagram has four states: *NorthernPort*, *SouthernPort*, *Northwards* and *Southwards*. Each of these states produces an output which is an action of the ferry. The ferry can either stop when one of the two ports is reached (_ferry.stop_) or move from one port to another (_ferry.moveSouthwards_ and _ferry.moveNorthwards_). In Moore machines the output *only* relies on the current state. This means that the output will not change unless the state also changes. This happens when a transition is taken. In our example, we have two kinds of inputs that may trigger a state transition: The ship’s mate who can decide where to sail (e.g. _mate.sailSouthwards_) and the quay which can detect an arriving ferry (e.g. _quay.reachedSouthernBank_).
+We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. This behavior is modeled by the state machine below. Pressing a button raises a corresponding event (_ON_pressed_ or _OFF_pressed_) upon which the machine reacts with a state change and corresponding outputs. The output of the state machine is simply the brightness level. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
 
-h2(#overview_mealy). Compact state machines by George H. Mealy
+!(small)images/overview_moore.png(Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools)!
 
-In comparison with the Moore machines seen above, "_Mealy_ machines":https://en.wikipedia.org/wiki/Mealy_machine produce outputs only on transitions and not in states. This often results in state diagrams with fewer states because more logic can be put on transitions. As a Mealy machine, the ferry example looks like the following image:
+p=. Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools
 
-!(large)images/ferry_mealy_1.png(Ferry example as a Mealy machine)!
 
-p=. Ferry example as a Mealy machine
+*Mealy machines*
 
-States do not produce outputs anymore, but the transitions do. Whether the ferry moves northwards or southwards is now expressed by the corresponding transitions. The input event mate.sail may lead to the output _ferry.moveSouthwards_ or _ferry.moveNorthwards_ depending on the active state. The state machine offers an extended logic: the states *Northwards* and *Southwards* have two transitions that lead to different states depending on the input event: If the event _mate.sail_ is raised in *Northwards* the output is _ferry.moveSouthwards_, if _quay.reachedNorthernBank_ is raised the ferry stops. The same logic as a Moore machine would lead to additional states like the following image shows:
+"_Mealy_ machines":https://en.wikipedia.org/wiki/Mealy_machine were invented by George H. Mealy in 1955. In comparison with Moore machines, Mealy machines *produce outputs only on transitions* and not in states. This often results in state diagrams with fewer states because more logic can be put on transitions. 
 
-!(large)images/ferry_moore2.png(The ferry as an extended Moore machine)!
+!(small)images/overview_mealy.png(Light switch example as a Mealy machine)!
 
-p=. The ferry as an extended Moore machine
+p=. Light switch example as a Mealy machine
 
 Be aware that both state diagrams, the Moore machine above and the Mealy one, describe exactly the same system. Indeed, automata theory states that you can always translate a Moore machine into a Mealy machine and vice versa, without losing any expressiveness.  
 
-h2(#overview_harel). Representing complex systems with Harel statecharts
 
-David Harel realized that:
+*Harel statecharts*
+
+Although Mealy machines can already reduce the number of required states, for complex systems such automatons get easily unmanageable. Or to put it in David Harel's words:
 
 _“A complex system cannot be beneficially described in this naive fashion, because of the unmanageable, exponentially growing multitude of states, all of which have to be arranged in a ‘flat’ unstratified fashion, resulting in an unstructured, unrealistic, and chaotic state diagram.”_
 
-He concluded the following:
+Harel concluded that "_a state approach must be modular, hierarchical and well-structured"_ and introduced additional concepts like state composition and orthogonality.
 
-_“To be useful, a state approach must be modular, hierarchical and well-structured.”_
-
-Harel introduced elements for modeling complex systems with finite state diagrams and also introduced the term “statecharts”, defined as:
+He coined the term “statechart”, and defined it as:
 
 _“statecharts = state-diagrams + depth + orthogonality + broadcast communication”_
 
-Using composite states and substate machines, we are able to bring more *depth* into state diagrams, while keeping the diagrams clear and well-structured. Regions help us to express *orthogonality*: Different substate machines that can be executed side by side. Events allow us to achieve *broadcast communication* and give us a strong means to describe complex behavior. Using conditions, we can state that a certain event is fired only if a given condition is met. Inter-level transitions, history states, temporal logic as well as entry, exit and throughout actions are further Harel statechart elements.
+So basically "Harel statecharts":http://www.wisdom.weizmann.ac.il/~dharel/SCANNED.PAPERS/Statecharts.pdf are Mealy/Moore machines extended by further concepts that allow us to model complex systems in a practical way.
 
-h3(#overview_harel_vs_mealy). Harel vs Mealy
+Using composite states and sub diagrams, we are able to bring more *depth* into state diagrams, while keeping the diagrams clear and well-structured. Regions help us to express *orthogonality*: Different substate machines that can be executed side by side. Events allow us to achieve *broadcast communication* and give us a strong means to describe complex behavior. Using guards, we can state that a certain event triggers a transition only if a given condition is met. Inter-level transitions, history states, temporal logic as well as entry, exit and throughout actions are further Harel statechart elements.
 
-Now let us extend the *Mealy* statechart with more details about what is happening on the ferry at habor: The ferry can take three cars. The mate has to admit these or let them out after arrival. At sea the lifts to the parking spaces shall be locked, so that the passengers stay on deck. The resulting state machine looks like the following:
+Harel statecharts can define variables which can be used in input and output expressions. Regarding the light switch example, this allows us to store the brightness level in a variable instead of a number of states. In that way, we can simplify the statechart by merging all _Light On_ states into one and executing the output actions on a self-transition. Here we just increment the brightness value each time the transition is taken. We use the modulo expression to ensure the brightness value stays between 1 and 3. This has the benefit that we can change the number of brightness levels without adding new states.
 
-!(large)images/ferry_mealy_2.png(Extended Ferry example as basic state machine)!
+!(small)images/overview_harel_1.png(Light switch example as a Harel statechart)!
 
-p=. Extended Ferry example as basic state machine
+To showcase the use of composite states we extend the light switch example by a motion detection mode. When the _MOT_ button is pressed, the motion sensor is activated. Once the sensor detects any motion (event @motion_detected@), the light is switched on at the highest brightness level (@brightness = 3@). This can be modeled with a composite state that groups the two states _Motion Detected_ and _No Motion Detected_ together.
 
-For every car that leaves or enters and also for both sides we use a state. This blows up the state machine. With the means of *composite states* and *conditions* we are able to minimize the state machine again by describing the same behavior. The following image describes the ferry behavior as a *Harel* statechart. It illustrates *composite states*, *guard conditions* and *inter-level transitions*.
+!(medium)images/overview_harel_2.png(Extended light switch example as a Harel statechart with composite states)!
 
-!(large)images/ferry_harel_1.png(Ferry example as a Harel statechart)!
+Please also note that Harel statecharts combine the characteristics of Mealy and Moore machines, hence outputs can be produced by states as well as transitions as indicated in the statechart above.
 
-p=. Ferry example as a Harel statechart
+We can even go one step further and hide the logic of the _Motion Detection Mode_ into a sub diagram. In that way, the system gets more comprehensive as one can directly see the different modes and how to switch between them.
 
-The *carEnter* / *carLeave* states were substituted by a composite state *FerryStops* with a substate machine that describes the behavior of the ferry at harbor. The lifts to the car deck shall be locked, because passengers must be there during transfer. There are transitions crossing the hierarchy from the substate machine to the upper-level states (inter-level transitions) like the one from state *LockLifts* to *Northwards* .
+!(medium)images/overview_harel_3.png(Extended light switch example as a Harel statechart with sub diagrams)!
 
-h2(#overview_uml). The present age: UML state machines
+Further concepts like orthogonality or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.html.
 
-UML state machines are based on the statechart notation introduced by David Harel. Furthermore, the UML extends the notation of Harel statecharts by object-oriented principles. Mapping this to our ferry example, in UML we can model the possible actions of the ferry as an interface with operations stop, moveNorthwards, moveSouthwards and so on.
+
+*The present age: UML state machines*
+
+UML state machines are based on the statechart notation introduced by David Harel. Furthermore, the UML extends the notation of Harel statecharts by object-oriented principles. Mapping this to our light switch example, in UML we can model the possible actions of the light switch as a type with operations @turnOn()@, @turnOff()@, @setBrightness(value)@ and so on.
 
 The following table illustrates the differences between the previously described types at a glance:
 
@@ -85,7 +85,13 @@ The following table illustrates the differences between the previously described
 
 p=. Differences between the state machine types
 
-The examples of this article were designed with the YAKINDU Statechart Tools, whose documentation you are reading just now.
+The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now. YAKINDU statecharts are based on Harel statecharts and are very close but not identical to UML state machines. The concrete differences are explained in the documentation where they exist. YAKINDU Statechart Tools come with a simulator which allows to directly execute the modelled statecharts. 
+
+Learn more about modeling systems with state machines in our free whitepaper:
+
+<a href="https://info.itemis.com/en/yakindu/state-machine/whitepaper/" class="btn btn-warning">Download Whitepaper</a>
+
+
 
 h1(#overview_what_are_yakindu_statechart_tools). What are YAKINDU Statechart Tools?
 
@@ -99,12 +105,10 @@ The Standard Edition of YAKINDU Statechart Tools provides the following features
 
 * *Statechart diagram editor* to graphically create and edit statecharts, the graphical representation of state machines
 * *Statechart simulator* to simulate the behavior of statecharts
-* *Code generators for Java, C, and C++* to transform statecharts into programming language source code
+* *Code generators for Java, C, C++ and Python* to transform statecharts into programming language source code
 * *Custom generator projects* to easily create model-to-text transformations with Xtend or Java in order to create any code of your own choice
 * *Integrated validator* to check for syntactical or semantical problems of the statechart model
 * *Testing framework* to test your state machines with unit tests
-
-###. CHECK: Does YSCT provide code generators for C, C++, and Java?
 
 The following graph shows these features and their relation to each other:
 
@@ -116,7 +120,6 @@ The Professional Edition of YAKINDU Statechart Tools makes additional features a
 
 * "*Deep integration with the C programming language*":../user-guide/c-domain.html#cdom_deep_c_integration to directly access C variables, types etc.
 * "*Advanced simulation and debugging*":../user-guide/simulating_statecharts.html#advsim_debugging_with_breakpoints_and_snapshots with breakpoints and snapshots
-
 
 
 
@@ -140,6 +143,6 @@ YAKINDU Statechart Tools is developed and driven by "itemis AG":https://en.wikip
 
 h2(#overview_who_is_using_yakindu_statechart_tools). Who is using YAKINDU Statechart Tools?
 
-Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C++ code.
+Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, C++ or Python code.
 
-###. CHECK: Does YSCT provide code generators for C, C++, and Java?
+

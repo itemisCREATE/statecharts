@@ -22,8 +22,6 @@ env:
   - GMOCK_HOME
 matrix:
   include:
-  - env: TARGET=Oxygen.target
-    if: branch = master
   - env: TARGET=2019-12.target
 before_script:
  - wget https://github.com/google/googletest/archive/release-1.8.0.zip
