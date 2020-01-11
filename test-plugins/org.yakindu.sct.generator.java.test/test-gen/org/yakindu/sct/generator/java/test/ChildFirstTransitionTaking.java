@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.childfirsttransitiontaking.ChildFirstTransitionTakingStatemachine;
 import org.yakindu.scr.childfirsttransitiontaking.ChildFirstTransitionTakingStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for ChildFirstTransitionTaking

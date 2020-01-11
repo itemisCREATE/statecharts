@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.eventdrivenoutevents.EventDrivenOutEventsStatemachine;
 import org.yakindu.scr.eventdrivenoutevents.EventDrivenOutEventsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for EventDrivenOutEvents

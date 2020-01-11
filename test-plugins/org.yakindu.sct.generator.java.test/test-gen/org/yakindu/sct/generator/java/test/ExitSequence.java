@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.exitsequence.ExitSequenceStatemachine;
 import org.yakindu.scr.exitsequence.ExitSequenceStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for ExitSequence

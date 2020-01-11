@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.localevents.LocalEventsStatemachine;
 import org.yakindu.scr.localevents.LocalEventsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for localEvents

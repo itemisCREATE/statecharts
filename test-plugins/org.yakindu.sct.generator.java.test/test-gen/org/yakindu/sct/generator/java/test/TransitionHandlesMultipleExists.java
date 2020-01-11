@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.transitionhandlesmultipleexits.TransitionHandlesMultipleExitsStatemachine;
 import org.yakindu.scr.transitionhandlesmultipleexits.TransitionHandlesMultipleExitsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for TransitionHandlesMultipleExits

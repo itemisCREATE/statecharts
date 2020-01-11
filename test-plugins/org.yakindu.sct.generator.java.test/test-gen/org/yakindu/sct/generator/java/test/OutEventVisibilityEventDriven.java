@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.outeventvisibilityeventdriven.OutEventVisibilityEventDrivenStatemachine;
 import org.yakindu.scr.outeventvisibilityeventdriven.OutEventVisibilityEventDrivenStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for OutEventVisibilityEventDriven

@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.eventdriveninternalevent.EventDrivenInternalEventStatemachine;
 import org.yakindu.scr.eventdriveninternalevent.EventDrivenInternalEventStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for EventDrivenInternalEvent
