@@ -178,7 +178,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String code(Property it) {
 		if (eContainer instanceof ComplexType) {
-			return it.name
+			return getter
 		}
 		if (eContainer instanceof LocalVariableDefinition) {
 			return it.name
