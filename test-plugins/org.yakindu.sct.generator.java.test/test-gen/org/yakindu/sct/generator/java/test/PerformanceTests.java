@@ -58,14 +58,14 @@ public class PerformanceTests {
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < perf) {
 			if (statemachine.isStateActive(State.mr_A)) {
-				statemachine.getSCInterface().raiseE1();
+				statemachine.raiseE1();
 			}
 			else {
 				if (statemachine.getC()%2l == 0l) {
-					statemachine.getSCInterface().raiseE2();
+					statemachine.raiseE2();
 				}
 				else {
-					statemachine.getSCInterface().raiseE3();
+					statemachine.raiseE3();
 				}
 			}
 			timer.cycleLeap(1l);

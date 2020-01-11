@@ -36,7 +36,7 @@ public class EventDrivenInternalEvent {
 		assertTrue(statemachine.isStateActive(State.eventDrivenInternalEvent_r1_A));
 		assertTrue(statemachine.isStateActive(State.eventDrivenInternalEvent_r2_C));
 		assertTrue(statemachine.isStateActive(State.eventDrivenInternalEvent_check_VALID));
-		statemachine.getSCInterface().raiseStart();
+		statemachine.raiseStart();
 		assertTrue(statemachine.isStateActive(State.eventDrivenInternalEvent_r1_B));
 		assertTrue(statemachine.isStateActive(State.eventDrivenInternalEvent_r2_D));
 		assertTrue(statemachine.isStateActive(State.eventDrivenInternalEvent_check_VALID));

@@ -41,7 +41,7 @@ public class HistoryWithoutInitialStep {
 	public void enterThroughInitialEntry() {
 		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
-		statemachine.getSCInterface().raiseNext();
+		statemachine.raiseNext();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
@@ -50,10 +50,10 @@ public class HistoryWithoutInitialStep {
 	public void enterCThroughHistory() {
 		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
-		statemachine.getSCInterface().raiseToA();
+		statemachine.raiseToA();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseToHistory();
+		statemachine.raiseToHistory();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
@@ -61,13 +61,13 @@ public class HistoryWithoutInitialStep {
 	@Test
 	public void enterDThroughHistory() {
 		init();
-		statemachine.getSCInterface().raiseNext();
+		statemachine.raiseNext();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
-		statemachine.getSCInterface().raiseToA();
+		statemachine.raiseToA();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseToHistory();
+		statemachine.raiseToHistory();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
@@ -76,7 +76,7 @@ public class HistoryWithoutInitialStep {
 	public void enterThroughHistoryWithoutInit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseToHistory();
+		statemachine.raiseToHistory();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
@@ -84,7 +84,7 @@ public class HistoryWithoutInitialStep {
 	public void init() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseToB();
+		statemachine.raiseToB();
 		timer.cycleLeap(1l);
 	}
 }

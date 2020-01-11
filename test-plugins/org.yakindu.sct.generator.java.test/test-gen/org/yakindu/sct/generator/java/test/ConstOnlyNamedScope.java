@@ -46,7 +46,7 @@ public class ConstOnlyNamedScope {
 	@Test
 	public void stateTransition() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE(1l);
+		statemachine.raiseE(1l);
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.constOnlyNamedScope_main_region_B));
 	}

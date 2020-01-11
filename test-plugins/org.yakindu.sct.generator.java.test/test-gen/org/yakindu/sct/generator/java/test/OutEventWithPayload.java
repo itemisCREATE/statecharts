@@ -33,9 +33,9 @@ public class OutEventWithPayload {
 	@Test
 	public void out_events_must_have_payload() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseI(21l);
+		statemachine.raiseI(21l);
 		assertTrue(statemachine.isRaisedO());
-		assertTrue(statemachine.getSCInterface().getOValue() == 42l);
+		assertTrue(statemachine.getOValue() == 42l);
 		statemachine.exit();
 	}
 }

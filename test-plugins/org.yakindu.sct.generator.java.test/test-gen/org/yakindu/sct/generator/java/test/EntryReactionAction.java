@@ -49,7 +49,7 @@ public class EntryReactionAction {
 	@Test
 	public void entryOnRTS() {
 		init();
-		statemachine.getSCInterface().raiseB();
+		statemachine.raiseB();
 		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getEnteredR1());
 		assertTrue(!statemachine.getEnteredR2());
@@ -60,7 +60,7 @@ public class EntryReactionAction {
 	@Test
 	public void noEntryTransitionActionOnHistory() {
 		init();
-		statemachine.getSCInterface().raiseD();
+		statemachine.raiseD();
 		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getEnteredR1());
 		assertTrue(!statemachine.getEnteredR2());
@@ -70,9 +70,9 @@ public class EntryReactionAction {
 	
 	public void init() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseB();
+		statemachine.raiseB();
 		timer.cycleLeap(1l);
-		statemachine.getSCInterface().raiseD();
+		statemachine.raiseD();
 		timer.cycleLeap(1l);
 		statemachine.setEnteredR1(false);
 		statemachine.setEnteredR2(false);

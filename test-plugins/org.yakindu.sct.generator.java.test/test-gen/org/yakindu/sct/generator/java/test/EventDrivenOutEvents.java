@@ -35,7 +35,7 @@ public class EventDrivenOutEvents {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.isStateActive(State.second_region_StateC));
-		statemachine.getSCInterface().raiseE1();
+		statemachine.raiseE1();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.isStateActive(State.second_region_StateD));
 		statemachine.exit();

@@ -83,7 +83,7 @@ public class Choice {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 	}
 	
@@ -91,7 +91,7 @@ public class Choice {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		timer.cycleLeap(1l);
 	}
 	
@@ -99,7 +99,7 @@ public class Choice {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
-		statemachine.getSCInterface().raiseG();
+		statemachine.raiseG();
 		timer.cycleLeap(1l);
 	}
 	
@@ -107,7 +107,7 @@ public class Choice {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
-		statemachine.getSCInterface().raiseH();
+		statemachine.raiseH();
 		timer.cycleLeap(1l);
 	}
 }

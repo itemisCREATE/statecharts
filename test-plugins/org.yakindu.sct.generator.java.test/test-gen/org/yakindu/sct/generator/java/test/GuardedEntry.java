@@ -68,12 +68,12 @@ public class GuardedEntry {
 	public void initEntryInTransition(boolean guardVar, boolean doneVar) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		statemachine.setGuard(guardVar);
 		statemachine.setDone(doneVar);
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
