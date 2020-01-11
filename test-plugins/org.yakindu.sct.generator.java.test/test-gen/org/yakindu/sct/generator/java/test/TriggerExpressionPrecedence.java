@@ -40,8 +40,8 @@ public class TriggerExpressionPrecedence {
 	@Test
 	public void unsatisfiedTriggerAndFGuardFalseOrFalse() {
 		statemachine.enter();
-		statemachine.getSCInterface().setC1(false);
-		statemachine.getSCInterface().setC2(false);
+		statemachine.setC1(false);
+		statemachine.setC2(false);
 		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}
@@ -49,8 +49,8 @@ public class TriggerExpressionPrecedence {
 	@Test
 	public void unsatisfiedTriggerAndFGuardTrueOrFalse() {
 		statemachine.enter();
-		statemachine.getSCInterface().setC1(true);
-		statemachine.getSCInterface().setC2(false);
+		statemachine.setC1(true);
+		statemachine.setC2(false);
 		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}
@@ -58,8 +58,8 @@ public class TriggerExpressionPrecedence {
 	@Test
 	public void unsatisfiedTriggerAndFGuardFalseOrTrue() {
 		statemachine.enter();
-		statemachine.getSCInterface().setC1(false);
-		statemachine.getSCInterface().setC2(true);
+		statemachine.setC1(false);
+		statemachine.setC2(true);
 		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}
@@ -67,8 +67,8 @@ public class TriggerExpressionPrecedence {
 	@Test
 	public void unsatisfiedTriggerAndFGuardTrueOrTrue() {
 		statemachine.enter();
-		statemachine.getSCInterface().setC1(true);
-		statemachine.getSCInterface().setC2(true);
+		statemachine.setC1(true);
+		statemachine.setC2(true);
 		timer.cycleLeap(1l);
 		assertTrue(!statemachine.getE1_transition());
 	}

@@ -69,6 +69,6 @@ public class EntryExitSelfTransition {
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
-		statemachine.getSCInterface().setEntries(0l);
+		statemachine.setEntries(0l);
 	}
 }

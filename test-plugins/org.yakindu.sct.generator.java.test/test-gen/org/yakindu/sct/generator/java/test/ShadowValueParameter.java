@@ -40,7 +40,7 @@ public class ShadowValueParameter {
 	@Test
 	public void shadowValueParameterTest() {
 		statemachine.enter();
-		statemachine.getSCInterface().setValue(2l);
+		statemachine.setValue(2l);
 		assertTrue((statemachine.getValue() == 2l));
 		statemachine.exit();
 	}

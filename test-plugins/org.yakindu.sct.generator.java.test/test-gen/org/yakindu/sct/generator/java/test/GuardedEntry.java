@@ -47,7 +47,7 @@ public class GuardedEntry {
 	
 	@Test
 	public void entryTakenOnStatechartEnter() {
-		statemachine.getSCInterface().setGuard(true);
+		statemachine.setGuard(true);
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getDone() == true);
@@ -71,8 +71,8 @@ public class GuardedEntry {
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		statemachine.getSCInterface().setGuard(guardVar);
-		statemachine.getSCInterface().setDone(doneVar);
+		statemachine.setGuard(guardVar);
+		statemachine.setDone(doneVar);
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));

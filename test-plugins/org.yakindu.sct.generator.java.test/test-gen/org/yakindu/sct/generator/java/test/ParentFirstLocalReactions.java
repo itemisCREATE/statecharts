@@ -54,8 +54,8 @@ public class ParentFirstLocalReactions {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAA));
 		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().setDisable_a(true);
-		statemachine.getSCInterface().setDisable_aa(true);
+		statemachine.setDisable_a(true);
+		statemachine.setDisable_aa(true);
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAB));
 		assertTrue(statemachine.getSm_local() == 1l);
@@ -68,7 +68,7 @@ public class ParentFirstLocalReactions {
 	public void expectGrandparentLocalReactionOnParentLocalTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAA));
-		statemachine.getSCInterface().setDisable_a(true);
+		statemachine.setDisable_a(true);
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AB));
@@ -82,8 +82,8 @@ public class ParentFirstLocalReactions {
 	public void expectNoLocalReactionOnGrandparentTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_A_r_AA_r_AAA));
-		statemachine.getSCInterface().setDisable_aaa(true);
-		statemachine.getSCInterface().setDisable_aa(true);
+		statemachine.setDisable_aaa(true);
+		statemachine.setDisable_aa(true);
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.parentFirstLocalReactions_r_B));

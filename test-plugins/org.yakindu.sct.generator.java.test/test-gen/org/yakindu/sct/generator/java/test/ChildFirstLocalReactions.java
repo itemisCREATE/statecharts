@@ -66,7 +66,7 @@ public class ChildFirstLocalReactions {
 	public void expectGrandparentLocalReactionOnParentLocalTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A_r_AA_r_AAA));
-		statemachine.getSCInterface().setDisable_aaa(true);
+		statemachine.setDisable_aaa(true);
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A_r_AB));
@@ -80,8 +80,8 @@ public class ChildFirstLocalReactions {
 	public void expectNoLocalReactionOnGrandparentTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A_r_AA_r_AAA));
-		statemachine.getSCInterface().setDisable_aaa(true);
-		statemachine.getSCInterface().setDisable_aa(true);
+		statemachine.setDisable_aaa(true);
+		statemachine.setDisable_aa(true);
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_B));

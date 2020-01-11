@@ -74,9 +74,9 @@ public class EntryReactionAction {
 		timer.cycleLeap(1l);
 		statemachine.getSCInterface().raiseD();
 		timer.cycleLeap(1l);
-		statemachine.getSCInterface().setEnteredR1(false);
-		statemachine.getSCInterface().setEnteredR2(false);
-		statemachine.getSCInterface().setEnteredBdefault(false);
-		statemachine.getSCInterface().setEnteredBother(false);
+		statemachine.setEnteredR1(false);
+		statemachine.setEnteredR2(false);
+		statemachine.setEnteredBdefault(false);
+		statemachine.setEnteredBother(false);
 	}
 }

@@ -42,7 +42,7 @@ public class TriggerGuardExpressions {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.getSCInterface().raiseE1();
-		statemachine.getSCInterface().setB(true);
+		statemachine.setB(true);
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		timer.cycleLeap(1l);
@@ -62,7 +62,7 @@ public class TriggerGuardExpressions {
 	public void falseGuard() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().setB(false);
+		statemachine.setB(false);
 		statemachine.getSCInterface().raiseE1();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));

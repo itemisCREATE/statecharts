@@ -39,7 +39,7 @@ public class TransitionHandlesMultipleExists {
 		assertTrue(statemachine.getX() == 1l);
 		statemachine.exit();
 		statemachine.enter();
-		statemachine.getSCInterface().setX(0l);
+		statemachine.setX(0l);
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_A_r_AA));
 		statemachine.getSCInterface().raiseF();
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_B_r_BB));
@@ -51,13 +51,13 @@ public class TransitionHandlesMultipleExists {
 		statemachine.enter();
 		statemachine.getSCInterface().raiseE();
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_B_r_BB));
-		statemachine.getSCInterface().setX(0l);
+		statemachine.setX(0l);
 		statemachine.getSCInterface().raiseE();
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_A_r_AA));
 		assertTrue(statemachine.getX() == 11l);
 		statemachine.getSCInterface().raiseE();
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_B_r_BB));
-		statemachine.getSCInterface().setX(0l);
+		statemachine.setX(0l);
 		statemachine.getSCInterface().raiseG();
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_A_r_AA));
 		assertTrue(statemachine.getX() == 10l);
@@ -69,7 +69,7 @@ public class TransitionHandlesMultipleExists {
 		statemachine.enter();
 		statemachine.getSCInterface().raiseE();
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_B_r_BB));
-		statemachine.getSCInterface().setX(0l);
+		statemachine.setX(0l);
 		statemachine.getSCInterface().raiseF();
 		assertTrue(statemachine.isStateActive(State.transitionHandlesMultipleExits_main_region_A_r_AA));
 		assertTrue(statemachine.getX() == 24l);

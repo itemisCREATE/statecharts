@@ -49,7 +49,7 @@ public class GuardedExit {
 	public void exitNotTaken() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().setGuard(true);
+		statemachine.setGuard(true);
 		checkDone(true);
 	}
 	
