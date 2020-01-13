@@ -5,7 +5,7 @@ h1(#quick_ref). Quick reference
 
 This chapter gives an overview of the building blocks a statechart consists of and their semantics. It also shows the textual syntax used to express behavior inside the graphical model. If you are new to YAKINDU Statechart Tools, this is a good starting point to learn the main concepts.  
 
-!(large)images/quick_ref_sct_overview.png(Overview of a statechart's basic building blocks)!
+!(full)images/quick_ref_sct_overview.png(Overview of a statechart's basic building blocks)!
 
 h2(#quick_ref_statechart_element_overview). Statechart elements overview
 
@@ -30,7 +30,7 @@ h2(#quick_ref_definition_section). Statechart definition section
 
 The _definition section_ of the statechart defines which entities of the statechart, like variables, events and operations, are accessible from the outside and which ones are only used internally. For this, a definition section can declare an internal scope and multiple interfaces. 
 
-!(tiny)images/quick_ref_def_section.png(Overview of a statechart's definition section)!
+!(small)images/quick_ref_def_section.png(Overview of a statechart's definition section)!
 
 h3(#quick_ref_interface_scope). Statechart interfaces
 
@@ -97,7 +97,7 @@ h4(#quick_ref_reaction_guards). Guards
 
 The reaction *guard* is optional. If specified, it needs to be a boolean expression. Here are some examples of valid guard conditions:
 
-|{width:260px}_. Guard Syntax Examples |_. Expression Kind |
+|_. Guard Syntax Examples |_. Expression Kind |
 | <code>[var1 && !var2]</code> | Logical AND, OR, NOT |
 | <code>[var1 > 0 && var1 <= 10]</code> | Logical comparisons <, <=, >, >= |
 | <code>[var1 == 10 && var2 != 17]</code> | Logical equality or inequality |
@@ -108,7 +108,7 @@ h4(#quick_ref_reaction_effects). Effects
 
 The reaction *effect* is optional. If specified, the effect is executed when the transition is taken. Multiple effects are separated by a semicolon. The last effect has no trailing semicolon.
 
-|{width:260px}_. Effect Syntax Examples |_. Meaning |
+|_. Effect Syntax Examples |_. Meaning |
 | <code>/ var1+=10; var2=var1</code> | Variable assignment |
 | <code>/ calculate(var1, var2)</code> | Operation call |
 | <code>/ raise ev1</code> | Event raising |
@@ -121,7 +121,7 @@ h3(#quick_ref_state_reactions). State reactions
 
 A state can also define reactions. The syntax is the same as for transitions. In addition to the above mentioned examples, a state can also define entry and exit reactions.
 
-|{width:160px}_. State Reaction Examples |_. Meaning |
+|_. State Reaction Examples |_. Meaning |
 | <code>entry / var1=10</code> | Entry reaction, is executed when the state is entered. |
 | <code>exit / var1=0</code> | Exit reaction, is executed when the state is exited. |
 | <code>ev1 / var1+=1</code> | Local reaction, is executed when no outgoing transition can be taken. |
@@ -131,7 +131,7 @@ h3(#quick_ref_builtin_functions). Built-in functions
 
 The statechart language comes with two built-in functions that can be used inside a guard or effect expression:
 
-|{width:160px}_. Built-in Function |_. Meaning |
+|_. Built-in Function |_. Meaning |
 | <code>valueOf(even)</code> | Returns the payload of an event. Note, that the event needs to be raised when @valueOf@ is called. |
 | <code>active(state)</code> | Returns @true@ if the given state is active, otherwise @false@. This function is especially useful in combination with orthogonality. |
 
@@ -145,7 +145,7 @@ When a state transition occurs, the specified reaction effects are executed in a
 
 Consider the following simple example:
 
-!(small)images/quick_ref_exec_flow.png(Example to understand execution order of reaction effects)!
+!(normal)images/quick_ref_exec_flow.png(Example to understand execution order of reaction effects)!
 
 When *StateA* is entered, its entry reaction is executed first (@a=1@). When event *ev1* is raised, the transition towards *StateB* is taken. As *StateA* is left, its exit reaction is executed (@b=1@) before the transition reaction is executed (@c=1@), following by entering *StateB* and executing its entry reaction (@d=1@). While *StateB* is active, each time the event *ev1* is raised, the state's local reaction is executed (@d++@). Note, that this is a different behavior compared to *StateB* having an outgoing transition pointing to itself, as taking such a self-transition would also invoke the state's exit and entry reactions. Finally, when event *ev2* is raised, *StateB* is left and its exit reaction is executed (@e=1@, followed by the transition's reaction (@f=1@), and *StateA*'s entry reaction (@a=1@).
 
@@ -155,7 +155,7 @@ h2(#quick_ref_choices). Choices
 
 A choice is a pseudo state. It is used to model a conditional path. If a choice's incoming transition is taken, its outgoing transitions are immediately evaluated to decide which path to take. To ensure there is always a valid path, a default transition can be defined with the trigger @else@ or @default@.
 
-!(small)images/quick_ref_choice.png(Example with a choice node and else-transition)!
+!(normal)images/quick_ref_choice.png(Example with a choice node and else-transition)!
 
 
 
@@ -169,11 +169,11 @@ When a composite state is entered, its entry node denotes the substate to be act
 
 When a composite state is left, all active substates are also left. A composite state can specify multiple exit nodes with unique names. Outgoing transitions of the composite state can specify the relevant exit node for them.
 
-!(medium)images/quick_ref_composite_overview.png(Overview of a composite state and named entry/exit nodes)!
+!(large)images/quick_ref_composite_overview.png(Overview of a composite state and named entry/exit nodes)!
 
 The syntax for referencing entry or exit points in a transition reaction is the following:
 
-|{width:160px}_. Transition Reaction Examples |_. Meaning |
+|_. Transition Reaction Examples |_. Meaning |
 | <code># > entry-point-1</code> | Enters the target composite state by the entry point @entry-point-1@ |
 | <code># exit-point-1 ></code> | Exit the composite state by this transition if exit point @exit-point-1@ is active |
 | <code># exit-point-1 > exit-point-2 ></code> | Exit the composite state by this transition if one of the exit points @exit-point-1@ or @exit-point-2@ is active |
@@ -198,7 +198,7 @@ YAKINDU Statechart Tools allows to specify orthogonal regions that are executed 
 
 Orthogonal regions are executed in a deterministic sequential order and not in parallel as one might expect. The execution order is defined by the regions' priorities. These are indicated in the top left corner of a region. The defined execution order plays a particular role when orthogonal regions raise and react to the same events. For more details, see also chapter "Raising and processing an event":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
 
-!(medium)images/quick_ref_orthogonal_overview_sim.png(Overview of a orthogonal state with fork and join nodes)!
+!(large)images/quick_ref_orthogonal_overview_sim.png(Overview of a orthogonal state with fork and join nodes)!
 
 h3(#quick_ref_forks_joins). Synchronizations (forks and joins)
 
@@ -210,7 +210,7 @@ A _shallow history_ state is a pseudo state that is placed inside the region of 
 
 A _deep history_ state is similar to a shallow history state, but more complex. With a deep history state, the latest status of all nested states is remembered.
 
-!(medium)images/quick_ref_history.png(Composite state with shallow history node)!
+!(large)images/quick_ref_history.png(Composite state with shallow history node)!
 
 
 

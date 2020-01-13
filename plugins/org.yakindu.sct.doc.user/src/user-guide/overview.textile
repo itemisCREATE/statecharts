@@ -26,7 +26,7 @@ In automata theory, there are two basic types of finite-state machines (FSM). On
 
 We extend the switch example above into a light switch with different brightness levels. The light switch has two buttons, an _ON_ button and an _OFF_ button. Pressing the _ON_ button switches the light on and toggles through the different brightness levels. This behavior is modeled by the state machine below. Pressing a button raises a corresponding event (_ON_pressed_ or _OFF_pressed_) upon which the machine reacts with a state change and corresponding outputs. The output of the state machine is simply the brightness level. As in Moore machines only states produce outputs, we need one dedicated state per brightness level:
 
-!(small)images/overview_moore.png(Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools)!
+!(normal)images/overview_moore.png(Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools)!
 
 p=. Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools
 
@@ -35,7 +35,7 @@ p=. Light switch example as a Moore machine, modeled with YAKINDU Statechart Too
 
 "_Mealy_ machines":https://en.wikipedia.org/wiki/Mealy_machine were invented by George H. Mealy in 1955. In comparison with Moore machines, Mealy machines *produce outputs only on transitions* and not in states. This often results in state diagrams with fewer states because more logic can be put on transitions. 
 
-!(small)images/overview_mealy.png(Light switch example as a Mealy machine)!
+!(normal)images/overview_mealy.png(Light switch example as a Mealy machine)!
 
 p=. Light switch example as a Mealy machine
 
@@ -60,17 +60,17 @@ Using composite states and sub diagrams, we are able to bring more *depth* into 
 
 Harel statecharts can define variables which can be used in input and output expressions. Regarding the light switch example, this allows us to store the brightness level in a variable instead of a number of states. In that way, we can simplify the statechart by merging all _Light On_ states into one and executing the output actions on a self-transition. Here we just increment the brightness value each time the transition is taken. We use the modulo expression to ensure the brightness value stays between 1 and 3. This has the benefit that we can change the number of brightness levels without adding new states.
 
-!(small)images/overview_harel_1.png(Light switch example as a Harel statechart)!
+!(normal)images/overview_harel_1.png(Light switch example as a Harel statechart)!
 
 To showcase the use of composite states we extend the light switch example by a motion detection mode. When the _MOT_ button is pressed, the motion sensor is activated. Once the sensor detects any motion (event @motion_detected@), the light is switched on at the highest brightness level (@brightness = 3@). This can be modeled with a composite state that groups the two states _Motion Detected_ and _No Motion Detected_ together.
 
-!(medium)images/overview_harel_2.png(Extended light switch example as a Harel statechart with composite states)!
+!(large)images/overview_harel_2.png(Extended light switch example as a Harel statechart with composite states)!
 
 Please also note that Harel statecharts combine the characteristics of Mealy and Moore machines, hence outputs can be produced by states as well as transitions as indicated in the statechart above.
 
 We can even go one step further and hide the logic of the _Motion Detection Mode_ into a sub diagram. In that way, the system gets more comprehensive as one can directly see the different modes and how to switch between them.
 
-!(medium)images/overview_harel_3.png(Extended light switch example as a Harel statechart with sub diagrams)!
+!(large)images/overview_harel_3.png(Extended light switch example as a Harel statechart with sub diagrams)!
 
 Further concepts like orthogonality or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.html.
 
