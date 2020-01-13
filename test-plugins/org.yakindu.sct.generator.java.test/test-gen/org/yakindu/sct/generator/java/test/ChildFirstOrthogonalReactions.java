@@ -48,43 +48,43 @@ public class ChildFirstOrthogonalReactions {
 	}
 	
 	public boolean checkA(boolean ret) {
-		statemachine.getSCInterface().setCnt(statemachine.getCnt()+1l);
-		statemachine.getSCInterface().setA_check(statemachine.getCnt());
+		statemachine.setCnt(statemachine.getCnt()+1l);
+		statemachine.setA_check(statemachine.getCnt());
 		return ret;
 	}
 	
 	public boolean checkAA(boolean ret) {
-		statemachine.getSCInterface().setCnt(statemachine.getCnt()+1l);
-		statemachine.getSCInterface().setAa_check(statemachine.getCnt());
+		statemachine.setCnt(statemachine.getCnt()+1l);
+		statemachine.setAa_check(statemachine.getCnt());
 		return ret;
 	}
 	
 	public boolean checkAAA(boolean ret) {
-		statemachine.getSCInterface().setCnt(statemachine.getCnt()+1l);
-		statemachine.getSCInterface().setAaa_check(statemachine.getCnt());
+		statemachine.setCnt(statemachine.getCnt()+1l);
+		statemachine.setAaa_check(statemachine.getCnt());
 		return ret;
 	}
 	
 	public boolean checkAAC(boolean ret) {
-		statemachine.getSCInterface().setCnt(statemachine.getCnt()+1l);
-		statemachine.getSCInterface().setAac_check(statemachine.getCnt());
+		statemachine.setCnt(statemachine.getCnt()+1l);
+		statemachine.setAac_check(statemachine.getCnt());
 		return ret;
 	}
 	
 	public boolean checkAC(boolean ret) {
-		statemachine.getSCInterface().setCnt(statemachine.getCnt()+1l);
-		statemachine.getSCInterface().setAc_check(statemachine.getCnt());
+		statemachine.setCnt(statemachine.getCnt()+1l);
+		statemachine.setAc_check(statemachine.getCnt());
 		return ret;
 	}
 	
 	public boolean checkC(boolean ret) {
-		statemachine.getSCInterface().setCnt(statemachine.getCnt()+1l);
-		statemachine.getSCInterface().setC_check(statemachine.getCnt());
+		statemachine.setCnt(statemachine.getCnt()+1l);
+		statemachine.setC_check(statemachine.getCnt());
 		return ret;
 	}
 	
 	public long nextCounter() {
-		statemachine.getSCInterface().setCnt(statemachine.getCnt()+1l);
+		statemachine.setCnt(statemachine.getCnt()+1l);
 		return statemachine.getCnt();
 	}
 	

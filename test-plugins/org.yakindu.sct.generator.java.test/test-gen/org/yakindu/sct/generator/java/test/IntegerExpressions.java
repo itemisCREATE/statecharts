@@ -43,7 +43,7 @@ public class IntegerExpressions {
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyInt1() == 10l);
 		assertTrue(statemachine.getMyInt2() == 5l);
-		statemachine.getSCInterface().raiseE1();
+		statemachine.raiseE1();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getLess() == false);
 		assertTrue(statemachine.getGreater() == true);

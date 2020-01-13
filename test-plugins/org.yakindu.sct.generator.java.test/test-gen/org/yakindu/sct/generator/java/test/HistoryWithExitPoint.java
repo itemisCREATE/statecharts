@@ -41,19 +41,19 @@ public class HistoryWithExitPoint {
 	public void historyEntryAfterExit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
-		statemachine.getSCInterface().raisePush();
+		statemachine.raisePush();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.mr_B));
-		statemachine.getSCInterface().raiseBack();
+		statemachine.raiseBack();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
-		statemachine.getSCInterface().raiseNext();
+		statemachine.raiseNext();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
-		statemachine.getSCInterface().raisePush();
+		statemachine.raisePush();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.mr_B));
-		statemachine.getSCInterface().raiseBack();
+		statemachine.raiseBack();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
 	}

@@ -84,7 +84,7 @@ public class OperationsTest {
 		 
 		verify(internalMock, atLeastOnce()).internalOperation5a(anyString());
 		 
-		statemachine.getSCInterface().raiseEv();
+		statemachine.raiseEv();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		verify(interface1Mock, atLeastOnce()).interfaceOperation1();
@@ -103,7 +103,7 @@ public class OperationsTest {
 		 
 		verify(interface1Mock, atLeastOnce()).interfaceOperation5a(anyString());
 		 
-		statemachine.getSCInterface().raiseEv();
+		statemachine.raiseEv();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation1();
@@ -151,7 +151,7 @@ public class OperationsTest {
 		 
 		verify(internalMock, never()).internalOperation5a(anyString());
 		 
-		statemachine.getSCInterface().raiseEv();
+		statemachine.raiseEv();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		verify(interface1Mock, never()).interfaceOperation1();
@@ -170,7 +170,7 @@ public class OperationsTest {
 		 
 		verify(interface1Mock, never()).interfaceOperation5a(anyString());
 		 
-		statemachine.getSCInterface().raiseEv();
+		statemachine.raiseEv();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		verify(defaultMock, never()).unnamedInterfaceOperation1();

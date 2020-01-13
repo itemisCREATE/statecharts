@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.exitsequence.ExitSequenceStatemachine;
 import org.yakindu.scr.exitsequence.ExitSequenceStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for ExitSequence
@@ -68,7 +67,7 @@ public class ExitSequence {
 	@Test
 	public void exitLeafSlimStateByTransition() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AB));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
@@ -88,7 +87,7 @@ public class ExitSequence {
 	@Test
 	public void exitLeafSlimStateByTransitionFromParent() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
 		assertTrue((statemachine.getA_exit() == 2l));
 		assertTrue((statemachine.getAa_exit() == 1l));
@@ -108,7 +107,7 @@ public class ExitSequence {
 	@Test
 	public void exitStatechartFromLeafSlimOrthogonalState() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AB));
 		statemachine.exit();
 		assertTrue(!statemachine.isStateActive(State.main_region_A));
@@ -130,8 +129,8 @@ public class ExitSequence {
 	@Test
 	public void exitLeafSlimOrthogonaleStateByTransition() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AC));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
@@ -151,9 +150,9 @@ public class ExitSequence {
 	@Test
 	public void exitLeafSlimOrthogonalStateByTransitionFromParent() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AB));
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
 		assertTrue((statemachine.getA_exit() == 5l));
 		assertTrue((statemachine.getAa_exit() == 1l));
@@ -172,8 +171,8 @@ public class ExitSequence {
 	@Test
 	public void exitStatechartFromLeafSlimDeepState() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AC));
 		statemachine.exit();
 		assertTrue(!statemachine.isStateActive(State.main_region_A));
@@ -194,9 +193,9 @@ public class ExitSequence {
 	@Test
 	public void exitLeafSlimDeepStateByTransition() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
@@ -215,10 +214,10 @@ public class ExitSequence {
 	@Test
 	public void exitLeafSlimDeepStateByTransitionFromParent() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AC));
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
 		assertTrue((statemachine.getA_exit() == 8l));
 		assertTrue((statemachine.getAa_exit() == 1l));
@@ -237,9 +236,9 @@ public class ExitSequence {
 	@Test
 	public void exitStatechartFromFatState() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
 		statemachine.exit();
 		assertTrue(!statemachine.isStateActive(State.main_region_A));
@@ -260,11 +259,11 @@ public class ExitSequence {
 	@Test
 	public void exitFatStateByTransition() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
@@ -283,11 +282,11 @@ public class ExitSequence {
 	@Test
 	public void exitFatStateByTransitionFromParent() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
 		assertTrue((statemachine.getA_exit() == 12l));
 		assertTrue((statemachine.getAa_exit() == 1l));

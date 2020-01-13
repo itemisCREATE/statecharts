@@ -41,7 +41,7 @@ public class StatechartEntryExitActions {
 	public void entryActionsAreExecutedOnEnteringStatechart() {
 		assertTrue(statemachine.getX() == 0l);
 		assertTrue(statemachine.getY() == 0l);
-		statemachine.getSCInterface().setB(true);
+		statemachine.setB(true);
 		statemachine.enter();
 		assertTrue(statemachine.getX() == 5l);
 		assertTrue(statemachine.getY() == 3l);

@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.nolocalevents.NoLocalEventsStatemachine;
 import org.yakindu.scr.nolocalevents.NoLocalEventsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for NoLocalEvents
@@ -35,12 +34,12 @@ public class NoLocalEvents {
 	public void test() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateA));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateB));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateA));
 		assertTrue((statemachine.getX() == 0l));
-		statemachine.getSCInterface().raiseI(42l);
+		statemachine.raiseI(42l);
 		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateB));
 		assertTrue((statemachine.getX() == 42l));
 		statemachine.exit();

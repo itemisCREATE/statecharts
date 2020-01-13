@@ -41,13 +41,13 @@ public class ShallowHistoryWithDeepEntry {
 	public void noDeepEntryWithinHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
-		statemachine.getSCInterface().raiseToZ();
+		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_A));
-		statemachine.getSCInterface().raiseToY();
+		statemachine.raiseToY();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
-		statemachine.getSCInterface().raiseToZ();
+		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_A));
 	}
@@ -56,17 +56,17 @@ public class ShallowHistoryWithDeepEntry {
 	public void deepEntryWithinHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
-		statemachine.getSCInterface().raiseToZ();
+		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_A));
-		statemachine.getSCInterface().raiseToC();
+		statemachine.raiseToC();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B__region0_C));
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B));
-		statemachine.getSCInterface().raiseToY();
+		statemachine.raiseToY();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
-		statemachine.getSCInterface().raiseToZ();
+		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B__region0_C));
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B));
@@ -76,14 +76,14 @@ public class ShallowHistoryWithDeepEntry {
 	public void directDeepEntryIntoHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
-		statemachine.getSCInterface().raiseToC();
+		statemachine.raiseToC();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B__region0_C));
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B));
-		statemachine.getSCInterface().raiseToY();
+		statemachine.raiseToY();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
-		statemachine.getSCInterface().raiseToZ();
+		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B__region0_C));
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B));

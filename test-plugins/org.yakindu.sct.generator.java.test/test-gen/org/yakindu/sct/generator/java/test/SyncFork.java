@@ -41,20 +41,20 @@ public class SyncFork {
 	public void syncForkTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D1));
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C2));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D2));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseF();
+		statemachine.raiseF();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
