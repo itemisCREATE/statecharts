@@ -43,7 +43,7 @@ public class BitExpressions {
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyBit1() == 5l);
 		assertTrue(statemachine.getMyBit2() == 7l);
-		statemachine.getSCInterface().raiseE1();
+		statemachine.raiseE1();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getLeftBitshift() == 10l);

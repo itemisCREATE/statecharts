@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.childfirsttransitiontaking.ChildFirstTransitionTakingStatemachine;
 import org.yakindu.scr.childfirsttransitiontaking.ChildFirstTransitionTakingStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for ChildFirstTransitionTaking
@@ -35,7 +34,7 @@ public class ChildFirstTransitionTaking {
 	public void testParentTransitionFromSimpleState() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AA));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_B));
 		statemachine.exit();
 	}
@@ -44,10 +43,10 @@ public class ChildFirstTransitionTaking {
 	public void testParentTransitionFromOrthogonalChildState() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AA));
-		statemachine.getSCInterface().raiseGo();
+		statemachine.raiseGo();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_B));
 		statemachine.exit();
 	}
@@ -56,10 +55,10 @@ public class ChildFirstTransitionTaking {
 	public void testParentLocalReactionOnTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AA));
-		statemachine.getSCInterface().raiseGo();
+		statemachine.raiseGo();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
-		statemachine.getSCInterface().raiseGo();
+		statemachine.raiseGo();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r1_A_r1_AA));
 		statemachine.exit();
 	}
@@ -70,19 +69,19 @@ public class ChildFirstTransitionTaking {
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r2_C_r_CA_r_CAA));
 		assertTrue(statemachine.getCLocalReaction() == 0l);
 		assertTrue(statemachine.getCaLocalReaction() == 0l);
-		statemachine.getSCInterface().raiseGo();
+		statemachine.raiseGo();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r2_C_r_CA_r_CAB));
 		assertTrue(statemachine.getCLocalReaction() == 1l);
 		assertTrue(statemachine.getCaLocalReaction() == 1l);
-		statemachine.getSCInterface().raiseGo();
+		statemachine.raiseGo();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r2_C_r_CA_r_CAA));
 		assertTrue(statemachine.getCLocalReaction() == 2l);
 		assertTrue(statemachine.getCaLocalReaction() == 2l);
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r2_C_r_CB));
 		assertTrue(statemachine.getCLocalReaction() == 3l);
 		assertTrue(statemachine.getCaLocalReaction() == 2l);
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.childFirstTransitionTaking_r2_C_r_CA));
 		assertTrue(statemachine.getCLocalReaction() == 4l);
 		assertTrue(statemachine.getCaLocalReaction() == 2l);

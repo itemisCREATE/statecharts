@@ -46,7 +46,7 @@ public class ConstOnlyInternalScope {
 	@Test
 	public void stateTransition() {
 		statemachine.enter();
-		statemachine.getSCInterface().raiseE(1l);
+		statemachine.raiseE(1l);
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.constOnlyInternalScope_main_region_B));
 	}

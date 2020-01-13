@@ -82,32 +82,32 @@ public class Choice {
 	public void initForEventE(boolean valueForC) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().setC(valueForC);
-		statemachine.getSCInterface().raiseE();
+		statemachine.setC(valueForC);
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 	}
 	
 	public void initForEventF(boolean valueForC) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().setC(valueForC);
-		statemachine.getSCInterface().raiseF();
+		statemachine.setC(valueForC);
+		statemachine.raiseF();
 		timer.cycleLeap(1l);
 	}
 	
 	public void initForEventG(boolean valueForC) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().setC(valueForC);
-		statemachine.getSCInterface().raiseG();
+		statemachine.setC(valueForC);
+		statemachine.raiseG();
 		timer.cycleLeap(1l);
 	}
 	
 	public void initForEventH(boolean valueForC) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().setC(valueForC);
-		statemachine.getSCInterface().raiseH();
+		statemachine.setC(valueForC);
+		statemachine.raiseH();
 		timer.cycleLeap(1l);
 	}
 }

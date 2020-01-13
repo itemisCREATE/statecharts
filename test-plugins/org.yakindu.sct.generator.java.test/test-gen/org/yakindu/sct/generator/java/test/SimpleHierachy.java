@@ -41,9 +41,9 @@ public class SimpleHierachy {
 	public void simpleHierachyTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().raiseEvent1();
-		statemachine.getSCInterface().raiseEvent1();
-		statemachine.getSCInterface().raiseEvent1();
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_subregion1_B1));

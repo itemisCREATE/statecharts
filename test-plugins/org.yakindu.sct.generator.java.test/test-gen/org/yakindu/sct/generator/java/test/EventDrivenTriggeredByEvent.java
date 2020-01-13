@@ -39,10 +39,10 @@ public class EventDrivenTriggeredByEvent {
 	public void internalEventTriggersRunCycle() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_A));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_B));
 		assertTrue(statemachine.getX() == 0l);
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_A));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();

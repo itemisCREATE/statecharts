@@ -41,7 +41,7 @@ public class ChildFirstExecutionHierarchy {
 	public void childShouldTakeTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA));
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.childFirstExecutionHierarchy_r_B));
 		assertTrue(!statemachine.getA_reacted());
@@ -54,8 +54,8 @@ public class ChildFirstExecutionHierarchy {
 	public void parentShouldTakeTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA));
-		statemachine.getSCInterface().setDisable_aaa(true);
-		statemachine.getSCInterface().raiseE();
+		statemachine.setDisable_aaa(true);
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.childFirstExecutionHierarchy_r_B));
 		assertTrue(!statemachine.getA_reacted());
@@ -70,9 +70,9 @@ public class ChildFirstExecutionHierarchy {
 	public void grandparentShouldTakeTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA));
-		statemachine.getSCInterface().setDisable_aa(true);
-		statemachine.getSCInterface().setDisable_aaa(true);
-		statemachine.getSCInterface().raiseE();
+		statemachine.setDisable_aa(true);
+		statemachine.setDisable_aaa(true);
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.childFirstExecutionHierarchy_r_B));
 		assertTrue(statemachine.getA_reacted());

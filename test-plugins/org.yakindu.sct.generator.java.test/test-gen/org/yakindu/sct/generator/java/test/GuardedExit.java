@@ -49,12 +49,12 @@ public class GuardedExit {
 	public void exitNotTaken() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.getSCInterface().setGuard(true);
+		statemachine.setGuard(true);
 		checkDone(true);
 	}
 	
 	public void checkDone(boolean shouldBeDone) {
-		statemachine.getSCInterface().raiseE();
+		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(shouldBeDone ? statemachine.getDone() : !statemachine.getDone());

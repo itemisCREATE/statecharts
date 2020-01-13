@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.ieq.eventdrivenoutevents.EventDrivenOutEventsStatemachine;
 import org.yakindu.scr.ieq.eventdrivenoutevents.EventDrivenOutEventsStatemachine.State;	
-import org.yakindu.scr.ieq.VirtualTimer;
 
 /**
  * Unit TestCase for EventDrivenOutEvents
@@ -36,7 +35,7 @@ public class EventDrivenOutEvents {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.isStateActive(State.second_region_StateC));
-		statemachine.getSCInterface().raiseE1();
+		statemachine.raiseE1();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.isStateActive(State.second_region_StateD));
 		statemachine.exit();

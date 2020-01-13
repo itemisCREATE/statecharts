@@ -47,7 +47,7 @@ public class TypeAlias {
 		assertTrue(statemachine.getMyString().equals("TypeSystem"));
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_Mid2));
-		statemachine.getSCInterface().raiseMyEvent();
+		statemachine.raiseMyEvent();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}
