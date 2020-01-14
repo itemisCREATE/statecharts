@@ -17,7 +17,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.stext.ImportScope
 
-class ModelToHeaderIncludeProvider implements IncludeProvider {
+class StatechartIncludeProvider implements IncludeProvider {
 	@Inject IPackageImport2URIMapper includeMapper;
 
 	override getIncludes(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
