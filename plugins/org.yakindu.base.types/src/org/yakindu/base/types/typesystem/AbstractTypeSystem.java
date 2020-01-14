@@ -31,7 +31,6 @@ import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
-import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.annotations.TypeAnnotations;
 
@@ -353,15 +352,5 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	@Override
 	public boolean isAny(Type type) {
 		return isSame(type, getType(ANY));
-	}
-	
-	@Override
-	public boolean isStatemachineType(Type type) {
-		if (type instanceof ComplexType) {
-			for(TypeSpecifier t : type.getSuperTypes()) {
-				return t.getType().getName().equals("Statemachine");
-			}
-		}
-		return false;
 	}
 }

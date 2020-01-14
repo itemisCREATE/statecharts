@@ -79,6 +79,4 @@ public interface ITypeSystem {
 
 	boolean isAny(Type type);
 	
-	boolean isStatemachineType(Type type);
-	
 }
