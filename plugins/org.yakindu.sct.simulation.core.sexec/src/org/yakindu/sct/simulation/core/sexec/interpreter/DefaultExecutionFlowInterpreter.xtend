@@ -358,10 +358,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 	
 	override isStateActive(String stateName) {
-		if(stateName === null){
+		val result = if(stateName === null){
 			activeStateConfiguration.exists[it === null]
 		} else
-			activeStateConfiguration.exists[it.name == stateName]
+			activeStateConfiguration.filterNull.exists[(it.sourceElement as RegularState).name == stateName]
+			println(result)
+		return result
 	}
 
 	override getExecutionContext() {
