@@ -402,15 +402,13 @@ class Naming {
 	def maxParallelTimeEvents(ExecutionFlow it) '''«type.toUpperCase»_MAX_PARALLEL_TIME_EVENTS'''
 	
 	def numStates(ExecutionFlow it) '''«type.toUpperCase»_STATE_COUNT'''
-	
 		
-	
 	def dispatch getHandle(Expression it, String handle) {
 		'''/*Cannot find handle for Expression: '«it»' */'''
 	}
 	
 	def dispatch CharSequence getHandle(FeatureCall it, String handle) {
-		'''«owner.getHandle(handle)»->«feature.access»'''
+		'''«owner.getHandle(handle)»«feature.access»'''
 	}
 	
 	def dispatch getHandle(ElementReferenceExpression it, CharSequence handle) {
