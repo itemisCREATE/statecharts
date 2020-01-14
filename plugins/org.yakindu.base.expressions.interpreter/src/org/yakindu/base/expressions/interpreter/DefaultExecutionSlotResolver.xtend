@@ -70,10 +70,6 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		if (!featureSlot.isPresent) {
 			return null
 		}
-		//Multi-SM
-		if(featureSlot.get instanceof ExecutionContext){
-			return packageNamespaceAwareResolve(featureSlot.get as ExecutionContext, e.feature)
-		}
 		return resolveFromSlot(featureSlot.get, e)
 	}
 	
@@ -105,7 +101,11 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		resolveByName(slot, feature)
 	}
 
-	def protected ExecutionSlot resolveByName(CompositeSlot slot, NamedElement element) {
+	def protected dispatch ExecutionSlot resolveByName(ExecutionContext slot, NamedElement element) {
+		slot.slots.findFirst[name == element.name] ?: resolveByName(slot.slots.filter(CompositeSlot).findFirst[it.name == "default"] ,element )
+	}
+	
+	def protected dispatch ExecutionSlot resolveByName(CompositeSlot slot, NamedElement element) {
 		slot.slots.findFirst[name == element.name]
 	}
 
