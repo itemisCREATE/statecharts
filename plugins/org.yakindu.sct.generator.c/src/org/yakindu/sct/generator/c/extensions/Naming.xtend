@@ -44,6 +44,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.expressions.expressions.FeatureCall
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -379,7 +380,15 @@ class Naming {
 	}
 
 	def dispatch access(VariableDefinition it) {
-		if (isConst) '''«it.constantName»''' else '''«scHandle»->«IF scope !== null»«scope.instance»«ELSE»/*TODO*/«ENDIF».«name.asEscapedIdentifier»'''
+		if (isConst) '''«it.constantName»''' else '''«scHandle»->«IF scope !== null»«scope.instance»«ELSE»«call»«ENDIF».«name.asEscapedIdentifier»'''
+	}
+	
+	def dispatch access(VariableDefinition it, ComplexType ct){
+		return '''iface.«name.asIdentifier»'''
+	}
+	
+	def call() {
+		'''/*TODO*/'''
 	}
 
 	def dispatch access(Property it) {
@@ -438,6 +447,10 @@ class Naming {
 	
 	def dispatch getHandle(Expression it, String handle) {
 		'''/*Cannot find handle for Expression: '«it»' */'''
+	}
+	
+	def dispatch CharSequence getHandle(FeatureCall it, String handle) {
+		'''«owner.getHandle(handle)»->«feature.access(feature.eContainer)»'''
 	}
 	
 	def dispatch getHandle(ElementReferenceExpression it, CharSequence handle) {

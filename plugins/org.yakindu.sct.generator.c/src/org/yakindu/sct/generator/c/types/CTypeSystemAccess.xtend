@@ -41,6 +41,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case isReal(originalType): REAL_TYPE
 			case isBoolean(originalType): BOOL_TYPE
 			case isString(originalType): STRING_TYPE
+			case isStatemachineType(originalType): '''«type.name»*'''
 			default: type.name
 		}
 	}
