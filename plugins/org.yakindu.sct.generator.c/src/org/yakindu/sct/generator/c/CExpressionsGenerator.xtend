@@ -46,6 +46,9 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 /**
  * @author axel terfloth
@@ -63,6 +66,9 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
 	
+	@Inject extension CMultiStatemachine
+	@Inject extension ExpressionExtensions
+
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
 		val target = it.definition
@@ -76,20 +82,30 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	/* Expressions */
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
+	def dispatch CharSequence code(FeatureCall it, EventDefinition target) {
+		'''«owner.featureOrReference.access»->«target.access»'''
+		
+	}
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
 	/* TODO: check if event is active */
-	def dispatch CharSequence code(EventValueReferenceExpression it) '''«value.definition.event.valueAccess»'''
+	def dispatch CharSequence code(EventValueReferenceExpression it) {
+		val value = value
+		if(value instanceof FeatureCall) {
+			if(value.feature.eContainer instanceof ComplexType) {
+				return '''«value.owner.featureOrReference.access»->«value.feature.valueAccess»'''
+			}
+		}
+		'''«value.definition.event.valueAccess»'''
+	}
 
 	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) 
 		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 
-
 	def dispatch CharSequence code(ElementReferenceExpression it, Method target) 
 		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
-
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) 
 		'''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
@@ -136,15 +152,24 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		it.code(it.definition)
 	}
 
-	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«target.access»'''
+	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
+		if (target.eContainer instanceof ComplexType) {
+			return '''«owner.code»->«target.access(target.eContainer)»'''
+		}
+		'''«target.access»'''
+	}
 
 	def dispatch CharSequence code(FeatureCall it,
 		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(FeatureCall it,
-		Operation target) '''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
+	def dispatch CharSequence code(FeatureCall it, Operation target) {
+		if (target.eContainer instanceof ComplexType) {
+			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle(scHandle + "->")»)'''
+		}
+		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
+	}
 
 	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
 

@@ -53,6 +53,7 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 
 		Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
 		includeBinder.addBinding().to(ScTypesIncludeProvider.class);
+		includeBinder.addBinding().to(StatechartIncludeProvider.class);
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {

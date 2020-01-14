@@ -22,6 +22,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 /**
  * @author andreas muelder
@@ -29,6 +30,7 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	@Inject protected extension ITypeSystem
+	@Inject protected extension StatechartUtil
 	
 	protected static val String ARRAY = "array"
 	protected static val String POINTER = "pointer"
@@ -41,6 +43,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case isReal(originalType): REAL_TYPE
 			case isBoolean(originalType): BOOL_TYPE
 			case isString(originalType): STRING_TYPE
+			case isStatemachineType(originalType): '''«type.name»*'''
 			default: type.name
 		}
 	}

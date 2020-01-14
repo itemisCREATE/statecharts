@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.base.types.Declaration
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -256,7 +257,7 @@ class CppNaming extends Naming {
 
 	override dispatch access(Event it) '''«scope.instance».«name.asIdentifier.raised»'''
 
-	override valueAccess(Event it) '''«scope.instance».«name.asIdentifier.value»'''
+	override valueAccess(Declaration it) '''«scope.instance».«name.asIdentifier.value»'''
 
 	def dispatch localAccess(VariableDefinition it) '''«name.asEscapedIdentifier»'''
 

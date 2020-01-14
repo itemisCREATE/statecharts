@@ -21,6 +21,9 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.expressions.expressions.FeatureCall
 
 /**
  * @author rbeckmann
@@ -33,6 +36,7 @@ class EventCode {
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension CLiterals
+	@Inject extension ExpressionExtensions
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
@@ -62,12 +66,18 @@ class EventCode {
 		}
 	'''
 	
-	def eventRaisingCode(EventRaisingExpression it, ExpressionsGenerator exp) '''
+	def CharSequence eventRaisingCode(EventRaisingExpression it, ExpressionsGenerator exp) {
+		if (event.featureOrReference.eContainer instanceof ComplexType) {
+			val fc = event as FeatureCall
+			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.featureOrReference.access»«IF value !== null», «exp.code(value)»«ENDIF»)'''
+		}
+		return '''
 		«IF value !== null»
 			«event.definition.event.valueAccess» = «exp.code(value)»;
 		«ENDIF»
 		«event.definition.event.access» = «TRUE_LITERAL»'''
-		
+	}
+	
 	def eventRaiserSignature(ExecutionFlow it, EventDefinition event) '''void «event.asRaiser»(«scHandleDecl»«event.valueParams»)'''
 	
 	def eventGetterSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.BOOL_TYPE» «event.asRaised»(const «scHandleDecl»)'''
