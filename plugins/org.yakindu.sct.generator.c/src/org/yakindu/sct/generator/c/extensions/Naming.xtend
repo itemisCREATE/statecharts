@@ -380,17 +380,13 @@ class Naming {
 	}
 
 	def dispatch access(VariableDefinition it) {
-		if (isConst) '''«it.constantName»''' else '''«scHandle»->«IF scope !== null»«scope.instance»«ELSE»«call»«ENDIF».«name.asEscapedIdentifier»'''
+		if (isConst) '''«it.constantName»''' else '''«scHandle»->«IF scope !== null»«scope.instance»«ENDIF».«name.asEscapedIdentifier»'''
 	}
 	
 	def dispatch access(VariableDefinition it, ComplexType ct){
 		return '''iface.«name.asIdentifier»'''
 	}
 	
-	def call() {
-		'''/*TODO*/'''
-	}
-
 	def dispatch access(Property it) {
 		'''«name.asEscapedIdentifier»'''
 	}
@@ -406,7 +402,7 @@ class Naming {
 	}
 	
 	def dispatch access(Expression it, EObject event) {
-		''''''
+		'''/*TODO*/'''
 	}
 	
 	def dispatch access(Enumerator it) {
