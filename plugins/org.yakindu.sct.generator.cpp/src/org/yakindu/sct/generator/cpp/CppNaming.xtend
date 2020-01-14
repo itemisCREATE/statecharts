@@ -257,7 +257,7 @@ class CppNaming extends Naming {
 
 	override dispatch access(Event it) '''«scope.instance».«name.asIdentifier.raised»'''
 
-	override valueAccess(Declaration it) '''«scope.instance».«name.asIdentifier.value»'''
+	override dispatch valueAccess(Declaration it) '''«scope.instance».«name.asIdentifier.value»'''
 
 	def dispatch localAccess(VariableDefinition it) '''«name.asEscapedIdentifier»'''
 

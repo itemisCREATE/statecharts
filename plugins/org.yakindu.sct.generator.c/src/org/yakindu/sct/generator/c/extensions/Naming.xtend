@@ -43,9 +43,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.adapter.OriginTracing
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -391,10 +389,12 @@ class Naming {
 
 	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
 
-	def dispatch access(EObject it) '''#error cannot access elements of type «getClass().name»'''
+	def dispatch access(EObject it) '''#error cannot access elements of type «getClass.name»'''
 
-	def valueAccess(Declaration it)'''«IF needsHandle»«scHandle»->«ENDIF»«scope.instance».«name.asIdentifier.value»'''
+	def dispatch valueAccess(Declaration it)'''«IF needsHandle»«scHandle»->«ENDIF»«scope.instance».«name.asIdentifier.value»'''
 
+	def dispatch valueAccess(EObject it) '''#error cannot value access elements of type «getClass.name»'''
+	
 	def maxOrthogonalStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_ORTHOGONAL_STATES'''
 
 	def maxHistoryStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_HISTORY_STATES'''

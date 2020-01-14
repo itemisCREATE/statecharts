@@ -90,13 +90,13 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	/* TODO: check if event is active */
 	def dispatch CharSequence code(EventValueReferenceExpression it) {
-		val value = value
-		if(value instanceof FeatureCall) {
-			if(value.feature.eContainer instanceof ComplexType) {
-				return '''«value.owner.featureOrReference.access»->«value.feature.valueAccess»'''
+		val fc = value
+		if(fc instanceof FeatureCall) {
+			if(fc.feature.eContainer instanceof ComplexType) {
+				return '''«fc.owner.code»->«fc.feature.valueAccess»'''
 			}
 		}
-		'''«value.definition.event.valueAccess»'''
+		'''«fc.featureOrReference.valueAccess»'''
 	}
 
 	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
@@ -149,7 +149,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	/* Feature call */
 	def dispatch CharSequence code(FeatureCall it) {
-		it.code(it.definition)
+		it.code(feature)
 	}
 
 	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
