@@ -83,7 +83,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it, EventDefinition target) {
-		'''«owner.featureOrReference.access»->«target.access»'''
+		'''«owner.code»«target.access»'''
 		
 	}
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
@@ -154,7 +154,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
 		if (target.eContainer instanceof ComplexType) {
-			return '''«owner.code»->«target.access(target.eContainer)»'''
+			return '''«owner.code»«target.access»'''
 		}
 		'''«target.access»'''
 	}
@@ -171,7 +171,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		code»«ENDFOR»)'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
+	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !(target.eContainer instanceof ComplexType)».«target.access»«ENDIF»'''
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
