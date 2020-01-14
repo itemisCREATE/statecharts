@@ -20,6 +20,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.*
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.EnumerationType
 
 /**
  * @author andreas muelder
@@ -37,21 +38,15 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	override String getTargetLanguageName(Type type) {
 		val originalType = type?.originType
-
-		// multi SM
-		if (originalType instanceof ComplexType) {
-			if (originalType.isStatechartType) {
-				return originalType.executionFlow.statemachineClassName
-			}
-		}
-
 		switch (originalType) {
 			case originalType === null || ts.isSame(originalType, getType(VOID)) : 'void'
 			case ts.isReal(originalType): "double"
 			case ts.isInteger(originalType): "long"
 			case ts.isBoolean(originalType): "boolean"
 			case ts.isString(originalType): "String"
-			
+			// multi SM
+			EnumerationType case originalType.isStatechartType: originalType.executionFlow.statemachineClassName + ".State"
+			ComplexType case originalType.isStatechartType: originalType.executionFlow.statemachineClassName
 			
 			default: "//" + this
 		};

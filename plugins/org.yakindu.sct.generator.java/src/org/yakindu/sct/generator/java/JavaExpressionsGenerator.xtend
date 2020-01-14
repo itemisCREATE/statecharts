@@ -42,6 +42,12 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.Enumerator
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
@@ -50,6 +56,8 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
+	@Inject protected extension OriginTracing
+	@Inject protected extension MultiStatemachineHelper
 	
 	var List<TimeEvent> timeEvents;
 
@@ -151,6 +159,8 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 				return operationCall(it, exp)
 			Event case exp.isComplexTypeContained:
 				return exp.getContext + "isRaised" + name.toFirstUpper + "()"
+			Enumerator case it.eContainer.isStateEnum:
+				return stateEnumAccess
 			Declaration case exp.isComplexTypeContained:
 				return exp.getContext + exp.definition.code
 			Property case exp.isAssignmentContained:
@@ -162,6 +172,17 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			Declaration:
 				return exp.definition.code
 		}
+	}
+	
+	def protected isStateEnum(EObject it) {
+		return (it instanceof EnumerationType) && !originTraces.filter(Statechart).nullOrEmpty
+	}
+	
+	def protected stateEnumAccess(Enumerator stateEnum) {
+		val statechart = stateEnum.eContainer.originTraces.filter(Statechart).head
+		val state = stateEnum.originTraces.filter(State).head
+		
+		'''«statechart.executionFlow.statemachineClassName».State.«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«nullStateName»«ENDIF»'''
 	}
 	
 	def dispatch protected String operationCall(Method it, ArgumentExpression exp) {

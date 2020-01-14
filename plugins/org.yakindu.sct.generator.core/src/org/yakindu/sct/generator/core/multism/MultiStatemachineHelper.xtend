@@ -6,9 +6,12 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer
 import org.yakindu.sct.model.sgraph.Statechart
 import org.eclipse.emf.ecore.resource.Resource
+import org.yakindu.base.types.adapter.OriginTracing
 
 class MultiStatemachineHelper {
 	@Inject IModelSequencer sequencer;
+	
+	@Inject extension OriginTracing
 
 	def executionFlow(ComplexType type) {
 		type.statechart.executionFlow
@@ -21,11 +24,7 @@ class MultiStatemachineHelper {
 	}
 	
 	def getStatechart(ComplexType type) {
-		val res = type.eResource
-		if (res === null)
-			throw (new IllegalStateException('''Resource '«res»' of ComplexType '«type»' should not be null!'''))
-		
-		return res.statechart
+		type.originTraces.filter(Statechart).head
 	}
 	
 	def getStatechart(Resource res) {
