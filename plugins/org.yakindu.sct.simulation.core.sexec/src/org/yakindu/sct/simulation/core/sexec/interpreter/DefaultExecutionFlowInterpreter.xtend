@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
-import com.google.inject.Singleton
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
@@ -357,8 +356,22 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			return true;
 		}
 	}
+	
+	override isStateActive(String stateName) {
+		if(stateName === null){
+			activeStateConfiguration.exists[it === null]
+		} else
+			activeStateConfiguration.exists[it.name == stateName]
+	}
 
 	override getExecutionContext() {
 		executionContext
 	}
+	
+	override getExecutionFlow() {
+		flow
+	}
+	
+	
+	
 }
