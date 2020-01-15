@@ -25,12 +25,15 @@ import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
@@ -42,13 +45,11 @@ import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.expressions.util.ExpressionExtensions
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 /**
  * @author axel terfloth
@@ -68,6 +69,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 	@Inject extension CMultiStatemachine
 	@Inject extension ExpressionExtensions
+	
+	@Inject extension OriginTracing
 
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -165,14 +168,19 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(FeatureCall it, Operation target) {
 		if (target.eContainer instanceof ComplexType) {
-			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle(scHandle + "->")»)'''
+			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle(scHandle + "->")»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 		}
 		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}
 
 	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !(target.eContainer instanceof ComplexType)».«target.access»«ENDIF»'''
 
-	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
+	def dispatch CharSequence code(FeatureCall it, Enumerator target) {
+		if(!target.eContainer.originTraces.nullOrEmpty) {
+			return '''«target.stateEnumAccess»'''
+		}
+		'''«target.access»'''
+	}
 
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»«TRUE_LITERAL»«ELSE»«FALSE_LITERAL»«ENDIF»'''

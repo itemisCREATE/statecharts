@@ -35,6 +35,7 @@ class CMultiStatemachine {
 			case "isActive": return flow.isActiveFctID
 			case "isFinal": return flow.isFinalFctID
 			case "runCycle": return flow.runCycleFctID
+			case "isStateActive": return flow.isStateActiveFctID
 			default: return '''Cannot find state machine method '«op»' for type '«type»'.'''
 		}
 	}

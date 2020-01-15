@@ -44,6 +44,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -61,6 +63,10 @@ class Naming {
 	@Inject protected extension INamingService
 	
 	@Inject extension GenmodelEntries
+	
+	@Inject extension OriginTracing
+	
+	@Inject extension MultiStatemachineHelper
 	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -402,6 +408,13 @@ class Naming {
 	def maxParallelTimeEvents(ExecutionFlow it) '''«type.toUpperCase»_MAX_PARALLEL_TIME_EVENTS'''
 	
 	def numStates(ExecutionFlow it) '''«type.toUpperCase»_STATE_COUNT'''
+	
+	def stateEnumAccess(Enumerator it) {
+		val statechart = eContainer.originTraces.filter(Statechart).head
+		val flow = statechart.executionFlow
+		val state = originTraces.filter(State).head		
+		return '''«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«flow.null_state»«ENDIF»'''
+	}
 		
 	def dispatch getHandle(Expression it, String handle) {
 		'''/*Cannot find handle for Expression: '«it»' */'''
