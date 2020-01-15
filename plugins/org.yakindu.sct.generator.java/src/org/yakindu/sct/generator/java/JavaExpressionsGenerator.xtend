@@ -199,12 +199,23 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String code(Property it) {
 		if (eContainer instanceof ComplexType) {
+			if (isInterfaceProperty) {
+				return '''get«interfacePropertyScope.interfaceName»()'''
+			}
 			return getter
 		}
 		if (eContainer instanceof LocalVariableDefinition) {
 			return it.name
 		}
 		getContext + getter
+	}
+	
+	def protected getInterfacePropertyScope(Property it) {
+		type.originTraces.filter(InterfaceScope).head
+	}
+	
+	def protected isInterfaceProperty(Property it) {
+		getInterfacePropertyScope !== null
 	}
 
 	def dispatch String code(TimeEvent it) {
