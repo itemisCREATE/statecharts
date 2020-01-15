@@ -24,6 +24,7 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.base.types.Enumerator
+import org.yakindu.sct.model.sgraph.Statechart
 
 class Naming {
 
@@ -110,12 +111,24 @@ class Naming {
 	def dispatch String statemachineName(ExecutionFlow it) {
 		return name.statemachineName.toFirstUpper()
 	}
+	
+	def dispatch String statemachineName(Statechart it) {
+		return name.statemachineName.toFirstUpper()
+	}
 
 	def statemachineClassName(ExecutionFlow it) {
 		statemachineName + "Statemachine"
 	}
+	
+	def statemachineClassName(Statechart it) {
+		statemachineName + "Statemachine"
+	}
 
 	def statemachineInterfaceName(ExecutionFlow it) {
+		"I" + statemachineClassName
+	}
+	
+	def statemachineInterfaceName(Statechart it) {
 		"I" + statemachineClassName
 	}
 

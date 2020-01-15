@@ -11,17 +11,16 @@
 package org.yakindu.sct.generator.java.types
 
 import com.google.inject.Inject
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
-import org.yakindu.sct.generator.java.Naming
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.EnumerationType
-import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 /**
  * @author andreas muelder
@@ -35,9 +34,6 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	protected extension Naming
 	
 	@Inject
-	protected extension MultiStatemachineHelper
-	
-	@Inject
 	protected extension StatechartUtil
 
 	override String getTargetLanguageName(Type type) {
@@ -49,8 +45,8 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case ts.isBoolean(originalType): "boolean"
 			case ts.isString(originalType): "String"
 			// multi SM
-			EnumerationType case originalType.isOriginStatechart: originalType.executionFlow.statemachineClassName + ".State"
-			ComplexType case originalType.isOriginStatechart: originalType.executionFlow.statemachineClassName
+			EnumerationType case originalType.isOriginStatechart: originalType.getOriginStatechart.statemachineClassName + ".State"
+			ComplexType case originalType.isOriginStatechart: originalType.getOriginStatechart.statemachineClassName
 			
 			default: "//" + this
 		};

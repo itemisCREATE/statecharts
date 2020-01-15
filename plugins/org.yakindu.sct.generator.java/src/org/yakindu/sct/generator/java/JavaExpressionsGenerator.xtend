@@ -34,7 +34,6 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Method
@@ -56,7 +55,6 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension OriginTracing
 	@Inject protected extension StatechartUtil
-	@Inject protected extension MultiStatemachineHelper
 	
 	var List<TimeEvent> timeEvents;
 
@@ -177,7 +175,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		val statechart = stateEnum.eContainer.originStatechart
 		val state = stateEnum.originState
 		
-		'''«statechart.executionFlow.statemachineClassName».State.«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«nullStateName»«ENDIF»'''
+		'''«statechart.statemachineClassName».State.«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«nullStateName»«ENDIF»'''
 	}
 	
 	def dispatch protected String operationCall(Method it, ArgumentExpression exp) {

@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*
+import org.yakindu.sct.model.sgraph.Statechart
 
 class GenmodelEntries {
 
@@ -101,8 +102,19 @@ class GenmodelEntries {
 		}
 		return flow.statemachineName
 	}
+	
+	def getImplementationSuffix(GeneratorEntry it, Statechart sct) {
+		if (implementationSuffixParameter !== null) {
+			return sct.statemachineName + implementationSuffixParameter.stringValue
+		}
+		return sct.statemachineName
+	}
 
 	def getImplementationPackageName(ExecutionFlow it, GeneratorEntry entry) {
+		entry.basePackageName + "." + entry.getImplementationSuffix(it).toLowerCase();
+	}
+	
+	def getImplementationPackageName(Statechart it, GeneratorEntry entry) {
 		entry.basePackageName + "." + entry.getImplementationSuffix(it).toLowerCase();
 	}
 

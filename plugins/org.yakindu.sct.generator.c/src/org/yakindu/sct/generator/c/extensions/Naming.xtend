@@ -172,6 +172,13 @@ class Naming {
 		}
 		type.toFirstLower + separator
 	}
+	
+	def functionPrefix(Statechart it) {
+		if (!entryStatemachinePrefix.nullOrEmpty) {
+			return entryStatemachinePrefix + separator
+		}
+		type.toFirstLower + separator
+	}
 
 	def separator() {
 		var sep = this.sep
@@ -240,12 +247,24 @@ class Naming {
 	def raiseTimeEventFctID(ExecutionFlow it) {
 		functionPrefix + RAISE_TIME_EVENT
 	}
+	
+	def raiseTimeEventFctID(Statechart it) {
+		functionPrefix + RAISE_TIME_EVENT
+	}
 
 	def isStateActiveFctID(ExecutionFlow it) {
 		functionPrefix + IS_STATE_ACTIVE
 	}
+	
+	def isStateActiveFctID(Statechart it) {
+		functionPrefix + IS_STATE_ACTIVE
+	}
 
 	def isActiveFctID(ExecutionFlow it) {
+		functionPrefix + IS_ACTIVE
+	}
+	
+	def isActiveFctID(Statechart it) {
 		functionPrefix + IS_ACTIVE
 	}
 
@@ -253,11 +272,23 @@ class Naming {
 		functionPrefix + IS_FINAL
 	}
 	
+	def isFinalFctID(Statechart it) {
+		functionPrefix + IS_FINAL
+	}
+	
 	def initFctID(ExecutionFlow it) {
 		functionPrefix + INIT
 	}
 	
+	def initFctID(Statechart it) {
+		functionPrefix + INIT
+	}
+	
 	def enterFctID(ExecutionFlow it) {
+		functionPrefix + ENTER
+	}
+	
+	def enterFctID(Statechart it) {
 		functionPrefix + ENTER
 	}
 
@@ -265,7 +296,15 @@ class Naming {
 		functionPrefix + EXIT
 	}
 	
+	def exitFctID(Statechart it) {
+		functionPrefix + EXIT
+	}
+	
 	def runCycleFctID(ExecutionFlow it) {
+		functionPrefix + RUN_CYCLE
+	}
+	
+	def runCycleFctID(Statechart it) {
 		functionPrefix + RUN_CYCLE
 	}
 	

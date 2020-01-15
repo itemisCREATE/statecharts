@@ -11,18 +11,17 @@ package org.yakindu.sct.generator.java
 
 import com.google.common.collect.Sets
 import com.google.inject.Inject
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
+import org.eclipse.emf.ecore.resource.Resource
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorModel
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.sct.model.stext.stext.ImportScope
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.Package
-import org.yakindu.sct.model.sgraph.util.StatechartUtil
-import org.yakindu.base.types.EnumerationType
-import org.eclipse.emf.ecore.resource.Resource
 
 class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 
@@ -32,9 +31,6 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 	@Inject
 	protected extension StatechartUtil
 	
-	@Inject
-	protected extension MultiStatemachineHelper
-
 	@Inject
 	protected extension Naming
 
@@ -46,10 +42,9 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 		for (PackageImport p : statechartImports) {
 			val typesRes = (sourceElement as Statechart).eResource.resourceSet.getResource(p.uri, true);
 			val submachineChart = typesRes.subchart
-			val submachineFlow = submachineChart.executionFlow
-			val submachineClass = submachineFlow.statemachineClassName
+			val submachineClass = submachineChart.statemachineClassName
 			val subEntry = genModel.getEntry(submachineChart)
-			val submachineImport = submachineFlow.getImplementationPackageName(subEntry) + "." + submachineClass
+			val submachineImport = submachineChart.getImplementationPackageName(subEntry) + "." + submachineClass
 			imports.add(submachineImport)
 		}
 		return imports
