@@ -18,12 +18,20 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.sct.model.stext.stext.ImportScope
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Package
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import org.yakindu.base.types.EnumerationType
+import org.eclipse.emf.ecore.resource.Resource
 
 class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 
 	@Inject
 	protected IPackageImport2URIMapper includeMapper;
 
+	@Inject
+	protected extension StatechartUtil
+	
 	@Inject
 	protected extension MultiStatemachineHelper
 
@@ -37,7 +45,7 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 		val imports = Sets.newHashSet
 		for (PackageImport p : statechartImports) {
 			val typesRes = (sourceElement as Statechart).eResource.resourceSet.getResource(p.uri, true);
-			val submachineChart = typesRes.statechart
+			val submachineChart = typesRes.subchart
 			val submachineFlow = submachineChart.executionFlow
 			val submachineClass = submachineFlow.statemachineClassName
 			val subEntry = genModel.getEntry(submachineChart)
@@ -45,6 +53,10 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 			imports.add(submachineImport)
 		}
 		return imports
+	}
+	
+	protected def getSubchart(Resource typesRes) {
+		typesRes.contents.filter(Package).head.member.filter(ComplexType).reject(EnumerationType).map[getOriginStatechart].filterNull.head
 	}
 
 	protected def getStatechartImports(ExecutionFlow flow) {

@@ -21,6 +21,7 @@ import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.EnumerationType
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 /**
  * @author andreas muelder
@@ -35,6 +36,9 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	
 	@Inject
 	protected extension MultiStatemachineHelper
+	
+	@Inject
+	protected extension StatechartUtil
 
 	override String getTargetLanguageName(Type type) {
 		val originalType = type?.originType
@@ -45,8 +49,8 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case ts.isBoolean(originalType): "boolean"
 			case ts.isString(originalType): "String"
 			// multi SM
-			EnumerationType case originalType.isStatechartType: originalType.executionFlow.statemachineClassName + ".State"
-			ComplexType case originalType.isStatechartType: originalType.executionFlow.statemachineClassName
+			EnumerationType case originalType.isOriginStatechart: originalType.executionFlow.statemachineClassName + ".State"
+			ComplexType case originalType.isOriginStatechart: originalType.executionFlow.statemachineClassName
 			
 			default: "//" + this
 		};

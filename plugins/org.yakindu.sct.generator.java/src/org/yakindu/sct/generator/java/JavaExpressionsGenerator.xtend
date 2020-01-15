@@ -20,34 +20,32 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
-import org.yakindu.base.types.EnumerationType
-import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.base.types.Enumerator
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
@@ -57,6 +55,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension OriginTracing
+	@Inject protected extension StatechartUtil
 	@Inject protected extension MultiStatemachineHelper
 	
 	var List<TimeEvent> timeEvents;
@@ -159,7 +158,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 				return operationCall(it, exp)
 			Event case exp.isComplexTypeContained:
 				return exp.getContext + "isRaised" + name.toFirstUpper + "()"
-			Enumerator case it.eContainer.isStateEnum:
+			Enumerator case it.eContainer.isOriginStateEnum:
 				return stateEnumAccess
 			Declaration case exp.isComplexTypeContained:
 				return exp.getContext + exp.definition.code
@@ -174,13 +173,9 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 	}
 	
-	def protected isStateEnum(EObject it) {
-		return (it instanceof EnumerationType) && !originTraces.filter(Statechart).nullOrEmpty
-	}
-	
 	def protected stateEnumAccess(Enumerator stateEnum) {
-		val statechart = stateEnum.eContainer.originTraces.filter(Statechart).head
-		val state = stateEnum.originTraces.filter(State).head
+		val statechart = stateEnum.eContainer.originStatechart
+		val state = stateEnum.originState
 		
 		'''«statechart.executionFlow.statemachineClassName».State.«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«nullStateName»«ENDIF»'''
 	}
