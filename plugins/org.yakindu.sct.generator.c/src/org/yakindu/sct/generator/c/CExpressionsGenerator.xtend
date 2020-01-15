@@ -83,20 +83,20 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it, EventDefinition target) {
-		'''«owner.featureOrReference.access»->«target.access»'''
+		'''«owner.code»«target.access»'''
 		
 	}
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
 	/* TODO: check if event is active */
 	def dispatch CharSequence code(EventValueReferenceExpression it) {
-		val value = value
-		if(value instanceof FeatureCall) {
-			if(value.feature.eContainer instanceof ComplexType) {
-				return '''«value.owner.featureOrReference.access»->«value.feature.valueAccess»'''
+		val fc = value
+		if(fc instanceof FeatureCall) {
+			if(fc.feature.eContainer instanceof ComplexType) {
+				return '''«fc.owner.code»->«fc.feature.valueAccess»'''
 			}
 		}
-		'''«value.definition.event.valueAccess»'''
+		'''«fc.featureOrReference.valueAccess»'''
 	}
 
 	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
@@ -149,12 +149,12 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	/* Feature call */
 	def dispatch CharSequence code(FeatureCall it) {
-		it.code(it.definition)
+		it.code(feature)
 	}
 
 	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
 		if (target.eContainer instanceof ComplexType) {
-			return '''«owner.code»->«target.access(target.eContainer)»'''
+			return '''«owner.code»«target.access»'''
 		}
 		'''«target.access»'''
 	}
@@ -171,7 +171,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		code»«ENDFOR»)'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
+	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !(target.eContainer instanceof ComplexType)».«target.access»«ENDIF»'''
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 

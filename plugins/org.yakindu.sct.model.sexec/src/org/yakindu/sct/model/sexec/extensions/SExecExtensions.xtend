@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.model.sexec.extensions
 
+import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
@@ -17,11 +18,13 @@ import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -44,6 +47,9 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class SExecExtensions {
+	@Inject extension OriginTracing
+	
+	
 	def <T extends EObject> T eContainerOfType(EObject eObject, Class<T> type) {
 		EcoreUtil2.getContainerOfType(eObject, type)
 	}
@@ -63,8 +69,15 @@ class SExecExtensions {
 		sourceElement as Statechart
 	}
 	
-	def Scope scope(Declaration it) {
-		if (eContainer instanceof Scope) eContainer as Scope
+	def scope(Declaration it) {
+		var container = eContainer
+		if (container instanceof ComplexType){
+			val origin = it.originTraces.head
+			if(origin instanceof Declaration){
+				container = origin.eContainer
+			}
+		}
+		if (container instanceof Scope) container
 		else null
 	}
 	

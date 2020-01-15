@@ -43,7 +43,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.expressions.expressions.FeatureCall
 
 class Naming {
@@ -63,8 +62,6 @@ class Naming {
 	
 	@Inject extension GenmodelEntries
 	
-	@Inject extension ExpressionExtensions
-
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
 	}
@@ -321,26 +318,11 @@ class Naming {
 	}
 
 	def asFunction(OperationDefinition it) {
-		getScopedFunctionPrefix + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
 	}
 	
 	def accessFunction(Declaration it, String funcName) {
-		getScopedFunctionPrefix + separator + funcName + separator + name.asIdentifier.toFirstLower
-	}
-	
-	def getScopedFunctionPrefix(Declaration it) {
-		if(scope !== null) {
-			return scope.functionPrefix(it)
-		}
-		if(ct !== null) {
-			return '''«ct.name.toFirstLower»Iface'''
-		}
-		return '''Can not find function prefix for "«it»"'''
-	}
-	
-	def ct(Declaration it) {
-		if(eContainer instanceof ComplexType) return eContainer as ComplexType
-		null
+		scope.functionPrefix(it) + separator + funcName + separator + name.asIdentifier.toFirstLower
 	}
 	
 	def variable(VariableDefinition it) {
@@ -380,11 +362,11 @@ class Naming {
 	}
 
 	def dispatch access(VariableDefinition it) {
-		if (isConst) '''«it.constantName»''' else '''«scHandle»->«IF scope !== null»«scope.instance»«ENDIF».«name.asEscapedIdentifier»'''
+		if (isConst) '''«it.constantName»''' else '''«IF needsHandle»«scHandle»«ENDIF»->«IF scope !== null»«scope.instance»«ENDIF».«name.asEscapedIdentifier»'''
 	}
 	
-	def dispatch access(VariableDefinition it, ComplexType ct){
-		return '''iface.«name.asIdentifier»'''
+	def needsHandle(EObject it) {
+		return !(eContainer instanceof ComplexType)
 	}
 	
 	def dispatch access(Property it) {
@@ -397,40 +379,22 @@ class Naming {
 
 	def dispatch access(Method it) '''«shortName»'''
 	
-	def dispatch access(Expression it, EventDefinition event) {
-		'''«it.featureOrReference.access».iface.«event.name.asEscapedIdentifier.raised»'''
-	}
-	
-	def dispatch access(Expression it, EObject event) {
-		'''/*TODO*/'''
-	}
-	
 	def dispatch access(Enumerator it) {
 		'''«name.asEscapedIdentifier»'''
 	}
 
 	def dispatch access(OperationDefinition it) '''«asFunction»'''
 
-	def dispatch access(Event it) {
-		val container = eContainer
-		if(container instanceof ComplexType) {
-			return '''iface.«name.asIdentifier.raised»'''
-		}
-		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
-	}
+	def dispatch access(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier.raised»'''
 
 	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
 
-	def dispatch access(EObject it) '''#error cannot access elements of type «getClass().name»'''
+	def dispatch access(EObject it) '''#error cannot access elements of type «getClass.name»'''
 
-	def valueAccess(Declaration it){
-		val container = eContainer
-		if(container instanceof ComplexType){
-			return '''iface.«name.asIdentifier.value»'''
-		}
-		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
-	}
+	def dispatch valueAccess(Declaration it)'''«IF needsHandle»«scHandle»->«ENDIF»«scope.instance».«name.asIdentifier.value»'''
 
+	def dispatch valueAccess(EObject it) '''#error cannot value access elements of type «getClass.name»'''
+	
 	def maxOrthogonalStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_ORTHOGONAL_STATES'''
 
 	def maxHistoryStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_HISTORY_STATES'''
@@ -438,31 +402,20 @@ class Naming {
 	def maxParallelTimeEvents(ExecutionFlow it) '''«type.toUpperCase»_MAX_PARALLEL_TIME_EVENTS'''
 	
 	def numStates(ExecutionFlow it) '''«type.toUpperCase»_STATE_COUNT'''
-	
 		
-	
 	def dispatch getHandle(Expression it, String handle) {
 		'''/*Cannot find handle for Expression: '«it»' */'''
 	}
 	
 	def dispatch CharSequence getHandle(FeatureCall it, String handle) {
-		'''«owner.getHandle(handle)»->«feature.access(feature.eContainer)»'''
+		'''«owner.getHandle(handle)»«feature.access»'''
 	}
 	
 	def dispatch getHandle(ElementReferenceExpression it, CharSequence handle) {
 		val reference = reference
 		if(reference instanceof VariableDefinition) {
-			'''«handle»«reference.ifaceName».«reference.name»'''
+			'''«handle»«reference.scope.instance».«reference.name»'''
 		}
 	}
 	
-	def getIfaceName(Declaration it){
-		val iface = eContainer
-		if(iface instanceof InterfaceScope) {
-			if(iface.name === null)
-				return '''iface'''
-			else 
-				return '''iface«name.toFirstUpper»'''
-		}
-	}
 }
