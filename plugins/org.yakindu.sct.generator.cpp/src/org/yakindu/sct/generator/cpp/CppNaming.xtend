@@ -218,7 +218,7 @@ class CppNaming extends Naming {
 		'get_' + name.asIdentifier.toFirstLower
 	}
 
-	override asSetter(VariableDefinition it) {
+	override asSetter(Declaration it) {
 		'set_' + name.asIdentifier.toFirstLower
 	}
 

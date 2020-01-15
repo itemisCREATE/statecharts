@@ -36,6 +36,10 @@ public interface IExecutionFlowInterpreter {
 	
 	public boolean isFinal();
 	
+	public boolean isStateActive(String stateName);
+	
 	public ExecutionContext getExecutionContext();
+	
+	public ExecutionFlow getExecutionFlow();
 
 }
