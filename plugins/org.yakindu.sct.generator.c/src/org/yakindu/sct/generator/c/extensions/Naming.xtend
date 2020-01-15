@@ -313,7 +313,7 @@ class Naming {
 		accessFunction("get")
 	}
 
-	def asSetter(VariableDefinition it) {
+	def asSetter(Declaration it) {
 		accessFunction("set")
 	}
 
