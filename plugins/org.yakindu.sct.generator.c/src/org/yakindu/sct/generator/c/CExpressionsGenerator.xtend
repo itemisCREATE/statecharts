@@ -167,8 +167,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		if (target.eContainer instanceof ComplexType) {
 			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle(scHandle + "->")»)'''
 		}
-		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
+		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}
 
 	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !(target.eContainer instanceof ComplexType)».«target.access»«ENDIF»'''

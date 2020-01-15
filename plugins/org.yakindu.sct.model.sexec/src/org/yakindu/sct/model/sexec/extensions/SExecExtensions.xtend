@@ -69,7 +69,7 @@ class SExecExtensions {
 		sourceElement as Statechart
 	}
 	
-	def scope(Declaration it) {
+	def scope(EObject it) {
 		var container = eContainer
 		if (container instanceof ComplexType){
 			val origin = it.originTraces.head
