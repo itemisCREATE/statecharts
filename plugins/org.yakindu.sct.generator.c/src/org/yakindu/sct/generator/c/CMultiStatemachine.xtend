@@ -29,13 +29,13 @@ class CMultiStatemachine {
 	def dispatch CharSequence getFunctionId(String op, ComplexType type) {
 		val sct = type.getOriginStatechart
 		switch (op) {
-			case "init": return flow.initFctID
-			case "exit": return flow.exitFctID
-			case "enter": return flow.enterFctID
-			case "isActive": return flow.isActiveFctID
-			case "isFinal": return flow.isFinalFctID
-			case "runCycle": return flow.runCycleFctID
-			case "isStateActive": return flow.isStateActiveFctID
+			case "init": return sct.initFctID
+			case "exit": return sct.exitFctID
+			case "enter": return sct.enterFctID
+			case "isActive": return sct.isActiveFctID
+			case "isFinal": return sct.isFinalFctID
+			case "runCycle": return sct.runCycleFctID
+			case "isStateActive": return sct.isStateActiveFctID
 			default: return '''Cannot find state machine method '«op»' for type '«type»'.'''
 		}
 	}
