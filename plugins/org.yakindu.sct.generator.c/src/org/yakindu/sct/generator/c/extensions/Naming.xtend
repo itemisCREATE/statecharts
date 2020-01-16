@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import com.google.inject.name.Named
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Enumerator
@@ -35,6 +36,7 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -43,9 +45,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -64,9 +63,7 @@ class Naming {
 	
 	@Inject extension GenmodelEntries
 	
-	@Inject extension OriginTracing
-	
-	@Inject extension MultiStatemachineHelper
+	@Inject extension StatechartUtil
 	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -178,6 +175,13 @@ class Naming {
 		}
 		type.toFirstLower + separator
 	}
+	
+	def functionPrefix(Statechart it) {
+		if (!entryStatemachinePrefix.nullOrEmpty) {
+			return entryStatemachinePrefix + separator
+		}
+		type.toFirstLower + separator
+	}
 
 	def separator() {
 		var sep = this.sep
@@ -196,6 +200,10 @@ class Naming {
 	}
 
 	def dispatch String null_state(ExecutionFlow it) {
+		type + lastStateID
+	}
+	
+	def dispatch String null_state(Statechart it) {
 		type + lastStateID
 	}
 
@@ -246,12 +254,24 @@ class Naming {
 	def raiseTimeEventFctID(ExecutionFlow it) {
 		functionPrefix + RAISE_TIME_EVENT
 	}
+	
+	def raiseTimeEventFctID(Statechart it) {
+		functionPrefix + RAISE_TIME_EVENT
+	}
 
 	def isStateActiveFctID(ExecutionFlow it) {
 		functionPrefix + IS_STATE_ACTIVE
 	}
+	
+	def isStateActiveFctID(Statechart it) {
+		functionPrefix + IS_STATE_ACTIVE
+	}
 
 	def isActiveFctID(ExecutionFlow it) {
+		functionPrefix + IS_ACTIVE
+	}
+	
+	def isActiveFctID(Statechart it) {
 		functionPrefix + IS_ACTIVE
 	}
 
@@ -259,11 +279,23 @@ class Naming {
 		functionPrefix + IS_FINAL
 	}
 	
+	def isFinalFctID(Statechart it) {
+		functionPrefix + IS_FINAL
+	}
+	
 	def initFctID(ExecutionFlow it) {
 		functionPrefix + INIT
 	}
 	
+	def initFctID(Statechart it) {
+		functionPrefix + INIT
+	}
+	
 	def enterFctID(ExecutionFlow it) {
+		functionPrefix + ENTER
+	}
+	
+	def enterFctID(Statechart it) {
 		functionPrefix + ENTER
 	}
 
@@ -271,7 +303,15 @@ class Naming {
 		functionPrefix + EXIT
 	}
 	
+	def exitFctID(Statechart it) {
+		functionPrefix + EXIT
+	}
+	
 	def runCycleFctID(ExecutionFlow it) {
+		functionPrefix + RUN_CYCLE
+	}
+	
+	def runCycleFctID(Statechart it) {
 		functionPrefix + RUN_CYCLE
 	}
 	
@@ -412,10 +452,9 @@ class Naming {
 	def numStates(ExecutionFlow it) '''«type.toUpperCase»_STATE_COUNT'''
 	
 	def stateEnumAccess(Enumerator it) {
-		val statechart = eContainer.originTraces.filter(Statechart).head
-		val flow = statechart.executionFlow
-		val state = originTraces.filter(State).head		
-		return '''«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«flow.null_state»«ENDIF»'''
+		val statechart = eContainer.originStatechart
+		val state = originState		
+		return '''«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«statechart.null_state»«ENDIF»'''
 	}
 		
 	def dispatch getHandle(Expression it, String handle) {
