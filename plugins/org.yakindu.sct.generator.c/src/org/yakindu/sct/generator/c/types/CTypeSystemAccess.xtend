@@ -19,10 +19,9 @@ import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-
-import static org.yakindu.base.types.typesystem.ITypeSystem.*
-import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
+
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author andreas muelder
@@ -43,7 +42,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case isReal(originalType): REAL_TYPE
 			case isBoolean(originalType): BOOL_TYPE
 			case isString(originalType): STRING_TYPE
-			case isStatemachineType(originalType): '''«type.name»*'''
+			case isOriginStatechart(originalType): '''«type.name»*'''
 			default: type.name
 		}
 	}

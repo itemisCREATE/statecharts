@@ -16,26 +16,26 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 class CMultiStatemachine {
-	@Inject protected extension MultiStatemachineHelper
 	@Inject extension Naming
+	@Inject extension StatechartUtil
 
 	def dispatch CharSequence getFunctionId(Operation op, ComplexType type) {
 		return getFunctionId(op.name, type)
 	}
 
 	def dispatch CharSequence getFunctionId(String op, ComplexType type) {
-		val flow = type.executionFlow
+		val sct = type.getOriginStatechart
 		switch (op) {
-			case "init": return flow.initFctID
-			case "exit": return flow.exitFctID
-			case "enter": return flow.enterFctID
-			case "isActive": return flow.isActiveFctID
-			case "isFinal": return flow.isFinalFctID
-			case "runCycle": return flow.runCycleFctID
-			case "isStateActive": return flow.isStateActiveFctID
+			case "init": return sct.initFctID
+			case "exit": return sct.exitFctID
+			case "enter": return sct.enterFctID
+			case "isActive": return sct.isActiveFctID
+			case "isFinal": return sct.isFinalFctID
+			case "runCycle": return sct.runCycleFctID
+			case "isStateActive": return sct.isStateActiveFctID
 			default: return '''Cannot find state machine method '«op»' for type '«type»'.'''
 		}
 	}

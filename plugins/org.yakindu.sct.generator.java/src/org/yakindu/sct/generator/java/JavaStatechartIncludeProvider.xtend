@@ -11,10 +11,14 @@ package org.yakindu.sct.generator.java
 
 import com.google.common.collect.Sets
 import com.google.inject.Inject
-import org.yakindu.sct.generator.core.multism.MultiStatemachineHelper
+import org.eclipse.emf.ecore.resource.Resource
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorModel
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.sct.model.stext.stext.ImportScope
@@ -25,8 +29,8 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 	protected IPackageImport2URIMapper includeMapper;
 
 	@Inject
-	protected extension MultiStatemachineHelper
-
+	protected extension StatechartUtil
+	
 	@Inject
 	protected extension Naming
 
@@ -37,14 +41,17 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 		val imports = Sets.newHashSet
 		for (PackageImport p : statechartImports) {
 			val typesRes = (sourceElement as Statechart).eResource.resourceSet.getResource(p.uri, true);
-			val submachineChart = typesRes.statechart
-			val submachineFlow = submachineChart.executionFlow
-			val submachineClass = submachineFlow.statemachineClassName
+			val submachineChart = typesRes.subchart
+			val submachineClass = submachineChart.statemachineClassName
 			val subEntry = genModel.getEntry(submachineChart)
-			val submachineImport = submachineFlow.getImplementationPackageName(subEntry) + "." + submachineClass
+			val submachineImport = submachineChart.getImplementationPackageName(subEntry) + "." + submachineClass
 			imports.add(submachineImport)
 		}
 		return imports
+	}
+	
+	protected def getSubchart(Resource typesRes) {
+		typesRes.contents.filter(Package).head.member.filter(ComplexType).reject(EnumerationType).map[getOriginStatechart].filterNull.head
 	}
 
 	protected def getStatechartImports(ExecutionFlow flow) {
