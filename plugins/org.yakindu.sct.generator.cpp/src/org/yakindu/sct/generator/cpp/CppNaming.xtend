@@ -210,11 +210,11 @@ class CppNaming extends Naming {
 		'isRaised_' + name.asIdentifier.toFirstLower
 	}
 
-	override asGetter(EventDefinition it) {
+	override dispatch asGetter(EventDefinition it) {
 		'get_' + name.asIdentifier.toFirstLower + '_value'
 	}
 
-	override asGetter(VariableDefinition it) {
+	override dispatch asGetter(VariableDefinition it) {
 		'get_' + name.asIdentifier.toFirstLower
 	}
 

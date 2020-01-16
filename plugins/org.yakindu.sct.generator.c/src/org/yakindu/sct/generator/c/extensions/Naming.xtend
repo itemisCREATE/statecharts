@@ -311,13 +311,15 @@ class Naming {
 		accessFunction("israised")
 	}
 
-	def asGetter(EventDefinition it) {
+	def dispatch asGetter(EventDefinition it) {
 		accessFunction("get").value
 	}
 
-	def asGetter(VariableDefinition it) {
+	def dispatch asGetter(VariableDefinition it) {
 		accessFunction("get")
 	}
+	
+	def dispatch asGetter(Declaration it) '''Cannot find getter for «it»'''
 
 	def asSetter(Declaration it) {
 		accessFunction("set")

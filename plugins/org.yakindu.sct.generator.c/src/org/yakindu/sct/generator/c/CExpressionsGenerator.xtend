@@ -86,6 +86,9 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it, EventDefinition target) {
+		if(target.eContainer instanceof ComplexType) {
+			return '''«target.asRaised»(«owner.code»)'''
+		}
 		'''«owner.code»«target.access»'''
 		
 	}
@@ -96,7 +99,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		val fc = value
 		if(fc instanceof FeatureCall) {
 			if(fc.feature.eContainer instanceof ComplexType) {
-				return '''«fc.owner.code»->«fc.feature.valueAccess»'''
+				return '''«fc.feature.asGetter»(«fc.owner.code»)'''
 			}
 		}
 		'''«fc.featureOrReference.valueAccess»'''
@@ -157,7 +160,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
 		if (target.eContainer instanceof ComplexType) {
-			return '''«owner.code»«target.access»'''
+			return '''«target.asGetter»(«owner.code»)'''
 		}
 		'''«target.access»'''
 	}
