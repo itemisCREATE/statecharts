@@ -22,6 +22,8 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.ComplexType
 
 /**
  * @author andreas muelder
@@ -42,7 +44,8 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case isReal(originalType): REAL_TYPE
 			case isBoolean(originalType): BOOL_TYPE
 			case isString(originalType): STRING_TYPE
-			case isOriginStatechart(originalType): '''«type.name»*'''
+			EnumerationType case isOriginStatechart(originalType): '''«type.name»'''
+			ComplexType case isOriginStatechart(originalType): '''«type.name»*'''
 			default: type.name
 		}
 	}
