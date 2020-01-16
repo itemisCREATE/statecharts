@@ -51,7 +51,7 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 	}
 	
 	protected def getSubchart(Resource typesRes) {
-		typesRes.contents.filter(Package).head.member.filter(ComplexType).reject(EnumerationType).map[getOriginStatechart].filterNull.head
+		typesRes.contents.filter(Package).head.member.filter(ComplexType).filter[!(it instanceof EnumerationType)].map[getOriginStatechart].filterNull.head
 	}
 
 	protected def getStatechartImports(ExecutionFlow flow) {
