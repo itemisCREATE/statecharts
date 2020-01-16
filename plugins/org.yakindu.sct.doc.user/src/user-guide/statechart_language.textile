@@ -625,12 +625,6 @@ bc.
 internal:
   event event1 : integer
 
-An event can have a value assignment:
-
-bc. 
-internal:
-  event event1: integer = 25
-
 Read access to an event's value is possible in the statechart using the _valueof()_ built-in method, see section "&quot;Built-in methods&quot;":#sclang_built-in-functions for details.
 
 bq. *Please note:* Reading an event's value is possible only when the event actually occurs, for example in a guard condition.
