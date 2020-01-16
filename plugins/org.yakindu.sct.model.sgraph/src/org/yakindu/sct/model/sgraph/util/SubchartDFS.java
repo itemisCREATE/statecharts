@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.DFS;
 
 /**
  * Traverses all referenced subcharts in a cycle-free DFS manner.
@@ -45,8 +45,11 @@ public class SubchartDFS extends DFS {
 		return new ArrayList<Property>().iterator();
 	}
 
-	public Statechart getStatechart(Property definition) {
+	public static Statechart getStatechart(Property definition) {
 		URI statemachineURI = definition.getType().eResource().getURI().trimFileExtension().appendFileExtension("sct");
+		if (!URIConverter.INSTANCE.exists(statemachineURI, null)) {
+			return null;
+		}
 		Resource resource = definition.eResource().getResourceSet().getResource(statemachineURI, true);
 		return (Statechart) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART);
 
@@ -62,3 +65,4 @@ public class SubchartDFS extends DFS {
 	}
 
 }
+
