@@ -44,7 +44,7 @@ TEST_F(TypeAliasTest, TypeAliasTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Mid));
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "TypeSystem") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"TypeSystem") == 0);
 	
 	runner->proceed_cycles(1);
 	

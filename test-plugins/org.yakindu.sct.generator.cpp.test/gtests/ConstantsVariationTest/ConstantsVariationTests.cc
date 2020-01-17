@@ -50,9 +50,9 @@ TEST_F(ConstantsVariationTests, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->getSCI_Named()->get_r()== 5);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_str2(), "String") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_str2(), (sc_string)"String") == 0);
 	
-	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_str(), "String") == 0);
+	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_str(), (sc_string)"String") == 0);
 	
 	runner->proceed_cycles(1);
 	

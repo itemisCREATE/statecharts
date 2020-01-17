@@ -38,7 +38,7 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "sct") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"sct") == 0);
 	
 	statechart->getDefaultSCI()->raise_integerEvent(23);
 	
@@ -64,7 +64,7 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 20);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "tool") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"tool") == 0);
 	
 	
 }
