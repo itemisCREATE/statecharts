@@ -36,7 +36,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	@Inject
 	protected extension IQualifiedNameProvider
-	
+
 	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, FeatureCall e) {
 		return Optional.ofNullable(resolveByFeature(context, e, e.feature))
 	}
@@ -72,7 +72,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		}
 		return resolveFromSlot(featureSlot.get, e)
 	}
-	
+
 	def protected dispatch ExecutionSlot resolveFromSlot(ExecutionSlot slot, FeatureCall call) {
 		slot // fallback
 	}
@@ -102,9 +102,11 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	}
 
 	def protected dispatch ExecutionSlot resolveByName(ExecutionContext slot, NamedElement element) {
-		slot.slots.findFirst[name == element.name] ?: resolveByName(slot.slots.filter(CompositeSlot).findFirst[it.name == "default"] ,element )
+		val defaultSlot = slot.slots.filter(CompositeSlot).findFirst[it.name == "default"]
+		if (defaultSlot !== null)
+			slot.slots.findFirst[name == element.name] ?: resolveByName(defaultSlot, element)
 	}
-	
+
 	def protected dispatch ExecutionSlot resolveByName(CompositeSlot slot, NamedElement element) {
 		slot.slots.findFirst[name == element.name]
 	}
