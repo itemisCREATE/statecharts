@@ -5,11 +5,18 @@ package org.yakindu.scr.parentfirstlocalreactions;
 public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
-		private boolean e;
+		private boolean doTransition;
 		
 		
-		public void raiseE() {
-			e = true;
+		public void raiseDoTransition() {
+			doTransition = true;
+		}
+		
+		private boolean doSelfTransition;
+		
+		
+		public void raiseDoSelfTransition() {
+			doSelfTransition = true;
 		}
 		
 		private long cnt;
@@ -97,7 +104,8 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		}
 		
 		protected void clearEvents() {
-			e = false;
+			doTransition = false;
+			doSelfTransition = false;
 		}
 	}
 	
@@ -243,8 +251,12 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		return sCInterface;
 	}
 	
-	public void raiseE() {
-		sCInterface.raiseE();
+	public void raiseDoTransition() {
+		sCInterface.raiseDoTransition();
+	}
+	
+	public void raiseDoSelfTransition() {
+		sCInterface.raiseDoSelfTransition();
 	}
 	
 	public long getCnt() {
@@ -481,11 +493,16 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
+				if (((sCInterface.doTransition) && (!sCInterface.getDisable_a()))) {
 					exitSequence_ParentFirstLocalReactions_r_A();
 					enterSequence_ParentFirstLocalReactions_r_B_default();
 				} else {
-					did_transition = false;
+					if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_a()))) {
+						exitSequence_ParentFirstLocalReactions_r_A();
+						enterSequence_ParentFirstLocalReactions_r_A_default();
+					} else {
+						did_transition = false;
+					}
 				}
 			}
 		}
@@ -500,7 +517,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (parentFirstLocalReactions_r_A_react(try_transition)==false) {
-				if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
+				if (((sCInterface.doTransition) && (!sCInterface.getDisable_aa()))) {
 					exitSequence_ParentFirstLocalReactions_r_A_r_AA();
 					enterSequence_ParentFirstLocalReactions_r_A_r_AB_default();
 				} else {
@@ -519,11 +536,16 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (parentFirstLocalReactions_r_A_r_AA_react(try_transition)==false) {
-				if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
+				if (((sCInterface.doTransition) && (!sCInterface.getDisable_aaa()))) {
 					exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
 					enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				} else {
-					did_transition = false;
+					if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_aaa()))) {
+						exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
+						enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA_default();
+					} else {
+						did_transition = false;
+					}
 				}
 			}
 		}

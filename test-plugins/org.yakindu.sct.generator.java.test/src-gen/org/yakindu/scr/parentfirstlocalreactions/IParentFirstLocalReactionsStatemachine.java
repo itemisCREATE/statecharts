@@ -6,7 +6,9 @@ import org.yakindu.scr.IStatemachine;
 public interface IParentFirstLocalReactionsStatemachine extends IStatemachine {
 	public interface SCInterface {
 	
-		public void raiseE();
+		public void raiseDoTransition();
+		
+		public void raiseDoSelfTransition();
 		
 		public long getCnt();
 		
