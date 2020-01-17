@@ -729,12 +729,6 @@ class BehaviorMapping {
 		exitStates.last		
 	}
 
-//	/** Determines the  */
-//	def Iterable<State> entryStates(Transition t) {
-//		val l = t.target.containers
-//		l.removeAll(t.source.containers)
-//		l.filter( typeof(State) )
-//	}
 	
 	/**
 	 * Determines the list of states that are exited by a transition.
