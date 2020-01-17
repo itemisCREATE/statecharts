@@ -43,21 +43,21 @@ void ReadOnlyVariableTest::readOnlyVariableTest()
 	readOnlyVariable_enter(&statechart);
 	EXPECT_TRUE(readOnlyVariable_isStateActive(&statechart, ReadOnlyVariable_main_region_StateA));
 	EXPECT_TRUE(readOnlyVariableIface_get_myInt(&statechart)== 0);
-	EXPECT_TRUE(strcmp(readOnlyVariableIface_get_myString(&statechart), (sc_string)"testString") == 0);
+	EXPECT_TRUE(strcmp(readOnlyVariableIface_get_myString(&statechart), "testString") == 0);
 	EXPECT_TRUE(readOnlyVariableIface_get_myBool(&statechart)== true);
 	EXPECT_TRUE(readOnlyVariableIface_get_myReal(&statechart)== 1.1);
 	EXPECT_TRUE(readOnlyVariableIfaceA_get_myInt(&statechart)== 0);
-	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart), (sc_string)"testString") == 0);
+	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart), "testString") == 0);
 	EXPECT_TRUE(readOnlyVariableIfaceA_get_myBool(&statechart)== true);
 	EXPECT_TRUE(readOnlyVariableIfaceA_get_myReal(&statechart)== 1.1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(readOnlyVariable_isStateActive(&statechart, ReadOnlyVariable_main_region_StateB));
 	EXPECT_TRUE(readOnlyVariableIface_get_myInt(&statechart)== 100);
-	EXPECT_TRUE(strcmp(readOnlyVariableIface_get_myString(&statechart), (sc_string)"fail") == 0);
+	EXPECT_TRUE(strcmp(readOnlyVariableIface_get_myString(&statechart), "fail") == 0);
 	EXPECT_TRUE(readOnlyVariableIface_get_myBool(&statechart)== false);
 	EXPECT_TRUE(readOnlyVariableIface_get_myReal(&statechart)== 6.6);
 	EXPECT_TRUE(readOnlyVariableIfaceA_get_myInt(&statechart)== 200);
-	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart), (sc_string)"A_fail") == 0);
+	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart), "A_fail") == 0);
 	EXPECT_TRUE(readOnlyVariableIfaceA_get_myBool(&statechart)== false);
 	EXPECT_TRUE(readOnlyVariableIfaceA_get_myReal(&statechart)== 7.7);
 }
