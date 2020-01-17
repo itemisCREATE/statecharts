@@ -58,7 +58,7 @@ void ChildFirstLocalReactionsTest::expectParentLocalReactionOnChildLocalTransiti
 {
 	childFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AA_r_AAA));
-	childFirstLocalReactionsIface_raise_doTransition(&statechart);
+	childFirstLocalReactionsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AA_r_AAB));
 	EXPECT_TRUE(childFirstLocalReactionsIface_get_aaa_local(&statechart)== 0);
@@ -85,7 +85,7 @@ void ChildFirstLocalReactionsTest::expectGrandparentLocalReactionOnParentLocalTr
 	childFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	childFirstLocalReactionsIface_set_disable_aaa(&statechart,true);
-	childFirstLocalReactionsIface_raise_doTransition(&statechart);
+	childFirstLocalReactionsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AB));
 	EXPECT_TRUE(childFirstLocalReactionsIface_get_aaa_local(&statechart)== 1);
@@ -99,7 +99,7 @@ void ChildFirstLocalReactionsTest::expectNoLocalReactionOnGrandparentTransition(
 	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	childFirstLocalReactionsIface_set_disable_aaa(&statechart,true);
 	childFirstLocalReactionsIface_set_disable_aa(&statechart,true);
-	childFirstLocalReactionsIface_raise_doTransition(&statechart);
+	childFirstLocalReactionsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_B));
 	EXPECT_TRUE(childFirstLocalReactionsIface_get_aaa_local(&statechart)== 1);

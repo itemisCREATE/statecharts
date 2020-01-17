@@ -58,7 +58,7 @@ void ParentFirstLocalReactionsTest::expectParentLocalReactionOnChildLocalTransit
 {
 	parentFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
-	parentFirstLocalReactionsIface_raise_doTransition(&statechart);
+	parentFirstLocalReactionsIface_raise_e(&statechart);
 	parentFirstLocalReactionsIface_set_disable_a(&statechart,true);
 	parentFirstLocalReactionsIface_set_disable_aa(&statechart,true);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -87,7 +87,7 @@ void ParentFirstLocalReactionsTest::expectGrandparentLocalReactionOnParentLocalT
 	parentFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	parentFirstLocalReactionsIface_set_disable_a(&statechart,true);
-	parentFirstLocalReactionsIface_raise_doTransition(&statechart);
+	parentFirstLocalReactionsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AB));
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_sm_local(&statechart)== 1);
@@ -101,7 +101,7 @@ void ParentFirstLocalReactionsTest::expectNoLocalReactionOnGrandparentTransition
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	parentFirstLocalReactionsIface_set_disable_aaa(&statechart,true);
 	parentFirstLocalReactionsIface_set_disable_aa(&statechart,true);
-	parentFirstLocalReactionsIface_raise_doTransition(&statechart);
+	parentFirstLocalReactionsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_B));
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_sm_local(&statechart)== 1);
