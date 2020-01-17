@@ -6,7 +6,7 @@ import org.yakindu.scr.IStatemachine;
 public interface IChildFirstLocalReactionsStatemachine extends IStatemachine {
 	public interface SCInterface {
 	
-		public void raiseDoTransition();
+		public void raiseE();
 		
 		public void raiseDoSelfTransition();
 		

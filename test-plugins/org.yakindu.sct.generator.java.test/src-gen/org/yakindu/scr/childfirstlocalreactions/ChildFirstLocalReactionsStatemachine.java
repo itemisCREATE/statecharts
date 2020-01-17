@@ -5,11 +5,11 @@ package org.yakindu.scr.childfirstlocalreactions;
 public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
-		private boolean doTransition;
+		private boolean e;
 		
 		
-		public void raiseDoTransition() {
-			doTransition = true;
+		public void raiseE() {
+			e = true;
 		}
 		
 		private boolean doSelfTransition;
@@ -104,7 +104,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		}
 		
 		protected void clearEvents() {
-			doTransition = false;
+			e = false;
 			doSelfTransition = false;
 		}
 	}
@@ -251,8 +251,8 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		return sCInterface;
 	}
 	
-	public void raiseDoTransition() {
-		sCInterface.raiseDoTransition();
+	public void raiseE() {
+		sCInterface.raiseE();
 	}
 	
 	public void raiseDoSelfTransition() {
@@ -492,7 +492,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.doTransition) && (!sCInterface.getDisable_a()))) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
 				exitSequence_ChildFirstLocalReactions_r_A();
 				enterSequence_ChildFirstLocalReactions_r_B_default();
 				react();
@@ -518,7 +518,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.doTransition) && (!sCInterface.getDisable_aa()))) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
 				exitSequence_ChildFirstLocalReactions_r_A_r_AA();
 				enterSequence_ChildFirstLocalReactions_r_A_r_AB_default();
 				childFirstLocalReactions_r_A_react(false);
@@ -538,7 +538,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.doTransition) && (!sCInterface.getDisable_aaa()))) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
 				exitSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAA();
 				enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				childFirstLocalReactions_r_A_r_AA_react(false);
