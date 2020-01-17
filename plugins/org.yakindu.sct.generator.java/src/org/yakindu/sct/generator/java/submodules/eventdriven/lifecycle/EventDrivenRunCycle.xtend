@@ -78,19 +78,11 @@ class EventDrivenRunCycle extends RunCycle {
 	
 	def protected singleCycle(ExecutionFlow it) '''
 		protected «sync»void singleCycle() {
-			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-				switch (stateVector[nextStateIndex]) {
-					«FOR state : flow.states.filter[isLeaf]»
-					«IF state.reactMethod !== null»
-						case «state.stateName.asEscapedIdentifier»:
-							«state.reactMethod.shortName»(true);
-							break;
-				«ENDIF»
-				«ENDFOR»
-				default:
-					// «getNullStateName()»
-				}
-			}
+			«IF flow.statechart.isSuperStep»
+			«superStepLoop(flow.runCycleForLoop)»
+			«ELSE»
+			«flow.runCycleForLoop»
+			«ENDIF»
 		}
 	'''
 	

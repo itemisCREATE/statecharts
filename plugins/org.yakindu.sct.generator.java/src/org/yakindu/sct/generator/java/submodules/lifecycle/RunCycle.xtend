@@ -19,6 +19,7 @@ import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class RunCycle implements org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle {
 	@Inject protected extension Naming
@@ -28,6 +29,7 @@ class RunCycle implements org.yakindu.sct.generator.core.submodules.lifecycle.Ru
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Synchronized
+	@Inject protected extension StatechartAnnotations
 	
 	override runCycle(ExecutionFlow flow) '''
 		public «sync»void runCycle() {
@@ -35,21 +37,37 @@ class RunCycle implements org.yakindu.sct.generator.core.submodules.lifecycle.Ru
 				throw new IllegalStateException(
 						"The state machine needs to be initialized first by calling the init() function.");
 			clearOutEvents();
-			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-				switch (stateVector[nextStateIndex]) {
-				«FOR state : flow.states.filter[isLeaf]»
-					«IF state.reactMethod !== null»
-						case «state.stateName.asEscapedIdentifier»:
-							«state.reactMethod.shortName»(true);
-							break;
-				«ENDIF»
-				«ENDFOR»
-				default:
-					// «getNullStateName()»
-				}
-			}
+			«IF flow.statechart.isSuperStep»
+			«superStepLoop(flow.runCycleForLoop)»
+			«ELSE»
+			«flow.runCycleForLoop»
+			«ENDIF»
 			clearEvents();
 		}
 	'''
+	
+	def protected runCycleForLoop(ExecutionFlow flow) '''
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			«FOR state : flow.states.filter[isLeaf]»
+				«IF state.reactMethod !== null»
+					case «state.stateName.asEscapedIdentifier»:
+						«state.reactMethod.shortName»(true);
+						break;
+			«ENDIF»
+			«ENDFOR»
+			default:
+				// «getNullStateName()»
+			}
+		}
+	'''
+	
+	def protected superStepLoop(CharSequence microStep) '''
+		do {
+			stateVectorChanged = false;
+			«microStep»
+		} while(stateVectorChanged);
+	'''
+		
 	
 }
