@@ -22,7 +22,7 @@ testclass ParentFirstLocalReactions for statechart executionorder.ParentFirstLoc
 		enter
 	 	assert active(executionorder.ParentFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
-	 	raise doTransition
+	 	raise e
 	 	disable_a = true
 	 	disable_aa = true
 	 	proceed 1 cycle
@@ -61,7 +61,7 @@ testclass ParentFirstLocalReactions for statechart executionorder.ParentFirstLoc
 	 	assert active(executionorder.ParentFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
 	 	disable_a = true
-	 	raise doTransition
+	 	raise e
 	 	proceed 1 cycle
 	 	
 	 	assert active(executionorder.ParentFirstLocalReactions.r.A.r.AB) 
@@ -79,7 +79,7 @@ testclass ParentFirstLocalReactions for statechart executionorder.ParentFirstLoc
 	 	
 	 	disable_aaa = true
 	 	disable_aa = true
-	 	raise doTransition
+	 	raise e
 	 	proceed 1 cycle
 	 	
 	 	assert active(executionorder.ParentFirstLocalReactions.r.B) 

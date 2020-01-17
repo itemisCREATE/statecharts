@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_WbIqMFgXEeeNwJt_ornpOA" specification="namespace executionorder&#xA;&#xA;@ParentFirstExecution&#xA;&#xA;interface:&#xA;// Define events and&#xA;// and variables here. &#xA;//Use CTRL + Space for content assist.&#xA;&#xA;var cnt : integer = 0&#xA;&#xA;in event doTransition&#xA;in event doSelfTransition&#xA;&#xA;var disable_a : boolean&#xA;var disable_aa : boolean&#xA;var disable_aaa : boolean&#xA;&#xA;var a_local : integer = 0&#xA;var aa_local : integer = 0&#xA;var aaa_local : integer = 0 &#xA;&#xA;&#xA;var sm_local : integer = 0&#xA;&#xA;internal :&#xA;&#xA;always / sm_local = (cnt+=1)" namespace="executionorder" name="ParentFirstLocalReactions">
+  <sgraph:Statechart xmi:id="_WbIqMFgXEeeNwJt_ornpOA" specification="namespace executionorder&#xA;&#xA;@ParentFirstExecution&#xA;&#xA;interface:&#xA;// Define events and&#xA;// and variables here. &#xA;//Use CTRL + Space for content assist.&#xA;&#xA;var cnt : integer = 0&#xA;&#xA;in event e&#xA;in event doSelfTransition&#xA;&#xA;var disable_a : boolean&#xA;var disable_aa : boolean&#xA;var disable_aaa : boolean&#xA;&#xA;var a_local : integer = 0&#xA;var aa_local : integer = 0&#xA;var aaa_local : integer = 0 &#xA;&#xA;&#xA;var sm_local : integer = 0&#xA;&#xA;internal :&#xA;&#xA;always / sm_local = (cnt+=1)" namespace="executionorder" name="ParentFirstLocalReactions">
     <regions xmi:id="_WbJ4UlgXEeeNwJt_ornpOA" name="r">
       <vertices xsi:type="sgraph:Entry" xmi:id="_WbZv8VgXEeeNwJt_ornpOA">
         <outgoingTransitions xmi:id="_WbcMMlgXEeeNwJt_ornpOA" target="_Wba-EVgXEeeNwJt_ornpOA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_Wba-EVgXEeeNwJt_ornpOA" specification="entry / &#xA;&#x9;disable_a = false;&#xA;&#x9;disable_aa = false;&#xA;&#x9;disable_aaa = false&#xA;&#x9;&#xA;always / a_local = (cnt+=1)" name="A" incomingTransitions="_WbcMMlgXEeeNwJt_ornpOA _VF-coDk6Eeq6cYS23gkxPQ">
-        <outgoingTransitions xmi:id="_n4jjUFgXEeeNwJt_ornpOA" specification="doTransition [! disable_a]" target="_lgGeMFgXEeeNwJt_ornpOA"/>
+        <outgoingTransitions xmi:id="_n4jjUFgXEeeNwJt_ornpOA" specification="e [! disable_a]" target="_lgGeMFgXEeeNwJt_ornpOA"/>
         <outgoingTransitions xmi:id="_VF-coDk6Eeq6cYS23gkxPQ" specification="doSelfTransition [! disable_a]" target="_Wba-EVgXEeeNwJt_ornpOA"/>
         <regions xmi:id="_euckTVgXEeeNwJt_ornpOA" name="r">
           <vertices xsi:type="sgraph:Entry" xmi:id="_euckTlgXEeeNwJt_ornpOA">
             <outgoingTransitions xmi:id="_euckT1gXEeeNwJt_ornpOA" specification="" target="_euckUFgXEeeNwJt_ornpOA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_euckUFgXEeeNwJt_ornpOA" specification="always / aa_local = (cnt+=1)" name="AA" incomingTransitions="_euckT1gXEeeNwJt_ornpOA">
-            <outgoingTransitions xmi:id="_rKGMkFgXEeeNwJt_ornpOA" specification="doTransition [! disable_aa]" target="_4ukrAFxFEeexYulqhdY-Pw"/>
+            <outgoingTransitions xmi:id="_rKGMkFgXEeeNwJt_ornpOA" specification="e [! disable_aa]" target="_4ukrAFxFEeexYulqhdY-Pw"/>
             <regions xmi:id="_fjqU8FgXEeeNwJt_ornpOA" name="r">
               <vertices xsi:type="sgraph:Entry" xmi:id="_fjqU8VgXEeeNwJt_ornpOA">
                 <outgoingTransitions xmi:id="_fjqU8lgXEeeNwJt_ornpOA" specification="" target="_fjqU81gXEeeNwJt_ornpOA"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_fjqU81gXEeeNwJt_ornpOA" specification="always / aaa_local = (cnt+=1)" name="AAA" incomingTransitions="_fjqU8lgXEeeNwJt_ornpOA _FQIlUDk6Eeq6cYS23gkxPQ">
-                <outgoingTransitions xmi:id="_p3XZYFgXEeeNwJt_ornpOA" specification="doTransition [! disable_aaa]" target="_nybS8FxFEeexYulqhdY-Pw"/>
+                <outgoingTransitions xmi:id="_p3XZYFgXEeeNwJt_ornpOA" specification="e [! disable_aaa]" target="_nybS8FxFEeexYulqhdY-Pw"/>
                 <outgoingTransitions xmi:id="_FQIlUDk6Eeq6cYS23gkxPQ" specification="doSelfTransition [! disable_aaa]" target="_fjqU81gXEeeNwJt_ornpOA"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_nybS8FxFEeexYulqhdY-Pw" name="AAB" incomingTransitions="_p3XZYFgXEeeNwJt_ornpOA"/>
