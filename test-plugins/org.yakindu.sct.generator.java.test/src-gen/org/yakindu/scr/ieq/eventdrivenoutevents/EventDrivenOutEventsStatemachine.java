@@ -115,18 +115,18 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case main_region_StateA:
-					main_region_StateA_react(true);
-					break;
-				case main_region_StateB:
-					main_region_StateB_react(true);
-					break;
-				case second_region_StateC:
-					second_region_StateC_react(true);
-					break;
-				case second_region_StateD:
-					second_region_StateD_react(true);
-					break;
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			case second_region_StateC:
+				second_region_StateC_react(true);
+				break;
+			case second_region_StateD:
+				second_region_StateD_react(true);
+				break;
 			default:
 				// $NullState$
 			}

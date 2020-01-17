@@ -254,15 +254,15 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	protected synchronized void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case runnableTest_main_region__final_:
-					runnableTest_main_region__final__react(true);
-					break;
-				case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
-					runnableTest_main_region_Composite_s1_s2_inner_region_s1_react(true);
-					break;
-				case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
-					runnableTest_main_region_Composite_s1_s2_inner_region_s2_react(true);
-					break;
+			case runnableTest_main_region__final_:
+				runnableTest_main_region__final__react(true);
+				break;
+			case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
+				runnableTest_main_region_Composite_s1_s2_inner_region_s1_react(true);
+				break;
+			case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
+				runnableTest_main_region_Composite_s1_s2_inner_region_s2_react(true);
+				break;
 			default:
 				// $NullState$
 			}

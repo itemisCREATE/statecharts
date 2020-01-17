@@ -121,21 +121,21 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case outEventVisibilityEventDriven_main_region_A:
-					outEventVisibilityEventDriven_main_region_A_react(true);
-					break;
-				case outEventVisibilityEventDriven_main_region_B:
-					outEventVisibilityEventDriven_main_region_B_react(true);
-					break;
-				case outEventVisibilityEventDriven_main_region_C:
-					outEventVisibilityEventDriven_main_region_C_react(true);
-					break;
-				case outEventVisibilityEventDriven_main_region_D:
-					outEventVisibilityEventDriven_main_region_D_react(true);
-					break;
-				case outEventVisibilityEventDriven_main_region_E:
-					outEventVisibilityEventDriven_main_region_E_react(true);
-					break;
+			case outEventVisibilityEventDriven_main_region_A:
+				outEventVisibilityEventDriven_main_region_A_react(true);
+				break;
+			case outEventVisibilityEventDriven_main_region_B:
+				outEventVisibilityEventDriven_main_region_B_react(true);
+				break;
+			case outEventVisibilityEventDriven_main_region_C:
+				outEventVisibilityEventDriven_main_region_C_react(true);
+				break;
+			case outEventVisibilityEventDriven_main_region_D:
+				outEventVisibilityEventDriven_main_region_D_react(true);
+				break;
+			case outEventVisibilityEventDriven_main_region_E:
+				outEventVisibilityEventDriven_main_region_E_react(true);
+				break;
 			default:
 				// $NullState$
 			}

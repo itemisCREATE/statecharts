@@ -53,6 +53,8 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	
 	private final State[] stateVector = new State[1];
 	
+	private boolean stateVectorChanged = false;
+	
 	private int nextStateIndex;
 	
 	public CycleBasedSuperStepStatemachine() {
@@ -83,33 +85,36 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case cycleBasedSuperStep_main_region_A:
-				cycleBasedSuperStep_main_region_A_react(true);
-				break;
-			case cycleBasedSuperStep_main_region_B:
-				cycleBasedSuperStep_main_region_B_react(true);
-				break;
-			case cycleBasedSuperStep_main_region_C:
-				cycleBasedSuperStep_main_region_C_react(true);
-				break;
-			case cycleBasedSuperStep_main_region_D:
-				cycleBasedSuperStep_main_region_D_react(true);
-				break;
-			case cycleBasedSuperStep_main_region_G:
-				cycleBasedSuperStep_main_region_G_react(true);
-				break;
-			case cycleBasedSuperStep_main_region_H:
-				cycleBasedSuperStep_main_region_H_react(true);
-				break;
-			case cycleBasedSuperStep_main_region_I:
-				cycleBasedSuperStep_main_region_I_react(true);
-				break;
-			default:
-				// $NullState$
+		do {
+			stateVectorChanged = false;
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case cycleBasedSuperStep_main_region_A:
+					cycleBasedSuperStep_main_region_A_react(true);
+					break;
+				case cycleBasedSuperStep_main_region_B:
+					cycleBasedSuperStep_main_region_B_react(true);
+					break;
+				case cycleBasedSuperStep_main_region_C:
+					cycleBasedSuperStep_main_region_C_react(true);
+					break;
+				case cycleBasedSuperStep_main_region_D:
+					cycleBasedSuperStep_main_region_D_react(true);
+					break;
+				case cycleBasedSuperStep_main_region_G:
+					cycleBasedSuperStep_main_region_G_react(true);
+					break;
+				case cycleBasedSuperStep_main_region_H:
+					cycleBasedSuperStep_main_region_H_react(true);
+					break;
+				case cycleBasedSuperStep_main_region_I:
+					cycleBasedSuperStep_main_region_I_react(true);
+					break;
+				default:
+					// $NullState$
+				}
 			}
-		}
+		} while(stateVectorChanged);
 		clearEvents();
 	}
 	public void exit() {
@@ -193,42 +198,49 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	private void enterSequence_CycleBasedSuperStep_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_A;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_CycleBasedSuperStep_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_B;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_CycleBasedSuperStep_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_C;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_CycleBasedSuperStep_main_region_D_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_D;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state G */
 	private void enterSequence_CycleBasedSuperStep_main_region_G_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_G;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state H */
 	private void enterSequence_CycleBasedSuperStep_main_region_H_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_H;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state I */
 	private void enterSequence_CycleBasedSuperStep_main_region_I_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_I;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for region main region */

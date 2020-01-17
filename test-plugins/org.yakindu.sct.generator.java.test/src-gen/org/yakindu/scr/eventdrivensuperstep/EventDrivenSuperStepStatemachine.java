@@ -58,6 +58,8 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	
 	private final State[] stateVector = new State[1];
 	
+	private boolean stateVectorChanged = false;
+	
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
@@ -107,8 +109,10 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	}
 	
 	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
+		do {
+			stateVectorChanged = false;
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
 				case eventDrivenSuperStep_main_region_A:
 					eventDrivenSuperStep_main_region_A_react(true);
 					break;
@@ -133,10 +137,11 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 				case eventDrivenSuperStep_main_region_L:
 					eventDrivenSuperStep_main_region_L_react(true);
 					break;
-			default:
-				// $NullState$
+				default:
+					// $NullState$
+				}
 			}
-		}
+		} while(stateVectorChanged);
 	}
 	
 	protected Runnable getNextEvent() {
@@ -260,48 +265,56 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	private void enterSequence_EventDrivenSuperStep_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_A;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_EventDrivenSuperStep_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_B;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_EventDrivenSuperStep_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_C;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_EventDrivenSuperStep_main_region_D_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_D;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state G */
 	private void enterSequence_EventDrivenSuperStep_main_region_G_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_G;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state H */
 	private void enterSequence_EventDrivenSuperStep_main_region_H_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_H;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state I */
 	private void enterSequence_EventDrivenSuperStep_main_region_I_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_I;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state L */
 	private void enterSequence_EventDrivenSuperStep_main_region_L_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_L;
+		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for region main region */
