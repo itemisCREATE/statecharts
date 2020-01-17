@@ -171,7 +171,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(FeatureCall it, Operation target) {
 		if (target.eContainer instanceof ComplexType) {
-			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle(scHandle + "->")»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 		}
 		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}

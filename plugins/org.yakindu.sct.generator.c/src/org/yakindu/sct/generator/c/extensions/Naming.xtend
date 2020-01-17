@@ -457,18 +457,29 @@ class Naming {
 		return '''«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«statechart.null_state»«ENDIF»'''
 	}
 		
-	def dispatch getHandle(Expression it, String handle) {
+	def dispatch getHandle(Expression it) {
 		'''/*Cannot find handle for Expression: '«it»' */'''
 	}
 	
-	def dispatch CharSequence getHandle(FeatureCall it, String handle) {
-		'''«owner.getHandle(handle)»«feature.access»'''
+	def dispatch CharSequence getHandle(FeatureCall it) {
+		if(feature instanceof VariableDefinition && owner instanceof FeatureCall) {
+			val owner = owner as FeatureCall
+			val ownerOfOwner = owner.owner
+			// named interface
+			if(ownerOfOwner instanceof FeatureCall) {
+				return '''«feature.asGetter»(«ownerOfOwner.getHandle»)'''	
+			}
+			// unnamed interface
+			return '''«feature.asGetter»(«owner.getHandle»)'''
+		}
+		// statechart internal
+		'''«owner.getHandle»«feature.access»'''
 	}
 	
-	def dispatch getHandle(ElementReferenceExpression it, CharSequence handle) {
+	def dispatch getHandle(ElementReferenceExpression it) {
 		val reference = reference
 		if(reference instanceof VariableDefinition) {
-			'''«handle»«reference.scope.instance».«reference.name»'''
+			'''«scHandle»->«reference.scope.instance».«reference.name»'''
 		}
 	}
 	
