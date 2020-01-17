@@ -1,0 +1,36 @@
+GeneratorModel for sctunit::java {
+	
+	
+	test CycleBasedSuperStep {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+	
+	test EventDrivenSuperStep {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+	
+}
