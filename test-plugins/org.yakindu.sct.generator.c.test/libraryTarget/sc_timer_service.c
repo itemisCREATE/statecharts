@@ -34,7 +34,8 @@ void sc_timer_service_init(
 			&run_cycle,
 			ts->cycle_period,
 			true,
-			0);
+			0,
+			handle);
 		run_cycle.isRunCycle = true;
 		run_cycle.priority = -1;
 		insert_timer(ts, run_cycle);
@@ -45,7 +46,8 @@ void sc_timer_init(
 	sc_timer_t * t,
 	sc_integer time_ms,
 	sc_boolean periodic,
-	sc_eventid evid
+	sc_eventid evid,
+	void* handle
 )
 {
 	t->rel_time_ms = time_ms;
@@ -54,6 +56,7 @@ void sc_timer_init(
 	t->pt_evid = evid;
 	t->priority = 0;
 	t->isRunCycle = false;
+	t->handle = handle;
 }
 
 void sc_timer_service_proceed_time(sc_unit_timer_service_t * ts, sc_integer time_ms)
@@ -85,7 +88,7 @@ void sc_timer_service_proceed_time(sc_unit_timer_service_t * ts, sc_integer time
 				if(next.isRunCycle) {
 					ts->run_cycle_func(ts->handle);
 				} else {
-					ts->raise_event_func(ts->handle, next.pt_evid);
+					ts->raise_event_func(next.handle, next.pt_evid);
 				}
 	
 				processed_timer = true;
