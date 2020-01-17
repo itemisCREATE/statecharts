@@ -27,12 +27,19 @@ protected:
 static TimedTransitionsTest * tc;
 
 
+static void dispatchTimeEvent(void* handle, sc_eventid evid)
+{
+	if(handle == &statechart){
+		timedTransitions_raiseTimeEvent(&statechart, evid);
+	}
+}
+
 void TimedTransitionsTest::SetUp()
 {
 	timedTransitions_init(&statechart);
 	sc_timer_service_init(
 		&timer_service,
-		(sc_raise_time_event_fp) &timedTransitions_raiseTimeEvent,
+		(sc_raise_time_event_fp) dispatchTimeEvent,
 		(sc_run_cycle_fp) &timedTransitions_runCycle,
 		false,
 		200,
@@ -85,7 +92,7 @@ void TimedTransitionsTest::countCycles()
 
 void TimedTransitionsTest::setTimer(TimedTransitions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	sc_timer_t timer;
-	sc_timer_init(&timer, time_ms, periodic, evid);
+	sc_timer_init(&timer, time_ms, periodic, evid, statechart);
 	insert_timer(&(tc->timer_service), timer);
 }
 
@@ -113,4 +120,5 @@ void timedTransitions_setTimer(TimedTransitions* statechart, const sc_eventid ev
 void timedTransitions_unsetTimer(TimedTransitions* handle, const sc_eventid evid){
 	tc->unsetTimer(handle, evid);
 }
+
 
