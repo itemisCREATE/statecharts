@@ -111,12 +111,12 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case eventDrivenTriggeredByTimeEvent_r_A:
-					eventDrivenTriggeredByTimeEvent_r_A_react(true);
-					break;
-				case eventDrivenTriggeredByTimeEvent_r_B:
-					eventDrivenTriggeredByTimeEvent_r_B_react(true);
-					break;
+			case eventDrivenTriggeredByTimeEvent_r_A:
+				eventDrivenTriggeredByTimeEvent_r_A_react(true);
+				break;
+			case eventDrivenTriggeredByTimeEvent_r_B:
+				eventDrivenTriggeredByTimeEvent_r_B_react(true);
+				break;
 			default:
 				// $NullState$
 			}

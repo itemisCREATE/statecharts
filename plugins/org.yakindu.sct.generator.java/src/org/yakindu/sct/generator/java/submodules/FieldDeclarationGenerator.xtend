@@ -18,9 +18,9 @@ import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 @Singleton
 class FieldDeclarationGenerator {
@@ -31,6 +31,7 @@ class FieldDeclarationGenerator {
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension VariableCode
 	@Inject protected extension EventCode
+	@Inject protected extension StatechartAnnotations
 	
 	def internalEventFields(ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
@@ -49,6 +50,10 @@ class FieldDeclarationGenerator {
 
 		«stateVectors(flow)»
 		
+		«IF flow.statechart.isSuperStep»
+		private boolean stateVectorChanged = false;
+		
+		«ENDIF»
 		private int nextStateIndex;
 		
 		«IF entry.tracingUsed»

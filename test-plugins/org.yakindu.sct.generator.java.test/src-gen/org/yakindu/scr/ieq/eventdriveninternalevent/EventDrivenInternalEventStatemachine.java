@@ -182,24 +182,24 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case eventDrivenInternalEvent_r1_A:
-					eventDrivenInternalEvent_r1_A_react(true);
-					break;
-				case eventDrivenInternalEvent_r1_B:
-					eventDrivenInternalEvent_r1_B_react(true);
-					break;
-				case eventDrivenInternalEvent_r2_C:
-					eventDrivenInternalEvent_r2_C_react(true);
-					break;
-				case eventDrivenInternalEvent_r2_D:
-					eventDrivenInternalEvent_r2_D_react(true);
-					break;
-				case eventDrivenInternalEvent_check_VALID:
-					eventDrivenInternalEvent_check_VALID_react(true);
-					break;
-				case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-					eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
-					break;
+			case eventDrivenInternalEvent_r1_A:
+				eventDrivenInternalEvent_r1_A_react(true);
+				break;
+			case eventDrivenInternalEvent_r1_B:
+				eventDrivenInternalEvent_r1_B_react(true);
+				break;
+			case eventDrivenInternalEvent_r2_C:
+				eventDrivenInternalEvent_r2_C_react(true);
+				break;
+			case eventDrivenInternalEvent_r2_D:
+				eventDrivenInternalEvent_r2_D_react(true);
+				break;
+			case eventDrivenInternalEvent_check_VALID:
+				eventDrivenInternalEvent_check_VALID_react(true);
+				break;
+			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
+				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
+				break;
 			default:
 				// $NullState$
 			}

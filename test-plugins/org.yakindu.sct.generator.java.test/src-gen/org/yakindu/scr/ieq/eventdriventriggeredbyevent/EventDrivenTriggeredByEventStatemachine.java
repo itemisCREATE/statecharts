@@ -118,12 +118,12 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case eventDrivenTriggeredByEvent_main_region_A:
-					eventDrivenTriggeredByEvent_main_region_A_react(true);
-					break;
-				case eventDrivenTriggeredByEvent_main_region_B:
-					eventDrivenTriggeredByEvent_main_region_B_react(true);
-					break;
+			case eventDrivenTriggeredByEvent_main_region_A:
+				eventDrivenTriggeredByEvent_main_region_A_react(true);
+				break;
+			case eventDrivenTriggeredByEvent_main_region_B:
+				eventDrivenTriggeredByEvent_main_region_B_react(true);
+				break;
 			default:
 				// $NullState$
 			}

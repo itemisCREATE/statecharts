@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class FlowCode {
 	
@@ -45,6 +46,7 @@ class FlowCode {
 	@Inject extension JavaExpressionsGenerator
 	@Inject extension SExecExtensions
 	@Inject extension GenmodelEntries
+	@Inject extension StatechartAnnotations
 	
 	@Inject GeneratorEntry entry
 	
@@ -146,6 +148,9 @@ class FlowCode {
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
 		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;
+		«IF flow.statechart.isSuperStep»
+		stateVectorChanged = true;
+		«ENDIF»
 		'''
 	
 	def dispatch CharSequence code(ExitState it) '''

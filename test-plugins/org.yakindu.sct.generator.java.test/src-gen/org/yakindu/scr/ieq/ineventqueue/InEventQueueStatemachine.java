@@ -173,18 +173,18 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case inEventQueue_main_region_A:
-					inEventQueue_main_region_A_react(true);
-					break;
-				case inEventQueue_main_region_B:
-					inEventQueue_main_region_B_react(true);
-					break;
-				case inEventQueue_main_region_C:
-					inEventQueue_main_region_C_react(true);
-					break;
-				case inEventQueue_main_region_dispatch:
-					inEventQueue_main_region_dispatch_react(true);
-					break;
+			case inEventQueue_main_region_A:
+				inEventQueue_main_region_A_react(true);
+				break;
+			case inEventQueue_main_region_B:
+				inEventQueue_main_region_B_react(true);
+				break;
+			case inEventQueue_main_region_C:
+				inEventQueue_main_region_C_react(true);
+				break;
+			case inEventQueue_main_region_dispatch:
+				inEventQueue_main_region_dispatch_react(true);
+				break;
 			default:
 				// $NullState$
 			}
