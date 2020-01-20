@@ -69,7 +69,7 @@ class EventCode {
 	def CharSequence eventRaisingCode(EventRaisingExpression it, ExpressionsGenerator exp) {
 		if (event.featureOrReference.eContainer instanceof ComplexType) {
 			val fc = event as FeatureCall
-			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.featureOrReference.access»«IF value !== null», «exp.code(value)»«ENDIF»)'''
+			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.getHandle»«IF value !== null», «exp.code(value)»«ENDIF»)'''
 		}
 		return '''
 		«IF value !== null»

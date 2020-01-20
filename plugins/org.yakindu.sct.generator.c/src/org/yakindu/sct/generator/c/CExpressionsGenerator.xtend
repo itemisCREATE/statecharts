@@ -50,6 +50,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.eclipse.emf.ecore.EObject
 
 /**
  * @author axel terfloth
@@ -83,6 +84,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 
 	/* Expressions */
+	def dispatch CharSequence code(Expression it, EObject target) ''''''
+	
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it, EventDefinition target) {
@@ -123,7 +126,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«target.name»'''
 
 
-	def dispatch CharSequence code(EventRaisingExpression it) {eventRaisingCode(this)}
+	def dispatch code(EventRaisingExpression it) {eventRaisingCode(this)}
 
 	def dispatch CharSequence code(
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
