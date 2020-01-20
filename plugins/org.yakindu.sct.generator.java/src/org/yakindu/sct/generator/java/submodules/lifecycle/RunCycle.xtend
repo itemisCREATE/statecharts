@@ -54,7 +54,7 @@ class RunCycle implements org.yakindu.sct.generator.core.submodules.lifecycle.Ru
 					case «state.stateName.asEscapedIdentifier»:
 						«state.reactMethod.shortName»(true);
 						break;
-			«ENDIF»
+				«ENDIF»
 			«ENDFOR»
 			default:
 				// «getNullStateName()»
