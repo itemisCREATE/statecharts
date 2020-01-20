@@ -150,6 +150,36 @@ GeneratorModel for sctunit::c {
 		}
 		
 	}
+	
+	test EventDriven {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/EventDriven"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = true
+			inlineEntryActions = true
+			inlineExitActions = true
+			inlineEnterSequences = true
+			inlineExitSequences = true
+			inlineChoices = true
+			inlineEnterRegion = true
+			inlineExitRegion = true
+			inlineEntries = true
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
+	}
 
 
 }

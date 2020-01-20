@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::c {
+	statechart eventDriven {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "EventDriven"
+		}
+		feature FunctionInlining {
+			inlineReactions = true
+			inlineEntryActions = true
+			inlineEnterSequences = true 
+			inlineExitActions = true
+			inlineExitSequences = true
+			inlineChoices = true
+			inlineEntries = true
+			inlineEnterRegion = true
+			inlineExitRegion = true
+		}
+	}
+}
