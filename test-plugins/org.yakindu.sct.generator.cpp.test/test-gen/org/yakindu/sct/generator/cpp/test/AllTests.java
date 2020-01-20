@@ -10,6 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyInternalScopeTest.class,
 	ConstOnlyNamedScopeTest.class,
 	EntryReactionActionTest.class,
+	EventDrivenTest.class,
 	EventDrivenInternalEventTest.class,
 	EventDrivenTriggeredByEventTest.class,
 	EventDrivenTriggeredByTimeEventTest.class,
