@@ -11,6 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyInternalScope.class,
 	ConstOnlyNamedScope.class,
 	EntryReactionAction.class,
+	EventDriven.class,
 	EventDrivenInternalEvent.class,
 	EventDrivenTriggeredByEvent.class,
 	EventDrivenTriggeredByTimeEvent.class,
