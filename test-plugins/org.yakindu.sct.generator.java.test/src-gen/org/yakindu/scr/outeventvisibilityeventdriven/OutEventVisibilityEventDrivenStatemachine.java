@@ -375,6 +375,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 				sCInterface.raiseO2();
 				
 				enterSequence_OutEventVisibilityEventDriven_main_region_B_default();
+				react();
 			} else {
 				did_transition = false;
 			}

@@ -8,6 +8,8 @@ public interface IChildFirstLocalReactionsStatemachine extends IStatemachine {
 	
 		public void raiseE();
 		
+		public void raiseDoSelfTransition();
+		
 		public long getCnt();
 		
 		public void setCnt(long value);

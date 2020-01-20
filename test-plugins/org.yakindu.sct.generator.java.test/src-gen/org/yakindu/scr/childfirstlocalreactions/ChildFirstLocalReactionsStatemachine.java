@@ -12,6 +12,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 			e = true;
 		}
 		
+		private boolean doSelfTransition;
+		
+		
+		public void raiseDoSelfTransition() {
+			doSelfTransition = true;
+		}
+		
 		private long cnt;
 		
 		public long getCnt() {
@@ -98,6 +105,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		
 		protected void clearEvents() {
 			e = false;
+			doSelfTransition = false;
 		}
 	}
 	
@@ -245,6 +253,10 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	
 	public void raiseE() {
 		sCInterface.raiseE();
+	}
+	
+	public void raiseDoSelfTransition() {
+		sCInterface.raiseDoSelfTransition();
 	}
 	
 	public long getCnt() {
@@ -485,7 +497,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 				enterSequence_ChildFirstLocalReactions_r_B_default();
 				react();
 			} else {
-				did_transition = false;
+				if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_a()))) {
+					exitSequence_ChildFirstLocalReactions_r_A();
+					enterSequence_ChildFirstLocalReactions_r_A_default();
+					react();
+				} else {
+					did_transition = false;
+				}
 			}
 		}
 		if (did_transition==false) {
@@ -525,7 +543,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 				enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				childFirstLocalReactions_r_A_r_AA_react(false);
 			} else {
-				did_transition = false;
+				if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_aaa()))) {
+					exitSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAA();
+					enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAA_default();
+					childFirstLocalReactions_r_A_r_AA_react(false);
+				} else {
+					did_transition = false;
+				}
 			}
 		}
 		if (did_transition==false) {

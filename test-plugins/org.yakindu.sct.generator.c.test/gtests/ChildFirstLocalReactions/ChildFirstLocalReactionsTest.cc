@@ -14,8 +14,10 @@ public:
 	/* All operations from the SCTUnit test class. */
 	void expectBottomUpLocalReactionOrder();
 	void expectParentLocalReactionOnChildLocalTransition();
+	void expectParentLocalReactionOnChildSelfTransition();
 	void expectGrandparentLocalReactionOnParentLocalTransition();
 	void expectNoLocalReactionOnGrandparentTransition();
+	void expectNoLocalReactionOnGrandparentSelfTransition();
 	void setTimer(ChildFirstLocalReactions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(ChildFirstLocalReactions* handle, const sc_eventid evid);
 protected:
@@ -64,6 +66,20 @@ void ChildFirstLocalReactionsTest::expectParentLocalReactionOnChildLocalTransiti
 	EXPECT_TRUE(childFirstLocalReactionsIface_get_a_local(&statechart)== 2);
 	EXPECT_TRUE(childFirstLocalReactionsIface_get_sm_local(&statechart)== 3);
 }
+void ChildFirstLocalReactionsTest::expectParentLocalReactionOnChildSelfTransition()
+{
+	childFirstLocalReactions_enter(&statechart);
+	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	childFirstLocalReactionsIface_raise_doSelfTransition(&statechart);
+	childFirstLocalReactionsIface_set_disable_a(&statechart,true);
+	childFirstLocalReactionsIface_set_disable_aa(&statechart,true);
+	sc_timer_service_proceed_cycles(&timer_service, 1);
+	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_aaa_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_aa_local(&statechart)== 1);
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_a_local(&statechart)== 2);
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_sm_local(&statechart)== 3);
+}
 void ChildFirstLocalReactionsTest::expectGrandparentLocalReactionOnParentLocalTransition()
 {
 	childFirstLocalReactions_enter(&statechart);
@@ -91,6 +107,20 @@ void ChildFirstLocalReactionsTest::expectNoLocalReactionOnGrandparentTransition(
 	EXPECT_TRUE(childFirstLocalReactionsIface_get_a_local(&statechart)== 0);
 	EXPECT_TRUE(childFirstLocalReactionsIface_get_sm_local(&statechart)== 3);
 }
+void ChildFirstLocalReactionsTest::expectNoLocalReactionOnGrandparentSelfTransition()
+{
+	childFirstLocalReactions_enter(&statechart);
+	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	childFirstLocalReactionsIface_set_disable_aaa(&statechart,true);
+	childFirstLocalReactionsIface_set_disable_aa(&statechart,true);
+	childFirstLocalReactionsIface_raise_doSelfTransition(&statechart);
+	sc_timer_service_proceed_cycles(&timer_service, 1);
+	EXPECT_TRUE(childFirstLocalReactions_isStateActive(&statechart, ChildFirstLocalReactions_ChildFirstLocalReactions_r_A));
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_aaa_local(&statechart)== 1);
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_aa_local(&statechart)== 2);
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_a_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstLocalReactionsIface_get_sm_local(&statechart)== 3);
+}
 
 void ChildFirstLocalReactionsTest::setTimer(ChildFirstLocalReactions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	sc_timer_t timer;
@@ -108,11 +138,17 @@ TEST_F(ChildFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 TEST_F(ChildFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransition) {
 	expectParentLocalReactionOnChildLocalTransition();
 }
+TEST_F(ChildFirstLocalReactionsTest, expectParentLocalReactionOnChildSelfTransition) {
+	expectParentLocalReactionOnChildSelfTransition();
+}
 TEST_F(ChildFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocalTransition) {
 	expectGrandparentLocalReactionOnParentLocalTransition();
 }
 TEST_F(ChildFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransition) {
 	expectNoLocalReactionOnGrandparentTransition();
+}
+TEST_F(ChildFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentSelfTransition) {
+	expectNoLocalReactionOnGrandparentSelfTransition();
 }
 
 

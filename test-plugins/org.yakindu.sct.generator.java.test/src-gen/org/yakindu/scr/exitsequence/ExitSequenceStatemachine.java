@@ -933,6 +933,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			if (sCInterface.f) {
 				exitSequence_main_region_exitSequence_main_region_A();
 				enterSequence_main_region_A_default();
+				react();
 			} else {
 				did_transition = false;
 			}
