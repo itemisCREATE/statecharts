@@ -24,12 +24,19 @@ protected:
 static EventDrivenTriggeredByTimeEventTest * tc;
 
 
+static void dispatchTimeEvent(void* handle, sc_eventid evid)
+{
+	if(handle == &statechart){
+		eventDrivenTriggeredByTimeEvent_raiseTimeEvent(&statechart, evid);
+	}
+}
+
 void EventDrivenTriggeredByTimeEventTest::SetUp()
 {
 	eventDrivenTriggeredByTimeEvent_init(&statechart);
 	sc_timer_service_init(
 		&timer_service,
-		(sc_raise_time_event_fp) &eventDrivenTriggeredByTimeEvent_raiseTimeEvent,
+		(sc_raise_time_event_fp) dispatchTimeEvent,
 		(sc_run_cycle_fp) &eventDrivenTriggeredByTimeEvent_runCycle,
 		true,
 		200,
@@ -68,7 +75,7 @@ void EventDrivenTriggeredByTimeEventTest::timeEventTriggersRunCycle()
 
 void EventDrivenTriggeredByTimeEventTest::setTimer(EventDrivenTriggeredByTimeEvent* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	sc_timer_t timer;
-	sc_timer_init(&timer, time_ms, periodic, evid);
+	sc_timer_init(&timer, time_ms, periodic, evid, statechart);
 	insert_timer(&(tc->timer_service), timer);
 }
 
@@ -87,4 +94,5 @@ void eventDrivenTriggeredByTimeEvent_setTimer(EventDrivenTriggeredByTimeEvent* s
 void eventDrivenTriggeredByTimeEvent_unsetTimer(EventDrivenTriggeredByTimeEvent* handle, const sc_eventid evid){
 	tc->unsetTimer(handle, evid);
 }
+
 

@@ -56,7 +56,7 @@ void ExitOnSelfTransitionTest::exitOnSelfTransitionTest()
 
 void ExitOnSelfTransitionTest::setTimer(ExitOnSelfTransition* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	sc_timer_t timer;
-	sc_timer_init(&timer, time_ms, periodic, evid);
+	sc_timer_init(&timer, time_ms, periodic, evid, statechart);
 	insert_timer(&(tc->timer_service), timer);
 }
 

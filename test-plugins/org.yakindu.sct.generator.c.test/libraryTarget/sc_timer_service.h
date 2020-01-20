@@ -20,6 +20,7 @@ typedef struct {
 	sc_eventid pt_evid;
 	sc_integer priority;
 	sc_boolean isRunCycle;
+	void* handle;
 } sc_timer_t;
 
 typedef struct sc_timer_task_s {
@@ -55,7 +56,8 @@ void sc_timer_init(
 	sc_timer_t * t,
 	sc_integer time_ms,
 	sc_boolean periodic,
-	sc_eventid evid
+	sc_eventid evid,
+	void* handle
 );
 
 
