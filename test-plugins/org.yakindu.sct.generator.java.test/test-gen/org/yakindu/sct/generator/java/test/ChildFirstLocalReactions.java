@@ -63,6 +63,21 @@ public class ChildFirstLocalReactions {
 	}
 	
 	@Test
+	public void expectParentLocalReactionOnChildSelfTransition() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A_r_AA_r_AAA));
+		statemachine.raiseDoSelfTransition();
+		statemachine.setDisable_a(true);
+		statemachine.setDisable_aa(true);
+		timer.cycleLeap(1l);
+		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A_r_AA_r_AAA));
+		assertTrue(statemachine.getAaa_local() == 0l);
+		assertTrue(statemachine.getAa_local() == 1l);
+		assertTrue(statemachine.getA_local() == 2l);
+		assertTrue(statemachine.getSm_local() == 3l);
+	}
+	
+	@Test
 	public void expectGrandparentLocalReactionOnParentLocalTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A_r_AA_r_AAA));
@@ -85,6 +100,21 @@ public class ChildFirstLocalReactions {
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_B));
+		assertTrue(statemachine.getAaa_local() == 1l);
+		assertTrue(statemachine.getAa_local() == 2l);
+		assertTrue(statemachine.getA_local() == 0l);
+		assertTrue(statemachine.getSm_local() == 3l);
+	}
+	
+	@Test
+	public void expectNoLocalReactionOnGrandparentSelfTransition() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A_r_AA_r_AAA));
+		statemachine.setDisable_aaa(true);
+		statemachine.setDisable_aa(true);
+		statemachine.raiseDoSelfTransition();
+		timer.cycleLeap(1l);
+		assertTrue(statemachine.isStateActive(State.childFirstLocalReactions_r_A));
 		assertTrue(statemachine.getAaa_local() == 1l);
 		assertTrue(statemachine.getAa_local() == 2l);
 		assertTrue(statemachine.getA_local() == 0l);

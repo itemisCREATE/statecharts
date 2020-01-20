@@ -709,7 +709,7 @@ class BehaviorMapping {
 	def Iterable<State> exitStates(Transition t) {
 		// we determine the states that have to be exited by 
 		val sourcePath = t.source.containers // getting the path elements from the source node 
-		val targetPath = t.target.containers // and the path elements from the target all target node
+		val targetPath = t.target.containers // and the path elements from the target node
 		{ // and for the case of self transitions
 			targetPath.remove(t.target) // we make sure that target node
 			targetPath.remove(t.source) // and source node are not part of the target path
@@ -729,13 +729,22 @@ class BehaviorMapping {
 		exitStates.last		
 	}
 
-	/** Determines the  */
-	def Iterable<State> entryStates(Transition t) {
-		val l = t.target.containers
-		l.removeAll(t.source.containers)
-		l.filter( typeof(State) )
-	}
 	
+	/**
+	 * Determines the list of states that are entered by a transition.
+	 */
+	def Iterable<State> entryStates(Transition t) {
+		// we determine the states that have to be entered by 
+		val sourcePath = t.source.containers // getting the path elements from the source node 
+		val targetPath = t.target.containers // and the path elements from the target node
+		{ // and for the case of self transitions
+			sourcePath.remove(t.target) // we make sure that target node
+			sourcePath.remove(t.source) // and source node are not part of the source path
+		}
+		targetPath.removeAll(sourcePath) // the relevant entry elements are then determined by removing all common source path elements
+		targetPath.filter( typeof(State) ) // and reducing this entry path to states 
+	}
+
 	
 	def State topEntryState(List<Transition> transitions) {
 		// first process the exit behavior of orthogonal states that has to be performed before source exit

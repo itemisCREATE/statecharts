@@ -33,6 +33,25 @@ testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocal
 		
 	}
 		
+	@Test operation expectParentLocalReactionOnChildSelfTransition() {
+		
+		enter
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	
+	 	raise doSelfTransition
+	 	disable_a = true
+	 	disable_aa = true
+	 	proceed 1 cycle
+	 	
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA) 
+		assert aaa_local == 0
+		assert aa_local == 1
+		assert a_local == 2
+		assert sm_local == 3
+		
+	}
+		
+		
 		
 	@Test operation expectGrandparentLocalReactionOnParentLocalTransition() {
 				
@@ -68,5 +87,25 @@ testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocal
 		assert sm_local == 3
 		
 	}
+	
+	
+	@Test operation expectNoLocalReactionOnGrandparentSelfTransition() {
+		
+		enter
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	
+	 	disable_aaa = true
+	 	disable_aa = true
+	 	raise doSelfTransition
+	 	proceed 1 cycle
+	 	
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A) 
+		assert aaa_local == 1
+		assert aa_local == 2
+		assert a_local == 0
+		assert sm_local == 3
+		
+	}
+	
 		
 }

@@ -14,8 +14,10 @@ public:
 	/* All operations from the SCTUnit test class. */
 	void expectBottomUpLocalReactionOrder();
 	void expectParentLocalReactionOnChildLocalTransition();
+	void expectParentLocalReactionOnChildSelfTransition();
 	void expectGrandparentLocalReactionOnParentLocalTransition();
 	void expectNoLocalReactionOnGrandparentTransition();
+	void expectNoLocalReactionOnGrandparentSelfTransition();
 	void setTimer(ParentFirstLocalReactions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(ParentFirstLocalReactions* handle, const sc_eventid evid);
 protected:
@@ -66,6 +68,20 @@ void ParentFirstLocalReactionsTest::expectParentLocalReactionOnChildLocalTransit
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aa_local(&statechart)== 3);
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aaa_local(&statechart)== 0);
 }
+void ParentFirstLocalReactionsTest::expectParentLocalReactionOnChildSelfTransition()
+{
+	parentFirstLocalReactions_enter(&statechart);
+	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
+	parentFirstLocalReactionsIface_raise_doSelfTransition(&statechart);
+	parentFirstLocalReactionsIface_set_disable_a(&statechart,true);
+	parentFirstLocalReactionsIface_set_disable_aa(&statechart,true);
+	sc_timer_service_proceed_cycles(&timer_service, 1);
+	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_sm_local(&statechart)== 1);
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_a_local(&statechart)== 2);
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aa_local(&statechart)== 3);
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aaa_local(&statechart)== 0);
+}
 void ParentFirstLocalReactionsTest::expectGrandparentLocalReactionOnParentLocalTransition()
 {
 	parentFirstLocalReactions_enter(&statechart);
@@ -93,6 +109,20 @@ void ParentFirstLocalReactionsTest::expectNoLocalReactionOnGrandparentTransition
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aa_local(&statechart)== 0);
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aaa_local(&statechart)== 0);
 }
+void ParentFirstLocalReactionsTest::expectNoLocalReactionOnGrandparentSelfTransition()
+{
+	parentFirstLocalReactions_enter(&statechart);
+	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
+	parentFirstLocalReactionsIface_set_disable_aaa(&statechart,true);
+	parentFirstLocalReactionsIface_set_disable_aa(&statechart,true);
+	parentFirstLocalReactionsIface_raise_doSelfTransition(&statechart);
+	sc_timer_service_proceed_cycles(&timer_service, 1);
+	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A));
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_sm_local(&statechart)== 1);
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_a_local(&statechart)== 0);
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aa_local(&statechart)== 0);
+	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aaa_local(&statechart)== 0);
+}
 
 void ParentFirstLocalReactionsTest::setTimer(ParentFirstLocalReactions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	sc_timer_t timer;
@@ -110,11 +140,17 @@ TEST_F(ParentFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransition) {
 	expectParentLocalReactionOnChildLocalTransition();
 }
+TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildSelfTransition) {
+	expectParentLocalReactionOnChildSelfTransition();
+}
 TEST_F(ParentFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocalTransition) {
 	expectGrandparentLocalReactionOnParentLocalTransition();
 }
 TEST_F(ParentFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransition) {
 	expectNoLocalReactionOnGrandparentTransition();
+}
+TEST_F(ParentFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentSelfTransition) {
+	expectNoLocalReactionOnGrandparentSelfTransition();
 }
 
 
