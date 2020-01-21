@@ -462,18 +462,21 @@ class Naming {
 	}
 	
 	def dispatch CharSequence getHandle(FeatureCall it) {
-		if(feature instanceof VariableDefinition && owner instanceof FeatureCall) {
-			val owner = owner as FeatureCall
-			val ownerOfOwner = owner.owner
-			// named interface
-			if(ownerOfOwner instanceof FeatureCall) {
-				return '''«feature.asGetter»(«ownerOfOwner.getHandle»)'''	
+		if(feature instanceof VariableDefinition) {
+			val owner = owner
+			if(owner instanceof FeatureCall) {
+				val ownerOfOwner = owner.owner
+				// named interface
+				if(ownerOfOwner instanceof FeatureCall) {
+					return '''«feature.asGetter»(«ownerOfOwner.getHandle»)'''	
+				}
+				// unnamed interface
+				return '''«feature.asGetter»(«owner.getHandle»)'''
 			}
-			// unnamed interface
-			return '''«feature.asGetter»(«owner.getHandle»)'''
-		}
-		// statechart internal
-		'''«owner.getHandle»«feature.access»'''
+			// statechart internal
+			return '''«owner.getHandle»«feature.access»'''
+			}
+		return '''«owner.getHandle»'''
 	}
 	
 	def dispatch getHandle(ElementReferenceExpression it) {

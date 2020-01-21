@@ -12,8 +12,6 @@ package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.yakindu.base.types.Direction
-import org.yakindu.base.types.Event
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.submodules.EventCode
@@ -37,13 +35,10 @@ class EventDrivenEventCode extends EventCode {
 	protected static int valueVarIndex = 0
 	
 	override CharSequence eventRaisingCode(EventRaisingExpression it, ExpressionsGenerator exp) {
-		'''
-		«IF eventDefinition.isQueued»
-		«toQueue(exp)»
-		«ELSE»
-		«super.eventRaisingCode(it, exp)»
-		«ENDIF»
-		'''
+		if(eventDefinition.isQueued){
+			return '''«toQueue(exp)»'''
+		}
+		super.eventRaisingCode(it, exp)
 	}
 	
 	override interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event)  {
