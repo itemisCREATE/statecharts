@@ -35,6 +35,9 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Operation
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.types.ComplexType
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -244,18 +247,33 @@ class CppNaming extends Naming {
 		}
 		return '''«scope.OCB_Instance»->«asFunction»'''
 	}
+	
+	override dispatch access(Operation it) '''«name»'''
 
 	override dispatch access(TimeEvent it) '''«timeEventsInstance»[«indexOf»]'''
 
 	override dispatch access(VariableDefinition it) {
 		if (const) {
-			return '''«flow.module»::«scope.interfaceName»::«name.asEscapedIdentifier»'''
+			return '''«flow.module»::«scope.interfaceName»::«localAccess»'''
 		} else {
-			return '''«scope.instance».«name.asEscapedIdentifier»'''
+			if (external) {
+				return '''«scope.getter»->«asGetter»()'''
+			} else {
+				return '''«scope.instance».«localAccess»'''
+				
+			}
 		}
 	}
+	
+	def dispatch access(EventDefinition it) {
+		if (external)
+			'''«scope.getter»->«asRaised»()'''
+		else
+			'''«scope.instance».«localAccess»'''
+	}
 
-	override dispatch access(Event it) '''«scope.instance».«name.asIdentifier.raised»'''
+	def getter(Scope it) '''get«interfaceName»()'''
+		
 
 	override dispatch valueAccess(Declaration it) '''«scope.instance».«name.asIdentifier.value»'''
 
@@ -270,6 +288,10 @@ class CppNaming extends Naming {
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
+	}
+	
+	protected def isExternal(EObject it) {
+		eContainer instanceof ComplexType
 	}
 	
 	def List<String> statechartNamespace(ExecutionFlow it) {

@@ -282,8 +282,8 @@ class SExecExtensions {
 			.findFirst[(varRef.definition as Property).equals(property)] !== null
 	}
 	
-	def Event event(Declaration it) {
-		if (it instanceof Event) it else null 	
+	def EventDefinition event(Declaration it) {
+		if (it instanceof EventDefinition) it else null 	
 	}
 
 	def dispatch List<ExecutionState> subStates(ExecutionState it) {

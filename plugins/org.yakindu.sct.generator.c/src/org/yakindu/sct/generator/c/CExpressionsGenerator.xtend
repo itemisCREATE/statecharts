@@ -93,8 +93,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 			return '''«target.asRaised»(«owner.code»)'''
 		}
 		'''«owner.code»«target.access»'''
-		
 	}
+	
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
 	/* TODO: check if event is active */
