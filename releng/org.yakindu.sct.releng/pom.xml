@@ -11,8 +11,8 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>1.5.0</tycho-version>
-		<tycho-extras-version>1.5.0</tycho-extras-version>
+		<tycho-version>1.6.0</tycho-version>
+		<tycho-extras-version>1.6.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>false</testFailureIgnore>
