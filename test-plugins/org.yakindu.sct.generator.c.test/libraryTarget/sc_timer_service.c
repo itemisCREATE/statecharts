@@ -125,7 +125,7 @@ void sc_timer_service_proceed_cycles(sc_unit_timer_service_t * ts, sc_integer cy
 			ts->run_cycle_func(ts->handle);
 			elapsed_cycles++;
 		} else {
-			ts->raise_event_func(ts->handle, next.pt_evid);
+			ts->raise_event_func(next.handle, next.pt_evid);
 		}
 	}
 }
