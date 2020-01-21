@@ -31,7 +31,7 @@ class SlotResolutionExceptionSupplier implements Supplier<IllegalStateException>
 	}
 
 	override IllegalStateException get() {
-		return new IllegalStateException('''Could not resolve execution slot for expression «exp.toText»''')
+		return new IllegalSlotResolutionException('''Could not resolve execution slot for expression «exp.toText»''')
 	}
 
 	def dispatch String toText(FeatureCall call) {
@@ -41,7 +41,7 @@ class SlotResolutionExceptionSupplier implements Supplier<IllegalStateException>
 	def dispatch String toText(ElementReferenceExpression exp) {
 		exp.reference.toText
 	}
-	
+
 	def dispatch String toText(NamedElement exp) {
 		exp.name
 	}
@@ -49,6 +49,12 @@ class SlotResolutionExceptionSupplier implements Supplier<IllegalStateException>
 	def dispatch String toText(Expression exp) {
 		val node = NodeModelUtils.getNode(exp)
 		return if(node !== null) node.text.trim else exp.toString
+	}
+
+	static class IllegalSlotResolutionException extends IllegalStateException {
+		new(String msg) {
+			super(msg)
+		}
 	}
 
 }
