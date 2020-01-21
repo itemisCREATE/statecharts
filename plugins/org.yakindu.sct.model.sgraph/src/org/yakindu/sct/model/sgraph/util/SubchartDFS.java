@@ -63,6 +63,12 @@ public class SubchartDFS extends DFS {
 				.filter(v -> "sct_types".equals(v.getType().eResource().getURI().fileExtension()))
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	public boolean isVisited(Object element) {
+		// statecharts can be visited again by different reference paths
+		return super.isVisited(element) && getVisitedDepth(element) >= 0;
+	}
 
 }
 
