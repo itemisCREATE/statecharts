@@ -21,29 +21,23 @@ import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.TypedElement
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.CExpressionsGenerator
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sexec.Method
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.base.types.Event
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
 	@Inject protected extension CppNaming
-	@Inject protected extension SExecExtensions
-	@Inject protected extension ITypeSystem
-	@Inject protected extension INamingService
 	@Inject protected extension ExpressionExtensions
 	@Inject protected extension EventRaisingCode
 

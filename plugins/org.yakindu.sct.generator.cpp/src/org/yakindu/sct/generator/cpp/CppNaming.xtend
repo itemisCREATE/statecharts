@@ -38,6 +38,9 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Enumerator
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import org.yakindu.sct.model.sgraph.Statechart
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -50,6 +53,7 @@ class CppNaming extends Naming {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension GenmodelEntriesExtension
+	@Inject protected extension StatechartUtil
 	@Inject GeneratorEntry entry
 
 	def cpp(String it) { it + ".cpp" }
@@ -304,5 +308,22 @@ class CppNaming extends Naming {
 			return emptyList
 		}
 		return newArrayList(ns.replace(".", "::").replace("/", "::").split("::").filter[!nullOrEmpty])
+	}
+	
+	override stateEnumAccess(Enumerator it) {
+		val statechart = eContainer.originStatechart
+		val state = originState		
+		if (state !== null)
+			'''«statechart.typeName»::«state.stateName.asEscapedIdentifier»'''
+		else
+			'''«statechart.typeName»::«statechart.null_state»'''
+	}
+	
+	/** TODO: copied from SCTUnitCppNaming */
+	def private typeName(Statechart it) {
+		if(namespace.nullOrEmpty)
+			name.asIdentifier.toFirstUpper
+		else
+			namespace.replace(".", "::").replace("/", "::") + "::" + name.asIdentifier.toFirstUpper
 	}
 }

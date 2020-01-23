@@ -107,7 +107,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
 		binder.bind(IExecutionFlowGenerator.class).to(CppGenerator.class);
-		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
+		binder.bind(ICodegenTypeSystemAccess.class).to(CppTypeSystemAccess.class);
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
