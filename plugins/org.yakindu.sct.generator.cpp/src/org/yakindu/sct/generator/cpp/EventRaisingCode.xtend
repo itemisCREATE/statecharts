@@ -18,7 +18,7 @@ class EventRaisingCode {
 	
 	def raiseEvent(EventRaisingExpression it, CharSequence valueCode) {
 		if (event.definition.isExternal) {
-			'''«event.context»«event.definition.scope.getter»->«event.definition.event.asRaiser»(«IF value !== null»«valueCode»«ENDIF»)'''
+			'''«event.context»«event.definition.event.asRaiser»(«IF value !== null»«valueCode»«ENDIF»)'''
 		} else {
 			'''
 			«IF value !== null»

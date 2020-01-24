@@ -25,6 +25,7 @@ import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.TypedElement
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -69,6 +70,7 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	
 	override dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«owner.code»«owner.callSep»«target.access»'''
 	
+	override dispatch CharSequence code(FeatureCall it, Property target) '''«owner.code»«owner.callSep»«target.access»'''
 
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»true«ELSE»false«ENDIF»'''

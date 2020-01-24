@@ -38,9 +38,11 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.Enumerator
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.adapter.OriginTracing
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -54,6 +56,8 @@ class CppNaming extends Naming {
 	@Inject protected extension INamingService
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension StatechartUtil
+	@Inject protected extension OriginTracing
+	
 	@Inject GeneratorEntry entry
 
 	def cpp(String it) { it + ".cpp" }
@@ -261,7 +265,7 @@ class CppNaming extends Naming {
 			return '''«flow.module»::«scope.interfaceName»::«localAccess»'''
 		} else {
 			if (external) {
-				return '''«scope.getter»->«asGetter»()'''
+				return '''«asGetter»()'''
 			} else {
 				return '''«scope.instance».«localAccess»'''
 				
@@ -269,9 +273,18 @@ class CppNaming extends Naming {
 		}
 	}
 	
+	override dispatch String access(Property definition) {
+		val origin = definition.type.originTraces.head
+		if (origin instanceof InterfaceScope) {
+			'''«origin.getter»'''
+		} else {
+			'''«super._access(definition)»'''
+		}
+	}
+	
 	def dispatch access(EventDefinition it) {
 		if (external)
-			'''«scope.getter»->«asRaised»()'''
+			'''«asRaised»()'''
 		else
 			'''«scope.instance».«localAccess»'''
 	}
