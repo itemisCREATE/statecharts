@@ -66,9 +66,9 @@ class CGenerator implements IExecutionFlowGenerator {
 	def protected initGenerationArtifacts(ExecutionFlow it, GeneratorEntry entry,
 		IGenArtifactConfigurations locations) {
 		locations.configure(flow.typesModule.h, entry.libraryOutput, types, getSkipLibraryFiles(entry))
-		
-		locations.configure(flow.tracingModule.h, entry.libraryOutput, tracing, getSkipLibraryFiles(entry))
-		
+		if(entry.tracingGeneric){
+			locations.configure(flow.tracingModule.h, entry.libraryOutput, tracing, getSkipLibraryFiles(entry))
+		}
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeader)
 		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)
 		if (flow.timed || !flow.operations.empty || entry.tracingUsed) {
