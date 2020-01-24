@@ -35,6 +35,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
@@ -43,6 +44,8 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	@Inject protected extension EventRaisingCode
 
 	override dispatch CharSequence code(ElementReferenceExpression it, Operation target) '''«target.access»(«argumentsCode»)'''
+	
+	override dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«argumentsCode»)'''
 	
 	override dispatch CharSequence code(ElementReferenceExpression it, Method target) '''«target.access»(«argumentsCode»)'''
 	
@@ -65,6 +68,8 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	
 	/* Feature Call */
 	override dispatch CharSequence code(FeatureCall it, Operation target) '''«owner.code»«owner.callSep»«target.access»(«argumentsCode»)'''
+	
+	override dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«owner.code»«owner.callSep»«target.access»(«argumentsCode»)'''
 	
 	override dispatch CharSequence code(FeatureCall it, EventDefinition target) '''«owner.code»«owner.callSep»«target.access»'''
 	
