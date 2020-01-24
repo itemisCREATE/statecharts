@@ -32,6 +32,7 @@ public abstract class CGeneratorConstants {
 	
 
 	public static final String TYPES_MODULE = "sc_types";
+	public static final String TRACING_MODULE = "sc_tracing";
 
 	/*
 	 * FUNCTIONS

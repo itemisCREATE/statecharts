@@ -95,6 +95,10 @@ class Naming {
 		TYPES_MODULE
 	}
 
+	def tracingModule(ExecutionFlow it) {
+		TRACING_MODULE
+	}
+
 	def timerType(ExecutionFlow it) {
 		'SCTimer'
 	}
