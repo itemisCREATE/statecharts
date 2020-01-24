@@ -3,6 +3,7 @@ package org.yakindu.sct.simulation.ui.view;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.Launch;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugPluginImages;
 import org.eclipse.debug.internal.ui.IInternalDebugUIConstants;
 import org.eclipse.jface.layout.TreeColumnLayout;
@@ -50,7 +51,8 @@ public class SimulationSessionViewerFactory {
 		@Override
 		public Image getImage(Object element) {
 			if (element instanceof Launch) {
-				if (((Launch) element).getDebugTarget().isSuspended()) {
+				IDebugTarget debugTarget = ((Launch) element).getDebugTarget();
+				if (debugTarget != null && debugTarget.isSuspended()) {
 					return DebugPluginImages.getImage(IInternalDebugUIConstants.IMG_ELCL_SUSPEND);
 				}
 				return SimulationImages.LAUNCHER_ICON.image();

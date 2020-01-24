@@ -34,6 +34,7 @@ import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.ActionContributionItem;
+import org.eclipse.jface.action.ControlContribution;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IContributionManager;
@@ -56,6 +57,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.ToolBar;
@@ -87,6 +89,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	private TreeViewer executionContextViewer;
 	private TreeViewer simulationSessionViewer;
+	private Clock clock;
 
 	private ViewerRefresher viewerRefresher;
 	private FormToolkit kit;
@@ -161,6 +164,15 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		executionContextViewer = ExecutionContextViewerFactory.createViewer(contextViewerComposite, false, this);
 		selectionListener = new RaiseEventSelectionListener(executionContextViewer);
 		final ToolBarManager manager = new ToolBarManager(toolBar);
+		manager.add(new ControlContribution("clock") {
+			@Override
+			protected Control createControl(Composite parent) {
+				if (clock == null)
+					clock = new Clock(parent);
+				return clock;
+			}
+		});
+		manager.add(new Separator());
 		manager.add(new ActionContributionItem(new ExpandAllAction(executionContextViewer)));
 		manager.add(new ActionContributionItem(new CollapseAllAction(executionContextViewer)));
 		manager.add(new ActionContributionItem(new HideTimeEventsAction(false)));
@@ -214,6 +226,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			setExecutionContextInput(null);
 			Display.getDefault().asyncExec(() -> {
 				sessionViewerInputChanged();
+				if (clock != null && !clock.isDisposed()) {
+					clock.updateTimestamp(0);
+				}
 			});
 			break;
 		case DebugEvent.SUSPEND:
@@ -356,13 +371,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 				@Override
 				public void run() {
-					IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
-					for (IDebugTarget current : debugTargets) {
-						ILaunch launch = current.getLaunch();
-						SCTDebugTarget target = (SCTDebugTarget) launch.getDebugTarget();
-						ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
-						DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
-					}
+					ILaunchConfiguration launchConfiguration = debugTarget.getLaunch().getLaunchConfiguration();
+					DebugUITools.launch(launchConfiguration, debugTarget.getLaunch().getLaunchMode());
 				}
 			});
 		}
@@ -386,12 +396,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 						SCTDebugTarget target = (SCTDebugTarget) launch.getDebugTarget();
 						try {
 							target.getLaunch().terminate();
-							ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
-							DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
 						} catch (CoreException e) {
 							e.printStackTrace();
 						}
 					}
+					ILaunchConfiguration launchConfiguration = debugTarget.getLaunch().getLaunchConfiguration();
+					DebugUITools.launch(launchConfiguration, debugTarget.getLaunch().getLaunchMode());
 				}
 			});
 		}
@@ -519,6 +529,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 								&& ((ExecutionContextContentProvider) executionContextViewer.getContentProvider())
 										.isShouldUpdate()) {
 							executionContextViewer.refresh();
+							if (clock != null && !clock.isDisposed() && debugTarget != null
+									&& !debugTarget.isTerminated()) {
+								ISimulationEngine engine = debugTarget.getLaunch().getDebugTarget()
+										.getAdapter(ISimulationEngine.class);
+								clock.updateTimestamp(engine.getTimeTaskScheduler().getCurrentTime());
+							}
 						}
 					});
 				} catch (InterruptedException e) {
