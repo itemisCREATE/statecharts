@@ -33,7 +33,6 @@ import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
@@ -51,6 +50,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 /**
  * @author axel terfloth
@@ -71,7 +71,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject extension CMultiStatemachine
 	@Inject extension ExpressionExtensions
 	
-	@Inject extension OriginTracing
+	@Inject extension StatechartUtil
 
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -179,10 +179,10 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !(target.eContainer instanceof ComplexType)».«target.access»«ENDIF»'''
+	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) {
-		if(!target.eContainer.originTraces.nullOrEmpty) {
+		if(target.eContainer.isOriginStatechart) {
 			return '''«target.stateEnumAccess»'''
 		}
 		'''«target.access»'''
