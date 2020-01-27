@@ -38,19 +38,19 @@ TEST_F(TypeAliasTest, TypeAliasTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Start));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 1);
+	EXPECT_TRUE(statechart->get_myVar()== 1);
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Mid));
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"TypeSystem") == 0);
+	EXPECT_TRUE(strcmp(statechart->get_myString(), (sc_string)"TypeSystem") == 0);
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Mid2));
 	
-	statechart->getDefaultSCI()->raise_myEvent();
+	statechart->raise_myEvent();
 	
 	runner->proceed_cycles(1);
 	

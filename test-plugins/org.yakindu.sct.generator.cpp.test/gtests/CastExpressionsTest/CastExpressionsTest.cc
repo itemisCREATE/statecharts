@@ -36,19 +36,19 @@ TEST_F(CastExpressionsTest, CastExpressionTest) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 5);
+	EXPECT_TRUE(statechart->get_realValue()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_intValue()== 5);
+	EXPECT_TRUE(statechart->get_intValue()== 5);
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 15);
+	EXPECT_TRUE(statechart->get_realValue()== 15);
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(CastExpressions::main_region_C));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757);
+	EXPECT_TRUE(statechart->get_realValue()== 757);
 	
 	
 }

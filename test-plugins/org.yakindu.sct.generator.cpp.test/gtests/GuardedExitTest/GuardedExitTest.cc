@@ -33,13 +33,13 @@ class GuardedExitTest : public ::testing::Test{
 };
 
 void checkDone(sc_boolean shouldBeDone){
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
 	
-	EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done() : !statechart->getDefaultSCI()->get_done());
+	EXPECT_TRUE(shouldBeDone ? statechart->get_done() : !statechart->get_done());
 	
 	
 }
@@ -50,7 +50,7 @@ TEST_F(GuardedExitTest, ExitTaken) {
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_guard());
+	EXPECT_TRUE(!statechart->get_guard());
 	
 	checkDone(false);
 	
@@ -62,7 +62,7 @@ TEST_F(GuardedExitTest, ExitNotTaken) {
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
 	
-	statechart->getDefaultSCI()->set_guard(true);
+	statechart->set_guard(true);
 	
 	checkDone(true);
 	

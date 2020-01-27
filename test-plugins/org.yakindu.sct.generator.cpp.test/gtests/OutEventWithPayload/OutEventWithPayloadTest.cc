@@ -36,11 +36,11 @@ TEST_F(OutEventWithPayloadTest, out_events_must_have_payload) {
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->raise_i(21);
+	statechart->raise_i(21);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_o());
+	EXPECT_TRUE(statechart->isRaised_o());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_o_value()== 42);
+	EXPECT_TRUE(statechart->get_o_value()== 42);
 	
 	statechart->exit();
 	

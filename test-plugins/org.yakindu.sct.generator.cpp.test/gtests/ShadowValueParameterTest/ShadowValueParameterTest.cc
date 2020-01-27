@@ -36,9 +36,9 @@ TEST_F(ShadowValueParameterTest, shadowValueParameterTest) {
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->set_value(2);
+	statechart->set_value(2);
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_value()== 2));
+	EXPECT_TRUE((statechart->get_value()== 2));
 	
 	statechart->exit();
 	

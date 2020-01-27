@@ -42,7 +42,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
@@ -50,7 +50,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->getDefaultSCI()->raise_jc();
+	statechart->raise_jc();
 	
 	runner->proceed_cycles(1);
 	
@@ -58,7 +58,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->getDefaultSCI()->raise_jd();
+	statechart->raise_jd();
 	
 	runner->proceed_cycles(1);
 	
@@ -66,9 +66,9 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->getDefaultSCI()->raise_jc();
+	statechart->raise_jc();
 	
-	statechart->getDefaultSCI()->raise_jd();
+	statechart->raise_jd();
 	
 	runner->proceed_cycles(1);
 	
@@ -76,7 +76,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
@@ -84,7 +84,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_jc();
+	statechart->raise_jc();
 	
 	runner->proceed_cycles(1);
 	
@@ -92,7 +92,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_jd();
+	statechart->raise_jd();
 	
 	runner->proceed_cycles(1);
 	
@@ -100,9 +100,9 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_jc();
+	statechart->raise_jc();
 	
-	statechart->getDefaultSCI()->raise_jd();
+	statechart->raise_jd();
 	
 	runner->proceed_cycles(1);
 	
@@ -120,7 +120,7 @@ TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
@@ -128,7 +128,7 @@ TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_jc();
+	statechart->raise_jc();
 	
 	runner->proceed_cycles(1);
 	
@@ -136,7 +136,7 @@ TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_jd();
+	statechart->raise_jd();
 	
 	runner->proceed_cycles(1);
 	
@@ -144,9 +144,9 @@ TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_jc();
+	statechart->raise_jc();
 	
-	statechart->getDefaultSCI()->raise_jd();
+	statechart->raise_jd();
 	
 	runner->proceed_cycles(1);
 	
@@ -154,7 +154,7 @@ TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
@@ -168,21 +168,21 @@ TEST_F(SyncJoinTest, doubleEntryActionBug) {
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
-	statechart->getDefaultSCI()->raise_jc();
+	statechart->raise_jc();
 	
-	statechart->getDefaultSCI()->raise_jd();
+	statechart->raise_jd();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1);
+	EXPECT_TRUE(statechart->get_x()== 1);
 	
 	
 }

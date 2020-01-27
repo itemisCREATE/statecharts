@@ -39,17 +39,17 @@ TEST_F(EventDrivenTriggeredByEventTest, internalEventTriggersRunCycle) {
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
+	EXPECT_TRUE(statechart->get_x()== 0);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
+	EXPECT_TRUE(statechart->get_x()== 0);
 	
 	statechart->exit();
 	
@@ -63,7 +63,7 @@ TEST_F(EventDrivenTriggeredByEventTest, proceedTimeDoesNotTriggerRunCycle) {
 	
 	runner->proceed_time(120*1000);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
+	EXPECT_TRUE(statechart->get_x()== 0);
 	
 	statechart->exit();
 	

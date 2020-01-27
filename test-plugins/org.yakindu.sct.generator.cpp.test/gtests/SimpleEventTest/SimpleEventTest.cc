@@ -40,7 +40,7 @@ TEST_F(SimpleEventTest, simpleEventTest) {
 	
 	EXPECT_TRUE(5== 5);
 	
-	statechart->getDefaultSCI()->raise_event1();
+	statechart->raise_event1();
 	
 	runner->proceed_cycles(1);
 	

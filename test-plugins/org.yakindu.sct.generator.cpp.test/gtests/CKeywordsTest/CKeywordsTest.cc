@@ -38,7 +38,7 @@ TEST_F(CKeywordsTest, CKeywordsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_char));
 	
-	statechart->getDefaultSCI()->raise_auto();
+	statechart->raise_auto();
 	
 	runner->proceed_cycles(1);
 	

@@ -38,7 +38,7 @@ TEST_F(ExitStateTest, defaultExit) {
 	
 	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
@@ -52,7 +52,7 @@ TEST_F(ExitStateTest, namedExitThroughNamedTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
@@ -66,7 +66,7 @@ TEST_F(ExitStateTest, namedExitThroughDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
 	
-	statechart->getDefaultSCI()->raise_g();
+	statechart->raise_g();
 	
 	runner->proceed_cycles(1);
 	

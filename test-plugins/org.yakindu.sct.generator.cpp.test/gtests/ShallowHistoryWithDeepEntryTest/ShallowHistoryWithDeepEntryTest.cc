@@ -38,19 +38,19 @@ TEST_F(ShallowHistoryWithDeepEntryTest, noDeepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->getDefaultSCI()->raise_toZ();
+	statechart->raise_toZ();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_A));
 	
-	statechart->getDefaultSCI()->raise_toY();
+	statechart->raise_toY();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->getDefaultSCI()->raise_toZ();
+	statechart->raise_toZ();
 	
 	runner->proceed_cycles(1);
 	
@@ -64,13 +64,13 @@ TEST_F(ShallowHistoryWithDeepEntryTest, deepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->getDefaultSCI()->raise_toZ();
+	statechart->raise_toZ();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_A));
 	
-	statechart->getDefaultSCI()->raise_toC();
+	statechart->raise_toC();
 	
 	runner->proceed_cycles(1);
 	
@@ -78,13 +78,13 @@ TEST_F(ShallowHistoryWithDeepEntryTest, deepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
 	
-	statechart->getDefaultSCI()->raise_toY();
+	statechart->raise_toY();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->getDefaultSCI()->raise_toZ();
+	statechart->raise_toZ();
 	
 	runner->proceed_cycles(1);
 	
@@ -100,7 +100,7 @@ TEST_F(ShallowHistoryWithDeepEntryTest, directDeepEntryIntoHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->getDefaultSCI()->raise_toC();
+	statechart->raise_toC();
 	
 	runner->proceed_cycles(1);
 	
@@ -108,13 +108,13 @@ TEST_F(ShallowHistoryWithDeepEntryTest, directDeepEntryIntoHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
 	
-	statechart->getDefaultSCI()->raise_toY();
+	statechart->raise_toY();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->getDefaultSCI()->raise_toZ();
+	statechart->raise_toZ();
 	
 	runner->proceed_cycles(1);
 	

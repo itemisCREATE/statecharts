@@ -40,9 +40,9 @@ void initForEventE(sc_boolean valueForC){
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	
-	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->set_c(valueForC);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
@@ -53,9 +53,9 @@ void initForEventF(sc_boolean valueForC){
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	
-	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->set_c(valueForC);
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
@@ -66,9 +66,9 @@ void initForEventG(sc_boolean valueForC){
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	
-	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->set_c(valueForC);
 	
-	statechart->getDefaultSCI()->raise_g();
+	statechart->raise_g();
 	
 	runner->proceed_cycles(1);
 	
@@ -79,9 +79,9 @@ void initForEventH(sc_boolean valueForC){
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	
-	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->set_c(valueForC);
 	
-	statechart->getDefaultSCI()->raise_h();
+	statechart->raise_h();
 	
 	runner->proceed_cycles(1);
 	

@@ -42,7 +42,7 @@ TEST_F(EventDrivenInternalEventTest, checkInternlEventQueueing) {
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
 	
-	statechart->getDefaultSCI()->raise_start();
+	statechart->raise_start();
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_r1_B));
 	
@@ -50,9 +50,9 @@ TEST_F(EventDrivenInternalEventTest, checkInternlEventQueueing) {
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i1_sequence()== 2);
+	EXPECT_TRUE(statechart->get_i1_sequence()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i2_sequence()== 3);
+	EXPECT_TRUE(statechart->get_i2_sequence()== 3);
 	
 	statechart->exit();
 	

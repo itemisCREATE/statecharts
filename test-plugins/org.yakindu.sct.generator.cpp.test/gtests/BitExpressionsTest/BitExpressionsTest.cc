@@ -38,27 +38,27 @@ TEST_F(BitExpressionsTest, BitExpressions) {
 	
 	EXPECT_TRUE(statechart->isStateActive(BitExpressions::main_region_StateA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit1()== 5);
+	EXPECT_TRUE(statechart->get_myBit1()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit2()== 7);
+	EXPECT_TRUE(statechart->get_myBit2()== 7);
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(BitExpressions::main_region_StateB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_leftBitshift()== 10);
+	EXPECT_TRUE(statechart->get_leftBitshift()== 10);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_rightBitshift()== 2);
+	EXPECT_TRUE(statechart->get_rightBitshift()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_complementBitshift()== - 6 );
+	EXPECT_TRUE(statechart->get_complementBitshift()== - 6 );
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseAnd()== 5);
+	EXPECT_TRUE(statechart->get_bitwiseAnd()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseOr()== 7);
+	EXPECT_TRUE(statechart->get_bitwiseOr()== 7);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseXor()== 2);
+	EXPECT_TRUE(statechart->get_bitwiseXor()== 2);
 	
 	
 }
