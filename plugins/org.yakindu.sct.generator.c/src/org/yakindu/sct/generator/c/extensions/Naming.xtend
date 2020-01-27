@@ -452,7 +452,7 @@ class Naming {
 	def numStates(ExecutionFlow it) '''«type.toUpperCase»_STATE_COUNT'''
 	
 	def stateEnumAccess(Enumerator it) {
-		val statechart = eContainer.originStatechart
+		val statechart = eContainer.getOriginStatechart()
 		val state = originState		
 		return '''«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«statechart.null_state»«ENDIF»'''
 	}
