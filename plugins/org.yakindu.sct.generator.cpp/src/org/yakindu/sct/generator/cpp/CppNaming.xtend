@@ -261,14 +261,13 @@ class CppNaming extends Naming {
 	override dispatch access(TimeEvent it) '''«timeEventsInstance»[«indexOf»]'''
 
 	override dispatch access(VariableDefinition it) {
-		if (const) {
-			return '''«flow.module»::«scope.interfaceName»::«localAccess»'''
+		if (external) {
+			return '''«asGetter»()'''
 		} else {
-			if (external) {
-				return '''«asGetter»()'''
+			if (const) {
+				return '''«flow.module»::«scope.interfaceName»::«localAccess»'''
 			} else {
 				return '''«scope.instance».«localAccess»'''
-				
 			}
 		}
 	}

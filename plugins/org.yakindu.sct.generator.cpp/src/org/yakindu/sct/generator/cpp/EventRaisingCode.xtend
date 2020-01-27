@@ -1,8 +1,6 @@
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.Expression
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -15,6 +13,7 @@ class EventRaisingCode {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension INamingService
 	@Inject protected extension CppExpressionsGenerator
+	@Inject protected extension FeatureCallSeparator
 	
 	def raiseEvent(EventRaisingExpression it, CharSequence valueCode) {
 		if (event.definition.isExternal) {
@@ -27,8 +26,4 @@ class EventRaisingCode {
 			«event.definition.scope.instance».«event.definition.name.asIdentifier.raised» = true'''
 		}
 	}
-		
-	
-	def dispatch context(FeatureCall it) '''«owner.code»«owner.callSep»'''
-	def dispatch context(Expression it) ''''''
 }
