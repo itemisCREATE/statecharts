@@ -92,7 +92,15 @@ p=. Differences between the state machine types
 
 Learn more about modeling systems with state machines in our free whitepaper:
 
-<a href="https://info.itemis.com/en/yakindu/state-machine/whitepaper/" class="btn btn-warning">Download Whitepaper</a>
+###. CTA: Download Whitepaper
+
+<span class="hs-cta-wrapper" id="hs-cta-wrapper-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd">
+<span class="hs-cta-node hs-cta-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd" id="hs-cta-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd">
+<a href="https://cta-redirect.hubspot.com/cta/redirect/761475/0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd"  target="_blank" >
+<img class="hs-cta-img" id="hs-cta-img-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd.png"  alt="Download Whitepaper"/>
+</a>
+</span>
+</span>
 
 The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now. YAKINDU statecharts are based on Harel statecharts and are very close but not identical to UML state machines. The concrete differences are explained in the documentation where they exist. YAKINDU Statechart Tools come with a simulator which allows to directly execute the modeled statecharts. Various code generators translate the statechart into source code.
 
