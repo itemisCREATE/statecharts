@@ -142,10 +142,16 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(LogicalOrExpression it) '''(«leftOperand.sc_boolean_code») || («rightOperand.sc_boolean_code»)'''
 	
 	override dispatch CharSequence code(AssignmentExpression it) {
+		val varRef = varRef
+		if(varRef instanceof FeatureCall){
+			if (varRef.feature.eContainer instanceof ComplexType) {
+				return '''«varRef.feature.asSetter»(«varRef.owner.code», «expression.code»)'''
+			}
+		}
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
-			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
-		} else
-			super._code(it)
+			return '''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
+		}
+		return super._code(it)
 	}
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
