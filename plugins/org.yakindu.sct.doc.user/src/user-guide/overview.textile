@@ -7,7 +7,7 @@ A state machine is a behavior model. It consists of a finite number of states an
 
 This introduction gives a short overview of the common basis and the differences between state machine types.
 
-!(small)images/simple_moore.png(Simple example as a Moore machine)!
+!(small)images/overview_simple_moore.jpg(Simple example as a Moore machine)!
 
 p=. Simple state machine
 
@@ -28,8 +28,7 @@ We extend the switch example above into a light switch with different brightness
 
 !(normal)images/overview_moore.png(Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools)!
 
-p=. Light switch example as a Moore machine, modeled with YAKINDU Statechart Tools
-
+p=. Light switch example as a Moore machine, modeled with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/
 
 *Mealy machines*
 
@@ -62,9 +61,13 @@ Harel statecharts can define variables which can be used in input and output exp
 
 !(normal)images/overview_harel_1.png(Light switch example as a Harel statechart)!
 
+p=. Light switch example as a Harel statechart
+
 To showcase the use of composite states we extend the light switch example by a motion detection mode. When the _MOT_ button is pressed, the motion sensor is activated. Once the sensor detects any motion (event @motion_detected@), the light is switched on at the highest brightness level (@brightness = 3@). This can be modeled with a composite state that groups the two states _Motion Detected_ and _No Motion Detected_ together.
 
 !(large)images/overview_harel_2.png(Extended light switch example as a Harel statechart with composite states)!
+
+p=. Extended light switch example as a Harel statechart with composite states
 
 Please also note that Harel statecharts combine the characteristics of Mealy and Moore machines, hence outputs can be produced by states as well as transitions as indicated in the statechart above.
 
@@ -72,7 +75,9 @@ We can even go one step further and hide the logic of the _Motion Detection Mode
 
 !(large)images/overview_harel_3.png(Extended light switch example as a Harel statechart with sub diagrams)!
 
-Further concepts like orthogonality or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.html.
+p=. Extended light switch example as a Harel statechart with sub diagrams
+
+Further concepts like orthogonality or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.
 
 
 *The present age: UML state machines*
@@ -85,17 +90,25 @@ The following table illustrates the differences between the previously described
 
 p=. Differences between the state machine types
 
-The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now. YAKINDU statecharts are based on Harel statecharts and are very close but not identical to UML state machines. The concrete differences are explained in the documentation where they exist. YAKINDU Statechart Tools come with a simulator which allows to directly execute the modelled statecharts. 
-
 Learn more about modeling systems with state machines in our free whitepaper:
 
-<a href="https://info.itemis.com/en/yakindu/state-machine/whitepaper/" class="btn btn-warning">Download Whitepaper</a>
+###. CTA: Download Whitepaper
+
+<span class="hs-cta-wrapper" id="hs-cta-wrapper-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd">
+<span class="hs-cta-node hs-cta-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd" id="hs-cta-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd">
+<a href="https://cta-redirect.hubspot.com/cta/redirect/761475/0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd"  target="_blank" >
+<img class="hs-cta-img" id="hs-cta-img-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd.png"  alt="Download Whitepaper"/>
+</a>
+</span>
+</span>
+
+The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now. YAKINDU statecharts are based on Harel statecharts and are very close but not identical to UML state machines. The concrete differences are explained in the documentation where they exist. YAKINDU Statechart Tools come with a simulator which allows to directly execute the modeled statecharts. Various code generators translate the statechart into source code.
 
 
 
 h1(#overview_what_are_yakindu_statechart_tools). What are YAKINDU Statechart Tools?
 
-YAKINDU Statechart Tools (YAKINDU SCT) is a modular toolkit for developing, simulating, and generating executable "_finite-state machines (FSM)_":https://en.wikipedia.org/wiki/Finite-state_machine or simply _state machines_.
+YAKINDU Statechart Tools (YAKINDU SCT) is a modular toolkit for developing, simulating, and generating executable "_finite-state machines (FSM)_":../user-guide/overview.html#overview_what_are_state_machines or simply _state machines_.
 
 State machines are useful for the model-driven development of so-called event-discrete systems, i.e., systems that are always in exactly one state of a finite number of states. State machines are particularly well-suited for embedded systems, but they are in no way restricted to them.
 
@@ -103,12 +116,12 @@ With YAKINDU Statechart Tools you can easily develop and simulate state machines
 
 The Standard Edition of YAKINDU Statechart Tools provides the following features for dealing with state machines:
 
-* *Statechart diagram editor* to graphically create and edit statecharts, the graphical representation of state machines
-* *Statechart simulator* to simulate the behavior of statecharts
-* *Code generators for Java, C, C++ and Python* to transform statecharts into programming language source code
+* *"Statechart diagram editor":../user-guide/editing_statecharts* to graphically create and edit statecharts, the graphical representation of state machines
+* *"Statechart simulator":../user-guide/simulating_statecharts* to simulate the behavior of statecharts
+* *"Code generators for Java, C, C++ and Python":../user-guide/code_generation_intro* to transform statecharts into programming language source code
 * *Custom generator projects* to easily create model-to-text transformations with Xtend or Java in order to create any code of your own choice
 * *Integrated validator* to check for syntactical or semantical problems of the statechart model
-* *Testing framework* to test your state machines with unit tests
+* *"Testing framework":../user-guide/sctunit* to test your state machines with unit tests
 
 The following graph shows these features and their relation to each other:
 
@@ -122,8 +135,18 @@ The Professional Edition of YAKINDU Statechart Tools makes additional features a
 * "*Advanced simulation and debugging*":../user-guide/simulating_statecharts.html#advsim_debugging_with_breakpoints_and_snapshots with breakpoints and snapshots
 
 
+###. CTA: Download Statechart Tools
 
-h2(#overview_which_licensing_rules_do_apply_to_yakindu_statechart_tools). Which licensing rules do apply to YAKINDU Statechart Tools?
+<span class="hs-cta-wrapper" id="hs-cta-wrapper-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2">
+<span class="hs-cta-node hs-cta-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2" id="hs-cta-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2">
+<a href="https://cta-redirect.hubspot.com/cta/redirect/761475/96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2"  target="_blank" >
+<img class="hs-cta-img" id="hs-cta-img-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2.png"  alt="Download YAKINDU Statechart Tools"/>
+</a>
+</span>
+</span>
+
+
+*Which licensing rules do apply to YAKINDU Statechart Tools?*
 
 ###. CHECK Do these licensing information still apply?
 
@@ -133,16 +156,13 @@ The code generators coming with YAKINDU Statechart Tools do not imply any licens
 
 
 
-
-h2(#overview_who_is_behind_yakindu_statechart_tools). Who is behind YAKINDU Statechart Tools?
+*Who is behind YAKINDU Statechart Tools?*
 
 YAKINDU Statechart Tools is developed and driven by "itemis AG":https://en.wikipedia.org/wiki/Itemis, a well-known consulting company specialized on model-based development. itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need advice, get in contact with itemis' "YAKINDU team":https://info.itemis.com/contact.
 
 
 
-
-h2(#overview_who_is_using_yakindu_statechart_tools). Who is using YAKINDU Statechart Tools?
+*Who is using YAKINDU Statechart Tools?*
 
 Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, C++ or Python code.
-
 
