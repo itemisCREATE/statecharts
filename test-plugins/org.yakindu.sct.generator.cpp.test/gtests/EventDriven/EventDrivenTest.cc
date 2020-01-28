@@ -36,25 +36,25 @@ TEST_F(EventDrivenTest, test) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_running());
+	EXPECT_TRUE(statechart->isRaised_running());
 	
-	statechart->getDefaultSCI()->raise_inEvent();
+	statechart->raise_inEvent();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_oe1());
+	EXPECT_TRUE(statechart->isRaised_oe1());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_oe2());
+	EXPECT_TRUE(statechart->isRaised_oe2());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_oe3());
+	EXPECT_TRUE(statechart->isRaised_oe3());
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDriven::main_region_StateD));
 	
-	statechart->getDefaultSCI()->raise_inEventBool(true);
+	statechart->raise_inEventBool(true);
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDriven::main_region_StateE));
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDriven::main_region_StateE__region0_State2));
 	
-	statechart->getDefaultSCI()->raise_inEvent();
+	statechart->raise_inEvent();
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDriven::main_region_StateF));
 	

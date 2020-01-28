@@ -36,13 +36,13 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrFalse)
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->set_c1(false);
+	statechart->set_c1(false);
 	
-	statechart->getDefaultSCI()->set_c2(false);
+	statechart->set_c2(false);
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
+	EXPECT_TRUE(!statechart->get_e1_transition());
 	
 	
 }
@@ -50,13 +50,13 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrFalse) 
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->set_c1(true);
+	statechart->set_c1(true);
 	
-	statechart->getDefaultSCI()->set_c2(false);
+	statechart->set_c2(false);
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
+	EXPECT_TRUE(!statechart->get_e1_transition());
 	
 	
 }
@@ -64,13 +64,13 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrTrue) 
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->set_c1(false);
+	statechart->set_c1(false);
 	
-	statechart->getDefaultSCI()->set_c2(true);
+	statechart->set_c2(true);
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
+	EXPECT_TRUE(!statechart->get_e1_transition());
 	
 	
 }
@@ -78,13 +78,13 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->set_c1(true);
+	statechart->set_c1(true);
 	
-	statechart->getDefaultSCI()->set_c2(true);
+	statechart->set_c2(true);
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
+	EXPECT_TRUE(!statechart->get_e1_transition());
 	
 	
 }

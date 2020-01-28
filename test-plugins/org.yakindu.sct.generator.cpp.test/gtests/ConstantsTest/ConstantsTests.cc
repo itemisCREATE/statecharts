@@ -38,31 +38,31 @@ TEST_F(ConstantsTests, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 10);
+	EXPECT_TRUE(statechart->get_x()== 10);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 20);
+	EXPECT_TRUE(statechart->get_y()== 20);
 	
 	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_y(), (sc_string)"Hello World") == 0);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 20);
+	EXPECT_TRUE(statechart->get_result()== 20);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_C));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 100);
+	EXPECT_TRUE(statechart->get_result()== 100);
 	
-	statechart->getDefaultSCI()->raise_e2(statechart->getDefaultSCI()->get_x());
+	statechart->raise_e2(statechart->get_x());
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 1000);
+	EXPECT_TRUE(statechart->get_result()== 1000);
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_A));
 	

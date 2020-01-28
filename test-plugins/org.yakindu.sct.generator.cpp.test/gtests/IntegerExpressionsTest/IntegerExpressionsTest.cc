@@ -38,55 +38,55 @@ TEST_F(IntegerExpressionsTest, integerExpressions) {
 	
 	EXPECT_TRUE(statechart->isStateActive(IntegerExpressions::main_region_StateA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt1()== 10);
+	EXPECT_TRUE(statechart->get_myInt1()== 10);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt2()== 5);
+	EXPECT_TRUE(statechart->get_myInt2()== 5);
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_less()== false);
+	EXPECT_TRUE(statechart->get_less()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_greater()== true);
+	EXPECT_TRUE(statechart->get_greater()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_equalOrLess()== false);
+	EXPECT_TRUE(statechart->get_equalOrLess()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_equalOrGreater()== true);
+	EXPECT_TRUE(statechart->get_equalOrGreater()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_equal()== false);
+	EXPECT_TRUE(statechart->get_equal()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_notEqual()== true);
+	EXPECT_TRUE(statechart->get_notEqual()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_plus()== 15);
+	EXPECT_TRUE(statechart->get_plus()== 15);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_minus()== 5);
+	EXPECT_TRUE(statechart->get_minus()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_multiply()== 50);
+	EXPECT_TRUE(statechart->get_multiply()== 50);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_division()== 2);
+	EXPECT_TRUE(statechart->get_division()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_modulo()== 0);
+	EXPECT_TRUE(statechart->get_modulo()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_negat()== - 10 );
+	EXPECT_TRUE(statechart->get_negat()== - 10 );
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_multiAssign()== 20);
+	EXPECT_TRUE(statechart->get_multiAssign()== 20);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_divAssign()== 2);
+	EXPECT_TRUE(statechart->get_divAssign()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_plusAssign()== 12);
+	EXPECT_TRUE(statechart->get_plusAssign()== 12);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_minusAssign()== - 8 );
+	EXPECT_TRUE(statechart->get_minusAssign()== - 8 );
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_moduloAssign()== 0);
+	EXPECT_TRUE(statechart->get_moduloAssign()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_decrementAssign()== 0);
+	EXPECT_TRUE(statechart->get_decrementAssign()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_decrement()== - 2 );
+	EXPECT_TRUE(statechart->get_decrement()== - 2 );
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_incrementAssign()== 0);
+	EXPECT_TRUE(statechart->get_incrementAssign()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_increment()== 2);
+	EXPECT_TRUE(statechart->get_increment()== 2);
 	
 	
 }

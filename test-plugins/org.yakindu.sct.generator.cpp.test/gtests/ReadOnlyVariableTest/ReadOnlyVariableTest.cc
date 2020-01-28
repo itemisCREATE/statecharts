@@ -38,13 +38,13 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ReadOnlyVariable::main_region_StateA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 0);
+	EXPECT_TRUE(statechart->get_myInt()== 0);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"testString") == 0);
+	EXPECT_TRUE(strcmp(statechart->get_myString(), (sc_string)"testString") == 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool()== true);
+	EXPECT_TRUE(statechart->get_myBool()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 1.1);
+	EXPECT_TRUE(statechart->get_myReal()== 1.1);
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myInt()== 0);
 	
@@ -58,13 +58,13 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ReadOnlyVariable::main_region_StateB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 100);
+	EXPECT_TRUE(statechart->get_myInt()== 100);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"fail") == 0);
+	EXPECT_TRUE(strcmp(statechart->get_myString(), (sc_string)"fail") == 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool()== false);
+	EXPECT_TRUE(statechart->get_myBool()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 6.6);
+	EXPECT_TRUE(statechart->get_myReal()== 6.6);
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myInt()== 200);
 	

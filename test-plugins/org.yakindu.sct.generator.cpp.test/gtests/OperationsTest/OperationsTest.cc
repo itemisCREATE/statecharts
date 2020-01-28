@@ -1290,7 +1290,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(internalOperation5aMock->calledAtLeastOnce());
 	
-	statechart->getDefaultSCI()->raise_ev();
+	statechart->raise_ev();
 	
 	runner->proceed_cycles(1);
 	
@@ -1312,7 +1312,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(interface1InterfaceOperation5aMock->calledAtLeastOnce());
 	
-	statechart->getDefaultSCI()->raise_ev();
+	statechart->raise_ev();
 	
 	runner->proceed_cycles(1);
 	
@@ -1417,7 +1417,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(internalOperation5aMock->calledAtLeastOnce());
 	
-	statechart->getDefaultSCI()->raise_ev();
+	statechart->raise_ev();
 	
 	runner->proceed_cycles(1);
 	
@@ -1439,7 +1439,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(interface1InterfaceOperation5aMock->calledAtLeastOnce());
 	
-	statechart->getDefaultSCI()->raise_ev();
+	statechart->raise_ev();
 	
 	runner->proceed_cycles(1);
 	

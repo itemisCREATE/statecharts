@@ -38,31 +38,31 @@ TEST_F(GuardTest, guardTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_event1();
+	statechart->raise_event1();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_event2();
+	statechart->raise_event2();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
 	
-	statechart->getDefaultSCI()->raise_return();
+	statechart->raise_return();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_event1();
+	statechart->raise_event1();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
 	
-	statechart->getDefaultSCI()->raise_return();
+	statechart->raise_return();
 	
 	runner->proceed_cycles(1);
 	

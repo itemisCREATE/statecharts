@@ -38,7 +38,7 @@ TEST_F(PriorityValuesTest, transitionPriority) {
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_event1();
+	statechart->raise_event1();
 	
 	runner->proceed_cycles(1);
 	
@@ -52,7 +52,7 @@ TEST_F(PriorityValuesTest, regionPriority) {
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_A));
 	
-	statechart->getDefaultSCI()->raise_event2();
+	statechart->raise_event2();
 	
 	runner->proceed_cycles(1);
 	

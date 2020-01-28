@@ -35,6 +35,14 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Operation
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Property
+import org.yakindu.base.types.Enumerator
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.adapter.OriginTracing
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -47,6 +55,9 @@ class CppNaming extends Naming {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension GenmodelEntriesExtension
+	@Inject protected extension StatechartUtil
+	@Inject protected extension OriginTracing
+	
 	@Inject GeneratorEntry entry
 
 	def cpp(String it) { it + ".cpp" }
@@ -244,18 +255,41 @@ class CppNaming extends Naming {
 		}
 		return '''«scope.OCB_Instance»->«asFunction»'''
 	}
+	
+	override dispatch access(Operation it) '''«name»'''
 
 	override dispatch access(TimeEvent it) '''«timeEventsInstance»[«indexOf»]'''
 
 	override dispatch access(VariableDefinition it) {
-		if (const) {
-			return '''«flow.module»::«scope.interfaceName»::«name.asEscapedIdentifier»'''
+		if (external) {
+			return '''«asGetter»()'''
 		} else {
-			return '''«scope.instance».«name.asEscapedIdentifier»'''
+			if (const) {
+				return '''«flow.module»::«scope.interfaceName»::«localAccess»'''
+			} else {
+				return '''«scope.instance».«localAccess»'''
+			}
 		}
 	}
+	
+	override dispatch String access(Property definition) {
+		val origin = definition.type.originTraces.head
+		if (origin instanceof InterfaceScope) {
+			'''«origin.getter»'''
+		} else {
+			'''«super._access(definition)»'''
+		}
+	}
+	
+	def dispatch access(EventDefinition it) {
+		if (external)
+			'''«asRaised»()'''
+		else
+			'''«scope.instance».«localAccess»'''
+	}
 
-	override dispatch access(Event it) '''«scope.instance».«name.asIdentifier.raised»'''
+	def getter(Scope it) '''get«interfaceName»()'''
+		
 
 	override dispatch valueAccess(Declaration it) '''«scope.instance».«name.asIdentifier.value»'''
 
@@ -272,6 +306,10 @@ class CppNaming extends Naming {
 			''
 	}
 	
+	protected def isExternal(EObject it) {
+		eContainer instanceof ComplexType
+	}
+	
 	def List<String> statechartNamespace(ExecutionFlow it) {
 		val sct = statechart
 		if(sct === null) {
@@ -282,5 +320,22 @@ class CppNaming extends Naming {
 			return emptyList
 		}
 		return newArrayList(ns.replace(".", "::").replace("/", "::").split("::").filter[!nullOrEmpty])
+	}
+	
+	override stateEnumAccess(Enumerator it) {
+		val statechart = eContainer.originStatechart
+		val state = originState		
+		if (state !== null)
+			'''«statechart.typeName»::«state.stateName.asEscapedIdentifier»'''
+		else
+			'''«statechart.typeName»::«statechart.null_state»'''
+	}
+	
+	/** TODO: copied from SCTUnitCppNaming */
+	def private typeName(Statechart it) {
+		if(namespace.nullOrEmpty)
+			name.asIdentifier.toFirstUpper
+		else
+			namespace.replace(".", "::").replace("/", "::") + "::" + name.asIdentifier.toFirstUpper
 	}
 }

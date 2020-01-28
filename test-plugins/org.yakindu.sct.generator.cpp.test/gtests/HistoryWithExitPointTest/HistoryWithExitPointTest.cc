@@ -38,31 +38,31 @@ TEST_F(HistoryWithExitPointTest, historyEntryAfterExit) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X1));
 	
-	statechart->getDefaultSCI()->raise_push();
+	statechart->raise_push();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_B));
 	
-	statechart->getDefaultSCI()->raise_back();
+	statechart->raise_back();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X1));
 	
-	statechart->getDefaultSCI()->raise_next();
+	statechart->raise_next();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X2));
 	
-	statechart->getDefaultSCI()->raise_push();
+	statechart->raise_push();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_B));
 	
-	statechart->getDefaultSCI()->raise_back();
+	statechart->raise_back();
 	
 	runner->proceed_cycles(1);
 	

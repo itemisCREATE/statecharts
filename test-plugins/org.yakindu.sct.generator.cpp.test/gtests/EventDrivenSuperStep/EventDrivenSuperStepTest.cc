@@ -38,11 +38,11 @@ TEST_F(EventDrivenSuperStepTest, superStepOnInternalEventQueue) {
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_A));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_C));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 17);
+	EXPECT_TRUE(statechart->get_x()== 17);
 	
 	statechart->exit();
 	
@@ -52,11 +52,11 @@ TEST_F(EventDrivenSuperStepTest, superStepIteratesUsingAlwaysTrigger) {
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_I));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
+	EXPECT_TRUE(statechart->get_x()== 0);
 	
 	statechart->exit();
 	
@@ -68,17 +68,17 @@ TEST_F(EventDrivenSuperStepTest, superStepIteratesUsingSameEventAndGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_A));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_C));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 17);
+	EXPECT_TRUE(statechart->get_x()== 17);
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::EventDrivenSuperStep::EventDrivenSuperStep_main_region_I));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
+	EXPECT_TRUE(statechart->get_x()== 0);
 	
 	statechart->exit();
 	

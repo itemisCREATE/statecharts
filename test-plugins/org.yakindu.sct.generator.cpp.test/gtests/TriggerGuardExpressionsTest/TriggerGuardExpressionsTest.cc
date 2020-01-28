@@ -38,19 +38,9 @@ TEST_F(TriggerGuardExpressionsTest, trueGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
-	statechart->getDefaultSCI()->set_b(true);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
-	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->set_b(true);
 	
 	runner->proceed_cycles(1);
 	
@@ -60,9 +50,19 @@ TEST_F(TriggerGuardExpressionsTest, trueGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e2();
 	
-	statechart->getDefaultSCI()->raise_e2();
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
+	statechart->raise_e1();
+	
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -76,23 +76,23 @@ TEST_F(TriggerGuardExpressionsTest, falseGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->getDefaultSCI()->set_b(false);
+	statechart->set_b(false);
 	
-	statechart->getDefaultSCI()->raise_e1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
-	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e2();
 	
-	statechart->getDefaultSCI()->raise_e2();
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
+	statechart->raise_e1();
+	
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	

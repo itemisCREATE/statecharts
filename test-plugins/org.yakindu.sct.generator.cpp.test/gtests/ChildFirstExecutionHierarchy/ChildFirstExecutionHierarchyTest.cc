@@ -33,11 +33,11 @@ class ChildFirstExecutionHierarchyTest : public ::testing::Test{
 };
 
 void assertNoLocalReaction(){
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_a_local());
+	EXPECT_TRUE(!statechart->get_a_local());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aa_local());
+	EXPECT_TRUE(!statechart->get_aa_local());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_local());
+	EXPECT_TRUE(!statechart->get_aaa_local());
 	
 	
 }
@@ -48,17 +48,17 @@ TEST_F(ChildFirstExecutionHierarchyTest, childShouldTakeTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstExecutionHierarchy::ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstExecutionHierarchy::ChildFirstExecutionHierarchy_r_B));
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_a_reacted());
+	EXPECT_TRUE(!statechart->get_a_reacted());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aa_reacted());
+	EXPECT_TRUE(!statechart->get_aa_reacted());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_reacted());
+	EXPECT_TRUE(statechart->get_aaa_reacted());
 	
 	assertNoLocalReaction();
 	
@@ -70,25 +70,25 @@ TEST_F(ChildFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstExecutionHierarchy::ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	
-	statechart->getDefaultSCI()->set_disable_aaa(true);
+	statechart->set_disable_aaa(true);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstExecutionHierarchy::ChildFirstExecutionHierarchy_r_B));
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_a_reacted());
+	EXPECT_TRUE(!statechart->get_a_reacted());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_reacted());
+	EXPECT_TRUE(statechart->get_aa_reacted());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_reacted());
+	EXPECT_TRUE(!statechart->get_aaa_reacted());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_a_local());
+	EXPECT_TRUE(!statechart->get_a_local());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aa_local());
+	EXPECT_TRUE(!statechart->get_aa_local());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local());
+	EXPECT_TRUE(statechart->get_aaa_local());
 	
 	
 }
@@ -98,27 +98,27 @@ TEST_F(ChildFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstExecutionHierarchy::ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	
-	statechart->getDefaultSCI()->set_disable_aa(true);
+	statechart->set_disable_aa(true);
 	
-	statechart->getDefaultSCI()->set_disable_aaa(true);
+	statechart->set_disable_aaa(true);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstExecutionHierarchy::ChildFirstExecutionHierarchy_r_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_reacted());
+	EXPECT_TRUE(statechart->get_a_reacted());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aa_reacted());
+	EXPECT_TRUE(!statechart->get_aa_reacted());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_reacted());
+	EXPECT_TRUE(!statechart->get_aaa_reacted());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_a_local());
+	EXPECT_TRUE(!statechart->get_a_local());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local());
+	EXPECT_TRUE(statechart->get_aa_local());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local());
+	EXPECT_TRUE(statechart->get_aaa_local());
 	
 	
 }
@@ -132,11 +132,11 @@ TEST_F(ChildFirstExecutionHierarchyTest, expectLocalReactrionsExecuteWithNoTrans
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstExecutionHierarchy::ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local());
+	EXPECT_TRUE(statechart->get_a_local());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local());
+	EXPECT_TRUE(statechart->get_aa_local());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local());
+	EXPECT_TRUE(statechart->get_aaa_local());
 	
 	
 }

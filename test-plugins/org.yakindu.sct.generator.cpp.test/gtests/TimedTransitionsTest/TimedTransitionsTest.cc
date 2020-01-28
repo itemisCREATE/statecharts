@@ -81,27 +81,27 @@ TEST_F(TimedTransitionsTest, countCycles) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_Start));
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_cycles()== 0));
+	EXPECT_TRUE((statechart->get_cycles()== 0));
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_seconds()== 0));
-	
-	runner->proceed_time(100);
-	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_cycles()== 0));
-	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_seconds()== 0));
+	EXPECT_TRUE((statechart->get_seconds()== 0));
 	
 	runner->proceed_time(100);
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_cycles()== 1));
+	EXPECT_TRUE((statechart->get_cycles()== 0));
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_seconds()== 0));
+	EXPECT_TRUE((statechart->get_seconds()== 0));
+	
+	runner->proceed_time(100);
+	
+	EXPECT_TRUE((statechart->get_cycles()== 1));
+	
+	EXPECT_TRUE((statechart->get_seconds()== 0));
 	
 	runner->proceed_time(800);
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_cycles()== 5));
+	EXPECT_TRUE((statechart->get_cycles()== 5));
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_seconds()== 1));
+	EXPECT_TRUE((statechart->get_seconds()== 1));
 	
 	
 }

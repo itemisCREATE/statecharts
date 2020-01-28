@@ -40,7 +40,7 @@ TEST_F(InternalEventLifeCycleTest, InternalEventLifeCycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_C));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
@@ -54,7 +54,7 @@ TEST_F(InternalEventLifeCycleTest, InternalEventLifeCycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_D));
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	

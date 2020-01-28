@@ -40,7 +40,7 @@ TEST_F(RaiseEventTest, raiseEvent) {
 	
 	EXPECT_TRUE(statechart->isStateActive(RaiseEvent::main_region_StateA));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	

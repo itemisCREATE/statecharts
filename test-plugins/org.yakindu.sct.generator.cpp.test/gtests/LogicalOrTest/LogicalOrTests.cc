@@ -38,7 +38,7 @@ TEST_F(LogicalOrTests, operandEvaluationOrder) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4 && statechart->getDefaultSCI()->get_b()) << "logical or expression was executed in wrong order..." ;
+	EXPECT_TRUE(statechart->get_x()== 4 && statechart->get_b()) << "logical or expression was executed in wrong order..." ;
 	
 	
 }

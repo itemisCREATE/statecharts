@@ -42,13 +42,13 @@ TEST_F(ParentFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
+	EXPECT_TRUE(statechart->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2);
+	EXPECT_TRUE(statechart->get_a_local()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 3);
+	EXPECT_TRUE(statechart->get_aa_local()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 4);
+	EXPECT_TRUE(statechart->get_aaa_local()== 4);
 	
 	
 }
@@ -58,23 +58,49 @@ TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTrans
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
-	statechart->getDefaultSCI()->set_disable_a(true);
+	statechart->set_disable_a(true);
 	
-	statechart->getDefaultSCI()->set_disable_aa(true);
+	statechart->set_disable_aa(true);
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
+	EXPECT_TRUE(statechart->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2);
+	EXPECT_TRUE(statechart->get_a_local()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 3);
+	EXPECT_TRUE(statechart->get_aa_local()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0);
+	EXPECT_TRUE(statechart->get_aaa_local()== 0);
+	
+	
+}
+TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildSelfTransition) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAA));
+	
+	statechart->raise_doSelfTransition();
+	
+	statechart->set_disable_a(true);
+	
+	statechart->set_disable_aa(true);
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAA));
+	
+	EXPECT_TRUE(statechart->get_sm_local()== 1);
+	
+	EXPECT_TRUE(statechart->get_a_local()== 2);
+	
+	EXPECT_TRUE(statechart->get_aa_local()== 3);
+	
+	EXPECT_TRUE(statechart->get_aaa_local()== 0);
 	
 	
 }
@@ -84,21 +110,21 @@ TEST_F(ParentFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLoca
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	
-	statechart->getDefaultSCI()->set_disable_a(true);
+	statechart->set_disable_a(true);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
+	EXPECT_TRUE(statechart->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2);
+	EXPECT_TRUE(statechart->get_a_local()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0);
+	EXPECT_TRUE(statechart->get_aa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0);
+	EXPECT_TRUE(statechart->get_aaa_local()== 0);
 	
 	
 }
@@ -108,23 +134,49 @@ TEST_F(ParentFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransiti
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	
-	statechart->getDefaultSCI()->set_disable_aaa(true);
+	statechart->set_disable_aaa(true);
 	
-	statechart->getDefaultSCI()->set_disable_aa(true);
+	statechart->set_disable_aa(true);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
+	EXPECT_TRUE(statechart->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 0);
+	EXPECT_TRUE(statechart->get_a_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0);
+	EXPECT_TRUE(statechart->get_aa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0);
+	EXPECT_TRUE(statechart->get_aaa_local()== 0);
+	
+	
+}
+TEST_F(ParentFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentSelfTransition) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A_r_AA_r_AAA));
+	
+	statechart->set_disable_aaa(true);
+	
+	statechart->set_disable_aa(true);
+	
+	statechart->raise_doSelfTransition();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstLocalReactions::ParentFirstLocalReactions_r_A));
+	
+	EXPECT_TRUE(statechart->get_sm_local()== 1);
+	
+	EXPECT_TRUE(statechart->get_a_local()== 0);
+	
+	EXPECT_TRUE(statechart->get_aa_local()== 0);
+	
+	EXPECT_TRUE(statechart->get_aaa_local()== 0);
 	
 	
 }

@@ -40,7 +40,7 @@ TEST_F(EventDrivenOutEventsTest, test) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDrivenOutEvents::second_region_StateC));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDrivenOutEvents::main_region_StateB));
 	
