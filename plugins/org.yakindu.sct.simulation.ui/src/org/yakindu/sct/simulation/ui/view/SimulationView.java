@@ -11,10 +11,8 @@
 package org.yakindu.sct.simulation.ui.view;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
-import org.apache.commons.lang.time.DurationFormatUtils;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
@@ -29,40 +27,40 @@ import org.eclipse.debug.internal.ui.commands.actions.StepOverCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateAndRelaunchAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
+import org.eclipse.debug.internal.ui.sourcelookup.SourceLookupManager;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.actions.DebugCommandAction;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.ActionContributionItem;
+import org.eclipse.jface.action.ControlContribution;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.IContributionManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.action.ToolBarManager;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
@@ -71,9 +69,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
-import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
-import org.yakindu.sct.simulation.ui.SimulationImages;
-import org.yakindu.sct.simulation.ui.model.presenter.SCTSourceDisplayDispatcher;
 import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
@@ -81,7 +76,6 @@ import org.yakindu.sct.simulation.ui.view.editing.ScopeSlotEditingSupport.ITypeS
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * 
@@ -93,38 +87,24 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	public static final String ID = "org.yakindu.sct.simulation.ui.declarationview"; //$NON-NLS-1$
 
-	private TreeViewer viewer;
+	private TreeViewer executionContextViewer;
+	private TreeViewer simulationSessionViewer;
+	private Clock clock;
+
 	private ViewerRefresher viewerRefresher;
 	private FormToolkit kit;
-	private Font font;
 	private RaiseEventSelectionListener selectionListener;
 	private ITypeSystem typeSystem;
-	private ITimeTaskScheduler timeScheduler;
-	private Label timeLabel;
-	private Label timeIconLabel;
-	private ComboViewer sessionDropdown;
-	private HashSet<IDebugTarget> targets = Sets.newHashSet();
-	private static SCTSourceDisplayDispatcher sctSourceDisplayDispatcher;
-	private static final int FONT_SIZE = 11;
-	private static final String FONT = "Courier New";
-
-	private SessionSelectionChangedListener listener;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
-		font = new Font(Display.getDefault(), new FontData(FONT, FONT_SIZE, SWT.NORMAL));
-		sctSourceDisplayDispatcher = new SCTSourceDisplayDispatcher();
 	}
 
 	@Override
 	public void dispose() {
 		selectionListener.dispose();
-		font.dispose();
-		sctSourceDisplayDispatcher = null;
-		disposeSessionDropDownComponent();
 		disposeViewerRefresher();
-		disposeTimeLabels();
 		super.dispose();
 	}
 
@@ -135,100 +115,93 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	protected void disposeTimeLabels() {
-		if (timeLabel != null && !timeLabel.isDisposed()) {
-			timeLabel.dispose();
-		}
-		if (timeIconLabel != null && !timeIconLabel.isDisposed()) {
-			timeIconLabel.dispose();
-		}
-	}
-
-	protected void disposeSessionDropDownComponent() {
-		if (sessionDropdown != null && sessionDropdown.getControl() != null
-				&& !sessionDropdown.getControl().isDisposed()) {
-			sessionDropdown.getControl().dispose();
-		}
-	}
-
 	@Override
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.VERTICAL));
 		Composite top = kit.createComposite(parent);
 		top.setLayout(new GridLayout(2, false));
-		createSessionSelectorComponent(top);
-		createTimeSchedulerComponent(top);
-		createViewer(top);
-		hookActions();
+		SashForm sash = new SashForm(top, SWT.VERTICAL | SWT.SMOOTH);
+		sash.setSashWidth(2);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(sash);
+		createSimulationSessionViewer(sash);
+		createExecutionContextViewer(sash);
+		sash.setWeights(new int[] { 1, 5 });
+		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
+		addSimulationSessionActions(mgr);
 		super.createPartControl(parent);
-	}
-
-	protected ComboViewer createSessionSelectorComponent(Composite top) {
-		Combo combo = new Combo(top, SWT.DROP_DOWN | SWT.READ_ONLY);
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		this.sessionDropdown = new ComboViewer(combo);
-		this.sessionDropdown.setContentProvider(new ArrayContentProvider());
-		this.sessionDropdown.setLabelProvider(new LabelProvider() {
-
-			@Override
-			public String getText(Object element) {
-				IDebugTarget target = ((IDebugTarget) element);
-				boolean isTerminated = target.isTerminated();
-				boolean isSuspended = target.isSuspended();
-				try {
-					return target.getName() + " ["
-							+ (isTerminated ? "terminated" : isSuspended ? "suspended" : "active") + "]";
-				} catch (DebugException e) {
-					return "unkown state";
-				}
-			}
-		});
-
-		listener = new SessionSelectionChangedListener();
-		this.sessionDropdown.addPostSelectionChangedListener(listener);
-
-		targets.clear();
-		for (ILaunch iLaunch : DebugPlugin.getDefault().getLaunchManager().getLaunches()) {
-			for (IDebugTarget iDebugTarget : iLaunch.getDebugTargets()) {
-				if (!iDebugTarget.isTerminated())
-					targets.add(iDebugTarget);
-			}
-		}
-		sessionDropdown.setInput(targets);
-		if (!targets.isEmpty()) {
-			IDebugTarget dt = targets.iterator().next();
-			sessionDropdown.setSelection(new StructuredSelection(dt), true);
-			activeTargetChanged(dt);
-		}
-
-		return this.sessionDropdown;
 	}
 
 	@Override
 	public void setFocus() {
-		viewer.getTree().setFocus();
+		executionContextViewer.getTree().setFocus();
 	}
 
-	protected Viewer createViewer(Composite parent) {
-		viewer = ExecutionContextViewerFactory.createViewer(parent, false, this);
-		selectionListener = new RaiseEventSelectionListener(viewer);
-		return viewer;
+	protected void createSimulationSessionViewer(Composite parent) {
+		simulationSessionViewer = SimulationSessionViewerFactory.createViewer(parent);
+		simulationSessionViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				Object selection = ((StructuredSelection) event.getSelection()).getFirstElement();
+				if (selection instanceof IDebugTarget)
+					changeTarget((IDebugTarget) selection);
+				else if (selection instanceof ILaunch)
+					changeTarget(((ILaunch) selection).getDebugTarget());
+				SourceLookupManager.getDefault().displaySource(selection, getSite().getPage(), true);
+			}
+		});
+
+		MenuManager contextMenu = new MenuManager();
+		addSimulationSessionActions(contextMenu);
+		Menu menu = contextMenu.createContextMenu(simulationSessionViewer.getControl());
+		simulationSessionViewer.getControl().setMenu(menu);
 	}
 
-	public Label createTimeSchedulerComponent(Composite parent) {
-		Composite comp = new Composite(parent, SWT.NONE);
-		comp.setLayout(new GridLayout(2, false));
-		timeIconLabel = new Label(comp, SWT.NONE);
-		timeIconLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false));
-		timeIconLabel.setImage(SimulationImages.SIMULATION_CLOCK.image());
-		timeIconLabel.setToolTipText("Displays the duration since the simulation is running");
-		timeIconLabel.setVisible(false);
-		timeLabel = new Label(comp, SWT.NONE);
-		timeLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false));
-		return timeLabel;
+	protected void createExecutionContextViewer(Composite parent) {
+		Composite contextViewerComposite = kit.createComposite(parent);
+		contextViewerComposite.setLayout(new GridLayout(1, false));
+		ToolBar toolBar = new ToolBar(contextViewerComposite, SWT.FLAT | SWT.WRAP | SWT.RIGHT);
+		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(toolBar);
+		executionContextViewer = ExecutionContextViewerFactory.createViewer(contextViewerComposite, false, this);
+		selectionListener = new RaiseEventSelectionListener(executionContextViewer);
+		final ToolBarManager manager = new ToolBarManager(toolBar);
+		manager.add(new ControlContribution("clock") {
+			@Override
+			protected Control createControl(Composite parent) {
+				if (clock == null)
+					clock = new Clock(parent);
+				return clock;
+			}
+		});
+		manager.add(new Separator());
+		manager.add(new ActionContributionItem(new ExpandAllAction(executionContextViewer)));
+		manager.add(new ActionContributionItem(new CollapseAllAction(executionContextViewer)));
+		manager.add(new ActionContributionItem(new HideTimeEventsAction(false)));
+		manager.update(true);
+		toolBar.pack();
 	}
 
-	protected void setViewerInput(Object input) {
+	@Override
+	public void launchChanged(ILaunch launch) {
+		sessionViewerInputChanged();
+		super.launchChanged(launch);
+
+	}
+
+	private void sessionViewerInputChanged() {
+		ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
+		List<ILaunch> activeLaunches = Lists.newArrayList();
+		for (ILaunch iLaunch : launches) {
+			if (!iLaunch.isTerminated()) {
+				activeLaunches.add(iLaunch);
+			}
+		}
+		Display.getDefault().asyncExec(() -> {
+			simulationSessionViewer.setInput(activeLaunches.toArray());
+			simulationSessionViewer.expandAll();
+		});
+	}
+
+	protected void setExecutionContextInput(Object input) {
 		if (viewerRefresher == null)
 			this.viewerRefresher = new ViewerRefresher();
 
@@ -240,9 +213,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 					this.viewerRefresher.cancel = false;
 				new Thread(viewerRefresher).start();
 			}
-			this.viewer.setInput(input);
+			this.executionContextViewer.setInput(input);
+			this.executionContextViewer.expandToLevel(2);
 		});
-
 	}
 
 	@Override
@@ -250,26 +223,29 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		updateActions();
 		switch (debugEvent.getKind()) {
 		case DebugEvent.TERMINATE:
-			setViewerInput(null);
+			setExecutionContextInput(null);
+			Display.getDefault().asyncExec(() -> {
+				sessionViewerInputChanged();
+				if (clock != null && !clock.isDisposed()) {
+					clock.updateTimestamp(0);
+				}
+			});
 			break;
 		case DebugEvent.SUSPEND:
+			Display.getDefault().asyncExec(() -> {
+				simulationSessionViewer.refresh();
+			});
 			break;
 		case DebugEvent.RESUME:
+			Display.getDefault().asyncExec(() -> {
+				simulationSessionViewer.refresh();
+			});
 			break;
 		}
-		Display.getDefault().asyncExec(() -> {
-			if (debugEvent.getSource() != null) {
-				sessionDropdown.refresh();
-				targets.removeIf(dt -> dt.isTerminated());
-			}
-		});
 	}
 
 	@Override
 	public void debugContextChanged(DebugContextEvent event) {
-		super.debugContextChanged(event);
-		if (debugTarget != null)
-			this.sessionDropdown.setSelection(new StructuredSelection(debugTarget));
 	}
 
 	@Override
@@ -277,10 +253,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		openEditorForTarget(debugTarget);
 		updateTypeSystem(debugTarget);
 		ISimulationEngine engine = debugTarget.getAdapter(ISimulationEngine.class);
-		timeScheduler = engine.getTimeTaskScheduler();
-		setViewerInput(engine.getExecutionContext());
+		setExecutionContextInput(engine.getExecutionContext());
 		updateActions();
-		updateSessionDropdownInput(debugTarget);
 	}
 
 	protected void openEditorForTarget(final IDebugTarget debugTarget) {
@@ -300,21 +274,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	protected void updateSessionDropdownInput(final IDebugTarget debugTarget) {
-		Display.getDefault().asyncExec(() -> {
-			if (debugTarget != null) {
-				if (!targets.contains(debugTarget)) {
-					targets.add(debugTarget);
-
-					sessionDropdown.setInput(targets);
-					sessionDropdown.setSelection(new StructuredSelection(debugTarget), true);
-					changeTarget(debugTarget);
-				}
-				sessionDropdown.refresh();
-			}
-		});
-	}
-
 	protected void updateActions() {
 		IContributionItem[] items = getViewSite().getActionBars().getToolBarManager().getItems();
 		for (IContributionItem iContributionItem : items) {
@@ -330,21 +289,14 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		typeSystem = domain.getInjector(IDomain.FEATURE_SIMULATION).getInstance(ITypeSystem.class);
 	}
 
-	protected void hookActions() {
-		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
+	protected void addSimulationSessionActions(IContributionManager mgr) {
 		addActions(mgr, Lists.newArrayList(new ResumeAction(), new SuspendAction(), new StepOverAction()));
 		addActions(mgr, Lists.newArrayList(new TerminateAction(), new TerminateAndRelaunch()));
 		addActions(mgr, Lists.newArrayList(new RestartAction()));
-		IAction collapse = new CollapseAllAction(viewer);
-		mgr.add(collapse);
-		IAction expand = new ExpandAllAction(viewer);
-		mgr.add(expand);
-		IAction hideTimeEvent = new HideTimeEventsAction(false);
-		mgr.add(hideTimeEvent);
-		getViewSite().getActionBars().getToolBarManager().update(true);
+		mgr.update(true);
 	}
 
-	protected void addActions(IToolBarManager mgr, ArrayList<DebugCommandAction> actions) {
+	protected void addActions(IContributionManager mgr, ArrayList<DebugCommandAction> actions) {
 		if (actions.isEmpty()) {
 			return;
 		}
@@ -353,22 +305,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 		updateActions();
 		mgr.add(new Separator());
-	}
-
-	/**
-	 * @author robert rudi - Initial contribution and API
-	 *
-	 */
-	protected class SessionSelectionChangedListener implements ISelectionChangedListener {
-		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
-			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-			IDebugTarget debugTarget = (IDebugTarget) selection.getFirstElement();
-			if (debugTarget != null) {
-				changeTarget(debugTarget);
-				sctSourceDisplayDispatcher.displaySource(debugTarget, SimulationView.this.getSite().getPage(), true);
-			}
-		}
 	}
 
 	/**
@@ -435,13 +371,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 				@Override
 				public void run() {
-					IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
-					for (IDebugTarget current : debugTargets) {
-						ILaunch launch = current.getLaunch();
-						SCTDebugTarget target = (SCTDebugTarget) launch.getDebugTarget();
-						ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
-						DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
-					}
+					ILaunchConfiguration launchConfiguration = debugTarget.getLaunch().getLaunchConfiguration();
+					DebugUITools.launch(launchConfiguration, debugTarget.getLaunch().getLaunchMode());
 				}
 			});
 		}
@@ -465,12 +396,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 						SCTDebugTarget target = (SCTDebugTarget) launch.getDebugTarget();
 						try {
 							target.getLaunch().terminate();
-							ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
-							DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
 						} catch (CoreException e) {
 							e.printStackTrace();
 						}
 					}
+					ILaunchConfiguration launchConfiguration = debugTarget.getLaunch().getLaunchConfiguration();
+					DebugUITools.launch(launchConfiguration, debugTarget.getLaunch().getLaunchMode());
 				}
 			});
 		}
@@ -594,50 +525,22 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				try {
 					Thread.sleep(UPDATE_INTERVAL);
 					Display.getDefault().asyncExec(() -> {
-						if (viewer != null && !viewer.getControl().isDisposed()
-								&& ((ExecutionContextContentProvider) viewer.getContentProvider()).isShouldUpdate()) {
-							viewer.refresh();
-						}
-
-						if (timeLabel != null && !timeLabel.isDisposed() && timeScheduler != null && debugTarget != null
-								&& !debugTarget.isTerminated() && timeLabel != null && !timeLabel.isDisposed()) {
-							updateTimestamp(timeScheduler.getCurrentTime());
-						} else {
-							if (timeIconLabel != null && !timeIconLabel.isDisposed() && timeIconLabel.isVisible())
-								updateTimestamp(0);
+						if (executionContextViewer != null && !executionContextViewer.getControl().isDisposed()
+								&& ((ExecutionContextContentProvider) executionContextViewer.getContentProvider())
+										.isShouldUpdate()) {
+							executionContextViewer.refresh();
+							if (clock != null && !clock.isDisposed() && debugTarget != null
+									&& !debugTarget.isTerminated()) {
+								ISimulationEngine engine = debugTarget.getLaunch().getDebugTarget()
+										.getAdapter(ISimulationEngine.class);
+								clock.updateTimestamp(engine.getTimeTaskScheduler().getCurrentTime());
+							}
 						}
 					});
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-		}
-
-		protected void updateTimestamp(long timestamp) {
-			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp,
-					(timestamp == 0 ? "--:--:--.---" : "HH:mm:ss.SSS"), true);
-			timeLabel.setText(formatDurationHMS);
-			timeLabel.setFont(font);
-			String time = getReadableSimulationTime(timestamp);
-			boolean isValidTime = time != null || (time != null && !time.isEmpty()) || timestamp != 0;
-			timeIconLabel.setVisible(isValidTime);
-			if (isValidTime) {
-				timeLabel.setToolTipText("Simulation running since " + time);
-				// layout all time-relevant components
-				timeLabel.getParent().getParent().layout();
-			}
-		}
-
-		protected String getReadableSimulationTime(long timestamp) {
-			long days = TimeUnit.MILLISECONDS.toDays(timestamp);
-			long hours = TimeUnit.MILLISECONDS.toHours(timestamp);
-			long minutes = TimeUnit.MILLISECONDS.toMinutes(timestamp);
-			long seconds = TimeUnit.MILLISECONDS.toSeconds(timestamp);
-			return DurationFormatUtils
-					.formatDuration(timestamp,
-							(days > 0 ? "dd 'days '" : "") + (hours > 0 ? "HH 'hours '" : "")
-									+ (minutes > 0 ? "mm 'minutes '" : "") + (seconds > 0 ? "ss 'seconds '" : ""),
-							false);
 		}
 
 		public boolean isCancel() {
