@@ -323,7 +323,7 @@ class CppNaming extends Naming {
 	}
 	
 	override stateEnumAccess(Enumerator it) {
-		val statechart = eContainer.originStatechart
+		val statechart = eContainer.getOriginStatechart
 		val state = originState		
 		if (state !== null)
 			'''«statechart.typeName»::«state.stateName.asEscapedIdentifier»'''
