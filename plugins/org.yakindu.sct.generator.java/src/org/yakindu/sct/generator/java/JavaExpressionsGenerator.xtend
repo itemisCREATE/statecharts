@@ -172,7 +172,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 	
 	def protected stateEnumAccess(Enumerator stateEnum) {
-		val statechart = stateEnum.eContainer.originStatechart
+		val statechart = stateEnum.eContainer.getOriginStatechart
 		val state = stateEnum.originState
 		
 		'''«statechart.statemachineClassName».State.«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«nullStateName»«ENDIF»'''
