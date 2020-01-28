@@ -24,7 +24,6 @@ Use the link below to download the whole chapter as a printable PDF document:
 </span>
 
 
-
 h2(#quick_ref_statechart_element_overview). Statechart elements overview
 
 A statechart consists of a number of different elements. The following list gives an overview of these elements in the order they are listed in the editor palette.
