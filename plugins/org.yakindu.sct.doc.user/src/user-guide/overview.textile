@@ -7,7 +7,7 @@ A state machine is a behavior model. It consists of a finite number of states an
 
 This introduction gives a short overview of the common basis and the differences between state machine types.
 
-!(small)images/simple_moore.png(Simple example as a Moore machine)!
+!(small)images/overview_simple_moore.jpg(Simple example as a Moore machine)!
 
 p=. Simple state machine
 
