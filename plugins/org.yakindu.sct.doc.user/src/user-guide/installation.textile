@@ -23,7 +23,7 @@ Installing YAKINDU Statechart Tools on a Windows machine boils down to the follo
 
 Congratulations, you have just installed and started YAKINDU Statechart Tools!
 
-You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorial_five-minutes_tutorial.html.
+You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorials.html#tutorial_five-minutes_tutorial.
 
 
 
@@ -38,7 +38,7 @@ Installing YAKINDU Statechart Tools on macOS boils down to the following steps:
 
 Congratulations, you have just installed and started YAKINDU Statechart Tools!
 
-You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorial_five-minutes_tutorial.html.
+You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorials.html#tutorial_five-minutes_tutorial.
 
 
 
@@ -52,7 +52,7 @@ Installing YAKINDU Statechart Tools on a Linux machine boils down to the followi
 
 Congratulations, you have just installed and started YAKINDU Statechart Tools!
 
-You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorial_five-minutes_tutorial.html.
+You can proceed now by "installing a YAKINDU Statechart Tools license":#inst_installing_a_yakindu_statechart_tools_license or by "creating your first YAKINDU Statecharts Tools project":../tutorials/tutorials.html#tutorial_five-minutes_tutorial.
 
 
 h3(#inst_installing_on_linux_installing_required_packages). Troubleshooting

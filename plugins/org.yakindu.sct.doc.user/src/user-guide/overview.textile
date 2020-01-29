@@ -77,7 +77,7 @@ We can even go one step further and hide the logic of the _Motion Detection Mode
 
 p=. Extended light switch example as a Harel statechart with sub diagrams
 
-Further concepts like orthogonality or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.
+Further concepts like orthogonality or history states are left out here for brevity. You can read about them in our "quick reference":../user-guide/quick_ref.html#quick_ref.
 
 
 *The present age: UML state machines*
@@ -94,13 +94,7 @@ Learn more about modeling systems with state machines in our free whitepaper:
 
 ###. CTA: Download Whitepaper
 
-<span class="hs-cta-wrapper" id="hs-cta-wrapper-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd">
-<span class="hs-cta-node hs-cta-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd" id="hs-cta-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd">
-<a href="https://cta-redirect.hubspot.com/cta/redirect/761475/0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd"  target="_blank" >
-<img class="hs-cta-img" id="hs-cta-img-0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd.png"  alt="Download Whitepaper"/>
-</a>
-</span>
-</span>
+{% cta "ysct_cta_whitepaper" overrideable=False, guid='0cfcab46-4e69-4a8c-b3a7-335a70c2f2dd' %}
 
 The examples of this article were designed with "YAKINDU Statechart Tools":https://www.itemis.com/en/yakindu/state-machine/, whose documentation you are reading just now. YAKINDU statecharts are based on Harel statecharts and are very close but not identical to UML state machines. The concrete differences are explained in the documentation where they exist. YAKINDU Statechart Tools come with a simulator which allows to directly execute the modeled statecharts. Various code generators translate the statechart into source code.
 
@@ -114,14 +108,18 @@ State machines are useful for the model-driven development of so-called event-di
 
 With YAKINDU Statechart Tools you can easily develop and simulate state machines, as well as generating them as source code for your target software system. YAKINDU Statechart Tools is based on the open-source development platform Eclipse.
 
+###. CTA: Download Statechart Tools
+
+{% cta "ysct_cta_download" overrideable=False, guid='96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2' %}
+
 The Standard Edition of YAKINDU Statechart Tools provides the following features for dealing with state machines:
 
-* *"Statechart diagram editor":../user-guide/editing_statecharts* to graphically create and edit statecharts, the graphical representation of state machines
-* *"Statechart simulator":../user-guide/simulating_statecharts* to simulate the behavior of statecharts
-* *"Code generators for Java, C, C++ and Python":../user-guide/code_generation_intro* to transform statecharts into programming language source code
+* *"Statechart diagram editor":../user-guide/editing_statecharts.html#edit_editing_statecharts* to graphically create and edit statecharts, the graphical representation of state machines
+* *"Statechart simulator":../user-guide/simulating_statecharts.html#simu_simulating_statecharts* to simulate the behavior of statecharts
+* *"Code generators for Java, C, C++ and Python":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code* to transform statecharts into programming language source code
 * *Custom generator projects* to easily create model-to-text transformations with Xtend or Java in order to create any code of your own choice
 * *Integrated validator* to check for syntactical or semantical problems of the statechart model
-* *"Testing framework":../user-guide/sctunit* to test your state machines with unit tests
+* *"Testing framework":../user-guide/sctunit.html#sctunit_test-driven_statechart_development_with_sctunit* to test your state machines with unit tests
 
 The following graph shows these features and their relation to each other:
 
@@ -134,16 +132,6 @@ The Professional Edition of YAKINDU Statechart Tools makes additional features a
 * "*Deep integration with the C programming language*":../user-guide/c-domain.html#cdom_deep_c_integration to directly access C variables, types etc.
 * "*Advanced simulation and debugging*":../user-guide/simulating_statecharts.html#advsim_debugging_with_breakpoints_and_snapshots with breakpoints and snapshots
 
-
-###. CTA: Download Statechart Tools
-
-<span class="hs-cta-wrapper" id="hs-cta-wrapper-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2">
-<span class="hs-cta-node hs-cta-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2" id="hs-cta-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2">
-<a href="https://cta-redirect.hubspot.com/cta/redirect/761475/96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2"  target="_blank" >
-<img class="hs-cta-img" id="hs-cta-img-96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/96e39768-5e5d-4bdb-8754-dd8cfd1ca8e2.png"  alt="Download YAKINDU Statechart Tools"/>
-</a>
-</span>
-</span>
 
 
 *Which licensing rules do apply to YAKINDU Statechart Tools?*

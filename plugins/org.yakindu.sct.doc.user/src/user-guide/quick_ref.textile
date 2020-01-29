@@ -15,13 +15,7 @@ Use the link below to download the whole chapter as a printable PDF document:
 
 ###. CTA: Download Quick Reference
 
-<span class="hs-cta-wrapper" id="hs-cta-wrapper-8e233d12-c7f7-4896-abb1-a4de1a6d549a">
-<span class="hs-cta-node hs-cta-8e233d12-c7f7-4896-abb1-a4de1a6d549a" id="hs-cta-8e233d12-c7f7-4896-abb1-a4de1a6d549a">
-<a href="https://cta-redirect.hubspot.com/cta/redirect/761475/8e233d12-c7f7-4896-abb1-a4de1a6d549a"  target="_blank" >
-<img class="hs-cta-img" id="hs-cta-img-8e233d12-c7f7-4896-abb1-a4de1a6d549a" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/8e233d12-c7f7-4896-abb1-a4de1a6d549a.png"  alt="Download Quick Reference"/>
-</a>
-</span>
-</span>
+{% cta "ysct_cta_quickref" overrideable=False, guid='8e233d12-c7f7-4896-abb1-a4de1a6d549a' %}
 
 
 h2(#quick_ref_statechart_element_overview). Statechart elements overview
