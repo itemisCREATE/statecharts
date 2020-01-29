@@ -30,6 +30,10 @@ class StatechartUtil {
 		false
 	}
 	
+	def isMultiSM(EObject it) {
+		isOriginStatechart ||isOriginScope
+	}
+	
 	def dispatch isOriginScope(Type type) {
 		type.originTraces.exists[it instanceof Scope]
 	}

@@ -144,7 +144,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	override dispatch CharSequence code(AssignmentExpression it) {
 		val varRef = varRef
 		if(varRef instanceof FeatureCall){
-			if (varRef.feature.eContainer instanceof ComplexType && (varRef.feature.eContainer.isOriginStatechart || varRef.feature.eContainer.isOriginScope)) {
+			val container = varRef.feature.eContainer
+			if (container instanceof ComplexType && container.isMultiSM) {
 				return '''«varRef.feature.asSetter»(«varRef.owner.code», «expression.code»)'''
 			}
 		}
