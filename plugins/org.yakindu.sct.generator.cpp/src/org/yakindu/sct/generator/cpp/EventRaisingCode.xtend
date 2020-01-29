@@ -15,7 +15,7 @@ class EventRaisingCode {
 	@Inject protected extension CppExpressionsGenerator
 	@Inject protected extension FeatureCallSeparator
 	
-	def raiseEvent(EventRaisingExpression it, CharSequence valueCode) {
+	def CharSequence raiseEvent(EventRaisingExpression it, CharSequence valueCode) {
 		if (event.definition.isExternal) {
 			'''«event.context»«event.definition.event.asRaiser»(«IF value !== null»«valueCode»«ENDIF»)'''
 		} else {

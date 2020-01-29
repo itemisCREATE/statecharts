@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
