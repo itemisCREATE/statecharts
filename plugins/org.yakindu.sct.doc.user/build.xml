@@ -40,7 +40,7 @@
     <property name="aether.jar.checksum"
         value="195ea2e75242b2a4919463e8e95f57bd3cfcfeb3920879fca5b680255dba4a22b9ec0d53138e608d3be94d80a444aa9b7b8522e5bf01660f0dfb4688dae998dd"/>
     <property name="aether.jar.src"
-        value="http://search.maven.org/remotecontent?filepath=org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar"/>
+        value="https://repo1.maven.org/maven2/org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar"/>
     <property name="aether.jar.file" value="${lib.dir}/aether-ant-tasks-uber.jar"/>
 
     <!-- MyLyn Wikitext version: -->
