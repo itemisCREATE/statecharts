@@ -71,7 +71,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject extension CMultiStatemachine
 	@Inject extension ExpressionExtensions
 	
-	@Inject extension StatechartUtil
+	@Inject extension protected StatechartUtil
 
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -142,6 +142,12 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(LogicalOrExpression it) '''(«leftOperand.sc_boolean_code») || («rightOperand.sc_boolean_code»)'''
 	
 	override dispatch CharSequence code(AssignmentExpression it) {
+		val varRef = varRef
+		if(varRef instanceof FeatureCall){
+			if (varRef.feature.eContainer instanceof ComplexType && (varRef.feature.eContainer.isOriginStatechart || varRef.feature.eContainer.isOriginScope)) {
+				return '''«varRef.feature.asSetter»(«varRef.owner.code», «expression.code»)'''
+			}
+		}
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			return '''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
 		}

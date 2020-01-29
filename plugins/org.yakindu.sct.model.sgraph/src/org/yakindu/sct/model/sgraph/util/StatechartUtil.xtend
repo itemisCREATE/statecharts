@@ -16,6 +16,7 @@ import org.yakindu.base.types.Type
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Scope
 
 class StatechartUtil {
 	
@@ -26,6 +27,14 @@ class StatechartUtil {
 	}
 	
 	def dispatch isOriginStatechart(EObject it) {
+		false
+	}
+	
+	def dispatch isOriginScope(Type type) {
+		type.originTraces.exists[it instanceof Scope]
+	}
+	
+	def dispatch isOriginScope(EObject it) {
 		false
 	}
 	
