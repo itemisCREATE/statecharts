@@ -8,7 +8,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 class EventDrivenEventRaisingCode extends EventRaisingCode {
 	@Inject protected extension EventNaming
 	
-	override raiseEvent(EventRaisingExpression it, CharSequence valueCode) {
+	override CharSequence raiseEvent(EventRaisingExpression it, CharSequence valueCode) {
 		switch (event.definition.event.direction) {
 			case Direction::IN: {
 				return raiseInEvent(valueCode)
@@ -23,11 +23,11 @@ class EventDrivenEventRaisingCode extends EventRaisingCode {
 	}
 	
 	def protected CharSequence raiseInEvent(EventRaisingExpression it, CharSequence valueCode) {
-		return super.raiseEvent(it, valueCode)
+		super.raiseEvent(it, valueCode)
 	}
 	
 	def protected CharSequence raiseOutEvent(EventRaisingExpression it, CharSequence valueCode) {
-		return super.raiseEvent(it, valueCode)
+		super.raiseEvent(it, valueCode)
 	}
 	
 	def protected CharSequence raiseInternalEvent(EventRaisingExpression it, CharSequence valueCode) {

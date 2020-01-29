@@ -81,8 +81,8 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	}
 	
 	protected def dispatch context(ElementReferenceExpression it) {
-		val refCode = reference.code.toString
-		if (refCode.isEmpty) refCode else refCode + reference.callSep
+		val refCode = code.toString
+		if (refCode.isEmpty) refCode else refCode + callSep
 	}
 	
 	protected def dispatch context(Expression it) ''''''
