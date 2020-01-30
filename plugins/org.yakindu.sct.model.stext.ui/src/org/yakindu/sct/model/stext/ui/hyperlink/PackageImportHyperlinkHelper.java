@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.stext.ui.hyperlink;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.emf.common.util.EList;
@@ -20,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -36,8 +36,6 @@ import org.yakindu.sct.model.sgraph.util.StatechartUtil;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
-import org.yakindu.sct.model.stext.stext.InterfaceScope;
-import org.eclipse.jface.text.hyperlink.IHyperlink;
 
 import com.google.inject.Inject;
 
