@@ -28,6 +28,7 @@ import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.StatemachineFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.TimingFunctions
+import org.yakindu.sct.generator.java.submodules.eventdriven.RunnableExtension
 import org.yakindu.sct.generator.java.submodules.lifecycle.Enter
 import org.yakindu.sct.generator.java.submodules.lifecycle.Exit
 import org.yakindu.sct.generator.java.submodules.lifecycle.Init
@@ -41,8 +42,6 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.java.submodules.eventdriven.RunnableExtension
-import org.yakindu.sct.model.sgen.GeneratorModel
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -89,7 +88,7 @@ class Statemachine {
 			.fileComment(entry.licenseText)
 			.packageName(getImplementationPackageName(flow, entry))
 			.addImports(imports)
-			.addImports(includeProviders.map[getImports(flow, entry.eContainerOfType(GeneratorModel))].flatten)
+			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(
 				classTemplate
 			)
@@ -153,7 +152,7 @@ class Statemachine {
 		}
 		
 		for(JavaIncludeProvider jip : includeProviders) {
-			importSet += jip.getImports(flow, entry.eContainerOfType(GeneratorModel)).map[toString]
+			importSet += jip.getImports(flow, entry).map[toString]
 		}
 		
 		if (tracingUsed(entry)) {
