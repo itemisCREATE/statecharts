@@ -109,6 +109,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
 			case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
 			case StextPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
+			case StextPackage.SUBMACHINE_DEFINITION: return createSubmachineDefinition();
 			case StextPackage.LOCAL_REACTION: return createLocalReaction();
 			case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
 			case StextPackage.GUARD: return createGuard();
@@ -172,6 +173,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -182,6 +184,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefRoot createDefRoot() {
 		DefRootImpl defRoot = new DefRootImpl();
 		return defRoot;
@@ -192,6 +195,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StatechartRoot createStatechartRoot() {
 		StatechartRootImpl statechartRoot = new StatechartRootImpl();
 		return statechartRoot;
@@ -202,6 +206,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateRoot createStateRoot() {
 		StateRootImpl stateRoot = new StateRootImpl();
 		return stateRoot;
@@ -212,6 +217,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitionRoot createTransitionRoot() {
 		TransitionRootImpl transitionRoot = new TransitionRootImpl();
 		return transitionRoot;
@@ -222,6 +228,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StatechartSpecification createStatechartSpecification() {
 		StatechartSpecificationImpl statechartSpecification = new StatechartSpecificationImpl();
 		return statechartSpecification;
@@ -232,6 +239,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateSpecification createStateSpecification() {
 		StateSpecificationImpl stateSpecification = new StateSpecificationImpl();
 		return stateSpecification;
@@ -242,6 +250,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitionSpecification createTransitionSpecification() {
 		TransitionSpecificationImpl transitionSpecification = new TransitionSpecificationImpl();
 		return transitionSpecification;
@@ -252,6 +261,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StatechartScope createStatechartScope() {
 		StatechartScopeImpl statechartScope = new StatechartScopeImpl();
 		return statechartScope;
@@ -262,6 +272,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InterfaceScope createInterfaceScope() {
 		InterfaceScopeImpl interfaceScope = new InterfaceScopeImpl();
 		return interfaceScope;
@@ -272,6 +283,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InternalScope createInternalScope() {
 		InternalScopeImpl internalScope = new InternalScopeImpl();
 		return internalScope;
@@ -282,6 +294,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImportScope createImportScope() {
 		ImportScopeImpl importScope = new ImportScopeImpl();
 		return importScope;
@@ -292,6 +305,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EventDefinition createEventDefinition() {
 		EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
 		return eventDefinition;
@@ -302,6 +316,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableDefinition createVariableDefinition() {
 		VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
 		return variableDefinition;
@@ -312,6 +327,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationDefinition createOperationDefinition() {
 		OperationDefinitionImpl operationDefinition = new OperationDefinitionImpl();
 		return operationDefinition;
@@ -322,6 +338,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeAliasDefinition createTypeAliasDefinition() {
 		TypeAliasDefinitionImpl typeAliasDefinition = new TypeAliasDefinitionImpl();
 		return typeAliasDefinition;
@@ -332,6 +349,18 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public SubmachineDefinition createSubmachineDefinition() {
+		SubmachineDefinitionImpl submachineDefinition = new SubmachineDefinitionImpl();
+		return submachineDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public LocalReaction createLocalReaction() {
 		LocalReactionImpl localReaction = new LocalReactionImpl();
 		return localReaction;
@@ -342,6 +371,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitionReaction createTransitionReaction() {
 		TransitionReactionImpl transitionReaction = new TransitionReactionImpl();
 		return transitionReaction;
@@ -352,6 +382,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Guard createGuard() {
 		GuardImpl guard = new GuardImpl();
 		return guard;
@@ -362,6 +393,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EntryPointSpec createEntryPointSpec() {
 		EntryPointSpecImpl entryPointSpec = new EntryPointSpecImpl();
 		return entryPointSpec;
@@ -372,6 +404,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExitPointSpec createExitPointSpec() {
 		ExitPointSpecImpl exitPointSpec = new ExitPointSpecImpl();
 		return exitPointSpec;
@@ -382,6 +415,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EventSpec createEventSpec() {
 		EventSpecImpl eventSpec = new EventSpecImpl();
 		return eventSpec;
@@ -392,6 +426,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RegularEventSpec createRegularEventSpec() {
 		RegularEventSpecImpl regularEventSpec = new RegularEventSpecImpl();
 		return regularEventSpec;
@@ -402,6 +437,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TimeEventSpec createTimeEventSpec() {
 		TimeEventSpecImpl timeEventSpec = new TimeEventSpecImpl();
 		return timeEventSpec;
@@ -412,6 +448,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BuiltinEventSpec createBuiltinEventSpec() {
 		BuiltinEventSpecImpl builtinEventSpec = new BuiltinEventSpecImpl();
 		return builtinEventSpec;
@@ -422,6 +459,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EntryEvent createEntryEvent() {
 		EntryEventImpl entryEvent = new EntryEventImpl();
 		return entryEvent;
@@ -432,6 +470,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExitEvent createExitEvent() {
 		ExitEventImpl exitEvent = new ExitEventImpl();
 		return exitEvent;
@@ -442,6 +481,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AlwaysEvent createAlwaysEvent() {
 		AlwaysEventImpl alwaysEvent = new AlwaysEventImpl();
 		return alwaysEvent;
@@ -452,6 +492,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimpleScope createSimpleScope() {
 		SimpleScopeImpl simpleScope = new SimpleScopeImpl();
 		return simpleScope;
@@ -462,6 +503,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ReactionTrigger createReactionTrigger() {
 		ReactionTriggerImpl reactionTrigger = new ReactionTriggerImpl();
 		return reactionTrigger;
@@ -472,6 +514,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefaultTrigger createDefaultTrigger() {
 		DefaultTriggerImpl defaultTrigger = new DefaultTriggerImpl();
 		return defaultTrigger;
@@ -482,6 +525,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ReactionEffect createReactionEffect() {
 		ReactionEffectImpl reactionEffect = new ReactionEffectImpl();
 		return reactionEffect;
@@ -492,6 +536,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EventRaisingExpression createEventRaisingExpression() {
 		EventRaisingExpressionImpl eventRaisingExpression = new EventRaisingExpressionImpl();
 		return eventRaisingExpression;
@@ -502,6 +547,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EventValueReferenceExpression createEventValueReferenceExpression() {
 		EventValueReferenceExpressionImpl eventValueReferenceExpression = new EventValueReferenceExpressionImpl();
 		return eventValueReferenceExpression;
@@ -512,6 +558,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActiveStateReferenceExpression createActiveStateReferenceExpression() {
 		ActiveStateReferenceExpressionImpl activeStateReferenceExpression = new ActiveStateReferenceExpressionImpl();
 		return activeStateReferenceExpression;
@@ -562,6 +609,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StextPackage getStextPackage() {
 		return (StextPackage)getEPackage();
 	}

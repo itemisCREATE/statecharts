@@ -59,6 +59,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getEvent() {
 		return event;
 	}
@@ -83,6 +84,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEvent(Expression newEvent) {
 		if (newEvent != event) {
 			NotificationChain msgs = null;

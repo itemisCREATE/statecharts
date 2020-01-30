@@ -59,6 +59,7 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitionSpecification getDef() {
 		return def;
 	}
@@ -83,6 +84,7 @@ public class TransitionRootImpl extends DefRootImpl implements TransitionRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDef(TransitionSpecification newDef) {
 		if (newDef != def) {
 			NotificationChain msgs = null;

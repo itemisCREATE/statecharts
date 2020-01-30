@@ -38,6 +38,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Property"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeAliasDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//TypeAlias ../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubmachineDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Property"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Guard">

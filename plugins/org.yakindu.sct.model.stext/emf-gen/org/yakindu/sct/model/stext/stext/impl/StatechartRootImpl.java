@@ -59,6 +59,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StatechartSpecification getDef() {
 		return def;
 	}
@@ -83,6 +84,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDef(StatechartSpecification newDef) {
 		if (newDef != def) {
 			NotificationChain msgs = null;

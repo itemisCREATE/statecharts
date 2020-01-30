@@ -68,6 +68,7 @@ public class InterfaceScopeImpl extends StatechartScopeImpl implements Interface
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -77,6 +78,7 @@ public class InterfaceScopeImpl extends StatechartScopeImpl implements Interface
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

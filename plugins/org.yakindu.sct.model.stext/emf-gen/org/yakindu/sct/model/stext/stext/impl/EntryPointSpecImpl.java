@@ -67,6 +67,7 @@ public class EntryPointSpecImpl extends ReactionPropertyImpl implements EntryPoi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEntrypoint() {
 		return entrypoint;
 	}
@@ -76,6 +77,7 @@ public class EntryPointSpecImpl extends ReactionPropertyImpl implements EntryPoi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEntrypoint(String newEntrypoint) {
 		String oldEntrypoint = entrypoint;
 		entrypoint = newEntrypoint;

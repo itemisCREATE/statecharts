@@ -184,6 +184,10 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAliasDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseSubmachineDefinition(SubmachineDefinition object) {
+				return createSubmachineDefinitionAdapter();
+			}
+			@Override
 			public Adapter caseLocalReaction(LocalReaction object) {
 				return createLocalReactionAdapter();
 			}
@@ -576,6 +580,20 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeAliasDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.SubmachineDefinition <em>Submachine Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.stext.stext.SubmachineDefinition
+	 * @generated
+	 */
+	public Adapter createSubmachineDefinitionAdapter() {
 		return null;
 	}
 

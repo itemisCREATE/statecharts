@@ -166,6 +166,15 @@ public interface StextFactory extends EFactory {
 	TypeAliasDefinition createTypeAliasDefinition();
 
 	/**
+	 * Returns a new object of class '<em>Submachine Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Submachine Definition</em>'.
+	 * @generated
+	 */
+	SubmachineDefinition createSubmachineDefinition();
+
+	/**
 	 * Returns a new object of class '<em>Local Reaction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

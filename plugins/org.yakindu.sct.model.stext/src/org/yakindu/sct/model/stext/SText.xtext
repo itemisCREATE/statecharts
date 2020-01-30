@@ -39,7 +39,7 @@ TransitionSpecification:
 	reaction=TransitionReaction;
 
 StateScope returns sgraph::Scope:
-	{SimpleScope} (members+=(LocalReaction))*;
+	{SimpleScope} (members+=(LocalReaction | SubmachineDefinition))*;
 
 StatechartScope:
 	InterfaceScope | InternalScope | ImportScope;
@@ -70,6 +70,10 @@ InternalScope:
 
 ImportScope:
 	{ImportScope} 'import' ':' imports+=STRING*;
+
+SubmachineDefinition: 
+	{SubmachineDefinition} 'submachine' name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
+;
 
 enum Direction returns types::Direction:
 	IN='in' | OUT='out';
@@ -166,7 +170,7 @@ IDWithKeywords:
 
 Keywords:
 	'namespace' | 'interface' | 'internal' | 'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly'
-	| 'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns';
+	| 'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns' | 'submachine';
 
 TriggerKeywords:
 	'every' | 'always' | 'oncycle' | 'after' | 'exit' | 'entry';

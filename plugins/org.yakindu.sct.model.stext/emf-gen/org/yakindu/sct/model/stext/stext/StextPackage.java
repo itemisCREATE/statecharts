@@ -1029,6 +1029,124 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.SubmachineDefinitionImpl <em>Submachine Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.stext.stext.impl.SubmachineDefinitionImpl
+	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getSubmachineDefinition()
+	 * @generated
+	 */
+	int SUBMACHINE_DEFINITION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__ANNOTATION_INFO = TypesPackage.PROPERTY__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__META_FEATURES = TypesPackage.PROPERTY__META_FEATURES;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__STATIC = TypesPackage.PROPERTY__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__TYPE = TypesPackage.PROPERTY__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__TYPE_SPECIFIER = TypesPackage.PROPERTY__TYPE_SPECIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Const</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__CONST = TypesPackage.PROPERTY__CONST;
+
+	/**
+	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__READONLY = TypesPackage.PROPERTY__READONLY;
+
+	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY__INITIAL_VALUE;
+
+	/**
+	 * The number of structural features of the '<em>Submachine Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1036,7 +1154,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getLocalReaction()
 	 * @generated
 	 */
-	int LOCAL_REACTION = 16;
+	int LOCAL_REACTION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
@@ -1082,7 +1200,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTransitionReaction()
 	 * @generated
 	 */
-	int TRANSITION_REACTION = 17;
+	int TRANSITION_REACTION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
@@ -1128,7 +1246,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getGuard()
 	 * @generated
 	 */
-	int GUARD = 18;
+	int GUARD = 19;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1156,7 +1274,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEntryPointSpec()
 	 * @generated
 	 */
-	int ENTRY_POINT_SPEC = 19;
+	int ENTRY_POINT_SPEC = 20;
 
 	/**
 	 * The feature id for the '<em><b>Entrypoint</b></em>' attribute.
@@ -1184,7 +1302,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getExitPointSpec()
 	 * @generated
 	 */
-	int EXIT_POINT_SPEC = 20;
+	int EXIT_POINT_SPEC = 21;
 
 	/**
 	 * The feature id for the '<em><b>Exitpoint</b></em>' attribute.
@@ -1212,7 +1330,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEventSpec()
 	 * @generated
 	 */
-	int EVENT_SPEC = 21;
+	int EVENT_SPEC = 22;
 
 	/**
 	 * The number of structural features of the '<em>Event Spec</em>' class.
@@ -1231,7 +1349,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getRegularEventSpec()
 	 * @generated
 	 */
-	int REGULAR_EVENT_SPEC = 22;
+	int REGULAR_EVENT_SPEC = 23;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference.
@@ -1259,7 +1377,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventSpec()
 	 * @generated
 	 */
-	int TIME_EVENT_SPEC = 23;
+	int TIME_EVENT_SPEC = 24;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1305,7 +1423,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getBuiltinEventSpec()
 	 * @generated
 	 */
-	int BUILTIN_EVENT_SPEC = 24;
+	int BUILTIN_EVENT_SPEC = 25;
 
 	/**
 	 * The number of structural features of the '<em>Builtin Event Spec</em>' class.
@@ -1324,7 +1442,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEntryEvent()
 	 * @generated
 	 */
-	int ENTRY_EVENT = 25;
+	int ENTRY_EVENT = 26;
 
 	/**
 	 * The number of structural features of the '<em>Entry Event</em>' class.
@@ -1343,7 +1461,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getExitEvent()
 	 * @generated
 	 */
-	int EXIT_EVENT = 26;
+	int EXIT_EVENT = 27;
 
 	/**
 	 * The number of structural features of the '<em>Exit Event</em>' class.
@@ -1362,7 +1480,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAlwaysEvent()
 	 * @generated
 	 */
-	int ALWAYS_EVENT = 27;
+	int ALWAYS_EVENT = 28;
 
 	/**
 	 * The number of structural features of the '<em>Always Event</em>' class.
@@ -1381,7 +1499,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getSimpleScope()
 	 * @generated
 	 */
-	int SIMPLE_SCOPE = 28;
+	int SIMPLE_SCOPE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
@@ -1445,7 +1563,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getReactionTrigger()
 	 * @generated
 	 */
-	int REACTION_TRIGGER = 29;
+	int REACTION_TRIGGER = 30;
 
 	/**
 	 * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
@@ -1482,7 +1600,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getDefaultTrigger()
 	 * @generated
 	 */
-	int DEFAULT_TRIGGER = 30;
+	int DEFAULT_TRIGGER = 31;
 
 	/**
 	 * The number of structural features of the '<em>Default Trigger</em>' class.
@@ -1501,7 +1619,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getReactionEffect()
 	 * @generated
 	 */
-	int REACTION_EFFECT = 31;
+	int REACTION_EFFECT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -1529,7 +1647,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEventRaisingExpression()
 	 * @generated
 	 */
-	int EVENT_RAISING_EXPRESSION = 32;
+	int EVENT_RAISING_EXPRESSION = 33;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference.
@@ -1566,7 +1684,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEventValueReferenceExpression()
 	 * @generated
 	 */
-	int EVENT_VALUE_REFERENCE_EXPRESSION = 33;
+	int EVENT_VALUE_REFERENCE_EXPRESSION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1594,7 +1712,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getActiveStateReferenceExpression()
 	 * @generated
 	 */
-	int ACTIVE_STATE_REFERENCE_EXPRESSION = 34;
+	int ACTIVE_STATE_REFERENCE_EXPRESSION = 35;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1622,7 +1740,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
 	 * @generated
 	 */
-	int TIME_EVENT_TYPE = 35;
+	int TIME_EVENT_TYPE = 36;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -1632,7 +1750,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
 	 * @generated
 	 */
-	int TIME_UNIT = 36;
+	int TIME_UNIT = 37;
 
 
 	/**
@@ -1871,6 +1989,16 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTypeAliasDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.SubmachineDefinition <em>Submachine Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Submachine Definition</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.SubmachineDefinition
+	 * @generated
+	 */
+	EClass getSubmachineDefinition();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.LocalReaction <em>Local Reaction</em>}'.
@@ -2473,6 +2601,16 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_ALIAS_DEFINITION = eINSTANCE.getTypeAliasDefinition();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.SubmachineDefinitionImpl <em>Submachine Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.stext.stext.impl.SubmachineDefinitionImpl
+		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getSubmachineDefinition()
+		 * @generated
+		 */
+		EClass SUBMACHINE_DEFINITION = eINSTANCE.getSubmachineDefinition();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.

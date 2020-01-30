@@ -52,6 +52,7 @@ import com.google.common.collect.Lists
 import com.google.inject.Inject
 import org.yakindu.base.types.MetaComposite
 import org.yakindu.base.expressions.expressions.MetaCall
+import org.yakindu.sct.model.stext.stext.SubmachineDefinition
 
 /** 
  * @author andreas muelder
@@ -103,6 +104,11 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var IScope scope = getDelegate().getScope(context, reference)
 		var Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference)
 		return new FilteringScope(scope, predicate)
+	}
+	
+	def scope_TypeSpecifier_type(SubmachineDefinition context, EReference reference){
+		var IScope scope = getDelegate().getScope(context, reference)
+		return new FilteringScope(scope, [EObjectURI.fileExtension == "sct_types"])
 	}
 
 	def IScope scope_ElementReferenceExpression_reference(EObject context, EReference reference) {

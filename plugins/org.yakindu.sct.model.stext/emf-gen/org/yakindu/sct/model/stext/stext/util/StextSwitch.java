@@ -258,6 +258,19 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case StextPackage.SUBMACHINE_DEFINITION: {
+				SubmachineDefinition submachineDefinition = (SubmachineDefinition)theEObject;
+				T result = caseSubmachineDefinition(submachineDefinition);
+				if (result == null) result = caseProperty(submachineDefinition);
+				if (result == null) result = caseTypedDeclaration(submachineDefinition);
+				if (result == null) result = caseDeclaration(submachineDefinition);
+				if (result == null) result = caseTypedElement(submachineDefinition);
+				if (result == null) result = caseNamedElement(submachineDefinition);
+				if (result == null) result = caseAnnotatableElement(submachineDefinition);
+				if (result == null) result = caseMetaComposite(submachineDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case StextPackage.LOCAL_REACTION: {
 				LocalReaction localReaction = (LocalReaction)theEObject;
 				T result = caseLocalReaction(localReaction);
@@ -633,6 +646,21 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypeAliasDefinition(TypeAliasDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Submachine Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Submachine Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSubmachineDefinition(SubmachineDefinition object) {
 		return null;
 	}
 
