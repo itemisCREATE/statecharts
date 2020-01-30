@@ -195,39 +195,39 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-				case main_region_StateA:
-					main_region_StateA_react(true);
-					break;
-				case main_region_StateB:
-					main_region_StateB_react(true);
-					break;
-				case main_region_StateC:
-					main_region_StateC_react(true);
-					break;
-				case main_region_StateE__region0_State1:
-					main_region_StateE__region0_State1_react(true);
-					break;
-				case main_region_StateE__region0_State2:
-					main_region_StateE__region0_State2_react(true);
-					break;
-				case main_region_StateE__region0_State3:
-					main_region_StateE__region0_State3_react(true);
-					break;
-				case main_region_StateE__region1_State1:
-					main_region_StateE__region1_State1_react(true);
-					break;
-				case main_region_StateE__region1_State2:
-					main_region_StateE__region1_State2_react(true);
-					break;
-				case main_region_StateF:
-					main_region_StateF_react(true);
-					break;
-				case main_region_StateD:
-					main_region_StateD_react(true);
-					break;
-				case main_region__final_:
-					main_region__final__react(true);
-					break;
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			case main_region_StateC:
+				main_region_StateC_react(true);
+				break;
+			case main_region_StateE__region0_State1:
+				main_region_StateE__region0_State1_react(true);
+				break;
+			case main_region_StateE__region0_State2:
+				main_region_StateE__region0_State2_react(true);
+				break;
+			case main_region_StateE__region0_State3:
+				main_region_StateE__region0_State3_react(true);
+				break;
+			case main_region_StateE__region1_State1:
+				main_region_StateE__region1_State1_react(true);
+				break;
+			case main_region_StateE__region1_State2:
+				main_region_StateE__region1_State2_react(true);
+				break;
+			case main_region_StateF:
+				main_region_StateF_react(true);
+				break;
+			case main_region_StateD:
+				main_region_StateD_react(true);
+				break;
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
 			default:
 				// $NullState$
 			}

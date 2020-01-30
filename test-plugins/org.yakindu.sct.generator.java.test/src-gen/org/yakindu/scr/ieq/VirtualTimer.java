@@ -58,6 +58,10 @@ public class VirtualTimer implements ITimer {
 		public int getEventId() {
 			return eventID;
 		}
+		
+		public ITimerCallback getCallback() {
+			return callback;
+		}
 
 		public void run() {
 			callback.timeElapsed(eventID);
@@ -113,7 +117,7 @@ public class VirtualTimer implements ITimer {
 
 	@Override
 	public void unsetTimer(ITimerCallback callback, int eventID) {
-		VirtualTimeTask timerTask = getTask(eventID);
+		VirtualTimeTask timerTask = getTask(callback, eventID);
 		if (timerTask != null)
 			timerTask.cancel();
 	}
@@ -135,11 +139,12 @@ public class VirtualTimer implements ITimer {
 		tasks.add(task);
 	}
 
-	protected VirtualTimeTask getTask(int eventName) {
+	protected VirtualTimeTask getTask(ITimerCallback callback, int eventName) {
 		for (VirtualTimeTask virtualTimeTask : tasks) {
 			if (!(virtualTimeTask instanceof VirtualTimeEventTask))
 				continue;
-			if (((VirtualTimeEventTask) virtualTimeTask).getEventId() == eventName)
+			if (((VirtualTimeEventTask) virtualTimeTask).getEventId() == eventName
+					&& ((VirtualTimeEventTask) virtualTimeTask).getCallback() == callback)
 				return virtualTimeTask;
 		}
 		return null;

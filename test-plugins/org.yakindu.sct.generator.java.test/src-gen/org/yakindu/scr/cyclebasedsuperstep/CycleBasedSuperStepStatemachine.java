@@ -405,6 +405,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 					sCInterface.setX(sCInterface.getX() - 1);
 					
 					enterSequence_CycleBasedSuperStep_main_region_D_default();
+					react();
 				} else {
 					did_transition = false;
 				}
