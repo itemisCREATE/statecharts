@@ -76,6 +76,7 @@ void IntegerExpressionsTest::setTimer(IntegerExpressions* statechart, const sc_e
 }
 
 void IntegerExpressionsTest::unsetTimer(IntegerExpressions* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

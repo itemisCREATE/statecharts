@@ -57,6 +57,7 @@ void CastExpressionsTest::setTimer(CastExpressions* statechart, const sc_eventid
 }
 
 void CastExpressionsTest::unsetTimer(CastExpressions* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

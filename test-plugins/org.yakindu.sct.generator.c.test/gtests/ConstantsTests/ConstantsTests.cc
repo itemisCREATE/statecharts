@@ -44,7 +44,7 @@ void ConstantsTests::constantDefinition()
 	EXPECT_TRUE(constants_isStateActive(&statechart, Constants_main_region_A));
 	EXPECT_TRUE(constantsIface_get_x(&statechart)== 10);
 	EXPECT_TRUE(constantsIface_get_y(&statechart)== 20);
-	EXPECT_TRUE(strcmp(constantsIfaceNamed_get_y(&statechart), "Hello World") == 0);
+	EXPECT_TRUE(strcmp(constantsIfaceNamed_get_y(&statechart), (sc_string)"Hello World") == 0);
 	constantsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(constantsIface_get_result(&statechart)== 20);
@@ -65,6 +65,7 @@ void ConstantsTests::setTimer(Constants* statechart, const sc_eventid evid, cons
 }
 
 void ConstantsTests::unsetTimer(Constants* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

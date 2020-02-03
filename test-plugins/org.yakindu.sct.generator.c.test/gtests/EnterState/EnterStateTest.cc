@@ -72,6 +72,7 @@ void EnterStateTest::setTimer(EnterState* statechart, const sc_eventid evid, con
 }
 
 void EnterStateTest::unsetTimer(EnterState* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

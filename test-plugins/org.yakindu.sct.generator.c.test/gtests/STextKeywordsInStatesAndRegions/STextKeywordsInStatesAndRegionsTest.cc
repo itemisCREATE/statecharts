@@ -510,6 +510,7 @@ void STextKeywordsInStatesAndRegionsTest::setTimer(STextKeywordsInStatesAndRegio
 }
 
 void STextKeywordsInStatesAndRegionsTest::unsetTimer(STextKeywordsInStatesAndRegions* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

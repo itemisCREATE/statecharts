@@ -57,6 +57,7 @@ void SimpleHierachyTest::setTimer(SimpleHierachy* statechart, const sc_eventid e
 }
 
 void SimpleHierachyTest::unsetTimer(SimpleHierachy* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -52,6 +52,7 @@ void ParenthesisTest::setTimer(Parenthesis* statechart, const sc_eventid evid, c
 }
 
 void ParenthesisTest::unsetTimer(Parenthesis* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

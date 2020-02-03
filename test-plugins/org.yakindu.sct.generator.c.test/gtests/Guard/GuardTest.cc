@@ -66,6 +66,7 @@ void GuardTest::setTimer(Guard* statechart, const sc_eventid evid, const sc_inte
 }
 
 void GuardTest::unsetTimer(Guard* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

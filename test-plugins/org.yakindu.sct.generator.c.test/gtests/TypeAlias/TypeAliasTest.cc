@@ -45,7 +45,7 @@ void TypeAliasTest::typeAliasTest()
 	EXPECT_TRUE(typeAliasIface_get_myVar(&statechart)== 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(typeAlias_isStateActive(&statechart, TypeAlias_main_region_Mid));
-	EXPECT_TRUE(strcmp(typeAliasIface_get_myString(&statechart), "TypeSystem") == 0);
+	EXPECT_TRUE(strcmp(typeAliasIface_get_myString(&statechart), (sc_string)"TypeSystem") == 0);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(typeAlias_isStateActive(&statechart, TypeAlias_main_region_Mid2));
 	typeAliasIface_raise_myEvent(&statechart);
@@ -60,6 +60,7 @@ void TypeAliasTest::setTimer(TypeAlias* statechart, const sc_eventid evid, const
 }
 
 void TypeAliasTest::unsetTimer(TypeAlias* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

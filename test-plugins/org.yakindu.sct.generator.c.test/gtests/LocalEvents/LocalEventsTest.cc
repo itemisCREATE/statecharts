@@ -60,6 +60,7 @@ void LocalEventsTest::setTimer(LocalEvents* statechart, const sc_eventid evid, c
 }
 
 void LocalEventsTest::unsetTimer(LocalEvents* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -109,6 +109,7 @@ void ParentFirstExecutionHierarchyTest::setTimer(ParentFirstExecutionHierarchy* 
 }
 
 void ParentFirstExecutionHierarchyTest::unsetTimer(ParentFirstExecutionHierarchy* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -53,6 +53,7 @@ void DeepEntryTest::setTimer(DeepEntry* statechart, const sc_eventid evid, const
 }
 
 void DeepEntryTest::unsetTimer(DeepEntry* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

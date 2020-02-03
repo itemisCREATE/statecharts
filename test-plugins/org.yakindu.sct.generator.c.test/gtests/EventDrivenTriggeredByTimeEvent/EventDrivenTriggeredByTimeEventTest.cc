@@ -80,6 +80,7 @@ void EventDrivenTriggeredByTimeEventTest::setTimer(EventDrivenTriggeredByTimeEve
 }
 
 void EventDrivenTriggeredByTimeEventTest::unsetTimer(EventDrivenTriggeredByTimeEvent* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

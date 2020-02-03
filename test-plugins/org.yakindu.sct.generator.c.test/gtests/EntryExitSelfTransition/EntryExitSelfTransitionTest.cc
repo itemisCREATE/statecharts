@@ -81,6 +81,7 @@ void EntryExitSelfTransitionTest::setTimer(EntryExitSelfTransition* statechart, 
 }
 
 void EntryExitSelfTransitionTest::unsetTimer(EntryExitSelfTransition* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -52,6 +52,7 @@ void StaticChoiceTest::setTimer(StaticChoice* statechart, const sc_eventid evid,
 }
 
 void StaticChoiceTest::unsetTimer(StaticChoice* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

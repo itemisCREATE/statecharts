@@ -59,6 +59,7 @@ void SameNameDifferentRegionTest::setTimer(SameNameDifferentRegion* statechart, 
 }
 
 void SameNameDifferentRegionTest::unsetTimer(SameNameDifferentRegion* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

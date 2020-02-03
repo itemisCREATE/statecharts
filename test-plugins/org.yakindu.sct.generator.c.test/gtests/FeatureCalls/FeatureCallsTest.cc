@@ -53,6 +53,7 @@ void FeatureCallsTest::setTimer(FeatureCalls* statechart, const sc_eventid evid,
 }
 
 void FeatureCallsTest::unsetTimer(FeatureCalls* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

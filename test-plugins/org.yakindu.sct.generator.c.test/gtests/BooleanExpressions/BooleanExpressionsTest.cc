@@ -61,6 +61,7 @@ void BooleanExpressionsTest::setTimer(BooleanExpressions* statechart, const sc_e
 }
 
 void BooleanExpressionsTest::unsetTimer(BooleanExpressions* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

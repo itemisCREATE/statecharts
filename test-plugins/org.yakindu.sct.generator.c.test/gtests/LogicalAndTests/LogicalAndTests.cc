@@ -52,6 +52,7 @@ void LogicalAndTests::setTimer(LogicalAnd* statechart, const sc_eventid evid, co
 }
 
 void LogicalAndTests::unsetTimer(LogicalAnd* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

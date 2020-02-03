@@ -97,6 +97,7 @@ void HistoryWithoutInitialStepTest::setTimer(HistoryWithoutInitialStep* statecha
 }
 
 void HistoryWithoutInitialStepTest::unsetTimer(HistoryWithoutInitialStep* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -56,6 +56,7 @@ void ConditionalExpression::setTimer(ConditionalExpressions* statechart, const s
 }
 
 void ConditionalExpression::unsetTimer(ConditionalExpressions* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

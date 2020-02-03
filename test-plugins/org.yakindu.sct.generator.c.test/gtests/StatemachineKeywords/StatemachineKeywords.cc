@@ -59,6 +59,7 @@ void StatemachineKeywords::setTimer(StatechartKeywords* statechart, const sc_eve
 }
 
 void StatemachineKeywords::unsetTimer(StatechartKeywords* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

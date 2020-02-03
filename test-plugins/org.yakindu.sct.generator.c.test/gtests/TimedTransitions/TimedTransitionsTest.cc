@@ -97,6 +97,7 @@ void TimedTransitionsTest::setTimer(TimedTransitions* statechart, const sc_event
 }
 
 void TimedTransitionsTest::unsetTimer(TimedTransitions* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

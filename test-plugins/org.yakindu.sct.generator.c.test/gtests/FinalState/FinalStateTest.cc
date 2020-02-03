@@ -52,6 +52,7 @@ void FinalStateTest::setTimer(FinalState* statechart, const sc_eventid evid, con
 }
 
 void FinalStateTest::unsetTimer(FinalState* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

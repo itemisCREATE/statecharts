@@ -54,6 +54,7 @@ void InEventLifeCycleTest::setTimer(InEventLifeCycle* statechart, const sc_event
 }
 
 void InEventLifeCycleTest::unsetTimer(InEventLifeCycle* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

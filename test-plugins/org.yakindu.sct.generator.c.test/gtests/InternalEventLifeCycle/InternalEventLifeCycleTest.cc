@@ -66,6 +66,7 @@ void InternalEventLifeCycleTest::setTimer(InternalEventLifeCycle* statechart, co
 }
 
 void InternalEventLifeCycleTest::unsetTimer(InternalEventLifeCycle* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

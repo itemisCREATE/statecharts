@@ -50,6 +50,7 @@ void DeclarationsTest::setTimer(Declarations* statechart, const sc_eventid evid,
 }
 
 void DeclarationsTest::unsetTimer(Declarations* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

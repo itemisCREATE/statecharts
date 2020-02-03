@@ -56,6 +56,7 @@ void EventDrivenOutEventsTest::setTimer(EventDrivenOutEvents* statechart, const 
 }
 
 void EventDrivenOutEventsTest::unsetTimer(EventDrivenOutEvents* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

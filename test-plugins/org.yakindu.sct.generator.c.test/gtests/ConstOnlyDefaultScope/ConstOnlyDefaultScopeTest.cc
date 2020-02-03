@@ -59,6 +59,7 @@ void ConstOnlyDefaultScopeTest::setTimer(ConstOnlyDefaultScope* statechart, cons
 }
 
 void ConstOnlyDefaultScopeTest::unsetTimer(ConstOnlyDefaultScope* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

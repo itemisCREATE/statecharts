@@ -65,6 +65,7 @@ void StatechartLocalReactionsTest::setTimer(StatechartLocalReactions* statechart
 }
 
 void StatechartLocalReactionsTest::unsetTimer(StatechartLocalReactions* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

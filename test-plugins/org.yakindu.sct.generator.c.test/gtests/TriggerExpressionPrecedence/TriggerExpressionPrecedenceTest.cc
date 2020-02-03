@@ -81,6 +81,7 @@ void TriggerExpressionPrecedenceTest::setTimer(TriggerExpressionPrecedence* stat
 }
 
 void TriggerExpressionPrecedenceTest::unsetTimer(TriggerExpressionPrecedence* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -57,6 +57,7 @@ void SimpleEventTest::setTimer(SimpleEvent* statechart, const sc_eventid evid, c
 }
 
 void SimpleEventTest::unsetTimer(SimpleEvent* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

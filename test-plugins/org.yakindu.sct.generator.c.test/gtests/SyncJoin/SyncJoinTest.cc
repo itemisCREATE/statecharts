@@ -128,6 +128,7 @@ void SyncJoinTest::setTimer(SyncJoin* statechart, const sc_eventid evid, const s
 }
 
 void SyncJoinTest::unsetTimer(SyncJoin* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

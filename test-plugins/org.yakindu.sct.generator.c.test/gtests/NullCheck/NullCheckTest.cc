@@ -53,6 +53,7 @@ void NullCheckTest::setTimer(NullCheck* statechart, const sc_eventid evid, const
 }
 
 void NullCheckTest::unsetTimer(NullCheck* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -102,6 +102,7 @@ void ChildFirstTransitionTakingTest::setTimer(ChildFirstTransitionTaking* statec
 }
 
 void ChildFirstTransitionTakingTest::unsetTimer(ChildFirstTransitionTaking* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

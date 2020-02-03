@@ -71,6 +71,7 @@ void StatechartActiveTest::setTimer(StatechartActive* statechart, const sc_event
 }
 
 void StatechartActiveTest::unsetTimer(StatechartActive* handle, const sc_eventid evid){
+	(void)handle;
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 
