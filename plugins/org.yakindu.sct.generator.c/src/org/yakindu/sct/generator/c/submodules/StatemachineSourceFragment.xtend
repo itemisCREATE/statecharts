@@ -70,6 +70,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 	
 	override CharSequence declarations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
+		«defines»
 		«functionPrototypes»
 		
 		«constantDefinitions»
