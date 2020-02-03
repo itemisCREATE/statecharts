@@ -184,10 +184,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAliasDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseSubmachineDefinition(SubmachineDefinition object) {
-				return createSubmachineDefinitionAdapter();
-			}
-			@Override
 			public Adapter caseLocalReaction(LocalReaction object) {
 				return createLocalReactionAdapter();
 			}
@@ -262,6 +258,10 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseActiveStateReferenceExpression(ActiveStateReferenceExpression object) {
 				return createActiveStateReferenceExpressionAdapter();
+			}
+			@Override
+			public Adapter caseSubmachineReferenceExpression(SubmachineReferenceExpression object) {
+				return createSubmachineReferenceExpressionAdapter();
 			}
 			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
@@ -584,20 +584,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.SubmachineDefinition <em>Submachine Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.stext.stext.SubmachineDefinition
-	 * @generated
-	 */
-	public Adapter createSubmachineDefinitionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.LocalReaction <em>Local Reaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -860,6 +846,20 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActiveStateReferenceExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression <em>Submachine Reference Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression
+	 * @generated
+	 */
+	public Adapter createSubmachineReferenceExpressionAdapter() {
 		return null;
 	}
 

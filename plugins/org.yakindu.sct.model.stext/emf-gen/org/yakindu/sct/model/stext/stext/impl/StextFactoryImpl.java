@@ -109,7 +109,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
 			case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
 			case StextPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
-			case StextPackage.SUBMACHINE_DEFINITION: return createSubmachineDefinition();
 			case StextPackage.LOCAL_REACTION: return createLocalReaction();
 			case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
 			case StextPackage.GUARD: return createGuard();
@@ -129,6 +128,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.EVENT_RAISING_EXPRESSION: return createEventRaisingExpression();
 			case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
 			case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION: return createActiveStateReferenceExpression();
+			case StextPackage.SUBMACHINE_REFERENCE_EXPRESSION: return createSubmachineReferenceExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -350,17 +350,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * @generated
 	 */
 	@Override
-	public SubmachineDefinition createSubmachineDefinition() {
-		SubmachineDefinitionImpl submachineDefinition = new SubmachineDefinitionImpl();
-		return submachineDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public LocalReaction createLocalReaction() {
 		LocalReactionImpl localReaction = new LocalReactionImpl();
 		return localReaction;
@@ -562,6 +551,17 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public ActiveStateReferenceExpression createActiveStateReferenceExpression() {
 		ActiveStateReferenceExpressionImpl activeStateReferenceExpression = new ActiveStateReferenceExpressionImpl();
 		return activeStateReferenceExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SubmachineReferenceExpression createSubmachineReferenceExpression() {
+		SubmachineReferenceExpressionImpl submachineReferenceExpression = new SubmachineReferenceExpressionImpl();
+		return submachineReferenceExpression;
 	}
 
 	/**

@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.model.stext.scoping
 
+import com.google.common.base.Predicate
+import com.google.common.collect.Lists
+import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
@@ -28,11 +31,14 @@ import org.eclipse.xtext.scoping.impl.ImportScope
 import org.eclipse.xtext.scoping.impl.SimpleScope
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.MetaCall
 import org.yakindu.base.expressions.scoping.ExpressionsScopeProvider
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.MetaComposite
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
@@ -43,16 +49,12 @@ import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.SpecificationElement
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.extensions.STextExtensions
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartSpecification
-import com.google.common.base.Predicate
-import com.google.common.collect.Lists
-import com.google.inject.Inject
-import org.yakindu.base.types.MetaComposite
-import org.yakindu.base.expressions.expressions.MetaCall
-import org.yakindu.sct.model.stext.stext.SubmachineDefinition
+import org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression
 
 /** 
  * @author andreas muelder
@@ -61,16 +63,18 @@ import org.yakindu.sct.model.stext.stext.SubmachineDefinition
  */
 class STextScopeProvider extends ExpressionsScopeProvider {
 
-	@Inject 
+	@Inject
 	ITypeSystemInferrer typeInferrer
-	@Inject 
+	@Inject
 	ITypeSystem typeSystem
-	@Inject 
+	@Inject
 	IQualifiedNameProvider nameProvider
-	@Inject 
+	@Inject
 	ContextPredicateProvider predicateProvider
 	@Inject
 	protected STextExtensions utils
+	@Inject
+	protected StatechartUtil statechartUtil
 
 	def IScope scope_ActiveStateReferenceExpression_value(EObject context, EReference reference) {
 		var Statechart statechart = getStatechart(context)
@@ -105,11 +109,6 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference)
 		return new FilteringScope(scope, predicate)
 	}
-	
-	def scope_TypeSpecifier_type(SubmachineDefinition context, EReference reference){
-		var IScope scope = getDelegate().getScope(context, reference)
-		return new FilteringScope(scope, [EObjectURI.fileExtension == "sct_types"])
-	}
 
 	def IScope scope_ElementReferenceExpression_reference(EObject context, EReference reference) {
 		var IScope namedScope = getNamedTopLevelScope(context, reference)
@@ -117,6 +116,19 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference)
 		unnamedScope = new FilteringScope(unnamedScope, predicate)
 		return new SimpleScope(unnamedScope, namedScope.getAllElements())
+	}
+
+	def IScope scope_ElementReferenceExpression_reference(SubmachineReferenceExpression context, EReference reference) {
+		var IScope namedScope = getNamedTopLevelScope(context, reference)
+		var IScope unnamedScope = new FilteringScope(getUnnamedTopLevelScope(context, reference), [
+			it.EObjectOrProxy instanceof Property && statechartUtil.isOriginStatechart((it.EObjectOrProxy as Property).type)
+		])
+		return new SimpleScope(unnamedScope, namedScope.getAllElements())
+	}
+
+	def scope_FeatureCall_feature(SubmachineReferenceExpression context, EReference ref) {
+		var IScope scope = getDelegate().getScope(context, ref)
+		return new FilteringScope(scope, [EObjectURI.fileExtension == "sct_types"])
 	}
 
 	def IScope scope_FeatureCall_feature(FeatureCall context, EReference reference) {
@@ -134,7 +146,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		if (element instanceof Package) {
 			return addScopeForPackage(element, scope, predicate)
 		}
-		
+
 		var InferenceResult result = typeInferrer.infer(owner)
 		var Type ownerType = if(result !== null) result.getType() else null
 		if (element instanceof Scope) {
@@ -153,15 +165,13 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 
 		return scope
 	}
-	
-	
-	
+
 	def IScope scope_FeatureCall_feature(MetaCall context, EReference reference) {
 
 		var Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		var Expression owner = context.getOwner();
 		var EObject element = null;
-		
+
 		if (owner instanceof ElementReferenceExpression) {
 			element = owner.getReference();
 		} else if (owner instanceof FeatureCall) {
@@ -172,7 +182,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 
 		var IScope scope = IScope.NULLSCOPE;
 
-		if (element instanceof MetaComposite ) {
+		if (element instanceof MetaComposite) {
 			if (element.getMetaFeatures().size() > 0) {
 				scope = Scopes.scopeFor(element.getMetaFeatures(), scope);
 				scope = new FilteringScope(scope, predicate);
@@ -181,7 +191,6 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 
 		return scope;
 	}
-	
 
 	def protected IScope addScopeForEnumType(EnumerationType element, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
@@ -198,7 +207,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		scope = new FilteringScope(scope, predicate)
 		return scope
 	}
-	
+
 	def protected IScope addScopeForPackage(Package pkg, IScope parentScope, Predicate<IEObjectDescription> predicate) {
 		var scope = parentScope
 		scope = Scopes.scopeFor(pkg.member, scope)

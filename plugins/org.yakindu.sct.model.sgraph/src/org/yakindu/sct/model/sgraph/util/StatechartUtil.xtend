@@ -23,7 +23,7 @@ class StatechartUtil {
 	@Inject extension OriginTracing
 	
 	def dispatch isOriginStatechart(Type type) {
-		type.originTraces.exists[it instanceof Statechart]
+		type?.originTraces.exists[it instanceof Statechart]
 	}
 	
 	def dispatch isOriginStatechart(EObject it) {

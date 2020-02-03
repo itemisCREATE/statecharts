@@ -43,7 +43,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.SubmachineDefinition;
+import org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
@@ -177,13 +177,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass submachineDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass localReactionEClass = null;
 
 	/**
@@ -311,6 +304,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	private EClass activeStateReferenceExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass submachineReferenceExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -621,16 +621,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	@Override
 	public EClass getTypeAliasDefinition() {
 		return typeAliasDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getSubmachineDefinition() {
-		return submachineDefinitionEClass;
 	}
 
 	/**
@@ -969,6 +959,26 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getSubmachineReferenceExpression() {
+		return submachineReferenceExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSubmachineReferenceExpression_Submachine() {
+		return (EReference)submachineReferenceExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getTimeEventType() {
 		return timeEventTypeEEnum;
 	}
@@ -1051,8 +1061,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		typeAliasDefinitionEClass = createEClass(TYPE_ALIAS_DEFINITION);
 
-		submachineDefinitionEClass = createEClass(SUBMACHINE_DEFINITION);
-
 		localReactionEClass = createEClass(LOCAL_REACTION);
 
 		transitionReactionEClass = createEClass(TRANSITION_REACTION);
@@ -1104,6 +1112,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		activeStateReferenceExpressionEClass = createEClass(ACTIVE_STATE_REFERENCE_EXPRESSION);
 		createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
+
+		submachineReferenceExpressionEClass = createEClass(SUBMACHINE_REFERENCE_EXPRESSION);
+		createEReference(submachineReferenceExpressionEClass, SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE);
 
 		// Create enums
 		timeEventTypeEEnum = createEEnum(TIME_EVENT_TYPE);
@@ -1158,7 +1169,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		operationDefinitionEClass.getESuperTypes().add(theTypesPackage.getOperation());
 		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getTypeAlias());
 		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getDeclaration());
-		submachineDefinitionEClass.getESuperTypes().add(theTypesPackage.getProperty());
 		localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
 		transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
 		entryPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());
@@ -1176,6 +1186,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		eventRaisingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		activeStateReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
+		submachineReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1216,8 +1227,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeAliasDefinitionEClass, TypeAliasDefinition.class, "TypeAliasDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(submachineDefinitionEClass, SubmachineDefinition.class, "SubmachineDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1270,6 +1279,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		initEClass(activeStateReferenceExpressionEClass, ActiveStateReferenceExpression.class, "ActiveStateReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(submachineReferenceExpressionEClass, SubmachineReferenceExpression.class, "SubmachineReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSubmachineReferenceExpression_Submachine(), theTypesPackage.getExpression(), null, "submachine", null, 0, 1, SubmachineReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(timeEventTypeEEnum, TimeEventType.class, "TimeEventType");
