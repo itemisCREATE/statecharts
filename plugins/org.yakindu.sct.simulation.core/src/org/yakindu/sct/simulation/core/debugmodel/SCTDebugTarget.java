@@ -43,7 +43,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	private boolean stepping = false;
 	private boolean terminated = false;
 	private boolean suspended = false;
-	private boolean primary = true;
+	private boolean primary = false;
 
 	private final NamedElement element;
 	private String name;

@@ -62,6 +62,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
 		Statechart statechart = loadStatechart(filename);
 		SCTDebugTarget target = createDebugTarget(launch, statechart);
+		target.setPrimary(true);
 		launch.addDebugTarget(target);
 		try {
 			target.init();
