@@ -14,10 +14,7 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.xtext.RuleCall;
@@ -86,26 +83,12 @@ public class PackageImportHyperlinkHelper extends HyperlinkHelper {
 		return result;
 	}
 	
-	/**
-	 * Produces hyperlinks for the given {@code region} that point to the referenced {@code target}.
-	 * 
-	 * Copied from {@link HyperlinkHelper} and exchanged target URI creation.
-	 */
 	@Override
 	public void createHyperlinksTo(XtextResource from, Region region, EObject target, IHyperlinkAcceptor acceptor) {
-		final URIConverter uriConverter = from.getResourceSet().getURIConverter();
-		final String hyperlinkText = getLabelProvider().getText(target);
-		final URI uri = computeURI(target);
-		final URI normalized = uri.isPlatformResource() ? uri : uriConverter.normalize(uri);
-
-		XtextHyperlink result = getHyperlinkProvider().get();
-		result.setHyperlinkRegion(region);
-		result.setURI(normalized);
-		result.setHyperlinkText(hyperlinkText);
-		acceptor.accept(result);
+		super.createHyperlinksTo(from, region, getOriginTarget(target), acceptor);
 	}
-	
-	protected URI computeURI(EObject target) {
+
+	protected EObject getOriginTarget(EObject target) {
 		Iterable<EObject> originTraces = IterableExtensions.filter(tracing.getOriginTraces(target), EObject.class);
 		Iterator<EObject> iter = originTraces.iterator();
 		if (iter.hasNext()) {
@@ -116,7 +99,7 @@ public class PackageImportHyperlinkHelper extends HyperlinkHelper {
 				target = statechartUtil.getOriginScope(type);
 			}
 		}
-		return EcoreUtil.getURI(target);
+		return target;
 	}
 	
 }
