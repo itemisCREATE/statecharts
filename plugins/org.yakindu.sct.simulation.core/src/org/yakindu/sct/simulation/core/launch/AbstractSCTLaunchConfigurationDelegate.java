@@ -75,13 +75,8 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 	}
 
 	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
-		return createDebugTarget(launch, statechart, statechart.getName());
-	}
-
-	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart, String name)
-			throws CoreException {
 		Assert.isNotNull(statechart);
-		return new SCTDebugTarget(launch, statechart, name, createExecutionContainer(launch, statechart));
+		return new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
 	}
 
 	protected Statechart loadStatechart(String filename) {
