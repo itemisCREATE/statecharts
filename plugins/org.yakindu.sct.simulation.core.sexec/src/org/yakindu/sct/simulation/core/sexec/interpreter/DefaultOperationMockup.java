@@ -40,7 +40,7 @@ public class DefaultOperationMockup extends AbstractOperationExecutor implements
 	protected Multimap<String, List<Object>> verifyCalls = ArrayListMultimap.create();
 
 	@Override
-	public boolean canExecute(ArgumentExpression expression) {
+	public boolean canExecute(ArgumentExpression expression, ExecutionContext context) {
 		return true;
 	}
 
