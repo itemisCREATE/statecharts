@@ -96,7 +96,9 @@ abstract public class DFS {
 		int minDepth = depth;
 
 		if (isVisited(element)) {
-			isCyclic = true;
+			if(getVisitedDepth(element) > 0 ) {
+				isCyclic = true;
+			}
 			return getVisitedDepth(element);
 		}
 
