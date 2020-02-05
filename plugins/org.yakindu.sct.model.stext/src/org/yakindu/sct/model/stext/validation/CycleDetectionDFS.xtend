@@ -25,8 +25,7 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 class CycleDetectionDFS extends DFS {
 	
 	val IPackageImport2URIMapper mapper
-
-
+	
 	new(IPackageImport2URIMapper mapper) {
 		this.mapper = mapper
 	}
@@ -52,10 +51,6 @@ class CycleDetectionDFS extends DFS {
 		scopes.filter(ImportScope).map[imports].flatten.toSet.map [ import |
 			mapper.findPackageImport(eResource, import)
 		].filter[isPresent].map[get].toList
-	}
-
-	override synchronized perform(Object root) {
-		super.perform(root)
 	}
 	
 }
