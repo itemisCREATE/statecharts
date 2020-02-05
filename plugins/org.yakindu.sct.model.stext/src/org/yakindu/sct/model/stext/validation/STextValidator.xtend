@@ -791,7 +791,15 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			}
 		}
 	}
-	
+	@Check
+	def void checkImportNotCyclicsct(Statechart sct) {
+		val cycleDetection = new CycleDetectionDFS(mapper)
+		cycleDetection.perform(sct)
+		if (cycleDetection.isCyclic) {
+			error(String.format(IMPORT_CYCLIC_MSG, sct.name), sct, null)
+		}
+	}
+
 	@Check(CheckType.FAST)
 	def void checkOnlyOneEntryPointSpecIsUsed(Transition transition) {
 		if(transition.properties.filter(EntryPointSpec).size > 1){

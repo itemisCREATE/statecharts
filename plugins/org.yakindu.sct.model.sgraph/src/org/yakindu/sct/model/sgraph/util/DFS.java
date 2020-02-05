@@ -40,6 +40,8 @@ abstract public class DFS {
 
  	/** The number of traversed links. */
 	public int linkCount;
+	
+	public boolean isCyclic;
 
 
 	/** Default algorithm constructor. */
@@ -90,10 +92,11 @@ abstract public class DFS {
 
 
 	/** Visits an element. */
-	private int visit(Object element, Object parent, int depth) {
+	public int visit(Object element, Object parent, int depth) {
 		int minDepth = depth;
 
 		if (isVisited(element)) {
+			isCyclic = true;
 			return getVisitedDepth(element);
 		}
 
