@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.core.debugmodel;
 
 import org.eclipse.core.resources.IMarkerDelta;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
@@ -46,22 +45,22 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	private boolean primary = false;
 
 	private final NamedElement element;
-	private String name;
+	private String context;
 	protected ISimulationEngine engine;
 	private IExecutionControl executionControl;
 	private AdapterImpl updater;
 
 	public SCTDebugTarget(ILaunch launch, NamedElement element, ISimulationEngine engine) throws CoreException {
-		this(launch, element,element.getName(), engine);
-	}
-	
-	public SCTDebugTarget(ILaunch launch, NamedElement element, String name, ISimulationEngine engine) throws CoreException {
 		super(null, element.eResource().getURI().toPlatformString(true));
-		Assert.isNotNull(element);
 		this.launch = launch;
 		this.element = element;
 		this.engine = engine;
-		this.name = name;
+	}
+
+	public SCTDebugTarget(ILaunch launch, NamedElement element, String context, ISimulationEngine engine)
+			throws CoreException {
+		this(launch, element, engine);
+		this.context = context;
 	}
 
 	public void init() {
@@ -92,7 +91,10 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	}
 
 	public String getName() throws DebugException {
-		return name;
+		if (context != null) {
+			return context + " : " + element.getName();
+		}
+		return element.getName();
 	}
 
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
@@ -111,7 +113,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
 		terminated = true;
 		executionControl.terminate();
-		if(engine.getExecutionContext() != null)
+		if (engine.getExecutionContext() != null)
 			engine.getExecutionContext().eAdapters().remove(updater);
 	}
 
@@ -223,7 +225,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	public void stepReturn() throws DebugException {
 
 	}
-	
+
 	public void setPrimary(boolean primary) {
 		this.primary = primary;
 	}
