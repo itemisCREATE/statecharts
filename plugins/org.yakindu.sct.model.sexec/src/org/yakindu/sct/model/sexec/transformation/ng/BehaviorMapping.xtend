@@ -10,6 +10,7 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.BehaviorMapping {
 
@@ -18,6 +19,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension SexecExtensions sexec
 	@Inject extension ReactMethod rm
+	@Inject extension StatechartAnnotations
 	
 	@Inject extension ExpressionBuilder exprBuilder
 	
