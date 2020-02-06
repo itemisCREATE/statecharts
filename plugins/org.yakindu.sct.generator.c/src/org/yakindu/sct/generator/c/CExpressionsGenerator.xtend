@@ -176,7 +176,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch CharSequence code(FeatureCall it,
-		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
+		OperationDefinition target) '''«target.access»(«owner.handle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
 	def dispatch CharSequence code(FeatureCall it, Operation target) {
