@@ -792,11 +792,11 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		}
 	}
 	@Check
-	def void checkImportNotCyclicsct(Statechart sct) {
+	def void checkImportNotCyclicsct(Statechart it) {
 		val cycleDetection = new CycleDetectionDFS(mapper)
-		cycleDetection.perform(sct)
+		cycleDetection.perform(it)
 		if (cycleDetection.isCyclic) {
-			error(String.format(IMPORT_CYCLIC_MSG, sct.name), sct, null)
+			error(String.format(IMPORT_CYCLIC_MSG, name), it, null)
 		}
 	}
 
