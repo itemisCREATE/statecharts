@@ -52,6 +52,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import java.util.List
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 
 /**
  * @author axel terfloth
@@ -219,15 +220,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«target.access»(«IF target.eContainer.isMultiSM»«owner.handle»«ELSE»«scHandle»«ENDIF»«argCode»)'''
 	}
 	
-	protected def CharSequence argCode(List<Expression> expressions)
+	protected def CharSequence argCode(ArgumentExpression it) {
 		'''«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»'''
-	
-	protected def CharSequence argCode(ElementReferenceExpression it) {
-		expressions.argCode
-	}
-	
-	protected def CharSequence argCode(FeatureCall it) {
-		expressions.argCode
 	}
 	
 }
