@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,138 +10,167 @@
  */
 package org.yakindu.sct.simulation.ui.model.presenter;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.debug.core.model.DebugElement;
+import org.eclipse.core.runtime.PlatformObject;
+import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.IDebugEventSetListener;
+import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.ui.sourcelookup.ISourceDisplay;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.IWorkbenchPart;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
-import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.partitioning.SubmachineEditorInput;
 
 /**
- * One SCTSourceDisplay is responsible for n {@link IDynamicNotationHandler}s.
- * Each {@link IDynamicNotationHandler} controls the
- * {@link IHighlightingSupport} of an {@link IEditorPart}
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTSourceDisplay implements ISourceDisplay {
+public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener, IPartListener {
 
-	private Map<IEditorPart, IDynamicNotationHandler> handler = null;
-	private ISimulationEngine container = null;
-	private DebugElement debugElement;
+	private Map<IEditorInput, IDynamicNotationHandler> handler = null;
+	private ILaunch activeLaunch;
 
-	public SCTSourceDisplay(ISimulationEngine container) {
-		this.container = container;
-		handler = new HashMap<IEditorPart, IDynamicNotationHandler>();
+	public SCTSourceDisplay() {
+		handler = new HashMap<IEditorInput, IDynamicNotationHandler>();
 	}
 
+	@Override
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
-		debugElement = (DebugElement) element;
-		IEditorPart editor = openEditor(debugElement, page);
-		if(editor != null) {
-			displaySource(editor);
+		IDebugTarget debugTarget = unwrapTarget(element);
+		if (debugTarget == null)
+			return;
+		setActiveLaunch(debugTarget);
+		IEditorPart editorPart = openEditor(debugTarget, page);
+		IDynamicNotationHandler notationHandler = getHandler(editorPart);
+		notationHandler.display(debugTarget.getAdapter(ExecutionContext.class));
+
+	}
+
+	private void setActiveLaunch(IDebugTarget debugTarget) {
+		ILaunch currentLaunch = debugTarget.getLaunch();
+		if (activeLaunch != currentLaunch) {
+			for (IDynamicNotationHandler current : handler.values()) {
+				current.terminate();
+			}
+			handler.clear();
+			activeLaunch = currentLaunch;
 		}
 	}
 
-	public void displaySource(IEditorPart editor) {
-		IDynamicNotationHandler notationHandler = handler.get(editor);
-		IHighlightingSupport support = (IHighlightingSupport) editor.getAdapter(IHighlightingSupport.class);
-		if (support == null)
-			return;
+	protected IDynamicNotationHandler getHandler(IEditorPart editorPart) {
+		IDynamicNotationHandler notationHandler = handler.get(editorPart.getEditorInput());
 		if (notationHandler == null) {
 			notationHandler = new DefaultDynamicNotationHandler();
-			handler.put(editor, notationHandler);
-		} else {
-			notationHandler.setHighlightingSupport(new IHighlightingSupport.HighlightingSupportNullImpl());
+			IHighlightingSupport support = editorPart.getAdapter(IHighlightingSupport.class);
+			if (support != null) {
+				notationHandler.setHighlightingSupport(support);
+			}
+			if (support.isLocked()) {
+				support.releaseEditor();
+			}
+			support.lockEditor();
+			handler.put(editorPart.getEditorInput(), notationHandler);
 		}
-		if (support.isLocked()) {
-			support.releaseEditor();
-		}
-		support.lockEditor();
-		notationHandler.setHighlightingSupport(support);
-		if (container != null) {
-			notationHandler.display(container.getExecutionContext());
-		}
+		return notationHandler;
 	}
 
-	public void terminate(boolean release) {
-		Collection<IDynamicNotationHandler> values = handler.values();
-		for (IDynamicNotationHandler notationHandler : values) {
-			notationHandler.terminate();
-			if (release && notationHandler.getHighlightingSupport().isLocked())
-				notationHandler.getHighlightingSupport().releaseEditor();
+	protected IDebugTarget unwrapTarget(Object element) {
+		if (element instanceof ILaunch) {
+			return ((ILaunch) element).getDebugTarget();
 		}
-		handler.clear();
-		container = null;
-		debugElement = null;
-	}
-
-	public IEditorPart openEditor(DebugElement debugElement, IWorkbenchPage page) {
-		EObject semanticObject = (EObject) debugElement.getAdapter(EObject.class);
-		IFile file = (IFile) debugElement.getAdapter(IFile.class);
-		if (file == null)
-			file = WorkspaceSynchronizer.getFile(semanticObject.eResource());
-
-		// check if an editor for the resource is already open, the return the
-		// opened editor.
-		// This is important for simulating subdiagrams
-		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.getActiveEditor();
-		if (activeEditor != null) {
-			IEditorInput editorInput = activeEditor.getEditorInput();
-			if (editorInput instanceof IFileEditorInput) {
-				if (((IFileEditorInput) editorInput).getFile().equals(file))
-					return activeEditor;
-			}
+		if (element instanceof PlatformObject) {
+			return ((PlatformObject) element).getAdapter(IDebugTarget.class);
 		}
-		// check if a Diagram is available and open the editor for the
-		// corresponding diagram
-		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
-		if (diagram != null) {
-			if (URIConverter.INSTANCE.exists(semanticObject.eResource().getURI(), null)) {
-				Resource sharedDomainResource = DiagramPartitioningUtil.getSharedDomain().getResourceSet()
-						.getResource(semanticObject.eResource().getURI(), true);
-
-				Collection<Diagram> contents = EcoreUtil.getObjectsByType(sharedDomainResource.getContents(),
-						NotationPackage.Literals.DIAGRAM);
-				for (Diagram diag : contents) {
-					if (EcoreUtil.getURI(diag.getElement()).equals(EcoreUtil.getURI(diagram.getElement()))) {
-						return DiagramPartitioningUtil.openEditor((Diagram) diag);
-					}
-				}
-			}
-			// No diagram for the semantic element -> open the default editor
-			// for the file
-		} else {
-			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
-			try {
-				return page.openEditor(new FileEditorInput(file), desc.getId());
-			} catch (PartInitException e) {
-				e.printStackTrace();
-			}
-		}
-		// No editor found
 		return null;
+	}
+
+	public IEditorPart openEditor(IDebugTarget debugTarget, IWorkbenchPage page) {
+		ExecutionContext context = debugTarget.getAdapter(ExecutionContext.class);
+		EObject semanticObject = (EObject) debugTarget.getAdapter(EObject.class);
+		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
+		diagram = (Diagram) DiagramPartitioningUtil.getSharedDomain().getResourceSet()
+				.getEObject(EcoreUtil.getURI(diagram), true);
+		if (context.getContextFqn() != null) {
+			return DiagramPartitioningUtil.openSubmachineEditor((Diagram) diagram, context.getContextFqn());
+		} else {
+			return DiagramPartitioningUtil.openEditor((Diagram) diagram);
+		}
+	}
+
+	@Override
+	public void handleDebugEvents(DebugEvent[] events) {
+		for (DebugEvent event : events) {
+			if (event.getKind() == DebugEvent.TERMINATE) {
+				handleDebugTargetTerminated(event);
+			}
+		}
+	}
+
+	protected void handleDebugTargetTerminated(DebugEvent debugEvent) {
+		Object source = debugEvent.getSource();
+		if (source instanceof IDebugTarget) {
+			IDebugTarget target = (IDebugTarget) source;
+			if (activeLaunch == target.getLaunch()) {
+				for (IDynamicNotationHandler current : handler.values()) {
+					current.terminate();
+				}
+				activeLaunch = null;
+				handler.clear();
+			}
+		}
+	}
+
+	@Override
+	public void partOpened(IWorkbenchPart part) {
+		highlightState(part);
+	}
+
+	@Override
+	public void partActivated(IWorkbenchPart part) {
+		highlightState(part);
+	}
+
+	protected void highlightState(IWorkbenchPart part) {
+		if (activeLaunch == null)
+			return;
+		if (part instanceof DiagramEditor) {
+			IEditorInput editorInput = ((DiagramEditor) part).getEditorInput();
+			// Only highlight top level Statechart on open, not clear which session
+			// otherwise
+			if (!(editorInput instanceof SubmachineEditorInput)) {
+				IDynamicNotationHandler notationHandler = getHandler((IEditorPart) part);
+				notationHandler.display(activeLaunch.getDebugTarget().getAdapter(ExecutionContext.class));
+			}
+
+		}
+	}
+
+	@Override
+	public void partClosed(IWorkbenchPart part) {
+		// Nothing to do
+	}
+
+	@Override
+	public void partBroughtToTop(IWorkbenchPart part) {
+		// Nothing to do
+	}
+
+	@Override
+	public void partDeactivated(IWorkbenchPart part) {
+		// Nothing to do
 	}
 
 }
