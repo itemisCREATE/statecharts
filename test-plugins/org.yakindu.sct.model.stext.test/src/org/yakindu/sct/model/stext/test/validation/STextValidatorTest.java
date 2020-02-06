@@ -872,6 +872,11 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	}
 	
 	@Test
+	public void checkImportNotCyclicsct() {
+		// Validation will be removed with forward declarations
+	}
+	
+	@Test
 	public void checkDuplicateImport() {
 		// Can't be checked here
 	}
