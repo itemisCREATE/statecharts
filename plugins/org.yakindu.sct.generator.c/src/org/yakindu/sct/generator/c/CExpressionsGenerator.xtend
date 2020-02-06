@@ -215,7 +215,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
 	
-		def dispatch CharSequence code(FeatureCall it, OperationDefinition target) {
+	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) {
 		'''«target.access»(«IF target.eContainer.isMultiSM»«owner.handle»«ELSE»«scHandle»«ENDIF»«argCode»)'''
 	}
 	
