@@ -103,8 +103,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	def protected dispatch ExecutionSlot resolveByName(ExecutionContext slot, NamedElement element) {
 		val defaultSlot = slot.slots.filter(CompositeSlot).findFirst[it.name == "default"]
-		if (defaultSlot !== null)
-			slot.slots.findFirst[name == element.name] ?: resolveByName(defaultSlot, element)
+		slot.slots.findFirst[name == element.name] ?: if (defaultSlot !== null) resolveByName(defaultSlot, element)
 	}
 
 	def protected dispatch ExecutionSlot resolveByName(CompositeSlot slot, NamedElement element) {

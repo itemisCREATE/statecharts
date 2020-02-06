@@ -55,4 +55,8 @@ class StatechartUtil {
 		originTraces.filter(State).head
 	}
 	
+	def getOriginScope(EObject it) {
+		originTraces.filter(Scope).head
+	}
+	
 }

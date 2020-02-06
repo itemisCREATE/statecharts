@@ -16,7 +16,7 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorModel
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
@@ -37,14 +37,13 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 	@Inject
 	protected extension GenmodelEntries
 
-	override Iterable<String> getImports(ExecutionFlow it, GeneratorModel genModel) {
+	override Iterable<String> getImports(ExecutionFlow it, GeneratorEntry entry) {
 		val imports = Sets.newHashSet
 		for (PackageImport p : statechartImports) {
 			val typesRes = (sourceElement as Statechart).eResource.resourceSet.getResource(p.uri, true);
 			val submachineChart = typesRes.subchart
 			val submachineClass = submachineChart.statemachineClassName
-			val subEntry = genModel.getEntry(submachineChart)
-			val submachineImport = submachineChart.getImplementationPackageName(subEntry) + "." + submachineClass
+			val submachineImport = submachineChart.getImplementationPackageName(entry) + "." + submachineClass
 			imports.add(submachineImport)
 		}
 		return imports
@@ -60,11 +59,5 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 		return statechartImports.map [
 			includeMapper.findPackageImport(statechart.eResource, it)
 		].filter[isPresent].map[get].filter[fileURI.fileExtension.equals("sct")]
-	}
-
-	protected def getEntry(GeneratorModel genModel, Statechart statechart) {
-		genModel.entries.filter[elementRef instanceof Statechart].findFirst [
-			(elementRef as Statechart).name == statechart.name
-		]
 	}
 }
