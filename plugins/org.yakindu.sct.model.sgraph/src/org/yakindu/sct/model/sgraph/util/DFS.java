@@ -92,7 +92,7 @@ abstract public class DFS {
 
 
 	/** Visits an element. */
-	public int visit(Object element, Object parent, int depth) {
+	private int visit(Object element, Object parent, int depth) {
 		int minDepth = depth;
 
 		if (isVisited(element)) {
