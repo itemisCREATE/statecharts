@@ -28,7 +28,7 @@ public interface IOperationExecutor {
 	 * @return true if the implementation provides an implementation for the given
 	 *         definition, false otherwise
 	 */
-	public boolean canExecute(ArgumentExpression expression);
+	public boolean canExecute(ArgumentExpression expression, ExecutionContext context);
 
 	/**
 	 * Called when the operation is executed
@@ -43,7 +43,7 @@ public interface IOperationExecutor {
 	public static final class NullOperationMock implements IOperationExecutor {
 
 		@Override
-		public boolean canExecute(ArgumentExpression expression) {
+		public boolean canExecute(ArgumentExpression expression, ExecutionContext context) {
 			return false;
 		}
 

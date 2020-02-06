@@ -22,6 +22,8 @@ class ExecutionContext extends NamedElement, CompositeSlot {
 	refers EObject[] activeStates
 	refers EObject[] executedElements
 	refers EObject[] suspendedElements
+	String contextFqn 
+	
 	boolean snapshot
 	op unique ExecutionEvent[] getRaisedEvents() {
 		return allEvents.filter[raised].toList
