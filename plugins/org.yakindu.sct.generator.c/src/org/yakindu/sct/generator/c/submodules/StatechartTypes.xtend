@@ -25,6 +25,9 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 
 /**
  * @author rbeckmann
@@ -36,6 +39,9 @@ class StatechartTypes {
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension StatechartAnnotations
+	
+	@Inject protected extension GeneratorEntry entry
+	@Inject protected extension GenmodelEntries
 	
 	def statemachineStruct(ExecutionFlow it) {
 		'''
@@ -61,6 +67,9 @@ class StatechartTypes {
 		«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
 			«iScope.type» «iScope.instance»;
 		«ENDFOR»
+		«IF entry.tracingGeneric»
+		«TRACE_HANDLER_TYPE» *«TRACE_HANDLER»;
+		«ENDIF»
 		'''
 	}
 	
@@ -73,6 +82,17 @@ class StatechartTypes {
 				«state.stateName»
 			«ENDFOR»
 		} «statesEnumType»;
+	'''
+	
+	def featuresEnumDecl(ExecutionFlow it) '''
+		/*! Enumeration of all features of the statechart */ 
+		typedef enum
+		{
+			«it.name.toLowerCase»_no_event = «NO_EVENT»,
+			«FOR feature : allEventAndVariables SEPARATOR ","»
+				«featureNamingPrefix»«feature.name»
+			«ENDFOR»
+		} «featuresEnumType»;
 	'''
 	
 	def scopeTypeDecl(Scope scope) '''

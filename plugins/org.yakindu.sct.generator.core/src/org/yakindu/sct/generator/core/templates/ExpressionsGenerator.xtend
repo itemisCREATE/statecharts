@@ -60,6 +60,7 @@ class ExpressionsGenerator {
 		operand.code + operator.literal
 	}
 
+
 	def dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
 
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''

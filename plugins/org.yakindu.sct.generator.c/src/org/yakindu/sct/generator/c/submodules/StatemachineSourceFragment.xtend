@@ -44,7 +44,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 	
 	@Inject protected extension APIGenerator
 	
-	@Inject protected extension InternalFunctionsGenerator
+	@Inject protected extension InternalFunctionsGenerator//TODO is this allowed?
 	@Inject protected extension InterfaceFunctionsGenerator
 
 	override CharSequence fileComment(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
@@ -53,8 +53,13 @@ class StatemachineSourceFragment implements ISourceFragment {
 	
 	override CharSequence includes(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
-		#include "«(module.h).relativeTo(module.c)»"
+		
 		#include "«(typesModule.h).relativeTo(module.c)»"
+		«IF entry.tracingGeneric»
+		#include "«(tracingModule.h).relativeTo(module.c)»"
+		«ENDIF»
+		
+		#include "«(module.h).relativeTo(module.c)»"
 		«IF timed || entry.tracingUsed || !it.operations.empty»
 			#include "«(module.client.h).relativeTo(module.c)»"
 		«ENDIF»
@@ -90,7 +95,11 @@ class StatemachineSourceFragment implements ISourceFragment {
 		«ENDFOR»
 	'''
 	
-	def functions(ExecutionFlow it) '''
+	def functions(ExecutionFlow it) '''	
+		«IF entry.tracingGeneric»
+		«tracing»
+		«ENDIF»
+		
 		«init»
 		
 		«enter»
@@ -114,7 +123,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 		«clearOutEventsFunction»
 		
 		«interfaceFunctions»
-		
+
 		«functionImplementations»
 	'''
 }

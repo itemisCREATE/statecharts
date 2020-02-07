@@ -21,6 +21,7 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author rbeckmann
@@ -93,6 +94,9 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + (unsigned)sizeof(«timeEventScope.type»))
 				{
 					*(«BOOL_TYPE»*)evid = «TRUE_LITERAL»;
+									
+					«INT_TYPE» tev_id = time_event_index(«scHandle», evid);
+					«traceTimeEventCall(TRACE_MACHINE_TIME_EVENT_RAISED, "tev_id")»
 					
 					«runCycleFctID»(«scHandle»);
 				}

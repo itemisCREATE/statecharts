@@ -95,16 +95,16 @@ class Naming {
 		TYPES_MODULE
 	}
 
-	def tracingModule(ExecutionFlow it) {
-		TRACING_MODULE
-	}
-
 	def timerType(ExecutionFlow it) {
 		'SCTimer'
 	}
 	
 	def statesEnumType(ExecutionFlow it) {
 		containerType + 'States'
+	}
+	
+	def featuresEnumType(ExecutionFlow it) {
+		containerType + 'Feature'
 	}
 	
 	def protected String entryStatemachinePrefix() {
@@ -488,6 +488,32 @@ class Naming {
 		if(reference instanceof VariableDefinition) {
 			'''«scHandle»->«reference.scope.instance».«reference.name»'''
 		}
+	}
+	
+	def featureNamingPrefix(ExecutionFlow it){
+		'''«it.name.toLowerCase»Iface_'''
+	}
+	
+	def scTracingHandleDecl(EObject it) { TRACE_HANDLER_TYPE + '* ' + TRACE_HANDLER }//sc_trace_handler* trace_handler
+	
+	def initTracingFctID(ExecutionFlow it) {
+		functionPrefix + INIT_TRACING
+	}
+	
+	def setTraceHandlerFctID(ExecutionFlow it) {
+		functionPrefix + SET_TRACING
+	}
+
+	def tracingModule(ExecutionFlow it) {
+		TRACING_MODULE
+	}
+	
+	def tracingPrefix(ExecutionFlow it){
+		TRACE_CALL + separator
+	}
+	
+	def traceFctID(ExecutionFlow it) {
+		TRACE_CALL
 	}
 	
 }

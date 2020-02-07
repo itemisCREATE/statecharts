@@ -77,11 +77,20 @@ class FlowCode {
 		«IF entry.tracingEnterState»
 		«flow.enterStateTracingFctID»(«scHandle», «it.state.stateName»);
 		«ENDIF»
+		«genericTracing»
 	'''
 	
 	def dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
 		«flow.exitStateTracingFctID»(«scHandle», «it.state.stateName»);
+		«ENDIF»
+		«genericTracing»
+	'''
+	
+	//TODO maybe delete this?
+	def genericTracing() '''
+		«IF entry.tracingGeneric»
+		
 		«ENDIF»
 	'''
 

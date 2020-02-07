@@ -51,6 +51,8 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 
 /**
  * @author axel terfloth
@@ -72,6 +74,9 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject extension ExpressionExtensions
 	
 	@Inject extension OriginTracing
+	
+	@Inject protected extension GeneratorEntry entry
+	@Inject protected extension GenmodelEntries
 
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -144,8 +149,20 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	override dispatch CharSequence code(AssignmentExpression it) {
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
-		} else
-			super._code(it)
+		} else{
+			var String setterCall = null;
+			try{
+				setterCall = varRef.definition.asSetter
+			}catch(NullPointerException e){
+				//Since the function 'isUniqueName' can throw Exceptions and is called by 'asSetter' this just means, that there is no setter
+			}
+			if(entry.tracingGeneric && setterCall !== null){
+				'''«setterCall»(«scHandle», «expression.code»)'''
+				//'''«varRef.code» «operator.literal» «expression.code»'''
+			}else{
+				super._code(it)
+			}	
+		}
 	}
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {

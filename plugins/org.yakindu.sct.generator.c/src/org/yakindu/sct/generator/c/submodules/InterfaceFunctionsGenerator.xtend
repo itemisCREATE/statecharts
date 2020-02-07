@@ -17,6 +17,9 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 
 /**
  * @author rbeckmann
@@ -29,6 +32,9 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
+	
+	@Inject protected extension GeneratorEntry entry
+	@Inject protected extension GenmodelEntries
 	
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : interfaceScopes»
@@ -51,6 +57,9 @@ class InterfaceFunctionsGenerator {
 				«IF !variable.readonly && !variable.const»
 				void «variable.asSetter»(«scHandleDecl», «variable.typeSpecifier.targetLanguageName» value)
 				{
+					«IF entry.tracingGeneric»
+					«tracingPrefix»FEATURE(«scHandle», «CGeneratorConstants::TRACE_MACHINE_VARIABLE_SET», «featureNamingPrefix»«variable.name», &value);
+					«ENDIF»
 					«variable.access» = value;
 				}
 				«ENDIF»

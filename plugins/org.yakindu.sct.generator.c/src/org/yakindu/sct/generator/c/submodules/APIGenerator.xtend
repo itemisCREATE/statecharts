@@ -22,6 +22,8 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 
 /**
  * @author rbeckmann
@@ -38,14 +40,19 @@ class APIGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
 	@Inject protected extension StatechartAnnotations
+	
+	@Inject protected extension GeneratorEntry genEntry
+	@Inject protected extension GenmodelEntries
 
 	def runCycle(ExecutionFlow it) {
 		'''
 			«runCycleSignature»
 			{
+				«traceCall(TRACE_MACHINE_CYCLE_START)»
 				«clearOutEventsFctID»(«scHandle»);
 				«runCycleForLoop(it)»
 				«clearInEventsFctID»(«scHandle»);
+				«traceCall(TRACE_MACHINE_CYCLE_END)»
 			}
 		'''
 	}
@@ -91,6 +98,24 @@ class APIGenerator {
 	def protected CharSequence runCycleSignature(ExecutionFlow it) {
 		'''void «runCycleFctID»(«scHandleDecl»)'''
 	}
+	
+	def tracing(ExecutionFlow it){
+		'''
+		/* required for tracing */
+		static «INT_TYPE» time_event_index(«scHandleDecl», «EVENT_TYPE» evid);
+		
+		static «INT_TYPE» time_event_index(«scHandleDecl», «EVENT_TYPE» evid)
+		{
+			«INT_TYPE» tev_id = ((«INTPTR_TYPE»)evid - («INTPTR_TYPE»)&(«scHandle»->timeEvents)) / sizeof(«BOOL_TYPE»);
+			return tev_id;
+		}
+		
+		void «initTracingFctID»(«scHandleDecl», «TRACE_HANDLER_TYPE» *trace_handler)
+		{
+			«scHandle»->trace_handler = trace_handler;
+		}
+		'''
+	}
 
 	def init(ExecutionFlow it) {
 		'''
@@ -123,6 +148,10 @@ class APIGenerator {
 			«clearOutEventsFctID»(«scHandle»);
 
 			«initSequence.code»
+			
+			«IF genEntry.tracingGeneric»
+			«initTracingFctID»(«scHandle», sc_null);
+			«ENDIF»
 		'''
 	}
 	
@@ -138,6 +167,7 @@ class APIGenerator {
 		'''
 			«enterSignature»
 			{
+				«traceCall(TRACE_MACHINE_ENTER)»
 				«enterSequences.defaultSequence.code»
 			}
 		'''
@@ -242,6 +272,7 @@ class APIGenerator {
 			«exitSignature»
 			{
 				«exitSequence.code»
+				«traceCall(TRACE_MACHINE_EXIT)»
 			}
 		'''
 	}
@@ -273,6 +304,42 @@ class APIGenerator {
 	
 	def protected CharSequence raiseTimeEventSignature(ExecutionFlow it) {
 		'''void «raiseTimeEventFctID»(«scHandleDecl», «EVENT_TYPE» evid)'''
+	}
+	
+	def protected CharSequence traceCall(ExecutionFlow it, String event){
+		'''
+		«IF genEntry.tracingGeneric»
+		«traceFctID»(«scHandle», «event»)
+		«ENDIF»
+		'''
+	}
+	
+	def protected CharSequence traceTimeEventCall(ExecutionFlow it, String event, String timerEventID){
+		'''
+		«IF genEntry.tracingGeneric»
+		«traceFctID»_TIME_EVENT(«scHandle», «event», «timerEventID»)
+		«ENDIF»
+		'''
+	}
+	
+	def protected CharSequence traceCall(ExecutionFlow it){
+		traceCall("")
+	}
+	
+	def declareInitWithTracing(ExecutionFlow it) {
+		'''«initWithTracingSignature»;'''
+	}
+	
+	def protected CharSequence initWithTracingSignature(ExecutionFlow it) {//void tictoc_initWithTracing(Tictoc* handle, sc_trace_handler* trace_handler);
+		'''void «initTracingFctID»(«scHandleDecl», «scTracingHandleDecl»)'''
+	}
+	
+	def declareSetTraceHandler(ExecutionFlow it) {
+		'''«setTraceHandlerSignature»;'''
+	}
+	
+	def protected CharSequence setTraceHandlerSignature(ExecutionFlow it){//;void tictoc_setTraceHandler(Tictoc* handle, sc_trace_handler* trace_handler);
+		'''void «setTraceHandlerFctID»(«scHandleDecl», «scTracingHandleDecl»)'''
 	}
 	
 }

@@ -175,6 +175,10 @@ class SExecExtensions {
 		scope.declarations.filter(EventDefinition)
 	}
 	
+	def eventAndVariableDefinitions(Scope scope) {
+		scope.declarations.filter[ e | e instanceof EventDefinition || e instanceof VariableDefinition]
+	}
+	
 	def boolean hasEvents(Scope it) {
 		return !eventDefinitions.empty
 	}
@@ -185,6 +189,10 @@ class SExecExtensions {
 	
 	def getAllEvents(ExecutionFlow it) {
 		return scopes.map[eventDefinitions].flatten
+	}
+	
+	def getAllEventAndVariables(ExecutionFlow it) {
+		return scopes.map[eventAndVariableDefinitions].flatten
 	}
 	
 	def hasLocalEvents(ExecutionFlow it) {

@@ -24,6 +24,9 @@ import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author rbeckmann
@@ -38,9 +41,16 @@ class EventCode {
 	@Inject protected extension CLiterals
 	@Inject extension ExpressionExtensions
 	
+	@Inject protected extension GeneratorEntry entry
+	@Inject protected extension GenmodelEntries
+	
+	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
 		{
+			«IF entry.tracingGeneric»
+			«TRACE_CALL»_FEATURE(«scHandle», «TRACE_MACHINE_EVENT_RAISED», «featureNamingPrefix»start, «NULL_LITERAL»);
+			«ENDIF»
 			«interfaceIncomingEventRaiserBody(event)»
 		}
 	'''
