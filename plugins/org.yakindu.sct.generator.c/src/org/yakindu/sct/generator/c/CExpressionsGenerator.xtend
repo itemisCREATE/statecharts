@@ -12,6 +12,7 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
@@ -43,14 +44,15 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import java.util.List
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 
 /**
  * @author axel terfloth
@@ -111,10 +113,10 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) 
-		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+		'''«target.access»(«scHandle»«argCode»)'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Method target) 
-		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+		'''«target.access»(«scHandle»«argCode»)'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) 
 		'''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
@@ -175,13 +177,9 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«target.access»'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it,
-		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
-
 	def dispatch CharSequence code(FeatureCall it, Operation target) {
 		if (target.eContainer instanceof ComplexType) {
-			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle»«argCode»)'''
 		}
 		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}
@@ -217,4 +215,13 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «TRUE_LITERAL» : «FALSE_LITERAL»'''
 	
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
+	
+	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) {
+		'''«target.access»(«IF target.eContainer.isMultiSM»«owner.handle»«ELSE»«scHandle»«ENDIF»«argCode»)'''
+	}
+	
+	protected def CharSequence argCode(ArgumentExpression it) {
+		'''«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»'''
+	}
+	
 }

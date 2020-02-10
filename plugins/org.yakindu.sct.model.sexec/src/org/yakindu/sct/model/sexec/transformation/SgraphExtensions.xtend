@@ -28,6 +28,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class SgraphExtensions {
 	
@@ -39,6 +40,9 @@ class SgraphExtensions {
 	
 	def dispatch isLeaf(State s) { s.simple }
 	
+	def hasOperations(Statechart it) {
+		!EcoreUtil2.eAllContents(it).filter(OperationDefinition).nullOrEmpty
+	}
 
 	// TODO: rename since this list also includes the start state or change implementation and usages
 	def List<RegularState> parentStates(RegularState s) {
