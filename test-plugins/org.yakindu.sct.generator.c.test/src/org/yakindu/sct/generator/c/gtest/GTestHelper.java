@@ -213,7 +213,9 @@ public class GTestHelper {
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
-				//.wPedantic()
+				.wPedantic()
+				.wnoLongLong()
+				.wnoVariadicMacros()
 			 	.wAll()				
 			 	.wExtra()
 			 	.wError() //TODO Does currently not work with GMock and Cpp
