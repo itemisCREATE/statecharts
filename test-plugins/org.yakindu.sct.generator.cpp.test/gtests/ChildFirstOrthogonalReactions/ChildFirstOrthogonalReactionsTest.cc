@@ -4,11 +4,6 @@
 #include "ChildFirstOrthogonalReactions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-#include "gmock/gmock.h"
-
-using ::testing::AtLeast;
-using ::testing::Return;
-using ::testing::_;
 
 namespace  {
 
