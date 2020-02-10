@@ -59,6 +59,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public State getValue() {
 		if (value != null && value.eIsProxy()) {
 			InternalEObject oldValue = (InternalEObject)value;
@@ -85,6 +86,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(State newValue) {
 		State oldValue = value;
 		value = newValue;

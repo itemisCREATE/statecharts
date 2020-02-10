@@ -103,6 +103,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TimeEventType getType() {
 		return type;
 	}
@@ -112,6 +113,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(TimeEventType newType) {
 		TimeEventType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
@@ -124,6 +126,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getValue() {
 		return value;
 	}
@@ -148,6 +151,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Expression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -167,6 +171,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TimeUnit getUnit() {
 		return unit;
 	}
@@ -176,6 +181,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUnit(TimeUnit newUnit) {
 		TimeUnit oldUnit = unit;
 		unit = newUnit == null ? UNIT_EDEFAULT : newUnit;

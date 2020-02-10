@@ -77,6 +77,7 @@ public class ReactionTriggerImpl extends TriggerImpl implements ReactionTrigger 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EventSpec> getTriggers() {
 		if (triggers == null) {
 			triggers = new EObjectContainmentEList<EventSpec>(EventSpec.class, this, StextPackage.REACTION_TRIGGER__TRIGGERS);
@@ -89,6 +90,7 @@ public class ReactionTriggerImpl extends TriggerImpl implements ReactionTrigger 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Guard getGuard() {
 		return guard;
 	}
@@ -113,6 +115,7 @@ public class ReactionTriggerImpl extends TriggerImpl implements ReactionTrigger 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGuard(Guard newGuard) {
 		if (newGuard != guard) {
 			NotificationChain msgs = null;

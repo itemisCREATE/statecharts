@@ -58,6 +58,7 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getImports() {
 		if (imports == null) {
 			imports = new EDataTypeUniqueEList<String>(String.class, this, StextPackage.IMPORT_SCOPE__IMPORTS);

@@ -27,16 +27,12 @@ import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.stext.stext.EntryEvent
-import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
-import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 class StatechartExtensions {
-	
 	
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
 	def dispatch int maxOrthogonality(Statechart sc) {
@@ -124,7 +120,7 @@ class StatechartExtensions {
 	}
  
 	def dispatch ReactiveElement reactiveElement(Reaction r) {
-		r.scope.reactiveElement		
+		r.scope?.reactiveElement		
 	}
 
 	def dispatch ReactiveElement reactiveElement(Transition tr) {
@@ -177,21 +173,6 @@ class StatechartExtensions {
 	def Iterable<Synchronization> allSynchronizations(Statechart sc) {
 		return sc.eAllContents.filter( typeof(Synchronization)).toIterable
 	}
-	
-	def List<LocalReaction> entryReactions(ReactiveElement state) {
-		state.localReactions
-			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
-			.map(lr | lr as LocalReaction)
-			.toList	
-	} 
-	
-	def List<LocalReaction> exitReactions(ReactiveElement state) {
-		state.localReactions
-			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
-			.map(lr | lr as LocalReaction)
-			.toList	
-	} 
-	
 	
 	//=================================================================
 	// naming util extensions

@@ -14,8 +14,6 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.base.types.AnnotatableElement
-import org.yakindu.base.types.Annotation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
@@ -175,17 +173,6 @@ class SgraphExtensions {
 	}
 	
 	/** 
-	 * Returns wether a child first execution order is defined for the statechart.
-	 * 
-	 * This feature can be configured by using the ChildFirstExecution annotation.
-	 * 
-	 * @return true if child first execution is declared.
-	 */
-	def boolean isChildFirstExecution(Statechart it) {
-		findAnnotation("ChildFirstExecution") !== null
-	}
-	
-	/** 
 	 * Returns wether interleaved or non interleaved execution order for local reactions is required.
 	 * 
 	 * Local reactions are interleaved when they are processed directly after a states transition checks. 
@@ -200,10 +187,4 @@ class SgraphExtensions {
 	def boolean interleaveLocalReactions(Statechart it) {
 		return true	
 	}
-	
-	
-	def Annotation findAnnotation(AnnotatableElement it, String name) {
-		annotations.filter[a | name.equals(a.type.name)].head
-	}	
-	 
 }

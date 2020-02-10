@@ -24,5 +24,6 @@ Require-Bundle: com.google.inject,
  org.yakindu.base.types;visibility:=reexport,
  org.yakindu.base.expressions;visibility:=reexport,
  org.yakindu.sct.model.stext,
+ org.yakindu.sct.model.stext.lib,
  org.yakindu.sct.model.sgraph;visibility:=reexport
 Bundle-ActivationPolicy: lazy

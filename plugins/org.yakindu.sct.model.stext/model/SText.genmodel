@@ -92,5 +92,8 @@
     <genClasses ecoreClass="SText.ecore#//ActiveStateReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>
+    <genClasses ecoreClass="SText.ecore#//SubmachineReferenceExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//SubmachineReferenceExpression/submachine"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
