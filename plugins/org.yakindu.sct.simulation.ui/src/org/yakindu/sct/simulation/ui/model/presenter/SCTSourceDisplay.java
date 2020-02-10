@@ -11,7 +11,9 @@
 package org.yakindu.sct.simulation.ui.model.presenter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugEvent;
@@ -25,13 +27,17 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.partitioning.SubmachineEditorInput;
+
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -48,7 +54,7 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 	}
 
 	@Override
-	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
+	public synchronized void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
 		IDebugTarget debugTarget = unwrapTarget(element);
 		if (debugTarget == null)
 			return;
@@ -56,10 +62,11 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 		IEditorPart editorPart = openEditor(debugTarget, page);
 		IDynamicNotationHandler notationHandler = getHandler(editorPart);
 		notationHandler.display(debugTarget.getAdapter(ExecutionContext.class));
+		restoreActiveEditors();
 
 	}
 
-	private void setActiveLaunch(IDebugTarget debugTarget) {
+	protected void setActiveLaunch(IDebugTarget debugTarget) {
 		ILaunch currentLaunch = debugTarget.getLaunch();
 		if (activeLaunch != currentLaunch) {
 			for (IDynamicNotationHandler current : handler.values()) {
@@ -68,6 +75,55 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 			handler.clear();
 			activeLaunch = currentLaunch;
 		}
+	}
+
+	// Restores session for all open submachine editors
+	protected void restoreActiveEditors() {
+		List<DiagramEditor> editors = getAllOpenSubmachineEditors();
+		for (DiagramEditor diagramEditor : editors) {
+			Optional<ExecutionContext> contextOptional = findExecutionContext(diagramEditor);
+			if (contextOptional.isPresent()) {
+				IDynamicNotationHandler notationHandler = getHandler(diagramEditor);
+				notationHandler.display(contextOptional.get());
+			}
+		}
+	}
+
+	protected Optional<ExecutionContext> findExecutionContext(DiagramEditor editor) {
+		IDebugTarget[] debugTargets = activeLaunch.getDebugTargets();
+		for (IDebugTarget debugTarget : debugTargets) {
+			ExecutionContext context = debugTarget.getAdapter(ExecutionContext.class);
+			Diagram diagram = getDiagram(debugTarget);
+			if (context.getContextFqn() != null) {
+				if (new SubmachineEditorInput(diagram, context.getContextFqn()).equals(editor.getEditorInput())) {
+					return Optional.of(context);
+				}
+			}
+		}
+		return Optional.empty();
+	}
+
+	protected Diagram getDiagram(IDebugTarget debugTarget) {
+		EObject semanticObject = (EObject) debugTarget.getAdapter(EObject.class);
+		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
+		return (Diagram) DiagramPartitioningUtil.getSharedDomain().getResourceSet()
+				.getEObject(EcoreUtil.getURI(diagram), true);
+	}
+
+	protected List<DiagramEditor> getAllOpenSubmachineEditors() {
+		List<DiagramEditor> result = Lists.newArrayList();
+		IEditorReference[] editorReferences = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+				.getEditorReferences();
+		for (IEditorReference iEditorReference : editorReferences) {
+			IEditorPart editor = iEditorReference.getEditor(false);
+			if (editor instanceof DiagramEditor) {
+				IEditorInput editorInput = editor.getEditorInput();
+				if (editorInput instanceof SubmachineEditorInput) {
+					result.add((DiagramEditor) editor);
+				}
+			}
+		}
+		return result;
 	}
 
 	protected IDynamicNotationHandler getHandler(IEditorPart editorPart) {
@@ -97,12 +153,9 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 		return null;
 	}
 
-	public IEditorPart openEditor(IDebugTarget debugTarget, IWorkbenchPage page) {
+	protected IEditorPart openEditor(IDebugTarget debugTarget, IWorkbenchPage page) {
 		ExecutionContext context = debugTarget.getAdapter(ExecutionContext.class);
-		EObject semanticObject = (EObject) debugTarget.getAdapter(EObject.class);
-		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
-		diagram = (Diagram) DiagramPartitioningUtil.getSharedDomain().getResourceSet()
-				.getEObject(EcoreUtil.getURI(diagram), true);
+		Diagram diagram = getDiagram(debugTarget);
 		if (context.getContextFqn() != null) {
 			return DiagramPartitioningUtil.openSubmachineEditor((Diagram) diagram, context.getContextFqn());
 		} else {
@@ -160,7 +213,14 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 
 	@Override
 	public void partClosed(IWorkbenchPart part) {
-		// Nothing to do
+		if (part instanceof DiagramEditor) {
+			IEditorInput input = ((DiagramEditor) part).getEditorInput();
+			IDynamicNotationHandler notationHandler = handler.get(input);
+			if (notationHandler != null) {
+				notationHandler.terminate();
+				handler.remove(input);
+			}
+		}
 	}
 
 	@Override
