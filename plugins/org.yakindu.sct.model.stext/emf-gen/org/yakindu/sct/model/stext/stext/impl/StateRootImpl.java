@@ -59,6 +59,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateSpecification getDef() {
 		return def;
 	}
@@ -83,6 +84,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDef(StateSpecification newDef) {
 		if (newDef != def) {
 			NotificationChain msgs = null;

@@ -8,39 +8,40 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.types.Expression;
-import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.base.types.impl.ExpressionImpl;
 import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Regular Event Spec</b></em>'.
+ * An implementation of the model object '<em><b>Submachine Reference Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.RegularEventSpecImpl#getEvent <em>Event</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.SubmachineReferenceExpressionImpl#getSubmachine <em>Submachine</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventSpec {
+public class SubmachineReferenceExpressionImpl extends ExpressionImpl implements SubmachineReferenceExpression {
 	/**
-	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference.
+	 * The cached value of the '{@link #getSubmachine() <em>Submachine</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEvent()
+	 * @see #getSubmachine()
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression event;
+	protected Expression submachine;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RegularEventSpecImpl() {
+	protected SubmachineReferenceExpressionImpl() {
 		super();
 	}
 
@@ -51,7 +52,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StextPackage.Literals.REGULAR_EVENT_SPEC;
+		return StextPackage.Literals.SUBMACHINE_REFERENCE_EXPRESSION;
 	}
 
 	/**
@@ -60,8 +61,8 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * @generated
 	 */
 	@Override
-	public Expression getEvent() {
-		return event;
+	public Expression getSubmachine() {
+		return submachine;
 	}
 
 	/**
@@ -69,11 +70,11 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEvent(Expression newEvent, NotificationChain msgs) {
-		Expression oldEvent = event;
-		event = newEvent;
+	public NotificationChain basicSetSubmachine(Expression newSubmachine, NotificationChain msgs) {
+		Expression oldSubmachine = submachine;
+		submachine = newSubmachine;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.REGULAR_EVENT_SPEC__EVENT, oldEvent, newEvent);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE, oldSubmachine, newSubmachine);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -85,18 +86,18 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * @generated
 	 */
 	@Override
-	public void setEvent(Expression newEvent) {
-		if (newEvent != event) {
+	public void setSubmachine(Expression newSubmachine) {
+		if (newSubmachine != submachine) {
 			NotificationChain msgs = null;
-			if (event != null)
-				msgs = ((InternalEObject)event).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.REGULAR_EVENT_SPEC__EVENT, null, msgs);
-			if (newEvent != null)
-				msgs = ((InternalEObject)newEvent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.REGULAR_EVENT_SPEC__EVENT, null, msgs);
-			msgs = basicSetEvent(newEvent, msgs);
+			if (submachine != null)
+				msgs = ((InternalEObject)submachine).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE, null, msgs);
+			if (newSubmachine != null)
+				msgs = ((InternalEObject)newSubmachine).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE, null, msgs);
+			msgs = basicSetSubmachine(newSubmachine, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REGULAR_EVENT_SPEC__EVENT, newEvent, newEvent));
+			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE, newSubmachine, newSubmachine));
 	}
 
 	/**
@@ -107,8 +108,8 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-				return basicSetEvent(null, msgs);
+			case StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE:
+				return basicSetSubmachine(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -121,8 +122,8 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-				return getEvent();
+			case StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE:
+				return getSubmachine();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,8 +136,8 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-				setEvent((Expression)newValue);
+			case StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE:
+				setSubmachine((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,8 +151,8 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-				setEvent((Expression)null);
+			case StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE:
+				setSubmachine((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -165,10 +166,10 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-				return event != null;
+			case StextPackage.SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE:
+				return submachine != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //RegularEventSpecImpl
+} //SubmachineReferenceExpressionImpl

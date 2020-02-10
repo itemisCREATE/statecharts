@@ -73,10 +73,14 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	override dispatch String code(AssignmentExpression it) {
 		val property = varRef.definition
 		if (property instanceof Property) {
-			if (property.eContainer instanceof LocalVariableDefinition) {
+			val container = property.eContainer
+			if (container instanceof LocalVariableDefinition) {
 				return '''«property.getContext»«property.name» = «assignCmdArgument(property)»'''
 			}
-			if (property.eContainer instanceof ComplexType) {
+			if (container instanceof ComplexType) {
+				if(container.isMultiSM) {
+					return '''«varRef.getContext»«property.setter»(«assignCmdArgument(property)»)'''
+				}
 				return '''«varRef.getContext»«property.name» = «assignCmdArgument(property)»'''
 			}
 			if (eContainer instanceof Expression) {
@@ -85,7 +89,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			return '''«varRef.getContext»«property.setter»(«assignCmdArgument(property)»)'''
 		}
 	}
-
+	
 	def protected assignCmdArgument(AssignmentExpression it, Property property) {
 		var cmd = ""
 		if (!AssignmentOperator.ASSIGN.equals(operator)) {

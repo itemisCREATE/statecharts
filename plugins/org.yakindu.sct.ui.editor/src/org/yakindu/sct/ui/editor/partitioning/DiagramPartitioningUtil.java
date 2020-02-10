@@ -188,6 +188,17 @@ public class DiagramPartitioningUtil {
 		return null;
 	}
 	
+	public static IEditorPart openSubmachineEditor(Diagram diagram, String context) {
+		try {
+			IFile file = WorkspaceSynchronizer.getFile(diagram.eResource());
+			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
+			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			return wbPage.openEditor(new SubmachineEditorInput(diagram, context), desc.getId());
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public static View findNotationView(EObject semanticElement) {
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(semanticElement.eResource().getContents(),

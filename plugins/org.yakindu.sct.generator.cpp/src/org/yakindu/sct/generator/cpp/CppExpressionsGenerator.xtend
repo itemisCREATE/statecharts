@@ -33,6 +33,8 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.types.ComplexType
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
@@ -63,6 +65,16 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 		return '''«fc.featureOrReference.valueAccess»'''
 	}
 	
+	override dispatch CharSequence code(AssignmentExpression it) {
+		val varRef = varRef
+		if(varRef instanceof FeatureCall){
+			val container = varRef.feature.eContainer
+			if (container instanceof ComplexType && container.isMultiSM) {
+				return '''«varRef.owner.code»->«varRef.feature.asSetter»(«expression.code»)'''
+			}
+		}
+		return super._code(it)
+	}
 	
 	/* Feature Call */
 	override dispatch CharSequence code(FeatureCall it, Operation target) '''«context»«target.access»(«argumentsCode»)'''

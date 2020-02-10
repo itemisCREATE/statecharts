@@ -39,12 +39,12 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 	}
 
 	/**
-	 * highlights the whole execution context, only executed once at the
-	 * beginning.
+	 * highlights the whole execution context, only executed once at the beginning.
 	 */
 	protected void restoreNotationState(ExecutionContext context) {
 		List<IHighlightingSupport.Action> actions = new ArrayList<IHighlightingSupport.Action>();
-		actions.add(new IHighlightingSupport.Highlight(contextExtensions.getAllActiveStates(context), HighlightingParameters.DEFAULT));
+		actions.add(new IHighlightingSupport.Highlight(contextExtensions.getAllActiveStates(context),
+				HighlightingParameters.DEFAULT));
 		actions.add(new IHighlightingSupport.Highlight(context.getExecutedElements(), HighlightingParameters.DEFAULT));
 		actions.add(new IHighlightingSupport.Highlight(context.getSuspendedElements(), SUSPENDED_PARAMS));
 		getHighlightingSupport().executeAsync(actions);
@@ -54,6 +54,9 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 	public void terminate() {
 		if (this.currentContext != null)
 			this.currentContext.eAdapters().remove(visualizer);
+		IHighlightingSupport support = visualizer.getHighlightingSupport();
+		if (support.isLocked())
+			support.releaseEditor();
 		visualizer.setHighlightingSupport(NULL_SUPPORT);
 	}
 

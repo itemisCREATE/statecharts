@@ -218,8 +218,8 @@ public class GTestHelper {
 				.wnoVariadicMacros()
 			 	.wAll()				
 			 	.wExtra()
-			 	.wError() //TODO Does currently not work with GMock and Cpp
-			 	.wConversion();
+			 	.wConversion()
+			 	.wError();
 		 if(compiler == Compiler.GCC) {
 			 //gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
 			 //gTestCommand.wnoUnusedFunction(); // ignore unused functions flag

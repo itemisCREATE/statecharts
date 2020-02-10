@@ -23,11 +23,15 @@ class StatechartUtil {
 	@Inject extension OriginTracing
 	
 	def dispatch isOriginStatechart(Type type) {
-		type.originTraces.exists[it instanceof Statechart]
+		type?.originTraces.exists[it instanceof Statechart]
 	}
 	
 	def dispatch isOriginStatechart(EObject it) {
 		false
+	}
+	
+	def isMultiSM(EObject it) {
+		isOriginStatechart ||isOriginScope
 	}
 	
 	def dispatch isOriginScope(Type type) {
@@ -49,6 +53,10 @@ class StatechartUtil {
 	
 	def getOriginState(EObject it) {
 		originTraces.filter(State).head
+	}
+	
+	def getOriginScope(EObject it) {
+		originTraces.filter(Scope).head
 	}
 	
 }
