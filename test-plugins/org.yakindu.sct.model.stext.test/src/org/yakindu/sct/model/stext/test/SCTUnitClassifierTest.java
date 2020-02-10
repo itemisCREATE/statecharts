@@ -58,7 +58,8 @@ public class SCTUnitClassifierTest {
 			SGraphPackage.Literals.IMPORT_DECLARATION, SGraphPackage.Literals.SCOPE,
 			SGraphPackage.Literals.SCOPE_MEMBER, StextPackage.Literals.TRANSITION_REACTION,
 			SGraphPackage.Literals.REACTION_PROPERTY, TypesPackage.Literals.ANNOTATION,
-			ExpressionsPackage.Literals.BINARY_LITERAL, ExpressionsPackage.Literals.META_CALL);
+			ExpressionsPackage.Literals.BINARY_LITERAL, ExpressionsPackage.Literals.META_CALL,
+			StextPackage.Literals.SUBMACHINE_REFERENCE_EXPRESSION);
 
 	@Test
 	public void checkEClassesCoveredByTestModels() throws Exception {

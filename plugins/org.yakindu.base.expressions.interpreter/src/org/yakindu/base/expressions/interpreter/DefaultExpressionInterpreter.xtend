@@ -345,14 +345,14 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def dispatch doExecute(Operation feature, Void slot, ArgumentExpression exp) {
-		val executor = operationExecutors.findFirst[canExecute(exp)]
+		val executor = operationExecutors.findFirst[canExecute(exp, context)]
 		if (executor !== null) {
 			return executor.executeOperation(exp)
 		}
 	}
 
 	def dispatch doExecute(Operation feature, ExecutionSlot slot, ArgumentExpression exp) {
-		val executor = operationExecutors.findFirst[canExecute(exp)]
+		val executor = operationExecutors.findFirst[canExecute(exp, context)]
 		if (executor !== null) {
 			slot.value = executor.executeOperation(exp)
 		}
@@ -360,7 +360,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def dispatch doExecute(Operation feature, CompositeSlot slot, ArgumentExpression exp) {
-		val executor = operationExecutors.findFirst[canExecute(exp)]
+		val executor = operationExecutors.findFirst[canExecute(exp, context)]
 		if (executor !== null) {
 			return executor.executeOperation(exp)
 		}

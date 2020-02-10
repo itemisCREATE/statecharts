@@ -60,6 +60,7 @@ public class StateSpecificationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Scope getScope() {
 		return scope;
 	}
@@ -84,6 +85,7 @@ public class StateSpecificationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setScope(Scope newScope) {
 		if (newScope != scope) {
 			NotificationChain msgs = null;

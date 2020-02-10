@@ -63,6 +63,7 @@ public class ReactionEffectImpl extends EffectImpl implements ReactionEffect {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getActions() {
 		if (actions == null) {
 			actions = new EObjectContainmentEList<Expression>(Expression.class, this, StextPackage.REACTION_EFFECT__ACTIONS);

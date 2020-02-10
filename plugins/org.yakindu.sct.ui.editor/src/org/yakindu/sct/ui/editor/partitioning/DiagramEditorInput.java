@@ -26,7 +26,7 @@ import org.eclipse.ui.part.FileEditorInput;
  */
 public class DiagramEditorInput extends FileEditorInput implements IDiagramEditorInput, MEditingDomainElement {
 
-	private Diagram diagram;
+	protected Diagram diagram;
 
 	public DiagramEditorInput(Diagram diagram) {
 		super(WorkspaceSynchronizer.getFile(diagram.eResource()));

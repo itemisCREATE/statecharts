@@ -60,6 +60,7 @@ public class TransitionSpecificationImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitionReaction getReaction() {
 		return reaction;
 	}
@@ -84,6 +85,7 @@ public class TransitionSpecificationImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReaction(TransitionReaction newReaction) {
 		if (newReaction != reaction) {
 			NotificationChain msgs = null;

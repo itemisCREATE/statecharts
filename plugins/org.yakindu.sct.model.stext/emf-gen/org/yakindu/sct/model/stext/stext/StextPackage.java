@@ -1615,6 +1615,34 @@ public interface StextPackage extends EPackage {
 	int ACTIVE_STATE_REFERENCE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.SubmachineReferenceExpressionImpl <em>Submachine Reference Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.stext.stext.impl.SubmachineReferenceExpressionImpl
+	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getSubmachineReferenceExpression()
+	 * @generated
+	 */
+	int SUBMACHINE_REFERENCE_EXPRESSION = 35;
+
+	/**
+	 * The feature id for the '<em><b>Submachine</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Submachine Reference Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBMACHINE_REFERENCE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1622,7 +1650,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
 	 * @generated
 	 */
-	int TIME_EVENT_TYPE = 35;
+	int TIME_EVENT_TYPE = 36;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -1632,7 +1660,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
 	 * @generated
 	 */
-	int TIME_UNIT = 36;
+	int TIME_UNIT = 37;
 
 
 	/**
@@ -2217,6 +2245,27 @@ public interface StextPackage extends EPackage {
 	EReference getActiveStateReferenceExpression_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression <em>Submachine Reference Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Submachine Reference Expression</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression
+	 * @generated
+	 */
+	EClass getSubmachineReferenceExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression#getSubmachine <em>Submachine</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Submachine</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression#getSubmachine()
+	 * @see #getSubmachineReferenceExpression()
+	 * @generated
+	 */
+	EReference getSubmachineReferenceExpression_Submachine();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2775,6 +2824,24 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getActiveStateReferenceExpression_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.SubmachineReferenceExpressionImpl <em>Submachine Reference Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.stext.stext.impl.SubmachineReferenceExpressionImpl
+		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getSubmachineReferenceExpression()
+		 * @generated
+		 */
+		EClass SUBMACHINE_REFERENCE_EXPRESSION = eINSTANCE.getSubmachineReferenceExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Submachine</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUBMACHINE_REFERENCE_EXPRESSION__SUBMACHINE = eINSTANCE.getSubmachineReferenceExpression_Submachine();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.

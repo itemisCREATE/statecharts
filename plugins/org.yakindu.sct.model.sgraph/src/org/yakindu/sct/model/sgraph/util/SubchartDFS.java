@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Property;
@@ -50,20 +52,25 @@ public class SubchartDFS extends DFS {
 		if (!URIConverter.INSTANCE.exists(statemachineURI, null)) {
 			return null;
 		}
-		Resource resource = definition.eResource().getResourceSet().getResource(statemachineURI, true);
+		ResourceSet set = null;
+		if (definition.eResource() != null && definition.eResource().getResourceSet() != null) {
+			set = definition.eResource().getResourceSet();
+		} else {
+			set = new ResourceSetImpl();
+		}
+		Resource resource = set.getResource(statemachineURI, true);
 		return (Statechart) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART);
 
 	}
 
 	protected List<Property> getSubcharts(Statechart element) {
 		return element.getScopes().stream().flatMap(scope -> scope.getDeclarations().stream())
-				.flatMap(select(Property.class))
-				.filter(v -> v.getType().eResource() != null)
+				.flatMap(select(Property.class)).filter(v -> v.getType().eResource() != null)
 				.filter(v -> !(v.getType() instanceof EnumerationType))
 				.filter(v -> "sct_types".equals(v.getType().eResource().getURI().fileExtension()))
 				.collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public boolean isVisited(Object element) {
 		// statecharts can be visited again by different reference paths
@@ -71,4 +78,3 @@ public class SubchartDFS extends DFS {
 	}
 
 }
-

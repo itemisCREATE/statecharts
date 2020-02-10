@@ -14,7 +14,6 @@ import java.util.Set
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Parameter
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -35,7 +34,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import org.yakindu.sct.model.sgen.GeneratorModel
 
 class StatemachineInterface {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -72,7 +70,7 @@ class StatemachineInterface {
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
 			.addImport(entry.basePackageName.dot(iTimerCallback), flow.timed)
 			.addImport(entry.basePackageName.dot(iStatemachine))
-			.addImports(includeProviders.map[getImports(flow, entry.eContainerOfType(GeneratorModel))].flatten)
+			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(
 				ClassTemplate
 					.create

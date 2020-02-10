@@ -38,6 +38,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -52,6 +53,7 @@ class ReactMethod {
 	@Inject extension SexecExtensions sexec
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension ITypeSystem typeSystem
+	@Inject extension StatechartAnnotations
 	
 	@Inject extension ExpressionBuilder exprBuilder
 	

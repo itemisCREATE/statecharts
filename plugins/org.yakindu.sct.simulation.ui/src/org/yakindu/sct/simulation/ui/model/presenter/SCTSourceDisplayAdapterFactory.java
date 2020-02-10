@@ -11,6 +11,8 @@
 package org.yakindu.sct.simulation.ui.model.presenter;
 
 import org.eclipse.core.runtime.IAdapterFactory;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * Returns a singleton instance of the {@link SCTSourceDisplay}
@@ -20,15 +22,24 @@ import org.eclipse.core.runtime.IAdapterFactory;
  */
 public class SCTSourceDisplayAdapterFactory implements IAdapterFactory {
 
-	private static SCTSourceDisplayDispatcher display = new SCTSourceDisplayDispatcher();
+	private static SCTSourceDisplay display = null;
 
 	@SuppressWarnings("unchecked")
 	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes") Class adapterType) {
+		return getSourceDisplay();
+	}
+
+	private Object getSourceDisplay() {
+		if (display == null) {
+			display = new SCTSourceDisplay();
+		}
+		DebugPlugin.getDefault().addDebugEventListener(display);
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().addPartListener(display);
 		return display;
 	}
 
 	public Class<?>[] getAdapterList() {
-		return new Class[] { SCTSourceDisplayDispatcher.class };
+		return new Class[] { SCTSourceDisplay.class };
 	}
 
 }

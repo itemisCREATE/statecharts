@@ -35,10 +35,7 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
  * 
  */
 public abstract class AbstractDebugTargetView extends ViewPart
-		implements
-			IDebugEventSetListener,
-			IDebugContextListener,
-			ILaunchListener {
+		implements IDebugEventSetListener, IDebugContextListener, ILaunchListener {
 
 	protected IDebugTarget debugTarget;
 
@@ -123,7 +120,8 @@ public abstract class AbstractDebugTargetView extends ViewPart
 	@Override
 	public void launchChanged(ILaunch launch) {
 		for (IDebugTarget newTarget : launch.getDebugTargets()) {
-			changeTarget(newTarget);
+			if (newTarget instanceof SCTDebugTarget && ((SCTDebugTarget) newTarget).isPrimary())
+				changeTarget(newTarget);
 		}
 	}
 

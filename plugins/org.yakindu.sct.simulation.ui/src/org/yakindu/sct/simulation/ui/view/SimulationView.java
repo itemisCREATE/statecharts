@@ -96,6 +96,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private RaiseEventSelectionListener selectionListener;
 	private ITypeSystem typeSystem;
 
+	private ISelectionChangedListener selectionChangedListener;
+
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
@@ -138,7 +140,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	protected void createSimulationSessionViewer(Composite parent) {
 		simulationSessionViewer = SimulationSessionViewerFactory.createViewer(parent);
-		simulationSessionViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		selectionChangedListener = new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				Object selection = ((StructuredSelection) event.getSelection()).getFirstElement();
@@ -148,7 +150,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 					changeTarget(((ILaunch) selection).getDebugTarget());
 				SourceLookupManager.getDefault().displaySource(selection, getSite().getPage(), true);
 			}
-		});
+		};
+		simulationSessionViewer.addSelectionChangedListener(selectionChangedListener);
 
 		MenuManager contextMenu = new MenuManager();
 		addSimulationSessionActions(contextMenu);
@@ -182,12 +185,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	@Override
 	public void launchChanged(ILaunch launch) {
-		sessionViewerInputChanged();
+		sessionViewerInputChanged(launch);
 		super.launchChanged(launch);
 
 	}
 
-	private void sessionViewerInputChanged() {
+	private void sessionViewerInputChanged(ILaunch changedLaunch) {
 		ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
 		List<ILaunch> activeLaunches = Lists.newArrayList();
 		for (ILaunch iLaunch : launches) {
@@ -196,8 +199,16 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			}
 		}
 		Display.getDefault().asyncExec(() -> {
-			simulationSessionViewer.setInput(activeLaunches.toArray());
-			simulationSessionViewer.expandAll();
+			try {
+				simulationSessionViewer.removeSelectionChangedListener(selectionChangedListener);
+				;
+				simulationSessionViewer.setInput(activeLaunches.toArray());
+				simulationSessionViewer.expandAll();
+			} finally {
+				simulationSessionViewer.addSelectionChangedListener(selectionChangedListener);
+				if (changedLaunch != null)
+					simulationSessionViewer.setSelection(new StructuredSelection(changedLaunch));
+			}
 		});
 	}
 
@@ -209,9 +220,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			if (input == null) {
 				viewerRefresher.cancel = true;
 			} else {
-				if (this.viewerRefresher.isCancel())
+				if (this.viewerRefresher.isCancel()) {
 					this.viewerRefresher.cancel = false;
-				new Thread(viewerRefresher).start();
+					new Thread(viewerRefresher).start();
+				}
 			}
 			this.executionContextViewer.setInput(input);
 			this.executionContextViewer.expandToLevel(2);
@@ -225,7 +237,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		case DebugEvent.TERMINATE:
 			setExecutionContextInput(null);
 			Display.getDefault().asyncExec(() -> {
-				sessionViewerInputChanged();
+				sessionViewerInputChanged(null);
 				if (clock != null && !clock.isDisposed()) {
 					clock.updateTimestamp(0);
 				}

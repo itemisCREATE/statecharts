@@ -66,7 +66,7 @@ public class JavaOperationMockup extends AbstractOperationExecutor implements IO
 	}
 
 	@Override
-	public boolean canExecute(ArgumentExpression expression) {
+	public boolean canExecute(ArgumentExpression expression, ExecutionContext context) {
 		for (Object callback : callbacks) {
 			Class<?> current = callback.getClass();
 			while (current != Object.class) {

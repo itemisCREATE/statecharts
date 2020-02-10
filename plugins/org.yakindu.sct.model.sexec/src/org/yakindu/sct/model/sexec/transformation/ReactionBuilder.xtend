@@ -33,6 +33,7 @@ import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -41,6 +42,7 @@ class ReactionBuilder {
 	@Inject extension StatechartExtensions sct
 	@Inject extension TraceExtensions trace
 	@Inject extension BehaviorMapping behaviorMapping
+	@Inject extension StatechartAnnotations
 	
 	def defineStatechartReaction(ExecutionFlow flow, Statechart sc) {
 		val sequence = sexec.factory.createSequence

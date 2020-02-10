@@ -78,10 +78,7 @@ import org.yakindu.sct.ui.editor.StatechartImages;
  * 
  */
 public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
-		implements
-			ISelectionChangedListener,
-			IEditingDomainProvider
-			{
+		implements ISelectionChangedListener, IEditingDomainProvider {
 
 	protected static final int SASH_WIDTH = 5;
 	private DiagramPartitioningBreadcrumbViewer viewer;
@@ -118,7 +115,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 		super.init(site, input);
 	}
-	
+
 	public void doSetInput(IEditorInput input, boolean releaseEditorContents) throws CoreException {
 		try {
 			super.doSetInput(input, releaseEditorContents);
@@ -167,14 +164,31 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@Override
 	public void setInput(IEditorInput input) {
 		super.setInput(input);
-		if (input instanceof IDiagramEditorInput) {
+		if (input instanceof SubmachineEditorInput) {
+			initializeTitle((SubmachineEditorInput) input);
+		} else if (input instanceof IDiagramEditorInput) {
 			initializeTitle((IDiagramEditorInput) input);
 		}
 	}
 
+	protected void initializeTitle(SubmachineEditorInput input) {
+		Diagram diagram = input.getDiagram();
+		EObject element = diagram.getElement();
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
+				new SGraphItemProviderAdapterFactory());
+		setTitleImage(labelProvider.getImage(element));
+		initializeTitle(diagram);
+		setPartName(((SubmachineEditorInput) input).getContext() + " : " + labelProvider.getText(element));
+
+	}
+
 	protected void initializeTitle(IDiagramEditorInput input) {
 		Diagram diagram = input.getDiagram();
-		initializeTitle(diagram);
+		EObject element = diagram.getElement();
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
+				new SGraphItemProviderAdapterFactory());
+		setTitleImage(labelProvider.getImage(element));
+		setPartName(labelProvider.getText(element));
 	}
 
 	protected void initializeTitle(Diagram diagram) {
@@ -275,8 +289,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	}
 
 	public static final class BreadcrumbViewerLabelProvider extends BaseLabelProvider
-			implements
-				ITreePathLabelProvider {
+			implements ITreePathLabelProvider {
 
 		public void updateLabel(ViewerLabel label, TreePath elementPath) {
 			Diagram lastSegment = (Diagram) elementPath.getLastSegment();
@@ -305,6 +318,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 				}
 			}
 		}
+
 		@Override
 		public boolean isAdapterForType(Object type) {
 			return type instanceof BreadcrumbSynchronizer;
@@ -313,15 +327,14 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
 		// Default context menu items that should be suppressed
-		protected String[] exclude = new String[]{"addNoteLinkAction", "properties",
+		protected String[] exclude = new String[] { "addNoteLinkAction", "properties",
 				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
 				"org.eclipse.jst.ws.atk.ui.webservice.category.popupMenu",
 				"org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate",
-				"org.eclipse.debug.ui.contextualLaunch.profile.submenu",
-				"org.eclipse.cdt.ui.buildConfigContributionM",
+				"org.eclipse.debug.ui.contextualLaunch.profile.submenu", "org.eclipse.cdt.ui.buildConfigContributionM",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
 				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu", "viewGroup",
-				"viewMenu"};
+				"viewMenu" };
 
 		protected FilteringDiagramContextMenuProvider(IWorkbenchPart part, EditPartViewer viewer) {
 			super(part, viewer);
@@ -341,6 +354,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			diagram.getElement().eAdapters().add(breadcrumbSynchronizer);
 		}
 	}
+
 	protected void removeBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
 		for (Diagram diagram : diagramContainerHierachy) {
 			diagram.getElement().eAdapters().remove(breadcrumbSynchronizer);
@@ -351,7 +365,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	protected Adapter createBreadcrumbSynchronizer() {
 		return new BreadcrumbSynchronizer();
 	}
-	
+
 	@Override
 	public void firePropertyChange(int property) {
 		super.firePropertyChange(property);
