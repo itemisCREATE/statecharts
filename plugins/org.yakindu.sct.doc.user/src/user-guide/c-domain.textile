@@ -772,7 +772,11 @@ h2(#cdom_annotations_short_identifiers). The @ShortCIdentifiers annotation
 
 It is possible to add annotations to a statechart's specification to alter their or the code generator's behavior, see "Statechart Annotations":../user-guide/statechart_language.html#sclang_annotations.
 
+==<!-- Start c_domain_keyword_shortcidentifiers -->==
+
 The C/C++ domain offers one more annotation: @ShortCIdentifiers helps you to keep the generated code compliant to rules which require C identifiers not to be longer than 31 characters (or rather, to be uniquely identified by the first 31 characters). To achieve this, instead of aggressively shortening names which are part of a statechart's API, YAKINDU Statechart Tools gives feedback about the names that will be generated and warns if any user input results in C code that is non-compliant with the 31 character rule. This puts the user in charge of the naming scheme and keeps the resulting C identifiers predictable.
+
+==<!-- End c_domain_keyword_shortcidentifiers -->==
 
 This is mainly done by:
 
@@ -784,7 +788,6 @@ Please note that the generator model's option _statemachinePrefix_ is ignored wh
 
 Keep in mind that all public functions and types of the statechart are prefixed with its name, so keeping that one short helps a lot.
 
-This annotation is not supported by the C++ generator, only by the C generator.
 
 h3(#cdom_annotations_short_identifiers_example). Example
 
@@ -858,7 +861,7 @@ static sc_boolean check_main_region_Automation_lights_Lights_On_tr0_tr0(const Ho
 static sc_boolean check_main_region_Automation_pond_Pond_Off_tr0_tr0(const House* handle);
 static sc_boolean check_main_region_Automation_pond_Pond_On_tr0_tr0(const House* handle);
 
-p. With @@ShortCIdentifiers annotation:
+p. With @ShortCIdentifiers annotation:
 
 bc. /* prototypes of all internal functions */
 static sc_boolean Idle_tr0_check(const House* handle);
