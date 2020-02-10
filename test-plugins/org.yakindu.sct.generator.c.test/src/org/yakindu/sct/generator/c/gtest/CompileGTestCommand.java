@@ -41,6 +41,7 @@ public class CompileGTestCommand {
 	private boolean wnoUnusedFunction = false;
 	private boolean wnoLongLong = false;
 	private boolean wnoVariadicMacros = false;
+	private boolean wnoDeprecated = false;
 	
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
@@ -96,6 +97,11 @@ public class CompileGTestCommand {
 		this.wnoVariadicMacros = true;
 		return this;
 	}
+	
+	public CompileGTestCommand wnoDeprecated() {
+		this.wnoDeprecated = true;
+		return this;
+	}
 
 	public CompileGTestCommand sources(List<String> sources) {
 		this.sources  = sources;
@@ -122,7 +128,7 @@ public class CompileGTestCommand {
 		return this;
 	}
 
-	public List<String> build(String...compilerFlags) {
+	public List<String> build(boolean build, String...compilerFlags) {
 		List<String> command = new ArrayList<>();
 		if (makefileDir != null) {
 			try {
@@ -137,8 +143,12 @@ public class CompileGTestCommand {
 		}
 		command.add(compiler);
 		command.add("-g");
-		command.add("-o");
-		command.add(getFileName(program));
+		if(build) {
+			command.add("-o");
+			command.add(getFileName(program));
+		} else {
+			command.add("-c");
+		}
 		command.add("-O0");
 		if(wPedantic) {
 			command.add("-pedantic");
@@ -152,7 +162,6 @@ public class CompileGTestCommand {
 		}
 		if(wError) {
 			command.add("-Werror");
-			command.add("-Wno-deprecated");
 		}
 		if(wConversion) {
 			command.add("-Wconversion");
@@ -168,6 +177,9 @@ public class CompileGTestCommand {
 		}
 		if(wnoVariadicMacros) {
 			command.add("-Wno-variadic-macros");
+		}
+		if(wnoDeprecated) {
+			command.add("-Wno-deprecated");
 		}
 		
 		if (OS_MACOSX.equals(Platform.getOS())) {
@@ -187,11 +199,13 @@ public class CompileGTestCommand {
 		for (String sourceFile : sources) {
 			command.add(getFileName(sourceFile ));
 		}
-		command.add("-lgtest");
-		if (mainLib != null) {
-			command.add("-l" + mainLib);
-		} else {
-			command.add("-lgtest_main");
+		if(build) {
+			command.add("-lgtest");
+			if (mainLib != null) {
+				command.add("-l" + mainLib);
+			} else {
+				command.add("-lgtest_main");
+			}
 		}
 		command.add("-lm");
 		command.add("-lstdc++");
