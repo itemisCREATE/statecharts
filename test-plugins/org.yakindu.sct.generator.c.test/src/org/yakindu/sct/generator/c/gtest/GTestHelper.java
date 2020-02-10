@@ -220,10 +220,6 @@ public class GTestHelper {
 			 	.wExtra()
 			 	.wConversion()
 			 	.wError();
-		 if(compiler == Compiler.GCC) {
-			 //gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
-			 //gTestCommand.wnoUnusedFunction(); // ignore unused functions flag
-		 }
 		return gTestCommand.build();
 	}
 	
