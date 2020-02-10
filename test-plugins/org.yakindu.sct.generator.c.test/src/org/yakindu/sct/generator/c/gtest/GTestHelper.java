@@ -216,6 +216,7 @@ public class GTestHelper {
 				//.wPedantic()
 			 	.wAll()				
 			 	.wExtra()
+			 	.wConversion()
 			 	.wError();
 		 if(compiler == Compiler.GCC) {
 			 gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
