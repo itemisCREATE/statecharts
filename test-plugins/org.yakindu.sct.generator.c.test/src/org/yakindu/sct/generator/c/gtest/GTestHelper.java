@@ -216,7 +216,7 @@ public class GTestHelper {
 				//.wPedantic()
 			 	.wAll()				
 			 	.wExtra()
-			 	//.wError() //TODO Does currently not work with GMock and Cpp
+			 	.wError() //TODO Does currently not work with GMock and Cpp
 			 	.wConversion();
 		 if(compiler == Compiler.GCC) {
 			 gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
