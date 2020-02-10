@@ -17,6 +17,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.c.FlowCode
 
 /**
  * @author rbeckmann
@@ -28,6 +29,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension EventCode
+	@Inject protected extension FlowCode
 	@Inject protected extension ExpressionsChecker
 	
 	def interfaceFunctions(ExecutionFlow it) '''
@@ -46,6 +48,9 @@ class InterfaceFunctionsGenerator {
 			«FOR variable : scope.variableDefinitions»
 				«IF variable.isConstString»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
 				{
+					«IF variable.isConst»
+						«unusedParam(scHandle)»
+					«ENDIF»
 					return «variable.access»;
 				}
 				«IF !variable.readonly && !variable.const»

@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static CastExpressions statechart;
 
 
@@ -57,6 +59,7 @@ void CastExpressionsTest::setTimer(CastExpressions* statechart, const sc_eventid
 }
 
 void CastExpressionsTest::unsetTimer(CastExpressions* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

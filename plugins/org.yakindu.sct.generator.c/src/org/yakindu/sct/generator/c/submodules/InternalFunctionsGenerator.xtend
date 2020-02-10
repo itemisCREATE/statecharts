@@ -30,6 +30,14 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sexec.Call
+import org.yakindu.sct.model.sexec.CheckRef
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.types.Operation
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Parameter
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
 
 /**
  * @author rbeckmann
@@ -51,34 +59,52 @@ class InternalFunctionsGenerator {
 	def clearInEventsFunction(ExecutionFlow it) '''
 		static void «clearInEventsFctID»(«scHandleDecl»)
 		{
+			«var clearedEvents = 0»
 			«FOR scope : it.scopes»
-				«FOR event : scope.incomingEvents»
+				«FOR event : scope.incomingEvents»«NOOUT(clearedEvents+=1)»
 				«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasInternalScope»
-				«FOR event : internalScope.events»
+				«FOR event : internalScope.events»«NOOUT(clearedEvents+=1)»
 				«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDIF»
 			«IF timed»
-				«FOR event : timeEventScope.events»
+				«FOR event : timeEventScope.events»«NOOUT(clearedEvents+=1)»
 				«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
+			«ENDIF»
+			«IF clearedEvents == 0»
+				«unusedParam(scHandle)»
 			«ENDIF»
 		}
 	'''
 	
-	def clearOutEventsFunction(ExecutionFlow it) '''
-		static void «clearOutEventsFctID»(«scHandleDecl»)
-		{
-			«FOR scope : it.scopes»
-				«FOR event : scope.outgoingEvents»
-				«event.access» = «FALSE_LITERAL»;
+	def <T> NOOUT(T p) ''''''
+	
+	def clearOutEventsFunction(ExecutionFlow it) {
+		var clearedEvents = 0
+		'''
+			static void «clearOutEventsFctID»(«scHandleDecl»)
+			{
+				«FOR scope : it.scopes»
+					«FOR event : scope.outgoingEvents»«NOOUT(clearedEvents+=1)»
+					«event.access» = «FALSE_LITERAL»;
+					«ENDFOR»
 				«ENDFOR»
-			«ENDFOR»
-		}
-	'''	
+				«IF clearedEvents == 0»
+				«unusedParam(scHandle)»
+				«ENDIF»
+			}
+		'''	
+	}
+	
+	def defines(ExecutionFlow it) '''
+		#define SC_UNUSED(P) (void)(P)
+	'''
+
+	
 	
 	def functionPrototypes(ExecutionFlow it) '''
 		/* prototypes of all internal functions */
@@ -145,10 +171,28 @@ class InternalFunctionsGenerator {
 
 	 def implementation(Method it) '''
 	 	static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+	«IF !body.requiresHandles»
+			«unusedParam(scHandle)»
+	«ENDIF»
 	 		«body.code»
 	 	}
 	 '''
 	 
+	def requiresHandles(Step it) {
+		it.eAllContents.filter[e | e.requiresHandle].size > 0
+	}
+	 
+	def dispatch requiresHandle(EObject e) { false }
+	def dispatch requiresHandle(Call e) { true }
+	def dispatch requiresHandle(CheckRef e) { true }
+	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) }
+	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
+	
+	def isLocalVariable(EObject o) {
+		(o instanceof org.yakindu.base.types.Property) && (o.eContainer instanceof LocalVariableDefinition)	
+	}
+	
+	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionImplementation»

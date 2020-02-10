@@ -37,8 +37,10 @@ public class CompileGTestCommand {
 	private boolean wExtra = false;
 	private boolean wError = false;
 	private boolean wConversion = false;
-	private boolean wnoUnusedParameter = true;
+	private boolean wnoUnusedParameter = false;
 	private boolean wnoUnusedFunction = false;
+	private boolean wnoLongLong = false;
+	private boolean wnoVariadicMacros = false;
 	
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
@@ -82,6 +84,16 @@ public class CompileGTestCommand {
 	
 	public CompileGTestCommand wnoUnusedFunction() {
 		this.wnoUnusedFunction = true;
+		return this;
+	}
+
+	public CompileGTestCommand wnoLongLong() {
+		this.wnoLongLong = true;
+		return this;
+	}
+
+	public CompileGTestCommand wnoVariadicMacros() {
+		this.wnoVariadicMacros = true;
 		return this;
 	}
 
@@ -151,6 +163,13 @@ public class CompileGTestCommand {
 		if(wnoUnusedFunction) {
 			command.add("-Wno-unused-function");
 		}
+		if(wnoLongLong) {
+			command.add("-Wno-long-long");
+		}
+		if(wnoVariadicMacros) {
+			command.add("-Wno-variadic-macros");
+		}
+		
 		if (OS_MACOSX.equals(Platform.getOS())) {
 			command.add("-Wno-unused-private-field");
 		}

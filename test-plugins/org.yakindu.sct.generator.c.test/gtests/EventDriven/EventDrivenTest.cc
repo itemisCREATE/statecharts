@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static EventDriven statechart;
 
 
@@ -64,6 +66,7 @@ void EventDrivenTest::setTimer(EventDriven* statechart, const sc_eventid evid, c
 }
 
 void EventDrivenTest::unsetTimer(EventDriven* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -13,6 +13,8 @@
 #include "OperationsWithoutBraces.h"
 #include "OperationsWithoutBracesRequired.h"
 
+#define UNUSED(P) (void)(P)
+
 OperationsWithoutBraces handle;
 
 TEST(StatemachineTest, OperationsWithoutBracesTest) {
@@ -32,13 +34,16 @@ TEST(StatemachineTest, OperationsWithoutBracesTest) {
 }
 		
 sc_boolean operationsWithoutBracesIface_myBoolOp(const OperationsWithoutBraces* handle){
+	UNUSED(handle);
 	return false;
 }
 
 sc_integer operationsWithoutBracesIface_myIntOp(const OperationsWithoutBraces* handle){
+	UNUSED(handle);
 	return 0;
 }
 
 sc_real operationsWithoutBracesIface_myRealOp(const OperationsWithoutBraces* handle){
+	UNUSED(handle);
 	return 0.0;
 }

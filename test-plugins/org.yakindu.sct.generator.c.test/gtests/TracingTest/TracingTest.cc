@@ -13,16 +13,22 @@
 #include "gtest/gtest.h"
 #include "TracingRequired.h"
 
+#define UNUSED(P) (void)(P)
+
 Tracing statechart;
 
 bool entered = false;
 bool exited = false;
 
 void tracing_stateEntered(Tracing* handle, const TracingStates state){
+	UNUSED(handle);
+	UNUSED(state);
 	entered = true;
 }
 
 void tracing_stateExited(Tracing* handle, const TracingStates state){
+	UNUSED(handle);
+	UNUSED(state);
 	exited = true;
 }
 
