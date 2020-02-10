@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static EntryReactionAction statechart;
 
 
@@ -89,6 +91,7 @@ void EntryReactionActionTest::setTimer(EntryReactionAction* statechart, const sc
 }
 
 void EntryReactionActionTest::unsetTimer(EntryReactionAction* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

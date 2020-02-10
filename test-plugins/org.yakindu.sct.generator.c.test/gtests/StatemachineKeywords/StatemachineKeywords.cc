@@ -6,6 +6,8 @@
 #include "StatechartKeywordsRequired.h"
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static StatechartKeywords statechart;
 
 
@@ -52,6 +54,7 @@ void StatemachineKeywords::setTimer(StatechartKeywords* statechart, const sc_eve
 }
 
 void StatemachineKeywords::unsetTimer(StatechartKeywords* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 
@@ -68,6 +71,8 @@ void statechartKeywords_unsetTimer(StatechartKeywords* handle, const sc_eventid 
 }
 
 void statechartKeywordsIfaceIf_myOperation(const StatechartKeywords* statechart) {
+	SC_UNUSED(statechart);		
 }
 void statechartKeywordsInternal_myOperation(const StatechartKeywords* statechart) {
+	SC_UNUSED(statechart);		
 }

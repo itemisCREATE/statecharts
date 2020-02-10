@@ -42,6 +42,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Call
 
 class SExecExtensions {
 	def <T extends EObject> T eContainerOfType(EObject eObject, Class<T> type) {
@@ -322,18 +323,86 @@ class SExecExtensions {
 	 
 	def List<Step> entryActionFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		if (entryAction.called) funcs.add(entryAction) 
-		states.forEach( s | if (s.entryAction.called) funcs += s.entryAction )
+		if (entryAction.reachable) funcs.add(entryAction) 
+		states.forEach( s | if (s.entryAction.reachable) funcs += s.entryAction )
 		return funcs
 	}
 	
 	def List<Step> exitActionFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		if (exitAction.called) funcs.add(exitAction) 
-		states.forEach( s | if (s.exitAction.called) funcs += s.exitAction )
+		if (exitAction.reachable) funcs.add(exitAction) 
+		states.forEach( s | if (s.exitAction.reachable) funcs += s.exitAction )
 		return funcs
 	}
 
+
+	/* Returns the function Sequence which contains the Call.*/
+	def callerFunction(Call it) {
+		return it.ownerFunction
+	}
+	
+	def dispatch Sequence ownerFunction(Sequence it){
+		if ( (eContainer instanceof ExecutionNode) || (eContainer instanceof ExecutionScope) || (eContainer instanceof Reaction))  {
+			return it	
+		} else {
+			return eContainer.ownerFunction
+		}
+	}
+	
+	def dispatch Sequence ownerFunction(EObject it){
+		
+		if (eContainer === null) return null
+		
+		return eContainer.ownerFunction
+	}
+	
+	def dispatch Sequence ownerFunction(Method it){
+		return null
+	}
+	
+	
+	def dispatch Method ownerMethod(EObject it){
+		if (eContainer === null) {
+			return null	
+		} else {
+			return eContainer.ownerMethod
+		}
+	}
+	
+	def dispatch Method ownerMethod(ExecutionNode it){
+		return null
+	}
+	
+	def dispatch Method ownerMethod(ExecutionScope it){
+		return null
+	}
+	
+	def dispatch Method ownerMethod(Method it){
+		return it
+	}
+	
+	
+	/** Checks if a step is reachable.   */
+	def boolean isReachable(Step it) {
+		if ( it === null ) return false
+		
+		for( c : it.caller ) {
+			if (c.ownerMethod !== null) return true
+			val f = c.ownerFunction
+			if (f !== null ) {
+				if (f.eContainer instanceof ExecutionFlow ) return true
+				if (f.reachable) return true	
+			}
+		}
+		
+		return false
+	}
+	
+	def List<Sequence> reachable(List<Sequence> it) {
+		filter( s | s.reachable ).toList
+	}
+	
+	
 	/**
 	 * Checks if a step is called or not.
 	 */
@@ -350,21 +419,22 @@ class SExecExtensions {
 	 
 	def List<Step> enterSequenceFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		funcs.addAll(enterSequences.called) 
-		states.forEach( s | funcs += s.enterSequences.called )
+		funcs.addAll(enterSequences.reachable) 
+		states.forEach( s | funcs += s.enterSequences.reachable )
 		regions.forEach( s | {
-			funcs += s.enterSequences.called
-			if (s.deepEnterSequence.called) funcs += s.deepEnterSequence
-			if (s.shallowEnterSequence.called) funcs += s.shallowEnterSequence
+			funcs += s.enterSequences.reachable
+			if (s.deepEnterSequence.reachable) funcs += s.deepEnterSequence
+			if (s.shallowEnterSequence.reachable) funcs += s.shallowEnterSequence
 		})
 		return funcs
 	}
 	 
 	def List<Step> exitSequenceFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		if (exitSequence.called) funcs.add(exitSequence) 
-		states.forEach( s | if (s.exitSequence.called) funcs += s.exitSequence )
-		regions.forEach( s | if (s.exitSequence.called) funcs += s.exitSequence )
+		if (exitSequence.reachable) funcs.add(exitSequence) 
+		states.forEach( s | if (s.exitSequence.reachable) funcs += s.exitSequence )
+		regions.forEach( s | if (s.exitSequence.reachable
+		) funcs += s.exitSequence )
 		return funcs
 	}
 	 
@@ -383,11 +453,14 @@ class SExecExtensions {
 	
 	def List<Step> reactFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		if (reactSequence.called) funcs.add(reactSequence) 
-		states.forEach( s | if (s.reactSequence.called) funcs += s.reactSequence )
-		nodes.forEach( s | if (s.reactSequence.called) funcs += s.reactSequence )
+		if (reactSequence.reachable) funcs.add(reactSequence) 
+		states.forEach( s | if (s.reactSequence.reachable) funcs += s.reactSequence )
+		nodes.forEach( s | if (s.reactSequence.reachable) funcs += s.reactSequence )
 		return funcs
 	}
+	
+	
+	
 	def dispatch Reaction reaction(Check it) { eContainer as Reaction }
 	def dispatch Reaction reaction(EObject it) { eContainer?.reaction }
 	def dispatch Reaction reaction(Reaction it) { it }

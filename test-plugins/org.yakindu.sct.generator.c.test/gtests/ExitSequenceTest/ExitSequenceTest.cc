@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static ExitSequence statechart;
 
 
@@ -317,6 +319,7 @@ void ExitSequenceTest::setTimer(ExitSequence* statechart, const sc_eventid evid,
 }
 
 void ExitSequenceTest::unsetTimer(ExitSequence* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

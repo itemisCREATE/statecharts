@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static TransitionHandlesMultipleExits statechart;
 
 
@@ -91,6 +93,7 @@ void TransitionHandlesMultipleExists::setTimer(TransitionHandlesMultipleExits* s
 }
 
 void TransitionHandlesMultipleExists::unsetTimer(TransitionHandlesMultipleExits* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

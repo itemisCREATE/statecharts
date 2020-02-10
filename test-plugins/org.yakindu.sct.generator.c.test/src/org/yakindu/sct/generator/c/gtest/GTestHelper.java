@@ -213,15 +213,13 @@ public class GTestHelper {
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
-				//.wPedantic()
+				.wPedantic()
+				.wnoLongLong()
+				.wnoVariadicMacros()
 			 	.wAll()				
 			 	.wExtra()
-			 	.wError()
-			 	.wConversion();
-		 if(compiler == Compiler.GCC) {
-			 gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
-			 gTestCommand.wnoUnusedFunction(); // ignore unused functions flag
-		 }
+			 	.wConversion()
+			 	.wError();
 		return gTestCommand.build();
 	}
 	

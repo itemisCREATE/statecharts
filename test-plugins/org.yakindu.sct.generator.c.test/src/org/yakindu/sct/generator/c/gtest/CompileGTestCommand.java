@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.c.gtest;
 
+import static org.eclipse.core.runtime.Platform.OS_MACOSX;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 
 import com.google.common.collect.Lists;
 
@@ -37,6 +40,8 @@ public class CompileGTestCommand {
 	private boolean wConversion = false;
 	private boolean wnoUnusedParameter = false;
 	private boolean wnoUnusedFunction = false;
+	private boolean wnoLongLong = false;
+	private boolean wnoVariadicMacros = false;
 	
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
@@ -80,6 +85,16 @@ public class CompileGTestCommand {
 	
 	public CompileGTestCommand wnoUnusedFunction() {
 		this.wnoUnusedFunction = true;
+		return this;
+	}
+
+	public CompileGTestCommand wnoLongLong() {
+		this.wnoLongLong = true;
+		return this;
+	}
+
+	public CompileGTestCommand wnoVariadicMacros() {
+		this.wnoVariadicMacros = true;
 		return this;
 	}
 
@@ -148,6 +163,16 @@ public class CompileGTestCommand {
 		}	
 		if(wnoUnusedFunction) {
 			command.add("-Wno-unused-function");
+		}
+		if(wnoLongLong) {
+			command.add("-Wno-long-long");
+		}
+		if(wnoVariadicMacros) {
+			command.add("-Wno-variadic-macros");
+		}
+		
+		if (OS_MACOSX.equals(Platform.getOS())) {
+			command.add("-Wno-unused-private-field");
 		}
 		
 		for(String compilerFlag:compilerFlags) {

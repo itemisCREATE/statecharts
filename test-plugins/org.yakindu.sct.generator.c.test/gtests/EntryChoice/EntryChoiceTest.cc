@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static EntryChoice statechart;
 
 
@@ -53,6 +55,7 @@ void EntryChoiceTest::setTimer(EntryChoice* statechart, const sc_eventid evid, c
 }
 
 void EntryChoiceTest::unsetTimer(EntryChoice* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

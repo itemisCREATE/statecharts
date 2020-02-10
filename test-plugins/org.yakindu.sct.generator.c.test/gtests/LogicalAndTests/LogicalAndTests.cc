@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static LogicalAnd statechart;
 
 
@@ -52,6 +54,7 @@ void LogicalAndTests::setTimer(LogicalAnd* statechart, const sc_eventid evid, co
 }
 
 void LogicalAndTests::unsetTimer(LogicalAnd* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

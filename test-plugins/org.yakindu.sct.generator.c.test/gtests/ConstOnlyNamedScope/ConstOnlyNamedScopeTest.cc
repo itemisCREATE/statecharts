@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static ConstOnlyNamedScope statechart;
 
 
@@ -59,6 +61,7 @@ void ConstOnlyNamedScopeTest::setTimer(ConstOnlyNamedScope* statechart, const sc
 }
 
 void ConstOnlyNamedScopeTest::unsetTimer(ConstOnlyNamedScope* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

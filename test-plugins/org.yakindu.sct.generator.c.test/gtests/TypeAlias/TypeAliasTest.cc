@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static TypeAlias statechart;
 
 
@@ -60,6 +62,7 @@ void TypeAliasTest::setTimer(TypeAlias* statechart, const sc_eventid evid, const
 }
 
 void TypeAliasTest::unsetTimer(TypeAlias* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

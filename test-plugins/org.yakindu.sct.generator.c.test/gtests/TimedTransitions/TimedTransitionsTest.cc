@@ -6,6 +6,8 @@
 #include "TimedTransitionsRequired.h"
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static TimedTransitions statechart;
 
 
@@ -90,6 +92,7 @@ void TimedTransitionsTest::setTimer(TimedTransitions* statechart, const sc_event
 }
 
 void TimedTransitionsTest::unsetTimer(TimedTransitions* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

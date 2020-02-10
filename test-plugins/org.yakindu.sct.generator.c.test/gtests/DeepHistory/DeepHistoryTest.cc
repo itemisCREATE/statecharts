@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static DeepHistory statechart;
 
 
@@ -68,6 +70,7 @@ void DeepHistoryTest::setTimer(DeepHistory* statechart, const sc_eventid evid, c
 }
 
 void DeepHistoryTest::unsetTimer(DeepHistory* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

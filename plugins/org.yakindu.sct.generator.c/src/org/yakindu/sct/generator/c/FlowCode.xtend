@@ -181,5 +181,9 @@ class FlowCode {
 	def dispatch CharSequence code(Statement it) '''
 		«expression.code»;
 	'''
+
+	def unusedParam(String s) '''
+		SC_UNUSED(«s»);
+	'''
 	
 }
