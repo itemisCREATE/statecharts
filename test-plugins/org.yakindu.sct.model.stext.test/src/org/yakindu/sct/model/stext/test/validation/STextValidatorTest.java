@@ -872,7 +872,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	}
 	
 	@Test
-	public void checkImportNotCyclicsct() {
+	public void checkImportNotCyclic() {
 		// Validation will be removed with forward declarations
 	}
 	
