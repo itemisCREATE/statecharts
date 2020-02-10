@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static FeatureCalls statechart;
 
 
@@ -53,7 +55,7 @@ void FeatureCallsTest::setTimer(FeatureCalls* statechart, const sc_eventid evid,
 }
 
 void FeatureCallsTest::unsetTimer(FeatureCalls* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

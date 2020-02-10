@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static ConstantsVariation statechart;
 
 
@@ -61,7 +63,7 @@ void ConstantsVariationTests::setTimer(ConstantsVariation* statechart, const sc_
 }
 
 void ConstantsVariationTests::unsetTimer(ConstantsVariation* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static GuardedEntry statechart;
 
 
@@ -87,7 +89,7 @@ void GuardedEntryTest::setTimer(GuardedEntry* statechart, const sc_eventid evid,
 }
 
 void GuardedEntryTest::unsetTimer(GuardedEntry* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

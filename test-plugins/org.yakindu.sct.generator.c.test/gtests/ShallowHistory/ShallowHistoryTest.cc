@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static ShallowHistory statechart;
 
 
@@ -80,7 +82,7 @@ void ShallowHistoryTest::setTimer(ShallowHistory* statechart, const sc_eventid e
 }
 
 void ShallowHistoryTest::unsetTimer(ShallowHistory* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static SimpleHierachy statechart;
 
 
@@ -57,7 +59,7 @@ void SimpleHierachyTest::setTimer(SimpleHierachy* statechart, const sc_eventid e
 }
 
 void SimpleHierachyTest::unsetTimer(SimpleHierachy* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

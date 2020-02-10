@@ -8,6 +8,8 @@
 #include "ChildFirstTransitionsInSubchartRequired.h"
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static ChildFirstTransitionsInSubchart statechart;
 
 
@@ -320,7 +322,7 @@ void ChildFirstTransitionsinSubchartTest::setTimer(ChildFirstTransitionsInSubcha
 }
 
 void ChildFirstTransitionsinSubchartTest::unsetTimer(ChildFirstTransitionsInSubchart* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 
@@ -339,8 +341,10 @@ TEST_F(ChildFirstTransitionsinSubchartTest, executionOrderWithTransitionInAllSub
 
 
 sc_boolean childFirstTransitionsInSubchartIface_check(const ChildFirstTransitionsInSubchart* statechart, const sc_string value) {
+	SC_UNUSED(statechart);		
 	return (checkMock->*(checkMock->getBehavior(value)))();
 }
 sc_integer childFirstTransitionsInSubchartIface_next(const ChildFirstTransitionsInSubchart* statechart) {
+	SC_UNUSED(statechart);		
 	return (nextMock->*(nextMock->getBehavior()))();
 }

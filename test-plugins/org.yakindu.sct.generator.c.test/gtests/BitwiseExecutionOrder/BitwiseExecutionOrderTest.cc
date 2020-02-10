@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static BitwiseExecutionOrder statechart;
 
 
@@ -53,7 +55,7 @@ void BitwiseExecutionOrderTest::setTimer(BitwiseExecutionOrder* statechart, cons
 }
 
 void BitwiseExecutionOrderTest::unsetTimer(BitwiseExecutionOrder* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

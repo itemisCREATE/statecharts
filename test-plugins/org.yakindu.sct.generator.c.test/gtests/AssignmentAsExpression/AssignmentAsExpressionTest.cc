@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static AssignmentAsExpression statechart;
 
 
@@ -79,7 +81,7 @@ void AssignmentAsExpressionTest::setTimer(AssignmentAsExpression* statechart, co
 }
 
 void AssignmentAsExpressionTest::unsetTimer(AssignmentAsExpression* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

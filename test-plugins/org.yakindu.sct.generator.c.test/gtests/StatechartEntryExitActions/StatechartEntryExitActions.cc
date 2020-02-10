@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static StatechartEntryAndExitActions statechart;
 
 
@@ -63,7 +65,7 @@ void StatechartEntryExitActions::setTimer(StatechartEntryAndExitActions* statech
 }
 
 void StatechartEntryExitActions::unsetTimer(StatechartEntryAndExitActions* handle, const sc_eventid evid){
-	(void)handle;
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 
