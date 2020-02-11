@@ -117,9 +117,12 @@ public class CompileGTestCommand {
 			command.add("-o");
 			command.add(getFileName(program));
 		} else {
+			// force statechart compilation with C 90 and C++ 98
 			command.add("-c");
 			if(compiler.equals("gcc")) {
-					command.add("-std=c90");
+				command.add("-std=c90");
+			} else {
+				command.add("-std=c++98");
 			}
 		}
 		command.add("-O0");
