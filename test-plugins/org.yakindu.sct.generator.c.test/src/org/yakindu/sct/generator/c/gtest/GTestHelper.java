@@ -219,8 +219,6 @@ public class GTestHelper {
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
 				.wPedantic()
-//				.wnoLongLong()
-//				.wnoVariadicMacros()
 			 	.wAll()				
 			 	.wExtra()
 			 	.wConversion()
