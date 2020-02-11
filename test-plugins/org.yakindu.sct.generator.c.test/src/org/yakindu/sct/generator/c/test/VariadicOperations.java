@@ -10,28 +10,24 @@
  */
 package org.yakindu.sct.generator.c.test;
 
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
-import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
+import org.yakindu.sct.generator.c.gtest.GTestRunner;
 
 @GTest(sourceFile = "gtests/VariadicOperations/VariadicOperations.cc",
 		program = "gtests/VariadicOperations/VariadicFunctions",
 		model = "testmodels/SCTUnit/VariadicFunctions.sct",
-		statechartBundle = "org.yakindu.sct.test.models")
+		statechartBundle = "org.yakindu.sct.test.models",
+		additionalFilesToCompile = {
+				"VariadicFunctions.c"
+		}
+		)
 @RunWith(GTestRunner.class)
 public class VariadicOperations {
 
-	protected final GTestHelper helper = new GTestHelper(this) {		
-		@Override
-		protected void getSourceFiles(Collection<String> files) {
-			super.getSourceFiles(files);
-			files.add(getFileName(getTestProgram()) + ".c");
-		}
-		
+	protected final GTestHelper helper = new GTestHelper(this) {
 	};
 
 	@Before
