@@ -17,7 +17,6 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
-import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
@@ -32,7 +31,6 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
-import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.types.ComplexType
 
@@ -101,8 +99,6 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»true«ELSE»false«ENDIF»'''
-	
-	override dispatch CharSequence code(StringLiteral it) '''(«STRING_TYPE») «super._code(it)»'''
 	
 	/** Don't use bool_true for C++ code */
 	override dispatch CharSequence sc_boolean_code(Expression it) {code}
