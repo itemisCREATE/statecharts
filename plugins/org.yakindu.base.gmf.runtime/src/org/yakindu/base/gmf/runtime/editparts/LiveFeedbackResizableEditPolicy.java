@@ -87,33 +87,10 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
 	@Override
 	protected ResizeTracker getResizeTracker(int direction) {
-
-		return new ResizeTracker((GraphicalEditPart) getHost(), direction) {
-
-			@Override
-			protected void updateSourceRequest() {
-				enforceConstraintForMove((ChangeBoundsRequest) getSourceRequest());
-				super.updateSourceRequest();
-			}
-
-			@Override
-			protected void enforceConstraintsForResize(ChangeBoundsRequest request) {
-				final IFigure figure = getHostFigure();
-				Dimension prefSize = figure.getPreferredSize().getCopy();
-				figure.translateToAbsolute(prefSize);
-				Rectangle bounds = getOriginalBounds();
-				bounds = request.getTransformedRectangle(bounds);
-				if (bounds.width < prefSize.width) {
-					request.getSizeDelta().width = request.getSizeDelta().width + (prefSize.width - bounds.width);
-				}
-				if (bounds.height < prefSize.height) {
-					request.getSizeDelta().height = request.getSizeDelta().height + (prefSize.height - bounds.height);
-				}
-
-				request.setSizeDelta(request.getSizeDelta());
-			}
-
-		};
+		LiveFeedbackResizeTracker liveFeedbackResizeTracker = new LiveFeedbackResizeTracker(
+				(GraphicalEditPart) getHost(), direction);
+		liveFeedbackResizeTracker.setOriginalBounds(getOriginalBounds());
+		return liveFeedbackResizeTracker;
 	}
 
 	protected void enforceConstraintForMove(ChangeBoundsRequest request) {
@@ -154,5 +131,34 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 		getHostFigure().getParent().setConstraint(getHostFigure(), rect);
 		lastRequest = (String) request.getType();
 	}
+
+	public class LiveFeedbackResizeTracker extends org.yakindu.base.gmf.runtime.tracker.ResizeTracker {
+
+		public LiveFeedbackResizeTracker(GraphicalEditPart owner, int direction) {
+			super(owner, direction);
+		}
+
+		@Override
+		protected Rectangle getOriginalBounds() {
+			return LiveFeedbackResizableEditPolicy.this.getOriginalBounds();
+		}
+
+		protected void enforceConstraintsForResize(ChangeBoundsRequest request) {
+			super.enforceConstraintsForResize(request);
+			final IFigure figure = getHostFigure();
+			Dimension prefSize = figure.getPreferredSize().getCopy();
+			figure.translateToAbsolute(prefSize);
+			Rectangle bounds = getOriginalBounds();
+			bounds = request.getTransformedRectangle(bounds);
+			if (bounds.width < prefSize.width) {
+				request.getSizeDelta().width = request.getSizeDelta().width + (prefSize.width - bounds.width);
+			}
+			if (bounds.height < prefSize.height) {
+				request.getSizeDelta().height = request.getSizeDelta().height + (prefSize.height - bounds.height);
+			}
+			request.setSizeDelta(request.getSizeDelta());
+		}
+
+	};
 
 }
