@@ -61,6 +61,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 			'''
 				«runCycleSignature»
 				{
+					«internalEventStructTypeName» currentEvent;
 					«IF needsRunCycleGuard»
 					if(«scHandle»->is_running_cycle == «TRUE_LITERAL») {
 						return;
@@ -69,7 +70,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					«ENDIF»
 					«clearOutEventsFctID»(«scHandle»);
 					
-					«internalEventStructTypeName» currentEvent = «nextEventFctID»(«scHandle»);
+					currentEvent = «nextEventFctID»(«scHandle»);
 					
 					do {
 						«dispatchEventFctID»(«scHandle», &currentEvent);

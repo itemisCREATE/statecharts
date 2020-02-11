@@ -76,8 +76,10 @@ class EventDrivenEventCode extends EventCode {
 		}»)'''
 		'''
 		«IF value !== null»
-		«event.typeSpecifier.targetLanguageName» «valueVarName» = «exp.code(value)»;
-		«flow.addToQueueValueFctID»(«queue», «event.eventEnumMemberName», &«valueVarName»)
+		{
+			«event.typeSpecifier.targetLanguageName» «valueVarName» = «exp.code(value)»;
+			«flow.addToQueueValueFctID»(«queue», «event.eventEnumMemberName», &«valueVarName»);
+		}
 		«ELSE»
 		«flow.addToQueueFctID»(«queue», «event.eventEnumMemberName»)«ENDIF»
 		'''
