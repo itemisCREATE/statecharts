@@ -19,24 +19,32 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 
-@GTest(sourceFile = "gtests/UnimplementedOCBTest/UnimplementedOCBTest.cc", program = "gtests/UnimplementedOCBTest/UnimplementedOCB", model = "testmodels/SCTUnit/UnimplementedOCB.sct", statechartBundle = "org.yakindu.sct.test.models")
+@GTest(
+		statechartBundle = "org.yakindu.sct.test.models",
+		sourceFile = "gtests/UnimplementedOCBTest/UnimplementedOCBTest.cc", 
+		program = "gtests/UnimplementedOCBTest/UnimplementedOCB", 
+		model = "testmodels/SCTUnit/UnimplementedOCB.sct", 
+		additionalFilesToCopy = {
+			"gtests/UnimplementedOCBTest/OCBDefaultInterfaceImpl.h",
+			"gtests/UnimplementedOCBTest/OCBInternalImpl.h",
+			"gtests/UnimplementedOCBTest/OCBNamedInterfaceImpl.h",
+			"gtests/UnimplementedOCBTest/OCBInternalImpl.cpp",
+			"gtests/UnimplementedOCBTest/OCBNamedInterfaceImpl.cpp",
+			"gtests/UnimplementedOCBTest/OCBDefaultInterfaceImpl.cpp",
+			"libraryTarget/sc_runner.h",
+			"libraryTarget/sc_runner.cpp"
+		}, 
+		additionalFilesToCompile = {
+			"UnimplementedOCB.cpp",
+			"OCBInternalImpl.cpp",
+			"OCBNamedInterfaceImpl.cpp",
+			"OCBDefaultInterfaceImpl.cpp",
+			"sc_runner.cpp"
+		}
+		)
 @RunWith(GTestRunner.class)
 public class UnimplementedOCBTest {
 	protected final GTestHelper helper = new GTestHelper(this, Compiler.GPLUSPLUS) {
-
-		@Override
-		protected void getTestDataFiles(Collection<String> files) {
-			super.getTestDataFiles(files);
-			files.add("gtests/UnimplementedOCBTest/OCBDefaultInterfaceImpl.h");
-			files.add("gtests/UnimplementedOCBTest/OCBInternalImpl.h");
-			files.add("gtests/UnimplementedOCBTest/OCBNamedInterfaceImpl.h");
-		}
-
-		@Override
-		protected void getSourceFiles(Collection<String> files) {
-			super.getSourceFiles(files);
-			files.add(getFileName(getTestProgram()) + ".cpp");
-		}
 
 	};
 
