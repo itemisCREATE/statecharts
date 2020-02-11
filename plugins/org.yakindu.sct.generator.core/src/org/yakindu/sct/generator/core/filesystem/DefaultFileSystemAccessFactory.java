@@ -91,6 +91,7 @@ public class DefaultFileSystemAccessFactory {
 		URI uri = access.getURI("", outputConfiguration);
 		if (uri.isFile()) {
 			File file = new File(uri.path());
+			if (!file.exists()) return;
 			if (!file.canWrite()) {
 				logger.log(String.format("Can not generate files to read-only folder '%s'. ", folderName));
 			}
