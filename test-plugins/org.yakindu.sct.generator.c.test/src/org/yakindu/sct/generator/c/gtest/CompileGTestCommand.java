@@ -37,11 +37,6 @@ public class CompileGTestCommand {
 	private boolean wExtra = false;
 	private boolean wError = false;
 	private boolean wConversion = false;
-	private boolean wnoUnusedParameter = false;
-	private boolean wnoUnusedFunction = false;
-	private boolean wnoLongLong = false;
-	private boolean wnoVariadicMacros = false;
-	private boolean wnoDeprecated = false;
 	
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
@@ -78,31 +73,6 @@ public class CompileGTestCommand {
 		return this;
 	}
 	
-	public CompileGTestCommand wnoUnusedParameter() {
-		this.wnoUnusedParameter = true;
-		return this;
-	}
-	
-	public CompileGTestCommand wnoUnusedFunction() {
-		this.wnoUnusedFunction = true;
-		return this;
-	}
-
-	public CompileGTestCommand wnoLongLong() {
-		this.wnoLongLong = true;
-		return this;
-	}
-
-	public CompileGTestCommand wnoVariadicMacros() {
-		this.wnoVariadicMacros = true;
-		return this;
-	}
-	
-	public CompileGTestCommand wnoDeprecated() {
-		this.wnoDeprecated = true;
-		return this;
-	}
-
 	public CompileGTestCommand sources(List<String> sources) {
 		this.sources  = sources;
 		return this;
@@ -148,6 +118,9 @@ public class CompileGTestCommand {
 			command.add(getFileName(program));
 		} else {
 			command.add("-c");
+			if(compiler.equals("gcc")) {
+					command.add("-std=c90");
+			}
 		}
 		command.add("-O0");
 		if(wPedantic) {
@@ -166,23 +139,10 @@ public class CompileGTestCommand {
 		if(wConversion) {
 			command.add("-Wconversion");
 		}
-		if(wnoUnusedParameter) {
-			command.add("-Wno-unused-parameter");
-		}	
-		if(wnoUnusedFunction) {
-			command.add("-Wno-unused-function");
-		}
-		if(wnoLongLong) {
-			command.add("-Wno-long-long");
-		}
-		if(wnoVariadicMacros) {
-			command.add("-Wno-variadic-macros");
-		}
-		if(wnoDeprecated) {
-			command.add("-Wno-deprecated");
-		}
 		
 		if (OS_MACOSX.equals(Platform.getOS())) {
+			command.add("-Wno-variadic-macros");
+			command.add("-Wno-long-long");
 			command.add("-Wno-unused-private-field");
 		}
 		
