@@ -112,13 +112,8 @@ public class CompileGTestCommand {
 			}
 		}
 		command.add(compiler);
-		command.add("-g");
-		if(build) {
-			command.add("-o");
-			command.add(getFileName(program));
-		} else {
+		if(!build) {
 			// force statechart compilation with C 90 and C++ 98
-			command.add("-c");
 			if(compiler.equals("gcc")) {
 				command.add("-std=c90");
 			} else {
@@ -126,6 +121,7 @@ public class CompileGTestCommand {
 			}
 		}
 		command.add("-O0");
+		command.add("-g");
 		if(wPedantic) {
 			command.add("-pedantic");
 			command.add("-pedantic-errors");
@@ -141,6 +137,13 @@ public class CompileGTestCommand {
 		}
 		if(wConversion) {
 			command.add("-Wconversion");
+		}
+		if(build) {
+			command.add("-o");
+			command.add(getFileName(program));
+		} else {
+			// only create object files
+			command.add("-c");
 		}
 		
 		if (OS_MACOSX.equals(Platform.getOS())) {
