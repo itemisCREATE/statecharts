@@ -66,19 +66,23 @@ class Types implements IContentTemplate {
 		
 		/* Error codes and mask can be used to check unimplemented operation callbacks. They can be activated in the API feature within the .sgen file.*/
 		#ifndef «ErrorCode.OCB_INIT_MASK.getName()»
-		#define «ErrorCode.OCB_INIT_MASK.getName» «ErrorCode.OCB_INIT_MASK.value»
+		// Original binary value: «ErrorCode.OCB_INIT_MASK.binaryValue»
+		#define «ErrorCode.OCB_INIT_MASK.getName» «ErrorCode.OCB_INIT_MASK.getHexValue»
 		#endif
 
 		#ifndef «ErrorCode.OCB_DEFAULT_INIT.getName»
-		#define «ErrorCode.OCB_DEFAULT_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_DEFAULT_INIT.value»)
+		// Original binary value: («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_DEFAULT_INIT.binaryValue»)
+		#define «ErrorCode.OCB_DEFAULT_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_DEFAULT_INIT.getHexValue»)
 		#endif
 
 		#ifndef «ErrorCode.OCB_NAMED_INIT.getName»
-		#define «ErrorCode.OCB_NAMED_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_NAMED_INIT.value»)
+		// Original binary value: «ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_NAMED_INIT.binaryValue»)
+		#define «ErrorCode.OCB_NAMED_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_NAMED_INIT.getHexValue»)
 		#endif
 
 		#ifndef «ErrorCode.OCB_INTERNAL_INIT.getName»
-		#define «ErrorCode.OCB_INTERNAL_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_INTERNAL_INIT.value»)
+		// Original binary value: #define («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_INTERNAL_INIT.binaryValue»)
+		#define «ErrorCode.OCB_INTERNAL_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_INTERNAL_INIT.getHexValue»)
 		#endif			
 		
 		#endif /* «typesModule.define»_H_ */

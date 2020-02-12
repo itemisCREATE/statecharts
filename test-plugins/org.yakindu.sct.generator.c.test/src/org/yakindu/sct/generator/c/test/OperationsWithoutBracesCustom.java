@@ -10,26 +10,25 @@
  */
 package org.yakindu.sct.generator.c.test;
 
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
-import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
+import org.yakindu.sct.generator.c.gtest.GTestRunner;
 
-@GTest(sourceFile = "gtests/OperationsWithoutBraces/OperationsWithoutBracesCustom.cc", program = "gtests/OperationsWithoutBraces/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct", statechartBundle = "org.yakindu.sct.test.models")
+@GTest(
+		sourceFile = "gtests/OperationsWithoutBraces/OperationsWithoutBracesCustom.cc", 
+		program = "gtests/OperationsWithoutBraces/OperationsWithoutBraces", 
+		model = "testmodels/SCTUnit/OperationsWithoutBraces.sct", 
+		statechartBundle = "org.yakindu.sct.test.models",
+		additionalFilesToCompile = {
+				"OperationsWithoutBraces.c"
+			}
+		)
 @RunWith(GTestRunner.class)
 public class OperationsWithoutBracesCustom {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
-		
-		@Override
-		protected void getSourceFiles(Collection<String> files) {
-			super.getSourceFiles(files);
-			files.add(getFileName(getTestProgram()) + ".c");
-		}
-		
 	};
 
 	@Before

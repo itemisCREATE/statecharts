@@ -22,17 +22,5 @@ public:
 	void defaultInterfaceOperation();
 };
 
-OCBDefaultInterfaceImpl::OCBDefaultInterfaceImpl() {
-
-}
-
-OCBDefaultInterfaceImpl::~OCBDefaultInterfaceImpl() {
-
-}
-
-void OCBDefaultInterfaceImpl::defaultInterfaceOperation(){
-
-}
-
 
 #endif /* OCBDEFAULTINTERFACEIMPL_H_ */

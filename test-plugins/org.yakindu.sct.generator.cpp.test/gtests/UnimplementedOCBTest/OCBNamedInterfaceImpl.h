@@ -21,15 +21,6 @@ class OCBNamedInterfaceImpl : public UnimplementedOCB::SCI_Named_OCB {
 		void namedInterfaceOperation();
 };
 
-OCBNamedInterfaceImpl::OCBNamedInterfaceImpl() {
-
-}
-
-OCBNamedInterfaceImpl::~OCBNamedInterfaceImpl() {
-
-}
-
-void OCBNamedInterfaceImpl::namedInterfaceOperation(){}
 
 
 #endif /* SRC_GEN_OCBNAMEDINTERFACEIMPL_H_ */

@@ -17,7 +17,12 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 
-@GTest(statechartBundle = "org.yakindu.sct.test.models", sourceFile = "gtests/StateNumTest/StateNumTest.cc", program = "gtests/StateNumTest/StateNumTest", model = "testmodels/SCTUnit/HistoryWithoutInitialStep.sct", additionalFilesToCopy = {
+@GTest(
+		statechartBundle = "org.yakindu.sct.test.models", 
+		sourceFile = "gtests/StateNumTest/StateNumTest.cc", 
+		program = "gtests/StateNumTest/StateNumTest", 
+		model = "testmodels/SCTUnit/HistoryWithoutInitialStep.sct", 
+		additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"
 }, additionalFilesToCompile = {
