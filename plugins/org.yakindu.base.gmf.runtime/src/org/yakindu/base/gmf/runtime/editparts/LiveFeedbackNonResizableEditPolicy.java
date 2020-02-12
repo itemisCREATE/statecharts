@@ -11,6 +11,7 @@
 package org.yakindu.base.gmf.runtime.editparts;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
@@ -25,20 +26,19 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx {
 
 	private boolean connectionStart = true;
-	private Rectangle originalBounds = null;
+	private PrecisionRectangle originalBounds = null;
 	private ChangeBoundsRequest NULL_REQUEST = new ChangeBoundsRequest(REQ_MOVE_CHILDREN);
 	private String lastRequest = "";
 
-	
 	protected Rectangle getOriginalBounds() {
 		if (originalBounds == null) {
 			updateOriginalBounds();
 		}
 		return originalBounds.getCopy();
 	}
-	
+
 	protected void updateOriginalBounds() {
-		originalBounds = getHostFigure().getBounds().getCopy();
+		originalBounds = new PrecisionRectangle(getHostFigure().getBounds().getCopy());
 		getHostFigure().translateToAbsolute(originalBounds);
 	}
 
@@ -55,7 +55,7 @@ public class LiveFeedbackNonResizableEditPolicy extends NonResizableEditPolicyEx
 			return;
 		}
 		super.eraseChangeBoundsFeedback(request);
-		enforceConstraintForMove(request);
+		 enforceConstraintForMove(request);
 		if (connectionStart) {
 			updateOriginalBounds();
 			connectionStart = false;
