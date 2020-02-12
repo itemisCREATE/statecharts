@@ -81,22 +81,22 @@ class Tracing implements IContentTemplate {
 		
 		
 		#define SC_TRACE(MACHINE, EVENT) \
-			if (MACHINE->trace_handler != sc_null && MACHINE->trace_handler->trace != sc_null) {\
+			if (MACHINE->trace_handler != «CLiterals::NULL_LITERAL_NAME» && MACHINE->trace_handler->trace != «CLiterals::NULL_LITERAL_NAME») {\
 				MACHINE->trace_handler->trace(MACHINE->trace_handler, MACHINE, EVENT);\
 			}
 		
 		#define SC_TRACE_FEATURE(MACHINE, TEVENT, FEATURE, PAYLOAD) \
-			if (MACHINE->trace_handler != sc_null && MACHINE->trace_handler->traceFeature != sc_null) {\
+			if (MACHINE->trace_handler != «CLiterals::NULL_LITERAL_NAME» && MACHINE->trace_handler->traceFeature != «CLiterals::NULL_LITERAL_NAME») {\
 				MACHINE->trace_handler->traceFeature(MACHINE->trace_handler, MACHINE, TEVENT, FEATURE, PAYLOAD);\
 			}
 		
 		#define SC_TRACE_TIME_EVENT(MACHINE, TEVENT, FEATURE) \
-			if (MACHINE->trace_handler != sc_null && MACHINE->trace_handler->traceTimeEvent != sc_null) {\
+			if (MACHINE->trace_handler != «CLiterals::NULL_LITERAL_NAME» && MACHINE->trace_handler->traceTimeEvent != «CLiterals::NULL_LITERAL_NAME») {\
 				MACHINE->trace_handler->traceTimeEvent(MACHINE->trace_handler, MACHINE, TEVENT, FEATURE);\
 			}
 		
 		#define SC_TRACE_STATE(MACHINE, TEVENT, STATE) \
-			if (MACHINE->trace_handler != sc_null && MACHINE->trace_handler->traceState != sc_null) {\
+			if (MACHINE->trace_handler != «CLiterals::NULL_LITERAL_NAME» && MACHINE->trace_handler->traceState != «CLiterals::NULL_LITERAL_NAME») {\
 				MACHINE->trace_handler->traceState(MACHINE->trace_handler, MACHINE, TEVENT, STATE);\
 			}
 		

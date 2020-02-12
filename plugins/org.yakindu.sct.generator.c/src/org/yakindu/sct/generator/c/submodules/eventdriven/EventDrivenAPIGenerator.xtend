@@ -96,7 +96,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					*(«BOOL_TYPE»*)evid = «TRUE_LITERAL»;
 									
 					«INT_TYPE» tev_id = time_event_index(«scHandle», evid);
-					«traceTimeEventCall(TRACE_MACHINE_TIME_EVENT_RAISED, "tev_id")»
+					«traceTimeEventCall(TRACE_MACHINE_TIME_EVENT_RAISED, "tev_id")»;
 					
 					«runCycleFctID»(«scHandle»);
 				}

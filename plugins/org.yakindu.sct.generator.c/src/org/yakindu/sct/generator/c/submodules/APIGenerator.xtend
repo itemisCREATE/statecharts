@@ -112,6 +112,7 @@ class APIGenerator {
 		
 		void «initTracingFctID»(«scHandleDecl», «TRACE_HANDLER_TYPE» *trace_handler)
 		{
+			«initFunctionBody(it)»
 			«scHandle»->trace_handler = trace_handler;
 		}
 		'''
@@ -121,7 +122,11 @@ class APIGenerator {
 		'''
 			«initSignature»
 			{
+				«IF genEntry.tracingGeneric»
+				«initTracingFctID»(«scHandle», «CLiterals::NULL_LITERAL_NAME»);
+				«ELSE»
 				«initFunctionBody(it)»
+				«ENDIF»
 			}
 		'''
 	}
@@ -148,10 +153,6 @@ class APIGenerator {
 			«clearOutEventsFctID»(«scHandle»);
 
 			«initSequence.code»
-			
-			«IF genEntry.tracingGeneric»
-			«initTracingFctID»(«scHandle», sc_null);
-			«ENDIF»
 		'''
 	}
 	
@@ -330,7 +331,7 @@ class APIGenerator {
 		'''«initWithTracingSignature»;'''
 	}
 	
-	def protected CharSequence initWithTracingSignature(ExecutionFlow it) {//void tictoc_initWithTracing(Tictoc* handle, sc_trace_handler* trace_handler);
+	def protected CharSequence initWithTracingSignature(ExecutionFlow it) {
 		'''void «initTracingFctID»(«scHandleDecl», «scTracingHandleDecl»)'''
 	}
 	
@@ -338,7 +339,7 @@ class APIGenerator {
 		'''«setTraceHandlerSignature»;'''
 	}
 	
-	def protected CharSequence setTraceHandlerSignature(ExecutionFlow it){//;void tictoc_setTraceHandler(Tictoc* handle, sc_trace_handler* trace_handler);
+	def protected CharSequence setTraceHandlerSignature(ExecutionFlow it){
 		'''void «setTraceHandlerFctID»(«scHandleDecl», «scTracingHandleDecl»)'''
 	}
 	

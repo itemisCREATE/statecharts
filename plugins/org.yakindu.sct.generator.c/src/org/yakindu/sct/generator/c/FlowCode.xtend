@@ -133,11 +133,15 @@ class FlowCode {
 	def dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
 		«flow.setTimerFctID»(«scHandle», («EVENT_TYPE») &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
+		«IF entry.tracingGeneric»
+		«TRACE_CALL»_TIME_EVENT(«scHandle», «TRACE_MACHINE_TIME_EVENT_SET», «flow.timeEvents.indexOf(timeEvent)»);
+		«ENDIF»
 	'''
 
 	def dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
 		«flow.unsetTimerFctID»(«scHandle», («EVENT_TYPE») &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
+		«TRACE_CALL»_TIME_EVENT(«scHandle», «TRACE_MACHINE_TIME_EVENT_UNSET», «flow.timeEvents.indexOf(timeEvent)»);
 	'''
 
 	def dispatch CharSequence code(Execution it)
@@ -177,11 +181,13 @@ class FlowCode {
 		«IF flow.statechart.isSuperStep»
 		«scHandle»->«STATEVECTOR_CHANGED» = true;
 		«ENDIF»
+		«TRACE_CALL»_STATE(«scHandle», «TRACE_MACHINE_ENTERED», «state.stateName»);
 	'''
 
 	def dispatch CharSequence code(ExitState it) '''
 		«scHandle»->«STATEVECTOR»[«state.stateVector.offset»] = «null_state»;
 		«scHandle»->«STATEVECTOR_POS» = «state.stateVector.offset»;
+		«TRACE_CALL»_STATE(«scHandle», «TRACE_MACHINE_EXITED», «state.stateName»);
 	'''
 	
 	def dispatch CharSequence code(Return it) '''
