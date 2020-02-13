@@ -35,7 +35,7 @@ public class PackageImport2URIMultiMapper implements IPackageImport2URIMapper {
 
 	@Override
 	public Optional<PackageImport> findPackageImport(Resource context, String packageImport) {
-		Optional<Optional<PackageImport>> any = mapper.stream()
+		Optional<Optional<PackageImport>> any = mapper.stream().filter((current) -> current.canHandle(packageImport))
 				.map((mapper) -> mapper.findPackageImport(context, packageImport))
 				.filter((optional) -> optional.isPresent()).findFirst();
 		return any.isPresent() ? any.get() : Optional.empty();
