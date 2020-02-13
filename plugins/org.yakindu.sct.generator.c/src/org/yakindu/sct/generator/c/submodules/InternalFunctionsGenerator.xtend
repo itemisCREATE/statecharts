@@ -38,7 +38,6 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Parameter
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.ComplexType
 
 /**
@@ -57,7 +56,6 @@ class InternalFunctionsGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension ExpressionsChecker
 	@Inject protected extension CLiterals
-	@Inject protected extension ITypeSystem
 	
 	
 	
