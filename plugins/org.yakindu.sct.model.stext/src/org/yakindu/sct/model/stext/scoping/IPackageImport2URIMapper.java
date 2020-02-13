@@ -29,7 +29,11 @@ public interface IPackageImport2URIMapper {
 	public Optional<PackageImport> findPackageImport(Resource context, String packageImport);
 
 	public Set<PackageImport> getAllImports(Resource context);
-
+	
+	public default boolean canHandle(String packageImport) {
+		return true;
+	}
+	
 	public static class PackageImport {
 
 		private String namespace;
