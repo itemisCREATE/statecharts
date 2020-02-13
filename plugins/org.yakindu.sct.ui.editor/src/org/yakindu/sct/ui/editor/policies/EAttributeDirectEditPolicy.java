@@ -35,8 +35,10 @@ public class EAttributeDirectEditPolicy extends DirectEditPolicy {
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
-		SetRequest setRequest = new SetRequest(getHost().resolveSemanticElement(), provider.getAttribute(), request
-				.getCellEditor().getValue());
+		Object value = request.getCellEditor().getValue();
+		if (value == null)
+			return null;
+		SetRequest setRequest = new SetRequest(getHost().resolveSemanticElement(), provider.getAttribute(), value);
 		SetValueCommand setCommand = new SetValueCommand(setRequest);
 		return new ICommandProxy(setCommand);
 	}
