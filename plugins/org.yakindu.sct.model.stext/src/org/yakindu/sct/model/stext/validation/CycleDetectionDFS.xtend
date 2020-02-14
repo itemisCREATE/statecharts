@@ -48,7 +48,7 @@ class CycleDetectionDFS extends DFS {
 	}
 	
 	protected def List<PackageImport> getPackageImports(Statechart it) {
-		scopes.filter(ImportScope).map[imports].flatten.toSet.map [ import |
+		scopes.filter(ImportScope).map[imports].flatten.toSet.filter[it.endsWith(".sct")].map [ import |
 			mapper.findPackageImport(eResource, import)
 		].filter[isPresent].map[get].toList
 	}
