@@ -96,16 +96,17 @@ public class LiveFeedbackResizableEditPolicy extends ResizableEditPolicyEx {
 
 	protected void enforceConstraintForMove(ChangeBoundsRequest request) {
 		Rectangle relativeBounds = getOriginalBounds();
-		Rectangle transformed = request.getTransformedRectangle(relativeBounds);
-		getHostFigure().getParent().translateToRelative(transformed);
-		if (transformed.x < 0) {
-			Point moveDelta = request.getMoveDelta();
-			moveDelta.x -= transformed.x;
-		}
-		if (transformed.y < 0) {
-			Point moveDelta = request.getMoveDelta();
-			moveDelta.y -= transformed.y;
-		}
+		PrecisionRectangle manipulatedConstraint = new PrecisionRectangle(
+				 request.getTransformedRectangle(relativeBounds));
+		getHostFigure().translateToRelative(manipulatedConstraint);
+		
+		manipulatedConstraint.setX(Math.max(0, manipulatedConstraint.x));
+		manipulatedConstraint.setY(Math.max(0, manipulatedConstraint.y));
+		
+		getHostFigure().translateToAbsolute(manipulatedConstraint);
+		
+		Dimension difference = manipulatedConstraint.getLocation().getDifference(originalBounds.getLocation());
+		request.setMoveDelta(new Point(difference.width, difference.height));
 	}
 
 	@Override
