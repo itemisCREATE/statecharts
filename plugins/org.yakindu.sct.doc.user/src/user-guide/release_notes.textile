@@ -5,6 +5,18 @@ h1(#release_notes). Release notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.10). YAKINDU Statechart Tools  3.5.10 (Feb 24, 2020)
+
+This is mainly a bugfix release, containing the following:
+
+* Fixed severe performance issues when using C/C++ domain statecharts in large C/C++ projects.
+* Improved the C/C++ code generators to not produce unused functions and parameters anymore.
+* Fixed a bug in C/C++ domain causing C headers with 'extern C' directives not be properly parsed.
+* Fixed a bug that causes a parent state's local reaction not being executed when a child state's self-transition was taken.
+* Fixed headless code generation for SCTUnit models using 'proceed' statements.
+* Code generators now print a warning if files could not be written due to missing write access rights.
+
+
 h2(#release_notes_3.5.9). YAKINDU Statechart Tools  3.5.9 (Nov 14, 2019)
 
 This is mainly a bugfix release, containing the following:
