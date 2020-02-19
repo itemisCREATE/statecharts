@@ -213,7 +213,7 @@ public class GTestHelper {
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
-				//.wPedantic()
+				.wPedantic()
 				.wnoLongLong()
 				.wnoVariadicMacros()
 			 	.wAll()				

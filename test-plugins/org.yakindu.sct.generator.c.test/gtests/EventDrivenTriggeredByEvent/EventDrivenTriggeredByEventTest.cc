@@ -58,12 +58,13 @@ void EventDrivenTriggeredByEventTest::proceedTimeDoesNotTriggerRunCycle()
 {
 	eventDrivenTriggeredByEvent_enter(&statechart);
 	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_A));
-	sc_timer_service_proceed_time(&timer_service, 120000);
+	sc_timer_service_proceed_time(&timer_service, 120*1000);
 	EXPECT_TRUE(eventDrivenTriggeredByEventIface_get_x(&statechart)== 0);
 	eventDrivenTriggeredByEvent_exit(&statechart);
 }
 
 void EventDrivenTriggeredByEventTest::setTimer(EventDrivenTriggeredByEvent* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+	SC_UNUSED(statechart);
 	sc_timer_t timer;
 	sc_timer_init(&timer, time_ms, periodic, evid);
 	insert_timer(&(tc->timer_service), timer);

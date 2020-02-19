@@ -56,7 +56,7 @@ void TimedTransitionsTest::Timer02()
 {
 	timedTransitions_enter(&statechart);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
-	sc_timer_service_proceed_time(&timer_service, 2000);
+	sc_timer_service_proceed_time(&timer_service, 2*1000);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_End));
 }
 void TimedTransitionsTest::noAdditionalCycle()
@@ -86,6 +86,7 @@ void TimedTransitionsTest::countCycles()
 }
 
 void TimedTransitionsTest::setTimer(TimedTransitions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+	SC_UNUSED(statechart);
 	sc_timer_t timer;
 	sc_timer_init(&timer, time_ms, periodic, evid);
 	insert_timer(&(tc->timer_service), timer);

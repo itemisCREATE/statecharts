@@ -48,23 +48,24 @@ void ReadOnlyVariableTest::readOnlyVariableTest()
 	EXPECT_TRUE(strcmp(readOnlyVariableIface_get_myString(&statechart), "testString") == 0);
 	EXPECT_TRUE(readOnlyVariableIface_get_myBool(&statechart)== true);
 	EXPECT_TRUE(readOnlyVariableIface_get_myReal(&statechart)== 1.1);
-	EXPECT_TRUE(readOnlyVariableIfaceA_get_myInt(&statechart)== 0);
-	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart), "testString") == 0);
-	EXPECT_TRUE(readOnlyVariableIfaceA_get_myBool(&statechart)== true);
-	EXPECT_TRUE(readOnlyVariableIfaceA_get_myReal(&statechart)== 1.1);
+	EXPECT_TRUE(readOnlyVariableIfaceA_get_myInt(&statechart) == 0);
+	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart) , "testString") == 0);
+	EXPECT_TRUE(readOnlyVariableIfaceA_get_myBool(&statechart) == true);
+	EXPECT_TRUE(readOnlyVariableIfaceA_get_myReal(&statechart) == 1.1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(readOnlyVariable_isStateActive(&statechart, ReadOnlyVariable_main_region_StateB));
 	EXPECT_TRUE(readOnlyVariableIface_get_myInt(&statechart)== 100);
 	EXPECT_TRUE(strcmp(readOnlyVariableIface_get_myString(&statechart), "fail") == 0);
 	EXPECT_TRUE(readOnlyVariableIface_get_myBool(&statechart)== false);
 	EXPECT_TRUE(readOnlyVariableIface_get_myReal(&statechart)== 6.6);
-	EXPECT_TRUE(readOnlyVariableIfaceA_get_myInt(&statechart)== 200);
-	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart), "A_fail") == 0);
-	EXPECT_TRUE(readOnlyVariableIfaceA_get_myBool(&statechart)== false);
-	EXPECT_TRUE(readOnlyVariableIfaceA_get_myReal(&statechart)== 7.7);
+	EXPECT_TRUE(readOnlyVariableIfaceA_get_myInt(&statechart) == 200);
+	EXPECT_TRUE(strcmp(readOnlyVariableIfaceA_get_myString(&statechart) , "A_fail") == 0);
+	EXPECT_TRUE(readOnlyVariableIfaceA_get_myBool(&statechart) == false);
+	EXPECT_TRUE(readOnlyVariableIfaceA_get_myReal(&statechart) == 7.7);
 }
 
 void ReadOnlyVariableTest::setTimer(ReadOnlyVariable* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+	SC_UNUSED(statechart);
 	sc_timer_t timer;
 	sc_timer_init(&timer, time_ms, periodic, evid);
 	insert_timer(&(tc->timer_service), timer);

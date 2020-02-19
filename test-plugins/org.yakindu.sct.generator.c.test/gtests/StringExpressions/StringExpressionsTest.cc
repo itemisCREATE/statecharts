@@ -77,6 +77,7 @@ void StringExpressionsTest::stringExpressionsTest()
 }
 
 void StringExpressionsTest::setTimer(StringExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+	SC_UNUSED(statechart);
 	sc_timer_t timer;
 	sc_timer_init(&timer, time_ms, periodic, evid);
 	insert_timer(&(tc->timer_service), timer);

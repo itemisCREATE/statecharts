@@ -53,15 +53,15 @@ void EventDrivenTriggeredByTimeEventTest::timeEventTriggersRunCycle()
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEvent_isStateActive(&statechart, EventDrivenTriggeredByTimeEvent_EventDrivenTriggeredByTimeEvent_r_B));
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_x(&statechart)== 0);
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_transition_count(&statechart)== 1);
-	sc_timer_service_proceed_time(&timer_service, 1000);
+	sc_timer_service_proceed_time(&timer_service, 1*1000);
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEvent_isStateActive(&statechart, EventDrivenTriggeredByTimeEvent_EventDrivenTriggeredByTimeEvent_r_A));
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_x(&statechart)== 0);
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_transition_count(&statechart)== 2);
-	sc_timer_service_proceed_time(&timer_service, 999000);
+	sc_timer_service_proceed_time(&timer_service, 999*1000);
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEvent_isStateActive(&statechart, EventDrivenTriggeredByTimeEvent_EventDrivenTriggeredByTimeEvent_r_B));
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_x(&statechart)== 0);
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_transition_count(&statechart)== 1001);
-	sc_timer_service_proceed_time(&timer_service, 999000);
+	sc_timer_service_proceed_time(&timer_service, 999*1000);
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEvent_isStateActive(&statechart, EventDrivenTriggeredByTimeEvent_EventDrivenTriggeredByTimeEvent_r_A));
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_x(&statechart)== 0);
 	EXPECT_TRUE(eventDrivenTriggeredByTimeEventIface_get_transition_count(&statechart)== 2000);
@@ -69,6 +69,7 @@ void EventDrivenTriggeredByTimeEventTest::timeEventTriggersRunCycle()
 }
 
 void EventDrivenTriggeredByTimeEventTest::setTimer(EventDrivenTriggeredByTimeEvent* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+	SC_UNUSED(statechart);
 	sc_timer_t timer;
 	sc_timer_init(&timer, time_ms, periodic, evid);
 	insert_timer(&(tc->timer_service), timer);

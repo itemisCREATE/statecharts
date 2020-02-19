@@ -51,12 +51,13 @@ void ConstantsVariationTests::constantDefinition()
 	EXPECT_TRUE(constantsVariationIface_get_r2(&statechart)== 5);
 	EXPECT_TRUE(constantsVariationIfaceNamed_get_r(&statechart) == 5);
 	EXPECT_TRUE(strcmp(constantsVariationIface_get_str2(&statechart), "String") == 0);
-	EXPECT_TRUE(strcmp(constantsVariationIfaceNamed_get_str(&statechart), "String") == 0);
+	EXPECT_TRUE(strcmp(constantsVariationIfaceNamed_get_str(&statechart) , "String") == 0);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(constantsVariation_isFinal(&statechart));
 }
 
 void ConstantsVariationTests::setTimer(ConstantsVariation* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+	SC_UNUSED(statechart);
 	sc_timer_t timer;
 	sc_timer_init(&timer, time_ms, periodic, evid);
 	insert_timer(&(tc->timer_service), timer);
