@@ -38,6 +38,7 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Parameter
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.base.types.ComplexType
 
 /**
  * @author rbeckmann
@@ -55,6 +56,7 @@ class InternalFunctionsGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension ExpressionsChecker
 	@Inject protected extension CLiterals
+	
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
 		static void «clearInEventsFctID»(«scHandleDecl»)
@@ -185,13 +187,16 @@ class InternalFunctionsGenerator {
 	def dispatch requiresHandle(EObject e) { false }
 	def dispatch requiresHandle(Call e) { true }
 	def dispatch requiresHandle(CheckRef e) { true }
-	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) }
-	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
+	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
+	def dispatch requiresHandle(FeatureCall e) { (! (e.feature instanceof Parameter)) && (!e.feature.isLocalVariable) && (!e.feature.declaredInHeader) }
 	
 	def isLocalVariable(EObject o) {
 		(o instanceof org.yakindu.base.types.Property) && (o.eContainer instanceof LocalVariableDefinition)	
 	}
 	
+	def declaredInHeader(EObject o) {
+		return (o.eContainer instanceof org.yakindu.base.types.Package || o.eContainer instanceof ComplexType) 
+	}
 	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
@@ -213,6 +218,9 @@ class InternalFunctionsGenerator {
 		static void «shortName»(«scHandleDecl»)
 		{
 			«code»
+			«IF !it.requiresHandles»
+				«unusedParam(scHandle)»
+			«ENDIF»
 		}
 		
 	'''
