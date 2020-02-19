@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory
 import org.eclipse.emf.edit.provider.IItemLabelProvider
-import org.eclipse.jface.resource.ImageRegistry
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.jface.viewers.StyledString.Styler
@@ -66,7 +65,6 @@ import org.yakindu.sct.model.stext.stext.StextPackage
 import org.yakindu.sct.model.stext.stext.TransitionReaction
 import org.yakindu.sct.model.stext.stext.TransitionSpecification
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.ui.internal.StextActivator
 
 /** 
  * Several filters to make proposals more useful.
@@ -82,6 +80,8 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	 
 	@Inject IPackageImport2URIMapper mapper
 	@Inject STextExtensions utils
+	@Inject PackageImportIconProvider iconProvider
+	
 
 	static class StrikeThroughStyler extends Styler {
 		override void applyStyles(TextStyle textStyle) {
@@ -271,8 +271,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	def protected Image getIncludeImage(PackageImport pkgImport) {
-		val ImageRegistry imageRegistry = StextActivator.getInstance().getImageRegistry()
-		return imageRegistry.get(ICONS_INCLUDE)
+		return iconProvider.getImageFor(pkgImport);
 	}
 
 	def protected StyledString computePackageStyledString(PackageImport pkgImport) {
