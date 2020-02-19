@@ -47,9 +47,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	// Key for edit policy installation
 	public static final Object ROLE = "ResizeContainer";
 
-	// Space between the border of the container and the moved figure
-	public static final int SPACEING = 25;
-
 	private Map<IFigure, Rectangle> boundsCache = new HashMap<IFigure, Rectangle>();
 
 	private List<IGraphicalEditPart> containerHierachy;
@@ -196,7 +193,6 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 		for (IGraphicalEditPart editPart : editParts) {
 			PrecisionRectangle transformedRect = new PrecisionRectangle(editPart.getFigure().getBounds());
 			editPart.getFigure().translateToAbsolute(transformedRect);
-			transformedRect.expand(SPACEING * level, SPACEING * level);
 			result.union(transformedRect);
 			Dimension preferredSize = containerFigure.getPreferredSize().getCopy();
 			editPart.getFigure().translateToAbsolute(preferredSize);
