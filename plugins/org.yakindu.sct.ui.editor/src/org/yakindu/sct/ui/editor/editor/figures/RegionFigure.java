@@ -39,6 +39,8 @@ public class RegionFigure extends RectangleFigure {
 	private RectangleFigure compartmentPane;
 
 	private final IMapMode mapMode;
+	
+	private Color gradient;
 
 	public RegionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
@@ -81,9 +83,19 @@ public class RegionFigure extends RectangleFigure {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
-		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
-		c.dispose();
+		if(gradient == null) {
+			gradient = mixColor(getBackgroundColor(), ColorConstants.white, 224);
+		}
+		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), gradient);
+	}
+	
+	@Override
+	public void setBackgroundColor(Color bg) {
+		if(gradient != null) {
+			gradient.dispose();
+			gradient = null;
+		}
+		super.setBackgroundColor(bg);
 	}
 
 	public IMapMode getMapMode() {

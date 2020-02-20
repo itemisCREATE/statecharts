@@ -43,6 +43,8 @@ public class StateFigure extends RoundedRectangle {
 	private Figure textCompartmentPane;
 	private Figure figureCompartmentPane;
 
+	private Color gradient;
+
 	public StateFigure(IMapMode mapMode) {
 		GridLayout layout = new GridLayout(1, false);
 		layout.verticalSpacing = 0;
@@ -114,10 +116,20 @@ public class StateFigure extends RoundedRectangle {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 224);
+		if(gradient == null) {
+			gradient = mixColor(getBackgroundColor(), ColorConstants.white, 224);
+		}
 		fillVerticalGradientRoundedRectangle(graphics, getBounds(),
-				getCornerDimensions(), getBackgroundColor(), c);
-		c.dispose();
+				getCornerDimensions(), getBackgroundColor(), gradient);
+	}
+	
+	@Override
+	public void setBackgroundColor(Color bg) {
+		if(gradient != null) {
+			gradient.dispose();
+			gradient = null;
+		}
+		super.setBackgroundColor(bg);
 	}
 
 	private void drawBlurredShadow(Graphics graphics) {
