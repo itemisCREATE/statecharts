@@ -62,18 +62,21 @@ class InternalFunctionsGenerator {
 		{
 			«var clearedEvents = 0»
 			«FOR scope : it.scopes»
-				«FOR event : scope.incomingEvents»«NOOUT(clearedEvents+=1)»
-				«event.access» = «FALSE_LITERAL»;
+				«FOR event : scope.incomingEvents»
+					«NOOUT(clearedEvents+=1)»
+					«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasInternalScope»
-				«FOR event : internalScope.events»«NOOUT(clearedEvents+=1)»
-				«event.access» = «FALSE_LITERAL»;
+				«FOR event : internalScope.events»
+					«NOOUT(clearedEvents+=1)»
+					«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDIF»
 			«IF timed»
-				«FOR event : timeEventScope.events»«NOOUT(clearedEvents+=1)»
-				«event.access» = «FALSE_LITERAL»;
+				«FOR event : timeEventScope.events»
+					«NOOUT(clearedEvents+=1)»
+					«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDIF»
 			«IF clearedEvents == 0»
@@ -90,12 +93,13 @@ class InternalFunctionsGenerator {
 			static void «clearOutEventsFctID»(«scHandleDecl»)
 			{
 				«FOR scope : it.scopes»
-					«FOR event : scope.outgoingEvents»«NOOUT(clearedEvents+=1)»
-					«event.access» = «FALSE_LITERAL»;
+					«FOR event : scope.outgoingEvents»
+						«NOOUT(clearedEvents+=1)»
+						«event.access» = «FALSE_LITERAL»;
 					«ENDFOR»
 				«ENDFOR»
 				«IF clearedEvents == 0»
-				«unusedParam(scHandle)»
+					«unusedParam(scHandle)»
 				«ENDIF»
 			}
 		'''	
