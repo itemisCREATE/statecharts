@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.PrecisionDimension;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
@@ -47,9 +47,12 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	// Key for edit policy installation
 	public static final Object ROLE = "ResizeContainer";
 
-	private Map<IFigure, Rectangle> boundsCache = new HashMap<IFigure, Rectangle>();
+	private Map<IFigure, PrecisionRectangle> boundsCache = new HashMap<IFigure, PrecisionRectangle>();
 
 	private List<IGraphicalEditPart> containerHierachy;
+
+	// Space between the border of the container and the moved figure
+	public static final int SPACEING = 20;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -129,12 +132,11 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	}
 
 	protected void showContainerFeedback(ChangeBoundsRequest request) {
-		for (int level = 1; level <= containerHierachy.size(); level++) {
-			IGraphicalEditPart containerEditPart = containerHierachy.get(level - 1);
+		for (IGraphicalEditPart containerEditPart : containerHierachy) {
 			IFigure containerFigure = containerEditPart.getFigure();
 			Rectangle feedbackBounds = getOriginalBounds(containerFigure);
 			containerFigure.getParent().translateToAbsolute(feedbackBounds);
-			feedbackBounds = calculateFeedbackBounds(request, feedbackBounds, level, containerFigure);
+			feedbackBounds = calculateFeedbackBounds(request, feedbackBounds, containerFigure);
 			containerFigure.translateToRelative(feedbackBounds);
 			setBounds(containerFigure, feedbackBounds);
 			EditPolicy editPolicy = containerEditPart.getEditPolicy(FixedBendpointEditPolicy.ROLE);
@@ -165,7 +167,7 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 		Rectangle originalContainerBounds = boundsCache.get(figure);
 		if (originalContainerBounds == null) {
 			originalContainerBounds = figure.getBounds().getCopy();
-			boundsCache.put(figure, originalContainerBounds);
+			boundsCache.put(figure, new PrecisionRectangle(originalContainerBounds));
 		}
 		return boundsCache.get(figure).getCopy();
 	}
@@ -186,24 +188,29 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	}
 
 	@SuppressWarnings({ "unchecked" })
-	private Rectangle calculateFeedbackBounds(ChangeBoundsRequest request, Rectangle feedbackBounds, int level,
+	private PrecisionRectangle calculateFeedbackBounds(ChangeBoundsRequest request, Rectangle feedbackBounds,
 			IFigure containerFigure) {
-		Rectangle result = feedbackBounds.getCopy();
+		PrecisionRectangle result = new PrecisionRectangle(feedbackBounds.getCopy());
 		List<IGraphicalEditPart> editParts = request.getEditParts();
 		for (IGraphicalEditPart editPart : editParts) {
-			PrecisionRectangle transformedRect = new PrecisionRectangle(editPart.getFigure().getBounds());
+			PrecisionRectangle transformedRect = new PrecisionRectangle(editPart.getFigure().getBounds().getCopy());
 			editPart.getFigure().translateToAbsolute(transformedRect);
-			result.union(transformedRect);
-			Dimension preferredSize = containerFigure.getPreferredSize().getCopy();
-			editPart.getFigure().translateToAbsolute(preferredSize);
-			Dimension max = Dimension.max(result.getSize(), preferredSize);
-			result.setSize(max);
-			if (result.x < feedbackBounds.x) {
-				result.x = feedbackBounds.x;
-			}
-			if (result.y < feedbackBounds.y) {
-				result.y = feedbackBounds.y;
-			}
+			result.union((Rectangle) transformedRect);
+		}
+		PrecisionDimension preferredSize = new PrecisionDimension(containerFigure.getPreferredSize().getCopy());
+		containerFigure.translateToAbsolute(preferredSize);
+
+		if (result.preciseWidth() < preferredSize.preciseWidth() + SPACEING) {
+			result.setPreciseWidth(preferredSize.preciseWidth() + SPACEING);
+		}
+		if (result.preciseHeight() < preferredSize.preciseHeight() + SPACEING) {
+			result.setPreciseHeight(preferredSize.preciseHeight() + SPACEING);
+		}
+		if (result.x < feedbackBounds.x) {
+			result.x = feedbackBounds.x;
+		}
+		if (result.y < feedbackBounds.y) {
+			result.y = feedbackBounds.y;
 		}
 		return result;
 	}
