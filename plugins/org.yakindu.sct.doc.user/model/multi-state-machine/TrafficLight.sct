@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_4NTTYEZ6Eeqaaazg9NGRiA" specification="@ChildFirstExecution&#xA;&#xA;interface:&#xA;&#xA;in event switchOn&#xA;in event switchOff&#xA;&#xA;in event attention&#xA;in event block&#xA;in event release&#xA;&#xA;out event blocked&#xA;out event released&#xA;&#xA;var releasePeriod : integer = 6&#xA;var preparePeriod : integer = 2&#xA;&#xA;interface lights:&#xA;&#xA;var red: boolean&#xA;var yellow : boolean&#xA;var green : boolean&#xA;&#xA;&#xA;internal:&#xA;&#xA;const ON : boolean = true&#xA;const OFF : boolean = false&#xA;" name="TrafficLight">
+  <sgraph:Statechart xmi:id="_4NTTYEZ6Eeqaaazg9NGRiA" specification="@ChildFirstExecution&#xA;&#xA;interface:&#xA;&#xA;&#x9;in event switchOn&#xA;&#x9;in event switchOff&#xA;&#xA;&#x9;in event attention&#xA;&#x9;in event block&#xA;&#x9;in event release&#xA;&#xA;&#x9;out event blocked&#xA;&#x9;out event released&#xA;&#xA;&#xA;interface lights:&#xA;&#x9;var red: boolean&#xA;&#x9;var yellow : boolean&#xA;&#x9;var green : boolean&#xA;&#xA;interface config:&#xA;&#x9;var releasePeriod : integer = 6&#xA;&#x9;var preparePeriod : integer = 2&#xA;&#xA;&#xA;internal:&#xA;&#xA;const ON : boolean = true&#xA;const OFF : boolean = false&#xA;" name="TrafficLight">
     <regions xmi:id="_4NWWs0Z6Eeqaaazg9NGRiA" name="main">
       <vertices xsi:type="sgraph:Entry" xmi:id="_4NdrcEZ6Eeqaaazg9NGRiA">
         <outgoingTransitions xmi:id="_4NgHsUZ6Eeqaaazg9NGRiA" target="_4NeSh0Z6Eeqaaazg9NGRiA"/>
@@ -16,7 +16,7 @@
             <outgoingTransitions xmi:id="_yGzngEaAEeqaaazg9NGRiA" specification="attention" target="_CLOVEEZ7Eeqaaazg9NGRiA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_NkdowEZ8Eeqaaazg9NGRiA" specification="entry / lights.green = ON&#xA;entry / raise released&#xA;exit / lights.green = OFF" name="Released" incomingTransitions="_NkihQEZ8Eeqaaazg9NGRiA">
-            <outgoingTransitions xmi:id="_8YSzgEaCEeqaaazg9NGRiA" specification="after releasePeriod s" target="_70HaUEaAEeqaaazg9NGRiA"/>
+            <outgoingTransitions xmi:id="_8YSzgEaCEeqaaazg9NGRiA" specification="after config.releasePeriod s" target="_70HaUEaAEeqaaazg9NGRiA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_CLOVEEZ7Eeqaaazg9NGRiA" specification="entry / lights.yellow = ON&#xA;every 500ms &#xA;&#x9;/ lights.yellow = ! lights.yellow&#xA;exit / lights.yellow = OFF" name="Attention" incomingTransitions="_uzqbwEaAEeqaaazg9NGRiA _yGzngEaAEeqaaazg9NGRiA">
             <outgoingTransitions xmi:id="_J1Tr4EZ7Eeqaaazg9NGRiA" specification="block" target="_J1OMUEZ7Eeqaaazg9NGRiA"/>
@@ -25,7 +25,7 @@
             <outgoingTransitions xmi:id="_uzqbwEaAEeqaaazg9NGRiA" specification="" target="_CLOVEEZ7Eeqaaazg9NGRiA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_70HaUEaAEeqaaazg9NGRiA" specification="entry / lights.yellow = ON&#xA;exit / lights.yellow = OFF" name="PrepareBlock" incomingTransitions="_8YSzgEaCEeqaaazg9NGRiA">
-            <outgoingTransitions xmi:id="_HEIrIEaDEeqaaazg9NGRiA" specification="after preparePeriod s" target="_J1OMUEZ7Eeqaaazg9NGRiA"/>
+            <outgoingTransitions xmi:id="_HEIrIEaDEeqaaazg9NGRiA" specification="after config.preparePeriod s" target="_J1OMUEZ7Eeqaaazg9NGRiA"/>
           </vertices>
         </regions>
       </vertices>

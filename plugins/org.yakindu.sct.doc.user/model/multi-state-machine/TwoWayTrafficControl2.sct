@@ -16,13 +16,13 @@
         <outgoingTransitions xmi:id="_k55bEEdhEeqqBpTJT3nxRw" specification="standby" target="_bS6KMEaGEeqaaazg9NGRiA"/>
         <regions xmi:id="_dXgnsEdhEeqqBpTJT3nxRw" name="r">
           <vertices xsi:type="sgraph:State" xmi:id="_ydZ7QEbQEeqWhMlTSL7aWA" specification="entry / process.trafficLight = trafficLightA&#xA;submachine process" name="Process A" incomingTransitions="_iXvAUEdhEeqqBpTJT3nxRw _bPRHkFHPEeqop6_8RQ-47Q">
-            <outgoingTransitions xmi:id="_ZHHvUFHPEeqop6_8RQ-47Q" specification="process.finished" target="_Qh0GYFHPEeqop6_8RQ-47Q"/>
+            <outgoingTransitions xmi:id="_ZHHvUFHPEeqop6_8RQ-47Q" specification="[process.isFinal]" target="_Qh0GYFHPEeqop6_8RQ-47Q"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_hiNGgEdhEeqqBpTJT3nxRw">
             <outgoingTransitions xmi:id="_iXvAUEdhEeqqBpTJT3nxRw" specification="" target="_ydZ7QEbQEeqWhMlTSL7aWA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_Qh0GYFHPEeqop6_8RQ-47Q" specification="entry / process.trafficLight = trafficLightB&#xA;submachine process" name="Process B" incomingTransitions="_ZHHvUFHPEeqop6_8RQ-47Q">
-            <outgoingTransitions xmi:id="_bPRHkFHPEeqop6_8RQ-47Q" specification="process.finished" target="_ydZ7QEbQEeqWhMlTSL7aWA"/>
+            <outgoingTransitions xmi:id="_bPRHkFHPEeqop6_8RQ-47Q" specification="[process.isFinal]" target="_ydZ7QEbQEeqWhMlTSL7aWA"/>
           </vertices>
         </regions>
       </vertices>
