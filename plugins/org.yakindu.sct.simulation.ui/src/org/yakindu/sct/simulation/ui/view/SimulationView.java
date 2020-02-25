@@ -528,7 +528,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	protected class ViewerRefresher implements Runnable {
 
-		private static final long UPDATE_INTERVAL = 500;
+		private static final long UPDATE_INTERVAL = 100;
 		private boolean cancel = false;
 
 		@Override
