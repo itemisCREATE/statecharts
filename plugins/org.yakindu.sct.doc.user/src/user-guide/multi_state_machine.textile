@@ -1,6 +1,10 @@
 p. 
 
+==<div class="r4-feature">==
+
+
 h1(#multi_state_machine_modelling). Multi state machine modeling
+
 
 The behavior of large systems is often too complex to be captured by a single statechart. So if a statechart gets too large you should think about splitting it into two or more smaller pieces. Beside the fact that the smaller state machines are easier to handle  and maintain there are additional reasons for using multiple state machine instead of single monolithic ones:
 
@@ -8,17 +12,32 @@ The behavior of large systems is often too complex to be captured by a single st
 * State machines can be reused at different places. So if you have identical copies of sub states spread around your stat e machines then this could be a good point.   
 * If you build a distributed system then the you require separate state machines for the different nodes. 
 
-This chapter describes how you can model and simulate a system which consists of multiple collaborating state machines and how you can embed a statechart as a sub machines into another statechart. The relevant aspects will be explained using the example of the different traffic light on a street crossing.
+This chapter describes how you can model and simulate a system which consists of multiple collaborating state machines and how you can embed a statechart as a sub machines into another statechart. This chapter introduces all relevant concepts using an example. 
 
 
-*PICTURE !! : structural overview of the street crossing*
- 
-The traffic control of a street crossing using traffic lights can become quite complex. In this example we ... TBD  
- 
+==<div class="example">==
+
+The example is the traffic control of a street crossing using traffic lights. While a single traffic light is not so complex the coordination of different traffic lights on a crossing is a good example to highlight the collaboration between different state machines. 
+
+
+!(large)images/multi_state_machine_example_overview.png(Street crossing with three state machines.)!
+
+The example consists of a system of three state machine instances. There are two instances of the statechart _TrafficLight_ . Each instance just cares about controlling the different modes of a single traffic light. The _TwoWayTrafficControl_ coordinates both traffic lights and makes sure that the traffic is always safe by making sure that no two traffic lights are green at the same time. 
+
+==</div>==
+
 
 h2(#multi_state_machine_referencing). Referencing state machines   
 
-First of all - in order to enable collaboration between different state machines instances a state machine can reference other state machines. 
+First of all - in order to enable collaboration between different state machines it must be possible that state machine can reference other state machines. To establish such a reference two steps are required:
+
+# The extenral statechart can be made visible by importing by defining an iport scope using @import: "xyz.sct"@ in the statecharts declaration area. Specify relative paths if the statecharts are not located in the same directory.
+# Define a variable of the desired state machine type: @var otherMachine : SomeMachineType@
+
+
+==<div class="example">==
+
+For our example state chart _TwoWayTrafficControl_ the declarations look like this:
 
 bc. 
 import: "TrafficLight.sct"
@@ -26,37 +45,127 @@ interface:
     var trafficLightA : TrafficLight
     var trafficLightB : TrafficLight
  
- 
+According to the steps described above the statechart _TrafficLight_ is imported. As two instances of this references statechart are required two variables are defined. So if you want to implement a three or four way traffic control you can simply define as man variables for state machine references as you require.
+  
+==</div>==
 
-!(small)images/multi_state_machine_controller.png(Controller state machine interacting with other state machine.)!
+
+h2(#multi_state_machine_types). State machine types and instances  
+
+A statechart does not only contain the definition of behavior. It also includes structural properties like its declared variables and events. These define its public interface and this interface is represented by a type. 
+
+==<div class="example">==
+
+Lets take a look at the example statecharts to get an idea how the state machine types look like:
+
+!(medium)images/multi_state_machine_types.png(State machine types derived from statechart definitions.)!
+
+The statechart _TrafficLight_ defines the type @TrafficLight@ and the statechart _TwoWayTrafficControl_ defines @TwoWayTrafficControl@. The types include all members defined in the statecharts declaration section. The variables which are of type @TrafficLight@ are references to instances of this type.
+
+==</div>==
+
+You should know the following facts about state machine types:
+
+# Each statechart has its own type. This type has the same name as the statechart.
+# The state machine type is a class type. All members defined in the statecharts default interface are direct members of this type.
+# These members can be variables, events, and operations.
+# The type members have the identical name as defined in the statechart.
+# State machine types used in variables, events and operations are always reference types.
+# Named interfaces are owned by the state machine and are represented as a member with the interface name as name.
+# These named interface members are complex types which include all members defined in the interfaces. 
+# All declarations of the internal scope are not exposed through the state machine type.
+# The state machine type inherits from the abstract type @IStateMachine@. This type defines additional life cycle operations which are implemented by each state machine.
+# Each statechart owns an addition enumeration type named @<StatechartName>States@. It defines an enumeration value for each state of the statechart.
+
+If you know the state machine code which is generated from statecharts then you will discover that the definitions of the state machine types directly directly match the definitions of the generated code. 
+
+HINT: State machine types are always uses as reference types. This implies that the state machine which defines a variable of a state machine type does not own the state machine instance. It will never be created by the state machine itself.     
+
+HINT: As a state machine type is a regular type you can use it like any other type. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value.
+
+HINT: Variables of state machine references can be reassigned. A valid value is @null@. @null@ is also the default value after in initializing a state machine.
+
+
 
 h2(#multi_state_machine_events_variables). Sending events, receiving events, and accessing variables 
     
-All events and variables which are defines by a statecharts named and default interfaces are visible as members in the state machines API. This means that a state machine instance can raise events which are in events of a referenced state machine. It can react to out events of the other machine and it can access variables. 
+A state machine reference can be used to interact with the referenced state machine. All elements which are exposed by the state machine type can be used:
 
-A loosely coupled architecture make use of asynchronous message passing and this perfectly matches to statechart events. Accessing variables imply a tighter coupling of state machines as these are accessed synchronously. 
+* Raise in events on the referenced state machine.
+* React on out events from referenced state machines.
+* Get and set variables (including referenced state machines). 
+
+
+==<div class="example">==
+
+The statechart _TwoWayTrafficControl_ raises different events on the referenced state machines.
+
+!(medium)images/multi_state_machine_controller.png(Traffic controller raises events on referenced state machines.)!
+
+Different states (like _Release A_) also use outgoing events ( @trafficLightA.released@) as transition triggers.
+
+==</div>==
+
+A loosely coupled architecture make use of asynchronous message passing and this perfectly matches to statechart events. A statechart which raises an event should not make any assumptions, when the event is processed. 
+
+Accessing variables implies a tighter coupling of state machines as these are accessed in a synchronized fashion.  
+
+==<div class="example">==
+
+In some action the statechart _TwoWayTrafficControl_ could configure the _TrafficLight_ state machines using provided variables.
+
+bc. 
+entry / trafficLightA.config.realeasePeriod = 60
+
+==</div>==
+
 
 h2(#multi_state_machine_life_cycle). Controlling a state machines life cycle   
 
-the life cycle methods of a state machine object are the same that exist in the generated state machines API. These are:
+In addition to events and variables which are declared by the statechart also additional operations exist. As explained before (see type @IStateMachine@ in previous chapter) they implicitly exist for each state machine. All these operations related to the state machines life cycle and can be used to control a state machine.
 
-- enter
-- exit
-- isFinal
-- isActive
-- isStateActive
-- runCycle
-
-controlling life cycle imply a tighter coupling between the involved machines. 
-these machines should not be distributed and should run in the same thread 
+| *operation* | *purpose* |
+| enter() : void | An inactive state machine can be activated by calling this operation. During activation the initial state will be activated and all required entry actions are executed. A state machine is inactive by default fter creation.|
+| exit() : void | A call to exit deactivates an active state machine. During exit all active states will be exited and all relevant exit actions will be executed. After exit no state is active. | 
+| isActive() : boolean | Returns true if the state machine is active and false if this is not the case. A state machine is active if there is at least one active state. This operation can be used in guards to test the life caycle state of a state machine. | 
+| isStateActive(state): boolean| Can be used in guards to check the activation of a specific state. The state parameter must of the state machines state enumeration type.|
+| isFinal() : boolean | Returns true if all active states are final states. The final state won't change until the state machine is exited and reentered. This operation can be used in guards to check if a state machine has finished its work.|
+| runCycle(): void | Performs a state machines run to completion step. If a state machine takes full control of a cycle based state machines then it has to decide when the run to completion step must be executed.
 
 
-h2(#multi_state_machine_submachine). Using sub machines   
+Using these operations implies a tighter semantic coupling of separate state machines. It is the basis for the implementation of sub state machines as described in the following chapter.   
 
-- Basic semantics of sub state machines
-- Refer to UML sub state machines
-- Life ccle of sub state machines
-- long running operations as sub state machine 
+
+h2(#multi_state_machine_submachine). Defining sub state machines   
+
+A common concept for structuring statecharts is the decomposition into different sub state machines. This is a concept that you can find in modeling languages like the UML and others. 
+
+The basic idea is that a state machine which is assigned to a state as sub machine is executed as if it is part of the enclosing state machine. This means its life cycle is coupled to the life cycle of its owning state. It will be activated when its parent state becomes active, will be deactivated when the parent state deactivates. 
+
+Such a sub machine pattern can bedefined using the life cycle methods introduces in the previous chapter. The pattern for using sub state machines looks like this:
+
+bc. 
+entry / otherMachine.enter
+oncycle / otherMachine.runCycle 
+exit / otherMachine.exit
+
+The call to @runCycle@ is only required if the referenced state machine is cycle based. As an alternative a simple @submachine@ statement can be used:
+
+bc. 
+submachine otherMachine
+
+If you want to apply sub state machines then use this statement as it is more expressive, less verbose and avoids errors by applying higher level validations.
+
+
+==<div class="example">==
+
+So lets apply sub state machines to the traffic control example.  
+
+!(full)images/multi_state_machine_sub_machine.png(Using sub machine in traffic control.)!
+
+
+==</div>==
+
 
 
 example is
@@ -78,6 +187,11 @@ explain example
 - sub machines in cycle based scenarios
 
 
+h2(#multi_state_machine_modelling_stereoids). State machine modeling on stereoids. 
+
+It is the basis for the implementation of sub state machines as described in the following chapter. Please be aware the this fine grained control state machines life cycles allow application that go far beyond 
+
+
 h2(#multi_state_machine_simulation). Simulating multiple state machines
 
 
@@ -87,3 +201,7 @@ h2(#multi_state_machine_testing). Testing multiple state machines
 
 
 h2(#multi_state_machine_code_gen). Generating code for multi state machine systems
+
+
+==</div>==
+
