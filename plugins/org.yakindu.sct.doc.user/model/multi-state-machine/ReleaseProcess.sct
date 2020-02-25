@@ -12,7 +12,7 @@
         <outgoingTransitions xmi:id="_ZMtr8VHNEeqop6_8RQ-47Q" specification="trafficLight.released" target="_ZMtr9lHNEeqop6_8RQ-47Q"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_ZMtr9lHNEeqop6_8RQ-47Q" name="Released" incomingTransitions="_ZMtr8VHNEeqop6_8RQ-47Q">
-        <outgoingTransitions xmi:id="_TzJJsFHOEeqop6_8RQ-47Q" specification="trafficLight.blocked &#xA;&#x9;/ raise finished" target="_PTOBwFHOEeqop6_8RQ-47Q"/>
+        <outgoingTransitions xmi:id="_TzJJsFHOEeqop6_8RQ-47Q" specification="trafficLight.blocked " target="_PTOBwFHOEeqop6_8RQ-47Q"/>
       </vertices>
       <vertices xsi:type="sgraph:FinalState" xmi:id="_PTOBwFHOEeqop6_8RQ-47Q" incomingTransitions="_TzJJsFHOEeqop6_8RQ-47Q"/>
     </regions>
