@@ -161,10 +161,10 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 			scope = addScopeForEnumType(ownerType, scope, predicate)
 		}
 		if (ownerType instanceof ComplexType) {
-			if (element instanceof Property) {
-				scope = addScopeForComplexTypeProperty(ownerType, scope, predicate)
+			if (element instanceof Type) {
+				scope = addStaticScopeForComplexType(ownerType, scope, predicate)
 			} else {
-				scope = addScopeForComplexType(ownerType, scope, predicate)
+				scope = addInstanceScopeForComplexType(ownerType, scope, predicate)
 			}
 		}
 
@@ -203,7 +203,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		return new FilteringScope(scope, predicate)
 	}
 
-	def protected IScope addScopeForComplexTypeProperty(ComplexType type, IScope parentScope,
+	def protected IScope addInstanceScopeForComplexType(ComplexType type, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
 		var scope = Scopes.scopeFor(type.getAllFeatures().filter[!isStatic], parentScope)
 		return new FilteringScope(scope, predicate)
@@ -220,7 +220,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		return new FilteringScope(scope, predicate)
 	}
 
-	def protected IScope addScopeForComplexType(ComplexType type, IScope parentScope,
+	def protected IScope addStaticScopeForComplexType(ComplexType type, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
 		var scope = Scopes.scopeFor(type.getAllFeatures().filter[isStatic], parentScope)
 		return new FilteringScope(scope, predicate)
