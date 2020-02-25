@@ -149,32 +149,45 @@ entry / otherMachine.enter
 oncycle / otherMachine.runCycle 
 exit / otherMachine.exit
 
-The call to @runCycle@ is only required if the referenced state machine is cycle based. As an alternative a simple @submachine@ statement can be used:
+The call to @runCycle@ is only required if the referenced state machine is cycle based. The equivalent is the follwoing statement:
 
 bc. 
 submachine otherMachine
 
-If you want to apply sub state machines then use this statement as it is more expressive, less verbose and avoids errors by applying higher level validations.
-
+The @submachine@ statement is not only a shortcut. It is more expressive, less verbose and avoids errors by applying higher level validations. You can simply use this statement like any other within the state. Using it is recommended when you want to use sub state machines. 
+ 
 
 ==<div class="example">==
 
-So lets apply sub state machines to the traffic control example.  
+So lets take a look how sub state machines can be applied to the traffic control example. The state _Operate_ contains several sub states which control the traffic flow by alternately releasing and blocking the traffic flow of the two directions. 
+
+!(medium)images/multi_state_machine_controller.png(Traffic controller raises events on referenced state machines.)!
+
+This set if sub states consist of two groups which are similar to each other. The First group consists of the states _all blocked before A_, _Release A_, and _A Released_. The second group is identical except for the fact that _A_ is replaced by _B_. So the behavior is cloned. Sub state machines can be used to eliminate such redundancies. 
 
 !(full)images/multi_state_machine_sub_machine.png(Using sub machine in traffic control.)!
 
+Here introducing the submachine required three steps.
 
+# Create a new statechart _ReleaseProcess.sct_ and copy the three states of the identified group. As the statechart shouldnot be specific for a specific traffic light it requires a variable to reference the controlled state machine: @var trafficLight : TrafficLight@ 
+# Replace each group by a single state. These are _Process A_ and _Process B_ here.
+# integrate the new statechart _ReleaseProcess_ as a sub state machine. 
+** This requires an additional variable which holds the reference to the sub state machine: @var process : ReleaseProcess@
+** The new states integrate the submachine. On entry the new process state machine is  configured with the proper traffic light state machine: @entry / process.trafficLight=trafficLightA@  
+** The sub machine is hooked into the state: @submachine process@
+** The transitions the two states are triggerd when the _ReleaseProcess_ state machine has finished its work and is in a final state.
+
+This example shows a typical scenario where using sub machines makes much sense. Here sub machine controls a process which consists of several steps. Here it just contains a happy case but it may also define error states. This process can be reused easily if the state machine should be extended to a 3 or 4-way traffic control. So setting up a 4-way traffic control in the initial statechart would require 4x3=12 states while using a sub machine requires 4+3=7 states.
+
+ 
 ==</div>==
 
 
+Sub machines are comparable with a sub regions and as it is possible to define multiple sub regions for a state it is also possible to define any number of sub state machines. It is even possible that a state defines both - sub regions and sub machines. If both are defined then they are processed according to the execution order:
+* In the case of _@ChildFirstExecution_ the sub regions are processed first.
+* In the case of _@ParentFirstExecution_ the sub machines are processed first.
 
-example is
-* watchdog
-* release control cycle
-explain example
 
-- a sub machien is comparable with a sub region
-- A state can contain regions and sub machines
 
 - A machine can only be sub machine in one active state at once.
 - A machine can subsequently be sub machine of many state if no two or more of them are active at the same time.
