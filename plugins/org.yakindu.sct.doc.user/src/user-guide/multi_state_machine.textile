@@ -81,7 +81,7 @@ If you know the state machine code which is generated from statecharts then you 
 
 HINT: State machine types are always uses as reference types. This implies that the state machine which defines a variable of a state machine type does not own the state machine instance. It will never be created by the state machine itself.     
 
-HINT: As a state machine type is a regular type you can use it like any other type. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value.
+HINT: As a state machine type is a regular type you can use it like any other type. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value. 
 
 HINT: Variables of state machine references can be reassigned. A valid value is @null@. @null@ is also the default value after in initializing a state machine.
 
@@ -175,34 +175,39 @@ Here introducing the submachine required three steps.
 ** This requires an additional variable which holds the reference to the sub state machine: @var process : ReleaseProcess@
 ** The new states integrate the submachine. On entry the new process state machine is  configured with the proper traffic light state machine: @entry / process.trafficLight=trafficLightA@  
 ** The sub machine is hooked into the state: @submachine process@
-** The transitions the two states are triggerd when the _ReleaseProcess_ state machine has finished its work and is in a final state.
+** The transitions the two states are triggerd when the _ReleaseProcess_ state machine has finished its work and is in a final state. The guerd is defined on the transitions: @[process.isFinal]@
+
+This results in this _TwoWayTrafficController_ and _ReleaseProcess_ state machines:
+
+!(full)images/multi_state_machine_controller_with_sub_machine.png(Traffic controller raises events on referenced state machines.)!
+
 
 This example shows a typical scenario where using sub machines makes much sense. Here sub machine controls a process which consists of several steps. Here it just contains a happy case but it may also define error states. This process can be reused easily if the state machine should be extended to a 3 or 4-way traffic control. So setting up a 4-way traffic control in the initial statechart would require 4x3=12 states while using a sub machine requires 4+3=7 states.
 
+In this example the state machine _process_ is used as sub machine in both states _Process A_ and _Proces B_. When state machine _process_ reaches its final state the a the state transition from state _Process A_ to state _Process B_ will be executed. During this state transition first _Process A_ will be exited. As a result also the sub machine will be exited. Second _Process B_ will be entered. As a result the _process_ state machine will be configured to use the other traffic light state machine and the _process_ state machine will be activated by calling its @enter@ operation. This will activate the intial state _Safe_. So the _process_ state machine is reset to control the next process.     
  
 ==</div>==
 
 
-Sub machines are comparable with a sub regions and as it is possible to define multiple sub regions for a state it is also possible to define any number of sub state machines. It is even possible that a state defines both - sub regions and sub machines. If both are defined then they are processed according to the execution order:
+Sub machines are comparable with sub regions and as it is possible to define multiple sub regions for a state it is also possible to define any number of sub state machines. It is even possible that a state defines both - sub regions and sub machines. If both are defined then they are processed according to the execution order:
 * In the case of _@ChildFirstExecution_ the sub regions are processed first.
 * In the case of _@ParentFirstExecution_ the sub machines are processed first.
 
+Additionally the order of the @submachine@ statement within a states behavior definition is relevant for the execution order:
+
+# Submachines are entered, exited, and executed (runCycle call) according to the order of the @submachine@ statements.
+# entry actions which are defined before the @submachine@ statement are executed before entering the sub machine. Those defined after are executed later. This may be relevant for properly setting up sub machines.
+# exit actions which are defined before the @submachine@ statement are executed before exiting the sub machine. Those defined after are executed later. This may be relevant for properly tearing down sub machines.
+# in the case of cycle based sub machines all local reaction of a state which are  defined before the @submachine@ statement are executed before executing the sub machines run to completion step. Those defined after are executed later. 
+
+As shown in the example a state machine can be used as a sub machine within different states. The only constraint that must be considered that these state must be exclusive to each other so that both states can't be active at the same time. With other word a machine can only be sub machine in one active state at once. The subsequent use of a state machine as sub machine is no problem. 
 
 
-- A machine can only be sub machine in one active state at once.
-- A machine can subsequently be sub machine of many state if no two or more of them are active at the same time.
+h2(#multi_state_machine_modelling_principles). Multi state machine modeling principles
 
-- execution order of sub machines and regions in parent and child first execution
+The ability to access the state machine life cycle operations which were introduced in the previous chapter provides the basis for the implementation of sub state machine. Nevertheless the concept of sub state machines defines tight life cycle constraints and this is just one pattern to control a state machine. The life cycle operations can also be used to control state machines beyond the concept of sub machines. So it is possible to enter a machine in a state and exit it in another state.
 
-- impact of order of submachine statement in state
-
-- Sub machines in event driven scenarios
-- sub machines in cycle based scenarios
-
-
-h2(#multi_state_machine_modelling_stereoids). State machine modeling on stereoids. 
-
-It is the basis for the implementation of sub state machines as described in the following chapter. Please be aware the this fine grained control state machines life cycles allow application that go far beyond 
+Future versions of this document will discuss different principles and best practices for multi state machine modeling. 
 
 
 h2(#multi_state_machine_simulation). Simulating multiple state machines
