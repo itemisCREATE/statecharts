@@ -13,11 +13,13 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.ide.model.WorkbenchFile;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 
@@ -37,11 +39,28 @@ public class PackageImportIconProvider extends WorkbenchFile {
 	/**
 	 * Provides default icon for import content type
 	 */
-	public Image getImageFor(PackageImport pkImport) {
-		IFile resource = ResourcesPlugin.getWorkspace().getRoot()
-				.getFile(new Path(pkImport.getFileURI().toPlatformString(true)));
-		ImageDescriptor descriptor = getBaseImage(resource);
-		return getImage(descriptor);
+	public Image getImageFor(PackageImport pkImport, IProject contextProject) {
+		if (contextProject != null) {
+			try {
+				IContentType contentType = contextProject.getContentTypeMatcher()
+						.findContentTypeFor(pkImport.getName());
+				ImageDescriptor image = PlatformUI.getWorkbench().getEditorRegistry()
+						.getImageDescriptor(pkImport.getName(), contentType);
+				if (image == null) {
+					return getDefaultImage();
+				}
+				return getImage(image);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		return getDefaultImage();
+	}
+
+	private Image getDefaultImage() {
+		ImageDescriptor imageDesc = PlatformUI.getWorkbench().getSharedImages()
+				.getImageDescriptor(ISharedImages.IMG_OBJ_FILE);
+		return getImage(imageDesc);
 	}
 
 	private Image getImage(ImageDescriptor descriptor) {

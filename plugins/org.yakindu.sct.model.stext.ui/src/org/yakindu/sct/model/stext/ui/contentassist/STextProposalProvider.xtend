@@ -65,6 +65,8 @@ import org.yakindu.sct.model.stext.stext.StextPackage
 import org.yakindu.sct.model.stext.stext.TransitionReaction
 import org.yakindu.sct.model.stext.stext.TransitionSpecification
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.commons.EMFHelper
+import org.eclipse.core.resources.IProject
 
 /** 
  * Several filters to make proposals more useful.
@@ -256,12 +258,18 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		var StringProposalDelegate stringProposalDelegate = new StringProposalDelegate(acceptor, context)
 		var Set<PackageImport> allImports = mapper.getAllImports(model.eResource())
+		val contextProject = model.project
 		for (PackageImport pkgImport : allImports) {
 			var ICompletionProposal doCreateProposal = createCompletionProposal('''"«pkgImport.getName()»"''',
-				computePackageStyledString(pkgImport), getIncludeImage(pkgImport),
+				computePackageStyledString(pkgImport), getIncludeImage(pkgImport, contextProject),
 				if(pkgImport.getUri().isPlatformResource()) 1 else -1, context.getPrefix(), context)
 			stringProposalDelegate.accept(doCreateProposal)
 		}
+	}
+	
+	def protected getProject(EObject model) {
+		val emfUri = utils.getContextElement(model).eResource.URI
+		return EMFHelper.getIFileFromEMFUri(emfUri)?.project
 	}
 
 	override ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
@@ -270,8 +278,8 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 			contentAssistContext.getPrefix(), contentAssistContext)
 	}
 
-	def protected Image getIncludeImage(PackageImport pkgImport) {
-		return iconProvider.getImageFor(pkgImport);
+	def protected Image getIncludeImage(PackageImport pkgImport, IProject contextProject) {
+		return iconProvider.getImageFor(pkgImport, contextProject);
 	}
 
 	def protected StyledString computePackageStyledString(PackageImport pkgImport) {
