@@ -142,17 +142,18 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		} else {
 			return getDelegate().getScope(context, reference)
 		}
+
 		var IScope scope = IScope.NULLSCOPE
 		if (element instanceof Package) {
 			return addScopeForPackage(element, scope, predicate)
 		}
+		if (element instanceof Scope) {
+			return addScopeForInterfaceScope(element, scope, predicate)
+		}
 
 		var InferenceResult result = typeInferrer.infer(owner)
 		var Type ownerType = if(result !== null) result.getType() else null
-		if (element instanceof Scope) {
-			scope = Scopes.scopeFor(element.getDeclarations())
-			return new FilteringScope(scope, predicate)
-		} else if (ownerType !== null) {
+		if (ownerType !== null) {
 			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType))
 			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType), scope)
 		}
@@ -160,7 +161,11 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 			scope = addScopeForEnumType(ownerType, scope, predicate)
 		}
 		if (ownerType instanceof ComplexType) {
-			scope = addScopeForComplexType(ownerType, scope, predicate)
+			if (element instanceof Property) {
+				scope = addScopeForComplexTypeProperty(ownerType, scope, predicate)
+			} else {
+				scope = addScopeForComplexType(ownerType, scope, predicate)
+			}
 		}
 
 		return scope
@@ -194,25 +199,31 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 
 	def protected IScope addScopeForEnumType(EnumerationType element, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
-		var scope = parentScope
-		scope = Scopes.scopeFor((element).getEnumerator(), scope)
-		scope = new FilteringScope(scope, predicate)
-		return scope
+		var scope = Scopes.scopeFor(element.getEnumerator(), parentScope)
+		return new FilteringScope(scope, predicate)
+	}
+
+	def protected IScope addScopeForComplexTypeProperty(ComplexType type, IScope parentScope,
+		Predicate<IEObjectDescription> predicate) {
+		var scope = Scopes.scopeFor(type.getAllFeatures().filter[!isStatic], parentScope)
+		return new FilteringScope(scope, predicate)
+	}
+
+	def protected IScope addScopeForPackage(Package pkg, IScope parentScope, Predicate<IEObjectDescription> predicate) {
+		var scope = Scopes.scopeFor(pkg.member, parentScope)
+		return new FilteringScope(scope, predicate)
+	}
+
+	def protected IScope addScopeForInterfaceScope(Scope sc, IScope parentScope,
+		Predicate<IEObjectDescription> predicate) {
+		var scope = Scopes.scopeFor(sc.declarations, parentScope)
+		return new FilteringScope(scope, predicate)
 	}
 
 	def protected IScope addScopeForComplexType(ComplexType type, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
-		var scope = parentScope
-		scope = Scopes.scopeFor(type.getAllFeatures().filter[!isStatic], scope)
-		scope = new FilteringScope(scope, predicate)
-		return scope
-	}
-
-	def protected IScope addScopeForPackage(Package pkg, IScope parentScope, Predicate<IEObjectDescription> predicate) {
-		var scope = parentScope
-		scope = Scopes.scopeFor(pkg.member, scope)
-		scope = new FilteringScope(scope, predicate)
-		return scope
+		var scope = Scopes.scopeFor(type.getAllFeatures().filter[isStatic], parentScope)
+		return new FilteringScope(scope, predicate)
 	}
 
 	def private Predicate<IEObjectDescription> calculateFilterPredicate(EObject context, EReference reference) {
