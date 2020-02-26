@@ -15,6 +15,7 @@
         <toc file="help/user-guide/scxml_domain-toc.xml" primary="false"/>
         <!-- <toc file="help/user-guide/typescript-domain-toc.xml" primary="false"/> -->
         <toc file="help/user-guide/statechart_language-toc.xml" primary="false"/>
+        <toc file="help/user-guide/multi_state_machine-toc.xml" primary="false"/>
         <toc file="help/user-guide/code_generation_intro-toc.xml" primary="false"/>
         <toc file="help/user-guide/code_generation_c-toc.xml" primary="false"/>
         <toc file="help/user-guide/code_generation_cpp-toc.xml" primary="false"/>
