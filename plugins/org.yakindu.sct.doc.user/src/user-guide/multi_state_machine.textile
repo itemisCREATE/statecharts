@@ -6,11 +6,11 @@ p.
 h1(#multi_state_machine_modelling). Multi state machine modeling
 
 
-The behavior of large systems is often too complex to be captured by a single statechart. So if a statechart gets too large you should think about splitting it into two or more smaller pieces. Beside the fact that the smaller state machines are easier to handle  and maintain there are additional reasons for using multiple state machine instead of single monolithic ones:
+The behavior of large systems is often too complex to be captured by a single statechart. So if a statechart gets too large you should think about splitting it into two or more smaller pieces. Beside the fact that the smaller state machines are easier to handle  and maintain there are additional reasons for using multiple state machines instead of single monolithic ones:
 
 * Separation of concerns enables a better software architecture.
-* State machines can be reused at different places. So if you have identical copies of sub states spread around your stat e machines then this could be a good point.   
-* If you build a distributed system then the you require separate state machines for the different nodes. 
+* State machines can be reused at different places. So if you have identical copies of sub states spread around your state machines then this could be a good point.
+* If you build a distributed system then you require separate state machines for the different nodes. 
 
 This chapter describes how you can model and simulate a system which consists of multiple collaborating state machines and how you can embed a statechart as a sub machines into another statechart. This chapter introduces all relevant concepts using an example. 
 
@@ -29,15 +29,15 @@ The example consists of a system of three state machine instances. There are two
 
 h2(#multi_state_machine_referencing). Referencing state machines   
 
-First of all - in order to enable collaboration between different state machines it must be possible that state machine can reference other state machines. To establish such a reference two steps are required:
+First of all - in order to enable collaboration between different state machines it must be possible that state machines can reference other state machines. To establish such a reference two steps are required:
 
-# The extenral statechart can be made visible by importing by defining an iport scope using @import: "xyz.sct"@ in the statecharts declaration area. Specify relative paths if the statecharts are not located in the same directory.
+# The external statechart can be made visible by defining an import scope using @import: "xyz.sct"@ in the statecharts declaration area. Specify relative paths if the statecharts are not located in the same directory.
 # Define a variable of the desired state machine type: @var otherMachine : SomeMachineType@
 
 
 ==<div class="example">==
 
-For our example state chart _TwoWayTrafficControl_ the declarations look like this:
+For our example statechart _TwoWayTrafficControl_ the declarations look like this:
 
 bc. 
 import: "TrafficLight.sct"
@@ -45,7 +45,7 @@ interface:
     var trafficLightA : TrafficLight
     var trafficLightB : TrafficLight
  
-According to the steps described above the statechart _TrafficLight_ is imported. As two instances of this references statechart are required two variables are defined. So if you want to implement a three or four way traffic control you can simply define as man variables for state machine references as you require.
+According to the steps described above the statechart _TrafficLight_ is imported. As two instances of this referenced statechart are required, two variables are defined. So if you want to implement a three or four way traffic control you can simply define as many variables for state machine references as you require.
   
 ==</div>==
 
@@ -67,7 +67,7 @@ The statechart _TrafficLight_ defines the type @TrafficLight@ and the statechart
 You should know the following facts about state machine types:
 
 # Each statechart has its own type. This type has the same name as the statechart.
-# The state machine type is a class type. All members defined in the statecharts default interface are direct members of this type.
+# The state machine type is a class type. All members defined in the statechart's default interface are direct members of this type.
 # These members can be variables, events, and operations.
 # The type members have the identical name as defined in the statechart.
 # State machine types used in variables, events and operations are always reference types.
@@ -75,9 +75,9 @@ You should know the following facts about state machine types:
 # These named interface members are complex types which include all members defined in the interfaces. 
 # All declarations of the internal scope are not exposed through the state machine type.
 # The state machine type inherits from the abstract type @IStateMachine@. This type defines additional life cycle operations which are implemented by each state machine.
-# Each statechart owns an addition enumeration type named @<StatechartName>States@. It defines an enumeration value for each state of the statechart.
+# Each statechart owns an additional enumeration type named @<StatechartName>States@. It defines an enumeration value for each state of the statechart.
 
-If you know the state machine code which is generated from statecharts then you will discover that the definitions of the state machine types directly directly match the definitions of the generated code. 
+If you know the state machine code which is generated from statecharts then you will discover that the definitions of the state machine types directly match the definitions of the generated code. 
 
 ==<div class="info">==
 
@@ -87,7 +87,7 @@ If you know the state machine code which is generated from statecharts then you 
 
 ==<div class="info">==
 
-As a *state machine type* is a regular type you can *use it like any other type*. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value.
+As a *state machine type* is a regular type you can *use it like any other type*. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as an operation's return value.
 
 ==</div>==
 
@@ -118,7 +118,7 @@ Different states (like _Release A_) also use outgoing events ( @trafficLightA.re
 
 ==</div>==
 
-A loosely coupled architecture make use of asynchronous message passing and this perfectly matches to statechart events. A statechart which raises an event should not make any assumptions, when the event is processed. 
+A loosely coupled architecture makes use of asynchronous message passing and this perfectly matches to statechart events. A statechart which raises an event should not make any assumptions when the event is processed. 
 
 Accessing variables implies a tighter coupling of state machines as these are accessed in a synchronized fashion.  
 
@@ -134,15 +134,15 @@ entry / trafficLightA.config.realeasePeriod = 60
 
 h2(#multi_state_machine_life_cycle). Controlling a state machines life cycle   
 
-In addition to events and variables which are declared by the statechart also additional operations exist. As explained before (see type @IStateMachine@ in previous chapter) they implicitly exist for each state machine. All these operations related to the state machines life cycle and can be used to control a state machine.
+In addition to the events and variables which are declared by the statechart, also additional life cycle operations exist. As explained before (see type @IStateMachine@ in previous chapter), they implicitly exist for each state machine and can be used to control its life cycle.
 
 | *operation* | *purpose* |
-| enter() : void | An inactive state machine can be activated by calling this operation. During activation the initial state will be activated and all required entry actions are executed. A state machine is inactive by default fter creation.|
-| exit() : void | A call to exit deactivates an active state machine. During exit all active states will be exited and all relevant exit actions will be executed. After exit no state is active. | 
-| isActive() : boolean | Returns true if the state machine is active and false if this is not the case. A state machine is active if there is at least one active state. This operation can be used in guards to test the life caycle state of a state machine. | 
-| isStateActive(state): boolean| Can be used in guards to check the activation of a specific state. The state parameter must of the state machines state enumeration type.|
+| enter() : void | An inactive state machine can be activated by calling this operation. During activation the initial state will be activated and all required entry actions are executed. A state machine is inactive by default after creation.|
+| exit() : void | A call to exit deactivates an active state machine. During exit, all active states will be exited and all relevant exit actions will be executed. After exit, no state is active. | 
+| isActive() : boolean | Returns true if the state machine is active and false otherwise. A state machine is active if there is at least one active state. This operation can be used in guards to test the life cycle state of a state machine. | 
+| isStateActive(state): boolean| Can be used in guards to check the activation of a specific state. The state parameter must be of the state machines state enumeration type.|
 | isFinal() : boolean | Returns true if all active states are final states. The final state won't change until the state machine is exited and reentered. This operation can be used in guards to check if a state machine has finished its work.|
-| runCycle(): void | Performs a state machines run to completion step. If a state machine takes full control of a cycle based state machines then it has to decide when the run to completion step must be executed.
+| runCycle(): void | Performs a state machines run-to-completion step. If a state machine takes full control of a cycle-based state machine then it has to decide when the run-to-completion step must be executed.
 
 
 Using these operations implies a tighter semantic coupling of separate state machines. It is the basis for the implementation of sub state machines as described in the following chapter.   
@@ -152,16 +152,16 @@ h2(#multi_state_machine_submachine). Defining sub state machines
 
 A common concept for structuring statecharts is the decomposition into different sub state machines. This is a concept that you can find in modeling languages like the UML and others. 
 
-The basic idea is that a state machine which is assigned to a state as sub machine is executed as if it is part of the enclosing state machine. This means its life cycle is coupled to the life cycle of its owning state. It will be activated when its parent state becomes active, will be deactivated when the parent state deactivates. 
+The basic idea is that a state machine which is assigned to a state as sub machine is executed as if it is part of the enclosing state machine. This means its life cycle is coupled to the life cycle of its owning state. It will be activated when its parent state becomes active, and will be deactivated when the parent state deactivates. 
 
-Such a sub machine pattern can bedefined using the life cycle methods introduces in the previous chapter. The pattern for using sub state machines looks like this:
+Such a sub machine pattern can be defined using the life cycle methods introduced in the previous chapter. The pattern for using sub state machines looks like this:
 
 bc. 
 entry / otherMachine.enter
 oncycle / otherMachine.runCycle 
 exit / otherMachine.exit
 
-The call to @runCycle@ is only required if the referenced state machine is cycle based. The equivalent is the follwoing statement:
+The call to @runCycle@ is only required if the referenced state machine is cycle-based. The equivalent is the following statement:
 
 bc. 
 submachine otherMachine
