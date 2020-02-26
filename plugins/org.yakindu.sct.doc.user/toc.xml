@@ -22,6 +22,7 @@
 	    <link toc="help/user-guide/scxml_domain-toc.xml"/>
 	    <!-- <link toc="help/user-guide/typescript-domain-toc.xml"/> -->
 	    <link toc="help/user-guide/statechart_language-toc.xml"/>
+     	<link toc="help/user-guide/multi_state_machine-toc.xml"/>
 	    <link toc="help/user-guide/embedded_systems_integration_guide-toc.xml"/>
 	    <link toc="help/user-guide/lab_projects-toc.xml"/>
 	    <link toc="help/user-guide/release_notes-toc.xml"/>

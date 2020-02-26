@@ -25,6 +25,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionSlot
+import org.yakindu.sct.model.sruntime.ReferenceSlot
 
 /**
  * Default implementation for resolving execution slots based on expressions.
@@ -83,6 +84,22 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	def protected dispatch ExecutionSlot resolveFromSlot(CompositeSlot slot, FeatureCall call) {
 		resolveByFeature(slot, call.feature)
+	}
+	
+	def protected dispatch ExecutionSlot resolveFromSlot(ReferenceSlot slot, Operation call) {
+		if (slot.reference instanceof CompositeSlot) {
+			resolveByFeature(slot.reference as CompositeSlot, call)
+		} else {
+			resolveByFeature(slot, call)
+		}
+	}
+	
+	def protected dispatch ExecutionSlot resolveFromSlot(ReferenceSlot slot, FeatureCall call) {
+		if (slot.reference instanceof CompositeSlot) {
+			resolveByFeature(slot.reference as CompositeSlot, call.feature)
+		} else {
+			resolveByFeature(slot, call.feature)
+		}
 	}
 
 	def protected dispatch ExecutionSlot resolveByFeature(CompositeSlot slot, EObject feature) {

@@ -276,6 +276,31 @@ body.eclipsehelp {
     margin-bottom: 1ex;
 }
 
+.body-container .primary .info {
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cccccc;
+    border-radius: 4px;
+    background-color: rgb(192, 238, 192);
+    padding-top: 1ex;
+    padding-bottom: 0.5ex;
+    padding-right: 1em;
+    padding-left: 0.5em;
+    margin-bottom: 1ex;
+    display:flex;
+}
+
+.info::before {
+    content: "i";
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 2em;
+    font-weight: bolder; 
+    color:green;
+    margin-right: 0.5em;
+    margin-left: 0.25em;
+}
+
 .body-container .primary .inline-paramount {
     border-style: solid;
     border-width: 1px;
