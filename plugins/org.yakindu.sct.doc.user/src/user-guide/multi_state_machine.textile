@@ -79,11 +79,20 @@ You should know the following facts about state machine types:
 
 If you know the state machine code which is generated from statecharts then you will discover that the definitions of the state machine types directly directly match the definitions of the generated code. 
 
-HINT: State machine types are always uses as reference types. This implies that the state machine which defines a variable of a state machine type does not own the state machine instance. It will never be created by the state machine itself.     
+==<div class="info">==
 
-HINT: As a state machine type is a regular type you can use it like any other type. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value. 
+*State machine types are* always used as *reference types.* This implies that the state machine which defines a variable of a state machine type does not own the state machine instance. It will never be created by the state machine itself.     
+==</div>==
 
-HINT: Variables of state machine references can be reassigned. A valid value is @null@. @null@ is also the default value after in initializing a state machine.
+==<div class="info">==
+
+As a *state machine type* is a regular type you can *use it like any other type*. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value. 
+==</div>==
+
+==<div class="info">==
+
+Variables of state machine references can be reassigned. A valid value is @null@. *@null@ is the default value* after initializing a state machine.
+==</div>==
 
 
 
