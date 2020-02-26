@@ -74,6 +74,43 @@ span.pro-feature:before {
     left: 0
 }
 
+.r4-feature {
+    border: 2px solid orangered;
+    border-color: rgba(255, 69, 0, 0.75);
+    border-width: 2px 0 0 2px;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px 0;
+    margin-right: -20px;
+    margin-bottom: 30px;
+}
+
+.r4-feature:before {
+    content: "R 4.0";
+    position: absolute;
+    top: -10px;
+    right: -34px;
+    background: orangered;
+    background: rgba(255, 69, 0, 0.75);
+    color: white;
+    padding: 20px 30px 2px;
+    transform: rotate(45deg);
+    z-index: 10
+}
+
+span.r4-feature {
+    padding: 0;
+    border-width: 0
+}
+
+span.r4-feature:before {
+    transform: none;
+    padding: 0 3px;
+    position: relative;
+    top: 0;
+    left: 0
+}
+
 /* Edit on GitHub: */
 .sct-docs h1 {
     /* Make some room for the "Edit on GitHub link": */
