@@ -81,17 +81,20 @@ If you know the state machine code which is generated from statecharts then you 
 
 ==<div class="info">==
 
-*State machine types are* always used as *reference types.* This implies that the state machine which defines a variable of a state machine type does not own the state machine instance. It will never be created by the state machine itself.     
+*State machine types are* always used as *reference types.* This implies that the state machine which defines a variable of a state machine type does not own the state machine instance. It will never be created by the state machine itself. 
+    
 ==</div>==
 
 ==<div class="info">==
 
-As a *state machine type* is a regular type you can *use it like any other type*. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value. 
+As a *state machine type* is a regular type you can *use it like any other type*. So you can assign state machine references to variables, use it as event payload, pass it as operation parameter, or use it as a operations return value.
+
 ==</div>==
 
 ==<div class="info">==
 
 Variables of state machine references can be reassigned. A valid value is @null@. *@null@ is the default value* after initializing a state machine.
+
 ==</div>==
 
 
@@ -216,11 +219,14 @@ h2(#multi_state_machine_modelling_principles). Multi state machine modeling prin
 
 The ability to access the state machine life cycle operations which were introduced in the previous chapter provides the basis for the implementation of sub state machine. Nevertheless the concept of sub state machines defines tight life cycle constraints and this is just one pattern to control a state machine. The life cycle operations can also be used to control state machines beyond the concept of sub machines. So it is possible to enter a machine in a state and exit it in another state.
 
+==<div class="info">==
+
 Future versions of this document will discuss different principles and best practices for multi state machine modeling. 
+
+==</div>==
 
 
 h2(#multi_state_machine_simulation). Simulating multiple state machines
-
 
 
 h2(#multi_state_machine_testing). Testing multiple state machines
@@ -228,6 +234,11 @@ h2(#multi_state_machine_testing). Testing multiple state machines
 
 
 h2(#multi_state_machine_code_gen). Generating code for multi state machine systems
+
+If a statechart uses other statecharts then this will be the same on the level of the generated code. You will find dependencies from the generated using state machine type to the the generated used state machine type.  
+
+
+The code generation process does not change when statecharts use other statecharts. Simply define the code generator ( _sgen_ ) files as before. Make sure that the generator properties, especially those that relate to output paths fit together.
 
 
 ==</div>==
