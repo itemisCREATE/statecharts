@@ -228,9 +228,119 @@ Future versions of this document will discuss different principles and best prac
 
 h2(#multi_state_machine_simulation). Simulating multiple state machines
 
+The statechart simulation supports the simulation of multiple statechart instances. Simply choose a statechart and choose _Run As > Statechart Simulation_ from the menu. 
+
+If the statechart defines variables which refer to other statechart types then the simulation engine will care about setting up the simulation scenario which includes statechart instances of the involved statechart types. 
+
+==<div class="example" style="display:flex;">==
+
+==<div style="width:75%; padding-right: 1em;">==
+
+When starting the simulation for the statechart _TwoWayTrafficControl_ the simulation view will list _TwoWayTrafficControl.sct_ as the current simulation session. Additionally the statechart instances which were created for the simulation session are listed as children of the simulation session. 
+
+The first statechart simply has no specific name and is of type _TwoWayTrafficControl_ . The second and third are instances of the statechart _TrafficLight_. Their name is the name of the variables which are defined by _TwoWayTrafficControl_ as statechart references. 
+
+If you click on the statechart instances then a simulation viewer for the specific statechart instance will be opened.
+
+In the detail view below also the variables that reference statecharts are visualized with a statechart icon. You can unfold the details of the referenced statechart by clicking on the grey triangle.
+
+==</div>==
+
+!(full)images/multi_state_machine_simulation_view.png(Simulation view for traffic control.)!
+
+==</div>==
+
+
+h3(#multi_state_machine_simulation_sm_creation). State machine creation
+
+The simulation engine creates statechart instances according to the following strategy:
+
+# create the root statechart instance
+# for each defined statechart reference of the instance 
+## if no instance was created for this reference definition (precludes infinite recursion)
+### create a statechart instance of referenced type
+### set the reference
+### continue with 2.)  
+
+==<div class="info">==
+
+As described in the previous chapters - *statechart instances never create other statechart instances*. Statecharts are *created by the simulation environment*. 
+
+==</div>==
+
+
+h3(#multi_state_machine_simulation_sm_activation). State machine activation
+
+After all statechart instances were created and connected the simulation engine will activate the root statechart instavce. All other instance are not activated. This implies that the root statechart must initiate the activation of the referenced machine instances. This can be done by
+
+# calling their _enter_ methods
+# or using them as sub machines. 
+
+If this is the case then everything works out of the box. There are additional cases where controlling the refererenced statecharts life cycle is not desired, e.g. to have a system of loosely coupled instances. Such systems typically just send events to each other and are inherently asynchronous. If you run the simulation for one of the involved statecharts then all instances except for the simulation root will never be activated. 
+
+In these cases you should setup an additional statechart which controls the life cycles of the loosely coupled state machine instances. This statechart defines the system behavior and thus we call it system statechart. 
+
+
+==<div class="example">==
+
+When starting the simulation for the statechart _TwoWayTrafficControl_ the simulation view will list _TwoWayTrafficControl.sct_ as the current simulation session. Additionally the statechart instances which were created for the simulation session are listed as children of the simulation session. 
+
+The first statechart simply has no specific name and is of type _TwoWayTrafficControl_ . The second and third are instances of the statechart _TrafficLight_. Their name is the name of the variables which are defined by _TwoWayTrafficControl_ as statechart references. 
+
+If you click on the statechart instances then a simulation viewer for the specific statechart instance will be opened.
+
+In the detail view below also the variables that reference statecharts are visualized with a statechart icon. You can unfold the details of the referenced statechart by clicking on the grey triangle.
+
+This case can be illustrated using the traffic light control example. Here all involved statecharts interact using events. An additional statechart _StreetCrossingSystem.sct_ defines the system behavior. This includes the start up sequence of all involved statechart instances.
+
+!(large)images/multi_state_machine_system_behavior.png(system behavior of a street crossing.)!
+
+The system statechart defines a reference called _controller_  to a _TwoWayTrafficControl_ state machine type. It does not start up everything immediately - what would be possible - but defines a set of states which define different system scenarios. The initial state is _Off_. In this state no state machine is active. By raising the event _startAll_ the system enters the state _On_ which makes sure that all state machines are active. Mention that the system behavior can access the referenced statecharts of referenced statecharts. 
+
+The system behavior also defines an additional states for each _TrafficLight_ state machine instance. Here an temopary outage of a _TrafficLight_ is simulated by deactivating the machines.
+
+==</div>==
+
+System statecharts can be used to fully control state machines. They can be used to set up complex system scenarios and finally may automate execution sequencesto bring the system in a defined state which would require much click work for the user. 
+
 
 h2(#multi_state_machine_testing). Testing multiple state machines
 
+SCUnit supports unit testing of multiple state machines. A SCTUnit tests is defined for a state machine type which is the test instance of the unit test.  
+
+If the statechart defines variables which refer to other statechart types then the test environment will care about setting up the test scenario which includes statechart instances of the involved statechart types. Here the same instantiation startegy as described for the simulation is applied. 
+
+If the statechart under test does not control the life cycle of the referenced state machines, then this can simply be done by the test case itself.
+
+
+==<div class="example">==
+
+An simple test case for the traffic control example could look like this.
+
+bc. 
+testclass TwoWayTrafficControl for statechart TwoWayTrafficControl {
+	@Test operation testStartUp() {
+		enter  
+		trafficLightA.^enter
+		trafficLightB.^enter
+		assert active (main.Off)
+		assert trafficLightA.isStateActive(TrafficLightStates.Off)
+		assert trafficLightB.isStateActive(TrafficLightStates.Off)
+	}
+}
+
+In SCTUnit state machines must be activated explicitly. this is also true for the state machine under test which is a _TwoWayTrafficControl_ state machine instance. The machine under test is activated by the @enter@ statement while the two _TrafficLight_ state machine instances are activated by calling the @enter@ operation on the reference. 
+
+The following assertions check if the initial states were activated. This is done by using the built in function @active@ for the machine under test while the referenced machines are tested using the @isStateActive@ operations.
+  
+==</div>==
+
+
+==<div class="info">==
+
+use the SCTUnit built in functions for the state machine under test and use the operations defined by the state machine types for the referenced state machines.
+
+==</div>==
 
 
 h2(#multi_state_machine_code_gen). Generating code for multi state machine systems
