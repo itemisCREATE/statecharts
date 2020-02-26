@@ -295,14 +295,6 @@ In these cases you should setup an additional statechart which controls the life
 
 ==<div class="example">==
 
-When starting the simulation for the statechart _TwoWayTrafficControl_ the simulation view will list _TwoWayTrafficControl.sct_ as the current simulation session. Additionally the statechart instances which were created for the simulation session are listed as children of the simulation session. 
-
-The first statechart simply has no specific name and is of type _TwoWayTrafficControl_ . The second and third are instances of the statechart _TrafficLight_. Their name is the name of the variables which are defined by _TwoWayTrafficControl_ as statechart references. 
-
-If you click on the statechart instances then a simulation viewer for the specific statechart instance will be opened.
-
-In the detail view below also the variables that reference statecharts are visualized with a statechart icon. You can unfold the details of the referenced statechart by clicking on the grey triangle.
-
 This case can be illustrated using the traffic light control example. Here all involved statecharts interact using events. An additional statechart _StreetCrossingSystem.sct_ defines the system behavior. This includes the start up sequence of all involved statechart instances.
 
 !(large)images/multi_state_machine_system_behavior.png(system behavior of a street crossing.)!
