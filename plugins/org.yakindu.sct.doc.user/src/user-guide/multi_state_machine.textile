@@ -6,10 +6,10 @@ p.
 h1(#multi_state_machine_modelling). Multi state machine modeling
 
 
-The behavior of large systems is often too complex to be captured by a single statechart. So if a statechart gets too large you should think about splitting it into two or more smaller pieces. Beside the fact that the smaller state machines are easier to handle  and maintain there are additional reasons for using multiple state machines instead of single monolithic ones:
+The behavior of large systems is often too complex to be captured by a single statechart. So if a statechart gets too large you should think about splitting it into two or more smaller parts. Beside the fact that the smaller state machines are easier to handle  and maintain there are additional reasons for using multiple state machines instead of single monolithic ones:
 
 * Separation of concerns enables a better software architecture.
-* State machines can be reused at different places. So if you have identical copies of sub states spread around your state machines then this could be a good point.
+* State machines can be reused in different contexts. So if you have identical copies of sub states spread around your state machines then this could be a good starting point.
 * If you build a distributed system then you require separate state machines for the different nodes. 
 
 This chapter describes how you can model and simulate a system which consists of multiple collaborating state machines and how you can embed a statechart as a sub machines into another statechart. This chapter introduces all relevant concepts using an example. 
@@ -17,7 +17,7 @@ This chapter describes how you can model and simulate a system which consists of
 
 ==<div class="example">==
 
-The example is the traffic control of a street crossing using traffic lights. While a single traffic light is not so complex the coordination of different traffic lights on a crossing is a good example to highlight the collaboration between different state machines. 
+The example is a traffic control of a street crossing using traffic lights. While a single traffic light is not so complex the coordination of different traffic lights on a crossing is a good example to highlight the collaboration between different state machines. 
 
 
 !(large)images/multi_state_machine_example_overview.png(Street crossing with three state machines.)!
@@ -29,9 +29,9 @@ The example consists of a system of three state machine instances. There are two
 
 h2(#multi_state_machine_referencing). Referencing state machines   
 
-First of all - in order to enable collaboration between different state machines it must be possible that state machines can reference other state machines. To establish such a reference two steps are required:
+First of all - in order to enable collaboration between separate state machines it must be possible that state machines can reference other state machines. To establish such a reference two steps are required:
 
-# The external statechart can be made visible by defining an import scope using @import: "xyz.sct"@ in the statecharts declaration area. Specify relative paths if the statecharts are not located in the same directory.
+# The external statechart must be made visible by defining an import scope using @import: "xyz.sct"@ in the statecharts declaration area. Specify relative paths if the statecharts are not located in the same directory.
 # Define a variable of the desired state machine type: @var otherMachine : SomeMachineType@
 
 
@@ -45,7 +45,7 @@ interface:
     var trafficLightA : TrafficLight
     var trafficLightB : TrafficLight
  
-According to the steps described above the statechart _TrafficLight_ is imported. As two instances of this referenced statechart are required, two variables are defined. So if you want to implement a three or four way traffic control you can simply define as many variables for state machine references as you require.
+According to the steps described above the statechart _TrafficLight.sct_ is imported. As two instances of this referenced statechart are required, two variables are defined. So if you want to implement a three or four way traffic control you can simply define as many variables for state machine references as you require.
   
 ==</div>==
 
@@ -60,7 +60,7 @@ Lets take a look at the example statecharts to get an idea how the state machine
 
 !(medium)images/multi_state_machine_types.png(State machine types derived from statechart definitions.)!
 
-The statechart _TrafficLight_ defines the type @TrafficLight@ and the statechart _TwoWayTrafficControl_ defines @TwoWayTrafficControl@. The types include all members defined in the statecharts declaration section. The variables which are of type @TrafficLight@ are references to instances of this type.
+The statechart _TrafficLight.sct_ defines the type @TrafficLight@ and the statechart _TwoWayTrafficControl.sct_ defines @TwoWayTrafficControl@. The types include all members defined in the statecharts declaration section. The variables which are of type @TrafficLight@ are references to instances of this type.
 
 ==</div>==
 
@@ -124,11 +124,13 @@ Accessing variables implies a tighter coupling of state machines as these are ac
 
 ==<div class="example">==
 
-In some action the statechart _TwoWayTrafficControl_ could configure the _TrafficLight_ state machines using provided variables.
+As an example the statechart _TwoWayTrafficControl_ could configure the _TrafficLight_ state machines using variables that these provide.
 
 bc. 
 entry / trafficLightA.config.realeasePeriod = 60
 
+Here the v ariable _releasePeriod_ is set as an entry action. _releasePeriod_ is defined by the named interface _config_ thus it is accessed in two step using the _dot expression_ '.' .
+ 
 ==</div>==
 
 
@@ -146,6 +148,16 @@ In addition to the events and variables which are declared by the statechart, al
 
 
 Using these operations implies a tighter semantic coupling of separate state machines. It is the basis for the implementation of sub state machines as described in the following chapter.   
+
+==<div class="example">==
+
+An example for using life cycle operations is given in: 
+
+* the "*next chapter*":#multi_state_machine_submachine 
+* "*state machine activation*":#multi_state_machine_simulation_sm_activation
+* and "*state machine testing*":#multi_state_machine_testing
+
+==</div>==
 
 
 h2(#multi_state_machine_submachine). Defining sub state machines   
