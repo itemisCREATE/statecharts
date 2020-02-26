@@ -187,28 +187,28 @@ So lets take a look how sub state machines can be applied to the traffic control
 
 !(medium)images/multi_state_machine_controller.png(Traffic controller raises events on referenced state machines.)!
 
-This set if sub states consist of two groups which are similar to each other. The First group consists of the states _all blocked before A_, _Release A_, and _A Released_. The second group is identical except for the fact that _A_ is replaced by _B_. So the behavior is cloned. Sub state machines can be used to eliminate such redundancies. 
+This set of sub states consists of two groups which are similar to each other. The first group consists of the states _all blocked before A_, _Release A_, and _A Released_. The second group is identical except for the fact that _A_ is replaced by _B_. So the behavior is cloned. Sub state machines can be used to eliminate such redundancies. 
 
 !(full)images/multi_state_machine_sub_machine.png(Using sub machine in traffic control.)!
 
-Here introducing the submachine required three steps.
+Here, introducing the submachine required three steps.
 
-# Create a new statechart _ReleaseProcess.sct_ and copy the three states of the identified group. As the statechart shouldnot be specific for a specific traffic light it requires a variable to reference the controlled state machine: @var trafficLight : TrafficLight@ 
+# Create a new statechart _ReleaseProcess.sct_ and copy the three states of the identified group. As the statechart should not be specific for a specific traffic light it requires a variable to reference the controlled state machine: @var trafficLight : TrafficLight@ 
 # Replace each group by a single state. These are _Process A_ and _Process B_ here.
-# integrate the new statechart _ReleaseProcess_ as a sub state machine. 
+# Integrate the new statechart _ReleaseProcess_ as a sub state machine. 
 ** This requires an additional variable which holds the reference to the sub state machine: @var process : ReleaseProcess@
-** The new states integrate the submachine. On entry the new process state machine is  configured with the proper traffic light state machine: @entry / process.trafficLight=trafficLightA@  
+** The new states integrate the submachine. On entry, the new process state machine is configured with the proper traffic light state machine: @entry / process.trafficLight=trafficLightA@  
 ** The sub machine is hooked into the state: @submachine process@
-** The transitions the two states are triggerd when the _ReleaseProcess_ state machine has finished its work and is in a final state. The guerd is defined on the transitions: @[process.isFinal]@
+** The transitions of the two states are triggered when the _ReleaseProcess_ state machine has finished its work and is in a final state. The guard is defined on the transitions: @[process.isFinal]@
 
-This results in this _TwoWayTrafficController_ and _ReleaseProcess_ state machines:
+This results in the following _TwoWayTrafficController_ and _ReleaseProcess_ state machines:
 
 !(full)images/multi_state_machine_controller_with_sub_machine.png(Traffic controller raises events on referenced state machines.)!
 
 
-This example shows a typical scenario where using sub machines makes much sense. Here sub machine controls a process which consists of several steps. Here it just contains a happy case but it may also define error states. This process can be reused easily if the state machine should be extended to a 3 or 4-way traffic control. So setting up a 4-way traffic control in the initial statechart would require 4x3=12 states while using a sub machine requires 4+3=7 states.
+This example shows a typical scenario where using sub machines makes much sense. Here, sub machine controls a process which consists of several steps. Here, it just contains a happy case but it may also define error states. This process can be reused easily if the state machine should be extended to a 3 or 4-way traffic control. So setting up a 4-way traffic control in the initial statechart would require 4x3=12 states while using a sub machine requires 4+3=7 states.
 
-In this example the state machine _process_ is used as sub machine in both states _Process A_ and _Proces B_. When state machine _process_ reaches its final state the a the state transition from state _Process A_ to state _Process B_ will be executed. During this state transition first _Process A_ will be exited. As a result also the sub machine will be exited. Second _Process B_ will be entered. As a result the _process_ state machine will be configured to use the other traffic light state machine and the _process_ state machine will be activated by calling its @enter@ operation. This will activate the intial state _Safe_. So the _process_ state machine is reset to control the next process.     
+In this example the state machine _process_ is used as sub machine in both states _Process A_ and _Proces B_. When state machine _process_ reaches its final state, the state transition from state _Process A_ to state _Process B_ will be executed. During this state transition, first, _Process A_ will be exited. As a result also the sub machine will be exited. Second, _Process B_ will be entered. As a result, the _process_ state machine will be configured to use the other traffic light state machine and the _process_ state machine will be activated by calling its @enter@ operation. This will activate the initial state _Safe_. So the _process_ state machine is reset to control the next process.     
  
 ==</div>==
 
@@ -217,19 +217,19 @@ Sub machines are comparable with sub regions and as it is possible to define mul
 * In the case of _@ChildFirstExecution_ the sub regions are processed first.
 * In the case of _@ParentFirstExecution_ the sub machines are processed first.
 
-Additionally the order of the @submachine@ statement within a states behavior definition is relevant for the execution order:
+Additionally, the order of the @submachine@ statement within a state's behavior definition is relevant for the execution order:
 
 # Submachines are entered, exited, and executed (runCycle call) according to the order of the @submachine@ statements.
-# entry actions which are defined before the @submachine@ statement are executed before entering the sub machine. Those defined after are executed later. This may be relevant for properly setting up sub machines.
-# exit actions which are defined before the @submachine@ statement are executed before exiting the sub machine. Those defined after are executed later. This may be relevant for properly tearing down sub machines.
-# in the case of cycle based sub machines all local reaction of a state which are  defined before the @submachine@ statement are executed before executing the sub machines run to completion step. Those defined after are executed later. 
+# Entry actions which are defined before the @submachine@ statement are executed before entering the sub machine. Those defined after are executed later. This may be relevant for properly setting up sub machines.
+# Exit actions which are defined before the @submachine@ statement are executed before exiting the sub machine. Those defined after are executed later. This may be relevant for properly tearing down sub machines.
+# In the case of cycle-based sub machines all local reactions of a state which are defined before the @submachine@ statement are executed before executing the sub machine's run-to-completion step. Those defined after are executed later. 
 
-As shown in the example a state machine can be used as a sub machine within different states. The only constraint that must be considered that these state must be exclusive to each other so that both states can't be active at the same time. With other word a machine can only be sub machine in one active state at once. The subsequent use of a state machine as sub machine is no problem. 
+As shown in the example a state machine can be used as a sub machine within different states. The only constraint that must be considered is that these states must be exclusive to each other so that both states can't be active at the same time. In other words, a machine can only be a sub machine in one active state at once. The subsequent use of a state machine as sub machine is no problem. 
 
 
 h2(#multi_state_machine_modelling_principles). Multi state machine modeling principles
 
-The ability to access the state machine life cycle operations which were introduced in the previous chapter provides the basis for the implementation of sub state machine. Nevertheless the concept of sub state machines defines tight life cycle constraints and this is just one pattern to control a state machine. The life cycle operations can also be used to control state machines beyond the concept of sub machines. So it is possible to enter a machine in a state and exit it in another state.
+The ability to access the state machine life cycle operations which were introduced in the previous chapter provides the basis for the implementation of sub state machine. Nevertheless, the concept of sub state machines defines tight life cycle constraints and this is just one pattern to control a state machine. The life cycle operations can also be used to control state machines beyond the concept of sub machines. So it is possible to enter a machine in a state and exit it in another state.
 
 ==<div class="info">==
 
@@ -248,7 +248,7 @@ If the statechart defines variables which refer to other statechart types then t
 
 ==<div style="width:75%; padding-right: 1em;">==
 
-When starting the simulation for the statechart _TwoWayTrafficControl_ the simulation view will list _TwoWayTrafficControl.sct_ as the current simulation session. Additionally the statechart instances which were created for the simulation session are listed as children of the simulation session. 
+When starting the simulation for the statechart _TwoWayTrafficControl_ the simulation view will list _TwoWayTrafficControl.sct_ as the current simulation session. Additionally, the statechart instances which were created for the simulation session are listed as children of the simulation session. 
 
 The first statechart simply has no specific name and is of type _TwoWayTrafficControl_ . The second and third are instances of the statechart _TrafficLight_. Their name is the name of the variables which are defined by _TwoWayTrafficControl_ as statechart references. 
 
@@ -283,36 +283,36 @@ As described in the previous chapters - *statechart instances never create other
 
 h3(#multi_state_machine_simulation_sm_activation). State machine activation
 
-After all statechart instances were created and connected the simulation engine will activate the root statechart instavce. All other instance are not activated. This implies that the root statechart must initiate the activation of the referenced machine instances. This can be done by
+After all statechart instances were created and connected the simulation engine will activate the root statechart instance. All other instances are not activated. This implies that the root statechart must initiate the activation of the referenced machine instances. This can be done by
 
 # calling their _enter_ methods
 # or using them as sub machines. 
 
-If this is the case then everything works out of the box. There are additional cases where controlling the refererenced statecharts life cycle is not desired, e.g. to have a system of loosely coupled instances. Such systems typically just send events to each other and are inherently asynchronous. If you run the simulation for one of the involved statecharts then all instances except for the simulation root will never be activated. 
+If this is the case then everything works out of the box. There are additional cases where controlling the referenced statechart's life cycle is not desired, e.g. to have a system of loosely coupled instances. Such systems typically just send events to each other and are inherently asynchronous. If you run the simulation for one of the involved statecharts then all instances except for the simulation root will never be activated. 
 
 In these cases you should setup an additional statechart which controls the life cycles of the loosely coupled state machine instances. This statechart defines the system behavior and thus we call it system statechart. 
 
 
 ==<div class="example">==
 
-This case can be illustrated using the traffic light control example. Here all involved statecharts interact using events. An additional statechart _StreetCrossingSystem.sct_ defines the system behavior. This includes the start up sequence of all involved statechart instances.
+This case can be illustrated using the traffic light control example. Here, all involved statecharts interact using events. An additional statechart _StreetCrossingSystem.sct_ defines the system behavior. This includes the start up sequence of all involved statechart instances.
 
 !(large)images/multi_state_machine_system_behavior.png(system behavior of a street crossing.)!
 
 The system statechart defines a reference called _controller_  to a _TwoWayTrafficControl_ state machine type. It does not start up everything immediately - what would be possible - but defines a set of states which define different system scenarios. The initial state is _Off_. In this state no state machine is active. By raising the event _startAll_ the system enters the state _On_ which makes sure that all state machines are active. Mention that the system behavior can access the referenced statecharts of referenced statecharts. 
 
-The system behavior also defines an additional states for each _TrafficLight_ state machine instance. Here an temopary outage of a _TrafficLight_ is simulated by deactivating the machines.
+The system behavior also defines an additional state for each _TrafficLight_ state machine instance. Here, a temopary outage of a _TrafficLight_ is simulated by deactivating the machines.
 
 ==</div>==
 
-System statecharts can be used to fully control state machines. They can be used to set up complex system scenarios and finally may automate execution sequencesto bring the system in a defined state which would require much click work for the user. 
+System statecharts can be used to fully control state machines. They can be used to set up complex system scenarios and finally may automate execution sequences to bring the system in a defined state which would require much click work for the user. 
 
 
 h2(#multi_state_machine_testing). Testing multiple state machines
 
-SCUnit supports unit testing of multiple state machines. A SCTUnit tests is defined for a state machine type which is the test instance of the unit test.  
+SCUnit supports unit testing of multiple state machines. A SCTUnit test is defined for a state machine type which is the test instance of the unit test.  
 
-If the statechart defines variables which refer to other statechart types then the test environment will care about setting up the test scenario which includes statechart instances of the involved statechart types. Here the same instantiation startegy as described for the simulation is applied. 
+If the statechart defines variables which refer to other statechart types then the test environment will care about setting up the test scenario which includes statechart instances of the involved statechart types. Here the same instantiation strategy as described for the simulation is applied. 
 
 If the statechart under test does not control the life cycle of the referenced state machines, then this can simply be done by the test case itself.
 
@@ -335,14 +335,14 @@ testclass TwoWayTrafficControl for statechart TwoWayTrafficControl {
 
 In SCTUnit state machines must be activated explicitly. this is also true for the state machine under test which is a _TwoWayTrafficControl_ state machine instance. The machine under test is activated by the @enter@ statement while the two _TrafficLight_ state machine instances are activated by calling the @enter@ operation on the reference. 
 
-The following assertions check if the initial states were activated. This is done by using the built in function @active@ for the machine under test while the referenced machines are tested using the @isStateActive@ operations.
+The following assertions check if the initial states were activated. This is done by using the built-in function @active@ for the machine under test while the referenced machines are tested using the @isStateActive@ operations.
   
 ==</div>==
 
 
 ==<div class="info">==
 
-use the SCTUnit built in functions for the state machine under test and use the operations defined by the state machine types for the referenced state machines.
+Use the SCTUnit built-in functions for the state machine under test and use the operations defined by the state machine types for the referenced state machines.
 
 ==</div>==
 
