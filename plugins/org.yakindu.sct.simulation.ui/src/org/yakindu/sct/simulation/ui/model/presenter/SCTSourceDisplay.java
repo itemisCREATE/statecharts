@@ -56,7 +56,7 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 	@Override
 	public synchronized void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
 		IDebugTarget debugTarget = unwrapTarget(element);
-		if (debugTarget == null)
+		if (debugTarget == null || getDiagram(debugTarget) == null)
 			return;
 		setActiveLaunch(debugTarget);
 		IEditorPart editorPart = openEditor(debugTarget, page);
@@ -106,6 +106,9 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 	protected Diagram getDiagram(IDebugTarget debugTarget) {
 		EObject semanticObject = (EObject) debugTarget.getAdapter(EObject.class);
 		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
+		if (diagram == null) 
+			return null;
+		
 		return (Diagram) DiagramPartitioningUtil.getSharedDomain().getResourceSet()
 				.getEObject(EcoreUtil.getURI(diagram), true);
 	}
