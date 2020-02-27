@@ -44,9 +44,6 @@ public class PackageImportIconProvider extends WorkbenchFile {
 			try {
 				IContentType contentType = contextProject.getContentTypeMatcher()
 						.findContentTypeFor(pkImport.getName());
-				if (contentType == null) {
-					return getDefaultImage();
-				}
 				ImageDescriptor image = PlatformUI.getWorkbench().getEditorRegistry()
 						.getImageDescriptor(pkImport.getName(), contentType);
 				if (image == null) {
