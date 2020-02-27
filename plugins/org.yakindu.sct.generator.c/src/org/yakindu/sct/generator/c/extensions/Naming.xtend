@@ -508,6 +508,18 @@ class Naming {
 		TRACING_MODULE
 	}
 	
+	def metaModule(ExecutionFlow it) {
+		it.name + metaSuffix
+	}
+	
+	def metaPrefix(ExecutionFlow it) {
+		META_MODULE + separator
+	}
+	
+	def metaSuffix(ExecutionFlow it) {
+		separator + META_MODULE
+	}
+	
 	def tracingPrefix(ExecutionFlow it){
 		TRACE_CALL + separator
 	}

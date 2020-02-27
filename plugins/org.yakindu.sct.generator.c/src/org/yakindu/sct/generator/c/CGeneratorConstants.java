@@ -76,6 +76,8 @@ public abstract class CGeneratorConstants {
 	public static final String SET_TRACING = "setTraceHandler";
 	public static final String TRACE_CALL = "SC_TRACE";
 	
+	public static final String META_MODULE = "Meta";
+	
 	public static final String TRACE_MACHINE_ENTER = "sc_trace_machine_enter";
 	public static final String TRACE_MACHINE_EXIT = "sc_trace_machine_exit";
 	public static final String TRACE_MACHINE_CYCLE_START = "sc_trace_machine_run_cycle_start";
