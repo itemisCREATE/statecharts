@@ -150,6 +150,8 @@ public class CompileGTestCommand {
 			command.add("-Wno-variadic-macros");
 			command.add("-Wno-long-long");
 			command.add("-Wno-unused-private-field");
+			command.add("-Wno-unused-command-line-argument");
+			command.add("-Wno-c++11-extensions");
 		}
 		
 		for(String compilerFlag:compilerFlags) {
