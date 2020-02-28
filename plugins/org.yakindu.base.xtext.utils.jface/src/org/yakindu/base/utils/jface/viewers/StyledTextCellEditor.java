@@ -213,6 +213,8 @@ public class StyledTextCellEditor extends CellEditor {
 	 * @return the text string
 	 */
 	protected Object doGetValue() {
+		if(text.isDisposed())
+			return null;
 		return text.getText();
 	}
 

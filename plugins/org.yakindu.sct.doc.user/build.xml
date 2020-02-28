@@ -40,7 +40,7 @@
     <property name="aether.jar.checksum"
         value="195ea2e75242b2a4919463e8e95f57bd3cfcfeb3920879fca5b680255dba4a22b9ec0d53138e608d3be94d80a444aa9b7b8522e5bf01660f0dfb4688dae998dd"/>
     <property name="aether.jar.src"
-        value="http://search.maven.org/remotecontent?filepath=org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar"/>
+        value="https://repo1.maven.org/maven2/org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar"/>
     <property name="aether.jar.file" value="${lib.dir}/aether-ant-tasks-uber.jar"/>
 
     <!-- MyLyn Wikitext version: -->
@@ -203,6 +203,7 @@
                 <include name="user-guide/scxml_domain.textile" />
                 <!-- include name="user-guide/typescript-domain.textile" / -->
                 <include name="user-guide/statechart_language.textile"/>
+                <include name="user-guide/multi_state_machine.textile"/>
                 <include name="user-guide/code_generation_intro.textile"/>
                 <include name="user-guide/code_generation_c.textile"/>
                 <include name="user-guide/code_generation_cpp.textile"/>
@@ -221,7 +222,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="20"/>
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="21"/>
                 </condition>
             </fail>
 
@@ -395,6 +396,7 @@
                         <file name="user-guide/scxml_domain.textile" />
                         <!-- file name="user-guide/typescript-domain.textile" / -->
                         <file name="user-guide/statechart_language.textile"/>
+                        <file name="user-guide/multi_state_machine.textile"/>
 						<file name="user-guide/embedded_systems_integration_guide.textile"/>
                     	<file name="user-guide/lab_projects.textile"/>
                         <file name="user-guide/installation.textile"/>

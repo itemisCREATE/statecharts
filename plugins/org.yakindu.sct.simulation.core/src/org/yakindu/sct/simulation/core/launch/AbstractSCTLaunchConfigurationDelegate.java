@@ -62,6 +62,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
 		Statechart statechart = loadStatechart(filename);
 		SCTDebugTarget target = createDebugTarget(launch, statechart);
+		target.setPrimary(true);
 		launch.addDebugTarget(target);
 		try {
 			target.init();
@@ -74,13 +75,8 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 	}
 
 	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
-		return createDebugTarget(launch, statechart, statechart.getName());
-	}
-
-	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart, String name)
-			throws CoreException {
 		Assert.isNotNull(statechart);
-		return new SCTDebugTarget(launch, statechart, name, createExecutionContainer(launch, statechart));
+		return new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
 	}
 
 	protected Statechart loadStatechart(String filename) {

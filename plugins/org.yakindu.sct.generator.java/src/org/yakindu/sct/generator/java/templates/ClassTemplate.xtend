@@ -13,7 +13,7 @@ package org.yakindu.sct.generator.java.templates
 import java.util.ArrayList
 import java.util.List
 
-public class ClassTemplate {
+class ClassTemplate {
 	protected CharSequence classComment = ""
 	protected CharSequence visibility = "public"
 	protected CharSequence classType = "class"

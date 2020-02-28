@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static AlwaysOncycle statechart;
 
 
@@ -73,6 +75,7 @@ void AlwaysOncycleTest::setTimer(AlwaysOncycle* statechart, const sc_eventid evi
 }
 
 void AlwaysOncycleTest::unsetTimer(AlwaysOncycle* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

@@ -38,7 +38,7 @@ TEST_F(ChildFirstTransitionTakingTest, testParentTransitionFromSimpleState) {
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_B));
 	
@@ -52,13 +52,13 @@ TEST_F(ChildFirstTransitionTakingTest, testParentTransitionFromOrthogonalChildSt
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
 	
-	statechart->getDefaultSCI()->raise_go();
+	statechart->raise_go();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_B));
 	
@@ -72,13 +72,13 @@ TEST_F(ChildFirstTransitionTakingTest, testParentLocalReactionOnTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
 	
-	statechart->getDefaultSCI()->raise_go();
+	statechart->raise_go();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
 	
-	statechart->getDefaultSCI()->raise_go();
+	statechart->raise_go();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
 	
@@ -92,41 +92,41 @@ TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScop
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 0);
+	EXPECT_TRUE(statechart->get_cLocalReaction()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 0);
+	EXPECT_TRUE(statechart->get_caLocalReaction()== 0);
 	
-	statechart->getDefaultSCI()->raise_go();
+	statechart->raise_go();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 1);
+	EXPECT_TRUE(statechart->get_cLocalReaction()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 1);
+	EXPECT_TRUE(statechart->get_caLocalReaction()== 1);
 	
-	statechart->getDefaultSCI()->raise_go();
+	statechart->raise_go();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 2);
+	EXPECT_TRUE(statechart->get_cLocalReaction()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2);
+	EXPECT_TRUE(statechart->get_caLocalReaction()== 2);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 3);
+	EXPECT_TRUE(statechart->get_cLocalReaction()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2);
+	EXPECT_TRUE(statechart->get_caLocalReaction()== 2);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 4);
+	EXPECT_TRUE(statechart->get_cLocalReaction()== 4);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2);
+	EXPECT_TRUE(statechart->get_caLocalReaction()== 2);
 	
 	
 }

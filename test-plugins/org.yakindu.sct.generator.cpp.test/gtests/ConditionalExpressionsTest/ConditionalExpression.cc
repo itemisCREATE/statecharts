@@ -38,15 +38,15 @@ TEST_F(ConditionalExpression, ConditionalExpressionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1);
+	EXPECT_TRUE(statechart->get_condition()== 1);
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2);
+	EXPECT_TRUE(statechart->get_condition()== 2);
 	
 	
 }

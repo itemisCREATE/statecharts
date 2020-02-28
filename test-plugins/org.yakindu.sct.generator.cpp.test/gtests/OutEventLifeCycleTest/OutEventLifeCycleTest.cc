@@ -35,7 +35,7 @@ class OutEventLifeCycleTest : public ::testing::Test{
 void init(sc_boolean sndCycle){
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
@@ -50,11 +50,11 @@ TEST_F(OutEventLifeCycleTest, availableAfterCycle) {
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_f());
+	EXPECT_TRUE(statechart->isRaised_f());
 	
 	
 }
@@ -62,7 +62,7 @@ TEST_F(OutEventLifeCycleTest, availableWithinCycle) {
 	
 	init(false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_f_available_in_cycle());
+	EXPECT_TRUE(statechart->get_f_available_in_cycle());
 	
 	
 }
@@ -70,7 +70,7 @@ TEST_F(OutEventLifeCycleTest, unvailableWithin2ndCycle) {
 	
 	init(true);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_f_available_in_next_cycle());
+	EXPECT_TRUE(!statechart->get_f_available_in_next_cycle());
 	
 	
 }
@@ -78,7 +78,7 @@ TEST_F(OutEventLifeCycleTest, unvailableAfter2ndCycle) {
 	
 	init(true);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_f());
+	EXPECT_TRUE(!statechart->isRaised_f());
 	
 	
 }

@@ -34,69 +34,69 @@ class StringExpressionsTest : public ::testing::Test{
 
 TEST_F(StringExpressionsTest, StringExpressionsTest) {
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringX(), (sc_string)"\"X\"") == 0);
+	EXPECT_TRUE(strcmp(statechart->get_quotedStringX(), (sc_string)"\"X\"") == 0);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringY(), (sc_string)"\"Y\"") == 0);
+	EXPECT_TRUE(strcmp(statechart->get_quotedStringY(), (sc_string)"\"Y\"") == 0);
 	
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_AssignmentChecked));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_VarToVarCompareSucceeded));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringEqual());
+	EXPECT_TRUE(statechart->get_guardStringEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringNotEqual());
+	EXPECT_TRUE(statechart->get_guardStringNotEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarEqual());
+	EXPECT_TRUE(statechart->get_stringVarEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
+	EXPECT_TRUE(statechart->get_stringVarNotEqual());
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_VarToConstCompareSucceeded));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringEqual());
+	EXPECT_TRUE(statechart->get_guardStringEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringNotEqual());
+	EXPECT_TRUE(statechart->get_guardStringNotEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarEqual());
+	EXPECT_TRUE(statechart->get_stringVarEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
+	EXPECT_TRUE(statechart->get_stringVarNotEqual());
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_ConstToVarCompareSucceeded));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringEqual());
+	EXPECT_TRUE(statechart->get_guardStringEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringNotEqual());
+	EXPECT_TRUE(statechart->get_guardStringNotEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarEqual());
+	EXPECT_TRUE(statechart->get_stringVarEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
+	EXPECT_TRUE(statechart->get_stringVarNotEqual());
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_ConstToConstCompareSucceeded));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringEqual());
+	EXPECT_TRUE(statechart->get_guardStringEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guardStringNotEqual());
+	EXPECT_TRUE(statechart->get_guardStringNotEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarEqual());
+	EXPECT_TRUE(statechart->get_stringVarEqual());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
+	EXPECT_TRUE(statechart->get_stringVarNotEqual());
 	
 	
 }

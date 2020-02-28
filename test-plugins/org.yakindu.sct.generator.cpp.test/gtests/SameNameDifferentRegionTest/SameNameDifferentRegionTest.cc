@@ -38,7 +38,7 @@ TEST_F(SameNameDifferentRegionTest, sameNameDifferenRegionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateA));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -46,7 +46,7 @@ TEST_F(SameNameDifferentRegionTest, sameNameDifferenRegionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateA));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	

@@ -10,6 +10,7 @@
 package org.yakindu.sct.model.stext.ui.contentassist
 
 import com.google.common.base.Function
+import com.google.common.collect.ImmutableList
 import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
@@ -20,9 +21,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory
 import org.eclipse.emf.edit.provider.IItemLabelProvider
-import org.eclipse.jface.resource.ImageRegistry
 import org.eclipse.jface.text.contentassist.ICompletionProposal
-import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.jface.viewers.StyledString.Styler
 import org.eclipse.swt.SWT
@@ -39,10 +38,11 @@ import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.DefaultProposalCreator
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
-import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.MetaComposite
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sgraph.Entry
@@ -58,17 +58,15 @@ import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImpor
 import org.yakindu.sct.model.stext.services.STextGrammarAccess
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.SimpleScope
 import org.yakindu.sct.model.stext.stext.StatechartSpecification
 import org.yakindu.sct.model.stext.stext.StextPackage
 import org.yakindu.sct.model.stext.stext.TransitionReaction
 import org.yakindu.sct.model.stext.stext.TransitionSpecification
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.ui.internal.StextActivator
-import org.eclipse.xtext.ui.editor.hover.IEObjectHover
-import com.google.common.collect.ImmutableList
-import org.yakindu.base.types.MetaComposite
-import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.commons.EMFHelper
+import org.eclipse.core.resources.IProject
 
 /** 
  * Several filters to make proposals more useful.
@@ -82,12 +80,10 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
 		ComposedAdapterFactory.Descriptor.Registry.INSTANCE)
 	 
-	@Inject 
-	@ContentProposalLabelProvider 
-	ILabelProvider labelProvider
-
 	@Inject IPackageImport2URIMapper mapper
 	@Inject STextExtensions utils
+	@Inject PackageImportIconProvider iconProvider
+	
 
 	static class StrikeThroughStyler extends Styler {
 		override void applyStyles(TextStyle textStyle) {
@@ -156,7 +152,6 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	def protected void suppressKeywords(List<Keyword> suppressKeywords, StatechartSpecification model) {
 		var EList<EObject> importKeyWordList = new BasicEList()
 		importKeyWordList.add(grammarAccess.getImportScopeAccess().getImportKeyword_1())
-		suppressKeywords.addAll(getKeywords(importKeyWordList))
 	}
 
 	def protected void suppressKeywords(List<Keyword> suppressKeywords, InterfaceScope model) {
@@ -263,12 +258,18 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		var StringProposalDelegate stringProposalDelegate = new StringProposalDelegate(acceptor, context)
 		var Set<PackageImport> allImports = mapper.getAllImports(model.eResource())
+		val contextProject = model.project
 		for (PackageImport pkgImport : allImports) {
 			var ICompletionProposal doCreateProposal = createCompletionProposal('''"«pkgImport.getName()»"''',
-				computePackageStyledString(pkgImport), getIncludeImage(pkgImport),
+				computePackageStyledString(pkgImport), getIncludeImage(pkgImport, contextProject),
 				if(pkgImport.getUri().isPlatformResource()) 1 else -1, context.getPrefix(), context)
 			stringProposalDelegate.accept(doCreateProposal)
 		}
+	}
+	
+	def protected getProject(EObject model) {
+		val emfUri = utils.getContextElement(model).eResource.URI
+		return EMFHelper.getIFileFromEMFUri(emfUri)?.project
 	}
 
 	override ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
@@ -277,9 +278,8 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 			contentAssistContext.getPrefix(), contentAssistContext)
 	}
 
-	def protected Image getIncludeImage(PackageImport pkgImport) {
-		val ImageRegistry imageRegistry = StextActivator.getInstance().getImageRegistry()
-		return imageRegistry.get(ICONS_INCLUDE)
+	def protected Image getIncludeImage(PackageImport pkgImport, IProject contextProject) {
+		return iconProvider.getImageFor(pkgImport, contextProject);
 	}
 
 	def protected StyledString computePackageStyledString(PackageImport pkgImport) {

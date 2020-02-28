@@ -249,15 +249,19 @@ class APIGenerator {
 			«ENDIF»
 			«isFinalSignature»
 			{
-		''' +
-		// only if the impact vector is completely covered by final states the state machine
-		// can become final
-		{if (fsiv.isCompletelyCovered) {'''	return «FOR i : 0 ..<fsiv.size SEPARATOR ' && '»(«FOR fs : fsiv.get(i) SEPARATOR ' || '»«scHandle»->«STATEVECTOR»[«i»] == «IF fs.stateVector.offset == i»«fs.stateName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
-				'''} else {'''
-					(void)(«scHandle»);
+				«IF (fsiv.isCompletelyCovered)»
+					return 
+					«FOR i : 0 ..<fsiv.size SEPARATOR ' && '»(
+						«FOR fs : fsiv.get(i) SEPARATOR ' || '»
+							«scHandle»->«STATEVECTOR»[«i»] == «IF fs.stateVector.offset == i»«fs.stateName»«ELSE»«null_state»«ENDIF»
+						«ENDFOR»)
+					«ENDFOR»;
+				«ELSE»
+					«unusedParam(scHandle)»
 					return «FALSE_LITERAL»;
-				'''} }		
-		+ Strings.newLine + '''}'''
+				«ENDIF»
+			}
+		''' 
 	}
 
 	def declareIsFinal(ExecutionFlow it) {

@@ -14,6 +14,8 @@
 #include "VariadicFunctions.h"
 #include "VariadicFunctionsRequired.h"
 
+#define UNUSED(P) (void)(P)
+
 bool myVarOperationCalled;
 
 
@@ -25,11 +27,13 @@ bool myInternalVarOperationCalled;
 
 void variadicFunctionsIface_myVarOperation(const VariadicFunctions* handle, ...)
 {
+	UNUSED(handle);
 	myVarOperationCalled = true;
 }
 
 void variadicFunctionsIfaceIF2_myVarOperation2(const VariadicFunctions* handle, const sc_integer argCount, ...)
 {
+	UNUSED(handle);
 	myVarOperation2Called = true;
 	myVarOperation2Sum = 0;
 
@@ -43,6 +47,7 @@ void variadicFunctionsIfaceIF2_myVarOperation2(const VariadicFunctions* handle, 
 
 sc_integer variadicFunctionsInternal_myInternalVarOperation(const VariadicFunctions* handle, ...)
 {
+	UNUSED(handle);
 	myInternalVarOperationCalled = true;
 	return 1;
 }

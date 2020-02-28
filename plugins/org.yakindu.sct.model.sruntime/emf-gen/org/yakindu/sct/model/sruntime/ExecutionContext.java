@@ -34,6 +34,7 @@ import org.yakindu.base.base.NamedElement;
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionContext#getActiveStates <em>Active States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionContext#getExecutedElements <em>Executed Elements</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionContext#getSuspendedElements <em>Suspended Elements</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionContext#getContextFqn <em>Context Fqn</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionContext#isSnapshot <em>Snapshot</em>}</li>
  * </ul>
  *
@@ -89,6 +90,28 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * @generated
 	 */
 	List<EObject> getSuspendedElements();
+
+	/**
+	 * Returns the value of the '<em><b>Context Fqn</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Context Fqn</em>' attribute.
+	 * @see #setContextFqn(String)
+	 * @see org.yakindu.sct.model.sruntime.SRuntimePackage#getExecutionContext_ContextFqn()
+	 * @model unique="false"
+	 * @generated
+	 */
+	String getContextFqn();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sruntime.ExecutionContext#getContextFqn <em>Context Fqn</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Context Fqn</em>' attribute.
+	 * @see #getContextFqn()
+	 * @generated
+	 */
+	void setContextFqn(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Snapshot</b></em>' attribute.

@@ -38,19 +38,19 @@ TEST_F(ConstantsVariationTests, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstantsVariation::main_region_StateA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_b2()== true);
+	EXPECT_TRUE(statechart->get_b2()== true);
 	
 	EXPECT_TRUE(statechart->getSCI_Named()->get_b()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i2()== 5);
+	EXPECT_TRUE(statechart->get_i2()== 5);
 	
 	EXPECT_TRUE(statechart->getSCI_Named()->get_i()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_r2()== 5);
+	EXPECT_TRUE(statechart->get_r2()== 5);
 	
 	EXPECT_TRUE(statechart->getSCI_Named()->get_r()== 5);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_str2(), (sc_string)"String") == 0);
+	EXPECT_TRUE(strcmp(statechart->get_str2(), (sc_string)"String") == 0);
 	
 	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_str(), (sc_string)"String") == 0);
 	

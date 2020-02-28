@@ -35,21 +35,21 @@ class EntryReactionActionTest : public ::testing::Test{
 void init(){
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->raise_b();
+	statechart->raise_b();
 	
 	runner->proceed_cycles(1);
 	
-	statechart->getDefaultSCI()->raise_d();
+	statechart->raise_d();
 	
 	runner->proceed_cycles(1);
 	
-	statechart->getDefaultSCI()->set_enteredR1(false);
+	statechart->set_enteredR1(false);
 	
-	statechart->getDefaultSCI()->set_enteredR2(false);
+	statechart->set_enteredR2(false);
 	
-	statechart->getDefaultSCI()->set_enteredBdefault(false);
+	statechart->set_enteredBdefault(false);
 	
-	statechart->getDefaultSCI()->set_enteredBother(false);
+	statechart->set_enteredBother(false);
 	
 	
 }
@@ -58,13 +58,13 @@ TEST_F(EntryReactionActionTest, entryTransitionActionOnStatechartEnter) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredR1());
+	EXPECT_TRUE(statechart->get_enteredR1());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredR2());
+	EXPECT_TRUE(statechart->get_enteredR2());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBdefault());
+	EXPECT_TRUE(statechart->get_enteredBdefault());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
+	EXPECT_TRUE(!statechart->get_enteredBother());
 	
 	
 }
@@ -72,17 +72,17 @@ TEST_F(EntryReactionActionTest, entryOnRTS) {
 	
 	init();
 	
-	statechart->getDefaultSCI()->raise_b();
+	statechart->raise_b();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
+	EXPECT_TRUE(!statechart->get_enteredR1());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR2());
+	EXPECT_TRUE(!statechart->get_enteredR2());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBdefault());
+	EXPECT_TRUE(!statechart->get_enteredBdefault());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBother());
+	EXPECT_TRUE(statechart->get_enteredBother());
 	
 	
 }
@@ -90,17 +90,17 @@ TEST_F(EntryReactionActionTest, noEntryTransitionActionOnHistory) {
 	
 	init();
 	
-	statechart->getDefaultSCI()->raise_d();
+	statechart->raise_d();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
+	EXPECT_TRUE(!statechart->get_enteredR1());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR2());
+	EXPECT_TRUE(!statechart->get_enteredR2());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBdefault());
+	EXPECT_TRUE(!statechart->get_enteredBdefault());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
+	EXPECT_TRUE(!statechart->get_enteredBother());
 	
 	
 }

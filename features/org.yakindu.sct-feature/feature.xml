@@ -120,13 +120,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.model.resource"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.domain.generic"
          download-size="0"
          install-size="0"

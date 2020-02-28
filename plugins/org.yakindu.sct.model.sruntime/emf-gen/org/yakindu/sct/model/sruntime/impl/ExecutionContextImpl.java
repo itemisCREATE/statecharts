@@ -69,6 +69,7 @@ import org.yakindu.sct.model.sruntime.SRuntimePackage;
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getActiveStates <em>Active States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getExecutedElements <em>Executed Elements</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getSuspendedElements <em>Suspended Elements</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getContextFqn <em>Context Fqn</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#isSnapshot <em>Snapshot</em>}</li>
  * </ul>
  *
@@ -184,6 +185,26 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * @ordered
 	 */
 	protected EList<EObject> suspendedElements;
+
+	/**
+	 * The default value of the '{@link #getContextFqn() <em>Context Fqn</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContextFqn()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONTEXT_FQN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContextFqn() <em>Context Fqn</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContextFqn()
+	 * @generated
+	 * @ordered
+	 */
+	protected String contextFqn = CONTEXT_FQN_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isSnapshot() <em>Snapshot</em>}' attribute.
@@ -383,6 +404,29 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 			suspendedElements = new EObjectResolvingEList<EObject>(EObject.class, this, SRuntimePackage.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS);
 		}
 		return suspendedElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getContextFqn() {
+		return contextFqn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContextFqn(String newContextFqn) {
+		String oldContextFqn = contextFqn;
+		contextFqn = newContextFqn;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_CONTEXT__CONTEXT_FQN, oldContextFqn, contextFqn));
 	}
 
 	/**
@@ -595,6 +639,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return getExecutedElements();
 			case SRuntimePackage.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS:
 				return getSuspendedElements();
+			case SRuntimePackage.EXECUTION_CONTEXT__CONTEXT_FQN:
+				return getContextFqn();
 			case SRuntimePackage.EXECUTION_CONTEXT__SNAPSHOT:
 				return isSnapshot();
 		}
@@ -638,6 +684,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				getSuspendedElements().clear();
 				getSuspendedElements().addAll((Collection<? extends EObject>)newValue);
 				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__CONTEXT_FQN:
+				setContextFqn((String)newValue);
+				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SNAPSHOT:
 				setSnapshot((Boolean)newValue);
 				return;
@@ -677,6 +726,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 			case SRuntimePackage.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS:
 				getSuspendedElements().clear();
 				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__CONTEXT_FQN:
+				setContextFqn(CONTEXT_FQN_EDEFAULT);
+				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SNAPSHOT:
 				setSnapshot(SNAPSHOT_EDEFAULT);
 				return;
@@ -708,6 +760,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return executedElements != null && !executedElements.isEmpty();
 			case SRuntimePackage.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS:
 				return suspendedElements != null && !suspendedElements.isEmpty();
+			case SRuntimePackage.EXECUTION_CONTEXT__CONTEXT_FQN:
+				return CONTEXT_FQN_EDEFAULT == null ? contextFqn != null : !CONTEXT_FQN_EDEFAULT.equals(contextFqn);
 			case SRuntimePackage.EXECUTION_CONTEXT__SNAPSHOT:
 				return snapshot != SNAPSHOT_EDEFAULT;
 		}
@@ -780,6 +834,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		result.append(fqName);
 		result.append(", writable: ");
 		result.append(writable);
+		result.append(", contextFqn: ");
+		result.append(contextFqn);
 		result.append(", snapshot: ");
 		result.append(snapshot);
 		result.append(')');

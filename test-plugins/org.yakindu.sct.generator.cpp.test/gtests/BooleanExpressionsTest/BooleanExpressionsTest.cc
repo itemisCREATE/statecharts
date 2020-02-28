@@ -38,25 +38,25 @@ TEST_F(BooleanExpressionsTest, booleanExpressions) {
 	
 	EXPECT_TRUE(statechart->isStateActive(BooleanExpressions::main_region_StateA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool1()== true);
+	EXPECT_TRUE(statechart->get_myBool1()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool2()== false);
+	EXPECT_TRUE(statechart->get_myBool2()== false);
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(BooleanExpressions::main_region_StateB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_and()== false);
+	EXPECT_TRUE(statechart->get_and()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_or()== true);
+	EXPECT_TRUE(statechart->get_or()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_not()== false);
+	EXPECT_TRUE(statechart->get_not()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_equal()== false);
+	EXPECT_TRUE(statechart->get_equal()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_notequal()== true);
+	EXPECT_TRUE(statechart->get_notequal()== true);
 	
 	
 }

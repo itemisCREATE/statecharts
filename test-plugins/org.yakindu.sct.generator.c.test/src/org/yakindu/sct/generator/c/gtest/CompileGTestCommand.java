@@ -37,8 +37,6 @@ public class CompileGTestCommand {
 	private boolean wExtra = false;
 	private boolean wError = false;
 	private boolean wConversion = false;
-	private boolean wnoUnusedParameter = true;
-	private boolean wnoUnusedFunction = false;
 	
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
@@ -75,16 +73,6 @@ public class CompileGTestCommand {
 		return this;
 	}
 	
-	public CompileGTestCommand wnoUnusedParameter() {
-		this.wnoUnusedParameter = true;
-		return this;
-	}
-	
-	public CompileGTestCommand wnoUnusedFunction() {
-		this.wnoUnusedFunction = true;
-		return this;
-	}
-
 	public CompileGTestCommand sources(List<String> sources) {
 		this.sources  = sources;
 		return this;
@@ -110,7 +98,7 @@ public class CompileGTestCommand {
 		return this;
 	}
 
-	public List<String> build(String...compilerFlags) {
+	public List<String> build(boolean build, String...compilerFlags) {
 		List<String> command = new ArrayList<>();
 		if (makefileDir != null) {
 			try {
@@ -124,10 +112,16 @@ public class CompileGTestCommand {
 			}
 		}
 		command.add(compiler);
-		command.add("-g");
-		command.add("-o");
-		command.add(getFileName(program));
+		if(!build) {
+			// force statechart compilation with C 90 and C++ 98
+			if(compiler.equals("gcc")) {
+				command.add("-std=c90");
+			} else {
+				command.add("-std=c++98");
+			}
+		}
 		command.add("-O0");
+		command.add("-g");
 		if(wPedantic) {
 			command.add("-pedantic");
 			command.add("-pedantic-errors");
@@ -140,19 +134,24 @@ public class CompileGTestCommand {
 		}
 		if(wError) {
 			command.add("-Werror");
-			command.add("-Wno-deprecated");
 		}
 		if(wConversion) {
 			command.add("-Wconversion");
 		}
-		if(wnoUnusedParameter) {
-			command.add("-Wno-unused-parameter");
-		}	
-		if(wnoUnusedFunction) {
-			command.add("-Wno-unused-function");
+		if(build) {
+			command.add("-o");
+			command.add(getFileName(program));
+		} else {
+			// only create object files
+			command.add("-c");
 		}
+		
 		if (OS_MACOSX.equals(Platform.getOS())) {
+			command.add("-Wno-variadic-macros");
+			command.add("-Wno-long-long");
 			command.add("-Wno-unused-private-field");
+			command.add("-Wno-unused-command-line-argument");
+			command.add("-Wno-c++11-extensions");
 		}
 		
 		for(String compilerFlag:compilerFlags) {
@@ -168,11 +167,13 @@ public class CompileGTestCommand {
 		for (String sourceFile : sources) {
 			command.add(getFileName(sourceFile ));
 		}
-		command.add("-lgtest");
-		if (mainLib != null) {
-			command.add("-l" + mainLib);
-		} else {
-			command.add("-lgtest_main");
+		if(build) {
+			command.add("-lgtest");
+			if (mainLib != null) {
+				command.add("-l" + mainLib);
+			} else {
+				command.add("-lgtest_main");
+			}
 		}
 		command.add("-lm");
 		command.add("-lstdc++");

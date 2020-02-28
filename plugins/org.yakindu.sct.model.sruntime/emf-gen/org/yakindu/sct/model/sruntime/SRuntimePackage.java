@@ -158,13 +158,22 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Context Fqn</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__CONTEXT_FQN = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Snapshot</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Execution Context</em>' class.
@@ -173,7 +182,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sruntime.impl.ExecutionSlotImpl <em>Execution Slot</em>}' class.
@@ -659,6 +668,17 @@ public interface SRuntimePackage extends EPackage {
 	EReference getExecutionContext_SuspendedElements();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sruntime.ExecutionContext#getContextFqn <em>Context Fqn</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Context Fqn</em>'.
+	 * @see org.yakindu.sct.model.sruntime.ExecutionContext#getContextFqn()
+	 * @see #getExecutionContext()
+	 * @generated
+	 */
+	EAttribute getExecutionContext_ContextFqn();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sruntime.ExecutionContext#isSnapshot <em>Snapshot</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -883,6 +903,14 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = eINSTANCE.getExecutionContext_SuspendedElements();
+
+		/**
+		 * The meta object literal for the '<em><b>Context Fqn</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXECUTION_CONTEXT__CONTEXT_FQN = eINSTANCE.getExecutionContext_ContextFqn();
 
 		/**
 		 * The meta object literal for the '<em><b>Snapshot</b></em>' attribute feature.

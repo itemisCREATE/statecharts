@@ -11,6 +11,8 @@
 
 package org.yakindu.sct.model.sgraph.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +56,7 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -92,6 +95,8 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 	@Inject
 	private LinkingHelper linkingHelper;
 	@Inject
+	private OnChangeEvictingCache cache;
+	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
@@ -126,6 +131,14 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 		syntaxDiagnostics = HashMultimap.create();
 		linkingDiagnostics = HashMultimap.create();
 		setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
+	}
+	
+	@Override
+	public void doLoad(java.io.InputStream inputStream, Map<?, ?> options) throws IOException {
+		// mute notifications to avoid cache clearing
+		cache.getOrCreate(this).ignoreNotifications();
+		super.doLoad(inputStream, options);
+		cache.getOrCreate(this).listenToNotifications();
 	}
 
 	@Override

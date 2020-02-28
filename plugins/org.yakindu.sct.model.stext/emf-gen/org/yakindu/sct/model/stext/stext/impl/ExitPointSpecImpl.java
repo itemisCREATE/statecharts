@@ -67,6 +67,7 @@ public class ExitPointSpecImpl extends ReactionPropertyImpl implements ExitPoint
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExitpoint() {
 		return exitpoint;
 	}
@@ -76,6 +77,7 @@ public class ExitPointSpecImpl extends ReactionPropertyImpl implements ExitPoint
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExitpoint(String newExitpoint) {
 		String oldExitpoint = exitpoint;
 		exitpoint = newExitpoint;

@@ -12,6 +12,8 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
@@ -25,6 +27,7 @@ import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Enumerator
@@ -33,10 +36,10 @@ import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.submodules.EventCode
 import org.yakindu.sct.generator.c.types.CLiterals
@@ -44,15 +47,16 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author axel terfloth
@@ -73,10 +77,10 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject extension CMultiStatemachine
 	@Inject extension ExpressionExtensions
 	
-	@Inject extension OriginTracing
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
+	@Inject extension protected StatechartUtil
 
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -98,8 +102,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 			return '''«target.asRaised»(«owner.code»)'''
 		}
 		'''«owner.code»«target.access»'''
-		
 	}
+	
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
 	/* TODO: check if event is active */
@@ -116,10 +120,10 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) 
-		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+		'''«target.access»(«scHandle»«argCode»)'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Method target) 
-		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+		'''«target.access»(«scHandle»«argCode»)'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) 
 		'''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
@@ -147,22 +151,29 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(LogicalOrExpression it) '''(«leftOperand.sc_boolean_code») || («rightOperand.sc_boolean_code»)'''
 	
 	override dispatch CharSequence code(AssignmentExpression it) {
-		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
-			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
-		} else{
-			var String setterCall = null;
-			try{
-				setterCall = varRef.definition.asSetter
-			}catch(NullPointerException e){
-				//Since the function 'isUniqueName' can throw Exceptions and is called by 'asSetter' this just means, that there is no setter
+		val varRef = varRef
+		if (varRef instanceof FeatureCall) {
+			val container = varRef.feature.eContainer
+			if (container instanceof ComplexType && container.isMultiSM) {
+				return '''«varRef.feature.asSetter»(«varRef.owner.code», «expression.code»)'''
 			}
-			if(entry.tracingGeneric && setterCall !== null){
-				'''«setterCall»(«scHandle», «expression.code»)'''
-				//'''«varRef.code» «operator.literal» «expression.code»'''
-			}else{
-				super._code(it)
-			}	
 		}
+		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
+			return '''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
+		} else {
+			var String setterCall = null;
+			try {
+				setterCall = varRef.definition.asSetter
+			} catch (NullPointerException e) {
+				// Since the function 'isUniqueName' can throw Exceptions and is called by 'asSetter' this just means, that there is no setter
+			}
+			if (entry.tracingGeneric && setterCall !== null) {
+				return '''«setterCall»(«scHandle», «expression.code»)'''
+			// '''«varRef.code» «operator.literal» «expression.code»'''
+			}
+
+		}
+		super._code(it)
 	}
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
@@ -185,21 +196,17 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«target.access»'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it,
-		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
-
 	def dispatch CharSequence code(FeatureCall it, Operation target) {
 		if (target.eContainer instanceof ComplexType) {
-			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+			return '''«target.getFunctionId(owner.featureOrReference)»(«owner.getHandle»«argCode»)'''
 		}
 		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !(target.eContainer instanceof ComplexType)».«target.access»«ENDIF»'''
+	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) {
-		if(!target.eContainer.originTraces.nullOrEmpty) {
+		if(target.eContainer.isOriginStatechart) {
 			return '''«target.stateEnumAccess»'''
 		}
 		'''«target.access»'''
@@ -227,4 +234,15 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «TRUE_LITERAL» : «FALSE_LITERAL»'''
 	
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
+	
+	override dispatch CharSequence code(StringLiteral it) '''(«STRING_TYPE») «super._code(it)»'''
+	
+	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) {
+		'''«target.access»(«IF target.eContainer.isMultiSM»«owner.handle»«ELSE»«scHandle»«ENDIF»«argCode»)'''
+	}
+	
+	protected def CharSequence argCode(ArgumentExpression it) {
+		'''«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»'''
+	}
+	
 }

@@ -63,6 +63,7 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DefRoot> getRoots() {
 		if (roots == null) {
 			roots = new EObjectContainmentEList<DefRoot>(DefRoot.class, this, StextPackage.ROOT__ROOTS);

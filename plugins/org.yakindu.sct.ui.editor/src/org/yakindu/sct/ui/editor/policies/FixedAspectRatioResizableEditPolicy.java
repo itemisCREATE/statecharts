@@ -17,7 +17,6 @@ import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.handles.ResizeHandle;
-import org.eclipse.gef.tools.ResizeTracker;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
@@ -47,7 +46,7 @@ public class FixedAspectRatioResizableEditPolicy extends LiveFeedbackResizableEd
 		handles.add(new ResizeHandle(getHost(), direction) {
 			@Override
 			protected DragTracker createDragTracker() {
-				return new ResizeTracker(getHost(), direction) {
+				return new LiveFeedbackResizeTracker(getHost(), direction) {
 					@Override
 					public void mouseDrag(MouseEvent event, EditPartViewer viewer) {
 						event.stateMask |= SWT.SHIFT;

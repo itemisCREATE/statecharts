@@ -209,8 +209,18 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getExecutionContext_Snapshot() {
+	public EAttribute getExecutionContext_ContextFqn() {
 		return (EAttribute)executionContextEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getExecutionContext_Snapshot() {
+		return (EAttribute)executionContextEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -396,6 +406,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		createEReference(executionContextEClass, EXECUTION_CONTEXT__ACTIVE_STATES);
 		createEReference(executionContextEClass, EXECUTION_CONTEXT__EXECUTED_ELEMENTS);
 		createEReference(executionContextEClass, EXECUTION_CONTEXT__SUSPENDED_ELEMENTS);
+		createEAttribute(executionContextEClass, EXECUTION_CONTEXT__CONTEXT_FQN);
 		createEAttribute(executionContextEClass, EXECUTION_CONTEXT__SNAPSHOT);
 
 		executionEventEClass = createEClass(EXECUTION_EVENT);
@@ -469,6 +480,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		initEReference(getExecutionContext_ActiveStates(), theEcorePackage.getEObject(), null, "activeStates", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionContext_ExecutedElements(), theEcorePackage.getEObject(), null, "executedElements", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionContext_SuspendedElements(), theEcorePackage.getEObject(), null, "suspendedElements", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecutionContext_ContextFqn(), theEcorePackage.getEString(), "contextFqn", null, 0, 1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionContext_Snapshot(), theEcorePackage.getEBoolean(), "snapshot", null, 0, 1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(executionContextEClass, this.getExecutionEvent(), "getRaisedEvents", 0, -1, IS_UNIQUE, IS_ORDERED);

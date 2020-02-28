@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static StringExpressions statechart;
 
 
@@ -40,8 +42,8 @@ void StringExpressionsTest::SetUp()
 }
 void StringExpressionsTest::stringExpressionsTest()
 {
-	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringX(&statechart), "\"X\"") == 0);
-	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringY(&statechart), "\"Y\"") == 0);
+	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringX(&statechart), (sc_string)"\"X\"") == 0);
+	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringY(&statechart), (sc_string)"\"Y\"") == 0);
 	stringExpressions_enter(&statechart);
 	EXPECT_TRUE(stringExpressions_isStateActive(&statechart, StringExpressions_main_region_AssignmentChecked));
 	stringExpressionsIface_raise_e(&statechart);
@@ -81,6 +83,7 @@ void StringExpressionsTest::setTimer(StringExpressions* statechart, const sc_eve
 }
 
 void StringExpressionsTest::unsetTimer(StringExpressions* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

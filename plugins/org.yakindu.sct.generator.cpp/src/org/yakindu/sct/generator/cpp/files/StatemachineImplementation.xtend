@@ -31,15 +31,13 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ExpressionsChecker
 	
-	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		val namespace = statechartNamespace
 	'''	
 		«entry.licenseText»
 		
-		#include "«module.h»"
-		«IF hasStringComparison»
-		#include <string.h>
-		«ENDIF»
+		#include "«(module.h).relativeTo(module.cpp)»"
+		«IF hasStringComparison»#include <string.h>«ENDIF»
 		«IF modOnReal»#include <math.h>«ENDIF»
 		
 		/*! \file Implementation of the state machine '«name»'

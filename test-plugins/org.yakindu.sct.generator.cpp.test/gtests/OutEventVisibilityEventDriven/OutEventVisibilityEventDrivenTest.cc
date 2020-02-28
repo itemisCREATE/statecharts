@@ -36,11 +36,11 @@ TEST_F(OutEventVisibilityEventDrivenTest, out_events_must_be_collected_during_lo
 	
 	statechart->enter();
 	
-	statechart->getDefaultSCI()->raise_i(1);
+	statechart->raise_i(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_o1());
+	EXPECT_TRUE(statechart->isRaised_o1());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_o2());
+	EXPECT_TRUE(statechart->isRaised_o2());
 	
 	statechart->exit();
 	
@@ -50,27 +50,27 @@ TEST_F(OutEventVisibilityEventDrivenTest, all_out_events_that_are_raised_within_
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_o1());
+	EXPECT_TRUE(!statechart->isRaised_o1());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_o2());
+	EXPECT_TRUE(!statechart->isRaised_o2());
 	
-	statechart->getDefaultSCI()->raise_i(2);
+	statechart->raise_i(2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_o1());
+	EXPECT_TRUE(statechart->isRaised_o1());
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_o2());
+	EXPECT_TRUE(!statechart->isRaised_o2());
 	
-	statechart->getDefaultSCI()->raise_i(2);
+	statechart->raise_i(2);
 	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_o1());
+	EXPECT_TRUE(!statechart->isRaised_o1());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_o2());
+	EXPECT_TRUE(statechart->isRaised_o2());
 	
-	statechart->getDefaultSCI()->raise_i(2);
+	statechart->raise_i(2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_o1());
+	EXPECT_TRUE(statechart->isRaised_o1());
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_o2());
+	EXPECT_TRUE(statechart->isRaised_o2());
 	
 	statechart->exit();
 	

@@ -30,6 +30,14 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sexec.Call
+import org.yakindu.sct.model.sexec.CheckRef
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Parameter
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.base.types.ComplexType
 
 /**
  * @author rbeckmann
@@ -48,37 +56,60 @@ class InternalFunctionsGenerator {
 	@Inject protected extension ExpressionsChecker
 	@Inject protected extension CLiterals
 	
+	
 	def clearInEventsFunction(ExecutionFlow it) '''
 		static void «clearInEventsFctID»(«scHandleDecl»)
 		{
+			«var clearedEvents = 0»
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
-				«event.access» = «FALSE_LITERAL»;
+					«NOOUT(clearedEvents+=1)»
+					«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasInternalScope»
 				«FOR event : internalScope.events»
-				«event.access» = «FALSE_LITERAL»;
+					«NOOUT(clearedEvents+=1)»
+					«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDIF»
 			«IF timed»
 				«FOR event : timeEventScope.events»
-				«event.access» = «FALSE_LITERAL»;
+					«NOOUT(clearedEvents+=1)»
+					«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
+			«ENDIF»
+			«IF clearedEvents == 0»
+				«unusedParam(scHandle)»
 			«ENDIF»
 		}
 	'''
 	
-	def clearOutEventsFunction(ExecutionFlow it) '''
-		static void «clearOutEventsFctID»(«scHandleDecl»)
-		{
-			«FOR scope : it.scopes»
-				«FOR event : scope.outgoingEvents»
-				«event.access» = «FALSE_LITERAL»;
+	def <T> NOOUT(T p) ''''''
+	
+	def clearOutEventsFunction(ExecutionFlow it) {
+		var clearedEvents = 0
+		'''
+			static void «clearOutEventsFctID»(«scHandleDecl»)
+			{
+				«FOR scope : it.scopes»
+					«FOR event : scope.outgoingEvents»
+						«NOOUT(clearedEvents+=1)»
+						«event.access» = «FALSE_LITERAL»;
+					«ENDFOR»
 				«ENDFOR»
-			«ENDFOR»
-		}
-	'''	
+				«IF clearedEvents == 0»
+					«unusedParam(scHandle)»
+				«ENDIF»
+			}
+		'''	
+	}
+	
+	def defines(ExecutionFlow it) '''
+		#define SC_UNUSED(P) (void)(P)
+	'''
+
+	
 	
 	def functionPrototypes(ExecutionFlow it) '''
 		/* prototypes of all internal functions */
@@ -144,11 +175,32 @@ class InternalFunctionsGenerator {
 	 '''
 
 	 def implementation(Method it) '''
-	 	static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-	 		«body.code»
-	 	}
+		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+			«body.code»
+			«IF !body.requiresHandles»
+				«unusedParam(scHandle)»
+			«ENDIF»
+		}
 	 '''
 	 
+	def requiresHandles(Step it) {
+		it.eAllContents.filter[e | e.requiresHandle].size > 0
+	}
+	 
+	def dispatch requiresHandle(EObject e) { false }
+	def dispatch requiresHandle(Call e) { true }
+	def dispatch requiresHandle(CheckRef e) { true }
+	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
+	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
+	
+	def isLocalVariable(EObject o) {
+		(o instanceof org.yakindu.base.types.Property) && (o.eContainer instanceof LocalVariableDefinition)	
+	}
+	
+	def declaredInHeader(EObject o) {
+		return (o.eContainer instanceof org.yakindu.base.types.Package || o.eContainer instanceof ComplexType) 
+	}
+	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionImplementation»
@@ -169,6 +221,9 @@ class InternalFunctionsGenerator {
 		static void «shortName»(«scHandleDecl»)
 		{
 			«code»
+			«IF !it.requiresHandles»
+				«unusedParam(scHandle)»
+			«ENDIF»
 		}
 		
 	'''

@@ -18,6 +18,7 @@ import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.types.Expression
@@ -40,18 +41,23 @@ import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
+import org.yakindu.sct.model.stext.stext.EntryEvent
+import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 class BehaviorMapping {
@@ -63,9 +69,9 @@ class BehaviorMapping {
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension TraceExtensions trace
 	@Inject extension SequenceBuilder sb
+	@Inject extension StatechartAnnotations sa
 	
 	@Inject protected extension ExpressionBuilder exprBuilder
-
 
 	def ExecutionFlow mapEntryActions(Statechart statechart, ExecutionFlow r){
 		val seq = sexec.factory.createSequence
@@ -340,7 +346,7 @@ class BehaviorMapping {
 	 }
 	  	
 	def ExecutionFlow mapLocalReactions(Statechart statechart, ExecutionFlow r){
-		r.reactions.addAll(statechart.localReactions
+		r.reactions.addAll(statechart.derivedLocalReactions
 				.filter( typeof( LocalReaction ))
 				// ignore all reaction that are just entry or exit actions
 				.filter(lr | 
@@ -364,7 +370,7 @@ class BehaviorMapping {
 		val _state = state.create
 		
 		_state.reactions.addAll( 
-			state.localReactions
+			state.derivedLocalReactions
 				.filter( typeof( LocalReaction ))
 				// ignore all reaction that are just entry or exit actions
 				.filter(lr | 
@@ -379,8 +385,45 @@ class BehaviorMapping {
 		)
 		return _state
 	}
-	 
-	 
+	
+	def List<LocalReaction> entryReactions(ScopedElement state) {
+		state.derivedLocalReactions
+			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
+			.map(lr | lr as LocalReaction)
+			.toList	
+	} 
+	
+	def List<LocalReaction> exitReactions(ScopedElement state) {
+		state.derivedLocalReactions
+			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
+			.map(lr | lr as LocalReaction)
+			.toList	
+	}
+
+	protected def getDerivedLocalReactions(ScopedElement it) {
+		scopes.map[members].flatten.map[deriveReactions].filterNull.flatten.filterNull.toList
+	}
+	
+	protected def dispatch deriveReactions(org.yakindu.sct.model.sgraph.Reaction it) { #[it] }
+	protected def dispatch deriveReactions(EObject it) { null }
+	protected def dispatch deriveReactions(SubmachineReferenceExpression it) { #[derivedEntry, derivedRunCycle, derivedExit] }
+	
+	protected def derivedRunCycle(SubmachineReferenceExpression subRef) {
+		val statechart = EcoreUtil2.getContainerOfType(subRef, Statechart)
+		if (statechart.isCycleBased) {
+			return localReaction(sc.stextFactory.createAlwaysEvent, subRef.operationCall("runCycle"))
+		}
+		null
+	}
+	
+	protected def derivedEntry(SubmachineReferenceExpression subRef) {
+		localReaction(sc.stextFactory.createEntryEvent, subRef.operationCall("enter"))
+	}
+	
+	protected def derivedExit(SubmachineReferenceExpression subRef) {
+		localReaction(sc.stextFactory.createExitEvent, subRef.operationCall("exit"))
+	}
+	
 	def Reaction mapReaction(LocalReaction lr) {
 		val r = lr.create 
 		if (lr.trigger !== null) r.check = mapToCheck(lr.trigger)

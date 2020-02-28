@@ -498,6 +498,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 					sCInterface.setX(sCInterface.getX() - 1);
 					
 					enterSequence_EventDrivenSuperStep_main_region_D_default();
+					react();
 				} else {
 					did_transition = false;
 				}
@@ -569,6 +570,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 					sCInterface.setX(sCInterface.getX() - 1);
 					
 					enterSequence_EventDrivenSuperStep_main_region_L_default();
+					react();
 				} else {
 					did_transition = false;
 				}

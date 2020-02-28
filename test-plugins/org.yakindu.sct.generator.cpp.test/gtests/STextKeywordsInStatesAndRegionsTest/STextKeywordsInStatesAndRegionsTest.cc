@@ -76,7 +76,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -120,7 +120,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -164,7 +164,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -208,7 +208,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -252,7 +252,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -296,7 +296,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -340,7 +340,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -384,7 +384,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -428,7 +428,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -472,7 +472,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -516,7 +516,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -560,7 +560,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -604,7 +604,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -648,7 +648,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -692,7 +692,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -736,7 +736,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -780,7 +780,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -824,7 +824,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	
@@ -868,7 +868,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->getDefaultSCI()->raise_e1();
+	statechart->raise_e1();
 	
 	runner->proceed_cycles(1);
 	
@@ -912,7 +912,7 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_valueof));
 	
-	statechart->getDefaultSCI()->raise_e2();
+	statechart->raise_e2();
 	
 	runner->proceed_cycles(1);
 	

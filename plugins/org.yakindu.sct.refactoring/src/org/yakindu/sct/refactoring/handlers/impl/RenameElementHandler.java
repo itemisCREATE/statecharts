@@ -72,7 +72,7 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 
 	@Inject
 	protected STextExtensions utils;
-	
+
 	public RenameElementHandler() {
 		Guice.createInjector().injectMembers(this);
 	}
@@ -104,9 +104,13 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 
 	public NamedElement unwrap(ISelection selection) {
 		IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+		if (!(structuredSelection.getFirstElement() instanceof EObject)) {
+			return null;
+		}
 		EObject selectedElement = (EObject) structuredSelection.getFirstElement();
 
-		// The provided element is the one from the fake resource of styled text adapter.
+		// The provided element is the one from the fake resource of styled text
+		// adapter.
 		// We need to find the actual element in our statechart for this fake element.
 		if (selectedElement instanceof FeatureCall) {
 			return findInStatechart(((FeatureCall) selectedElement).getFeature());
@@ -128,7 +132,7 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 			Statechart sct = utils.getStatechart((LazyLinkingResource) resource);
 			EObject elem = utils.findElement(fakeElement, sct);
 			if (elem instanceof NamedElement) {
-				return (NamedElement) elem; 
+				return (NamedElement) elem;
 			}
 		}
 		return fakeElement;
@@ -161,7 +165,9 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 	@Override
 	public void setContext(AbstractRefactoring<NamedElement> refactoring, ISelection selection) {
 		NamedElement element = unwrap(selection);
-		refactoring.setContextObjects(Lists.newArrayList(element));
+		if (element != null) {
+			refactoring.setContextObjects(Lists.newArrayList(element));
+		}
 	}
 
 	private class NameUniquenessValidator implements IInputValidator {
@@ -184,7 +190,6 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 
 	}
 
-	
 	protected static class RenameDialog extends Dialog {
 		private boolean modelContainsErrors;
 		private Label messageLabel;
@@ -193,7 +198,7 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 		private Text text;
 		private String dialogTitle;
 		private String dialogMessage;
-		
+
 		private String newName = "";
 
 		public RenameDialog(Shell parentShell, String dialogTitle, String dialogMessage, String initialValue,
@@ -204,8 +209,6 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 			this.validator = validator;
 			this.modelContainsErrors = hasDefinitionSectionErrors;
 		}
-		
-		
 
 		@Override
 		protected Control createDialogArea(Composite parent) {
@@ -243,13 +246,13 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 			});
 			validate();
 		}
-		
+
 		@Override
 		protected void okPressed() {
 			this.newName = text.getText();
 			super.okPressed();
 		}
-		
+
 		protected void validate() {
 			setErrorMessage(validator.isValid(text.getText()));
 		}
@@ -294,7 +297,7 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 		public String getNewName() {
 			return newName;
 		}
-		
+
 	}
 
 }

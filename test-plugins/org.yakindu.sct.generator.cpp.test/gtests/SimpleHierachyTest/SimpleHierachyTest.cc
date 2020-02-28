@@ -38,11 +38,11 @@ TEST_F(SimpleHierachyTest, simpleHierachyTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_event1();
+	statechart->raise_event1();
 	
-	statechart->getDefaultSCI()->raise_event1();
+	statechart->raise_event1();
 	
-	statechart->getDefaultSCI()->raise_event1();
+	statechart->raise_event1();
 	
 	runner->proceed_cycles(1);
 	

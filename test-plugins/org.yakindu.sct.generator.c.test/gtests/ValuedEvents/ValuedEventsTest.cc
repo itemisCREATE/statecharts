@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static ValuedEvents statechart;
 
 
@@ -42,7 +44,7 @@ void ValuedEventsTest::valuedEventsTest()
 {
 	valuedEvents_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&statechart), "sct") == 0);
+	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&statechart), (sc_string)"sct") == 0);
 	valuedEventsIface_raise_integerEvent(&statechart, 23);
 	valuedEventsIface_raise_booleanEvent(&statechart, false);
 	valuedEventsIface_raise_realEvent(&statechart, 20);
@@ -55,7 +57,7 @@ void ValuedEventsTest::valuedEventsTest()
 	EXPECT_TRUE(valuedEventsIface_get_myInt(&statechart)== 23);
 	EXPECT_TRUE(valuedEventsIface_get_myBool(&statechart)== false);
 	EXPECT_TRUE(valuedEventsIface_get_myReal(&statechart)== 20);
-	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&statechart), "tool") == 0);
+	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&statechart), (sc_string)"tool") == 0);
 }
 
 void ValuedEventsTest::setTimer(ValuedEvents* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
@@ -65,6 +67,7 @@ void ValuedEventsTest::setTimer(ValuedEvents* statechart, const sc_eventid evid,
 }
 
 void ValuedEventsTest::unsetTimer(ValuedEvents* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

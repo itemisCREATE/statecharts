@@ -21,16 +21,6 @@ class OCBInternalImpl : public UnimplementedOCB::InternalSCI_OCB {
 		void internalInterfaceOperation();
 };
 
-OCBInternalImpl::OCBInternalImpl() {
 
-}
-
-OCBInternalImpl::~OCBInternalImpl() {
-
-}
-
-void OCBInternalImpl::internalInterfaceOperation() {
-
-}
 
 #endif /* SRC_GEN_OCBINTERNALIMPL_H_ */

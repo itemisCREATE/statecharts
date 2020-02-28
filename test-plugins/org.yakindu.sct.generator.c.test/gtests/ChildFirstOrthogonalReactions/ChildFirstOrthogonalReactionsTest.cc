@@ -8,6 +8,8 @@
 #include "ChildFirstOrthogonalReactionsRequired.h"
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static ChildFirstOrthogonalReactions statechart;
 
 
@@ -360,6 +362,7 @@ void ChildFirstOrthogonalReactionsTest::setTimer(ChildFirstOrthogonalReactions* 
 }
 
 void ChildFirstOrthogonalReactionsTest::unsetTimer(ChildFirstOrthogonalReactions* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 
@@ -381,8 +384,10 @@ TEST_F(ChildFirstOrthogonalReactionsTest, executionOrderWithLastLeafTransition) 
 
 
 sc_boolean childFirstOrthogonalReactionsIface_check(const ChildFirstOrthogonalReactions* statechart, const sc_string value) {
+	SC_UNUSED(statechart);		
 	return (checkMock->*(checkMock->getBehavior(value)))();
 }
 sc_integer childFirstOrthogonalReactionsIface_next(const ChildFirstOrthogonalReactions* statechart) {
+	SC_UNUSED(statechart);		
 	return (nextMock->*(nextMock->getBehavior()))();
 }

@@ -5,6 +5,8 @@
 
 #include "sc_timer_service.h"
 
+#define SC_UNUSED(P) (void)P
+
 static EventDriven statechart;
 
 
@@ -59,11 +61,12 @@ void EventDrivenTest::test()
 
 void EventDrivenTest::setTimer(EventDriven* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	sc_timer_t timer;
-	sc_timer_init(&timer, time_ms, periodic, evid);
+	sc_timer_init(&timer, time_ms, periodic, evid, statechart);
 	insert_timer(&(tc->timer_service), timer);
 }
 
 void EventDrivenTest::unsetTimer(EventDriven* handle, const sc_eventid evid){
+	SC_UNUSED(handle);
 	delete_task(&(tc->timer_service), find_time_event(&timer_service, evid));
 }
 

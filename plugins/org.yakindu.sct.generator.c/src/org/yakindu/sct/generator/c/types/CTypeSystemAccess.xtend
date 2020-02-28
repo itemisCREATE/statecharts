@@ -11,10 +11,8 @@
 package org.yakindu.sct.generator.c.types
 
 import com.google.inject.Inject
-import java.util.ArrayList
-import java.util.List
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.base.types.PrimitiveType
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -22,8 +20,6 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.base.types.EnumerationType
-import org.yakindu.base.types.ComplexType
 
 /**
  * @author andreas muelder
@@ -44,7 +40,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case isReal(originalType): REAL_TYPE
 			case isBoolean(originalType): BOOL_TYPE
 			case isString(originalType): STRING_TYPE
-			EnumerationType case isOriginStatechart(originalType): '''«type.name»'''
+			EnumerationType case isOriginStatechart(originalType): originalType.printStateEnumType
 			ComplexType case isOriginStatechart(originalType): '''«type.name»*'''
 			default: type.name
 		}
@@ -52,16 +48,6 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 	
 	override getTargetLanguageName(TypeSpecifier typeSpecifier) {
 		return getTargetLanguageName(typeSpecifier?.type)
-	}
-	
-	def protected String buildName(Type type) {
-		val names = new ArrayList<String>()
-		getParentPackages(type, names)
-		var name = ""
-		for(var i = 1; i < names.size; i++) {
-			name += names.get(i) + "::"
-		}
-		return name + type.name
 	}
 
 	protected def printVoidType() {
@@ -76,35 +62,14 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			return '''«typeSpecifier.typeArguments.head.type.name»'''
 		}
 	}
+	
+	protected def printStateEnumType(EnumerationType type) {
+		type.name
+	}
 
 	protected def printType(TypeSpecifier typeSpecifier) {
 		return getTargetLanguageName(typeSpecifier?.type)
 	}
-	
-	protected def void getParentPackages(EObject eo, List<String> names) {
-		if(eo instanceof Package) {
-			names.add(0, eo.name)
-		}
-		if(eo.eContainer === null) {
-			return
-		}
-		getParentPackages(eo.eContainer, names)
-	}
-	
-	protected def String printQualifiedTypeName(EObject type) {
-		if(type instanceof PrimitiveType) {
-			type.name
-		}
-		if(type.eContainer === null) {
-			return ""
-		}
-		if(type instanceof Package) {
-			return printQualifiedTypeName(type.eContainer) + type.name + "::"
-		}
-		if(type instanceof Type) {
-			return printQualifiedTypeName(type.eContainer) + type.name
-		}
-		return printQualifiedTypeName(type.eContainer)
-	}
+
 
 }

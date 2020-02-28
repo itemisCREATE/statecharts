@@ -38,7 +38,7 @@ TEST_F(SyncForkTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
@@ -48,7 +48,7 @@ TEST_F(SyncForkTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D1));
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
@@ -58,13 +58,13 @@ TEST_F(SyncForkTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D2));
 	
-	statechart->getDefaultSCI()->raise_e();
+	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_A));
 	
-	statechart->getDefaultSCI()->raise_f();
+	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	

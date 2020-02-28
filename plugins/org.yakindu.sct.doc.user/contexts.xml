@@ -28,6 +28,9 @@
    <context id="stext_keyword">
       <topic href="help/user-guide/statechart_language.html" label="YAKINDU Statechart Tools user guide"/>
    </context>
+   <context id="c_domain_keyword">
+      <topic href="help/user-guide/c-domain.html" label="YAKINDU Statechart Tools - Deep C/C++ Integration"/>
+   </context>
    <context id="sctunit_keyword">
       <topic href="help/user-guide/sctunit.html" label="YAKINDU Statechart Tools SCTUnit"/>
    </context>

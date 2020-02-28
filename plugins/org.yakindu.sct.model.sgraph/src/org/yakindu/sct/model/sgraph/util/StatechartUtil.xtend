@@ -16,13 +16,30 @@ import org.yakindu.base.types.Type
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Scope
 
 class StatechartUtil {
 	
 	@Inject extension OriginTracing
 	
-	def isOriginStatechart(Type type) {
-		type.originTraces.exists[it instanceof Statechart]
+	def dispatch isOriginStatechart(Type type) {
+		type?.originTraces.exists[it instanceof Statechart]
+	}
+	
+	def dispatch isOriginStatechart(EObject it) {
+		false
+	}
+	
+	def isMultiSM(EObject it) {
+		isOriginStatechart ||isOriginScope
+	}
+	
+	def dispatch isOriginScope(Type type) {
+		type.originTraces.exists[it instanceof Scope]
+	}
+	
+	def dispatch isOriginScope(EObject it) {
+		false
 	}
 	
 	def isOriginStateEnum(EObject it) {
@@ -36,6 +53,10 @@ class StatechartUtil {
 	
 	def getOriginState(EObject it) {
 		originTraces.filter(State).head
+	}
+	
+	def getOriginScope(EObject it) {
+		originTraces.filter(Scope).head
 	}
 	
 }
