@@ -516,6 +516,20 @@
                     <include name="${index.html}"/>
                 </fileset>
             </replaceregexp>
+        	
+        	<!-- Fix "pro-feature" elements -->
+            <replaceregexp byline="false" flags="g"
+                match='&lt;p&gt;&lt;div class="r4-feature"&gt;&lt;/p&gt;' replace='&lt;div class="r4-feature"&gt;'>
+                <fileset dir="${work.dir}">
+                    <include name="${index.html}"/>
+                </fileset>
+            </replaceregexp>
+            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;/div&gt;&lt;/p&gt;'
+                replace='&lt;/div&gt;'>
+                <fileset dir="${work.dir}">
+                    <include name="${index.html}"/>
+                </fileset>
+            </replaceregexp>
 
             <!-- Copy the CSS files to the destination directory: -->
             <copy todir="${work.dir}/${css.dir}">
