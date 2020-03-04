@@ -40,7 +40,6 @@ void main() {
 		delay_ms(100);
 	}
 }
-
 p. 
 The program starts with an initialization. After this, everything will be handled in a while loop, where the inputs will be polled cyclically - in this case every 100 milliseconds plus the execution time the program. Waiting for x milliseconds does not need to be realized in a blocking delay function, it also can be done by using sleep modes and a timer interrupt. But the main idea of polling is cyclic reacting on events.
 For applications where events/inputs only rarely occur, this is not a good design choice, as the sensors are read frequently. This will lead to higher power consumption.
@@ -71,7 +70,6 @@ ISR_1 {
 ISR_2 {
 	bool_flag2 = true;
 }
-
 p. 
 Each ISR uses one specific boolean flag, which stores wherever an interrupt has occurred. This pattern is often combined with a sleep mode, so that the microcontroller's CPU is only active after an interrupt. This pattern is often used for low power applications, which are powered by batteries.
 
@@ -115,7 +113,7 @@ void main() {
 	
 	hardwareInit();
 	
-	#ifdef IN_EVENTS
+	#ifdef TIME_EVENTS
 		timerInit();
 	#endif
 	
@@ -238,7 +236,6 @@ void loop() {
 	statemachine_runCycle();
 	last_cycle_time = current_millis;
 }
-
 p. 
 
 For prototyping, this implementation can be used, but it should be considered that the timer will overflow after approximately 50 days. That's why we highly recommend a implementation with interrupts as described before.
