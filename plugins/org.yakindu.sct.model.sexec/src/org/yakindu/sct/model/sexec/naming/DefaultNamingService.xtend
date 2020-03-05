@@ -39,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.ExecutionEntry
+import org.eclipse.xtext.naming.QualifiedName
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -370,7 +371,7 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected dispatch String elementName(Reaction it) {
-		provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+		skipFirst(provider.getFullyQualifiedName(it), 2).toString(separator.toString)
 	}
 
 	def protected dispatch String elementName(ExecutionScope it) {
@@ -382,16 +383,16 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected dispatch String elementName(ExecutionNode it) {
-		return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+		return skipFirst(provider.getFullyQualifiedName(it), 2).toString(separator.toString)
 	}
 	
 	def protected dispatch String elementName(ExecutionEntry it) {
-		return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+		return skipFirst(provider.getFullyQualifiedName(it), 2).toString(separator.toString)
 	}
 
 	// TODO: we should merge the region/vertex case into this base implementation; we should check whether it is used in any case at all (otherwise it could be replaced with the body of vertexOrRegionName)
 	def protected dispatch String elementName(NamedElement it) {
-		return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+		return skipFirst(provider.getFullyQualifiedName(it), 2).toString(separator.toString)
 	}
 
 	def protected dispatch String elementName(Region it) {
@@ -407,7 +408,11 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def private vertexOrRegionName(NamedElement it) {
-		provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+		skipFirst(provider.getFullyQualifiedName(it), 1).toString(separator.toString)
+	}
+	
+	def private skipFirst(QualifiedName name, int skipCount) {
+		activeFlow.statechart.namespace === null ? name.skipFirst(skipCount) : name.skipFirst(skipCount + 1)
 	}
 
 	def protected dispatch String elementName(ExecutionFlow it) {
