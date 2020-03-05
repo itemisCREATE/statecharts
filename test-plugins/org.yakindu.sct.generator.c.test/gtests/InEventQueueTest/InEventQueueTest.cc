@@ -40,21 +40,21 @@ TEST(InEventQueue, InEventQueue) {
 	inEventQueue_init(&machine);
 	inEventQueue_enter(&machine);
 	
-	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_InEventQueue_main_region_A) );
+	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_main_region_A) );
 
 
 	nextEvent = 'f';
 	inEventQueueIface_raise_e(&machine);
-	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_InEventQueue_main_region_B) );
+	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_main_region_B) );
 
 
 	nextEvent = 'g';
 	 inEventQueueIface_raise_e(&machine);
-	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_InEventQueue_main_region_C) );
+	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_main_region_C) );
 
 
 	nextEvent = 'e';
 	inEventQueueIface_raise_f(&machine, 43);
-	EXPECT_TRUE( inEventQueue_isStateActive(&machine, InEventQueue_InEventQueue_main_region_A) );
+	EXPECT_TRUE( inEventQueue_isStateActive(&machine,InEventQueue_main_region_A) );
 
 	}
