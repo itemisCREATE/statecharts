@@ -412,7 +412,12 @@ class DefaultNamingService implements INamingService {
 	}
 	
 	def private skipFirst(QualifiedName name, int skipCount) {
-		activeFlow.statechart.namespace === null ? name.skipFirst(skipCount) : name.skipFirst(skipCount + 1)
+		if(activeFlow !== null) {
+			return activeFlow.statechart.namespace === null ? name.skipFirst(skipCount) : name.skipFirst(skipCount + 1)
+		}
+		if(activeStatechart !== null ) {
+			return activeStatechart.namespace === null ? name.skipFirst(skipCount) : name.skipFirst(skipCount + 1)
+		}
 	}
 
 	def protected dispatch String elementName(ExecutionFlow it) {
