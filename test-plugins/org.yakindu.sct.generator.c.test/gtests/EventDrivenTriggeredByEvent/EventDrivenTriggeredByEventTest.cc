@@ -52,19 +52,19 @@ void EventDrivenTriggeredByEventTest::SetUp()
 void EventDrivenTriggeredByEventTest::internalEventTriggersRunCycle()
 {
 	eventDrivenTriggeredByEvent_enter(&statechart);
-	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_A));
+	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_main_region_A));
 	eventDrivenTriggeredByEventIface_raise_e(&statechart);
-	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_B));
+	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_main_region_B));
 	EXPECT_TRUE(eventDrivenTriggeredByEventIface_get_x(&statechart)== 0);
 	eventDrivenTriggeredByEventIface_raise_e(&statechart);
-	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_A));
+	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_main_region_A));
 	EXPECT_TRUE(eventDrivenTriggeredByEventIface_get_x(&statechart)== 0);
 	eventDrivenTriggeredByEvent_exit(&statechart);
 }
 void EventDrivenTriggeredByEventTest::proceedTimeDoesNotTriggerRunCycle()
 {
 	eventDrivenTriggeredByEvent_enter(&statechart);
-	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_A));
+	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_main_region_A));
 	sc_timer_service_proceed_time(&timer_service, 120*1000);
 	EXPECT_TRUE(eventDrivenTriggeredByEventIface_get_x(&statechart)== 0);
 	eventDrivenTriggeredByEvent_exit(&statechart);

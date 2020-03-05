@@ -45,10 +45,10 @@ void CycleBasedSuperStepTest::SetUp()
 void CycleBasedSuperStepTest::superStepTakesTwoTransitionsUsingSameEvent()
 {
 	cycleBasedSuperStep_enter(&statechart);
-	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_CycleBasedSuperStep_main_region_A));
+	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_main_region_A));
 	cycleBasedSuperStepIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_CycleBasedSuperStep_main_region_C));
+	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_main_region_C));
 	cycleBasedSuperStep_exit(&statechart);
 }
 void CycleBasedSuperStepTest::superStepIteratesUsingAlwaysTrigger()
@@ -56,21 +56,21 @@ void CycleBasedSuperStepTest::superStepIteratesUsingAlwaysTrigger()
 	cycleBasedSuperStep_enter(&statechart);
 	cycleBasedSuperStepIface_raise_f(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_CycleBasedSuperStep_main_region_I));
+	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_main_region_I));
 	EXPECT_TRUE(cycleBasedSuperStepIface_get_x(&statechart)== 0);
 	cycleBasedSuperStep_exit(&statechart);
 }
 void CycleBasedSuperStepTest::superStepIteratesUsingSameEventAndGuard()
 {
 	cycleBasedSuperStep_enter(&statechart);
-	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_CycleBasedSuperStep_main_region_A));
+	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_main_region_A));
 	cycleBasedSuperStepIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_CycleBasedSuperStep_main_region_C));
+	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_main_region_C));
 	EXPECT_TRUE(cycleBasedSuperStepIface_get_x(&statechart)== 42);
 	cycleBasedSuperStepIface_raise_f(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_CycleBasedSuperStep_main_region_I));
+	EXPECT_TRUE(cycleBasedSuperStep_isStateActive(&statechart, CycleBasedSuperStep_main_region_I));
 	EXPECT_TRUE(cycleBasedSuperStepIface_get_x(&statechart)== 0);
 	cycleBasedSuperStep_exit(&statechart);
 }
