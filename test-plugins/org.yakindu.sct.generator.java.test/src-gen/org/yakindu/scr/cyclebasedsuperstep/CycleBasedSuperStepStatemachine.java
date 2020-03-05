@@ -77,7 +77,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_CycleBasedSuperStep_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -90,25 +90,25 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
 				case cycleBasedSuperStep_main_region_A:
-					cycleBasedSuperStep_main_region_A_react(true);
+					main_region_A_react(true);
 					break;
 				case cycleBasedSuperStep_main_region_B:
-					cycleBasedSuperStep_main_region_B_react(true);
+					main_region_B_react(true);
 					break;
 				case cycleBasedSuperStep_main_region_C:
-					cycleBasedSuperStep_main_region_C_react(true);
+					main_region_C_react(true);
 					break;
 				case cycleBasedSuperStep_main_region_D:
-					cycleBasedSuperStep_main_region_D_react(true);
+					main_region_D_react(true);
 					break;
 				case cycleBasedSuperStep_main_region_G:
-					cycleBasedSuperStep_main_region_G_react(true);
+					main_region_G_react(true);
 					break;
 				case cycleBasedSuperStep_main_region_H:
-					cycleBasedSuperStep_main_region_H_react(true);
+					main_region_H_react(true);
 					break;
 				case cycleBasedSuperStep_main_region_I:
-					cycleBasedSuperStep_main_region_I_react(true);
+					main_region_I_react(true);
 					break;
 				default:
 					// $NullState$
@@ -118,7 +118,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_CycleBasedSuperStep_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -195,124 +195,124 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_CycleBasedSuperStep_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_A;
 		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_CycleBasedSuperStep_main_region_B_default() {
+	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_B;
 		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state C */
-	private void enterSequence_CycleBasedSuperStep_main_region_C_default() {
+	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_C;
 		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state D */
-	private void enterSequence_CycleBasedSuperStep_main_region_D_default() {
+	private void enterSequence_main_region_D_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_D;
 		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state G */
-	private void enterSequence_CycleBasedSuperStep_main_region_G_default() {
+	private void enterSequence_main_region_G_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_G;
 		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state H */
-	private void enterSequence_CycleBasedSuperStep_main_region_H_default() {
+	private void enterSequence_main_region_H_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_H;
 		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state I */
-	private void enterSequence_CycleBasedSuperStep_main_region_I_default() {
+	private void enterSequence_main_region_I_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_I;
 		stateVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_CycleBasedSuperStep_main_region_default() {
-		react_CycleBasedSuperStep_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_CycleBasedSuperStep_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_CycleBasedSuperStep_main_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C */
-	private void exitSequence_CycleBasedSuperStep_main_region_C() {
+	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state D */
-	private void exitSequence_CycleBasedSuperStep_main_region_D() {
+	private void exitSequence_main_region_D() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state G */
-	private void exitSequence_CycleBasedSuperStep_main_region_G() {
+	private void exitSequence_main_region_G() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state H */
-	private void exitSequence_CycleBasedSuperStep_main_region_H() {
+	private void exitSequence_main_region_H() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state I */
-	private void exitSequence_CycleBasedSuperStep_main_region_I() {
+	private void exitSequence_main_region_I() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_CycleBasedSuperStep_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case cycleBasedSuperStep_main_region_A:
-			exitSequence_CycleBasedSuperStep_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		case cycleBasedSuperStep_main_region_B:
-			exitSequence_CycleBasedSuperStep_main_region_B();
+			exitSequence_main_region_B();
 			break;
 		case cycleBasedSuperStep_main_region_C:
-			exitSequence_CycleBasedSuperStep_main_region_C();
+			exitSequence_main_region_C();
 			break;
 		case cycleBasedSuperStep_main_region_D:
-			exitSequence_CycleBasedSuperStep_main_region_D();
+			exitSequence_main_region_D();
 			break;
 		case cycleBasedSuperStep_main_region_G:
-			exitSequence_CycleBasedSuperStep_main_region_G();
+			exitSequence_main_region_G();
 			break;
 		case cycleBasedSuperStep_main_region_H:
-			exitSequence_CycleBasedSuperStep_main_region_H();
+			exitSequence_main_region_H();
 			break;
 		case cycleBasedSuperStep_main_region_I:
-			exitSequence_CycleBasedSuperStep_main_region_I();
+			exitSequence_main_region_I();
 			break;
 		default:
 			break;
@@ -320,26 +320,26 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_CycleBasedSuperStep_main_region__entry_Default() {
-		enterSequence_CycleBasedSuperStep_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean cycleBasedSuperStep_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_CycleBasedSuperStep_main_region_A();
-				enterSequence_CycleBasedSuperStep_main_region_B_default();
+				exitSequence_main_region_A();
+				enterSequence_main_region_B_default();
 				react();
 			} else {
 				if (sCInterface.f) {
-					exitSequence_CycleBasedSuperStep_main_region_A();
-					enterSequence_CycleBasedSuperStep_main_region_G_default();
+					exitSequence_main_region_A();
+					enterSequence_main_region_G_default();
 					react();
 				} else {
 					did_transition = false;
@@ -352,13 +352,13 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		return did_transition;
 	}
 	
-	private boolean cycleBasedSuperStep_main_region_B_react(boolean try_transition) {
+	private boolean main_region_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_CycleBasedSuperStep_main_region_B();
-				enterSequence_CycleBasedSuperStep_main_region_C_default();
+				exitSequence_main_region_B();
+				enterSequence_main_region_C_default();
 				react();
 			} else {
 				did_transition = false;
@@ -370,13 +370,13 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		return did_transition;
 	}
 	
-	private boolean cycleBasedSuperStep_main_region_C_react(boolean try_transition) {
+	private boolean main_region_C_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.f) {
-				exitSequence_CycleBasedSuperStep_main_region_C();
-				enterSequence_CycleBasedSuperStep_main_region_D_default();
+				exitSequence_main_region_C();
+				enterSequence_main_region_D_default();
 				react();
 			} else {
 				did_transition = false;
@@ -391,20 +391,20 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		return did_transition;
 	}
 	
-	private boolean cycleBasedSuperStep_main_region_D_react(boolean try_transition) {
+	private boolean main_region_D_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (((sCInterface.f) && (sCInterface.getX()==0))) {
-				exitSequence_CycleBasedSuperStep_main_region_D();
-				enterSequence_CycleBasedSuperStep_main_region_A_default();
+				exitSequence_main_region_D();
+				enterSequence_main_region_A_default();
 				react();
 			} else {
 				if (sCInterface.f) {
-					exitSequence_CycleBasedSuperStep_main_region_D();
+					exitSequence_main_region_D();
 					sCInterface.setX(sCInterface.getX() - 1);
 					
-					enterSequence_CycleBasedSuperStep_main_region_D_default();
+					enterSequence_main_region_D_default();
 					react();
 				} else {
 					did_transition = false;
@@ -417,12 +417,12 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		return did_transition;
 	}
 	
-	private boolean cycleBasedSuperStep_main_region_G_react(boolean try_transition) {
+	private boolean main_region_G_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			exitSequence_CycleBasedSuperStep_main_region_G();
-			enterSequence_CycleBasedSuperStep_main_region_H_default();
+			exitSequence_main_region_G();
+			enterSequence_main_region_H_default();
 			react();
 		}
 		if (did_transition==false) {
@@ -431,12 +431,12 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		return did_transition;
 	}
 	
-	private boolean cycleBasedSuperStep_main_region_H_react(boolean try_transition) {
+	private boolean main_region_H_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			exitSequence_CycleBasedSuperStep_main_region_H();
-			enterSequence_CycleBasedSuperStep_main_region_I_default();
+			exitSequence_main_region_H();
+			enterSequence_main_region_I_default();
 			react();
 		}
 		if (did_transition==false) {
@@ -445,13 +445,13 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		return did_transition;
 	}
 	
-	private boolean cycleBasedSuperStep_main_region_I_react(boolean try_transition) {
+	private boolean main_region_I_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_CycleBasedSuperStep_main_region_I();
-				enterSequence_CycleBasedSuperStep_main_region_A_default();
+				exitSequence_main_region_I();
+				enterSequence_main_region_A_default();
 				react();
 			} else {
 				did_transition = false;

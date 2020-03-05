@@ -70,7 +70,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_ConstOnlyInternalScope_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -81,13 +81,13 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case constOnlyInternalScope_main_region_A:
-				constOnlyInternalScope_main_region_A_react(true);
+				main_region_A_react(true);
 				break;
 			case constOnlyInternalScope_main_region_B:
-				constOnlyInternalScope_main_region_B_react(true);
+				main_region_B_react(true);
 				break;
 			case constOnlyInternalScope_main_region_C:
-				constOnlyInternalScope_main_region_C_react(true);
+				main_region_C_react(true);
 				break;
 			default:
 				// $NullState$
@@ -96,7 +96,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_ConstOnlyInternalScope_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -153,57 +153,57 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_ConstOnlyInternalScope_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.constOnlyInternalScope_main_region_A;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_ConstOnlyInternalScope_main_region_B_default() {
+	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.constOnlyInternalScope_main_region_B;
 	}
 	
 	/* 'default' enter sequence for state C */
-	private void enterSequence_ConstOnlyInternalScope_main_region_C_default() {
+	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.constOnlyInternalScope_main_region_C;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_ConstOnlyInternalScope_main_region_default() {
-		react_ConstOnlyInternalScope_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_ConstOnlyInternalScope_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_ConstOnlyInternalScope_main_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C */
-	private void exitSequence_ConstOnlyInternalScope_main_region_C() {
+	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_ConstOnlyInternalScope_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case constOnlyInternalScope_main_region_A:
-			exitSequence_ConstOnlyInternalScope_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		case constOnlyInternalScope_main_region_B:
-			exitSequence_ConstOnlyInternalScope_main_region_B();
+			exitSequence_main_region_B();
 			break;
 		case constOnlyInternalScope_main_region_C:
-			exitSequence_ConstOnlyInternalScope_main_region_C();
+			exitSequence_main_region_C();
 			break;
 		default:
 			break;
@@ -211,26 +211,26 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ConstOnlyInternalScope_main_region__entry_Default() {
-		enterSequence_ConstOnlyInternalScope_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean constOnlyInternalScope_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (((sCInterface.e) && (sCInterface.getEValue()==getB()))) {
-					exitSequence_ConstOnlyInternalScope_main_region_A();
-					enterSequence_ConstOnlyInternalScope_main_region_B_default();
+					exitSequence_main_region_A();
+					enterSequence_main_region_B_default();
 				} else {
 					if (((sCInterface.e) && (sCInterface.getEValue()==getC()))) {
-						exitSequence_ConstOnlyInternalScope_main_region_A();
-						enterSequence_ConstOnlyInternalScope_main_region_C_default();
+						exitSequence_main_region_A();
+						enterSequence_main_region_C_default();
 					} else {
 						did_transition = false;
 					}
@@ -240,7 +240,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		return did_transition;
 	}
 	
-	private boolean constOnlyInternalScope_main_region_B_react(boolean try_transition) {
+	private boolean main_region_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -251,7 +251,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		return did_transition;
 	}
 	
-	private boolean constOnlyInternalScope_main_region_C_react(boolean try_transition) {
+	private boolean main_region_C_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

@@ -124,8 +124,8 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_localEvents_r1_default();
-		enterSequence_localEvents_r2_default();
+		enterSequence_r1_default();
+		enterSequence_r2_default();
 	}
 	
 	public void runCycle() {
@@ -158,25 +158,25 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case localEvents_r1_Comp1_r_A1:
-				localEvents_r1_Comp1_r_A1_react(true);
+				r1_Comp1_r_A1_react(true);
 				break;
 			case localEvents_r1_Comp1_r_C1:
-				localEvents_r1_Comp1_r_C1_react(true);
+				r1_Comp1_r_C1_react(true);
 				break;
 			case localEvents_r1_Comp1_r_D1:
-				localEvents_r1_Comp1_r_D1_react(true);
+				r1_Comp1_r_D1_react(true);
 				break;
 			case localEvents_r2_Comp2_r_A2:
-				localEvents_r2_Comp2_r_A2_react(true);
+				r2_Comp2_r_A2_react(true);
 				break;
 			case localEvents_r2_Comp2_r_B2:
-				localEvents_r2_Comp2_r_B2_react(true);
+				r2_Comp2_r_B2_react(true);
 				break;
 			case localEvents_r2_Comp2_r_C2:
-				localEvents_r2_Comp2_r_C2_react(true);
+				r2_Comp2_r_C2_react(true);
 				break;
 			case localEvents_r2_Comp2_r_D2:
-				localEvents_r2_Comp2_r_D2_react(true);
+				r2_Comp2_r_D2_react(true);
 				break;
 			default:
 				// $NullState$
@@ -204,8 +204,8 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	}
 	
 	public void exit() {
-		exitSequence_localEvents_r1();
-		exitSequence_localEvents_r2();
+		exitSequence_r1();
+		exitSequence_r2();
 	}
 	
 	/**
@@ -347,133 +347,116 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	}
 	
 	/* Entry action for state 'B2'. */
-	private void entryAction_localEvents_r2_Comp2_r_B2() {
+	private void entryAction_r2_Comp2_r_B2() {
 		raiseActivate_c();
 	}
 	
 	/* 'default' enter sequence for state A1 */
-	private void enterSequence_localEvents_r1_Comp1_r_A1_default() {
+	private void enterSequence_r1_Comp1_r_A1_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.localEvents_r1_Comp1_r_A1;
 	}
 	
 	/* 'default' enter sequence for state C1 */
-	private void enterSequence_localEvents_r1_Comp1_r_C1_default() {
+	private void enterSequence_r1_Comp1_r_C1_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.localEvents_r1_Comp1_r_C1;
 	}
 	
 	/* 'default' enter sequence for state D1 */
-	private void enterSequence_localEvents_r1_Comp1_r_D1_default() {
+	private void enterSequence_r1_Comp1_r_D1_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.localEvents_r1_Comp1_r_D1;
 	}
 	
 	/* 'default' enter sequence for state A2 */
-	private void enterSequence_localEvents_r2_Comp2_r_A2_default() {
+	private void enterSequence_r2_Comp2_r_A2_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.localEvents_r2_Comp2_r_A2;
 	}
 	
 	/* 'default' enter sequence for state B2 */
-	private void enterSequence_localEvents_r2_Comp2_r_B2_default() {
-		entryAction_localEvents_r2_Comp2_r_B2();
+	private void enterSequence_r2_Comp2_r_B2_default() {
+		entryAction_r2_Comp2_r_B2();
 		nextStateIndex = 1;
 		stateVector[1] = State.localEvents_r2_Comp2_r_B2;
 	}
 	
 	/* 'default' enter sequence for state C2 */
-	private void enterSequence_localEvents_r2_Comp2_r_C2_default() {
+	private void enterSequence_r2_Comp2_r_C2_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.localEvents_r2_Comp2_r_C2;
 	}
 	
 	/* 'default' enter sequence for state D2 */
-	private void enterSequence_localEvents_r2_Comp2_r_D2_default() {
+	private void enterSequence_r2_Comp2_r_D2_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.localEvents_r2_Comp2_r_D2;
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_localEvents_r1_default() {
-		react_localEvents_r1__entry_Default();
+	private void enterSequence_r1_default() {
+		react_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_localEvents_r2_default() {
-		react_localEvents_r2__entry_Default();
+	private void enterSequence_r2_default() {
+		react_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A1 */
-	private void exitSequence_localEvents_r1_Comp1_r_A1() {
+	private void exitSequence_r1_Comp1_r_A1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C1 */
-	private void exitSequence_localEvents_r1_Comp1_r_C1() {
+	private void exitSequence_r1_Comp1_r_C1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state D1 */
-	private void exitSequence_localEvents_r1_Comp1_r_D1() {
+	private void exitSequence_r1_Comp1_r_D1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state A2 */
-	private void exitSequence_localEvents_r2_Comp2_r_A2() {
+	private void exitSequence_r2_Comp2_r_A2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B2 */
-	private void exitSequence_localEvents_r2_Comp2_r_B2() {
+	private void exitSequence_r2_Comp2_r_B2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C2 */
-	private void exitSequence_localEvents_r2_Comp2_r_C2() {
+	private void exitSequence_r2_Comp2_r_C2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state D2 */
-	private void exitSequence_localEvents_r2_Comp2_r_D2() {
+	private void exitSequence_r2_Comp2_r_D2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_localEvents_r1() {
+	private void exitSequence_r1() {
 		switch (stateVector[0]) {
 		case localEvents_r1_Comp1_r_A1:
-			exitSequence_localEvents_r1_Comp1_r_A1();
+			exitSequence_r1_Comp1_r_A1();
 			break;
 		case localEvents_r1_Comp1_r_C1:
-			exitSequence_localEvents_r1_Comp1_r_C1();
+			exitSequence_r1_Comp1_r_C1();
 			break;
 		case localEvents_r1_Comp1_r_D1:
-			exitSequence_localEvents_r1_Comp1_r_D1();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r */
-	private void exitSequence_localEvents_r1_Comp1_r() {
-		switch (stateVector[0]) {
-		case localEvents_r1_Comp1_r_A1:
-			exitSequence_localEvents_r1_Comp1_r_A1();
-			break;
-		case localEvents_r1_Comp1_r_C1:
-			exitSequence_localEvents_r1_Comp1_r_C1();
-			break;
-		case localEvents_r1_Comp1_r_D1:
-			exitSequence_localEvents_r1_Comp1_r_D1();
+			exitSequence_r1_Comp1_r_D1();
 			break;
 		default:
 			break;
@@ -481,39 +464,19 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_localEvents_r2() {
+	private void exitSequence_r2() {
 		switch (stateVector[1]) {
 		case localEvents_r2_Comp2_r_A2:
-			exitSequence_localEvents_r2_Comp2_r_A2();
+			exitSequence_r2_Comp2_r_A2();
 			break;
 		case localEvents_r2_Comp2_r_B2:
-			exitSequence_localEvents_r2_Comp2_r_B2();
+			exitSequence_r2_Comp2_r_B2();
 			break;
 		case localEvents_r2_Comp2_r_C2:
-			exitSequence_localEvents_r2_Comp2_r_C2();
+			exitSequence_r2_Comp2_r_C2();
 			break;
 		case localEvents_r2_Comp2_r_D2:
-			exitSequence_localEvents_r2_Comp2_r_D2();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r */
-	private void exitSequence_localEvents_r2_Comp2_r() {
-		switch (stateVector[1]) {
-		case localEvents_r2_Comp2_r_A2:
-			exitSequence_localEvents_r2_Comp2_r_A2();
-			break;
-		case localEvents_r2_Comp2_r_B2:
-			exitSequence_localEvents_r2_Comp2_r_B2();
-			break;
-		case localEvents_r2_Comp2_r_C2:
-			exitSequence_localEvents_r2_Comp2_r_C2();
-			break;
-		case localEvents_r2_Comp2_r_D2:
-			exitSequence_localEvents_r2_Comp2_r_D2();
+			exitSequence_r2_Comp2_r_D2();
 			break;
 		default:
 			break;
@@ -521,13 +484,13 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_localEvents_r1__entry_Default() {
-		enterSequence_localEvents_r1_Comp1_r_A1_default();
+	private void react_r1__entry_Default() {
+		enterSequence_r1_Comp1_r_A1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_localEvents_r2__entry_Default() {
-		enterSequence_localEvents_r2_Comp2_r_A2_default();
+	private void react_r2__entry_Default() {
+		enterSequence_r2_Comp2_r_A2_default();
 	}
 	
 	private boolean react() {
@@ -542,7 +505,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return false;
 	}
 	
-	private boolean localEvents_r1_Comp1_react(boolean try_transition) {
+	private boolean r1_Comp1_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -556,14 +519,14 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean localEvents_r1_Comp1_r_A1_react(boolean try_transition) {
+	private boolean r1_Comp1_r_A1_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (localEvents_r1_Comp1_react(try_transition)==false) {
+			if (r1_Comp1_react(try_transition)==false) {
 				if (activate_c) {
-					exitSequence_localEvents_r1_Comp1_r_A1();
-					enterSequence_localEvents_r1_Comp1_r_C1_default();
+					exitSequence_r1_Comp1_r_A1();
+					enterSequence_r1_Comp1_r_C1_default();
 				} else {
 					did_transition = false;
 				}
@@ -577,16 +540,16 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean localEvents_r1_Comp1_r_C1_react(boolean try_transition) {
+	private boolean r1_Comp1_r_C1_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (localEvents_r1_Comp1_react(try_transition)==false) {
+			if (r1_Comp1_react(try_transition)==false) {
 				if (((activate_d) && (getActivate_dValue()==1))) {
-					exitSequence_localEvents_r1_Comp1_r_C1();
+					exitSequence_r1_Comp1_r_C1();
 					raiseActivate_d(2);
 					
-					enterSequence_localEvents_r1_Comp1_r_D1_default();
+					enterSequence_r1_Comp1_r_D1_default();
 				} else {
 					did_transition = false;
 				}
@@ -595,18 +558,18 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean localEvents_r1_Comp1_r_D1_react(boolean try_transition) {
+	private boolean r1_Comp1_r_D1_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (localEvents_r1_Comp1_react(try_transition)==false) {
+			if (r1_Comp1_react(try_transition)==false) {
 				did_transition = false;
 			}
 		}
 		return did_transition;
 	}
 	
-	private boolean localEvents_r2_Comp2_react(boolean try_transition) {
+	private boolean r2_Comp2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -618,14 +581,14 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean localEvents_r2_Comp2_r_A2_react(boolean try_transition) {
+	private boolean r2_Comp2_r_A2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (localEvents_r2_Comp2_react(try_transition)==false) {
+			if (r2_Comp2_react(try_transition)==false) {
 				if (activate_b) {
-					exitSequence_localEvents_r2_Comp2_r_A2();
-					enterSequence_localEvents_r2_Comp2_r_B2_default();
+					exitSequence_r2_Comp2_r_A2();
+					enterSequence_r2_Comp2_r_B2_default();
 				} else {
 					did_transition = false;
 				}
@@ -634,14 +597,14 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean localEvents_r2_Comp2_r_B2_react(boolean try_transition) {
+	private boolean r2_Comp2_r_B2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (localEvents_r2_Comp2_react(try_transition)==false) {
+			if (r2_Comp2_react(try_transition)==false) {
 				if (activate_c) {
-					exitSequence_localEvents_r2_Comp2_r_B2();
-					enterSequence_localEvents_r2_Comp2_r_C2_default();
+					exitSequence_r2_Comp2_r_B2();
+					enterSequence_r2_Comp2_r_C2_default();
 				} else {
 					did_transition = false;
 				}
@@ -650,14 +613,14 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean localEvents_r2_Comp2_r_C2_react(boolean try_transition) {
+	private boolean r2_Comp2_r_C2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (localEvents_r2_Comp2_react(try_transition)==false) {
+			if (r2_Comp2_react(try_transition)==false) {
 				if (((activate_d) && (getActivate_dValue()==2))) {
-					exitSequence_localEvents_r2_Comp2_r_C2();
-					enterSequence_localEvents_r2_Comp2_r_D2_default();
+					exitSequence_r2_Comp2_r_C2();
+					enterSequence_r2_Comp2_r_D2_default();
 				} else {
 					did_transition = false;
 				}
@@ -666,11 +629,11 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean localEvents_r2_Comp2_r_D2_react(boolean try_transition) {
+	private boolean r2_Comp2_r_D2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (localEvents_r2_Comp2_react(try_transition)==false) {
+			if (r2_Comp2_react(try_transition)==false) {
 				did_transition = false;
 			}
 		}

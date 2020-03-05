@@ -84,7 +84,7 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_OutEventWithPayload_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -95,7 +95,7 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case outEventWithPayload_main_region_A:
-				outEventWithPayload_main_region_A_react(true);
+				main_region_A_react(true);
 				break;
 			default:
 				// $NullState$
@@ -104,7 +104,7 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_OutEventWithPayload_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -166,27 +166,27 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_OutEventWithPayload_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.outEventWithPayload_main_region_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_OutEventWithPayload_main_region_default() {
-		react_OutEventWithPayload_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_OutEventWithPayload_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_OutEventWithPayload_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case outEventWithPayload_main_region_A:
-			exitSequence_OutEventWithPayload_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		default:
 			break;
@@ -194,15 +194,15 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_OutEventWithPayload_main_region__entry_Default() {
-		enterSequence_OutEventWithPayload_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean outEventWithPayload_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

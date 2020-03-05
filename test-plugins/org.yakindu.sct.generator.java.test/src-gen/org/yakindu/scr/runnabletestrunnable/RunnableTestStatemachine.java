@@ -222,7 +222,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		}
 		timer.setTimer(this, 2, (1 * 1000), true);
 		
-		enterSequence_RunnableTest_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public synchronized void runCycle() {
@@ -255,13 +255,13 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case runnableTest_main_region__final_:
-				runnableTest_main_region__final__react(true);
+				main_region__final__react(true);
 				break;
 			case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
-				runnableTest_main_region_Composite_s1_s2_inner_region_s1_react(true);
+				main_region_Composite_s1_s2_inner_region_s1_react(true);
 				break;
 			case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
-				runnableTest_main_region_Composite_s1_s2_inner_region_s2_react(true);
+				main_region_Composite_s1_s2_inner_region_s2_react(true);
 				break;
 			default:
 				// $NullState$
@@ -286,7 +286,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	}
 	
 	public synchronized void exit() {
-		exitSequence_RunnableTest_main_region();
+		exitSequence_main_region();
 		timer.unsetTimer(this, 2);
 	}
 	
@@ -420,107 +420,107 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	}
 	
 	/* Entry action for state 'Composite_s1_s2'. */
-	private void entryAction_RunnableTest_main_region_Composite_s1_s2() {
+	private void entryAction_main_region_Composite_s1_s2() {
 		timer.setTimer(this, 0, (10 * 1000), false);
 	}
 	
 	/* Entry action for state 's1'. */
-	private void entryAction_RunnableTest_main_region_Composite_s1_s2_inner_region_s1() {
+	private void entryAction_main_region_Composite_s1_s2_inner_region_s1() {
 		timer.setTimer(this, 1, 500, false);
 		
 		sCInterface.raiseEv_out(2);
 	}
 	
 	/* Entry action for state 's2'. */
-	private void entryAction_RunnableTest_main_region_Composite_s1_s2_inner_region_s2() {
+	private void entryAction_main_region_Composite_s1_s2_inner_region_s2() {
 		sCInterface.setS2_entered(sCInterface.getS2_entered() + 1);
 	}
 	
 	/* Exit action for state 'Composite_s1_s2'. */
-	private void exitAction_RunnableTest_main_region_Composite_s1_s2() {
+	private void exitAction_main_region_Composite_s1_s2() {
 		timer.unsetTimer(this, 0);
 	}
 	
 	/* Exit action for state 's1'. */
-	private void exitAction_RunnableTest_main_region_Composite_s1_s2_inner_region_s1() {
+	private void exitAction_main_region_Composite_s1_s2_inner_region_s1() {
 		timer.unsetTimer(this, 1);
 	}
 	
 	/* Default enter sequence for state null */
-	private void enterSequence_RunnableTest_main_region__final__default() {
+	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.runnableTest_main_region__final_;
 	}
 	
 	/* 'default' enter sequence for state Composite_s1_s2 */
-	private void enterSequence_RunnableTest_main_region_Composite_s1_s2_default() {
-		entryAction_RunnableTest_main_region_Composite_s1_s2();
-		enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_default();
+	private void enterSequence_main_region_Composite_s1_s2_default() {
+		entryAction_main_region_Composite_s1_s2();
+		enterSequence_main_region_Composite_s1_s2_inner_region_default();
 	}
 	
 	/* 'default' enter sequence for state s1 */
-	private void enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1_default() {
-		entryAction_RunnableTest_main_region_Composite_s1_s2_inner_region_s1();
+	private void enterSequence_main_region_Composite_s1_s2_inner_region_s1_default() {
+		entryAction_main_region_Composite_s1_s2_inner_region_s1();
 		nextStateIndex = 0;
 		stateVector[0] = State.runnableTest_main_region_Composite_s1_s2_inner_region_s1;
 	}
 	
 	/* 'default' enter sequence for state s2 */
-	private void enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s2_default() {
-		entryAction_RunnableTest_main_region_Composite_s1_s2_inner_region_s2();
+	private void enterSequence_main_region_Composite_s1_s2_inner_region_s2_default() {
+		entryAction_main_region_Composite_s1_s2_inner_region_s2();
 		nextStateIndex = 0;
 		stateVector[0] = State.runnableTest_main_region_Composite_s1_s2_inner_region_s2;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_RunnableTest_main_region_default() {
-		react_RunnableTest_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region inner region */
-	private void enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_default() {
-		react_RunnableTest_main_region_Composite_s1_s2_inner_region__entry_Default();
+	private void enterSequence_main_region_Composite_s1_s2_inner_region_default() {
+		react_main_region_Composite_s1_s2_inner_region__entry_Default();
 	}
 	
 	/* Default exit sequence for final state. */
-	private void exitSequence_RunnableTest_main_region__final_() {
+	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state Composite_s1_s2 */
-	private void exitSequence_RunnableTest_main_region_Composite_s1_s2() {
-		exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region();
-		exitAction_RunnableTest_main_region_Composite_s1_s2();
+	private void exitSequence_main_region_Composite_s1_s2() {
+		exitSequence_main_region_Composite_s1_s2_inner_region();
+		exitAction_main_region_Composite_s1_s2();
 	}
 	
 	/* Default exit sequence for state s1 */
-	private void exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1() {
+	private void exitSequence_main_region_Composite_s1_s2_inner_region_s1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		exitAction_RunnableTest_main_region_Composite_s1_s2_inner_region_s1();
+		exitAction_main_region_Composite_s1_s2_inner_region_s1();
 	}
 	
 	/* Default exit sequence for state s2 */
-	private void exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s2() {
+	private void exitSequence_main_region_Composite_s1_s2_inner_region_s2() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_RunnableTest_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case runnableTest_main_region__final_:
-			exitSequence_RunnableTest_main_region__final_();
+			exitSequence_main_region__final_();
 			break;
 		case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
-			exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1();
-			exitAction_RunnableTest_main_region_Composite_s1_s2();
+			exitSequence_main_region_Composite_s1_s2_inner_region_s1();
+			exitAction_main_region_Composite_s1_s2();
 			break;
 		case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
-			exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s2();
-			exitAction_RunnableTest_main_region_Composite_s1_s2();
+			exitSequence_main_region_Composite_s1_s2_inner_region_s2();
+			exitAction_main_region_Composite_s1_s2();
 			break;
 		default:
 			break;
@@ -528,13 +528,13 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	}
 	
 	/* Default exit sequence for region inner region */
-	private void exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region() {
+	private void exitSequence_main_region_Composite_s1_s2_inner_region() {
 		switch (stateVector[0]) {
 		case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
-			exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1();
+			exitSequence_main_region_Composite_s1_s2_inner_region_s1();
 			break;
 		case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
-			exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s2();
+			exitSequence_main_region_Composite_s1_s2_inner_region_s2();
 			break;
 		default:
 			break;
@@ -542,13 +542,13 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_RunnableTest_main_region__entry_Default() {
-		enterSequence_RunnableTest_main_region_Composite_s1_s2_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_Composite_s1_s2_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_RunnableTest_main_region_Composite_s1_s2_inner_region__entry_Default() {
-		enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1_default();
+	private void react_main_region_Composite_s1_s2_inner_region__entry_Default() {
+		enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 	}
 	
 	private boolean react() {
@@ -560,7 +560,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		return false;
 	}
 	
-	private boolean runnableTest_main_region__final__react(boolean try_transition) {
+	private boolean main_region__final__react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -571,14 +571,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		return did_transition;
 	}
 	
-	private boolean runnableTest_main_region_Composite_s1_s2_react(boolean try_transition) {
+	private boolean main_region_Composite_s1_s2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (timeEvents[0]) {
-					exitSequence_RunnableTest_main_region_Composite_s1_s2();
-					enterSequence_RunnableTest_main_region__final__default();
+					exitSequence_main_region_Composite_s1_s2();
+					enterSequence_main_region__final__default();
 				} else {
 					did_transition = false;
 				}
@@ -587,20 +587,20 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		return did_transition;
 	}
 	
-	private boolean runnableTest_main_region_Composite_s1_s2_inner_region_s1_react(boolean try_transition) {
+	private boolean main_region_Composite_s1_s2_inner_region_s1_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (runnableTest_main_region_Composite_s1_s2_react(try_transition)==false) {
+			if (main_region_Composite_s1_s2_react(try_transition)==false) {
 				if (sCInterface.ev_in) {
-					exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1();
-					enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s2_default();
+					exitSequence_main_region_Composite_s1_s2_inner_region_s1();
+					enterSequence_main_region_Composite_s1_s2_inner_region_s2_default();
 				} else {
 					if (timeEvents[1]) {
-						exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1();
+						exitSequence_main_region_Composite_s1_s2_inner_region_s1();
 						sCInterface.setAfterCalls(sCInterface.getAfterCalls() + 1);
 						
-						enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1_default();
+						enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 					} else {
 						did_transition = false;
 					}
@@ -610,14 +610,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		return did_transition;
 	}
 	
-	private boolean runnableTest_main_region_Composite_s1_s2_inner_region_s2_react(boolean try_transition) {
+	private boolean main_region_Composite_s1_s2_inner_region_s2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (runnableTest_main_region_Composite_s1_s2_react(try_transition)==false) {
+			if (main_region_Composite_s1_s2_react(try_transition)==false) {
 				if (sCInterface.ev_in) {
-					exitSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s2();
-					enterSequence_RunnableTest_main_region_Composite_s1_s2_inner_region_s1_default();
+					exitSequence_main_region_Composite_s1_s2_inner_region_s2();
+					enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 				} else {
 					did_transition = false;
 				}
