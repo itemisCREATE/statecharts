@@ -36,19 +36,19 @@ TEST_F(EventDrivenInternalEventTest, checkInternlEventQueueing) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_r1_A));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::r1_A));
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_r2_C));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::r2_C));
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::check_VALID));
 	
 	statechart->raise_start();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_r1_B));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::r1_B));
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_r2_D));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::r2_D));
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenInternalEvent::check_VALID));
 	
 	EXPECT_TRUE(statechart->get_i1_sequence()== 2);
 	

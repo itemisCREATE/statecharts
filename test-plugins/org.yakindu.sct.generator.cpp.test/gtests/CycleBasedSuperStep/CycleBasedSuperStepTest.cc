@@ -36,13 +36,13 @@ TEST_F(CycleBasedSuperStepTest, superStepTakesTwoTransitionsUsingSameEvent) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::CycleBasedSuperStep_main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::main_region_A));
 	
 	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::CycleBasedSuperStep_main_region_C));
+	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::main_region_C));
 	
 	statechart->exit();
 	
@@ -56,7 +56,7 @@ TEST_F(CycleBasedSuperStepTest, superStepIteratesUsingAlwaysTrigger) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::CycleBasedSuperStep_main_region_I));
+	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::main_region_I));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	
@@ -68,13 +68,13 @@ TEST_F(CycleBasedSuperStepTest, superStepIteratesUsingSameEventAndGuard) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::CycleBasedSuperStep_main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::main_region_A));
 	
 	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::CycleBasedSuperStep_main_region_C));
+	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::main_region_C));
 	
 	EXPECT_TRUE(statechart->get_x()== 42);
 	
@@ -82,7 +82,7 @@ TEST_F(CycleBasedSuperStepTest, superStepIteratesUsingSameEventAndGuard) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::CycleBasedSuperStep_main_region_I));
+	EXPECT_TRUE(statechart->isStateActive(supersteps::CycleBasedSuperStep::main_region_I));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	

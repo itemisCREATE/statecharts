@@ -36,11 +36,11 @@ TEST_F(TransitionHandlesMultipleExists, testTransitionHandling2Of2Exits) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_A_r_AA));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_A_r_AA));
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_B_r_BB));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_B_r_BB));
 	
 	EXPECT_TRUE(statechart->get_x()== 1);
 	
@@ -50,11 +50,11 @@ TEST_F(TransitionHandlesMultipleExists, testTransitionHandling2Of2Exits) {
 	
 	statechart->set_x(0);
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_A_r_AA));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_A_r_AA));
 	
 	statechart->raise_f();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_B_r_BB));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_B_r_BB));
 	
 	EXPECT_TRUE(statechart->get_x()== 2);
 	
@@ -66,25 +66,25 @@ TEST_F(TransitionHandlesMultipleExists, testTransitionHandling2Of3Exits) {
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_B_r_BB));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_B_r_BB));
 	
 	statechart->set_x(0);
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_A_r_AA));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_A_r_AA));
 	
 	EXPECT_TRUE(statechart->get_x()== 11);
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_B_r_BB));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_B_r_BB));
 	
 	statechart->set_x(0);
 	
 	statechart->raise_g();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_A_r_AA));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_A_r_AA));
 	
 	EXPECT_TRUE(statechart->get_x()== 10);
 	
@@ -98,13 +98,13 @@ TEST_F(TransitionHandlesMultipleExists, testTransitionHandling1Of3Exits) {
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_B_r_BB));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_B_r_BB));
 	
 	statechart->set_x(0);
 	
 	statechart->raise_f();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::TransitionHandlesMultipleExits_main_region_A_r_AA));
+	EXPECT_TRUE(statechart->isStateActive(exits::TransitionHandlesMultipleExits::main_region_A_r_AA));
 	
 	EXPECT_TRUE(statechart->get_x()== 24);
 	

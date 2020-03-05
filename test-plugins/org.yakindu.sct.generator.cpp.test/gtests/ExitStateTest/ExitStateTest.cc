@@ -36,13 +36,13 @@ TEST_F(ExitStateTest, defaultExit) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_A));
 	
 	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_E));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_E));
 	
 	
 }
@@ -50,13 +50,13 @@ TEST_F(ExitStateTest, namedExitThroughNamedTransition) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_A));
 	
 	statechart->raise_f();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_F));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_F));
 	
 	
 }
@@ -64,13 +64,13 @@ TEST_F(ExitStateTest, namedExitThroughDefaultTransition) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_A));
 	
 	statechart->raise_g();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_E));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_E));
 	
 	
 }
@@ -78,11 +78,11 @@ TEST_F(ExitStateTest, remainInA) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_A));
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isStateActive(exits::ExitState::r_A));
 	
 	
 }
