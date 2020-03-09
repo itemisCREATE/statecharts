@@ -509,7 +509,7 @@ class Naming {
 	}
 	
 	def metaModule(ExecutionFlow it) {
-		it.name + metaSuffix
+		it.module + META_MODULE
 	}
 	
 	def metaPrefix(ExecutionFlow it) {

@@ -8,26 +8,26 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.generator.c.extensions.Naming
 
 class MetaSource implements IContentTemplate {
 	@Inject extension GenmodelEntries
+	@Inject extension Naming
 	
-	override content(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
+	override content(ExecutionFlow flow, GeneratorEntry entry, extension IGenArtifactConfigurations locations) {
 		'''
 		«entry.licenseText»
 		
-		
-		#include "«flow.name»Meta.h"
+		#include "«(flow.metaModule.h).relativeTo(flow.metaModule.c)»"				
 				
-				
-		static «CGeneratorConstants::STRING_TYPE» feature_names[] = {
+		«CGeneratorConstants::STRING_TYPE» feature_names[] = {
 			"<nothing>",
 			«FOR feature : flow.scopes.map[it | it.declarations].flatten.reject(TimeEvent) SEPARATOR ","»
 			"«feature.name»"
 			«ENDFOR»
 		};
 		
-		static «CGeneratorConstants::STRING_TYPE» state_identifier[] = {
+		«CGeneratorConstants::STRING_TYPE» state_names[] = {
 			"<nostate>",
 			«FOR state : flow.states SEPARATOR ","»
 			"«state.name.removePrefix»"
