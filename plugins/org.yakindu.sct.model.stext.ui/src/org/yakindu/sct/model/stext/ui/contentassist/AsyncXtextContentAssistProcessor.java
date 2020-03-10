@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.stext.ui.contentassist;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.jface.text.ITextViewer;
@@ -19,13 +18,10 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.CompletionProposalComputer;
-import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-
-import com.google.common.collect.Lists;
 
 /**
  * 
@@ -38,10 +34,13 @@ public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcesso
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		if (getContentProposalProvider() == null)
 			return null;
+
 		IXtextDocument document = (IXtextDocument) viewer.getDocument();
 		final CancelableCompletionProposalComputer computer = createCompletionProposalComputer(viewer, offset);
-		ICompletionProposal[] result = document
-				.readOnly(new CancelableUnitOfWork<ICompletionProposal[], XtextResource>() {
+		RunnableWithResult<ICompletionProposal[]> runnable = new RunnableWithResult.Impl<ICompletionProposal[]>() {
+			@Override
+			public void run() {
+				setResult(document.priorityReadOnly(new CancelableUnitOfWork<ICompletionProposal[], XtextResource>() {
 					@Override
 					public ICompletionProposal[] exec(XtextResource state, CancelIndicator cancelIndicator)
 							throws Exception {
@@ -52,7 +51,16 @@ public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcesso
 							return new ICompletionProposal[] {};
 						}
 					}
-				});
+				}));
+			}
+		};
+
+		if (Display.getCurrent() == null) {
+			Display.getDefault().syncExec(runnable);
+		} else {
+			runnable.run();
+		}
+		ICompletionProposal[] result = runnable.getResult();
 		Arrays.sort(result, getCompletionProposalComparator());
 		result = getCompletionProposalPostProcessor().postProcess(result);
 		return result;
@@ -83,21 +91,5 @@ public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcesso
 			return !cancelIndicator.isCanceled();
 		}
 
-		@Override
-		protected ContentAssistContext[] createContentAssistContexts(XtextResource resource) {
-			RunnableWithResult<ContentAssistContext[]> runnable = new RunnableWithResult.Impl<ContentAssistContext[]>() {
-				@Override
-				public void run() {
-					setResult(CancelableCompletionProposalComputer.super.createContentAssistContexts(resource));
-				}
-			};
-			if (Display.getCurrent() == null) {
-				Display.getDefault().syncExec(runnable);
-			} else {
-				runnable.run();
-			}
-			return runnable.getResult();
-
-		}
 	}
 }
