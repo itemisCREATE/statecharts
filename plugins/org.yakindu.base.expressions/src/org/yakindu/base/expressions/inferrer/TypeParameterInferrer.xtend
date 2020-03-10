@@ -276,8 +276,8 @@ class TypeParameterInferrer {
 			val bindings = parameter.typeArguments.map [
 				InferenceResult.from(type)
 			]
-			if(result1.type.name == ITypeSystem.ANY){
-				return;
+			if(typeValidator.isAnyType(result1.type)){
+				return
 			}
 			acceptor.error(
 				String.format(INCOMPATIBLE_TYPES, argumentResult, InferenceResult.from(parameter.type, bindings)),
