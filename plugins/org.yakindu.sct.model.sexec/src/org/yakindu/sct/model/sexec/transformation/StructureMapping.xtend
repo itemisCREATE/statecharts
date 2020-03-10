@@ -14,12 +14,17 @@ import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
@@ -33,9 +38,11 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StructureMapping {
@@ -43,6 +50,9 @@ class StructureMapping {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
+	@Inject extension StatechartUtil
+	@Inject extension OriginTracing
+	@Inject extension ExpressionBuilder
 	
 	
 	//==========================================================================
@@ -234,6 +244,50 @@ class StructureMapping {
 		}	
 		
 		result
+	}
+	
+	//==========================================================================
+	// REFERENCED MACHINE OUT EVENT MAPPING
+	//
+	
+	/** creates shadow variables for referenced machines' out events */
+	def mapReferencedMachineOutEvents(Statechart statechart, ExecutionFlow r) {
+		var machineMembers = statechart.scopes.map[declarations].flatten.filter(VariableDefinition).filter [
+			type.isOriginStatechart
+		]
+
+		machineMembers.forEach [ m |
+			var machine = m.type.getOriginStatechart
+			machine.allScopesWithOutEvents.forEach [ scope, outEvents |
+				outEvents.forEach [ e |
+					val shadowEvent = StextFactory.eINSTANCE.createEventDefinition => [
+						name = shadowEventName(e, m)
+						direction = Direction.IN
+						typeSpecifier = EcoreUtil.copy(e.typeSpecifier)
+						traceOrigin(e)
+					]
+					r.shadowMemberScope.members += shadowEvent
+					
+					retargetOutEventRefs(e, shadowEvent, r)
+				]
+			]
+		]
+		return r
+	}
+	
+	protected def shadowEventName(Event oe, VariableDefinition v) {
+		v.name + "_" + oe.fullyQualifiedName
+	} 
+	
+	/** retargets all references of referenced machines' out events to new shadow events */
+	protected def retargetOutEventRefs(Event originalEvent, Event shadowEvent, ExecutionFlow flow) {
+		val allContent = EcoreUtil2::eAllContentsAsList(flow)
+		var outEventRefs = allContent.filter(FeatureCall).filter[feature.originTraces.contains(originalEvent)]
+		outEventRefs.forEach[ref|EcoreUtil.replace(ref, shadowEvent._ref)]
+	}
+
+	protected def Scope create s : StextFactory.eINSTANCE.createInternalScope shadowMemberScope(ExecutionFlow flow) {
+		flow.scopes += s
 	}
 	
 }

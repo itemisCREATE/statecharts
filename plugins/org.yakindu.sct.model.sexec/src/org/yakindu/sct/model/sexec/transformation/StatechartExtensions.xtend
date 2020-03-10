@@ -31,6 +31,10 @@ import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.base.types.Event
+import java.util.Map
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.base.types.Direction
 
 class StatechartExtensions {
 	
@@ -172,6 +176,13 @@ class StatechartExtensions {
 	
 	def Iterable<Synchronization> allSynchronizations(Statechart sc) {
 		return sc.eAllContents.filter( typeof(Synchronization)).toIterable
+	}
+	
+	def Map<InterfaceScope, Iterable<Event>> allScopesWithOutEvents(Statechart sc) {
+		sc.scopes.filter(InterfaceScope).
+			toInvertedMap[it.declarations.filter(Event).filter[direction == Direction.OUT]].filter [ scope, outEvents |
+				!outEvents.nullOrEmpty
+			]
 	}
 	
 	//=================================================================

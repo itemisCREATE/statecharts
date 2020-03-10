@@ -31,7 +31,7 @@ class StatechartUtil {
 	}
 	
 	def isMultiSM(EObject it) {
-		isOriginStatechart ||isOriginScope
+		isOriginStatechart || isOriginScope
 	}
 	
 	def dispatch isOriginScope(Type type) {

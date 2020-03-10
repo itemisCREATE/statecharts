@@ -87,6 +87,9 @@ class ModelSequencer implements IModelSequencer {
 		
 		ef.defineReactMethods
 		
+		// map submachine out events to shadow events
+		sc.mapReferencedMachineOutEvents(ef)
+		
 		// retarget declaration refs
 		ef.retargetDeclRefs
 		
