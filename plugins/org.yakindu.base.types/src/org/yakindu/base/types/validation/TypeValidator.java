@@ -141,7 +141,7 @@ public class TypeValidator {
 		return registry.isSame(result.getType(), registry.getType(ITypeSystem.NULL));
 	}
 	
-	protected boolean isAnyType(Type type) {
+	public boolean isAnyType(Type type) {
 		return registry.isSame(type, registry.getType(ITypeSystem.ANY));
 	}
 }

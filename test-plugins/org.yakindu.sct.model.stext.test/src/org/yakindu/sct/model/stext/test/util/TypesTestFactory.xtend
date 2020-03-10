@@ -127,5 +127,12 @@ class TypesTestFactory {
 			it.superTypes += (ts.getType(baseTypeName) as PrimitiveType).toTypeSpecifier
 		]
 	}
+	
+	def createAnyType() {
+		factory.createPrimitiveType => [
+			it.name = ts.getType(ITypeSystem.ANY).name
+			it.abstract = true
+		]
+	}
 
 }
