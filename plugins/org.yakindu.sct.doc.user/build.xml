@@ -172,9 +172,6 @@
 
         <!-- Classpath for YAKINDU Docs: -->
         <artifact:resolve>
-	    <artifact:remoterepos>
-                <remoterepo url="https://repo1.maven.org/maven2" releases="true" snapshots="false" updates="never" checksums="fail"/>
-            </artifact:remoterepos>
             <artifact:dependencies>
                 <dependency groupId="org.yakindu.docs" artifactId="yakindu-docs-maven-plugin"
                     version="${yakindu.docs.version}" scope="compile"/>
@@ -184,9 +181,6 @@
 
         <!-- YAKINDU Docs website template: -->
         <artifact:resolve>
-	    <artifact:remoterepos>
-                <remoterepo url="https://repo1.maven.org/maven2" releases="true" snapshots="false" updates="never" checksums="fail"/>
-            </artifact:remoterepos>
             <artifact:dependencies>
                 <dependency groupId="org.yakindu.docs" artifactId="yakindu-docs-maven-plugin"
                     version="${yakindu.docs.version}" scope="compile" classifier="website"/>
