@@ -42,6 +42,7 @@ import org.yakindu.base.types.TypesPackage
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.TypesJavaValidator
+import org.yakindu.base.types.validation.TypeValidator
 
 /** 
  * @author andreas muelder - Initial contribution and API
@@ -50,6 +51,7 @@ import org.yakindu.base.types.validation.TypesJavaValidator
 class ExpressionsValidator extends AbstractExpressionsValidator implements IValidationIssueAcceptor {
 
 	@Inject ITypeSystemInferrer typeInferrer
+	@Inject TypeValidator typeValidator
 
 	@Check
 	def void checkExpression(Expression expression) {
@@ -253,6 +255,9 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 				referencedObject = expression.getReference()
 			if (referencedObject instanceof Property) {
 				if (!referencedObject.isConst()) {
+					if(typeValidator.isAnyType(referencedObject.type)) {
+						return
+					}
 					error(REFERENCE_TO_VARIABLE, TypesPackage.Literals.PROPERTY__INITIAL_VALUE)
 				}
 			}
