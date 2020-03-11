@@ -30,6 +30,10 @@ class StatechartUtil {
 		false
 	}
 	
+	def dispatch isOriginStatechart(Void it) {
+		false
+	}
+	
 	def isMultiSM(EObject it) {
 		isOriginStatechart || isOriginScope
 	}

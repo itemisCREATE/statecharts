@@ -44,6 +44,9 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.types.TypedDeclaration
+import org.yakindu.base.base.NamedElement
 
 class StructureMapping {
 	 
@@ -53,6 +56,7 @@ class StructureMapping {
 	@Inject extension StatechartUtil
 	@Inject extension OriginTracing
 	@Inject extension ExpressionBuilder
+	@Inject extension ExpressionExtensions
 	
 	
 	//==========================================================================
@@ -251,43 +255,49 @@ class StructureMapping {
 	//
 	
 	/** creates shadow variables for referenced machines' out events */
-	def mapReferencedMachineOutEvents(Statechart statechart, ExecutionFlow r) {
-		var machineMembers = statechart.scopes.map[declarations].flatten.filter(VariableDefinition).filter [
-			type.isOriginStatechart
-		]
-
-		machineMembers.forEach [ m |
-			var machine = m.type.getOriginStatechart
-			machine.allScopesWithOutEvents.forEach [ scope, outEvents |
-				outEvents.forEach [ e |
-					val shadowEvent = StextFactory.eINSTANCE.createEventDefinition => [
-						name = shadowEventName(e, m)
-						direction = Direction.IN
-						typeSpecifier = EcoreUtil.copy(e.typeSpecifier)
-						traceOrigin(e)
-					]
-					r.shadowMemberScope.members += shadowEvent
-					
-					retargetOutEventRefs(e, shadowEvent, r)
-				]
-			]
-		]
-		return r
-	}
-	
-	protected def shadowEventName(Event oe, VariableDefinition v) {
-		v.name + "_" + oe.fullyQualifiedName
-	} 
-	
-	/** retargets all references of referenced machines' out events to new shadow events */
-	protected def retargetOutEventRefs(Event originalEvent, Event shadowEvent, ExecutionFlow flow) {
+	def mapReferencedMachineOutEvents(Statechart statechart, ExecutionFlow flow) {
+		// get all references to out events of submachines
 		val allContent = EcoreUtil2::eAllContentsAsList(flow)
-		var outEventRefs = allContent.filter(FeatureCall).filter[feature.originTraces.contains(originalEvent)]
-		outEventRefs.forEach[ref|EcoreUtil.replace(ref, shadowEvent._ref)]
+		val allFeatureCalls = allContent.filter(FeatureCall)
+		val outEventCalls = allFeatureCalls.filter[feature instanceof Event && (feature as Event).direction == Direction.OUT]
+		val submachineOutEventCalls = outEventCalls.filter[toCallStack.exists[featureOrReference.isStatechartRef]]
+		
+		submachineOutEventCalls.forEach[fc |
+			val submachineMember = fc.toCallStack.map[featureOrReference].findFirst[isStatechartRef]
+			val outEvent = fc.feature as Event
+			val shadowEventName = fc.shadowEventName
+			val shadowEvent = createShadowEvent(shadowEventName, outEvent, flow)
+			// trace to statechart event, not the one in the statechart type
+			shadowEvent.traceOrigin(outEvent.originTraces.filter(Event).head)
+			// also trace to submachine member, so we can properly trace back later based on (member, event)
+			shadowEvent.traceOrigin(submachineMember)
+			// retarget feature call to new shadow event
+			EcoreUtil.replace(fc, shadowEvent._ref)
+		]
+	}
+	
+	protected def dispatch isStatechartRef(EObject it) {
+		false
+	}
+	
+	protected def dispatch isStatechartRef(TypedDeclaration it) {
+		type.isOriginStatechart
+	}
+	
+	protected def shadowEventName(FeatureCall fc) {
+		fc.toCallStack.map[featureOrReference].filter(NamedElement).map[name].join("_")
+	}
+	
+	protected def create StextFactory.eINSTANCE.createEventDefinition createShadowEvent(String shadowEventName, Event originEvent, ExecutionFlow flow) {
+		name = shadowEventName
+		direction = Direction.IN
+		typeSpecifier = EcoreUtil.copy(originEvent.typeSpecifier)
+		
+		flow.shadowMemberScope.members += it
 	}
 
-	protected def Scope create s : StextFactory.eINSTANCE.createInternalScope shadowMemberScope(ExecutionFlow flow) {
-		flow.scopes += s
+	protected def Scope create StextFactory.eINSTANCE.createInternalScope shadowMemberScope(ExecutionFlow flow) {
+		flow.scopes += it
 	}
 	
 }

@@ -14,24 +14,21 @@ package org.yakindu.sct.generator.java.submodules
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.Synchronized
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import java.util.List
-import com.google.common.collect.Lists
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.generator.java.GeneratorPredicate
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 
 /**
  * @author BeckmaR
@@ -58,7 +55,7 @@ class VariableCode {
 			«fieldDeclaration»
 			
 		«ENDIF»
-		«IF type.isOriginStatechart»
+		«IF needsShadowEventMapping»
 			«submachineInterfaceListeners»
 			
 		«ENDIF»
@@ -79,71 +76,89 @@ class VariableCode {
 		«ENDIF»
 	'''
 	
+	protected def needsShadowEventMapping(VariableDefinition member) {
+		member.type.isOriginStatechart && !member.shadowEvents.nullOrEmpty
+	}
+
+	protected def getShadowEvents(VariableDefinition member) {
+		member.flow.shadowEvents.filter[originTraces.contains(member)]
+	}
+	
+	protected def shadowEvent(VariableDefinition member, Event originalEvent) {
+		member.shadowEvents.findFirst[originTraces.contains(originalEvent)]
+	}
+
+	protected def getShadowEvents(ExecutionFlow flow) {
+		var internalEvents = flow.scopes.filter(InternalScope).map[members].flatten.filter(Event)
+		// in events in internal scope => must be a shadow event
+		internalEvents.filter[direction == Direction.IN]
+	}
+
+	protected def getShadowEventsByScope(VariableDefinition member) {
+		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
+	}
+
 	protected def setterContent(VariableDefinition it) {
 		'''
-			«IF type.isOriginStatechart && !type.getOriginStatechart.scopesWithOutEvents.isEmpty»
+			«IF needsShadowEventMapping»
 				if (this.«identifier» != null) {
-					«FOR submachineScope : type.getOriginStatechart.scopesWithOutEvents»
+					«FOR submachineScope : shadowEventsByScope.keySet»
 						this.«identifier».get«submachineScope.interfaceName»().getListeners().remove(«identifier»_«submachineScope.getInterfaceListenerName»);
 					«ENDFOR»
 				}
 				
 			«ENDIF»
 			this.«identifier» = value;
-			«IF type.isOriginStatechart && !type.getOriginStatechart.scopesWithOutEvents.isEmpty»
+			«IF needsShadowEventMapping»
 				
 				if (this.«identifier» != null) {
-					«FOR submachineScope : type.getOriginStatechart.scopesWithOutEvents»
+					«FOR submachineScope : shadowEventsByScope.keySet»
 						this.«identifier».get«submachineScope.interfaceName»().getListeners().add(«identifier»_«submachineScope.getInterfaceListenerName»);
 					«ENDFOR»
 				}
 			«ENDIF»
 		'''
 	}
-	
-	protected def scopesWithOutEvents(Statechart submachine) {
-		submachine.scopes.filter(InterfaceScope).filter[eventDefinitions.exists[direction == Direction.OUT]]
+
+	protected def submachineInterfaceListeners(VariableDefinition member) {
+		member.shadowEventsByScope.keySet.map[scope|submachineInterfaceListener(member, scope)].join
 	}
-	
-	protected def submachineInterfaceListeners(VariableDefinition it) {
-		var subchart = type.getOriginStatechart
-		val List<CharSequence> listeners = Lists.newArrayList 
-		subchart.allScopesWithOutEvents.forEach[scope, outEvents |
-			listeners += submachineInterfaceListener(it, scope, outEvents);
-		]
-		return listeners.join
-	}
-	
-	protected def submachineInterfaceListener(VariableDefinition it, InterfaceScope scope, Iterable<Event> outEvents) {
+
+	protected def submachineInterfaceListener(VariableDefinition it, InterfaceScope scope) {
 		var subchart = type.getOriginStatechart
 		'''
-		private «subchart.statemachineInterfaceName».«scope.interfaceListenerName» «identifier»_«scope.interfaceListenerName» = new «subchart.statemachineInterfaceName».«scope.interfaceListenerName»() {
-			«FOR outEvent : outEvents»
-			«submachineOutEventHandler(outEvent, flow)»
-			«ENDFOR»
-		};
+			private «subchart.statemachineInterfaceName».«scope.interfaceListenerName» «identifier»_«scope.interfaceListenerName» = new «subchart.statemachineInterfaceName».«scope.interfaceListenerName»() {
+				«FOR outEvent : scope.outgoingEvents»
+					«submachineOutEventHandler(outEvent)»
+				«ENDFOR»
+			};
 		'''
 	}
 	
-	protected def submachineOutEventHandler(Event outEvent, ExecutionFlow flow) {
+	protected def submachineOutEventHandler(VariableDefinition member, Event outEvent) {
+		var shadowEvent = shadowEvent(member, outEvent)
 		'''
-		@Override
-		«IF outEvent.type !== null && !isVoid(outEvent.type)»
-			public void on«outEvent.name.toFirstUpper()»Raised(«outEvent.typeSpecifier.targetLanguageName» value) {
-				raise«outEvent.shadowEvent(flow).name.asName»(value);
-			}
-		«ELSE»
-			public void on«outEvent.name.toFirstUpper()»Raised() {
-				raise«outEvent.shadowEvent(flow).name.asName»();
-			}
-		«ENDIF»	
+			@Override
+			«IF outEvent.type !== null && !isVoid(outEvent.type)»
+				public void on«outEvent.name.toFirstUpper()»Raised(«outEvent.typeSpecifier.targetLanguageName» value) {
+					«IF shadowEvent !== null»
+						raise«shadowEvent.name.asName»(value);
+					«ELSE»
+						// nothing to do
+					«ENDIF»
+				}
+			«ELSE»
+				public void on«outEvent.name.toFirstUpper()»Raised() {
+					«IF shadowEvent !== null»
+						raise«shadowEvent.name.asName»();
+					«ELSE»
+						// nothing to do
+					«ENDIF»
+				}
+			«ENDIF»	
 		'''
 	}
-	
-	protected def shadowEvent(Event originalEvent, ExecutionFlow flow) {
-		flow.scopes.filter(InternalScope).map[declarations].flatten.filter(Event).findFirst[originTraces.contains(originalEvent)]
-	}
-	
+
 	protected def needsPublicGetter(VariableDefinition it) {
 		switch(eContainer) {
 			InternalScope: false
