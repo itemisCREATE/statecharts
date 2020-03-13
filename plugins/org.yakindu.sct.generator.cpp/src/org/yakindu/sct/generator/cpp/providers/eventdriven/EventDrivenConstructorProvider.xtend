@@ -27,7 +27,7 @@ class EventDrivenConstructorProvider extends ConstructorProvider {
 		val ifaceInstances = interfaces.map[instance].toList
 		toInit.replaceAll[ p |
 			if(ifaceInstances.contains(p.key)) {
-				pair(p.key, "this")
+				pair(p.key, "sc_null")
 			} else {
 				p
 			}
@@ -37,4 +37,16 @@ class EventDrivenConstructorProvider extends ConstructorProvider {
 		}
 		toInit
 	}
+	
+	override protected constructorBody(ExecutionFlow it) {
+		var toConstructorBody = super.constructorBody(it)
+		val ifaceInstances = interfaces.map[instance].toList
+		val ifaceInitialization = '''
+			«FOR ifaceInstance : ifaceInstances»
+				«ifaceInstance» = this;
+			«ENDFOR»
+		'''
+		toConstructorBody + ifaceInitialization
+	}
+	
 }
