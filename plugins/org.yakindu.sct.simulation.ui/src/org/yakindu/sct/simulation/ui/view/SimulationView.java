@@ -213,8 +213,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	protected void setExecutionContextInput(Object input) {
-		if (viewerRefresher == null)
+		if (viewerRefresher == null) {
 			this.viewerRefresher = new ViewerRefresher();
+			this.viewerRefresher.setCancel(true);
+		}
 
 		Display.getDefault().asyncExec(() -> {
 			if (input == null) {
