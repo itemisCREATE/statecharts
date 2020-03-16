@@ -4,6 +4,7 @@ package org.yakindu.scr.ckeywords;
 import org.yakindu.scr.IStatemachine;
 
 public interface ICKeywordsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseAuto();

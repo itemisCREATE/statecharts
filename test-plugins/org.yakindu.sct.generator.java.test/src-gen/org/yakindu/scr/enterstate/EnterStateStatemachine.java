@@ -245,20 +245,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		}
 	}
 	
-	/* Default exit sequence for region r */
-	private void exitSequence_r_B_r() {
-		switch (stateVector[0]) {
-		case r_B_r_E:
-			exitSequence_r_B_r_E();
-			break;
-		case r_B_r_F:
-			exitSequence_r_B_r_F();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_r__entry_Default() {
 		enterSequence_r_A_default();

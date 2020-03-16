@@ -4,6 +4,7 @@ package org.yakindu.scr.guardedentry;
 import org.yakindu.scr.IStatemachine;
 
 public interface IGuardedEntryStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

@@ -4,6 +4,7 @@ package org.yakindu.scr.shadowvalueparameter;
 import org.yakindu.scr.IStatemachine;
 
 public interface IShadowValueParameterStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public long getValue();

@@ -4,6 +4,7 @@ package org.yakindu.scr.floatmodulo;
 import org.yakindu.scr.IStatemachine;
 
 public interface IFloatModuloStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public double getR();
@@ -17,6 +18,7 @@ public interface IFloatModuloStatemachine extends IStatemachine {
 	}
 	
 	public SCInterface getSCInterface();
+	
 	
 	public interface SCIA {
 	

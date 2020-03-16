@@ -114,7 +114,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunningCycle = false;
+	private boolean isRunning = false;
 	private boolean h;
 	public InEventQueueStatemachine() {
 		sCInterface = new SCInterfaceImpl();
@@ -141,7 +141,9 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
+		isRunning = true;
 		enterSequence_InEventQueue_main_region_default();
+		isRunning = false;
 	}
 	
 	public void runCycle() {
@@ -149,10 +151,10 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		
-		if (isRunningCycle) {
+		if (isRunning) {
 			return;
 		}
-		isRunningCycle = true;
+		isRunning = true;
 		
 		clearOutEvents();
 	
@@ -167,7 +169,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			task = getNextEvent();
 		}
 		
-		isRunningCycle = false;
+		isRunning = false;
 	}
 	
 	protected void singleCycle() {
@@ -211,7 +213,9 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	}
 	
 	public void exit() {
+		isRunning = true;
 		exitSequence_InEventQueue_main_region();
+		isRunning = false;
 	}
 	
 	/**

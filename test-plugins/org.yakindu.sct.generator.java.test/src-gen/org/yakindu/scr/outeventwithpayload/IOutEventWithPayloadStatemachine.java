@@ -4,6 +4,7 @@ package org.yakindu.scr.outeventwithpayload;
 import org.yakindu.scr.IStatemachine;
 
 public interface IOutEventWithPayloadStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseI(long value);

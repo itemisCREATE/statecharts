@@ -416,17 +416,6 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		}
 	}
 	
-	/* Default exit sequence for region r */
-	private void exitSequence_ParentFirstExecutionHierarchy_r_A_r_AA_r() {
-		switch (stateVector[0]) {
-		case parentFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-			exitSequence_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_ParentFirstExecutionHierarchy_r__entry_Default() {
 		enterSequence_ParentFirstExecutionHierarchy_r_A_default();

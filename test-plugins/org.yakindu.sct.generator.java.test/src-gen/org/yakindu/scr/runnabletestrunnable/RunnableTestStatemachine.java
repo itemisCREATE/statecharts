@@ -183,7 +183,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	private final boolean[] timeEvents = new boolean[3];
 	
 	private BlockingQueue<Runnable> inEventQueue = new LinkedBlockingQueue<Runnable>();
-	private boolean isRunningCycle = false;
+	private boolean isRunning = false;
 	public RunnableTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -220,9 +220,11 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+		isRunning = true;
 		timer.setTimer(this, 2, (1 * 1000), true);
 		
 		enterSequence_RunnableTest_main_region_default();
+		isRunning = false;
 	}
 	
 	public synchronized void runCycle() {
@@ -230,10 +232,10 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		
-		if (isRunningCycle) {
+		if (isRunning) {
 			return;
 		}
-		isRunningCycle = true;
+		isRunning = true;
 		
 		clearOutEvents();
 	
@@ -248,7 +250,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			task = getNextEvent();
 		}
 		
-		isRunningCycle = false;
+		isRunning = false;
 	}
 	
 	protected synchronized void singleCycle() {
@@ -286,8 +288,10 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	}
 	
 	public synchronized void exit() {
+		isRunning = true;
 		exitSequence_RunnableTest_main_region();
 		timer.unsetTimer(this, 2);
+		isRunning = false;
 	}
 	
 	/**

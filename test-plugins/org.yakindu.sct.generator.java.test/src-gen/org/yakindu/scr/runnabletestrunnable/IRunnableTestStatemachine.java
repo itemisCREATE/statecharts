@@ -10,6 +10,7 @@ import org.yakindu.scr.IStatemachine;
 import org.yakindu.scr.ITimerCallback;
 
 public interface IRunnableTestStatemachine extends ITimerCallback,IStatemachine {
+	
 	public interface SCInterface {
 	
 		public boolean isRaisedEv_out();
@@ -34,15 +35,14 @@ public interface IRunnableTestStatemachine extends ITimerCallback,IStatemachine 
 		
 		public void setS2_entered(long value);
 		
-	public List<SCInterfaceListener> getListeners();
+		public List<SCInterfaceListener> getListeners();
 		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
-	
 	}
 	
 	public interface SCInterfaceListener {
 	
 		public void onEv_outRaised(long value);
-		}
+	}
 	
 	public interface SCInterfaceOperationCallback {
 	

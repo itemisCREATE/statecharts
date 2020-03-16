@@ -4,6 +4,7 @@ package org.yakindu.scr.cyclebasedsuperstep;
 import org.yakindu.scr.IStatemachine;
 
 public interface ICycleBasedSuperStepStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

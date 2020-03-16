@@ -4,6 +4,7 @@ package org.yakindu.scr.alwaysoncycle;
 import org.yakindu.scr.IStatemachine;
 
 public interface IAlwaysOncycleStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

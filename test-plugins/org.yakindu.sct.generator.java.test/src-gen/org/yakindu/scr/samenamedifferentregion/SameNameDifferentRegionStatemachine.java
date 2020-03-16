@@ -206,20 +206,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		}
 	}
 	
-	/* Default exit sequence for region r1 */
-	private void exitSequence_main_region_StateB_r1() {
-		switch (stateVector[0]) {
-		case main_region_StateB_r1_StateA:
-			exitSequence_main_region_StateB_r1_StateA();
-			break;
-		case main_region_StateB_r1_StateB:
-			exitSequence_main_region_StateB_r1_StateB();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();

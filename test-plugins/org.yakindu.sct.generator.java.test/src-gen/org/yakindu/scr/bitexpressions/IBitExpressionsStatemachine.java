@@ -4,6 +4,7 @@ package org.yakindu.scr.bitexpressions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IBitExpressionsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE1();

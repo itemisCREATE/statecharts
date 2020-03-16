@@ -6,6 +6,7 @@ import org.yakindu.scr.IStatemachine;
 import org.yakindu.scr.ITimerCallback;
 
 public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatemachine {
+	
 	public interface SCIIf {
 	
 		public boolean isRaisedOperationCallback();
@@ -32,16 +33,15 @@ public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatema
 		
 		public void setRunCycle(long value);
 		
-	public List<SCIIfListener> getListeners();
+		public List<SCIIfListener> getListeners();
 		public void setSCIIfOperationCallback(SCIIfOperationCallback operationCallback);
-	
 	}
 	
 	public interface SCIIfListener {
 	
 		public void onOperationCallbackRaised();
 		public void onListenersRaised();
-		}
+	}
 	
 	public interface SCIIfOperationCallback {
 	

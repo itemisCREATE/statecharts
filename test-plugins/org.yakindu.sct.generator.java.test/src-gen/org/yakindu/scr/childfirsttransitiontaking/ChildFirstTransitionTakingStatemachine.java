@@ -604,42 +604,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r() {
-		switch (stateVector[2]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA();
-			break;
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB();
-			break;
-		case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_CBA();
-			break;
-		default:
-			break;
-		}
-		
-		switch (stateVector[3]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB();
-			break;
-		case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_CBB();
-			break;
-		default:
-			break;
-		}
-		
-		switch (stateVector[4]) {
-		case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_CBC();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r */
 	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r() {
 		switch (stateVector[2]) {
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:

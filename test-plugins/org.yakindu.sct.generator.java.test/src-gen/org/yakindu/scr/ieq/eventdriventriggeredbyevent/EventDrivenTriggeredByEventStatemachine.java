@@ -59,7 +59,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	private final boolean[] timeEvents = new boolean[1];
 	
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunningCycle = false;
+	private boolean isRunning = false;
 	public EventDrivenTriggeredByEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -86,7 +86,9 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+		isRunning = true;
 		enterSequence_EventDrivenTriggeredByEvent_main_region_default();
+		isRunning = false;
 	}
 	
 	public void runCycle() {
@@ -94,10 +96,10 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		
-		if (isRunningCycle) {
+		if (isRunning) {
 			return;
 		}
-		isRunningCycle = true;
+		isRunning = true;
 		
 		clearOutEvents();
 	
@@ -112,7 +114,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			task = getNextEvent();
 		}
 		
-		isRunningCycle = false;
+		isRunning = false;
 	}
 	
 	protected void singleCycle() {
@@ -147,7 +149,9 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	}
 	
 	public void exit() {
+		isRunning = true;
 		exitSequence_EventDrivenTriggeredByEvent_main_region();
+		isRunning = false;
 	}
 	
 	/**
