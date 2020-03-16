@@ -260,7 +260,7 @@ class StructureMapping {
 		val allContent = EcoreUtil2::eAllContentsAsList(flow)
 		val allFeatureCalls = allContent.filter(FeatureCall)
 		val outEventCalls = allFeatureCalls.filter[feature instanceof Event && (feature as Event).direction == Direction.OUT]
-		val submachineOutEventCalls = outEventCalls.filter[toCallStack.exists[featureOrReference.isStatechartRef]]
+		val submachineOutEventCalls = outEventCalls.filter[isCallOnStatechartMember(it, statechart)]
 		
 		submachineOutEventCalls.forEach[fc |
 			val submachineMember = fc.toCallStack.map[featureOrReference].findFirst[isStatechartRef]
@@ -274,6 +274,26 @@ class StructureMapping {
 			// retarget feature call to new shadow event
 			EcoreUtil.replace(fc, shadowEvent._ref)
 		]
+	}
+	
+	/**
+	 * Returns true if the feature call is on a statechart reference which is a direct member of the given statechart, e.g.
+	 * <br><br>
+	 * <code>submachine.outEvent</code> or 
+	 * <br>
+	 * <code>submachine.Iface.outEvent</code>.
+	 * <br>
+	 * Returns false otherwise, especially when the owner is not a direct member of the given statechart, e.g.
+	 * <br><br>
+	 * <code>submachine1.submachine2.outEvent</code>.
+	 * 
+	 */
+	protected def isCallOnStatechartMember(FeatureCall it, Statechart statechart) {
+		val statechartRefs = toCallStack.map[featureOrReference].filter[isStatechartRef]
+		if (statechartRefs.size !== 1) return false
+		
+		val statechartContainer = EcoreUtil2.getContainerOfType(statechartRefs.head, ExecutionFlow)?.sourceElement
+		return (statechartContainer !== null && statechart == statechartContainer)
 	}
 	
 	protected def dispatch isStatechartRef(EObject it) {
