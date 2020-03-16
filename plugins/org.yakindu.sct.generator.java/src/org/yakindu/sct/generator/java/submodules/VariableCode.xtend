@@ -12,17 +12,15 @@
 package org.yakindu.sct.generator.java.submodules
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
-import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.Synchronized
-import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
@@ -43,7 +41,7 @@ class VariableCode {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension StatechartAnnotations
 	@Inject protected extension GeneratorPredicate
-	@Inject protected extension OriginTracing
+	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension StatechartExtensions
 	
 	def fieldDeclaration(VariableDefinition variable) '''
@@ -78,24 +76,6 @@ class VariableCode {
 	
 	protected def needsShadowEventMapping(VariableDefinition member) {
 		member.type.isOriginStatechart && !member.shadowEvents.nullOrEmpty
-	}
-
-	protected def getShadowEvents(VariableDefinition member) {
-		member.flow.shadowEvents.filter[originTraces.contains(member)]
-	}
-	
-	protected def shadowEvent(VariableDefinition member, Event originalEvent) {
-		member.shadowEvents.findFirst[originTraces.contains(originalEvent)]
-	}
-
-	protected def getShadowEvents(ExecutionFlow flow) {
-		var internalEvents = flow.scopes.filter(InternalScope).map[members].flatten.filter(Event)
-		// in events in internal scope => must be a shadow event
-		internalEvents.filter[direction == Direction.IN]
-	}
-
-	protected def getShadowEventsByScope(VariableDefinition member) {
-		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
 	}
 
 	protected def setterContent(VariableDefinition it) {
@@ -136,7 +116,7 @@ class VariableCode {
 	}
 	
 	protected def submachineOutEventHandler(VariableDefinition member, Event outEvent) {
-		var shadowEvent = shadowEvent(member, outEvent)
+		var shadowEvent = member.getShadowEvent(outEvent)
 		'''
 			@Override
 			«IF outEvent.type !== null && !isVoid(outEvent.type)»

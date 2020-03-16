@@ -19,17 +19,19 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
@@ -42,11 +44,7 @@ import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.expressions.util.ExpressionExtensions
-import org.yakindu.base.types.TypedDeclaration
-import org.yakindu.base.base.NamedElement
 
 class StructureMapping {
 	 
@@ -54,9 +52,9 @@ class StructureMapping {
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
 	@Inject extension StatechartUtil
-	@Inject extension OriginTracing
 	@Inject extension ExpressionBuilder
 	@Inject extension ExpressionExtensions
+	@Inject extension ShadowEventExtensions
 	
 	
 	//==========================================================================
@@ -263,14 +261,11 @@ class StructureMapping {
 		val submachineOutEventCalls = outEventCalls.filter[isCallOnStatechartMember(it, statechart)]
 		
 		submachineOutEventCalls.forEach[fc |
-			val submachineMember = fc.toCallStack.map[featureOrReference].findFirst[isStatechartRef]
+			val submachineMember = fc.statechartRefs.head
 			val outEvent = fc.feature as Event
 			val shadowEventName = fc.shadowEventName
-			val shadowEvent = createShadowEvent(shadowEventName, outEvent, flow)
-			// trace to statechart event, not the one in the statechart type
-			shadowEvent.traceOrigin(outEvent.originTraces.filter(Event).head)
-			// also trace to submachine member, so we can properly trace back later based on (member, event)
-			shadowEvent.traceOrigin(submachineMember)
+			val shadowEvent = createShadowEvent(shadowEventName, submachineMember, outEvent, flow)
+
 			// retarget feature call to new shadow event
 			EcoreUtil.replace(fc, shadowEvent._ref)
 		]
@@ -289,11 +284,14 @@ class StructureMapping {
 	 * 
 	 */
 	protected def isCallOnStatechartMember(FeatureCall it, Statechart statechart) {
-		val statechartRefs = toCallStack.map[featureOrReference].filter[isStatechartRef]
 		if (statechartRefs.size !== 1) return false
 		
 		val statechartContainer = EcoreUtil2.getContainerOfType(statechartRefs.head, ExecutionFlow)?.sourceElement
 		return (statechartContainer !== null && statechart == statechartContainer)
+	}
+	
+	protected def getStatechartRefs(FeatureCall it) {
+		toCallStack.map[featureOrReference].filter(VariableDefinition).filter[isStatechartRef]
 	}
 	
 	protected def dispatch isStatechartRef(EObject it) {
@@ -302,22 +300,6 @@ class StructureMapping {
 	
 	protected def dispatch isStatechartRef(TypedDeclaration it) {
 		type.isOriginStatechart
-	}
-	
-	protected def shadowEventName(FeatureCall fc) {
-		fc.toCallStack.map[featureOrReference].filter(NamedElement).map[name].join("_")
-	}
-	
-	protected def create StextFactory.eINSTANCE.createEventDefinition createShadowEvent(String shadowEventName, Event originEvent, ExecutionFlow flow) {
-		name = shadowEventName
-		direction = Direction.IN
-		typeSpecifier = EcoreUtil.copy(originEvent.typeSpecifier)
-		
-		flow.shadowMemberScope.members += it
-	}
-
-	protected def Scope create StextFactory.eINSTANCE.createInternalScope shadowMemberScope(ExecutionFlow flow) {
-		flow.scopes += it
 	}
 	
 }
