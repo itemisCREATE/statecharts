@@ -605,28 +605,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 		}
 	}
 	
-	/* Default exit sequence for region r */
-	private void exitSequence_ParentFirstOrthogonalReactions_r_A_r_AA_r() {
-		switch (stateVector[0]) {
-		case parentFirstOrthogonalReactions_r_A_r_AA_r_AAA:
-			exitSequence_ParentFirstOrthogonalReactions_r_A_r_AA_r_AAA();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region  */
-	private void exitSequence_ParentFirstOrthogonalReactions_r_A_r_AA__region1() {
-		switch (stateVector[1]) {
-		case parentFirstOrthogonalReactions_r_A_r_AA__region1_AAC:
-			exitSequence_ParentFirstOrthogonalReactions_r_A_r_AA__region1_AAC();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default exit sequence for region r2 */
 	private void exitSequence_ParentFirstOrthogonalReactions_r_A_r2() {
 		switch (stateVector[2]) {
