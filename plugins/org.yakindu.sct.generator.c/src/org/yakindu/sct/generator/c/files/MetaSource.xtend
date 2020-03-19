@@ -20,14 +20,14 @@ class MetaSource implements IContentTemplate {
 		
 		#include "«(flow.metaModule.h).relativeTo(flow.metaModule.c)»"				
 				
-		«CGeneratorConstants::STRING_TYPE» feature_names[] = {
+		«CGeneratorConstants::STRING_TYPE» «flow.name.toFirstUpper»Meta_feature_names[] = {
 			"<nothing>",
 			«FOR feature : flow.scopes.map[it | it.declarations].flatten.reject(TimeEvent) SEPARATOR ","»
 			"«feature.name»"
 			«ENDFOR»
 		};
 		
-		«CGeneratorConstants::STRING_TYPE» state_names[] = {
+		«CGeneratorConstants::STRING_TYPE» «flow.name.toFirstUpper»Meta_state_names[] = {
 			"<nostate>",
 			«FOR state : flow.states SEPARATOR ","»
 			"«state.name.removePrefix»"

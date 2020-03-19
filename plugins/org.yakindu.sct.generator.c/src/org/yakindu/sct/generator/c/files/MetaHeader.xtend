@@ -26,9 +26,9 @@ class MetaHeader implements IContentTemplate {
 		extern "C" {
 		#endif
 		
-		extern «CGeneratorConstants::STRING_TYPE» feature_names[];
+		extern «CGeneratorConstants::STRING_TYPE» «flow.name.toFirstUpper»Meta_feature_names[];
 		
-		extern «CGeneratorConstants::STRING_TYPE» state_names[];
+		extern «CGeneratorConstants::STRING_TYPE» «flow.name.toFirstUpper»Meta_state_names[];
 		
 		#ifdef __cplusplus
 		}
