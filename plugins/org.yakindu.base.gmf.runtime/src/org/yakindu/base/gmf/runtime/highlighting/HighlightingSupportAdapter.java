@@ -164,7 +164,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 				lockEditorInternal();
 			}
 		});
-		executeSync(singletonList);
+		executeAsync(singletonList);
 	}
 
 	private void lockEditorInternal() {
@@ -201,7 +201,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 				releaseInternal();
 			}
 		});
-		executeSync(singletonList);
+		executeAsync(singletonList);
 	}
 
 	protected void releaseInternal() {
@@ -261,18 +261,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (actions != null) {
 
 			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
-					for (Action a : actions) {
-						a.execute(HighlightingSupportAdapter.this);
-					}
-				}
-			});
-		}
-	}
-	protected void executeSync(final List<Action> actions) {
-		if (actions != null) {
-
-			Display.getDefault().syncExec(new Runnable() {
 				public void run() {
 					for (Action a : actions) {
 						a.execute(HighlightingSupportAdapter.this);
