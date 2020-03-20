@@ -545,7 +545,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 									&& !debugTarget.isTerminated()) {
 								ISimulationEngine engine = debugTarget.getLaunch().getDebugTarget()
 										.getAdapter(ISimulationEngine.class);
-								clock.updateTimestamp(engine.getTimeTaskScheduler().getCurrentTime());
+								if (engine.getTimeTaskScheduler() != null) {
+									clock.updateTimestamp(engine.getTimeTaskScheduler().getCurrentTime());
+								}
 							}
 						}
 					});
