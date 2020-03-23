@@ -29,7 +29,7 @@ import org.yakindu.base.expressions.expressions.ArgumentExpression
 /**
  * 
  * @author andreas muelder - Initial contribution and API 
- * @authos axel terfloth - additions
+ * @author axel terfloth - additions
  * 
  */
 class StextExpressionInterpreter extends DefaultExpressionInterpreter {

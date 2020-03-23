@@ -168,8 +168,8 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 				ExecutionEvent event = (ExecutionEvent) notification.getNotifier();
 				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
 					if (notification.getNewBooleanValue() && event.getDirection() == Direction.OUT) {
-						// we have an out event => check if there is a parent execution context that
-						// contains a shadow event
+						// an out event was raised => check if there is a parent execution context that
+						// contains a corresponding shadow event
 						ExecutionContext thisContext = interpreter.getExecutionContext();
 						if (thisContext.getName() == null || thisContext.getName().isEmpty()) {
 							return;
@@ -179,22 +179,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 						if (parentContext == null) {
 							return;
 						}
-						
-						List<String> shadowEventFqn = Lists.newArrayList();
-						shadowEventFqn.add(event.getName());
-						for (EObject container : EcoreUtil2.getAllContainers(event)) {
-							if (container == parentContext) break;
-							
-							if (container instanceof CompositeSlot) {
-								CompositeSlot slot = (CompositeSlot) container;
-								if (!slot.getName().isEmpty() && !slot.getName().equals("default")) {
-									shadowEventFqn.add(0, slot.getName());
-								}
-							}
-						}
-						
-						String shadowEventName = String.join("_", shadowEventFqn);
-						ExecutionEvent shadowEvent = parentContext.getEvent(shadowEventName);
+						ExecutionEvent shadowEvent = findShadowEvent(event, parentContext);
 						if (shadowEvent == null) {
 							return;
 						}
@@ -207,6 +192,23 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 					}
 				}
 			}
+		}
+
+		protected ExecutionEvent findShadowEvent(ExecutionEvent event, ExecutionContext parentContext) {
+			List<String> shadowEventFqn = Lists.newArrayList();
+			shadowEventFqn.add(event.getName());
+			for (EObject container : EcoreUtil2.getAllContainers(event)) {
+				if (container == parentContext) break;
+				
+				if (container instanceof CompositeSlot) {
+					CompositeSlot slot = (CompositeSlot) container;
+					if (!slot.getName().isEmpty() && !slot.getName().equals("default")) {
+						shadowEventFqn.add(0, slot.getName());
+					}
+				}
+			}
+			String shadowEventName = String.join("_", shadowEventFqn);
+			return parentContext.getEvent(shadowEventName);
 		}
 
 		@Override
