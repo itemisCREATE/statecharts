@@ -43,7 +43,7 @@ class EventDrivenConstructorProvider extends ConstructorProvider {
 		val ifaceInstances = interfaces.map[instance].toList
 		val ifaceInitialization = '''
 			«FOR ifaceInstance : ifaceInstances»
-				«ifaceInstance» = this;
+				this->«ifaceInstance».parent = this;
 			«ENDFOR»
 		'''
 		toConstructorBody + ifaceInitialization
