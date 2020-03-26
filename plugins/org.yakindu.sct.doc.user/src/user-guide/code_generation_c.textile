@@ -601,7 +601,7 @@ The *Tracing* feature enables the generation of tracing callback functions:
 
 * _enterState_ (boolean, optional): Specifies whether to generate a callback function that is used to notify about state-entering events.
 * _exitState_ (boolean, optional): Specifies whether to generate a callback that is used to notify about state-exiting events.
-* _generic_ (boolean, optional): Specifies whether to generate callbacks that are used to notify about any changes.
+* _generic_ (boolean, optional): Specifies whether to generate callbacks that are used to notify about any changes. These can be implemented manually or by the Yet Tracer.
 
 ==<div class="example">==
 
