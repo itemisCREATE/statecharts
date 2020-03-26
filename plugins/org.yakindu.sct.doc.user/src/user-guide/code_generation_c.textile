@@ -601,7 +601,7 @@ The *Tracing* feature enables the generation of tracing callback functions:
 
 * _enterState_ (boolean, optional): Specifies whether to generate a callback function that is used to notify about state-entering events.
 * _exitState_ (boolean, optional): Specifies whether to generate a callback that is used to notify about state-exiting events.
-* _generic_ (boolean, optional): Specifies whether to generate callbacks that are used to notify about all changes.
+* _generic_ (boolean, optional): Specifies whether to generate callbacks that are used to notify about any changes.
 
 ==<div class="example">==
 
@@ -619,7 +619,7 @@ bc. feature Tracing {
 
 h4(#codegen_c_yet_generator). Yet Tracer
 
-The *Yet Tracer* is a C generator extension, which allows the use of the *Statechart Tracing*. The generated C code implements the callback funtions, which fit into the generated architecture of the generic tracing feature. To use the Yet Tracer, please also enable a generic Tracing feature.
+The *Yet Tracer* is a C generator extension, which allows the use of the *Yet Tracing* run option. The generated C code implements the callback funtions, which fit into the generated architecture of the generic tracing feature. To use the Yet Tracer, please also supply a C generator with generic Tracing feature enabled.
 
 bc. GeneratorModel for yakindu::c::yet {
 	...
