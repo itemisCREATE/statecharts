@@ -441,10 +441,7 @@ There are some constraints that have to be considered for the implementation of 
 	- make sure that the execution time is as short as possible.
  
 */
-extern sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_integer p1, const sc_boolean p2);
-
-
-
+extern sc_integer defaultSMIfaceSample_myOperation(const DefaultSM* handle, const sc_integer p1, const sc_boolean p2);
 
 #ifdef __cplusplus
 }
