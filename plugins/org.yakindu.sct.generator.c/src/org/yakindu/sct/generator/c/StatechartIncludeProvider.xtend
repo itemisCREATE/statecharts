@@ -29,7 +29,7 @@ class StatechartIncludeProvider implements IncludeProvider {
 			val resource = set.getResource(import.fileURI, true)
 			val submachine = resource.contents.filter(Statechart).head
 			if(submachine instanceof Statechart) {
-				sctImports += '''#include "«import.name.replace(".sct", "")»«IF submachine.hasOperations»Required«ENDIF».h"'''
+				sctImports += '''#include "«submachine.name.toFirstUpper»«IF submachine.hasOperations»Required«ENDIF».h"'''
 			}
 		]
 		return sctImports
