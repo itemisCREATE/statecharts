@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.base.gmf.runtime"
       label="GMF Runtime"
-      version="3.5.10.qualifier"
+      version="3.5.11.qualifier"
       provider-name="itemis AG">
 
    <description>
