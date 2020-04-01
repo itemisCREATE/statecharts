@@ -413,10 +413,10 @@ class DefaultNamingService implements INamingService {
 	
 	def private skipFirst(QualifiedName name, int skipCount) {
 		if(activeFlow !== null) {
-			return activeFlow.statechart.namespace === null ? name.skipFirst(skipCount) : name.skipFirst(skipCount + 1)
+			return if (activeFlow.statechart.namespace === null) name.skipFirst(skipCount) else name.skipFirst(skipCount + 1)
 		}
 		if(activeStatechart !== null ) {
-			return activeStatechart.namespace === null ? name.skipFirst(skipCount) : name.skipFirst(skipCount + 1)
+			return if (activeStatechart.namespace === null) name.skipFirst(skipCount) else name.skipFirst(skipCount + 1)
 		}
 	}
 
