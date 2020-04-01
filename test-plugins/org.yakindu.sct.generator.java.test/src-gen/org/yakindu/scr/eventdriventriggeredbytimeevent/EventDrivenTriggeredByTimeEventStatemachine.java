@@ -75,7 +75,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		enterSequence_EventDrivenTriggeredByTimeEvent_r_default();
+		enterSequence_r_default();
 	}
 	
 	public void runCycle() {
@@ -86,10 +86,10 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case eventDrivenTriggeredByTimeEvent_r_A:
-				eventDrivenTriggeredByTimeEvent_r_A_react(true);
+				r_A_react(true);
 				break;
 			case eventDrivenTriggeredByTimeEvent_r_B:
-				eventDrivenTriggeredByTimeEvent_r_B_react(true);
+				r_B_react(true);
 				break;
 			default:
 				// $NullState$
@@ -98,7 +98,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_EventDrivenTriggeredByTimeEvent_r();
+		exitSequence_r();
 	}
 	
 	/**
@@ -192,68 +192,68 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	}
 	
 	/* Entry action for state 'A'. */
-	private void entryAction_EventDrivenTriggeredByTimeEvent_r_A() {
+	private void entryAction_r_A() {
 		timer.setTimer(this, 0, (1 * 1000), false);
 	}
 	
 	/* Entry action for state 'B'. */
-	private void entryAction_EventDrivenTriggeredByTimeEvent_r_B() {
+	private void entryAction_r_B() {
 		timer.setTimer(this, 1, (1 * 1000), false);
 	}
 	
 	/* Exit action for state 'A'. */
-	private void exitAction_EventDrivenTriggeredByTimeEvent_r_A() {
+	private void exitAction_r_A() {
 		timer.unsetTimer(this, 0);
 	}
 	
 	/* Exit action for state 'B'. */
-	private void exitAction_EventDrivenTriggeredByTimeEvent_r_B() {
+	private void exitAction_r_B() {
 		timer.unsetTimer(this, 1);
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default() {
-		entryAction_EventDrivenTriggeredByTimeEvent_r_A();
+	private void enterSequence_r_A_default() {
+		entryAction_r_A();
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenTriggeredByTimeEvent_r_A;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_EventDrivenTriggeredByTimeEvent_r_B_default() {
-		entryAction_EventDrivenTriggeredByTimeEvent_r_B();
+	private void enterSequence_r_B_default() {
+		entryAction_r_B();
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenTriggeredByTimeEvent_r_B;
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_EventDrivenTriggeredByTimeEvent_r_default() {
-		react_EventDrivenTriggeredByTimeEvent_r__entry_Default();
+	private void enterSequence_r_default() {
+		react_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_EventDrivenTriggeredByTimeEvent_r_A() {
+	private void exitSequence_r_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		exitAction_EventDrivenTriggeredByTimeEvent_r_A();
+		exitAction_r_A();
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_EventDrivenTriggeredByTimeEvent_r_B() {
+	private void exitSequence_r_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		exitAction_EventDrivenTriggeredByTimeEvent_r_B();
+		exitAction_r_B();
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_EventDrivenTriggeredByTimeEvent_r() {
+	private void exitSequence_r() {
 		switch (stateVector[0]) {
 		case eventDrivenTriggeredByTimeEvent_r_A:
-			exitSequence_EventDrivenTriggeredByTimeEvent_r_A();
+			exitSequence_r_A();
 			break;
 		case eventDrivenTriggeredByTimeEvent_r_B:
-			exitSequence_EventDrivenTriggeredByTimeEvent_r_B();
+			exitSequence_r_B();
 			break;
 		default:
 			break;
@@ -261,24 +261,24 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenTriggeredByTimeEvent_r__entry_Default() {
-		enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
+	private void react_r__entry_Default() {
+		enterSequence_r_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean eventDrivenTriggeredByTimeEvent_r_A_react(boolean try_transition) {
+	private boolean r_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (timeEvents[0]) {
-					exitSequence_EventDrivenTriggeredByTimeEvent_r_A();
+					exitSequence_r_A();
 					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
 					
-					enterSequence_EventDrivenTriggeredByTimeEvent_r_B_default();
+					enterSequence_r_B_default();
 				} else {
 					did_transition = false;
 				}
@@ -290,16 +290,16 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		return did_transition;
 	}
 	
-	private boolean eventDrivenTriggeredByTimeEvent_r_B_react(boolean try_transition) {
+	private boolean r_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (timeEvents[1]) {
-					exitSequence_EventDrivenTriggeredByTimeEvent_r_B();
+					exitSequence_r_B();
 					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
 					
-					enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
+					enterSequence_r_A_default();
 				} else {
 					did_transition = false;
 				}

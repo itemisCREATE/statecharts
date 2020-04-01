@@ -1369,31 +1369,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 	}
 	
-	/* Default exit sequence for region volatile */
-	private void exitSequence_goto_void_volatile() {
-		switch (stateVector[0]) {
-		case goto_void_volatile_transient_throw_false:
-			exitSequence_goto_void_volatile_transient_throw_false();
-			break;
-		case goto_void_volatile_state:
-			exitSequence_goto_void_volatile_state();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region throw */
-	private void exitSequence_goto_void_volatile_transient_throw() {
-		switch (stateVector[0]) {
-		case goto_void_volatile_transient_throw_false:
-			exitSequence_goto_void_volatile_transient_throw_false();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_goto__entry_Default() {
 		enterSequence_goto_abstract_default();

@@ -141,7 +141,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_InEventQueue_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -174,16 +174,16 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case inEventQueue_main_region_A:
-				inEventQueue_main_region_A_react(true);
+				main_region_A_react(true);
 				break;
 			case inEventQueue_main_region_B:
-				inEventQueue_main_region_B_react(true);
+				main_region_B_react(true);
 				break;
 			case inEventQueue_main_region_C:
-				inEventQueue_main_region_C_react(true);
+				main_region_C_react(true);
 				break;
 			case inEventQueue_main_region_dispatch:
-				inEventQueue_main_region_dispatch_react(true);
+				main_region_dispatch_react(true);
 				break;
 			default:
 				// $NullState$
@@ -211,7 +211,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	}
 	
 	public void exit() {
-		exitSequence_InEventQueue_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -298,78 +298,78 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	}
 	
 	/* Entry action for state 'dispatch'. */
-	private void entryAction_InEventQueue_main_region_dispatch() {
+	private void entryAction_main_region_dispatch() {
 		sCInterface.operationCallback.askOracle();
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_InEventQueue_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.inEventQueue_main_region_A;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_InEventQueue_main_region_B_default() {
+	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.inEventQueue_main_region_B;
 	}
 	
 	/* 'default' enter sequence for state C */
-	private void enterSequence_InEventQueue_main_region_C_default() {
+	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.inEventQueue_main_region_C;
 	}
 	
 	/* 'default' enter sequence for state dispatch */
-	private void enterSequence_InEventQueue_main_region_dispatch_default() {
-		entryAction_InEventQueue_main_region_dispatch();
+	private void enterSequence_main_region_dispatch_default() {
+		entryAction_main_region_dispatch();
 		nextStateIndex = 0;
 		stateVector[0] = State.inEventQueue_main_region_dispatch;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_InEventQueue_main_region_default() {
-		react_InEventQueue_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_InEventQueue_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_InEventQueue_main_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C */
-	private void exitSequence_InEventQueue_main_region_C() {
+	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state dispatch */
-	private void exitSequence_InEventQueue_main_region_dispatch() {
+	private void exitSequence_main_region_dispatch() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_InEventQueue_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case inEventQueue_main_region_A:
-			exitSequence_InEventQueue_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		case inEventQueue_main_region_B:
-			exitSequence_InEventQueue_main_region_B();
+			exitSequence_main_region_B();
 			break;
 		case inEventQueue_main_region_C:
-			exitSequence_InEventQueue_main_region_C();
+			exitSequence_main_region_C();
 			break;
 		case inEventQueue_main_region_dispatch:
-			exitSequence_InEventQueue_main_region_dispatch();
+			exitSequence_main_region_dispatch();
 			break;
 		default:
 			break;
@@ -377,8 +377,8 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_InEventQueue_main_region__entry_Default() {
-		enterSequence_InEventQueue_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
@@ -387,12 +387,12 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		return false;
 	}
 	
-	private boolean inEventQueue_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			exitSequence_InEventQueue_main_region_A();
-			enterSequence_InEventQueue_main_region_dispatch_default();
+			exitSequence_main_region_A();
+			enterSequence_main_region_dispatch_default();
 			react();
 		}
 		if (did_transition==false) {
@@ -401,13 +401,13 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		return did_transition;
 	}
 	
-	private boolean inEventQueue_main_region_B_react(boolean try_transition) {
+	private boolean main_region_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (!sCInterface.f) {
-				exitSequence_InEventQueue_main_region_B();
-				enterSequence_InEventQueue_main_region_dispatch_default();
+				exitSequence_main_region_B();
+				enterSequence_main_region_dispatch_default();
 				react();
 			} else {
 				did_transition = false;
@@ -422,12 +422,12 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		return did_transition;
 	}
 	
-	private boolean inEventQueue_main_region_C_react(boolean try_transition) {
+	private boolean main_region_C_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			exitSequence_InEventQueue_main_region_C();
-			enterSequence_InEventQueue_main_region_dispatch_default();
+			exitSequence_main_region_C();
+			enterSequence_main_region_dispatch_default();
 			react();
 		}
 		if (did_transition==false) {
@@ -436,23 +436,23 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		return did_transition;
 	}
 	
-	private boolean inEventQueue_main_region_dispatch_react(boolean try_transition) {
+	private boolean main_region_dispatch_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_InEventQueue_main_region_dispatch();
-				enterSequence_InEventQueue_main_region_A_default();
+				exitSequence_main_region_dispatch();
+				enterSequence_main_region_A_default();
 				react();
 			} else {
 				if (sCInterface.f) {
-					exitSequence_InEventQueue_main_region_dispatch();
-					enterSequence_InEventQueue_main_region_B_default();
+					exitSequence_main_region_dispatch();
+					enterSequence_main_region_B_default();
 					react();
 				} else {
 					if (sCII.g) {
-						exitSequence_InEventQueue_main_region_dispatch();
-						enterSequence_InEventQueue_main_region_C_default();
+						exitSequence_main_region_dispatch();
+						enterSequence_main_region_C_default();
 						react();
 					} else {
 						did_transition = false;

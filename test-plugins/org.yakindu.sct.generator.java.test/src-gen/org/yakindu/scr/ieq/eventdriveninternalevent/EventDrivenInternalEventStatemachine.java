@@ -148,9 +148,9 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_EventDrivenInternalEvent_r1_default();
-		enterSequence_EventDrivenInternalEvent_r2_default();
-		enterSequence_EventDrivenInternalEvent_check_default();
+		enterSequence_r1_default();
+		enterSequence_r2_default();
+		enterSequence_check_default();
 	}
 	
 	public void runCycle() {
@@ -183,22 +183,22 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case eventDrivenInternalEvent_r1_A:
-				eventDrivenInternalEvent_r1_A_react(true);
+				r1_A_react(true);
 				break;
 			case eventDrivenInternalEvent_r1_B:
-				eventDrivenInternalEvent_r1_B_react(true);
+				r1_B_react(true);
 				break;
 			case eventDrivenInternalEvent_r2_C:
-				eventDrivenInternalEvent_r2_C_react(true);
+				r2_C_react(true);
 				break;
 			case eventDrivenInternalEvent_r2_D:
-				eventDrivenInternalEvent_r2_D_react(true);
+				r2_D_react(true);
 				break;
 			case eventDrivenInternalEvent_check_VALID:
-				eventDrivenInternalEvent_check_VALID_react(true);
+				check_VALID_react(true);
 				break;
 			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
+				check_MULTIPLEEVENTS_react(true);
 				break;
 			default:
 				// $NullState$
@@ -226,9 +226,9 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	public void exit() {
-		exitSequence_EventDrivenInternalEvent_r1();
-		exitSequence_EventDrivenInternalEvent_r2();
-		exitSequence_EventDrivenInternalEvent_check();
+		exitSequence_r1();
+		exitSequence_r2();
+		exitSequence_check();
 	}
 	
 	/**
@@ -350,100 +350,100 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_EventDrivenInternalEvent_r1_A_default() {
+	private void enterSequence_r1_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenInternalEvent_r1_A;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_EventDrivenInternalEvent_r1_B_default() {
+	private void enterSequence_r1_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenInternalEvent_r1_B;
 	}
 	
 	/* 'default' enter sequence for state C */
-	private void enterSequence_EventDrivenInternalEvent_r2_C_default() {
+	private void enterSequence_r2_C_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.eventDrivenInternalEvent_r2_C;
 	}
 	
 	/* 'default' enter sequence for state D */
-	private void enterSequence_EventDrivenInternalEvent_r2_D_default() {
+	private void enterSequence_r2_D_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.eventDrivenInternalEvent_r2_D;
 	}
 	
 	/* 'default' enter sequence for state VALID */
-	private void enterSequence_EventDrivenInternalEvent_check_VALID_default() {
+	private void enterSequence_check_VALID_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.eventDrivenInternalEvent_check_VALID;
 	}
 	
 	/* 'default' enter sequence for state MULTIPLEEVENTS */
-	private void enterSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS_default() {
+	private void enterSequence_check_MULTIPLEEVENTS_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.eventDrivenInternalEvent_check_MULTIPLEEVENTS;
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_EventDrivenInternalEvent_r1_default() {
-		react_EventDrivenInternalEvent_r1__entry_Default();
+	private void enterSequence_r1_default() {
+		react_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_EventDrivenInternalEvent_r2_default() {
-		react_EventDrivenInternalEvent_r2__entry_Default();
+	private void enterSequence_r2_default() {
+		react_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region check */
-	private void enterSequence_EventDrivenInternalEvent_check_default() {
-		react_EventDrivenInternalEvent_check__entry_Default();
+	private void enterSequence_check_default() {
+		react_check__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_EventDrivenInternalEvent_r1_A() {
+	private void exitSequence_r1_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_EventDrivenInternalEvent_r1_B() {
+	private void exitSequence_r1_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C */
-	private void exitSequence_EventDrivenInternalEvent_r2_C() {
+	private void exitSequence_r2_C() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state D */
-	private void exitSequence_EventDrivenInternalEvent_r2_D() {
+	private void exitSequence_r2_D() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state VALID */
-	private void exitSequence_EventDrivenInternalEvent_check_VALID() {
+	private void exitSequence_check_VALID() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state MULTIPLEEVENTS */
-	private void exitSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS() {
+	private void exitSequence_check_MULTIPLEEVENTS() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_EventDrivenInternalEvent_r1() {
+	private void exitSequence_r1() {
 		switch (stateVector[0]) {
 		case eventDrivenInternalEvent_r1_A:
-			exitSequence_EventDrivenInternalEvent_r1_A();
+			exitSequence_r1_A();
 			break;
 		case eventDrivenInternalEvent_r1_B:
-			exitSequence_EventDrivenInternalEvent_r1_B();
+			exitSequence_r1_B();
 			break;
 		default:
 			break;
@@ -451,13 +451,13 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_EventDrivenInternalEvent_r2() {
+	private void exitSequence_r2() {
 		switch (stateVector[1]) {
 		case eventDrivenInternalEvent_r2_C:
-			exitSequence_EventDrivenInternalEvent_r2_C();
+			exitSequence_r2_C();
 			break;
 		case eventDrivenInternalEvent_r2_D:
-			exitSequence_EventDrivenInternalEvent_r2_D();
+			exitSequence_r2_D();
 			break;
 		default:
 			break;
@@ -465,13 +465,13 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	/* Default exit sequence for region check */
-	private void exitSequence_EventDrivenInternalEvent_check() {
+	private void exitSequence_check() {
 		switch (stateVector[2]) {
 		case eventDrivenInternalEvent_check_VALID:
-			exitSequence_EventDrivenInternalEvent_check_VALID();
+			exitSequence_check_VALID();
 			break;
 		case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-			exitSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS();
+			exitSequence_check_MULTIPLEEVENTS();
 			break;
 		default:
 			break;
@@ -479,18 +479,18 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenInternalEvent_r1__entry_Default() {
-		enterSequence_EventDrivenInternalEvent_r1_A_default();
+	private void react_r1__entry_Default() {
+		enterSequence_r1_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenInternalEvent_r2__entry_Default() {
-		enterSequence_EventDrivenInternalEvent_r2_C_default();
+	private void react_r2__entry_Default() {
+		enterSequence_r2_C_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenInternalEvent_check__entry_Default() {
-		enterSequence_EventDrivenInternalEvent_check_VALID_default();
+	private void react_check__entry_Default() {
+		enterSequence_check_VALID_default();
 	}
 	
 	private boolean react() {
@@ -499,16 +499,16 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return false;
 	}
 	
-	private boolean eventDrivenInternalEvent_r1_A_react(boolean try_transition) {
+	private boolean r1_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (i2) {
-					exitSequence_EventDrivenInternalEvent_r1_A();
+					exitSequence_r1_A();
 					sCInterface.setI2_sequence(sCInterface.x);
 					
-					enterSequence_EventDrivenInternalEvent_r1_B_default();
+					enterSequence_r1_B_default();
 				} else {
 					did_transition = false;
 				}
@@ -522,14 +522,14 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return did_transition;
 	}
 	
-	private boolean eventDrivenInternalEvent_r1_B_react(boolean try_transition) {
+	private boolean r1_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (sCInterface.reset) {
-					exitSequence_EventDrivenInternalEvent_r1_B();
-					enterSequence_EventDrivenInternalEvent_r1_A_default();
+					exitSequence_r1_B();
+					enterSequence_r1_A_default();
 				} else {
 					did_transition = false;
 				}
@@ -543,17 +543,17 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return did_transition;
 	}
 	
-	private boolean eventDrivenInternalEvent_r2_C_react(boolean try_transition) {
+	private boolean r2_C_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (i1) {
-				exitSequence_EventDrivenInternalEvent_r2_C();
+				exitSequence_r2_C();
 				sCInterface.setI1_sequence(sCInterface.x);
 				
 				raiseI2();
 				
-				enterSequence_EventDrivenInternalEvent_r2_D_default();
+				enterSequence_r2_D_default();
 			} else {
 				did_transition = false;
 			}
@@ -561,13 +561,13 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return did_transition;
 	}
 	
-	private boolean eventDrivenInternalEvent_r2_D_react(boolean try_transition) {
+	private boolean r2_D_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.reset) {
-				exitSequence_EventDrivenInternalEvent_r2_D();
-				enterSequence_EventDrivenInternalEvent_r2_C_default();
+				exitSequence_r2_D();
+				enterSequence_r2_C_default();
 			} else {
 				did_transition = false;
 			}
@@ -580,13 +580,13 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return did_transition;
 	}
 	
-	private boolean eventDrivenInternalEvent_check_VALID_react(boolean try_transition) {
+	private boolean check_VALID_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (((((sCInterface.start && i1)) || ((sCInterface.start && i2))) || ((i1 && i2)))) {
-				exitSequence_EventDrivenInternalEvent_check_VALID();
-				enterSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS_default();
+				exitSequence_check_VALID();
+				enterSequence_check_MULTIPLEEVENTS_default();
 			} else {
 				did_transition = false;
 			}
@@ -594,13 +594,13 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return did_transition;
 	}
 	
-	private boolean eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(boolean try_transition) {
+	private boolean check_MULTIPLEEVENTS_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.reset) {
-				exitSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS();
-				enterSequence_EventDrivenInternalEvent_check_VALID_default();
+				exitSequence_check_MULTIPLEEVENTS();
+				enterSequence_check_VALID_default();
 			} else {
 				did_transition = false;
 			}

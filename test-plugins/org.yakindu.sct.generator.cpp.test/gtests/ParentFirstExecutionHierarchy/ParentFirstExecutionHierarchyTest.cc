@@ -46,7 +46,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, childShouldTakeTransition) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_A_r_AA_r_AAA));
 	
 	statechart->set_disable_a(true);
 	
@@ -56,7 +56,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, childShouldTakeTransition) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_B));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_B));
 	
 	EXPECT_TRUE(!statechart->get_a_reacted());
 	
@@ -76,7 +76,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_A_r_AA_r_AAA));
 	
 	statechart->set_disable_a(true);
 	
@@ -84,7 +84,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_B));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_B));
 	
 	EXPECT_TRUE(!statechart->get_a_reacted());
 	
@@ -104,13 +104,13 @@ TEST_F(ParentFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_A_r_AA_r_AAA));
 	
 	statechart->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_B));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_B));
 	
 	EXPECT_TRUE(statechart->get_a_reacted());
 	
@@ -126,11 +126,11 @@ TEST_F(ParentFirstExecutionHierarchyTest, expectLocalReactrionsExecuteWithNoTran
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_A_r_AA_r_AAA));
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ParentFirstExecutionHierarchy::r_A_r_AA_r_AAA));
 	
 	EXPECT_TRUE(statechart->get_a_local());
 	

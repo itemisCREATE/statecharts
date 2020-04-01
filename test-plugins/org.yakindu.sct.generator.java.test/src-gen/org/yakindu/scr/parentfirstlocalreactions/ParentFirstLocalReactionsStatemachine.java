@@ -162,7 +162,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_ParentFirstLocalReactions_r_default();
+		enterSequence_r_default();
 	}
 	
 	public void runCycle() {
@@ -173,16 +173,16 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case parentFirstLocalReactions_r_A_r_AA_r_AAA:
-				parentFirstLocalReactions_r_A_r_AA_r_AAA_react(true);
+				r_A_r_AA_r_AAA_react(true);
 				break;
 			case parentFirstLocalReactions_r_A_r_AA_r_AAB:
-				parentFirstLocalReactions_r_A_r_AA_r_AAB_react(true);
+				r_A_r_AA_r_AAB_react(true);
 				break;
 			case parentFirstLocalReactions_r_A_r_AB:
-				parentFirstLocalReactions_r_A_r_AB_react(true);
+				r_A_r_AB_react(true);
 				break;
 			case parentFirstLocalReactions_r_B:
-				parentFirstLocalReactions_r_B_react(true);
+				r_B_react(true);
 				break;
 			default:
 				// $NullState$
@@ -191,7 +191,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_ParentFirstLocalReactions_r();
+		exitSequence_r();
 	}
 	
 	/**
@@ -324,7 +324,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	}
 	
 	/* Entry action for state 'A'. */
-	private void entryAction_ParentFirstLocalReactions_r_A() {
+	private void entryAction_r_A() {
 		sCInterface.setDisable_a(false);
 		
 		sCInterface.setDisable_aa(false);
@@ -333,103 +333,103 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_ParentFirstLocalReactions_r_A_default() {
-		entryAction_ParentFirstLocalReactions_r_A();
-		enterSequence_ParentFirstLocalReactions_r_A_r_default();
+	private void enterSequence_r_A_default() {
+		entryAction_r_A();
+		enterSequence_r_A_r_default();
 	}
 	
 	/* 'default' enter sequence for state AA */
-	private void enterSequence_ParentFirstLocalReactions_r_A_r_AA_default() {
-		enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_default();
+	private void enterSequence_r_A_r_AA_default() {
+		enterSequence_r_A_r_AA_r_default();
 	}
 	
 	/* 'default' enter sequence for state AAA */
-	private void enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA_default() {
+	private void enterSequence_r_A_r_AA_r_AAA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.parentFirstLocalReactions_r_A_r_AA_r_AAA;
 	}
 	
 	/* 'default' enter sequence for state AAB */
-	private void enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB_default() {
+	private void enterSequence_r_A_r_AA_r_AAB_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.parentFirstLocalReactions_r_A_r_AA_r_AAB;
 	}
 	
 	/* 'default' enter sequence for state AB */
-	private void enterSequence_ParentFirstLocalReactions_r_A_r_AB_default() {
+	private void enterSequence_r_A_r_AB_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.parentFirstLocalReactions_r_A_r_AB;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_ParentFirstLocalReactions_r_B_default() {
+	private void enterSequence_r_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.parentFirstLocalReactions_r_B;
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ParentFirstLocalReactions_r_default() {
-		react_ParentFirstLocalReactions_r__entry_Default();
+	private void enterSequence_r_default() {
+		react_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ParentFirstLocalReactions_r_A_r_default() {
-		react_ParentFirstLocalReactions_r_A_r__entry_Default();
+	private void enterSequence_r_A_r_default() {
+		react_r_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_default() {
-		react_ParentFirstLocalReactions_r_A_r_AA_r__entry_Default();
+	private void enterSequence_r_A_r_AA_r_default() {
+		react_r_A_r_AA_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_ParentFirstLocalReactions_r_A() {
-		exitSequence_ParentFirstLocalReactions_r_A_r();
+	private void exitSequence_r_A() {
+		exitSequence_r_A_r();
 	}
 	
 	/* Default exit sequence for state AA */
-	private void exitSequence_ParentFirstLocalReactions_r_A_r_AA() {
-		exitSequence_ParentFirstLocalReactions_r_A_r_AA_r();
+	private void exitSequence_r_A_r_AA() {
+		exitSequence_r_A_r_AA_r();
 	}
 	
 	/* Default exit sequence for state AAA */
-	private void exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA() {
+	private void exitSequence_r_A_r_AA_r_AAA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state AAB */
-	private void exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB() {
+	private void exitSequence_r_A_r_AA_r_AAB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state AB */
-	private void exitSequence_ParentFirstLocalReactions_r_A_r_AB() {
+	private void exitSequence_r_A_r_AB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_ParentFirstLocalReactions_r_B() {
+	private void exitSequence_r_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ParentFirstLocalReactions_r() {
+	private void exitSequence_r() {
 		switch (stateVector[0]) {
 		case parentFirstLocalReactions_r_A_r_AA_r_AAA:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
+			exitSequence_r_A_r_AA_r_AAA();
 			break;
 		case parentFirstLocalReactions_r_A_r_AA_r_AAB:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB();
+			exitSequence_r_A_r_AA_r_AAB();
 			break;
 		case parentFirstLocalReactions_r_A_r_AB:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AB();
+			exitSequence_r_A_r_AB();
 			break;
 		case parentFirstLocalReactions_r_B:
-			exitSequence_ParentFirstLocalReactions_r_B();
+			exitSequence_r_B();
 			break;
 		default:
 			break;
@@ -437,16 +437,16 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ParentFirstLocalReactions_r_A_r() {
+	private void exitSequence_r_A_r() {
 		switch (stateVector[0]) {
 		case parentFirstLocalReactions_r_A_r_AA_r_AAA:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
+			exitSequence_r_A_r_AA_r_AAA();
 			break;
 		case parentFirstLocalReactions_r_A_r_AA_r_AAB:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB();
+			exitSequence_r_A_r_AA_r_AAB();
 			break;
 		case parentFirstLocalReactions_r_A_r_AB:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AB();
+			exitSequence_r_A_r_AB();
 			break;
 		default:
 			break;
@@ -454,13 +454,13 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ParentFirstLocalReactions_r_A_r_AA_r() {
+	private void exitSequence_r_A_r_AA_r() {
 		switch (stateVector[0]) {
 		case parentFirstLocalReactions_r_A_r_AA_r_AAA:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
+			exitSequence_r_A_r_AA_r_AAA();
 			break;
 		case parentFirstLocalReactions_r_A_r_AA_r_AAB:
-			exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB();
+			exitSequence_r_A_r_AA_r_AAB();
 			break;
 		default:
 			break;
@@ -468,18 +468,18 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ParentFirstLocalReactions_r__entry_Default() {
-		enterSequence_ParentFirstLocalReactions_r_A_default();
+	private void react_r__entry_Default() {
+		enterSequence_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ParentFirstLocalReactions_r_A_r__entry_Default() {
-		enterSequence_ParentFirstLocalReactions_r_A_r_AA_default();
+	private void react_r_A_r__entry_Default() {
+		enterSequence_r_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ParentFirstLocalReactions_r_A_r_AA_r__entry_Default() {
-		enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA_default();
+	private void react_r_A_r_AA_r__entry_Default() {
+		enterSequence_r_A_r_AA_r_AAA_default();
 	}
 	
 	private boolean react() {
@@ -488,18 +488,18 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		return false;
 	}
 	
-	private boolean parentFirstLocalReactions_r_A_react(boolean try_transition) {
+	private boolean r_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
-					exitSequence_ParentFirstLocalReactions_r_A();
-					enterSequence_ParentFirstLocalReactions_r_B_default();
+					exitSequence_r_A();
+					enterSequence_r_B_default();
 				} else {
 					if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_a()))) {
-						exitSequence_ParentFirstLocalReactions_r_A();
-						enterSequence_ParentFirstLocalReactions_r_A_default();
+						exitSequence_r_A();
+						enterSequence_r_A_default();
 					} else {
 						did_transition = false;
 					}
@@ -512,14 +512,14 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		return did_transition;
 	}
 	
-	private boolean parentFirstLocalReactions_r_A_r_AA_react(boolean try_transition) {
+	private boolean r_A_r_AA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (parentFirstLocalReactions_r_A_react(try_transition)==false) {
+			if (r_A_react(try_transition)==false) {
 				if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
-					exitSequence_ParentFirstLocalReactions_r_A_r_AA();
-					enterSequence_ParentFirstLocalReactions_r_A_r_AB_default();
+					exitSequence_r_A_r_AA();
+					enterSequence_r_A_r_AB_default();
 				} else {
 					did_transition = false;
 				}
@@ -531,18 +531,18 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		return did_transition;
 	}
 	
-	private boolean parentFirstLocalReactions_r_A_r_AA_r_AAA_react(boolean try_transition) {
+	private boolean r_A_r_AA_r_AAA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (parentFirstLocalReactions_r_A_r_AA_react(try_transition)==false) {
+			if (r_A_r_AA_react(try_transition)==false) {
 				if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
-					exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
-					enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB_default();
+					exitSequence_r_A_r_AA_r_AAA();
+					enterSequence_r_A_r_AA_r_AAB_default();
 				} else {
 					if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_aaa()))) {
-						exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
-						enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA_default();
+						exitSequence_r_A_r_AA_r_AAA();
+						enterSequence_r_A_r_AA_r_AAA_default();
 					} else {
 						did_transition = false;
 					}
@@ -555,29 +555,29 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		return did_transition;
 	}
 	
-	private boolean parentFirstLocalReactions_r_A_r_AA_r_AAB_react(boolean try_transition) {
+	private boolean r_A_r_AA_r_AAB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (parentFirstLocalReactions_r_A_r_AA_react(try_transition)==false) {
+			if (r_A_r_AA_react(try_transition)==false) {
 				did_transition = false;
 			}
 		}
 		return did_transition;
 	}
 	
-	private boolean parentFirstLocalReactions_r_A_r_AB_react(boolean try_transition) {
+	private boolean r_A_r_AB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (parentFirstLocalReactions_r_A_react(try_transition)==false) {
+			if (r_A_react(try_transition)==false) {
 				did_transition = false;
 			}
 		}
 		return did_transition;
 	}
 	
-	private boolean parentFirstLocalReactions_r_B_react(boolean try_transition) {
+	private boolean r_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

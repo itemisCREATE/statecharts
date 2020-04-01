@@ -107,12 +107,6 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 		stateVector[0] = State.main_region_A;
 	}
 	
-	/* 'default' enter sequence for state B */
-	private void enterSequence_main_region_B_default() {
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
-	}
-	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
 		react_main_region__entry_Default();

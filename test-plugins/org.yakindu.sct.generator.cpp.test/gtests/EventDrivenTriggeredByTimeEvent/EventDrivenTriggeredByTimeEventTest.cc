@@ -37,19 +37,19 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::r_A));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	
 	runner->proceed_time(999);
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::r_A));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	
 	runner->proceed_time(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::r_B));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	
@@ -57,7 +57,7 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	runner->proceed_time(1*1000);
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::r_A));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	
@@ -65,7 +65,7 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	runner->proceed_time(999*1000);
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::r_B));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	
@@ -73,7 +73,7 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	runner->proceed_time(999*1000);
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::r_A));
 	
 	EXPECT_TRUE(statechart->get_x()== 0);
 	

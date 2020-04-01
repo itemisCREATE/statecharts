@@ -260,8 +260,8 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_ChildFirstTransitionsInSubchart_r_default();
-		enterSequence_ChildFirstTransitionsInSubchart_r2_default();
+		enterSequence_r_default();
+		enterSequence_r2_default();
 	}
 	
 	public void runCycle() {
@@ -272,25 +272,25 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstTransitionsInSubchart_r_A_r1_AA:
-				childFirstTransitionsInSubchart_r_A_r1_AA_react(true);
+				r_A_r1_AA_react(true);
 				break;
 			case childFirstTransitionsInSubchart_r_A_r1_AB:
-				childFirstTransitionsInSubchart_r_A_r1_AB_react(true);
+				r_A_r1_AB_react(true);
 				break;
 			case childFirstTransitionsInSubchart_r_A_r2_AC:
-				childFirstTransitionsInSubchart_r_A_r2_AC_react(true);
+				r_A_r2_AC_react(true);
 				break;
 			case childFirstTransitionsInSubchart_r_A_r2_AD:
-				childFirstTransitionsInSubchart_r_A_r2_AD_react(true);
+				r_A_r2_AD_react(true);
 				break;
 			case childFirstTransitionsInSubchart_r_B:
-				childFirstTransitionsInSubchart_r_B_react(true);
+				r_B_react(true);
 				break;
 			case childFirstTransitionsInSubchart_r2_C:
-				childFirstTransitionsInSubchart_r2_C_react(true);
+				r2_C_react(true);
 				break;
 			case childFirstTransitionsInSubchart_r2_D:
-				childFirstTransitionsInSubchart_r2_D_react(true);
+				r2_D_react(true);
 				break;
 			default:
 				// $NullState$
@@ -299,8 +299,8 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_ChildFirstTransitionsInSubchart_r();
-		exitSequence_ChildFirstTransitionsInSubchart_r2();
+		exitSequence_r();
+		exitSequence_r2();
 	}
 	
 	/**
@@ -499,132 +499,132 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_A_default() {
-		enterSequence_ChildFirstTransitionsInSubchart_r_A_r1_default();
-		enterSequence_ChildFirstTransitionsInSubchart_r_A_r2_default();
+	private void enterSequence_r_A_default() {
+		enterSequence_r_A_r1_default();
+		enterSequence_r_A_r2_default();
 	}
 	
 	/* 'default' enter sequence for state AA */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_A_r1_AA_default() {
+	private void enterSequence_r_A_r1_AA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstTransitionsInSubchart_r_A_r1_AA;
 	}
 	
 	/* 'default' enter sequence for state AB */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_A_r1_AB_default() {
+	private void enterSequence_r_A_r1_AB_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstTransitionsInSubchart_r_A_r1_AB;
 	}
 	
 	/* 'default' enter sequence for state AC */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_A_r2_AC_default() {
+	private void enterSequence_r_A_r2_AC_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.childFirstTransitionsInSubchart_r_A_r2_AC;
 	}
 	
 	/* 'default' enter sequence for state AD */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_A_r2_AD_default() {
+	private void enterSequence_r_A_r2_AD_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.childFirstTransitionsInSubchart_r_A_r2_AD;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_B_default() {
+	private void enterSequence_r_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstTransitionsInSubchart_r_B;
 	}
 	
 	/* 'default' enter sequence for state C */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r2_C_default() {
+	private void enterSequence_r2_C_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.childFirstTransitionsInSubchart_r2_C;
 	}
 	
 	/* 'default' enter sequence for state D */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r2_D_default() {
+	private void enterSequence_r2_D_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.childFirstTransitionsInSubchart_r2_D;
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_default() {
-		react_ChildFirstTransitionsInSubchart_r__entry_Default();
+	private void enterSequence_r_default() {
+		react_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_A_r1_default() {
-		react_ChildFirstTransitionsInSubchart_r_A_r1__entry_Default();
+	private void enterSequence_r_A_r1_default() {
+		react_r_A_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r_A_r2_default() {
-		react_ChildFirstTransitionsInSubchart_r_A_r2__entry_Default();
+	private void enterSequence_r_A_r2_default() {
+		react_r_A_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_ChildFirstTransitionsInSubchart_r2_default() {
-		react_ChildFirstTransitionsInSubchart_r2__entry_Default();
+	private void enterSequence_r2_default() {
+		react_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_A() {
-		exitSequence_ChildFirstTransitionsInSubchart_r_A_r1();
-		exitSequence_ChildFirstTransitionsInSubchart_r_A_r2();
+	private void exitSequence_r_A() {
+		exitSequence_r_A_r1();
+		exitSequence_r_A_r2();
 	}
 	
 	/* Default exit sequence for state AA */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AA() {
+	private void exitSequence_r_A_r1_AA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state AB */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AB() {
+	private void exitSequence_r_A_r1_AB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state AC */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AC() {
+	private void exitSequence_r_A_r2_AC() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state AD */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AD() {
+	private void exitSequence_r_A_r2_AD() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_B() {
+	private void exitSequence_r_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r2_C() {
+	private void exitSequence_r2_C() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state D */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r2_D() {
+	private void exitSequence_r2_D() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r() {
+	private void exitSequence_r() {
 		switch (stateVector[0]) {
 		case childFirstTransitionsInSubchart_r_A_r1_AA:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AA();
+			exitSequence_r_A_r1_AA();
 			break;
 		case childFirstTransitionsInSubchart_r_A_r1_AB:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AB();
+			exitSequence_r_A_r1_AB();
 			break;
 		case childFirstTransitionsInSubchart_r_B:
-			exitSequence_ChildFirstTransitionsInSubchart_r_B();
+			exitSequence_r_B();
 			break;
 		default:
 			break;
@@ -632,10 +632,10 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		
 		switch (stateVector[1]) {
 		case childFirstTransitionsInSubchart_r_A_r2_AC:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AC();
+			exitSequence_r_A_r2_AC();
 			break;
 		case childFirstTransitionsInSubchart_r_A_r2_AD:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AD();
+			exitSequence_r_A_r2_AD();
 			break;
 		default:
 			break;
@@ -643,13 +643,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_A_r1() {
+	private void exitSequence_r_A_r1() {
 		switch (stateVector[0]) {
 		case childFirstTransitionsInSubchart_r_A_r1_AA:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AA();
+			exitSequence_r_A_r1_AA();
 			break;
 		case childFirstTransitionsInSubchart_r_A_r1_AB:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AB();
+			exitSequence_r_A_r1_AB();
 			break;
 		default:
 			break;
@@ -657,13 +657,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r_A_r2() {
+	private void exitSequence_r_A_r2() {
 		switch (stateVector[1]) {
 		case childFirstTransitionsInSubchart_r_A_r2_AC:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AC();
+			exitSequence_r_A_r2_AC();
 			break;
 		case childFirstTransitionsInSubchart_r_A_r2_AD:
-			exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AD();
+			exitSequence_r_A_r2_AD();
 			break;
 		default:
 			break;
@@ -671,13 +671,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_ChildFirstTransitionsInSubchart_r2() {
+	private void exitSequence_r2() {
 		switch (stateVector[2]) {
 		case childFirstTransitionsInSubchart_r2_C:
-			exitSequence_ChildFirstTransitionsInSubchart_r2_C();
+			exitSequence_r2_C();
 			break;
 		case childFirstTransitionsInSubchart_r2_D:
-			exitSequence_ChildFirstTransitionsInSubchart_r2_D();
+			exitSequence_r2_D();
 			break;
 		default:
 			break;
@@ -685,23 +685,23 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionsInSubchart_r__entry_Default() {
-		enterSequence_ChildFirstTransitionsInSubchart_r_A_default();
+	private void react_r__entry_Default() {
+		enterSequence_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionsInSubchart_r_A_r1__entry_Default() {
-		enterSequence_ChildFirstTransitionsInSubchart_r_A_r1_AA_default();
+	private void react_r_A_r1__entry_Default() {
+		enterSequence_r_A_r1_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionsInSubchart_r_A_r2__entry_Default() {
-		enterSequence_ChildFirstTransitionsInSubchart_r_A_r2_AC_default();
+	private void react_r_A_r2__entry_Default() {
+		enterSequence_r_A_r2_AC_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionsInSubchart_r2__entry_Default() {
-		enterSequence_ChildFirstTransitionsInSubchart_r2_C_default();
+	private void react_r2__entry_Default() {
+		enterSequence_r2_C_default();
 	}
 	
 	private boolean react() {
@@ -710,13 +710,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		return false;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r_A_react(boolean try_transition) {
+	private boolean r_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.operationCallback.check("A")) {
-				exitSequence_ChildFirstTransitionsInSubchart_r_A();
-				enterSequence_ChildFirstTransitionsInSubchart_r_B_default();
+				exitSequence_r_A();
+				enterSequence_r_B_default();
 			} else {
 				did_transition = false;
 			}
@@ -727,13 +727,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r_A_r1_AA_react(boolean try_transition) {
+	private boolean r_A_r1_AA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.operationCallback.check("AA")) {
-				exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AA();
-				enterSequence_ChildFirstTransitionsInSubchart_r_A_r1_AB_default();
+				exitSequence_r_A_r1_AA();
+				enterSequence_r_A_r1_AB_default();
 			} else {
 				did_transition = false;
 			}
@@ -744,13 +744,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r_A_r1_AB_react(boolean try_transition) {
+	private boolean r_A_r1_AB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.operationCallback.check("AB")) {
-				exitSequence_ChildFirstTransitionsInSubchart_r_A_r1_AB();
-				enterSequence_ChildFirstTransitionsInSubchart_r_A_r1_AA_default();
+				exitSequence_r_A_r1_AB();
+				enterSequence_r_A_r1_AA_default();
 			} else {
 				did_transition = false;
 			}
@@ -761,14 +761,14 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r_A_r2_AC_react(boolean try_transition) {
+	private boolean r_A_r2_AC_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.operationCallback.check("AC")) {
-				exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AC();
-				enterSequence_ChildFirstTransitionsInSubchart_r_A_r2_AD_default();
-				childFirstTransitionsInSubchart_r_A_react(false);
+				exitSequence_r_A_r2_AC();
+				enterSequence_r_A_r2_AD_default();
+				r_A_react(false);
 			} else {
 				did_transition = false;
 			}
@@ -776,19 +776,19 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		if (did_transition==false) {
 			sCInterface.setAc_local(sCInterface.operationCallback.next());
 			
-			did_transition = childFirstTransitionsInSubchart_r_A_react(try_transition);
+			did_transition = r_A_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r_A_r2_AD_react(boolean try_transition) {
+	private boolean r_A_r2_AD_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.operationCallback.check("AD")) {
-				exitSequence_ChildFirstTransitionsInSubchart_r_A_r2_AD();
-				enterSequence_ChildFirstTransitionsInSubchart_r_A_r2_AC_default();
-				childFirstTransitionsInSubchart_r_A_react(false);
+				exitSequence_r_A_r2_AD();
+				enterSequence_r_A_r2_AC_default();
+				r_A_react(false);
 			} else {
 				did_transition = false;
 			}
@@ -796,12 +796,12 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		if (did_transition==false) {
 			sCInterface.setAd_local(sCInterface.operationCallback.next());
 			
-			did_transition = childFirstTransitionsInSubchart_r_A_react(try_transition);
+			did_transition = r_A_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r_B_react(boolean try_transition) {
+	private boolean r_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -810,13 +810,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r2_C_react(boolean try_transition) {
+	private boolean r2_C_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.operationCallback.check("C")) {
-				exitSequence_ChildFirstTransitionsInSubchart_r2_C();
-				enterSequence_ChildFirstTransitionsInSubchart_r2_D_default();
+				exitSequence_r2_C();
+				enterSequence_r2_D_default();
 				react();
 			} else {
 				did_transition = false;
@@ -830,7 +830,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionsInSubchart_r2_D_react(boolean try_transition) {
+	private boolean r2_D_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

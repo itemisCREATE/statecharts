@@ -81,7 +81,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		
 		sCInterface.setX(sCInterface.getX() + sCInterface.y);
 		
-		enterSequence_StatechartEntryAndExitActions_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -92,7 +92,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case statechartEntryAndExitActions_main_region_A:
-				statechartEntryAndExitActions_main_region_A_react(true);
+				main_region_A_react(true);
 				break;
 			default:
 				// $NullState$
@@ -101,7 +101,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_StatechartEntryAndExitActions_main_region();
+		exitSequence_main_region();
 		sCInterface.setX(8);
 		
 		sCInterface.setY(2);
@@ -178,27 +178,27 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_StatechartEntryAndExitActions_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.statechartEntryAndExitActions_main_region_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_StatechartEntryAndExitActions_main_region_default() {
-		react_StatechartEntryAndExitActions_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_StatechartEntryAndExitActions_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_StatechartEntryAndExitActions_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case statechartEntryAndExitActions_main_region_A:
-			exitSequence_StatechartEntryAndExitActions_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		default:
 			break;
@@ -206,15 +206,15 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_StatechartEntryAndExitActions_main_region__entry_Default() {
-		enterSequence_StatechartEntryAndExitActions_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean statechartEntryAndExitActions_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

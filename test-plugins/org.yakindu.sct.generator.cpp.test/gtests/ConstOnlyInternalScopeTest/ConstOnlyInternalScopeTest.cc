@@ -36,7 +36,7 @@ TEST_F(ConstOnlyInternalScopeTest, statechartEntry) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(declarations::ConstOnlyInternalScope::ConstOnlyInternalScope_main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(declarations::ConstOnlyInternalScope::main_region_A));
 	
 	
 }
@@ -48,7 +48,7 @@ TEST_F(ConstOnlyInternalScopeTest, stateTransition) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(declarations::ConstOnlyInternalScope::ConstOnlyInternalScope_main_region_B));
+	EXPECT_TRUE(statechart->isStateActive(declarations::ConstOnlyInternalScope::main_region_B));
 	
 	
 }

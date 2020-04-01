@@ -47,12 +47,12 @@ void ParentFirstExecutionHierarchyTest::SetUp()
 void ParentFirstExecutionHierarchyTest::childShouldTakeTransition()
 {
 	parentFirstExecutionHierarchy_enter(&statechart);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	parentFirstExecutionHierarchyIface_set_disable_a(&statechart,true);
 	parentFirstExecutionHierarchyIface_set_disable_aa(&statechart,true);
 	parentFirstExecutionHierarchyIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_B));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_B));
 	EXPECT_TRUE(!parentFirstExecutionHierarchyIface_get_a_reacted(&statechart));
 	EXPECT_TRUE(!parentFirstExecutionHierarchyIface_get_aa_reacted(&statechart));
 	EXPECT_TRUE(parentFirstExecutionHierarchyIface_get_aaa_reacted(&statechart));
@@ -63,11 +63,11 @@ void ParentFirstExecutionHierarchyTest::childShouldTakeTransition()
 void ParentFirstExecutionHierarchyTest::parentShouldTakeTransition()
 {
 	parentFirstExecutionHierarchy_enter(&statechart);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	parentFirstExecutionHierarchyIface_set_disable_a(&statechart,true);
 	parentFirstExecutionHierarchyIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_B));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_B));
 	EXPECT_TRUE(!parentFirstExecutionHierarchyIface_get_a_reacted(&statechart));
 	EXPECT_TRUE(parentFirstExecutionHierarchyIface_get_aa_reacted(&statechart));
 	EXPECT_TRUE(!parentFirstExecutionHierarchyIface_get_aaa_reacted(&statechart));
@@ -78,10 +78,10 @@ void ParentFirstExecutionHierarchyTest::parentShouldTakeTransition()
 void ParentFirstExecutionHierarchyTest::grandparentShouldTakeTransition()
 {
 	parentFirstExecutionHierarchy_enter(&statechart);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	parentFirstExecutionHierarchyIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_B));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_B));
 	EXPECT_TRUE(parentFirstExecutionHierarchyIface_get_a_reacted(&statechart));
 	EXPECT_TRUE(!parentFirstExecutionHierarchyIface_get_aa_reacted(&statechart));
 	EXPECT_TRUE(!parentFirstExecutionHierarchyIface_get_aaa_reacted(&statechart));
@@ -90,9 +90,9 @@ void ParentFirstExecutionHierarchyTest::grandparentShouldTakeTransition()
 void ParentFirstExecutionHierarchyTest::expectLocalReactrionsExecuteWithNoTransition()
 {
 	parentFirstExecutionHierarchy_enter(&statechart);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(parentFirstExecutionHierarchy_isStateActive(&statechart, ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	EXPECT_TRUE(parentFirstExecutionHierarchyIface_get_a_local(&statechart));
 	EXPECT_TRUE(parentFirstExecutionHierarchyIface_get_aa_local(&statechart));
 	EXPECT_TRUE(parentFirstExecutionHierarchyIface_get_aaa_local(&statechart));

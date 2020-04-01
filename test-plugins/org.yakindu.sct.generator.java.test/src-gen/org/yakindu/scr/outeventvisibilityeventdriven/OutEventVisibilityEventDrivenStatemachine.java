@@ -95,7 +95,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_OutEventVisibilityEventDriven_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -122,19 +122,19 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case outEventVisibilityEventDriven_main_region_A:
-				outEventVisibilityEventDriven_main_region_A_react(true);
+				main_region_A_react(true);
 				break;
 			case outEventVisibilityEventDriven_main_region_B:
-				outEventVisibilityEventDriven_main_region_B_react(true);
+				main_region_B_react(true);
 				break;
 			case outEventVisibilityEventDriven_main_region_C:
-				outEventVisibilityEventDriven_main_region_C_react(true);
+				main_region_C_react(true);
 				break;
 			case outEventVisibilityEventDriven_main_region_D:
-				outEventVisibilityEventDriven_main_region_D_react(true);
+				main_region_D_react(true);
 				break;
 			case outEventVisibilityEventDriven_main_region_E:
-				outEventVisibilityEventDriven_main_region_E_react(true);
+				main_region_E_react(true);
 				break;
 			default:
 				// $NullState$
@@ -159,7 +159,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	}
 	
 	public void exit() {
-		exitSequence_OutEventVisibilityEventDriven_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -240,87 +240,87 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_OutEventVisibilityEventDriven_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.outEventVisibilityEventDriven_main_region_A;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_OutEventVisibilityEventDriven_main_region_B_default() {
+	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.outEventVisibilityEventDriven_main_region_B;
 	}
 	
 	/* 'default' enter sequence for state C */
-	private void enterSequence_OutEventVisibilityEventDriven_main_region_C_default() {
+	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.outEventVisibilityEventDriven_main_region_C;
 	}
 	
 	/* 'default' enter sequence for state D */
-	private void enterSequence_OutEventVisibilityEventDriven_main_region_D_default() {
+	private void enterSequence_main_region_D_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.outEventVisibilityEventDriven_main_region_D;
 	}
 	
 	/* 'default' enter sequence for state E */
-	private void enterSequence_OutEventVisibilityEventDriven_main_region_E_default() {
+	private void enterSequence_main_region_E_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.outEventVisibilityEventDriven_main_region_E;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_OutEventVisibilityEventDriven_main_region_default() {
-		react_OutEventVisibilityEventDriven_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_OutEventVisibilityEventDriven_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_OutEventVisibilityEventDriven_main_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state C */
-	private void exitSequence_OutEventVisibilityEventDriven_main_region_C() {
+	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state D */
-	private void exitSequence_OutEventVisibilityEventDriven_main_region_D() {
+	private void exitSequence_main_region_D() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state E */
-	private void exitSequence_OutEventVisibilityEventDriven_main_region_E() {
+	private void exitSequence_main_region_E() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_OutEventVisibilityEventDriven_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case outEventVisibilityEventDriven_main_region_A:
-			exitSequence_OutEventVisibilityEventDriven_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		case outEventVisibilityEventDriven_main_region_B:
-			exitSequence_OutEventVisibilityEventDriven_main_region_B();
+			exitSequence_main_region_B();
 			break;
 		case outEventVisibilityEventDriven_main_region_C:
-			exitSequence_OutEventVisibilityEventDriven_main_region_C();
+			exitSequence_main_region_C();
 			break;
 		case outEventVisibilityEventDriven_main_region_D:
-			exitSequence_OutEventVisibilityEventDriven_main_region_D();
+			exitSequence_main_region_D();
 			break;
 		case outEventVisibilityEventDriven_main_region_E:
-			exitSequence_OutEventVisibilityEventDriven_main_region_E();
+			exitSequence_main_region_E();
 			break;
 		default:
 			break;
@@ -328,32 +328,32 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_OutEventVisibilityEventDriven_main_region__entry_Default() {
-		enterSequence_OutEventVisibilityEventDriven_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean outEventVisibilityEventDriven_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (((sCInterface.i) && (sCInterface.getIValue()==1))) {
-				exitSequence_OutEventVisibilityEventDriven_main_region_A();
+				exitSequence_main_region_A();
 				sCInterface.raiseO1();
 				
 				raiseL();
 				
-				enterSequence_OutEventVisibilityEventDriven_main_region_B_default();
+				enterSequence_main_region_B_default();
 				react();
 			} else {
 				if (sCInterface.i) {
-					exitSequence_OutEventVisibilityEventDriven_main_region_A();
+					exitSequence_main_region_A();
 					sCInterface.raiseO1();
 					
-					enterSequence_OutEventVisibilityEventDriven_main_region_C_default();
+					enterSequence_main_region_C_default();
 					react();
 				} else {
 					did_transition = false;
@@ -366,15 +366,15 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		return did_transition;
 	}
 	
-	private boolean outEventVisibilityEventDriven_main_region_B_react(boolean try_transition) {
+	private boolean main_region_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (l) {
-				exitSequence_OutEventVisibilityEventDriven_main_region_B();
+				exitSequence_main_region_B();
 				sCInterface.raiseO2();
 				
-				enterSequence_OutEventVisibilityEventDriven_main_region_B_default();
+				enterSequence_main_region_B_default();
 				react();
 			} else {
 				did_transition = false;
@@ -386,15 +386,15 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		return did_transition;
 	}
 	
-	private boolean outEventVisibilityEventDriven_main_region_C_react(boolean try_transition) {
+	private boolean main_region_C_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.i) {
-				exitSequence_OutEventVisibilityEventDriven_main_region_C();
+				exitSequence_main_region_C();
 				sCInterface.raiseO2();
 				
-				enterSequence_OutEventVisibilityEventDriven_main_region_D_default();
+				enterSequence_main_region_D_default();
 				react();
 			} else {
 				did_transition = false;
@@ -406,17 +406,17 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		return did_transition;
 	}
 	
-	private boolean outEventVisibilityEventDriven_main_region_D_react(boolean try_transition) {
+	private boolean main_region_D_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.i) {
-				exitSequence_OutEventVisibilityEventDriven_main_region_D();
+				exitSequence_main_region_D();
 				sCInterface.raiseO1();
 				
 				sCInterface.raiseO2();
 				
-				enterSequence_OutEventVisibilityEventDriven_main_region_E_default();
+				enterSequence_main_region_E_default();
 				react();
 			} else {
 				did_transition = false;
@@ -428,7 +428,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		return did_transition;
 	}
 	
-	private boolean outEventVisibilityEventDriven_main_region_E_react(boolean try_transition) {
+	private boolean main_region_E_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

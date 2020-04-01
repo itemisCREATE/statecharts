@@ -36,15 +36,15 @@ TEST_F(LocalEventsTest, test) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::localEvents_r1_Comp1_r_A1));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::r1_Comp1_r_A1));
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::localEvents_r2_Comp2_r_A2));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::r2_Comp2_r_A2));
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::localEvents_r1_Comp1_r_D1));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::r1_Comp1_r_D1));
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::localEvents_r2_Comp2_r_D2));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::r2_Comp2_r_D2));
 	
 	EXPECT_TRUE(statechart->get_cycleCountSm()== 5);
 	
