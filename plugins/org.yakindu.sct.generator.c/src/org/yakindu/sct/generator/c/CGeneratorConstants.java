@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -72,6 +72,7 @@ public abstract class CGeneratorConstants {
 	public static final String TRACE_HANDLER_TYPE = "sc_trace_handler";
 	public static final String TRACE_HANDLER = "trace_handler";
 	public static final String TRACING_MODULE = "sc_tracing";
+	public static final String RXC_MODULE = "sc_rxc";
 	public static final String INIT_TRACING = "initWithTracing";
 	public static final String SET_TRACING = "setTraceHandler";
 	public static final String TRACE_CALL = "SC_TRACE";

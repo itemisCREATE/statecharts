@@ -508,6 +508,10 @@ class Naming {
 		TRACING_MODULE
 	}
 	
+	def rxcModule(ExecutionFlow it) {
+		RXC_MODULE
+	}
+	
 	def metaModule(ExecutionFlow it) {
 		it.module + META_MODULE
 	}
