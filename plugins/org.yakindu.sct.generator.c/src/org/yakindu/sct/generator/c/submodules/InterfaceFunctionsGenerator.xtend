@@ -63,7 +63,7 @@ class InterfaceFunctionsGenerator {
 				«IF !variable.readonly && !variable.const»
 				void «variable.asSetter»(«scHandleDecl», «variable.typeSpecifier.targetLanguageName» value)
 				{
-					«variable.traceCode»
+					«variable.traceCode('&value')»;
 					«variable.access» = value;
 				}
 				«ENDIF»

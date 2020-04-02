@@ -24,6 +24,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 /**
  * @author axel terfloth
@@ -44,7 +45,11 @@ class TraceCode {
 
 
 	def dispatch CharSequence traceCode(Object it) {
-		if (entry.tracingGeneric) notifyTrace
+		if (entry.tracingGeneric) notifyTrace else ''''''
+	}
+
+	def CharSequence traceCode(Object it, Object value) {
+		if (entry.tracingGeneric) it.notifyTrace(value) else null
 	}
 
 	def CharSequence traceTimeEventRaised(ExecutionFlow it) {
@@ -81,9 +86,13 @@ class TraceCode {
 
 	def protected dispatch notifyTrace(Object it) ''''''
 	
-	def protected dispatch notifyTrace(VariableDefinition it) '''
-		«flow.tracingPrefix»FEATURE(«scHandle», «TRACE_MACHINE_VARIABLE_SET», «flow.featureNamingPrefix»«it.name», &value);
-	'''
+	def protected dispatch notifyTrace(Object it, Object value) ''''''
+	
+	def protected dispatch notifyTrace(VariableDefinition it, Object value) 
+		'''«flow.tracingPrefix»FEATURE(«scHandle», «TRACE_MACHINE_VARIABLE_SET», «flow.featureNamingPrefix»«it.name», «value»)'''
+
+	def protected dispatch notifyTrace(EventDefinition it, Object value) 
+		'''«flow.tracingPrefix»FEATURE(«scHandle», «TRACE_MACHINE_EVENT_RAISED», «flow.featureNamingPrefix»«it.name», «value»)'''
 
 	def protected dispatch notifyTrace(TraceStateEntered it) '''
 		«TRACE_CALL»_STATE(«scHandle», «TRACE_MACHINE_ENTERED», «state.stateName»);

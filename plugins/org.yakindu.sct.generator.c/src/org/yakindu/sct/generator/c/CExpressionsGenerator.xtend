@@ -72,6 +72,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension CLiterals
 	
 	@Inject protected extension EventCode
+	@Inject protected extension TraceCode
 	@Inject protected extension ExpressionsChecker
 	
 	@Inject extension CMultiStatemachine
@@ -151,30 +152,26 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(LogicalOrExpression it) '''(«leftOperand.sc_boolean_code») || («rightOperand.sc_boolean_code»)'''
 	
 	override dispatch CharSequence code(AssignmentExpression it) {
-		val varRef = varRef
-		if (varRef instanceof FeatureCall) {
-			val container = varRef.feature.eContainer
+		val vRef = it.varRef
+		if (vRef instanceof FeatureCall) {
+			val container = vRef.feature.eContainer
 			if (container instanceof ComplexType && container.isMultiSM) {
-				return '''«varRef.feature.asSetter»(«varRef.owner.code», «expression.code»)'''
+				return '''«vRef.feature.asSetter»(«vRef.owner.code», «expression.code»)'''
 			}
 		}
+		var CharSequence assignCode
+		
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
-			return '''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
+			assignCode =  '''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
 		} else {
-			var String setterCall = null;
-			try {
-				setterCall = varRef.definition.asSetter
-			} catch (NullPointerException e) {
-				// Since the function 'isUniqueName' can throw Exceptions and is called by 'asSetter' this just means, that there is no setter
-			}
-			if (entry.tracingGeneric && setterCall !== null) {
-				return '''«setterCall»(«scHandle», «expression.code»)'''
-			// '''«varRef.code» «operator.literal» «expression.code»'''
-			}
-
+			assignCode = super._code(it)
 		}
-		super._code(it)
+		
+		return assignCode = '''
+			«assignCode»;
+			«varRef.definition.traceCode('&' + vRef.code)»'''
 	}
+
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
 		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {

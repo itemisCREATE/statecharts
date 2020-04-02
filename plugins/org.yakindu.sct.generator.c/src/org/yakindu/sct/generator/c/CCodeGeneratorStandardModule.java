@@ -63,14 +63,16 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 				PARAMETER_TRACING_ENTER_STATE);
 		FeatureParameterValue traceExitFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
 				PARAMETER_TRACING_EXIT_STATE);
-		boolean traceEnter = traceEnterFeature != null ? traceEnterFeature.getBooleanValue() : false;
-		boolean traceExit = traceExitFeature != null ? traceExitFeature.getBooleanValue() : false;//TODO: this line was previously:
-		//boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false; // was this a bug?
-		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit);
-
 		FeatureParameterValue traceGenericFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
 				PARAMETER_TRACING_GENERIC);
+		boolean traceEnter = traceEnterFeature != null ? traceEnterFeature.getBooleanValue() : false;
+		boolean traceExit = traceExitFeature != null ? traceExitFeature.getBooleanValue() : false;
 		boolean traceGeneric = traceGenericFeature != null ? traceGenericFeature.getBooleanValue() : false;
+		
+		//TODO: this line was previously:
+		//boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false; // was this a bug?
+		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit || traceGeneric);
+
 		if(traceGeneric) {
 			Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
 			includeBinder.addBinding().to(ScTracingIncludeProvider.class);

@@ -27,6 +27,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.TraceCode
 
 /**
  * @author rbeckmann
@@ -39,6 +40,7 @@ class EventCode {
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension CLiterals
+	@Inject protected extension	TraceCode 
 	@Inject extension ExpressionExtensions
 	
 	@Inject protected extension GeneratorEntry entry
@@ -81,11 +83,15 @@ class EventCode {
 			val fc = event as FeatureCall
 			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.getHandle»«IF value !== null», «exp.code(value)»«ENDIF»)'''
 		}
+		
+		val eventMarker = '''«event.definition.event.access» = «TRUE_LITERAL»'''
+		val eventValue  = if (it.value !== null) '''«event.definition.event.valueAccess» = «exp.code(value)»''' else null
+		val eventTrace  = event.definition.traceCode(if (it.value !== null) '''&«event.definition.event.valueAccess»''' else '''sc_null''')
+
 		return '''
-		«IF value !== null»
-			«event.definition.event.valueAccess» = «exp.code(value)»;
-		«ENDIF»
-		«event.definition.event.access» = «TRUE_LITERAL»'''
+			«eventMarker»«IF eventValue !== null»;
+			«eventValue»«ENDIF»«IF eventTrace !== null»;
+			«eventTrace»«ENDIF»'''
 	}
 	
 	def eventRaiserSignature(ExecutionFlow it, EventDefinition event) '''void «event.asRaiser»(«scHandleDecl»«event.valueParams»)'''
