@@ -44,7 +44,6 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension GenmodelEntries
 	@Inject extension Naming
 	@Inject extension ICoreLibraryHelper
-	@Inject GeneratorEntry entry
 
 	@Inject
 	IGenArtifactConfigurations configs

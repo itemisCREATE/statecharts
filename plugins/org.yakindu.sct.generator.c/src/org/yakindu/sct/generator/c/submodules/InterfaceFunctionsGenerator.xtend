@@ -12,8 +12,8 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
@@ -34,6 +34,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension EventCode
 	@Inject protected extension FlowCode
 	@Inject protected extension ExpressionsChecker
+	@Inject protected extension TraceCode
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
@@ -62,9 +63,7 @@ class InterfaceFunctionsGenerator {
 				«IF !variable.readonly && !variable.const»
 				void «variable.asSetter»(«scHandleDecl», «variable.typeSpecifier.targetLanguageName» value)
 				{
-					«IF entry.tracingGeneric»
-					«tracingPrefix»FEATURE(«scHandle», «CGeneratorConstants::TRACE_MACHINE_VARIABLE_SET», «featureNamingPrefix»«variable.name», &value);
-					«ENDIF»
+					«variable.traceCode»
 					«variable.access» = value;
 				}
 				«ENDIF»

@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.xtext.util.Strings
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -24,6 +23,7 @@ import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.c.TraceCode
 
 /**
  * @author rbeckmann
@@ -40,6 +40,7 @@ class APIGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
 	@Inject protected extension StatechartAnnotations
+	@Inject protected extension TraceCode
 	
 	@Inject protected extension GeneratorEntry genEntry
 	@Inject protected extension GenmodelEntries
@@ -48,11 +49,11 @@ class APIGenerator {
 		'''
 			«runCycleSignature»
 			{
-				«traceCall(TRACE_MACHINE_CYCLE_START)»
+				«traceCycleStart»
 				«clearOutEventsFctID»(«scHandle»);
 				«runCycleForLoop(it)»
 				«clearInEventsFctID»(«scHandle»);
-				«traceCall(TRACE_MACHINE_CYCLE_END)»
+				«traceCycleEnd»
 			}
 		'''
 	}
@@ -168,7 +169,7 @@ class APIGenerator {
 		'''
 			«enterSignature»
 			{
-				«traceCall(TRACE_MACHINE_ENTER)»
+				«traceMachineEnter»
 				«enterSequences.defaultSequence.code»
 			}
 		'''
@@ -277,7 +278,7 @@ class APIGenerator {
 			«exitSignature»
 			{
 				«exitSequence.code»
-				«traceCall(TRACE_MACHINE_EXIT)»
+				«traceMachineExit»
 			}
 		'''
 	}
@@ -298,6 +299,7 @@ class APIGenerator {
 					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + (unsigned)sizeof(«timeEventScope.type»))
 					{
 					*(«BOOL_TYPE»*)evid = «TRUE_LITERAL»;
+					«traceTimeEventRaised»
 				}		
 			}
 		'''
@@ -311,26 +313,19 @@ class APIGenerator {
 		'''void «raiseTimeEventFctID»(«scHandleDecl», «EVENT_TYPE» evid)'''
 	}
 	
-	def protected CharSequence traceCall(ExecutionFlow it, String event){
-		'''
-		«IF genEntry.tracingGeneric»
-		«traceFctID»(«scHandle», «event»)
-		«ENDIF»
-		'''
-	}
-	
-	def protected CharSequence traceTimeEventCall(ExecutionFlow it, String event, String timerEventID){
-		'''
-		«IF genEntry.tracingGeneric»
-		«traceFctID»_TIME_EVENT(«scHandle», «event», «timerEventID»)
-		«ENDIF»
-		'''
-	}
-	
-	def protected CharSequence traceCall(ExecutionFlow it){
-		traceCall("")
-	}
-	
+//	def protected CharSequence traceCall(ExecutionFlow it, String event){
+//		'''
+//		«IF genEntry.tracingGeneric»
+//		«traceFctID»(«scHandle», «event»)
+//		«ENDIF»
+//		'''
+//	}
+//	
+//	
+//	def protected CharSequence traceCall(ExecutionFlow it){
+//		traceCall("")
+//	}
+//	
 	def declareInitWithTracing(ExecutionFlow it) {
 		'''«initWithTracingSignature»;'''
 	}
