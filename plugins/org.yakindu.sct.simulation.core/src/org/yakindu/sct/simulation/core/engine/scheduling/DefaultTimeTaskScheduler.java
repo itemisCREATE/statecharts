@@ -170,10 +170,10 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 			if (executionTime <= stopTime) {
 				currentTime = task.getNextExecutionTime();
 				task = tasks.poll();
-				task.run();
 				if (task.period > -1) {
 					schedulePeriodicalTask(task, task.period, task.period);
 				}
+				task.run();
 			} else {
 				currentTime = stopTime;
 				processTasks = false;

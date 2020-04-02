@@ -97,6 +97,9 @@
 
         <!-- Classpath for MyLyn Wikitext: -->
         <artifact:resolve>
+	    <artifact:remoterepos>
+                <remoterepo url="https://repo1.maven.org/maven2" releases="true" snapshots="false" updates="never" checksums="fail"/>
+            </artifact:remoterepos>
             <artifact:dependencies>
                 <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext"
                     version="${wikitext.version}" scope="compile"/>
@@ -106,6 +109,9 @@
 
         <!-- Sources of MyLyn Wikitext: -->
         <artifact:resolve>
+	    <artifact:remoterepos>
+                <remoterepo url="https://repo1.maven.org/maven2" releases="true" snapshots="false" updates="never" checksums="fail"/>
+            </artifact:remoterepos>
             <artifact:dependencies>
                 <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext"
                     version="${wikitext.version}" scope="compile" classifier="sources"/>
@@ -115,6 +121,9 @@
 
         <!-- Classpath for MyLyn Wikitext's Textile support: -->
         <artifact:resolve>
+	    <artifact:remoterepos>
+                <remoterepo url="https://repo1.maven.org/maven2" releases="true" snapshots="false" updates="never" checksums="fail"/>
+            </artifact:remoterepos>
             <artifact:dependencies>
                 <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext.textile"
                     version="${wikitext.version}" scope="compile"/>
@@ -124,6 +133,9 @@
 
         <!-- Sources of MyLyn Wikitext's Textile support: -->
         <artifact:resolve>
+	    <artifact:remoterepos>
+                <remoterepo url="https://repo1.maven.org/maven2" releases="true" snapshots="false" updates="never" checksums="fail"/>
+            </artifact:remoterepos>
             <artifact:dependencies>
                 <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext.textile"
                     version="${wikitext.version}" scope="compile" classifier="sources"/>
@@ -133,6 +145,9 @@
 
         <!-- Classpath for MyLyn Wikitext's Ant support: -->
         <artifact:resolve>
+	    <artifact:remoterepos>
+                <remoterepo url="https://repo1.maven.org/maven2" releases="true" snapshots="false" updates="never" checksums="fail"/>
+            </artifact:remoterepos>
             <artifact:dependencies>
                 <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext.ant"
                     version="${wikitext.version}" scope="compile"/>
@@ -506,6 +521,20 @@
             <!-- Fix "pro-feature" elements -->
             <replaceregexp byline="false" flags="g"
                 match='&lt;p&gt;&lt;div class="pro-feature"&gt;&lt;/p&gt;' replace='&lt;div class="pro-feature"&gt;'>
+                <fileset dir="${work.dir}">
+                    <include name="${index.html}"/>
+                </fileset>
+            </replaceregexp>
+            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;/div&gt;&lt;/p&gt;'
+                replace='&lt;/div&gt;'>
+                <fileset dir="${work.dir}">
+                    <include name="${index.html}"/>
+                </fileset>
+            </replaceregexp>
+        	
+        	<!-- Fix "pro-feature" elements -->
+            <replaceregexp byline="false" flags="g"
+                match='&lt;p&gt;&lt;div class="r4-feature"&gt;&lt;/p&gt;' replace='&lt;div class="r4-feature"&gt;'>
                 <fileset dir="${work.dir}">
                     <include name="${index.html}"/>
                 </fileset>

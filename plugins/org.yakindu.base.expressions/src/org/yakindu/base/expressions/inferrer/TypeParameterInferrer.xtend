@@ -113,6 +113,9 @@ class TypeParameterInferrer {
 		if (parameterType instanceof TypeParameter) {
 			doInferTypeParameterFromOperationArgument(parameterType, argumentType, inferredTypeParameterTypes, acceptor)
 		} else if (parameterType instanceof GenericElement) {
+			if(typeValidator.isAnyType(argumentType.type)) {
+				return
+			}
 			doInferGenericTypeFromOperationArgument(parameterTypeSpecifier, argumentType, inferredTypeParameterTypes,
 				acceptor)
 		}
@@ -273,6 +276,9 @@ class TypeParameterInferrer {
 			val bindings = parameter.typeArguments.map [
 				InferenceResult.from(type)
 			]
+			if(typeValidator.isAnyType(result1.type)){
+				return
+			}
 			acceptor.error(
 				String.format(INCOMPATIBLE_TYPES, argumentResult, InferenceResult.from(parameter.type, bindings)),
 				NOT_COMPATIBLE_CODE)

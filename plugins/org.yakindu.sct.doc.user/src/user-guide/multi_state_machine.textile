@@ -1,10 +1,9 @@
-p. 
+
+h1{%EARLY_SEPARATOR%}. 
 
 ==<div class="r4-feature">==
 
-
 h1(#multi_state_machine_modelling). Multi state machine modeling
-
 
 The behavior of large systems is often too complex to be captured by a single statechart. So if a statechart gets too large you should think about splitting it into two or more smaller parts. Beside the fact that the smaller state machines are easier to handle  and maintain there are additional reasons for using multiple state machines instead of single monolithic ones:
 
