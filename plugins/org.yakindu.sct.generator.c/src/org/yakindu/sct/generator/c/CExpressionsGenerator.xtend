@@ -56,6 +56,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 
 /**
  * @author axel terfloth
@@ -158,7 +159,12 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 				return '''«vRef.feature.asSetter»(«vRef.owner.code», «expression.code»)'''
 			}
 		}
-		super._code(it)
+		
+		return if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
+			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
+		} else {
+			super._code(it)
+		}
 	}
 
 
@@ -166,7 +172,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
 			'''«expression.eContainer.castToReciever»fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
 		} else {
-			super._code(expression);
+			super._code(expression)
 		}
 	}
 
