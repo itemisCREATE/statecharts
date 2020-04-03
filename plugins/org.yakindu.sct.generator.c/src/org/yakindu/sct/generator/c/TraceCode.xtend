@@ -30,6 +30,7 @@ import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
 
 /**
  * @author axel terfloth
@@ -122,6 +123,7 @@ class TraceCode {
 							.filter(AssignmentExpression)
 							.map[ assignment | assignment.varRef ]
 							.filter[ v | ! v.isVarFromOtherStatechart ]
+							.filter[ v | ! (v.definition.eContainer instanceof LocalVariableDefinition)]
 							.toList
 							
 		val traceVars = traceAssignee.map( a | a.definition ).toSet
@@ -129,7 +131,7 @@ class TraceCode {
 							
 		'''
 		«FOR v : traceAssigneeUnique»
-		«v.definition.traceCode('&' + v.code)»;
+		«v.definition.notifyTrace('&' + v.code)»;
 		«ENDFOR»
 		'''
 	}
