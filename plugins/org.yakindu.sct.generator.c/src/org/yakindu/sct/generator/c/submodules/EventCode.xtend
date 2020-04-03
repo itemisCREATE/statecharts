@@ -24,6 +24,7 @@ import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -37,6 +38,7 @@ class EventCode {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension CLiterals
 	@Inject extension ExpressionExtensions
+	@Inject extension GeneratorPredicate
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
@@ -59,6 +61,13 @@ class EventCode {
 		}
 	'''
 	
+	def interfaceOutgoingEventObservableGetter(ExecutionFlow it, EventDefinition event) '''
+		«eventObservableSignature(event)»
+		{
+			return &«event.accessObservable»;
+		}
+	'''
+	
 	def interfaceOutgoingEventValueGetter(ExecutionFlow it, EventDefinition event) '''
 		«eventValueGetterSignature(event)»
 		{
@@ -70,6 +79,16 @@ class EventCode {
 		if (event.featureOrReference.eContainer instanceof ComplexType) {
 			val fc = event as FeatureCall
 			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.getHandle»«IF value !== null», «exp.code(value)»«ENDIF»)'''
+		}
+		if(useOutEventObservables) {
+			return'''
+			«IF value !== null»
+				{
+					«event.definition.event.valueDeclaration» = «exp.code(value)»;
+					SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», &«event.definition.event.valueName»);
+				}
+				«ELSE»
+				SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», sc_null)«ENDIF»'''
 		}
 		return '''
 		«IF value !== null»
@@ -83,4 +102,6 @@ class EventCode {
 	def eventGetterSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.BOOL_TYPE» «event.asRaised»(const «scHandleDecl»)'''
 	
 	def eventValueGetterSignature(ExecutionFlow it, EventDefinition event) '''«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)'''
+	
+	def eventObservableSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»* «event.asObservableGetter»(«scHandleDecl»)'''
 }

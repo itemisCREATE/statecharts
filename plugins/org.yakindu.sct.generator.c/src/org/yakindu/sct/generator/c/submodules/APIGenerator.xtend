@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.xtext.util.Strings
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -22,6 +21,9 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.base.types.Direction
 
 /**
  * @author rbeckmann
@@ -38,12 +40,13 @@ class APIGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
 	@Inject protected extension StatechartAnnotations
+	@Inject protected extension GeneratorPredicate
 
 	def runCycle(ExecutionFlow it) {
 		'''
 			«runCycleSignature»
 			{
-				«clearOutEventsFctID»(«scHandle»);
+				«IF !useOutEventObservables»«clearOutEventsFctID»(«scHandle»);«ENDIF»
 				«runCycleForLoop(it)»
 				«clearInEventsFctID»(«scHandle»);
 			}
@@ -120,9 +123,22 @@ class APIGenerator {
 			«scHandle»->«STATEVECTOR_POS» = 0;
 			
 			«clearInEventsFctID»(«scHandle»);
-			«clearOutEventsFctID»(«scHandle»);
+			«IF !useOutEventObservables»
+				«clearOutEventsFctID»(«scHandle»);
+			«ELSE»
+			
+			«initializeObservables»
+			«ENDIF»
 
 			«initSequence.code»
+		'''
+	}
+	
+	def initializeObservables(ExecutionFlow it) {
+		'''
+		«FOR outEvent : scopes.filter(InterfaceScope).map[events].flatten.filter[direction === Direction.OUT]»
+			SC_OBSERVABLE_INIT(&«outEvent.accessObservable»);
+		«ENDFOR»
 		'''
 	}
 	

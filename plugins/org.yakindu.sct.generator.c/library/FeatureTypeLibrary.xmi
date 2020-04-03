@@ -58,5 +58,9 @@
         comment="If set to true, the buffers for the event queues are not allocated by the state machine, but have to be provided to the init function instead."
         optional="true"
         parameterType="BOOLEAN"/>
+    <parameters
+        name="outEventObservables"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>

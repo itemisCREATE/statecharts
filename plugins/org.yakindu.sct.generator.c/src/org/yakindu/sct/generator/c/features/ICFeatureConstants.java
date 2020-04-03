@@ -53,4 +53,6 @@ public interface ICFeatureConstants {
 	
 	public static final String PARAMETER_USER_ALLOCATED_QUEUE = "userAllocatedQueue";
 	
+	public static final String PARAMETER_OUT_EVENT_OBSERVABLES = "outEventObservables";
+	
 }

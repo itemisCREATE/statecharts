@@ -122,4 +122,13 @@ class GenmodelEntries {
 			false
 		}
 	}
+	
+	def getOutEventObservablesUsed(GeneratorEntry it) {
+		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_OUT_EVENT_OBSERVABLES)
+		if(parameter !== null) {
+			parameter.booleanValue
+		} else {
+			false
+		}
+	}
 }

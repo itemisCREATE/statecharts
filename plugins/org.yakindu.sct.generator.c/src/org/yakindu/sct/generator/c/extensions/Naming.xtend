@@ -45,6 +45,9 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.TypedDeclaration
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -64,6 +67,7 @@ class Naming {
 	@Inject extension GenmodelEntries
 	
 	@Inject extension StatechartUtil
+	@Inject extension GeneratorPredicate
 	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -232,10 +236,15 @@ class Naming {
 		return null;
 	}
 	
-	def dispatch scopeTypeDeclMember(EventDefinition it) '''
+	def dispatch scopeTypeDeclMember(EventDefinition it) {
+		if(useOutEventObservables && direction == Direction.OUT) {
+			return '''«OBSERVABLE_TYPE» «eventName»;'''
+		}
+		'''
 		«BOOL_TYPE» «eventRaisedFlag»;
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
-	'''
+		'''
+	}
 
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
 		«BOOL_TYPE» «timeEventRaisedFlag»;
@@ -319,6 +328,10 @@ class Naming {
 		name.asIdentifier.value
 	}
 	
+	def eventName(EventDefinition it) {
+		name.asIdentifier
+	}
+	
 	def timeEventRaisedFlag(TimeEvent it) {
 		shortName.raised
 	}
@@ -349,6 +362,10 @@ class Naming {
 
 	def asRaised(EventDefinition it) {
 		accessFunction("israised")
+	}
+	
+	def asObservableGetter(EventDefinition it) {
+		accessFunction("get")
 	}
 
 	def dispatch asGetter(EventDefinition it) {
@@ -434,14 +451,26 @@ class Naming {
 	def dispatch access(OperationDefinition it) '''«asFunction»'''
 
 	def dispatch access(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier.raised»'''
+	
+	def dispatch accessObservable(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier»'''
+	
+	def dispatch accessObservable(EObject it) ''''''
 
 	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
 
 	def dispatch access(EObject it) '''#error cannot access elements of type «getClass.name»'''
 
 	def dispatch valueAccess(Declaration it)'''«IF needsHandle»«scHandle»->«ENDIF»«scope.instance».«name.asIdentifier.value»'''
-
+	
 	def dispatch valueAccess(EObject it) '''#error cannot value access elements of type «getClass.name»'''
+
+	def dispatch valueDeclaration(TypedDeclaration it) '''«typeSpecifier.targetLanguageName» «valueName»'''
+	
+	def dispatch valueDeclaration(EObject it) ''''''
+	
+	def dispatch valueName(TypedDeclaration it) '''«scope.instance»_«name.asIdentifier.value»'''
+	
+	def dispatch valueName(EObject it) ''''''
 	
 	def maxOrthogonalStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_ORTHOGONAL_STATES'''
 

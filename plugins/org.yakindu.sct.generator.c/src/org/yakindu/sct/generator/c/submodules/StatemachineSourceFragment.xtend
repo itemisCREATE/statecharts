@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.c.ISourceFragment
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -41,6 +42,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 	@Inject protected extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension ExpressionsChecker
+	@Inject protected extension GeneratorPredicate
 	
 	@Inject protected extension APIGenerator
 	
@@ -112,8 +114,10 @@ class StatemachineSourceFragment implements ISourceFragment {
 		
 		«clearInEventsFunction»
 		
-		«clearOutEventsFunction»
-		
+		«IF !useOutEventObservables»
+			«clearOutEventsFunction»
+			
+		«ENDIF»
 		«interfaceFunctions»
 		
 		«functionImplementations»

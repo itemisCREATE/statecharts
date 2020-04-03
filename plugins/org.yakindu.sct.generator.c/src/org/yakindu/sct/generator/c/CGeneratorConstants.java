@@ -29,6 +29,7 @@ public abstract class CGeneratorConstants {
 	public static final String REAL_TYPE = "sc_real";
 	public static final String EVENT_TYPE = "sc_eventid";
 	public static final String INTPTR_TYPE = "sc_intptr_t";
+	public static final String OBSERVABLE_TYPE = "sc_observable";
 	
 
 	public static final String TYPES_MODULE = "sc_types";

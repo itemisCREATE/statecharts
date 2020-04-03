@@ -31,6 +31,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.c.IHeaderFragment
 import java.util.Set
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -51,6 +52,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension APIGenerator
 	@Inject protected extension StatechartTypes
 	@Inject protected extension EventCode
+	@Inject protected extension GeneratorPredicate
 	
 	@Inject
 	IGenArtifactConfigurations defaultConfigs
@@ -180,6 +182,9 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		«IF direction == Direction::IN»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern «eventRaiserSignature(flow, it)»;
+		«ELSEIF useOutEventObservables»
+			/*! Returns the observable for the out event '«name»' that is defined in the «scope.scopeDescription». */ 
+			extern «eventObservableSignature(flow, it)»;
 			
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 

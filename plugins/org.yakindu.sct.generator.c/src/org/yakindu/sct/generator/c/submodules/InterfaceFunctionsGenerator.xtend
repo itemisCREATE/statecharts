@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -31,6 +32,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension EventCode
 	@Inject protected extension FlowCode
 	@Inject protected extension ExpressionsChecker
+	@Inject protected extension GeneratorPredicate
 	
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : interfaceScopes»
@@ -39,9 +41,13 @@ class InterfaceFunctionsGenerator {
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
-				«interfaceOutgoingEventGetter(event)»
-				«IF event.hasValue» 
-					«interfaceOutgoingEventValueGetter(event)»
+				«IF useOutEventObservables»
+					«interfaceOutgoingEventObservableGetter(event)»
+				«ELSE»
+					«interfaceOutgoingEventGetter(event)»
+					«IF event.hasValue» 
+						«interfaceOutgoingEventValueGetter(event)»
+					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 			
