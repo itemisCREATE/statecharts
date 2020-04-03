@@ -12,22 +12,21 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.types.ComplexType
 import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.TraceCode
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.base.expressions.util.ExpressionExtensions
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
-import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.TraceCode
 
 /**
  * @author rbeckmann
@@ -50,13 +49,12 @@ class EventCode {
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
 		{
-			«IF entry.tracingGeneric»
-			«TRACE_CALL»_FEATURE(«scHandle», «TRACE_MACHINE_EVENT_RAISED», «featureNamingPrefix»start, «NULL_LITERAL»);
-			«ENDIF»
+			«event.traceCode( if (event.hasValue) "&value" else "sc_null" )»
 			«interfaceIncomingEventRaiserBody(event)»
 		}
-	'''
-	
+
+	'''	
+
 	def interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
 		«IF event.hasValue»
 		«event.valueAccess» = value;

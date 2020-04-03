@@ -12,22 +12,21 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 
 /**
  * @author rbeckmann
@@ -84,16 +83,23 @@ class StatechartTypes {
 		} «statesEnumType»;
 	'''
 	
-	def featuresEnumDecl(ExecutionFlow it) '''
-		/*! Enumeration of all features of the statechart */ 
-		typedef enum
-		{
-			«it.name.toLowerCase»_no_event = «NO_EVENT»,
-			«FOR feature : allEventAndVariables SEPARATOR ","»
-				«featureNamingPrefix»«feature.name»
-			«ENDFOR»
-		} «featuresEnumType»;
-	'''
+	def featuresEnumDecl(ExecutionFlow it) {
+		if ( entry.tracingGeneric ) {
+			val featureEnumeratorNames = allEventAndVariables.map[ f | '''«featureNamingPrefix»«f.name»'''].toList
+			featureEnumeratorNames.add(0, '''«it.name.toLowerCase»_no_feature = «NO_EVENT»''')
+			
+			'''
+				/*! Enumeration of all features of the statechart */ 
+				typedef enum
+				{
+					«FOR feature : featureEnumeratorNames SEPARATOR ","»
+						«feature»
+					«ENDFOR»
+				} «featuresEnumType»;
+			'''	
+		}
+		else ''''''
+	}
 	
 	def scopeTypeDecl(Scope scope) '''
 		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»

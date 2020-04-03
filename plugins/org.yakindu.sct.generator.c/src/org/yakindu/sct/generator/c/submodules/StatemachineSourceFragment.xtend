@@ -99,6 +99,8 @@ class StatemachineSourceFragment implements ISourceFragment {
 	def functions(ExecutionFlow it) '''	
 		«IF entry.tracingGeneric»
 		«tracing»
+		
+		«initWithTracing»
 		«ENDIF»
 		
 		«init»

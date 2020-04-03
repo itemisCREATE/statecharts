@@ -101,8 +101,8 @@ class APIGenerator {
 	}
 	
 	def tracing(ExecutionFlow it){
+		if (timed) 
 		'''
-		/* required for tracing */
 		static «INT_TYPE» time_event_index(«scHandleDecl», «EVENT_TYPE» evid);
 		
 		static «INT_TYPE» time_event_index(«scHandleDecl», «EVENT_TYPE» evid)
@@ -110,7 +110,12 @@ class APIGenerator {
 			«INT_TYPE» tev_id = ((«INTPTR_TYPE»)evid - («INTPTR_TYPE»)&(«scHandle»->timeEvents)) / sizeof(«BOOL_TYPE»);
 			return tev_id;
 		}
-		
+		'''
+		else ''''''
+	}
+
+	def initWithTracing(ExecutionFlow it) {
+		'''
 		void «initTracingFctID»(«scHandleDecl», «TRACE_HANDLER_TYPE» *trace_handler)
 		{
 			«initFunctionBody(it)»
@@ -118,7 +123,7 @@ class APIGenerator {
 		}
 		'''
 	}
-
+	
 	def init(ExecutionFlow it) {
 		'''
 			«initSignature»
