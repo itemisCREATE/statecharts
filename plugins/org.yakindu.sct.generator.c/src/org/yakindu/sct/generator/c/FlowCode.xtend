@@ -119,8 +119,10 @@ class FlowCode {
 		«traceCode»
 	'''
 
-	def dispatch CharSequence code(Execution it)
-		'''«statement.code»;'''
+	def dispatch CharSequence code(Execution it) '''
+		«statement.code»;
+		«statement.traceCode»
+		'''
 	
 	def dispatch CharSequence code(Call it)
 		'''«step.shortName»(«scHandle»);'''
@@ -173,6 +175,7 @@ class FlowCode {
 	
 	def dispatch CharSequence code(Statement it) '''
 		«expression.code»;
+		«expression.traceCode»
 	'''
 
 	def unusedParam(String s) '''

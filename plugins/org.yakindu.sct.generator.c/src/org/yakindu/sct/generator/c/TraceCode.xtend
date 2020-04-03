@@ -25,6 +25,11 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.base.types.Expression
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.ComplexType
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 /**
  * @author axel terfloth
@@ -34,6 +39,8 @@ class TraceCode {
  	@Inject extension GenmodelEntries
  	@Inject extension Naming
 	@Inject extension SExecExtensions
+ 	@Inject extension protected StatechartUtil
+ 	@Inject extension CExpressionsGenerator
  
  	@Inject GeneratorEntry entry
  		
@@ -110,6 +117,30 @@ class TraceCode {
 		«TRACE_CALL»_TIME_EVENT(«scHandle», «TRACE_MACHINE_TIME_EVENT_UNSET», «flow.timeEvents.indexOf(timeEvent)»);
 	'''
 
+	def protected dispatch notifyTrace(Expression it) {
+		val traceAssignee = (it.eAllContents.toList => [ l | l.add(it)])
+							.filter(AssignmentExpression)
+							.map[ assignment | assignment.varRef ]
+							.filter[ v | ! v.isVarFromOtherStatechart ]
+							.toList
+							
+		val traceVars = traceAssignee.map( a | a.definition ).toSet
+		val traceAssigneeUnique = traceAssignee.filter[ a | traceVars.remove(a.definition)]
+							
+		'''
+		«FOR v : traceAssigneeUnique»
+		«v.definition.traceCode('&' + v.code)»;
+		«ENDFOR»
+		'''
+	}
+	
+
+	def isVarFromOtherStatechart(Expression it) {
+		return (it instanceof FeatureCall) 
+			&& ((it as FeatureCall).feature.eContainer instanceof ComplexType) 
+			&& (it as FeatureCall ).feature.eContainer.isMultiSM
+	}
+	
 
 	def protected dispatch callTraceHook(Trace it) '''''' 
 

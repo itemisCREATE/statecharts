@@ -15,7 +15,6 @@ import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -159,17 +158,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 				return '''«vRef.feature.asSetter»(«vRef.owner.code», «expression.code»)'''
 			}
 		}
-		var CharSequence assignCode
-		
-		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
-			assignCode =  '''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
-		} else {
-			assignCode = super._code(it)
-		}
-		
-		return assignCode = '''
-			«assignCode»;
-			«varRef.definition.traceCode('&' + vRef.code)»'''
+		super._code(it)
 	}
 
 
