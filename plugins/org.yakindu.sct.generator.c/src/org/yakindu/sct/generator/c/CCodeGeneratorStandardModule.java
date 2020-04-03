@@ -69,8 +69,6 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 		boolean traceExit = traceExitFeature != null ? traceExitFeature.getBooleanValue() : false;
 		boolean traceGeneric = traceGenericFeature != null ? traceGenericFeature.getBooleanValue() : false;
 		
-		//TODO: this line was previously:
-		//boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false; // was this a bug?
 		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit || traceGeneric);
 
 		if(traceGeneric) {
