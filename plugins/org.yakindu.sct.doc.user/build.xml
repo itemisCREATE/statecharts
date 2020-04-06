@@ -228,8 +228,8 @@
                 <include name="user-guide/generating_code_headless.textile"/>
                 <include name="user-guide/sctunit.textile"/>
             	<include name="user-guide/embedded_systems_integration_guide.textile"/>
-            	<include name="user-guide/lab_projects.textile"/>
             	<include name="user-guide/tracing_debugging_testing.textile"/>
+            	<include name="user-guide/lab_projects.textile"/>
                 <include name="user-guide/installation.textile"/>
             	<include name="user-guide/release_notes.textile"/>
                 <!-- <include name="user-guide/glossary.textile" /> -->
@@ -415,8 +415,8 @@
                         <file name="user-guide/statechart_language.textile"/>
                         <file name="user-guide/multi_state_machine.textile"/>
 						<file name="user-guide/embedded_systems_integration_guide.textile"/>
-                    	<file name="user-guide/lab_projects.textile"/>
                     	<file name="user-guide/tracing_debugging_testing.textile"/>
+                    	<file name="user-guide/lab_projects.textile"/>
                         <file name="user-guide/installation.textile"/>
                     	<file name="user-guide/release_notes.textile"/>
                         <!-- file name="user-guide/glossary.textile" / -->
