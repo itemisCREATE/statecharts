@@ -46,6 +46,10 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.expressions.expressions.StringLiteral
+
+import static  org.yakindu.sct.generator.c.CGeneratorConstants.*
+
 
 /**
  * @author axel terfloth
@@ -172,4 +176,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «TRUE_LITERAL» : «FALSE_LITERAL»'''
 	
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
+	
+	override dispatch CharSequence code(StringLiteral it) {
+		'''(«STRING_TYPE») «super._code(it)»'''
+	}
 }
