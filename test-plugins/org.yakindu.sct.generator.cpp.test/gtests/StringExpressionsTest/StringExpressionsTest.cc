@@ -34,9 +34,9 @@ class StringExpressionsTest : public ::testing::Test{
 
 TEST_F(StringExpressionsTest, StringExpressionsTest) {
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringX(), "\"X\"") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringX(), (sc_string)"\"X\"") == 0);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringY(), "\"Y\"") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringY(), (sc_string)"\"Y\"") == 0);
 	
 	statechart->enter();
 	

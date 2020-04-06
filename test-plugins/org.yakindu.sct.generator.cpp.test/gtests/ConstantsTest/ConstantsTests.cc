@@ -42,7 +42,7 @@ TEST_F(ConstantsTests, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 20);
 	
-	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_y(), "Hello World") == 0);
+	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_y(), (sc_string)"Hello World") == 0);
 	
 	statechart->getDefaultSCI()->raise_e();
 	

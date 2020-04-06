@@ -252,17 +252,17 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrder) {
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
 	
-	checkMock->setCheckBehavior("AA",&CheckMock::check2);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check2);
 	
-	checkMock->setCheckBehavior("AAA",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AAA",&CheckMock::check3);
 	
-	checkMock->setCheckBehavior("AAC",&CheckMock::check4);
+	checkMock->setCheckBehavior((sc_string)"AAC",&CheckMock::check4);
 	
-	checkMock->setCheckBehavior("AC",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check5);
 	
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	
@@ -308,17 +308,17 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstLeafTransition
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
 	
-	checkMock->setCheckBehavior("AA",&CheckMock::check2);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check2);
 	
-	checkMock->setCheckBehavior("AAA",&CheckMock::check7);
+	checkMock->setCheckBehavior((sc_string)"AAA",&CheckMock::check7);
 	
-	checkMock->setCheckBehavior("AAC",&CheckMock::check4);
+	checkMock->setCheckBehavior((sc_string)"AAC",&CheckMock::check4);
 	
-	checkMock->setCheckBehavior("AC",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check5);
 	
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	
@@ -364,17 +364,17 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstParentTransiti
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
 	
-	checkMock->setCheckBehavior("AA",&CheckMock::check8);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check8);
 	
-	checkMock->setCheckBehavior("AAA",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AAA",&CheckMock::check3);
 	
-	checkMock->setCheckBehavior("AAC",&CheckMock::check4);
+	checkMock->setCheckBehavior((sc_string)"AAC",&CheckMock::check4);
 	
-	checkMock->setCheckBehavior("AC",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check5);
 	
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	
@@ -420,17 +420,17 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstGrandParentTra
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	checkMock->setCheckBehavior("A",&CheckMock::check9);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check9);
 	
-	checkMock->setCheckBehavior("AA",&CheckMock::check2);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check2);
 	
-	checkMock->setCheckBehavior("AAA",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AAA",&CheckMock::check3);
 	
-	checkMock->setCheckBehavior("AAC",&CheckMock::check4);
+	checkMock->setCheckBehavior((sc_string)"AAC",&CheckMock::check4);
 	
-	checkMock->setCheckBehavior("AC",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check5);
 	
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	
@@ -476,17 +476,17 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWithLastLeafTransition)
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
 	
-	checkMock->setCheckBehavior("AA",&CheckMock::check2);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check2);
 	
-	checkMock->setCheckBehavior("AAA",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AAA",&CheckMock::check3);
 	
-	checkMock->setCheckBehavior("AAC",&CheckMock::check4);
+	checkMock->setCheckBehavior((sc_string)"AAC",&CheckMock::check4);
 	
-	checkMock->setCheckBehavior("AC",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check5);
 	
-	checkMock->setCheckBehavior("C",&CheckMock::check10);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check10);
 	
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	

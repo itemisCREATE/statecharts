@@ -40,7 +40,7 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 0);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "testString") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"testString") == 0);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool()== true);
 	
@@ -48,7 +48,7 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myInt()== 0);
 	
-	EXPECT_TRUE(strcmp(statechart->getSCI_A()->get_myString(), "testString") == 0);
+	EXPECT_TRUE(strcmp(statechart->getSCI_A()->get_myString(), (sc_string)"testString") == 0);
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myBool()== true);
 	
@@ -60,7 +60,7 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 100);
 	
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "fail") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), (sc_string)"fail") == 0);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool()== false);
 	
@@ -68,7 +68,7 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myInt()== 200);
 	
-	EXPECT_TRUE(strcmp(statechart->getSCI_A()->get_myString(), "A_fail") == 0);
+	EXPECT_TRUE(strcmp(statechart->getSCI_A()->get_myString(), (sc_string)"A_fail") == 0);
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myBool()== false);
 	
