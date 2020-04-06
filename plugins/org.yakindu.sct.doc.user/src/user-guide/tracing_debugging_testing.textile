@@ -93,7 +93,7 @@ The unit test is defined as a test class. A test class refers to the statechart 
 
 h3(fmi_co_simulation). FMI based co-simulation
 
-Co-simulation is a major field for the application of YET. YAKINDU Statechart Tools can be used to create Functional Mock-up Units (FMUs) that can be integrated in co-simulations based on the FMI standard. Different scenarios are supported. First the debugging and testing approaches described in the previous sections can also be applied using a FMI co-simulation instead of a concrete embedded target. An additional scenario is to integrate the YAKINDU statechart simulation into a FMI co-simulation using a tool wrapper FMU. This is a FMU which wraps a simulation tool and does not execute a statechart on its own. Instead the statechart is executed by the YAKINDU statechart simulation. This simulation runs in a separate process. This requires execution events to be exchanged between the FMU and the simulator. 
+Co-simulation is a major field for the application of YET. YAKINDU Statechart Tools can be used to create Functional Mock-up Units (FMUs) that can be integrated in co-simulations based on the "Functional Mock-up Interface (FMI) standard":https://fmi-standard.org/. Different scenarios are supported. First the debugging and testing approaches described in the previous sections can also be applied using a FMI co-simulation instead of a concrete embedded target. An additional scenario is to integrate the YAKINDU statechart simulation into a FMI co-simulation using a tool wrapper FMU. This is a FMU which wraps a simulation tool and does not execute a statechart on its own. Instead, the statechart is executed by the YAKINDU statechart simulation. This simulation runs in a separate process. This requires execution events to be exchanged between the FMU and the simulator. 
 
 
 !(medium)images/yet_tool_wrapper_fmu.png(FMU tool wrapper delegates execution to YAKINDU simulator)!
@@ -112,20 +112,18 @@ In addition to the tool features provided by YAKINDU Statechart Tools, out of th
 <p style="text-align:center;">_YAKINDU statechart execution visualized in "impulse":https://www.toem.de/index.php/products/impulse_</p>
 
 
-The correlation of data from different sources and its visualization is not scope of YAKINDU tools. Thus it makes much sense to integrate dedicated tools for this purpose. While impulse and YAKINDU are integrates using two different approaches one is of these is based on YET.
+The correlation of data from different sources and its visualization is not scope of YAKINDU tools. Thus it makes much sense to integrate dedicated tools for this purpose. impulse can read and analyse YET trace files of YAKINDU statecharts.
 
 
 !(medium)images/yet_impulse_integration.png(Analyse execution traces from file)!
 <p style="text-align:center;">_Analyse execution traces from file_</p>
 
 
-This integration is based on execution traces stored in YET files.
-
 
 
 h2(#using_yet). Using YET
 
-In order to use execution tracing for target debugging or unit testing some implementation and configuration steps are necessary. In general the systems which executes the statechart must be prepared to produce an execution trace and the systems which analyse a YET trace must be prepared properly. Depending on the system the simple configurations or manual implementation tasks are required. Here the following cases are described:
+In order to use execution tracing for target debugging or unit testing some implementation and configuration steps are necessary. In general the system which executes the statechart must be prepared to produce an execution trace and the system which analyses a YET trace must be prepared properly. Depending on the system simple configurations or manual implementation tasks are required. Here the following cases are described:
 # Preparing an embedded system for tracing
 # Trace and debug statechart execution
 # Unit test a statechart YET trace
@@ -161,10 +159,10 @@ GeneratorModel for yakindu::c {
 p. 
 
 
-The feature _“Tracing”_ It has the property called _“generic”_ with the value _“true”_ (_“false”_ is the default). As a result an additional C header file named _“sc_tracing.h”_ is generated. It declares the generic trace API which will be used by by all state machines with enabled tracing. These declarations include the type @sc_trace_handler@. A state machine uses such a trace handler instance to call trace callbacks which can be processed by a trace handler implementation. This API is independent of YET. It can be used to adapt any execution tracing or logging infrastructure.  
+The feature _“Tracing”_ has the property _“generic”_ with the value _“true”_ (_“false”_ is the default). As a result an additional C header file named _“sc_tracing.h”_ is generated. It declares the generic trace API which will be used by all state machines with enabled tracing. These declarations include the type @sc_trace_handler@. A state machine uses such a trace handler instance to call trace callbacks which can be processed by a trace handler implementation. This API is independent of YET. It can be used to adapt any execution tracing or logging infrastructure.  
 
 *Adding a YET tracer*
-While the step before enables a generic trace API for state machine an additional generator can be configured which generates a YET specific implementation of a @sc_trace_handler@. This is also straightforward. Simply add a new _.sgen_ file to the project. Corresponding to the example above it looks like: 
+While the step before enables a generic trace API for the state machine, an additional generator can be configured which generates a YET specific implementation of the @sc_trace_handler@. This is also straightforward. Simply add a new _sgen_ file to the project. Corresponding to the example above it looks like: 
 
 bc.. 
 GeneratorModel for yakindu::c::yet {
@@ -181,10 +179,10 @@ p.
 
 This generator model uses @yakindu::c::yet@ generator instead of the @yakindu::c@. It just requires an @Outlet@ feature and the same values should be used as in the normal C code generator model. This generator adds several additional source files to the project:
 
-* @sc_yet.[hc]@ - implements a set of functions which are used to create and parse YET execution events. This implementation is completely independent of statechart semantics and can be used to support execution tracing for other models.
-* @yet_sc_tracer.[hc]@ - this module implements all generic parts for YET statechart tracing which can be applied to all statecharts. So it is aware of statechart semantics and provides an implementation of @sc_trace_handler@.   
-* @<Statechart>Tracer.[hc]@ - this module implements the statechart model specific parts of a YET tracer. 
-* @<Statechart>Meta.[hc]@ - this module defines data structures which provide names as string for the different statechart features like variables, events, and states. This is separated from the tracer module as these structures are independent from YET and can be reused for other purpose (like a generic MQTT adaption).
+* @sc_yet.[h|c]@ - implements a set of functions which are used to create and parse YET execution events. This implementation is completely independent of statechart semantics and can be used to support execution tracing for other models.
+* @yet_sc_tracer.[h|c]@ - this module implements all generic parts for YET statechart tracing which can be applied to all statecharts. So it is aware of statechart semantics and provides an implementation of @sc_trace_handler@.   
+* @<Statechart>Tracer.[h|c]@ - this module implements the statechart model specific parts of a YET tracer. 
+* @<Statechart>Meta.[h|c]@ - this module defines data structures which provide names as strings for the different statechart features like variables, events, and states. This is separated from the tracer module as these structures are independent from YET and can be reused for other purpose (like a generic MQTT adaption).
 
 Please keep in mind, that the generic tracing feature currently only supports the C language.
 
@@ -203,21 +201,21 @@ The generated code provides a @yet_sc_tracer@ instance. This instance must be co
 * @yet_file_writer@ - writes trace events to a file using a single line for each entry. The result is a valid yet trace file.
 * @yet_udp_stream@ -  implements a bidirectional transport of trace events based on UDP datagrams. Each datagram contains a single trace event. 
 
-The integration of the tracer instance on the one side and the physical channels on the other side are based on observable message streams. These support a asynchronous, reactive programming model and allow a loose coupling between the different component. These are based on the principles of reactive extensions (ReactiveX). While these design principles are applied no external ReactiveX library is used. 
+The integration of the tracer instance on the one side and the physical channels on the other side are based on observable message streams. These support an asynchronous, reactive programming model and allow a loose coupling between the different components. The message streams are based on the principles of reactive extensions (ReactiveX) without making use of any external ReactiveX library.
 
-The @yet_sc_tracer@ provides an observable stream of trace messages where each trace message is a simple string. This stream can be observed by any number of observers and all physical channels provide an observer which can subscribe to the observable trace messages. In addition the tracer defines the observer @message_receiver@ which processes incoming trace events which are stimuli for the state machine. This can for instance be connected to the observable @received_messages@ which is provided by the bidirectional @yet_udp_stream@. The figure above show how the observable streams are connected. On the code level the setup is straight forward. First we need a state machine and initialize it.
+The @yet_sc_tracer@ provides an observable stream of trace messages where each trace message is a simple string. This stream can be observed by any number of observers and all physical channels provide an observer which can subscribe to the observable trace messages. In addition, the tracer defines the observer @message_receiver@ which processes incoming trace events which are stimuli for the state machine. This can, for instance be connected to the observable @received_messages@ which is provided by the bidirectional @yet_udp_stream@. The figure above shows how the observable streams are connected. On the code level the setup is straight forward. First, we need a state machine and initialize it.
 
 bc. 
     SomeStateMachine machine;
     someStateMachine_init(&machine);
 
-The code for setting up the timer service is omitted here. Next a tracer instance is defined and initialized. 
+The code for setting up the timer service is omitted here. Next, a tracer instance is defined and initialized. 
 
 bc. 
     yet_sc_tracer tracer;
     someStateMachine_init_sc_tracer(&tracer, &machine);
 
-Without a physical channel tracing has no effect. So define and initialize an instance for each discussed physical channel. 
+Without a physical channel, tracing has no effect. So we need to define and initialize an instance for each discussed physical channel. 
 
 bc.. 
     yet_file_writer yet_file;
@@ -249,7 +247,7 @@ Then the observers must subscribe to the observable.
                             out_trace_observers);
 p. 
 
-The observer subscriptions here go beyond the scenario which is described by the previous figure as the @yet_log@ will also care about the incoming trace events from the @yet_stream@ instance. So it logs outgoing and incoming trace events. Some more things should be mentioned here. 
+The observer subscriptions here go beyond the scenario which is described by the previous figure as the @yet_log@ will also care about the incoming trace events from the @yet_stream@ instance. So it logs outgoing and incoming trace events. Some more things should be mentioned here:
 
 # The involved instances do not know anything about the other instances. So the configuration can be changed without impact on the implementation of these instances. 
 # There can be any number of physical channel instances. E.g. multiple trace files could be defined.
