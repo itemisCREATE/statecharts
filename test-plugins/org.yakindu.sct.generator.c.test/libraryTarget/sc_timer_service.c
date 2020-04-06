@@ -103,11 +103,13 @@ void sc_timer_service_proceed_cycles(sc_unit_timer_service_t * ts, sc_integer cy
 	sc_integer elapsed_cycles = 0;
 	
 	while(elapsed_cycles < cycles) {
+		sc_timer_task_t * next_task;
+		sc_timer_t next;
 		if(ts->tasks == 0) {
 			return;
 		}
-		sc_timer_task_t * next_task = pop_task(ts);
-		sc_timer_t next = next_task->timer;
+		next_task = pop_task(ts);
+		next = next_task->timer;
 		free(next_task);
 		
 		ts->current_time_ms = next.abs_time_ms;
@@ -180,6 +182,7 @@ void insert_timer(sc_unit_timer_service_t * ts, sc_timer_t te)
 {
 	sc_timer_task_t * head = ts->tasks;
 	sc_timer_task_t * new_task = (sc_timer_task_t *) malloc(sizeof(sc_timer_task_t));
+	sc_timer_task_t * last = head;
 	te.abs_time_ms = ts->current_time_ms + te.rel_time_ms;
 	new_task->timer = te;
 	new_task->next = 0;
@@ -195,7 +198,6 @@ void insert_timer(sc_unit_timer_service_t * ts, sc_timer_t te)
 		return;
 	}
 
-	sc_timer_task_t * last = head;
 	head = head->next;
 	while(head != 0) {
 		if(compare(&te, &(head->timer)) < 0) {
