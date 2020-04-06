@@ -89,9 +89,11 @@ public class GTestHelper {
 		copyFilesFromBundleToFolder();
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(getTargetPath());
 		File directory = resource.getLocation().toFile();
+		List<String> objectCommand = createObjectsCommand();
 		List<String> command = createCommand();
 		
 		long t0 = System.currentTimeMillis();
+		getCommandExecutor().execute(objectCommand, directory, false);
 		getCommandExecutor().execute(command, directory, false);
 		long t1 = System.currentTimeMillis();
 		System.out.println("Compiling " + directory.getName() + " took " + (t1 - t0) + "ms");
@@ -200,7 +202,10 @@ public class GTestHelper {
 		List<String> includes = new ArrayList<>();
 		getIncludes(includes);
 		
-		List<String> sourceFiles = getFilesToCompile();
+		List<String> sourceFiles = new ArrayList<>();
+		for(String sourceFile : getFilesToCompile()) {
+			sourceFiles.add(sourceFile.replace(sourceFile.substring(sourceFile.lastIndexOf(".")), ".o"));
+		}
 		getSourceFiles(sourceFiles);
 
 		File targetPath = ResourcesPlugin.getWorkspace().getRoot().findMember(getTargetPath()).getLocation().toFile();
@@ -213,14 +218,26 @@ public class GTestHelper {
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
-				//.wPedantic()
-				.wnoLongLong()
-				.wnoVariadicMacros()
+				.wPedantic()
 			 	.wAll()				
 			 	.wExtra()
 			 	.wConversion()
 			 	.wError();
-		return gTestCommand.build();
+		return gTestCommand.build(true);
+	}
+	
+	protected List<String>createObjectsCommand() {
+		List<String> sourceFiles = getFilesToCompile();
+		CompileGTestCommand gTestCommand = new CompileGTestCommand()
+				.compiler(getCompilerCommand())
+				.sources(sourceFiles)
+				.mainLib(getMainLib())
+				.wPedantic()
+			 	.wAll()				
+			 	.wExtra()
+			 	.wConversion()
+			 	.wError();
+		return gTestCommand.build(false);
 	}
 	
 	/**
