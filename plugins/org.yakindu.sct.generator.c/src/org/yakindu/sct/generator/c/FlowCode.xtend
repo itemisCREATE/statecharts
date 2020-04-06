@@ -11,8 +11,8 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
@@ -31,16 +31,12 @@ import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Trace
-import org.yakindu.sct.model.sexec.TraceStateEntered
-import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * @author axel terfloth
@@ -51,14 +47,13 @@ class FlowCode {
 	@Inject extension SExecExtensions
 	@Inject extension CExpressionsGenerator
 	@Inject extension INamingService
-	@Inject extension GenmodelEntries
+	@Inject extension TraceCode 
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension StatechartAnnotations
 	
 	@Inject protected extension CLiterals
 	
  
- 	@Inject GeneratorEntry entry
  
 	def stepComment(Step it) '''
 		«IF !comment.nullOrEmpty»
@@ -70,20 +65,11 @@ class FlowCode {
 		#error ActionCode for Step '«getClass().name»' not defined
 	'''
 	
-// ignore all trace steps not explicitly supported
-	def dispatch CharSequence code(Trace it)''''''
-	
-	def dispatch CharSequence code(TraceStateEntered it) '''
-		«IF entry.tracingEnterState»
-		«flow.enterStateTracingFctID»(«scHandle», «it.state.stateName»);
-		«ENDIF»
-	'''
-	
-	def dispatch CharSequence code(TraceStateExited it) '''
-		«IF entry.tracingExitState»
-		«flow.exitStateTracingFctID»(«scHandle», «it.state.stateName»);
-		«ENDIF»
-	'''
+
+	def dispatch CharSequence code(Trace it) {
+		traceCode
+	}
+		
 
 	def dispatch CharSequence code(SaveHistory it) '''
 		«stepComment»
@@ -124,15 +110,19 @@ class FlowCode {
 	def dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
 		«flow.setTimerFctID»(«scHandle», («EVENT_TYPE») &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
+		«traceCode»
 	'''
 
 	def dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
 		«flow.unsetTimerFctID»(«scHandle», («EVENT_TYPE») &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
+		«traceCode»
 	'''
 
-	def dispatch CharSequence code(Execution it)
-		'''«statement.code»;'''
+	def dispatch CharSequence code(Execution it) '''
+		«statement.code»;
+		«statement.traceCode»
+		'''
 	
 	def dispatch CharSequence code(Call it)
 		'''«step.shortName»(«scHandle»);'''
@@ -185,6 +175,7 @@ class FlowCode {
 	
 	def dispatch CharSequence code(Statement it) '''
 		«expression.code»;
+		«expression.traceCode»
 	'''
 
 	def unusedParam(String s) '''

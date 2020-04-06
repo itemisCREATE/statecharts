@@ -97,6 +97,14 @@ class GenmodelEntries {
 		return false
 	}
 	
+	def getTracingGeneric(GeneratorEntry it){
+		val genericParameter = tracingFeature?.getParameterValue(ICFeatureConstants::PARAMETER_TRACING_GENERIC)
+		if (genericParameter !== null) {
+			return genericParameter.booleanValue
+		}
+		return false
+	}
+	
 	def tracingUsed(GeneratorEntry it) {
 		return (tracingEnterState || tracingExitState)
 	}
