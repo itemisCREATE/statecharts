@@ -62,10 +62,10 @@ void sc_timer_service_proceed_time(sc_unit_timer_service_t * ts, sc_integer time
 	sc_boolean processed_timer = false;
 	
 	do {
-		// first assume we won't process a timer
+		/* first assume we won't process a timer */
 		processed_timer = false;
 	
-		// and then check if there is a timer to process
+		/* and then check if there is a timer to process */
 		if( ts->tasks != 0) {
 			if(ts->tasks->timer.abs_time_ms <= stop_time_ms) {
 	
@@ -73,15 +73,15 @@ void sc_timer_service_proceed_time(sc_unit_timer_service_t * ts, sc_integer time
 				sc_timer_t next = next_task->timer;
 				free(next_task);
 	
-				// shift time to the timer absolute time
+				/* shift time to the timer absolute time */
 				ts->current_time_ms = next.abs_time_ms;
 	
-				// reschedule periodic timer
+				/* reschedule periodic timer */
 				if(next.periodic) {
 					insert_timer(ts, next);
 				}
 	
-				// process timer ...
+				/* process timer ... */
 				if(next.isRunCycle) {
 					ts->run_cycle_func(ts->handle);
 				} else {
@@ -94,7 +94,7 @@ void sc_timer_service_proceed_time(sc_unit_timer_service_t * ts, sc_integer time
 	
 	} while ( processed_timer );
 	
-	// As a postcondition the current time is the time after proceeding the specified period.
+	/* As a postcondition the current time is the time after proceeding the specified period. */
 	ts->current_time_ms = stop_time_ms;
 }
 
@@ -112,12 +112,12 @@ void sc_timer_service_proceed_cycles(sc_unit_timer_service_t * ts, sc_integer cy
 		
 		ts->current_time_ms = next.abs_time_ms;
 		
-		// Repeat the event?
+		/* Repeat the event? */
 		if(next.periodic) {
 			insert_timer(ts, next);
 		}
 
-		// Process event
+		/* Process event */
 		if(next.isRunCycle) {
 			ts->run_cycle_func(ts->handle);
 			elapsed_cycles++;
@@ -135,7 +135,7 @@ sc_timer_t sc_timer_service_proceed(sc_unit_timer_service_t * ts)
 	
 	ts->current_time_ms = next.abs_time_ms;
 	
-	// Repeat the event?
+	/* Repeat the event? */
 	if(next.periodic) {
 		insert_timer(ts, next);
 	}
@@ -188,7 +188,7 @@ void insert_timer(sc_unit_timer_service_t * ts, sc_timer_t te)
 		return;
 	}
 
-	// Check if we should put it in as first element
+	/* Check if we should put it in as first element */
 	if(compare(&te, &(head->timer)) < 0) {
 		new_task->next = head;
 		ts->tasks = new_task;
@@ -207,7 +207,7 @@ void insert_timer(sc_unit_timer_service_t * ts, sc_timer_t te)
 		head = head->next;
 	}
 
-	// put it in last position
+	/* put it in last position */
 	last->next = new_task;
 }
 
@@ -221,13 +221,14 @@ sc_timer_task_t * pop_task(sc_unit_timer_service_t * ts) {
 
 /* Returns negative when a needs to be raised before b, 0 when a<>b, positive when a after b */
 sc_integer compare(sc_timer_t * a, sc_timer_t * b) {
-	// smaller time_ms needs to be raised first
+	/* smaller time_ms needs to be raised first */
 	sc_integer result = a->abs_time_ms - b->abs_time_ms;
 	if(result != 0) {
 		return result;
 	} else {
-		// bigger priority needs to be raised first
+		/* bigger priority needs to be raised first */
 		result = b->priority - a->priority;
 		return result;
 	}
 }
+
