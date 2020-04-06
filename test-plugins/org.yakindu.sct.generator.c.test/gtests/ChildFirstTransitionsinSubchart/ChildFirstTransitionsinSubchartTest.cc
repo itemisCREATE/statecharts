@@ -228,12 +228,12 @@ sc_integer ChildFirstTransitionsinSubchartTest::nextCounter()
 void ChildFirstTransitionsinSubchartTest::executionOrderWithNoTransitionInOrthogonalSubstates()
 {
 	set_up();
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
-	checkMock->setCheckBehavior("AA",&CheckMock::check2);
-	checkMock->setCheckBehavior("AB",&CheckMock::check3);
-	checkMock->setCheckBehavior("AC",&CheckMock::check4);
-	checkMock->setCheckBehavior("AD",&CheckMock::check5);
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check2);
+	checkMock->setCheckBehavior((sc_string)"AB",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check4);
+	checkMock->setCheckBehavior((sc_string)"AD",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstTransitionsInSubchart_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -250,12 +250,12 @@ void ChildFirstTransitionsinSubchartTest::executionOrderWithNoTransitionInOrthog
 void ChildFirstTransitionsinSubchartTest::executionOrderWithTransitionInFirstSubRegion()
 {
 	set_up();
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
-	checkMock->setCheckBehavior("AA",&CheckMock::check7);
-	checkMock->setCheckBehavior("AB",&CheckMock::check3);
-	checkMock->setCheckBehavior("AC",&CheckMock::check4);
-	checkMock->setCheckBehavior("AD",&CheckMock::check5);
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check7);
+	checkMock->setCheckBehavior((sc_string)"AB",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check4);
+	checkMock->setCheckBehavior((sc_string)"AD",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstTransitionsInSubchart_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -272,12 +272,12 @@ void ChildFirstTransitionsinSubchartTest::executionOrderWithTransitionInFirstSub
 void ChildFirstTransitionsinSubchartTest::executionOrderWithTransitionInLastSubRegion()
 {
 	set_up();
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
-	checkMock->setCheckBehavior("AA",&CheckMock::check2);
-	checkMock->setCheckBehavior("AB",&CheckMock::check3);
-	checkMock->setCheckBehavior("AC",&CheckMock::check8);
-	checkMock->setCheckBehavior("AD",&CheckMock::check5);
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check2);
+	checkMock->setCheckBehavior((sc_string)"AB",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check8);
+	checkMock->setCheckBehavior((sc_string)"AD",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstTransitionsInSubchart_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -294,12 +294,12 @@ void ChildFirstTransitionsinSubchartTest::executionOrderWithTransitionInLastSubR
 void ChildFirstTransitionsinSubchartTest::executionOrderWithTransitionInAllSubRegion()
 {
 	set_up();
-	checkMock->setCheckBehavior("A",&CheckMock::check1);
-	checkMock->setCheckBehavior("AA",&CheckMock::check7);
-	checkMock->setCheckBehavior("AB",&CheckMock::check3);
-	checkMock->setCheckBehavior("AC",&CheckMock::check8);
-	checkMock->setCheckBehavior("AD",&CheckMock::check5);
-	checkMock->setCheckBehavior("C",&CheckMock::check6);
+	checkMock->setCheckBehavior((sc_string)"A",&CheckMock::check1);
+	checkMock->setCheckBehavior((sc_string)"AA",&CheckMock::check7);
+	checkMock->setCheckBehavior((sc_string)"AB",&CheckMock::check3);
+	checkMock->setCheckBehavior((sc_string)"AC",&CheckMock::check8);
+	checkMock->setCheckBehavior((sc_string)"AD",&CheckMock::check5);
+	checkMock->setCheckBehavior((sc_string)"C",&CheckMock::check6);
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstTransitionsInSubchart_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
