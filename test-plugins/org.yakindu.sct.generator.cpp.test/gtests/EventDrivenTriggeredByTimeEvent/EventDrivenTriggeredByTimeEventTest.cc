@@ -55,7 +55,7 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1);
 	
-	runner->proceed_time(1000);
+	runner->proceed_time(1*1000);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
 	
@@ -63,7 +63,7 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2);
 	
-	runner->proceed_time(999000);
+	runner->proceed_time(999*1000);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
 	
@@ -71,7 +71,7 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1001);
 	
-	runner->proceed_time(999000);
+	runner->proceed_time(999*1000);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
 	
