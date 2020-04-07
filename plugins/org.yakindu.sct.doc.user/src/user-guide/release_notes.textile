@@ -5,14 +5,15 @@ h1(#release_notes). Release notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
-h2(#release_notes_3.5.11). YAKINDU Statechart Tools  3.5.11 (Apr 02, 2020)
+h2(#release_notes_3.5.11). YAKINDU Statechart Tools  3.5.11 (Apr 07, 2020)
 
 This is mainly a bugfix release, containing the following:
 
 * Fixed the C++ code generator when multiple namespaces are used.
 * Improved the C++ code generator to not produce a warning in initialization lists anymore.
+* Fixed some case where generated C/C++ code did not compile with -pedantic flag.
 * Fixed usage of synchronization nodes for SCXML domain statecharts.
-* Fixed an issue where the JRE was not found on startup
+* Fixed an issue where the JRE was not found on startup.
 
 
 h2(#release_notes_3.5.10). YAKINDU Statechart Tools  3.5.10 (Feb 24, 2020)
