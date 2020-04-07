@@ -23,7 +23,7 @@ class ScTypesIncludeProvider implements IncludeProvider {
 	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		val List<CharSequence> scIncludes = newArrayList('''#include "«(typesModule.h).relativeTo(module.h)»"''')
 		if(useOutEventObservables) {
-			scIncludes.add('''#include "sc_rxc.h"''') // TODO: configure module, reuse YET
+			scIncludes.add('''#include "«(rxcModule.h).relativeTo(module.h)»"''')
 		}
 		return scIncludes
 	}
