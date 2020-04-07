@@ -228,6 +228,7 @@
                 <include name="user-guide/generating_code_headless.textile"/>
                 <include name="user-guide/sctunit.textile"/>
             	<include name="user-guide/embedded_systems_integration_guide.textile"/>
+            	<include name="user-guide/tracing_debugging_testing.textile"/>
             	<include name="user-guide/lab_projects.textile"/>
                 <include name="user-guide/installation.textile"/>
             	<include name="user-guide/release_notes.textile"/>
@@ -237,7 +238,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="21"/>
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="22"/>
                 </condition>
             </fail>
 
@@ -347,8 +348,9 @@
 
             <!-- Copy the image files to the destination directory: -->
             <copy todir="${help.dir}">
+                <!-- Copy the image files to the destination directory: -->
                 <fileset dir="src">
-                    <include name="**/${img.dir}/*"/>
+                    <include name="**/${img.dir}/**/*"/>
                     <exclude name="**/${img.dir}/*.xcf"/>
                 </fileset>
             </copy>
@@ -413,6 +415,7 @@
                         <file name="user-guide/statechart_language.textile"/>
                         <file name="user-guide/multi_state_machine.textile"/>
 						<file name="user-guide/embedded_systems_integration_guide.textile"/>
+                    	<file name="user-guide/tracing_debugging_testing.textile"/>
                     	<file name="user-guide/lab_projects.textile"/>
                         <file name="user-guide/installation.textile"/>
                     	<file name="user-guide/release_notes.textile"/>

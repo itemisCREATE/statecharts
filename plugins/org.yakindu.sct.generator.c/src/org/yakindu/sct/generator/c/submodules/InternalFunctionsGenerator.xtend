@@ -108,7 +108,9 @@ class InternalFunctionsGenerator {
 	}
 	
 	def defines(ExecutionFlow it) '''
+		#ifndef SC_UNUSED
 		#define SC_UNUSED(P) (void)(P)
+		#endif
 	'''
 
 	

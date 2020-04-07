@@ -54,6 +54,8 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension EventCode
 	@Inject protected extension GeneratorPredicate
 	
+	@Inject protected extension GeneratorEntry entry
+	
 	@Inject
 	IGenArtifactConfigurations defaultConfigs
 	
@@ -96,6 +98,8 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	override types(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«statesEnumDecl»
+				
+		«featuresEnumDecl»
 		
 		«FOR s : it.scopes»
 			«s.scopeTypeDecl»
@@ -111,6 +115,13 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	
 	protected def CharSequence functions(ExecutionFlow it)
 		'''
+		«IF entry.tracingGeneric»
+		/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
+		extern «declareInitWithTracing»
+		
+		/*! Sets the trace handler. Can be called any time. */
+		extern «declareSetTraceHandler»
+		«ENDIF»
 		
 		/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
 		extern «declareInit»

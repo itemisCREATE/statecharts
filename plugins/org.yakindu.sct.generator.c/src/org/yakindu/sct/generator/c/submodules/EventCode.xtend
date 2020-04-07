@@ -12,19 +12,22 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.types.ComplexType
 import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.generator.c.TraceCode
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.base.expressions.util.ExpressionExtensions
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -37,16 +40,23 @@ class EventCode {
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension CLiterals
+	@Inject protected extension	TraceCode 
 	@Inject extension ExpressionExtensions
 	@Inject extension GeneratorPredicate
+	
+	@Inject protected extension GeneratorEntry entry
+	@Inject protected extension GenmodelEntries
+	
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
 		{
+			«event.traceCode( if (event.hasValue) "&value" else "sc_null" )»
 			«interfaceIncomingEventRaiserBody(event)»
 		}
-	'''
-	
+
+	'''	
+
 	def interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
 		«IF event.hasValue»
 		«event.valueAccess» = value;
@@ -90,11 +100,15 @@ class EventCode {
 				«ELSE»
 				SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», sc_null)«ENDIF»'''
 		}
+		
+		val eventMarker = '''«event.definition.event.access» = «TRUE_LITERAL»'''
+		val eventValue  = if (it.value !== null) '''«event.definition.event.valueAccess» = «exp.code(value)»''' else null
+		val eventTrace  = event.definition.traceCode(if (it.value !== null) '''&«event.definition.event.valueAccess»''' else '''sc_null''')
+
 		return '''
-		«IF value !== null»
-			«event.definition.event.valueAccess» = «exp.code(value)»;
-		«ENDIF»
-		«event.definition.event.access» = «TRUE_LITERAL»'''
+			«eventMarker»«IF eventValue !== null»;
+			«eventValue»«ENDIF»«IF eventTrace !== null»;
+			«eventTrace»«ENDIF»'''
 	}
 	
 	def eventRaiserSignature(ExecutionFlow it, EventDefinition event) '''void «event.asRaiser»(«scHandleDecl»«event.valueParams»)'''

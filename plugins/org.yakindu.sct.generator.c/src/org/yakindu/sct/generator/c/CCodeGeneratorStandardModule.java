@@ -15,9 +15,11 @@ import static org.yakindu.sct.generator.c.features.ICFeatureConstants.FEATURE_TR
 import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
 import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_ENTER_STATE;
 import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_EXIT_STATE;
+import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_GENERIC;
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
+import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.files.StatemachineHeader;
 import org.yakindu.sct.generator.c.files.StatemachineSource;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -61,9 +63,18 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 				PARAMETER_TRACING_ENTER_STATE);
 		FeatureParameterValue traceExitFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
 				PARAMETER_TRACING_EXIT_STATE);
+		FeatureParameterValue traceGenericFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
+				PARAMETER_TRACING_GENERIC);
 		boolean traceEnter = traceEnterFeature != null ? traceEnterFeature.getBooleanValue() : false;
-		boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false;
-		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit);
+		boolean traceExit = traceExitFeature != null ? traceExitFeature.getBooleanValue() : false;
+		boolean traceGeneric = traceGenericFeature != null ? traceGenericFeature.getBooleanValue() : false;
+		
+		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit || traceGeneric);
+
+		if(traceGeneric) {
+			Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
+			includeBinder.addBinding().to(ScTracingIncludeProvider.class);
+		}
 	}
 
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {

@@ -174,7 +174,7 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	 * @generated NOT
 	 */
 	public FeatureConfiguration getFeatureConfiguration(String featureName) {
-		for (FeatureConfiguration configuration : features) {
+		for (FeatureConfiguration configuration : getFeatures()) {
 			if (configuration.getType().getName() != null
 					&& configuration.getType().getName().equals(featureName))
 				return configuration;

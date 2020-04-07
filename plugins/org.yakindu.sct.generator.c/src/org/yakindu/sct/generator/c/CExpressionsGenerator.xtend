@@ -13,8 +13,8 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -26,6 +26,7 @@ import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Enumerator
@@ -37,6 +38,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.submodules.EventCode
 import org.yakindu.sct.generator.c.types.CLiterals
@@ -44,6 +46,7 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -51,10 +54,9 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.expressions.expressions.ArgumentExpression
-import org.yakindu.base.expressions.expressions.StringLiteral
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 
 /**
  * @author axel terfloth
@@ -70,11 +72,15 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension CLiterals
 	
 	@Inject protected extension EventCode
+	@Inject protected extension TraceCode
 	@Inject protected extension ExpressionsChecker
 	
 	@Inject extension CMultiStatemachine
 	@Inject extension ExpressionExtensions
 	
+	
+	@Inject protected extension GeneratorEntry entry
+	@Inject protected extension GenmodelEntries
 	@Inject extension protected StatechartUtil
 
 	/* Referring to declared elements */
@@ -146,24 +152,27 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(LogicalOrExpression it) '''(«leftOperand.sc_boolean_code») || («rightOperand.sc_boolean_code»)'''
 	
 	override dispatch CharSequence code(AssignmentExpression it) {
-		val varRef = varRef
-		if(varRef instanceof FeatureCall){
-			val container = varRef.feature.eContainer
+		val vRef = it.varRef
+		if (vRef instanceof FeatureCall) {
+			val container = vRef.feature.eContainer
 			if (container instanceof ComplexType && container.isMultiSM) {
-				return '''«varRef.feature.asSetter»(«varRef.owner.code», «expression.code»)'''
+				return '''«vRef.feature.asSetter»(«vRef.owner.code», «expression.code»)'''
 			}
 		}
-		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
-			return '''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
+		
+		return if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
+			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
+		} else {
+			super._code(it)
 		}
-		return super._code(it)
 	}
+
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
 		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
 			'''«expression.eContainer.castToReciever»fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
 		} else {
-			super._code(expression);
+			super._code(expression)
 		}
 	}
 
