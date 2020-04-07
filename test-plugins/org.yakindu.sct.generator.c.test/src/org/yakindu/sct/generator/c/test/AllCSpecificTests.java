@@ -30,7 +30,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	StateNumTest.class,
 	TracingTest.class,
 	InEventQueueTest.class,
-	InEventQueueTestUserAllocated.class
+	InEventQueueTestUserAllocated.class,
+	OutEventsObservablesTest.class
 })
 public class AllCSpecificTests {
 }
