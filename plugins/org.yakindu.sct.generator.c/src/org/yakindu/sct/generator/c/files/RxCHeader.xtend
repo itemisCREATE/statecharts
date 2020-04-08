@@ -40,7 +40,7 @@ class RxCHeader implements IContentTemplate {
 		#ifndef «rxcModule.define»_H_
 		#define «rxcModule.define»_H_
 		
-		#include "«("sc_types".h).relativeTo(rxcModule.h)»"
+		#include "«(typesModule.h).relativeTo(rxcModule.h)»"
 		
 		#include "sc_types.h"
 		
@@ -112,9 +112,11 @@ class RxCHeader implements IContentTemplate {
 		#define SC_OBSERVABLE_INIT_OBSERVERS(OBSERVABLE, OBSERVERS) \
 			(OBSERVABLE)->observer_count = sizeof(OBSERVERS)/sizeof(sc_observer*);\
 			(OBSERVABLE)->observers = (OBSERVERS); \
-			int _OBS_IDX_; \
-			for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
-				((OBSERVABLE)->observers[_OBS_IDX_]) = «CLiterals::NULL_LITERAL_NAME»;\
+			{\
+				int _OBS_IDX_; \
+				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
+					((OBSERVABLE)->observers[_OBS_IDX_]) = «CLiterals::NULL_LITERAL_NAME»;\
+				}\
 			}
 		
 		
@@ -124,9 +126,11 @@ class RxCHeader implements IContentTemplate {
 		
 		
 		#define SC_OBSERVABLE_NEXT(OBSERVABLE, ITEM) \
-			int _OBS_IDX_; \
-			for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
-				SC_OBSERVER_NEXT(((OBSERVABLE)->observers[_OBS_IDX_]), (ITEM));\
+			{\
+				int _OBS_IDX_; \
+				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
+					SC_OBSERVER_NEXT(((OBSERVABLE)->observers[_OBS_IDX_]), (ITEM));\
+				}\
 			}
 		
 		
