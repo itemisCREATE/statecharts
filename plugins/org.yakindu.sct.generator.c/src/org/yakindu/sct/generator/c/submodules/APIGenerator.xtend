@@ -21,6 +21,9 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.TraceCode
@@ -40,8 +43,8 @@ class APIGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
 	@Inject protected extension StatechartAnnotations
+	@Inject protected extension GeneratorPredicate
 	@Inject protected extension TraceCode
-	
 	@Inject protected extension GeneratorEntry genEntry
 	@Inject protected extension GenmodelEntries
 
@@ -50,7 +53,7 @@ class APIGenerator {
 			«runCycleSignature»
 			{
 				«traceCycleStart»
-				«clearOutEventsFctID»(«scHandle»);
+				«IF !useOutEventObservables»«clearOutEventsFctID»(«scHandle»);«ENDIF»
 				«runCycleForLoop(it)»
 				«clearInEventsFctID»(«scHandle»);
 				«traceCycleEnd»
@@ -156,9 +159,22 @@ class APIGenerator {
 			«scHandle»->«STATEVECTOR_POS» = 0;
 			
 			«clearInEventsFctID»(«scHandle»);
-			«clearOutEventsFctID»(«scHandle»);
+			«IF !useOutEventObservables»
+				«clearOutEventsFctID»(«scHandle»);
+			«ELSE»
+			
+			«initializeObservables»
+			«ENDIF»
 
 			«initSequence.code»
+		'''
+	}
+	
+	def initializeObservables(ExecutionFlow it) {
+		'''
+		«FOR outEvent : scopes.filter(InterfaceScope).map[events].flatten.filter[direction === Direction.OUT]»
+			SC_OBSERVABLE_INIT(&«outEvent.accessObservable»);
+		«ENDFOR»
 		'''
 	}
 	
@@ -318,19 +334,6 @@ class APIGenerator {
 		'''void «raiseTimeEventFctID»(«scHandleDecl», «EVENT_TYPE» evid)'''
 	}
 	
-//	def protected CharSequence traceCall(ExecutionFlow it, String event){
-//		'''
-//		«IF genEntry.tracingGeneric»
-//		«traceFctID»(«scHandle», «event»)
-//		«ENDIF»
-//		'''
-//	}
-//	
-//	
-//	def protected CharSequence traceCall(ExecutionFlow it){
-//		traceCall("")
-//	}
-//	
 	def declareInitWithTracing(ExecutionFlow it) {
 		'''«initWithTracingSignature»;'''
 	}

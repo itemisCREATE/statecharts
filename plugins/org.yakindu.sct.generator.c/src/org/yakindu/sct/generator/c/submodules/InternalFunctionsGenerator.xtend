@@ -38,6 +38,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Parameter
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.base.types.ComplexType
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -55,6 +56,7 @@ class InternalFunctionsGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension ExpressionsChecker
 	@Inject protected extension CLiterals
+	@Inject protected extension GeneratorPredicate
 	
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
@@ -124,7 +126,7 @@ class InternalFunctionsGenerator {
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
 		«reactMethods.toDeclarations»
 		static void «clearInEventsFctID»(«scHandleDecl»);
-		static void «clearOutEventsFctID»(«scHandleDecl»);
+		«IF !useOutEventObservables»static void «clearOutEventsFctID»(«scHandleDecl»);«ENDIF»
 	'''
 	
 	

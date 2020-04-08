@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.c.submodules
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
@@ -34,6 +35,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension EventCode
 	@Inject protected extension FlowCode
 	@Inject protected extension ExpressionsChecker
+	@Inject protected extension GeneratorPredicate
 	@Inject protected extension TraceCode
 	
 	@Inject protected extension GeneratorEntry entry
@@ -46,9 +48,13 @@ class InterfaceFunctionsGenerator {
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
-				«interfaceOutgoingEventGetter(event)»
-				«IF event.hasValue» 
-					«interfaceOutgoingEventValueGetter(event)»
+				«IF useOutEventObservables»
+					«interfaceOutgoingEventObservableGetter(event)»
+				«ELSE»
+					«interfaceOutgoingEventGetter(event)»
+					«IF event.hasValue» 
+						«interfaceOutgoingEventValueGetter(event)»
+					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 			
