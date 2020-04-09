@@ -65,6 +65,10 @@ public class GTestHelper {
 		public String getCommand() {
 			return this.command;
 		}
+		
+		public void setCommand(String command) {
+			this.command = command;
+		}
 	}
 	
 	private final Object owner;
@@ -211,7 +215,7 @@ public class GTestHelper {
 		File targetPath = ResourcesPlugin.getWorkspace().getRoot().findMember(getTargetPath()).getLocation().toFile();
 
 		 CompileGTestCommand gTestCommand = new CompileGTestCommand()
-				.compiler(getCompilerCommand())
+				.compiler(Compiler.GPLUSPLUS.command) // always compile tests with g++
 				.program(getFileName(getTestProgram()))
 				.includes(includes)
 				.sources(sourceFiles)
