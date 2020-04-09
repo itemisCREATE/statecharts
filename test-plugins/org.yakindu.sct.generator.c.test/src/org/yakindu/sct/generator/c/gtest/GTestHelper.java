@@ -65,10 +65,6 @@ public class GTestHelper {
 		public String getCommand() {
 			return this.command;
 		}
-		
-		public void setCommand(String command) {
-			this.command = command;
-		}
 	}
 	
 	private final Object owner;
