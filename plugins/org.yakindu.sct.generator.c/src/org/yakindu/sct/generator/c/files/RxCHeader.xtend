@@ -32,7 +32,6 @@ class RxCHeader implements IContentTemplate {
 		#ifndef «rxcModule.define»_H_
 		#define «rxcModule.define»_H_
 		
-		#include "stddef.h"
 		#include "«(typesModule.h).relativeTo(rxcModule.h)»"
 		
 		#ifdef __cplusplus
