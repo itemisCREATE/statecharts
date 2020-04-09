@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "OutEventsObservables.h"
 
-struct {
+typedef struct {
 	OutEventsObservables machine;
 
 	sc_observer* oEv_observers[1];
@@ -33,7 +33,9 @@ struct {
 	sc_boolean raised_oEv_r;
 	sc_boolean raised_oEv_s;
 
-} sm;
+} sm_type;
+
+sm_type sm;
 
 static void on_oEv(OutEventsObservables* handle, void* value);
 static void on_oEv_b(OutEventsObservables* handle, void* value);
