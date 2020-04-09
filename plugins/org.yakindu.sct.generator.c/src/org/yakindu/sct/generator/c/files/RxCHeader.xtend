@@ -55,7 +55,7 @@ class RxCHeader implements IContentTemplate {
 		typedef struct sc_observable sc_observable;
 		
 		struct sc_observable {
-			size_t observer_count;
+			sc_uinteger observer_count;
 			sc_observer** observers;
 		};
 		
@@ -67,7 +67,7 @@ class RxCHeader implements IContentTemplate {
 		
 		#define SC_OBSERVER_SUBSCRIBE(OBSERVABLE, OBSERVER) \
 			if ((OBSERVER)->next != «CLiterals::NULL_LITERAL_NAME») { \
-				size_t _OBS_IDX_; \
+				sc_uinteger _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) { \
 					if (((OBSERVABLE)->observers[_OBS_IDX_]) == «CLiterals::NULL_LITERAL_NAME») { \
 						((OBSERVABLE)->observers[_OBS_IDX_]) = (OBSERVER); \
@@ -79,7 +79,7 @@ class RxCHeader implements IContentTemplate {
 		
 		#define SC_OBSERVER_UNSUBSCRIBE(OBSERVABLE, OBSERVER) \
 			if ((OBSERVER)->next != «CLiterals::NULL_LITERAL_NAME») { \
-				size_t _OBS_IDX_; \
+				sc_uinteger _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) { \
 					if (((OBSERVABLE)->observers[_OBS_IDX_]) == (OBSERVER)) { \
 						((OBSERVABLE)->observers[_OBS_IDX_]) = «CLiterals::NULL_LITERAL_NAME»; \
@@ -101,10 +101,10 @@ class RxCHeader implements IContentTemplate {
 		
 		
 		#define SC_OBSERVABLE_INIT_OBSERVERS(OBSERVABLE, OBSERVERS) \
-			(OBSERVABLE)->observer_count = sizeof(OBSERVERS)/sizeof(sc_observer*);\
+			(OBSERVABLE)->observer_count = (sc_uinteger)(sizeof(OBSERVERS)/sizeof(sc_observer*));\
 			(OBSERVABLE)->observers = (OBSERVERS); \
 			{\
-				size_t _OBS_IDX_; \
+				sc_uinteger _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
 					((OBSERVABLE)->observers[_OBS_IDX_]) = «CLiterals::NULL_LITERAL_NAME»;\
 				}\
@@ -112,13 +112,13 @@ class RxCHeader implements IContentTemplate {
 		
 		
 		#define SC_OBSERVABLE_SUBSCRIBE(OBSERVABLE, OBSERVERS) \
-			(OBSERVABLE)->observer_count = sizeof(OBSERVERS)/sizeof(sc_observer*);\
+			(OBSERVABLE)->observer_count = (sc_uinteger)(sizeof(OBSERVERS)/sizeof(sc_observer*));\
 			(OBSERVABLE)->observers = (OBSERVERS);
 		
 		
 		#define SC_OBSERVABLE_NEXT(OBSERVABLE, ITEM) \
 			{\
-				size_t _OBS_IDX_; \
+				sc_uinteger _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
 					SC_OBSERVER_NEXT(((OBSERVABLE)->observers[_OBS_IDX_]), (ITEM));\
 				}\
