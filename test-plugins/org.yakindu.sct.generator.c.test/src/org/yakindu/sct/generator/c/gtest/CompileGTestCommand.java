@@ -176,9 +176,7 @@ public class CompileGTestCommand {
 			}
 		}
 		command.add("-lm");
-		command.add("-lstdc++");
 		command.add("-pthread");
-		// command.add("-pg");
 
 		System.out.println(command);
 		return command;
