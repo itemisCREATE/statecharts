@@ -27,22 +27,13 @@ class RxCHeader implements IContentTemplate {
 	@Inject extension GenmodelEntries
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations locations) '''
-		/*
-		 * sc_rxc.h
-		 *
-		 * Provided by YAKINDU Statechart Tools.
-		 *
-		 * Created on: 30.03.2020
-		 *     Author: terfloth
-		 */
 		«entry.licenseText»
 		
 		#ifndef «rxcModule.define»_H_
 		#define «rxcModule.define»_H_
 		
+		#include "stddef.h"
 		#include "«(typesModule.h).relativeTo(rxcModule.h)»"
-		
-		#include "sc_types.h"
 		
 		#ifdef __cplusplus
 		extern "C" {
@@ -64,7 +55,7 @@ class RxCHeader implements IContentTemplate {
 		typedef struct sc_observable sc_observable;
 		
 		struct sc_observable {
-			int observer_count;
+			size_t observer_count;
 			sc_observer** observers;
 		};
 		
@@ -76,7 +67,7 @@ class RxCHeader implements IContentTemplate {
 		
 		#define SC_OBSERVER_SUBSCRIBE(OBSERVABLE, OBSERVER) \
 			if ((OBSERVER)->next != «CLiterals::NULL_LITERAL_NAME») { \
-				int _OBS_IDX_; \
+				size_t _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) { \
 					if (((OBSERVABLE)->observers[_OBS_IDX_]) == «CLiterals::NULL_LITERAL_NAME») { \
 						((OBSERVABLE)->observers[_OBS_IDX_]) = (OBSERVER); \
@@ -88,7 +79,7 @@ class RxCHeader implements IContentTemplate {
 		
 		#define SC_OBSERVER_UNSUBSCRIBE(OBSERVABLE, OBSERVER) \
 			if ((OBSERVER)->next != «CLiterals::NULL_LITERAL_NAME») { \
-				int _OBS_IDX_; \
+				size_t _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) { \
 					if (((OBSERVABLE)->observers[_OBS_IDX_]) == (OBSERVER)) { \
 						((OBSERVABLE)->observers[_OBS_IDX_]) = «CLiterals::NULL_LITERAL_NAME»; \
@@ -113,7 +104,7 @@ class RxCHeader implements IContentTemplate {
 			(OBSERVABLE)->observer_count = sizeof(OBSERVERS)/sizeof(sc_observer*);\
 			(OBSERVABLE)->observers = (OBSERVERS); \
 			{\
-				int _OBS_IDX_; \
+				size_t _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
 					((OBSERVABLE)->observers[_OBS_IDX_]) = «CLiterals::NULL_LITERAL_NAME»;\
 				}\
@@ -127,7 +118,7 @@ class RxCHeader implements IContentTemplate {
 		
 		#define SC_OBSERVABLE_NEXT(OBSERVABLE, ITEM) \
 			{\
-				int _OBS_IDX_; \
+				size_t _OBS_IDX_; \
 				for (_OBS_IDX_ = 0; _OBS_IDX_<(OBSERVABLE)->observer_count; _OBS_IDX_++) {\
 					SC_OBSERVER_NEXT(((OBSERVABLE)->observers[_OBS_IDX_]), (ITEM));\
 				}\
