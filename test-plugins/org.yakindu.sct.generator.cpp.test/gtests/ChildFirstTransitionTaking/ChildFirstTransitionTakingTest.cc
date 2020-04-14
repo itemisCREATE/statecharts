@@ -36,11 +36,11 @@ TEST_F(ChildFirstTransitionTakingTest, testParentTransitionFromSimpleState) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AA));
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_B));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_B));
 	
 	statechart->exit();
 	
@@ -50,17 +50,17 @@ TEST_F(ChildFirstTransitionTakingTest, testParentTransitionFromOrthogonalChildSt
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AA));
 	
 	statechart->raise_go();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AB_r1_ABA));
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AB_r2_ABB));
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_B));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_B));
 	
 	statechart->exit();
 	
@@ -70,17 +70,17 @@ TEST_F(ChildFirstTransitionTakingTest, testParentLocalReactionOnTransition) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AA));
 	
 	statechart->raise_go();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AB_r1_ABA));
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AB_r2_ABB));
 	
 	statechart->raise_go();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r1_A_r1_AA));
 	
 	statechart->exit();
 	
@@ -90,7 +90,7 @@ TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScop
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r2_C_r_CA_r_CAA));
 	
 	EXPECT_TRUE(statechart->get_cLocalReaction()== 0);
 	
@@ -98,7 +98,7 @@ TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScop
 	
 	statechart->raise_go();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r2_C_r_CA_r_CAB));
 	
 	EXPECT_TRUE(statechart->get_cLocalReaction()== 1);
 	
@@ -106,7 +106,7 @@ TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScop
 	
 	statechart->raise_go();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r2_C_r_CA_r_CAA));
 	
 	EXPECT_TRUE(statechart->get_cLocalReaction()== 2);
 	
@@ -114,7 +114,7 @@ TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScop
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r2_C_r_CB));
 	
 	EXPECT_TRUE(statechart->get_cLocalReaction()== 3);
 	
@@ -122,7 +122,7 @@ TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScop
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::r2_C_r_CA));
 	
 	EXPECT_TRUE(statechart->get_cLocalReaction()== 4);
 	

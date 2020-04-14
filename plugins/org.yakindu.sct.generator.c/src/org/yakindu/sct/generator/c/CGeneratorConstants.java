@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ public abstract class CGeneratorConstants {
 	public static final String REAL_TYPE = "sc_real";
 	public static final String EVENT_TYPE = "sc_eventid";
 	public static final String INTPTR_TYPE = "sc_intptr_t";
+	public static final String OBSERVABLE_TYPE = "sc_observable";
 	
 
 	public static final String TYPES_MODULE = "sc_types";
@@ -64,4 +65,32 @@ public abstract class CGeneratorConstants {
 	 * MISC
 	 */
 	public static final int EVENT_QUEUE_BUFFER_SIZE = 20;
+	public static final String NO_EVENT = "SC_NO_EVENT";
+	
+	/*
+	 * TRACING
+	 */
+	public static final String TRACE_HANDLER_TYPE = "sc_trace_handler";
+	public static final String TRACE_HANDLER = "trace_handler";
+	public static final String TRACING_MODULE = "sc_tracing";
+	public static final String RXC_MODULE = "sc_rxc";
+	public static final String INIT_TRACING = "initWithTracing";
+	public static final String SET_TRACING = "setTraceHandler";
+	public static final String TRACE_CALL = "SC_TRACE";
+	
+	public static final String META_MODULE = "Meta";
+	
+	public static final String TRACE_MACHINE_ENTER = "sc_trace_machine_enter";
+	public static final String TRACE_MACHINE_EXIT = "sc_trace_machine_exit";
+	public static final String TRACE_MACHINE_CYCLE_START = "sc_trace_machine_run_cycle_start";
+	public static final String TRACE_MACHINE_CYCLE_END = "sc_trace_machine_run_cycle_end";
+	public static final String TRACE_MACHINE_ENTERED = "sc_trace_state_entered";
+	public static final String TRACE_MACHINE_EXITED = "sc_trace_state_exited";
+	public static final String TRACE_MACHINE_EVENT_RAISED = "sc_trace_event_raised";
+	public static final String TRACE_MACHINE_VARIABLE_SET = "sc_trace_variable_set";
+	public static final String TRACE_MACHINE_TIME_EVENT_RAISED = "sc_trace_time_event_raised";
+	public static final String TRACE_MACHINE_TIME_EVENT_SET = "sc_trace_time_event_set";
+	public static final String TRACE_MACHINE_TIME_EVENT_UNSET = "sc_trace_time_event_unset";
+	
+	
 }

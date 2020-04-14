@@ -76,6 +76,11 @@ class Types implements IContentTemplate {
 		#define «TRUE_LITERAL» true
 		#define «FALSE_LITERAL» false
 		
+		/*! Defines the standard value for the "no event" id of the statechart event enumerations */
+		#ifndef «CGeneratorConstants::NO_EVENT»
+		#define «CGeneratorConstants::NO_EVENT» 0
+		#endif
+		
 		#endif /* «typesModule.define»_H_ */
 	'''
 }

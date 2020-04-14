@@ -97,6 +97,14 @@ class GenmodelEntries {
 		return false
 	}
 	
+	def getTracingGeneric(GeneratorEntry it){
+		val genericParameter = tracingFeature?.getParameterValue(ICFeatureConstants::PARAMETER_TRACING_GENERIC)
+		if (genericParameter !== null) {
+			return genericParameter.booleanValue
+		}
+		return false
+	}
+	
 	def tracingUsed(GeneratorEntry it) {
 		return (tracingEnterState || tracingExitState)
 	}
@@ -116,6 +124,15 @@ class GenmodelEntries {
 	
 	def getQueueAllocatedByUser(GeneratorEntry it) {
 		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_USER_ALLOCATED_QUEUE)
+		if(parameter !== null) {
+			parameter.booleanValue
+		} else {
+			false
+		}
+	}
+	
+	def getOutEventObservablesUsed(GeneratorEntry it) {
+		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_OUT_EVENT_OBSERVABLES)
 		if(parameter !== null) {
 			parameter.booleanValue
 		} else {

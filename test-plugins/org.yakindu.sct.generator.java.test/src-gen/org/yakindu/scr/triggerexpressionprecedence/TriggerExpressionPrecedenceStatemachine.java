@@ -105,7 +105,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_TriggerExpressionPrecedence_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -116,7 +116,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case triggerExpressionPrecedence_main_region_A:
-				triggerExpressionPrecedence_main_region_A_react(true);
+				main_region_A_react(true);
 				break;
 			default:
 				// $NullState$
@@ -125,7 +125,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_TriggerExpressionPrecedence_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -214,27 +214,27 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_TriggerExpressionPrecedence_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.triggerExpressionPrecedence_main_region_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_TriggerExpressionPrecedence_main_region_default() {
-		react_TriggerExpressionPrecedence_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_TriggerExpressionPrecedence_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_TriggerExpressionPrecedence_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case triggerExpressionPrecedence_main_region_A:
-			exitSequence_TriggerExpressionPrecedence_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		default:
 			break;
@@ -242,30 +242,30 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_TriggerExpressionPrecedence_main_region__entry_Default() {
-		enterSequence_TriggerExpressionPrecedence_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean triggerExpressionPrecedence_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (((sCInterface.e1) && ((sCInterface.getC1() || sCInterface.getC2())))) {
-					exitSequence_TriggerExpressionPrecedence_main_region_A();
+					exitSequence_main_region_A();
 					sCInterface.setE1_transition(true);
 					
-					enterSequence_TriggerExpressionPrecedence_main_region_A_default();
+					enterSequence_main_region_A_default();
 				} else {
 					if (sCInterface.e2) {
-						exitSequence_TriggerExpressionPrecedence_main_region_A();
+						exitSequence_main_region_A();
 						sCInterface.setE2_transition(true);
 						
-						enterSequence_TriggerExpressionPrecedence_main_region_A_default();
+						enterSequence_main_region_A_default();
 					} else {
 						did_transition = false;
 					}

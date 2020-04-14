@@ -441,10 +441,7 @@ There are some constraints that have to be considered for the implementation of 
 	- make sure that the execution time is as short as possible.
  
 */
-extern sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_integer p1, const sc_boolean p2);
-
-
-
+extern sc_integer defaultSMIfaceSample_myOperation(const DefaultSM* handle, const sc_integer p1, const sc_boolean p2);
 
 #ifdef __cplusplus
 }
@@ -601,6 +598,7 @@ The *Tracing* feature enables the generation of tracing callback functions:
 
 * _enterState_ (boolean, optional): Specifies whether to generate a callback function that is used to notify about state-entering events.
 * _exitState_ (boolean, optional): Specifies whether to generate a callback that is used to notify about state-exiting events.
+* _generic_ (boolean, optional): Specifies whether to generate callbacks that are used to notify about any changes. These can be implemented manually or by the Yet Tracer.
 
 ==<div class="example">==
 
@@ -609,11 +607,20 @@ Example:
 bc. feature Tracing {
     enterState = true
     exitState  = true
+    generic = true
 }
 
 ==</div>==
 
 ==<!-- End sgen_feature_tracing -->==
+
+h4(#codegen_c_yet_generator). Yet Tracer
+
+The *Yet Tracer* is a C generator extension, which allows the use of the *Yet Tracing* run option. The generated C code implements the callback funtions, which fit into the generated architecture of the generic tracing feature. To use the Yet Tracer, please also supply a C generator with generic Tracing feature enabled.
+
+bc. GeneratorModel for yakindu::c::yet {
+	...
+}
 
 ==<!-- Start sgen_feature_includes -->==
 

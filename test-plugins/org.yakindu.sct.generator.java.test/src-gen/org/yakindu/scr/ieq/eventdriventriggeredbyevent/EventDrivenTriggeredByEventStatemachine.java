@@ -87,7 +87,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			throw new IllegalStateException("timer not set.");
 		}
 		isRunning = true;
-		enterSequence_EventDrivenTriggeredByEvent_main_region_default();
+		enterSequence_main_region_default();
 		isRunning = false;
 	}
 	
@@ -121,10 +121,10 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case eventDrivenTriggeredByEvent_main_region_A:
-				eventDrivenTriggeredByEvent_main_region_A_react(true);
+				main_region_A_react(true);
 				break;
 			case eventDrivenTriggeredByEvent_main_region_B:
-				eventDrivenTriggeredByEvent_main_region_B_react(true);
+				main_region_B_react(true);
 				break;
 			default:
 				// $NullState$
@@ -150,7 +150,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	public void exit() {
 		isRunning = true;
-		exitSequence_EventDrivenTriggeredByEvent_main_region();
+		exitSequence_main_region();
 		isRunning = false;
 	}
 	
@@ -248,55 +248,55 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	}
 	
 	/* Entry action for state 'B'. */
-	private void entryAction_EventDrivenTriggeredByEvent_main_region_B() {
+	private void entryAction_main_region_B() {
 		timer.setTimer(this, 0, (100000 * 1000), false);
 	}
 	
 	/* Exit action for state 'B'. */
-	private void exitAction_EventDrivenTriggeredByEvent_main_region_B() {
+	private void exitAction_main_region_B() {
 		timer.unsetTimer(this, 0);
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_EventDrivenTriggeredByEvent_main_region_A_default() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenTriggeredByEvent_main_region_A;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_EventDrivenTriggeredByEvent_main_region_B_default() {
-		entryAction_EventDrivenTriggeredByEvent_main_region_B();
+	private void enterSequence_main_region_B_default() {
+		entryAction_main_region_B();
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenTriggeredByEvent_main_region_B;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_EventDrivenTriggeredByEvent_main_region_default() {
-		react_EventDrivenTriggeredByEvent_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_EventDrivenTriggeredByEvent_main_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_EventDrivenTriggeredByEvent_main_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		exitAction_EventDrivenTriggeredByEvent_main_region_B();
+		exitAction_main_region_B();
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_EventDrivenTriggeredByEvent_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case eventDrivenTriggeredByEvent_main_region_A:
-			exitSequence_EventDrivenTriggeredByEvent_main_region_A();
+			exitSequence_main_region_A();
 			break;
 		case eventDrivenTriggeredByEvent_main_region_B:
-			exitSequence_EventDrivenTriggeredByEvent_main_region_B();
+			exitSequence_main_region_B();
 			break;
 		default:
 			break;
@@ -304,22 +304,22 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenTriggeredByEvent_main_region__entry_Default() {
-		enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean eventDrivenTriggeredByEvent_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (sCInterface.e) {
-					exitSequence_EventDrivenTriggeredByEvent_main_region_A();
-					enterSequence_EventDrivenTriggeredByEvent_main_region_B_default();
+					exitSequence_main_region_A();
+					enterSequence_main_region_B_default();
 				} else {
 					did_transition = false;
 				}
@@ -331,14 +331,14 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		return did_transition;
 	}
 	
-	private boolean eventDrivenTriggeredByEvent_main_region_B_react(boolean try_transition) {
+	private boolean main_region_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (sCInterface.e) {
-					exitSequence_EventDrivenTriggeredByEvent_main_region_B();
-					enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
+					exitSequence_main_region_B();
+					enterSequence_main_region_A_default();
 				} else {
 					did_transition = false;
 				}

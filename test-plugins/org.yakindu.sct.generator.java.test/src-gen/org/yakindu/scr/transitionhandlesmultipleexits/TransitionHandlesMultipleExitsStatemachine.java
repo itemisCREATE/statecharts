@@ -83,7 +83,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_TransitionHandlesMultipleExits_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -94,10 +94,10 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case transitionHandlesMultipleExits_main_region_A_r_AA:
-				transitionHandlesMultipleExits_main_region_A_r_AA_react(true);
+				main_region_A_r_AA_react(true);
 				break;
 			case transitionHandlesMultipleExits_main_region_B_r_BB:
-				transitionHandlesMultipleExits_main_region_B_r_BB_react(true);
+				main_region_B_r_BB_react(true);
 				break;
 			default:
 				// $NullState$
@@ -106,7 +106,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_TransitionHandlesMultipleExits_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -182,93 +182,93 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		sCInterface.setX(value);
 	}
 	
-	private void effect_TransitionHandlesMultipleExits_main_region_A_tr0() {
-		exitSequence_TransitionHandlesMultipleExits_main_region_A();
-		enterSequence_TransitionHandlesMultipleExits_main_region_B_default();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
+		enterSequence_main_region_B_default();
 		react();
 	}
 	
-	private void effect_TransitionHandlesMultipleExits_main_region_B_tr0() {
-		exitSequence_TransitionHandlesMultipleExits_main_region_B();
-		enterSequence_TransitionHandlesMultipleExits_main_region_A_default();
+	private void effect_main_region_B_tr0() {
+		exitSequence_main_region_B();
+		enterSequence_main_region_A_default();
 		react();
 	}
 	
-	private void effect_TransitionHandlesMultipleExits_main_region_B_tr1() {
-		exitSequence_TransitionHandlesMultipleExits_main_region_B();
+	private void effect_main_region_B_tr1() {
+		exitSequence_main_region_B();
 		sCInterface.setX(sCInterface.getX() * 2);
 		
-		enterSequence_TransitionHandlesMultipleExits_main_region_A_default();
+		enterSequence_main_region_A_default();
 		react();
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_TransitionHandlesMultipleExits_main_region_A_default() {
-		enterSequence_TransitionHandlesMultipleExits_main_region_A_r_default();
+	private void enterSequence_main_region_A_default() {
+		enterSequence_main_region_A_r_default();
 	}
 	
 	/* 'default' enter sequence for state AA */
-	private void enterSequence_TransitionHandlesMultipleExits_main_region_A_r_AA_default() {
+	private void enterSequence_main_region_A_r_AA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.transitionHandlesMultipleExits_main_region_A_r_AA;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_TransitionHandlesMultipleExits_main_region_B_default() {
-		enterSequence_TransitionHandlesMultipleExits_main_region_B_r_default();
+	private void enterSequence_main_region_B_default() {
+		enterSequence_main_region_B_r_default();
 	}
 	
 	/* 'default' enter sequence for state BB */
-	private void enterSequence_TransitionHandlesMultipleExits_main_region_B_r_BB_default() {
+	private void enterSequence_main_region_B_r_BB_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.transitionHandlesMultipleExits_main_region_B_r_BB;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_TransitionHandlesMultipleExits_main_region_default() {
-		react_TransitionHandlesMultipleExits_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_TransitionHandlesMultipleExits_main_region_A_r_default() {
-		react_TransitionHandlesMultipleExits_main_region_A_r__entry_Default();
+	private void enterSequence_main_region_A_r_default() {
+		react_main_region_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_TransitionHandlesMultipleExits_main_region_B_r_default() {
-		react_TransitionHandlesMultipleExits_main_region_B_r__entry_Default();
+	private void enterSequence_main_region_B_r_default() {
+		react_main_region_B_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_TransitionHandlesMultipleExits_main_region_A() {
-		exitSequence_TransitionHandlesMultipleExits_main_region_A_r();
+	private void exitSequence_main_region_A() {
+		exitSequence_main_region_A_r();
 	}
 	
 	/* Default exit sequence for state AA */
-	private void exitSequence_TransitionHandlesMultipleExits_main_region_A_r_AA() {
+	private void exitSequence_main_region_A_r_AA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_TransitionHandlesMultipleExits_main_region_B() {
-		exitSequence_TransitionHandlesMultipleExits_main_region_B_r();
+	private void exitSequence_main_region_B() {
+		exitSequence_main_region_B_r();
 	}
 	
 	/* Default exit sequence for state BB */
-	private void exitSequence_TransitionHandlesMultipleExits_main_region_B_r_BB() {
+	private void exitSequence_main_region_B_r_BB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_TransitionHandlesMultipleExits_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case transitionHandlesMultipleExits_main_region_A_r_AA:
-			exitSequence_TransitionHandlesMultipleExits_main_region_A_r_AA();
+			exitSequence_main_region_A_r_AA();
 			break;
 		case transitionHandlesMultipleExits_main_region_B_r_BB:
-			exitSequence_TransitionHandlesMultipleExits_main_region_B_r_BB();
+			exitSequence_main_region_B_r_BB();
 			break;
 		default:
 			break;
@@ -276,10 +276,10 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_TransitionHandlesMultipleExits_main_region_A_r() {
+	private void exitSequence_main_region_A_r() {
 		switch (stateVector[0]) {
 		case transitionHandlesMultipleExits_main_region_A_r_AA:
-			exitSequence_TransitionHandlesMultipleExits_main_region_A_r_AA();
+			exitSequence_main_region_A_r_AA();
 			break;
 		default:
 			break;
@@ -287,10 +287,10 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_TransitionHandlesMultipleExits_main_region_B_r() {
+	private void exitSequence_main_region_B_r() {
 		switch (stateVector[0]) {
 		case transitionHandlesMultipleExits_main_region_B_r_BB:
-			exitSequence_TransitionHandlesMultipleExits_main_region_B_r_BB();
+			exitSequence_main_region_B_r_BB();
 			break;
 		default:
 			break;
@@ -298,50 +298,50 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_TransitionHandlesMultipleExits_main_region__entry_Default() {
-		enterSequence_TransitionHandlesMultipleExits_main_region_A_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_TransitionHandlesMultipleExits_main_region_A_r__entry_Default() {
-		enterSequence_TransitionHandlesMultipleExits_main_region_A_r_AA_default();
+	private void react_main_region_A_r__entry_Default() {
+		enterSequence_main_region_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_TransitionHandlesMultipleExits_main_region_B_r__entry_Default() {
-		enterSequence_TransitionHandlesMultipleExits_main_region_B_r_BB_default();
+	private void react_main_region_B_r__entry_Default() {
+		enterSequence_main_region_B_r_BB_default();
 	}
 	
 	/* The reactions of exit ex1. */
-	private void react_TransitionHandlesMultipleExits_main_region_A_r_ex1() {
-		effect_TransitionHandlesMultipleExits_main_region_A_tr0();
+	private void react_main_region_A_r_ex1() {
+		effect_main_region_A_tr0();
 	}
 	
 	/* The reactions of exit ex2. */
-	private void react_TransitionHandlesMultipleExits_main_region_A_r_ex2() {
-		effect_TransitionHandlesMultipleExits_main_region_A_tr0();
+	private void react_main_region_A_r_ex2() {
+		effect_main_region_A_tr0();
 	}
 	
 	/* The reactions of exit ex1. */
-	private void react_TransitionHandlesMultipleExits_main_region_B_r_ex1() {
-		effect_TransitionHandlesMultipleExits_main_region_B_tr0();
+	private void react_main_region_B_r_ex1() {
+		effect_main_region_B_tr0();
 	}
 	
 	/* The reactions of exit ex2. */
-	private void react_TransitionHandlesMultipleExits_main_region_B_r_ex2() {
-		effect_TransitionHandlesMultipleExits_main_region_B_tr1();
+	private void react_main_region_B_r_ex2() {
+		effect_main_region_B_tr1();
 	}
 	
 	/* The reactions of exit ex3. */
-	private void react_TransitionHandlesMultipleExits_main_region_B_r_ex3() {
-		effect_TransitionHandlesMultipleExits_main_region_B_tr0();
+	private void react_main_region_B_r_ex3() {
+		effect_main_region_B_tr0();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean transitionHandlesMultipleExits_main_region_A_react(boolean try_transition) {
+	private boolean main_region_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -353,33 +353,33 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		return did_transition;
 	}
 	
-	private boolean transitionHandlesMultipleExits_main_region_A_r_AA_react(boolean try_transition) {
+	private boolean main_region_A_r_AA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_TransitionHandlesMultipleExits_main_region_A_r_AA();
+				exitSequence_main_region_A_r_AA();
 				sCInterface.setX(1);
 				
-				react_TransitionHandlesMultipleExits_main_region_A_r_ex1();
+				react_main_region_A_r_ex1();
 			} else {
 				if (sCInterface.f) {
-					exitSequence_TransitionHandlesMultipleExits_main_region_A_r_AA();
+					exitSequence_main_region_A_r_AA();
 					sCInterface.setX(2);
 					
-					react_TransitionHandlesMultipleExits_main_region_A_r_ex2();
+					react_main_region_A_r_ex2();
 				} else {
 					did_transition = false;
 				}
 			}
 		}
 		if (did_transition==false) {
-			did_transition = transitionHandlesMultipleExits_main_region_A_react(try_transition);
+			did_transition = main_region_A_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean transitionHandlesMultipleExits_main_region_B_react(boolean try_transition) {
+	private boolean main_region_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -391,27 +391,27 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		return did_transition;
 	}
 	
-	private boolean transitionHandlesMultipleExits_main_region_B_r_BB_react(boolean try_transition) {
+	private boolean main_region_B_r_BB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_TransitionHandlesMultipleExits_main_region_B_r_BB();
+				exitSequence_main_region_B_r_BB();
 				sCInterface.setX(11);
 				
-				react_TransitionHandlesMultipleExits_main_region_B_r_ex1();
+				react_main_region_B_r_ex1();
 			} else {
 				if (sCInterface.f) {
-					exitSequence_TransitionHandlesMultipleExits_main_region_B_r_BB();
+					exitSequence_main_region_B_r_BB();
 					sCInterface.setX(12);
 					
-					react_TransitionHandlesMultipleExits_main_region_B_r_ex2();
+					react_main_region_B_r_ex2();
 				} else {
 					if (sCInterface.g) {
-						exitSequence_TransitionHandlesMultipleExits_main_region_B_r_BB();
+						exitSequence_main_region_B_r_BB();
 						sCInterface.setX(10);
 						
-						react_TransitionHandlesMultipleExits_main_region_B_r_ex3();
+						react_main_region_B_r_ex3();
 					} else {
 						did_transition = false;
 					}
@@ -419,7 +419,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 			}
 		}
 		if (did_transition==false) {
-			did_transition = transitionHandlesMultipleExits_main_region_B_react(try_transition);
+			did_transition = main_region_B_react(try_transition);
 		}
 		return did_transition;
 	}

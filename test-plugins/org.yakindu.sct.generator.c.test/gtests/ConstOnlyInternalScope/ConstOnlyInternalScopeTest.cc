@@ -44,14 +44,14 @@ void ConstOnlyInternalScopeTest::SetUp()
 void ConstOnlyInternalScopeTest::statechartEntry()
 {
 	constOnlyInternalScope_enter(&statechart);
-	EXPECT_TRUE(constOnlyInternalScope_isStateActive(&statechart, ConstOnlyInternalScope_ConstOnlyInternalScope_main_region_A));
+	EXPECT_TRUE(constOnlyInternalScope_isStateActive(&statechart, ConstOnlyInternalScope_main_region_A));
 }
 void ConstOnlyInternalScopeTest::stateTransition()
 {
 	constOnlyInternalScope_enter(&statechart);
 	constOnlyInternalScopeIface_raise_e(&statechart, 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(constOnlyInternalScope_isStateActive(&statechart, ConstOnlyInternalScope_ConstOnlyInternalScope_main_region_B));
+	EXPECT_TRUE(constOnlyInternalScope_isStateActive(&statechart, ConstOnlyInternalScope_main_region_B));
 }
 
 void ConstOnlyInternalScopeTest::setTimer(ConstOnlyInternalScope* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

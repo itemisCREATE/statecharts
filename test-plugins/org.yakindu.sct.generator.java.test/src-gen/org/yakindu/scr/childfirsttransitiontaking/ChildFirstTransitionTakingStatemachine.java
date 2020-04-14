@@ -98,8 +98,8 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_ChildFirstTransitionTaking_r1_default();
-		enterSequence_ChildFirstTransitionTaking_r2_default();
+		enterSequence_r1_default();
+		enterSequence_r2_default();
 	}
 	
 	public void runCycle() {
@@ -110,34 +110,34 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstTransitionTaking_r1_A_r1_AA:
-				childFirstTransitionTaking_r1_A_r1_AA_react(true);
+				r1_A_r1_AA_react(true);
 				break;
 			case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
-				childFirstTransitionTaking_r1_A_r1_AB_r1_ABA_react(true);
+				r1_A_r1_AB_r1_ABA_react(true);
 				break;
 			case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
-				childFirstTransitionTaking_r1_A_r1_AB_r2_ABB_react(true);
+				r1_A_r1_AB_r2_ABB_react(true);
 				break;
 			case childFirstTransitionTaking_r1_B:
-				childFirstTransitionTaking_r1_B_react(true);
+				r1_B_react(true);
 				break;
 			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
-				childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA_react(true);
+				r2_C_r_CA_r_CAA_r1_CAAA_react(true);
 				break;
 			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
-				childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB_react(true);
+				r2_C_r_CA_r_CAA_r2_CAAB_react(true);
 				break;
 			case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
-				childFirstTransitionTaking_r2_C_r_CA_r_CAB_react(true);
+				r2_C_r_CA_r_CAB_react(true);
 				break;
 			case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
-				childFirstTransitionTaking_r2_C_r_CB_r1_CBA_react(true);
+				r2_C_r_CB_r1_CBA_react(true);
 				break;
 			case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
-				childFirstTransitionTaking_r2_C_r_CB_r2_CBB_react(true);
+				r2_C_r_CB_r2_CBB_react(true);
 				break;
 			case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
-				childFirstTransitionTaking_r2_C_r_CB_r3_CBC_react(true);
+				r2_C_r_CB_r3_CBC_react(true);
 				break;
 			default:
 				// $NullState$
@@ -146,8 +146,8 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_ChildFirstTransitionTaking_r1();
-		exitSequence_ChildFirstTransitionTaking_r2();
+		exitSequence_r1();
+		exitSequence_r2();
 	}
 	
 	/**
@@ -256,259 +256,259 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_default() {
-		enterSequence_ChildFirstTransitionTaking_r1_A_r1_default();
+	private void enterSequence_r1_A_default() {
+		enterSequence_r1_A_r1_default();
 	}
 	
 	/* 'default' enter sequence for state AA */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_r1_AA_default() {
+	private void enterSequence_r1_A_r1_AA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstTransitionTaking_r1_A_r1_AA;
 	}
 	
 	/* 'default' enter sequence for state AB */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_default() {
-		enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_default();
-		enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_default();
+	private void enterSequence_r1_A_r1_AB_default() {
+		enterSequence_r1_A_r1_AB_r1_default();
+		enterSequence_r1_A_r1_AB_r2_default();
 	}
 	
 	/* 'default' enter sequence for state ABA */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA_default() {
+	private void enterSequence_r1_A_r1_AB_r1_ABA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstTransitionTaking_r1_A_r1_AB_r1_ABA;
 	}
 	
 	/* 'default' enter sequence for state ABB */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB_default() {
+	private void enterSequence_r1_A_r1_AB_r2_ABB_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.childFirstTransitionTaking_r1_A_r1_AB_r2_ABB;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_ChildFirstTransitionTaking_r1_B_default() {
+	private void enterSequence_r1_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstTransitionTaking_r1_B;
 	}
 	
 	/* 'default' enter sequence for state C */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_default();
+	private void enterSequence_r2_C_default() {
+		enterSequence_r2_C_r_default();
 	}
 	
 	/* 'default' enter sequence for state CA */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_default();
+	private void enterSequence_r2_C_r_CA_default() {
+		enterSequence_r2_C_r_CA_r_default();
 	}
 	
 	/* 'default' enter sequence for state CAA */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_default();
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_default();
+	private void enterSequence_r2_C_r_CA_r_CAA_default() {
+		enterSequence_r2_C_r_CA_r_CAA_r1_default();
+		enterSequence_r2_C_r_CA_r_CAA_r2_default();
 	}
 	
 	/* 'default' enter sequence for state CAAA */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA_default() {
+	private void enterSequence_r2_C_r_CA_r_CAA_r1_CAAA_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA;
 	}
 	
 	/* 'default' enter sequence for state CAAB */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB_default() {
+	private void enterSequence_r2_C_r_CA_r_CAA_r2_CAAB_default() {
 		nextStateIndex = 3;
 		stateVector[3] = State.childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB;
 	}
 	
 	/* 'default' enter sequence for state CAB */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB_default() {
+	private void enterSequence_r2_C_r_CA_r_CAB_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.childFirstTransitionTaking_r2_C_r_CA_r_CAB;
 	}
 	
 	/* 'default' enter sequence for state CB */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_default();
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_default();
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_default();
+	private void enterSequence_r2_C_r_CB_default() {
+		enterSequence_r2_C_r_CB_r1_default();
+		enterSequence_r2_C_r_CB_r2_default();
+		enterSequence_r2_C_r_CB_r3_default();
 	}
 	
 	/* 'default' enter sequence for state CBA */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_CBA_default() {
+	private void enterSequence_r2_C_r_CB_r1_CBA_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.childFirstTransitionTaking_r2_C_r_CB_r1_CBA;
 	}
 	
 	/* 'default' enter sequence for state CBB */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_CBB_default() {
+	private void enterSequence_r2_C_r_CB_r2_CBB_default() {
 		nextStateIndex = 3;
 		stateVector[3] = State.childFirstTransitionTaking_r2_C_r_CB_r2_CBB;
 	}
 	
 	/* 'default' enter sequence for state CBC */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_CBC_default() {
+	private void enterSequence_r2_C_r_CB_r3_CBC_default() {
 		nextStateIndex = 4;
 		stateVector[4] = State.childFirstTransitionTaking_r2_C_r_CB_r3_CBC;
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_ChildFirstTransitionTaking_r1_default() {
-		react_ChildFirstTransitionTaking_r1__entry_Default();
+	private void enterSequence_r1_default() {
+		react_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_r1_default() {
-		react_ChildFirstTransitionTaking_r1_A_r1__entry_Default();
+	private void enterSequence_r1_A_r1_default() {
+		react_r1_A_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_default() {
-		react_ChildFirstTransitionTaking_r1_A_r1_AB_r1__entry_Default();
+	private void enterSequence_r1_A_r1_AB_r1_default() {
+		react_r1_A_r1_AB_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_default() {
-		react_ChildFirstTransitionTaking_r1_A_r1_AB_r2__entry_Default();
+	private void enterSequence_r1_A_r1_AB_r2_default() {
+		react_r1_A_r1_AB_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_ChildFirstTransitionTaking_r2_default() {
-		react_ChildFirstTransitionTaking_r2__entry_Default();
+	private void enterSequence_r2_default() {
+		react_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_default() {
-		react_ChildFirstTransitionTaking_r2_C_r__entry_Default();
+	private void enterSequence_r2_C_r_default() {
+		react_r2_C_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_default() {
-		react_ChildFirstTransitionTaking_r2_C_r_CA_r__entry_Default();
+	private void enterSequence_r2_C_r_CA_r_default() {
+		react_r2_C_r_CA_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_default() {
-		react_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1__entry_Default();
+	private void enterSequence_r2_C_r_CA_r_CAA_r1_default() {
+		react_r2_C_r_CA_r_CAA_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_default() {
-		react_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2__entry_Default();
+	private void enterSequence_r2_C_r_CA_r_CAA_r2_default() {
+		react_r2_C_r_CA_r_CAA_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_default() {
-		react_ChildFirstTransitionTaking_r2_C_r_CB_r1__entry_Default();
+	private void enterSequence_r2_C_r_CB_r1_default() {
+		react_r2_C_r_CB_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_default() {
-		react_ChildFirstTransitionTaking_r2_C_r_CB_r2__entry_Default();
+	private void enterSequence_r2_C_r_CB_r2_default() {
+		react_r2_C_r_CB_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r3 */
-	private void enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_default() {
-		react_ChildFirstTransitionTaking_r2_C_r_CB_r3__entry_Default();
+	private void enterSequence_r2_C_r_CB_r3_default() {
+		react_r2_C_r_CB_r3__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A() {
-		exitSequence_ChildFirstTransitionTaking_r1_A_r1();
+	private void exitSequence_r1_A() {
+		exitSequence_r1_A_r1();
 	}
 	
 	/* Default exit sequence for state AA */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A_r1_AA() {
+	private void exitSequence_r1_A_r1_AA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state AB */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB() {
-		exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1();
-		exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2();
+	private void exitSequence_r1_A_r1_AB() {
+		exitSequence_r1_A_r1_AB_r1();
+		exitSequence_r1_A_r1_AB_r2();
 	}
 	
 	/* Default exit sequence for state ABA */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA() {
+	private void exitSequence_r1_A_r1_AB_r1_ABA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state ABB */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB() {
+	private void exitSequence_r1_A_r1_AB_r2_ABB() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_ChildFirstTransitionTaking_r1_B() {
+	private void exitSequence_r1_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state CA */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA() {
-		exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r();
+	private void exitSequence_r2_C_r_CA() {
+		exitSequence_r2_C_r_CA_r();
 	}
 	
 	/* Default exit sequence for state CAA */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA() {
-		exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1();
-		exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2();
+	private void exitSequence_r2_C_r_CA_r_CAA() {
+		exitSequence_r2_C_r_CA_r_CAA_r1();
+		exitSequence_r2_C_r_CA_r_CAA_r2();
 	}
 	
 	/* Default exit sequence for state CAAA */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA() {
+	private void exitSequence_r2_C_r_CA_r_CAA_r1_CAAA() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state CAAB */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB() {
+	private void exitSequence_r2_C_r_CA_r_CAA_r2_CAAB() {
 		nextStateIndex = 3;
 		stateVector[3] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state CAB */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB() {
+	private void exitSequence_r2_C_r_CA_r_CAB() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state CB */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CB() {
-		exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1();
-		exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2();
-		exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3();
+	private void exitSequence_r2_C_r_CB() {
+		exitSequence_r2_C_r_CB_r1();
+		exitSequence_r2_C_r_CB_r2();
+		exitSequence_r2_C_r_CB_r3();
 	}
 	
 	/* Default exit sequence for state CBA */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_CBA() {
+	private void exitSequence_r2_C_r_CB_r1_CBA() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state CBB */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_CBB() {
+	private void exitSequence_r2_C_r_CB_r2_CBB() {
 		nextStateIndex = 3;
 		stateVector[3] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state CBC */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_CBC() {
+	private void exitSequence_r2_C_r_CB_r3_CBC() {
 		nextStateIndex = 4;
 		stateVector[4] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_ChildFirstTransitionTaking_r1() {
+	private void exitSequence_r1() {
 		switch (stateVector[0]) {
 		case childFirstTransitionTaking_r1_A_r1_AA:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AA();
+			exitSequence_r1_A_r1_AA();
 			break;
 		case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA();
+			exitSequence_r1_A_r1_AB_r1_ABA();
 			break;
 		case childFirstTransitionTaking_r1_B:
-			exitSequence_ChildFirstTransitionTaking_r1_B();
+			exitSequence_r1_B();
 			break;
 		default:
 			break;
@@ -516,7 +516,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		switch (stateVector[1]) {
 		case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB();
+			exitSequence_r1_A_r1_AB_r2_ABB();
 			break;
 		default:
 			break;
@@ -524,13 +524,13 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A_r1() {
+	private void exitSequence_r1_A_r1() {
 		switch (stateVector[0]) {
 		case childFirstTransitionTaking_r1_A_r1_AA:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AA();
+			exitSequence_r1_A_r1_AA();
 			break;
 		case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA();
+			exitSequence_r1_A_r1_AB_r1_ABA();
 			break;
 		default:
 			break;
@@ -538,7 +538,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		switch (stateVector[1]) {
 		case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB();
+			exitSequence_r1_A_r1_AB_r2_ABB();
 			break;
 		default:
 			break;
@@ -546,10 +546,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1() {
+	private void exitSequence_r1_A_r1_AB_r1() {
 		switch (stateVector[0]) {
 		case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA();
+			exitSequence_r1_A_r1_AB_r1_ABA();
 			break;
 		default:
 			break;
@@ -557,10 +557,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2() {
+	private void exitSequence_r1_A_r1_AB_r2() {
 		switch (stateVector[1]) {
 		case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
-			exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB();
+			exitSequence_r1_A_r1_AB_r2_ABB();
 			break;
 		default:
 			break;
@@ -568,16 +568,16 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_ChildFirstTransitionTaking_r2() {
+	private void exitSequence_r2() {
 		switch (stateVector[2]) {
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA();
+			exitSequence_r2_C_r_CA_r_CAA_r1_CAAA();
 			break;
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB();
+			exitSequence_r2_C_r_CA_r_CAB();
 			break;
 		case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_CBA();
+			exitSequence_r2_C_r_CB_r1_CBA();
 			break;
 		default:
 			break;
@@ -585,10 +585,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		switch (stateVector[3]) {
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB();
+			exitSequence_r2_C_r_CA_r_CAA_r2_CAAB();
 			break;
 		case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_CBB();
+			exitSequence_r2_C_r_CB_r2_CBB();
 			break;
 		default:
 			break;
@@ -596,7 +596,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		switch (stateVector[4]) {
 		case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_CBC();
+			exitSequence_r2_C_r_CB_r3_CBC();
 			break;
 		default:
 			break;
@@ -604,13 +604,13 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r() {
+	private void exitSequence_r2_C_r_CA_r() {
 		switch (stateVector[2]) {
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA();
+			exitSequence_r2_C_r_CA_r_CAA_r1_CAAA();
 			break;
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB();
+			exitSequence_r2_C_r_CA_r_CAB();
 			break;
 		default:
 			break;
@@ -618,7 +618,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		switch (stateVector[3]) {
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB();
+			exitSequence_r2_C_r_CA_r_CAA_r2_CAAB();
 			break;
 		default:
 			break;
@@ -626,10 +626,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1() {
+	private void exitSequence_r2_C_r_CA_r_CAA_r1() {
 		switch (stateVector[2]) {
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA();
+			exitSequence_r2_C_r_CA_r_CAA_r1_CAAA();
 			break;
 		default:
 			break;
@@ -637,10 +637,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2() {
+	private void exitSequence_r2_C_r_CA_r_CAA_r2() {
 		switch (stateVector[3]) {
 		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB();
+			exitSequence_r2_C_r_CA_r_CAA_r2_CAAB();
 			break;
 		default:
 			break;
@@ -648,10 +648,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1() {
+	private void exitSequence_r2_C_r_CB_r1() {
 		switch (stateVector[2]) {
 		case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_CBA();
+			exitSequence_r2_C_r_CB_r1_CBA();
 			break;
 		default:
 			break;
@@ -659,10 +659,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2() {
+	private void exitSequence_r2_C_r_CB_r2() {
 		switch (stateVector[3]) {
 		case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_CBB();
+			exitSequence_r2_C_r_CB_r2_CBB();
 			break;
 		default:
 			break;
@@ -670,10 +670,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default exit sequence for region r3 */
-	private void exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3() {
+	private void exitSequence_r2_C_r_CB_r3() {
 		switch (stateVector[4]) {
 		case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
-			exitSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_CBC();
+			exitSequence_r2_C_r_CB_r3_CBC();
 			break;
 		default:
 			break;
@@ -681,76 +681,76 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r1__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r1_A_default();
+	private void react_r1__entry_Default() {
+		enterSequence_r1_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r1_A_r1__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r1_A_r1_AA_default();
+	private void react_r1_A_r1__entry_Default() {
+		enterSequence_r1_A_r1_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r1_A_r1_AB_r1__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA_default();
+	private void react_r1_A_r1_AB_r1__entry_Default() {
+		enterSequence_r1_A_r1_AB_r1_ABA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r1_A_r1_AB_r2__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB_default();
+	private void react_r1_A_r1_AB_r2__entry_Default() {
+		enterSequence_r1_A_r1_AB_r2_ABB_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_default();
+	private void react_r2__entry_Default() {
+		enterSequence_r2_C_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2_C_r__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_default();
+	private void react_r2_C_r__entry_Default() {
+		enterSequence_r2_C_r_CA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2_C_r_CA_r__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_default();
+	private void react_r2_C_r_CA_r__entry_Default() {
+		enterSequence_r2_C_r_CA_r_CAA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA_default();
+	private void react_r2_C_r_CA_r_CAA_r1__entry_Default() {
+		enterSequence_r2_C_r_CA_r_CAA_r1_CAAA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB_default();
+	private void react_r2_C_r_CA_r_CAA_r2__entry_Default() {
+		enterSequence_r2_C_r_CA_r_CAA_r2_CAAB_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2_C_r_CB_r1__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r1_CBA_default();
+	private void react_r2_C_r_CB_r1__entry_Default() {
+		enterSequence_r2_C_r_CB_r1_CBA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2_C_r_CB_r2__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r2_CBB_default();
+	private void react_r2_C_r_CB_r2__entry_Default() {
+		enterSequence_r2_C_r_CB_r2_CBB_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstTransitionTaking_r2_C_r_CB_r3__entry_Default() {
-		enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_CBC_default();
+	private void react_r2_C_r_CB_r3__entry_Default() {
+		enterSequence_r2_C_r_CB_r3_CBC_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean childFirstTransitionTaking_r1_A_react(boolean try_transition) {
+	private boolean r1_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_ChildFirstTransitionTaking_r1_A();
-				enterSequence_ChildFirstTransitionTaking_r1_B_default();
+				exitSequence_r1_A();
+				enterSequence_r1_B_default();
 			} else {
 				did_transition = false;
 			}
@@ -758,44 +758,44 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r1_A_r1_AA_react(boolean try_transition) {
+	private boolean r1_A_r1_AA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.go) {
-				exitSequence_ChildFirstTransitionTaking_r1_A_r1_AA();
-				enterSequence_ChildFirstTransitionTaking_r1_A_r1_AB_default();
-				childFirstTransitionTaking_r1_A_react(false);
+				exitSequence_r1_A_r1_AA();
+				enterSequence_r1_A_r1_AB_default();
+				r1_A_react(false);
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r1_A_react(try_transition);
+			did_transition = r1_A_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r1_A_r1_AB_react(boolean try_transition) {
+	private boolean r1_A_r1_AB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r1_A_react(try_transition);
+			did_transition = r1_A_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r1_A_r1_AB_r1_ABA_react(boolean try_transition) {
+	private boolean r1_A_r1_AB_r1_ABA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.go) {
-				exitSequence_ChildFirstTransitionTaking_r1_A_r1_AB();
-				enterSequence_ChildFirstTransitionTaking_r1_A_r1_AA_default();
-				childFirstTransitionTaking_r1_A_react(false);
+				exitSequence_r1_A_r1_AB();
+				enterSequence_r1_A_r1_AA_default();
+				r1_A_react(false);
 			} else {
 				did_transition = false;
 			}
@@ -803,25 +803,25 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r1_A_r1_AB_r2_ABB_react(boolean try_transition) {
+	private boolean r1_A_r1_AB_r2_ABB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r1_A_r1_AB_react(try_transition);
+			did_transition = r1_A_r1_AB_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r1_B_react(boolean try_transition) {
+	private boolean r1_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_ChildFirstTransitionTaking_r1_B();
-				enterSequence_ChildFirstTransitionTaking_r1_A_default();
+				exitSequence_r1_B();
+				enterSequence_r1_A_default();
 			} else {
 				did_transition = false;
 			}
@@ -829,7 +829,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_react(boolean try_transition) {
+	private boolean r2_C_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -843,14 +843,14 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CA_react(boolean try_transition) {
+	private boolean r2_C_r_CA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_ChildFirstTransitionTaking_r2_C_r_CA();
-				enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_default();
-				childFirstTransitionTaking_r2_C_react(false);
+				exitSequence_r2_C_r_CA();
+				enterSequence_r2_C_r_CB_default();
+				r2_C_react(false);
 			} else {
 				did_transition = false;
 			}
@@ -858,30 +858,30 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		if (did_transition==false) {
 			sCInterface.setCaLocalReaction(sCInterface.getCaLocalReaction() + 1);
 			
-			did_transition = childFirstTransitionTaking_r2_C_react(try_transition);
+			did_transition = r2_C_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CA_r_CAA_react(boolean try_transition) {
+	private boolean r2_C_r_CA_r_CAA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.go) {
-				exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA();
-				enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB_default();
-				childFirstTransitionTaking_r2_C_r_CA_react(false);
+				exitSequence_r2_C_r_CA_r_CAA();
+				enterSequence_r2_C_r_CA_r_CAB_default();
+				r2_C_r_CA_react(false);
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r2_C_r_CA_react(try_transition);
+			did_transition = r2_C_r_CA_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA_react(boolean try_transition) {
+	private boolean r2_C_r_CA_r_CAA_r1_CAAA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -890,55 +890,55 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB_react(boolean try_transition) {
+	private boolean r2_C_r_CA_r_CAA_r2_CAAB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r2_C_r_CA_r_CAA_react(try_transition);
+			did_transition = r2_C_r_CA_r_CAA_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CA_r_CAB_react(boolean try_transition) {
+	private boolean r2_C_r_CA_r_CAB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.go) {
-				exitSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB();
-				enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA_default();
-				childFirstTransitionTaking_r2_C_r_CA_react(false);
+				exitSequence_r2_C_r_CA_r_CAB();
+				enterSequence_r2_C_r_CA_r_CAA_default();
+				r2_C_r_CA_react(false);
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r2_C_r_CA_react(try_transition);
+			did_transition = r2_C_r_CA_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CB_react(boolean try_transition) {
+	private boolean r2_C_r_CB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_ChildFirstTransitionTaking_r2_C_r_CB();
-				enterSequence_ChildFirstTransitionTaking_r2_C_r_CA_default();
-				childFirstTransitionTaking_r2_C_react(false);
+				exitSequence_r2_C_r_CB();
+				enterSequence_r2_C_r_CA_default();
+				r2_C_react(false);
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r2_C_react(try_transition);
+			did_transition = r2_C_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CB_r1_CBA_react(boolean try_transition) {
+	private boolean r2_C_r_CB_r1_CBA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -947,7 +947,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CB_r2_CBB_react(boolean try_transition) {
+	private boolean r2_C_r_CB_r2_CBB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -956,14 +956,14 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	private boolean childFirstTransitionTaking_r2_C_r_CB_r3_CBC_react(boolean try_transition) {
+	private boolean r2_C_r_CB_r3_CBC_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = childFirstTransitionTaking_r2_C_r_CB_react(try_transition);
+			did_transition = r2_C_r_CB_react(try_transition);
 		}
 		return did_transition;
 	}

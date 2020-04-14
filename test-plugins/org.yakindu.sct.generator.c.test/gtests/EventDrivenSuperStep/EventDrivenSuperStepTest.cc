@@ -45,9 +45,9 @@ void EventDrivenSuperStepTest::SetUp()
 void EventDrivenSuperStepTest::superStepOnInternalEventQueue()
 {
 	eventDrivenSuperStep_enter(&statechart);
-	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_A));
+	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_main_region_A));
 	eventDrivenSuperStepIface_raise_e(&statechart);
-	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_C));
+	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_main_region_C));
 	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 17);
 	eventDrivenSuperStep_exit(&statechart);
 }
@@ -55,19 +55,19 @@ void EventDrivenSuperStepTest::superStepIteratesUsingAlwaysTrigger()
 {
 	eventDrivenSuperStep_enter(&statechart);
 	eventDrivenSuperStepIface_raise_f(&statechart);
-	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_I));
+	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_main_region_I));
 	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 0);
 	eventDrivenSuperStep_exit(&statechart);
 }
 void EventDrivenSuperStepTest::superStepIteratesUsingSameEventAndGuard()
 {
 	eventDrivenSuperStep_enter(&statechart);
-	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_A));
+	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_main_region_A));
 	eventDrivenSuperStepIface_raise_e(&statechart);
-	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_C));
+	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_main_region_C));
 	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 17);
 	eventDrivenSuperStepIface_raise_f(&statechart);
-	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_EventDrivenSuperStep_main_region_I));
+	EXPECT_TRUE(eventDrivenSuperStep_isStateActive(&statechart, EventDrivenSuperStep_main_region_I));
 	EXPECT_TRUE(eventDrivenSuperStepIface_get_x(&statechart)== 0);
 	eventDrivenSuperStep_exit(&statechart);
 }

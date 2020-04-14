@@ -36,21 +36,21 @@ TEST_F(NoLocalEventsTest, test) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::main_region_StateA));
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::main_region_StateB));
 	
 	statechart->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::main_region_StateA));
 	
 	EXPECT_TRUE((statechart->get_x()== 0));
 	
 	statechart->raise_i(42);
 	
-	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::main_region_StateB));
 	
 	EXPECT_TRUE((statechart->get_x()== 42));
 	

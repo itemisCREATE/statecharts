@@ -211,14 +211,13 @@ public class GTestHelper {
 		File targetPath = ResourcesPlugin.getWorkspace().getRoot().findMember(getTargetPath()).getLocation().toFile();
 
 		 CompileGTestCommand gTestCommand = new CompileGTestCommand()
-				.compiler(getCompilerCommand())
+				.compiler(Compiler.GPLUSPLUS.command) // always compile tests with g++
 				.program(getFileName(getTestProgram()))
 				.includes(includes)
 				.sources(sourceFiles)
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
-				.wPedantic()
 			 	.wAll()				
 			 	.wExtra()
 			 	.wConversion()

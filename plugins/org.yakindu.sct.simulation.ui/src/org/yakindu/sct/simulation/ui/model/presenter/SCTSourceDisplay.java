@@ -180,10 +180,10 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 		if (source instanceof IDebugTarget) {
 			IDebugTarget target = (IDebugTarget) source;
 			if (activeLaunch == target.getLaunch()) {
+				activeLaunch = null;
 				for (IDynamicNotationHandler current : handler.values()) {
 					current.terminate();
 				}
-				activeLaunch = null;
 				handler.clear();
 			}
 		}

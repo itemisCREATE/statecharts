@@ -80,7 +80,7 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_NoLocalEvents_main_region_default();
+		enterSequence_main_region_default();
 	}
 	
 	public void runCycle() {
@@ -91,10 +91,10 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case noLocalEvents_main_region_StateA:
-				noLocalEvents_main_region_StateA_react(true);
+				main_region_StateA_react(true);
 				break;
 			case noLocalEvents_main_region_StateB:
-				noLocalEvents_main_region_StateB_react(true);
+				main_region_StateB_react(true);
 				break;
 			default:
 				// $NullState$
@@ -103,7 +103,7 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_NoLocalEvents_main_region();
+		exitSequence_main_region();
 	}
 	
 	/**
@@ -170,42 +170,42 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 	}
 	
 	/* 'default' enter sequence for state StateA */
-	private void enterSequence_NoLocalEvents_main_region_StateA_default() {
+	private void enterSequence_main_region_StateA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.noLocalEvents_main_region_StateA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
-	private void enterSequence_NoLocalEvents_main_region_StateB_default() {
+	private void enterSequence_main_region_StateB_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.noLocalEvents_main_region_StateB;
 	}
 	
 	/* 'default' enter sequence for region main region */
-	private void enterSequence_NoLocalEvents_main_region_default() {
-		react_NoLocalEvents_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state StateA */
-	private void exitSequence_NoLocalEvents_main_region_StateA() {
+	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state StateB */
-	private void exitSequence_NoLocalEvents_main_region_StateB() {
+	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
-	private void exitSequence_NoLocalEvents_main_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 		case noLocalEvents_main_region_StateA:
-			exitSequence_NoLocalEvents_main_region_StateA();
+			exitSequence_main_region_StateA();
 			break;
 		case noLocalEvents_main_region_StateB:
-			exitSequence_NoLocalEvents_main_region_StateB();
+			exitSequence_main_region_StateB();
 			break;
 		default:
 			break;
@@ -213,28 +213,28 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_NoLocalEvents_main_region__entry_Default() {
-		enterSequence_NoLocalEvents_main_region_StateA_default();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_StateA_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean noLocalEvents_main_region_StateA_react(boolean try_transition) {
+	private boolean main_region_StateA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
 				if (sCInterface.e) {
-					exitSequence_NoLocalEvents_main_region_StateA();
-					enterSequence_NoLocalEvents_main_region_StateB_default();
+					exitSequence_main_region_StateA();
+					enterSequence_main_region_StateB_default();
 				} else {
 					if (sCInterface.i) {
-						exitSequence_NoLocalEvents_main_region_StateA();
+						exitSequence_main_region_StateA();
 						sCInterface.setX(sCInterface.getIValue());
 						
-						enterSequence_NoLocalEvents_main_region_StateB_default();
+						enterSequence_main_region_StateB_default();
 					} else {
 						did_transition = false;
 					}
@@ -244,13 +244,13 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	private boolean noLocalEvents_main_region_StateB_react(boolean try_transition) {
+	private boolean main_region_StateB_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
-				exitSequence_NoLocalEvents_main_region_StateB();
-				enterSequence_NoLocalEvents_main_region_StateA_default();
+				exitSequence_main_region_StateB();
+				enterSequence_main_region_StateA_default();
 			}
 		}
 		return did_transition;

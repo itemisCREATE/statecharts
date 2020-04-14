@@ -160,7 +160,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_ChildFirstExecutionHierarchy_r_default();
+		enterSequence_r_default();
 	}
 	
 	public void runCycle() {
@@ -171,10 +171,10 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-				childFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
+				r_A_r_AA_r_AAA_react(true);
 				break;
 			case childFirstExecutionHierarchy_r_B:
-				childFirstExecutionHierarchy_r_B_react(true);
+				r_B_react(true);
 				break;
 			default:
 				// $NullState$
@@ -183,7 +183,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_ChildFirstExecutionHierarchy_r();
+		exitSequence_r();
 	}
 	
 	/**
@@ -316,7 +316,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	}
 	
 	/* Entry action for state 'A'. */
-	private void entryAction_ChildFirstExecutionHierarchy_r_A() {
+	private void entryAction_r_A() {
 		sCInterface.setA_reacted(false);
 		
 		sCInterface.setAa_reacted(false);
@@ -337,68 +337,68 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_ChildFirstExecutionHierarchy_r_A_default() {
-		entryAction_ChildFirstExecutionHierarchy_r_A();
-		enterSequence_ChildFirstExecutionHierarchy_r_A_r_default();
+	private void enterSequence_r_A_default() {
+		entryAction_r_A();
+		enterSequence_r_A_r_default();
 	}
 	
 	/* 'default' enter sequence for state AA */
-	private void enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_default() {
-		enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_default();
+	private void enterSequence_r_A_r_AA_default() {
+		enterSequence_r_A_r_AA_r_default();
 	}
 	
 	/* 'default' enter sequence for state AAA */
-	private void enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA_default() {
+	private void enterSequence_r_A_r_AA_r_AAA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA;
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_ChildFirstExecutionHierarchy_r_B_default() {
+	private void enterSequence_r_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.childFirstExecutionHierarchy_r_B;
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ChildFirstExecutionHierarchy_r_default() {
-		react_ChildFirstExecutionHierarchy_r__entry_Default();
+	private void enterSequence_r_default() {
+		react_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ChildFirstExecutionHierarchy_r_A_r_default() {
-		react_ChildFirstExecutionHierarchy_r_A_r__entry_Default();
+	private void enterSequence_r_A_r_default() {
+		react_r_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_default() {
-		react_ChildFirstExecutionHierarchy_r_A_r_AA_r__entry_Default();
+	private void enterSequence_r_A_r_AA_r_default() {
+		react_r_A_r_AA_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_ChildFirstExecutionHierarchy_r_A() {
-		exitSequence_ChildFirstExecutionHierarchy_r_A_r();
+	private void exitSequence_r_A() {
+		exitSequence_r_A_r();
 	}
 	
 	/* Default exit sequence for state AAA */
-	private void exitSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA() {
+	private void exitSequence_r_A_r_AA_r_AAA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_ChildFirstExecutionHierarchy_r_B() {
+	private void exitSequence_r_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ChildFirstExecutionHierarchy_r() {
+	private void exitSequence_r() {
 		switch (stateVector[0]) {
 		case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-			exitSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA();
+			exitSequence_r_A_r_AA_r_AAA();
 			break;
 		case childFirstExecutionHierarchy_r_B:
-			exitSequence_ChildFirstExecutionHierarchy_r_B();
+			exitSequence_r_B();
 			break;
 		default:
 			break;
@@ -406,10 +406,10 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ChildFirstExecutionHierarchy_r_A_r() {
+	private void exitSequence_r_A_r() {
 		switch (stateVector[0]) {
 		case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-			exitSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA();
+			exitSequence_r_A_r_AA_r_AAA();
 			break;
 		default:
 			break;
@@ -417,33 +417,33 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstExecutionHierarchy_r__entry_Default() {
-		enterSequence_ChildFirstExecutionHierarchy_r_A_default();
+	private void react_r__entry_Default() {
+		enterSequence_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstExecutionHierarchy_r_A_r__entry_Default() {
-		enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_default();
+	private void react_r_A_r__entry_Default() {
+		enterSequence_r_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstExecutionHierarchy_r_A_r_AA_r__entry_Default() {
-		enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA_default();
+	private void react_r_A_r_AA_r__entry_Default() {
+		enterSequence_r_A_r_AA_r_AAA_default();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean childFirstExecutionHierarchy_r_A_react(boolean try_transition) {
+	private boolean r_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
-				exitSequence_ChildFirstExecutionHierarchy_r_A();
+				exitSequence_r_A();
 				sCInterface.setA_reacted(true);
 				
-				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
+				enterSequence_r_B_default();
 				react();
 			} else {
 				did_transition = false;
@@ -457,15 +457,15 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		return did_transition;
 	}
 	
-	private boolean childFirstExecutionHierarchy_r_A_r_AA_react(boolean try_transition) {
+	private boolean r_A_r_AA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
-				exitSequence_ChildFirstExecutionHierarchy_r_A();
+				exitSequence_r_A();
 				sCInterface.setAa_reacted(true);
 				
-				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
+				enterSequence_r_B_default();
 				react();
 			} else {
 				did_transition = false;
@@ -474,20 +474,20 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		if (did_transition==false) {
 			sCInterface.setAa_local(true);
 			
-			did_transition = childFirstExecutionHierarchy_r_A_react(try_transition);
+			did_transition = r_A_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(boolean try_transition) {
+	private boolean r_A_r_AA_r_AAA_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
-				exitSequence_ChildFirstExecutionHierarchy_r_A();
+				exitSequence_r_A();
 				sCInterface.setAaa_reacted(true);
 				
-				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
+				enterSequence_r_B_default();
 				react();
 			} else {
 				did_transition = false;
@@ -496,18 +496,18 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		if (did_transition==false) {
 			sCInterface.setAaa_local(true);
 			
-			did_transition = childFirstExecutionHierarchy_r_A_r_AA_react(try_transition);
+			did_transition = r_A_r_AA_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean childFirstExecutionHierarchy_r_B_react(boolean try_transition) {
+	private boolean r_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.e) {
-				exitSequence_ChildFirstExecutionHierarchy_r_B();
-				enterSequence_ChildFirstExecutionHierarchy_r_A_default();
+				exitSequence_r_B();
+				enterSequence_r_A_default();
 				react();
 			} else {
 				did_transition = false;

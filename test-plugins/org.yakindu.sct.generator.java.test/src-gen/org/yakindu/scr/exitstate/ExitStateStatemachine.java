@@ -69,7 +69,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
-		enterSequence_ExitState_r_default();
+		enterSequence_r_default();
 	}
 	
 	public void runCycle() {
@@ -80,13 +80,13 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case exitState_r_A_r_B:
-				exitState_r_A_r_B_react(true);
+				r_A_r_B_react(true);
 				break;
 			case exitState_r_E:
-				exitState_r_E_react(true);
+				r_E_react(true);
 				break;
 			case exitState_r_F:
-				exitState_r_F_react(true);
+				r_F_react(true);
 				break;
 			default:
 				// $NullState$
@@ -95,7 +95,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		clearEvents();
 	}
 	public void exit() {
-		exitSequence_ExitState_r();
+		exitSequence_r();
 	}
 	
 	/**
@@ -162,83 +162,83 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		sCInterface.raiseG();
 	}
 	
-	private void effect_ExitState_r_A_tr0() {
-		exitSequence_ExitState_r_A();
-		enterSequence_ExitState_r_E_default();
+	private void effect_r_A_tr0() {
+		exitSequence_r_A();
+		enterSequence_r_E_default();
 	}
 	
-	private void effect_ExitState_r_A_tr1() {
-		exitSequence_ExitState_r_A();
-		enterSequence_ExitState_r_F_default();
+	private void effect_r_A_tr1() {
+		exitSequence_r_A();
+		enterSequence_r_F_default();
 	}
 	
 	/* 'default' enter sequence for state A */
-	private void enterSequence_ExitState_r_A_default() {
-		enterSequence_ExitState_r_A_r_default();
+	private void enterSequence_r_A_default() {
+		enterSequence_r_A_r_default();
 	}
 	
 	/* 'default' enter sequence for state B */
-	private void enterSequence_ExitState_r_A_r_B_default() {
+	private void enterSequence_r_A_r_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.exitState_r_A_r_B;
 	}
 	
 	/* 'default' enter sequence for state E */
-	private void enterSequence_ExitState_r_E_default() {
+	private void enterSequence_r_E_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.exitState_r_E;
 	}
 	
 	/* 'default' enter sequence for state F */
-	private void enterSequence_ExitState_r_F_default() {
+	private void enterSequence_r_F_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.exitState_r_F;
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ExitState_r_default() {
-		react_ExitState_r__entry_Default();
+	private void enterSequence_r_default() {
+		react_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
-	private void enterSequence_ExitState_r_A_r_default() {
-		react_ExitState_r_A_r__entry_Default();
+	private void enterSequence_r_A_r_default() {
+		react_r_A_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
-	private void exitSequence_ExitState_r_A() {
-		exitSequence_ExitState_r_A_r();
+	private void exitSequence_r_A() {
+		exitSequence_r_A_r();
 	}
 	
 	/* Default exit sequence for state B */
-	private void exitSequence_ExitState_r_A_r_B() {
+	private void exitSequence_r_A_r_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state E */
-	private void exitSequence_ExitState_r_E() {
+	private void exitSequence_r_E() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state F */
-	private void exitSequence_ExitState_r_F() {
+	private void exitSequence_r_F() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ExitState_r() {
+	private void exitSequence_r() {
 		switch (stateVector[0]) {
 		case exitState_r_A_r_B:
-			exitSequence_ExitState_r_A_r_B();
+			exitSequence_r_A_r_B();
 			break;
 		case exitState_r_E:
-			exitSequence_ExitState_r_E();
+			exitSequence_r_E();
 			break;
 		case exitState_r_F:
-			exitSequence_ExitState_r_F();
+			exitSequence_r_F();
 			break;
 		default:
 			break;
@@ -246,10 +246,10 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 	
 	/* Default exit sequence for region r */
-	private void exitSequence_ExitState_r_A_r() {
+	private void exitSequence_r_A_r() {
 		switch (stateVector[0]) {
 		case exitState_r_A_r_B:
-			exitSequence_ExitState_r_A_r_B();
+			exitSequence_r_A_r_B();
 			break;
 		default:
 			break;
@@ -257,35 +257,35 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ExitState_r__entry_Default() {
-		enterSequence_ExitState_r_A_default();
+	private void react_r__entry_Default() {
+		enterSequence_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ExitState_r_A_r__entry_Default() {
-		enterSequence_ExitState_r_A_r_B_default();
+	private void react_r_A_r__entry_Default() {
+		enterSequence_r_A_r_B_default();
 	}
 	
 	/* The reactions of exit default. */
-	private void react_ExitState_r_A_r__exit_Default() {
-		effect_ExitState_r_A_tr0();
+	private void react_r_A_r__exit_Default() {
+		effect_r_A_tr0();
 	}
 	
 	/* The reactions of exit f. */
-	private void react_ExitState_r_A_r_f() {
-		effect_ExitState_r_A_tr1();
+	private void react_r_A_r_f() {
+		effect_r_A_tr1();
 	}
 	
 	/* The reactions of exit g. */
-	private void react_ExitState_r_A_r_g() {
-		effect_ExitState_r_A_tr0();
+	private void react_r_A_r_g() {
+		effect_r_A_tr0();
 	}
 	
 	private boolean react() {
 		return false;
 	}
 	
-	private boolean exitState_r_A_react(boolean try_transition) {
+	private boolean r_A_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -296,22 +296,22 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		return did_transition;
 	}
 	
-	private boolean exitState_r_A_r_B_react(boolean try_transition) {
+	private boolean r_A_r_B_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (exitState_r_A_react(try_transition)==false) {
+			if (r_A_react(try_transition)==false) {
 				if (sCInterface.g) {
-					exitSequence_ExitState_r_A_r_B();
-					react_ExitState_r_A_r_g();
+					exitSequence_r_A_r_B();
+					react_r_A_r_g();
 				} else {
 					if (sCInterface.f) {
-						exitSequence_ExitState_r_A_r_B();
-						react_ExitState_r_A_r_f();
+						exitSequence_r_A_r_B();
+						react_r_A_r_f();
 					} else {
 						if (sCInterface.e) {
-							exitSequence_ExitState_r_A_r_B();
-							react_ExitState_r_A_r__exit_Default();
+							exitSequence_r_A_r_B();
+							react_r_A_r__exit_Default();
 						} else {
 							did_transition = false;
 						}
@@ -322,7 +322,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		return did_transition;
 	}
 	
-	private boolean exitState_r_E_react(boolean try_transition) {
+	private boolean r_E_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -333,7 +333,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		return did_transition;
 	}
 	
-	private boolean exitState_r_F_react(boolean try_transition) {
+	private boolean r_F_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

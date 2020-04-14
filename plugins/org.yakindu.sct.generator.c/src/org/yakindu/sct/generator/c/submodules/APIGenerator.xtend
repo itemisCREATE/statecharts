@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.xtext.util.Strings
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -22,6 +21,12 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.base.types.Direction
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.c.TraceCode
 
 /**
  * @author rbeckmann
@@ -38,14 +43,20 @@ class APIGenerator {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
 	@Inject protected extension StatechartAnnotations
+	@Inject protected extension GeneratorPredicate
+	@Inject protected extension TraceCode
+	@Inject protected extension GeneratorEntry genEntry
+	@Inject protected extension GenmodelEntries
 
 	def runCycle(ExecutionFlow it) {
 		'''
 			«runCycleSignature»
 			{
-				«clearOutEventsFctID»(«scHandle»);
+				«traceCycleStart»
+				«IF !useOutEventObservables»«clearOutEventsFctID»(«scHandle»);«ENDIF»
 				«runCycleForLoop(it)»
 				«clearInEventsFctID»(«scHandle»);
+				«traceCycleEnd»
 			}
 		'''
 	}
@@ -91,12 +102,40 @@ class APIGenerator {
 	def protected CharSequence runCycleSignature(ExecutionFlow it) {
 		'''void «runCycleFctID»(«scHandleDecl»)'''
 	}
+	
+	def tracing(ExecutionFlow it){
+		if (timed) 
+		'''
+		static «INT_TYPE» time_event_index(«scHandleDecl», «EVENT_TYPE» evid);
+		
+		static «INT_TYPE» time_event_index(«scHandleDecl», «EVENT_TYPE» evid)
+		{
+			«INT_TYPE» tev_id = ((«INTPTR_TYPE»)evid - («INTPTR_TYPE»)&(«scHandle»->timeEvents)) / sizeof(«BOOL_TYPE»);
+			return tev_id;
+		}
+		'''
+		else ''''''
+	}
 
+	def initWithTracing(ExecutionFlow it) {
+		'''
+		void «initTracingFctID»(«scHandleDecl», «TRACE_HANDLER_TYPE» *trace_handler)
+		{
+			«initFunctionBody(it)»
+			«scHandle»->trace_handler = trace_handler;
+		}
+		'''
+	}
+	
 	def init(ExecutionFlow it) {
 		'''
 			«initSignature»
 			{
+				«IF genEntry.tracingGeneric»
+				«initTracingFctID»(«scHandle», «CLiterals::NULL_LITERAL_NAME»);
+				«ELSE»
 				«initFunctionBody(it)»
+				«ENDIF»
 			}
 		'''
 	}
@@ -120,9 +159,22 @@ class APIGenerator {
 			«scHandle»->«STATEVECTOR_POS» = 0;
 			
 			«clearInEventsFctID»(«scHandle»);
-			«clearOutEventsFctID»(«scHandle»);
+			«IF !useOutEventObservables»
+				«clearOutEventsFctID»(«scHandle»);
+			«ELSE»
+			
+			«initializeObservables»
+			«ENDIF»
 
 			«initSequence.code»
+		'''
+	}
+	
+	def initializeObservables(ExecutionFlow it) {
+		'''
+		«FOR outEvent : scopes.filter(InterfaceScope).map[events].flatten.filter[direction === Direction.OUT]»
+			SC_OBSERVABLE_INIT(&«outEvent.accessObservable»);
+		«ENDFOR»
 		'''
 	}
 	
@@ -138,6 +190,7 @@ class APIGenerator {
 		'''
 			«enterSignature»
 			{
+				«traceMachineEnter»
 				«enterSequences.defaultSequence.code»
 			}
 		'''
@@ -246,6 +299,7 @@ class APIGenerator {
 			«exitSignature»
 			{
 				«exitSequence.code»
+				«traceMachineExit»
 			}
 		'''
 	}
@@ -266,6 +320,7 @@ class APIGenerator {
 					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + (unsigned)sizeof(«timeEventScope.type»))
 					{
 					*(«BOOL_TYPE»*)evid = «TRUE_LITERAL»;
+					«traceTimeEventRaised»
 				}		
 			}
 		'''
@@ -277,6 +332,22 @@ class APIGenerator {
 	
 	def protected CharSequence raiseTimeEventSignature(ExecutionFlow it) {
 		'''void «raiseTimeEventFctID»(«scHandleDecl», «EVENT_TYPE» evid)'''
+	}
+	
+	def declareInitWithTracing(ExecutionFlow it) {
+		'''«initWithTracingSignature»;'''
+	}
+	
+	def protected CharSequence initWithTracingSignature(ExecutionFlow it) {
+		'''void «initTracingFctID»(«scHandleDecl», «scTracingHandleDecl»)'''
+	}
+	
+	def declareSetTraceHandler(ExecutionFlow it) {
+		'''«setTraceHandlerSignature»;'''
+	}
+	
+	def protected CharSequence setTraceHandlerSignature(ExecutionFlow it){
+		'''void «setTraceHandlerFctID»(«scHandleDecl», «scTracingHandleDecl»)'''
 	}
 	
 }

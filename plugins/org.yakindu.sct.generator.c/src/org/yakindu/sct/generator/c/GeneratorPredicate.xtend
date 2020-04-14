@@ -24,4 +24,8 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	def needsValueUnion(ExecutionFlow it) {
 		hasQueuedEventsWithValue
 	}
+	
+	def useOutEventObservables() {
+		entries.getOutEventObservablesUsed(entry)
+	}
 }

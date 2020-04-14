@@ -43,6 +43,8 @@ public interface ICFeatureConstants {
 
 	public static final String PARAMETER_TRACING_EXIT_STATE = "exitState";
 
+	public static final String PARAMETER_TRACING_GENERIC = "generic";
+
 	public static final String FEATURE_INCLUDES = "Includes";
 
 	public static final String PARAMETER_INCLUDES_USE_RELATIVE_PATHS = "useRelativePaths";
@@ -52,5 +54,7 @@ public interface ICFeatureConstants {
 	public static final String PARAMETER_IN_EVENT_QUEUE = "inEventQueue";
 	
 	public static final String PARAMETER_USER_ALLOCATED_QUEUE = "userAllocatedQueue";
+	
+	public static final String PARAMETER_OUT_EVENT_OBSERVABLES = "outEventObservables";
 	
 }

@@ -44,14 +44,14 @@ void ConstOnlyNamedScopeTest::SetUp()
 void ConstOnlyNamedScopeTest::statechartEntry()
 {
 	constOnlyNamedScope_enter(&statechart);
-	EXPECT_TRUE(constOnlyNamedScope_isStateActive(&statechart, ConstOnlyNamedScope_ConstOnlyNamedScope_main_region_A));
+	EXPECT_TRUE(constOnlyNamedScope_isStateActive(&statechart, ConstOnlyNamedScope_main_region_A));
 }
 void ConstOnlyNamedScopeTest::stateTransition()
 {
 	constOnlyNamedScope_enter(&statechart);
 	constOnlyNamedScopeIface_raise_e(&statechart, 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(constOnlyNamedScope_isStateActive(&statechart, ConstOnlyNamedScope_ConstOnlyNamedScope_main_region_B));
+	EXPECT_TRUE(constOnlyNamedScope_isStateActive(&statechart, ConstOnlyNamedScope_main_region_B));
 }
 
 void ConstOnlyNamedScopeTest::setTimer(ConstOnlyNamedScope* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

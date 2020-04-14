@@ -12,15 +12,16 @@ package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.submodules.APIGenerator
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.INTPTR_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
-import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
-import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -32,6 +33,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 	@Inject protected extension EventNaming
 	@Inject protected extension CLiterals
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension TraceCode
 	
 	override protected initSignature(ExecutionFlow it) {
 		val internalArgs = ''', «internalEventStructTypeName» *internal_queue_buffer, «INT_TYPE» internal_queue_capacity'''
@@ -94,7 +96,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + (unsigned)sizeof(«timeEventScope.type»))
 				{
 					*(«BOOL_TYPE»*)evid = «TRUE_LITERAL»;
-					
+					«traceTimeEventRaised»								
 					«runCycleFctID»(«scHandle»);
 				}
 			}

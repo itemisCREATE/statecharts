@@ -45,6 +45,9 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.TypedDeclaration
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -64,6 +67,7 @@ class Naming {
 	@Inject extension GenmodelEntries
 	
 	@Inject extension StatechartUtil
+	@Inject extension GeneratorPredicate
 	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -101,6 +105,10 @@ class Naming {
 	
 	def statesEnumType(ExecutionFlow it) {
 		containerType + 'States'
+	}
+	
+	def featuresEnumType(ExecutionFlow it) {
+		containerType + 'Feature'
 	}
 	
 	def protected String entryStatemachinePrefix() {
@@ -232,10 +240,15 @@ class Naming {
 		return null;
 	}
 	
-	def dispatch scopeTypeDeclMember(EventDefinition it) '''
+	def dispatch scopeTypeDeclMember(EventDefinition it) {
+		if(useOutEventObservables && direction == Direction.OUT) {
+			return '''«OBSERVABLE_TYPE» «eventName»;'''
+		}
+		'''
 		«BOOL_TYPE» «eventRaisedFlag»;
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
-	'''
+		'''
+	}
 
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
 		«BOOL_TYPE» «timeEventRaisedFlag»;
@@ -319,6 +332,10 @@ class Naming {
 		name.asIdentifier.value
 	}
 	
+	def eventName(EventDefinition it) {
+		name.asIdentifier
+	}
+	
 	def timeEventRaisedFlag(TimeEvent it) {
 		shortName.raised
 	}
@@ -349,6 +366,10 @@ class Naming {
 
 	def asRaised(EventDefinition it) {
 		accessFunction("israised")
+	}
+	
+	def asObservableGetter(EventDefinition it) {
+		accessFunction("get")
 	}
 
 	def dispatch asGetter(EventDefinition it) {
@@ -434,14 +455,26 @@ class Naming {
 	def dispatch access(OperationDefinition it) '''«asFunction»'''
 
 	def dispatch access(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier.raised»'''
+	
+	def dispatch accessObservable(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier»'''
+	
+	def dispatch accessObservable(EObject it) ''''''
 
 	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
 
 	def dispatch access(EObject it) '''#error cannot access elements of type «getClass.name»'''
 
 	def dispatch valueAccess(Declaration it)'''«IF needsHandle»«scHandle»->«ENDIF»«scope.instance».«name.asIdentifier.value»'''
-
+	
 	def dispatch valueAccess(EObject it) '''#error cannot value access elements of type «getClass.name»'''
+
+	def dispatch valueDeclaration(TypedDeclaration it) '''«typeSpecifier.targetLanguageName» «valueName»'''
+	
+	def dispatch valueDeclaration(EObject it) ''''''
+	
+	def dispatch valueName(TypedDeclaration it) '''«scope.instance»_«name.asIdentifier.value»'''
+	
+	def dispatch valueName(EObject it) ''''''
 	
 	def maxOrthogonalStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_ORTHOGONAL_STATES'''
 
@@ -484,6 +517,48 @@ class Naming {
 		if(reference instanceof VariableDefinition) {
 			'''«scHandle»->«reference.scope.instance».«reference.name»'''
 		}
+	}
+	
+	def featureNamingPrefix(ExecutionFlow it){
+		'''«it.name.toLowerCase»Iface_'''
+	}
+	
+	def scTracingHandleDecl(EObject it) { TRACE_HANDLER_TYPE + '* ' + TRACE_HANDLER }//sc_trace_handler* trace_handler
+	
+	def initTracingFctID(ExecutionFlow it) {
+		functionPrefix + INIT_TRACING
+	}
+	
+	def setTraceHandlerFctID(ExecutionFlow it) {
+		functionPrefix + SET_TRACING
+	}
+
+	def tracingModule(ExecutionFlow it) {
+		TRACING_MODULE
+	}
+	
+	def rxcModule(ExecutionFlow it) {
+		RXC_MODULE
+	}
+	
+	def metaModule(ExecutionFlow it) {
+		it.module + META_MODULE
+	}
+	
+	def metaPrefix(ExecutionFlow it) {
+		META_MODULE + separator
+	}
+	
+	def metaSuffix(ExecutionFlow it) {
+		separator + META_MODULE
+	}
+	
+	def tracingPrefix(ExecutionFlow it){
+		TRACE_CALL + separator
+	}
+	
+	def traceFctID(ExecutionFlow it) {
+		TRACE_CALL
 	}
 	
 }

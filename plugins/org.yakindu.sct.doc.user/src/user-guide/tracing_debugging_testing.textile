@@ -1,0 +1,301 @@
+h1{%EARLY_SEPARATOR%}. 
+
+==<div class="r4-feature">==
+
+
+h1(#yakindu_execution_tracing). YET - debugging and testing state machines on target using execution traces
+
+
+YAKINDU statechart models are executable. There are many use cases that require information about the execution itself. Examples are remote debugging of state machines, execution analysis, testing, co-simulation and others. This information may be provided live during the execution or it could be used post-mortem when the execution of the system already finished. In any case this information must be explicit and it must be possible to store it persistently and provide other tools access to this information. 
+
+The YAKINDU Execution Tracing (YET) infrastructure provides open formats, protocols, and APIs. It enables interoperability between state machines which execute on a target in the one side and YAKINDU (and other) tools on the other side.
+
+This chapter describes some "application scenarios":#application_scenarios at first and then describes "how to use YET":#using_yet  
+
+h2(#application_scenarios). Application scenarios
+
+The execution trace model enables interoperability between different tools and as such serves a large number of application scenarios. The possible interoperability is shown in the following figure.
+
+!(full)images/yet_integrations.png(Interoperability based on execution traces)!
+<p style="text-align:center;">_Interoperability based on execution traces_</p>
+
+
+One important part is to enable execution tracing and stimulation for all contexts in which statecharts are executed. One important context is a concrete collaborative embedded system which executes one or more state machines. The others are simulations like the YAKINDU interpreter based simulation or a Functional Mock-up Interface (FMI) based co-simulation context. On the other side there are tools which analyze the system or the statechart execution. These interpret and analyze the statechart execution traces in a specific way. Some of these just consume execution traces. Others can also stimulate execution and as such can be executed ‘in the loop’ with statecharts. 
+
+The execution trace decouples the statechart execution from analysis tools. So, both sides can be combined in a flexible way with each other. There are some application scenarios which are implemented based on this concept. 
+
+
+h3(#target_debugging). Model-level target debugging of state machines
+
+In (embedded) software development scenarios, YAKINDU statecharts are transformed to state machine code that runs within a target application. To enable model-level debugging of these state machine implementations within the YAKINDU Statechart Tools, a YET based integration is applied. 
+
+
+!(medium)images/yet_target_trace_debugging.png(Integration scenarios for model-level target debugging)!
+<p style="text-align:center;">_Integration scenarios for model-level target debugging_</p>
+
+Model-level debugging may cover two variants. First, a bidirectional online integration based on streams (YET stream). Second, a file-based integration (YET file) which covers offline post-mortem analysis of execution traces.
+
+In both cases YET must contain execution trace events that allow:
+* tracking of variable values 
+* tracking of statechart events
+* tracking of active states and transitions
+
+YET stream is bidirectional and also supports
+* changing variable values and
+* raising events
+on the state machine if that direction is supported by the target application. 
+
+Of course YET traces can be analyzed manually as the file format is human readable. This is already a great help in the day to day work. Additionally, tool support enables the visualization of execution traces using the YAKINDU simulation UI. This enables the playback of traces stored in files or the live visualization and interaction based on a YET stream. 
+
+
+h3(#testing_traces). Test statechart execution traces using SCTUnit
+
+While the model-level target debugging supports the interactive analysis of a state machine execution there are cases where automated checking of execution results are required. This is the case if execution traces are very large or must be analyzed very often. A specific kind of automated execution analysis, which is supported by YAKINDU, is SCTUnit. SCTUnit is a model-level unit testing framework and can check statechart behavior for correctness. As a YET trace is a representation of a statecharts behavior it can be used as a subject of test. According to the the debugging scenario, which are described in the previous section, unit tests can be executed on a execution trace which is stored in a file. If it is connected to a statechart using a YET stream then also stimulation of the statechart and an ‘in the loop’ execution is possible. This can be used to set up HiL (or other kind of XiL) test scenarios.
+
+
+!(medium)images/yet_target_trace_testing.png(Testing state machine execution on an embedded target)!
+<p style="text-align:center;">_Testing state machine execution on an embedded target_</p>
+
+
+SCTUnit itself is a text based language which follows the typical XUnit testing approach. Test cases are implemented as simple scripts. These scripts can directly be executed in the YAKINDU tool or can be transpiled to code. A very simple example for a statechart unit test provides the following code:
+
+bc.. 
+testclass TrafficLightTest for statechart TrafficLightCtrl {
+	
+	@Test operation switchTrafficLightOn () {
+				
+		// given the traffic light is inactive
+		assert !is_active
+		// when
+		enter
+		// then traffic light is off which means no color was switched on
+		assert TrafficLight.displayRed
+		assert !TrafficLight.displayGreen
+		assert !TrafficLight.displayYellow
+	}
+	
+
+	@Test operation switchLightFromRedToGreen () {
+				
+		// given
+		switchTrafficLightOn
+		// when
+		raise TrafficLight.releaseTraffic
+		proceed 60s
+		// then 
+		assert TrafficLight.displayGreen
+	}
+}
+p. 
+
+The unit test is defined as a test class. A test class refers to the statechart under test and defines two test cases.  Each is implemented by a test operation. ‘assert’ statements check properties of the state machine. The ‘enter’ statement activates the state machine and ‘raise’ raises an event. So both are stimuli processed by the statechart. The ‘proceed’ statement controls time and continues the test after 60 seconds have passed. A unit test is optimized to check specific execution sequences. For more complex conditional and iterative scenarios also ‘if’ statements and ‘while’ loops can be defined which can make use of local variables.   
+
+
+h3(fmi_co_simulation). FMI based co-simulation
+
+Co-simulation is a major field for the application of YET. YAKINDU Statechart Tools can be used to create Functional Mock-up Units (FMUs) that can be integrated in co-simulations based on the "Functional Mock-up Interface (FMI) standard":https://fmi-standard.org/. Different scenarios are supported. First the debugging and testing approaches described in the previous sections can also be applied using a FMI co-simulation instead of a concrete embedded target. An additional scenario is to integrate the YAKINDU statechart simulation into a FMI co-simulation using a tool wrapper FMU. This is a FMU which wraps a simulation tool and does not execute a statechart on its own. Instead, the statechart is executed by the YAKINDU statechart simulation. This simulation runs in a separate process. This requires execution events to be exchanged between the FMU and the simulator. 
+
+
+!(medium)images/yet_tool_wrapper_fmu.png(FMU tool wrapper delegates execution to YAKINDU simulator)!
+<p style="text-align:center;">_FMU tool wrapper delegates execution to YAKINDU simulator_</p>
+
+
+Integrating YAKINDU statechart in FMI-bases co-simulation scenarios requires additional plugins. A detailed description of this features is not included in this document but it will follow soon. Please contact statecharts@itemis.com if you require more information earlier.
+
+
+h3(#impulse). Analyse statechart execution using data visualization & analysis tools
+
+In addition to the tool features provided by YAKINDU Statechart Tools, out of the box analysis and trace visualization tools can be integrated. An example for such a tool is impulse which is a visualization and analysis workbench. It enables engineers to understand and debug complex systems by relating signals and data from arbitrary sources to statechart execution. This data can be visualized using a rich set of diagrams.
+
+
+!(full)images/impulse_with_ysct.png(YAKINDU statechart execution visualized in impulse)!
+<p style="text-align:center;">_YAKINDU statechart execution visualized in "impulse":https://www.toem.de/index.php/products/impulse_</p>
+
+
+The correlation of data from different sources and its visualization is not scope of YAKINDU tools. Thus it makes much sense to integrate dedicated tools for this purpose. impulse can read and analyse YET trace files of YAKINDU statecharts.
+
+
+!(medium)images/yet_impulse_integration.png(Analyse execution traces from file)!
+<p style="text-align:center;">_Analyse execution traces from file_</p>
+
+
+
+
+h2(#using_yet). Using YET
+
+In order to use execution tracing for target debugging or unit testing some implementation and configuration steps are necessary. In general the system which executes the statechart must be prepared to produce an execution trace and the system which analyses a YET trace must be prepared properly. Depending on the system simple configurations or manual implementation tasks are required. Here the following cases are described:
+# Preparing an embedded system for tracing
+# Trace and debug statechart execution
+# Unit test a statechart YET trace
+	  
+
+h3(#prepare_system). Preparing an embedded system for tracing
+
+A generated state machine which should be debugged or remote controlled must be enabled for execution tracing. This consists of the following steps. 
+
+Preparing the generated state machine for execution tracing. 
+Set up the trace handling in the target application. This step may require application specific implementation work. 
+
+By default the tracing feature of state machines is disabled in order to save resources if it is not required. Nevertheless enabling tracing for a state machine is a simple configuration topic for code generators. The second step is more complex as it may require application specific implementation work.
+
+
+*Enable tracing when generating state machine*
+The generated state machine code must be instrumented for raising trace events. So you first have to enable the tracing feature in your sgen generator file. This can be done by adding another feature called _“Tracing”_ to the C generator configuration. The configuration below gives an example. 
+
+bc.. 
+GeneratorModel for yakindu::c {
+
+    statechart tictoc {
+        feature Outlet {
+            targetProject = "example"
+		targetFolder = "sc"
+		libraryTargetFolder = "sc/base"
+        }		
+        feature Tracing {
+            generic = true
+        }
+    }
+}
+p. 
+
+
+The feature _“Tracing”_ has the property _“generic”_ with the value _“true”_ (_“false”_ is the default). As a result an additional C header file named _“sc_tracing.h”_ is generated. It declares the generic trace API which will be used by all state machines with enabled tracing. These declarations include the type @sc_trace_handler@. A state machine uses such a trace handler instance to call trace callbacks which can be processed by a trace handler implementation. This API is independent of YET. It can be used to adapt any execution tracing or logging infrastructure.  
+
+*Adding a YET tracer*
+While the step before enables a generic trace API for the state machine, an additional generator can be configured which generates a YET specific implementation of the @sc_trace_handler@. This is also straightforward. Simply add a new _sgen_ file to the project. Corresponding to the example above it looks like: 
+
+bc.. 
+GeneratorModel for yakindu::c::yet {
+
+	statechart tictoc {
+		feature Outlet {
+			targetProject = "example"
+			targetFolder = "sc"
+			libraryTargetFolder = "sc/base"
+		}	
+	}
+}
+p. 
+
+This generator model uses @yakindu::c::yet@ generator instead of the @yakindu::c@. It just requires an @Outlet@ feature and the same values should be used as in the normal C code generator model. This generator adds several additional source files to the project:
+
+* @sc_yet.[h|c]@ - implements a set of functions which are used to create and parse YET execution events. This implementation is completely independent of statechart semantics and can be used to support execution tracing for other models.
+* @yet_sc_tracer.[h|c]@ - this module implements all generic parts for YET statechart tracing which can be applied to all statecharts. So it is aware of statechart semantics and provides an implementation of @sc_trace_handler@.   
+* @<Statechart>Tracer.[h|c]@ - this module implements the statechart model specific parts of a YET tracer. 
+* @<Statechart>Meta.[h|c]@ - this module defines data structures which provide names as strings for the different statechart features like variables, events, and states. This is separated from the tracer module as these structures are independent from YET and can be reused for other purpose (like a generic MQTT adaption).
+
+Please keep in mind, that the generic tracing feature currently only supports the C language.
+
+
+*Setting up tracing in the application*
+The generated infrastructure is capable of producing and consuming trace. What is missing is connecting this functionality to the outside world. This part is not covered by a code generator and must be implemented manually based on the API which is provided by the generated code and reusable software components.
+
+
+!(medium)images/yet_physical_channels.png(Connecting trace infrastructure to physical channels)!
+<p style="text-align:center;">_Connecting trace infrastructure to physical channels_</p>
+
+
+The generated code provides a @yet_sc_tracer@ instance. This instance must be connected to physical channels which care about the physical handling of trace events. Three different implementations of physical channels are currently provided:
+
+* @yet_logger@ - logs trace events by writing them to the standard output stream of the process.  
+* @yet_file_writer@ - writes trace events to a file using a single line for each entry. The result is a valid yet trace file.
+* @yet_udp_stream@ -  implements a bidirectional transport of trace events based on UDP datagrams. Each datagram contains a single trace event. 
+
+The integration of the tracer instance on the one side and the physical channels on the other side are based on observable message streams. These support an asynchronous, reactive programming model and allow a loose coupling between the different components. The message streams are based on the principles of reactive extensions (ReactiveX) without making use of any external ReactiveX library.
+
+The @yet_sc_tracer@ provides an observable stream of trace messages where each trace message is a simple string. This stream can be observed by any number of observers and all physical channels provide an observer which can subscribe to the observable trace messages. In addition, the tracer defines the observer @message_receiver@ which processes incoming trace events which are stimuli for the state machine. This can, for instance be connected to the observable @received_messages@ which is provided by the bidirectional @yet_udp_stream@. The figure above shows how the observable streams are connected. On the code level the setup is straight forward. First, we need a state machine and initialize it.
+
+bc. 
+    SomeStateMachine machine;
+    someStateMachine_init(&machine);
+
+The code for setting up the timer service is omitted here. Next, a tracer instance is defined and initialized. 
+
+bc. 
+    yet_sc_tracer tracer;
+    someStateMachine_init_sc_tracer(&tracer, &machine);
+
+Without a physical channel, tracing has no effect. So we need to define and initialize an instance for each discussed physical channel. 
+
+bc.. 
+    yet_file_writer yet_file;
+    yet_udp_stream  yet_stream;
+    yet_logger      yet_log;
+
+    yet_file_writer_init(&yet_file, "machine.yet");
+    yet_udp_stream_init(&yet_stream, ip, port);
+    yet_logger_init(&yet_log);
+p. 
+
+Now all instances are in place but we have to connect the observable streams with the observers as discussed above. This is done by defining a list of observers for each observable which must be connected.  
+
+bc.. 
+    sc_observer* out_trace_observers[] = {
+                 &(yet_log.message_logger),
+                 &(yet_file.message_writer),
+                 &(yet_stream.message_sender) };
+
+    sc_observer* in_trace_observers[] = {
+                 &(yet_log.message_logger),
+                 &(tracer.scope.message_receiver) };
+
+Then the observers must subscribe to the observable. 
+
+    SC_OBSERVABLE_SUBSCRIBE(&(yet_stream.received_messages),               
+                            in_trace_observers);
+    SC_OBSERVABLE_SUBSCRIBE(&(tictocTracer.scope.trace_messages), 
+                            out_trace_observers);
+p. 
+
+The observer subscriptions here go beyond the scenario which is described by the previous figure as the @yet_log@ will also care about the incoming trace events from the @yet_stream@ instance. So it logs outgoing and incoming trace events. Some more things should be mentioned here:
+
+# The involved instances do not know anything about the other instances. So the configuration can be changed without impact on the implementation of these instances. 
+# There can be any number of physical channel instances. E.g. multiple trace files could be defined.
+# It is easy to implement custom physical channels and add them to the scenario.
+# Observers and observables can also be used to implement other functionality than physical channels like buffers, filters, aggregators etc.. E.g. a simple observable could implement a trace event counter.  
+
+This provides a high flexibility for the application developer and the implementation of the existing physical channels is a good template for custom implementations. 
+
+
+
+h3(#trace_and_debug). Trace and debug statechart execution
+
+Debugging a statechart YET trace is simple. Within a statechart editor or on the model file entry in the project explorer choose _“Run As > Statechart Trace Debugging”_ from the context menu. 
+
+
+!(medium)images/yet_launch_trace_debugging.png(CStarting a trace debug session)!
+<p style="text-align:center;">_Starting a trace debug session_</p>
+
+
+This will launch the trace debugger and by default will try to read the execution trace from the file _“trace.yet”_ from the root of the project folder. If it is not already in place then create this trace file e.g. by starting the application with enabled YET file tracing. The UI of the trace debugger is identical to the regular simulation UI. 
+
+If you want to choose a different trace file you have to reconfigure the run configuration which was created by the _“Run As > Statechart Trace Debugging”_ action. To do this choose _“Run As > Run Configurations…”_ from the context menu. The _“Run Configurations”_ dialog pops up and choose the proper entry in the category _“Statechart Trace Debugging”_. The tab _“Statechart Trace”_ provides several configuration options.
+
+First the instance name is used to distinguish between multiple running instances of the same state machine if multiple state machines are executed on the target and if they share a common trace channel. The default is just the name of the statechart model.
+
+The obviously most important option is how you want to read or receive traces. It is possible to choose one of three trace provider:
+
+* _Read trace from file_ - supports to configure what file should be used. 
+* _Read trace from UDP socket_ - opens a UDP socket on the local machine with a configurable port (default 444). The physical trace channel on the embedded target can connect to this port to setup a bidirectional communication channel.   
+* _Read trace from TCP socket_ - uses TCP instead of UDP to setup a bidirectional communication channel and can be configured in the same way.The default port is 8444.
+
+If UDP or TCP based YET streams are used then the debugging UI supports raising events and modifying statechart variables. 
+
+
+!(medium)images/yet_configure_trace_debugging.png(Configuration of trace debug session)!
+<p style="text-align:center;">_Configuration of trace debug session_</p>
+
+
+After that click “Apply” and “Run”. The trace debugger UI will be activated. If UDP or TCP trace provider are used then no active statechart state may be highlighted in the Debugger UI. This is always the case if no remote target is connected or if the statechart is not yet activated on the remote target. 
+
+
+h3(#sctunit_traces). Testing statechart execution traces
+
+Instead of the interactive debugger a trace can also be consumed by unit tests. Within a SCTUnit editor or on test file entry in the project explorer choose _“Run As > Statechart SCT Unit Trace Test”_ from the context menu. The unit test runner will start up an execute the tests.
+
+All points regarding setting up a run configuration for trace tests is identical to the steps required for the interactive trace debugging as the same configuration dialogs are applied. The only difference is that the category _‘SCT Unit Trace Test’_ is used instead of _‘Statechart Trace Debugging’_ . 
+
+
+==</div>==
+
+
