@@ -288,7 +288,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	}
 	
 	public synchronized void exit() {
-    isRunning = true;
+		isRunning = true;
 		exitSequence_main_region();
 		timer.unsetTimer(this, 2);
 		isRunning = false;

@@ -152,7 +152,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		enterSequence_check_default();
-    isRunning = false;
+		isRunning = false;
 	}
 	
 	public void runCycle() {
@@ -228,11 +228,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	public void exit() {
-	  isRunning = true;
+		isRunning = true;
 		exitSequence_r1();
 		exitSequence_r2();
 		exitSequence_check();
-    isRunning = false;
+		isRunning = false;
 	}
 	
 	/**

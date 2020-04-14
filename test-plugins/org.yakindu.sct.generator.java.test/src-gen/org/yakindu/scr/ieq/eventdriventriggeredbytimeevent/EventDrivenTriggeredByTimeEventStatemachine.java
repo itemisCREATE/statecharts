@@ -79,8 +79,8 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		isRunning = true;		
-    enterSequence_r_default();
+		isRunning = true;
+		enterSequence_r_default();
 		isRunning = false;
 	}
 	
