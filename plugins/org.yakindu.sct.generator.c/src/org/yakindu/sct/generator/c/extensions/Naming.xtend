@@ -249,6 +249,12 @@ class Naming {
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
 		'''
 	}
+	
+	def scopeShadowEventMember(Event it) {
+		'''
+		«OBSERVER_TYPE» «eventName»;
+		'''
+	}
 
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
 		«BOOL_TYPE» «timeEventRaisedFlag»;
@@ -332,7 +338,7 @@ class Naming {
 		name.asIdentifier.value
 	}
 	
-	def eventName(EventDefinition it) {
+	def eventName(Event it) {
 		name.asIdentifier
 	}
 	
@@ -368,7 +374,7 @@ class Naming {
 		accessFunction("israised")
 	}
 	
-	def asObservableGetter(EventDefinition it) {
+	def asObservableGetter(Event it) {
 		accessFunction("get")
 	}
 
@@ -459,6 +465,14 @@ class Naming {
 	def dispatch accessObservable(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier»'''
 	
 	def dispatch accessObservable(EObject it) ''''''
+	
+	def dispatch accessObserver(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier»'''
+	
+	def dispatch accessObserver(EObject it) ''''''
+	
+	def dispatch observerCallbackFctID(Event it) '''on_«name.asIdentifier»'''
+	
+	def dispatch observerCallbackFctID(EObject it) ''''''
 
 	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
 

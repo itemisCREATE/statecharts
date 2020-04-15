@@ -73,10 +73,6 @@ class VariableCode {
 		}
 		«ENDIF»
 	'''
-	
-	protected def needsShadowEventMapping(VariableDefinition member) {
-		member.type.isOriginStatechart && !member.shadowEvents.nullOrEmpty
-	}
 
 	protected def setterContent(VariableDefinition it) {
 		'''

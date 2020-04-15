@@ -12,21 +12,23 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.generator.c.TraceCode
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
-import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.base.types.Direction
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
-import org.yakindu.sct.generator.c.TraceCode
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author rbeckmann
@@ -47,6 +49,7 @@ class APIGenerator {
 	@Inject protected extension TraceCode
 	@Inject protected extension GeneratorEntry genEntry
 	@Inject protected extension GenmodelEntries
+	@Inject protected extension ShadowEventExtensions
 
 	def runCycle(ExecutionFlow it) {
 		'''
@@ -165,10 +168,20 @@ class APIGenerator {
 			
 			«initializeObservables»
 			«ENDIF»
+			«initializeObserver»
 
 			«initSequence.code»
 		'''
 	}
+	
+	protected def CharSequence initializeObserver(ExecutionFlow it){
+		'''
+		«FOR e : shadowEvents»
+			SC_OBSERVER_INIT(&(«e.accessObserver»), «scHandle», «e.observerCallbackFctID»);
+		«ENDFOR»
+		'''
+	}
+	
 	
 	def initializeObservables(ExecutionFlow it) {
 		'''

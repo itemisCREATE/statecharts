@@ -24,12 +24,14 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 class ShadowEventExtensions {
 
 	@Inject protected extension OriginTracing
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ExpressionExtensions
+	@Inject protected extension StatechartUtil
 
 	def getShadowEvents(VariableDefinition member) {
 		member.flow.shadowEvents.filter[originTraces.contains(member)]
@@ -48,9 +50,17 @@ class ShadowEventExtensions {
 	def getShadowEventsByScope(VariableDefinition member) {
 		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
 	}
+	
+	def getOriginOutEvents(VariableDefinition it) {
+		shadowEventsByScope.keySet.map[members].flatten.filter(Event).filter[direction === Direction.OUT]
+	}
 
 	def getShadowEventName(FeatureCall fc) {
 		fc.toCallStack.map[featureOrReference].filter(NamedElement).map[name].join("_")
+	}
+	
+	def needsShadowEventMapping(VariableDefinition member) {
+		member.type.isOriginStatechart && !member.shadowEvents.nullOrEmpty
 	}
 
 	def create StextFactory.eINSTANCE.createEventDefinition createShadowEvent(String shadowEventName,
