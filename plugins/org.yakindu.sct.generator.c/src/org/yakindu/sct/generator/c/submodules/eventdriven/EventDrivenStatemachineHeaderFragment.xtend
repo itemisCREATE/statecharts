@@ -73,7 +73,7 @@ class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 		«generateEventValueUnion»
 		«ENDIF»
 
-		«IF needsQueues»
+		«IF hasQueuedEvents»
 		«generateEventsEnum»
 		
 		«generateEventStruct»
