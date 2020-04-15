@@ -51,13 +51,14 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 	}
 	
 	def generateEventsEnum(ExecutionFlow it) {
+		val queuedEvents = queuedEvents
 		if(!needsQueues) return ''''''
 		'''
 		/*
 		 * Enum of event names in the statechart.
 		 */
 		typedef enum  {
-			«invalidEventEnumName(it)» = «invalidEvent»,
+			«invalidEventEnumName(it)» = «invalidEvent»«IF !queuedEvents.nullOrEmpty»,«ENDIF»
 			«FOR e : queuedEvents SEPARATOR ","»
 				«eventEnumMemberName(e)»
 			«ENDFOR»
