@@ -20,6 +20,9 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.base.expressions.util.ExpressionExtensions
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.expressions.expressions.FeatureCall
 
 /**
  * @author rbeckmann
@@ -31,10 +34,15 @@ class EventDrivenEventCode extends EventCode {
 	@Inject extension EventNaming
 	@Inject protected extension CLiterals
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension ExpressionExtensions
 	
 	protected static int valueVarIndex = 0
 	
 	override CharSequence eventRaisingCode(EventRaisingExpression it, ExpressionsGenerator exp) {
+		if (event.featureOrReference.eContainer instanceof ComplexType) {
+			val fc = event as FeatureCall
+			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.getHandle»«IF value !== null», «exp.code(value)»«ENDIF»)'''
+		}
 		if(eventDefinition.isQueued){
 			return '''«toQueue(exp)»'''
 		}
