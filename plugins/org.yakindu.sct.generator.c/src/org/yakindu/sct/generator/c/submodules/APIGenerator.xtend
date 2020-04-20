@@ -176,9 +176,11 @@ class APIGenerator {
 	
 	protected def CharSequence initializeObserver(ExecutionFlow it){
 		'''
+		«IF statechart.isEventDriven»
 		«FOR e : shadowEvents»
 			SC_OBSERVER_INIT(&(«e.accessObserver»), «scHandle», «e.observerCallbackFctID»);
 		«ENDFOR»
+		«ENDIF»
 		'''
 	}
 	

@@ -70,7 +70,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					}
 					«scHandle»->is_running_cycle = «TRUE_LITERAL»;
 					«ENDIF»
-					«clearOutEventsFctID»(«scHandle»);
+					«IF !useOutEventObservables»«clearOutEventsFctID»(«scHandle»);«ENDIF»
 					
 					currentEvent = «nextEventFctID»(«scHandle»);
 					

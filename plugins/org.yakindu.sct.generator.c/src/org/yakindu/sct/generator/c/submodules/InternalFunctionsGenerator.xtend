@@ -68,6 +68,7 @@ class InternalFunctionsGenerator {
 			{
 				«IF e.typeSpecifier === null»
 				«addToQueueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName»);
+				«unusedParam("value")»
 				«ELSE»
 				«addToQueueValueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName», value);
 				«ENDIF»

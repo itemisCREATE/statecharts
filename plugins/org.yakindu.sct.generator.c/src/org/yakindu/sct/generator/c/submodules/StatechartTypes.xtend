@@ -113,7 +113,7 @@ class StatechartTypes {
 				«FOR d : typeRelevantDeclarations»
 					«d.scopeTypeDeclMember»
 				«ENDFOR»
-				«IF scope instanceof InternalScope»
+				«IF scope instanceof InternalScope && scope.flow.statechart.isEventDriven»
 					«FOR d : shadowEvents»
 						«d.scopeShadowEventMember»
 					«ENDFOR»
