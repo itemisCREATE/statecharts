@@ -4,6 +4,7 @@ package org.yakindu.scr.nolocalevents;
 import org.yakindu.scr.IStatemachine;
 
 public interface INoLocalEventsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

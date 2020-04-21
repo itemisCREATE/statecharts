@@ -4,6 +4,7 @@ package org.yakindu.scr.realexpressions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IRealExpressionsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE1();

@@ -6,6 +6,7 @@ import java.util.Queue;
 import org.yakindu.scr.IStatemachine;
 
 public interface IOutEventVisibilityEventDrivenStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseI(long value);

@@ -4,6 +4,7 @@ package org.yakindu.scr.shallowhistorywithdeepentry;
 import org.yakindu.scr.IStatemachine;
 
 public interface IShallowHistoryWithDeepEntryStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseToZ();

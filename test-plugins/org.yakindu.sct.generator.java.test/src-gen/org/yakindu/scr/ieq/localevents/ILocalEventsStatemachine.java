@@ -6,6 +6,7 @@ import java.util.Queue;
 import org.yakindu.scr.ieq.IStatemachine;
 
 public interface ILocalEventsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

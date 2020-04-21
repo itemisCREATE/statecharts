@@ -24,29 +24,47 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 import org.yakindu.base.expressions.interpreter.SlotResolutionExceptionSupplier
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API 
- * @authos axel terfloth - additions
+ * @author axel terfloth - additions
  * 
  */
 class StextExpressionInterpreter extends DefaultExpressionInterpreter {
 
 	@Inject
 	extension IQualifiedNameProvider provider
+	
 	@Inject(optional=true)
-	protected extension IEventRaiser eventRaiser
+	protected extension IEventRaiser defaultEventRaiser
+	
 	@Inject protected extension ExecutionContextExtensions
+	
+	@Inject protected extension SubchartInterpreterProvider subchartInterpreterProvider
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		val event = context.resolve(eventRaising.event)
 			.orElseThrow(SlotResolutionExceptionSupplier.forContext(eventRaising.event))
 		if (event instanceof ExecutionEvent) {
 			val value = eventRaising.value?.execute
-			if (eventRaiser !== null) event.raise(value)
+			val eventRaiser = eventRaising.event.eventRaiser
+			if (eventRaiser !== null) eventRaiser.raise(event, value)
 		}
 		null
+	}
+	
+	def dispatch protected getEventRaiser(Expression exp) {
+		return defaultEventRaiser
+	}
+	
+	def dispatch protected getEventRaiser(ArgumentExpression exp) {
+		val subInterpreter = subchartInterpreterProvider.findInterpreter(exp, context)
+		if (subInterpreter.isPresent && subInterpreter.get instanceof IEventRaiser) {
+			return subInterpreter.get as IEventRaiser
+		}
+		return defaultEventRaiser
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {

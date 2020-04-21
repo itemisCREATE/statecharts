@@ -4,6 +4,7 @@ package org.yakindu.scr.statechartentryandexitactions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IStatechartEntryAndExitActionsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public long getX();

@@ -4,6 +4,7 @@ package org.yakindu.scr.childfirstorthogonalreactions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IChildFirstOrthogonalReactionsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public long getA_local();
@@ -63,7 +64,6 @@ public interface IChildFirstOrthogonalReactionsStatemachine extends IStatemachin
 		public void setCnt(long value);
 		
 		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
-	
 	}
 	
 	public interface SCInterfaceOperationCallback {

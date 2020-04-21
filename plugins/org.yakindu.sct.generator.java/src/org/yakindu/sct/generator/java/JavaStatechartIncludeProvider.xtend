@@ -22,6 +22,9 @@ import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.sct.model.stext.stext.ImportScope
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Direction
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 
@@ -45,6 +48,10 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 			val submachineClass = submachineChart.statemachineClassName
 			val submachineImport = submachineChart.getImplementationPackageName(entry) + "." + submachineClass
 			imports.add(submachineImport)
+			if (submachineChart.scopes.filter(InterfaceScope).exists[declarations.filter(Event).exists[direction == Direction.OUT]]) {
+				val submachineInterface = submachineChart.statemachineInterfaceName
+				imports.add(submachineChart.getImplementationPackageName(entry) + "." + submachineInterface)
+			}
 		}
 		return imports
 	}

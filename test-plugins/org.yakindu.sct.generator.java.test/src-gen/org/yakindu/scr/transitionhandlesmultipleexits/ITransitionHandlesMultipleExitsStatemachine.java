@@ -4,6 +4,7 @@ package org.yakindu.scr.transitionhandlesmultipleexits;
 import org.yakindu.scr.IStatemachine;
 
 public interface ITransitionHandlesMultipleExitsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

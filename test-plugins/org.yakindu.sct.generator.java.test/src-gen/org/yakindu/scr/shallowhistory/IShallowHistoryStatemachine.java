@@ -4,6 +4,7 @@ package org.yakindu.scr.shallowhistory;
 import org.yakindu.scr.IStatemachine;
 
 public interface IShallowHistoryStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseEvent1();

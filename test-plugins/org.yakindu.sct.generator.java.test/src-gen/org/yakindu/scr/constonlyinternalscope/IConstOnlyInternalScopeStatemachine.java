@@ -8,6 +8,7 @@ public interface IConstOnlyInternalScopeStatemachine extends IStatemachine {
 	
 	public static final long c = 2;
 	
+	
 	public interface SCInterface {
 	
 		public void raiseE(long value);

@@ -6,6 +6,7 @@ import java.util.Queue;
 import org.yakindu.scr.ieq.IStatemachine;
 
 public interface IInEventQueueStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();
@@ -17,7 +18,6 @@ public interface IInEventQueueStatemachine extends IStatemachine {
 		public void setCycles(long value);
 		
 		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
-	
 	}
 	
 	public interface SCInterfaceOperationCallback {
@@ -27,6 +27,7 @@ public interface IInEventQueueStatemachine extends IStatemachine {
 	}
 	
 	public SCInterface getSCInterface();
+	
 	
 	public interface SCII {
 	

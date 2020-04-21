@@ -121,7 +121,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunningCycle = false;
+	private boolean isRunning = false;
 	private boolean i1;
 	private boolean i2;
 	public EventDrivenInternalEventStatemachine() {
@@ -148,9 +148,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
+		isRunning = true;
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		enterSequence_check_default();
+		isRunning = false;
 	}
 	
 	public void runCycle() {
@@ -158,10 +160,10 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		
-		if (isRunningCycle) {
+		if (isRunning) {
 			return;
 		}
-		isRunningCycle = true;
+		isRunning = true;
 		
 		clearOutEvents();
 	
@@ -176,7 +178,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			task = getNextEvent();
 		}
 		
-		isRunningCycle = false;
+		isRunning = false;
 	}
 	
 	protected void singleCycle() {
@@ -226,9 +228,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	public void exit() {
+		isRunning = true;
 		exitSequence_r1();
 		exitSequence_r2();
 		exitSequence_check();
+		isRunning = false;
 	}
 	
 	/**

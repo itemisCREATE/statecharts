@@ -4,6 +4,7 @@ package org.yakindu.scr.deepentry;
 import org.yakindu.scr.IStatemachine;
 
 public interface IDeepEntryStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

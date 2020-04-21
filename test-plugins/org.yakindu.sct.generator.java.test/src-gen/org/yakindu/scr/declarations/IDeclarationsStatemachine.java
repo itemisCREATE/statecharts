@@ -4,6 +4,7 @@ package org.yakindu.scr.declarations;
 import org.yakindu.scr.IStatemachine;
 
 public interface IDeclarationsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseEvA();
@@ -45,6 +46,7 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 	}
 	
 	public SCInterface getSCInterface();
+	
 	
 	public interface SCIIfA {
 	

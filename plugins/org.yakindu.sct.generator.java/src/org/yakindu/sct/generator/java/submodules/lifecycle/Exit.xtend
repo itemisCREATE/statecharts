@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.java.submodules.lifecycle
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.java.FlowCode
+import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
@@ -28,10 +29,17 @@ class Exit implements org.yakindu.sct.generator.core.submodules.lifecycle.Exit {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Synchronized
+	@Inject protected extension GeneratorPredicate
 	
 	override exit(ExecutionFlow it) '''
 		public «sync»void exit() {
+			«IF needsRunCycleGuard»
+			«runCycleGuard» = true;
+			«ENDIF»
 			«exitSequence.code»
+			«IF needsRunCycleGuard»
+			«runCycleGuard» = false;
+			«ENDIF»
 		}
 
 	'''

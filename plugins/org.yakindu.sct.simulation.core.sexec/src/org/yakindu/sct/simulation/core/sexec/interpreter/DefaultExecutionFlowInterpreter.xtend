@@ -69,6 +69,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	protected Queue<Event> internalEventQueue = new LinkedList<Event>()
+	protected Queue<Event> inEventQueue = new LinkedList<Event>()
 
 	@Inject
 	protected IExpressionInterpreter statementInterpreter
@@ -90,9 +91,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected List<Step> executionStack
 	protected int activeStateIndex
 	protected boolean useInternalEventQueue
+	protected boolean useInEventQueue
 
 	protected boolean useSuperStep
 	protected boolean stateVectorChanged
+
+	protected boolean isRunning = false
 
 	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
 	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
@@ -108,7 +112,10 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		activeStateConfiguration = newArrayOfSize(flow.stateVector.size)
 		activeStateIndex = 0
 		historyStateConfiguration = newHashMap()
+		
 		this.useInternalEventQueue = useInternalEventQueue
+
+		useInEventQueue = (flow.sourceElement as Statechart).isEventDriven
 		useSuperStep = (flow.sourceElement as Statechart).isSuperStep
 
 		if (!executionContext.snapshot) {
@@ -118,8 +125,11 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override enter() {
-		if (!executionContext.snapshot)
+		if (!executionContext.snapshot) {
+			isRunning = true
 			flow.enterSequences?.defaultSequence?.scheduleAndRun
+			isRunning = false
+		}
 		else {
 			executionContext.activeStates.filter(RegularState).forEach [ state |
 				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)
@@ -160,9 +170,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			if (cycleAdapter !== null)
 				executionContext.eAdapters.remove(cycleAdapter)
 
+			if (isRunning) return;
+			isRunning = true;
+
 			executionContext.clearOutEvents
 
-			var Event event = null
+			var Event event = internalEventQueue.poll ?: inEventQueue.poll
 			do {
 				traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
 				// activate an event if there is one
@@ -173,19 +186,23 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 				}
 				// perform a run to completion step
 				if (useSuperStep) {
-					superStepLoop([rtcStep])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+					superStepLoop([rtcStep])
 				} else {
 					rtcStep
 				}
 				executionContext.clearLocalAndInEvents
 
 				// get next event if available
-				if(! internalEventQueue.empty) event = internalEventQueue.poll
+				event = internalEventQueue.poll ?: inEventQueue.poll
+
 				traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 			} while (event !== null)
 		} finally {
+			isRunning = false;
+
 			if (cycleAdapter !== null)
 				executionContext.eAdapters.add(cycleAdapter)
+			
 		}
 	}
 
@@ -207,7 +224,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override exit() {
+		isRunning = true
 		flow.exitSequence.scheduleAndRun
+		isRunning = false
 	}
 
 	override tearDown() {
@@ -327,7 +346,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	override raise(ExecutionEvent ev, Object value) {
 		if (useInternalEventQueue && ev.direction == Direction::LOCAL) {
 			internalEventQueue.add(new Event(ev, value));
-
+		} else if (useInEventQueue && ev.direction == Direction::IN) {
+			inEventQueue.add(new Event(ev, value));
+			runCycle
 		} else {
 			ev.value = value
 			ev.raised = true

@@ -4,6 +4,7 @@ package org.yakindu.scr.childfirstlocalreactions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IChildFirstLocalReactionsStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

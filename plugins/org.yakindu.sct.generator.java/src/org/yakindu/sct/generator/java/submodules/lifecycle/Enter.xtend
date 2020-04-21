@@ -19,6 +19,7 @@ import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.generator.java.GeneratorPredicate
 
 class Enter implements org.yakindu.sct.generator.core.submodules.lifecycle.Enter {
 	@Inject protected extension Naming
@@ -28,6 +29,7 @@ class Enter implements org.yakindu.sct.generator.core.submodules.lifecycle.Enter
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Synchronized
+	@Inject protected extension GeneratorPredicate
 	
 	override enter(ExecutionFlow it) '''
 		public «sync»void enter() {
@@ -41,7 +43,13 @@ class Enter implements org.yakindu.sct.generator.core.submodules.lifecycle.Enter
 				throw new IllegalStateException("timer not set.");
 			}
 			«ENDIF»
+			«IF needsRunCycleGuard»
+			«runCycleGuard» = true;
+			«ENDIF»
 			«enterSequences.defaultSequence.code»
+			«IF needsRunCycleGuard»
+			«runCycleGuard» = false;
+			«ENDIF»
 		}
 
 	'''

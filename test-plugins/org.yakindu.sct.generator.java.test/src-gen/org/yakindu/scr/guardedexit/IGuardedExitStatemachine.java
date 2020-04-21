@@ -4,6 +4,7 @@ package org.yakindu.scr.guardedexit;
 import org.yakindu.scr.IStatemachine;
 
 public interface IGuardedExitStatemachine extends IStatemachine {
+	
 	public interface SCInterface {
 	
 		public void raiseE();

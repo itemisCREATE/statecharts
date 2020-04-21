@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 
 /**
  * @author rbeckmann
@@ -38,6 +39,7 @@ class StatechartTypes {
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension StatechartAnnotations
+	@Inject extension ShadowEventExtensions
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
@@ -103,6 +105,7 @@ class StatechartTypes {
 	
 	def scopeTypeDecl(Scope scope) '''
 		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»
+		«val shadowEvents = scope.flow.shadowEvents»
 		«IF !typeRelevantDeclarations.empty»
 			/*! Type definition of the data structure for the «scope.type» interface scope. */
 			typedef struct
@@ -110,6 +113,11 @@ class StatechartTypes {
 				«FOR d : typeRelevantDeclarations»
 					«d.scopeTypeDeclMember»
 				«ENDFOR»
+				«IF scope instanceof InternalScope && scope.flow.statechart.isEventDriven»
+					«FOR d : shadowEvents»
+						«d.scopeShadowEventMember»
+					«ENDFOR»
+				«ENDIF»
 			} «scope.type»;
 			
 		«ENDIF»

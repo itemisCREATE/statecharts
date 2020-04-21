@@ -77,7 +77,12 @@ class InternalFunctionsGenerator {
 	
 	def internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
-			«event.internalEventRaiser»
+			«IF event.isInEvent»
+				««« shadow event raiser (in event in internal scope) »»»
+				«event.inEventRaiser»
+			«ELSE»
+				«event.internalEventRaiser»
+			«ENDIF»
 			«IF event.hasValue»
 				«event.eventValueGetter»
 			«ENDIF»

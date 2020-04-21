@@ -92,7 +92,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunningCycle = false;
+	private boolean isRunning = false;
 	private boolean activate_b;
 	private boolean activate_c;
 	private boolean activate_d;
@@ -124,8 +124,10 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
+		isRunning = true;
 		enterSequence_r1_default();
 		enterSequence_r2_default();
+		isRunning = false;
 	}
 	
 	public void runCycle() {
@@ -133,10 +135,10 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		
-		if (isRunningCycle) {
+		if (isRunning) {
 			return;
 		}
-		isRunningCycle = true;
+		isRunning = true;
 		
 		clearOutEvents();
 	
@@ -151,7 +153,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			task = getNextEvent();
 		}
 		
-		isRunningCycle = false;
+		isRunning = false;
 	}
 	
 	protected void singleCycle() {
@@ -204,8 +206,10 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	}
 	
 	public void exit() {
+		isRunning = true;
 		exitSequence_r1();
 		exitSequence_r2();
+		isRunning = false;
 	}
 	
 	/**

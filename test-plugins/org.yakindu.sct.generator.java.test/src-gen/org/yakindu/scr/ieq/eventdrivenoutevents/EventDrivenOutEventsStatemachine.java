@@ -62,7 +62,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	private int nextStateIndex;
 	
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunningCycle = false;
+	private boolean isRunning = false;
 	public EventDrivenOutEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -82,8 +82,10 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 				"The state machine needs to be initialized first by calling the init() function."
 			);
 		}
+		isRunning = true;
 		enterSequence_main_region_default();
 		enterSequence_second_region_default();
+		isRunning = false;
 	}
 	
 	public void runCycle() {
@@ -91,10 +93,10 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		
-		if (isRunningCycle) {
+		if (isRunning) {
 			return;
 		}
-		isRunningCycle = true;
+		isRunning = true;
 		
 		clearOutEvents();
 	
@@ -109,7 +111,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			task = getNextEvent();
 		}
 		
-		isRunningCycle = false;
+		isRunning = false;
 	}
 	
 	protected void singleCycle() {
@@ -150,8 +152,10 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	}
 	
 	public void exit() {
+		isRunning = true;
 		exitSequence_main_region();
 		exitSequence_second_region();
+		isRunning = false;
 	}
 	
 	/**

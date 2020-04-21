@@ -7,6 +7,7 @@ import org.yakindu.scr.ieq.IStatemachine;
 import org.yakindu.scr.ieq.ITimerCallback;
 
 public interface IEventDrivenTriggeredByTimeEventStatemachine extends ITimerCallback,IStatemachine {
+	
 	public interface SCInterface {
 	
 		public long getX();

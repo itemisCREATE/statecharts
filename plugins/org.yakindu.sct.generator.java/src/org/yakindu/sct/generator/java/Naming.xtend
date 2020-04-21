@@ -242,7 +242,7 @@ class Naming {
 	def functionName(Step it) { shortName }
 	
 	def runCycleGuard() {
-		"isRunningCycle"
+		"isRunning"
 	}
 
 }

@@ -134,21 +134,21 @@ class StatemachineInterface {
 	}
 
 	def protected createInterface(InterfaceScope scope, GeneratorEntry entry) {
+		var constants = scope.declarations.filter(VariableDefinition).filter[const]
 		'''
+
 			public interface «scope.interfaceName» {
 			
-			«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
-			«FOR constant : constants»
-				«constant.constantFieldDeclaration()»
-			«ENDFOR»
+				«FOR constant : constants»
+					«constant.constantFieldDeclaration()»
+				«ENDFOR»
 				«scope.eventAccessors»
 				«scope.variableAccessors»
-			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
-				public List<«scope.getInterfaceListenerName()»> getListeners();
-			«ENDIF»
+				«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
+					public List<«scope.getInterfaceListenerName()»> getListeners();
+				«ENDIF»
 				«IF scope.hasOperations()»
 					public void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
-
 				«ENDIF»
 			}
 		'''
@@ -157,7 +157,7 @@ class StatemachineInterface {
 	def protected createListenerInterface(InterfaceScope scope, GeneratorEntry entry) {
 		'''
 			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
-				
+
 				public interface «scope.getInterfaceListenerName()» {
 				
 					«FOR event : scope.eventDefinitions»
@@ -169,7 +169,7 @@ class StatemachineInterface {
 							«ENDIF»	
 						«ENDIF»
 					«ENDFOR»
-					}
+				}
 			«ENDIF»
 		'''
 	}

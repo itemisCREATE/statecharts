@@ -14,17 +14,24 @@ import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
@@ -33,6 +40,7 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
@@ -43,6 +51,10 @@ class StructureMapping {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
+	@Inject extension StatechartUtil
+	@Inject extension ExpressionBuilder
+	@Inject extension ExpressionExtensions
+	@Inject extension ShadowEventExtensions
 	
 	
 	//==========================================================================
@@ -234,6 +246,60 @@ class StructureMapping {
 		}	
 		
 		result
+	}
+	
+	//==========================================================================
+	// REFERENCED MACHINE OUT EVENT MAPPING
+	//
+	
+	/** creates shadow variables for referenced machines' out events */
+	def mapReferencedMachineOutEvents(Statechart statechart, ExecutionFlow flow) {
+		// get all references to out events of submachines
+		val allContent = EcoreUtil2::eAllContentsAsList(flow)
+		val allFeatureCalls = allContent.filter(FeatureCall)
+		val outEventCalls = allFeatureCalls.filter[feature instanceof Event && (feature as Event).direction == Direction.OUT]
+		val submachineOutEventCalls = outEventCalls.filter[isCallOnStatechartMember(it, statechart)]
+		
+		submachineOutEventCalls.forEach[fc |
+			val submachineMember = fc.statechartRefs.head
+			val outEvent = fc.feature as Event
+			val shadowEventName = fc.shadowEventName
+			val shadowEvent = createShadowEvent(shadowEventName, submachineMember, outEvent, flow)
+
+			// retarget feature call to new shadow event
+			EcoreUtil.replace(fc, shadowEvent._ref)
+		]
+	}
+	
+	/**
+	 * Returns true if the feature call is on a statechart reference which is a direct member of the given statechart, e.g.
+	 * <br><br>
+	 * <code>submachine.outEvent</code> or 
+	 * <br>
+	 * <code>submachine.Iface.outEvent</code>.
+	 * <br>
+	 * Returns false otherwise, especially when the owner is not a direct member of the given statechart, e.g.
+	 * <br><br>
+	 * <code>submachine1.submachine2.outEvent</code>.
+	 * 
+	 */
+	protected def isCallOnStatechartMember(FeatureCall it, Statechart statechart) {
+		if (statechartRefs.size !== 1) return false
+		
+		val statechartContainer = EcoreUtil2.getContainerOfType(statechartRefs.head, ExecutionFlow)?.sourceElement
+		return (statechartContainer !== null && statechart == statechartContainer)
+	}
+	
+	protected def getStatechartRefs(FeatureCall it) {
+		toCallStack.map[featureOrReference].filter(VariableDefinition).filter[isStatechartRef]
+	}
+	
+	protected def dispatch isStatechartRef(EObject it) {
+		false
+	}
+	
+	protected def dispatch isStatechartRef(TypedDeclaration it) {
+		type.isOriginStatechart
 	}
 	
 }
