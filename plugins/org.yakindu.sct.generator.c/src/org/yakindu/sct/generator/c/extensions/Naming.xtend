@@ -575,4 +575,8 @@ class Naming {
 		TRACE_CALL
 	}
 	
+	def runCycleGuard() {
+		"is_running"
+	}
+	
 }
