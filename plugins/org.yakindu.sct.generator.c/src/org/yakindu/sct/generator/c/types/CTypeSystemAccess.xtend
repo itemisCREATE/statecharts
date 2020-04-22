@@ -41,7 +41,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case isBoolean(originalType): BOOL_TYPE
 			case isString(originalType): STRING_TYPE
 			EnumerationType case isOriginStatechart(originalType): originalType.printStateEnumType
-			ComplexType case isOriginStatechart(originalType): '''«type.name»*'''
+			ComplexType case isOriginStatechart(originalType): '''«type.name.toFirstUpper»*'''
 			default: type.name
 		}
 	}
