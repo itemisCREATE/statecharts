@@ -51,7 +51,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 			«eventQueueInitFunction»(&«scHandle»->«inEventQueue», «IF userAllocatesInQueue»in_queue_buffer, in_queue_capacity«ELSE»«scHandle»->in_buffer, «inBufferSize»«ENDIF»);
 		«ENDIF»
 		«IF needsRunCycleGuard»
-			«scHandle»->is_running_cycle = «FALSE_LITERAL»;
+			«scHandle»->«runCycleGuard» = «FALSE_LITERAL»;
 		«ENDIF»
 		'''
 	}
@@ -65,10 +65,10 @@ class EventDrivenAPIGenerator extends APIGenerator {
 				{
 					«internalEventStructTypeName» currentEvent;
 					«IF needsRunCycleGuard»
-					if(«scHandle»->is_running_cycle == «TRUE_LITERAL») {
+					if(«scHandle»->«runCycleGuard» == «TRUE_LITERAL») {
 						return;
 					}
-					«scHandle»->is_running_cycle = «TRUE_LITERAL»;
+					«scHandle»->«runCycleGuard» = «TRUE_LITERAL»;
 					«ENDIF»
 					«IF !useOutEventObservables»«clearOutEventsFctID»(«scHandle»);«ENDIF»
 					
@@ -81,7 +81,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					} while((currentEvent = «nextEventFctID»(«scHandle»)).name != «invalidEventEnumName»);
 					
 					«IF needsRunCycleGuard»
-					«scHandle»->is_running_cycle = «FALSE_LITERAL»;
+					«scHandle»->«runCycleGuard» = «FALSE_LITERAL»;
 					«ENDIF»
 				}
 			'''
@@ -102,4 +102,36 @@ class EventDrivenAPIGenerator extends APIGenerator {
 			}
 		«ENDIF»
 		'''
+	
+	override enter(ExecutionFlow it) {
+		'''
+			«enterSignature»
+			{
+				«traceMachineEnter»
+				«IF needsRunCycleGuard»
+				«scHandle»->«runCycleGuard» = «TRUE_LITERAL»;
+				«ENDIF»
+				«enterSequences.defaultSequence.code»
+				«IF needsRunCycleGuard»
+				«scHandle»->«runCycleGuard» = «FALSE_LITERAL»;
+				«ENDIF»
+			}
+		'''
+	}
+	
+	override exit(ExecutionFlow it) {
+		'''
+			«exitSignature»
+			{
+				«IF needsRunCycleGuard»
+				«scHandle»->«runCycleGuard» = «TRUE_LITERAL»;
+				«ENDIF»
+				«exitSequence.code»
+				«IF needsRunCycleGuard»
+				«scHandle»->«runCycleGuard» = «FALSE_LITERAL»;
+				«ENDIF»
+				«traceMachineExit»
+			}
+		'''
+	}
 }

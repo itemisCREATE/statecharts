@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
+import org.yakindu.sct.generator.c.extensions.Naming
 
 /**
  * @author rbeckmann
@@ -28,6 +29,7 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
 class EventDrivenStatechartTypes extends StatechartTypes {
 	@Inject protected extension EventNaming
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension Naming
 	
 	override statemachineStructContent(ExecutionFlow it) {
 		'''
@@ -45,7 +47,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		«ENDIF»
 		«ENDIF»
 		«IF needsRunCycleGuard»
-		«BOOL_TYPE» is_running_cycle;
+		«BOOL_TYPE» «runCycleGuard»;
 		«ENDIF»
 		'''
 	}
