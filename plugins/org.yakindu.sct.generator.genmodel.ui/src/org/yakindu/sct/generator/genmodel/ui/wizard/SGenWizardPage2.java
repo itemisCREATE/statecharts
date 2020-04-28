@@ -113,7 +113,10 @@ public class SGenWizardPage2 extends WizardPage {
 	@Override
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
-		refreshInput();
+		if (visible) {
+			selectPreferredGenerator();
+			refreshInput();
+		}
 	}
 
 	private void createObjectTree(Composite container) {
@@ -160,14 +163,6 @@ public class SGenWizardPage2 extends WizardPage {
 		Collections.sort(descriptors, CoreGenerator.generatorOrder);
 		generatorCombo.setInput(descriptors);
 		generatorCombo.getCombo().select(0);
-		Optional<CoreGenerator> preferredByNature = getGeneratorForNature(getContextProject());
-		if (preferredByNature.isPresent()) {
-			Optional<IGeneratorDescriptor> desc = descriptors.stream()
-					.filter(d -> d.getId().equals(preferredByNature.get().getId())).findFirst();
-			if (desc.isPresent()) {
-				generatorCombo.getCombo().select(descriptors.indexOf(desc.get()));
-			}
-		}
 		generatorCombo.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				Object element = ((IStructuredSelection) event.getSelection()).getFirstElement();
@@ -189,7 +184,23 @@ public class SGenWizardPage2 extends WizardPage {
 		generatorCombo.add(new InstallMoreGeneratorsItem());
 	}
 
+	private void selectPreferredGenerator() {
+		List<IGeneratorDescriptor> descriptors = Lists.newArrayList(GeneratorExtensions.getGeneratorDescriptors());
+		Collections.sort(descriptors, CoreGenerator.generatorOrder);
+		Optional<CoreGenerator> preferredByNature = getGeneratorForNature(getContextProject());
+		if (preferredByNature.isPresent()) {
+			Optional<IGeneratorDescriptor> desc = descriptors.stream()
+					.filter(d -> d.getId().equals(preferredByNature.get().getId())).findFirst();
+			if (desc.isPresent()) {
+				generatorCombo.getCombo().select(descriptors.indexOf(desc.get()));
+			}
+		}
+	}
+
 	private Optional<CoreGenerator> getGeneratorForNature(IProject project) {
+		if (project == null)
+			return Optional.empty();
+
 		for (Entry<String, CoreGenerator> entry : NATURE_TO_GENERATOR.entrySet()) {
 			try {
 				if (project.hasNature(entry.getKey())) {
@@ -218,9 +229,9 @@ public class SGenWizardPage2 extends WizardPage {
 	}
 
 	protected IProject getContextProject() {
-		IPath containerPath = fileSelectionPage.getFilePath();
-		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(containerPath);
-		IProject project = folder.getProject();
+		IPath filePath = fileSelectionPage.getFilePath();
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(filePath);
+		IProject project = file.getProject();
 		return project;
 	}
 	
