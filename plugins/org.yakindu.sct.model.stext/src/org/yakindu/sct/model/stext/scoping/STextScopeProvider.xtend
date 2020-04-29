@@ -144,7 +144,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		}
 		var IScope scope = IScope.NULLSCOPE
 		if (element instanceof Package) {
-			return addScopeForPackage(element, scope, predicate)
+			return addScopeForPackage(element, scope, predicate, context, reference)
 		}
 
 		var InferenceResult result = typeInferrer.infer(owner)
@@ -208,7 +208,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		return scope
 	}
 
-	def protected IScope addScopeForPackage(Package pkg, IScope parentScope, Predicate<IEObjectDescription> predicate) {
+	def protected IScope addScopeForPackage(Package pkg, IScope parentScope, Predicate<IEObjectDescription> predicate, FeatureCall context, EReference reference) {
 		var scope = parentScope
 		scope = Scopes.scopeFor(pkg.member, scope)
 		scope = new FilteringScope(scope, predicate)
