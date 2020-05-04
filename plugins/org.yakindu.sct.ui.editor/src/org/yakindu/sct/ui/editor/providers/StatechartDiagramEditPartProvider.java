@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.common.ui.services.parser.CommonParserHint;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateRootEditPartOperation;
@@ -27,6 +28,8 @@ import org.yakindu.sct.ui.editor.editparts.ChoiceEditPart;
 import org.yakindu.sct.ui.editor.editparts.EntryEditPart;
 import org.yakindu.sct.ui.editor.editparts.ExitEditPart;
 import org.yakindu.sct.ui.editor.editparts.FinalStateEditPart;
+import org.yakindu.sct.ui.editor.editparts.LiveNoteEditPart;
+import org.yakindu.sct.ui.editor.editparts.LiveTextEditPart;
 import org.yakindu.sct.ui.editor.editparts.NamedElementLabelEditPart;
 import org.yakindu.sct.ui.editor.editparts.RegionCompartmentEditPart;
 import org.yakindu.sct.ui.editor.editparts.RegionEditPart;
@@ -89,6 +92,9 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider 
 		editParts.put(SYNCHRONIZATION, SynchronizationEditPart.class);
 		
 		editParts.put(CommonParserHint.DESCRIPTION, StatechartDescriptionCompartmentEditPart.class);
+		
+		editParts.put(ViewType.NOTE, LiveNoteEditPart.class);
+		editParts.put(ViewType.TEXT, LiveTextEditPart.class);
 
 	}
 

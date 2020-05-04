@@ -45,6 +45,7 @@ import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrac
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
+import org.yakindu.sct.ui.editor.policies.FixedBendpointEditPolicy;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;

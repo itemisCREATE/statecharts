@@ -6,7 +6,7 @@
 * 	andreas muelder - itemis AG
 *
 */
-package org.yakindu.sct.ui.editor.editparts;
+package org.yakindu.sct.ui.editor.policies;
 
 import java.util.ArrayList;
 import java.util.List;
