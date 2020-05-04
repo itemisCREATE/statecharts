@@ -135,21 +135,21 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 				{ "myInt ^ Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
 						true }, //
 				{ "e1 ^ e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
-				{ "myOpp(1) ^ myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp3() ^ myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
 				/*
 				 * filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES)
 				 */
 				{ "myInt | Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
 						true }, //
 				{ "e1 | e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
-				{ "myOpp(1) | myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp3() | myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
 				/*
 				 * filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES)
 				 */
 				{ "myInt & Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
 						true }, //
 				{ "e1 & e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
-				{ "myOpp(1) & myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp3() & myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
 				/*
 				 * filter.put(key(SHIFT_EXPRESSION), VARIABLES)
 				 */
@@ -159,8 +159,8 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 						true }, //
 				{ "e1 >> e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
 				{ "e1 >> e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
-				{ "myOpp(1) >> myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
-				{ "myOpp(1) << myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp3() >> myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myOpp3() << myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
 				/*
 				 * filter.put(key(LOGICAL_NOT_EXPRESSION),
 				 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
