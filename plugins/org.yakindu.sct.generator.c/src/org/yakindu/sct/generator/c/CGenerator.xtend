@@ -18,7 +18,6 @@ import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.files.StatemachineHeader
 import org.yakindu.sct.generator.c.files.StatemachineRequiredHeader
 import org.yakindu.sct.generator.c.files.StatemachineSource
-import org.yakindu.sct.generator.c.files.Types
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -28,6 +27,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import org.yakindu.sct.generator.c.files.Tracing
 import org.yakindu.sct.generator.c.files.RxCHeader
+import org.yakindu.sct.generator.c.files.SCTypes
+import org.yakindu.sct.generator.c.files.Types
 
 /**
  * This is the C code generators main class. 
@@ -36,6 +37,7 @@ import org.yakindu.sct.generator.c.files.RxCHeader
  */
 class CGenerator implements IExecutionFlowGenerator {
 
+	@Inject extension SCTypes sCTypes
 	@Inject extension Types types
 	@Inject extension Tracing tracing
 	@Inject extension RxCHeader rxc
@@ -66,7 +68,8 @@ class CGenerator implements IExecutionFlowGenerator {
 
 	def protected initGenerationArtifacts(ExecutionFlow it, GeneratorEntry entry,
 		IGenArtifactConfigurations locations) {
-		locations.configure(flow.typesModule.h, entry.libraryOutput, types, getSkipLibraryFiles(entry))
+		locations.configure(flow.sCTypesModule.h, entry.libraryOutput, sCTypes, getSkipLibraryFiles(entry))
+		locations.configure(flow.typeModule.h, entry.headerOutput, types)
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeader)
 		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)
 		if (flow.timed || !flow.operations.empty || entry.tracingUsed) {

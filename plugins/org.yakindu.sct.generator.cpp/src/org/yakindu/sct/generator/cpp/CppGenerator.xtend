@@ -69,7 +69,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	}
 
 	def initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
-		locations.configure(flow.typesModule.h, entry.libraryOutput, typesContent, entry.skipLibraryFiles)
+		locations.configure(flow.sCTypesModule.h, entry.libraryOutput, typesContent, entry.skipLibraryFiles)
 		locations.configure(statemachineInterface.h, entry.libraryOutput, statemachineInterfaceContent,
 			entry.skipLibraryFiles)
 

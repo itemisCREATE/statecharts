@@ -32,8 +32,8 @@ class Types implements IContentTemplate {
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) '''
 		«entry.licenseText»
 		
-		#ifndef «typesModule.define»_H_
-		#define «typesModule.define»_H_
+		#ifndef «sCTypesModule.define»_H_
+		#define «sCTypesModule.define»_H_
 		
 		/* As <cstdint> is not available on all platforms we choose to include <stdint.h>. You can switch to <cstdint> by commenting and uncommenting the lines below.*/
 		// #include <cstdint>
@@ -85,7 +85,7 @@ class Types implements IContentTemplate {
 		#define «ErrorCode.OCB_INTERNAL_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_INTERNAL_INIT.getHexValue»)
 		#endif			
 		
-		#endif /* «typesModule.define»_H_ */
+		#endif /* «sCTypesModule.define»_H_ */
 	'''
 	
 }

@@ -42,7 +42,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		#ifndef «module.client.define»_H_
 		#define «module.client.define»_H_
 
-		#include "«(typesModule.h).relativeTo(module.client.h)»"
+		#include "«(sCTypesModule.h).relativeTo(module.client.h)»"
 		«IF timed || operations.size > 0 || entry.tracingUsed»
 		#include "«(module.h).relativeTo(module.client.h)»"
 		«ENDIF»

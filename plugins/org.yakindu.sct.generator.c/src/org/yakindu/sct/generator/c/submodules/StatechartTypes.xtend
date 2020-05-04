@@ -28,6 +28,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 /**
  * @author rbeckmann
@@ -43,17 +44,18 @@ class StatechartTypes {
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
+	@Inject protected extension StatechartUtil
 	
 	def statemachineStruct(ExecutionFlow it) {
 		'''
 		/*! 
-		 * Type definition of the data structure for the «type» state machine.
+		 * Type declaration of the data structure for the «type» state machine.
 		 * This data structure has to be allocated by the client code. 
 		 */
-		typedef struct
+		struct «type»
 		{
 			«statemachineStructContent»
-		} «type»;
+		};
 		'''
 	}
 	

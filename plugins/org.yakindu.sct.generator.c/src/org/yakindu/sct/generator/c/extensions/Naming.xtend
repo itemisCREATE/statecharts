@@ -95,12 +95,16 @@ class Naming {
 		'sc_timer'
 	}
 
-	def typesModule(ExecutionFlow it) {
+	def sCTypesModule(ExecutionFlow it) {
 		TYPES_MODULE
 	}
 
 	def timerType(ExecutionFlow it) {
 		'SCTimer'
+	}
+	
+	def typeModule(ExecutionFlow it) {
+		module + "_type"
 	}
 	
 	def statesEnumType(ExecutionFlow it) {

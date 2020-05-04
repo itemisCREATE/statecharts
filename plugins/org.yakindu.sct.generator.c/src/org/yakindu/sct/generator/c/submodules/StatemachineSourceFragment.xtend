@@ -56,7 +56,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 	override CharSequence includes(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		
-		#include "«(typesModule.h).relativeTo(module.c)»"
+		#include "«(sCTypesModule.h).relativeTo(module.c)»"
 		«IF entry.tracingGeneric»
 		#include "«(tracingModule.h).relativeTo(module.c)»"
 		«ENDIF»

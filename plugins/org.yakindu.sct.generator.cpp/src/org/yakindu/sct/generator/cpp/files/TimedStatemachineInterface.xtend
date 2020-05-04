@@ -35,7 +35,7 @@ class TimedStatemachineInterface implements IContentTemplate {
 		#ifndef «timedStatemachineInterface.define»_H_
 		#define «timedStatemachineInterface.define»_H_
 		
-		#include "«typesModule.h»"
+		#include "«sCTypesModule.h»"
 		#include "«timerInterface.h»"
 		
 		/*! \file Interface for state machines which use timed event triggers.
