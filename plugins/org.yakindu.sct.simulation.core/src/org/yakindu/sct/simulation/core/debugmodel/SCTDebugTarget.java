@@ -24,7 +24,6 @@ import org.eclipse.debug.core.model.IStep;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
@@ -93,7 +92,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 
 	public String getName() throws DebugException {
 		if (context != null) {
-			return context + " : " + StringExtensions.toFirstUpper(element.getName());
+			return context + " : " + element.getName();
 		}
 		return element.getName();
 	}
