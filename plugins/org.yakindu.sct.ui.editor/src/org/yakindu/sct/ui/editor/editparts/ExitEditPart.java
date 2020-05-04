@@ -24,6 +24,7 @@ import org.yakindu.base.gmf.runtime.figures.EllipseAnchorDefaultSizeNodeFigure;
 import org.yakindu.sct.ui.editor.editor.figures.ExitFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
+import org.yakindu.sct.ui.editor.policies.FixedBendpointEditPolicy;
 
 /**
  * 

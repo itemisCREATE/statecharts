@@ -22,6 +22,7 @@ import org.yakindu.sct.ui.editor.editor.figures.FinalStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
+import org.yakindu.sct.ui.editor.policies.FixedBendpointEditPolicy;
 
 /**
  * 
