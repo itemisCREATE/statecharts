@@ -19,7 +19,6 @@ import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
-import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.files.StatemachineHeader;
 import org.yakindu.sct.generator.c.files.StatemachineSource;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -56,6 +55,7 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 		Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
 		includeBinder.addBinding().to(ScTypesIncludeProvider.class);
 		includeBinder.addBinding().to(StatechartIncludeProvider.class);
+		includeBinder.addBinding().to(TypesIncludeProvider.class);
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {

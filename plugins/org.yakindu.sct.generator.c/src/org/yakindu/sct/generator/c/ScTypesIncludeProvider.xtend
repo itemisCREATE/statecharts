@@ -21,10 +21,7 @@ class ScTypesIncludeProvider implements IncludeProvider {
 	@Inject protected extension GeneratorPredicate
 	
 	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
-		val List<CharSequence> scIncludes = newArrayList( //
-		'''#include "«(sCTypesModule.h).relativeTo(module.h)»"''', //
-		'''#include "«(typeModule.h).relativeTo(module.h)»"''' //
-		) //
+		val List<CharSequence> scIncludes = newArrayList('''#include "«(sCTypesModule.h).relativeTo(module.h)»"''')
 		if(useOutEventObservables) {
 			scIncludes.add('''#include "«(rxcModule.h).relativeTo(module.h)»"''')
 		}
