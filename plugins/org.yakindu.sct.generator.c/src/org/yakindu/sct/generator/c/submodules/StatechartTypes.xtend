@@ -44,16 +44,25 @@ class StatechartTypes {
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
 	
+	def forwardDeclarations(ExecutionFlow it) {
+		'''
+		/*!
+		* Forward declaration for the «type» state machine.
+		*/
+		typedef struct «type» «type»;
+		'''
+	}
+	
 	def statemachineStruct(ExecutionFlow it) {
 		'''
 		/*! 
-		 * Type definition of the data structure for the «type» state machine.
+		 * Type declaration of the data structure for the «type» state machine.
 		 * This data structure has to be allocated by the client code. 
 		 */
-		typedef struct
+		struct «type»
 		{
 			«statemachineStructContent»
-		} «type»;
+		};
 		'''
 	}
 	

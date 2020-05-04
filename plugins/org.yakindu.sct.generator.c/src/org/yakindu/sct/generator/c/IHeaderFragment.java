@@ -20,6 +20,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 public interface IHeaderFragment {
 	public CharSequence fileComment(ExecutionFlow flow, GeneratorEntry entry,
 			IGenArtifactConfigurations artifactConfigs);
+	
+	public CharSequence forwardDeclarations(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs);
 
 	public CharSequence includes(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs);
 

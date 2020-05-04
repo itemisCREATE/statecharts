@@ -58,6 +58,10 @@ class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 	override fileComment(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		''''''
 	}
+		
+	override forwardDeclarations(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		''''''
+	}
 	
 	override functions(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		''''''
