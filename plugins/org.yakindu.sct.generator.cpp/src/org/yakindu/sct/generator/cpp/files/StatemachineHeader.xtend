@@ -53,6 +53,17 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			#ifndef «module().define»_H_
 			#define «module().define»_H_
+
+			«FOR ns : namespace»
+				namespace «ns» {
+			«ENDFOR»
+			/*!
+			 * Forward declaration for the «module» state machine.
+			 */
+			 class «module»;
+			«FOR ns : namespace»
+				}
+			«ENDFOR»
 			
 			
 			«includes(artifactConfigs)»

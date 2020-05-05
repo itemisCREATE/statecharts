@@ -87,6 +87,10 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		'''«entry.licenseText»'''
 	}
 	
+	override forwardDeclarations(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		forwardDeclarations
+	}
+	
 	override functions(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		functions
 	}

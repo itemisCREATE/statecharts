@@ -44,16 +44,32 @@ class StatechartTypes {
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
 	
+	def forwardDeclarations(ExecutionFlow it) {
+		'''
+		/*!
+		* Forward declaration for the «type» state machine.
+		*/
+		typedef struct «type» «type»;
+		«FOR scope : scopes.filter[s | !s.typeRelevantDeclarations.nullOrEmpty]»
+			
+			/*!
+			* Forward declaration of the data structure for the «scope.type» interface scope.
+			*/
+			typedef struct «scope.type» «scope.type»;
+		«ENDFOR»
+		'''
+	}
+	
 	def statemachineStruct(ExecutionFlow it) {
 		'''
 		/*! 
-		 * Type definition of the data structure for the «type» state machine.
+		 * Type declaration of the data structure for the «type» state machine.
 		 * This data structure has to be allocated by the client code. 
 		 */
-		typedef struct
+		struct «type»
 		{
 			«statemachineStructContent»
-		} «type»;
+		};
 		'''
 	}
 	
@@ -107,8 +123,8 @@ class StatechartTypes {
 		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»
 		«val shadowEvents = scope.flow.shadowEvents»
 		«IF !typeRelevantDeclarations.empty»
-			/*! Type definition of the data structure for the «scope.type» interface scope. */
-			typedef struct
+			/*! Type declaration of the data structure for the «scope.type» interface scope. */
+			struct «scope.type»
 			{
 				«FOR d : typeRelevantDeclarations»
 					«d.scopeTypeDeclMember»
@@ -118,7 +134,7 @@ class StatechartTypes {
 						«d.scopeShadowEventMember»
 					«ENDFOR»
 				«ENDIF»
-			} «scope.type»;
+			};
 			
 		«ENDIF»
 	'''

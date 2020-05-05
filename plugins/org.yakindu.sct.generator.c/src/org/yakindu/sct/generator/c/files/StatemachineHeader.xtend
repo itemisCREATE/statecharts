@@ -38,6 +38,16 @@ class StatemachineHeader implements IContentTemplate {
 			#ifndef «module.define»_H_
 			#define «module.define»_H_
 			
+			#ifdef __cplusplus
+			extern "C" { 
+			#endif
+			
+			«forwardDeclarations(entry, artifactConfigs)»
+			
+			#ifdef __cplusplus
+			}
+			#endif
+			
 			«includes(entry, artifactConfigs)»
 			
 			#ifdef __cplusplus
@@ -65,6 +75,14 @@ class StatemachineHeader implements IContentTemplate {
 		'''
 			«FOR p : contentProviders»
 				«p.fileComment(it, entry, artifactConfigs)»
+			«ENDFOR»
+		'''
+	}
+	
+	def forwardDeclarations(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
+		'''
+			«FOR p : contentProviders»
+				«p.forwardDeclarations(it, entry, artifactConfigs)»
 			«ENDFOR»
 		'''
 	}
