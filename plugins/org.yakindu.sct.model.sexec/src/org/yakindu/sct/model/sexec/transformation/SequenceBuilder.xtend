@@ -500,7 +500,7 @@ class SequenceBuilder {
 		if (vd.initialValue !== null) {
 			return vd.initialValue
 		} else {
-			return vd.type?.defaultValue?.buildValue
+			return vd.type?.defaultValue.buildValue
 		}
 	}
 
@@ -610,6 +610,13 @@ class SequenceBuilder {
 		lit.value = i
 		pve.value = lit
 
+		pve
+	}
+	
+	def dispatch Expression buildValue(Void v) {
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		pve.value = factory.createNullLiteral
+		
 		pve
 	}
 	
