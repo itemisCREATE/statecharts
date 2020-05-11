@@ -67,10 +67,12 @@
       optional="true">
     <parameters
         name="observables"
+        comment="If set to true, observables for out events are generated. Default value is true."
         optional="true"
         parameterType="BOOLEAN"/>
     <parameters
         name="getters"
+        comment="If set to true, getter for out events are generated."
         optional="true"
         parameterType="BOOLEAN"/>
   </types>
