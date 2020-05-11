@@ -56,7 +56,8 @@ class InterfaceFunctionsGenerator {
 			«FOR event : scope.outgoingEvents»
 				«IF useOutEventObservables»
 					«interfaceOutgoingEventObservableGetter(event)»
-				«ELSE»
+				«ENDIF»
+				«IF useOutEventGetters»
 					«interfaceOutgoingEventGetter(event)»
 					«IF event.hasValue» 
 						«interfaceOutgoingEventValueGetter(event)»

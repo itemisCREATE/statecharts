@@ -28,4 +28,12 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	def useOutEventObservables() {
 		entries.getOutEventObservablesUsed(entry)
 	}
+	
+	def useOutEventGetters() {
+		entries.getOutEventGettersUsed(entry)
+	}
+	
+	def needsClearOutEventsFunction() {
+		!useOutEventObservables || useOutEventGetters
+	}
 }

@@ -67,6 +67,8 @@ public class CDefaultFeatureValueProvider extends AbstractDefaultFeatureValuePro
 		} else if (ICFeatureConstants.PARAMETER_USER_ALLOCATED_QUEUE.equals(parameterName)) {
 			parameterValue.setValue(false);
 		} else if(ICFeatureConstants.PARAMETER_OUT_EVENT_OBSERVABLES.equals(parameterName)) {
+			parameterValue.setValue(true);
+		} else if(ICFeatureConstants.PARAMETER_OUT_EVENT_GETTERS.equals(parameterName)) {
 			parameterValue.setValue(false);
 		} else {
 			throw new IllegalArgumentException("Unsupported parameter '" + parameterName + "'.");

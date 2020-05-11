@@ -56,7 +56,7 @@ class APIGenerator {
 			«runCycleSignature»
 			{
 				«traceCycleStart»
-				«IF !useOutEventObservables»«clearOutEventsFctID»(«scHandle»);«ENDIF»
+				«IF needsClearOutEventsFunction»«clearOutEventsFctID»(«scHandle»);«ENDIF»
 				«runCycleForLoop(it)»
 				«clearInEventsFctID»(«scHandle»);
 				«traceCycleEnd»
@@ -162,7 +162,7 @@ class APIGenerator {
 			«scHandle»->«STATEVECTOR_POS» = 0;
 			
 			«clearInEventsFctID»(«scHandle»);
-			«IF !useOutEventObservables»
+			«IF needsClearOutEventsFunction»
 				«clearOutEventsFctID»(«scHandle»);
 			«ELSE»
 			

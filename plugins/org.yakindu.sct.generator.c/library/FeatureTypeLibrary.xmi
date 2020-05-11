@@ -62,8 +62,19 @@
         comment="If set to true, the buffers for the event queues are not allocated by the state machine, but have to be provided to the init function instead."
         optional="true"
         parameterType="BOOLEAN"/>
+  </types>
+  <types name="OutEventAPI"
+      optional="true">
     <parameters
-        name="outEventObservables"
+        name="observables"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="getters"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="callbacks"
         optional="true"
         parameterType="BOOLEAN"/>
   </types>

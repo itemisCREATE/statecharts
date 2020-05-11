@@ -151,7 +151,7 @@ class InternalFunctionsGenerator {
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
 		«reactMethods.toDeclarations»
 		static void «clearInEventsFctID»(«scHandleDecl»);
-		«IF !useOutEventObservables»static void «clearOutEventsFctID»(«scHandleDecl»);«ENDIF»
+		«IF needsClearOutEventsFunction»static void «clearOutEventsFctID»(«scHandleDecl»);«ENDIF»
 		«observerCallbacksPrototypes»
 	'''
 	

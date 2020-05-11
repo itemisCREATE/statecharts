@@ -241,12 +241,14 @@ class Naming {
 	}
 	
 	def dispatch scopeTypeDeclMember(EventDefinition it) {
-		if(useOutEventObservables && direction == Direction.OUT) {
-			return '''«OBSERVABLE_TYPE» «eventName»;'''
-		}
 		'''
-		«BOOL_TYPE» «eventRaisedFlag»;
-		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
+		«IF useOutEventObservables && direction == Direction.OUT»
+			«OBSERVABLE_TYPE» «eventName»;
+		«ENDIF»
+		«IF (useOutEventObservables && direction == Direction.OUT) || direction == Direction.IN || direction == Direction.LOCAL»
+			«BOOL_TYPE» «eventRaisedFlag»;
+			«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
+		«ENDIF»
 		'''
 	}
 	
