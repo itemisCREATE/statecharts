@@ -73,9 +73,5 @@
         name="getters"
         optional="true"
         parameterType="BOOLEAN"/>
-    <parameters
-        name="callbacks"
-        optional="true"
-        parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>
