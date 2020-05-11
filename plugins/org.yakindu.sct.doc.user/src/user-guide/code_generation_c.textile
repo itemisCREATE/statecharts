@@ -642,9 +642,9 @@ bc. feature Includes {
 
 ==<!-- End sgen_feature_includes -->==
 
-==<!-- Start sgen_feature_out_event_api -->==
+==<!-- Start sgen_feature_outeventapi -->==
 
-h4(#codegen_generating_code_functionouteventapi_feature). OutEventAPI feature
+h4(#codegen_generating_code_outeventapi_feature). OutEventAPI feature
 
 The *OutEventAPI* feature enables different generator features, which are used for out events:
 
@@ -662,7 +662,7 @@ bc. feature OutEventAPI {
 
 ==</div>==
 
-==<!-- End sgen_feature_out_event_api -->==
+==<!-- End sgen_feature_outeventapi -->==
 
 
 
