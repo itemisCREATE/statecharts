@@ -95,6 +95,7 @@ encoding//testmodels/SCTUnit/expressions/TriggerExpressionPrecedence.sct=UTF-8
 encoding//testmodels/SCTUnit/ineventqueue/InEventQueue.sct=UTF-8
 encoding//testmodels/extensions/NoTimeEvents.sct=UTF-8
 encoding//testmodels/extensions/ParallelTimeEvents.sct=UTF-8
+encoding//testmodels/extensions/RegionWithoutState.sct=UTF-8
 encoding//testmodels/validation/AssignmentToValue.sct=UTF-8
 encoding//testmodels/validation/ConstWithVariable.sct=UTF-8
 encoding//testmodels/validation/MultipleDefaultInChoices.sct=UTF-8
