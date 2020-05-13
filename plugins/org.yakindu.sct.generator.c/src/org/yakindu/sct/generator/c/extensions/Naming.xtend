@@ -245,7 +245,7 @@ class Naming {
 		«IF useOutEventObservables && direction == Direction.OUT»
 			«OBSERVABLE_TYPE» «eventName»;
 		«ENDIF»
-		«IF (useOutEventObservables && direction == Direction.OUT) || direction == Direction.IN || direction == Direction.LOCAL»
+		«IF (useOutEventGetters && direction == Direction.OUT) || direction == Direction.IN || direction == Direction.LOCAL»
 			«BOOL_TYPE» «eventRaisedFlag»;
 			«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
 		«ENDIF»
