@@ -118,7 +118,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
 					if (notification.getNewBooleanValue() && event.getDirection() != Direction.OUT) {
 						if (!suspended)
-							interpreter.runCycle();
+							new Thread(() -> interpreter.runCycle(), "Interpreter RTC Step").start();
 						else {
 							cycleAfterResume = true;
 						}
