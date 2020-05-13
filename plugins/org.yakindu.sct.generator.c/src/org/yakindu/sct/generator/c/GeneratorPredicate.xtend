@@ -34,6 +34,6 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	}
 	
 	def needsClearOutEventsFunction() {
-		!useOutEventObservables || useOutEventGetters
+		useOutEventGetters
 	}
 }
