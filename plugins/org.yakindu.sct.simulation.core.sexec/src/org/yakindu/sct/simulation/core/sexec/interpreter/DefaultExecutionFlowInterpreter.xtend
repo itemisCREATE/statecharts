@@ -205,11 +205,13 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			
 		}
 	}
-
+	
 	def superStepLoop(()=>void microStep) {
 		do {
 			stateVectorChanged = false
 			microStep.apply
+			// give the highlighter a chance to do its work
+			Thread.sleep(70)
 		} while (stateVectorChanged)
 	}
 
