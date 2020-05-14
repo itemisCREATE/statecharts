@@ -61,6 +61,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 	@Override
 	public void terminate() {
+		cycleAdapter.terminate();
 		context.eAdapters().remove(cycleAdapter);
 		context.eAdapters().remove(shadowEventAdapter);
 		super.terminate();
@@ -96,6 +97,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 	public static class EventDrivenCycleAdapter extends EContentAdapter {
 
 		private IExecutionFlowInterpreter interpreter;
+		private Thread interpreterThread;
 
 		private boolean suspended = false;
 		private boolean cycleAfterResume = false;
@@ -117,8 +119,10 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 				ExecutionEvent event = (ExecutionEvent) notification.getNotifier();
 				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
 					if (notification.getNewBooleanValue() && event.getDirection() != Direction.OUT) {
-						if (!suspended)
-							new Thread(() -> interpreter.runCycle(), "Interpreter RTC Step").start();
+						if (!suspended) {
+							interpreterThread = createInterpreterThread();
+							interpreterThread.start();
+						}
 						else {
 							cycleAfterResume = true;
 						}
@@ -126,6 +130,10 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 				}
 			}
 
+		}
+		
+		private Thread createInterpreterThread() {
+			return new Thread(() -> interpreter.runCycle(), "Interpreter RTC Step");
 		}
 
 		@Override
@@ -139,9 +147,16 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 		public void resume() {
 			suspended = false;
-			if (cycleAfterResume)
-				interpreter.runCycle();
+			if (cycleAfterResume) {
+				interpreterThread = createInterpreterThread();
+				interpreterThread.start();
+			}
 			cycleAfterResume = false;
+		}
+		
+		public void terminate() {
+			if (interpreterThread != null)
+				interpreterThread.interrupt();
 		}
 	}
 

@@ -197,6 +197,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 
 				traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 			} while (event !== null)
+		} catch (InterruptedException e) {
+			// can happen when run in own thread and got interrupted
 		} finally {
 			isRunning = false;
 
