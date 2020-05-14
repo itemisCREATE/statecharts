@@ -116,7 +116,6 @@ plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.550.v20170928-1359
 -XX:PermSize=256m
 -XX:+UseParallelGC
 -Xmx3G
--XX:MaxPermSize=256m
 
 bq. *Please note*: Do _not_ attempt to replace all of the contents of your _SCT.ini_ file with the lines above! The specified version numbers have to match your installation, and if you change them, SCT will not be able to start anymore.
 

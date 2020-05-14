@@ -16,7 +16,7 @@ Please consult the gtest documentation for installation and build instructions (
 
 Running the tests:
 
-The C tests are wrapped by Junit tests. Simply run these as Junit-Plugin tests and make sure that the PermGenSpace is big enough ( -XX:MaxPermSize=256m ).
+The C tests are wrapped by Junit tests. Simply run these as Junit-Plugin tests.
 
 Running as plugin tests is necessary since several resources required for the test are loaded from the plugin bundle.
 
