@@ -11,7 +11,14 @@
 package org.yakindu.sct.generator.genmodel.test;
 
 import static org.junit.Assert.fail;
-import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.*;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DEPRECATED;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_FEATURE;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_PARAMETER;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.EMPTY_SGEN;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_FEATURE;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_PARAMETER;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKNOWN_CONTENT_TYPE;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKOWN_GENERATOR;
 
 import java.lang.reflect.Method;
 
@@ -20,10 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.validation.Check;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
@@ -38,8 +42,6 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -49,77 +51,11 @@ import com.google.inject.Injector;
 @InjectWith(SGenInjectorProvider.class)
 public class SGenJavaValidatorTest extends AbstractSGenTest {
 	
-	@Inject
-	private SGenJavaValidator validator;
-	@Inject
-	private Injector injector;
-	
-	private ValidatorTester<SGenJavaValidator> tester;
-	
-	@Before
-	public void setup() {
-		tester = new ValidatorTester<>(validator, injector);
-	}
-	
-	@After
-	public void teardown() {
-		tester = null;
-	}
-	
 	@Test
-	public void checkOutEventAPIhasOneParameterSet() {
-		EObject model = null;
-		AssertableDiagnostics result = null;
-		
-		String start = "GeneratorModel for yakindu::c { statechart Example {";
-		
-		model = parseExpression(
-				start + "feature OutEventAPI {observables = false}}}",
-				GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertAny(new MsgPredicate(String.format(REQUIRED_TRUE_PARAMETER, "OutEventAPI")));
-		
-		model = parseExpression(
-				start + "feature OutEventAPI {observables = false getters = false}}}",
-				GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertAny(new MsgPredicate(String.format(REQUIRED_TRUE_PARAMETER, "OutEventAPI")));		
-		
-		model = parseExpression(
-				start + " feature OutEventAPI {observables = true}}}",
-				GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		
-		model = parseExpression(
-				start + "feature OutEventAPI {observables = true getters = true}}}",
-				GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		
-		model = parseExpression(
-				start + "feature OutEventAPI {observables = true getters = false}}}",
-				GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		
-		model = parseExpression(
-				start + "feature OutEventAPI {observables = false getters = true}}}",
-				GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		
-		model = parseExpression(
-				start + "feature OutEventAPI {getters = true}}}",
-				GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		
-		model = parseExpression(
-		start + "feature OutEventAPI {getters = false}}}",
-		GeneratorModel.class.getSimpleName());
-		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
+	public void checkFeatureConfiguration() {
+		// generator specific tests
+		// - CSGenJavaValidatorTest
+		// - ...
 	}
 	
 	/**

@@ -81,7 +81,6 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
 	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates: %s";
-	public static final String REQUIRED_TRUE_PARAMETER = "'%s' must at least define one parameter as 'true'.";
 
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature"; 
 	public static final String CODE_REQUIRED_DOMAIN = "code_req_domain";
@@ -101,28 +100,6 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 	@Inject 
 	protected PathHelper pathHelper; 
 
-	@Check
-	public void checkOutEventAPIhasOneParameterSet(FeatureConfiguration configuration) {
-		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(configuration, GeneratorModel.class);
-		if (!"yakindu::c".equals(generatorModel.getGeneratorId())) {
-			return;
-		}
-		String outEventAPI = configuration.getType().getName();
-		if (!"OutEventAPI".equals(outEventAPI)) {
-			return;
-		}
-		FeatureParameterValue observablesValue = configuration.getParameterValue("observables");
-		if (observablesValue == null || observablesValue.getBooleanValue()) {
-			return; // default is true
-		}
-		Iterable<FeatureParameterValue> trueValues = Iterables.filter(configuration.getParameterValues(),
-				p -> p.getBooleanValue());
-		if (trueValues.iterator().hasNext()) {
-			return;
-		}
-		error(String.format(REQUIRED_TRUE_PARAMETER, outEventAPI), SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
-	}
-	
 	@Check
 	public void checkInitialValue(Property property) {
 		if (property.getType() == null || property.getType().eIsProxy())
@@ -336,6 +313,24 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 				warning += value.getParameter().getComment();
 			}
 			warning(warning, value, null);
+		}
+	}
+	
+	@Check
+	public void checkFeatureConfiguration(FeatureConfiguration configuration) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(configuration);
+
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
+		IDefaultFeatureValueProvider provider = LibraryExtensions.getDefaultFeatureValueProvider(
+				generatorDescriptor.get().getLibraryIDs(), configuration.getType().getLibrary());
+		injector.injectMembers(provider);
+		IStatus status = provider.validateConfiguration(configuration);
+		if (status.getSeverity() == IStatus.ERROR) {
+			super.error(status.getMessage(), SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
 		}
 	}
 
