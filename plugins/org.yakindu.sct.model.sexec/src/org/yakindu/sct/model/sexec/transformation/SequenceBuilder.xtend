@@ -41,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 class SequenceBuilder {
 
@@ -49,7 +50,8 @@ class SequenceBuilder {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension TraceExtensions trace
 
-	@Inject extension ITypeValueProvider 
+	@Inject extension ITypeValueProvider
+	@Inject extension StatechartUtil
 
 	@Inject(optional=true)
 	@Named(IModelSequencer.ADD_TRACES)
@@ -499,6 +501,8 @@ class SequenceBuilder {
 	def effectiveInitialValue(VariableDefinition vd) {
 		if (vd.initialValue !== null) {
 			return vd.initialValue
+		} else if (vd.type.isOriginStatechart) {
+			return buildValue(null)
 		} else {
 			return vd.type?.defaultValue?.buildValue
 		}
@@ -610,6 +614,13 @@ class SequenceBuilder {
 		lit.value = i
 		pve.value = lit
 
+		pve
+	}
+	
+	def dispatch Expression buildValue(Void v) {
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		pve.value = factory.createNullLiteral
+		
 		pve
 	}
 	
