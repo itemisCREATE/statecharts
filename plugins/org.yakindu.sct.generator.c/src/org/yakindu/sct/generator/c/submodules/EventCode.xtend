@@ -90,26 +90,37 @@ class EventCode {
 			val fc = event as FeatureCall
 			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.getHandle»«IF value !== null», «exp.code(value)»«ENDIF»)'''
 		}
-		if(useOutEventObservables) {
-			return'''
-			«IF value !== null»
-				{
-					«event.definition.event.valueDeclaration» = «exp.code(value)»;
-					SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», &«event.definition.event.valueName»);
-				}
-				«ELSE»
-				SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», sc_null)«ENDIF»'''
-		}
 		
-		val eventMarker = '''«event.definition.event.access» = «TRUE_LITERAL»'''
-		val eventValue  = if (it.value !== null) '''«event.definition.event.valueAccess» = «exp.code(value)»''' else null
-		val eventTrace  = event.definition.traceCode(if (it.value !== null) '''&«event.definition.event.valueAccess»''' else '''sc_null''')
-
-		return '''
-			«eventMarker»«IF eventValue !== null»;
-			«eventValue»«ENDIF»«IF eventTrace !== null»;
-			«eventTrace»«ENDIF»'''
+		'''
+			«IF useOutEventObservables»
+				«IF value !== null»
+					{
+						«event.definition.event.valueDeclaration» = «exp.code(value)»;
+						SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», &«event.definition.event.valueName»);
+					}
+				«ELSE»
+					SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», sc_null)«IF useOutEventGetters»;«ENDIF»
+				«ENDIF»
+			«ENDIF»
+			«IF useOutEventGetters»
+				«eventMarker»«IF eventValue(exp) !== null»;
+				«eventValue(exp)»«ENDIF»«IF eventTrace !== null»;
+				«eventTrace»«ENDIF»
+			«ENDIF»
+		'''
 	}
+	
+	protected def CharSequence eventTrace(EventRaisingExpression it) {
+		event.definition.traceCode(if (it.value !== null) '''&«event.definition.event.valueAccess»''' else '''sc_null''')
+	}
+	
+	protected def String eventValue(EventRaisingExpression it, ExpressionsGenerator exp) {
+		if (it.value !== null) '''«event.definition.event.valueAccess» = «exp.code(value)»''' else null
+	}
+	
+	protected def CharSequence eventMarker(EventRaisingExpression it)
+		'''«event.definition.event.access» = «TRUE_LITERAL»'''
+	
 	
 	def eventRaiserSignature(ExecutionFlow it, EventDefinition event) '''void «event.asRaiser»(«scHandleDecl»«event.valueParams»)'''
 	

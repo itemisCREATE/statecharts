@@ -11,7 +11,9 @@
 package org.yakindu.sct.generator.core.library;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.Check;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
@@ -28,6 +30,10 @@ public interface IDefaultFeatureValueProvider {
 			FeatureType type, EObject contextElement);
 	
 	public IStatus validateParameterValue(FeatureParameterValue value);
+	
+	public default IStatus validateConfiguration(FeatureConfiguration configuration) {
+		return Status.OK_STATUS;
+	}
 
 	public boolean isProviderFor(FeatureTypeLibrary library);
 	

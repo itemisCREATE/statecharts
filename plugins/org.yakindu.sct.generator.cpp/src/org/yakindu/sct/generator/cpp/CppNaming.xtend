@@ -126,6 +126,11 @@ class CppNaming extends Naming {
 		YSC_NAMESPACE
 	}
 	
+	override dispatch scopeTypeDeclMember(EventDefinition it) '''
+		«BOOL_TYPE» «eventRaisedFlag»;
+		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
+	'''
+	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''

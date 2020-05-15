@@ -27,10 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.validation.Check;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
@@ -45,8 +42,6 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -56,21 +51,11 @@ import com.google.inject.Injector;
 @InjectWith(SGenInjectorProvider.class)
 public class SGenJavaValidatorTest extends AbstractSGenTest {
 	
-	@Inject
-	private SGenJavaValidator validator;
-	@Inject
-	private Injector injector;
-	
-	private ValidatorTester<SGenJavaValidator> tester;
-	
-	@Before
-	public void setup() {
-		tester = new ValidatorTester<>(validator, injector);
-	}
-	
-	@After
-	public void teardown() {
-		tester = null;
+	@Test
+	public void checkFeatureConfiguration() {
+		// generator specific tests
+		// - CSGenJavaValidatorTest
+		// - ...
 	}
 	
 	/**

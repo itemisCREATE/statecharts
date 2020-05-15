@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.c.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.yakindu.sct.generator.c.test.sgen.CSGenJavaValidatorTest;
 
 /**
  * Suite of all test suites that are relevant for the C code generator. These are the generic cross target language tests
@@ -21,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author terfloth
  */
 @RunWith(Suite.class)
-@SuiteClasses({AllTests.class, AllCSpecificTests.class})
+@SuiteClasses({AllTests.class, AllCSpecificTests.class, CSGenJavaValidatorTest.class})
 public class AllCTests {
 
 }

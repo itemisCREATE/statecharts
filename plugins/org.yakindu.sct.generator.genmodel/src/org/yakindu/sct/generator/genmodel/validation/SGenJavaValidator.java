@@ -315,6 +315,24 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 			warning(warning, value, null);
 		}
 	}
+	
+	@Check
+	public void checkFeatureConfiguration(FeatureConfiguration configuration) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(configuration);
+
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
+		IDefaultFeatureValueProvider provider = LibraryExtensions.getDefaultFeatureValueProvider(
+				generatorDescriptor.get().getLibraryIDs(), configuration.getType().getLibrary());
+		injector.injectMembers(provider);
+		IStatus status = provider.validateConfiguration(configuration);
+		if (status.getSeverity() == IStatus.ERROR) {
+			super.error(status.getMessage(), SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
+		}
+	}
 
 	@Check
 	public void checkDeprecatedFeatures(FeatureConfiguration configuration) {

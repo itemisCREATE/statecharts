@@ -18,5 +18,10 @@ GeneratorModel for yakindu::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 		}
+		
+		feature OutEventAPI {
+			observables = false
+			getters = true
+		}
 	}
 }

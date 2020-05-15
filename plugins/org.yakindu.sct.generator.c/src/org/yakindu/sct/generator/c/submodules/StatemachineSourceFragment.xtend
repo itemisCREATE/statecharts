@@ -125,7 +125,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 		
 		«clearInEventsFunction»
 		
-		«IF !useOutEventObservables»
+		«IF needsClearOutEventsFunction»
 			«clearOutEventsFunction»
 			
 		«ENDIF»

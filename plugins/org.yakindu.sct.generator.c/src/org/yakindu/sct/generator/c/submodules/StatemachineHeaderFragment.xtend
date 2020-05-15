@@ -197,18 +197,21 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		«IF direction == Direction::IN»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern «eventRaiserSignature(flow, it)»;
-		«ELSEIF useOutEventObservables»
-			/*! Returns the observable for the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-			extern «eventObservableSignature(flow, it)»;
-			
 		«ELSE»
-			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
-			extern «eventGetterSignature(flow, it)»;
-			
-			«IF hasValue»
-				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-				extern «eventValueGetterSignature(flow, it)»;
+			«IF useOutEventObservables»
+				/*! Returns the observable for the out event '«name»' that is defined in the «scope.scopeDescription». */ 
+				extern «eventObservableSignature(flow, it)»;
 				
+			«ENDIF»
+			«IF useOutEventGetters»
+				/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
+				extern «eventGetterSignature(flow, it)»;
+				
+				«IF hasValue»
+					/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
+					extern «eventValueGetterSignature(flow, it)»;
+					
+				«ENDIF»
 			«ENDIF»
 		«ENDIF»
 	'''

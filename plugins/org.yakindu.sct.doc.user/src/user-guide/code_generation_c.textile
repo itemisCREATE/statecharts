@@ -642,5 +642,27 @@ bc. feature Includes {
 
 ==<!-- End sgen_feature_includes -->==
 
+==<!-- Start sgen_feature_outeventapi -->==
+
+h4(#codegen_generating_code_outeventapi_feature). OutEventAPI feature
+
+The *OutEventAPI* feature enables different generator features, which are used for out events:
+
+* _observables_ (Boolean, optional): uses observables for out events. Default true.
+* _getters_ (Boolean, optional): uses getters for out events. Follows the API of SCT 3.x. Default false.
+
+==<div class="example">==
+
+Example:
+
+bc. feature OutEventAPI {
+    observables = true
+    getters = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_outeventapi -->==
+
 
 

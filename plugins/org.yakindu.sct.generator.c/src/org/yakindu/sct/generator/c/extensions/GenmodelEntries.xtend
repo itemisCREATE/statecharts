@@ -113,6 +113,10 @@ class GenmodelEntries {
 		getFeatureConfiguration(ICFeatureConstants::FEATURE_GENERATOR_OPTIONS)
 	}
 	
+	def private getOutEventAPIFeature(GeneratorEntry it) {
+		getFeatureConfiguration(ICFeatureConstants::FEATURE_OUT_EVENT_API)
+	}
+	
 	def getInEventQueueUsed(GeneratorEntry it) {
 		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_IN_EVENT_QUEUE)
 		if(parameter !== null) {
@@ -132,11 +136,19 @@ class GenmodelEntries {
 	}
 	
 	def getOutEventObservablesUsed(GeneratorEntry it) {
-		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_OUT_EVENT_OBSERVABLES)
+		val parameter = getOutEventAPIFeature?.getParameterValue(ICFeatureConstants::PARAMETER_OUT_EVENT_OBSERVABLES)
 		if(parameter !== null) {
-			parameter.booleanValue
-		} else {
-			false
+			return parameter.booleanValue
 		}
+		true
 	}
+	
+	def getOutEventGettersUsed(GeneratorEntry it) {
+		val parameter = getOutEventAPIFeature?.getParameterValue(ICFeatureConstants::PARAMETER_OUT_EVENT_GETTERS)
+		if(parameter !== null) {
+			return parameter.booleanValue
+		}
+		false
+	}
+	
 }

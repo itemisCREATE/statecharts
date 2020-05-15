@@ -17,14 +17,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.junit.After;
+import org.junit.Before;
+import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
@@ -34,6 +39,23 @@ import com.google.inject.Provider;
  */
 public abstract class AbstractSGenTest {
 
+	@Inject
+	protected SGenJavaValidator validator;
+	@Inject
+	protected Injector injector;
+	
+	protected ValidatorTester<SGenJavaValidator> tester;
+	
+	@Before
+	public void setup() {
+		tester = new ValidatorTester<>(validator, injector);
+	}
+	
+	@After
+	public void teardown() {
+		tester = null;
+	}
+	
 	@Inject
 	private IParser parser;
 	@Inject
