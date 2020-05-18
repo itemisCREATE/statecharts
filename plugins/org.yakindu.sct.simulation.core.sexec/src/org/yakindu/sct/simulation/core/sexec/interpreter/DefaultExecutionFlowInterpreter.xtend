@@ -197,8 +197,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 
 				traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 			} while (event !== null)
-		} catch (InterruptedException e) {
-			// can happen when run in own thread and got interrupted
 		} finally {
 			isRunning = false;
 
@@ -212,9 +210,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		do {
 			stateVectorChanged = false
 			microStep.apply
-			// give the highlighter a chance to do its work
-			Thread.sleep(70)
-		} while (stateVectorChanged)
+		} while (stateVectorChanged && !Thread.currentThread.isInterrupted)
 	}
 
 	def rtcStep() {
