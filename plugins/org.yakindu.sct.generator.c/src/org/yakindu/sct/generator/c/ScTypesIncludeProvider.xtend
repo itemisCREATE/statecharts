@@ -14,15 +14,17 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import java.util.List
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class ScTypesIncludeProvider implements IncludeProvider {
 	
 	@Inject protected extension Naming cNaming
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension SExecExtensions
 	
 	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		val List<CharSequence> scIncludes = newArrayList('''#include "«(typesModule.h).relativeTo(module.h)»"''')
-		if(useOutEventObservables) {
+		if(useOutEventObservables && hasOutgoingEvents) {
 			scIncludes.add('''#include "«(rxcModule.h).relativeTo(module.h)»"''')
 		}
 		return scIncludes
