@@ -28,6 +28,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.base.types.Direction
 
 /**
  * @author rbeckmann
@@ -90,19 +91,19 @@ class EventCode {
 			val fc = event as FeatureCall
 			return '''«(fc.feature as EventDefinition).asRaiser»(«fc.owner.getHandle»«IF value !== null», «exp.code(value)»«ENDIF»)'''
 		}
-		
+		val eventDefintion = event.definition.event
 		'''
-			«IF useOutEventObservables»
+			«IF useOutEventObservables && event.definition.event.direction === Direction.OUT»
 				«IF value !== null»
 					{
 						«event.definition.event.valueDeclaration» = «exp.code(value)»;
-						SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», &«event.definition.event.valueName»);
+						SC_OBSERVABLE_NEXT(&«eventDefintion.accessObservable», &«eventDefintion.valueName»);
 					}
 				«ELSE»
-					SC_OBSERVABLE_NEXT(&«event.definition.event.accessObservable», sc_null)«IF useOutEventGetters»;«ENDIF»
+					SC_OBSERVABLE_NEXT(&«eventDefintion.accessObservable», sc_null)«IF useOutEventGetters»;«ENDIF»
 				«ENDIF»
 			«ENDIF»
-			«IF useOutEventGetters»
+			«IF (useOutEventGetters && eventDefintion.direction == Direction.OUT) || eventDefintion.direction == Direction.IN || eventDefintion.direction == Direction.LOCAL»
 				«eventMarker»«IF eventValue(exp) !== null»;
 				«eventValue(exp)»«ENDIF»«IF eventTrace !== null»;
 				«eventTrace»«ENDIF»
