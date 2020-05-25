@@ -75,7 +75,7 @@ class CGenerator implements IExecutionFlowGenerator {
 		if(entry.tracingGeneric) {
 			locations.configure(flow.tracingModule.h, entry.libraryOutput, tracing, getSkipLibraryFiles(entry))
 		}
-		if(entry.outEventObservablesUsed) {
+		if(entry.outEventObservablesUsed && hasOutgoingEvents) {
 			locations.configure(flow.rxcModule.h, entry.libraryOutput, rxc, getSkipLibraryFiles(entry))
 		}
 	}
