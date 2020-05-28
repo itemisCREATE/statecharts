@@ -11,7 +11,6 @@
 package org.yakindu.sct.generator.cpp.submodules.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Declaration
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.submodules.EventCode
@@ -30,30 +29,36 @@ class EventDrivenEventCode extends EventCode {
 	override generateEvents(ExecutionFlow it, StatechartScope scope)
 		'''
 			«FOR event : scope.incomingEvents»
-				«event.generateEvent»
+				«generateEvent(event, scope)»
 			«ENDFOR»
 			«FOR event : scope.outgoingEvents»
-				«event.generateEvent»
+				«generateEvent(event, scope)»
 			«ENDFOR»
 			«FOR event : scope.localEvents»
-				«event.generateEvent»
+				«generateEvent(event, scope)»
 			«ENDFOR»
 		'''
 	
-	def generateEvent(EventDefinition it)
+	def generateEvent(ExecutionFlow it, EventDefinition event, StatechartScope scope)
 		'''
-			«it.generateEventComment(statechartScope)»
-			«IF it.needsRaiser»
-				«generateInterfaceEventRaiser(flow, it, statechartScope)»
-				«IF it.isQueued»«generateInternalInterfaceEventRaiser(flow, it, statechartScope)»«ENDIF»
-				«IF statechartScope.defaultInterface»«generateDefaultInterfaceEventRaiser(flow, it, statechartScope)»«ENDIF»
+			«event.generateEventComment(scope)»
+			«IF event.needsRaiser»
+				«generateInterfaceEventRaiser(event, scope)»
+				«IF event.isQueued»«generateInternalInterfaceEventRaiser(event, scope)»«ENDIF»
+				«IF scope.defaultInterface»«generateDefaultInterfaceEventRaiser(event, scope)»«ENDIF»
 			«ENDIF»
-			«IF it.needsRaised»
-				«generateInterfaceEventRaised(flow, it, statechartScope)»
-				«IF statechartScope.defaultInterface»«generateDefaultInterfaceEventRaised(flow, it, statechartScope)»«ENDIF»
-				«IF it.hasValue»
-					«generateEventValueGetter(flow, it, statechartScope)»
-					«IF statechartScope.defaultInterface»«generateEventGetter(flow, it, statechartScope)»«ENDIF»
+			«IF event.needsRaised»
+				«generateInterfaceEventRaised(flow, event, scope)»
+				«IF scope.defaultInterface»«generateDefaultInterfaceEventRaised(event, scope)»«ENDIF»
+				«IF event.hasValue»
+					«generateEventValueGetter(event, scope)»
+					«IF scope.defaultInterface»«generateEventGetter(event, scope)»«ENDIF»
+				«ENDIF»
+			«ENDIF»
+			«IF event.needsObservable»
+				«generateObservableGetter(event, scope)»
+				«IF scope.defaultInterface»
+					«generateDefaultInterfaceObservableGetter(event, scope)»
 				«ENDIF»
 			«ENDIF»
 		'''
@@ -106,10 +111,6 @@ class EventDrivenEventCode extends EventCode {
 	override CharSequence generateEventComment(EventDefinition it, StatechartScope scope)
 		'''/* Functions for event «name» in interface «scope.interfaceName» */'''
 		
-	def statechartScope(Declaration it) {
-		if (it.scope instanceof StatechartScope) it.scope as StatechartScope
-		else null
-	}
 	
 	def queue(EventDefinition it) {
 		return 

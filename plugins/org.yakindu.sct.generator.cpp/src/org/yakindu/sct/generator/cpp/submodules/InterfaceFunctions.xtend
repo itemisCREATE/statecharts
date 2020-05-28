@@ -29,6 +29,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 class InterfaceFunctions {
 	@Inject protected extension CppNaming
@@ -37,6 +38,7 @@ class InterfaceFunctions {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
+	@Inject protected extension GeneratorPredicate
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -110,7 +112,6 @@ class InterfaceFunctions {
 
 	def createPublicScope(InterfaceScope scope) '''
 		«scope.createInterface(new ClassDeclaration).generate»
-		«««		«scope.createListenerInterface(entry)»
 		«scope.createOCBInterface»
 		
 		/*! Returns an instance of the interface class '«scope.interfaceName»'. */
@@ -203,6 +204,11 @@ class InterfaceFunctions {
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
 				«typeSpecifier.targetLanguageName» «asGetter»() const;
+				
+			«ENDIF»
+			«IF needsObservable»
+				/*! Gets the observable of the out event '«name»' that is defined in the «scope.scopeDescription». */
+				sc::rx::Observable<«typeSpecifier.targetLanguageName»>* «asObservableGetter»();
 				
 			«ENDIF»
 		«ENDIF»

@@ -18,6 +18,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author René Beckmann
@@ -26,6 +27,7 @@ class EventCode {
 	@Inject protected extension org.yakindu.sct.generator.cpp.CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension GeneratorPredicate
 	
 	def generateEvents(ExecutionFlow it, StatechartScope scope)
 		'''
@@ -48,6 +50,12 @@ class EventCode {
 					«generateEventGetter(it, event, scope)»
 				«ENDIF»
 			«ENDIF»
+			«IF useOutEventObservables»
+				«generateObservableGetter(it, event, scope)»
+				«IF scope.defaultInterface»
+					«generateDefaultInterfaceObservableGetter(it, event, scope)»
+				«ENDIF»
+			«ENDIF»
 		«ENDFOR»
 		«FOR event : scope.localEvents»
 			«generateEventComment(event, scope)»
@@ -58,6 +66,24 @@ class EventCode {
 			«ENDIF»
 		«ENDFOR»
 	'''
+		
+	def protected generateObservableGetter(ExecutionFlow it, EventDefinition event, StatechartScope scope) {
+		'''
+			sc::rx::Observable<«event.typeSpecifier.targetLanguageName»>* «module»::«scope.interfaceName»::«event.asObservableGetter»()
+			{
+				return &(this->«event.observable»);
+			}
+		'''
+	}
+	
+	def protected generateDefaultInterfaceObservableGetter(ExecutionFlow it, EventDefinition event, StatechartScope scope) {
+		'''
+			sc::rx::Observable<«event.typeSpecifier.targetLanguageName»>* «module»::«event.asObservableGetter»()
+			{
+				return «scope.instance».«event.asObservableGetter»();
+			}
+		'''		
+	}
 		
 	protected def CharSequence generateEventGetter(ExecutionFlow it, EventDefinition event, StatechartScope scope)
 		'''
@@ -119,5 +145,5 @@ class EventCode {
 		'''/* Functions for event «name» in interface «scope.interfaceName» */'''
 		
 	def needsRaiser(EventDefinition it) { it.isInEvent || it.isLocalEvent }
-	def needsRaised(EventDefinition it) { it.isLocalEvent || it.isOutEvent }
+	def needsRaised(EventDefinition it) { it.isLocalEvent || it.isOutEvent } // && getter feature?
 }

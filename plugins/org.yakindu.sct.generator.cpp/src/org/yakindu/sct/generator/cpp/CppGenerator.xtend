@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
+import org.yakindu.sct.generator.cpp.files.RxCppHeader
 
 /**
  * This is the CPP code generators main class. 
@@ -46,11 +47,11 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
 	@Inject extension Tracing tracingContent
+	@Inject extension RxCppHeader rxcpp
 	@Inject extension SExecExtensions
 	@Inject extension CppNaming
 	@Inject extension ICoreLibraryHelper
 	@Inject extension GenmodelEntries
-
 	@Inject
 	IGenArtifactConfigurations locations
 
@@ -84,6 +85,9 @@ class CppGenerator implements IExecutionFlowGenerator {
 		
 		if (entry.tracingUsed) {
 			locations.configure(scTracing.h, entry.libraryOutput, tracingContent);
+		}
+		if(entry.outEventObservablesUsed && flow.hasOutgoingEvents) {
+			locations.configure(flow.rxcModule.h, entry.libraryOutput, rxcpp, getSkipLibraryFiles(entry))
 		}
 	}
 
