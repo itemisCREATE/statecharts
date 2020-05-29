@@ -27,6 +27,8 @@ public interface IHighlightingSupport {
 	boolean isLocked();
 
 	void releaseEditor();
+	
+	void releaseAndLockEditor();
 
 	void highlight(List<? extends EObject> semanticElement, HighlightingParameters parameters);
 
@@ -90,6 +92,10 @@ public interface IHighlightingSupport {
 
 		@Override
 		public void releaseEditor() {
+		}
+
+		@Override
+		public void releaseAndLockEditor() {
 		}
 
 		@Override

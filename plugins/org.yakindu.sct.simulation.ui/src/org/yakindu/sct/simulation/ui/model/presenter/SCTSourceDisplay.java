@@ -138,9 +138,10 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener,
 				notationHandler.setHighlightingSupport(support);
 			}
 			if (support.isLocked()) {
-				support.releaseEditor();
+				support.releaseAndLockEditor();
+			} else {
+				support.lockEditor();
 			}
-			support.lockEditor();
 			handler.put(editorPart.getEditorInput(), notationHandler);
 		}
 		return notationHandler;

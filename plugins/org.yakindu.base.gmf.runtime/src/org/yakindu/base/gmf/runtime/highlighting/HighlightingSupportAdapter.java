@@ -216,6 +216,21 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		object2editPart.clear();
 		locked = false;
 	}
+	
+	public synchronized void releaseAndLockEditor() {
+		if (!locked) {
+			throw new IllegalStateException("Editor not locked!");
+		}
+		List<Action> singletonList = new ArrayList<>();
+		singletonList.add(new Action() {
+			@Override
+			public void execute(IHighlightingSupport hs) {
+				releaseInternal();
+				lockEditorInternal();
+			}
+		});
+		executeAsync(singletonList);
+	}
 
 	public void highlight(List<? extends EObject> semanticElements, HighlightingParameters parameters) {
 		synchronized (semanticElements) {
