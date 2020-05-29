@@ -3,7 +3,7 @@
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.itemis.xtext.antlr.feature.feature.group" version="2.1.1.v201405091103"/>
 <unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>
-<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
+<repository location="https://download.itemis.com/updates/releases/2.1.1/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="com.google.gson" version="2.2.4.v201311231704"/>
@@ -12,16 +12,16 @@
 <unit id="com.google.inject.multibindings.source" version="3.0.0.v201402270930"/>
 <unit id="com.google.inject.source" version="3.0.0.v201312141243"/>
 <unit id="org.apache.commons.io" version="2.2.0.v201405211200"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
+<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.feature.group" version="4.5.0.201609210915-r"/>
-<repository location="http://download.eclipse.org/egit/updates-4.5/"/>
+<repository location="https://download.eclipse.org/egit/updates-4.5/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.pde.source.feature.group" version="3.13.2.v20171130-0510"/>
 <unit id="org.eclipse.platform.sdk" version="4.7.2.M20171130-0510"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.7"/>
+<repository location="https://download.eclipse.org/eclipse/updates/4.7"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.cdt.sdk.feature.group" version="9.4.3.201802261533"/>
@@ -36,7 +36,7 @@
 <unit id="org.eclipse.recommenders.news.rcp.feature.feature.group" version="2.5.1.v20180228-0833"/>
 <unit id="org.eclipse.uml2.sdk.feature.group" version="5.3.0.v20170605-1616"/>
 <unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
-<repository location="http://download.eclipse.org/releases/oxygen/"/>
+<repository location="https://download.eclipse.org/releases/oxygen/"/>
 </location>
 </locations>
 </target>
