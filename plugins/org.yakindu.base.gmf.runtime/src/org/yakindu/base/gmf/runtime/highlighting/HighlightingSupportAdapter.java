@@ -158,12 +158,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			throw new IllegalStateException("Editor already locked!");
 		}
 		List<Action> singletonList = new ArrayList<>();
-		singletonList.add(new Action() {
-			@Override
-			public void execute(IHighlightingSupport hs) {
-				lockEditorInternal();
-			}
-		});
+		singletonList.add((support) -> lockEditorInternal());
 		executeAsync(singletonList);
 	}
 
@@ -195,12 +190,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			throw new IllegalStateException("Editor not locked!");
 		}
 		List<Action> singletonList = new ArrayList<>();
-		singletonList.add(new Action() {
-			@Override
-			public void execute(IHighlightingSupport hs) {
-				releaseInternal();
-			}
-		});
+		singletonList.add((support) -> releaseInternal());
 		executeAsync(singletonList);
 	}
 
@@ -222,12 +212,9 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			throw new IllegalStateException("Editor not locked!");
 		}
 		List<Action> singletonList = new ArrayList<>();
-		singletonList.add(new Action() {
-			@Override
-			public void execute(IHighlightingSupport hs) {
+		singletonList.add((support) -> {
 				releaseInternal();
 				lockEditorInternal();
-			}
 		});
 		executeAsync(singletonList);
 	}
