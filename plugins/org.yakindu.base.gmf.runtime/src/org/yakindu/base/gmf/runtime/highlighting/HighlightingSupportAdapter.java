@@ -158,12 +158,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			throw new IllegalStateException("Editor already locked!");
 		}
 		List<Action> singletonList = new ArrayList<>();
-		singletonList.add(new Action() {
-			@Override
-			public void execute(IHighlightingSupport hs) {
-				lockEditorInternal();
-			}
-		});
+		singletonList.add((support) -> lockEditorInternal());
 		executeAsync(singletonList);
 	}
 
@@ -195,16 +190,11 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			throw new IllegalStateException("Editor not locked!");
 		}
 		List<Action> singletonList = new ArrayList<>();
-		singletonList.add(new Action() {
-			@Override
-			public void execute(IHighlightingSupport hs) {
-				releaseInternal();
-			}
-		});
+		singletonList.add((support) -> releaseEditorInternal());
 		executeAsync(singletonList);
 	}
 
-	protected void releaseInternal() {
+	protected void releaseEditorInternal() {
 		// restore all elements still being highlighted
 		for (ColorMemento figureState : figureStates.values()) {
 			figureState.restore();
@@ -215,6 +205,18 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		setSanityCheckEnablementState(true);
 		object2editPart.clear();
 		locked = false;
+	}
+	
+	public synchronized void releaseAndLockEditor() {
+		if (!locked) {
+			throw new IllegalStateException("Editor not locked!");
+		}
+		List<Action> singletonList = new ArrayList<>();
+		singletonList.add((support) -> {
+				releaseEditorInternal();
+				lockEditorInternal();
+		});
+		executeAsync(singletonList);
 	}
 
 	public void highlight(List<? extends EObject> semanticElements, HighlightingParameters parameters) {
