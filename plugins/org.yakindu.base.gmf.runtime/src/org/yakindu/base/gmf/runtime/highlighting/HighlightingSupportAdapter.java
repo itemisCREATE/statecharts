@@ -190,11 +190,11 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			throw new IllegalStateException("Editor not locked!");
 		}
 		List<Action> singletonList = new ArrayList<>();
-		singletonList.add((support) -> releaseInternal());
+		singletonList.add((support) -> releaseEditorInternal());
 		executeAsync(singletonList);
 	}
 
-	protected void releaseInternal() {
+	protected void releaseEditorInternal() {
 		// restore all elements still being highlighted
 		for (ColorMemento figureState : figureStates.values()) {
 			figureState.restore();
@@ -213,7 +213,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 		List<Action> singletonList = new ArrayList<>();
 		singletonList.add((support) -> {
-				releaseInternal();
+				releaseEditorInternal();
 				lockEditorInternal();
 		});
 		executeAsync(singletonList);
