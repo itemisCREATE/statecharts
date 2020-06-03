@@ -46,6 +46,7 @@ class EventDrivenInterfaceFunctions extends InterfaceFunctions {
 			}
 		}
 		toInit.add("parent(parent)")
+		shadowEvents.forEach[toInit.add('''«observer»(this)''')]
 		scopeDecl.publicMember(
 			'''
 			«interfaceName»(«execution_flow.module()» * parent):

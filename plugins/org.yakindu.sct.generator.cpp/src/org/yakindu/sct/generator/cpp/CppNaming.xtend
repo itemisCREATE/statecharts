@@ -250,6 +250,22 @@ class CppNaming extends Naming {
 	override asObservableGetter(Event it) {
 		'''get_«name.asIdentifier.toFirstLower»'''
 	}
+	
+	def asObserverGetter(Event it) {
+		'''get_«name.asIdentifier.toFirstLower»'''
+	}
+	
+	def interfaceMember() {
+		'''interface'''
+	}
+	
+	def observerClass(Event it) {
+		'''«name.toFirstUpper»Observer'''
+	}
+	
+	def observer(Event it) {
+		'''«name»_observer'''
+	}
 
 	override raiseTimeEventFctID(ExecutionFlow it) {
 		RAISE_TIME_EVENT

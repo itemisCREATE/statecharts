@@ -30,6 +30,10 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
+import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.base.types.Event
+import org.yakindu.sct.generator.cpp.CppObservables
 
 class InterfaceFunctions {
 	@Inject protected extension CppNaming
@@ -39,6 +43,9 @@ class InterfaceFunctions {
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension ShadowEventExtensions
+	@Inject protected extension CLiterals
+	@Inject protected extension CppObservables
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -89,19 +96,34 @@ class InterfaceFunctions {
 				«IF !variable.readonly && !variable.const»
 					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
 					{
+						«observerHandler(variable, "unsubscribe")»
 						this->«variable.localAccess» = value;
+						«observerHandler(variable, "subscribe")»
 					}
 					
 					«IF scope.defaultInterface»
 						void «module»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
 						{
-							«variable.access» = value;
+							«scope.instance».«variable.asSetter»(value);
 						}
 						
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 		'''
+		
+	
+	protected def CharSequence observerHandler(VariableDefinition variable, String subscription)
+		'''«IF variable.needsShadowEventMapping»
+		if(this->«variable.localAccess» != «NULL_LITERAL»)
+		{
+			«FOR e : variable.shadowEventsByScope.keySet.map[members].flatten.filter(Event)»
+				«val outEvent = variable.getShadowEvent(e)»
+				«IF outEvent !== null»parent->«outEvent.scope.instance».«variable.getShadowEvent(e).observer».«subscription»(value->«e.scope.getter»->«e.asObserverGetter»());«ENDIF»
+			«ENDFOR»
+		}
+		«ENDIF»'''
+	
 		
 	def createPublicScope(Scope scope) {
 		switch scope {
@@ -135,6 +157,8 @@ class InterfaceFunctions {
 		
 		scope.declarations.map[functionPrototypes].forEach[scopeDecl.publicMember(it)]
 		scopeDecl.member(entry.innerClassVisibility, protectedInnerClassMembers(scope))
+		scopeDecl.member(ClassDeclaration::PRIVATE, scope.shadowEvents.map[createObserverClass(new ClassDeclaration, scope).generate ].join())
+		scopeDecl.member(ClassDeclaration::PRIVATE, scope.shadowEvents.map[createObserver(scopeDecl)].join())
 	}
 	
 	def CharSequence protectedInnerClassMembers(StatechartScope scope)
