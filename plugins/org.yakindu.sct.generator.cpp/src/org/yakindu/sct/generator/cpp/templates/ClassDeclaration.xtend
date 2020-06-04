@@ -3,6 +3,11 @@ package org.yakindu.sct.generator.cpp.templates
 import java.util.List
 
 class ClassDeclaration {
+	
+	public static val PUBLIC = "public";
+	public static val PROTECTED = "protected"
+	public static val PRIVATE = "private";
+	
 	protected CharSequence name
 	protected CharSequence comment
 	
@@ -44,9 +49,9 @@ class ClassDeclaration {
 	
 	def ClassDeclaration member(CharSequence visibility, CharSequence member) {
 		switch(visibility) {
-			case "public": publicMembers
-			case "protected": protectedMembers
-			case "private": privateMembers
+			case PUBLIC: publicMembers
+			case PROTECTED: protectedMembers
+			case PRIVATE: privateMembers
 		}.add(member)
 		this
 	}

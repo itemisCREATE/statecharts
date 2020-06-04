@@ -38,4 +38,9 @@ public abstract class CppGeneratorConstants {
 	 * YSC NAMESPACE 
 	 */
 	public static final String YSC_NAMESPACE = "ysc";
+	
+	/*
+	 * FILES
+	 */
+	public static final String RXCPP_MODULE = "sc_rxcpp";
 }

@@ -67,7 +67,7 @@ class EventNaming extends org.yakindu.sct.generator.c.extensions.EventNaming {
 		"inEventQueue"
 	}
 	
-	def runCycleGuard() {
+	def getRunCycleGuard() {
 		"isRunningCycle"
 	}
 	

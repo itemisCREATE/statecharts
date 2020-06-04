@@ -36,6 +36,8 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 
 class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActive, Exit, IsFinal {
 	
@@ -48,6 +50,8 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
 	@Inject protected extension StatechartAnnotations
+	@Inject protected extension GeneratorPredicate
+	@Inject protected extension EventNaming
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -111,7 +115,13 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	override enter(ExecutionFlow it) '''
 		void «module»::«enterFctID»()
 		{
+			«IF needsRunCycleGuard»
+				«getRunCycleGuard» = true;
+			«ENDIF»
 			«enterSequences.defaultSequence.code»
+			«IF needsRunCycleGuard»
+				«getRunCycleGuard» = false;
+			«ENDIF»
 		}
 	'''
 	
@@ -183,7 +193,13 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	override exit(ExecutionFlow it) '''
 		void «module»::«exitFctID»()
 		{
+			«IF needsRunCycleGuard»
+				«getRunCycleGuard» = true;
+			«ENDIF»
 			«exitSequence.code»
+			«IF needsRunCycleGuard»
+				«getRunCycleGuard» = false;
+			«ENDIF»
 		}
 	'''
 	

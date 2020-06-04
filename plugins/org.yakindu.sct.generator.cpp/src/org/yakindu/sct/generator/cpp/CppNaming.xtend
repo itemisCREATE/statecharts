@@ -43,6 +43,7 @@ import org.yakindu.base.types.Enumerator
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -57,6 +58,7 @@ class CppNaming extends Naming {
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension StatechartUtil
 	@Inject protected extension OriginTracing
+	@Inject protected extension GeneratorPredicate
 	
 	@Inject GeneratorEntry entry
 
@@ -126,7 +128,14 @@ class CppNaming extends Naming {
 		YSC_NAMESPACE
 	}
 	
+	override rxcModule(ExecutionFlow it) {
+		RXCPP_MODULE
+	}
+	
 	override dispatch scopeTypeDeclMember(EventDefinition it) '''
+		«IF needsObservable»
+			sc::rx::Observable<«typeSpecifier.targetLanguageName»> «observable»;
+		«ENDIF»
 		«BOOL_TYPE» «eventRaisedFlag»;
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
 	'''
@@ -237,6 +246,26 @@ class CppNaming extends Naming {
 	override asSetter(Declaration it) {
 		'set_' + name.asIdentifier.toFirstLower
 	}
+	
+	override asObservableGetter(Event it) {
+		'''get_«name.asIdentifier.toFirstLower»'''
+	}
+	
+	def asObserverGetter(Event it) {
+		'''get_«name.asIdentifier.toFirstLower»'''
+	}
+	
+	def interfaceMember() {
+		'''interface'''
+	}
+	
+	def observerClass(Event it) {
+		'''«name.toFirstUpper»Observer'''
+	}
+	
+	def observer(Event it) {
+		'''«name»_observer'''
+	}
 
 	override raiseTimeEventFctID(ExecutionFlow it) {
 		RAISE_TIME_EVENT
@@ -297,6 +326,12 @@ class CppNaming extends Naming {
 		
 
 	override dispatch valueAccess(Declaration it) '''«scope.instance».«name.asIdentifier.value»'''
+	
+	def dispatch observableAccess(Declaration it) '''«scope.instance».«observable»'''
+	
+	def dispatch observableAccess(EObject it) '''Can not access object of type '«it.class.name»'.'''
+	
+	def observable(Declaration it) {it.name.asIdentifier + separator + 'observable'}
 
 	def dispatch localAccess(VariableDefinition it) '''«name.asEscapedIdentifier»'''
 

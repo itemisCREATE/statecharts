@@ -20,11 +20,12 @@ import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 class ShadowEventExtensions {
 
@@ -45,6 +46,10 @@ class ShadowEventExtensions {
 		var internalEvents = flow.scopes.filter(InternalScope).map[members].flatten.filter(Event)
 		// in events in internal scope => must be a shadow event
 		internalEvents.filter[direction == Direction.IN]
+	}
+	
+	def getShadowEvents(StatechartScope it) {
+		members.filter[scope.flow.shadowEvents.contains(it)].filter(Event)
 	}
 
 	def getShadowEventsByScope(VariableDefinition member) {

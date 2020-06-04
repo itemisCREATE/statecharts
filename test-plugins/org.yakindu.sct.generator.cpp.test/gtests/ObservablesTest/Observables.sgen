@@ -1,0 +1,21 @@
+GeneratorModel for yakindu::cpp {
+	statechart Observables {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ObservablesTest"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+	
+	
+}
