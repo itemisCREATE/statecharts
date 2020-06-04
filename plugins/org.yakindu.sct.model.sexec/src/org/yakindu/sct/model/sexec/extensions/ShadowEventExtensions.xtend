@@ -49,8 +49,8 @@ class ShadowEventExtensions {
 	}
 	
 	def getShadowEvents(StatechartScope it) {
-		members.filter[scope.flow.shadowEvents.contains(it)].filter(Event)
-	}
+		members.filter[scope.flow.shadowEvents.toList.contains(it)].filter(Event)
+	} 
 
 	def getShadowEventsByScope(VariableDefinition member) {
 		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
