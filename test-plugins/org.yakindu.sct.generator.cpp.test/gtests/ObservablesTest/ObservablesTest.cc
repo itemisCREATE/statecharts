@@ -33,7 +33,8 @@ protected:
 class IntAdder : public sc::rx::Observer<int>
 {
 public:
-	int sum = 0;
+	IntAdder():sum(0) {}
+	int sum;
 	virtual ~IntAdder() {}
 	virtual void next(int value)
 	{
@@ -44,7 +45,8 @@ public:
 class Counter : public sc::rx::Observer<void>
 {
 public:
-	int count = 0;
+	Counter():count(0) {}
+	int count;
 	virtual ~Counter() {}
 	virtual void next()
 	{
@@ -363,7 +365,8 @@ TEST_F(ObservableTest, testSingleSubsrciptionObserver) {
 
 	class Adder : public sc::rx::SingleSubscriptionObserver<int> {
 	public:
-		int sum = 0;
+		Adder():sum(0){}
+		int sum;
 		virtual void next(int i) {
 			sum += i;
 		}
