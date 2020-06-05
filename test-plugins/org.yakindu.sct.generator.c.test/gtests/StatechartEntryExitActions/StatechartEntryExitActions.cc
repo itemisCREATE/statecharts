@@ -15,7 +15,9 @@ class StatechartEntryExitActions : public ::testing::Test
 public:
 	/* All operations from the SCTUnit test class. */
 	void entryActionsAreExecutedOnEnteringStatechart();
-	void exitActionsAreExecutedOnEnteringStatechart();
+	void entryActionGuardsAreEvaluatedOnEnteringStatechart();
+	void exitActionsAreExecutedOnExitingStatechart();
+	void exitActionGuardsAreEvaluatedOnExitingStatechart();
 	void setTimer(StatechartEntryAndExitActions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(StatechartEntryAndExitActions* handle, const sc_eventid evid);
 protected:
@@ -50,11 +52,29 @@ void StatechartEntryExitActions::entryActionsAreExecutedOnEnteringStatechart()
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 5);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3);
 }
-void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechart()
+void StatechartEntryExitActions::entryActionGuardsAreEvaluatedOnEnteringStatechart()
+{
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 0);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 0);
+	statechartEntryAndExitActionsIface_set_b(&statechart,false);
+	statechartEntryAndExitActions_enter(&statechart);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 2);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3);
+}
+void StatechartEntryExitActions::exitActionsAreExecutedOnExitingStatechart()
 {
 	statechartEntryAndExitActions_enter(&statechart);
+	statechartEntryAndExitActionsIface_set_b(&statechart,true);
 	statechartEntryAndExitActions_exit(&statechart);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 6);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2);
+}
+void StatechartEntryExitActions::exitActionGuardsAreEvaluatedOnExitingStatechart()
+{
+	statechartEntryAndExitActions_enter(&statechart);
+	statechartEntryAndExitActionsIface_set_b(&statechart,false);
+	statechartEntryAndExitActions_exit(&statechart);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 8);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2);
 }
 
@@ -73,8 +93,14 @@ void StatechartEntryExitActions::unsetTimer(StatechartEntryAndExitActions* handl
 TEST_F(StatechartEntryExitActions, entryActionsAreExecutedOnEnteringStatechart) {
 	entryActionsAreExecutedOnEnteringStatechart();
 }
-TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechart) {
-	exitActionsAreExecutedOnEnteringStatechart();
+TEST_F(StatechartEntryExitActions, entryActionGuardsAreEvaluatedOnEnteringStatechart) {
+	entryActionGuardsAreEvaluatedOnEnteringStatechart();
+}
+TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnExitingStatechart) {
+	exitActionsAreExecutedOnExitingStatechart();
+}
+TEST_F(StatechartEntryExitActions, exitActionGuardsAreEvaluatedOnExitingStatechart) {
+	exitActionGuardsAreEvaluatedOnExitingStatechart();
 }
 
 

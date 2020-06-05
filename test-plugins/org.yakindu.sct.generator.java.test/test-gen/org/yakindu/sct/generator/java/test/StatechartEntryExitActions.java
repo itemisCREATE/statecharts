@@ -48,10 +48,30 @@ public class StatechartEntryExitActions {
 	}
 	
 	@Test
-	public void exitActionsAreExecutedOnEnteringStatechart() {
+	public void entryActionGuardsAreEvaluatedOnEnteringStatechart() {
+		assertTrue(statemachine.getX() == 0l);
+		assertTrue(statemachine.getY() == 0l);
+		statemachine.getSCInterface().setB(false);
 		statemachine.enter();
+		assertTrue(statemachine.getX() == 2l);
+		assertTrue(statemachine.getY() == 3l);
+	}
+	
+	@Test
+	public void exitActionsAreExecutedOnExitingStatechart() {
+		statemachine.enter();
+		statemachine.getSCInterface().setB(true);
 		statemachine.exit();
 		assertTrue(statemachine.getX() == 6l);
+		assertTrue(statemachine.getY() == 2l);
+	}
+	
+	@Test
+	public void exitActionGuardsAreEvaluatedOnExitingStatechart() {
+		statemachine.enter();
+		statemachine.getSCInterface().setB(false);
+		statemachine.exit();
+		assertTrue(statemachine.getX() == 8l);
 		assertTrue(statemachine.getY() == 2l);
 	}
 }
