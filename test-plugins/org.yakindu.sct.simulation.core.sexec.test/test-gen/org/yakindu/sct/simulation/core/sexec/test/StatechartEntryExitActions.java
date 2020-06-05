@@ -35,10 +35,28 @@ public class StatechartEntryExitActions extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("y") == 3l);
 	}
 	@Test
-	public void exitActionsAreExecutedOnEnteringStatechart() throws Exception {
+	public void entryActionGuardsAreEvaluatedOnEnteringStatechart() throws Exception {
+		assertTrue(getInteger("x") == 0l);
+		assertTrue(getInteger("y") == 0l);
+		setBoolean("b", false);
 		interpreter.enter();
+		assertTrue(getInteger("x") == 2l);
+		assertTrue(getInteger("y") == 3l);
+	}
+	@Test
+	public void exitActionsAreExecutedOnExitingStatechart() throws Exception {
+		interpreter.enter();
+		setBoolean("b", true);
 		interpreter.exit();
 		assertTrue(getInteger("x") == 6l);
+		assertTrue(getInteger("y") == 2l);
+	}
+	@Test
+	public void exitActionGuardsAreEvaluatedOnExitingStatechart() throws Exception {
+		interpreter.enter();
+		setBoolean("b", false);
+		interpreter.exit();
+		assertTrue(getInteger("x") == 8l);
 		assertTrue(getInteger("y") == 2l);
 	}
 }

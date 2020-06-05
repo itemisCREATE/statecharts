@@ -85,7 +85,7 @@ class BehaviorMapping {
 		}	
 		
 		statechart.entryReactions
-			.map([lr | if (lr.effect !== null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.map([lr | lr.mapEntryAction ])
 			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		r.entryAction = seq
@@ -174,7 +174,7 @@ class BehaviorMapping {
 		}	
 		
 		statechart.exitReactions
-			.map([lr | if (lr.effect !== null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.map([lr | lr.mapExitAction()])
 			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		r.exitAction = seq
