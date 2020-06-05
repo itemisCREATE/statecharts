@@ -97,10 +97,10 @@ class EventCode {
 				«IF value !== null»
 					{
 						«event.definition.event.valueDeclaration» = «exp.code(value)»;
-						SC_OBSERVABLE_NEXT(&«eventDefintion.accessObservable», &«eventDefintion.valueName»);
+						sc_observable_next(&«eventDefintion.accessObservable», &«eventDefintion.valueName»);
 					}
 				«ELSE»
-					SC_OBSERVABLE_NEXT(&«eventDefintion.accessObservable», sc_null)«IF useOutEventGetters»;«ENDIF»
+					sc_observable_next(&«eventDefintion.accessObservable», sc_null)«IF useOutEventGetters»;«ENDIF»
 				«ENDIF»
 			«ENDIF»
 			«IF (useOutEventGetters && eventDefintion.direction == Direction.OUT) || eventDefintion.direction == Direction.IN || eventDefintion.direction == Direction.LOCAL»
