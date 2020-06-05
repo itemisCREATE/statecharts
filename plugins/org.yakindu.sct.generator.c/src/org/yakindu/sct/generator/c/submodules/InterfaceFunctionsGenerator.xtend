@@ -29,6 +29,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 /**
  * @author rbeckmann
+ * @author rherrmann
+ * @author aterfloth
  *
  */
 @Singleton // Guice
@@ -80,22 +82,22 @@ class InterfaceFunctionsGenerator {
 					«IF traceCode !== null»
 						«traceCode»;
 					«ENDIF»
-					«observerHandler(variable, "UNSUBSCRIBE")»
+					«observerHandler(variable, "unsubscribe")»
 					«variable.access» = value;
-					«observerHandler(variable, "SUBSCRIBE")»
+					«observerHandler(variable, "subscribe")»
 				}
 				«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
 	'''
 	
-	protected def CharSequence observerHandler(VariableDefinition variable, String subscription)
+	protected def CharSequence observerHandler(VariableDefinition variable, String method)
 		'''«IF variable.needsShadowEventMapping»
 		if(«variable.access» != «NULL_LITERAL»)
 		{
 			«FOR e : variable.shadowEventsByScope.keySet.map[members].flatten.filter(Event)»
 				«val outEvent = variable.getShadowEvent(e)»
-				«IF outEvent !== null»SC_OBSERVER_«subscription»(«e.asObservableGetter»(«variable.access»), &(«variable.getShadowEvent(e).accessObservable»));«ENDIF»
+				«IF outEvent !== null»sc_single_subscription_observer_«method»(&(«variable.getShadowEvent(e).accessObservable»), «e.asObservableGetter»(«variable.access»));«ENDIF»
 			«ENDFOR»
 		}
 		«ENDIF»'''

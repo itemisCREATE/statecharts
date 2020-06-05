@@ -254,7 +254,7 @@ class Naming {
 	
 	def scopeShadowEventMember(Event it) {
 		'''
-		«OBSERVER_TYPE» «eventName»;
+		«SINGLE_SUBSCRIPTION_OBSERVER_TYPE» «eventName»;
 		'''
 	}
 

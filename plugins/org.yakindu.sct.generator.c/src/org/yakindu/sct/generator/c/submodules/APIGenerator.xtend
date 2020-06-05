@@ -178,7 +178,7 @@ class APIGenerator {
 		'''
 		«IF statechart.isEventDriven»
 		«FOR e : shadowEvents»
-			SC_OBSERVER_INIT(&(«e.accessObserver»), «scHandle», «e.observerCallbackFctID»);
+			sc_single_subscription_observer_init(&(«e.accessObserver»), «scHandle», («OBSERVER_NEXT_FP_TYPE»)«e.observerCallbackFctID»);
 		«ENDFOR»
 		«ENDIF»
 		'''
@@ -188,7 +188,7 @@ class APIGenerator {
 	def initializeObservables(ExecutionFlow it) {
 		'''
 		«FOR outEvent : scopes.filter(InterfaceScope).map[events].flatten.filter[direction === Direction.OUT]»
-			SC_OBSERVABLE_INIT(&«outEvent.accessObservable»);
+			sc_observable_init(&«outEvent.accessObservable»);
 		«ENDFOR»
 		'''
 	}
