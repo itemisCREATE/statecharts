@@ -6,10 +6,12 @@ import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 
 class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.GeneratorPredicate {
 	@Inject protected GenmodelEntries entries
 	@Inject protected extension SExecExtensions
+	@Inject protected extension ICoreLibraryHelper
 		
 	override useInEventQueue() {
 		entries.getInEventQueueUsed(entry)
@@ -28,11 +30,11 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	}
 	
 	def useOutEventObservables() {
-		entries.getOutEventObservablesUsed(entry)
+		getOutEventObservablesUsed(entry)
 	}
 	
 	def useOutEventGetters() {
-		entries.getOutEventGettersUsed(entry)
+		getOutEventGettersUsed(entry)
 	}
 	
 	def needsClearOutEventsFunction() {

@@ -41,5 +41,9 @@ public interface ICoreLibraryConstants {
 	String FUNCTION_INLINING_FEATURE_INLINE_ENTRIES = "inlineEntries";
 	String FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION = "inlineEnterRegion";
 	String FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION = "inlineExitRegion";
+	
+	String FEATURE_OUT_EVENT_API = "OutEventAPI";
+	String PARAMETER_OUT_EVENT_OBSERVABLES = "observables";
+	String PARAMETER_OUT_EVENT_GETTERS = "getters";
 
 }

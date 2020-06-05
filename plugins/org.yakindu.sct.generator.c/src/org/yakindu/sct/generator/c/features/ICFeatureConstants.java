@@ -51,14 +51,8 @@ public interface ICFeatureConstants {
 
 	public static final String FEATURE_GENERATOR_OPTIONS = "GeneratorOptions";
 	
-	public static final String FEATURE_OUT_EVENT_API = "OutEventAPI";
-
 	public static final String PARAMETER_IN_EVENT_QUEUE = "inEventQueue";
 	
 	public static final String PARAMETER_USER_ALLOCATED_QUEUE = "userAllocatedQueue";
-	
-	public static final String PARAMETER_OUT_EVENT_OBSERVABLES = "observables";
-	
-	public static final String PARAMETER_OUT_EVENT_GETTERS = "getters";
 	
 }

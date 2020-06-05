@@ -22,9 +22,13 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.library.ICoreLibraryConstants;
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+
+import com.google.common.collect.Iterables;
 
 /**
  * 
@@ -51,6 +55,10 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 			parameterValue.setValue("Enter license text here");
 		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
 			parameterValue.setValue(false);
+		} else if(ICoreLibraryConstants.PARAMETER_OUT_EVENT_OBSERVABLES.equals(parameterName)) {
+			parameterValue.setValue(true);
+		} else if(ICoreLibraryConstants.PARAMETER_OUT_EVENT_GETTERS.equals(parameterName)) {
+			parameterValue.setValue(false);
 		}
 	}
 
@@ -73,5 +81,22 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 			}
 		}
 		return Status.OK_STATUS;
+	}
+	
+	public IStatus validateConfiguration(FeatureConfiguration configuration) {
+		String outEventAPI = configuration.getType().getName();
+		if (!ICoreLibraryConstants.FEATURE_OUT_EVENT_API.equals(outEventAPI)) {
+			return Status.OK_STATUS;
+		}
+		FeatureParameterValue observablesValue = configuration.getParameterValue(ICoreLibraryConstants.PARAMETER_OUT_EVENT_OBSERVABLES);
+		if (observablesValue == null || observablesValue.getBooleanValue()) {
+			return Status.OK_STATUS; // default is true
+		}
+		Iterable<FeatureParameterValue> trueValues = Iterables.filter(configuration.getParameterValues(),
+				p -> p.getBooleanValue());
+		if (trueValues.iterator().hasNext()) {
+			return Status.OK_STATUS;
+		}
+		return error(String.format(REQUIRED_TRUE_PARAMETER, outEventAPI));
 	}
 }

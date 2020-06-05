@@ -39,6 +39,8 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 	public static final String CODE_MISSING_PROJECT = "error_code_missing_project";
 	
 	protected static final String INVALID_IDENTIFIER_REGEX = "[[^a-z]&&[^A-Z]&&[^0-9]]";
+	public static final String REQUIRED_TRUE_PARAMETER = "'%s' must at least define one parameter as 'true'.";
+
 
 	
 	@Inject
