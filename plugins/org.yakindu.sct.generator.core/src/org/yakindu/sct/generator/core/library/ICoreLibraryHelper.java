@@ -77,4 +77,8 @@ public interface ICoreLibraryHelper {
 	String getRelativeApiFolder(GeneratorEntry entry);
 
 	boolean serializeExecutionFlow(GeneratorEntry entry);
+	
+	boolean getOutEventObservablesUsed(GeneratorEntry it);
+	
+	boolean getOutEventGettersUsed(GeneratorEntry it);
 }
