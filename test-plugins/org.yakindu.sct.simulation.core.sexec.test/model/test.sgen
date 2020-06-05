@@ -87,6 +87,14 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}
 	}
+	
+	test ConstantsVariationTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
 
 	test Declarations {
 
@@ -370,6 +378,14 @@ GeneratorModel for sctunit::interpreter {
 	}
 
 	test SameNameDifferentRegion {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
+	
+	test ShadowValueParameter {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
