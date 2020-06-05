@@ -28,6 +28,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import org.yakindu.sct.generator.c.files.Tracing
 import org.yakindu.sct.generator.c.files.RxCHeader
+import org.yakindu.sct.generator.c.files.RxCSource
 
 /**
  * This is the C code generators main class. 
@@ -38,7 +39,8 @@ class CGenerator implements IExecutionFlowGenerator {
 
 	@Inject extension Types types
 	@Inject extension Tracing tracing
-	@Inject extension RxCHeader rxc
+	@Inject extension RxCHeader rxcHeader
+	@Inject extension RxCSource rxcSource
 	@Inject extension StatemachineHeader statemachineHeader
 	@Inject extension StatemachineSource statemachineSource
 	@Inject extension StatemachineRequiredHeader statemachineRequiredHeader
@@ -76,7 +78,8 @@ class CGenerator implements IExecutionFlowGenerator {
 			locations.configure(flow.tracingModule.h, entry.libraryOutput, tracing, getSkipLibraryFiles(entry))
 		}
 		if(entry.outEventObservablesUsed && hasOutgoingEvents) {
-			locations.configure(flow.rxcModule.h, entry.libraryOutput, rxc, getSkipLibraryFiles(entry))
+			locations.configure(flow.rxcModule.h, entry.libraryOutput, rxcHeader, getSkipLibraryFiles(entry))
+			locations.configure(flow.rxcModule.c, entry.libraryOutput, rxcSource, getSkipLibraryFiles(entry))
 		}
 	}
 
