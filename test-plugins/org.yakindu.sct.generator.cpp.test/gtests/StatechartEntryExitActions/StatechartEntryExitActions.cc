@@ -48,13 +48,45 @@ TEST_F(StatechartEntryExitActions, entryActionsAreExecutedOnEnteringStatechart) 
 	
 	
 }
-TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechart) {
+TEST_F(StatechartEntryExitActions, entryActionGuardsAreEvaluatedOnEnteringStatechart) {
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0);
+	
+	statechart->getDefaultSCI()->set_b(false);
 	
 	statechart->enter();
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 2);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 3);
+	
+	
+}
+TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnExitingStatechart) {
+	
+	statechart->enter();
+	
+	statechart->getDefaultSCI()->set_b(true);
 	
 	statechart->exit();
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 6);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 2);
+	
+	
+}
+TEST_F(StatechartEntryExitActions, exitActionGuardsAreEvaluatedOnExitingStatechart) {
+	
+	statechart->enter();
+	
+	statechart->getDefaultSCI()->set_b(false);
+	
+	statechart->exit();
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 8);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 2);
 	
