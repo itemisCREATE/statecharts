@@ -31,7 +31,10 @@ public abstract class CGeneratorConstants {
 	public static final String INTPTR_TYPE = "sc_intptr_t";
 	public static final String OBSERVABLE_TYPE = "sc_observable";
 	public static final String OBSERVER_TYPE = "sc_observer";
-
+	public static final String SINGLE_SUBSCRIPTION_OBSERVER_TYPE = "sc_single_subscription_observer";
+	public static final String OBSERVER_NEXT_FP_TYPE = "sc_observer_next_fp";
+		
+	
 	public static final String TYPES_MODULE = "sc_types";
 
 	/*

@@ -1,16 +1,9 @@
 GeneratorModel for yakindu::c {
-
-	statechart OutEventsObservables {
-
+	statechart Observables {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "OutEventsObservablesTest"
+			targetFolder = "ObservablesTest"
 		}
-
-		feature GeneratorOptions {
-			outEventObservables = true
-		}
-		
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -22,5 +15,10 @@ GeneratorModel for yakindu::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 		}
+		feature OutEventAPI {
+			observables = true
+		}
 	}
-}  
+	
+	
+}

@@ -51,7 +51,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	EnterStateTest.class,
 	EntryChoiceTest.class,
 	EntryExitSelfTransitionTest.class,
-//	EventDrivenOutEventsTest.class, TODO: #3095
+	EventDrivenOutEventsTest.class,
 	ExitOnSelfTransitionTest.class,
 	ExitSequenceTest.class,
 	FeatureCallsTest.class,
@@ -73,7 +73,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	OutEventLifeCycleTest.class,
 	ParenthesisTest.class,
 	PriorityValuesTest.class,
-//	RaiseEventTest.class, TODO: #3095
+	RaiseEventTest.class,
 	ReadOnlyVariableTest.class,
 	SameNameDifferentRegionTest.class,
 	ShallowHistoryTest.class,
