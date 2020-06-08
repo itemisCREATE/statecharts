@@ -16,15 +16,31 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.base.types.Event
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.base.types.Direction
 
 abstract class GeneratorPredicate {
 	@Inject protected extension SExecExtensions
 	
 	@Inject protected GeneratorEntry entry
 	@Inject protected extension AnnotationExtensions
+	@Inject protected extension ICoreLibraryHelper
 	
 	def boolean isEventDriven() {
 		entry.isEventDriven
+	}
+	
+	def useOutEventObservables() {
+		getOutEventObservablesUsed(entry)
+	}
+	
+	def useOutEventGetters() {
+		getOutEventGettersUsed(entry)
+	}
+	
+	def needsObservable(Event it) {
+		useOutEventObservables && direction === Direction.OUT
 	}
 	
 	def boolean needsQueues(ExecutionFlow it) {
@@ -40,7 +56,7 @@ abstract class GeneratorPredicate {
 	}
 	
 	def boolean needsInternalEventQueue(ExecutionFlow it) {
-		isEventDriven && flow.hasLocalEvents
+		isEventDriven && hasLocalEvents
 	}
 	
 	def boolean needsInEventQueue(ExecutionFlow it) {
