@@ -18,6 +18,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.OutEventObservables
 import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
@@ -30,6 +31,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 /**
  * @author BeckmaR
+ * @author Thomas Kutz - added out event observers
  */
 class VariableCode {
 	@Inject protected extension Naming
@@ -43,6 +45,7 @@ class VariableCode {
 	@Inject protected extension GeneratorPredicate
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension StatechartExtensions
+	@Inject protected extension OutEventObservables
 	
 	def fieldDeclaration(VariableDefinition variable) '''
 		private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
@@ -54,7 +57,7 @@ class VariableCode {
 			
 		«ENDIF»
 		«IF needsShadowEventMapping»
-			«submachineInterfaceListeners»
+			«submachineOutEventObservers»
 			
 		«ENDIF»
 		«getterVisibility» «typeSpecifier.targetLanguageName» «getter» {
@@ -79,7 +82,9 @@ class VariableCode {
 			«IF needsShadowEventMapping»
 				if (this.«identifier» != null) {
 					«FOR submachineScope : shadowEventsByScope.keySet»
-						this.«identifier».get«submachineScope.interfaceName»().getListeners().remove(«identifier»_«submachineScope.getInterfaceListenerName»);
+						«FOR shadowEvent : shadowEventsByScope.get(submachineScope)»
+							this.«identifier».get«submachineScope.interfaceName»().get«shadowEvent.originEvent.name.asName»Observable().unsubscribe(«observerName(it, submachineScope, shadowEvent.originEvent)»);
+						«ENDFOR»
 					«ENDFOR»
 				}
 				
@@ -89,51 +94,29 @@ class VariableCode {
 				
 				if (this.«identifier» != null) {
 					«FOR submachineScope : shadowEventsByScope.keySet»
-						this.«identifier».get«submachineScope.interfaceName»().getListeners().add(«identifier»_«submachineScope.getInterfaceListenerName»);
+						«FOR shadowEvent : shadowEventsByScope.get(submachineScope)»
+							this.«identifier».get«submachineScope.interfaceName»().get«shadowEvent.originEvent.name.asName»Observable().subscribe(«observerName(it, submachineScope, shadowEvent.originEvent)»);
+						«ENDFOR»
 					«ENDFOR»
 				}
 			«ENDIF»
 		'''
 	}
+	
+	protected def observerName(VariableDefinition member, InterfaceScope iface, Event outEvent) '''«member.identifier»_«iface.interfaceName»_«outEvent.identifier»_observer'''
 
-	protected def submachineInterfaceListeners(VariableDefinition member) {
-		member.shadowEventsByScope.keySet.map[scope|submachineInterfaceListener(member, scope)].join
-	}
-
-	protected def submachineInterfaceListener(VariableDefinition it, InterfaceScope scope) {
-		var subchart = type.getOriginStatechart
-		'''
-			private «subchart.statemachineInterfaceName».«scope.interfaceListenerName» «identifier»_«scope.interfaceListenerName» = new «subchart.statemachineInterfaceName».«scope.interfaceListenerName»() {
-				«FOR outEvent : scope.outgoingEvents»
-					«submachineOutEventHandler(outEvent)»
-				«ENDFOR»
-			};
-		'''
+	protected def submachineOutEventObservers(VariableDefinition member) {
+		member.shadowEventsByScope.entrySet.map[entry | entry.value.map[e | submachineOutEventObserver(member, entry.key, e)].join].join
 	}
 	
-	protected def submachineOutEventHandler(VariableDefinition member, Event outEvent) {
-		var shadowEvent = member.getShadowEvent(outEvent)
-		'''
+	protected def submachineOutEventObserver(VariableDefinition member, InterfaceScope iface, Event shadowEvent) '''
+		private Observer<«shadowEvent.originEvent.eventType»> «observerName(member, iface, shadowEvent.originEvent)» = new Observer<«shadowEvent.originEvent.eventType»>() {
 			@Override
-			«IF outEvent.type !== null && !isVoid(outEvent.type)»
-				public void on«outEvent.name.toFirstUpper()»Raised(«outEvent.typeSpecifier.targetLanguageName» value) {
-					«IF shadowEvent !== null»
-						raise«shadowEvent.name.asName»(value);
-					«ELSE»
-						// nothing to do
-					«ENDIF»
-				}
-			«ELSE»
-				public void on«outEvent.name.toFirstUpper()»Raised() {
-					«IF shadowEvent !== null»
-						raise«shadowEvent.name.asName»();
-					«ELSE»
-						// nothing to do
-					«ENDIF»
-				}
-			«ENDIF»	
-		'''
-	}
+			public void next(«shadowEvent.originEvent.eventType» value) {
+				raise«shadowEvent.name.asName»(«IF shadowEvent.hasValue»value«ENDIF»);
+			}
+		};
+	'''
 
 	protected def needsPublicGetter(VariableDefinition it) {
 		switch(eContainer) {

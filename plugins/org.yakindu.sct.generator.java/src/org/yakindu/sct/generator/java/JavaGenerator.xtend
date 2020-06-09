@@ -26,6 +26,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
+import org.yakindu.sct.generator.java.files.Observer
+import org.yakindu.sct.generator.java.files.Observable
 
 /**
  * This is the Java code generators main class.
@@ -36,6 +39,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 class JavaGenerator implements IExecutionFlowGenerator {
 
 	@Inject extension GenmodelEntries
+	@Inject extension GeneratorPredicate
+	@Inject extension ShadowEventExtensions
 	@Inject extension EventBasedRunnableFeature
 	@Inject extension CycleBasedWrapperFeature
 
@@ -50,6 +55,8 @@ class JavaGenerator implements IExecutionFlowGenerator {
 	@Inject extension Statemachine
 	@Inject extension EventBasedRunnableWrapper
 	@Inject extension CycleBasedSynchronizedWrapper
+	@Inject extension Observer
+	@Inject extension Observable
 	@Inject INamingService namingService
  	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
@@ -83,6 +90,13 @@ class JavaGenerator implements IExecutionFlowGenerator {
 		
 		if (entry.tracingUsed) {
 			flow.generateTracing(entry, fsa)
+		}
+		
+		if (useOutEventObservables && flow.hasOutgoingEvents) {
+			flow.generateObservable(entry, fsa)
+			flow.generateObserver(entry, fsa)
+		} else if (!flow.shadowEvents.nullOrEmpty) {
+			flow.generateObserver(entry, fsa)
 		}
 	}
 }

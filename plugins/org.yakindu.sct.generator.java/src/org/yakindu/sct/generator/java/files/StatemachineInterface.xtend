@@ -34,6 +34,8 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import org.yakindu.sct.generator.java.GeneratorPredicate
+import org.yakindu.sct.generator.java.features.OutEventObservables
 
 class StatemachineInterface {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -44,8 +46,10 @@ class StatemachineInterface {
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension JavaExpressionsGenerator
+	@Inject extension OutEventObservables
 
-	@Inject ICoreLibraryHelper outletFeatureHelper
+	@Inject extension ICoreLibraryHelper outletFeatureHelper
+	@Inject extension GeneratorPredicate
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
@@ -70,6 +74,7 @@ class StatemachineInterface {
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
 			.addImport(entry.basePackageName.dot(iTimerCallback), flow.timed)
 			.addImport(entry.basePackageName.dot(iStatemachine))
+			.addImport(entry.basePackageName.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(
 				ClassTemplate
@@ -142,7 +147,7 @@ class StatemachineInterface {
 				«FOR constant : constants»
 					«constant.constantFieldDeclaration()»
 				«ENDFOR»
-				«scope.eventAccessors»
+				«scope.eventAccessors(entry)»
 				«scope.variableAccessors»
 				«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 					public List<«scope.getInterfaceListenerName()»> getListeners();
@@ -188,7 +193,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def protected eventAccessors(InterfaceScope scope) {
+	def protected eventAccessors(InterfaceScope scope, GeneratorEntry entry) {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
@@ -200,13 +205,19 @@ class StatemachineInterface {
 						
 					«ENDIF»
 				«ELSEIF event.direction == Direction::OUT»
-					public boolean isRaised«event.name.asName»();
-					
-					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type !== null && !isVoid(event.type)»
-						public «event.typeSpecifier.targetLanguageName» «event.getter»;
+					«IF useOutEventGetters»
+						public boolean isRaised«event.name.asName»();
+						««« IMPORTANT: An event not specifying a type is regarded to have a void type
+						«IF event.hasValue»
+							public «event.typeSpecifier.targetLanguageName» «event.getter»;
+							
+						«ENDIF»	
 						
-					«ENDIF»	
+					«ENDIF»
+					«IF useOutEventObservables»
+						public Observable<«event.eventType»> «event.observableGetterName»();
+						
+					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 		'''

@@ -49,15 +49,15 @@ class ShadowEventExtensions {
 	}
 	
 	def getShadowEvents(StatechartScope it) {
-		members.filter[scope.flow.shadowEvents.toList.contains(it)].filter(Event)
-	} 
+		scope.flow.shadowEvents
+	}
+	
+	def getOriginEvent(Event shadowEvent) {
+		shadowEvent.originTraces.filter(Event).filter[direction == Direction.OUT].head
+	}
 
 	def getShadowEventsByScope(VariableDefinition member) {
 		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
-	}
-	
-	def getOriginOutEvents(VariableDefinition it) {
-		shadowEventsByScope.keySet.map[members].flatten.filter(Event).filter[direction === Direction.OUT]
 	}
 
 	def getShadowEventName(FeatureCall fc) {

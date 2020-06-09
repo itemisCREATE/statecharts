@@ -42,6 +42,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -71,6 +72,8 @@ class Statemachine {
 	@Inject protected extension RunnableExtension
 	
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension ShadowEventExtensions
+	
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
@@ -88,6 +91,8 @@ class Statemachine {
 			.fileComment(entry.licenseText)
 			.packageName(getImplementationPackageName(flow, entry))
 			.addImports(imports)
+			.addImport(entry.basePackageName.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
+			.addImport(entry.basePackageName.dot(observerClass), !flow.shadowEvents.nullOrEmpty)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(
 				classTemplate

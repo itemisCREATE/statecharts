@@ -54,6 +54,14 @@ class Naming {
 	def runtimeServiceClass() {
 		"RuntimeService"
 	}
+	
+	def observableClass() {
+		"Observable"
+	}
+	
+	def observerClass() {
+		"Observer"
+	}
 
 	def java(String it) {
 		it + ".java"
@@ -159,7 +167,7 @@ class Naming {
 	def String getValueIdentifier(Event it) {
 		name.asIdentifier + "Value"
 	}
-
+	
 	def String getInterfaceImplName(InterfaceScope it) {
 		getInterfaceName() + "Impl";
 	}

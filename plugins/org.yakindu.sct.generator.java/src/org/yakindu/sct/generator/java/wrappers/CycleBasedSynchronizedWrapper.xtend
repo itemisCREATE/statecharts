@@ -13,13 +13,14 @@ package org.yakindu.sct.generator.java.wrappers
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
+import org.yakindu.sct.generator.java.features.OutEventObservables
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -40,6 +41,8 @@ class CycleBasedSynchronizedWrapper {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension GeneratorPredicate
+	@Inject protected extension OutEventObservables
 
 	def generateCycleWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
@@ -144,6 +147,9 @@ class CycleBasedSynchronizedWrapper {
 			import java.util.List;
 			
 		«ENDIF»
+		«IF useOutEventObservables && flow.hasOutgoingEvents»
+			import «entry.getBasePackageName()».«observableClass»;
+		«ENDIF»
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;
 			import «entry.getBasePackageName()».ITimerCallback;
@@ -202,18 +208,29 @@ class CycleBasedSynchronizedWrapper {
 				«ENDIF»
 			«ENDIF»
 			«IF event.direction == Direction::OUT»
-				public boolean isRaised«event.name.asName»() {
-					synchronized(statemachine) {
-						return statemachine.get«scope.interfaceName»().isRaised«event.name.asName»();
-					}
-				}
-				
-				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
+				«IF useOutEventGetters»
+					public boolean isRaised«event.name.asName»() {
 						synchronized(statemachine) {
-							return statemachine.get«scope.interfaceName»().get«event.name.asName»Value();
+							return statemachine.get«scope.interfaceName»().isRaised«event.name.asName»();
 						}
 					}
+					
+					«IF event.hasValue»
+						public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
+							synchronized(statemachine) {
+								return statemachine.get«scope.interfaceName»().get«event.name.asName»Value();
+							}
+						}
+						
+					«ENDIF»
+				«ENDIF»
+				«IF useOutEventObservables»
+					public Observable<«event.eventType»> «event.observableGetterName»() {
+						synchronized(statemachine) {
+							return statemachine.get«scope.interfaceName»().«event.observableGetterName»();
+						}
+					}
+					
 				«ENDIF»
 			«ENDIF»
 		«ENDFOR»
