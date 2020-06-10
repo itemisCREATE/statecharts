@@ -4,14 +4,15 @@ package org.yakindu.scr.statechartkeywords;
 import java.util.List;
 import org.yakindu.scr.IStatemachine;
 import org.yakindu.scr.ITimerCallback;
+import org.yakindu.scr.Observable;
 
 public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatemachine {
 	
 	public interface SCIIf {
 	
-		public boolean isRaisedOperationCallback();
+		public Observable<Void> getOperationCallbackObservable();
 		
-		public boolean isRaisedListeners();
+		public Observable<Void> getListenersObservable();
 		
 		public long getTimer();
 		

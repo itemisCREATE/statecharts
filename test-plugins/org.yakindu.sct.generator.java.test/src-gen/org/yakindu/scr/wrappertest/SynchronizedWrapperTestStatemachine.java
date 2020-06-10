@@ -2,6 +2,7 @@
 package org.yakindu.scr.wrappertest;
 import java.util.List;
 
+import org.yakindu.scr.Observable;
 import org.yakindu.scr.ITimer;
 import org.yakindu.scr.ITimerCallback;
 import org.yakindu.scr.wrappertest.WrapperTestStatemachine.State;
@@ -39,9 +40,9 @@ public class SynchronizedWrapperTestStatemachine implements IWrapperTestStatemac
 			}
 		}
 		
-		public boolean isRaisedEv_out() {
+		public Observable<Void> getEv_outObservable() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().isRaisedEv_out();
+				return statemachine.getSCInterface().getEv_outObservable();
 			}
 		}
 		

@@ -2,12 +2,13 @@
 package org.yakindu.scr.raiseevent;
 
 import org.yakindu.scr.IStatemachine;
+import org.yakindu.scr.Observable;
 
 public interface IRaiseEventStatemachine extends IStatemachine {
 	
 	public interface SCInterface {
 	
-		public boolean isRaisedE1();
+		public Observable<Void> getE1Observable();
 		
 		public void raiseE2();
 		

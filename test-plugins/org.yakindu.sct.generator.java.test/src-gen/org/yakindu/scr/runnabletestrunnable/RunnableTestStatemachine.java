@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.yakindu.scr.ITimer;
+import org.yakindu.scr.Observable;
 
 public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runnable {
 	
@@ -44,12 +45,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		private long ev_outValue;
 		
 		
-		public boolean isRaisedEv_out() {
-			synchronized(RunnableTestStatemachine.this) {
-				return ev_out;
-			}
-		}
-		
 		protected void raiseEv_out(long value) {
 			synchronized(RunnableTestStatemachine.this) {
 				ev_outValue = value;
@@ -57,15 +52,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 				for (SCInterfaceListener listener : listeners) {
 					listener.onEv_outRaised(value);
 				}
+				ev_outObservable.next(value);
 			}
 		}
 		
-		public long getEv_outValue() {
-			synchronized(RunnableTestStatemachine.this) {
-				if (! ev_out ) 
-					throw new IllegalStateException("Illegal event value access. Event Ev_out is not raised!");
-				return ev_outValue;
-			}
+		private Observable<Long> ev_outObservable = new Observable<Long>();
+		
+		public Observable<Long> getEv_outObservable() {
+			return ev_outObservable;
 		}
 		
 		private boolean ev_in;
@@ -379,12 +373,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		return sCInterface;
 	}
 	
-	public synchronized boolean isRaisedEv_out() {
-		return sCInterface.isRaisedEv_out();
-	}
-	
-	public synchronized long getEv_outValue() {
-		return sCInterface.getEv_outValue();
+	public synchronized Observable<Long> getEv_outObservable() {
+		return sCInterface.getEv_outObservable();
 	}
 	
 	public synchronized void raiseEv_in(long value) {
