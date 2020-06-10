@@ -16,6 +16,7 @@ import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventDrivenEventCode extends EventCode {
+	
 	@Inject protected extension GeneratorPredicate
 	@Inject protected extension Synchronized
 	

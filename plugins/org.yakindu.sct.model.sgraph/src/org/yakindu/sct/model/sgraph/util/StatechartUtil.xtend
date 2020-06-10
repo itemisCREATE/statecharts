@@ -65,10 +65,12 @@ class StatechartUtil {
 		originTraces.filter(Scope).head
 	}
 	
+	// XXX: move to ShadowEventExtensions
 	def getOriginEvent(Event shadowEvent) {
 		shadowEvent.originTraces.filter(Event).filter[direction == Direction.OUT].head
 	}
 	
+	// XXX: move to OriginTracing
 	def getOriginOfType(EObject it, Class<? extends EObject> type) {
 		originTraces.filter(type).head
 	}

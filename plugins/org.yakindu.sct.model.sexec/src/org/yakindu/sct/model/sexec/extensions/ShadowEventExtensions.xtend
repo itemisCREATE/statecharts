@@ -52,10 +52,6 @@ class ShadowEventExtensions {
 		scope.flow.shadowEvents
 	}
 	
-	def getOriginEvent(Event shadowEvent) {
-		shadowEvent.originTraces.filter(Event).filter[direction == Direction.OUT].head
-	}
-
 	def getShadowEventsByScope(VariableDefinition member) {
 		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
 	}
