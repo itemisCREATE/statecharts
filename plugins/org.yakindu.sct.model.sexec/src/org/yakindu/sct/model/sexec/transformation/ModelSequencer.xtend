@@ -77,8 +77,11 @@ class ModelSequencer implements IModelSequencer {
 		// retarget declaration refs
 		ef.retargetDeclRefs
 		
-		// map submachine out events to shadow events
+		// map referenced machine out events to shadow events
 		sc.mapReferencedMachineOutEvents(ef)
+		
+		// introduce buffer events
+		ef.defineBufferEvents
 		
 		//clear create caches to avoid memory leak with repetetive generator cycles
 		mapping.cleanup

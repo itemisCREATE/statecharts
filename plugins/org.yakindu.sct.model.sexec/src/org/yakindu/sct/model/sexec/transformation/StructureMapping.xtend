@@ -25,12 +25,14 @@ import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
@@ -45,6 +47,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 class StructureMapping {
 	 
@@ -55,6 +59,8 @@ class StructureMapping {
 	@Inject extension ExpressionBuilder
 	@Inject extension ExpressionExtensions
 	@Inject extension ShadowEventExtensions
+	@Inject extension BufferEventExtensions
+	@Inject extension TypeBuilder
 	
 	
 	//==========================================================================
@@ -271,6 +277,7 @@ class StructureMapping {
 		]
 	}
 	
+	
 	/**
 	 * Returns true if the feature call is on a statechart reference which is a direct member of the given statechart, e.g.
 	 * <br><br>
@@ -302,4 +309,46 @@ class StructureMapping {
 		type.isOriginStatechart
 	}
 	
+	
+	//==========================================================================
+	// DEFINE BUFFER EVENTS
+	//
+	
+	
+	def defineEventBuffer(ExecutionFlow flow){
+		
+		val bufferType = _complexType("EventBuf") => [ bt |
+			flow.scopes.filter[hasBufferedEvents].forEach[ scope | 
+				val scopeBufferType = _complexType(scope.scopeName + "EventBuf") => [ scopeType |
+					scope.declarations
+						.filter(Event)
+						.filter[ e | e.direction != Direction::OUT ]
+						.forEach[ e | e.createBufferEvent => [scopeType.features.add(it)]]
+				]
+				
+				bt.features += _variable(scope.scopeName, scopeBufferType)
+			]
+		]
+		
+		flow.features += _variable("eventBuffer", bufferType);	
+	}
+	
+	def dispatch scopeName(Scope it) {
+		"scope"	
+	}
+
+	def dispatch scopeName(InternalScope it) {
+		"Internal"	
+	}
+	
+	def dispatch scopeName(InterfaceScope it) {
+		if ( name.nullOrEmpty ) "Iface" else name + "Iface"
+	}
+	
+	
+	def hasBufferedEvents(Scope it) {
+		it.declarations.filter(Event).exists[ e | e.direction != Direction::OUT]	
+	}
+	
+			
 }
