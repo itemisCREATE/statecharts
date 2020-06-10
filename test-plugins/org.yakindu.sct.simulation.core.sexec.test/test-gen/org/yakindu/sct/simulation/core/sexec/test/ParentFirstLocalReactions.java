@@ -51,6 +51,20 @@ public class ParentFirstLocalReactions extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("aaa_local") == 0l);
 	}
 	@Test
+	public void expectParentLocalReactionOnChildSelfTransition() throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("AAA"));
+		raiseEvent("doSelfTransition");
+		setBoolean("disable_a", true);
+		setBoolean("disable_aa", true);
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("AAA"));
+		assertTrue(getInteger("sm_local") == 1l);
+		assertTrue(getInteger("a_local") == 2l);
+		assertTrue(getInteger("aa_local") == 3l);
+		assertTrue(getInteger("aaa_local") == 0l);
+	}
+	@Test
 	public void expectGrandparentLocalReactionOnParentLocalTransition() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("AAA"));
@@ -72,6 +86,20 @@ public class ParentFirstLocalReactions extends AbstractExecutionFlowTest {
 		raiseEvent("e");
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
+		assertTrue(getInteger("sm_local") == 1l);
+		assertTrue(getInteger("a_local") == 0l);
+		assertTrue(getInteger("aa_local") == 0l);
+		assertTrue(getInteger("aaa_local") == 0l);
+	}
+	@Test
+	public void expectNoLocalReactionOnGrandparentSelfTransition() throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("AAA"));
+		setBoolean("disable_aaa", true);
+		setBoolean("disable_aa", true);
+		raiseEvent("doSelfTransition");
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("sm_local") == 1l);
 		assertTrue(getInteger("a_local") == 0l);
 		assertTrue(getInteger("aa_local") == 0l);

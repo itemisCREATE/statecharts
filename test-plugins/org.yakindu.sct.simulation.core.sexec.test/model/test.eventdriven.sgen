@@ -32,15 +32,22 @@ GeneratorModel for sctunit::interpreter {
 	}
 	
 	
-//	test LocalEvents {
-//		feature Outlet{ 
-//			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
-//		}	
-//	}
+	test LocalEvents {
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}	
+	}
 	
 	
 	test NoLocalEvents {
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}	
+	}
+	
+	test EventDriven {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
