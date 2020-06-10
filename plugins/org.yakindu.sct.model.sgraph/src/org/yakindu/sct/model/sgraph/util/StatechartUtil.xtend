@@ -63,4 +63,8 @@ class StatechartUtil {
 		originTraces.filter(Scope).head
 	}
 	
+	def getOriginOfType(EObject it, Class<? extends EObject> type) {
+		originTraces.filter(type).head
+	}
+	
 }
