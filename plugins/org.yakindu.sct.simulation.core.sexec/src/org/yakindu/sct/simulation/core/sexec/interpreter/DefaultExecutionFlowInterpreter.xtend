@@ -210,7 +210,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		do {
 			stateVectorChanged = false
 			microStep.apply
-		} while (stateVectorChanged)
+		} while (stateVectorChanged && !Thread.currentThread.isInterrupted)
 	}
 
 	def rtcStep() {

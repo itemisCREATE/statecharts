@@ -97,10 +97,15 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private ITypeSystem typeSystem;
 
 	private ISelectionChangedListener selectionChangedListener;
+	
+	private ThreadGroup raiseEventThreadGroup;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
+		
+		raiseEventThreadGroup = new ThreadGroup("Raise Event ThreadGroup");
+		raiseEventThreadGroup.setMaxPriority(Thread.MIN_PRIORITY);
 	}
 
 	@Override
@@ -165,7 +170,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		ToolBar toolBar = new ToolBar(contextViewerComposite, SWT.FLAT | SWT.WRAP | SWT.RIGHT);
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(toolBar);
 		executionContextViewer = ExecutionContextViewerFactory.createViewer(contextViewerComposite, false, this);
-		selectionListener = new RaiseEventSelectionListener(executionContextViewer);
+		selectionListener = new RaiseEventSelectionListener(executionContextViewer, raiseEventThreadGroup);
 		final ToolBarManager manager = new ToolBarManager(toolBar);
 		manager.add(new ControlContribution("clock") {
 			@Override
@@ -244,6 +249,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 					clock.updateTimestamp(0);
 				}
 			});
+			raiseEventThreadGroup.interrupt();
 			break;
 		case DebugEvent.SUSPEND:
 			Display.getDefault().asyncExec(() -> {
@@ -349,9 +355,11 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 					raiseEvent((ExecutionEvent) element);
 			}
 		};
+		private ThreadGroup raiseEventThreads;
 
-		public RaiseEventSelectionListener(TreeViewer viewer) {
+		public RaiseEventSelectionListener(TreeViewer viewer, ThreadGroup raiseEventThreadGroup) {
 			this.viewer = viewer;
+			this.raiseEventThreads = raiseEventThreadGroup;
 			registerMouseListener();
 		}
 
@@ -368,7 +376,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 
 		public void raiseEvent(ExecutionEvent event) {
-			event.setRaised(!event.isRaised());
+			new Thread(raiseEventThreads, () -> event.setRaised(!event.isRaised()), "Raise Event " + event.getName())
+					.start();
 			viewer.refresh();
 		}
 	}
