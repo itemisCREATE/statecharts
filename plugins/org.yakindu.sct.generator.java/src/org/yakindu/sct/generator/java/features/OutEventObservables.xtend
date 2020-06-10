@@ -18,7 +18,7 @@ class OutEventObservables {
 	def getEventType(Event it) {
 		if (hasValue) {
 			val typeName = typeSpecifier.targetLanguageName
-			return type instanceof ComplexType ? typeName : typeName.toFirstUpper
+			return if (type instanceof ComplexType) typeName else typeName.toFirstUpper
 		}
 		return "Void"
 	}
