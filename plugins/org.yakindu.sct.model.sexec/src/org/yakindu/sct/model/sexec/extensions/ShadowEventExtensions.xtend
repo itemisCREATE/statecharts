@@ -38,8 +38,8 @@ class ShadowEventExtensions {
 		member.flow.shadowEvents.filter[originTraces.contains(member)]
 	}
 
-	def getShadowEvent(VariableDefinition member, Event originalEvent) {
-		member.shadowEvents.findFirst[originTraces.contains(originalEvent)]
+	def getShadowEvent(VariableDefinition member, Event outEvent) {
+		member.shadowEvents.findFirst[originTraces.contains(outEvent)]
 	}
 
 	def getShadowEvents(ExecutionFlow flow) {
@@ -62,6 +62,10 @@ class ShadowEventExtensions {
 	
 	def needsShadowEventMapping(VariableDefinition member) {
 		member.type.isOriginStatechart && !member.shadowEvents.nullOrEmpty
+	}
+	
+	def getOutEvent(Event shadowEvent) {
+		shadowEvent.originTraces.filter(Event).filter[direction == Direction.OUT].head
 	}
 
 	def create StextFactory.eINSTANCE.createEventDefinition createShadowEvent(String shadowEventName,

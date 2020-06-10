@@ -83,7 +83,7 @@ class VariableCode {
 				if (this.«identifier» != null) {
 					«FOR submachineScope : shadowEventsByScope.keySet»
 						«FOR shadowEvent : shadowEventsByScope.get(submachineScope)»
-							this.«identifier».get«submachineScope.interfaceName»().«shadowEvent.originEvent.observableGetterName»().unsubscribe(«shadowEvent.observerName»);
+							this.«identifier».get«submachineScope.interfaceName»().«shadowEvent.outEvent.observableGetterName»().unsubscribe(«shadowEvent.observerName»);
 						«ENDFOR»
 					«ENDFOR»
 				}
@@ -95,7 +95,7 @@ class VariableCode {
 				if (this.«identifier» != null) {
 					«FOR submachineScope : shadowEventsByScope.keySet»
 						«FOR shadowEvent : shadowEventsByScope.get(submachineScope)»
-							this.«identifier».get«submachineScope.interfaceName»().«shadowEvent.originEvent.observableGetterName»().subscribe(«shadowEvent.observerName»);
+							this.«identifier».get«submachineScope.interfaceName»().«shadowEvent.outEvent.observableGetterName»().subscribe(«shadowEvent.observerName»);
 						«ENDFOR»
 					«ENDFOR»
 				}
@@ -108,9 +108,9 @@ class VariableCode {
 	}
 	
 	protected def submachineOutEventObserver(Event shadowEvent) '''
-		private «shadowEvent.originEvent.observerType» «shadowEvent.observerName» = new «shadowEvent.originEvent.observerType»() {
+		private «shadowEvent.outEvent.observerType» «shadowEvent.observerName» = new «shadowEvent.outEvent.observerType»() {
 			@Override
-			public void next(«shadowEvent.originEvent.eventType» value) {
+			public void next(«shadowEvent.outEvent.eventType» value) {
 				raise«shadowEvent.name.asName»(«IF shadowEvent.hasValue»value«ENDIF»);
 			}
 		};
