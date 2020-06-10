@@ -30,4 +30,18 @@ class OutEventObservables {
 	def getObservableGetterName(Event it) '''get«name.asName»Observable'''
 	
 	def getObservableName(Event it) '''«name.asIdentifier»Observable'''
+	
+	def getObserverName(Event shadowEvent) '''«shadowEvent.name»_observer'''
+	
+	def getObserverType(Event it) '''«observerClass»<«eventType»>'''
+	
+	def getObservableType(Event it) '''«observableClass»<«eventType»>'''
+	
+	def observableClass() {
+		"Observable"
+	}
+	
+	def observerClass() {
+		"Observer"
+	}
 }

@@ -55,14 +55,6 @@ class Naming {
 		"RuntimeService"
 	}
 	
-	def observableClass() {
-		"Observable"
-	}
-	
-	def observerClass() {
-		"Observer"
-	}
-
 	def java(String it) {
 		it + ".java"
 	}

@@ -83,7 +83,7 @@ class VariableCode {
 				if (this.«identifier» != null) {
 					«FOR submachineScope : shadowEventsByScope.keySet»
 						«FOR shadowEvent : shadowEventsByScope.get(submachineScope)»
-							this.«identifier».get«submachineScope.interfaceName»().get«shadowEvent.originEvent.name.asName»Observable().unsubscribe(«observerName(it, submachineScope, shadowEvent.originEvent)»);
+							this.«identifier».get«submachineScope.interfaceName»().«shadowEvent.originEvent.observableGetterName»().unsubscribe(«shadowEvent.observerName»);
 						«ENDFOR»
 					«ENDFOR»
 				}
@@ -95,7 +95,7 @@ class VariableCode {
 				if (this.«identifier» != null) {
 					«FOR submachineScope : shadowEventsByScope.keySet»
 						«FOR shadowEvent : shadowEventsByScope.get(submachineScope)»
-							this.«identifier».get«submachineScope.interfaceName»().get«shadowEvent.originEvent.name.asName»Observable().subscribe(«observerName(it, submachineScope, shadowEvent.originEvent)»);
+							this.«identifier».get«submachineScope.interfaceName»().«shadowEvent.originEvent.observableGetterName»().subscribe(«shadowEvent.observerName»);
 						«ENDFOR»
 					«ENDFOR»
 				}
@@ -103,19 +103,18 @@ class VariableCode {
 		'''
 	}
 	
-	protected def observerName(VariableDefinition member, InterfaceScope iface, Event outEvent) '''«member.identifier»_«iface.interfaceName»_«outEvent.identifier»_observer'''
-
 	protected def submachineOutEventObservers(VariableDefinition member) {
-		member.shadowEventsByScope.entrySet.map[entry | entry.value.map[e | submachineOutEventObserver(member, entry.key, e)].join].join
+		member.shadowEvents.map[submachineOutEventObserver].join
 	}
 	
-	protected def submachineOutEventObserver(VariableDefinition member, InterfaceScope iface, Event shadowEvent) '''
-		private Observer<«shadowEvent.originEvent.eventType»> «observerName(member, iface, shadowEvent.originEvent)» = new Observer<«shadowEvent.originEvent.eventType»>() {
+	protected def submachineOutEventObserver(Event shadowEvent) '''
+		private «shadowEvent.originEvent.observerType» «shadowEvent.observerName» = new «shadowEvent.originEvent.observerType»() {
 			@Override
 			public void next(«shadowEvent.originEvent.eventType» value) {
 				raise«shadowEvent.name.asName»(«IF shadowEvent.hasValue»value«ENDIF»);
 			}
 		};
+		
 	'''
 
 	protected def needsPublicGetter(VariableDefinition it) {
