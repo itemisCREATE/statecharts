@@ -28,6 +28,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.ComplexType
 
 /**
  * @author rbeckmann
@@ -87,6 +89,9 @@ class StatechartTypes {
 		«IF entry.tracingGeneric»
 		«TRACE_HANDLER_TYPE» *«TRACE_HANDLER»;
 		«ENDIF»
+		«FOR v : it.features.filter(org.yakindu.base.types.Property)»
+			«type(v)» «v.name»;
+		«ENDFOR»
 		'''
 	}
 	
@@ -151,8 +156,8 @@ class StatechartTypes {
 	def typeRelevantDeclarations(Scope scope){
 		return scope.declarations.filter[
 			switch it {
-				EventDefinition: true
-				TimeEvent: true
+				Event: true
+//				TimeEvent: true
 				VariableDefinition: !it.const
 				default: false
 			}
@@ -162,4 +167,14 @@ class StatechartTypes {
 	def constDeclarations(Scope scope){
 		return scope.declarations.filter(typeof(VariableDefinition)).filter[const]
 	}
+	
+	/** TODO complex type should be contained in ExecutionFLow */
+	def structDeclaration(ComplexType type, ExecutionFlow flow) '''
+		struct «flow.type»«type.name» {
+			«FOR f : type.features»
+				«f.scopeTypeDeclMember»
+			«ENDFOR»
+		};
+		
+	'''
 }

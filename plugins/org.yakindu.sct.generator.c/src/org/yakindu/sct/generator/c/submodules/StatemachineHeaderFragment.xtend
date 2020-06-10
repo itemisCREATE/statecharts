@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.c.submodules
 import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
@@ -32,6 +33,11 @@ import org.yakindu.sct.generator.c.IHeaderFragment
 import java.util.Set
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.base.types.Event
+import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
+import org.yakindu.base.types.ComplexType
+import java.util.ArrayList
+import java.util.LinkedList
 
 /**
  * @author rbeckmann
@@ -53,6 +59,8 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension StatechartTypes
 	@Inject protected extension EventCode
 	@Inject protected extension GeneratorPredicate
+	
+	@Inject protected extension BufferEventExtensions
 	
 	@Inject protected extension GeneratorEntry entry
 	
@@ -112,9 +120,41 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 			
 		«ENDFOR»
 		
+		
+		«FOR t : it.derivedComplexTypes»
+			«t.structDeclaration(flow)»			
+		«ENDFOR»
+		
 		«statemachineStruct»
 		
 		'''
+	}
+	
+	def derivedComplexTypes(ExecutionFlow flow) {
+		
+		val types = new LinkedList<ComplexType> 
+		flow.collectDerivedComplexTypes(types)
+		return types
+	}
+	
+	
+	def LinkedList<ComplexType> collectDerivedComplexTypes(ComplexType it, LinkedList<ComplexType> types) {
+		it.referencedComplexTypes.reverseView.forEach[ t | 
+			if (!types.contains(t)) {
+				types.push(t)
+				t.collectDerivedComplexTypes(types)
+			}
+		]
+		
+		return types		
+	} 
+	
+	def referencedComplexTypes(ComplexType it) {
+		it	.features
+			.filter(Property)
+			.filter[typeSpecifier.type instanceof ComplexType]
+			.map[typeSpecifier.type as ComplexType]
+			.toList
 	}
 	
 	protected def CharSequence functions(ExecutionFlow it)
@@ -184,7 +224,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	}	
 	
 	def dispatch scopeFunctionPrototypes(StatechartScope it) '''
-		«FOR d : declarations»
+		«FOR d : declarations.filter[d | !(d instanceof Event) || !((d as Event).isBufferEvent)]»
 			«d.functionPrototypes »
 		«ENDFOR»
 	'''
