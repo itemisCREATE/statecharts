@@ -127,6 +127,10 @@ class Naming {
 		containerType + 'TimeEvents'
 	}
 
+	def dispatch String type(Property it) {
+		containerType + it.type.name
+	}
+
 	def dispatch String type(ExecutionFlow it) {
 		if (entryStatemachinePrefix.nullOrEmpty) {
 			return name.asIdentifier.toFirstUpper
@@ -240,7 +244,7 @@ class Naming {
 		return null;
 	}
 	
-	def dispatch scopeTypeDeclMember(EventDefinition it) {
+	def dispatch scopeTypeDeclMember(Event it) {
 		'''
 		«IF useOutEventObservables && direction == Direction.OUT»
 			«OBSERVABLE_TYPE» «eventName»;
@@ -262,7 +266,7 @@ class Naming {
 		«BOOL_TYPE» «timeEventRaisedFlag»;
 	'''
 
-	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
+	def dispatch scopeTypeDeclMember(Property it) '''
 		«IF type.name != 'void' && !isConst»«typeSpecifier.targetLanguageName» «variable»;«ENDIF»
 	'''
 	
@@ -336,7 +340,7 @@ class Naming {
 		functionPrefix + RUN_CYCLE
 	}
 	
-	def eventValueVariable(EventDefinition it) {
+	def eventValueVariable(Event it) {
 		name.asIdentifier.value
 	}
 	
@@ -348,7 +352,7 @@ class Naming {
 		shortName.raised
 	}
 	
-	def eventRaisedFlag(EventDefinition it) {
+	def eventRaisedFlag(Event it) {
 		 name.asIdentifier.raised
 	}
 	
@@ -402,7 +406,7 @@ class Naming {
 		scope.functionPrefix(it) + separator + funcName + separator + name.asIdentifier.toFirstLower
 	}
 	
-	def variable(VariableDefinition it) {
+	def variable(Property it) {
 		name.asEscapedIdentifier
 	}
 	

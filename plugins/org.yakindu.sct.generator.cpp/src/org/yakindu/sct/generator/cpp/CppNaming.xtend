@@ -132,7 +132,7 @@ class CppNaming extends Naming {
 		RXCPP_MODULE
 	}
 	
-	override dispatch scopeTypeDeclMember(EventDefinition it) '''
+	override dispatch scopeTypeDeclMember(Event it) '''
 		«IF needsObservable»
 			sc::rx::Observable<«typeSpecifier.targetLanguageName»> «observable»;
 		«ENDIF»
