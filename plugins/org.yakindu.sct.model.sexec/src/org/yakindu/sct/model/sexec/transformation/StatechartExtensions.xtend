@@ -1,5 +1,5 @@
 /** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
+ * Copyright (c) 2015-20 committers of YAKINDU and others. 
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
@@ -116,7 +116,7 @@ class StatechartExtensions {
 	}
 	
 	def dispatch int maxNumberOfParallelTimeEvents(Region r) {
-		r.vertices.filter(State).map[maxNumberOfParallelTimeEvents].max
+		r.vertices.filter(State).map[maxNumberOfParallelTimeEvents].fold(0, [ a, b | Math.max(a,b) ])
 	}
 
 	def dispatch int maxNumberOfParallelTimeEvents(State s) {
