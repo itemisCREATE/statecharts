@@ -49,7 +49,7 @@ class ShadowEventExtensions {
 	}
 	
 	def getShadowEvents(StatechartScope it) {
-		scope.flow.shadowEvents
+		members.filter[scope.flow.shadowEvents.toList.contains(it)].filter(Event)
 	}
 	
 	def getShadowEventsByScope(VariableDefinition member) {
