@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) C# Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.csharp;singleton:=true
-Bundle-Version: 3.5.11.qualifier
+Bundle-Version: 3.5.12.qualifier
 Require-Bundle: org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.genmodel,
