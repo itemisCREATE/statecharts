@@ -5,6 +5,26 @@ h1(#release_notes). Release notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.12). YAKINDU Statechart Tools  3.5.12 (Jun 15, 2020)
+
+This is mainly a bugfix release, containing the following:
+
+* Fixed some scoping issues when using C++ namespaces in C++ domain statecharts. In particular, elements from namespaces that are split over multiple files are now properly accessible in the statechart.
+* Fixed an issue in the C code generator that resulted in a duplicate type cast.
+* Improved performance when validating SCTUnit files. Especially for larger SCTUnit test classes, the performance improvement is significant.
+* Fixed an issue when opening the generator model wizard without selecting a file.
+* Fixed handling of guard expressions in statechart entry and exit reactions.
+* Fixed an issue when time events were used in regions without inner states.
+* Added the 'Send Feedback' option also to the Standard Edition.
+
+h3(#release_notes_3.5.12_scxml). SCXML
+
+In this release we also put some effort in improving the SCXML integration, containing the following:
+* Update to latest Apache Commons SCXML Engine.
+* Several bug fixes, especially for handling Choice and Synchronization nodes.
+* We also added various validation rules to ensure that the modeled statechart can always be transformed into valid SCXML.
+
+
 h2(#release_notes_3.5.11). YAKINDU Statechart Tools  3.5.11 (Apr 07, 2020)
 
 This is mainly a bugfix release, containing the following:
