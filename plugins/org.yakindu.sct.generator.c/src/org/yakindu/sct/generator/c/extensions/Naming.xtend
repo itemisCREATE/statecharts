@@ -48,6 +48,9 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.TypedDeclaration
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sexec.extensions.EventBufferExtensions
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -68,6 +71,9 @@ class Naming {
 	
 	@Inject extension StatechartUtil
 	@Inject extension GeneratorPredicate
+	@Inject extension OriginTracing
+	@Inject extension EventBufferExtensions
+	
 	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -144,6 +150,27 @@ class Naming {
 		}
 		return entryStatemachinePrefix.toFirstUpper
 	}
+	
+	
+	def dispatch String cType(EObject it) {
+		type
+	}
+	
+	def dispatch String cType(ExecutionFlow it) {
+		type
+	}
+	
+	def dispatch String cType(Type it) {
+		if (! it.name.isNullOrEmpty) return it.name
+		if (! it.targetLanguageName.isNullOrEmpty) return targetLanguageName
+		
+		val typeSuffix = if (it.isEventBuffer) "EvBuf" else ""
+		val typeOrigin = it.originTraces.filter(EObject).findFirst[true]
+		
+		if (typeOrigin !== null) typeOrigin.cType + typeSuffix 
+		else typeSuffix
+	}
+	
 	
 	def String getContainerType(EObject it) {
 		if (flow !== null) {
@@ -244,6 +271,18 @@ class Naming {
 		return null;
 	}
 	
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
+	def scopeShadowEventMember(Event it) {
+		'''
+		«SINGLE_SUBSCRIPTION_OBSERVER_TYPE» «eventName»;
+		'''
+	}
+
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
 	def dispatch scopeTypeDeclMember(Event it) {
 		'''
 		«IF useOutEventObservables && direction == Direction.OUT»
@@ -256,20 +295,23 @@ class Naming {
 		'''
 	}
 	
-	def scopeShadowEventMember(Event it) {
-		'''
-		«SINGLE_SUBSCRIPTION_OBSERVER_TYPE» «eventName»;
-		'''
-	}
-
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
 		«BOOL_TYPE» «timeEventRaisedFlag»;
 	'''
 
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
 	def dispatch scopeTypeDeclMember(Property it) '''
 		«IF type.name != 'void' && !isConst»«typeSpecifier.targetLanguageName» «variable»;«ENDIF»
 	'''
 	
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
 	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
 	def constantName(VariableDefinition it) {

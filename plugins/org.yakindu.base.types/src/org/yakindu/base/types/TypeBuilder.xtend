@@ -207,6 +207,10 @@ class TypeBuilder {
 		]
 	}
 
+	def _complexType() {
+		createComplexType
+	}
+
 	def <T extends AnnotatableElement> T _annotate(T elem, AnnotationType annotationType, Expression... args) {
 		checkNotNull(annotatableElement, elem)
 		checkNotNull(annotation_Type, annotationType)

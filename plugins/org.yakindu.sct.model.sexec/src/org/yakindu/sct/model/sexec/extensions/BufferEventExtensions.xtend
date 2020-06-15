@@ -1,9 +1,9 @@
 package org.yakindu.sct.model.sexec.extensions
 
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.yakindu.base.types.TypeBuilder
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 
 class BufferEventExtensions {
@@ -20,6 +20,7 @@ class BufferEventExtensions {
 		typeSpecifier = EcoreUtil.copy(bufferedEvent.typeSpecifier)
 		_annotate(BUFFER_EVENT_ANNOTATION)
 	}
+	
 	
 	def isBufferEvent(Event it){
 		annotations.exists[ a | a.type.name == BUFFER_EVENT_ANNOTATION]		

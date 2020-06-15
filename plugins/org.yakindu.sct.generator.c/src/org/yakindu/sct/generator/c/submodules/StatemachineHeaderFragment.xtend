@@ -122,6 +122,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		
 		
 		«FOR t : it.derivedComplexTypes»
+			«t.typeDeclaration(flow)»			
 			«t.structDeclaration(flow)»			
 		«ENDFOR»
 		

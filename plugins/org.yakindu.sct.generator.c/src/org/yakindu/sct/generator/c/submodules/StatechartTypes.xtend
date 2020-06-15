@@ -30,6 +30,10 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Property
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.base.types.Direction
 
 /**
  * @author rbeckmann
@@ -44,6 +48,7 @@ class StatechartTypes {
 	@Inject extension ShadowEventExtensions
 	
 	@Inject protected extension GeneratorEntry entry
+	@Inject extension GeneratorPredicate
 	@Inject protected extension GenmodelEntries
 	
 	def forwardDeclarations(ExecutionFlow it) {
@@ -90,7 +95,7 @@ class StatechartTypes {
 		«TRACE_HANDLER_TYPE» *«TRACE_HANDLER»;
 		«ENDIF»
 		«FOR v : it.features.filter(org.yakindu.base.types.Property)»
-			«type(v)» «v.name»;
+			«v.type.cType» «v.name»;
 		«ENDFOR»
 		'''
 	}
@@ -169,12 +174,39 @@ class StatechartTypes {
 	}
 	
 	/** TODO complex type should be contained in ExecutionFLow */
+	def typeDeclaration(ComplexType type, ExecutionFlow flow) '''
+		typedef struct «type.cType» «type.cType»;
+	'''
+	
+	/** TODO complex type should be contained in ExecutionFLow */
 	def structDeclaration(ComplexType type, ExecutionFlow flow) '''
-		struct «flow.type»«type.name» {
+		struct «type.cType» {
 			«FOR f : type.features»
-				«f.scopeTypeDeclMember»
+				«f.structMember»
 			«ENDFOR»
 		};
 		
 	'''
+	
+	def dispatch structMember(Event it) {
+		'''
+		«IF useOutEventObservables && direction == Direction.OUT»
+			«OBSERVABLE_TYPE» «eventName»;
+		«ENDIF»
+		«IF (useOutEventGetters && direction == Direction.OUT) || direction == Direction.IN || direction == Direction.LOCAL»
+			«BOOL_TYPE» «eventRaisedFlag»;
+			«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
+		«ENDIF»
+		'''
+	}
+	
+	def dispatch structMember(TimeEvent it) '''
+		«BOOL_TYPE» «timeEventRaisedFlag»;
+	'''
+
+	def dispatch structMember(Property it) '''
+		«type.cType» «variable»;
+	'''
+	
+	def dispatch structMember(Declaration it) ''''''
 }

@@ -49,6 +49,10 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sexec.extensions.EventBufferExtensions
+import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class StructureMapping {
 	 
@@ -61,6 +65,9 @@ class StructureMapping {
 	@Inject extension ShadowEventExtensions
 	@Inject extension BufferEventExtensions
 	@Inject extension TypeBuilder
+	@Inject extension OriginTracing
+	@Inject extension INamingService
+	@Inject extension StatechartAnnotations
 	
 	
 	//==========================================================================
@@ -315,34 +322,41 @@ class StructureMapping {
 	//
 	
 	
-	def defineEventBuffer(ExecutionFlow flow){
+	def defineEventBuffer(Statechart sc, ExecutionFlow flow){
 		
-		val bufferType = _complexType("EventBuf") => [ bt |
+		if (sc.isEventDriven) return 
+		
+		val bufferType = _complexType() => [ bt |
 			flow.scopes.filter[hasBufferedEvents].forEach[ scope | 
-				val scopeBufferType = _complexType(scope.scopeName + "EventBuf") => [ scopeType |
+				val scopeBufferType = _complexType() => [ scopeType |
 					scope.declarations
 						.filter(Event)
 						.filter[ e | e.direction != Direction::OUT ]
 						.forEach[ e | e.createBufferEvent => [scopeType.features.add(it)]]
+					scopeType._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
 				]
 				
-				bt.features += _variable(scope.scopeName, scopeBufferType)
+				scopeBufferType.traceOrigin(scope)
+				bt.features += _variable(scope.featureName, scopeBufferType)
 			]
+			
+			bt._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
+			bt.traceOrigin(flow)
 		]
 		
 		flow.features += _variable("eventBuffer", bufferType);	
 	}
 	
-	def dispatch scopeName(Scope it) {
-		"scope"	
+	def dispatch featureName(Scope it) {
+		'timeEvents'	
 	}
 
-	def dispatch scopeName(InternalScope it) {
-		"Internal"	
+	def dispatch featureName(InternalScope it) {
+		"internal"	
 	}
 	
-	def dispatch scopeName(InterfaceScope it) {
-		if ( name.nullOrEmpty ) "Iface" else name + "Iface"
+	def dispatch featureName(InterfaceScope it) {
+		'iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
 	
 	

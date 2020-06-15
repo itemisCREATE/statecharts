@@ -80,8 +80,8 @@ class ModelSequencer implements IModelSequencer {
 		// map referenced machine out events to shadow events
 		sc.mapReferencedMachineOutEvents(ef)
 		
-		// introduce buffer events
-		ef.defineBufferEvents
+		// define event buffer
+		ef.defineEventBuffer
 		
 		//clear create caches to avoid memory leak with repetetive generator cycles
 		mapping.cleanup
