@@ -3,7 +3,7 @@ GeneratorModel for yakindu::images {
 	statechart watch_subdiagrams {
 
 		feature Outlet {
-			targetProject = "org.yakindu.sct.examples.digital_watch"
+			targetProject = "org.yakindu.sct.examples.basic.digital_watch"
 			targetFolder = "images-gen-bmp"
 		}
 
@@ -15,7 +15,7 @@ GeneratorModel for yakindu::images {
 	statechart watch_subdiagrams {
 
 		feature Outlet {
-			targetProject = "org.yakindu.sct.examples.digital_watch"
+			targetProject = "org.yakindu.sct.examples.basic.digital_watch"
 			targetFolder = "images-gen-png"
 		}
 
@@ -27,7 +27,7 @@ GeneratorModel for yakindu::images {
 	statechart watch_subdiagrams {
 
 		feature Outlet {
-			targetProject = "org.yakindu.sct.examples.digital_watch"
+			targetProject = "org.yakindu.sct.examples.basic.digital_watch"
 			targetFolder = "images-gen-jpg"
 		}
 
@@ -39,7 +39,7 @@ GeneratorModel for yakindu::images {
 	statechart watch_subdiagrams {
 
 		feature Outlet {
-			targetProject = "org.yakindu.sct.examples.digital_watch"
+			targetProject = "org.yakindu.sct.examples.basic.digital_watch"
 			targetFolder = "images-gen-jpeg"
 		}
 
@@ -51,7 +51,7 @@ GeneratorModel for yakindu::images {
 	statechart watch_subdiagrams {
 
 		feature Outlet {
-			targetProject = "org.yakindu.sct.examples.digital_watch"
+			targetProject = "org.yakindu.sct.examples.basic.digital_watch"
 			targetFolder = "images-gen-svg"
 		}
 
