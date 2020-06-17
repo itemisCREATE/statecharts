@@ -3,6 +3,7 @@ package org.yakindu.scr.ieq.eventdrivenoutevents;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -26,12 +27,15 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		private boolean e2;
 		
 		
-		public boolean isRaisedE2() {
-			return e2;
-		}
-		
 		protected void raiseE2() {
 			e2 = true;
+			e2Observable.next(null);
+		}
+		
+		private Observable<Void> e2Observable = new Observable<Void>();
+		
+		public Observable<Void> getE2() {
+			return e2Observable;
 		}
 		
 		protected void clearEvents() {
@@ -214,8 +218,8 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		sCInterface.raiseE1();
 	}
 	
-	public boolean isRaisedE2() {
-		return sCInterface.isRaisedE2();
+	public Observable<Void> getE2() {
+		return sCInterface.getE2();
 	}
 	
 	/* Entry action for state 'StateB'. */

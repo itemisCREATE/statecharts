@@ -14,11 +14,9 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.base.types.Event
-import org.yakindu.base.types.Direction
 
 class StatechartUtil {
 	
@@ -63,14 +61,6 @@ class StatechartUtil {
 	
 	def getOriginScope(EObject it) {
 		originTraces.filter(Scope).head
-	}
-	
-	def getOriginEvent(Event shadowEvent) {
-		shadowEvent.originTraces.filter(Event).filter[direction == Direction.OUT].head
-	}
-	
-	def getOriginOfType(EObject it, Class<? extends EObject> type) {
-		originTraces.filter(type).head
 	}
 	
 }

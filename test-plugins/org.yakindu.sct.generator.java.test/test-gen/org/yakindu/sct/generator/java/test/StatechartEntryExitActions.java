@@ -25,7 +25,7 @@ public class StatechartEntryExitActions {
 		statemachine = new StatechartEntryAndExitActionsStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
-	
+		
 		statemachine.init();
 		
 	}

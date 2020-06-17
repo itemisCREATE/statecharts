@@ -3,6 +3,7 @@ package org.yakindu.scr.eventdriven;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -34,56 +35,91 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		private boolean outEvent;
 		
 		
+		protected void raiseOutEvent() {
+			outEvent = true;
+			outEventObservable.next(null);
+		}
 		public boolean isRaisedOutEvent() {
 			return outEvent;
 		}
 		
-		protected void raiseOutEvent() {
-			outEvent = true;
+		
+		private Observable<Void> outEventObservable = new Observable<Void>();
+		
+		public Observable<Void> getOutEvent() {
+			return outEventObservable;
 		}
 		
 		private boolean running;
 		
 		
+		protected void raiseRunning() {
+			running = true;
+			runningObservable.next(null);
+		}
 		public boolean isRaisedRunning() {
 			return running;
 		}
 		
-		protected void raiseRunning() {
-			running = true;
+		
+		private Observable<Void> runningObservable = new Observable<Void>();
+		
+		public Observable<Void> getRunning() {
+			return runningObservable;
 		}
 		
 		private boolean oe1;
 		
 		
+		protected void raiseOe1() {
+			oe1 = true;
+			oe1Observable.next(null);
+		}
 		public boolean isRaisedOe1() {
 			return oe1;
 		}
 		
-		protected void raiseOe1() {
-			oe1 = true;
+		
+		private Observable<Void> oe1Observable = new Observable<Void>();
+		
+		public Observable<Void> getOe1() {
+			return oe1Observable;
 		}
 		
 		private boolean oe2;
 		
 		
+		protected void raiseOe2() {
+			oe2 = true;
+			oe2Observable.next(null);
+		}
 		public boolean isRaisedOe2() {
 			return oe2;
 		}
 		
-		protected void raiseOe2() {
-			oe2 = true;
+		
+		private Observable<Void> oe2Observable = new Observable<Void>();
+		
+		public Observable<Void> getOe2() {
+			return oe2Observable;
 		}
 		
 		private boolean oe3;
 		
 		
+		protected void raiseOe3() {
+			oe3 = true;
+			oe3Observable.next(null);
+		}
 		public boolean isRaisedOe3() {
 			return oe3;
 		}
 		
-		protected void raiseOe3() {
-			oe3 = true;
+		
+		private Observable<Void> oe3Observable = new Observable<Void>();
+		
+		public Observable<Void> getOe3() {
+			return oe3Observable;
 		}
 		
 		protected void clearEvents() {

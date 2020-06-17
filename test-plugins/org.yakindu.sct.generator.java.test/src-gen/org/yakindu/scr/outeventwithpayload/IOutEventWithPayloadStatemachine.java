@@ -2,6 +2,7 @@
 package org.yakindu.scr.outeventwithpayload;
 
 import org.yakindu.scr.IStatemachine;
+import org.yakindu.sct.rx.Observable;
 
 public interface IOutEventWithPayloadStatemachine extends IStatemachine {
 	
@@ -10,8 +11,10 @@ public interface IOutEventWithPayloadStatemachine extends IStatemachine {
 		public void raiseI(long value);
 		
 		public boolean isRaisedO();
-		
 		public long getOValue();
+		
+		
+		public Observable<Long> getO();
 		
 	}
 	

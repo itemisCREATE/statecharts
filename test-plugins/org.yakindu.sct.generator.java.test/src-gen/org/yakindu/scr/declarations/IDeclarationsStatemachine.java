@@ -2,6 +2,7 @@
 package org.yakindu.scr.declarations;
 
 import org.yakindu.scr.IStatemachine;
+import org.yakindu.sct.rx.Observable;
 
 public interface IDeclarationsStatemachine extends IStatemachine {
 	
@@ -9,19 +10,15 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 	
 		public void raiseEvA();
 		
-		public boolean isRaisedEvB();
+		public Observable<Void> getEvB();
 		
 		public void raiseEvC(boolean value);
 		
-		public boolean isRaisedEvD();
-		
-		public long getEvDValue();
+		public Observable<Long> getEvD();
 		
 		public void raiseEvE(double value);
 		
-		public boolean isRaisedEvF();
-		
-		public String getEvFValue();
+		public Observable<String> getEvF();
 		
 		public boolean getVarA();
 		
@@ -52,19 +49,15 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 	
 		public void raiseEvA();
 		
-		public boolean isRaisedEvB();
+		public Observable<Void> getEvB();
 		
 		public void raiseEvC(boolean value);
 		
-		public boolean isRaisedEvD();
-		
-		public long getEvDValue();
+		public Observable<Long> getEvD();
 		
 		public void raiseEvE(double value);
 		
-		public boolean isRaisedEvF();
-		
-		public String getEvFValue();
+		public Observable<String> getEvF();
 		
 		public boolean getVarA();
 		
