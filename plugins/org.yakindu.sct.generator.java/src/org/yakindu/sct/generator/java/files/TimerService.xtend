@@ -18,11 +18,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class TimerService {
 	
-	@Inject
-	extension Naming 
-	
-	@Inject
-	extension GenmodelEntries
+	@Inject extension Naming 
+	@Inject extension GenmodelEntries
 	
 	def generateTimerService(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		fsa.generateFile(entry.basePackagePath + '/' + timerServiceClass.java, content(entry))

@@ -22,6 +22,8 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.generator.java.GeneratorPredicate
+import org.yakindu.sct.generator.java.features.OutEventObservables
 
 @Singleton
 class StatemachineFunctionsGenerator {
@@ -32,6 +34,8 @@ class StatemachineFunctionsGenerator {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Synchronized
+	@Inject protected extension GeneratorPredicate
+	@Inject protected extension OutEventObservables
 	
 	def createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
@@ -59,15 +63,22 @@ class StatemachineFunctionsGenerator {
 
 				«ENDIF»
 				«IF event.direction ==  Direction::OUT»
-					public «sync»boolean isRaised«event.name.asName»() {
-						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
-					}
-
-					«IF event.hasValue»
-						public «sync»«event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
-							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
+					«IF useOutEventGetters»
+						public «sync»boolean isRaised«event.name.asName»() {
+							return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 						}
-
+						
+						«IF event.hasValue»
+							public «sync»«event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
+								return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
+							}
+							
+						«ENDIF»
+					«ELSEIF useOutEventObservables»
+						public «sync»Observable<«event.eventType»> «event.observableGetterName»() {
+							return «scope.interfaceName.asEscapedIdentifier».«event.observableGetterName»();
+						}
+						
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»

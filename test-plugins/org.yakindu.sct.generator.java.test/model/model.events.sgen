@@ -27,6 +27,10 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature OutEventAPI {
+			getters = true
+		}
 
 	}	
 
@@ -55,6 +59,10 @@ GeneratorModel for yakindu::java {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature OutEventAPI {
+			getters = true
 		}
 
 	}	

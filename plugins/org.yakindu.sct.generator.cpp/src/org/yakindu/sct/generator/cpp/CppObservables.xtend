@@ -19,7 +19,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 /**
- * @autho Robin Herrmann
+ * @author Robin Herrmann
  */
 class CppObservables {
 	

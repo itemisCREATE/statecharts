@@ -24,6 +24,8 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.generator.java.GeneratorPredicate
+import org.yakindu.sct.generator.java.features.OutEventObservables
 
 @Singleton
 class EventCode {
@@ -35,6 +37,8 @@ class EventCode {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension ITypeSystem
 	@Inject protected extension Synchronized
+	@Inject protected extension GeneratorPredicate
+	@Inject protected extension OutEventObservables
 	
 	@Inject protected extension FieldDeclarationGenerator
 	
@@ -62,14 +66,22 @@ class EventCode {
 	}
 			
 	def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
-		public boolean isRaised«event.name.asName»() {
-			«sync(scope.flow.statemachineClassName + ".this", '''return «event.identifier»;''')»
-		}
-		
 		«outEventRaiser(event, entry, scope)»
-		«IF event.hasValue»
+		«IF useOutEventGetters»
+			public boolean isRaised«event.name.asName»() {
+				«sync(scope.flow.statemachineClassName + ".this", '''return «event.identifier»;''')»
+			}
+			
+			«IF event.hasValue»
+				
+				«eventValueGetter(event)»
+			«ENDIF»
+		«ENDIF»
+		«IF useOutEventObservables»
 		
-		«eventValueGetter(event)»
+		«eventObservableField(event)»
+		
+		«eventObservableGetter(event)»
 		«ENDIF»
 	'''
 
@@ -87,6 +99,20 @@ class EventCode {
 			«getIllegalAccessValidation»
 			return «valueIdentifier»;
 			''')»
+		}
+		'''
+	}
+	
+	def protected eventObservableField(EventDefinition event) {
+		'''
+		private Observable<«event.eventType»> «event.observableName» = new Observable<«event.eventType»>();
+		'''
+	}
+	
+	def protected eventObservableGetter(EventDefinition event) {
+		'''
+		public Observable<«event.eventType»> «event.observableGetterName»() {
+			return «event.observableName»;
 		}
 		'''
 	}
@@ -125,7 +151,7 @@ class EventCode {
 	def protected eventRaiser(EventDefinition it, String visibility, String interfaceListenerName) {
 		'''
 			«IF hasValue»
-			«visibility» void raise«name.asName»(«typeSpecifier.targetLanguageName» value) {
+				«visibility» void raise«name.asName»(«typeSpecifier.targetLanguageName» value) {
 			«ELSE»
 				«visibility» void raise«name.asName»() {
 			«ENDIF»
@@ -138,6 +164,9 @@ class EventCode {
 					for («interfaceListenerName» listener : listeners) {
 						listener.on«event.name.asEscapedName»Raised(«IF hasValue»value«ENDIF»);
 					}
+				«ENDIF»
+				«IF needsObservable»
+					«observableName».next(«IF hasValue»value«ELSE»null«ENDIF»);
 				«ENDIF»
 				''')»
 			}
