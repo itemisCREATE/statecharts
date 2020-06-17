@@ -10,9 +10,9 @@ public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatema
 	
 	public interface SCIIf {
 	
-		public Observable<Void> getOperationCallback();
+		public Observable<Void> getOperationCallbackEvent();
 		
-		public Observable<Void> getListeners();
+		public Observable<Void> getListenersEvent();
 		
 		public long getTimer();
 		

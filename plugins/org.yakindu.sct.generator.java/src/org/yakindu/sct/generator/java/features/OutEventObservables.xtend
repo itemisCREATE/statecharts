@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Event
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
@@ -12,7 +11,6 @@ class OutEventObservables {
 	
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension Naming
-	@Inject extension JavaNamingService
 	@Inject extension SExecExtensions
 	
 	def getEventType(Event it) {
@@ -23,9 +21,9 @@ class OutEventObservables {
 		return "Void"
 	}
 	
-	def getObservableGetterName(Event it) '''get«name.asName»'''
+	def getObservableGetterName(Event it) '''get«identifier.toString.toFirstUpper»'''
 	
-	def getObservableName(Event it) '''«name.asIdentifier»Observable'''
+	def getObservableName(Event it) '''«identifier»Observable'''
 	
 	def getObserverName(Event shadowEvent) '''«shadowEvent.name»_observer'''
 	

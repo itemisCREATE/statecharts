@@ -1,8 +1,8 @@
 package org.yakindu.sct.generator.java.test;
 
 import org.junit.Test;
-import org.yakindu.scr.Observable;
-import org.yakindu.scr.Observer;
+import org.yakindu.sct.rx.Observable;
+import org.yakindu.sct.rx.Observer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

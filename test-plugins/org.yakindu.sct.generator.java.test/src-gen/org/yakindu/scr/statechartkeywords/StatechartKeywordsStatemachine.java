@@ -28,13 +28,13 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			for (SCIIfListener listener : listeners) {
 				listener.onOperationCallbackRaised();
 			}
-			operationCallbackObservable.next(null);
+			operationCallbackEventObservable.next(null);
 		}
 		
-		private Observable<Void> operationCallbackObservable = new Observable<Void>();
+		private Observable<Void> operationCallbackEventObservable = new Observable<Void>();
 		
-		public Observable<Void> getOperationCallback() {
-			return operationCallbackObservable;
+		public Observable<Void> getOperationCallbackEvent() {
+			return operationCallbackEventObservable;
 		}
 		
 		private boolean listenersEvent;
@@ -45,13 +45,13 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			for (SCIIfListener listener : listeners) {
 				listener.onListenersRaised();
 			}
-			listenersObservable.next(null);
+			listenersEventObservable.next(null);
 		}
 		
-		private Observable<Void> listenersObservable = new Observable<Void>();
+		private Observable<Void> listenersEventObservable = new Observable<Void>();
 		
-		public Observable<Void> getListeners() {
-			return listenersObservable;
+		public Observable<Void> getListenersEvent() {
+			return listenersEventObservable;
 		}
 		
 		private long timer;
