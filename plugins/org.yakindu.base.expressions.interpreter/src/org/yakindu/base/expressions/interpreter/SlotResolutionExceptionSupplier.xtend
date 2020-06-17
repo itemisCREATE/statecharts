@@ -35,7 +35,7 @@ class SlotResolutionExceptionSupplier implements Supplier<IllegalStateException>
 	}
 
 	def dispatch String toText(FeatureCall call) {
-		call.owner.toText + "." + call.feature.name
+		call.owner.toText + "." + (call.feature as NamedElement).name
 	}
 
 	def dispatch String toText(ElementReferenceExpression exp) {

@@ -136,7 +136,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			event.getContext + "raise" + event.definition.name.toFirstUpper + "()"
 		}
 	}
-
+ 
 	def dispatch String code(EventValueReferenceExpression it) {
 		value.getContext + value.definition.event.getter
 	}
@@ -151,7 +151,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(FeatureCall it) {
-		it.feature.codeDeclaration(it).toString
+		(it.feature as Declaration).codeDeclaration(it).toString
 	}
 
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
