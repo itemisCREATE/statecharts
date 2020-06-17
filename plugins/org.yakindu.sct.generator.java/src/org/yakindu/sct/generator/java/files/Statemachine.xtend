@@ -93,8 +93,8 @@ class Statemachine {
 			.fileComment(entry.licenseText)
 			.packageName(getImplementationPackageName(flow, entry))
 			.addImports(imports)
-			.addImport(entry.basePackageName.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
-			.addImport(entry.basePackageName.dot(observerClass), !flow.shadowEvents.nullOrEmpty)
+			.addImport(rxPackage.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
+			.addImport(rxPackage.dot(observerClass), !flow.shadowEvents.nullOrEmpty)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(
 				classTemplate

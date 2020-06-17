@@ -31,14 +31,14 @@ class Observer {
 		if (entry.skipLibraryFiles) {
 			return
 		}
-		val fileName = entry.basePackagePath + '/' + observerClass.java
+		val fileName = rxPackagePath + '/' + observerClass.java
 		fsa.generateFile(fileName, entry.libraryOutputConfig, entry.content)
 	}
 	
 	def private content(GeneratorEntry entry)
 	'''
 		«entry.licenseText»
-		package «entry.getBasePackageName()»;
+		package «rxPackage»;
 		
 		public interface Observer<T> {
 		

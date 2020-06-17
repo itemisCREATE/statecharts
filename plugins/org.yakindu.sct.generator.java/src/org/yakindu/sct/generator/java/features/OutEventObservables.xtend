@@ -23,7 +23,7 @@ class OutEventObservables {
 		return "Void"
 	}
 	
-	def getObservableGetterName(Event it) '''get«name.asName»Observable'''
+	def getObservableGetterName(Event it) '''get«name.asName»'''
 	
 	def getObservableName(Event it) '''«name.asIdentifier»Observable'''
 	
@@ -33,11 +33,10 @@ class OutEventObservables {
 	
 	def getObservableType(Event it) '''«observableClass»<«eventType»>'''
 	
-	def observableClass() {
-		"Observable"
-	}
+	def observableClass() { "Observable" }
 	
-	def observerClass() {
-		"Observer"
-	}
+	def observerClass() { "Observer" }
+	
+	def rxPackage() 	{ "org.yakindu.sct.rx" }
+	def rxPackagePath() { "org/yakindu/sct/rx" }
 }

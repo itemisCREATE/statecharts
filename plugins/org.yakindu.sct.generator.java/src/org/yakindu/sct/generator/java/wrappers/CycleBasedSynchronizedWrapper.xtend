@@ -148,7 +148,7 @@ class CycleBasedSynchronizedWrapper {
 			
 		«ENDIF»
 		«IF useOutEventObservables && flow.hasOutgoingEvents»
-			import «entry.getBasePackageName()».«observableClass»;
+			import «rxPackage».«observableClass»;
 		«ENDIF»
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;

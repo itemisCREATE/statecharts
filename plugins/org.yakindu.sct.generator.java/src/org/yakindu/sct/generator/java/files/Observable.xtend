@@ -26,19 +26,19 @@ class Observable {
 	@Inject extension Naming
 	@Inject extension OutputConfigProvider
 	@Inject extension ICoreLibraryHelper
-
+	
 	def generateObservable(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		if (entry.skipLibraryFiles) {
 			return
 		}
-		val fileName = entry.basePackagePath + '/' + observableClass.java
+		val fileName = rxPackagePath + '/' + observableClass.java
 		fsa.generateFile(fileName, entry.libraryOutputConfig, entry.content)
 	}
 	
 	def private content(GeneratorEntry entry)
 	'''
 		«entry.licenseText»
-		package «entry.getBasePackageName()»;
+		package «rxPackage»;
 		
 		import java.util.ArrayList;
 		import java.util.List;

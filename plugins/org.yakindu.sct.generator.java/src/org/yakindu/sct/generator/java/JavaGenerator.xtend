@@ -92,10 +92,8 @@ class JavaGenerator implements IExecutionFlowGenerator {
 			flow.generateTracing(entry, fsa)
 		}
 		
-		if (useOutEventObservables && flow.hasOutgoingEvents) {
+		if ((useOutEventObservables && flow.hasOutgoingEvents) || !flow.shadowEvents.nullOrEmpty) {
 			flow.generateObservable(entry, fsa)
-			flow.generateObserver(entry, fsa)
-		} else if (!flow.shadowEvents.nullOrEmpty) {
 			flow.generateObserver(entry, fsa)
 		}
 	}
