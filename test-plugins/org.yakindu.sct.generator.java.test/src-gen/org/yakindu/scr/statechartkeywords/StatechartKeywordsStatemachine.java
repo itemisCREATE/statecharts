@@ -4,7 +4,7 @@ package org.yakindu.scr.statechartkeywords;
 import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITimer;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatemachine {
 	protected class SCIIfImpl implements SCIIf {
@@ -33,7 +33,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		private Observable<Void> operationCallbackObservable = new Observable<Void>();
 		
-		public Observable<Void> getOperationCallbackObservable() {
+		public Observable<Void> getOperationCallback() {
 			return operationCallbackObservable;
 		}
 		
@@ -50,7 +50,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		private Observable<Void> listenersObservable = new Observable<Void>();
 		
-		public Observable<Void> getListenersObservable() {
+		public Observable<Void> getListeners() {
 			return listenersObservable;
 		}
 		

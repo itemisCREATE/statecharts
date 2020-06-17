@@ -4,7 +4,7 @@ package org.yakindu.scr.outeventvisibilityeventdriven;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface IOutEventVisibilityEventDrivenStatemachine extends IStatemachine {
 	
@@ -14,11 +14,11 @@ public interface IOutEventVisibilityEventDrivenStatemachine extends IStatemachin
 		
 		public boolean isRaisedO1();
 		
-		public Observable<Void> getO1Observable();
+		public Observable<Void> getO1();
 		
 		public boolean isRaisedO2();
 		
-		public Observable<Void> getO2Observable();
+		public Observable<Void> getO2();
 		
 	}
 	

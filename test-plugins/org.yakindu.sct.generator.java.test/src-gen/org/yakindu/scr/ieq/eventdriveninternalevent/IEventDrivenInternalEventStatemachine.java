@@ -4,7 +4,7 @@ package org.yakindu.scr.ieq.eventdriveninternalevent;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.yakindu.scr.ieq.IStatemachine;
-import org.yakindu.scr.ieq.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface IEventDrivenInternalEventStatemachine extends IStatemachine {
 	
@@ -14,7 +14,7 @@ public interface IEventDrivenInternalEventStatemachine extends IStatemachine {
 		
 		public void raiseReset();
 		
-		public Observable<Long> getEObservable();
+		public Observable<Long> getE();
 		
 		public long getX();
 		

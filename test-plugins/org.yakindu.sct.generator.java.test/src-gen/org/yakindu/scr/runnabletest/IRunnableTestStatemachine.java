@@ -4,13 +4,13 @@ package org.yakindu.scr.runnabletest;
 import java.util.List;
 import org.yakindu.scr.IStatemachine;
 import org.yakindu.scr.ITimerCallback;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface IRunnableTestStatemachine extends ITimerCallback,IStatemachine {
 	
 	public interface SCInterface {
 	
-		public Observable<Long> getEv_outObservable();
+		public Observable<Long> getEv_out();
 		
 		public void raiseEv_in(long value);
 		

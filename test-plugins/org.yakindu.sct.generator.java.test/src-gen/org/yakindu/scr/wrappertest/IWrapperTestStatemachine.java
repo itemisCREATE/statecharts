@@ -4,13 +4,13 @@ package org.yakindu.scr.wrappertest;
 import java.util.List;
 import org.yakindu.scr.IStatemachine;
 import org.yakindu.scr.ITimerCallback;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface IWrapperTestStatemachine extends ITimerCallback,IStatemachine {
 	
 	public interface SCInterface {
 	
-		public Observable<Void> getEv_outObservable();
+		public Observable<Void> getEv_out();
 		
 		public void raiseEv_in();
 		

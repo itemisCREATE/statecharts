@@ -3,7 +3,7 @@ package org.yakindu.scr.outeventvisibilityeventdriven;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisibilityEventDrivenStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -38,7 +38,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		
 		private Observable<Void> o1Observable = new Observable<Void>();
 		
-		public Observable<Void> getO1Observable() {
+		public Observable<Void> getO1() {
 			return o1Observable;
 		}
 		
@@ -56,7 +56,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		
 		private Observable<Void> o2Observable = new Observable<Void>();
 		
-		public Observable<Void> getO2Observable() {
+		public Observable<Void> getO2() {
 			return o2Observable;
 		}
 		

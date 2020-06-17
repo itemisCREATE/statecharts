@@ -3,7 +3,7 @@ package org.yakindu.scr.eventdriven;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -46,7 +46,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		private Observable<Void> outEventObservable = new Observable<Void>();
 		
-		public Observable<Void> getOutEventObservable() {
+		public Observable<Void> getOutEvent() {
 			return outEventObservable;
 		}
 		
@@ -64,7 +64,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		private Observable<Void> runningObservable = new Observable<Void>();
 		
-		public Observable<Void> getRunningObservable() {
+		public Observable<Void> getRunning() {
 			return runningObservable;
 		}
 		
@@ -82,7 +82,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		private Observable<Void> oe1Observable = new Observable<Void>();
 		
-		public Observable<Void> getOe1Observable() {
+		public Observable<Void> getOe1() {
 			return oe1Observable;
 		}
 		
@@ -100,7 +100,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		private Observable<Void> oe2Observable = new Observable<Void>();
 		
-		public Observable<Void> getOe2Observable() {
+		public Observable<Void> getOe2() {
 			return oe2Observable;
 		}
 		
@@ -118,7 +118,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		private Observable<Void> oe3Observable = new Observable<Void>();
 		
-		public Observable<Void> getOe3Observable() {
+		public Observable<Void> getOe3() {
 			return oe3Observable;
 		}
 		

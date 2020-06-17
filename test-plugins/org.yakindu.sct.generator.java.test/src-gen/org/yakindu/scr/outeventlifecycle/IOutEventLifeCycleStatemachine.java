@@ -2,7 +2,7 @@
 package org.yakindu.scr.outeventlifecycle;
 
 import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface IOutEventLifeCycleStatemachine extends IStatemachine {
 	
@@ -12,7 +12,7 @@ public interface IOutEventLifeCycleStatemachine extends IStatemachine {
 		
 		public boolean isRaisedF();
 		
-		public Observable<Void> getFObservable();
+		public Observable<Void> getF();
 		
 		public boolean getF_available_in_cycle();
 		

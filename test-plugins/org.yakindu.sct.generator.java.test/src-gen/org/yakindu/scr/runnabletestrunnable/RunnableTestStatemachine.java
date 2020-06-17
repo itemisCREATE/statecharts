@@ -7,7 +7,7 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.yakindu.scr.ITimer;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runnable {
 	
@@ -58,7 +58,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		
 		private Observable<Long> ev_outObservable = new Observable<Long>();
 		
-		public Observable<Long> getEv_outObservable() {
+		public Observable<Long> getEv_out() {
 			return ev_outObservable;
 		}
 		
@@ -373,8 +373,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		return sCInterface;
 	}
 	
-	public synchronized Observable<Long> getEv_outObservable() {
-		return sCInterface.getEv_outObservable();
+	public synchronized Observable<Long> getEv_out() {
+		return sCInterface.getEv_out();
 	}
 	
 	public synchronized void raiseEv_in(long value) {

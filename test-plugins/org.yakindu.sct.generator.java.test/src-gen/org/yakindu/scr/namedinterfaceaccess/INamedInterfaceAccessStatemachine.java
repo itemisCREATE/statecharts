@@ -2,7 +2,7 @@
 package org.yakindu.scr.namedinterfaceaccess;
 
 import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 	
@@ -10,11 +10,11 @@ public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 	
 		public boolean isRaisedOpen();
 		
-		public Observable<Void> getOpenObservable();
+		public Observable<Void> getOpen();
 		
 		public boolean isRaisedClose();
 		
-		public Observable<Void> getCloseObservable();
+		public Observable<Void> getClose();
 		
 	}
 	

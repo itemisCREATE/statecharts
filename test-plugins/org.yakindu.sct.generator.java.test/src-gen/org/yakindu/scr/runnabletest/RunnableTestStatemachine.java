@@ -4,7 +4,7 @@ package org.yakindu.scr.runnabletest;
 import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITimer;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -36,7 +36,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		private Observable<Long> ev_outObservable = new Observable<Long>();
 		
-		public Observable<Long> getEv_outObservable() {
+		public Observable<Long> getEv_out() {
 			return ev_outObservable;
 		}
 		
@@ -272,8 +272,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		return sCInterface;
 	}
 	
-	public Observable<Long> getEv_outObservable() {
-		return sCInterface.getEv_outObservable();
+	public Observable<Long> getEv_out() {
+		return sCInterface.getEv_out();
 	}
 	
 	public void raiseEv_in(long value) {

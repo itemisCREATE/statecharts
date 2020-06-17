@@ -4,7 +4,7 @@ package org.yakindu.scr.eventdriven;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface IEventDrivenStatemachine extends IStatemachine {
 	
@@ -16,23 +16,23 @@ public interface IEventDrivenStatemachine extends IStatemachine {
 		
 		public boolean isRaisedOutEvent();
 		
-		public Observable<Void> getOutEventObservable();
+		public Observable<Void> getOutEvent();
 		
 		public boolean isRaisedRunning();
 		
-		public Observable<Void> getRunningObservable();
+		public Observable<Void> getRunning();
 		
 		public boolean isRaisedOe1();
 		
-		public Observable<Void> getOe1Observable();
+		public Observable<Void> getOe1();
 		
 		public boolean isRaisedOe2();
 		
-		public Observable<Void> getOe2Observable();
+		public Observable<Void> getOe2();
 		
 		public boolean isRaisedOe3();
 		
-		public Observable<Void> getOe3Observable();
+		public Observable<Void> getOe3();
 		
 	}
 	

@@ -2,7 +2,7 @@
 package org.yakindu.scr.runnabletest;
 import java.util.List;
 
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 import org.yakindu.scr.ITimer;
 import org.yakindu.scr.ITimerCallback;
 import org.yakindu.scr.runnabletest.RunnableTestStatemachine.State;
@@ -40,9 +40,9 @@ public class SynchronizedRunnableTestStatemachine implements IRunnableTestStatem
 			}
 		}
 		
-		public Observable<Long> getEv_outObservable() {
+		public Observable<Long> getEv_out() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().getEv_outObservable();
+				return statemachine.getSCInterface().getEv_out();
 			}
 		}
 		

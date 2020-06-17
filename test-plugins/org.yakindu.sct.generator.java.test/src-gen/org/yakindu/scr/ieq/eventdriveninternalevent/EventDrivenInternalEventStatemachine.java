@@ -3,7 +3,7 @@ package org.yakindu.scr.ieq.eventdriveninternalevent;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import org.yakindu.scr.ieq.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenInternalEventStatemachine implements IEventDrivenInternalEventStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -53,7 +53,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 		private Observable<Long> eObservable = new Observable<Long>();
 		
-		public Observable<Long> getEObservable() {
+		public Observable<Long> getE() {
 			return eObservable;
 		}
 		
@@ -319,8 +319,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		sCInterface.raiseReset();
 	}
 	
-	public Observable<Long> getEObservable() {
-		return sCInterface.getEObservable();
+	public Observable<Long> getE() {
+		return sCInterface.getE();
 	}
 	
 	public long getX() {

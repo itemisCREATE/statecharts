@@ -2,13 +2,13 @@
 package org.yakindu.scr.observables;
 
 import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public interface IObservablesStatemachine extends IStatemachine {
 	
 	public interface SCInterface {
 	
-		public Observable<Void> getDummyObservable();
+		public Observable<Void> getDummy();
 		
 	}
 	

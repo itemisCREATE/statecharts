@@ -3,7 +3,7 @@ package org.yakindu.scr.ieq.eventdrivenoutevents;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import org.yakindu.scr.ieq.Observable;
+import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -34,7 +34,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 		private Observable<Void> e2Observable = new Observable<Void>();
 		
-		public Observable<Void> getE2Observable() {
+		public Observable<Void> getE2() {
 			return e2Observable;
 		}
 		
@@ -218,8 +218,8 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		sCInterface.raiseE1();
 	}
 	
-	public Observable<Void> getE2Observable() {
-		return sCInterface.getE2Observable();
+	public Observable<Void> getE2() {
+		return sCInterface.getE2();
 	}
 	
 	/* Entry action for state 'StateB'. */
