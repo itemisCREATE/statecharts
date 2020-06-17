@@ -131,8 +131,15 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 */
 	@Override
 	public Type getType() {
-		Type type = basicGetType();
-		return type != null && type.eIsProxy() ? (Type)eResolveProxy((InternalEObject)type) : type;
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (Type)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE, oldType, type));
+			}
+		}
+		return type;
 	}
 
 	/**
