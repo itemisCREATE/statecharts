@@ -132,6 +132,10 @@ class CppNaming extends Naming {
 		RXCPP_MODULE
 	}
 	
+	def parent() {
+		PARENT
+	}
+	
 	override dispatch scopeTypeDeclMember(EventDefinition it) '''
 		«IF needsObservable»
 			sc::rx::Observable<«typeSpecifier.targetLanguageName»> «observable»;
@@ -337,13 +341,25 @@ class CppNaming extends Naming {
 
 	def dispatch localAccess(Event it) '''«name.asIdentifier.raised»'''
 
-	def localValueAccess(Event it) '''«name.asIdentifier.value»'''
+	def dispatch localValueAccess(Event it) '''«name.asIdentifier.value»'''
+	
+	def dispatch localValueAccess(EObject it) ''''''
 
 	override valueParams(EventDefinition it) {
 		if (hasValue)
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
+	}
+	
+	def enumeratorAccess(Enumerator it) {
+		val chain = newArrayList()
+		var container = eContainer.eContainer
+		while(container instanceof ComplexType) {
+			chain.add(container)
+			container = container.eContainer
+		}
+		'''«chain.reverse.join("", "::", "::", [it.name])»«super._access(it)»'''
 	}
 	
 	protected def isExternal(EObject it) {

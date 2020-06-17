@@ -87,11 +87,11 @@ class EventDrivenEventCode extends EventCode {
 			void «flow.module»::«scope.interfaceName»::«it.asRaiser»(«it.valueParams»)
 			{
 				«IF it.hasValue»
-				parent->«queue».push_back(new «event.eventClassName»(«event.eventEnumMemberName», value));
+				«parent»->«queue».push_back(new «event.eventClassName»(«event.eventEnumMemberName», value));
 				«ELSE»
-				parent->«queue».push_back(new «event.eventClassName»(«event.eventEnumMemberName»));
+				«parent»->«queue».push_back(new «event.eventClassName»(«event.eventEnumMemberName»));
 				«ENDIF»
-				parent->«flow.runCycleFctID»();
+				«parent»->«flow.runCycleFctID»();
 			}
 		'''
 
@@ -104,7 +104,7 @@ class EventDrivenEventCode extends EventCode {
 				«ENDIF»
 				«event.localAccess» = true;
 				
-				parent->«flow.runCycleFctID»();
+				«parent»->«flow.runCycleFctID»();
 			}
 		'''
 	
