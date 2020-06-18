@@ -11,6 +11,7 @@ import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 
 class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.BehaviorMapping {
 
@@ -22,6 +23,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 	@Inject extension StatechartAnnotations
 	
 	@Inject extension ExpressionBuilder exprBuilder
+	@Inject extension SexecBuilder sexecBuilder
 	
 
 	protected override Step lcaDoSequence(Region region, ExecutionFlow flow) {

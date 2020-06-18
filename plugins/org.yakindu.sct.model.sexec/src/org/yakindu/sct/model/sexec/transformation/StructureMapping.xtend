@@ -25,14 +25,13 @@ import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
+import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
@@ -47,12 +46,6 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.model.sexec.extensions.EventBufferExtensions
-import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class StructureMapping {
 	 
@@ -60,14 +53,9 @@ class StructureMapping {
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
 	@Inject extension StatechartUtil
-	@Inject extension ExpressionBuilder
 	@Inject extension ExpressionExtensions
 	@Inject extension ShadowEventExtensions
-	@Inject extension BufferEventExtensions
-	@Inject extension TypeBuilder
-	@Inject extension OriginTracing
-	@Inject extension INamingService
-	@Inject extension StatechartAnnotations
+	@Inject extension SexecBuilder
 	
 	
 	//==========================================================================
@@ -322,47 +310,6 @@ class StructureMapping {
 	//
 	
 	
-	def defineEventBuffer(Statechart sc, ExecutionFlow flow){
-		
-		if (sc.isEventDriven) return 
-		
-		val bufferType = _complexType() => [ bt |
-			flow.scopes.filter[hasBufferedEvents].forEach[ scope | 
-				val scopeBufferType = _complexType() => [ scopeType |
-					scope.declarations
-						.filter(Event)
-						.filter[ e | e.direction != Direction::OUT ]
-						.forEach[ e | e.createBufferEvent => [scopeType.features.add(it)]]
-					scopeType._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
-				]
-				
-				scopeBufferType.traceOrigin(scope)
-				bt.features += _variable(scope.featureName, scopeBufferType)
-			]
-			
-			bt._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
-			bt.traceOrigin(flow)
-		]
-		
-		flow.features += _variable("eventBuffer", bufferType);	
-	}
-	
-	def dispatch featureName(Scope it) {
-		'timeEvents'	
-	}
-
-	def dispatch featureName(InternalScope it) {
-		"internal"	
-	}
-	
-	def dispatch featureName(InterfaceScope it) {
-		'iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
-	}
-	
-	
-	def hasBufferedEvents(Scope it) {
-		it.declarations.filter(Event).exists[ e | e.direction != Direction::OUT]	
-	}
 	
 			
 }

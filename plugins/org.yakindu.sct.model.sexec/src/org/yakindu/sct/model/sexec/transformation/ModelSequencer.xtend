@@ -15,6 +15,7 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.transformation.ng.EventBuffer
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -25,6 +26,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension StateVectorBuilder svBuilder
 	@Inject extension RetargetReferences retageting
+	@Inject extension EventBuffer eventBuffer
 	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
@@ -81,7 +83,7 @@ class ModelSequencer implements IModelSequencer {
 		sc.mapReferencedMachineOutEvents(ef)
 		
 		// define event buffer
-		ef.defineEventBuffer
+		ef.defineEventBuffer(sc)
 		
 		//clear create caches to avoid memory leak with repetetive generator cycles
 		mapping.cleanup

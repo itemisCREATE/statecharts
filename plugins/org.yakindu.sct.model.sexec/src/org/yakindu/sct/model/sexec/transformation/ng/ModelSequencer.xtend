@@ -35,6 +35,9 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension RetargetReferences retageting
 	
 	@Inject extension ReactMethod reactMethod
+	@Inject extension SuperStep superStep
+	@Inject extension RunCycleMethod runCycleMethod
+	@Inject extension EventBuffer eventBuffer
 	
 	
 	/* ==========================================================================
@@ -94,7 +97,12 @@ class ModelSequencer implements IModelSequencer {
 		sc.mapReferencedMachineOutEvents(ef)
 		
 		// define event buffer
-		sc.defineEventBuffer(ef)
+		ef.defineEventBuffer(sc)
+		
+		superStep.defineStructuralFeatures(ef)
+		runCycleMethod.defineStructuralFeatures(ef)
+		
+		ef.defineRunCycle
 
 		//clear create caches to avoid memory leak with repetetive generator cycles
 		mapping.cleanup

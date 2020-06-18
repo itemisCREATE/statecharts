@@ -105,6 +105,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 		_createCache_create_9.clear
 		_createCache_create_10.clear
 		_createCache_create_11.clear
+		
 		_createCache_createScope.clear
 		_createCache_createScope_1.clear
 		_createCache_createScope_2.clear
