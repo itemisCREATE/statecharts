@@ -75,6 +75,10 @@ class RunCycleMethod {
 		features.filter( typeof(Property) ).filter( m | m.name == "isReacting").head
 	}
 	
+	def Method runCycle(ExecutionFlow it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "runCycle").head
+	}
+	
 	def Method clearOutEvents(ExecutionFlow it) {
 		features.filter( typeof(Method) ).filter( m | m.name == "clearOutEvents").head
 	}

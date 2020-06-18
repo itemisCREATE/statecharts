@@ -20,11 +20,15 @@ import java.util.Map
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.naming.QualifiedName
 import org.yakindu.base.base.NamedElement
+import org.yakindu.sct.model.sexec.ExecutionEntry
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
@@ -36,14 +40,12 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.Reaction
-import org.yakindu.sct.model.sexec.Method
-import org.yakindu.sct.model.sexec.ExecutionEntry
-import org.eclipse.xtext.naming.QualifiedName
+import org.yakindu.sct.model.sexec.transformation.ng.ReactMethod
+import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
 
 class StepDepthComparator implements Comparator<Step> {
-	@Inject
-	extension SExecExtensions
+
+	@Inject protected extension SExecExtensions
 
 	override compare(Step arg0, Step arg1) {
 		return arg0.scopeDepth - arg1.scopeDepth
@@ -82,6 +84,7 @@ class DefaultNamingService implements INamingService {
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension MethodDepthComparator methodDepthComparator
 	@Inject extension NamingHelper
+	@Inject extension RunCycleMethod
 
 	@Inject StextNameProvider provider
 

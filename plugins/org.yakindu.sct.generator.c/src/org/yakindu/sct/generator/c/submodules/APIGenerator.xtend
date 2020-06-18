@@ -29,6 +29,7 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
 
 /**
  * @author rbeckmann
@@ -50,9 +51,13 @@ class APIGenerator {
 	@Inject protected extension GeneratorEntry genEntry
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension ShadowEventExtensions
+	@Inject protected extension RunCycleMethod
+	@Inject protected extension InternalFunctionsGenerator
 
-	def runCycle_(ExecutionFlow it) {
-		'''
+	def runCycleCode(ExecutionFlow it) {
+		if (it.runCycle !== null)
+			it.runCycle.implementation
+		else '''
 			«runCycleSignature»
 			{
 				«traceCycleStart»
