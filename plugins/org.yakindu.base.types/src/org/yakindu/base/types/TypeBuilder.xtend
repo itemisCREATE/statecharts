@@ -15,6 +15,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 /**
  * Builder extension for building types.
@@ -261,6 +262,10 @@ class TypeBuilder {
 	}
 	
 
+	def <T extends AnnotatableElement> T _public(T e) {
+		e._annotate(VisibilityAnnotations.PUBLIC_ANNOTATION)
+	}
+	
 //	def <T extends Declaration> T _protected(T it) {
 //		checkNotNull(declaration, it)
 //		visibility = Visibility.PROTECTED
