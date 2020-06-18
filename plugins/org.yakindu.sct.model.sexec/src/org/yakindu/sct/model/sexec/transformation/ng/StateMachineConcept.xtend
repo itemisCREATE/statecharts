@@ -11,6 +11,9 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import org.yakindu.sct.model.sexec.Sequence
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sexec.Statement
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 
 /**
  * 
@@ -21,6 +24,19 @@ class StateMachineConcept {
 	public static val CONCEPT_NAME_PREFIX = "@"
 	
 	def isStateMachineConcept (Sequence it) {
-		it.steps.empty && !it.name.nullOrEmpty && it.name.startsWith(CONCEPT_NAME_PREFIX)
+		!it.name.nullOrEmpty && it.name.startsWith(CONCEPT_NAME_PREFIX)
+	}
+	
+	def getParameter(Sequence s) {
+		s.getParameter(0)
+	}
+	
+	def EObject getParameter(Sequence s, int idx) {
+		if (s !== null && s.steps.size > idx) {
+			return ((s.steps.get(idx) as Statement)
+					.expression as ElementReferenceExpression)
+					.reference
+		}
+		else return null
 	}
 }

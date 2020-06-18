@@ -10,6 +10,7 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.Sequence
 
 class EventProcessing {
 
@@ -20,6 +21,7 @@ class EventProcessing {
 	
 	@Inject extension StatechartAnnotations
 	@Inject extension SExecExtensions
+	@Inject extension StateMachineConcept
 	
 
 	public static val CLEAR_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "clearEvent"
@@ -49,6 +51,9 @@ class EventProcessing {
 		_conceptSequence(CLEAR_EVENT, it)	
 	}
 	
+	def Event event(Sequence it){
+		it.getParameter as Event
+	}
 	
 	def Step _eventProcessing(ExecutionFlow it, Step body) {
 		_sequence(
