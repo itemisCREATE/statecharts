@@ -29,6 +29,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
 
 /**
  * @author rbeckmann
@@ -36,7 +37,8 @@ import org.yakindu.base.types.Direction
  *
  */
 @Singleton // Guice
-class EventCode {
+class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.EventCode {
+
 	@Inject protected extension SExecExtensions
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -130,4 +132,10 @@ class EventCode {
 	def eventValueGetterSignature(ExecutionFlow it, EventDefinition event) '''«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)'''
 	
 	def eventObservableSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»* «event.asObservableGetter»(«scHandleDecl»)'''
+	
+	
+	override eventClearCode(ExecutionFlow flow, Event event) '''
+		«event.access» = «FALSE_LITERAL»;
+	'''
+	
 }

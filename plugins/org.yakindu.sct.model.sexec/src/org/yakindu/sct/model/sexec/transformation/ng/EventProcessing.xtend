@@ -11,6 +11,7 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.base.types.Expression
 
 class EventProcessing {
 
@@ -27,12 +28,13 @@ class EventProcessing {
 	public static val CLEAR_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "clearEvent"
 	public static val CLEAR_OUT_EVENTS = "clearOutEvents"
 	public static val CLEAR_IN_EVENTS = "clearInEvents"
+	public static val CLEAR_INTERNAL_EVENTS = "clearInternalEvents"
 
 
 	def defineFeatures (ExecutionFlow it) {
 		if (hasOutgoingEvents) defineClearOutEvents
-		if (hasInEvents) it._method("clearInEvents") => [ _type(_void) ]
-		
+		if (needsClearInEvents) defineClearInEvents
+		if (hasLocalEvents) defineClearInternalEvents
 	}
 
 
@@ -47,6 +49,63 @@ class EventProcessing {
 		]
 	}
 	
+	def defineClearInEvents(ExecutionFlow it) {
+		it._method(CLEAR_IN_EVENTS) => [ m | 
+			m._type(_void)
+			
+			m._body(
+				#[flow.incomingEvents, flow.timeEvents].flatten.map[ i |
+					i._clear
+				]
+			)
+		]
+	}
+	
+	def defineClearInternalEvents(ExecutionFlow it) {
+		it._method(CLEAR_INTERNAL_EVENTS) => [ m | 
+			m._type(_void)
+			
+			m._body(
+				localEvents.map[ i |
+					i._clear
+				]
+			)
+		]
+	}
+	
+	def Step _eventProcessing(ExecutionFlow it, Step body) {
+		_sequence(
+			_clearOutEvents,
+			_eventLoop(_sequence(
+				body,
+				_clearInEvents	
+			))
+		)
+	}
+
+
+	def Step _eventLoop(ExecutionFlow it, Step body) {
+		if (hasLocalEvents) 
+			_do(_sequence(
+				body
+			))._while(
+				localEvents.map[ e | e._ref as Expression].reduce[r1, r2| r1._or(r2)]
+			)
+		else 
+			body	
+	}
+
+	def Step _clearOutEvents(ExecutionFlow it) {
+			if ( hasOutgoingEvents ) clearOutEvents._call._statement else _empty	
+	}
+
+
+	def Step _clearInEvents(ExecutionFlow it) {
+			if ( needsClearInEvents  ) clearInEvents._call._statement else _empty	
+	}
+
+
+
 	def Step _clear(Event it){
 		_conceptSequence(CLEAR_EVENT, it)	
 	}
@@ -55,24 +114,6 @@ class EventProcessing {
 		it.getParameter as Event
 	}
 	
-	def Step _eventProcessing(ExecutionFlow it, Step body) {
-		_sequence(
-			_clearOutEvents,
-			body,
-			_clearInEvents
-		)
-	}
-
-
-	def Step _clearOutEvents(ExecutionFlow it) {
-			if ( hasOutgoingEvents ) clearOutEvents._call._statement else _empty	
-	}
-
-
-	def Step _clearInEvents(ExecutionFlow it) {
-			if ( hasOutgoingEvents ) clearInEvents._call._statement else _empty	
-	}
-
 
 	def Method clearOutEvents(ExecutionFlow it) {
 		features.filter( typeof(Method) ).filter( m | m.name == CLEAR_OUT_EVENTS).head
@@ -83,6 +124,9 @@ class EventProcessing {
 	}
 	
 
+	def needsClearInEvents(ExecutionFlow it) {
+		hasInEvents || timeEvents.size > 0 
+	}
 
 	
 	

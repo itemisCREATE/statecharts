@@ -30,17 +30,16 @@ class RunCycleMethod {
 	def defineRunCycle(ExecutionFlow it) {
 		
 		it._method("runCycle") => [ m |
+			m._public
 			m._type(_void)
 			m._body(
 				_guardExecution( _sequence(
 					_traceBeginRunCycle,
-					clearOutEvents._call._statement,
 					_eventProcessing(
 						_superStepLoop(
 							_microStep	
 						)
 					),
-					clearInEvents._call._statement,
 					_traceEndRunCycle
 				))
 			)

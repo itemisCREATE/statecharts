@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
 import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -51,6 +52,7 @@ class TreeNamingService implements INamingService {
 	@Inject extension IQualifiedNameProvider
 	@Inject extension RunCycleMethod
 	@Inject extension EventProcessing
+	@Inject extension VisibilityAnnotations
 
 	@Inject extension ElementNameProvider
 
@@ -318,7 +320,9 @@ class TreeNamingService implements INamingService {
 	}
 
 	def protected List<String> prefix(Method it) {
-		return new ArrayList<String>();
+		val l = new ArrayList<String>()
+		if (it.isPublic) l.add(flow.name)
+		return l
 	}
 
 	def protected List<String> suffix(ExecutionState it) {

@@ -6,6 +6,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.expressions.expressions.LogicalOrExpression
 
 class ExpressionBuilder {
 
@@ -30,6 +31,13 @@ class ExpressionBuilder {
 			operationCall = false
 			operationCall = p instanceof Operation
 			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
+		]
+	}
+	
+	def LogicalOrExpression _or(Expression e1, Expression e2) {
+		createLogicalOrExpression => [
+			leftOperand = e1
+			rightOperand = e2
 		]
 	}
 

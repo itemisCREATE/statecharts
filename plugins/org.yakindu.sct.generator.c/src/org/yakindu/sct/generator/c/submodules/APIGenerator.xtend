@@ -53,6 +53,7 @@ class APIGenerator {
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension RunCycleMethod
 	@Inject protected extension InternalFunctionsGenerator
+	@Inject protected extension MethodGenerator
 
 	def runCycleCode(ExecutionFlow it) {
 		if (it.runCycle !== null)

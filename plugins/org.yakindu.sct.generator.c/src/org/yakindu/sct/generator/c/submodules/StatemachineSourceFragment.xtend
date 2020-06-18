@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.c.ISourceFragment
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
 
 /**
  * @author rbeckmann
@@ -45,9 +46,11 @@ class StatemachineSourceFragment implements ISourceFragment {
 	@Inject protected extension GeneratorPredicate
 	
 	@Inject protected extension APIGenerator
+	@Inject protected extension EventProcessing
 	
 	@Inject protected extension InternalFunctionsGenerator//TODO is this allowed?
 	@Inject protected extension InterfaceFunctionsGenerator
+	@Inject protected extension MethodGenerator
 
 	override CharSequence fileComment(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''«entry.licenseText»'''
@@ -123,14 +126,24 @@ class StatemachineSourceFragment implements ISourceFragment {
 		«ENDIF»
 		«isStateActive»
 		
+		«clearInEvents?.implementation»
+		
 		«clearInEventsFunction»
 		
-		«IF needsClearOutEventsFunction»
-			«clearOutEventsFunction»
-			
-		«ENDIF»
+		«clearOutEvents?.implementation»
+		
+«««		«IF needsClearOutEventsFunction»
+«««			«clearOutEventsFunction»			
+«««		«ENDIF»
+		
 		«interfaceFunctions»
 
 		«functionImplementations»
+		
+		«reactMethods.implementation»
+		
+		«observerCallbacksImplementations»
+		
+		
 	'''
 }

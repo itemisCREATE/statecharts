@@ -26,6 +26,7 @@ import org.yakindu.sct.generator.c.submodules.RunCycleMethodCode;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
+import org.yakindu.sct.generator.core.submodules.lifecycle.EventCode;
 import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -53,6 +54,7 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 		binder.bind(StatemachineSource.class).toProvider(SourceContentFragmentProvider.class);
 		binder.bind(StatemachineHeader.class).toProvider(HeaderContentFragmentProvider.class);
 		binder.bind(MicroStepCode.class).to(RunCycleMethodCode.class);
+		binder.bind(EventCode.class).to(org.yakindu.sct.generator.c.submodules.EventCode.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));

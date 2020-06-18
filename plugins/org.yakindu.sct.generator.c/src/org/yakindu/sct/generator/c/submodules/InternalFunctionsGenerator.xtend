@@ -192,44 +192,9 @@ class InternalFunctionsGenerator {
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
-		«reactMethods.toDefinitions»
-		«observerCallbacksImplementations»
 	'''
 
 
-	 def toDefinitions(List<Method> methods) '''
-	 	«FOR m : methods»
-	 		«m.implementation»
-	 		
-	 	«ENDFOR»
-	 '''
-
-	 def implementation(Method it) '''
-		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-			«body.code»
-			«IF !body.requiresHandles»
-				«unusedParam(scHandle)»
-			«ENDIF»
-		}
-	 '''
-	 
-	def requiresHandles(Step it) {
-		it.eAllContents.filter[e | e.requiresHandle].size > 0
-	}
-	 
-	def dispatch requiresHandle(EObject e) { false }
-	def dispatch requiresHandle(Call e) { true }
-	def dispatch requiresHandle(CheckRef e) { true }
-	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
-	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
-	
-	def isLocalVariable(EObject o) {
-		(o instanceof org.yakindu.base.types.Property) && (o.eContainer instanceof LocalVariableDefinition)	
-	}
-	
-	def declaredInHeader(EObject o) {
-		return (o.eContainer instanceof org.yakindu.base.types.Package || (o.eContainer instanceof ComplexType && !(o.eContainer instanceof ExecutionFlow)))
-	}
 	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
