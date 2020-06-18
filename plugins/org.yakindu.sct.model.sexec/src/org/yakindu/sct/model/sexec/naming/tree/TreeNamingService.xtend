@@ -145,11 +145,8 @@ class TreeNamingService implements INamingService {
 			addElement(func, func.prefix, func.suffix);
 		}
 
-		flow.reactMethods.forEach[m|m.addElement(m.prefix, m.suffix)]
-		
-		flow.runCycle.addMethod
-		flow.clearOutEvents.addMethod
-		flow.clearInEvents.addMethod
+		flow.reactMethods.forEach[addMethod]
+		flow.methods.forEach[addMethod]
 		
 
 		// Create short name for time events of statechart

@@ -21,10 +21,10 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -45,7 +45,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.Call
 
 class SExecExtensions {
 	@Inject extension OriginTracing
@@ -469,6 +468,11 @@ class SExecExtensions {
 	
 	def Method reactMethod(ExecutionNode it) {
 		features.filter( typeof(Method) ).filter( m | m.name == "react").head
+	}
+	
+	
+	def methods(ExecutionFlow it) {
+		features.filter(Method).filter( m | m !== reactMethod)
 	}
 	
 	

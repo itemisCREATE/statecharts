@@ -212,9 +212,7 @@ class DefaultNamingService implements INamingService {
 			map.putShortName(s, s.prefix(separator), s.suffix(separator), maxLength, separator)
 		}
 		
-		map.addMethod(flow.runCycle)
-		map.addMethod(flow.clearOutEvents)		
-		map.addMethod(flow.clearInEvents)		
+		flow.methods.forEach[ m | map.addMethod(m)]
 	}
 
 	def protected addMethod(Map<NamedElement, String> map, Method op) {
