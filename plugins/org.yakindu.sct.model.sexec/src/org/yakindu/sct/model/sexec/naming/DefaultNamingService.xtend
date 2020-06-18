@@ -40,8 +40,8 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.transformation.ng.ReactMethod
 import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
+import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
 
 class StepDepthComparator implements Comparator<Step> {
 
@@ -85,7 +85,8 @@ class DefaultNamingService implements INamingService {
 	@Inject extension MethodDepthComparator methodDepthComparator
 	@Inject extension NamingHelper
 	@Inject extension RunCycleMethod
-
+	@Inject extension EventProcessing
+	
 	@Inject StextNameProvider provider
 
 	// from public class org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider extends		
@@ -212,7 +213,6 @@ class DefaultNamingService implements INamingService {
 		map.addMethod(flow.runCycle)
 		map.addMethod(flow.clearOutEvents)		
 		map.addMethod(flow.clearInEvents)		
-		map.addMethod(flow.microStep)		
 	}
 
 	def protected addMethod(Map<NamedElement, String> map, Method op) {

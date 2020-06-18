@@ -34,6 +34,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension StateVectorBuilder svBuilder
 	@Inject extension RetargetReferences retageting
 	
+	@Inject extension EventProcessing eventProcessing
 	@Inject extension ReactMethod reactMethod
 	@Inject extension SuperStep superStep
 	@Inject extension RunCycleMethod runCycleMethod
@@ -99,8 +100,9 @@ class ModelSequencer implements IModelSequencer {
 		// define event buffer
 		ef.defineEventBuffer(sc)
 		
-		superStep.defineStructuralFeatures(ef)
-		runCycleMethod.defineStructuralFeatures(ef)
+		eventProcessing.defineFeatures(ef)
+		superStep.defineFeatures(ef)
+		runCycleMethod.defineFeatures(ef)
 		
 		ef.defineRunCycle
 

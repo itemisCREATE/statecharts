@@ -36,6 +36,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
+import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -49,6 +50,7 @@ class TreeNamingService implements INamingService {
 	@Inject extension StatechartExtensions
 	@Inject extension IQualifiedNameProvider
 	@Inject extension RunCycleMethod
+	@Inject extension EventProcessing
 
 	@Inject extension ElementNameProvider
 
@@ -146,7 +148,6 @@ class TreeNamingService implements INamingService {
 		flow.runCycle.addMethod
 		flow.clearOutEvents.addMethod
 		flow.clearInEvents.addMethod
-		flow.microStep.addMethod
 		
 
 		// Create short name for time events of statechart

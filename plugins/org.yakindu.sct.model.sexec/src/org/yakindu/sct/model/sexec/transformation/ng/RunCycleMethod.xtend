@@ -12,7 +12,10 @@ import org.yakindu.sct.model.sexec.Method
 class RunCycleMethod {
 	
 	
+	@Inject extension EventProcessing
 	@Inject extension SuperStep
+	
+	
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
 	@Inject extension SexecBuilder
@@ -20,14 +23,11 @@ class RunCycleMethod {
 
 	public static val MICRO_STEP = StateMachineConcept.CONCEPT_NAME_PREFIX + "microStep"
 	
-	def defineStructuralFeatures (ExecutionFlow it) {
+	def defineFeatures (ExecutionFlow it) {
 		it.features += _variable("isReacting", _boolean)		
 	}
 			
 	def defineRunCycle(ExecutionFlow it) {
-		it._method("clearOutEvents") => [ _type(_void) ]
-		it._method("clearInEvents") => [ _type(_void) ]
-		it._method("microStep") => [ _type(_void) ]
 		
 		it._method("runCycle") => [ m |
 			m._type(_void)
@@ -35,7 +35,7 @@ class RunCycleMethod {
 				_guardExecution( _sequence(
 					_traceBeginRunCycle,
 					clearOutEvents._call._statement,
-					_eventLoop(
+					_eventProcessing(
 						_superStepLoop(
 							_microStep	
 						)
@@ -60,11 +60,6 @@ class RunCycleMethod {
 	}
 
 
-	def Step _eventLoop(ExecutionFlow flow, Step body) {
-		body
-	}
-
-	
 	def Step _microStep(ExecutionFlow it) {
 		//flow.microStep._call._statement
 		_sequence => [ name = MICRO_STEP ]
@@ -79,17 +74,6 @@ class RunCycleMethod {
 		features.filter( typeof(Method) ).filter( m | m.name == "runCycle").head
 	}
 	
-	def Method clearOutEvents(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == "clearOutEvents").head
-	}
-	
-	def Method clearInEvents(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == "clearInEvents").head
-	}
-	
-	def Method microStep(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == "microStep").head
-	}
 
 	
 }

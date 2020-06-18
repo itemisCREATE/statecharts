@@ -21,7 +21,7 @@ class SuperStep {
 	static val String HAS_STATE_CHANGED = "hasStataChanged"
 	
 	
-	def void defineStructuralFeatures (ExecutionFlow it) {
+	def void defineFeatures (ExecutionFlow it) {
 		if (appliesSuperStep) 
 			it.features += _variable(HAS_STATE_CHANGED, _boolean)		
 	}

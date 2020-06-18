@@ -89,6 +89,24 @@ class SexecBuilder {
 		]
 	}		
 	
+	def Step _empty () {
+		createSequence
+	}		
+	
+	
+	def Sequence _conceptSequence (String name) {
+		createSequence => [
+			it.name = name
+		]
+	}		
+	
+	def Sequence _conceptSequence (String name, EObject object) {
+		createSequence => [
+			it.name = name
+			it.steps += object._ref._statement
+		]
+	}		
+	
 	
 	def If _if (Expression cond) {
 		createIf() => [
