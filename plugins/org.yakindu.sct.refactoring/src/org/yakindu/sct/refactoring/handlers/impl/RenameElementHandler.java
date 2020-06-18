@@ -113,7 +113,7 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 		// adapter.
 		// We need to find the actual element in our statechart for this fake element.
 		if (selectedElement instanceof FeatureCall) {
-			return findInStatechart(((FeatureCall) selectedElement).getFeature());
+			return findInStatechart((NamedElement)((FeatureCall) selectedElement).getFeature());
 		}
 		if (selectedElement instanceof ElementReferenceExpression) {
 			return findInStatechart((NamedElement) ((ElementReferenceExpression) selectedElement).getReference());

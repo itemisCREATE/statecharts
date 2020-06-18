@@ -11,9 +11,7 @@
 package org.yakindu.sct.model.sruntime;
 
 import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.yakindu.base.base.NamedElement;
 
 /**

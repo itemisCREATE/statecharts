@@ -277,9 +277,10 @@ class SExecExtensions {
 		if (reference instanceof Declaration) reference as Declaration
 	}
 	def dispatch definition(FeatureCall it) {
-		feature
+		feature as Declaration
 	}
-	def dispatch definition(Expression it) {
+	
+	def dispatch definition(EObject it){
 		null
 	}
 	

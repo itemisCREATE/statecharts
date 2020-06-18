@@ -11,20 +11,14 @@
 package org.yakindu.sct.model.sruntime.impl;
 
 import com.google.common.base.Objects;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import java.util.Collection;
 import java.util.List;
-
 import java.util.function.Consumer;
-
 import org.eclipse.core.runtime.Assert;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
@@ -37,11 +31,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-
 import org.yakindu.base.base.impl.NamedElementImpl;
 
 import org.yakindu.base.types.Type;
