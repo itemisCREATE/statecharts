@@ -1,0 +1,26 @@
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+package org.yakindu.sct.model.sexec.transformation.ng
+
+import org.yakindu.sct.model.sexec.Sequence
+
+/**
+ * 
+ * @author aterfloth
+ */
+class StateMachineConcept {
+	
+	public static val CONCEPT_NAME_PREFIX = "@"
+	
+	def isStateMachineConcept (Sequence it) {
+		it.steps.empty && !it.name.nullOrEmpty && it.name.startsWith(CONCEPT_NAME_PREFIX)
+	}
+}
