@@ -9,6 +9,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -56,7 +57,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * @generated
 	 * @ordered
 	 */
-	protected Declaration feature;
+	protected EObject feature;
 
 	/**
 	 * The default value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
@@ -178,10 +179,10 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * @generated
 	 */
 	@Override
-	public Declaration getFeature() {
+	public EObject getFeature() {
 		if (feature != null && feature.eIsProxy()) {
 			InternalEObject oldFeature = (InternalEObject)feature;
-			feature = (Declaration)eResolveProxy(oldFeature);
+			feature = eResolveProxy(oldFeature);
 			if (feature != oldFeature) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.FEATURE_CALL__FEATURE, oldFeature, feature));
@@ -195,7 +196,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Declaration basicGetFeature() {
+	public EObject basicGetFeature() {
 		return feature;
 	}
 
@@ -205,8 +206,8 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * @generated
 	 */
 	@Override
-	public void setFeature(Declaration newFeature) {
-		Declaration oldFeature = feature;
+	public void setFeature(EObject newFeature) {
+		EObject oldFeature = feature;
 		feature = newFeature;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.FEATURE_CALL__FEATURE, oldFeature, feature));
@@ -323,7 +324,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 				setOwner((Expression)newValue);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__FEATURE:
-				setFeature((Declaration)newValue);
+				setFeature((EObject)newValue);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				setOperationCall((Boolean)newValue);
@@ -351,7 +352,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 				setOwner((Expression)null);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__FEATURE:
-				setFeature((Declaration)null);
+				setFeature((EObject)null);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				setOperationCall(OPERATION_CALL_EDEFAULT);

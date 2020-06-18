@@ -196,5 +196,10 @@ statechart EventDrivenOutEvents {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature OutEventAPI {
+			getters = true
+		}
+		
 	}
 }

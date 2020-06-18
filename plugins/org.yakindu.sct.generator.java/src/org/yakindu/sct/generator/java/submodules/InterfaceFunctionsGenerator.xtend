@@ -99,7 +99,6 @@ class InterfaceFunctionsGenerator {
 
 	'''
 	
-	
 	protected def generateClearEvents(InterfaceScope scope) '''
 		protected void clearEvents() {
 			«FOR event : scope.eventDefinitions»
