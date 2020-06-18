@@ -228,7 +228,7 @@ class InternalFunctionsGenerator {
 	}
 	
 	def declaredInHeader(EObject o) {
-		return (o.eContainer instanceof org.yakindu.base.types.Package || o.eContainer instanceof ComplexType) 
+		return (o.eContainer instanceof org.yakindu.base.types.Package || (o.eContainer instanceof ComplexType && !(o.eContainer instanceof ExecutionFlow)))
 	}
 	
 	def toImplementation(List<Step> steps) '''

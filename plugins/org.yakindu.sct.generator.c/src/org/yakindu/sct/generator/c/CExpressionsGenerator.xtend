@@ -57,6 +57,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.sct.model.sexec.ExecutionFlow
 
 /**
  * @author axel terfloth
@@ -129,8 +130,12 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) 
 		'''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, Property target) 
+	def dispatch CharSequence code(ElementReferenceExpression it, Property target) {
+		if(target.eContainer instanceof ExecutionFlow) {
+			return '''«scHandle»->«target.access»'''
+		}
 		'''«target.access»'''
+	}
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Parameter target) 
 		'''«target.name»'''

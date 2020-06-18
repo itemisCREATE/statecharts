@@ -95,7 +95,7 @@ class StatechartTypes {
 		«TRACE_HANDLER_TYPE» *«TRACE_HANDLER»;
 		«ENDIF»
 		«FOR v : it.features.filter(org.yakindu.base.types.Property)»
-			«v.type.cType» «v.name»;
+			«v.structMember»
 		«ENDFOR»
 		'''
 	}
