@@ -28,6 +28,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.c.ISourceFragment
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 /**
  * @author rbeckmann
@@ -45,6 +46,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 	@Inject protected extension ExpressionsChecker
 	@Inject protected extension GeneratorPredicate
 	
+	@Inject protected extension VisibilityAnnotations
 	@Inject protected extension APIGenerator
 	@Inject protected extension EventProcessing
 	
@@ -81,8 +83,15 @@ class StatemachineSourceFragment implements ISourceFragment {
 	override CharSequence declarations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«defines»
-		«functionPrototypes»
 		
+		«functionPrototypes»
+
+		«reactMethods.declarations»
+
+		«methods.filter[ m | ! m.isPublic].declarations»
+
+		«observerCallbacksPrototypes»
+				
 		«constantDefinitions»
 		'''
 	}
@@ -126,11 +135,13 @@ class StatemachineSourceFragment implements ISourceFragment {
 		«ENDIF»
 		«isStateActive»
 		
-		«clearInEvents?.implementation»
+		«methods.filter[ m | ! m.isPublic].implementation»
 		
-		«clearInEventsFunction»
-		
-		«clearOutEvents?.implementation»
+«««		«clearInEvents?.implementation»
+«««		
+«««		«clearInEventsFunction»
+«««		
+«««		«clearOutEvents?.implementation»
 		
 «««		«IF needsClearOutEventsFunction»
 «««			«clearOutEventsFunction»			

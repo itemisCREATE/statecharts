@@ -149,23 +149,9 @@ class InternalFunctionsGenerator {
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
-		«reactMethods.toDeclarations»
-		static void «clearInEventsFctID»(«scHandleDecl»);
-		«IF needsClearOutEventsFunction»static void «clearOutEventsFctID»(«scHandleDecl»);«ENDIF»
-		«observerCallbacksPrototypes»
 	'''
 	
 	
-	def toDeclarations(List<Method> steps) '''
-		«FOR s : steps»
-			«s.toPrototype»
-		«ENDFOR»
-	'''
-	
-	
-	def toPrototype(Method it) '''
-		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
-	'''
 	
 	
 	def toPrototypes(List<Step> steps) '''

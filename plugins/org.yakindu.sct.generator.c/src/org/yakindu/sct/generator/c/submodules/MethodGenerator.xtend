@@ -1,13 +1,12 @@
 package org.yakindu.sct.generator.c.submodules
 
-import org.yakindu.sct.model.sexec.Method
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.FlowCode
-import java.util.List
 import org.yakindu.base.types.annotations.VisibilityAnnotations
+import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class MethodGenerator {
 
@@ -19,9 +18,29 @@ class MethodGenerator {
 	@Inject protected extension FlowCode
 
 
-	 def implementation(List<Method> methods) '''
+	def declarations(Iterable<Method> steps) '''
+		«FOR s : steps»
+			«s.declaration»
+		«ENDFOR»
+	'''
+	
+	
+	def declaration(Method it) '''
+		«declarationModifier»«typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+	'''
+	
+	def declarationModifier(Method it) {
+		if (it.isPublic)
+			'''extern '''
+		else 
+			'''static '''
+	}
+	
+
+	def implementation(Iterable<Method> methods) '''
 	 	«FOR m : methods»
 	 		«m.implementation»
+	 		
 	 	«ENDFOR»
 	 '''
 	

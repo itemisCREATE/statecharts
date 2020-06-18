@@ -11,15 +11,23 @@
 package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
+import java.util.LinkedList
+import java.util.Set
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Property
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.IHeaderFragment
 import org.yakindu.sct.generator.c.IncludeProvider
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
@@ -29,15 +37,6 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.c.IHeaderFragment
-import java.util.Set
-import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
-import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.base.types.Event
-import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
-import org.yakindu.base.types.ComplexType
-import java.util.ArrayList
-import java.util.LinkedList
 
 /**
  * @author rbeckmann
@@ -122,8 +121,8 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		
 		
 		«FOR t : it.derivedComplexTypes»
-			«t.typeDeclaration(flow)»			
-			«t.structDeclaration(flow)»			
+			«t.typeDeclaration(flow)»
+			«t.structDeclaration(flow)»
 		«ENDFOR»
 		
 		«statemachineStruct»
