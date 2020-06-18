@@ -95,7 +95,7 @@ class ConstructorProvider implements ISourceFragment {
 	def protected initialisationList(ExecutionFlow flow, StatechartScope it) {
 		val List<Pair<String, String>> toInit = newArrayList
 		
-		for(d : declarations.filter(TypedDeclaration)) {
+		for(d : declarations.filter(TypedDeclaration).filter[it instanceof VariableDefinition || it instanceof Event]) {
 			var add = true
 			if(d instanceof VariableDefinition) {
 				if(d.const){
