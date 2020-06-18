@@ -36,10 +36,12 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
 
 class FlowOptimizer {
 	
 	@Inject extension SExecExtensions sexec
+	@Inject extension StateMachineConcept concept
 	
 	boolean _inlineReactions        def inlineReactions(boolean b)      {_inlineReactions = b}
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}
@@ -108,7 +110,7 @@ class FlowOptimizer {
 	/** Determines and removes all empty sequences that are not part of a parent step from the model */
 	def eliminateEmptySequences(ExecutionFlow flow) {
 
-		var emptySeqences = flow.eAllContents.filter(typeof(Sequence)).filter( s | s.empty ).toList
+		var emptySeqences = flow.eAllContents.filter(typeof(Sequence)).filter( s | s.empty && !s.isStateMachineConcept).toList
 
 
 		emptySeqences.removeAll(flow.states.map( state | state.reactSequence ))
@@ -133,7 +135,7 @@ class FlowOptimizer {
 		
 		do {
 			
-			garbage = sequences.filter[ seq | seq.empty && (seq.isInSequence || seq.isElseStep)].toList
+			garbage = sequences.filter[ seq | seq.empty && !seq.isStateMachineConcept && (seq.isInSequence || seq.isElseStep)].toList
 			garbage.forEach[ seq | seq.eliminate]
 			count += garbage.size
 			
