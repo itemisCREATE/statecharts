@@ -38,7 +38,7 @@ class TypeBuilder {
 	}
 
 	def _op(String name) {
-		_op(name, typeSystem.getType(ITypeSystem.VOID))
+		_op(name, _void)
 	}
 
 	def _op(String name, Type returnType) {
@@ -239,6 +239,27 @@ class TypeBuilder {
 		t.name = name
 	} 
 	
+	
+	def _boolean() {
+		typeSystem.getType(ITypeSystem.BOOLEAN)
+	}
+	
+	def _void() {
+		typeSystem.getType(ITypeSystem.VOID)
+	}
+	
+	def _integer() {
+		typeSystem.getType(ITypeSystem.INTEGER)
+	}
+	
+	def _real() {
+		typeSystem.getType(ITypeSystem.REAL)
+	}
+	
+	def _string() {
+		typeSystem.getType(ITypeSystem.STRING)
+	}
+	
 
 //	def <T extends Declaration> T _protected(T it) {
 //		checkNotNull(declaration, it)
@@ -263,5 +284,6 @@ class TypeBuilder {
 			throw new IllegalArgumentException('''Object of type «eCls.name» must not be null!''')
 		}
 	}
+	
 
 }
