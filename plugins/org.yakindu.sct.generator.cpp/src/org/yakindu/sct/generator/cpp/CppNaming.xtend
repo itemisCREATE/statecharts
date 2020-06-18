@@ -243,7 +243,7 @@ class CppNaming extends Naming {
 		'get_' + name.asIdentifier.toFirstLower
 	}
 
-	override asSetter(Declaration it) {
+	override dispatch asSetter(Declaration it) {
 		'set_' + name.asIdentifier.toFirstLower
 	}
 	
