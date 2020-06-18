@@ -31,6 +31,8 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle
+import org.yakindu.sct.model.sexec.TraceEndRunCycle
 
 /**
  * @author axel terfloth
@@ -94,13 +96,23 @@ class TraceCode {
 
 	def protected dispatch notifyTrace(Object it) ''''''
 	
-	def protected dispatch notifyTrace(Object it, Object value) ''''''
+	def protected dispatch notifyTrace(Object it, Object value) '''// failed attempt to trace ... '''
 	
 	def protected dispatch notifyTrace(VariableDefinition it, Object value) 
 		'''«flow.tracingPrefix»FEATURE(«scHandle», «TRACE_MACHINE_VARIABLE_SET», «flow.featureNamingPrefix»«it.name», «value»)'''
 
 	def protected dispatch notifyTrace(EventDefinition it, Object value) 
 		'''«flow.tracingPrefix»FEATURE(«scHandle», «TRACE_MACHINE_EVENT_RAISED», «flow.featureNamingPrefix»«it.name», «value»)'''
+
+
+	def protected dispatch notifyTrace(TraceBeginRunCycle it) '''
+		«flow.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_START»);
+	'''
+
+	def protected dispatch notifyTrace(TraceEndRunCycle it) '''
+		«flow.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_END»);
+	'''
+
 
 	def protected dispatch notifyTrace(TraceStateEntered it) '''
 		«TRACE_CALL»_STATE(«scHandle», «TRACE_MACHINE_ENTERED», «state.stateName»);
@@ -124,6 +136,7 @@ class TraceCode {
 							.map[ assignment | assignment.varRef ]
 							.filter[ v | ! v.isVarFromOtherStatechart ]
 							.filter[ v | ! (v.definition.eContainer instanceof LocalVariableDefinition)]
+							.filter[ v | v.definition instanceof VariableDefinition ]
 							.toList
 							
 		val traceVars = traceAssignee.map( a | a.definition ).toSet
