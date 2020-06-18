@@ -37,6 +37,9 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.sexec.DoWhile
+import org.yakindu.sct.generator.core.submodules.lifecycle.NamedConceptSequenceCode
+import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
 
 /**
  * @author axel terfloth
@@ -50,6 +53,8 @@ class FlowCode {
 	@Inject extension TraceCode 
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension StatechartAnnotations
+	@Inject protected extension NamedConceptSequenceCode
+	@Inject protected extension StateMachineConcept
 	
 	@Inject protected extension CLiterals
 	
@@ -127,12 +132,16 @@ class FlowCode {
 	def dispatch CharSequence code(Call it)
 		'''«step.shortName»(«scHandle»);'''
 
-	def dispatch CharSequence code(Sequence it) '''
-		«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
-		«FOR s : steps»
-			«s.code»
-		«ENDFOR»
-	'''	
+	def dispatch CharSequence code(Sequence it) {
+		if (it.isStateMachineConcept) 
+			it.flow.stateMachineConceptCode(it)	
+		else '''
+			«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
+			«FOR s : steps»
+				«s.code»
+			«ENDFOR»
+		'''
+	}
 
 	def dispatch CharSequence code(Check it)
 		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»«TRUE_LITERAL»«ENDIF»'''
@@ -150,6 +159,14 @@ class FlowCode {
 			«elseStep.code»
 		}
 		«ENDIF»
+	'''
+	
+	def dispatch CharSequence code(DoWhile it) '''
+		«stepComment»
+		do
+		{ 
+			«body.code»
+		} while («check.code»);
 	'''
 	
 	def dispatch CharSequence code(EnterState it) '''
