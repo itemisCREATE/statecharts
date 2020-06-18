@@ -140,7 +140,7 @@ class CppNaming extends Naming {
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
 	'''
 	
-	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
+	override dispatch scopeTypeDeclMember(Property it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 

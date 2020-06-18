@@ -161,8 +161,8 @@ class Naming {
 	}
 	
 	def dispatch String cType(Type it) {
-		if (! it.name.isNullOrEmpty) return it.name
 		if (! it.targetLanguageName.isNullOrEmpty) return targetLanguageName
+		if (! it.name.isNullOrEmpty) return it.name
 		
 		val typeSuffix = if (it.isEventBuffer) "EvBuf" else ""
 		val typeOrigin = it.originTraces.filter(EObject).findFirst[true]
