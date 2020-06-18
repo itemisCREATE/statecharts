@@ -51,7 +51,7 @@ class APIGenerator {
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension ShadowEventExtensions
 
-	def runCycle(ExecutionFlow it) {
+	def runCycle_(ExecutionFlow it) {
 		'''
 			«runCycleSignature»
 			{

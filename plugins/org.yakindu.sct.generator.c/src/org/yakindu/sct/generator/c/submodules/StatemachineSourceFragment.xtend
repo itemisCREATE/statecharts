@@ -109,7 +109,9 @@ class StatemachineSourceFragment implements ISourceFragment {
 		
 		«enter»
 		
-		«runCycle»
+		«runCycle_»
+		
+		«runCycle?.implementation»
 
 		«exit»
 		

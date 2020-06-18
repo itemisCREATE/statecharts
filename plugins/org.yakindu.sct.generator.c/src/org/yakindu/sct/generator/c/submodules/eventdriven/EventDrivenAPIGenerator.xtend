@@ -56,9 +56,9 @@ class EventDrivenAPIGenerator extends APIGenerator {
 		'''
 	}
 	
-	override runCycle(ExecutionFlow it)  {
+	override runCycle_(ExecutionFlow it)  {
 		if(!needsQueues) {
-			return super.runCycle(it)
+			return super.runCycle_(it)
 		} else {
 			'''
 				«runCycleSignature»
