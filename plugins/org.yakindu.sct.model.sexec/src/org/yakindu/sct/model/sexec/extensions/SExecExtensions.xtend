@@ -472,6 +472,24 @@ class SExecExtensions {
 	}
 	
 	
+	def Method runCycle(ExecutionFlow it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "runCycle").head
+	}
+	
+	def Method clearOutEvents(ExecutionFlow it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "clearOutEvents").head
+	}
+	
+	def Method clearInEvents(ExecutionFlow it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "clearInEvents").head
+	}
+	
+	def Method microStep(ExecutionFlow it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "microStep").head
+	}
+	
+	
+	
 	def List<Step> reactFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
 		if (reactSequence.reachable) funcs.add(reactSequence) 

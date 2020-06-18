@@ -35,6 +35,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.Method
+import org.yakindu.base.types.Operation
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -140,6 +141,12 @@ class TreeNamingService implements INamingService {
 		}
 
 		flow.reactMethods.forEach[m|m.addElement(m.prefix, m.suffix)]
+		
+		flow.runCycle.addMethod
+		flow.clearOutEvents.addMethod
+		flow.clearInEvents.addMethod
+		flow.microStep.addMethod
+		
 
 		// Create short name for time events of statechart
 		if (flow.sourceElement instanceof Statechart) {
@@ -156,6 +163,10 @@ class TreeNamingService implements INamingService {
 		}
 	}
 
+	def protected addMethod(Method op) {
+		op?.addElement(op.prefix, op.suffix)	
+	}
+	
 	def protected addShortTimeEventName(NamedElement executionFlowElement, NamedElement sgraphElement) {
 		var timeEventSpecs = sgraphElement.timeEventSpecs;
 		for (tes : timeEventSpecs) {

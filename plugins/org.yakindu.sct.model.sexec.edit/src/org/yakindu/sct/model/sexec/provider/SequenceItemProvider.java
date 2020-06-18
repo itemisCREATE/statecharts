@@ -164,6 +164,11 @@ public class SequenceItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createDoWhile()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createExecution()));
 
 		newChildDescriptors.add

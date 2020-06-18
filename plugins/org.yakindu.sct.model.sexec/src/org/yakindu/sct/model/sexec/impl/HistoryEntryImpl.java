@@ -111,6 +111,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getInitialStep() {
 		return initialStep;
 	}
@@ -135,6 +136,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitialStep(Step newInitialStep) {
 		if (newInitialStep != initialStep) {
 			NotificationChain msgs = null;
@@ -154,6 +156,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isDeep() {
 		return deep;
 	}
@@ -163,6 +166,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeep(boolean newDeep) {
 		boolean oldDeep = deep;
 		deep = newDeep;
@@ -175,6 +179,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionRegion getRegion() {
 		if (region != null && region.eIsProxy()) {
 			InternalEObject oldRegion = (InternalEObject)region;
@@ -201,6 +206,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRegion(ExecutionRegion newRegion) {
 		ExecutionRegion oldRegion = region;
 		region = newRegion;
@@ -213,6 +219,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getHistoryStep() {
 		return historyStep;
 	}
@@ -237,6 +244,7 @@ public class HistoryEntryImpl extends StepImpl implements HistoryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHistoryStep(Step newHistoryStep) {
 		if (newHistoryStep != historyStep) {
 			NotificationChain msgs = null;

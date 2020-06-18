@@ -174,6 +174,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateVector getStateVector() {
 		return stateVector;
 	}
@@ -198,6 +199,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStateVector(StateVector newStateVector) {
 		if (newStateVector != stateVector) {
 			NotificationChain msgs = null;
@@ -217,6 +219,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExecutionScope> getSubScopes() {
 		if (subScopes == null) {
 			subScopes = new EObjectWithInverseResolvingEList<ExecutionScope>(ExecutionScope.class, this, SexecPackage.EXECUTION_STATE__SUB_SCOPES, SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE);
@@ -229,6 +232,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionScope getSuperScope() {
 		if (superScope != null && superScope.eIsProxy()) {
 			InternalEObject oldSuperScope = (InternalEObject)superScope;
@@ -270,6 +274,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuperScope(ExecutionScope newSuperScope) {
 		if (newSuperScope != superScope) {
 			NotificationChain msgs = null;
@@ -289,6 +294,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Sequence> getEnterSequences() {
 		if (enterSequences == null) {
 			enterSequences = new EObjectContainmentEList<Sequence>(Sequence.class, this, SexecPackage.EXECUTION_STATE__ENTER_SEQUENCES);
@@ -301,6 +307,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getEntryAction() {
 		return entryAction;
 	}
@@ -325,6 +332,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEntryAction(Step newEntryAction) {
 		if (newEntryAction != entryAction) {
 			NotificationChain msgs = null;
@@ -344,6 +352,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getExitAction() {
 		return exitAction;
 	}
@@ -368,6 +377,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExitAction(Step newExitAction) {
 		if (newExitAction != exitAction) {
 			NotificationChain msgs = null;
@@ -387,6 +397,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getExitSequence() {
 		return exitSequence;
 	}
@@ -411,6 +422,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExitSequence(Sequence newExitSequence) {
 		if (newExitSequence != exitSequence) {
 			NotificationChain msgs = null;
@@ -430,6 +442,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getInitSequence() {
 		return initSequence;
 	}
@@ -454,6 +467,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitSequence(Sequence newInitSequence) {
 		if (newInitSequence != initSequence) {
 			NotificationChain msgs = null;
@@ -501,6 +515,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isLeaf() {
 		return leaf;
 	}
@@ -510,6 +525,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLeaf(boolean newLeaf) {
 		boolean oldLeaf = leaf;
 		leaf = newLeaf;

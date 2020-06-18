@@ -96,6 +96,7 @@ public class StateVectorImpl extends EObjectImpl implements StateVector {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getSize() {
 		return size;
 	}
@@ -105,6 +106,7 @@ public class StateVectorImpl extends EObjectImpl implements StateVector {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSize(int newSize) {
 		int oldSize = size;
 		size = newSize;
@@ -117,6 +119,7 @@ public class StateVectorImpl extends EObjectImpl implements StateVector {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getOffset() {
 		return offset;
 	}
@@ -126,6 +129,7 @@ public class StateVectorImpl extends EObjectImpl implements StateVector {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOffset(int newOffset) {
 		int oldOffset = offset;
 		offset = newOffset;

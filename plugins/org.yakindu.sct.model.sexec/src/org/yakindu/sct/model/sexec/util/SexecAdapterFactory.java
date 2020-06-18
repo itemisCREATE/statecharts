@@ -202,6 +202,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createIfAdapter();
 			}
 			@Override
+			public Adapter caseDoWhile(DoWhile object) {
+				return createDoWhileAdapter();
+			}
+			@Override
 			public Adapter caseExecution(Execution object) {
 				return createExecutionAdapter();
 			}
@@ -644,6 +648,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIfAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.DoWhile <em>Do While</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.DoWhile
+	 * @generated
+	 */
+	public Adapter createDoWhileAdapter() {
 		return null;
 	}
 

@@ -213,7 +213,6 @@ public class ExecutionNodeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 			childrenFeatures.add(TypesPackage.Literals.META_COMPOSITE__META_FEATURES);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
@@ -276,6 +275,7 @@ public class ExecutionNodeItemProvider
 
 		switch (notification.getFeatureID(ExecutionNode.class)) {
 			case SexecPackage.EXECUTION_NODE__NAME:
+			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 			case SexecPackage.EXECUTION_NODE__STATIC:
 			case SexecPackage.EXECUTION_NODE__ID:
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
@@ -284,7 +284,6 @@ public class ExecutionNodeItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
-			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 			case SexecPackage.EXECUTION_NODE__META_FEATURES:
 			case SexecPackage.EXECUTION_NODE__SUPER_TYPES:
 			case SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS:

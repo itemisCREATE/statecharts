@@ -152,6 +152,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -161,6 +162,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -173,6 +175,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateVector getStateVector() {
 		return stateVector;
 	}
@@ -197,6 +200,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStateVector(StateVector newStateVector) {
 		if (newStateVector != stateVector) {
 			NotificationChain msgs = null;
@@ -216,6 +220,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExecutionScope> getSubScopes() {
 		if (subScopes == null) {
 			subScopes = new EObjectWithInverseResolvingEList<ExecutionScope>(ExecutionScope.class, this, SexecPackage.EXECUTION_SCOPE__SUB_SCOPES, SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE);
@@ -228,6 +233,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionScope getSuperScope() {
 		if (superScope != null && superScope.eIsProxy()) {
 			InternalEObject oldSuperScope = (InternalEObject)superScope;
@@ -269,6 +275,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuperScope(ExecutionScope newSuperScope) {
 		if (newSuperScope != superScope) {
 			NotificationChain msgs = null;
@@ -288,6 +295,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Sequence> getEnterSequences() {
 		if (enterSequences == null) {
 			enterSequences = new EObjectContainmentEList<Sequence>(Sequence.class, this, SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES);
@@ -300,6 +308,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getExitSequence() {
 		return exitSequence;
 	}
@@ -324,6 +333,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExitSequence(Sequence newExitSequence) {
 		if (newExitSequence != exitSequence) {
 			NotificationChain msgs = null;
@@ -343,6 +353,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getInitSequence() {
 		return initSequence;
 	}
@@ -367,6 +378,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitSequence(Sequence newInitSequence) {
 		if (newInitSequence != initSequence) {
 			NotificationChain msgs = null;

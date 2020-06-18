@@ -205,6 +205,16 @@ class DefaultNamingService implements INamingService {
 		for (s : flow.reactMethods.sortWith(methodDepthComparator)) {
 			map.putShortName(s, s.prefix(separator), s.suffix(separator), maxLength, separator)
 		}
+		
+		map.addMethod(flow.runCycle)
+		map.addMethod(flow.clearOutEvents)		
+		map.addMethod(flow.clearInEvents)		
+		map.addMethod(flow.microStep)		
+	}
+
+	def protected addMethod(Map<NamedElement, String> map, Method op) {
+		if (op !== null) 
+			map.putShortName(op, op.prefix(separator), op.suffix(separator), maxLength, separator)		
 	}
 
 
