@@ -9,7 +9,6 @@
  *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.generator.cpp.providers
-
 import com.google.inject.Inject
 import java.util.List
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
@@ -22,18 +21,17 @@ import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
-
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.base.types.typesystem.ITypeValueProvider
-import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypeAlias
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Type
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 class ConstructorProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
@@ -45,20 +43,15 @@ class ConstructorProvider implements ISourceFragment {
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected GeneratorEntry entry
 	@Inject protected extension ITypeValueProvider
-	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«constructorDefinition»
-		
 		«destructorDefinition»
-		
 		«FOR iface : interfaces»
 			«it.ifaceConstructorDefintion(iface)»
-			
 		«ENDFOR»
 		'''
 	}
-	
 	def ifaceConstructorDefintion(ExecutionFlow it, StatechartScope iface) {
 		'''
 		«module»::«iface.interfaceName»::«iface.interfaceName»(«module»* «parent»)«initialisationList(iface).generate»
@@ -67,7 +60,6 @@ class ConstructorProvider implements ISourceFragment {
 		}
 		'''
 	}
-	
 	def constructorDefinition(ExecutionFlow it){
 	'''
 		«module»::«module»() «initialisationList.generate»
@@ -76,7 +68,6 @@ class ConstructorProvider implements ISourceFragment {
 		}
 	'''
 	}
-	
 	def protected initialisationList(ExecutionFlow it) {
 		val List<Pair<String, String>> toInit = newArrayList
 		if(timed) toInit.add(timerInstance, NULL_LITERAL)
@@ -91,85 +82,41 @@ class ConstructorProvider implements ISourceFragment {
 		]
 		toInit
 	}
-	
 	def protected initialisationList(ExecutionFlow flow, StatechartScope it) {
 		val List<Pair<String, String>> toInit = newArrayList
-		
-		for(d : declarations.filter(TypedDeclaration).filter[it instanceof VariableDefinition || it instanceof Event]) {
-			var add = true
-			if(d instanceof VariableDefinition) {
-				if(d.const){
-					add = false
-				}
-			} if(add) {
-				if(d instanceof Event) {
-					println(d.name)
-				}
-				toInit.add(d.localAccess.toString, d.type?.defaultValue?.toString?:d.NULL_LITERAL)
-				
-				if(d.hasValue) {
-					if(d.type instanceof ComplexType) {
-						
-					} else {
-						toInit.add(d.localValueAccess.toString, d.type.defaultValue?.toString?:d.eventDefaultValue)
-					}
-				}
-			}
-		}
+		declarations.forEach[ d | toInit.add(d)]
 		toInit.add('''«parent»''','''«parent»''')
 		shadowEvents.forEach[toInit.add('''«observer»''', "this")]
 		return toInit
 	}
-	
-	def String eventDefaultValue(TypedDeclaration it) {
-		val type = type
-		switch type {
-			EnumerationType case type:
-				return '''«(type as EnumerationType).enumerator.head.stateEnumAccess»'''
-			TypeAlias case type: {
-				val typeAlias = type.typeSpecifier.type
-				switch typeAlias {
-					EnumerationType case typeAlias: return '''«typeAlias.enumerator.head.access»'''
-					ComplexType case typeAlias: return ""
-					default: return NULL_LITERAL
-				}
-			}
-			ComplexType case type:
-				return ""
-			default:
-				return NULL_LITERAL
+	def dispatch add(List<Pair<String, String>> toInit, Declaration it) {}
+	def dispatch add(List<Pair<String, String>> toInit, VariableDefinition it) {
+		if(!isConst){
+			toInit.add(localAccess.toString, type.initialValue)
 		}
 	}
-	
-	
-	def private dispatch NULL_LITERAL(EventDefinition it) {
-		return "false"
-	}
-	
-	def private dispatch NULL_LITERAL(EObject it) {
-		NULL_LITERAL
-	}
-	
-	def private dispatch NULL_LITERAL(TypedDeclaration it) {
-		val type = type
-		switch type{
-			EnumerationType case type: 
-				return '''«type.enumerator.head.stateEnumAccess»'''
-			TypeAlias case type: {
-				val typeAlias = type.typeSpecifier.type
-				switch typeAlias {
-					EnumerationType case typeAlias: return '''«typeAlias.enumerator.head.enumeratorAccess»'''
-					ComplexType case typeAlias: return ""
-					default: return NULL_LITERAL
-				}
-			}
-			ComplexType case type:
-				return ""
-			default: 
-				return NULL_LITERAL
+	def dispatch add(List<Pair<String, String>> toInit, Event it) {
+		toInit.add(localAccess.toString, "false")
+		if(hasValue) {
+			toInit.add(localValueAccess.toString, type.initialValue)
 		}
 	}
-	
+	def dispatch initialValue(Type it) {
+		defaultValue?.toString?:NULL_LITERAL
+	}
+	@Inject protected extension StatechartUtil
+	def dispatch initialValue(EnumerationType it) {
+		if(multiSM) {
+			return enumerator.head.stateEnumAccess
+		}
+		enumerator.head.enumeratorAccess.toString
+	}
+	def dispatch initialValue(ComplexType it) {
+		""
+	}
+	def dispatch String initialValue(TypeAlias it) {
+		type.initialValue
+	}
 	def protected initialisationListCopy(ExecutionFlow it) {
 		val List<Pair<String, String>> toInit = newArrayList
 		if(timed) toInit.add(timerInstance, '''rhs.«timerInstance»''')
@@ -183,39 +130,31 @@ class ConstructorProvider implements ISourceFragment {
 		]
 		toInit
 	}
-	
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
 		«IF hasHistory»
 			for («USHORT_TYPE» i = 0; i < «historyStatesConst»; ++i)
 				«HISTORYVECTOR»[i] = «null_state»;
-				
 		«ENDIF»
 		«FOR iface : interfaces»
 			this->«iface.instance».«parent» = this;
 		«ENDFOR»
 		'''
-	
 	protected def CharSequence constructorBody(ExecutionFlow it, StatechartScope iface) 
 	'''
 	'''
-	
 	def destructorDefinition(ExecutionFlow it) '''
 		«module»::~«module»()
 		{
 		}
 	'''
-	
 	def protected generate(List<Pair<String,String>> values) {
 		values.join(" :\n", ",\n", "", ['''«it.key»(«it.value»)'''])
 	}
-	
 	def protected Pair<String, String> pair(String a, String b) {
 		return new Pair<String, String>(a, b)
 	}
-	
 	def protected void add(List<Pair<String, String>> l, String a, String b) {
 		l.add(pair(a, b))
 	}
-	
 }
