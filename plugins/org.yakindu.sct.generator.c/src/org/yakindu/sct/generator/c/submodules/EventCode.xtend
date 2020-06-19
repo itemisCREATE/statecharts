@@ -30,6 +30,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.generator.c.CExpressionsGenerator
 
 /**
  * @author rbeckmann
@@ -49,6 +51,8 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
+	
+	@Inject protected extension CExpressionsGenerator
 	
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
@@ -134,8 +138,8 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	def eventObservableSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»* «event.asObservableGetter»(«scHandleDecl»)'''
 	
 	
-	override eventClearCode(ExecutionFlow flow, Event event) '''
-		«event.access» = «FALSE_LITERAL»;
+	override eventClearCode(ExecutionFlow flow, Expression event) '''
+		«event.code» = «FALSE_LITERAL»;
 	'''
 	
 }

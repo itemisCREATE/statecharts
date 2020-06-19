@@ -200,7 +200,11 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
+	def dispatch CharSequence code(FeatureCall it, Property target) 
+		'''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
+
+	def dispatch CharSequence code(FeatureCall it, Event target) 
+		'''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) {
 		if(target.eContainer.isOriginStatechart) {

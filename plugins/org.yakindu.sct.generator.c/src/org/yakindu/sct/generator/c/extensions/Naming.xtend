@@ -508,7 +508,9 @@ class Naming {
 
 	def dispatch access(OperationDefinition it) '''«asFunction»'''
 
-	def dispatch access(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier.raised»'''
+	def dispatch access(EventDefinition it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier.raised»'''
+
+	def dispatch access(Event it) '''«name.asIdentifier.raised»'''
 	
 	def dispatch accessObservable(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier»'''
 	
