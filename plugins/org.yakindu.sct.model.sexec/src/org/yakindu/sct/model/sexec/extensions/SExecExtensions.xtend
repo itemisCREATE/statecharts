@@ -45,6 +45,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.types.Event
 
 class SExecExtensions {
 	@Inject extension OriginTracing
@@ -129,7 +130,7 @@ class SExecExtensions {
 		flow.timeEvents.findFirst[name.compareTo(timeEventName) == 0]
 	}
 	
-	def hasValue (EventDefinition it) {
+	def hasValue (Event it) {
 		type !== null && type.name != 'void'
 	}
 	

@@ -63,6 +63,8 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.types.TypeBuilder
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 @Singleton class SexecElementMapping {
 	
@@ -71,6 +73,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	@Inject extension StatechartExtensions sce
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension SexecExtensions sexec
+	@Inject extension SExecExtensions sExec
+	@Inject extension TypeBuilder typeBuilder
 	
 
 	def  ExecutionFlow create r : sexecFactory.createExecutionFlow create(Statechart statechart){
@@ -114,7 +118,9 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	}
 	
 	
-	def EventDefinition create r : EcoreUtil.copy(event) create(EventDefinition event) {}
+	def EventDefinition create r : EcoreUtil.copy(event) create(EventDefinition event) {
+		if ( event.hasValue ) r._meta(_variable("value", event.type))
+	}
 	
 	def VariableDefinition create r : EcoreUtil.copy(v) create(VariableDefinition v) {}
 	

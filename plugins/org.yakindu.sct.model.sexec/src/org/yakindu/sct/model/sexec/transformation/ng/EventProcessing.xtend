@@ -3,6 +3,7 @@ package org.yakindu.sct.model.sexec.transformation.ng
 import com.google.inject.Inject
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Method
@@ -156,6 +157,10 @@ class EventProcessing {
 	def dispatch Event event(ElementReferenceExpression it){
 		it.reference as Event
 	}
+	
+	def Property valueFeature(Event it) {
+		it.metaFeatures.filter(Property).filter[ p | p.name == "value"].head
+	} 
 	
 	def dispatch Event event(FeatureCall it){
 		it.feature as Event

@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 class BufferEventExtensions {
 	
@@ -12,12 +13,15 @@ class BufferEventExtensions {
 	
 	extension TypesFactory tFactory = TypesFactory.eINSTANCE
 	@Inject extension TypeBuilder
+	@Inject extension ExpressionBuilder
+
 		
 	def create tFactory.createEvent createBufferEvent(Event bufferedEvent) {
 
 		name = bufferedEvent.name
 		direction = bufferedEvent.direction
 		typeSpecifier = EcoreUtil.copy(bufferedEvent.typeSpecifier)
+		if ( type !== null && type != _void ) _meta(_variable("value", type))
 		_annotate(BUFFER_EVENT_ANNOTATION)
 	}
 	
