@@ -290,5 +290,11 @@ class TypeBuilder {
 		}
 	}
 	
+	def <T extends Declaration> T _meta(Declaration owner, T feature) {
+		owner.metaFeatures += feature
+		feature
+	}
+	
+	
 
 }
