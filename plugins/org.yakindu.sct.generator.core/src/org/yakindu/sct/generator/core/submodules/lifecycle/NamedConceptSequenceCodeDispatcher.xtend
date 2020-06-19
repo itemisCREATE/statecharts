@@ -15,6 +15,7 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
 import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
+import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
 
 /**
  * Instances of this class dispatches the generation of named sequences representing state machine concepts 
@@ -27,6 +28,7 @@ class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 	@Inject extension MicroStepCode
 	@Inject extension EventCode
 	
+	@Inject extension StateMachineConcept
 	@Inject extension EventProcessing
 	 
 	override stateMachineConceptCode(ExecutionFlow flow, Sequence s) {
@@ -34,7 +36,7 @@ class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 			case RunCycleMethod.MICRO_STEP :
 				return flow.microStepCode
 			case EventProcessing.CLEAR_EVENT:
-				return flow.eventClearCode(s.event)
+				return flow.eventClearCode(s.expression)
 			default : 
 				return ''''''
 		}		
