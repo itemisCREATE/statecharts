@@ -56,7 +56,7 @@ class EventBuffer {
 			bt.traceOrigin(flow)
 		]
 		
-		flow.features += _variable("eventBuffer", bufferType)
+		flow.features += _variable("_current", bufferType)
 	}
 	
 	def protected dispatch featureName(Scope it) {
