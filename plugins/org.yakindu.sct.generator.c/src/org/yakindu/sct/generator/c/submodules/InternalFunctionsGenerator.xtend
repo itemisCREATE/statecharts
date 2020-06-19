@@ -179,10 +179,10 @@ class InternalFunctionsGenerator {
 
 	 def implementation(Method it) '''
 		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+			«body.code»
 			«IF !body.requiresHandles»
 				«unusedParam(scHandle)»
 			«ENDIF»
-			«body.code»
 		}
 	 '''
 	 
@@ -202,6 +202,10 @@ class InternalFunctionsGenerator {
 	
 	def declaredInHeader(EObject o) {
 		return (o.eContainer instanceof org.yakindu.base.types.Package || o.eContainer instanceof ComplexType) 
+	}
+	
+	def isMethod(EObject o){
+		return o instanceof Method
 	}
 	
 	def toImplementation(List<Step> steps) '''
