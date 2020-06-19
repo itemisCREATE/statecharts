@@ -14,6 +14,7 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.types.Expression
 
 /**
  * 
@@ -33,10 +34,21 @@ class StateMachineConcept {
 	
 	def EObject getParameter(Sequence s, int idx) {
 		if (s !== null && s.steps.size > idx) {
-			return ((s.steps.get(idx) as Statement)
-					.expression as ElementReferenceExpression)
+			return (s.getExpression(idx) as ElementReferenceExpression)
 					.reference
 		}
 		else return null
 	}
+	
+	def getExpression(Sequence s) {
+		s.getExpression(0)
+	}
+	
+	def Expression getExpression(Sequence s, int idx) {
+		if (s !== null && s.steps.size > idx) {
+			return (s.steps.get(idx) as Statement).expression
+		}
+		else return null
+	}
+	
 }

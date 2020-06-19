@@ -103,9 +103,22 @@ class SexecBuilder {
 	def Sequence _conceptSequence (String name, EObject object) {
 		createSequence => [
 			it.name = name
-			it.steps += object._ref._statement
+			it.steps += object.toStep
 		]
 	}		
+	
+	def dispatch Step toStep(EObject o) {
+		o._ref._statement
+	}
+	
+	def dispatch Step toStep(Expression e) {
+		e._statement
+	}
+	
+	def dispatch Step toStep(Step s) {
+		s
+	}
+	
 	
 	
 	def If _if (Expression cond) {
