@@ -28,9 +28,11 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 /**
  * @author rbeckmann
@@ -52,6 +54,9 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	@Inject protected extension GenmodelEntries
 	
 	@Inject protected extension CExpressionsGenerator
+	
+	@Inject protected extension EventProcessing
+	@Inject protected extension ExpressionBuilder
 	
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
@@ -143,6 +148,7 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	
 	override eventMoveCode(ExecutionFlow flow, Expression source, Expression target) '''
 		«target.code» = «source.code»;
+		«IF source.event.hasValue»«target._meta(target.event.valueFeature).code» = «source._meta(source.event.valueFeature).code»;«ENDIF»
 		«source.code» = «FALSE_LITERAL»;
 	'''
 	
