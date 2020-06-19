@@ -44,19 +44,16 @@ class EventBuffer {
 						.forEach[ e | e.createBufferEvent => [
 							scopeType.features.add(it)
 							it.traceOrigin(e)
-							//it.traceOrigin(sc)
 						]]
 					scopeType._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
 				]
 				
 				scopeBufferType.traceOrigin(scope)
-				//scopeBufferType.traceOrigin(sc)				
 				bt.features += _variable(scope.featureName, scopeBufferType)
 			]
 			
 			bt._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
 			bt.traceOrigin(flow)
-			//bt.traceOrigin(sc)
 		]
 		
 		flow.features += _variable("eventBuffer", bufferType)
@@ -107,6 +104,10 @@ class EventBuffer {
 			]
 
 		return l			
+	}
+	
+	def Event originEvent(Event it) {
+		originTraces.filter(Event).head
 	}
 
 	def List<Expression> asExpressions(List<List<Declaration>> declPaths) {

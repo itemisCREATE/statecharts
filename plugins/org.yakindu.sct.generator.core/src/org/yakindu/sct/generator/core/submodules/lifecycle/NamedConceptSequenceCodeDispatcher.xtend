@@ -37,6 +37,8 @@ class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 				return flow.microStepCode
 			case EventProcessing.CLEAR_EVENT:
 				return flow.eventClearCode(s.expression)
+			case EventProcessing.MOVE_EVENT:
+				return flow.eventMoveCode(s.expression, s.getExpression(1))
 			default : 
 				return ''''''
 		}		

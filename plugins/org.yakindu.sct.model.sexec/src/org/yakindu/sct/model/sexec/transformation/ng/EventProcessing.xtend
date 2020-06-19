@@ -13,6 +13,10 @@ import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Direction
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventProcessing {
 
@@ -28,6 +32,7 @@ class EventProcessing {
 	
 
 	public static val CLEAR_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "clearEvent"
+	public static val MOVE_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "moveEvent"
 	public static val CLEAR_OUT_EVENTS = "clearOutEvents"
 	public static val CLEAR_IN_EVENTS = "clearInEvents"
 	public static val CLEAR_INTERNAL_EVENTS = "clearInternalEvents"
@@ -84,9 +89,17 @@ class EventProcessing {
 			m._type(_void)
 			
 			m._body(
-				it.eventBuffer.bufferEvents.asExpressions.map[ i |
-					i._clear
-				]
+				it
+					.eventBuffer
+					.bufferEvents
+					.asExpressions
+					.filter[ e | 
+						val o = e.event.originEvent;
+						o instanceof EventDefinition && o.direction == Direction.LOCAL
+					]
+					.map[ e |
+						e.event.originEvent._move(e)
+					]
 			)
 		]
 	}
@@ -128,13 +141,24 @@ class EventProcessing {
 	}
 
 
-
 	def Step _clear(EObject it){
 		_conceptSequence(CLEAR_EVENT, it)	
 	}
 	
-	def Event event(Sequence it){
+	def Step _move(EObject source, EObject target){
+		_conceptSequence(MOVE_EVENT, source, target)	
+	}
+	
+	def dispatch Event event(Sequence it){
 		it.getParameter as Event
+	}
+	
+	def dispatch Event event(ElementReferenceExpression it){
+		it.reference as Event
+	}
+	
+	def dispatch Event event(FeatureCall it){
+		it.feature as Event
 	}
 	
 

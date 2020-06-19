@@ -15,6 +15,9 @@ import com.google.inject.Singleton
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.TraceCode
@@ -28,10 +31,6 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.base.types.Direction
-import org.yakindu.base.types.Event
-import org.yakindu.base.types.Expression
-import org.yakindu.sct.generator.c.CExpressionsGenerator
 
 /**
  * @author rbeckmann
@@ -140,6 +139,11 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	
 	override eventClearCode(ExecutionFlow flow, Expression event) '''
 		«event.code» = «FALSE_LITERAL»;
+	'''
+	
+	override eventMoveCode(ExecutionFlow flow, Expression source, Expression target) '''
+		«target.code» = «source.code»;
+		«source.code» = «FALSE_LITERAL»;
 	'''
 	
 }

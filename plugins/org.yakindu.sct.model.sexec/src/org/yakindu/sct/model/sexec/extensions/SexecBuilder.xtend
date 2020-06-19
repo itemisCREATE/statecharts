@@ -100,10 +100,12 @@ class SexecBuilder {
 		]
 	}		
 	
-	def Sequence _conceptSequence (String name, EObject object) {
+	def Sequence _conceptSequence (String name, EObject... objects) {
 		createSequence => [
 			it.name = name
-			it.steps += object.toStep
+			objects.forEach[ o | 
+				it.steps += o.toStep
+			]
 		]
 	}		
 	

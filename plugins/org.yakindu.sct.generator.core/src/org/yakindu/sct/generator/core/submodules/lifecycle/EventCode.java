@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.generator.core.submodules.lifecycle;
 
-import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 
@@ -22,5 +21,6 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 public interface EventCode {
 	
 	CharSequence eventClearCode(ExecutionFlow flow, Expression event);
+	CharSequence eventMoveCode(ExecutionFlow flow, Expression source, Expression target);
 
 }
