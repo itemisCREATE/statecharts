@@ -206,10 +206,10 @@ class InternalFunctionsGenerator {
 
 	 def implementation(Method it) '''
 		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-			«body.code»
 			«IF !body.requiresHandles»
 				«unusedParam(scHandle)»
 			«ENDIF»
+			«body.code»
 		}
 	 '''
 	 
@@ -250,10 +250,10 @@ class InternalFunctionsGenerator {
 		«stepComment»
 		static void «shortName»(«scHandleDecl»)
 		{
-			«code»
 			«IF !it.requiresHandles»
 				«unusedParam(scHandle)»
 			«ENDIF»
+			«code»
 		}
 		
 	'''
