@@ -41,6 +41,8 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.generator.c.extensions.EventNaming
+import org.yakindu.sct.generator.c.TraceCode
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 /**
  * @author rbeckmann
@@ -61,22 +63,41 @@ class InternalFunctionsGenerator {
 	@Inject protected extension GeneratorPredicate
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension EventNaming
+	
+	@Inject protected extension	TraceCode 
+	@Inject protected extension	EventCode 
+	
 
 	def observerCallbacksImplementations(ExecutionFlow it) '''
 		«FOR e : shadowEvents»
 			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»*«ENDIF» value)
 			{
-				«IF e.typeSpecifier === null»
-				«addToQueueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName»);
-				«unusedParam("value")»
-				«ELSE»
-				«addToQueueValueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName», value);
+				«e.traceCode( if (e.hasValue) "&value" else "sc_null" )»
+				«interfaceIncomingEventRaiserBody(e as EventDefinition)»
+				
+				«IF ! e.hasValue»
+					«unusedParam("value")»
 				«ENDIF»
-				«runCycleFctID»(«scHandle»);
 			}
 			
 		«ENDFOR»
 	'''
+
+//	def observerCallbacksImplementations(ExecutionFlow it) '''
+//		«FOR e : shadowEvents»
+//			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»*«ENDIF» value)
+//			{
+//				«IF e.typeSpecifier === null»
+//				«addToQueueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName»);
+//				«unusedParam("value")»
+//				«ELSE»
+//				«addToQueueValueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName», value);
+//				«ENDIF»
+//				«runCycleFctID»(«scHandle»);
+//			}
+//			
+//		«ENDFOR»
+//	'''
 
 	def observerCallbacksPrototypes(ExecutionFlow it) '''
 		«FOR e : shadowEvents»

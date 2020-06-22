@@ -16,6 +16,7 @@ import com.google.inject.Singleton
 import com.google.inject.Inject
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.sgraph.Scope
 
 /**
  * @author Axel Terfloth
@@ -34,8 +35,9 @@ class ShadowMemberScope {
 		it._annotate(SHADOW_ANNOTATION)
 	} 
 	
-	def boolean isShadowMemberScope(StatechartScope it) {
-		annotations.exists[ a | a.type.name == SHADOW_ANNOTATION]		
+	def boolean isShadowMemberScope(Scope it) {
+		it instanceof StatechartScope
+		&& (it as StatechartScope).annotations.exists[ a | a.type.name == SHADOW_ANNOTATION]		
 	} 
 	
 }

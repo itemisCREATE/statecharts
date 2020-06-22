@@ -170,9 +170,9 @@ class APIGenerator {
 			«clearInEventsFctID»(«scHandle»);
 			«IF needsClearOutEventsFunction»
 				«clearOutEventsFctID»(«scHandle»);
-			«ELSE»
-			
-			«initializeObservables»
+			«ENDIF»
+			«IF useOutEventObservables»
+				«initializeObservables»
 			«ENDIF»
 			«initializeObserver»
 
@@ -182,11 +182,9 @@ class APIGenerator {
 	
 	protected def CharSequence initializeObserver(ExecutionFlow it){
 		'''
-		«IF statechart.isEventDriven»
 		«FOR e : shadowEvents»
 			sc_single_subscription_observer_init(&(«e.accessObserver»), «scHandle», («OBSERVER_NEXT_FP_TYPE»)«e.observerCallbackFctID»);
 		«ENDFOR»
-		«ENDIF»
 		'''
 	}
 	

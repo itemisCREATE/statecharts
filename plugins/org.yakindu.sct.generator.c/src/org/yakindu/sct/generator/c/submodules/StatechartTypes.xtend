@@ -34,6 +34,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.base.types.Direction
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 /**
  * @author rbeckmann
@@ -50,6 +51,8 @@ class StatechartTypes {
 	@Inject protected extension GeneratorEntry entry
 	@Inject extension GeneratorPredicate
 	@Inject protected extension GenmodelEntries
+	
+	@Inject protected extension ShadowMemberScope
 	
 	def forwardDeclarations(ExecutionFlow it) {
 		'''
@@ -139,7 +142,7 @@ class StatechartTypes {
 				«FOR d : typeRelevantDeclarations»
 					«d.scopeTypeDeclMember»
 				«ENDFOR»
-				«IF scope instanceof InternalScope && scope.flow.statechart.isEventDriven»
+				«IF scope instanceof InternalScope && scope.isShadowMemberScope»
 					«FOR d : shadowEvents»
 						«d.scopeShadowEventMember»
 					«ENDFOR»
