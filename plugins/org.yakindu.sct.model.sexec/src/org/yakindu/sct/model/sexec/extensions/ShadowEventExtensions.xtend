@@ -28,15 +28,19 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import com.google.inject.Singleton
 import org.yakindu.base.types.TypeBuilder
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 @Singleton
 class ShadowEventExtensions {
 
+	@Inject protected extension ShadowMemberScope
+	
 	@Inject protected extension OriginTracing
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ExpressionExtensions
 	@Inject protected extension StatechartUtil
 	@Inject protected extension TypeBuilder
+	
 	
 
 	def getShadowEvents(VariableDefinition member) {
@@ -89,7 +93,4 @@ class ShadowEventExtensions {
 		flow.shadowMemberScope.members += it
 	}
 
-	protected def create StextFactory.eINSTANCE.createInternalScope shadowMemberScope(ExecutionFlow flow) {
-		flow.scopes += it
-	}
 }

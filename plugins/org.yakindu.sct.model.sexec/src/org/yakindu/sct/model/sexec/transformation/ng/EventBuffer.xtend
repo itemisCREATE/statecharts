@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 class EventBuffer {
 	
@@ -30,6 +31,7 @@ class EventBuffer {
 	@Inject extension OriginTracing
 	@Inject extension StatechartAnnotations
 	@Inject extension ExpressionBuilder
+	@Inject extension ShadowMemberScope
 	
 	def defineEventBuffer(ExecutionFlow flow, Statechart sc){
 		
@@ -64,7 +66,8 @@ class EventBuffer {
 	}
 
 	def protected dispatch featureName(InternalScope it) {
-		"internal"	
+		if ( isShadowMemberScope ) "shadow"
+		else "internal"	
 	}
 	
 	def protected dispatch featureName(InterfaceScope it) {

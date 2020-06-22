@@ -51,6 +51,7 @@ import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.extensions.EventBufferExtensions
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -73,6 +74,7 @@ class Naming {
 	@Inject extension GeneratorPredicate
 	@Inject extension OriginTracing
 	@Inject extension EventBufferExtensions
+	@Inject protected extension ShadowMemberScope
 	
 	
 	def getFullyQualifiedName(State state) {
@@ -126,7 +128,8 @@ class Naming {
 	}
 
 	def dispatch String type(InternalScope it) {
-		containerType + 'Internal'
+		if ( it.isShadowMemberScope ) containerType + 'Shadow'
+		else containerType + 'Internal'
 	}
 
 	def dispatch String type(Scope it) {
@@ -192,7 +195,8 @@ class Naming {
 	}
 
 	def dispatch instance(InternalScope it) {
-		'internal'
+		if ( it.isShadowMemberScope ) 'shadow'
+		else 'internal'
 	}
 
 	def functionPrefix(Scope it, Declaration decl) {
