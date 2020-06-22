@@ -104,7 +104,6 @@ class ModelSequencer implements IModelSequencer {
 		eventProcessing.defineFeatures(ef)
 		superStep.defineFeatures(ef)
 		runCycleMethod.defineFeatures(ef)
-		ef.defineRunCycle
 
 
 		//clear create caches to avoid memory leak with repetetive generator cycles

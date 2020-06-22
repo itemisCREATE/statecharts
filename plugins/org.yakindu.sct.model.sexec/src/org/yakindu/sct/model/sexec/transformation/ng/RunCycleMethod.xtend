@@ -24,7 +24,8 @@ class RunCycleMethod {
 	public static val MICRO_STEP = StateMachineConcept.CONCEPT_NAME_PREFIX + "microStep"
 	
 	def defineFeatures (ExecutionFlow it) {
-		it.features += _variable("isReacting", _boolean)		
+		it.features += _variable("isReacting", _boolean)
+		defineRunCycle	
 	}
 			
 	def defineRunCycle(ExecutionFlow it) {
