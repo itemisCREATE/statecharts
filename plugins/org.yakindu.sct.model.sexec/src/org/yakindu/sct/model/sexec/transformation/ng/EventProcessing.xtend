@@ -1,7 +1,11 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
+import java.util.HashMap
+import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Direction
@@ -13,12 +17,13 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.sexec.TimeEvent
-import java.util.List
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 
 class EventProcessing {
 
@@ -30,6 +35,7 @@ class EventProcessing {
 	@Inject extension SExecExtensions
 	@Inject extension StateMachineConcept
 	@Inject protected extension EventBuffer
+	@Inject protected extension BufferEventExtensions
 	
 
 	public static val CLEAR_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "clearEvent"
@@ -42,10 +48,10 @@ class EventProcessing {
 
 
 	def defineFeatures (ExecutionFlow it) {
-		if (hasOutgoingEvents) defineClearOutEvents
+		if (hasOutgoingEvents && buffersOutgoingEvents) defineClearOutEvents
 		if (hasIncomingEvents) {
 			if (buffersIncomingEvents) defineTakeInEvents
-			else defineClearInEvents
+			defineClearInEvents
 		}
 		if (hasLocalEvents) {
 			if (buffersInternalEvents) defineTakeInternalEvents
@@ -172,6 +178,70 @@ class EventProcessing {
 		_conceptSequence(MOVE_EVENT, source, target)	
 	}
 	
+	
+	def transformEventAccess(ExecutionFlow flow) {
+	
+		val bufferedEvents = #[flow.incomingEvents, flow.timeEvents, flow.localEvents].flatten.toSet
+
+		val allEventReferences = flow.eAllContents
+										.filter(Expression)
+										.filter[ e | 
+											bufferedEvents.contains(e.referenceOrFeature)
+											&& !(e.eContainer instanceof FeatureCall)
+											&& !(e.eContainer instanceof EventRaisingExpression)
+										]
+										
+		val HashMap<EObject, Expression> allEventAccessExpression = newHashMap
+		flow.bufferEventExpressions.forEach[ e | if (e.referenceOrFeature !== null) allEventAccessExpression.put(e.referenceOrFeature, e)]
+													
+		allEventReferences.forEach[ expression | 
+			val event = expression.referenceOrFeature as Event
+			val bufferEvent = event.createBufferEvent
+			val bufferEventExpression = EcoreUtil.copy(allEventAccessExpression.get(bufferEvent))
+			
+			expression.eContainer.substitute(expression, bufferEventExpression)
+		]
+				
+	}
+	
+	/* Substitutes the EObject oldValue which is contained in EObject parent by EObject newValue.
+	 * If oldValue is not contained in parent then nothing happens. 
+	 */
+	protected def substitute(EObject parent, EObject oldValue, EObject newValue) {
+		if (parent !== null ) {
+			val ref = parent.eClass.getEAllStructuralFeatures
+				.filter(EReference)
+				.filter[ f | 
+					f.isChangeable 
+					&& !f.isDerived 
+					&& f.isContainment
+					&& parent.eIsSet(f)
+				]
+				.findFirst[ f | 
+					if (f.isMany) {
+						(parent.eGet(f) as List<EObject>).contains(oldValue)
+					} else {
+						parent.eGet(f) === oldValue
+					}
+				]
+			
+			if ( ref !== null ) {
+				if (ref.isMany) {
+					val list = parent.eGet(ref) as List<EObject>
+					list.set(list.indexOf(oldValue), newValue)
+				}
+				else parent.eSet(ref, newValue)				
+			}			
+		}	
+	}
+		
+	
+	protected def dispatch EObject referenceOrFeature(Expression e) { return null }
+	protected def dispatch EObject referenceOrFeature(ElementReferenceExpression e) { return e.reference }
+	protected def dispatch EObject referenceOrFeature(FeatureCall e) { return e.feature }
+	
+	
+	
 	def dispatch Event event(Sequence it){
 		it.getParameter as Event
 	}
@@ -234,6 +304,12 @@ class EventProcessing {
 	def buffersIncomingEvents(ExecutionFlow it) {
 		true 
 	}
+
+
+	def buffersOutgoingEvents(ExecutionFlow it) {
+		true 
+	}
+
 
 	def buffersInternalEvents(ExecutionFlow it) {
 		true 

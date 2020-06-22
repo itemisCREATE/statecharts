@@ -6,7 +6,9 @@ import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import com.google.inject.Singleton
 
+@Singleton
 class BufferEventExtensions {
 	
 	public static String BUFFER_EVENT_ANNOTATION = "__buffer_event__"

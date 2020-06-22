@@ -60,7 +60,6 @@ class RunCycleMethod {
 
 
 	def Step _microStep(ExecutionFlow it) {
-		//flow.microStep._call._statement
 		_sequence => [ name = MICRO_STEP ]
 	}
 		
