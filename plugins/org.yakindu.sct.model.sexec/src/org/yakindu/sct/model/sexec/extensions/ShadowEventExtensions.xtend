@@ -26,13 +26,18 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import com.google.inject.Singleton
+import org.yakindu.base.types.TypeBuilder
 
+@Singleton
 class ShadowEventExtensions {
 
 	@Inject protected extension OriginTracing
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ExpressionExtensions
 	@Inject protected extension StatechartUtil
+	@Inject protected extension TypeBuilder
+	
 
 	def getShadowEvents(VariableDefinition member) {
 		member.flow.shadowEvents.filter[originTraces.contains(member)]
@@ -74,6 +79,7 @@ class ShadowEventExtensions {
 		name = shadowEventName
 		direction = Direction.IN
 		typeSpecifier = EcoreUtil.copy(originEvent.typeSpecifier)
+		if ( type !== null && type != _void ) _meta(_variable("value", type))
 
 		// trace to statechart event, not the one in the statechart type
 		traceOrigin(originEvent.originTraces.filter(Event).head)
