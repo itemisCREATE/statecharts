@@ -43,18 +43,18 @@ class EventProcessing {
 	public static val CLEAR_OUT_EVENTS = "clearOutEvents"
 	public static val CLEAR_IN_EVENTS = "clearInEvents"
 	public static val CLEAR_INTERNAL_EVENTS = "clearInternalEvents"
-	public static val TAKE_IN_EVENTS = "takeInEvents"
-	public static val TAKE_INTERNAL_EVENTS = "takeInternalEvents"
+	public static val SWAP_IN_EVENTS = "swapInEvents"
+	public static val SWAP_INTERNAL_EVENTS = "swapInternalEvents"
 
 
 	def defineFeatures (ExecutionFlow it) {
 		if (hasOutgoingEvents && buffersOutgoingEvents) defineClearOutEvents
 		if (hasIncomingEvents) {
-			if (buffersIncomingEvents) defineTakeInEvents
+			if (buffersIncomingEvents) defineSwapInEvents
 			defineClearInEvents
 		}
 		if (hasLocalEvents) {
-			if (buffersInternalEvents) defineTakeInternalEvents
+			if (buffersInternalEvents) defineSwapInternalEvents
 			else defineClearInternalEvents
 		}
 	}
@@ -96,8 +96,8 @@ class EventProcessing {
 	}
 
 
-	def defineTakeInEvents(ExecutionFlow it) {
-		it._method(TAKE_IN_EVENTS) => [ m | 
+	def defineSwapInEvents(ExecutionFlow it) {
+		it._method(org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_IN_EVENTS) => [ m | 
 			m._type(_void)
 			
 			m._body(
@@ -111,8 +111,8 @@ class EventProcessing {
 	
 
 
-	def defineTakeInternalEvents(ExecutionFlow it) {
-		it._method(TAKE_INTERNAL_EVENTS) => [ m | 
+	def defineSwapInternalEvents(ExecutionFlow it) {
+		it._method(org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_INTERNAL_EVENTS) => [ m | 
 			m._type(_void)
 			
 			m._body(
@@ -289,11 +289,11 @@ class EventProcessing {
 	}
 	
 	def Method takeInternalEvents(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == TAKE_INTERNAL_EVENTS).head
+		features.filter( typeof(Method) ).filter( m | m.name == org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_INTERNAL_EVENTS).head
 	}
 
 	def Method takeInEvents(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == TAKE_IN_EVENTS).head
+		features.filter( typeof(Method) ).filter( m | m.name == org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_IN_EVENTS).head
 	}
 	
 
