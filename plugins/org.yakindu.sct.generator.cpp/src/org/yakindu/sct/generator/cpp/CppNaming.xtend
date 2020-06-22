@@ -315,7 +315,7 @@ class CppNaming extends Naming {
 		}
 	}
 	
-	def dispatch access(EventDefinition it) {
+	override dispatch access(EventDefinition it) {
 		if (external)
 			'''«asRaised»()'''
 		else

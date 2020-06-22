@@ -137,16 +137,6 @@ class StatemachineSourceFragment implements ISourceFragment {
 		
 		«methods.filter[ m | ! m.isPublic].implementation»
 		
-«««		«clearInEvents?.implementation»
-«««		
-«««		«clearInEventsFunction»
-«««		
-«««		«clearOutEvents?.implementation»
-		
-«««		«IF needsClearOutEventsFunction»
-«««			«clearOutEventsFunction»			
-«««		«ENDIF»
-		
 		«interfaceFunctions»
 
 		«functionImplementations»
