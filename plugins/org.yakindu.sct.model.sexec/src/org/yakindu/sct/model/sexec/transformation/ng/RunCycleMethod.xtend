@@ -61,7 +61,7 @@ class RunCycleMethod {
 
 
 	def Step _microStep(ExecutionFlow it) {
-		_sequence => [ name = MICRO_STEP ]
+		_conceptSequence(MICRO_STEP)
 	}
 		
 

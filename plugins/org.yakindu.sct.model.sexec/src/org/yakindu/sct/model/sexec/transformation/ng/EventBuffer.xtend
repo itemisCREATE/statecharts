@@ -17,10 +17,10 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
 
 class EventBuffer {
 	
@@ -29,20 +29,24 @@ class EventBuffer {
 	@Inject extension EventBufferExtensions	
 	@Inject extension INamingService
 	@Inject extension OriginTracing
-	@Inject extension StatechartAnnotations
 	@Inject extension ExpressionBuilder
 	@Inject extension ShadowMemberScope
 	
+	@Inject protected extension IFlowConfiguration config
+	
 	def defineEventBuffer(ExecutionFlow flow, Statechart sc){
 		
-		if (sc.isEventDriven) return 
+		if (! (applyIncomingEventBuffer || applyInternalEventBuffer)) return 
 		
 		val bufferType = _complexType() => [ bt |
 			flow.scopes.filter[hasBufferedEvents].forEach[ scope | 
 				val scopeBufferType = _complexType() => [ scopeType |
 					scope.declarations
 						.filter(Event)
-						.filter[ e | e.direction != Direction::OUT ]
+						.filter[ e |
+							   (applyIncomingEventBuffer && e.direction == Direction.IN)
+							|| (applyInternalEventBuffer && e.direction == Direction.LOCAL) 
+						]
 						.forEach[ e | e.createBufferEvent => [
 							scopeType.features.add(it)
 							it.traceOrigin(e)
@@ -80,6 +84,10 @@ class EventBuffer {
 		
 	def eventBuffer(ExecutionFlow it) {
 		eventBuffers.head
+	}
+	
+	def hasEventBuffer (ExecutionFlow it) {
+		eventBuffer !== null
 	}
 	
 	def eventBuffers(ComplexType it) {

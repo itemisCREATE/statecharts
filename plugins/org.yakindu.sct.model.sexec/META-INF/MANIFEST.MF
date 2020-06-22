@@ -15,6 +15,7 @@ Export-Package: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.sexec.naming,
  org.yakindu.sct.model.sexec.naming.tree,
  org.yakindu.sct.model.sexec.transformation,
+ org.yakindu.sct.model.sexec.transformation.config,
  org.yakindu.sct.model.sexec.transformation.ng,
  org.yakindu.sct.model.sexec.util
 Require-Bundle: com.google.inject,

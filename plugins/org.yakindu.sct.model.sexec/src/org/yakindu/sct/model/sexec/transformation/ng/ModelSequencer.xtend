@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
 import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.RetargetReferences
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -40,6 +41,8 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension RunCycleMethod runCycleMethod
 	@Inject extension EventBuffer eventBuffer
 	
+	@Inject extension IFlowConfiguration config
+	
 	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
@@ -51,6 +54,9 @@ class ModelSequencer implements IModelSequencer {
 	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
 		val ef = sc.create
+		
+		// derive configuration from statechart
+		config.takeConfigurationfromStatechart(sc)
 		
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)

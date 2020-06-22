@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
 
 class EventProcessing {
 
@@ -37,6 +38,9 @@ class EventProcessing {
 	@Inject protected extension EventBuffer
 	@Inject protected extension BufferEventExtensions
 	
+	@Inject protected extension IFlowConfiguration config
+	
+	
 
 	public static val CLEAR_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "clearEvent"
 	public static val MOVE_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "moveEvent"
@@ -48,13 +52,13 @@ class EventProcessing {
 
 
 	def defineFeatures (ExecutionFlow it) {
-		if (hasOutgoingEvents && buffersOutgoingEvents) defineClearOutEvents
+		if (hasOutgoingEvents && applyOutgoingEventBuffer) defineClearOutEvents
 		if (hasIncomingEvents) {
-			if (buffersIncomingEvents) defineSwapInEvents
+			if (applyIncomingEventBuffer) defineSwapInEvents
 			defineClearInEvents
 		}
 		if (hasLocalEvents) {
-			if (buffersInternalEvents) defineSwapInternalEvents
+			if (applyInternalEventBuffer) defineSwapInternalEvents
 			else defineClearInternalEvents
 		}
 	}
@@ -147,13 +151,13 @@ class EventProcessing {
 	}
 
 	def Step _clearOutEvents(ExecutionFlow it) {
-		if ( hasOutgoingEvents ) clearOutEvents._call._statement 
+		if ( clearOutEvents !== null ) clearOutEvents._call._statement 
 		else _empty	
 	}
 
 
 	def Step _clearInEvents(ExecutionFlow it) {
-		if ( hasIncomingEvents && !buffersIncomingEvents ) clearInEvents._call._statement 
+		if ( clearInEvents !== null) clearInEvents._call._statement 
 		else _empty	
 	}
 
@@ -181,6 +185,8 @@ class EventProcessing {
 	
 	def transformEventAccess(ExecutionFlow flow) {
 	
+		if ( ! flow.hasEventBuffer ) return 
+		
 		val bufferedEvents = #[flow.incomingEvents, flow.timeEvents, flow.localEvents].flatten.toSet
 
 		val allEventReferences = flow.eAllContents
@@ -300,21 +306,5 @@ class EventProcessing {
 	def hasIncomingEvents(ExecutionFlow it) {
 		hasInEvents || timeEvents.size > 0 	
 	}
-	
-	def buffersIncomingEvents(ExecutionFlow it) {
-		true 
-	}
-
-
-	def buffersOutgoingEvents(ExecutionFlow it) {
-		true 
-	}
-
-
-	def buffersInternalEvents(ExecutionFlow it) {
-		true 
-	}
-
-	
 	
 }
