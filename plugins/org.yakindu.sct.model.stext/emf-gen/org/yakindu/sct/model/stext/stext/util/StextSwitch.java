@@ -176,6 +176,7 @@ public class StextSwitch<T> extends Switch<T> {
 				StatechartScope statechartScope = (StatechartScope)theEObject;
 				T result = caseStatechartScope(statechartScope);
 				if (result == null) result = caseScope(statechartScope);
+				if (result == null) result = caseAnnotatableElement(statechartScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -185,6 +186,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseStatechartScope(interfaceScope);
 				if (result == null) result = caseNamedElement(interfaceScope);
 				if (result == null) result = caseScope(interfaceScope);
+				if (result == null) result = caseAnnotatableElement(interfaceScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,6 +195,7 @@ public class StextSwitch<T> extends Switch<T> {
 				T result = caseInternalScope(internalScope);
 				if (result == null) result = caseStatechartScope(internalScope);
 				if (result == null) result = caseScope(internalScope);
+				if (result == null) result = caseAnnotatableElement(internalScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -201,6 +204,7 @@ public class StextSwitch<T> extends Switch<T> {
 				T result = caseImportScope(importScope);
 				if (result == null) result = caseStatechartScope(importScope);
 				if (result == null) result = caseScope(importScope);
+				if (result == null) result = caseAnnotatableElement(importScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

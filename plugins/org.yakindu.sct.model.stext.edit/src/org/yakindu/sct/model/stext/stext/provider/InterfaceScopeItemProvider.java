@@ -20,6 +20,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -148,7 +149,9 @@ public class InterfaceScopeItemProvider extends StatechartScopeItemProvider {
 
 		boolean qualify =
 			childFeature == SGraphPackage.Literals.SCOPE__DECLARATIONS ||
-			childFeature == SGraphPackage.Literals.SCOPE__MEMBERS;
+			childFeature == SGraphPackage.Literals.SCOPE__MEMBERS ||
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 
 		if (qualify) {
 			return getString

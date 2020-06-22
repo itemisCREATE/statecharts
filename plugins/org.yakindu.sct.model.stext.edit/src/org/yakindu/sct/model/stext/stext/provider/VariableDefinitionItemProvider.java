@@ -118,6 +118,26 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createStatechartScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createInterfaceScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createInternalScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createImportScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 StextFactory.eINSTANCE.createEventDefinition()));
 
 		newChildDescriptors.add
@@ -184,6 +204,11 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 StextFactory.eINSTANCE.createSubmachineReferenceExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
