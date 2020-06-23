@@ -44,6 +44,7 @@ class EventProcessing {
 
 	public static val CLEAR_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "clearEvent"
 	public static val MOVE_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "moveEvent"
+	public static val NEXT_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "nextEvent"
 	public static val CLEAR_OUT_EVENTS = "clearOutEvents"
 	public static val CLEAR_IN_EVENTS = "clearInEvents"
 	public static val CLEAR_INTERNAL_EVENTS = "clearInternalEvents"
@@ -129,23 +130,52 @@ class EventProcessing {
 	}
 	
 	def Step _eventProcessing(ExecutionFlow it, Step body) {
-		_sequence(
-			_takeInEvents,
-			_clearOutEvents,
-			_eventLoop(body),
-			_clearInEvents	
-		)
+		
+		if (isCycleBased) 
+			_sequence(
+				_takeInEvents,
+				_clearOutEvents,
+				_eventLoop(body),
+				_clearInEvents	
+			)
+		else 
+			_sequence(
+				_clearOutEvents,
+				_processEventQueues(body)
+			)
+			
 	}
 
 
 	def Step _eventLoop(ExecutionFlow it, Step body) {
-		if (hasLocalEvents) 
+		if (hasLocalEvents && applyInternalEventBuffer) 
 			_do(_sequence(
 				body,
 				_takeInternalEvents
 			))._while(
 				bufferEventExpressions.internal.reduce[r1, r2| r1._or(r2)]
 			)
+		else 
+			body	
+	}
+
+	def Step _processEventQueues(ExecutionFlow it, Step body) {
+		if (hasLocalEvents || applyIncomingEventQueue) {
+		
+			_sequence(
+				_conceptSequence(NEXT_EVENT),
+				_do(_sequence(
+					body,
+					_clearInEvents,
+					// clearInternalEvents
+					_conceptSequence(NEXT_EVENT)
+				))._while( #[incomingEvents,localEvents]
+							.flatten
+							.map[ ev | ev._ref as Expression ]
+							.reduce[ e1, e2 | e1._or(e2) ]
+				) 
+			)			
+		}
 		else 
 			body	
 	}
