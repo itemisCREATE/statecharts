@@ -52,6 +52,8 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 		«IF needsNextEventFunction»
 		
 		«nextEventFunction»
+		
+		«dispatchNextEventFunction»
 		«ENDIF»
 		«IF hasQueuedEventsWithValue»
 		
@@ -76,6 +78,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 		«ENDIF»
 		«IF needsNextEventFunction»
 			static «internalEventStructTypeName» «nextEventFctID»(«scHandleDecl»);
+			static void «dispatchNextEventFctID»(«scHandleDecl»);
 		«ENDIF»
 		
 		«IF hasQueuedEventsWithValue»
@@ -234,6 +237,18 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 		'''
 	}
 	
+	def dispatchNextEventFunction(ExecutionFlow it) {
+		'''
+		static void «dispatchNextEventFctID»(«scHandleDecl»)
+		{
+			«internalEventStructTypeName» nextEvent;
+			nextEvent = «nextEventFctID»(«scHandle»);
+			«dispatchEventFctID»(«scHandle», &nextEvent);
+		}
+		'''
+	}
+	
+
 	override fileComment(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		''''''
 	}

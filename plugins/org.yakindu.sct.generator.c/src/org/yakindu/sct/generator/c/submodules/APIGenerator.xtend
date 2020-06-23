@@ -55,54 +55,11 @@ class APIGenerator {
 	@Inject protected extension InternalFunctionsGenerator
 	@Inject protected extension MethodGenerator
 
+
 	def runCycleCode(ExecutionFlow it) {
-		if (it.runCycle !== null)
-			it.runCycle.implementation
-		else '''
-			«runCycleSignature»
-			{
-				«traceCycleStart»
-				«IF needsClearOutEventsFunction»«clearOutEventsFctID»(«scHandle»);«ENDIF»
-				«runCycleForLoop(it)»
-				«clearInEventsFctID»(«scHandle»);
-				«traceCycleEnd»
-			}
-		'''
+		it.runCycle.implementation
 	}
 	
-	protected def superStepLoop(CharSequence microStep) '''
-		do {
-			«scHandle»->«STATEVECTOR_CHANGED» = false;
-			«microStep»
-		} while(«scHandle»->«STATEVECTOR_CHANGED»);
-	'''
-
-	protected def CharSequence runCycleForLoop(ExecutionFlow it) {
-		val microStep = '''
-		for («scHandle»->«STATEVECTOR_POS» = 0;
-			«scHandle»->«STATEVECTOR_POS» < «maxOrthogonalStates»;
-			«scHandle»->«STATEVECTOR_POS»++)
-			{
-				
-			switch («scHandle»->«STATEVECTOR»[«scHandle»->«STATEVECTOR_POS»])
-			{
-			«FOR state : states.filter[isLeaf]»
-				«IF state.reactMethod !== null»
-					case «state.stateName»:
-					{
-						«state.reactMethod.shortName»(«scHandle», «TRUE_LITERAL»);
-						break;
-					}
-				«ENDIF»
-			«ENDFOR»
-			default:
-				break;
-			}
-		}
-		'''
-		return if (statechart.isSuperStep) superStepLoop(microStep) else microStep
-	} 
-
 
 	def declareRunCycle(ExecutionFlow it) {
 		'''«runCycleSignature»;'''

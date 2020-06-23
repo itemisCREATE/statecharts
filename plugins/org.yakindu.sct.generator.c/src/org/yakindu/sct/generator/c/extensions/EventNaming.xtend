@@ -109,6 +109,10 @@ class EventNaming {
 	def nextEventFctID(ExecutionFlow it) {
 		'''«functionPrefix»get_next_event'''
 	}
+
+	def dispatchNextEventFctID(ExecutionFlow it) {
+		'''«functionPrefix»dispatch_next_event'''
+	}
 	
 	def addToQueueFctID(ExecutionFlow it) {
 		'''«functionPrefix»add_event_to_queue'''

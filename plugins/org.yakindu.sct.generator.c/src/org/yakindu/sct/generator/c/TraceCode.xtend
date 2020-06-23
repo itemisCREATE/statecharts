@@ -80,18 +80,6 @@ class TraceCode {
 			«it.traceFctID»(«scHandle», «TRACE_MACHINE_EXIT»);
 		'''
 	}
-
-	def CharSequence traceCycleStart(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_START»);
-		'''
-	}
-	
-	def CharSequence traceCycleEnd(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_END»);
-		'''
-	}
 		
 
 	def protected dispatch notifyTrace(Object it) ''''''

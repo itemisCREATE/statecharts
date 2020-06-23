@@ -99,4 +99,11 @@ class EventDrivenEventCode extends EventCode {
 			decl
 		} else null
 	}
+	
+	
+	override eventNextCode(ExecutionFlow it) '''
+		«dispatchNextEventFctID»(«scHandle»);
+	'''
+	
+	
 }

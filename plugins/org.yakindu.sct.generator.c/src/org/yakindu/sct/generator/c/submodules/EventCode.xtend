@@ -154,4 +154,8 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 		«source.code» = «FALSE_LITERAL»;
 	'''
 	
+	override eventNextCode(ExecutionFlow flow) {
+		throw new UnsupportedOperationException("Something went wrong - generating 'eventNext' not supported for cycle based statecharts.")
+	}
+	
 }

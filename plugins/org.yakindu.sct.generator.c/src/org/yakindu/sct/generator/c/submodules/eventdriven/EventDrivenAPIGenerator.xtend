@@ -55,39 +55,8 @@ class EventDrivenAPIGenerator extends APIGenerator {
 		«ENDIF»
 		'''
 	}
-	
-	override runCycleCode(ExecutionFlow it)  {
-		if(!needsQueues) {
-			return super.runCycleCode(it)
-		} else {
-			'''
-				«runCycleSignature»
-				{
-					«internalEventStructTypeName» currentEvent;
-					«IF needsRunCycleGuard»
-					if(«scHandle»->«runCycleGuard» == «TRUE_LITERAL») {
-						return;
-					}
-					«scHandle»->«runCycleGuard» = «TRUE_LITERAL»;
-					«ENDIF»
-					«IF needsClearOutEventsFunction»«clearOutEventsFctID»(«scHandle»);«ENDIF»
-					
-					currentEvent = «nextEventFctID»(«scHandle»);
-					
-					do {
-						«dispatchEventFctID»(«scHandle», &currentEvent);
-						«runCycleForLoop»
-						«clearInEventsFctID»(«scHandle»);
-					} while((currentEvent = «nextEventFctID»(«scHandle»)).name != «invalidEventEnumName»);
-					
-					«IF needsRunCycleGuard»
-					«scHandle»->«runCycleGuard» = «FALSE_LITERAL»;
-					«ENDIF»
-				}
-			'''
-		}
-	}
-	
+
+		
 	override raiseTimeEvent(ExecutionFlow it) '''
 		«IF timed»
 			«raiseTimeEventSignature»
