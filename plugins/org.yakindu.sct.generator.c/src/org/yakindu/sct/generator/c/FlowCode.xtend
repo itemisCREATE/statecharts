@@ -11,14 +11,25 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Package
+import org.yakindu.base.types.Parameter
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.submodules.TraceCode
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.sct.generator.core.submodules.lifecycle.NamedConceptSequenceCode
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
+import org.yakindu.sct.model.sexec.DoWhile
 import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.Execution
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.If
@@ -34,18 +45,11 @@ import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sexec.DoWhile
-import org.yakindu.sct.generator.core.submodules.lifecycle.NamedConceptSequenceCode
-import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.Parameter
-import org.yakindu.base.types.ComplexType
-import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.transformation.ng.SuperStep
 
 /**
  * @author axel terfloth
@@ -61,6 +65,8 @@ class FlowCode {
 	@Inject protected extension StatechartAnnotations
 	@Inject protected extension NamedConceptSequenceCode
 	@Inject protected extension StateMachineConcept
+	
+	@Inject protected extension SuperStep
 	
 	@Inject protected extension CLiterals
 	
@@ -178,9 +184,7 @@ class FlowCode {
 	def dispatch CharSequence code(EnterState it) '''
 		«scHandle»->«STATEVECTOR»[«state.stateVector.offset»] = «state.stateName»;
 		«scHandle»->«STATEVECTOR_POS» = «state.stateVector.offset»;
-		«IF flow.statechart.isSuperStep»
-		«scHandle»->«STATEVECTOR_CHANGED» = true;
-		«ENDIF»
+		«flow._stateChanged.code»
 	'''
 
 	def dispatch CharSequence code(ExitState it) '''
@@ -216,11 +220,11 @@ class FlowCode {
 	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
 
 	def isLocalVariable(EObject o) {
-		(o instanceof org.yakindu.base.types.Property) && (o.eContainer instanceof LocalVariableDefinition)	
+		(o instanceof Property) && (o.eContainer instanceof LocalVariableDefinition)	
 	}
 	
 	def declaredInHeader(EObject o) {
-		return (o.eContainer instanceof org.yakindu.base.types.Package || (o.eContainer instanceof ComplexType && !(o.eContainer instanceof ExecutionFlow)))
+		return (o.eContainer instanceof Package || (o.eContainer instanceof ComplexType && !(o.eContainer instanceof ExecutionFlow)))
 	}
 	
 }

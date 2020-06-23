@@ -15,34 +15,24 @@ import com.google.inject.Singleton
 import java.util.List
 import org.yakindu.sct.generator.c.ConstantInitializationResolver
 import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
-import org.yakindu.sct.generator.c.types.CLiterals
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sexec.Call
-import org.yakindu.sct.model.sexec.CheckRef
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.Parameter
-import org.yakindu.sct.model.sexec.LocalVariableDefinition
-import org.yakindu.base.types.ComplexType
-import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
-import org.yakindu.sct.generator.c.extensions.EventNaming
-import org.yakindu.sct.generator.c.TraceCode
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 /**
  * @author rbeckmann

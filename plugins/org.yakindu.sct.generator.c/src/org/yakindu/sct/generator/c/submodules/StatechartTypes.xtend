@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,29 +12,28 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Property
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
-import org.yakindu.base.types.Event
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.Declaration
-import org.yakindu.base.types.Property
-import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.base.types.Direction
-import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 /**
  * @author rbeckmann
@@ -88,16 +87,13 @@ class StatechartTypes {
 		«statesEnumType» «STATEVECTOR»[«maxOrthogonalStates»];
 		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«maxHistoryStates»];«ENDIF»
 		«USHORT_TYPE» «STATEVECTOR_POS»; 
-		«IF statechart.isSuperStep»
-		«BOOL_TYPE» «STATEVECTOR_CHANGED»;
-		«ENDIF»
 		«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
 			«iScope.type» «iScope.instance»;
 		«ENDFOR»
 		«IF entry.tracingGeneric»
 		«TRACE_HANDLER_TYPE» *«TRACE_HANDLER»;
 		«ENDIF»
-		«FOR v : it.features.filter(org.yakindu.base.types.Property)»
+		«FOR v : it.features.filter(Property)»
 			«v.structMember»
 		«ENDFOR»
 		'''

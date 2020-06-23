@@ -119,11 +119,11 @@ class StatemachineSourceFragment implements ISourceFragment {
 		
 		«init»
 		
-		«enter»
+		«enterCode»
 		
 		«runCycleCode»
 		
-		«exit»
+		«exitCode»
 		
 		«active»
 		

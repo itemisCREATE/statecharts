@@ -15,7 +15,6 @@ import com.google.inject.Singleton
 import org.yakindu.base.types.Event
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming

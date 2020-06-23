@@ -46,9 +46,6 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		«internalEventStructTypeName» in_buffer[«inBufferSize»];
 		«ENDIF»
 		«ENDIF»
-		«IF needsRunCycleGuard»
-		«BOOL_TYPE» «runCycleGuard»;
-		«ENDIF»
 		'''
 	}
 	

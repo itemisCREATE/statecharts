@@ -15,7 +15,6 @@ import com.google.inject.Singleton
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.types.CLiterals
@@ -30,6 +29,10 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
+import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
+import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
+import org.yakindu.sct.model.sexec.concepts.EnterMethod
+import org.yakindu.sct.model.sexec.concepts.ExitMethod
 
 /**
  * @author rbeckmann
@@ -51,9 +54,14 @@ class APIGenerator {
 	@Inject protected extension GeneratorEntry genEntry
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension ShadowEventExtensions
-	@Inject protected extension RunCycleMethod
 	@Inject protected extension InternalFunctionsGenerator
 	@Inject protected extension MethodGenerator
+	
+	@Inject protected extension EnterMethod
+	@Inject protected extension ExitMethod	
+	@Inject protected extension RunCycleMethod
+	@Inject protected extension ExecutionGuard
+	@Inject protected extension EventProcessing
 
 
 	def runCycleCode(ExecutionFlow it) {
@@ -124,16 +132,18 @@ class APIGenerator {
 			
 			«scHandle»->«STATEVECTOR_POS» = 0;
 			
-			«clearInEventsFctID»(«scHandle»);
-			«IF needsClearOutEventsFunction»
-				«clearOutEventsFctID»(«scHandle»);
-			«ENDIF»
+			«_clearInEvents.code»
+			«_clearInternalEvents.code»
+			«_clearOutEvents.code»
+
 			«IF useOutEventObservables»
 				«initializeObservables»
 			«ENDIF»
 			«initializeObserver»
 
 			«initSequence.code»
+			
+			«_initIsExecuting.code»
 		'''
 	}
 	
@@ -162,16 +172,10 @@ class APIGenerator {
 		'''«initSignature»;'''
 	}
 
-	def enter(ExecutionFlow it) {
-		'''
-			«enterSignature»
-			{
-				«traceMachineEnter»
-				«enterSequences.defaultSequence.code»
-			}
-		'''
-	}
-
+	def enterCode(ExecutionFlow it) '''
+		«it.enter.implementation»
+	'''
+		
 	def declareEnter(ExecutionFlow it) {
 		'''«enterSignature»;'''
 	}
@@ -270,15 +274,9 @@ class APIGenerator {
 		'''«BOOL_TYPE» «isFinalFctID»(const «scHandleDecl»)'''
 	}
 	
-	def exit(ExecutionFlow it) {
-		'''
-			«exitSignature»
-			{
-				«exitSequence.code»
-				«traceMachineExit»
-			}
-		'''
-	}
+	def exitCode(ExecutionFlow it) '''
+		«it.exit.implementation»
+	'''
 	
 	def declareExit(ExecutionFlow it) {
 		'''«exitSignature»;'''

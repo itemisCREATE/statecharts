@@ -26,7 +26,6 @@ class Tracing implements IContentTemplate {
 
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
-	@Inject extension CLiterals
 
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) '''
 		«entry.licenseText»

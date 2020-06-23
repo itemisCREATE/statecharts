@@ -20,7 +20,6 @@ import org.yakindu.base.types.Expression
 import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.types.CLiterals
@@ -28,11 +27,11 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 /**
  * @author rbeckmann

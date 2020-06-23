@@ -8,36 +8,37 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Trace
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle
+import org.yakindu.sct.model.sexec.TraceEndRunCycle
 import org.yakindu.sct.model.sexec.TraceStateEntered
 import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.base.types.Expression
-import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.ComplexType
-import org.yakindu.sct.model.sgraph.util.StatechartUtil
-import org.yakindu.sct.model.sexec.LocalVariableDefinition
-import org.yakindu.sct.model.sexec.TraceBeginRunCycle
-import org.yakindu.sct.model.sexec.TraceEndRunCycle
 
 /**
  * @author axel terfloth
  */
-class TraceCode {
+class TraceCode implements org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode {
 	
  	@Inject extension GenmodelEntries
  	@Inject extension Naming
@@ -69,18 +70,6 @@ class TraceCode {
 		'''
 	}
 	
-	def CharSequence traceMachineEnter(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_ENTER»);
-		'''
-	}
-
-	def CharSequence traceMachineExit(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_EXIT»);
-		'''
-	}
-		
 
 	def protected dispatch notifyTrace(Object it) ''''''
 	
@@ -158,6 +147,20 @@ class TraceCode {
 			«flow.exitStateTracingFctID»(«scHandle», «it.state.stateName»);
 		«ENDIF»
 	'''
+	
+	
+	override traceEnterCode(ExecutionFlow it) {
+		if (entry.tracingGeneric) '''
+			«it.traceFctID»(«scHandle», «TRACE_MACHINE_ENTER»);
+		'''	
+	}
+	
+	
+	override traceExitCode(ExecutionFlow it) {
+		if (entry.tracingGeneric) '''
+			«it.traceFctID»(«scHandle», «TRACE_MACHINE_EXIT»);
+		'''
+	}
 	
 	
 }

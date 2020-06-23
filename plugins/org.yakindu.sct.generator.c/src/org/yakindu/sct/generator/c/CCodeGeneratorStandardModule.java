@@ -19,7 +19,6 @@ import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
-import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.files.StatemachineHeader;
 import org.yakindu.sct.generator.c.files.StatemachineSource;
 import org.yakindu.sct.generator.c.submodules.RunCycleMethodCode;
@@ -29,13 +28,13 @@ import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.CoreFlowConfiguration;
 import org.yakindu.sct.generator.core.submodules.lifecycle.EventCode;
 import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
+import org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.ng.ReactMethod;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
@@ -58,6 +57,7 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 		binder.bind(StatemachineHeader.class).toProvider(HeaderContentFragmentProvider.class);
 		binder.bind(MicroStepCode.class).to(RunCycleMethodCode.class);
 		binder.bind(EventCode.class).to(org.yakindu.sct.generator.c.submodules.EventCode.class);
+		binder.bind(TraceCode.class).to(org.yakindu.sct.generator.c.submodules.TraceCode.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
