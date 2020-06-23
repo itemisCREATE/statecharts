@@ -193,7 +193,7 @@ class InternalFunctionsGenerator {
 	def dispatch requiresHandle(EObject e) { false }
 	def dispatch requiresHandle(Call e) { true }
 	def dispatch requiresHandle(CheckRef e) { true }
-	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
+	def dispatch requiresHandle(ElementReferenceExpression e) { (e.reference.isMethod) || (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
 	def dispatch requiresHandle(FeatureCall e) { (! (e.feature instanceof Parameter)) && (!e.feature.isLocalVariable) && (!e.feature.declaredInHeader) }
 	
 	def isLocalVariable(EObject o) {
