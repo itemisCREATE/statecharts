@@ -64,18 +64,6 @@ class APIGenerator {
 	@Inject protected extension EventProcessing
 
 
-	def runCycleCode(ExecutionFlow it) {
-		it.runCycle.implementation
-	}
-	
-
-	def declareRunCycle(ExecutionFlow it) {
-		'''«runCycleSignature»;'''
-	}
-
-	def protected CharSequence runCycleSignature(ExecutionFlow it) {
-		'''void «runCycleFctID»(«scHandleDecl»)'''
-	}
 	
 	def tracing(ExecutionFlow it){
 		if (timed) 
@@ -172,18 +160,7 @@ class APIGenerator {
 		'''«initSignature»;'''
 	}
 
-	def enterCode(ExecutionFlow it) '''
-		«it.enter.implementation»
-	'''
-		
-	def declareEnter(ExecutionFlow it) {
-		'''«enterSignature»;'''
-	}
 	
-	def protected CharSequence enterSignature(ExecutionFlow it) {
-		'''void «enterFctID»(«scHandleDecl»)'''
-	}
-
 	def isActive(ExecutionFlow it) {
 		'''
 			«isActiveSignature»
@@ -272,18 +249,6 @@ class APIGenerator {
 	
 	def protected CharSequence isFinalSignature(ExecutionFlow it) {
 		'''«BOOL_TYPE» «isFinalFctID»(const «scHandleDecl»)'''
-	}
-	
-	def exitCode(ExecutionFlow it) '''
-		«it.exit.implementation»
-	'''
-	
-	def declareExit(ExecutionFlow it) {
-		'''«exitSignature»;'''
-	}
-	
-	def protected CharSequence exitSignature(ExecutionFlow it) {
-		'''void «exitFctID»(«scHandleDecl»)'''
 	}
 	
 	def raiseTimeEvent(ExecutionFlow it) {

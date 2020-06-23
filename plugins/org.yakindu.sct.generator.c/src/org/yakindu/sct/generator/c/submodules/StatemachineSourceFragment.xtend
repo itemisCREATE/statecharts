@@ -88,10 +88,10 @@ class StatemachineSourceFragment implements ISourceFragment {
 
 		«reactMethods.declarations»
 
-		«methods.filter[ m | ! m.isPublic].declarations»
+		«methods.filter[ !isPublic ].declarations»
 
 		«observerCallbacksPrototypes»
-				
+		
 		«constantDefinitions»
 		'''
 	}
@@ -119,11 +119,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 		
 		«init»
 		
-		«enterCode»
-		
-		«runCycleCode»
-		
-		«exitCode»
+		«methods.filter[ isPublic ].implementation»
 		
 		«active»
 		
@@ -135,7 +131,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 		«ENDIF»
 		«isStateActive»
 		
-		«methods.filter[ m | ! m.isPublic].implementation»
+		«methods.filter[ !isPublic ].implementation»
 		
 		«interfaceFunctions»
 

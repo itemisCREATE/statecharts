@@ -36,6 +36,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 /**
  * @author rbeckmann
@@ -59,6 +60,8 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension GeneratorPredicate
 	
 	@Inject protected extension BufferEvent
+	@Inject protected extension VisibilityAnnotations
+	@Inject protected extension MethodGenerator
 	
 	@Inject protected extension GeneratorEntry entry
 	
@@ -169,14 +172,9 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
 		extern «declareInit»
 		
-		/*! Activates the state machine */
-		extern «declareEnter»
 		
-		/*! Deactivates the state machine */
-		extern «declareExit»
+		«methods.filter[ isPublic ].declarations»
 		
-		/*! Performs a 'run to completion' step. */
-		extern «declareRunCycle»
 		
 		«IF timed»
 			/*! Raises a time event. */
