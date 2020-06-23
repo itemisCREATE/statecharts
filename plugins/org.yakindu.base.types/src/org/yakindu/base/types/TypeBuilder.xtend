@@ -9,13 +9,12 @@
 package org.yakindu.base.types
 
 import com.google.inject.Inject
-import org.yakindu.base.base.BaseFactory
-import org.yakindu.base.base.BasePackage
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.base.BasePackage
 import org.yakindu.base.types.annotations.VisibilityAnnotations
+import org.yakindu.base.types.typesystem.ITypeSystem
 
 /**
  * Builder extension for building types.
@@ -30,9 +29,9 @@ class TypeBuilder {
 
 	@Inject extension ITypeSystem typeSystem
 	
+	extension BasePackage = BasePackage.eINSTANCE
+	extension TypesPackage = TypesPackage.eINSTANCE
 	extension TypesFactory tFactory = TypesFactory.eINSTANCE
-	extension TypesPackage = tFactory.typesPackage
-	extension BasePackage = BaseFactory.eINSTANCE.basePackage
 
 	def _op(String name, String returnType) {
 		_op(name, typeSystem.getType(returnType))
