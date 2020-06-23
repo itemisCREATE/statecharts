@@ -133,7 +133,7 @@ class EventProcessing {
 		
 		if (isCycleBased) 
 			_sequence(
-				_takeInEvents,
+				_swapIncomingEvents,
 				_clearOutEvents,
 				_eventLoop(body),
 				_clearInEvents	
@@ -151,7 +151,7 @@ class EventProcessing {
 		if (hasLocalEvents && applyInternalEventBuffer) 
 			_do(_sequence(
 				body,
-				_takeInternalEvents
+				_swapInternalEvents
 			))._while(
 				bufferEventExpressions.internal.reduce[r1, r2| r1._or(r2)]
 			)
@@ -167,7 +167,7 @@ class EventProcessing {
 				_do(_sequence(
 					body,
 					_clearInEvents,
-					// clearInternalEvents
+					_clearInternalEvents,
 					_conceptSequence(NEXT_EVENT)
 				))._while( #[incomingEvents,localEvents]
 							.flatten
@@ -191,15 +191,20 @@ class EventProcessing {
 		else _empty	
 	}
 
-	def Step _takeInEvents(ExecutionFlow it) {
-		if (takeInEvents !== null)
-			takeInEvents._call._statement
+	def Step _clearInternalEvents(ExecutionFlow it) {
+		if ( clearInternalEvents !== null) clearInternalEvents._call._statement 
+		else _empty	
+	}
+
+	def Step _swapIncomingEvents(ExecutionFlow it) {
+		if (swapIncomingEvents !== null)
+			swapIncomingEvents._call._statement
 		else _empty
 	}
 
-	def Step _takeInternalEvents(ExecutionFlow it) {
-		if (takeInternalEvents !== null)
-			takeInternalEvents._call._statement
+	def Step _swapInternalEvents(ExecutionFlow it) {
+		if (swapInternalEvents !== null)
+			swapInternalEvents._call._statement
 		else _empty
 	}
 
@@ -324,11 +329,15 @@ class EventProcessing {
 		features.filter( typeof(Method) ).filter( m | m.name == CLEAR_IN_EVENTS).head
 	}
 	
-	def Method takeInternalEvents(ExecutionFlow it) {
+	def Method clearInternalEvents(ExecutionFlow it) {
+		features.filter( typeof(Method) ).filter( m | m.name == CLEAR_INTERNAL_EVENTS).head
+	}
+	
+	def Method swapInternalEvents(ExecutionFlow it) {
 		features.filter( typeof(Method) ).filter( m | m.name == org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_INTERNAL_EVENTS).head
 	}
 
-	def Method takeInEvents(ExecutionFlow it) {
+	def Method swapIncomingEvents(ExecutionFlow it) {
 		features.filter( typeof(Method) ).filter( m | m.name == org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_IN_EVENTS).head
 	}
 	

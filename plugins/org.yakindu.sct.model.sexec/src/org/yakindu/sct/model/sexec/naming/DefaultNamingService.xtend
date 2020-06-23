@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.yakindu.base.base.NamedElement
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 import org.yakindu.sct.model.sexec.ExecutionEntry
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -40,9 +41,6 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
-import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
-import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 class StepDepthComparator implements Comparator<Step> {
 
@@ -85,8 +83,6 @@ class DefaultNamingService implements INamingService {
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension MethodDepthComparator methodDepthComparator
 	@Inject extension NamingHelper
-	@Inject extension RunCycleMethod
-	@Inject extension EventProcessing
 	@Inject extension VisibilityAnnotations
 	
 	@Inject StextNameProvider provider
@@ -281,7 +277,7 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected prefix(Method it, char separator) {
-		if (it.isPublic) flow.name
+		if (it.isPublic) flow.name.toFirstLower
 		else ""
 	}
 

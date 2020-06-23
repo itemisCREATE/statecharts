@@ -24,6 +24,9 @@ import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.RetargetReferences
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
+import org.yakindu.sct.model.sexec.concepts.EnterMethod
+import org.yakindu.sct.model.sexec.concepts.ExitMethod
+import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -35,9 +38,12 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension StateVectorBuilder svBuilder
 	@Inject extension RetargetReferences retageting
 	
+	@Inject extension ExecutionGuard executionGuard
 	@Inject extension EventProcessing eventProcessing
 	@Inject extension ReactMethod reactMethod
 	@Inject extension SuperStep superStep
+	@Inject extension EnterMethod enterMethod
+	@Inject extension ExitMethod exitMethod
 	@Inject extension RunCycleMethod runCycleMethod
 	@Inject extension EventBuffer eventBuffer
 	
@@ -108,6 +114,9 @@ class ModelSequencer implements IModelSequencer {
 		eventProcessing.transformEventAccess(ef)
 		
 		eventProcessing.defineFeatures(ef)
+		executionGuard.defineFeatures(ef)
+		enterMethod.defineFeatures(ef)
+		exitMethod.defineFeatures(ef)
 		superStep.defineFeatures(ef)
 		runCycleMethod.defineFeatures(ef)
 

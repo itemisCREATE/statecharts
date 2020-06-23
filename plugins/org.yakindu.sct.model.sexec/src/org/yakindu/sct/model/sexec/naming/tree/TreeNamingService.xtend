@@ -19,6 +19,7 @@ import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.base.NamedElement
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -35,9 +36,6 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
-import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
-import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -50,8 +48,6 @@ class TreeNamingService implements INamingService {
 	@Inject extension SExecExtensions
 	@Inject extension StatechartExtensions
 	@Inject extension IQualifiedNameProvider
-	@Inject extension RunCycleMethod
-	@Inject extension EventProcessing
 	@Inject extension VisibilityAnnotations
 
 	@Inject extension ElementNameProvider
@@ -318,7 +314,7 @@ class TreeNamingService implements INamingService {
 
 	def protected List<String> prefix(Method it) {
 		val l = new ArrayList<String>()
-		if (it.isPublic) l.add(flow.name)
+		if (it.isPublic) l.add(flow.name.toFirstLower)
 		return l
 	}
 

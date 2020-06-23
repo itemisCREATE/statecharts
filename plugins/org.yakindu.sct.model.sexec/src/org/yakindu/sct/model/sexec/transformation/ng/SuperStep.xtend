@@ -18,16 +18,16 @@ class SuperStep {
 	@Inject extension StatechartAnnotations
 	
 
-	static val String HAS_STATE_CHANGED = "hasStataChanged"
+	static val String STATE_CHANGED = "stateConfVectorChanged"
 	
 	
 	def void defineFeatures (ExecutionFlow it) {
 		if (appliesSuperStep) 
-			it.features += _variable(HAS_STATE_CHANGED, _boolean)		
+			it.features += _variable(STATE_CHANGED, _boolean)		
 	}
 
 	def org.yakindu.base.types.Property hasStateChanged(ExecutionFlow it) {
-		features.filter( typeof(Property) ).filter( m | m.name == HAS_STATE_CHANGED).head
+		features.filter( typeof(Property) ).filter( m | m.name == STATE_CHANGED).head
 	}
 
 	
@@ -42,6 +42,16 @@ class SuperStep {
 			body
 	}
 	
+	def _stateChanged(ExecutionFlow it) {
+		if (stateChangedProperty !== null) 
+			stateChangedProperty._assign(_true)
+		else
+			_empty
+	}	
+	
+	def Property stateChangedProperty(ExecutionFlow it) {
+		features.filter( typeof(Property) ).filter( m | m.name == STATE_CHANGED).head
+	}
 	
 	
 	def appliesSuperStep(ExecutionFlow it) {
