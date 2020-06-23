@@ -25,7 +25,6 @@ import org.yakindu.sct.generator.c.submodules.RunCycleMethodCode;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
-import org.yakindu.sct.generator.core.extensions.CoreFlowConfiguration;
 import org.yakindu.sct.generator.core.submodules.lifecycle.EventCode;
 import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
 import org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode;
@@ -46,7 +45,7 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
-		binder.bind(IFlowConfiguration.class).to(CoreFlowConfiguration.class);
+		binder.bind(IFlowConfiguration.class).to(CFlowConfiguration.class);
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
