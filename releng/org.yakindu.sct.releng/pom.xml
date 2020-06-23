@@ -188,6 +188,7 @@
 			</activation>
 			<properties>
 				<xtext-version>2.12.0</xtext-version>
+				<mwe-version>2.9.1</mwe-version>
 				<ecore-xtext-version>1.2.0</ecore-xtext-version>
 				<ecore-xcore-version>1.3.1</ecore-xcore-version>
 				<ecore-xcore-lib-version>1.1.100</ecore-xcore-lib-version>
@@ -295,6 +296,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<mwe-version>2.9.1</mwe-version>
 				<xtext-version>2.14.0</xtext-version>
 				<ecore-xtext-version>1.4.0</ecore-xtext-version>
 				<ecore-xcore-version>1.7.0</ecore-xcore-version>
@@ -393,6 +395,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<mwe-version>2.9.1</mwe-version>
 				<xtext-version>2.15.0</xtext-version>
 				<ecore-xtext-version>1.4.0</ecore-xtext-version>
 				<ecore-xcore-version>1.7.0</ecore-xcore-version>
@@ -425,6 +428,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<mwe-version>2.11.1</mwe-version>
 				<xtext-version>2.20.0</xtext-version>
 				<ecore-xtext-version>1.4.0</ecore-xtext-version>
 				<ecore-xcore-version>1.12.0</ecore-xcore-version>
@@ -457,6 +461,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+			<mwe-version>2.11.3</mwe-version>
 				<xtext-version>2.22.0</xtext-version>
 				<ecore-xtext-version>1.4.0</ecore-xtext-version>
 				<ecore-xcore-version>1.14.0</ecore-xcore-version>
