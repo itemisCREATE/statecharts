@@ -10,6 +10,7 @@
 */
 package org.yakindu.sct.model.sexec.transformation
 
+import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
@@ -26,22 +27,21 @@ import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.If
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateCase
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
-import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sexec.Method
-import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
 
 class FlowOptimizer {
 	
 	@Inject extension SExecExtensions sexec
-	@Inject extension StateMachineConcept concept
+	@Inject extension StateMachineBehaviorConcept concept
 	
 	boolean _inlineReactions        def inlineReactions(boolean b)      {_inlineReactions = b}
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}

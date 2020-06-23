@@ -10,14 +10,14 @@
  */
 package org.yakindu.sct.generator.core.submodules.lifecycle
 
+import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.transformation.ng.RunCycleMethod
-import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
-import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
 import org.yakindu.sct.model.sexec.concepts.EnterMethod
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
 import org.yakindu.sct.model.sexec.concepts.ExitMethod
+import org.yakindu.sct.model.sexec.concepts.RunCycleMethod
+import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 
 /**
  * Instances of this class dispatches the generation of named sequences representing state machine concepts 
@@ -31,7 +31,7 @@ class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 	@Inject extension EventCode
 	@Inject extension TraceCode
 	
-	@Inject extension StateMachineConcept
+	@Inject extension StateMachineBehaviorConcept
 	 
 	override stateMachineConceptCode(ExecutionFlow flow, Sequence s) {
 		switch (s.name) {

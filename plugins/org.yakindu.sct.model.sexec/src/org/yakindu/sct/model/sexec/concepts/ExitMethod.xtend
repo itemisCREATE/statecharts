@@ -1,18 +1,31 @@
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.model.sexec.concepts
 
 import com.google.inject.Inject
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.SexecBuilder
-import org.yakindu.sct.model.sexec.transformation.ng.EventProcessing
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
-import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 
+/**
+ * This class defines the general concept of exiting a state machine. 
+ * 
+ * @author aterfloth
+ */
 class ExitMethod {
 
-	public static val TRACE_EXIT = StateMachineConcept.CONCEPT_NAME_PREFIX + "traceExit"
+	public static val TRACE_EXIT = StateMachineBehaviorConcept.CONCEPT_NAME_PREFIX + "traceExit"
 	public static val EXIT = "exit"
 
 	@Inject protected extension ExecutionGuard

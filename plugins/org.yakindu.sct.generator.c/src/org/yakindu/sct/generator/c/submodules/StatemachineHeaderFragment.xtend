@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import java.util.Set
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.Event
 import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
@@ -27,7 +26,7 @@ import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
+import org.yakindu.sct.model.sexec.concepts.BufferEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
@@ -59,7 +58,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension EventCode
 	@Inject protected extension GeneratorPredicate
 	
-	@Inject protected extension BufferEventExtensions
+	@Inject protected extension BufferEvent
 	
 	@Inject protected extension GeneratorEntry entry
 	

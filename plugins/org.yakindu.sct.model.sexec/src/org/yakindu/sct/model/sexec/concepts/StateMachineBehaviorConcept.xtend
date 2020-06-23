@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.concepts
 
 import org.yakindu.sct.model.sexec.Sequence
 import org.eclipse.emf.ecore.EObject
@@ -17,10 +17,16 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.types.Expression
 
 /**
+ * Named sequences are used to capture specific abstract execution concepts. These behaviors are not defined 
+ * in detail by the sexec transformations but are expected to be specifically expanded by the code generators.
+ * So they serve as specific hooks. 
+ * 
+ * Parameters like declarations or expressions may be specified for these concepts and this class provides
+ * extension methods which implemebt this parameter handling. 
  * 
  * @author aterfloth
  */
-class StateMachineConcept {
+class StateMachineBehaviorConcept {
 	
 	public static val CONCEPT_NAME_PREFIX = "@"
 	

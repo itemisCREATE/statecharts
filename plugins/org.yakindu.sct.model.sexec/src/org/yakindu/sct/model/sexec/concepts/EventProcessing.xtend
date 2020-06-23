@@ -1,4 +1,14 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+package org.yakindu.sct.model.sexec.concepts
 
 import com.google.inject.Inject
 import java.util.HashMap
@@ -18,14 +28,19 @@ import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
 
+/**
+ * This class defines the concept of event processing. It defines how events are processed for
+ * cycle based and event driven execution. 
+ * 
+ * @author aterfloth
+ */
 class EventProcessing {
 
 
@@ -34,17 +49,17 @@ class EventProcessing {
 	@Inject extension SexecBuilder
 	
 	@Inject extension SExecExtensions
-	@Inject extension StateMachineConcept
+	@Inject extension StateMachineBehaviorConcept
 	@Inject protected extension EventBuffer
-	@Inject protected extension BufferEventExtensions
+	@Inject protected extension BufferEvent
 	
 	@Inject protected extension IFlowConfiguration config
 	
 	
 
-	public static val CLEAR_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "clearEvent"
-	public static val MOVE_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "moveEvent"
-	public static val NEXT_EVENT = StateMachineConcept.CONCEPT_NAME_PREFIX + "nextEvent"
+	public static val CLEAR_EVENT = StateMachineBehaviorConcept.CONCEPT_NAME_PREFIX + "clearEvent"
+	public static val MOVE_EVENT = StateMachineBehaviorConcept.CONCEPT_NAME_PREFIX + "moveEvent"
+	public static val NEXT_EVENT = StateMachineBehaviorConcept.CONCEPT_NAME_PREFIX + "nextEvent"
 	public static val CLEAR_OUT_EVENTS = "clearOutEvents"
 	public static val CLEAR_IN_EVENTS = "clearInEvents"
 	public static val CLEAR_INTERNAL_EVENTS = "clearInternalEvents"
@@ -102,7 +117,7 @@ class EventProcessing {
 
 
 	def defineSwapInEvents(ExecutionFlow it) {
-		it._method(org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_IN_EVENTS) => [ m | 
+		it._method(SWAP_IN_EVENTS) => [ m | 
 			m._type(_void)
 			
 			m._body(
@@ -117,7 +132,7 @@ class EventProcessing {
 
 
 	def defineSwapInternalEvents(ExecutionFlow it) {
-		it._method(org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_INTERNAL_EVENTS) => [ m | 
+		it._method(SWAP_INTERNAL_EVENTS) => [ m | 
 			m._type(_void)
 			
 			m._body(
@@ -334,11 +349,11 @@ class EventProcessing {
 	}
 	
 	def Method swapInternalEvents(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_INTERNAL_EVENTS).head
+		features.filter( typeof(Method) ).filter( m | m.name == SWAP_INTERNAL_EVENTS).head
 	}
 
 	def Method swapIncomingEvents(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == org.yakindu.sct.model.sexec.transformation.ng.EventProcessing.SWAP_IN_EVENTS).head
+		features.filter( typeof(Method) ).filter( m | m.name == SWAP_IN_EVENTS).head
 	}
 	
 

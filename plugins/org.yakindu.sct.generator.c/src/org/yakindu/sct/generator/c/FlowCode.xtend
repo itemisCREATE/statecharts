@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012-2018 committers of YAKINDU and others.
+ * Copyright (c) 2012-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.If
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
@@ -43,14 +44,13 @@ import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sexec.concepts.SuperStep
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sexec.transformation.ng.StateMachineConcept
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sexec.transformation.ng.SuperStep
-import org.yakindu.sct.model.sexec.Method
 
 /**
  * @author axel terfloth
@@ -65,7 +65,7 @@ class FlowCode {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension StatechartAnnotations
 	@Inject protected extension NamedConceptSequenceCode
-	@Inject protected extension StateMachineConcept
+	@Inject protected extension StateMachineBehaviorConcept
 	
 	@Inject protected extension SuperStep
 	

@@ -1,4 +1,14 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+package org.yakindu.sct.model.sexec.concepts
 
 import com.google.inject.Inject
 import org.yakindu.base.types.TypeBuilder
@@ -8,6 +18,12 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 
+/**
+ * This class defines the general concept of the runCycle method which implements 
+ * the run to comlpetion step (RTCS) of a state machine. 
+ * 
+ * @author aterfloth
+ */
 class RunCycleMethod {
 	
 	@Inject extension ExecutionGuard
@@ -18,7 +34,7 @@ class RunCycleMethod {
 	@Inject extension SexecBuilder
 	
 
-	public static val MICRO_STEP = StateMachineConcept.CONCEPT_NAME_PREFIX + "microStep"
+	public static val MICRO_STEP = StateMachineBehaviorConcept.CONCEPT_NAME_PREFIX + "microStep"
 	
 	def defineFeatures (ExecutionFlow it) {
 		defineRunCycle	

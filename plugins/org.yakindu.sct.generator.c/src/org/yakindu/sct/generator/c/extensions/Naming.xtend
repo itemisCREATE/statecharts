@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2012-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,17 +17,24 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypedDeclaration
+import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.concepts.EventBuffer
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
@@ -45,13 +52,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.base.types.Direction
-import org.yakindu.base.types.TypedDeclaration
-import org.yakindu.base.types.Type
-import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.model.sexec.extensions.EventBufferExtensions
-import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -73,7 +73,7 @@ class Naming {
 	@Inject extension StatechartUtil
 	@Inject extension GeneratorPredicate
 	@Inject extension OriginTracing
-	@Inject extension EventBufferExtensions
+	@Inject extension EventBuffer
 	@Inject protected extension ShadowMemberScope
 	
 	

@@ -1,4 +1,14 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+package org.yakindu.sct.model.sexec.concepts
 
 import com.google.inject.Inject
 import java.util.List
@@ -11,8 +21,6 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.BufferEventExtensions
-import org.yakindu.sct.model.sexec.extensions.EventBufferExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sgraph.Scope
@@ -21,12 +29,20 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
+import org.yakindu.base.types.Type
 
+/**
+ * This class defines the concept of an event buffer which can be applied to cycle based state machines.
+ * It defines additional types and members which implement a double buffering of events. 
+ * 
+ * @author aterfloth
+ */
 class EventBuffer {
 	
+	public static String EVENT_BUFFER_ANNOTATION = "__event_buffer__"
+	
 	@Inject extension TypeBuilder
-	@Inject extension BufferEventExtensions	
-	@Inject extension EventBufferExtensions	
+	@Inject extension BufferEvent	
 	@Inject extension INamingService
 	@Inject extension OriginTracing
 	@Inject extension ExpressionBuilder
@@ -51,14 +67,14 @@ class EventBuffer {
 							scopeType.features.add(it)
 							it.traceOrigin(e)
 						]]
-					scopeType._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
+					scopeType._annotate(EVENT_BUFFER_ANNOTATION)
 				]
 				
 				scopeBufferType.traceOrigin(scope)
 				bt.features += _variable(scope.featureName, scopeBufferType)
 			]
 			
-			bt._annotate(EventBufferExtensions::EVENT_BUFFER_ANNOTATION)
+			bt._annotate(EVENT_BUFFER_ANNOTATION)
 			bt.traceOrigin(flow)
 		]
 		
@@ -116,6 +132,12 @@ class EventBuffer {
 
 		return l			
 	}
+	
+	
+	def isEventBuffer(Type it){
+		annotations.exists[ a | a.type.name == EVENT_BUFFER_ANNOTATION]		
+	}
+	
 	
 	def Event originEvent(Event it) {
 		originTraces.filter(Event).head
