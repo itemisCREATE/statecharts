@@ -59,6 +59,11 @@ public class ChoiceEditPart extends ShapeNodeEditPart {
 				points.addPoint(handleBounds.x, handleBounds.y + handleBounds.height / 2);
 				return points;
 			}
+			
+			@Override
+			public final Dimension getPreferredSize(int w, int h) {
+				return getMinimumSize();
+			}
 		};
 		figure.setLayoutManager(new StackLayout());
 		figure.add(createPrimaryShape());
