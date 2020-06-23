@@ -50,6 +50,7 @@ class ExitMethod {
 					exitSequence
 				))
 			)
+			m.body.comment = "Deactivates the state machine."
 		]
 	}
 

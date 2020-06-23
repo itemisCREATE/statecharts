@@ -54,8 +54,9 @@ class RunCycleMethod {
 						)
 					),
 					_traceEndRunCycle
-				))
+				)) 
 			)
+			m.body.comment = "Performs a 'run to completion' step."
 		]
 	}
 

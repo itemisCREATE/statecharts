@@ -50,6 +50,7 @@ class EnterMethod {
 					enterSequences.defaultSequence
 				))
 			)
+			m.body.comment = "Activates the state machine."
 		]
 	}
 

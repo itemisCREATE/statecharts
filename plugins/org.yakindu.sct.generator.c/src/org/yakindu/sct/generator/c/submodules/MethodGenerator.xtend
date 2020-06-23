@@ -26,7 +26,9 @@ class MethodGenerator {
 	
 	
 	def declaration(Method it) '''
+		«IF ! body.comment.isNullOrEmpty»/*! «body.comment» */«ENDIF»
 		«declarationModifier»«typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+		
 	'''
 	
 	def declarationModifier(Method it) {
