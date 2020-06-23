@@ -224,7 +224,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	}	
 	
 	def dispatch scopeFunctionPrototypes(StatechartScope it) '''
-		«FOR d : declarations.filter[d | !(d instanceof Event) || !((d as Event).isBufferEvent)]»
+		«FOR d : declarations»
 			«d.functionPrototypes »
 		«ENDFOR»
 	'''
