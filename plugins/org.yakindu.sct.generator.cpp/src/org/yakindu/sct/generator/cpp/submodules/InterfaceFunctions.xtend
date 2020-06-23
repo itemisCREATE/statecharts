@@ -119,7 +119,7 @@ class InterfaceFunctions {
 		{
 			«FOR e : variable.shadowEventsByScope.keySet.map[members].flatten.filter(Event)»
 				«val outEvent = variable.getShadowEvent(e)»
-				«IF outEvent !== null»parent->«outEvent.scope.instance».«variable.getShadowEvent(e).observer».«subscription»(value->«e.scope.getter»->«e.asObserverGetter»());«ENDIF»
+				«IF outEvent !== null»«parent»->«outEvent.scope.instance».«variable.getShadowEvent(e).observer».«subscription»(value->«e.scope.getter»->«e.asObserverGetter»());«ENDIF»
 			«ENDFOR»
 		}
 		«ENDIF»'''
@@ -154,11 +154,17 @@ class InterfaceFunctions {
 		scopeDecl
 			.name(scope.interfaceName)
 			.comment('''//! Inner class for «scope.simpleName» interface scope.''')
+			.constructorDeclaration(newArrayList(scope.parentMemberDeclaration))
 		
 		scope.declarations.map[functionPrototypes].forEach[scopeDecl.publicMember(it)]
 		scopeDecl.member(entry.innerClassVisibility, protectedInnerClassMembers(scope))
+		scopeDecl.member(ClassDeclaration::PRIVATE, '''«scope.parentMemberDeclaration»;''')
 		scopeDecl.member(ClassDeclaration::PRIVATE, scope.shadowEvents.map[createObserverClass(new ClassDeclaration, scope).generate ].join())
 		scopeDecl.member(ClassDeclaration::PRIVATE, scope.shadowEvents.map[createObserver(scopeDecl)].join())
+	}
+	
+	def parentMemberDeclaration(StatechartScope scope) {
+		'''«scope.flow.module»* «parent»'''
 	}
 	
 	def CharSequence protectedInnerClassMembers(StatechartScope scope)

@@ -130,8 +130,12 @@ class SExecExtensions {
 		flow.timeEvents.findFirst[name.compareTo(timeEventName) == 0]
 	}
 	
-	def hasValue (Event it) {
+	def dispatch hasValue (Event it) {
 		type !== null && type.name != 'void'
+	}
+	
+	def dispatch hasValue(EObject it) {
+		false;
 	}
 	
 	/**

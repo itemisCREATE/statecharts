@@ -37,16 +37,4 @@ class EventDrivenConstructorProvider extends ConstructorProvider {
 		}
 		toInit
 	}
-	
-	override protected constructorBody(ExecutionFlow it) {
-		var toConstructorBody = super.constructorBody(it)
-		val ifaceInstances = interfaces.map[instance].toList
-		val ifaceInitialization = '''
-			«FOR ifaceInstance : ifaceInstances»
-				this->«ifaceInstance».parent = this;
-			«ENDFOR»
-		'''
-		toConstructorBody + ifaceInitialization
-	}
-	
 }
