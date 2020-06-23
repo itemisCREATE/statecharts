@@ -50,6 +50,7 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.model.sexec.transformation.ng.SuperStep
+import org.yakindu.sct.model.sexec.Method
 
 /**
  * @author axel terfloth
@@ -216,7 +217,7 @@ class FlowCode {
 	def dispatch requiresHandle(EObject e) { false }
 	def dispatch requiresHandle(Call e) { true }
 	def dispatch requiresHandle(CheckRef e) { true }
-	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
+	def dispatch requiresHandle(ElementReferenceExpression e) {(e.reference.isMethod) || (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
 	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
 
 	def isLocalVariable(EObject o) {
@@ -226,5 +227,10 @@ class FlowCode {
 	def declaredInHeader(EObject o) {
 		return (o.eContainer instanceof Package || (o.eContainer instanceof ComplexType && !(o.eContainer instanceof ExecutionFlow)))
 	}
+	
+	def isMethod(EObject o){
+		return o instanceof Method
+	}
+	
 	
 }
