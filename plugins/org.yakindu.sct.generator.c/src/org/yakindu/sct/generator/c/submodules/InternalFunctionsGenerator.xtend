@@ -220,7 +220,7 @@ class InternalFunctionsGenerator {
 	def dispatch requiresHandle(EObject e) { false }
 	def dispatch requiresHandle(Call e) { true }
 	def dispatch requiresHandle(CheckRef e) { true }
-	def dispatch requiresHandle(ElementReferenceExpression e) { (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
+	def dispatch requiresHandle(ElementReferenceExpression e) { (e.reference.isMethod) || (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader)}
 	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
 	
 	def isLocalVariable(EObject o) {
@@ -229,6 +229,10 @@ class InternalFunctionsGenerator {
 	
 	def declaredInHeader(EObject o) {
 		return (o.eContainer instanceof org.yakindu.base.types.Package || o.eContainer instanceof ComplexType) 
+	}
+	
+	def isMethod(EObject o){
+		return o instanceof Method
 	}
 	
 	def toImplementation(List<Step> steps) '''
@@ -250,10 +254,10 @@ class InternalFunctionsGenerator {
 		«stepComment»
 		static void «shortName»(«scHandleDecl»)
 		{
-			«code»
 			«IF !it.requiresHandles»
 				«unusedParam(scHandle)»
 			«ENDIF»
+			«code»
 		}
 		
 	'''
