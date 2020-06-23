@@ -11,12 +11,13 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyInternalScope.class,
 	ConstOnlyNamedScope.class,
 	EntryReactionAction.class,
-//	EventDrivenInternalEvent.class,
+	EventDriven.class,
+	EventDrivenInternalEvent.class,
 	EventDrivenTriggeredByEvent.class,
 	EventDrivenTriggeredByTimeEvent.class,
-//	LocalEvents.class,
+	LocalEvents.class,
 	NoLocalEvents.class,
-//	OutEventVisibilityEventDriven.class,
+	OutEventVisibilityEventDriven.class,
 //	OutEventWithPayload.class,
 	ChildFirstExecutionHierarchy.class,
 	ChildFirstLocalReactions.class,
@@ -30,6 +31,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	TransitionHandlesMultipleExists.class,
 	TriggerExpressionPrecedence.class,
 	StatechartEntryExitActions.class,
+	CycleBasedSuperStep.class,
+	EventDrivenSuperStep.class,
 	AlwaysOncycle.class,
 	AssignmentAsExpression.class,
 	BitExpressions.class,
@@ -40,7 +43,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CKeywords.class,
 	ConditionalExpression.class,
 	ConstantsTests.class,
-//	ConstantsVariationTests.class,
+	ConstantsVariationTests.class,
 	Declarations.class,
 	DeepEntry.class,
 	DeepHistory.class,
@@ -76,6 +79,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SameNameDifferentRegion.class,
 	ShallowHistory.class,
 	ShallowHistoryWithDeepEntry.class,
+	ShadowValueParameter.class,
 	SimpleEvent.class,
 	SimpleHierachy.class,
 	StatechartActive.class,
@@ -91,9 +95,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ValuedEvents.class,
 	TypeAlias.class,
 	StatemachineKeywords.class,
-	TimedTransitions.class,
-	CycleBasedSuperStep.class,
-	EventDrivenSuperStep.class
+	TimedTransitions.class
 	})
 public class AllTests {
 }

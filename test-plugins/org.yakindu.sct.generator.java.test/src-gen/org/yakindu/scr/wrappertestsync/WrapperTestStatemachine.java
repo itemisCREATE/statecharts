@@ -4,6 +4,7 @@ package org.yakindu.scr.wrappertestsync;
 import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITimer;
+import org.yakindu.sct.rx.Observable;
 
 public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -22,19 +23,20 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		private boolean ev_out;
 		
 		
-		public boolean isRaisedEv_out() {
-			synchronized(WrapperTestStatemachine.this) {
-				return ev_out;
-			}
-		}
-		
 		protected void raiseEv_out() {
 			synchronized(WrapperTestStatemachine.this) {
 				ev_out = true;
 				for (SCInterfaceListener listener : listeners) {
 					listener.onEv_outRaised();
 				}
+				ev_outObservable.next(null);
 			}
+		}
+		
+		private Observable<Void> ev_outObservable = new Observable<Void>();
+		
+		public Observable<Void> getEv_out() {
+			return ev_outObservable;
 		}
 		
 		private boolean ev_in;
@@ -259,8 +261,8 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		return sCInterface;
 	}
 	
-	public synchronized boolean isRaisedEv_out() {
-		return sCInterface.isRaisedEv_out();
+	public synchronized Observable<Void> getEv_out() {
+		return sCInterface.getEv_out();
 	}
 	
 	public synchronized void raiseEv_in() {

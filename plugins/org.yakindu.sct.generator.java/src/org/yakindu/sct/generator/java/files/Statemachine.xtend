@@ -22,6 +22,7 @@ import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaIncludeProvider
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.OutEventObservables
 import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.generator.java.submodules.FieldDeclarationGenerator
 import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator
@@ -40,6 +41,7 @@ import org.yakindu.sct.generator.java.templates.ClassTemplate
 import org.yakindu.sct.generator.java.templates.FileTemplate
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
@@ -71,6 +73,9 @@ class Statemachine {
 	@Inject protected extension RunnableExtension
 	
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension ShadowEventExtensions
+	@Inject protected extension OutEventObservables
+	
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
@@ -88,6 +93,8 @@ class Statemachine {
 			.fileComment(entry.licenseText)
 			.packageName(getImplementationPackageName(flow, entry))
 			.addImports(imports)
+			.addImport(rxPackage.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
+			.addImport(rxPackage.dot(observerClass), !flow.shadowEvents.nullOrEmpty)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(
 				classTemplate

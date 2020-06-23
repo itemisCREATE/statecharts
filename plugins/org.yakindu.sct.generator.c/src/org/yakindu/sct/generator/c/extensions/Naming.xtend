@@ -438,12 +438,14 @@ class Naming {
 		accessFunction("get")
 	}
 	
-	def dispatch asGetter(Declaration it) '''Cannot find getter for «it»'''
+	def dispatch asGetter(EObject it) '''Cannot find getter for «it»'''
 
-	def asSetter(Declaration it) {
+	def dispatch String asSetter(Declaration it) {
 		accessFunction("set")
 	}
-
+	
+	def dispatch String asSetter(EObject it) '''Cannot find setter for «it»'''
+	
 	def asFunction(OperationDefinition it) {
 		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
 	}

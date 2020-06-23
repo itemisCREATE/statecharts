@@ -130,8 +130,12 @@ class SExecExtensions {
 		flow.timeEvents.findFirst[name.compareTo(timeEventName) == 0]
 	}
 	
-	def hasValue (Event it) {
+	def dispatch hasValue (Event it) {
 		type !== null && type.name != 'void'
+	}
+	
+	def dispatch hasValue(EObject it) {
+		false;
 	}
 	
 	/**
@@ -277,9 +281,10 @@ class SExecExtensions {
 		if (reference instanceof Declaration) reference as Declaration
 	}
 	def dispatch definition(FeatureCall it) {
-		feature
+		feature as Declaration
 	}
-	def dispatch definition(Expression it) {
+	
+	def dispatch definition(EObject it){
 		null
 	}
 	

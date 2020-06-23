@@ -15,13 +15,14 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaExpressionsGenerator
 import org.yakindu.sct.generator.java.JavaIncludeProvider
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.OutEventObservables
 import org.yakindu.sct.generator.java.templates.ClassTemplate
 import org.yakindu.sct.generator.java.templates.FileTemplate
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -33,8 +34,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
-import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-
 class StatemachineInterface {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
 	@Inject extension Naming
@@ -44,8 +43,9 @@ class StatemachineInterface {
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension JavaExpressionsGenerator
-
-	@Inject ICoreLibraryHelper outletFeatureHelper
+	@Inject extension OutEventObservables
+	@Inject extension OutputConfigProvider
+	@Inject extension GeneratorPredicate
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
@@ -54,12 +54,7 @@ class StatemachineInterface {
 		this.entry = entry
 		this.flow = flow
 		val filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
-		if (outletFeatureHelper.getApiTargetFolderValue(entry) !== null) {
-			// generate into API target folder in case one is specified, as it is an interface
-			fsa.generateFile(filename, API_TARGET_FOLDER_OUTPUT, content)
-		} else {
-			fsa.generateFile(filename, content)
-		}
+		fsa.generateFile(filename, entry.apiOutputConfig, content)
 	}
 
 	def protected content() {
@@ -70,6 +65,7 @@ class StatemachineInterface {
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
 			.addImport(entry.basePackageName.dot(iTimerCallback), flow.timed)
 			.addImport(entry.basePackageName.dot(iStatemachine))
+			.addImport(rxPackage.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(
 				ClassTemplate
@@ -92,8 +88,7 @@ class StatemachineInterface {
 			).generate
 	}
 
-	def protected constantFieldDeclaration(
-		VariableDefinition variable) {
+	def protected constantFieldDeclaration(VariableDefinition variable) {
 		'''public static final «variable.typeSpecifier.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;
 
 		'''
@@ -142,7 +137,7 @@ class StatemachineInterface {
 				«FOR constant : constants»
 					«constant.constantFieldDeclaration()»
 				«ENDFOR»
-				«scope.eventAccessors»
+				«scope.eventAccessors(entry)»
 				«scope.variableAccessors»
 				«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 					public List<«scope.getInterfaceListenerName()»> getListeners();
@@ -188,7 +183,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def protected eventAccessors(InterfaceScope scope) {
+	def protected eventAccessors(InterfaceScope scope, GeneratorEntry entry) {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
@@ -200,13 +195,19 @@ class StatemachineInterface {
 						
 					«ENDIF»
 				«ELSEIF event.direction == Direction::OUT»
-					public boolean isRaised«event.name.asName»();
-					
-					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type !== null && !isVoid(event.type)»
-						public «event.typeSpecifier.targetLanguageName» «event.getter»;
+					«IF useOutEventGetters»
+						public boolean isRaised«event.name.asName»();
+						««« IMPORTANT: An event not specifying a type is regarded to have a void type
+						«IF event.hasValue»
+							public «event.typeSpecifier.targetLanguageName» «event.getter»;
+							
+						«ENDIF»	
 						
-					«ENDIF»	
+					«ENDIF»
+					«IF useOutEventObservables»
+						public Observable<«event.eventType»> «event.observableGetterName»();
+						
+					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 		'''

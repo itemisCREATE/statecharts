@@ -24,6 +24,7 @@ public abstract class CppGeneratorConstants {
 	public static final String TIME_EVENTS_COUNT = "timeEventsCount";
 	public static final String PARALLEL_TIME_EVENTS_COUNT = "parallelTimeEventsCount";
 	public static final String TIME_EVENTS = "timeEvents";
+	public static final String PARENT = "parent";
 	
 	/*
 	 * CLASS NAMES

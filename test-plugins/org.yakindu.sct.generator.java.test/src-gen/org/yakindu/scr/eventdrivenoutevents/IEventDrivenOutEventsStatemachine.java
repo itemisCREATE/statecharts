@@ -2,6 +2,7 @@
 package org.yakindu.scr.eventdrivenoutevents;
 
 import org.yakindu.scr.IStatemachine;
+import org.yakindu.sct.rx.Observable;
 
 public interface IEventDrivenOutEventsStatemachine extends IStatemachine {
 	
@@ -9,7 +10,7 @@ public interface IEventDrivenOutEventsStatemachine extends IStatemachine {
 	
 		public void raiseE1();
 		
-		public boolean isRaisedE2();
+		public Observable<Void> getE2();
 		
 	}
 	

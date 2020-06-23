@@ -1122,6 +1122,10 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature OutEventAPI {
+			getters = true
+		}
 	}
 
 	statechart NullCheck {
@@ -1233,6 +1237,10 @@ GeneratorModel for yakindu::java {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature OutEventAPI {
+			getters = true
 		}
 	}
 

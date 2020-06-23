@@ -47,8 +47,8 @@ class ShadowEventExtensions {
 		member.flow.shadowEvents.filter[originTraces.contains(member)]
 	}
 
-	def getShadowEvent(VariableDefinition member, Event originalEvent) {
-		member.shadowEvents.findFirst[originTraces.contains(originalEvent)]
+	def getShadowEvent(VariableDefinition member, Event outEvent) {
+		member.shadowEvents.findFirst[originTraces.contains(outEvent)]
 	}
 
 	def getShadowEvents(ExecutionFlow flow) {
@@ -59,14 +59,10 @@ class ShadowEventExtensions {
 	
 	def getShadowEvents(StatechartScope it) {
 		members.filter[scope.flow.shadowEvents.toList.contains(it)].filter(Event)
-	} 
-
-	def getShadowEventsByScope(VariableDefinition member) {
-		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
 	}
 	
-	def getOriginOutEvents(VariableDefinition it) {
-		shadowEventsByScope.keySet.map[members].flatten.filter(Event).filter[direction === Direction.OUT]
+	def getShadowEventsByScope(VariableDefinition member) {
+		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
 	}
 
 	def getShadowEventName(FeatureCall fc) {
@@ -75,6 +71,10 @@ class ShadowEventExtensions {
 	
 	def needsShadowEventMapping(VariableDefinition member) {
 		member.type.isOriginStatechart && !member.shadowEvents.nullOrEmpty
+	}
+	
+	def getOutEvent(Event shadowEvent) {
+		shadowEvent.originTraces.filter(Event).filter[direction == Direction.OUT].head
 	}
 
 	def create StextFactory.eINSTANCE.createEventDefinition createShadowEvent(String shadowEventName,

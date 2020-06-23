@@ -127,7 +127,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Type getType() {

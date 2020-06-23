@@ -73,22 +73,6 @@ class InternalFunctionsGenerator {
 		«ENDFOR»
 	'''
 
-//	def observerCallbacksImplementations(ExecutionFlow it) '''
-//		«FOR e : shadowEvents»
-//			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»*«ENDIF» value)
-//			{
-//				«IF e.typeSpecifier === null»
-//				«addToQueueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName»);
-//				«unusedParam("value")»
-//				«ELSE»
-//				«addToQueueValueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName», value);
-//				«ENDIF»
-//				«runCycleFctID»(«scHandle»);
-//			}
-//			
-//		«ENDFOR»
-//	'''
-
 	def observerCallbacksPrototypes(ExecutionFlow it) '''
 		«FOR e : shadowEvents»
 			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»*«ENDIF» value);
@@ -146,8 +130,7 @@ class InternalFunctionsGenerator {
 		«exitSequenceFunctions.toImplementation»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
 	'''
-
-
+	
 	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
@@ -168,10 +151,10 @@ class InternalFunctionsGenerator {
 		«stepComment»
 		static void «shortName»(«scHandleDecl»)
 		{
-			«code»
 			«IF !it.requiresHandles»
 				«unusedParam(scHandle)»
 			«ENDIF»
+			«code»
 		}
 		
 	'''

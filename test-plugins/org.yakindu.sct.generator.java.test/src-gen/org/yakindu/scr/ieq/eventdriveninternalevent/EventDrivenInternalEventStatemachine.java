@@ -3,6 +3,7 @@ package org.yakindu.scr.ieq.eventdriveninternalevent;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenInternalEventStatemachine implements IEventDrivenInternalEventStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
@@ -44,19 +45,16 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		private long eValue;
 		
 		
-		public boolean isRaisedE() {
-			return e;
-		}
-		
 		protected void raiseE(long value) {
 			eValue = value;
 			e = true;
+			eObservable.next(value);
 		}
 		
-		public long getEValue() {
-			if (! e ) 
-				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
-			return eValue;
+		private Observable<Long> eObservable = new Observable<Long>();
+		
+		public Observable<Long> getE() {
+			return eObservable;
 		}
 		
 		private long x;
@@ -321,12 +319,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		sCInterface.raiseReset();
 	}
 	
-	public boolean isRaisedE() {
-		return sCInterface.isRaisedE();
-	}
-	
-	public long getEValue() {
-		return sCInterface.getEValue();
+	public Observable<Long> getE() {
+		return sCInterface.getE();
 	}
 	
 	public long getX() {

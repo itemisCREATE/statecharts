@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Scope
 
 class StatechartUtil {
 	
