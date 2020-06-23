@@ -29,7 +29,6 @@ class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 	@Inject extension EventCode
 	
 	@Inject extension StateMachineConcept
-	@Inject extension EventProcessing
 	 
 	override stateMachineConceptCode(ExecutionFlow flow, Sequence s) {
 		switch (s.name) {
@@ -39,8 +38,10 @@ class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 				return flow.eventClearCode(s.expression)
 			case EventProcessing.MOVE_EVENT:
 				return flow.eventMoveCode(s.expression, s.getExpression(1))
+			case EventProcessing.NEXT_EVENT:
+				return flow.eventNextCode
 			default : 
-				return ''''''
+				return '''// unknown concept sequence : «s.name»'''
 		}		
 	}
 }

@@ -22,5 +22,5 @@ public interface EventCode {
 	
 	CharSequence eventClearCode(ExecutionFlow flow, Expression event);
 	CharSequence eventMoveCode(ExecutionFlow flow, Expression source, Expression target);
-
+	CharSequence eventNextCode(ExecutionFlow flow);
 }
