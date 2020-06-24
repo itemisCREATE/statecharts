@@ -160,7 +160,8 @@ class EventProcessing {
 				_clearOutEvents,
 				_swapIncomingEvents,
 				_eventLoop(body),
-				_clearInEvents._when(!applyIncomingEventBuffer)	
+				_clearInEvents._when(!applyIncomingEventBuffer),
+				_clearInternalEvents._when(!applyInternalEventBuffer)	
 			)
 		else 
 			_sequence(
@@ -201,7 +202,11 @@ class EventProcessing {
 			)			
 		}
 		else 
-			body	
+			_sequence(
+				body,
+				_clearInEvents,
+				_clearInternalEvents	
+			)
 	}
 
 	def Step _clearOutEvents(ExecutionFlow it) {
