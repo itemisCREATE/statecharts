@@ -277,8 +277,9 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected prefix(Method it, char separator) {
-		if (it.isPublic) flow.name.toFirstLower
-		else ""
+//		if (it.isPublic) flow.name.toFirstLower
+//		else ""
+		""
 	}
 
 	def protected suffix(Method it, char separator) {

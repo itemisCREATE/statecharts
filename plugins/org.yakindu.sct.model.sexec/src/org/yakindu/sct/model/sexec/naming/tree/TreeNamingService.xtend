@@ -314,7 +314,7 @@ class TreeNamingService implements INamingService {
 
 	def protected List<String> prefix(Method it) {
 		val l = new ArrayList<String>()
-		if (it.isPublic) l.add(flow.name.toFirstLower)
+//		if (it.isPublic) l.add(flow.name.toFirstLower)
 		return l
 	}
 

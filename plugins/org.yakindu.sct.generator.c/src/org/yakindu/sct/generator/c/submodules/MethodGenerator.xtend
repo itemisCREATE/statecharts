@@ -6,6 +6,7 @@ import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 class MethodGenerator {
@@ -14,6 +15,7 @@ class MethodGenerator {
 	@Inject protected extension INamingService
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension Naming
+	@Inject protected extension SExecExtensions
 	
 	@Inject protected extension FlowCode
 
@@ -27,7 +29,7 @@ class MethodGenerator {
 	
 	def declaration(Method it) '''
 		«IF ! body.comment.isNullOrEmpty»/*! «body.comment» */«ENDIF»
-		«declarationModifier»«typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+		«declarationModifier»«typeSpecifier.targetLanguageName» «prefix»«shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
 		
 	'''
 	
@@ -47,7 +49,7 @@ class MethodGenerator {
 	 '''
 	
 	def implementation(Method it) '''
-		«implementationModifier»«typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+		«implementationModifier»«typeSpecifier.targetLanguageName» «prefix»«shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
 			«body.code»
 			«IF !body.requiresHandles»
 				«unusedParam(scHandle)»
@@ -60,5 +62,10 @@ class MethodGenerator {
 			''''''
 		else 
 			'''static '''
+	}
+	
+	protected def prefix (Method it){
+		if (isPublic) flow.functionPrefix
+		else ""
 	}
 }
