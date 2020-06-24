@@ -120,7 +120,7 @@
 					<arguments>
 						<argument>/${project.basedir}/src/org/yakindu/base/expressions/GenerateExpressions.mwe2</argument>
 						<argument>-p</argument>
-						<argument>rootPath=/${project.basedir}/..</argument>
+						<argument>rootPath=/${project.basedir}/..</argument> 
 					</arguments>
 					<classpathScope>compile</classpathScope>
 					<includePluginDependencies>true</includePluginDependencies>
