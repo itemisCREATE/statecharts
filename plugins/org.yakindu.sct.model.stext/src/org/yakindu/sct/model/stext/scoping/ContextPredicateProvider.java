@@ -73,7 +73,8 @@ public class ContextPredicateProvider {
 
 	protected static final Predicate<IEObjectDescription> EVENTS = or(FEATURE,
 			input -> TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass())
-					|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass())));
+					|| ((TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass()))
+						&& !TypesPackage.Literals.PRIMITIVE_TYPE.isSuperTypeOf(input.getEClass())));
 
 	protected static final Predicate<IEObjectDescription> OPERATIONS = or(FEATURE,
 			input -> TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass()));
