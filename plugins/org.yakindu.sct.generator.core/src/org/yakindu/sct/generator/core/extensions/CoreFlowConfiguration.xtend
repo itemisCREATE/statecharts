@@ -32,8 +32,8 @@ class CoreFlowConfiguration extends DefaultFlowConfiguration {
 		super.takeConfigurationfromStatechart(sc)
 		
 		_applyOutgoingEventBuffer = entry.outEventGettersUsed
-		_applyIncomingEventBuffer = entry.inEventBuffer	
-		_applyInternalEventBuffer = entry.internalEventBuffer
-		_applyIncomingEventQueue  = entry.inEventQueue
+		_applyIncomingEventBuffer = entry.applyInEventBuffer	
+		_applyInternalEventBuffer = entry.applyInternalEventBuffer
+		_applyIncomingEventQueue  = entry.applyInEventQueue
 	}
 }

@@ -101,7 +101,7 @@ class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 		getFeatureConfiguration(ICoreLibraryConstants::FEATURE_EVENT_PROCESSING)
 	}
 	
-	override getInEventBuffer(GeneratorEntry it) {
+	override applyInEventBuffer(GeneratorEntry it) {
 		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_IN_EVENT_BUFFER)
 		if(parameter !== null) {
 			return parameter.booleanValue
@@ -109,7 +109,7 @@ class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 		true
 	}
 	
-	override getInEventQueue(GeneratorEntry it) {
+	override applyInEventQueue(GeneratorEntry it) {
 		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_IN_EVENT_QUEUE)
 		if(parameter !== null) {
 			return parameter.booleanValue
@@ -117,7 +117,7 @@ class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 		false
 	}
 	
-	override getInternalEventBuffer(GeneratorEntry it) {
+	override applyInternalEventBuffer(GeneratorEntry it) {
 		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_INTERNAL_EVENT_BUFFER)
 		if(parameter !== null) {
 			return parameter.booleanValue
