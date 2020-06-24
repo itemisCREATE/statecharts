@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * This class defines the general concept of exiting a state machine. 
@@ -47,7 +48,7 @@ class ExitMethod {
 			m._body(
 				_guardExecution( _sequence(
 					_traceExit,
-					exitSequence
+					EcoreUtil.copy(exitSequence)
 				))
 			)
 			m.body.comment = "Deactivates the state machine."

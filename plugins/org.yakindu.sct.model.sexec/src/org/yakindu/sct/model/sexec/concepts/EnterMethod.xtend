@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sexec.concepts
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Method
@@ -35,6 +36,8 @@ class EnterMethod {
 	@Inject protected extension TypeBuilder
 	@Inject protected extension SexecBuilder
 	
+
+	
 	def defineFeatures (ExecutionFlow it) {
 		defineEnter	
 	}
@@ -47,7 +50,7 @@ class EnterMethod {
 			m._body(
 				_guardExecution( _sequence(
 					_traceEnter,
-					enterSequences.defaultSequence
+					EcoreUtil.copy(enterSequences.defaultSequence)
 				))
 			)
 			m.body.comment = "Activates the state machine."

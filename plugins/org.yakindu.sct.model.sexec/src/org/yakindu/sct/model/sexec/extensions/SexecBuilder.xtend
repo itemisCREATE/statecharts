@@ -231,6 +231,9 @@ class SexecBuilder {
 		]	
 	}
 	
+	def _call(Step callee) {
+		createCall => [step = callee]
+	}
 	
 	def _traceBeginRunCycle() {
 		createTraceBeginRunCycle
