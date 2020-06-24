@@ -93,6 +93,10 @@ class SexecBuilder {
 		createSequence
 	}		
 	
+	def Step _when(Step step, boolean cond) {
+		if (cond) step
+		else _empty
+	}
 	
 	def Sequence _conceptSequence (String name) {
 		createSequence => [

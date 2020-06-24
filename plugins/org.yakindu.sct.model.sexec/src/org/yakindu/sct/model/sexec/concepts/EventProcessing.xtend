@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 
 /**
  * This class defines the concept of event processing. It defines how events are processed for
@@ -75,7 +76,7 @@ class EventProcessing {
 		}
 		if (hasLocalEvents) {
 			if (applyInternalEventBuffer) defineSwapInternalEvents
-			else defineClearInternalEvents
+			defineClearInternalEvents
 		}
 	}
 
@@ -136,10 +137,18 @@ class EventProcessing {
 			m._type(_void)
 			
 			m._body(
-				it.bufferEventExpressions.internal
+				_sequence(
+					it.bufferEventExpressions.incoming
+					.map[ e | 
+						e._clear()
+					]						
+				) => [ comment = "When processing internal events all incoming events are processed and must be cleared from current buffer."],
+				_sequence(
+					it.bufferEventExpressions.internal
 					.map[ e | 
 						e.event.originEvent._move(e)
-					]
+					]	
+				) => [ comment = "Swap all internal events."]
 			)
 		]
 	}
@@ -148,10 +157,10 @@ class EventProcessing {
 		
 		if (isCycleBased) 
 			_sequence(
-				_swapIncomingEvents,
 				_clearOutEvents,
+				_swapIncomingEvents,
 				_eventLoop(body),
-				_clearInEvents	
+				_clearInEvents._when(!applyIncomingEventBuffer)	
 			)
 		else 
 			_sequence(
@@ -255,7 +264,11 @@ class EventProcessing {
 			val bufferEvent = event.createBufferEvent
 			val bufferEventExpression = EcoreUtil.copy(allEventAccessExpression.get(bufferEvent))
 			
-			expression.eContainer.substitute(expression, bufferEventExpression)
+			if ( expression.eContainer instanceof EventValueReferenceExpression ) {
+				expression.eContainer.eContainer.substitute(expression.eContainer, bufferEventExpression._meta(bufferEvent.valueFeature))
+			} else {
+				expression.eContainer.substitute(expression, bufferEventExpression)			
+			}
 		]
 				
 	}
