@@ -71,14 +71,14 @@ class EventBuffer {
 				]
 				
 				scopeBufferType.traceOrigin(scope)
-				bt.features += _variable(scope.featureName, scopeBufferType)
+				if (!scopeBufferType.features.empty) bt.features += _variable(scope.featureName, scopeBufferType)
 			]
 			
 			bt._annotate(EVENT_BUFFER_ANNOTATION)
 			bt.traceOrigin(flow)
 		]
 		
-		flow.features += _variable("_current", bufferType)
+		if (!bufferType.features.empty) flow.features += _variable("_current", bufferType)
 	}
 	
 	def protected dispatch featureName(Scope it) {
