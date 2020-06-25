@@ -179,10 +179,12 @@ class InternalFunctionsGenerator {
 
 	 def implementation(Method it) '''
 		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-			«body.code»
+			«IF !body.steps.nullOrEmpty»«body.stepComment»«ENDIF»
+			«body.steps.filter(LocalVariableDefinition).map[s | s.code].join»
 			«IF !body.requiresHandles»
 				«unusedParam(scHandle)»
 			«ENDIF»
+			«body.steps.filter[s | !(s instanceof LocalVariableDefinition)].map[s | s.code].join»
 		}
 	 '''
 	 
