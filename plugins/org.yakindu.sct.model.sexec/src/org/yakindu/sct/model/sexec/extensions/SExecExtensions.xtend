@@ -46,6 +46,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.types.Event
+import java.util.LinkedList
 
 class SExecExtensions {
 	@Inject extension OriginTracing
@@ -603,4 +604,33 @@ class SExecExtensions {
 		functions.addAll(reactFunctions)
 		return functions
 	}
+	
+	
+	def derivedComplexTypes(ExecutionFlow flow) {
+		
+		val types = new LinkedList<ComplexType> 
+		flow.collectDerivedComplexTypes(types)
+		return types
+	}
+	
+	
+	protected def LinkedList<ComplexType> collectDerivedComplexTypes(ComplexType it, LinkedList<ComplexType> types) {
+		it.referencedComplexTypes.reverseView.forEach[ t | 
+			if (!types.contains(t)) {
+				types.push(t)
+				t.collectDerivedComplexTypes(types)
+			}
+		]
+		
+		return types		
+	} 
+	
+	def referencedComplexTypes(ComplexType it) {
+		it	.features
+			.filter(Property)
+			.filter[typeSpecifier.type instanceof ComplexType]
+			.map[typeSpecifier.type as ComplexType]
+			.toList
+	}
+	
 }

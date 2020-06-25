@@ -132,32 +132,6 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		'''
 	}
 	
-	def derivedComplexTypes(ExecutionFlow flow) {
-		
-		val types = new LinkedList<ComplexType> 
-		flow.collectDerivedComplexTypes(types)
-		return types
-	}
-	
-	
-	def LinkedList<ComplexType> collectDerivedComplexTypes(ComplexType it, LinkedList<ComplexType> types) {
-		it.referencedComplexTypes.reverseView.forEach[ t | 
-			if (!types.contains(t)) {
-				types.push(t)
-				t.collectDerivedComplexTypes(types)
-			}
-		]
-		
-		return types		
-	} 
-	
-	def referencedComplexTypes(ComplexType it) {
-		it	.features
-			.filter(Property)
-			.filter[typeSpecifier.type instanceof ComplexType]
-			.map[typeSpecifier.type as ComplexType]
-			.toList
-	}
 	
 	protected def CharSequence functions(ExecutionFlow it)
 		'''
