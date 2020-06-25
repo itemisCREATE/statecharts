@@ -14,8 +14,10 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayoutAnimator;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
@@ -25,6 +27,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
+import org.eclipse.gmf.runtime.diagram.ui.internal.tools.RubberbandDragTracker;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.gmf.runtime.editpolicies.SetPreferredSizeRequest;
@@ -36,6 +39,7 @@ import org.yakindu.sct.ui.editor.policies.RegionCompartmentCanonicalEditPolicy;
  * @author muelder
  * @author muehlbrandt
  */
+@SuppressWarnings("restriction")
 public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 
 	public RegionCompartmentEditPart(View view) {
@@ -83,7 +87,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 
 	@Override
 	public boolean isSelectable() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -91,5 +95,10 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		super.refreshVisuals();
 		((ResizableCompartmentFigure) getFigure()).getScrollPane()
 				.setScrollBarVisibility(org.eclipse.draw2d.ScrollPane.NEVER);
+	}
+	
+	@Override
+	public DragTracker getDragTracker(Request request) {
+		return new RubberbandDragTracker();
 	}
 }
