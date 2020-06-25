@@ -161,7 +161,6 @@ class StatechartTypes {
 		return scope.declarations.filter[
 			switch it {
 				Event: true
-//				TimeEvent: true
 				VariableDefinition: !it.const
 				default: false
 			}

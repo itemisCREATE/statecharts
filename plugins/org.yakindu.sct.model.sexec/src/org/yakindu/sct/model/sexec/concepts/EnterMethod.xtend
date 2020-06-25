@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sexec.concepts
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Method

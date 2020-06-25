@@ -19,7 +19,6 @@ import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.base.NamedElement
-import org.yakindu.base.types.annotations.VisibilityAnnotations
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -48,7 +47,6 @@ class TreeNamingService implements INamingService {
 	@Inject extension SExecExtensions
 	@Inject extension StatechartExtensions
 	@Inject extension IQualifiedNameProvider
-	@Inject extension VisibilityAnnotations
 
 	@Inject extension ElementNameProvider
 
@@ -313,9 +311,7 @@ class TreeNamingService implements INamingService {
 	}
 
 	def protected List<String> prefix(Method it) {
-		val l = new ArrayList<String>()
-//		if (it.isPublic) l.add(flow.name.toFirstLower)
-		return l
+		return new ArrayList<String>()
 	}
 
 	def protected List<String> suffix(ExecutionState it) {

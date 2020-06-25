@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
@@ -13,6 +23,10 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 
+/**
+ * 
+ * @author axel terfloth
+ */
 class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.BehaviorMapping {
 
 	@Inject extension SexecElementMapping mapping

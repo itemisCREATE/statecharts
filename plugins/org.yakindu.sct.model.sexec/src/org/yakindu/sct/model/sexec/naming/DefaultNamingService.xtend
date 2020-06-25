@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.yakindu.base.base.NamedElement
-import org.yakindu.base.types.annotations.VisibilityAnnotations
 import org.yakindu.sct.model.sexec.ExecutionEntry
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -83,7 +82,6 @@ class DefaultNamingService implements INamingService {
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension MethodDepthComparator methodDepthComparator
 	@Inject extension NamingHelper
-	@Inject extension VisibilityAnnotations
 	
 	@Inject StextNameProvider provider
 
@@ -277,8 +275,6 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected prefix(Method it, char separator) {
-//		if (it.isPublic) flow.name.toFirstLower
-//		else ""
 		""
 	}
 
