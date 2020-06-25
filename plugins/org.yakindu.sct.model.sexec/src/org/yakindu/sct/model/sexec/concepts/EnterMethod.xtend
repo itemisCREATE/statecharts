@@ -50,7 +50,7 @@ class EnterMethod {
 			m._body(
 				_guardExecution( _sequence(
 					_traceEnter,
-					EcoreUtil.copy(enterSequences.defaultSequence)
+					enterSequences.defaultSequence._clone
 				))
 			)
 			m.body.comment = "Activates the state machine."

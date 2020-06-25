@@ -20,6 +20,10 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.base.types.ComplexType
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.DoWhile
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.ecore.EReference
+import org.yakindu.sct.model.sexec.Call
+import org.yakindu.sct.model.sexec.SexecPackage
 
 class SexecBuilder {
 	
@@ -241,6 +245,33 @@ class SexecBuilder {
 	
 	def _traceEndRunCycle() {
 		createTraceEndRunCycle
+	}
+	
+	/**
+	 * Clones a model element with all its contained childs as well as cross references. As 
+	 * ECoreUtil does not copy to one references if they have an opposite event if that opposite
+	 * has is to many. As a result call steps are not copied properly preserving the step reference. 
+	 * This implementation also copies this reference. 
+	 * 
+	 * The implementation can be generalized by checking the eOpposites cardinality.
+	 */
+	def <T extends EObject> T _clone(T original) {
+		
+		val EcoreUtil.Copier copier = new EcoreUtil.Copier() {
+			
+			override copyReference(EReference ref, EObject original, EObject copy) {
+				if (! (original instanceof Call) || ref.featureID != SexecPackage.CALL__STEP) {
+					super.copyReference(ref, original, copy)
+				} else {
+					(copy as Call).step = (original as Call).step
+				}
+			}
+		}
+		
+		val copy = copier.copy(original)
+		copier.copyReferences
+		
+		return copy as T
 	}
 	
 	
