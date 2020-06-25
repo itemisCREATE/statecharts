@@ -49,11 +49,11 @@ class EventDrivenEventCode extends EventCode {
 		super.eventRaisingCode(it, exp)
 	}
 	
-	override interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event)  {
+	override interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event, boolean valueByReference)  {
 		if(event.isQueued) {
 			'''
 			«IF event.hasValue»
-			«event.typeSpecifier.targetLanguageName» event_value = value;
+			«event.typeSpecifier.targetLanguageName» event_value = «IF valueByReference»*«ENDIF»value;
 			«flow.addToQueueValueFctID»(&(«scHandle»->«inEventQueue»), «event.eventEnumMemberName», &event_value);
 			«ELSE»
 			«flow.addToQueueFctID»(&(«scHandle»->«inEventQueue»), «event.eventEnumMemberName»);
@@ -63,7 +63,7 @@ class EventDrivenEventCode extends EventCode {
 		} else {
 			'''
 			«IF event.hasValue»
-			«event.valueAccess» = value;
+			«event.valueAccess» = «IF valueByReference»*«ENDIF»value;
 			«ENDIF»
 			«event.access» = «TRUE_LITERAL»;
 			

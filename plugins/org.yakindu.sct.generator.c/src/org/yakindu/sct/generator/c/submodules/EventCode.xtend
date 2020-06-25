@@ -62,14 +62,14 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 		«eventRaiserSignature(event)»
 		{
 			«event.traceCode( if (event.hasValue) "&value" else "sc_null" )»
-			«interfaceIncomingEventRaiserBody(event)»
+			«interfaceIncomingEventRaiserBody(event, false)»
 		}
 
 	'''	
 
-	def interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
+	def interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event, boolean valueByReference) '''
 		«IF event.hasValue»
-		«event.valueAccess» = value;
+		«event.valueAccess» = «IF valueByReference»*«ENDIF»value;
 		«ENDIF»
 		«event.access» = «TRUE_LITERAL»;
 	'''

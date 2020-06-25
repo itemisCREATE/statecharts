@@ -63,7 +63,7 @@ class InternalFunctionsGenerator {
 			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»*«ENDIF» value)
 			{
 				«e.traceCode( if (e.hasValue) "&value" else "sc_null" )»
-				«interfaceIncomingEventRaiserBody(e as EventDefinition)»
+				«interfaceIncomingEventRaiserBody(e as EventDefinition, true)»
 				
 				«IF ! e.hasValue»
 					«unusedParam("value")»
