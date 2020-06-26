@@ -28,8 +28,8 @@ class CoreFlowConfiguration extends DefaultFlowConfiguration {
 	@Inject protected GeneratorEntry entry
 	@Inject extension ICoreLibraryHelper 
 	
-	override takeConfigurationfromStatechart(Statechart sc) {
-		super.takeConfigurationfromStatechart(sc)
+	override defineConfigurationForStatechart(Statechart sc) {
+		super.defineConfigurationForStatechart(sc)
 		
 		_applyOutgoingEventBuffer = entry.outEventGettersUsed
 		_applyIncomingEventBuffer = entry.applyInEventBuffer	

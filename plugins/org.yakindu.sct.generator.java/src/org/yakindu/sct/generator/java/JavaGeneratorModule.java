@@ -31,6 +31,8 @@ import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.config.DefaultFlowConfiguration;
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -61,6 +63,10 @@ public class JavaGeneratorModule implements IGeneratorModule {
 	}
 
 	public void configureGeneratorRoot(GeneratorEntry entry, Binder binder) {
+	
+		// TODO: replace binding with new to define JavaFlowConfiguration
+		binder.bind(IFlowConfiguration.class).to(DefaultFlowConfiguration.AllFeaturesDisabled.class);
+		
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(IExecutionFlowGenerator.class).to(JavaGenerator.class);

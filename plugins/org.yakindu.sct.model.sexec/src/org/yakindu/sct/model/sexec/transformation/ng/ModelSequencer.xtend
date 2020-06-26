@@ -66,7 +66,7 @@ class ModelSequencer implements IModelSequencer {
 		val ef = sc.create
 		
 		// derive configuration from statechart
-		config.takeConfigurationfromStatechart(sc)
+		config.defineConfigurationForStatechart(sc)
 		
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)

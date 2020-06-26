@@ -34,7 +34,7 @@ class DefaultFlowConfiguration implements IFlowConfiguration {
 	
 	protected boolean _applyIncomingEventQueue = true
 		
-	override takeConfigurationfromStatechart(Statechart sc) {
+	override defineConfigurationForStatechart(Statechart sc) {
 		_isEventDriven = annotations.isEventDriven(sc)
 		_isSuperStep = annotations.isSuperStep(sc)
 	}
@@ -61,5 +61,19 @@ class DefaultFlowConfiguration implements IFlowConfiguration {
 		isEventDriven && _applyIncomingEventQueue
 	}
 	
+	@javax.inject.Singleton
+	static class AllFeaturesDisabled extends DefaultFlowConfiguration {
+		
+		override void defineConfigurationForStatechart(Statechart sc) {
+			
+			super.defineConfigurationForStatechart(sc)
+			
+			_applyIncomingEventBuffer = false
+			_applyInternalEventBuffer = false
+			_applyOutgoingEventBuffer = false
+			_applyIncomingEventQueue = false
+		}
+
+	}
 	
 }

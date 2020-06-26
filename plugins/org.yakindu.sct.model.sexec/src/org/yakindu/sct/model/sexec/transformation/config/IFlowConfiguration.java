@@ -18,12 +18,14 @@ import com.google.inject.ImplementedBy;
  * are typically derived from the generator models and the concrete generators can contribute 
  * their configuration by implementing and binding this interface.
  * 
+ * Implementations of this interface should typically be bound as singletons for dependency injection.
+ * 
  *  @author axel terfloth
  */
 @ImplementedBy(DefaultFlowConfiguration.class)
 public interface IFlowConfiguration {
 
-	void takeConfigurationfromStatechart(Statechart sc);
+	void defineConfigurationForStatechart(Statechart sc);
 	
 	boolean isEventDriven();
 	boolean isCycleBased();

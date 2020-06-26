@@ -27,12 +27,10 @@ class CppFlowConfiguration extends CoreFlowConfiguration {
 	@Inject protected extension GenmodelEntriesExtension gp
 	
 
-	override takeConfigurationfromStatechart(Statechart sc) {
-		super.takeConfigurationfromStatechart(sc)
+	override defineConfigurationForStatechart(Statechart sc) {
+		super.defineConfigurationForStatechart(sc)
 		
-		_applyIncomingEventBuffer = false // deactivate confugartion for now TODO: remove
-		_applyInternalEventBuffer = false // deactivate configuration for now TODO: remove
-		_applyIncomingEventQueue = false // deactivate configuration for now TODO: entry.inEventQueue
+		_applyIncomingEventQueue = entry.inEventQueue
 	}
 	
 }

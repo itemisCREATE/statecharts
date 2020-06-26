@@ -25,8 +25,8 @@ class CFlowConfiguration extends CoreFlowConfiguration {
 	
 	@Inject protected GeneratorPredicate gp
 
-	override takeConfigurationfromStatechart(Statechart sc) {
-		super.takeConfigurationfromStatechart(sc)
+	override defineConfigurationForStatechart(Statechart sc) {
+		super.defineConfigurationForStatechart(sc)
 		
 		_applyIncomingEventQueue = gp.useInEventQueue		
 	}
