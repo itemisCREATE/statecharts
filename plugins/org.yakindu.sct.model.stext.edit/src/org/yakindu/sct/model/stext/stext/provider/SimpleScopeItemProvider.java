@@ -307,6 +307,11 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 StextFactory.eINSTANCE.createSubmachineReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 ExpressionsFactory.eINSTANCE.createBoolLiteral()));
 
 		newChildDescriptors.add

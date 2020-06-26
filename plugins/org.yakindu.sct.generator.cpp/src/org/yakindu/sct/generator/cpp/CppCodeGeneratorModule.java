@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-2019 committers of YAKINDU and others.
+ * Copyright (c) 2016-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,7 +26,6 @@ import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.StatechartIncludeProvider;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
 import org.yakindu.sct.generator.c.extensions.Naming;
-import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
@@ -36,7 +35,9 @@ import org.yakindu.sct.generator.core.submodules.lifecycle.Init;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsActive;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsStateActive;
+import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
 import org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle;
+import org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.CppEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventRaisingCode;
@@ -57,7 +58,9 @@ import org.yakindu.sct.generator.cpp.providers.eventdriven.StatechartEvents;
 import org.yakindu.sct.generator.cpp.providers.eventdriven.UsingNamespaceProvider;
 import org.yakindu.sct.generator.cpp.providers.eventdriven.classdecl.QueueMemberProvider;
 import org.yakindu.sct.generator.cpp.submodules.EventCode;
+import org.yakindu.sct.generator.cpp.submodules.EventConceptCode;
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions;
+import org.yakindu.sct.generator.cpp.submodules.RunCycleMethodCode;
 import org.yakindu.sct.generator.cpp.submodules.TimingFunctions;
 import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenInterfaceFunctions;
@@ -67,6 +70,8 @@ import org.yakindu.sct.generator.cpp.submodules.lifecycle.LifecycleFunctions;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.config.DefaultFlowConfiguration;
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -79,6 +84,7 @@ import com.google.inject.name.Names;
 /**
  *
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth
  *
  */
 public class CppCodeGeneratorModule implements IGeneratorModule {
@@ -101,6 +107,9 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		bindFragments(binder, entry);
 
 		includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
+		
+		// TODO: replace binding with already existing CppFlowConfiguration
+		binder.bind(IFlowConfiguration.class).to(DefaultFlowConfiguration.AllFeaturesDisabled.class);
 
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
@@ -111,6 +120,11 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
+		
+		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.EventCode.class).to(EventConceptCode.class);
+		binder.bind(MicroStepCode.class).to(RunCycleMethodCode.class);
+		binder.bind(TraceCode.class).to(org.yakindu.sct.generator.cpp.submodules.TraceCode.class);
+		
 		bindTracingProperty(entry, binder);
 		if ((new AnnotationExtensions()).isEventDriven(entry)) {
 			bindEventDrivenClasses(binder);

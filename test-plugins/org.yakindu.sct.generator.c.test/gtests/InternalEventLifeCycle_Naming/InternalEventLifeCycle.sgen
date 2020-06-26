@@ -4,9 +4,11 @@ GeneratorModel for yakindu::c {
 			targetProject = "gtests"
 			targetFolder = "InternalEventLifeCycle_Naming"
 		}
+
 		feature IdentifierSettings {
 			statemachinePrefix =  "intlEvent" 
-		}
+		} 
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -17,6 +19,11 @@ GeneratorModel for yakindu::c {
 			inlineEntries = false
 			inlineEnterRegion = false
 			inlineExitRegion = false
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = false
+			internalEventBuffer = false
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,22 +11,24 @@
 package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 import org.yakindu.sct.generator.c.ConstantInitializationResolver
 import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.ISourceFragment
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.c.ISourceFragment
-import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -44,10 +46,13 @@ class StatemachineSourceFragment implements ISourceFragment {
 	@Inject protected extension ExpressionsChecker
 	@Inject protected extension GeneratorPredicate
 	
+	@Inject protected extension VisibilityAnnotations
 	@Inject protected extension APIGenerator
+	@Inject protected extension EventProcessing
 	
 	@Inject protected extension InternalFunctionsGenerator//TODO is this allowed?
 	@Inject protected extension InterfaceFunctionsGenerator
+	@Inject protected extension MethodGenerator
 
 	override CharSequence fileComment(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''«entry.licenseText»'''
@@ -78,7 +83,14 @@ class StatemachineSourceFragment implements ISourceFragment {
 	override CharSequence declarations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«defines»
+		
 		«functionPrototypes»
+
+		«reactMethods.declarations»
+
+		«methods.filter[ !isPublic ].declarations»
+
+		«observerCallbacksPrototypes»
 		
 		«constantDefinitions»
 		'''
@@ -107,11 +119,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 		
 		«init»
 		
-		«enter»
-		
-		«runCycle»
-
-		«exit»
+		«methods.filter[ isPublic ].implementation»
 		
 		«active»
 		
@@ -123,14 +131,16 @@ class StatemachineSourceFragment implements ISourceFragment {
 		«ENDIF»
 		«isStateActive»
 		
-		«clearInEventsFunction»
+		«methods.filter[ !isPublic ].implementation»
 		
-		«IF needsClearOutEventsFunction»
-			«clearOutEventsFunction»
-			
-		«ENDIF»
 		«interfaceFunctions»
 
 		«functionImplementations»
+		
+		«reactMethods.implementation»
+		
+		«observerCallbacksImplementations»
+		
+		
 	'''
 }

@@ -229,6 +229,11 @@ public class ReactionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.REACTION__EFFECT,
+				 SexecFactory.eINSTANCE.createDoWhile()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.REACTION__EFFECT,
 				 SexecFactory.eINSTANCE.createExecution()));
 
 		newChildDescriptors.add

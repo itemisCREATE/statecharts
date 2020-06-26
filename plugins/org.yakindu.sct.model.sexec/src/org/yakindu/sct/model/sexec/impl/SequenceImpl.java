@@ -70,6 +70,7 @@ public class SequenceImpl extends StepImpl implements Sequence {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Step> getSteps() {
 		if (steps == null) {
 			steps = new EObjectContainmentEList<Step>(Step.class, this, SexecPackage.SEQUENCE__STEPS);

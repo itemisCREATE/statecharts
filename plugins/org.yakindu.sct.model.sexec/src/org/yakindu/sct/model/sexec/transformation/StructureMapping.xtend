@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
@@ -52,9 +53,9 @@ class StructureMapping {
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
 	@Inject extension StatechartUtil
-	@Inject extension ExpressionBuilder
 	@Inject extension ExpressionExtensions
 	@Inject extension ShadowEventExtensions
+	@Inject extension SexecBuilder
 	
 	
 	//==========================================================================
@@ -271,6 +272,7 @@ class StructureMapping {
 		]
 	}
 	
+	
 	/**
 	 * Returns true if the feature call is on a statechart reference which is a direct member of the given statechart, e.g.
 	 * <br><br>
@@ -301,5 +303,6 @@ class StructureMapping {
 	protected def dispatch isStatechartRef(TypedDeclaration it) {
 		type.isOriginStatechart
 	}
+	
 	
 }

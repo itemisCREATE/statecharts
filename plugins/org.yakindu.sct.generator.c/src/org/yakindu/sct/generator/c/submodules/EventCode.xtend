@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,20 +15,23 @@ import com.google.inject.Singleton
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.base.types.Direction
 
 /**
  * @author rbeckmann
@@ -36,7 +39,8 @@ import org.yakindu.base.types.Direction
  *
  */
 @Singleton // Guice
-class EventCode {
+class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.EventCode {
+
 	@Inject protected extension SExecExtensions
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -48,19 +52,24 @@ class EventCode {
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
 	
+	@Inject protected extension CExpressionsGenerator
+	
+	@Inject protected extension EventProcessing
+	@Inject protected extension ExpressionBuilder
+	
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
 		{
 			«event.traceCode( if (event.hasValue) "&value" else "sc_null" )»
-			«interfaceIncomingEventRaiserBody(event)»
+			«interfaceIncomingEventRaiserBody(event, false)»
 		}
 
 	'''	
 
-	def interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
+	def interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event, boolean valueByReference) '''
 		«IF event.hasValue»
-		«event.valueAccess» = value;
+		«event.valueAccess» = «IF valueByReference»*«ENDIF»value;
 		«ENDIF»
 		«event.access» = «TRUE_LITERAL»;
 	'''
@@ -130,4 +139,22 @@ class EventCode {
 	def eventValueGetterSignature(ExecutionFlow it, EventDefinition event) '''«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)'''
 	
 	def eventObservableSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»* «event.asObservableGetter»(«scHandleDecl»)'''
+	
+	def eventObserverNextSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»* «event.asObservableGetter»(«scHandleDecl»)'''
+	
+	
+	override eventClearCode(ExecutionFlow flow, Expression event) '''
+		«event.code» = «FALSE_LITERAL»;
+	'''
+	
+	override eventMoveCode(ExecutionFlow flow, Expression source, Expression target) '''
+		«target.code» = «source.code»;
+		«IF source.event.hasValue»«target._meta(target.event.valueFeature).code» = «source._meta(source.event.valueFeature).code»;«ENDIF»
+		«source.code» = «FALSE_LITERAL»;
+	'''
+	
+	override eventNextCode(ExecutionFlow flow) {
+		throw new UnsupportedOperationException("Something went wrong - generating 'eventNext' not supported for cycle based statecharts.")
+	}
+	
 }

@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
@@ -119,7 +120,9 @@ public class InternalScopeItemProvider extends StatechartScopeItemProvider
 
 		boolean qualify =
 			childFeature == SGraphPackage.Literals.SCOPE__DECLARATIONS ||
-			childFeature == SGraphPackage.Literals.SCOPE__MEMBERS;
+			childFeature == SGraphPackage.Literals.SCOPE__MEMBERS ||
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 
 		if (qualify) {
 			return getString

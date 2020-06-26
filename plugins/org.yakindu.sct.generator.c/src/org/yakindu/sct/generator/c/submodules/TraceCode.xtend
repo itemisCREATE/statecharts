@@ -8,34 +8,37 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Trace
+import org.yakindu.sct.model.sexec.TraceBeginRunCycle
+import org.yakindu.sct.model.sexec.TraceEndRunCycle
 import org.yakindu.sct.model.sexec.TraceStateEntered
 import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.util.StatechartUtil
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.base.types.Expression
-import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.ComplexType
-import org.yakindu.sct.model.sgraph.util.StatechartUtil
-import org.yakindu.sct.model.sexec.LocalVariableDefinition
 
 /**
  * @author axel terfloth
  */
-class TraceCode {
+class TraceCode implements org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode {
 	
  	@Inject extension GenmodelEntries
  	@Inject extension Naming
@@ -67,40 +70,26 @@ class TraceCode {
 		'''
 	}
 	
-	def CharSequence traceMachineEnter(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_ENTER»);
-		'''
-	}
-
-	def CharSequence traceMachineExit(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_EXIT»);
-		'''
-	}
-
-	def CharSequence traceCycleStart(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_START»);
-		'''
-	}
-	
-	def CharSequence traceCycleEnd(ExecutionFlow it) {
-		if (entry.tracingGeneric) '''
-			«it.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_END»);
-		'''
-	}
-		
 
 	def protected dispatch notifyTrace(Object it) ''''''
 	
-	def protected dispatch notifyTrace(Object it, Object value) ''''''
+	def protected dispatch notifyTrace(Object it, Object value) '''// failed attempt to trace ... '''
 	
 	def protected dispatch notifyTrace(VariableDefinition it, Object value) 
 		'''«flow.tracingPrefix»FEATURE(«scHandle», «TRACE_MACHINE_VARIABLE_SET», «flow.featureNamingPrefix»«it.name», «value»)'''
 
 	def protected dispatch notifyTrace(EventDefinition it, Object value) 
 		'''«flow.tracingPrefix»FEATURE(«scHandle», «TRACE_MACHINE_EVENT_RAISED», «flow.featureNamingPrefix»«it.name», «value»)'''
+
+
+	def protected dispatch notifyTrace(TraceBeginRunCycle it) '''
+		«flow.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_START»);
+	'''
+
+	def protected dispatch notifyTrace(TraceEndRunCycle it) '''
+		«flow.traceFctID»(«scHandle», «TRACE_MACHINE_CYCLE_END»);
+	'''
+
 
 	def protected dispatch notifyTrace(TraceStateEntered it) '''
 		«TRACE_CALL»_STATE(«scHandle», «TRACE_MACHINE_ENTERED», «state.stateName»);
@@ -124,6 +113,7 @@ class TraceCode {
 							.map[ assignment | assignment.varRef ]
 							.filter[ v | ! v.isVarFromOtherStatechart ]
 							.filter[ v | ! (v.definition.eContainer instanceof LocalVariableDefinition)]
+							.filter[ v | v.definition instanceof VariableDefinition ]
 							.toList
 							
 		val traceVars = traceAssignee.map( a | a.definition ).toSet
@@ -157,6 +147,20 @@ class TraceCode {
 			«flow.exitStateTracingFctID»(«scHandle», «it.state.stateName»);
 		«ENDIF»
 	'''
+	
+	
+	override traceEnterCode(ExecutionFlow it) {
+		if (entry.tracingGeneric) '''
+			«it.traceFctID»(«scHandle», «TRACE_MACHINE_ENTER»);
+		'''	
+	}
+	
+	
+	override traceExitCode(ExecutionFlow it) {
+		if (entry.tracingGeneric) '''
+			«it.traceFctID»(«scHandle», «TRACE_MACHINE_EXIT»);
+		'''
+	}
 	
 	
 }

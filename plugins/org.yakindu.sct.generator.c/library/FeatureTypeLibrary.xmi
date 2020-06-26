@@ -54,7 +54,8 @@
       optional="true">
     <parameters
         name="inEventQueue"
-        comment="If set to true, a queue for incoming events is generated."
+        deprecated="true"
+        comment="Deprecated - use EventProcessing > inEventQueue instead. If set to true, a queue for incoming events is generated."
         optional="true"
         parameterType="BOOLEAN"/>
     <parameters

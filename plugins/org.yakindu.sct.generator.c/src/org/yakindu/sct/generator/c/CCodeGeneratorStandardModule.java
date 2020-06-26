@@ -19,16 +19,20 @@ import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
-import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.files.StatemachineHeader;
 import org.yakindu.sct.generator.c.files.StatemachineSource;
+import org.yakindu.sct.generator.c.submodules.RunCycleMethodCode;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
+import org.yakindu.sct.generator.core.submodules.lifecycle.EventCode;
+import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
+import org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -41,6 +45,7 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
+		binder.bind(IFlowConfiguration.class).to(CFlowConfiguration.class);
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
@@ -49,6 +54,9 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CNamingService.class);
 		binder.bind(StatemachineSource.class).toProvider(SourceContentFragmentProvider.class);
 		binder.bind(StatemachineHeader.class).toProvider(HeaderContentFragmentProvider.class);
+		binder.bind(MicroStepCode.class).to(RunCycleMethodCode.class);
+		binder.bind(EventCode.class).to(org.yakindu.sct.generator.c.submodules.EventCode.class);
+		binder.bind(TraceCode.class).to(org.yakindu.sct.generator.c.submodules.TraceCode.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));

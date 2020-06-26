@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,22 +12,28 @@ package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Property
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 
 /**
  * @author rbeckmann
@@ -42,7 +48,10 @@ class StatechartTypes {
 	@Inject extension ShadowEventExtensions
 	
 	@Inject protected extension GeneratorEntry entry
+	@Inject extension GeneratorPredicate
 	@Inject protected extension GenmodelEntries
+	
+	@Inject protected extension ShadowMemberScope
 	
 	def forwardDeclarations(ExecutionFlow it) {
 		'''
@@ -78,15 +87,15 @@ class StatechartTypes {
 		«statesEnumType» «STATEVECTOR»[«maxOrthogonalStates»];
 		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«maxHistoryStates»];«ENDIF»
 		«USHORT_TYPE» «STATEVECTOR_POS»; 
-		«IF statechart.isSuperStep»
-		«BOOL_TYPE» «STATEVECTOR_CHANGED»;
-		«ENDIF»
 		«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
 			«iScope.type» «iScope.instance»;
 		«ENDFOR»
 		«IF entry.tracingGeneric»
 		«TRACE_HANDLER_TYPE» *«TRACE_HANDLER»;
 		«ENDIF»
+		«FOR v : it.features.filter(Property)»
+			«v.structMember»
+		«ENDFOR»
 		'''
 	}
 	
@@ -129,7 +138,7 @@ class StatechartTypes {
 				«FOR d : typeRelevantDeclarations»
 					«d.scopeTypeDeclMember»
 				«ENDFOR»
-				«IF scope instanceof InternalScope && scope.flow.statechart.isEventDriven»
+				«IF scope instanceof InternalScope && scope.isShadowMemberScope»
 					«FOR d : shadowEvents»
 						«d.scopeShadowEventMember»
 					«ENDFOR»
@@ -151,8 +160,7 @@ class StatechartTypes {
 	def typeRelevantDeclarations(Scope scope){
 		return scope.declarations.filter[
 			switch it {
-				EventDefinition: true
-				TimeEvent: true
+				Event: true
 				VariableDefinition: !it.const
 				default: false
 			}
@@ -162,4 +170,41 @@ class StatechartTypes {
 	def constDeclarations(Scope scope){
 		return scope.declarations.filter(typeof(VariableDefinition)).filter[const]
 	}
+	
+	/** TODO complex type should be contained in ExecutionFLow */
+	def typeDeclaration(ComplexType type, ExecutionFlow flow) '''
+		typedef struct «type.cType» «type.cType»;
+	'''
+	
+	/** TODO complex type should be contained in ExecutionFLow */
+	def structDeclaration(ComplexType type, ExecutionFlow flow) '''
+		struct «type.cType» {
+			«FOR f : type.features»
+				«f.structMember»
+			«ENDFOR»
+		};
+		
+	'''
+	
+	def dispatch structMember(Event it) {
+		'''
+		«IF useOutEventObservables && direction == Direction.OUT»
+			«OBSERVABLE_TYPE» «eventName»;
+		«ENDIF»
+		«IF (useOutEventGetters && direction == Direction.OUT) || direction == Direction.IN || direction == Direction.LOCAL»
+			«BOOL_TYPE» «eventRaisedFlag»;
+			«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
+		«ENDIF»
+		'''
+	}
+	
+	def dispatch structMember(TimeEvent it) '''
+		«BOOL_TYPE» «timeEventRaisedFlag»;
+	'''
+
+	def dispatch structMember(Property it) '''
+		«type.cType» «variable»;
+	'''
+	
+	def dispatch structMember(Declaration it) ''''''
 }

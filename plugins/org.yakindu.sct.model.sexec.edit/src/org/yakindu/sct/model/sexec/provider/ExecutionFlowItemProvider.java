@@ -288,7 +288,6 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 			childrenFeatures.add(TypesPackage.Literals.META_COMPOSITE__META_FEATURES);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
@@ -358,6 +357,7 @@ public class ExecutionFlowItemProvider
 
 		switch (notification.getFeatureID(ExecutionFlow.class)) {
 			case SexecPackage.EXECUTION_FLOW__NAME:
+			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 			case SexecPackage.EXECUTION_FLOW__ID:
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
@@ -370,7 +370,6 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
-			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
 			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
 			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
@@ -890,6 +889,11 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createDoWhile()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createExecution()));
 
 		newChildDescriptors.add
@@ -1001,6 +1005,11 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createIf()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createDoWhile()));
 
 		newChildDescriptors.add
 			(createChildParameter

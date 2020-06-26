@@ -400,6 +400,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.DoWhile} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DoWhileItemProvider doWhileItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.DoWhile}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDoWhileAdapter() {
+		if (doWhileItemProvider == null) {
+			doWhileItemProvider = new DoWhileItemProvider(this);
+		}
+
+		return doWhileItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Execution} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -957,6 +980,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -967,6 +991,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -1015,6 +1040,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -1025,6 +1051,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -1035,6 +1062,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -1049,6 +1077,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		if (mappedElementItemProvider != null) mappedElementItemProvider.dispose();
 		if (executionFlowItemProvider != null) executionFlowItemProvider.dispose();
@@ -1068,6 +1097,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (checkItemProvider != null) checkItemProvider.dispose();
 		if (checkRefItemProvider != null) checkRefItemProvider.dispose();
 		if (ifItemProvider != null) ifItemProvider.dispose();
+		if (doWhileItemProvider != null) doWhileItemProvider.dispose();
 		if (executionItemProvider != null) executionItemProvider.dispose();
 		if (enterStateItemProvider != null) enterStateItemProvider.dispose();
 		if (exitStateItemProvider != null) exitStateItemProvider.dispose();

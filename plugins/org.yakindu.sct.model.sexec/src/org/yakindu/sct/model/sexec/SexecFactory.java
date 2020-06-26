@@ -156,6 +156,15 @@ public interface SexecFactory extends EFactory {
 	If createIf();
 
 	/**
+	 * Returns a new object of class '<em>Do While</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Do While</em>'.
+	 * @generated
+	 */
+	DoWhile createDoWhile();
+
+	/**
 	 * Returns a new object of class '<em>Execution</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

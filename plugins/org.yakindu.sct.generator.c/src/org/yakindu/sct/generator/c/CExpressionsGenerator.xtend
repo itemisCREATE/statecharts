@@ -15,6 +15,7 @@ import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -23,12 +24,14 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.MetaCall
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
@@ -41,8 +44,10 @@ import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.submodules.EventCode
+import org.yakindu.sct.generator.c.submodules.TraceCode
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -56,7 +61,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.base.expressions.expressions.AssignmentOperator
 
 /**
  * @author axel terfloth
@@ -129,8 +133,12 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) 
 		'''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, Property target) 
+	def dispatch CharSequence code(ElementReferenceExpression it, Property target) {
+		if(target.eContainer instanceof ExecutionFlow) {
+			return '''«scHandle»->«target.access»'''
+		}
 		'''«target.access»'''
+	}
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Parameter target) 
 		'''«target.name»'''
@@ -195,7 +203,14 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«it.owner.code».«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	}
 
-	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
+	def dispatch CharSequence code(FeatureCall it, Property target) 
+		'''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
+
+	def dispatch CharSequence code(MetaCall it, Declaration target) 
+		'''«it.owner.metaCode(it.owner.featureOrReference, target)»'''
+
+	def dispatch CharSequence code(FeatureCall it, Event target) 
+		'''«it.owner.code»«IF !target.eContainer.isOriginStatechart».«target.access»«ENDIF»'''
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) {
 		if(target.eContainer.isOriginStatechart) {
@@ -204,6 +219,15 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«target.access»'''
 	}
 
+	def dispatch CharSequence metaCode(Expression it, EObject owner, EObject feature)
+		'''/* cant generate meta code for «feature» of «it» */'''
+	
+	def dispatch CharSequence metaCode(FeatureCall it, Event owner, Property feature)
+		'''«it.owner.code».«owner.name.asEscapedIdentifier»_«feature.name.asEscapedIdentifier»'''
+
+	def dispatch CharSequence metaCode(ElementReferenceExpression it, EventDefinition owner, Property feature)
+		'''«scHandle»->«owner.scope.instance».«owner.name.asEscapedIdentifier»_«feature.name.asEscapedIdentifier»'''
+	
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»«TRUE_LITERAL»«ELSE»«FALSE_LITERAL»«ENDIF»'''
 	
@@ -237,4 +261,5 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		'''«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»'''
 	}
 	
+
 }

@@ -919,12 +919,36 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SubmachineReferenceExpressionItemProvider submachineReferenceExpressionItemProvider;
+
+		/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.SubmachineReferenceExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSubmachineReferenceExpressionAdapter() {
+		if (submachineReferenceExpressionItemProvider == null) {
+			submachineReferenceExpressionItemProvider = new SubmachineReferenceExpressionItemProvider(this);
+		}
+
+		return submachineReferenceExpressionItemProvider;
+	}
+
+		/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ComposeableAdapterFactory getRootAdapterFactory()
+  @Override
+		public ComposeableAdapterFactory getRootAdapterFactory()
   {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -935,7 +959,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory)
+  @Override
+		public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory)
   {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -987,7 +1012,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void addListener(INotifyChangedListener notifyChangedListener)
+  @Override
+		public void addListener(INotifyChangedListener notifyChangedListener)
   {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -998,7 +1024,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void removeListener(INotifyChangedListener notifyChangedListener)
+  @Override
+		public void removeListener(INotifyChangedListener notifyChangedListener)
   {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -1009,7 +1036,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void fireNotifyChanged(Notification notification)
+  @Override
+		public void fireNotifyChanged(Notification notification)
   {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -1024,7 +1052,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void dispose()
+  @Override
+		public void dispose()
   {
 		if (rootItemProvider != null) rootItemProvider.dispose();
 		if (defRootItemProvider != null) defRootItemProvider.dispose();
@@ -1061,6 +1090,7 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
 		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
 		if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
+		if (submachineReferenceExpressionItemProvider != null) submachineReferenceExpressionItemProvider.dispose();
 	}
 
 }

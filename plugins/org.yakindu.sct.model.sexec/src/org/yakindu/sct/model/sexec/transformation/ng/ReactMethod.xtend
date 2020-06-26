@@ -11,27 +11,14 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.ExpressionsFactory
-import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.types.Expression
-import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Parameter
-import org.yakindu.base.types.Property
-import org.yakindu.base.types.TypedElement
-import org.yakindu.base.types.TypesFactory
-import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.If
-import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Method
-import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SexecBuilder
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
@@ -39,6 +26,9 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.base.types.TypeBuilder
+import org.yakindu.base.types.Parameter
+import org.yakindu.base.types.Operation
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -52,10 +42,11 @@ class ReactMethod {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension SexecExtensions sexec
 	@Inject extension SgraphExtensions sgraph
-	@Inject extension ITypeSystem typeSystem
 	@Inject extension StatechartAnnotations
 	
+	@Inject extension TypeBuilder typeBuilder
 	@Inject extension ExpressionBuilder exprBuilder
+	@Inject extension SexecBuilder sexecBuilder
 	
 	
 	/**
@@ -90,8 +81,8 @@ class ReactMethod {
 		node => [
 			features.add( sexecFactory.createMethod => [ m |
 				m.name = "react"
-				m._type(_bool)
-				m._param("try_transition", _bool)
+				m._type(_boolean)
+				m._param("try_transition", _boolean)
 			])
 		]
 	}
@@ -100,7 +91,7 @@ class ReactMethod {
 		node => [
 			features.add( sexecFactory.createMethod => [ m |
 				m.name = "react"
-				m._type(_bool)
+				m._type(_boolean)
 			])
 		]
 	}
@@ -132,7 +123,7 @@ class ReactMethod {
 		if (state.statechart.interleaveLocalReactions) {
 			
 			val tryTransitionParam = reactMethod.param('try_transition')
-			val didTransitionVariable = _variable("did_transition", _bool)
+			val didTransitionVariable = _variable("did_transition", _boolean)
 			
 				
 			val stateReactions = 
@@ -184,143 +175,16 @@ class ReactMethod {
 
 	def dispatch callReact(ExecutionFlow flow, Expression p)  { _call(flow.reactMethod) }
 	
-	
-	
-	def _step(Sequence it, Step step) {
-		steps.add(step)
-		return steps
-	}	
 
-
-	def _equals(Expression left, Expression right) {
-		ExpressionsFactory.eINSTANCE.createLogicalRelationExpression => [ eq |
-			eq.operator = RelationalOperator.EQUALS;
-			eq.leftOperand = left
-			eq.rightOperand = right
-		]
-	}	
 	
-	def _assign(Property prop, Expression value) {
-		sexecFactory.createStatement => [
-			expression = ExpressionsFactory.eINSTANCE.createAssignmentExpression => [ ae |
-				ae.varRef = _ref(prop)
-				ae.expression = value
-			]
-		]	
-	}
-	
-	
-	def _statement(Expression value) {
-		sexecFactory.createStatement => [
-			expression = value
-		]	
-	}
-	
-	
-	def _declare(Property prop) {
-		sexec.factory.createLocalVariableDefinition => [ variable = prop ]
+	def Method reactMethod(ExecutionNode it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "react").head
 	}
 	
 	def Parameter param(Operation it, String name) {
 		parameters.filter[ p | p.name == name].head
 	}
 	
-	def Method reactMethod(ExecutionNode it) {
-		features.filter( typeof(Method) ).filter( m | m.name == "react").head
-	}
-	
-
-	def Sequence _sequence (Step... sequenceSteps) {
-		sexec.factory.createSequence => [
-			steps.addAll(sequenceSteps)
-		]
-	}		
-	
-	
-	def If _if (Expression cond) {
-		sexec.factory.createIf() => [
-			check = sexec.factory.createCheck => [
-				condition = cond
-			]	
-		]
-	}
-	
-	def If _if (Check c) {
-		sexec.factory.createIf() => [
-			check = c	
-		]
-	}
-	
-	def If _then (If it, Step step) {
-		thenStep = step	
-		it
-	}
-	
-	def If _else (If it, Step step) {
-		elseStep = step
-		it
-	}
-	
-	
-	def ElementReferenceExpression _call(Operation op) {
-		ExpressionsFactory.eINSTANCE.createElementReferenceExpression => [ 
-			reference = op 
-			operationCall=true
-		]
-	}
-	
-	def ElementReferenceExpression _ref(EObject p) {
-		ExpressionsFactory.eINSTANCE.createElementReferenceExpression => [ 
-			reference = p
-			operationCall=false
-		]
-	}
-	
-	def ElementReferenceExpression _with(ElementReferenceExpression it, Expression... params) {
-		for (param : params) {
-			it.arguments.add(ExpressionsFactory.eINSTANCE.createArgument => [arg | arg.value = param])
-		}
-		return it
-	}
-	
-	def LocalVariableDefinition _with(LocalVariableDefinition it, Expression value) {
-	
-		initialValue = value;
-		return it
-	}
-	
-	def Return _return(Expression exp) {
-		sexec.factory.createReturn => [ value = exp ]
-	}
-	
-	
-	def _type(TypedElement it, String typeName) {
-		typeSpecifier = TypesFactory.eINSTANCE.createTypeSpecifier => [
-					type = typeSystem.getType(typeName);
-				]
-	}
-	
-	def _bool() {
-		return ITypeSystem::BOOLEAN
-	}
-	
-	def _param(Operation it, String pName, String typeName) {
-
-		parameters.add(TypesFactory.eINSTANCE.createParameter => [
-			name = pName
-			_type(typeName)
-		])
-
-		return it
-	}
-	
-	
-	def _variable(String name, String typeName) {
-		TypesFactory.eINSTANCE.createProperty => [ prop |
-			prop.name = name
-			prop._type(typeName)
-		]	
-	}
 	
 	
 	 

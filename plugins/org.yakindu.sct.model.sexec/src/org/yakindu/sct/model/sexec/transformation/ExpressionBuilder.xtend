@@ -6,6 +6,10 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.expressions.expressions.LogicalOrExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.expressions.expressions.MetaCall
 
 class ExpressionBuilder {
 
@@ -30,6 +34,34 @@ class ExpressionBuilder {
 			operationCall = false
 			operationCall = p instanceof Operation
 			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
+		]
+	}
+	
+	def FeatureCall _dot(Expression o, Declaration p, Expression... arguments) {
+		createFeatureCall => [
+			owner = o
+			feature = p
+			operationCall = false
+			operationCall = p instanceof Operation
+			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
+		]
+	}
+	
+	def MetaCall _meta(Expression o, Declaration p, Expression... arguments) {
+		createMetaCall => [
+			owner = o
+			feature = p
+			operationCall = false
+			operationCall = p instanceof Operation
+			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
+		]
+	}
+	
+	
+	def LogicalOrExpression _or(Expression e1, Expression e2) {
+		createLogicalOrExpression => [
+			leftOperand = e1
+			rightOperand = e2
 		]
 	}
 

@@ -225,6 +225,11 @@ public class TimeEventSpecItemProvider extends EventSpecItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+				 StextFactory.eINSTANCE.createSubmachineReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add

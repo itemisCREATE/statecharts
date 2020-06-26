@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,11 +15,15 @@ import com.google.inject.Singleton
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.generator.c.TraceCode
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.concepts.EnterMethod
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
+import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
+import org.yakindu.sct.model.sexec.concepts.ExitMethod
+import org.yakindu.sct.model.sexec.concepts.RunCycleMethod
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -50,61 +54,16 @@ class APIGenerator {
 	@Inject protected extension GeneratorEntry genEntry
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension ShadowEventExtensions
-
-	def runCycle(ExecutionFlow it) {
-		'''
-			«runCycleSignature»
-			{
-				«traceCycleStart»
-				«IF needsClearOutEventsFunction»«clearOutEventsFctID»(«scHandle»);«ENDIF»
-				«runCycleForLoop(it)»
-				«clearInEventsFctID»(«scHandle»);
-				«traceCycleEnd»
-			}
-		'''
-	}
+	@Inject protected extension InternalFunctionsGenerator
+	@Inject protected extension MethodGenerator
 	
-	protected def superStepLoop(CharSequence microStep) '''
-		do {
-			«scHandle»->«STATEVECTOR_CHANGED» = false;
-			«microStep»
-		} while(«scHandle»->«STATEVECTOR_CHANGED»);
-	'''
-
-	protected def CharSequence runCycleForLoop(ExecutionFlow it) {
-		val microStep = '''
-		for («scHandle»->«STATEVECTOR_POS» = 0;
-			«scHandle»->«STATEVECTOR_POS» < «maxOrthogonalStates»;
-			«scHandle»->«STATEVECTOR_POS»++)
-			{
-				
-			switch («scHandle»->«STATEVECTOR»[«scHandle»->«STATEVECTOR_POS»])
-			{
-			«FOR state : states.filter[isLeaf]»
-				«IF state.reactMethod !== null»
-					case «state.stateName»:
-					{
-						«state.reactMethod.shortName»(«scHandle», «TRUE_LITERAL»);
-						break;
-					}
-				«ENDIF»
-			«ENDFOR»
-			default:
-				break;
-			}
-		}
-		'''
-		return if (statechart.isSuperStep) superStepLoop(microStep) else microStep
-	} 
+	@Inject protected extension EnterMethod
+	@Inject protected extension ExitMethod	
+	@Inject protected extension RunCycleMethod
+	@Inject protected extension ExecutionGuard
+	@Inject protected extension EventProcessing
 
 
-	def declareRunCycle(ExecutionFlow it) {
-		'''«runCycleSignature»;'''
-	}
-
-	def protected CharSequence runCycleSignature(ExecutionFlow it) {
-		'''void «runCycleFctID»(«scHandleDecl»)'''
-	}
 	
 	def tracing(ExecutionFlow it){
 		if (timed) 
@@ -161,26 +120,26 @@ class APIGenerator {
 			
 			«scHandle»->«STATEVECTOR_POS» = 0;
 			
-			«clearInEventsFctID»(«scHandle»);
-			«IF needsClearOutEventsFunction»
-				«clearOutEventsFctID»(«scHandle»);
-			«ELSE»
-			
-			«initializeObservables»
+			«_clearInEvents.code»
+			«_clearInternalEvents.code»
+			«_clearOutEvents.code»
+
+			«IF useOutEventObservables»
+				«initializeObservables»
 			«ENDIF»
 			«initializeObserver»
 
 			«initSequence.code»
+			
+			«_initIsExecuting.code»
 		'''
 	}
 	
 	protected def CharSequence initializeObserver(ExecutionFlow it){
 		'''
-		«IF statechart.isEventDriven»
 		«FOR e : shadowEvents»
 			sc_single_subscription_observer_init(&(«e.accessObserver»), «scHandle», («OBSERVER_NEXT_FP_TYPE»)«e.observerCallbackFctID»);
 		«ENDFOR»
-		«ENDIF»
 		'''
 	}
 	
@@ -201,24 +160,7 @@ class APIGenerator {
 		'''«initSignature»;'''
 	}
 
-	def enter(ExecutionFlow it) {
-		'''
-			«enterSignature»
-			{
-				«traceMachineEnter»
-				«enterSequences.defaultSequence.code»
-			}
-		'''
-	}
-
-	def declareEnter(ExecutionFlow it) {
-		'''«enterSignature»;'''
-	}
 	
-	def protected CharSequence enterSignature(ExecutionFlow it) {
-		'''void «enterFctID»(«scHandleDecl»)'''
-	}
-
 	def isActive(ExecutionFlow it) {
 		'''
 			«isActiveSignature»
@@ -307,24 +249,6 @@ class APIGenerator {
 	
 	def protected CharSequence isFinalSignature(ExecutionFlow it) {
 		'''«BOOL_TYPE» «isFinalFctID»(const «scHandleDecl»)'''
-	}
-	
-	def exit(ExecutionFlow it) {
-		'''
-			«exitSignature»
-			{
-				«exitSequence.code»
-				«traceMachineExit»
-			}
-		'''
-	}
-	
-	def declareExit(ExecutionFlow it) {
-		'''«exitSignature»;'''
-	}
-	
-	def protected CharSequence exitSignature(ExecutionFlow it) {
-		'''void «exitFctID»(«scHandleDecl»)'''
 	}
 	
 	def raiseTimeEvent(ExecutionFlow it) {

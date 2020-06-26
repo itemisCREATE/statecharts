@@ -104,6 +104,7 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<StateCase> getCases() {
 		if (cases == null) {
 			cases = new EObjectContainmentEList<StateCase>(StateCase.class, this, SexecPackage.STATE_SWITCH__CASES);
@@ -116,6 +117,7 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getStateConfigurationIdx() {
 		return stateConfigurationIdx;
 	}
@@ -125,6 +127,7 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStateConfigurationIdx(int newStateConfigurationIdx) {
 		int oldStateConfigurationIdx = stateConfigurationIdx;
 		stateConfigurationIdx = newStateConfigurationIdx;
@@ -137,6 +140,7 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionRegion getHistoryRegion() {
 		if (historyRegion != null && historyRegion.eIsProxy()) {
 			InternalEObject oldHistoryRegion = (InternalEObject)historyRegion;
@@ -163,6 +167,7 @@ public class StateSwitchImpl extends StepImpl implements StateSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHistoryRegion(ExecutionRegion newHistoryRegion) {
 		ExecutionRegion oldHistoryRegion = historyRegion;
 		historyRegion = newHistoryRegion;

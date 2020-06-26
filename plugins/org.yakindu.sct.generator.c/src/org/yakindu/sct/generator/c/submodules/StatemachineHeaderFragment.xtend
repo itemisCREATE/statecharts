@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2018-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,14 +11,22 @@
 package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
+import java.util.LinkedList
+import java.util.Set
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Property
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.IHeaderFragment
 import org.yakindu.sct.generator.c.IncludeProvider
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.concepts.BufferEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
@@ -28,10 +36,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.c.IHeaderFragment
-import java.util.Set
-import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
-import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 /**
  * @author rbeckmann
@@ -53,6 +58,10 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension StatechartTypes
 	@Inject protected extension EventCode
 	@Inject protected extension GeneratorPredicate
+	
+	@Inject protected extension BufferEvent
+	@Inject protected extension VisibilityAnnotations
+	@Inject protected extension MethodGenerator
 	
 	@Inject protected extension GeneratorEntry entry
 	
@@ -112,10 +121,17 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 			
 		«ENDFOR»
 		
+		
+		«FOR t : it.derivedComplexTypes»
+			«t.typeDeclaration(flow)»
+			«t.structDeclaration(flow)»
+		«ENDFOR»
+		
 		«statemachineStruct»
 		
 		'''
 	}
+	
 	
 	protected def CharSequence functions(ExecutionFlow it)
 		'''
@@ -130,14 +146,9 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
 		extern «declareInit»
 		
-		/*! Activates the state machine */
-		extern «declareEnter»
 		
-		/*! Deactivates the state machine */
-		extern «declareExit»
+		«methods.filter[ isPublic ].declarations»
 		
-		/*! Performs a 'run to completion' step. */
-		extern «declareRunCycle»
 		
 		«IF timed»
 			/*! Raises a time event. */

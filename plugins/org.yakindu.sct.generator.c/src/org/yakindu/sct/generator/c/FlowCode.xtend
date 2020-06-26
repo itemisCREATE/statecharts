@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012-2018 committers of YAKINDU and others.
+ * Copyright (c) 2012-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,18 +11,30 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Package
+import org.yakindu.base.types.Parameter
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.submodules.TraceCode
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.sct.generator.core.submodules.lifecycle.NamedConceptSequenceCode
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
+import org.yakindu.sct.model.sexec.DoWhile
 import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.Execution
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.If
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
@@ -32,6 +44,8 @@ import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sexec.concepts.SuperStep
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
@@ -50,6 +64,10 @@ class FlowCode {
 	@Inject extension TraceCode 
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension StatechartAnnotations
+	@Inject protected extension NamedConceptSequenceCode
+	@Inject protected extension StateMachineBehaviorConcept
+	
+	@Inject protected extension SuperStep
 	
 	@Inject protected extension CLiterals
 	
@@ -127,12 +145,16 @@ class FlowCode {
 	def dispatch CharSequence code(Call it)
 		'''«step.shortName»(«scHandle»);'''
 
-	def dispatch CharSequence code(Sequence it) '''
-		«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
-		«FOR s : steps»
-			«s.code»
-		«ENDFOR»
-	'''	
+	def dispatch CharSequence code(Sequence it) {
+		if (it.isStateMachineConcept) 
+			it.flow.stateMachineConceptCode(it)	
+		else '''
+			«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
+			«FOR s : steps»
+				«s.code»
+			«ENDFOR»
+		'''
+	}
 
 	def dispatch CharSequence code(Check it)
 		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»«TRUE_LITERAL»«ENDIF»'''
@@ -152,12 +174,18 @@ class FlowCode {
 		«ENDIF»
 	'''
 	
+	def dispatch CharSequence code(DoWhile it) '''
+		«stepComment»
+		do
+		{ 
+			«body.code»
+		} while («check.code»);
+	'''
+	
 	def dispatch CharSequence code(EnterState it) '''
 		«scHandle»->«STATEVECTOR»[«state.stateVector.offset»] = «state.stateName»;
 		«scHandle»->«STATEVECTOR_POS» = «state.stateVector.offset»;
-		«IF flow.statechart.isSuperStep»
-		«scHandle»->«STATEVECTOR_CHANGED» = true;
-		«ENDIF»
+		«flow._stateChanged.code»
 	'''
 
 	def dispatch CharSequence code(ExitState it) '''
@@ -181,5 +209,28 @@ class FlowCode {
 	def unusedParam(String s) '''
 		SC_UNUSED(«s»);
 	'''
+	
+	def requiresHandles(Step it) {
+		it.eAllContents.filter[e | e.requiresHandle].size > 0
+	}
+	 
+	def dispatch requiresHandle(EObject e) { false }
+	def dispatch requiresHandle(Call e) { true }
+	def dispatch requiresHandle(CheckRef e) { true }
+	def dispatch requiresHandle(ElementReferenceExpression e) {(e.reference.isMethod) || (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
+	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
+
+	def isLocalVariable(EObject o) {
+		(o instanceof Property) && (o.eContainer instanceof LocalVariableDefinition)	
+	}
+	
+	def declaredInHeader(EObject o) {
+		return (o.eContainer instanceof Package || (o.eContainer instanceof ComplexType && !(o.eContainer instanceof ExecutionFlow)))
+	}
+	
+	def isMethod(EObject o){
+		return o instanceof Method
+	}
+	
 	
 }

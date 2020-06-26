@@ -198,6 +198,11 @@ public class StateCaseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createDoWhile()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createExecution()));
 
 		newChildDescriptors.add

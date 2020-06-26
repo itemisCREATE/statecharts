@@ -113,6 +113,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elseStep" eType="#//Step"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DoWhile" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Step" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Execution" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statement" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>

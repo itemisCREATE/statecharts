@@ -66,6 +66,7 @@ public class TraceStateExitedImpl extends TraceImpl implements TraceStateExited 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionState getState() {
 		if (state != null && state.eIsProxy()) {
 			InternalEObject oldState = (InternalEObject)state;
@@ -92,6 +93,7 @@ public class TraceStateExitedImpl extends TraceImpl implements TraceStateExited 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setState(ExecutionState newState) {
 		ExecutionState oldState = state;
 		state = newState;

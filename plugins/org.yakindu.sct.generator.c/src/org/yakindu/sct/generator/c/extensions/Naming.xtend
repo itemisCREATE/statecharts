@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2012-2020 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,17 +17,24 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypedDeclaration
+import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.concepts.EventBuffer
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
@@ -45,9 +52,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.base.types.Direction
-import org.yakindu.base.types.TypedDeclaration
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -68,6 +72,10 @@ class Naming {
 	
 	@Inject extension StatechartUtil
 	@Inject extension GeneratorPredicate
+	@Inject extension OriginTracing
+	@Inject extension EventBuffer
+	@Inject protected extension ShadowMemberScope
+	
 	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -120,11 +128,16 @@ class Naming {
 	}
 
 	def dispatch String type(InternalScope it) {
-		containerType + 'Internal'
+		if ( it.isShadowMemberScope ) containerType + 'Shadow'
+		else containerType + 'Internal'
 	}
 
 	def dispatch String type(Scope it) {
 		containerType + 'TimeEvents'
+	}
+
+	def dispatch String type(Property it) {
+		containerType + it.type.name
 	}
 
 	def dispatch String type(ExecutionFlow it) {
@@ -140,6 +153,27 @@ class Naming {
 		}
 		return entryStatemachinePrefix.toFirstUpper
 	}
+	
+	
+	def dispatch String cType(EObject it) {
+		type
+	}
+	
+	def dispatch String cType(ExecutionFlow it) {
+		type
+	}
+	
+	def dispatch String cType(Type it) {
+		if (! it.targetLanguageName.isNullOrEmpty) return targetLanguageName
+		if (! it.name.isNullOrEmpty) return it.name
+		
+		val typeSuffix = if (it.isEventBuffer) "EvBuf" else ""
+		val typeOrigin = it.originTraces.filter(EObject).head
+		
+		if (typeOrigin !== null) typeOrigin.cType + typeSuffix 
+		else typeSuffix
+	}
+	
 	
 	def String getContainerType(EObject it) {
 		if (flow !== null) {
@@ -161,7 +195,8 @@ class Naming {
 	}
 
 	def dispatch instance(InternalScope it) {
-		'internal'
+		if ( it.isShadowMemberScope ) 'shadow'
+		else 'internal'
 	}
 
 	def functionPrefix(Scope it, Declaration decl) {
@@ -240,7 +275,19 @@ class Naming {
 		return null;
 	}
 	
-	def dispatch scopeTypeDeclMember(EventDefinition it) {
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
+	def scopeShadowEventMember(Event it) {
+		'''
+		«SINGLE_SUBSCRIPTION_OBSERVER_TYPE» «eventName»;
+		'''
+	}
+
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
+	def dispatch scopeTypeDeclMember(Event it) {
 		'''
 		«IF useOutEventObservables && direction == Direction.OUT»
 			«OBSERVABLE_TYPE» «eventName»;
@@ -252,20 +299,23 @@ class Naming {
 		'''
 	}
 	
-	def scopeShadowEventMember(Event it) {
-		'''
-		«SINGLE_SUBSCRIPTION_OBSERVER_TYPE» «eventName»;
-		'''
-	}
-
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
 		«BOOL_TYPE» «timeEventRaisedFlag»;
 	'''
 
-	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
+	def dispatch scopeTypeDeclMember(Property it) '''
 		«IF type.name != 'void' && !isConst»«typeSpecifier.targetLanguageName» «variable»;«ENDIF»
 	'''
 	
+	/**
+	 * TODO: move method it is for declaration not naming
+	 */
 	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
 	def constantName(VariableDefinition it) {
@@ -336,7 +386,7 @@ class Naming {
 		functionPrefix + RUN_CYCLE
 	}
 	
-	def eventValueVariable(EventDefinition it) {
+	def eventValueVariable(Event it) {
 		name.asIdentifier.value
 	}
 	
@@ -348,7 +398,7 @@ class Naming {
 		shortName.raised
 	}
 	
-	def eventRaisedFlag(EventDefinition it) {
+	def eventRaisedFlag(Event it) {
 		 name.asIdentifier.raised
 	}
 	
@@ -404,7 +454,7 @@ class Naming {
 		scope.functionPrefix(it) + separator + funcName + separator + name.asIdentifier.toFirstLower
 	}
 	
-	def variable(VariableDefinition it) {
+	def variable(Property it) {
 		name.asEscapedIdentifier
 	}
 	
@@ -464,7 +514,9 @@ class Naming {
 
 	def dispatch access(OperationDefinition it) '''«asFunction»'''
 
-	def dispatch access(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier.raised»'''
+	def dispatch access(EventDefinition it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier.raised»'''
+
+	def dispatch access(Event it) '''«name.asIdentifier.raised»'''
 	
 	def dispatch accessObservable(Event it) '''«IF needsHandle»«scHandle»«ENDIF»->«scope.instance».«name.asIdentifier»'''
 	
@@ -579,8 +631,5 @@ class Naming {
 		TRACE_CALL
 	}
 	
-	def runCycleGuard() {
-		"is_running"
-	}
 	
 }

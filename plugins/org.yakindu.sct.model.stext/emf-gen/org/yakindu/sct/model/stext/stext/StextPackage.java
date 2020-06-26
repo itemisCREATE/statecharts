@@ -356,13 +356,31 @@ public interface StextPackage extends EPackage {
 	int STATECHART_SCOPE__MEMBERS = SGraphPackage.SCOPE__MEMBERS;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART_SCOPE__ANNOTATIONS = SGraphPackage.SCOPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART_SCOPE__ANNOTATION_INFO = SGraphPackage.SCOPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Statechart Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_SCOPE_FEATURE_COUNT = SGraphPackage.SCOPE_FEATURE_COUNT + 0;
+	int STATECHART_SCOPE_FEATURE_COUNT = SGraphPackage.SCOPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.InterfaceScopeImpl <em>Interface Scope</em>}' class.
@@ -418,6 +436,24 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTERFACE_SCOPE__MEMBERS = STATECHART_SCOPE__MEMBERS;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_SCOPE__ANNOTATIONS = STATECHART_SCOPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_SCOPE__ANNOTATION_INFO = STATECHART_SCOPE__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -493,6 +529,24 @@ public interface StextPackage extends EPackage {
 	int INTERNAL_SCOPE__MEMBERS = STATECHART_SCOPE__MEMBERS;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNAL_SCOPE__ANNOTATIONS = STATECHART_SCOPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNAL_SCOPE__ANNOTATION_INFO = STATECHART_SCOPE__ANNOTATION_INFO;
+
+	/**
 	 * The number of structural features of the '<em>Internal Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -555,6 +609,24 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPORT_SCOPE__MEMBERS = STATECHART_SCOPE__MEMBERS;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_SCOPE__ANNOTATIONS = STATECHART_SCOPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_SCOPE__ANNOTATION_INFO = STATECHART_SCOPE__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' attribute list.

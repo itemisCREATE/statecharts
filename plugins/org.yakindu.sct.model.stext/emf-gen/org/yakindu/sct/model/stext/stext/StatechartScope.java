@@ -2,6 +2,7 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.sct.model.sgraph.Scope;
 
 /**
@@ -14,5 +15,5 @@ import org.yakindu.sct.model.sgraph.Scope;
  * @model
  * @generated
  */
-public interface StatechartScope extends Scope {
+public interface StatechartScope extends Scope, AnnotatableElement {
 } // StatechartScope

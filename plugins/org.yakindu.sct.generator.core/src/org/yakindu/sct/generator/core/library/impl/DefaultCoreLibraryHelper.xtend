@@ -95,5 +95,34 @@ class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 		}
 		false
 	}
+
+
+	def private getEventProcessingFeature(GeneratorEntry it) {
+		getFeatureConfiguration(ICoreLibraryConstants::FEATURE_EVENT_PROCESSING)
+	}
+	
+	override applyInEventBuffer(GeneratorEntry it) {
+		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_IN_EVENT_BUFFER)
+		if(parameter !== null) {
+			return parameter.booleanValue
+		}
+		true
+	}
+	
+	override applyInEventQueue(GeneratorEntry it) {
+		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_IN_EVENT_QUEUE)
+		if(parameter !== null) {
+			return parameter.booleanValue
+		}
+		false
+	}
+	
+	override applyInternalEventBuffer(GeneratorEntry it) {
+		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_INTERNAL_EVENT_BUFFER)
+		if(parameter !== null) {
+			return parameter.booleanValue
+		}
+		true
+	}
 	
 }

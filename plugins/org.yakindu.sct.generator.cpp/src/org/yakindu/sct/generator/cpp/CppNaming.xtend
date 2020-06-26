@@ -136,7 +136,7 @@ class CppNaming extends Naming {
 		PARENT
 	}
 	
-	override dispatch scopeTypeDeclMember(EventDefinition it) '''
+	override dispatch scopeTypeDeclMember(Event it) '''
 		«IF needsObservable»
 			sc::rx::Observable<«typeSpecifier.targetLanguageName»> «observable»;
 		«ENDIF»
@@ -144,7 +144,7 @@ class CppNaming extends Naming {
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
 	'''
 	
-	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
+	override dispatch scopeTypeDeclMember(Property it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 
@@ -319,7 +319,7 @@ class CppNaming extends Naming {
 		}
 	}
 	
-	def dispatch access(EventDefinition it) {
+	override dispatch access(EventDefinition it) {
 		if (external)
 			'''«asRaised»()'''
 		else

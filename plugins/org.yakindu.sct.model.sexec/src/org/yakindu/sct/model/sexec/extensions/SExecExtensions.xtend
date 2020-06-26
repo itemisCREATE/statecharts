@@ -21,10 +21,10 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -45,7 +45,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.Call
+import org.yakindu.base.types.Event
+import java.util.LinkedList
 
 class SExecExtensions {
 	@Inject extension OriginTracing
@@ -477,6 +478,12 @@ class SExecExtensions {
 	}
 	
 	
+	def methods(ExecutionFlow it) {
+		features.filter(Method).filter( m | m !== reactMethod)
+	}
+	
+	
+		
 	def List<Step> reactFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
 		if (reactSequence.reachable) funcs.add(reactSequence) 
@@ -582,6 +589,7 @@ class SExecExtensions {
 		return scopeDepth
 	}
 	
+
 	/**
 	 * returns all functions of an ExecutionFlow.
 	 */
@@ -596,4 +604,33 @@ class SExecExtensions {
 		functions.addAll(reactFunctions)
 		return functions
 	}
+	
+	
+	def derivedComplexTypes(ExecutionFlow flow) {
+		
+		val types = new LinkedList<ComplexType> 
+		flow.collectDerivedComplexTypes(types)
+		return types
+	}
+	
+	
+	protected def LinkedList<ComplexType> collectDerivedComplexTypes(ComplexType it, LinkedList<ComplexType> types) {
+		it.referencedComplexTypes.reverseView.forEach[ t | 
+			if (!types.contains(t)) {
+				types.push(t)
+				t.collectDerivedComplexTypes(types)
+			}
+		]
+		
+		return types		
+	} 
+	
+	def referencedComplexTypes(ComplexType it) {
+		it	.features
+			.filter(Property)
+			.filter[typeSpecifier.type instanceof ComplexType]
+			.map[typeSpecifier.type as ComplexType]
+			.toList
+	}
+	
 }

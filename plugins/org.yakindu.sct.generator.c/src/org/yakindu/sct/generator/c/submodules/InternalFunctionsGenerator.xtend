@@ -15,32 +15,24 @@ import com.google.inject.Singleton
 import java.util.List
 import org.yakindu.sct.generator.c.ConstantInitializationResolver
 import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
-import org.yakindu.sct.generator.c.types.CLiterals
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sexec.Call
-import org.yakindu.sct.model.sexec.CheckRef
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.Parameter
-import org.yakindu.sct.model.sexec.LocalVariableDefinition
-import org.yakindu.base.types.ComplexType
-import org.yakindu.sct.generator.c.GeneratorPredicate
-import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
-import org.yakindu.sct.generator.c.extensions.EventNaming
 
 /**
  * @author rbeckmann
@@ -61,18 +53,21 @@ class InternalFunctionsGenerator {
 	@Inject protected extension GeneratorPredicate
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension EventNaming
+	
+	@Inject protected extension	TraceCode 
+	@Inject protected extension	EventCode 
+	
 
 	def observerCallbacksImplementations(ExecutionFlow it) '''
 		«FOR e : shadowEvents»
 			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»*«ENDIF» value)
 			{
-				«IF e.typeSpecifier === null»
-				«addToQueueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName»);
-				«unusedParam("value")»
-				«ELSE»
-				«addToQueueValueFctID»(&«scHandle»->«inEventQueue», «e.eventEnumMemberName», value);
+				«e.traceCode( if (e.hasValue) "&value" else "sc_null" )»
+				«interfaceIncomingEventRaiserBody(e as EventDefinition, true)»
+				
+				«IF ! e.hasValue»
+					«unusedParam("value")»
 				«ENDIF»
-				«runCycleFctID»(«scHandle»);
 			}
 			
 		«ENDFOR»
@@ -84,53 +79,9 @@ class InternalFunctionsGenerator {
 		«ENDFOR»
 	'''
 
-	def clearInEventsFunction(ExecutionFlow it) '''
-		static void «clearInEventsFctID»(«scHandleDecl»)
-		{
-			«var clearedEvents = 0»
-			«FOR scope : it.scopes»
-				«FOR event : scope.incomingEvents»
-					«NOOUT(clearedEvents+=1)»
-					«event.access» = «FALSE_LITERAL»;
-				«ENDFOR»
-			«ENDFOR»
-			«IF hasInternalScope»
-				«FOR event : internalScope.events»
-					«NOOUT(clearedEvents+=1)»
-					«event.access» = «FALSE_LITERAL»;
-				«ENDFOR»
-			«ENDIF»
-			«IF timed»
-				«FOR event : timeEventScope.events»
-					«NOOUT(clearedEvents+=1)»
-					«event.access» = «FALSE_LITERAL»;
-				«ENDFOR»
-			«ENDIF»
-			«IF clearedEvents == 0»
-				«unusedParam(scHandle)»
-			«ENDIF»
-		}
-	'''
 	
 	def <T> NOOUT(T p) ''''''
 	
-	def clearOutEventsFunction(ExecutionFlow it) {
-		var clearedEvents = 0
-		'''
-			static void «clearOutEventsFctID»(«scHandleDecl»)
-			{
-				«FOR scope : it.scopes»
-					«FOR event : scope.outgoingEvents»
-						«NOOUT(clearedEvents+=1)»
-						«event.access» = «FALSE_LITERAL»;
-					«ENDFOR»
-				«ENDFOR»
-				«IF clearedEvents == 0»
-					«unusedParam(scHandle)»
-				«ENDIF»
-			}
-		'''	
-	}
 	
 	def defines(ExecutionFlow it) '''
 		#ifndef SC_UNUSED
@@ -149,23 +100,9 @@ class InternalFunctionsGenerator {
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
-		«reactMethods.toDeclarations»
-		static void «clearInEventsFctID»(«scHandleDecl»);
-		«IF needsClearOutEventsFunction»static void «clearOutEventsFctID»(«scHandleDecl»);«ENDIF»
-		«observerCallbacksPrototypes»
 	'''
 	
 	
-	def toDeclarations(List<Method> steps) '''
-		«FOR s : steps»
-			«s.toPrototype»
-		«ENDFOR»
-	'''
-	
-	
-	def toPrototype(Method it) '''
-		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
-	'''
 	
 	
 	def toPrototypes(List<Step> steps) '''
@@ -192,50 +129,8 @@ class InternalFunctionsGenerator {
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
-		«reactMethods.toDefinitions»
-		«observerCallbacksImplementations»
 	'''
-
-
-	 def toDefinitions(List<Method> methods) '''
-	 	«FOR m : methods»
-	 		«m.implementation»
-	 		
-	 	«ENDFOR»
-	 '''
-
-	 def implementation(Method it) '''
-		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-			«IF !body.steps.nullOrEmpty»«body.stepComment»«ENDIF»
-			«body.steps.filter(LocalVariableDefinition).map[s | s.code].join»
-			«IF !body.requiresHandles»
-				«unusedParam(scHandle)»
-			«ENDIF»
-			«body.steps.filter[s | !(s instanceof LocalVariableDefinition)].map[s | s.code].join»
-		}
-	 '''
-	 
-	def requiresHandles(Step it) {
-		it.eAllContents.filter[e | e.requiresHandle].size > 0
-	}
-	 
-	def dispatch requiresHandle(EObject e) { false }
-	def dispatch requiresHandle(Call e) { true }
-	def dispatch requiresHandle(CheckRef e) { true }
-	def dispatch requiresHandle(ElementReferenceExpression e) { (e.reference.isMethod) || (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader)}
-	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
 	
-	def isLocalVariable(EObject o) {
-		(o instanceof org.yakindu.base.types.Property) && (o.eContainer instanceof LocalVariableDefinition)	
-	}
-	
-	def declaredInHeader(EObject o) {
-		return (o.eContainer instanceof org.yakindu.base.types.Package || o.eContainer instanceof ComplexType) 
-	}
-	
-	def isMethod(EObject o){
-		return o instanceof Method
-	}
 	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»

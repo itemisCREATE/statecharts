@@ -81,6 +81,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//If/thenStep"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//If/elseStep"/>
     </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//DoWhile">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//DoWhile/check"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//DoWhile/body"/>
+    </genClasses>
     <genClasses ecoreClass="sexec.ecore#//Execution">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//Execution/statement"/>
     </genClasses>

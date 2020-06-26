@@ -66,6 +66,7 @@ public class TraceNodeExecutedImpl extends TraceImpl implements TraceNodeExecute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionNode getNode() {
 		if (node != null && node.eIsProxy()) {
 			InternalEObject oldNode = (InternalEObject)node;
@@ -92,6 +93,7 @@ public class TraceNodeExecutedImpl extends TraceImpl implements TraceNodeExecute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNode(ExecutionNode newNode) {
 		ExecutionNode oldNode = node;
 		node = newNode;

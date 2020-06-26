@@ -1160,6 +1160,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		statechartSpecificationEClass.getESuperTypes().add(theSGraphPackage.getScopedElement());
 		statechartSpecificationEClass.getESuperTypes().add(theTypesPackage.getAnnotatableElement());
 		statechartScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
+		statechartScopeEClass.getESuperTypes().add(theTypesPackage.getAnnotatableElement());
 		interfaceScopeEClass.getESuperTypes().add(this.getStatechartScope());
 		interfaceScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		internalScopeEClass.getESuperTypes().add(this.getStatechartScope());
