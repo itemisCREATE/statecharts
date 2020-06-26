@@ -168,7 +168,7 @@ class Naming {
 		if (! it.name.isNullOrEmpty) return it.name
 		
 		val typeSuffix = if (it.isEventBuffer) "EvBuf" else ""
-		val typeOrigin = it.originTraces.filter(EObject).findFirst[true]
+		val typeOrigin = it.originTraces.filter(EObject).head
 		
 		if (typeOrigin !== null) typeOrigin.cType + typeSuffix 
 		else typeSuffix

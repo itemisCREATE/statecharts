@@ -990,30 +990,6 @@ bc. feature GeneralFeatures {
 
 ==<!-- End sgen_feature_generalfeatures -->==
 
-==<!-- Start sgen_feature_eventprocessing -->==
-
-h4(#codegen_generating_code_eventprocessing_feature). EventProcessing feature
-
-The *EventProcessing* feature enables different generator features, which are used for determining the event processing strategy:
-
-* _inEventBuffer_ (Boolean, optional): the state machine applies event buffering for incoming events in cycle based execution mode. Events can safely be raised during a run to completion step. Buffering requires double memory for event storage. Default true.
-* _internalEventBuffer_ (Boolean, optional): the state machine applies event buffering for internal events in cycle based execution mode. If enabled internal events are processed in a separate step. If disabled internal events are just visible in lower priority regions. Buffering requires double memory for event storage. Default true.
-* _inEventQueue_ (Boolean, optional): use an event queue for incoming events in event driven execution mode. Events can safely be raised during a run to completion step. Buffering requires double memory for event storage. Default true.
-
-==<div class="example">==
-
-Example:
-
-bc. feature EventProcessing {
-    inEventBuffer = false
-    internalEventBuffer = true
-    inEventQueue = false
-}
-
-==</div>==
-
-==<!-- End sgen_feature_eventprocessing -->==
-
 
 ==<!-- Start sgen_feature_tracing -->==
 

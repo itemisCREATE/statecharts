@@ -33,7 +33,7 @@ class ExecutionGuard {
 
 
 	def defineFeatures (ExecutionFlow it) {
-		it.features += _variable(org.yakindu.sct.model.sexec.concepts.ExecutionGuard.IS_EXECUTING, _boolean)
+		it.features += _variable(IS_EXECUTING, _boolean)
 	}
 	
 
@@ -56,7 +56,7 @@ class ExecutionGuard {
 	}	
 
 	def Property isExecutingProperty(ExecutionFlow it) {
-		features.filter( typeof(Property) ).filter( m | m.name == org.yakindu.sct.model.sexec.concepts.ExecutionGuard.IS_EXECUTING).head
+		features.filter( typeof(Property) ).filter( m | m.name == IS_EXECUTING).head
 	}
 	
 	

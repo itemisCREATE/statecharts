@@ -299,13 +299,7 @@ class EventProcessing {
 					}
 				]
 			
-			if ( ref !== null ) {
-				if (ref.isMany) {
-					val list = parent.eGet(ref) as List<EObject>
-					list.set(list.indexOf(oldValue), newValue)
-				}
-				else parent.eSet(ref, newValue)				
-			}			
+			EcoreUtil.replace(parent, ref, oldValue, newValue);
 		}	
 	}
 		
