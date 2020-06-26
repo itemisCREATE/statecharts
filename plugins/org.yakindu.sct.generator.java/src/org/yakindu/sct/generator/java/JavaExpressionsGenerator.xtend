@@ -38,6 +38,8 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.concepts.BufferEvent
+import org.yakindu.sct.model.sexec.concepts.EventBuffer
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -45,6 +47,8 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.expressions.expressions.MetaCall
+import org.yakindu.base.expressions.util.ExpressionExtensions
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
@@ -55,6 +59,9 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension OriginTracing
 	@Inject protected extension StatechartUtil
+	@Inject protected extension BufferEvent
+	@Inject protected extension EventBuffer
+	@Inject protected extension ExpressionExtensions
 	
 	var List<TimeEvent> timeEvents;
 
@@ -149,6 +156,16 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			Declaration: return codeDeclaration(ref, it).toString
 		}
 	}
+		
+	def dispatch String code(MetaCall it) {
+		feature.metaCode(owner)
+	}
+	
+	def dispatch String metaCode(EObject it, Expression exp)
+		'''/* cant generate meta code for «it» of «exp» */'''
+	
+	def dispatch String metaCode(Property it, ArgumentExpression exp)
+		'''«codeDeclaration(it, exp)»«identifier.toString.toFirstUpper»'''
 
 	def dispatch String code(FeatureCall it) {
 		(it.feature as Declaration).codeDeclaration(it).toString
@@ -158,7 +175,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		switch it {
 			Operation:
 				return operationCall(it, exp)
-			Event case exp.isComplexTypeContained:
+			Event case exp.isComplexTypeContained && !isBufferEvent:
 				return exp.getContext + "isRaised" + name.toFirstUpper + "()"
 			Enumerator case it.eContainer.isOriginStateEnum:
 				return stateEnumAccess
@@ -195,6 +212,9 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(Property it) {
+		if (type.isEventBuffer) {
+			return name
+		}
 		if (eContainer instanceof ComplexType) {
 			if (isInterfaceProperty) {
 				return '''get«interfacePropertyScope.interfaceName»()'''
@@ -202,7 +222,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			return getter
 		}
 		if (eContainer instanceof LocalVariableDefinition) {
-			return it.name
+			return name
 		}
 		getContext + getter
 	}

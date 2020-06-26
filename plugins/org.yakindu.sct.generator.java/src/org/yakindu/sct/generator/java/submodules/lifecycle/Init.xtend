@@ -17,6 +17,8 @@ import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
+import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 
@@ -28,6 +30,8 @@ class Init implements org.yakindu.sct.generator.core.submodules.lifecycle.Init {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Synchronized
+	@Inject protected extension EventProcessing
+	@Inject protected extension ExecutionGuard
 	
 	override init(ExecutionFlow flow) '''
 		public «sync»void init() {
@@ -58,9 +62,14 @@ class Init implements org.yakindu.sct.generator.core.submodules.lifecycle.Init {
 				historyVector[i] = State.«nullStateName»;
 			}
 			«ENDIF»
-			clearEvents();
-			clearOutEvents();
+			
+			«flow._clearInEvents.code»
+			«flow._clearInternalEvents.code»
+			«flow._clearOutEvents.code»
+			
 			«flow.initSequence.code»
+			
+			«flow._initIsExecuting.code»
 		}
 
 	'''

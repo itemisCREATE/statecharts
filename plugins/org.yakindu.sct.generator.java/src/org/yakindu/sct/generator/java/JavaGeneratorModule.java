@@ -15,23 +15,22 @@ import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRA
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
+import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.eventdriven.JavaEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.java.features.IJavaFeatureConstants;
 import org.yakindu.sct.generator.java.submodules.EventCode;
 import org.yakindu.sct.generator.java.submodules.FieldDeclarationGenerator;
+import org.yakindu.sct.generator.java.submodules.RunCycleMethodCode;
 import org.yakindu.sct.generator.java.submodules.TimingFunctions;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenFieldDeclarationGenerator;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenTimingFunctions;
-import org.yakindu.sct.generator.java.submodules.eventdriven.lifecycle.EventDrivenRunCycle;
-import org.yakindu.sct.generator.java.submodules.lifecycle.RunCycle;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.config.DefaultFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -63,9 +62,10 @@ public class JavaGeneratorModule implements IGeneratorModule {
 	}
 
 	public void configureGeneratorRoot(GeneratorEntry entry, Binder binder) {
-	
-		// TODO: replace binding with new to define JavaFlowConfiguration
-		binder.bind(IFlowConfiguration.class).to(DefaultFlowConfiguration.AllFeaturesDisabled.class);
+		binder.bind(IFlowConfiguration.class).to(JavaFlowConfiguration.class);
+		binder.bind(MicroStepCode.class).to(RunCycleMethodCode.class);
+		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.EventCode.class).to(org.yakindu.sct.generator.java.submodules.EventCode.class);
+		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode.class).to(org.yakindu.sct.generator.java.submodules.TraceCode.class);
 		
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
@@ -79,7 +79,6 @@ public class JavaGeneratorModule implements IGeneratorModule {
 			binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
 			binder.bind(FieldDeclarationGenerator.class).to(EventDrivenFieldDeclarationGenerator.class);
-			binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
 		}
 	}
 

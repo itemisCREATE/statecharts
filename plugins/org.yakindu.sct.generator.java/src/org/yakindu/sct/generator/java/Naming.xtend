@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
@@ -20,16 +21,23 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.base.types.Enumerator
-import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.Type
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.base.types.adapter.OriginTracing
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 class Naming {
 
 	@Inject extension JavaNamingService namingService;
 	@Inject StextNameProvider provider;
+	@Inject extension SExecExtensions
+	@Inject extension OriginTracing
+	@Inject extension ShadowMemberScope
 	
 	def iStatemachine() {
 		"IStatemachine"
@@ -241,8 +249,25 @@ class Naming {
 
 	def functionName(Step it) { shortName }
 	
-	def runCycleGuard() {
-		"isRunning"
+	def eventBufferTypeName(Type it) {
+		val typeOrigin = it.originTraces.filter(EObject).head
+		typeOrigin.className + "EvBuf"
+	}
+	
+	protected def dispatch String className(EObject it) {
+		flow.statemachineClassName + "TimeEvents"
 	}
 
+	protected def dispatch String className(InterfaceScope it) {
+		interfaceName
+	}
+
+	protected def dispatch String className(InternalScope it) {
+		flow.statemachineClassName + if (isShadowMemberScope) "Shadow" else "Internal"
+	}
+
+	protected def dispatch String className(ExecutionFlow it) {
+		statemachineClassName
+	}
+	
 }

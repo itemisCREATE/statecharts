@@ -225,7 +225,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence metaCode(FeatureCall it, Event owner, Property feature)
 		'''«it.owner.code».«owner.name.asEscapedIdentifier»_«feature.name.asEscapedIdentifier»'''
 
-	def dispatch CharSequence metaCode(ElementReferenceExpression it, EventDefinition owner, Property feature)
+	def dispatch CharSequence metaCode(ElementReferenceExpression it, Event owner, Property feature)
 		'''«scHandle»->«owner.scope.instance».«owner.name.asEscapedIdentifier»_«feature.name.asEscapedIdentifier»'''
 	
 	/* Literals */

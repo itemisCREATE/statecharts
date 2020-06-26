@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.java.submodules
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GeneratorPredicate
@@ -20,6 +21,7 @@ import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.OutEventObservables
 import org.yakindu.sct.generator.java.features.Synchronized
+import org.yakindu.sct.model.sexec.concepts.EventBuffer
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
@@ -27,13 +29,13 @@ import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 /**
  * @author BeckmaR
  * @author Thomas Kutz - added out event observers
  */
 class VariableCode {
+	
 	@Inject protected extension Naming
 	@Inject protected extension JavaNamingService
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -46,12 +48,9 @@ class VariableCode {
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension StatechartExtensions
 	@Inject protected extension OutEventObservables
+	@Inject protected extension EventBuffer
 	
-	def fieldDeclaration(VariableDefinition variable) '''
-		private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
-		'''
-	
-	protected def generateVariableDefinition(VariableDefinition it) '''
+	def code(Property it) '''
 		«IF !const»
 			«fieldDeclaration»
 			
@@ -60,24 +59,42 @@ class VariableCode {
 			«submachineOutEventObservers»
 			
 		«ENDIF»
-		«getterVisibility» «typeSpecifier.targetLanguageName» «getter» {
-			«sync(flow.statemachineClassName + ".this", '''return «identifier»;''')»
-		}
+		«IF needsGetter»
+		«getterCode»
+		«ENDIF»
 		«IF needsSetter»
 		
-		«setterVisibility» void «setter»(«typeSpecifier.targetLanguageName» value) {
-			«sync(flow.statemachineClassName + ".this", setterContent)»
-		}
+		«setterCode»
 		«ENDIF»
 		«IF needsAssignMethod»
 		
+		«assignCode»
+		«ENDIF»
+	'''
+	
+	def fieldDeclaration(Property it) '''
+		private «typeSpecifier.targetLanguageName» «identifier»«IF needsInitialization» = new «typeSpecifier.targetLanguageName»()«ENDIF»;
+	'''
+	
+	def getterCode(Property it) '''
+		«getterVisibility» «typeSpecifier.targetLanguageName» «getter» {
+			«sync(flow.statemachineClassName + ".this", '''return «identifier»;''')»
+		}
+	'''
+	
+	def setterCode(Property it) '''
+		«setterVisibility» void «setter»(«typeSpecifier.targetLanguageName» value) {
+			«sync(flow.statemachineClassName + ".this", setterContent)»
+		}
+	'''
+	
+	def assignCode(Property it) '''
 		protected «sync»«typeSpecifier.targetLanguageName» «assign»(«typeSpecifier.targetLanguageName» value) {
 			«sync(flow.statemachineClassName + ".this", '''return this.«identifier» = value;''')»
 		}
-		«ENDIF»
 	'''
 
-	protected def setterContent(VariableDefinition it) {
+	protected def setterContent(Property it) {
 		'''
 			«IF needsShadowEventMapping»
 				if (this.«identifier» != null) {
@@ -103,7 +120,7 @@ class VariableCode {
 		'''
 	}
 	
-	protected def submachineOutEventObservers(VariableDefinition member) {
+	protected def submachineOutEventObservers(Property member) {
 		member.shadowEvents.map[submachineOutEventObserver].join
 	}
 	
@@ -117,7 +134,7 @@ class VariableCode {
 		
 	'''
 
-	protected def needsPublicGetter(VariableDefinition it) {
+	protected def needsPublicGetter(Property it) {
 		switch(eContainer) {
 			InternalScope: false
 			InterfaceScope: true
@@ -125,11 +142,11 @@ class VariableCode {
 		}
 	}
 	
-	protected def getterVisibility(VariableDefinition it) {
+	protected def getterVisibility(Property it) {
 		if(needsPublicGetter) '''public «sync»'''.toString.trim else "protected"
 	}
 	
-	protected def needsPublicSetter(VariableDefinition it) {
+	protected def needsPublicSetter(Property it) {
 		switch(eContainer) {
 			InternalScope: false
 			InterfaceScope case !readonly: true
@@ -138,11 +155,19 @@ class VariableCode {
 		}
 	}
 	
-	protected def needsSetter(VariableDefinition it) {
-		!const
+	protected def needsSetter(Property it) {
+		!const && !type.isEventBuffer
 	}
 	
-	protected def setterVisibility(VariableDefinition it) {
+	protected def needsGetter(Property it) {
+		!type.isEventBuffer
+	}
+	
+	protected def needsInitialization(Property it) {
+		type.isEventBuffer
+	}
+	
+	protected def setterVisibility(Property it) {
 		if(needsPublicSetter) '''public''' else "protected"
 	}
 }

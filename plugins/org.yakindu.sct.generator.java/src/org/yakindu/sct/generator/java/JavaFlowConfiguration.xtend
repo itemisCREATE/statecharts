@@ -6,29 +6,29 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
+ * 
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.yakindu.sct.generator.core.extensions.CoreFlowConfiguration
 import org.yakindu.sct.model.sgraph.Statechart
-import com.google.inject.Singleton
 
 /**
  * Derives a flow configuration required by the model sequencer from the 
- * C code generator model.
+ * Java code generator model.
  * 
- * @author axel terfloth
+ * @author Thomas Kutz
  */
 @Singleton
-class CFlowConfiguration extends CoreFlowConfiguration {
+class JavaFlowConfiguration extends CoreFlowConfiguration {
 	
-	@Inject protected GeneratorPredicate gp
-
+	@Inject extension GeneratorPredicate
+	
 	override defineConfigurationForStatechart(Statechart sc) {
 		super.defineConfigurationForStatechart(sc)
 		
-		_applyIncomingEventQueue = gp.useInEventQueue		
+		_applyIncomingEventQueue = useInEventQueue
 	}
-	
 }

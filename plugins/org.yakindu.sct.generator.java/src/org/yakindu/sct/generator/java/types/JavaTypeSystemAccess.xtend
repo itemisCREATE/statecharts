@@ -21,6 +21,7 @@ import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
+import org.yakindu.sct.model.sexec.concepts.EventBuffer
 
 /**
  * @author andreas muelder
@@ -35,6 +36,9 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	
 	@Inject
 	protected extension StatechartUtil
+	
+	@Inject
+	protected extension EventBuffer
 
 	override String getTargetLanguageName(Type type) {
 		val originalType = type?.originType
@@ -47,6 +51,8 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 			// multi SM
 			EnumerationType case originalType.isOriginStatechart: originalType.getOriginStatechart.statemachineClassName + ".State"
 			ComplexType case originalType.isOriginStatechart: originalType.getOriginStatechart.statemachineClassName
+			
+			case originalType.isEventBuffer: originalType.eventBufferTypeName
 			
 			default: "//" + this
 		};

@@ -49,7 +49,6 @@ class EventDrivenTimingFunctions extends TimingFunctions {
 					@Override
 					public void run() {
 						timeEvents[eventID] = true;
-						singleCycle();
 					}
 				});
 				«ELSE»

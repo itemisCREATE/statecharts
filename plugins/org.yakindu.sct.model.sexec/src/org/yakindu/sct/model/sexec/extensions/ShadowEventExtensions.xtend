@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sexec.extensions
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.base.NamedElement
@@ -18,17 +19,16 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Property
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.StextFactory
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import com.google.inject.Singleton
-import org.yakindu.base.types.TypeBuilder
-import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 
 @Singleton
 class ShadowEventExtensions {
@@ -43,11 +43,11 @@ class ShadowEventExtensions {
 	
 	
 
-	def getShadowEvents(VariableDefinition member) {
+	def getShadowEvents(Property member) {
 		member.flow.shadowEvents.filter[originTraces.contains(member)]
 	}
 
-	def getShadowEvent(VariableDefinition member, Event outEvent) {
+	def getShadowEvent(Property member, Event outEvent) {
 		member.shadowEvents.findFirst[originTraces.contains(outEvent)]
 	}
 
@@ -61,7 +61,7 @@ class ShadowEventExtensions {
 		members.filter[scope.flow.shadowEvents.toList.contains(it)].filter(Event)
 	}
 	
-	def getShadowEventsByScope(VariableDefinition member) {
+	def getShadowEventsByScope(Property member) {
 		member.shadowEvents.groupBy[originTraces.filter(Event).head.eContainer as InterfaceScope]
 	}
 
@@ -69,7 +69,7 @@ class ShadowEventExtensions {
 		fc.toCallStack.map[featureOrReference].filter(NamedElement).map[name].join("_")
 	}
 	
-	def needsShadowEventMapping(VariableDefinition member) {
+	def needsShadowEventMapping(Property member) {
 		member.type.isOriginStatechart && !member.shadowEvents.nullOrEmpty
 	}
 	

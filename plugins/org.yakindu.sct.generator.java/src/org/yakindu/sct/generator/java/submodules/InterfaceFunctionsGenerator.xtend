@@ -56,13 +56,13 @@ class InterfaceFunctionsGenerator {
 			
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-			«generateVariableDefinition(variable)»
+			«variable.code»
 			
 			«ENDFOR»
 			«IF scope.hasEvents»
 			«scope.generateClearEvents»
 			«ENDIF»
-			«IF scope.hasOutgoingEvents()»
+			«IF scope.hasOutgoingEvents»
 			«generateClearOutEvents(scope)»
 			«ENDIF»
 		}
