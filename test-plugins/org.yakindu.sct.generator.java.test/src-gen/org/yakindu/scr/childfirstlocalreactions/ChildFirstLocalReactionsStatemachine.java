@@ -110,6 +110,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean doSelfTransition;
+	}
+	private static class ChildFirstLocalReactionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -128,6 +135,17 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	
 	private int nextStateIndex;
 	
+	private ChildFirstLocalReactionsStatemachineEvBuf _current = new ChildFirstLocalReactionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ChildFirstLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -137,8 +155,9 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setCnt(0);
 		
 		sCInterface.setDisable_a(false);
@@ -154,22 +173,37 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		sCInterface.setAaa_local(0);
 		
 		sCInterface.setSm_local(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_r_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_r();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstLocalReactions_r_A_r_AA_r_AAA:
@@ -188,10 +222,9 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -209,17 +242,18 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.doSelfTransition = sCInterface.doSelfTransition;
+		sCInterface.doSelfTransition = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
+		
+		sCInterface.doSelfTransition = false;
 	}
 	
 	/**
@@ -492,12 +526,12 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
+			if (((_current.iface.e) && (!sCInterface.getDisable_a()))) {
 				exitSequence_r_A();
 				enterSequence_r_B_default();
 				react();
 			} else {
-				if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_a()))) {
+				if (((_current.iface.doSelfTransition) && (!sCInterface.getDisable_a()))) {
 					exitSequence_r_A();
 					enterSequence_r_A_default();
 					react();
@@ -518,7 +552,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
+			if (((_current.iface.e) && (!sCInterface.getDisable_aa()))) {
 				exitSequence_r_A_r_AA();
 				enterSequence_r_A_r_AB_default();
 				r_A_react(false);
@@ -538,12 +572,12 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
+			if (((_current.iface.e) && (!sCInterface.getDisable_aaa()))) {
 				exitSequence_r_A_r_AA_r_AAA();
 				enterSequence_r_A_r_AA_r_AAB_default();
 				r_A_r_AA_react(false);
 			} else {
-				if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_aaa()))) {
+				if (((_current.iface.doSelfTransition) && (!sCInterface.getDisable_aaa()))) {
 					exitSequence_r_A_r_AA_r_AAA();
 					enterSequence_r_A_r_AA_r_AAA_default();
 					r_A_r_AA_react(false);

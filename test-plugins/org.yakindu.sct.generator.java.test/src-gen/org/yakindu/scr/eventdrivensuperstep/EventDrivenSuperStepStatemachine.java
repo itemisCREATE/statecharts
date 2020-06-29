@@ -58,13 +58,29 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	
 	private final State[] stateVector = new State[1];
 	
-	private boolean stateVectorChanged = false;
-	
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private boolean l1;
 	private boolean l2;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
+	private boolean stateConfVectorChanged;
+	
+	protected boolean getStateConfVectorChanged() {
+		return stateConfVectorChanged;
+	}
+	
+	protected void setStateConfVectorChanged(boolean value) {
+		this.stateConfVectorChanged = value;
+	}
 	public EventDrivenSuperStepStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -74,94 +90,84 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
+		
 		sCInterface.setX(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
-	}
-	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
-		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-	}
-	
-	protected void singleCycle() {
-		do {
-			stateVectorChanged = false;
-			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-				switch (stateVector[nextStateIndex]) {
-				case eventDrivenSuperStep_main_region_A:
-					main_region_A_react(true);
-					break;
-				case eventDrivenSuperStep_main_region_B:
-					main_region_B_react(true);
-					break;
-				case eventDrivenSuperStep_main_region_C:
-					main_region_C_react(true);
-					break;
-				case eventDrivenSuperStep_main_region_D:
-					main_region_D_react(true);
-					break;
-				case eventDrivenSuperStep_main_region_G:
-					main_region_G_react(true);
-					break;
-				case eventDrivenSuperStep_main_region_H:
-					main_region_H_react(true);
-					break;
-				case eventDrivenSuperStep_main_region_I:
-					main_region_I_react(true);
-					break;
-				case eventDrivenSuperStep_main_region_L:
-					main_region_L_react(true);
-					break;
-				default:
-					// $NullState$
-				}
-			}
-		} while(stateVectorChanged);
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!internalEventQueue.isEmpty()) {
-			return internalEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
+		isExecuting = false;
 	}
 	
 	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
 		exitSequence_main_region();
+		isExecuting = false;
+	}
+	
+	public void runCycle() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		nextEvent();
+		do { 
+			do { 
+				stateConfVectorChanged = false;
+				for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+					switch (stateVector[nextStateIndex]) {
+					case eventDrivenSuperStep_main_region_A:
+						main_region_A_react(true);
+						break;
+					case eventDrivenSuperStep_main_region_B:
+						main_region_B_react(true);
+						break;
+					case eventDrivenSuperStep_main_region_C:
+						main_region_C_react(true);
+						break;
+					case eventDrivenSuperStep_main_region_D:
+						main_region_D_react(true);
+						break;
+					case eventDrivenSuperStep_main_region_G:
+						main_region_G_react(true);
+						break;
+					case eventDrivenSuperStep_main_region_H:
+						main_region_H_react(true);
+						break;
+					case eventDrivenSuperStep_main_region_I:
+						main_region_I_react(true);
+						break;
+					case eventDrivenSuperStep_main_region_L:
+						main_region_L_react(true);
+						break;
+					default:
+						// $NullState$
+					}
+				}
+			} while (getStateConfVectorChanged());
+			
+			clearInEvents();
+			clearInternalEvents();
+			nextEvent();
+		} while ((((sCInterface.e || sCInterface.f) || l1) || l2));
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -179,21 +185,24 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearInEvents() {
+		sCInterface.e = false;
+		
+		sCInterface.f = false;
+	}
+	
+	private void clearInternalEvents() {
 		l1 = false;
+		
 		l2 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	protected void nextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			internalEventQueue.poll().run();
+			return;
+		}
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -227,20 +236,18 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	
 	private void raiseL1() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				l1 = true;					
-				singleCycle();
 			}
 		});
 	}
 	
 	private void raiseL2() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				l2 = true;					
-				singleCycle();
 			}
 		});
 	}
@@ -265,56 +272,56 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_A;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_B;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_C;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_main_region_D_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_D;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state G */
 	private void enterSequence_main_region_G_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_G;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state H */
 	private void enterSequence_main_region_H_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_H;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state I */
 	private void enterSequence_main_region_I_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_I;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state L */
 	private void enterSequence_main_region_L_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.eventDrivenSuperStep_main_region_L;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for region main region */

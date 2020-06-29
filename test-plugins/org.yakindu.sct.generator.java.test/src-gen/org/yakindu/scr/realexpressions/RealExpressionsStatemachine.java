@@ -282,6 +282,12 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e1;
+	}
+	private static class RealExpressionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -296,6 +302,17 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	
 	private int nextStateIndex;
 	
+	private RealExpressionsStatemachineEvBuf _current = new RealExpressionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public RealExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -305,8 +322,9 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setMyReal1(0.0);
 		
 		sCInterface.setMyReal2(0.0);
@@ -358,22 +376,37 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		sCInterface.setDecrement(0);
 		
 		sCInterface.setDecrementAssign(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -386,10 +419,9 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -407,17 +439,13 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e1 = sCInterface.e1;
+		sCInterface.e1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e1 = false;
 	}
 	
 	/**
@@ -762,7 +790,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e1) {
+				if (_current.iface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {

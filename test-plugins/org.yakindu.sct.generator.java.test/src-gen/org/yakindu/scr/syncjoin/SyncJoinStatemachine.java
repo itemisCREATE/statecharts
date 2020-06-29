@@ -52,6 +52,15 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean f;
+		private boolean jc;
+		private boolean jd;
+	}
+	private static class SyncJoinStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -70,6 +79,17 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	
 	private int nextStateIndex;
 	
+	private SyncJoinStatemachineEvBuf _current = new SyncJoinStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public SyncJoinStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -79,25 +99,41 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setX(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -119,10 +155,9 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -140,17 +175,28 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.f = sCInterface.f;
+		sCInterface.f = false;
+		
+		_current.iface.jc = sCInterface.jc;
+		sCInterface.jc = false;
+		
+		_current.iface.jd = sCInterface.jd;
+		sCInterface.jd = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
+		
+		sCInterface.f = false;
+		
+		sCInterface.jc = false;
+		
+		sCInterface.jd = false;
 	}
 	
 	/**
@@ -383,7 +429,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((sCInterface.e || sCInterface.f)) {
+				if ((_current.iface.e || _current.iface.f)) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
@@ -410,7 +456,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_B_r1_C1();
 					enterSequence_main_region_B_r1_C2_default();
 				} else {
@@ -426,7 +472,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (((sCInterface.jc && isStateActive(State.main_region_B_r2_D2)) && sCInterface.jd)) {
+				if (((_current.iface.jc && isStateActive(State.main_region_B_r2_D2)) && _current.iface.jd)) {
 					exitSequence_main_region_B();
 					react_main_region__sync0();
 				} else {
@@ -441,7 +487,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.f) {
+			if (_current.iface.f) {
 				exitSequence_main_region_B_r2_D1();
 				enterSequence_main_region_B_r2_D2_default();
 			} else {
@@ -455,7 +501,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.jd && isStateActive(State.main_region_B_r1_C2)) && sCInterface.jc)) {
+			if (((_current.iface.jd && isStateActive(State.main_region_B_r1_C2)) && _current.iface.jc)) {
 				exitSequence_main_region_B();
 				react_main_region__sync0();
 			} else {

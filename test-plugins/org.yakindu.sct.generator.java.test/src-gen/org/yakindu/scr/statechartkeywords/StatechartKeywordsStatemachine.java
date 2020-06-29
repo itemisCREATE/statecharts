@@ -115,6 +115,17 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	}
 	
 	
+	private static class StatechartKeywordsStatemachineInternalEvBuf {
+		private boolean operationCallback;
+		private boolean listeners;
+	}
+	private static class StatechartKeywordsStatemachineTimeEventsEvBuf {
+		private boolean statechartKeywords_time_event_0;
+	}
+	private static class StatechartKeywordsStatemachineEvBuf {
+		private StatechartKeywordsStatemachineInternalEvBuf internal = new StatechartKeywordsStatemachineInternalEvBuf();
+		private StatechartKeywordsStatemachineTimeEventsEvBuf timeEvents = new StatechartKeywordsStatemachineTimeEventsEvBuf();
+	}
 	protected SCIIfImpl sCIIf;
 	
 	private boolean initialized = false;
@@ -201,6 +212,17 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	
 	private InternalOperationCallback operationCallback;
+	private StatechartKeywordsStatemachineEvBuf _current = new StatechartKeywordsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public StatechartKeywordsStatemachine() {
 		sCIIf = new SCIIfImpl();
 	}
@@ -220,8 +242,10 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
+		
 		sCIIf.setTimer(0);
 		
 		sCIIf.setIsActive(0);
@@ -243,41 +267,57 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		setRunCycle(0);
 		
 		setSCIIfVariable(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
-		if (timer == null) {
-			throw new IllegalStateException("timer not set.");
-		}
+		isExecuting = true;
+		
 		timer.setTimer(this, 0, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		timer.unsetTimer(this, 0);
+		
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Timer:
-				main_region_Timer_react(true);
-				break;
-			default:
-				// $NullState$
-			}
+		if (getIsExecuting()) {
+			return;
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
-		timer.unsetTimer(this, 0);
+		isExecuting = true;
+		
+		swapInEvents();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case main_region_Timer:
+					main_region_Timer_react(true);
+					break;
+				default:
+					// $NullState$
+				}
+			}
+			
+			swapInternalEvents();
+		} while ((_current.internal.operationCallback || _current.internal.listeners));
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -295,23 +335,29 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCIIf.clearEvents();
-		operationCallbackEvent = false;
-		listeners = false;
-		for (int i=0; i<timeEvents.length; i++) {
-			timeEvents[i] = false;
-		}
+	private void swapInEvents() {
+		_current.timeEvents.statechartKeywords_time_event_0 = timeEvents[0];
+		timeEvents[0] = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCIIf.clearOutEvents();
+	private void clearInEvents() {
+		timeEvents[0] = false;
+	}
+	
+	private void swapInternalEvents() {
+		_current.timeEvents.statechartKeywords_time_event_0 = false;
+		
+		_current.internal.operationCallback = operationCallbackEvent;
+		operationCallbackEvent = false;
+		
+		_current.internal.listeners = listeners;
+		listeners = false;
+	}
+	
+	private void clearInternalEvents() {
+		operationCallbackEvent = false;
+		
+		listeners = false;
 	}
 	
 	/**
@@ -402,7 +448,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	}
 	
 	private boolean react() {
-		if (timeEvents[0]) {
+		if (_current.timeEvents.statechartKeywords_time_event_0) {
 			setTimerVariable(getTimerVariable() + 1);
 		}
 		return false;

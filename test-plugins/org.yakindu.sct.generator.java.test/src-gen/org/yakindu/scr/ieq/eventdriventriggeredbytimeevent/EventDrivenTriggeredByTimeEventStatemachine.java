@@ -50,7 +50,15 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	private final boolean[] timeEvents = new boolean[2];
 	
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunning = false;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public EventDrivenTriggeredByTimeEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -63,88 +71,63 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setX(0);
 		
 		sCInterface.setTransition_count(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
-		}
-		if (timer == null) {
-			throw new IllegalStateException("timer not set.");
-		}
-		isRunning = true;
-		enterSequence_r_default();
-		isRunning = false;
-	}
-	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		
-		if (isRunning) {
+		if (getIsExecuting()) {
 			return;
 		}
-		isRunning = true;
+		isExecuting = true;
 		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
-		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-		isRunning = false;
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case eventDrivenTriggeredByTimeEvent_r_A:
-				r_A_react(true);
-				break;
-			case eventDrivenTriggeredByTimeEvent_r_B:
-				r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!inEventQueue.isEmpty()) {
-			return inEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
+		enterSequence_r_default();
+		isExecuting = false;
 	}
 	
 	public void exit() {
-		isRunning = true;
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
 		exitSequence_r();
-		isRunning = false;
+		isExecuting = false;
+	}
+	
+	public void runCycle() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case eventDrivenTriggeredByTimeEvent_r_A:
+					r_A_react(true);
+					break;
+				case eventDrivenTriggeredByTimeEvent_r_B:
+					r_B_react(true);
+					break;
+				default:
+					// $NullState$
+				}
+			}
+			
+			clearInEvents();
+			nextEvent();
+		} while (true);
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -162,21 +145,18 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		for (int i=0; i<timeEvents.length; i++) {
-			timeEvents[i] = false;
+	private void clearInEvents() {
+		timeEvents[0] = false;
+		
+		timeEvents[1] = false;
+	}
+	
+	protected void nextEvent() {
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
+			return;
 		}
 	}
-	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -217,7 +197,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			@Override
 			public void run() {
 				timeEvents[eventID] = true;
-				singleCycle();
 			}
 		});
 		runCycle();

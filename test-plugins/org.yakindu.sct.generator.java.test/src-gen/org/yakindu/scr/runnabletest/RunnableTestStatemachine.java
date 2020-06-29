@@ -106,6 +106,20 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean ev_in;
+		
+		private long ev_inValue;
+	}
+	private static class RunnableTestStatemachineTimeEventsEvBuf {
+		private boolean runnableTest_main_region_Composite_s1_s2_time_event_0;
+		private boolean runnableTest_main_region_Composite_s1_s2_inner_region_s1_time_event_0;
+		private boolean runnableTest_time_event_0;
+	}
+	private static class RunnableTestStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private RunnableTestStatemachineTimeEventsEvBuf timeEvents = new RunnableTestStatemachineTimeEventsEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -126,6 +140,17 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	private final boolean[] timeEvents = new boolean[3];
 	
+	private RunnableTestStatemachineEvBuf _current = new RunnableTestStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public RunnableTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -142,8 +167,9 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setMyVar(0);
 		
 		sCInterface.setAfterCalls(0);
@@ -151,27 +177,41 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		sCInterface.setCycles(0);
 		
 		sCInterface.setS2_entered(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
-		if (timer == null) {
-			throw new IllegalStateException("timer not set.");
-		}
+		isExecuting = true;
+		
 		timer.setTimer(this, 2, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		timer.unsetTimer(this, 2);
+		
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region__final_:
@@ -187,11 +227,9 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
-		timer.unsetTimer(this, 2);
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -207,21 +245,29 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	public boolean isFinal() {
 		return (stateVector[0] == State.main_region__final_);
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
-		for (int i=0; i<timeEvents.length; i++) {
-			timeEvents[i] = false;
-		}
+	private void swapInEvents() {
+		_current.iface.ev_in = sCInterface.ev_in;
+		_current.iface.ev_inValue = sCInterface.ev_inValue;
+		sCInterface.ev_in = false;
+		
+		_current.timeEvents.runnableTest_main_region_Composite_s1_s2_time_event_0 = timeEvents[0];
+		timeEvents[0] = false;
+		
+		_current.timeEvents.runnableTest_main_region_Composite_s1_s2_inner_region_s1_time_event_0 = timeEvents[1];
+		timeEvents[1] = false;
+		
+		_current.timeEvents.runnableTest_time_event_0 = timeEvents[2];
+		timeEvents[2] = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	private void clearInEvents() {
+		sCInterface.ev_in = false;
+		
+		timeEvents[0] = false;
+		
+		timeEvents[1] = false;
+		
+		timeEvents[2] = false;
 	}
 	
 	/**
@@ -445,7 +491,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	}
 	
 	private boolean react() {
-		if (timeEvents[2]) {
+		if (_current.timeEvents.runnableTest_time_event_0) {
 			sCInterface.operationCallback.displayTime();
 		}
 		sCInterface.setCycles(sCInterface.getCycles() + 1);
@@ -469,7 +515,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (timeEvents[0]) {
+				if (_current.timeEvents.runnableTest_main_region_Composite_s1_s2_time_event_0) {
 					exitSequence_main_region_Composite_s1_s2();
 					enterSequence_main_region__final__default();
 				} else {
@@ -485,11 +531,11 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		if (try_transition) {
 			if (main_region_Composite_s1_s2_react(try_transition)==false) {
-				if (sCInterface.ev_in) {
+				if (_current.iface.ev_in) {
 					exitSequence_main_region_Composite_s1_s2_inner_region_s1();
 					enterSequence_main_region_Composite_s1_s2_inner_region_s2_default();
 				} else {
-					if (timeEvents[1]) {
+					if (_current.timeEvents.runnableTest_main_region_Composite_s1_s2_inner_region_s1_time_event_0) {
 						exitSequence_main_region_Composite_s1_s2_inner_region_s1();
 						sCInterface.setAfterCalls(sCInterface.getAfterCalls() + 1);
 						
@@ -508,7 +554,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		if (try_transition) {
 			if (main_region_Composite_s1_s2_react(try_transition)==false) {
-				if (sCInterface.ev_in) {
+				if (_current.iface.ev_in) {
 					exitSequence_main_region_Composite_s1_s2_inner_region_s2();
 					enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 				} else {

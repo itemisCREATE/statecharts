@@ -76,6 +76,15 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	
 	private int nextStateIndex;
 	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ChildFirstTransitionTakingStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -85,28 +94,44 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		for (int i = 0; i < 5; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setCLocalReaction(0);
 		
 		sCInterface.setCaLocalReaction(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_r1_default();
 		enterSequence_r2_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_r1();
+		exitSequence_r2();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstTransitionTaking_r1_A_r1_AA:
@@ -143,11 +168,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r1();
-		exitSequence_r2();
+		
+		clearInEvents();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -165,19 +189,14 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearInEvents() {
+		sCInterface.e = false;
+		
+		sCInterface.go = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	protected void nextEvent() {
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

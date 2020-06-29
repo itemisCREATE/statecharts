@@ -26,6 +26,13 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean f;
+	}
+	private static class SyncForkStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -44,6 +51,17 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	
 	private int nextStateIndex;
 	
+	private SyncForkStatemachineEvBuf _current = new SyncForkStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public SyncForkStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -53,24 +71,40 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -92,10 +126,9 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -113,17 +146,18 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.f = sCInterface.f;
+		sCInterface.f = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
+		
+		sCInterface.f = false;
 	}
 	
 	/**
@@ -335,11 +369,11 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_A();
 					react_main_region__sync0();
 				} else {
-					if (sCInterface.f) {
+					if (_current.iface.f) {
 						exitSequence_main_region_A();
 						enterSequence_main_region_B_default();
 					} else {
@@ -356,7 +390,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
@@ -372,7 +406,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (sCInterface.f) {
+				if (_current.iface.f) {
 					exitSequence_main_region_B_r1_C1();
 					enterSequence_main_region_B_r1_C2_default();
 				} else {
@@ -398,7 +432,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.f) {
+			if (_current.iface.f) {
 				exitSequence_main_region_B_r2_D1();
 				enterSequence_main_region_B_r2_D2_default();
 			} else {

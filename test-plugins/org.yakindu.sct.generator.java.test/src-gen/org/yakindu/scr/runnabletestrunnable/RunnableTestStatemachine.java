@@ -69,16 +69,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		
 		public void raiseEv_in(final long value) {
 			synchronized(RunnableTestStatemachine.this) {
-				inEventQueue.add(
-					new Runnable() {
-						@Override
-						public void run() {
-							ev_inValue = value;
-							ev_in = true;
-							runCycle();
-						}
+				inEventQueue.add(new Runnable() {
+					@Override
+					public void run() {
+						ev_inValue = value;
+						ev_in = true;
+						runCycle();
 					}
-				);
+				});
 			}
 		}
 		protected long getEv_inValue() {
@@ -177,7 +175,19 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	private final boolean[] timeEvents = new boolean[3];
 	
 	private BlockingQueue<Runnable> inEventQueue = new LinkedBlockingQueue<Runnable>();
-	private boolean isRunning = false;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		synchronized(RunnableTestStatemachine.this) {
+			return isExecuting;
+		}
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		synchronized(RunnableTestStatemachine.this) {
+			this.isExecuting = value;
+		}
+	}
 	public RunnableTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -194,8 +204,9 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setMyVar(0);
 		
 		sCInterface.setAfterCalls(0);
@@ -203,89 +214,64 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		sCInterface.setCycles(0);
 		
 		sCInterface.setS2_entered(0);
+		
+		isExecuting = false;
 	}
 	
-	public synchronized void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+	public void enter() {
+		if (getIsExecuting()) {
+			return;
 		}
-		if (timer == null) {
-			throw new IllegalStateException("timer not set.");
-		}
-		isRunning = true;
+		isExecuting = true;
+		
 		timer.setTimer(this, 2, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
-		isRunning = false;
+		isExecuting = false;
 	}
 	
-	public synchronized void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		
-		if (isRunning) {
+	public void exit() {
+		if (getIsExecuting()) {
 			return;
 		}
-		isRunning = true;
+		isExecuting = true;
 		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
-		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-		isRunning = false;
-	}
-	
-	protected synchronized void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case runnableTest_main_region__final_:
-				main_region__final__react(true);
-				break;
-			case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
-				main_region_Composite_s1_s2_inner_region_s1_react(true);
-				break;
-			case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
-				main_region_Composite_s1_s2_inner_region_s2_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!inEventQueue.isEmpty()) {
-			return inEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
-	}
-	
-	public synchronized void exit() {
-		isRunning = true;
 		exitSequence_main_region();
 		timer.unsetTimer(this, 2);
-		isRunning = false;
+		
+		isExecuting = false;
+	}
+	
+	public void runCycle() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case runnableTest_main_region__final_:
+					main_region__final__react(true);
+					break;
+				case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
+					main_region_Composite_s1_s2_inner_region_s1_react(true);
+					break;
+				case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
+					main_region_Composite_s1_s2_inner_region_s2_react(true);
+					break;
+				default:
+					// $NullState$
+				}
+			}
+			
+			clearInEvents();
+			nextEvent();
+		} while (sCInterface.ev_in);
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -301,23 +287,22 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	public synchronized boolean isFinal() {
 		return (stateVector[0] == State.runnableTest_main_region__final_);
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
-		for (int i=0; i<timeEvents.length; i++) {
-			timeEvents[i] = false;
+	private void clearInEvents() {
+		sCInterface.ev_in = false;
+		
+		timeEvents[0] = false;
+		
+		timeEvents[1] = false;
+		
+		timeEvents[2] = false;
+	}
+	
+	protected void nextEvent() {
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
+			return;
 		}
 	}
-	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
-	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -363,7 +348,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			@Override
 			public void run() {
 				timeEvents[eventID] = true;
-				singleCycle();
 			}
 		});
 		runCycle();

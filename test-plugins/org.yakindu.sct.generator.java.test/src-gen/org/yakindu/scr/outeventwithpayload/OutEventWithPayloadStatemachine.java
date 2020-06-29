@@ -73,6 +73,15 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 	
 	private int nextStateIndex;
 	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public OutEventWithPayloadStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -82,23 +91,40 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
+		
+		clearInEvents();
 		clearOutEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
 		clearOutEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -109,10 +135,10 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		clearInEvents();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -130,20 +156,16 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearOutEvents() {
+		sCInterface.o = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	private void clearInEvents() {
+		sCInterface.i = false;
 	}
 	
+	protected void nextEvent() {
+	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

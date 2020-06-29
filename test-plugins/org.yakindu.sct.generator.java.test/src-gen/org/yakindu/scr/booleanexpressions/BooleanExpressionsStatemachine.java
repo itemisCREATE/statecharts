@@ -88,6 +88,12 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e1;
+	}
+	private static class BooleanExpressionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -102,6 +108,17 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	
 	private int nextStateIndex;
 	
+	private BooleanExpressionsStatemachineEvBuf _current = new BooleanExpressionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public BooleanExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -111,8 +128,9 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setMyBool1(false);
 		
 		sCInterface.setMyBool2(false);
@@ -126,22 +144,37 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		sCInterface.setEqual(false);
 		
 		sCInterface.setNotequal(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -154,10 +187,9 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -175,17 +207,13 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e1 = sCInterface.e1;
+		sCInterface.e1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e1 = false;
 	}
 	
 	/**
@@ -346,7 +374,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e1) {
+				if (_current.iface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {

@@ -38,6 +38,12 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean myEvent;
+	}
+	private static class TypeAliasStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -54,6 +60,17 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	
 	private int nextStateIndex;
 	
+	private TypeAliasStatemachineEvBuf _current = new TypeAliasStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public TypeAliasStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -63,27 +80,43 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setMyVar(0);
 		
 		sCInterface.setMyString("");
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Start:
@@ -102,10 +135,9 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -123,17 +155,13 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.myEvent = sCInterface.myEvent;
+		sCInterface.myEvent = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.myEvent = false;
 	}
 	
 	/**
@@ -310,7 +338,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.myEvent) {
+				if (_current.iface.myEvent) {
 					exitSequence_main_region_Mid2();
 					enterSequence_main_region_End_default();
 				} else {

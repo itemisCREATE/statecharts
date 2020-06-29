@@ -38,6 +38,12 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e2;
+	}
+	private static class RaiseEventStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -54,6 +60,17 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	
 	private int nextStateIndex;
 	
+	private RaiseEventStatemachineEvBuf _current = new RaiseEventStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public RaiseEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -63,25 +80,42 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
 		enterSequence_second_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		exitSequence_second_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -100,11 +134,9 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
-		exitSequence_second_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -122,18 +154,13 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e2 = sCInterface.e2;
+		sCInterface.e2 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	private void clearInEvents() {
+		sCInterface.e2 = false;
 	}
 	
 	/**
@@ -278,7 +305,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e2) {
+				if (_current.iface.e2) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {

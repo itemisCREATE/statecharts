@@ -101,6 +101,17 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean ev_in;
+	}
+	private static class WrapperTestStatemachineTimeEventsEvBuf {
+		private boolean wrapperTest_main_region_s1_time_event_0;
+		private boolean wrapperTest_time_event_0;
+	}
+	private static class WrapperTestStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private WrapperTestStatemachineTimeEventsEvBuf timeEvents = new WrapperTestStatemachineTimeEventsEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -120,6 +131,21 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	private final boolean[] timeEvents = new boolean[2];
 	
+	private WrapperTestStatemachineEvBuf _current = new WrapperTestStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		synchronized(WrapperTestStatemachine.this) {
+			return isExecuting;
+		}
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		synchronized(WrapperTestStatemachine.this) {
+			this.isExecuting = value;
+		}
+	}
 	public WrapperTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -136,34 +162,49 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setAfterCalls(0);
 		
 		sCInterface.setCycles(0);
 		
 		sCInterface.setS2_entered(0);
+		
+		isExecuting = false;
 	}
 	
-	public synchronized void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+	public void enter() {
+		if (getIsExecuting()) {
+			return;
 		}
-		if (timer == null) {
-			throw new IllegalStateException("timer not set.");
-		}
+		isExecuting = true;
+		
 		timer.setTimer(this, 1, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
+		isExecuting = false;
 	}
 	
-	public synchronized void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		timer.unsetTimer(this, 1);
+		
+		isExecuting = false;
+	}
+	
+	public void runCycle() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_s1:
@@ -179,11 +220,9 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public synchronized void exit() {
-		exitSequence_main_region();
-		timer.unsetTimer(this, 1);
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -199,21 +238,23 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	public synchronized boolean isFinal() {
 		return (stateVector[0] == State.main_region__final_);
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
-		for (int i=0; i<timeEvents.length; i++) {
-			timeEvents[i] = false;
-		}
+	private void swapInEvents() {
+		_current.iface.ev_in = sCInterface.ev_in;
+		sCInterface.ev_in = false;
+		
+		_current.timeEvents.wrapperTest_main_region_s1_time_event_0 = timeEvents[0];
+		timeEvents[0] = false;
+		
+		_current.timeEvents.wrapperTest_time_event_0 = timeEvents[1];
+		timeEvents[1] = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	private void clearInEvents() {
+		sCInterface.ev_in = false;
+		
+		timeEvents[0] = false;
+		
+		timeEvents[1] = false;
 	}
 	
 	/**
@@ -378,7 +419,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	}
 	
 	private boolean react() {
-		if (timeEvents[1]) {
+		if (_current.timeEvents.wrapperTest_time_event_0) {
 			sCInterface.operationCallback.displayTime();
 		}
 		sCInterface.setCycles(sCInterface.getCycles() + 1);
@@ -395,11 +436,11 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 					exitSequence_main_region_s1();
 					enterSequence_main_region__final__default();
 				} else {
-					if (sCInterface.ev_in) {
+					if (_current.iface.ev_in) {
 						exitSequence_main_region_s1();
 						enterSequence_main_region_s2_default();
 					} else {
-						if (timeEvents[0]) {
+						if (_current.timeEvents.wrapperTest_main_region_s1_time_event_0) {
 							exitSequence_main_region_s1();
 							sCInterface.setAfterCalls(sCInterface.getAfterCalls() + 1);
 							
@@ -419,7 +460,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.ev_in) {
+				if (_current.iface.ev_in) {
 					exitSequence_main_region_s2();
 					enterSequence_main_region_s1_default();
 				} else {

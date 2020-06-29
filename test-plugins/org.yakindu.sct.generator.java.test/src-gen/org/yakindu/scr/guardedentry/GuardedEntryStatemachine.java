@@ -38,6 +38,12 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+	}
+	private static class GuardedEntryStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -52,6 +58,17 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	
 	private int nextStateIndex;
 	
+	private GuardedEntryStatemachineEvBuf _current = new GuardedEntryStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public GuardedEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -61,27 +78,43 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setGuard(false);
 		
 		sCInterface.setDone(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -94,10 +127,9 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -115,17 +147,13 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
 	}
 	
 	/**
@@ -232,7 +260,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
@@ -248,7 +276,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {

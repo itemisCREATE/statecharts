@@ -26,6 +26,18 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean f;
+	}
+	private static class InternalEventLifeCycleStatemachineInternalEvBuf {
+		private boolean i1;
+		private boolean i2;
+	}
+	private static class InternalEventLifeCycleStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InternalEventLifeCycleStatemachineInternalEvBuf internal = new InternalEventLifeCycleStatemachineInternalEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -44,6 +56,17 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 	private boolean i1;
 	private boolean i2;
+	private InternalEventLifeCycleStatemachineEvBuf _current = new InternalEventLifeCycleStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public InternalEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -53,48 +76,68 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_r1_default();
 		enterSequence_r2_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_r1();
+		exitSequence_r2();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r1_A:
-				r1_A_react(true);
-				break;
-			case r1_B:
-				r1_B_react(true);
-				break;
-			case r2_C:
-				r2_C_react(true);
-				break;
-			case r2_D:
-				r2_D_react(true);
-				break;
-			default:
-				// $NullState$
-			}
+		if (getIsExecuting()) {
+			return;
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r1();
-		exitSequence_r2();
+		isExecuting = true;
+		
+		swapInEvents();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case r1_A:
+					r1_A_react(true);
+					break;
+				case r1_B:
+					r1_B_react(true);
+					break;
+				case r2_C:
+					r2_C_react(true);
+					break;
+				case r2_D:
+					r2_D_react(true);
+					break;
+				default:
+					// $NullState$
+				}
+			}
+			
+			swapInternalEvents();
+		} while ((_current.internal.i1 || _current.internal.i2));
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -112,19 +155,36 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.f = sCInterface.f;
+		sCInterface.f = false;
+	}
+	
+	private void clearInEvents() {
+		sCInterface.e = false;
+		
+		sCInterface.f = false;
+	}
+	
+	private void swapInternalEvents() {
+		_current.iface.e = false;
+		
+		_current.iface.f = false;
+		
+		_current.internal.i1 = i1;
 		i1 = false;
+		
+		_current.internal.i2 = i2;
 		i2 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInternalEvents() {
+		i1 = false;
+		
+		i2 = false;
 	}
 	
 	/**
@@ -271,7 +331,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (i2) {
+				if (_current.internal.i2) {
 					exitSequence_r1_A();
 					enterSequence_r1_B_default();
 				} else {
@@ -280,7 +340,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.e) {
+			if (_current.iface.e) {
 				raiseI1();
 			}
 		}
@@ -292,7 +352,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_r1_B();
 					enterSequence_r1_A_default();
 				} else {
@@ -307,7 +367,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (i1) {
+			if (_current.internal.i1) {
 				exitSequence_r2_C();
 				enterSequence_r2_D_default();
 			} else {
@@ -321,7 +381,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.f) {
+			if (_current.iface.f) {
 				exitSequence_r2_D();
 				raiseI2();
 				

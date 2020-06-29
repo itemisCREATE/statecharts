@@ -12,15 +12,12 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 		
 		public void raiseE1() {
-			inEventQueue.add(
-				new Runnable() {
-					@Override
-					public void run() {
-						e1 = true;
-						singleCycle();
-					}
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					e1 = true;
 				}
-			);
+			});
 			runCycle();
 		}
 		
@@ -66,7 +63,15 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	private int nextStateIndex;
 	
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunning = false;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public EventDrivenOutEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -76,90 +81,68 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
-		}
-		isRunning = true;
-		enterSequence_main_region_default();
-		enterSequence_second_region_default();
-		isRunning = false;
-	}
-	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		
-		if (isRunning) {
+		if (getIsExecuting()) {
 			return;
 		}
-		isRunning = true;
+		isExecuting = true;
 		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
-		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-		isRunning = false;
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			case second_region_StateC:
-				second_region_StateC_react(true);
-				break;
-			case second_region_StateD:
-				second_region_StateD_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!inEventQueue.isEmpty()) {
-			return inEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
+		enterSequence_main_region_default();
+		enterSequence_second_region_default();
+		isExecuting = false;
 	}
 	
 	public void exit() {
-		isRunning = true;
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
 		exitSequence_main_region();
 		exitSequence_second_region();
-		isRunning = false;
+		isExecuting = false;
+	}
+	
+	public void runCycle() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case main_region_StateA:
+					main_region_StateA_react(true);
+					break;
+				case main_region_StateB:
+					main_region_StateB_react(true);
+					break;
+				case second_region_StateC:
+					second_region_StateC_react(true);
+					break;
+				case second_region_StateD:
+					second_region_StateD_react(true);
+					break;
+				default:
+					// $NullState$
+				}
+			}
+			
+			clearInEvents();
+			nextEvent();
+		} while (sCInterface.e1);
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -177,20 +160,16 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearInEvents() {
+		sCInterface.e1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	protected void nextEvent() {
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
+			return;
+		}
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

@@ -47,6 +47,15 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	private final boolean[] timeEvents = new boolean[2];
 	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public EventDrivenTriggeredByTimeEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -59,30 +68,42 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setX(0);
 		
 		sCInterface.setTransition_count(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
-		if (timer == null) {
-			throw new IllegalStateException("timer not set.");
-		}
+		isExecuting = true;
+		
 		enterSequence_r_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_r();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case eventDrivenTriggeredByTimeEvent_r_A:
@@ -95,10 +116,10 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r();
+		
+		clearInEvents();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -116,21 +137,14 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		for (int i=0; i<timeEvents.length; i++) {
-			timeEvents[i] = false;
-		}
+	private void clearInEvents() {
+		timeEvents[0] = false;
+		
+		timeEvents[1] = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	protected void nextEvent() {
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

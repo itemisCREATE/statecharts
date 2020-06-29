@@ -185,6 +185,15 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	private boolean e1;
 	private boolean e2;
 	private boolean e3;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public EventDrivenStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCINamedI = new SCINamedIImpl();
@@ -195,99 +204,91 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
 		clearOutEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
-	}
-	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
-		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			case main_region_StateC:
-				main_region_StateC_react(true);
-				break;
-			case main_region_StateE__region0_State1:
-				main_region_StateE__region0_State1_react(true);
-				break;
-			case main_region_StateE__region0_State2:
-				main_region_StateE__region0_State2_react(true);
-				break;
-			case main_region_StateE__region0_State3:
-				main_region_StateE__region0_State3_react(true);
-				break;
-			case main_region_StateE__region1_State1:
-				main_region_StateE__region1_State1_react(true);
-				break;
-			case main_region_StateE__region1_State2:
-				main_region_StateE__region1_State2_react(true);
-				break;
-			case main_region_StateF:
-				main_region_StateF_react(true);
-				break;
-			case main_region_StateD:
-				main_region_StateD_react(true);
-				break;
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!internalEventQueue.isEmpty()) {
-			return internalEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
+		isExecuting = false;
 	}
 	
 	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
 		exitSequence_main_region();
+		isExecuting = false;
+	}
+	
+	public void runCycle() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		clearOutEvents();
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case main_region_StateA:
+					main_region_StateA_react(true);
+					break;
+				case main_region_StateB:
+					main_region_StateB_react(true);
+					break;
+				case main_region_StateC:
+					main_region_StateC_react(true);
+					break;
+				case main_region_StateE__region0_State1:
+					main_region_StateE__region0_State1_react(true);
+					break;
+				case main_region_StateE__region0_State2:
+					main_region_StateE__region0_State2_react(true);
+					break;
+				case main_region_StateE__region0_State3:
+					main_region_StateE__region0_State3_react(true);
+					break;
+				case main_region_StateE__region1_State1:
+					main_region_StateE__region1_State1_react(true);
+					break;
+				case main_region_StateE__region1_State2:
+					main_region_StateE__region1_State2_react(true);
+					break;
+				case main_region_StateF:
+					main_region_StateF_react(true);
+					break;
+				case main_region_StateD:
+					main_region_StateD_react(true);
+					break;
+				case main_region__final_:
+					main_region__final__react(true);
+					break;
+				default:
+					// $NullState$
+				}
+			}
+			
+			clearInEvents();
+			clearInternalEvents();
+			nextEvent();
+		} while (((((((sCInterface.inEvent || sCInterface.inEventBool) || sCINamedI.namedInEvent) || locEvent) || e1) || e2) || e3));
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -303,25 +304,42 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	public boolean isFinal() {
 		return (stateVector[0] == State.main_region__final_) && (stateVector[1] == State.$NullState$);
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
-		sCINamedI.clearEvents();
+	private void clearOutEvents() {
+		sCInterface.outEvent = false;
+		
+		sCInterface.running = false;
+		
+		sCInterface.oe1 = false;
+		
+		sCInterface.oe2 = false;
+		
+		sCInterface.oe3 = false;
+	}
+	
+	private void clearInEvents() {
+		sCInterface.inEvent = false;
+		
+		sCInterface.inEventBool = false;
+		
+		sCINamedI.namedInEvent = false;
+	}
+	
+	private void clearInternalEvents() {
 		locEvent = false;
+		
 		e1 = false;
+		
 		e2 = false;
+		
 		e3 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	protected void nextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			internalEventQueue.poll().run();
+			return;
+		}
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -368,40 +386,36 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	
 	private void raiseLocEvent() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				locEvent = true;					
-				singleCycle();
 			}
 		});
 	}
 	
 	private void raiseE1() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				e1 = true;					
-				singleCycle();
 			}
 		});
 	}
 	
 	private void raiseE2() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				e2 = true;					
-				singleCycle();
 			}
 		});
 	}
 	
 	private void raiseE3() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				e3 = true;					
-				singleCycle();
 			}
 		});
 	}

@@ -52,6 +52,15 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 	
 	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean f;
+		private boolean g;
+		private boolean h;
+	}
+	private static class ChoiceStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -67,6 +76,17 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	
 	private int nextStateIndex;
 	
+	private ChoiceStatemachineEvBuf _current = new ChoiceStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ChoiceStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -76,25 +96,41 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setC(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
-			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
+		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -110,10 +146,9 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -131,17 +166,28 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.f = sCInterface.f;
+		sCInterface.f = false;
+		
+		_current.iface.g = sCInterface.g;
+		sCInterface.g = false;
+		
+		_current.iface.h = sCInterface.h;
+		sCInterface.h = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
+		
+		sCInterface.f = false;
+		
+		sCInterface.g = false;
+		
+		sCInterface.h = false;
 	}
 	
 	/**
@@ -345,19 +391,19 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_A();
 					react_main_region__choice_0();
 				} else {
-					if (sCInterface.f) {
+					if (_current.iface.f) {
 						exitSequence_main_region_A();
 						react_main_region__choice_2();
 					} else {
-						if (sCInterface.g) {
+						if (_current.iface.g) {
 							exitSequence_main_region_A();
 							react_main_region__choice_1();
 						} else {
-							if (sCInterface.h) {
+							if (_current.iface.h) {
 								exitSequence_main_region_A();
 								react_main_region__choice_3();
 							} else {
