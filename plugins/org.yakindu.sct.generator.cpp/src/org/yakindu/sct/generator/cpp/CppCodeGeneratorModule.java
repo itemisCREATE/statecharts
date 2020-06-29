@@ -70,7 +70,6 @@ import org.yakindu.sct.generator.cpp.submodules.lifecycle.LifecycleFunctions;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.config.DefaultFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -108,8 +107,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 
 		includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
 		
-		// TODO: replace binding with already existing CppFlowConfiguration
-		binder.bind(IFlowConfiguration.class).to(DefaultFlowConfiguration.AllFeaturesDisabled.class);
+		binder.bind(IFlowConfiguration.class).to(CppFlowConfiguration.class);
 
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
