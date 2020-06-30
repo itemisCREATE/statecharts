@@ -30,13 +30,8 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		private boolean e;
 		private boolean f;
 	}
-	private static class InternalEventLifeCycleStatemachineInternalEvBuf {
-		private boolean i1;
-		private boolean i2;
-	}
 	private static class InternalEventLifeCycleStatemachineEvBuf {
 		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
-		private InternalEventLifeCycleStatemachineInternalEvBuf internal = new InternalEventLifeCycleStatemachineInternalEvBuf();
 	}
 	protected SCInterfaceImpl sCInterface;
 	
@@ -121,29 +116,26 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		isExecuting = true;
 		
 		swapInEvents();
-		do { 
-			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-				switch (stateVector[nextStateIndex]) {
-				case r1_A:
-					r1_A_react(true);
-					break;
-				case r1_B:
-					r1_B_react(true);
-					break;
-				case r2_C:
-					r2_C_react(true);
-					break;
-				case r2_D:
-					r2_D_react(true);
-					break;
-				default:
-					// $NullState$
-				}
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r1_A:
+				r1_A_react(true);
+				break;
+			case r1_B:
+				r1_B_react(true);
+				break;
+			case r2_C:
+				r2_C_react(true);
+				break;
+			case r2_D:
+				r2_D_react(true);
+				break;
+			default:
+				// $NullState$
 			}
-			
-			swapInternalEvents();
-		} while ((_current.internal.i1 || _current.internal.i2));
+		}
 		
+		clearInternalEvents();
 		
 		isExecuting = false;
 	}
@@ -175,18 +167,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		sCInterface.e = false;
 		
 		sCInterface.f = false;
-	}
-	
-	private void swapInternalEvents() {
-		_current.iface.e = false;
-		
-		_current.iface.f = false;
-		
-		_current.internal.i1 = i1;
-		i1 = false;
-		
-		_current.internal.i2 = i2;
-		i2 = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -339,7 +319,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (_current.internal.i2) {
+				if (i2) {
 					exitSequence_r1_A();
 					enterSequence_r1_B_default();
 				} else {
@@ -375,7 +355,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (_current.internal.i1) {
+			if (i1) {
 				exitSequence_r2_C();
 				enterSequence_r2_D_default();
 			} else {
