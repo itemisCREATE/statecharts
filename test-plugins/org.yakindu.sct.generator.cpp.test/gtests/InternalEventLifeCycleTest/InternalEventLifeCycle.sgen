@@ -1,7 +1,7 @@
 GeneratorModel for yakindu::cpp {
 	statechart InternalEventLifeCycle {
 		feature Outlet {
-			targetProject = "test"
+			targetProject = "gtests"
 			targetFolder = "InternalEventLifeCycleTest"
 		}
 		feature FunctionInlining {
