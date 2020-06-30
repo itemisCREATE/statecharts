@@ -66,6 +66,7 @@ public class JavaGeneratorModule implements IGeneratorModule {
 		binder.bind(MicroStepCode.class).to(RunCycleMethodCode.class);
 		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.EventCode.class).to(org.yakindu.sct.generator.java.submodules.EventCode.class);
 		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode.class).to(org.yakindu.sct.generator.java.submodules.TraceCode.class);
+		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.InitializedCheckCode.class).to(org.yakindu.sct.generator.java.submodules.InitializedCheckCode.class);
 		
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);

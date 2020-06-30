@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sexec.concepts.EventProcessing
 import org.yakindu.sct.model.sexec.concepts.ExitMethod
 import org.yakindu.sct.model.sexec.concepts.RunCycleMethod
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sexec.concepts.InitializedCheck
 
 /**
  * Instances of this class dispatches the generation of named sequences representing state machine concepts 
@@ -28,6 +29,7 @@ import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 	
 	@Inject extension MicroStepCode
+	@Inject extension InitializedCheckCode
 	@Inject extension EventCode
 	@Inject extension TraceCode
 	
@@ -47,6 +49,8 @@ class NamedConceptSequenceCodeDispatcher implements NamedConceptSequenceCode {
 				return flow.traceEnterCode
 			case ExitMethod.TRACE_EXIT:
 				return flow.traceExitCode
+			case InitializedCheck.INIT_CHECK :
+				return flow.initializedCheckCode
 			default : 
 				return '''// unknown concept sequence : «s.name»'''
 		}		
