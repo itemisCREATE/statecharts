@@ -60,14 +60,14 @@ public class CDefaultFeatureValueProvider extends AbstractDefaultFeatureValuePro
 			parameterValue.setValue(true);
 		} else if (ICFeatureConstants.PARAMETER_TRACING_EXIT_STATE.equals(parameterName)) {
 			parameterValue.setValue(true);
+		} else if (ICFeatureConstants.PARAMETER_TRACING_GENERIC.equals(parameterName)) {
+			parameterValue.setValue(false);
 		} else if (ICFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS.equals(parameterName)) {
 			parameterValue.setValue(true);
 		} else if (ICFeatureConstants.PARAMETER_IN_EVENT_QUEUE.equals(parameterName)) {
 			parameterValue.setValue(false);
 		} else if (ICFeatureConstants.PARAMETER_USER_ALLOCATED_QUEUE.equals(parameterName)) {
 			parameterValue.setValue(false);
-		} else {
-			throw new IllegalArgumentException("Unsupported parameter '" + parameterName + "'.");
 		}
 	}
 
