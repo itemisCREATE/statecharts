@@ -251,7 +251,7 @@ class EventProcessing {
 	
 		if ( ! flow.hasEventBuffer ) return 
 		
-		val bufferedEvents = #[flow.incomingEvents, flow.timeEvents, flow.localEvents].flatten.toSet
+		val bufferedEvents = #[flow.incomingEvents, flow.timeEvents, flow.localEvents].flatten.filter[isBuffered].toSet
 
 		val allEventReferences = flow.eAllContents
 										.filter(Expression)
@@ -317,7 +317,7 @@ class EventProcessing {
 	def protected List<Expression> bufferEventExpressions(ExecutionFlow it) {
 		it
 			.eventBuffer
-			.bufferEvents
+			.bufferEventPaths
 			.asExpressions		
 	}
 	
