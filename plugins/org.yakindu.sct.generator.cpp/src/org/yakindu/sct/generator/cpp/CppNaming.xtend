@@ -44,6 +44,7 @@ import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.sexec.concepts.EventBuffer
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -59,6 +60,7 @@ class CppNaming extends Naming {
 	@Inject protected extension StatechartUtil
 	@Inject protected extension OriginTracing
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension EventBuffer
 	
 	@Inject GeneratorEntry entry
 
@@ -313,10 +315,11 @@ class CppNaming extends Naming {
 	override dispatch String access(Property definition) {
 		val origin = definition.type.originTraces.head
 		if (origin instanceof InterfaceScope) {
-			'''«origin.getter»'''
-		} else {
-			'''«super._access(definition)»'''
+			if(!definition.type.isEventBuffer) {
+				return '''«origin.getter»'''
+			}
 		}
+		'''«super._access(definition)»'''
 	}
 	
 	override dispatch access(EventDefinition it) {

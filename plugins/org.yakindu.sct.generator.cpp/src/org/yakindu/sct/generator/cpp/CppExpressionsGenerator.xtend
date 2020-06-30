@@ -48,6 +48,8 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	override dispatch CharSequence code(ElementReferenceExpression it, Method target) '''«target.access»(«argumentsCode»)'''
 	
 	def dispatch CharSequence code(ElementReferenceExpression it, Event target) '''«target.access»'''
+	
+	override dispatch CharSequence code(ElementReferenceExpression it, Property target) '''«target.access»'''
 
 	override dispatch CharSequence code(EventRaisingExpression it) '''«raiseEvent(it, value?.code)»'''
 
@@ -84,6 +86,9 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	override dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«context»«target.access»'''
 	
 	override dispatch CharSequence code(FeatureCall it, Property target) '''«context»«target.access»'''
+	
+	override dispatch CharSequence metaCode(ElementReferenceExpression it, EventDefinition owner, Property feature)
+		'''«owner.scope.instance».«owner.name.asEscapedIdentifier»_«feature.name.asEscapedIdentifier»'''
 	
 	protected def dispatch context(FeatureCall it) {
 		val ownerCode = owner.code.toString

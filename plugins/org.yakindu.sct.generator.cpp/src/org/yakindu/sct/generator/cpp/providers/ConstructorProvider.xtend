@@ -21,7 +21,6 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.base.types.typesystem.ITypeValueProvider
@@ -40,7 +39,6 @@ class ConstructorProvider implements ISourceFragment {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension CLiterals
-	@Inject protected extension StatechartAnnotations
 	@Inject protected extension INamingService
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected GeneratorEntry entry
@@ -50,8 +48,10 @@ class ConstructorProvider implements ISourceFragment {
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
 			«constructorDefinition»
+			
 			«destructorDefinition»
 			«FOR iface : interfaces»
+				
 				«it.ifaceConstructorDefintion(iface)»
 			«ENDFOR»
 		'''
@@ -80,13 +80,13 @@ class ConstructorProvider implements ISourceFragment {
 		if(timed) toInit.add(timerInstance, NULL_LITERAL)
 		if(entry.tracingUsed) toInit.add(tracingInstance, "0")
 		toInit.add(STATEVECTOR_POS, "0")
-		if(statechart.isSuperStep) toInit.add(STATEVECTOR_CHANGED, "false")
 		interfaces.forEach [
 			toInit.add(instance, NULL_LITERAL)
 			if (hasOperations && !entry.useStaticOPC) {
 				toInit.add(OCB_Instance, NULL_LITERAL)
 			}
 		]
+		properties.forEach[p | toInit.add(p.name.asEscapedIdentifier, p.type.initialValue)]
 		toInit
 	}
 
@@ -136,7 +136,6 @@ class ConstructorProvider implements ISourceFragment {
 		val List<Pair<String, String>> toInit = newArrayList
 		if(timed) toInit.add(timerInstance, '''rhs.«timerInstance»''')
 		toInit.add(STATEVECTOR_POS, '''rhs.«STATEVECTOR_POS»''')
-		if(statechart.isSuperStep) toInit.add(STATEVECTOR_CHANGED, '''rhs.«STATEVECTOR_CHANGED»''')
 		interfaces.forEach [
 			toInit.add(instance, '''rhs.«instance»''')
 			if (hasOperations && !entry.useStaticOPC) {

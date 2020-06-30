@@ -119,6 +119,10 @@ class SExecExtensions {
 		scopes.filter(StatechartScope).filter[!(it instanceof ImportScope)]
 	}
 	
+	def getProperties(ExecutionFlow it) {
+		features.filter(Property)
+	}
+	
 	def hasOperationCallbacks (ExecutionFlow it){
 		scopes.filter[declarations.filter(OperationDefinition).size > 0].size > 0
 	}

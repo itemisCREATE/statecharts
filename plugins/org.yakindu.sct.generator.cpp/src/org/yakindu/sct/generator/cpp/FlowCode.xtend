@@ -116,12 +116,16 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	override dispatch CharSequence code(Call it) 
 		'''«step.shortName»();'''
 	
-	override dispatch CharSequence code(Sequence it) '''
-		«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
-		«FOR s : steps»
-			«s.code»
-		«ENDFOR»
-	'''	
+	override dispatch CharSequence code(Sequence it) {
+		if (it.isStateMachineConcept) 
+			it.flow.stateMachineConceptCode(it)	
+		else '''
+			«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
+			«FOR s : steps»
+				«s.code»
+			«ENDFOR»
+		'''
+	}
 	
 	override dispatch CharSequence code(Check it) 
 		'''«IF condition !== null»«condition.code»«ELSE»true«ENDIF»'''
@@ -144,9 +148,7 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	override dispatch CharSequence code(EnterState it) '''
 		«STATEVECTOR»[«state.stateVector.offset»] = «state.shortName»;
 		«STATEVECTOR_POS» = «state.stateVector.offset»;
-		«IF flow.statechart.isSuperStep» 
-		«STATEVECTOR_CHANGED» = true;
-		«ENDIF»
+		«flow._stateChanged.code»
 	'''
 
 	override dispatch CharSequence code(ExitState it) '''

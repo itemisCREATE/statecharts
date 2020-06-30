@@ -11,7 +11,6 @@
 package org.yakindu.sct.generator.cpp.submodules
 
 import com.google.inject.Inject
-import java.util.List
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.FlowCode
@@ -24,6 +23,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 class InternalFunctions {
 	@Inject protected extension CppNaming
@@ -31,6 +31,7 @@ class InternalFunctions {
 	@Inject protected extension FlowCode
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
+	@Inject protected extension VisibilityAnnotations
 	
 	def functionImplementations(ExecutionFlow it) '''
 		// implementations of all internal functions
@@ -43,10 +44,11 @@ class InternalFunctions {
 		«exitSequenceFunctions.toImplementation»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
 		«reactMethods.toDefinitions»
+		«methods.toDefinitions»
 		
 	'''
 	
-	 def toDefinitions(List<Method> methods) '''
+	 def toDefinitions(Iterable<Method> methods) '''
 	 	«FOR m : methods»
 	 		«m.implementation»
 	 		
@@ -59,7 +61,7 @@ class InternalFunctions {
 	 	}
 	 '''
 	 
-	def toImplementation(List<Step> steps) '''
+	def toImplementation(Iterable<Step> steps) '''
 		«FOR s : steps»
 			«s.functionImplementation»
 		«ENDFOR»
@@ -83,38 +85,6 @@ class InternalFunctions {
 		
 	'''
 	
-	def clearInEventsFunction(ExecutionFlow it) '''
-		void «module»::«clearInEventsFctID»()
-		{
-			«FOR scope : it.scopes»
-				«FOR event : scope.incomingEvents»
-				«event.access» = false;
-				«ENDFOR»
-			«ENDFOR»
-			«IF hasInternalScope»
-				«FOR event : internalScope.events»
-				«event.access» = false; 
-				«ENDFOR»
-			«ENDIF»
-			«IF timed»
-				«FOR event : timeEventScope.events»
-				«event.access» = false; 
-				«ENDFOR»
-			«ENDIF»
-		}
-	'''
-	
-	def clearOutEventsFunction(ExecutionFlow it) '''
-		void «module»::«clearOutEventsFctID»()
-		{
-			«FOR scope : it.scopes»
-				«FOR event : scope.outgoingEvents»
-				«event.access» = false;
-				«ENDFOR»
-			«ENDFOR»
-		}
-	'''
-	
 	def prototypes(ExecutionFlow it) '''
 		// prototypes of all internal functions
 		
@@ -124,14 +94,13 @@ class InternalFunctions {
 		«exitActionFunctions.toPrototypes»
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
-		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toPrototypes»
 		«reactMethods.toDeclarations»
-		void «clearInEventsFctID»();
-		void «clearOutEventsFctID»();
+		«methods.filter[!isPublic].toDeclarations»
 		
 	'''
 	
-	def toDeclarations(List<Method> steps) '''
+	def toDeclarations(Iterable<Method> steps) '''
 		«FOR s : steps»
 			«s.toPrototype»
 		«ENDFOR»
@@ -141,7 +110,7 @@ class InternalFunctions {
 		«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
 	'''
 	
-	def toPrototypes(List<Step> steps) '''
+	def toPrototypes(Iterable<Step> steps) '''
 		«FOR s : steps»
 			«s.functionPrototype»
 		«ENDFOR»
