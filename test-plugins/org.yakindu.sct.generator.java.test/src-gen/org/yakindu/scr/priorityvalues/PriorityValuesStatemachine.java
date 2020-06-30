@@ -88,7 +88,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_someRegion_default();
 		enterSequence_main_region_default();
 		isExecuting = false;
@@ -99,7 +98,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_someRegion();
 		exitSequence_main_region();
 		isExecuting = false;
@@ -114,7 +112,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -144,7 +141,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 			}
 		}
 		
-		
 		isExecuting = false;
 	}
 	
@@ -173,7 +169,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.event1 = false;
-		
 		sCInterface.event2 = false;
 	}
 	

@@ -76,7 +76,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_R1_default();
 		enterSequence_R2_default();
 		isExecuting = false;
@@ -87,7 +86,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_R1();
 		exitSequence_R2();
 		isExecuting = false;
@@ -102,7 +100,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -122,7 +119,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

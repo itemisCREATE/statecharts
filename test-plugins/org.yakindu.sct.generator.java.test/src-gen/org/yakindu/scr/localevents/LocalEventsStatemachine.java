@@ -130,7 +130,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		isExecuting = false;
@@ -141,7 +140,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r1();
 		exitSequence_r2();
 		isExecuting = false;
@@ -156,7 +154,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -192,7 +189,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			nextEvent();
 		} while ((((sCInterface.e || activate_b) || activate_c) || activate_d));
 		
-		
 		isExecuting = false;
 	}
 	
@@ -217,9 +213,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private void clearInternalEvents() {
 		activate_b = false;
-		
 		activate_c = false;
-		
 		activate_d = false;
 	}
 	

@@ -89,7 +89,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		enterSequence_second_region_default();
 		isExecuting = false;
@@ -100,7 +99,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		exitSequence_second_region();
 		isExecuting = false;
@@ -115,7 +113,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -136,7 +133,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		}
 		
 		clearInEvents();
-		
 		isExecuting = false;
 	}
 	

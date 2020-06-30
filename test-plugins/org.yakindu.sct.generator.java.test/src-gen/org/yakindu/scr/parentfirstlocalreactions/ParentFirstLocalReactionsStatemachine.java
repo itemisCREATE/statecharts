@@ -186,7 +186,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		isExecuting = false;
 	}
@@ -196,7 +195,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		isExecuting = false;
 	}
@@ -210,7 +208,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -230,7 +227,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -260,7 +256,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.doSelfTransition = false;
 	}
 	

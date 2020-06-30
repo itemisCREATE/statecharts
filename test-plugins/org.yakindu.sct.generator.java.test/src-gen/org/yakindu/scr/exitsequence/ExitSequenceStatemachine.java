@@ -241,7 +241,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -251,7 +250,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -265,7 +263,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A_r_AA:
@@ -295,7 +292,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 		
 		clearInEvents();
-		
 		isExecuting = false;
 	}
 	
@@ -316,7 +312,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	}
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
 	}
 	

@@ -160,7 +160,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			return;
 		}
 		isExecuting = true;
-		
 		timer.setTimer(this, 0, 2000, true);
 		
 		timer.setTimer(this, 1, 6200, true);
@@ -174,7 +173,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_mr();
 		timer.unsetTimer(this, 0);
 		
@@ -195,7 +193,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -246,7 +243,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			}
 		}
 		
-		
 		isExecuting = false;
 	}
 	
@@ -284,13 +280,9 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	private void clearInEvents() {
 		sCInterface.e1 = false;
-		
 		sCInterface.e2 = false;
-		
 		sCInterface.e3 = false;
-		
 		timeEvents[0] = false;
-		
 		timeEvents[1] = false;
 	}
 	

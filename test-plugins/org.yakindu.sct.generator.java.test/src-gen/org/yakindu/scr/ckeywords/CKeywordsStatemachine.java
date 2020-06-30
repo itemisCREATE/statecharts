@@ -400,7 +400,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_auto_default();
 		isExecuting = false;
 	}
@@ -410,7 +409,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_auto();
 		isExecuting = false;
 	}
@@ -424,7 +422,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -438,7 +435,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -468,7 +464,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.auto = false;
-		
 		sCInterface.breakEvent = false;
 	}
 	

@@ -120,7 +120,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_default_default();
 		enterSequence_operation_default();
 		enterSequence_namespace_default();
@@ -149,7 +148,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_default();
 		exitSequence_operation();
 		exitSequence_namespace();
@@ -182,7 +180,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -308,7 +305,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			}
 		}
 		
-		
 		isExecuting = false;
 	}
 	
@@ -337,7 +333,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	
 	private void clearInEvents() {
 		sCInterface.e1 = false;
-		
 		sCInterface.e2 = false;
 	}
 	

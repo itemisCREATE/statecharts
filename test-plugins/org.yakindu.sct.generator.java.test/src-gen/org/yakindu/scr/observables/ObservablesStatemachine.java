@@ -76,7 +76,6 @@ public class ObservablesStatemachine implements IObservablesStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -86,7 +85,6 @@ public class ObservablesStatemachine implements IObservablesStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -100,7 +98,6 @@ public class ObservablesStatemachine implements IObservablesStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -110,7 +107,6 @@ public class ObservablesStatemachine implements IObservablesStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

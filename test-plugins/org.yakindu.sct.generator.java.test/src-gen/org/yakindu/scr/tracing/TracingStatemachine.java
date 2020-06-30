@@ -60,7 +60,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -70,7 +69,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -84,7 +82,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -97,7 +94,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -219,9 +215,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			
 			exitSequence_main_region_StateA();
-			
 			enterSequence_main_region__final__default();
 		}
 		if (did_transition==false) {

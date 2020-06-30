@@ -108,7 +108,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -118,7 +117,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -132,7 +130,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -149,7 +146,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -185,11 +181,8 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	
 	private void clearInEvents() {
 		sCInterface.toZ = false;
-		
 		sCInterface.toY = false;
-		
 		sCInterface.toC = false;
-		
 		sCInterface.toA = false;
 	}
 	

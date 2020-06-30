@@ -129,11 +129,11 @@ class Statemachine {
 		«flow.createFieldDeclarations(entry)»
 		«flow.createConstructor»
 		«flow.init»
-		«flow.methods.filter[ isPublic ].implementation»
+		«flow.methods.filter[ isPublic ].toImplementation»
 		«flow.isActive»
 		«flow.isFinal»
-		«flow.methods.filter[ !isPublic ].implementation»
-		«flow.getNextEvent»
+		«flow.methods.filter[ !isPublic ].toImplementation»
+		«flow.nextEvent»
 		«flow.isStateActive»
 		«flow.timingFunctions»
 		«flow.interfaceAccessors(entry)»

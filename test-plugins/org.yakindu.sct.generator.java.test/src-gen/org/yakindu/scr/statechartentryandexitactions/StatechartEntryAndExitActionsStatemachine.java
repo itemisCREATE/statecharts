@@ -89,7 +89,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 			return;
 		}
 		isExecuting = true;
-		
 		sCInterface.setX(2);
 		
 		sCInterface.setY(3);
@@ -106,7 +105,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		sCInterface.setX(8);
 		
@@ -127,7 +125,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case statechartEntryAndExitActions_main_region_A:
@@ -137,7 +134,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

@@ -113,7 +113,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		isExecuting = false;
@@ -124,7 +123,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r1();
 		exitSequence_r2();
 		isExecuting = false;
@@ -139,7 +137,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstTransitionTaking_r1_A_r1_AA:
@@ -178,7 +175,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 		
 		clearInEvents();
-		
 		isExecuting = false;
 	}
 	
@@ -199,7 +195,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	}
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.go = false;
 	}
 	

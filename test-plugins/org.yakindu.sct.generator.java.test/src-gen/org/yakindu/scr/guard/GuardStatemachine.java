@@ -103,7 +103,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -113,7 +112,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -127,7 +125,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -141,7 +138,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -174,9 +170,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.event1 = false;
-		
 		sCInterface.event2 = false;
-		
 		sCInterface.returnEvent = false;
 	}
 	

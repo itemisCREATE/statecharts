@@ -71,7 +71,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		enterSequence_another_region_default();
 		isExecuting = false;
@@ -82,7 +81,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		exitSequence_another_region();
 		isExecuting = false;
@@ -97,7 +95,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -128,7 +125,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

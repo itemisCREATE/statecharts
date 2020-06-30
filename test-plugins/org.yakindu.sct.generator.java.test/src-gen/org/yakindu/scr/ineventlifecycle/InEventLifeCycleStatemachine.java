@@ -84,7 +84,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -94,7 +93,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -108,7 +106,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -119,7 +116,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

@@ -222,7 +222,6 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -232,7 +231,6 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -246,7 +244,6 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		clearOutEvents();
 		nextEvent();
 		do { 
@@ -295,7 +292,6 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			nextEvent();
 		} while (((((((sCInterface.inEvent || sCInterface.inEventBool) || sCINamedI.namedInEvent) || locEvent) || e1) || e2) || e3));
 		
-		
 		isExecuting = false;
 	}
 	
@@ -314,31 +310,22 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	}
 	private void clearOutEvents() {
 		sCInterface.outEvent = false;
-		
 		sCInterface.running = false;
-		
 		sCInterface.oe1 = false;
-		
 		sCInterface.oe2 = false;
-		
 		sCInterface.oe3 = false;
 	}
 	
 	private void clearInEvents() {
 		sCInterface.inEvent = false;
-		
 		sCInterface.inEventBool = false;
-		
 		sCINamedI.namedInEvent = false;
 	}
 	
 	private void clearInternalEvents() {
 		locEvent = false;
-		
 		e1 = false;
-		
 		e2 = false;
-		
 		e3 = false;
 	}
 	

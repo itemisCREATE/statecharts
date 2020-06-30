@@ -238,7 +238,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		enterSequence_r2_default();
 		isExecuting = false;
@@ -249,7 +248,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		exitSequence_r2();
 		isExecuting = false;
@@ -264,7 +262,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case parentFirstOrthogonalReactions_r_A_r_AA_r_AAA:
@@ -289,7 +286,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

@@ -147,7 +147,6 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -157,7 +156,6 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -171,7 +169,6 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -198,7 +195,6 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			nextEvent();
 		} while ((((sCInterface.e || sCInterface.f) || sCII.g) || h));
 		
-		
 		isExecuting = false;
 	}
 	
@@ -219,9 +215,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	}
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
-		
 		sCII.g = false;
 	}
 	

@@ -108,7 +108,6 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -118,7 +117,6 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -132,7 +130,6 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			do { 
@@ -174,7 +171,6 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 			nextEvent();
 		} while ((((sCInterface.e || sCInterface.f) || l1) || l2));
 		
-		
 		isExecuting = false;
 	}
 	
@@ -195,13 +191,11 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	}
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
 	}
 	
 	private void clearInternalEvents() {
 		l1 = false;
-		
 		l2 = false;
 	}
 	

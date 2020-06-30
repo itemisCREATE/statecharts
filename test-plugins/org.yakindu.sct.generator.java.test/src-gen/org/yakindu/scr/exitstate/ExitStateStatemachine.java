@@ -94,7 +94,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		isExecuting = false;
 	}
@@ -104,7 +103,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		isExecuting = false;
 	}
@@ -118,7 +116,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -135,7 +132,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -168,9 +164,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
-		
 		sCInterface.g = false;
 	}
 	

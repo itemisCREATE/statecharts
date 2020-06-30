@@ -17,10 +17,8 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
  */
 class TraceCode implements org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode {
 	
-	override traceEnterCode(ExecutionFlow flow) '''
-	'''
+	override traceEnterCode(ExecutionFlow flow) ''''''
 	
-	override traceExitCode(ExecutionFlow flow) '''
-	'''
+	override traceExitCode(ExecutionFlow flow) ''''''
 	
 }

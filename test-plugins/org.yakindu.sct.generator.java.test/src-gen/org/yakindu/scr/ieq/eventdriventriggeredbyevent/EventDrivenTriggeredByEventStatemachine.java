@@ -97,7 +97,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -107,7 +106,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -124,7 +122,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -143,7 +140,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			clearInEvents();
 			nextEvent();
 		} while ((sCInterface.e || timeEvents[0]));
-		
 		
 		isExecuting = false;
 	}
@@ -165,7 +161,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	}
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		timeEvents[0] = false;
 	}
 	

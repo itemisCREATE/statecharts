@@ -186,7 +186,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		timer.setTimer(this, 1, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
@@ -198,7 +197,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		timer.unsetTimer(this, 1);
 		
@@ -217,7 +215,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -234,7 +231,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -265,9 +261,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.ev_in = false;
-		
 		timeEvents[0] = false;
-		
 		timeEvents[1] = false;
 	}
 	

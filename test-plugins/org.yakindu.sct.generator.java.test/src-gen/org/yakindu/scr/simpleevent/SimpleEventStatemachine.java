@@ -75,7 +75,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -85,7 +84,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -99,7 +97,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -116,7 +113,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

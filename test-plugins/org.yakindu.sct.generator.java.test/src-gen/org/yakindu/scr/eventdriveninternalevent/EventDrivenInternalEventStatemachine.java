@@ -144,7 +144,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		enterSequence_check_default();
@@ -156,7 +155,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r1();
 		exitSequence_r2();
 		exitSequence_check();
@@ -172,7 +170,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -205,7 +202,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			nextEvent();
 		} while ((((sCInterface.start || sCInterface.reset) || i1) || i2));
 		
-		
 		isExecuting = false;
 	}
 	
@@ -226,13 +222,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	private void clearInEvents() {
 		sCInterface.start = false;
-		
 		sCInterface.reset = false;
 	}
 	
 	private void clearInternalEvents() {
 		i1 = false;
-		
 		i2 = false;
 	}
 	

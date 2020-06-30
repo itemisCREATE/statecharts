@@ -108,7 +108,6 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -118,7 +117,6 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -132,7 +130,6 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		do { 
 			stateConfVectorChanged = false;
@@ -165,7 +162,6 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			}
 		} while (getStateConfVectorChanged());
 		
-		
 		isExecuting = false;
 	}
 	
@@ -194,7 +190,6 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
 	}
 	

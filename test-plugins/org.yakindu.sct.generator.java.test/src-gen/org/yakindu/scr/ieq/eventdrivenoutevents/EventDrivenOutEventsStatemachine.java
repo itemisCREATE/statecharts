@@ -97,7 +97,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		enterSequence_second_region_default();
 		isExecuting = false;
@@ -108,7 +107,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		exitSequence_second_region();
 		isExecuting = false;
@@ -123,7 +121,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -148,7 +145,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			clearInEvents();
 			nextEvent();
 		} while (sCInterface.e1);
-		
 		
 		isExecuting = false;
 	}

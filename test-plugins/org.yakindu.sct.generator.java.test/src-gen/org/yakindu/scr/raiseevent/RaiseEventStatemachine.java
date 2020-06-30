@@ -96,7 +96,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		enterSequence_second_region_default();
 		isExecuting = false;
@@ -107,7 +106,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		exitSequence_second_region();
 		isExecuting = false;
@@ -122,7 +120,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -142,7 +139,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

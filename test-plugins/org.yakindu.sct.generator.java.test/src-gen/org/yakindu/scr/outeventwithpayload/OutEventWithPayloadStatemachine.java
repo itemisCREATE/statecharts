@@ -108,7 +108,6 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -118,7 +117,6 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -132,7 +130,6 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 			return;
 		}
 		isExecuting = true;
-		
 		clearOutEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -145,7 +142,6 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		}
 		
 		clearInEvents();
-		
 		isExecuting = false;
 	}
 	

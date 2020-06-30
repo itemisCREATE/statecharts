@@ -618,7 +618,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_goto_default();
 		isExecuting = false;
 	}
@@ -628,7 +627,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_goto();
 		isExecuting = false;
 	}
@@ -642,7 +640,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -662,7 +659,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -692,7 +688,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.whileEvent = false;
-		
 		sCInterface.ev = false;
 	}
 	

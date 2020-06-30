@@ -122,7 +122,7 @@ class FlowCode {
 		if (isStateMachineConcept) {
 			flow.stateMachineConceptCode(it)
 		} else {
-			steps.map[code].join('\n')
+			steps.map[code.toString].filter[!nullOrEmpty].join('\n')
 		}
 	}
 	

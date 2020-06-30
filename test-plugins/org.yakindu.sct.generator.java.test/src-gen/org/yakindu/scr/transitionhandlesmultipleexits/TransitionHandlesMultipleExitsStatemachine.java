@@ -98,7 +98,6 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -108,7 +107,6 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -122,7 +120,6 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case transitionHandlesMultipleExits_main_region_A_r_AA:
@@ -137,7 +134,6 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		}
 		
 		clearInEvents();
-		
 		isExecuting = false;
 	}
 	
@@ -158,9 +154,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	}
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
-		
 		sCInterface.g = false;
 	}
 	

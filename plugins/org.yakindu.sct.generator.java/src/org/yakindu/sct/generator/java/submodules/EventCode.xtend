@@ -186,13 +186,11 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 			throw new IllegalStateException("Illegal event value access. Event «name.asEscapedName» is not raised!");
 	'''
 	
-	def getNextEvent(ExecutionFlow it) {
+	def nextEvent(ExecutionFlow it) {
 		// nothing to do for cycle based statecharts
 	}
 	
-	override eventClearCode(ExecutionFlow flow, Expression event) '''
-		«event.code» = false;
-	'''
+	override eventClearCode(ExecutionFlow flow, Expression event) '''«event.code» = false;'''
 	
 	override eventMoveCode(ExecutionFlow flow, Expression source, Expression target) '''
 		«target.code» = «source.code»;

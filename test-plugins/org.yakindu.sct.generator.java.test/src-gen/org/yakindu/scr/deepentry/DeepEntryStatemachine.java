@@ -130,7 +130,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		enterSequence_r2_default();
 		enterSequence_r3_default();
@@ -142,7 +141,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		exitSequence_r2();
 		exitSequence_r3();
@@ -158,7 +156,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -181,7 +178,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -211,7 +207,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
 	}
 	

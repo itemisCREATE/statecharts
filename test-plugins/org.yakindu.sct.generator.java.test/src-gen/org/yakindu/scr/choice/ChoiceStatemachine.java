@@ -113,7 +113,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -123,7 +122,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -137,7 +135,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -154,7 +151,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -190,11 +186,8 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
-		
 		sCInterface.g = false;
-		
 		sCInterface.h = false;
 	}
 	

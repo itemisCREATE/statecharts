@@ -27,14 +27,14 @@ class MethodGenerator {
 	@Inject extension INamingService
 	@Inject extension FlowCode
 
-	def implementation(Iterable<Method> methods) '''
+	def toImplementation(Iterable<Method> methods) '''
 		«FOR m : methods»
-			«m.implementation»
+			«m.toImplementation»
 			
 		«ENDFOR»
 	'''
 	
-	def implementation(Method it) '''
+	def toImplementation(Method it) '''
 		«implementationModifier»«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»«p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
 			«body.code»
 		}

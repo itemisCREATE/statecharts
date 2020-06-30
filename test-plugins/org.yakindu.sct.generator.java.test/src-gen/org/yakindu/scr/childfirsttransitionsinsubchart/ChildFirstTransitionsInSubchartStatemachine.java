@@ -274,7 +274,6 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		enterSequence_r2_default();
 		isExecuting = false;
@@ -285,7 +284,6 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		exitSequence_r2();
 		isExecuting = false;
@@ -300,7 +298,6 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstTransitionsInSubchart_r_A_r1_AA:
@@ -328,7 +325,6 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

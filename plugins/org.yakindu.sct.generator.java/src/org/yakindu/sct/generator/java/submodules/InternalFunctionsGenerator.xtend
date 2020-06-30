@@ -101,7 +101,7 @@ class InternalFunctionsGenerator {
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
-		«reactMethods.implementation»
+		«reactMethods.toImplementation»
 	'''
 	
 	def toImplementation(List<Step> steps) '''

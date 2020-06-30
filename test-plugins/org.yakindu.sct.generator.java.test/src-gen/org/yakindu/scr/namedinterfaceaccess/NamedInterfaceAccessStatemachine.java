@@ -189,7 +189,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_region_1_default();
 		enterSequence__region1_default();
 		isExecuting = false;
@@ -200,7 +199,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_region_1();
 		exitSequence__region1();
 		isExecuting = false;
@@ -215,7 +213,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			return;
 		}
 		isExecuting = true;
-		
 		clearOutEvents();
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -243,7 +240,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			}
 		}
 		
-		
 		isExecuting = false;
 	}
 	
@@ -264,7 +260,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 	private void clearOutEvents() {
 		sCISafe.open = false;
-		
 		sCISafe.close = false;
 	}
 	
@@ -279,7 +274,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 	private void clearInEvents() {
 		sCIUser.numberPressed = false;
-		
 		sCIUser.reset = false;
 	}
 	

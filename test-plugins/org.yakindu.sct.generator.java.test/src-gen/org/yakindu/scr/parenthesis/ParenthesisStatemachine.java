@@ -65,7 +65,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_mainRegion_default();
 		isExecuting = false;
 	}
@@ -75,7 +74,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_mainRegion();
 		isExecuting = false;
 	}
@@ -89,7 +87,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case mainRegion_A:
@@ -99,7 +96,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

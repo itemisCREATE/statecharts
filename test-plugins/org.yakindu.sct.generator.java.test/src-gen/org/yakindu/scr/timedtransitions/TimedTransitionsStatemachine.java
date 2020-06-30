@@ -99,7 +99,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		timer.setTimer(this, 1, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
@@ -111,7 +110,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		timer.unsetTimer(this, 1);
 		
@@ -130,7 +128,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -144,7 +141,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -174,7 +170,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	private void clearInEvents() {
 		timeEvents[0] = false;
-		
 		timeEvents[1] = false;
 	}
 	

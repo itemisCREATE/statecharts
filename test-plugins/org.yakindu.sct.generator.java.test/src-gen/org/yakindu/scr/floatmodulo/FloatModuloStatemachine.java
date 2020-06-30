@@ -110,7 +110,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -120,7 +119,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -134,7 +132,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -147,7 +144,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

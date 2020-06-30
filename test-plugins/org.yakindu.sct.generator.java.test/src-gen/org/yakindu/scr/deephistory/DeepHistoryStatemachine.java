@@ -157,7 +157,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_mainRegion_default();
 		isExecuting = false;
 	}
@@ -167,7 +166,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_mainRegion();
 		isExecuting = false;
 	}
@@ -181,7 +179,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -207,7 +204,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -258,21 +254,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.event1 = false;
-		
 		sCInterface.event2 = false;
-		
 		sCInterface.event3 = false;
-		
 		sCInterface.event4 = false;
-		
 		sCInterface.event5 = false;
-		
 		sCInterface.event6 = false;
-		
 		sCInterface.event7 = false;
-		
 		sCInterface.event8 = false;
-		
 		sCInterface.event9 = false;
 	}
 	

@@ -88,7 +88,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		isExecuting = false;
@@ -99,7 +98,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r1();
 		exitSequence_r2();
 		isExecuting = false;
@@ -114,7 +112,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -136,7 +133,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		}
 		
 		clearInternalEvents();
-		
 		isExecuting = false;
 	}
 	
@@ -165,13 +161,11 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
 	}
 	
 	private void clearInternalEvents() {
 		i1 = false;
-		
 		i2 = false;
 	}
 	

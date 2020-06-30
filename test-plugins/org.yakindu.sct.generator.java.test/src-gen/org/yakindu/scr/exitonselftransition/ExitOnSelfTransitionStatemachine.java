@@ -106,7 +106,6 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -116,7 +115,6 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -130,7 +128,6 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -144,7 +141,6 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -174,7 +170,6 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.f = false;
 	}
 	

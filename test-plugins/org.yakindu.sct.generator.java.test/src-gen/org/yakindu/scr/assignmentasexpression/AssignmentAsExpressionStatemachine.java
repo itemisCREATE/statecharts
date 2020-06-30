@@ -377,7 +377,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -387,7 +386,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -401,7 +399,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Add:
@@ -435,7 +432,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

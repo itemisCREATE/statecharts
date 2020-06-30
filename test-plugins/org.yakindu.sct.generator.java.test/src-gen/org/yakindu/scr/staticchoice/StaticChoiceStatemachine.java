@@ -86,7 +86,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -96,7 +95,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -110,7 +108,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -127,7 +124,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

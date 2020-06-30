@@ -137,7 +137,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r2_default();
 		enterSequence_r1_default();
 		isExecuting = false;
@@ -148,7 +147,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r2();
 		exitSequence_r1();
 		isExecuting = false;
@@ -163,7 +161,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -183,7 +180,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -213,7 +209,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	private void clearInEvents() {
 		sCInterface.b = false;
-		
 		sCInterface.d = false;
 	}
 	

@@ -46,7 +46,6 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		isExecuting = false;
 	}
@@ -56,7 +55,6 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		isExecuting = false;
 	}
@@ -70,7 +68,6 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r_A:
@@ -80,7 +77,6 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

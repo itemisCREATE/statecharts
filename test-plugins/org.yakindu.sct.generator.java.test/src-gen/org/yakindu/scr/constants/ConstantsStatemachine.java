@@ -134,7 +134,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -144,7 +143,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -158,7 +156,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -175,7 +172,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -206,7 +202,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.e2 = false;
 	}
 	

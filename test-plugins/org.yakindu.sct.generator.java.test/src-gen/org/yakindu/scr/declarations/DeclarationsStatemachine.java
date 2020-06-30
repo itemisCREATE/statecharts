@@ -499,7 +499,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -509,7 +508,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -523,7 +521,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -541,7 +538,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			
 			swapInternalEvents();
 		} while ((((((_current.internal.evInA || _current.internal.evInB) || _current.internal.evInC) || _current.internal.evInD) || _current.internal.evInE) || _current.internal.evInF));
-		
 		
 		isExecuting = false;
 	}
@@ -587,31 +583,20 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.evA = false;
-		
 		sCInterface.evC = false;
-		
 		sCInterface.evE = false;
-		
 		sCIIfA.evA = false;
-		
 		sCIIfA.evC = false;
-		
 		sCIIfA.evE = false;
 	}
 	
 	private void swapInternalEvents() {
 		_current.iface.evA = false;
-		
 		_current.iface.evC = false;
-		
 		_current.iface.evE = false;
-		
 		_current.ifaceIfA.evA = false;
-		
 		_current.ifaceIfA.evC = false;
-		
 		_current.ifaceIfA.evE = false;
-		
 		_current.internal.evInA = evInA;
 		evInA = false;
 		
@@ -637,15 +622,10 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	private void clearInternalEvents() {
 		evInA = false;
-		
 		evInB = false;
-		
 		evInC = false;
-		
 		evInD = false;
-		
 		evInE = false;
-		
 		evInF = false;
 	}
 	

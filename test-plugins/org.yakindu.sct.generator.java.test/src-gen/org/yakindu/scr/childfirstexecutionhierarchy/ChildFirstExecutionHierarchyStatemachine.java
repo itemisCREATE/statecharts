@@ -183,7 +183,6 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		isExecuting = false;
 	}
@@ -193,7 +192,6 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		isExecuting = false;
 	}
@@ -207,7 +205,6 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -221,7 +218,6 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

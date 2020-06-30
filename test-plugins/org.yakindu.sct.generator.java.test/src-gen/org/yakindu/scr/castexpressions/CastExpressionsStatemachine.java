@@ -79,7 +79,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -89,7 +88,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -103,7 +101,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -119,7 +116,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

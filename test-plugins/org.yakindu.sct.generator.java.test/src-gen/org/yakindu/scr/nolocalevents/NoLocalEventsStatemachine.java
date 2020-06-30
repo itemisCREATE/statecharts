@@ -95,7 +95,6 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -105,7 +104,6 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -119,7 +117,6 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case noLocalEvents_main_region_StateA:
@@ -134,7 +131,6 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		}
 		
 		clearInEvents();
-		
 		isExecuting = false;
 	}
 	
@@ -155,7 +151,6 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 	}
 	private void clearInEvents() {
 		sCInterface.e = false;
-		
 		sCInterface.i = false;
 	}
 	

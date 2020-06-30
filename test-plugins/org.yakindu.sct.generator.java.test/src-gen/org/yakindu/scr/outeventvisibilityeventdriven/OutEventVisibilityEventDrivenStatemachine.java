@@ -127,7 +127,6 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -137,7 +136,6 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -151,7 +149,6 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 			return;
 		}
 		isExecuting = true;
-		
 		clearOutEvents();
 		nextEvent();
 		do { 
@@ -182,7 +179,6 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 			nextEvent();
 		} while ((sCInterface.i || l));
 		
-		
 		isExecuting = false;
 	}
 	
@@ -203,7 +199,6 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	}
 	private void clearOutEvents() {
 		sCInterface.o1 = false;
-		
 		sCInterface.o2 = false;
 	}
 	

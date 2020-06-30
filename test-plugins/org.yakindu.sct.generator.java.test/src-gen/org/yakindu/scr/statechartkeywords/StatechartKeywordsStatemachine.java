@@ -283,7 +283,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			return;
 		}
 		isExecuting = true;
-		
 		timer.setTimer(this, 0, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
@@ -295,7 +294,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		timer.unsetTimer(this, 0);
 		
@@ -314,7 +312,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -329,7 +326,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			
 			swapInternalEvents();
 		} while ((_current.internal.operationCallback || _current.internal.listeners));
-		
 		
 		isExecuting = false;
 	}
@@ -360,7 +356,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	private void swapInternalEvents() {
 		_current.timeEvents.statechartKeywords_time_event_0 = false;
-		
 		_current.internal.operationCallback = operationCallbackEvent;
 		operationCallbackEvent = false;
 		
@@ -370,7 +365,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	private void clearInternalEvents() {
 		operationCallbackEvent = false;
-		
 		listeners = false;
 	}
 	

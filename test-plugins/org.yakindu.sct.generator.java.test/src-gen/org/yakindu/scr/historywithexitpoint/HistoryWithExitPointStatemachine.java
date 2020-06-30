@@ -98,7 +98,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_mr_default();
 		isExecuting = false;
 	}
@@ -108,7 +107,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_mr();
 		isExecuting = false;
 	}
@@ -122,7 +120,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -139,7 +136,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -172,9 +168,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	
 	private void clearInEvents() {
 		sCInterface.push = false;
-		
 		sCInterface.back = false;
-		
 		sCInterface.next = false;
 	}
 	

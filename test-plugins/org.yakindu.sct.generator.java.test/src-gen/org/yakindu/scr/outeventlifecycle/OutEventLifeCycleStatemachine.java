@@ -123,7 +123,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		isExecuting = false;
@@ -134,7 +133,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r1();
 		exitSequence_r2();
 		isExecuting = false;
@@ -149,7 +147,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			return;
 		}
 		isExecuting = true;
-		
 		clearOutEvents();
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -167,7 +164,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

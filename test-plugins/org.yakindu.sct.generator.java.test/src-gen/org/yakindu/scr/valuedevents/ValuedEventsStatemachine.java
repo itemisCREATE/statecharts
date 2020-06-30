@@ -199,7 +199,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region1_default();
 		enterSequence_integer_region_default();
 		enterSequence_boolean_region_default();
@@ -213,7 +212,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region1();
 		exitSequence_integer_region();
 		exitSequence_boolean_region();
@@ -231,7 +229,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -279,7 +276,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			}
 		}
 		
-		
 		isExecuting = false;
 	}
 	
@@ -318,11 +314,8 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	
 	private void clearInEvents() {
 		sCInterface.integerEvent = false;
-		
 		sCInterface.booleanEvent = false;
-		
 		sCInterface.realEvent = false;
-		
 		sCInterface.stringEvent = false;
 	}
 	

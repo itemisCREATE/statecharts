@@ -69,7 +69,7 @@ class EventDrivenEventCode extends EventCode {
 	
 	override eventNextCode(ExecutionFlow flow) '''nextEvent();'''
 	
-	override getNextEvent(ExecutionFlow it) '''
+	override nextEvent(ExecutionFlow it) '''
 		protected void nextEvent() {
 			«IF needsInternalEventQueue»
 			if(!internalEventQueue.isEmpty()) {

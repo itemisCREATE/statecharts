@@ -93,7 +93,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_r_default();
 		isExecuting = false;
 	}
@@ -103,7 +102,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_r();
 		isExecuting = false;
 	}
@@ -120,7 +118,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -139,7 +136,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			clearInEvents();
 			nextEvent();
 		} while ((timeEvents[0] || timeEvents[1]));
-		
 		
 		isExecuting = false;
 	}
@@ -161,7 +157,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	}
 	private void clearInEvents() {
 		timeEvents[0] = false;
-		
 		timeEvents[1] = false;
 	}
 	

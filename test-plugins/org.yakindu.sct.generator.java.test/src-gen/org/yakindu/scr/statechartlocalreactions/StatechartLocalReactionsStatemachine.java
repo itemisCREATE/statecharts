@@ -67,7 +67,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		enterSequence_region2_default();
 		isExecuting = false;
@@ -78,7 +77,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		exitSequence_region2();
 		isExecuting = false;
@@ -93,7 +91,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 			return;
 		}
 		isExecuting = true;
-		
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_S1:
@@ -109,7 +106,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}

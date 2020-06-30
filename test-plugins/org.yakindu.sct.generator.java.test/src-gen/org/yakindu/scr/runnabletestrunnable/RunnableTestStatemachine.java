@@ -230,7 +230,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			return;
 		}
 		isExecuting = true;
-		
 		timer.setTimer(this, 2, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
@@ -242,7 +241,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		timer.unsetTimer(this, 2);
 		
@@ -261,7 +259,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			return;
 		}
 		isExecuting = true;
-		
 		nextEvent();
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -284,7 +281,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			nextEvent();
 		} while ((((sCInterface.ev_in || timeEvents[0]) || timeEvents[1]) || timeEvents[2]));
 		
-		
 		isExecuting = false;
 	}
 	
@@ -303,11 +299,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	}
 	private void clearInEvents() {
 		sCInterface.ev_in = false;
-		
 		timeEvents[0] = false;
-		
 		timeEvents[1] = false;
-		
 		timeEvents[2] = false;
 	}
 	

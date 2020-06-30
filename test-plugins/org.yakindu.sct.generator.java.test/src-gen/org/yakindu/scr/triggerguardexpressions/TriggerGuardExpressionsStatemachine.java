@@ -94,7 +94,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 			return;
 		}
 		isExecuting = true;
-		
 		enterSequence_main_region_default();
 		isExecuting = false;
 	}
@@ -104,7 +103,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 			return;
 		}
 		isExecuting = true;
-		
 		exitSequence_main_region();
 		isExecuting = false;
 	}
@@ -118,7 +116,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 			return;
 		}
 		isExecuting = true;
-		
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
@@ -132,7 +129,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 				// $NullState$
 			}
 		}
-		
 		
 		isExecuting = false;
 	}
@@ -162,7 +158,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 	
 	private void clearInEvents() {
 		sCInterface.e1 = false;
-		
 		sCInterface.e2 = false;
 	}
 	
