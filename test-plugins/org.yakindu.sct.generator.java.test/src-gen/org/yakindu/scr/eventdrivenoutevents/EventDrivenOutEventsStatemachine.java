@@ -81,6 +81,10 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	}
 	
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}
@@ -103,6 +107,10 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	}
 	
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}

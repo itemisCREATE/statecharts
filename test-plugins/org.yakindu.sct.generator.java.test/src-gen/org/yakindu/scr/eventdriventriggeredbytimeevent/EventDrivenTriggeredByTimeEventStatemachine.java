@@ -79,6 +79,13 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	}
 	
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		if (timer == null) {
+			throw new IllegalStateException("timer not set.");
+		}
+		
 		if (getIsExecuting()) {
 			return;
 		}
@@ -99,6 +106,13 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	}
 	
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		if (timer == null) {
+			throw new IllegalStateException("timer not set.");
+		}
+		
 		if (getIsExecuting()) {
 			return;
 		}

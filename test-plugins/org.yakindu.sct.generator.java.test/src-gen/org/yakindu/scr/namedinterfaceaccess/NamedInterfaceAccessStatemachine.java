@@ -181,6 +181,10 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 	
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}
@@ -203,6 +207,10 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 	
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}

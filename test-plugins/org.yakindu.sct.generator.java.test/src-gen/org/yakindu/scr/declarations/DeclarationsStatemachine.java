@@ -491,6 +491,10 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 	
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}
@@ -511,6 +515,10 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 	
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}

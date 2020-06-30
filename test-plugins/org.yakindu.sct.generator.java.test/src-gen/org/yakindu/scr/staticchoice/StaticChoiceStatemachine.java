@@ -78,6 +78,10 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	}
 	
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}
@@ -98,6 +102,10 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	}
 	
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}

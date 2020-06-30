@@ -129,6 +129,10 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	}
 	
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}
@@ -151,6 +155,10 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	}
 	
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
 		if (getIsExecuting()) {
 			return;
 		}
