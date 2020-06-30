@@ -24,11 +24,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

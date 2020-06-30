@@ -33,14 +33,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			toA = true;
 		}
 		
-		protected void clearEvents() {
-			toZ = false;
-			toY = false;
-			toC = false;
-			toA = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean toZ;

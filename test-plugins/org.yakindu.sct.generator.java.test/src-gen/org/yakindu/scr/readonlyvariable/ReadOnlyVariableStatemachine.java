@@ -47,7 +47,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		
 	}
 	
-	
 	protected class SCIAImpl implements SCIA {
 	
 		private long myInt;
@@ -91,7 +90,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		}
 		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

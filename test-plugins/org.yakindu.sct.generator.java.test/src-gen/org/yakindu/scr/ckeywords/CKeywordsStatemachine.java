@@ -279,12 +279,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.whileVariable = value;
 		}
 		
-		protected void clearEvents() {
-			auto = false;
-			breakEvent = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean auto;

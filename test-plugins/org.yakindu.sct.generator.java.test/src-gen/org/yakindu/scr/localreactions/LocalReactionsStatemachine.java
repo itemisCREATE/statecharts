@@ -17,7 +17,6 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

@@ -26,13 +26,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 			next = true;
 		}
 		
-		protected void clearEvents() {
-			push = false;
-			back = false;
-			next = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean push;

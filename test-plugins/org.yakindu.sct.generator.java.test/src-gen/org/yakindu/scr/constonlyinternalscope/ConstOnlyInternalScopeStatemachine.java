@@ -20,11 +20,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 			return eValue;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

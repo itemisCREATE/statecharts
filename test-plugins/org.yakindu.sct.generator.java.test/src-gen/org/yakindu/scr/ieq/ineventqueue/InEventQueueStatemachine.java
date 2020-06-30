@@ -57,12 +57,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			this.cycles = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	protected class SCIIImpl implements SCII {
 	
@@ -79,11 +74,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			runCycle();
 		}
 		
-		protected void clearEvents() {
-			g = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

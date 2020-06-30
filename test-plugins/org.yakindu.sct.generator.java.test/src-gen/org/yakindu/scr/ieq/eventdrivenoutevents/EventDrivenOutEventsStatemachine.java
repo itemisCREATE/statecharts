@@ -35,16 +35,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return e2Observable;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-		}
-		protected void clearOutEvents() {
-		
-		e2 = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

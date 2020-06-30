@@ -28,7 +28,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

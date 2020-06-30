@@ -29,12 +29,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

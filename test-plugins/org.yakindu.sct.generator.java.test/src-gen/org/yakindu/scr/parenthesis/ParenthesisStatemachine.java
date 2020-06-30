@@ -17,7 +17,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

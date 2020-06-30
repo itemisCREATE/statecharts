@@ -52,11 +52,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 			this.y = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

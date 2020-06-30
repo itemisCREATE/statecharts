@@ -122,21 +122,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			return oe3Observable;
 		}
 		
-		protected void clearEvents() {
-			inEvent = false;
-			inEventBool = false;
-		}
-		protected void clearOutEvents() {
-		
-		outEvent = false;
-		running = false;
-		oe1 = false;
-		oe2 = false;
-		oe3 = false;
-		}
-		
 	}
-	
 	
 	protected class SCINamedIImpl implements SCINamedI {
 	
@@ -148,11 +134,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			runCycle();
 		}
 		
-		protected void clearEvents() {
-			namedInEvent = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

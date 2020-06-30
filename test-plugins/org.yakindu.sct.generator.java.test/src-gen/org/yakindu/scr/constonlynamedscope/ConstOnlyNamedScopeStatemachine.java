@@ -20,11 +20,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 			return eValue;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	protected class SCIAImpl implements SCIA {
 	
@@ -37,7 +33,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		}
 		
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

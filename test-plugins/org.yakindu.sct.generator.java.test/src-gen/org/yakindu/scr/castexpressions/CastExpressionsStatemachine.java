@@ -27,7 +27,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

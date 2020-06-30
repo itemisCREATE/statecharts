@@ -19,12 +19,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			f = true;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

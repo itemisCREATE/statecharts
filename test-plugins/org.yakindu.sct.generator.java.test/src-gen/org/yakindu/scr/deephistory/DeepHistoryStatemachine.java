@@ -68,19 +68,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			event9 = true;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-			event2 = false;
-			event3 = false;
-			event4 = false;
-			event5 = false;
-			event6 = false;
-			event7 = false;
-			event8 = false;
-			event9 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean event1;

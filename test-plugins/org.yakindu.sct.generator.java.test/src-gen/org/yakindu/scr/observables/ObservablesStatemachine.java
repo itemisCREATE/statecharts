@@ -20,15 +20,7 @@ public class ObservablesStatemachine implements IObservablesStatemachine {
 			return dummyObservable;
 		}
 		
-		protected void clearEvents() {
-		}
-		protected void clearOutEvents() {
-		
-		dummy = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

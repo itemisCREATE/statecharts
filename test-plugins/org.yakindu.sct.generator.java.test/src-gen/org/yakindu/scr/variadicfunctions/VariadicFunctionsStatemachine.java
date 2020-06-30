@@ -13,7 +13,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		}
 	}
 	
-	
 	protected class SCIIF2Impl implements SCIIF2 {
 	
 		private SCIIF2OperationCallback operationCallback;
@@ -23,7 +22,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			this.operationCallback = operationCallback;
 		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

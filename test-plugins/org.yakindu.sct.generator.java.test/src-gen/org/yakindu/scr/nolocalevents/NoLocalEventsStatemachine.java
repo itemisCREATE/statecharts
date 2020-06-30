@@ -39,12 +39,7 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			i = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

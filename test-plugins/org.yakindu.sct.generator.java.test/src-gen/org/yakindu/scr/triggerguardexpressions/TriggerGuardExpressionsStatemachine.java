@@ -29,12 +29,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 			this.b = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-			e2 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e1;

@@ -32,11 +32,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 			this.myString = value;
 		}
 		
-		protected void clearEvents() {
-			myEvent = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean myEvent;

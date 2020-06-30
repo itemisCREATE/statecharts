@@ -10,7 +10,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

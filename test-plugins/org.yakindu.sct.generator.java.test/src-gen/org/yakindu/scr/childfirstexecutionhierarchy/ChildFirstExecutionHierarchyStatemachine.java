@@ -102,11 +102,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			this.aaa_local = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

@@ -102,11 +102,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			this.guardStringEqual = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

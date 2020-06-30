@@ -105,14 +105,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			this.myString = value;
 		}
 		
-		protected void clearEvents() {
-			integerEvent = false;
-			booleanEvent = false;
-			realEvent = false;
-			stringEvent = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean integerEvent;

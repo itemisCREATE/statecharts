@@ -36,13 +36,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 			this.myVar = value;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-			event2 = false;
-			returnEvent = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean event1;

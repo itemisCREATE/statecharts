@@ -41,12 +41,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			this.caLocalReaction = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			go = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

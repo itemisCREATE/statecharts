@@ -104,16 +104,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			this.runCycle = value;
 		}
 		
-		protected void clearEvents() {
-		}
-		protected void clearOutEvents() {
-		
-		operationCallbackEvent = false;
-		listenersEvent = false;
-		}
-		
 	}
-	
 	
 	private static class StatechartKeywordsStatemachineInternalEvBuf {
 		private boolean operationCallback;

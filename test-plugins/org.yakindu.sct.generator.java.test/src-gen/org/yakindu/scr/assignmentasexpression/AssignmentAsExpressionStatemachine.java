@@ -277,7 +277,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

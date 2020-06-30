@@ -19,12 +19,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			e2 = true;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-			e2 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e1;

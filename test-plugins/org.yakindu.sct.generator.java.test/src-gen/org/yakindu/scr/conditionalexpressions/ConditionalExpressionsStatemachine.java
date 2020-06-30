@@ -52,11 +52,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			this.stringCondition = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

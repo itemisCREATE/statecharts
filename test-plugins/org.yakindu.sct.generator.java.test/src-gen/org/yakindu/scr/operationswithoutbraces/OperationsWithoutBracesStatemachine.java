@@ -13,7 +13,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		}
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

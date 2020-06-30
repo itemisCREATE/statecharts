@@ -90,16 +90,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			}
 		}
 		
-		protected void clearEvents() {
-			ev_in = false;
-		}
-		protected void clearOutEvents() {
-		
-		ev_out = false;
-		}
-		
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean ev_in;

@@ -59,12 +59,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 			this.e2_transition = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-			e2 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e1;

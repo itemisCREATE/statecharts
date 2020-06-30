@@ -32,43 +32,6 @@ class InternalFunctionsGenerator {
 	@Inject extension EventCode
 	@Inject extension MethodGenerator
 	
-	def clearInEvents(ExecutionFlow flow) '''
-		/**
-		* This method resets the incoming events (time events included).
-		*/
-		protected void clearEvents() {
-			«FOR scope : flow.interfaceScopes»
-				«IF scope.hasEvents»
-					«scope.interfaceName.asEscapedIdentifier».clearEvents();
-				«ENDIF»
-			«ENDFOR»
-			«FOR scope : flow.internalScopes»
-				«FOR event : scope.eventDefinitions»
-				«event.identifier» = false;
-				«ENDFOR»
-			«ENDFOR»
-			«IF flow.timed»
-			for (int i=0; i<timeEvents.length; i++) {
-				timeEvents[i] = false;
-			}
-			«ENDIF»
-		}
-
-	'''
-	def clearOutEvents(ExecutionFlow flow) '''
-		/**
-		* This method resets the outgoing events.
-		*/
-		protected void clearOutEvents() {
-			«FOR scope : flow.interfaceScopes»
-				«IF scope.hasOutgoingEvents»
-					«scope.interfaceName.asEscapedIdentifier».clearOutEvents();
-				«ENDIF»
-			«ENDFOR»
-		}
-
-	'''
-	
 	def internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
 			«IF event.isInEvent»

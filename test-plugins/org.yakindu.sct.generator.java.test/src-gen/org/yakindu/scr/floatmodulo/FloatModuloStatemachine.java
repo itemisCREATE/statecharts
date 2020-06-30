@@ -27,7 +27,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 	}
 	
-	
 	protected class SCIAImpl implements SCIA {
 	
 		private double r;
@@ -51,7 +50,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		}
 		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

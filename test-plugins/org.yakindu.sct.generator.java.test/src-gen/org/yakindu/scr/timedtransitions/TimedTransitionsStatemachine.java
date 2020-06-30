@@ -28,7 +28,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		
 	}
 	
-	
 	private static class TimedTransitionsStatemachineTimeEventsEvBuf {
 		private boolean timedTransitions_main_region_Start_time_event_0;
 		private boolean timedTransitions_time_event_0;

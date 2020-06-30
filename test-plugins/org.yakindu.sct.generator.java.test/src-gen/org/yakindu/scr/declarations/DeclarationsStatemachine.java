@@ -141,20 +141,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varE = value;
 		}
 		
-		protected void clearEvents() {
-			evA = false;
-			evC = false;
-			evE = false;
-		}
-		protected void clearOutEvents() {
-		
-		evB = false;
-		evD = false;
-		evF = false;
-		}
-		
 	}
-	
 	
 	protected class SCIIfAImpl implements SCIIfA {
 	
@@ -293,20 +280,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varE = value;
 		}
 		
-		protected void clearEvents() {
-			evA = false;
-			evC = false;
-			evE = false;
-		}
-		protected void clearOutEvents() {
-		
-		evB = false;
-		evD = false;
-		evF = false;
-		}
-		
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean evA;

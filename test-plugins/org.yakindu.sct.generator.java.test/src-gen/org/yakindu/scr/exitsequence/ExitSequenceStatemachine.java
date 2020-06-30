@@ -151,12 +151,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.c = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

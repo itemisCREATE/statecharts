@@ -26,13 +26,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 			g = true;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-			g = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

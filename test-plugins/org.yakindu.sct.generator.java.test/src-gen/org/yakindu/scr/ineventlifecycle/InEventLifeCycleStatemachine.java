@@ -22,11 +22,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 			this.i = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

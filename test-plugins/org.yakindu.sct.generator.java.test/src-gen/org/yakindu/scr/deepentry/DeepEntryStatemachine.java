@@ -49,12 +49,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			this.z = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

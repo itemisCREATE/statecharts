@@ -183,7 +183,6 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

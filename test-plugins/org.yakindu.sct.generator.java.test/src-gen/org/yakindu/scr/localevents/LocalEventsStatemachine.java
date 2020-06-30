@@ -55,11 +55,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			this.checksum = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

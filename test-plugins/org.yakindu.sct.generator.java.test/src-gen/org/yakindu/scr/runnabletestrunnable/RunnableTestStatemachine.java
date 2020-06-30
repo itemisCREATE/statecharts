@@ -143,16 +143,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			}
 		}
 		
-		protected void clearEvents() {
-			ev_in = false;
-		}
-		protected void clearOutEvents() {
-		
-		ev_out = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

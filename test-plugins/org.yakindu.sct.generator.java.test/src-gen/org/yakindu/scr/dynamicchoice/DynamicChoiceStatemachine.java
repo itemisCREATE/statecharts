@@ -22,11 +22,7 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 			this.number = value;
 		}
 		
-		protected void clearEvents() {
-			reset = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean reset;

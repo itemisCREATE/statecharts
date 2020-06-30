@@ -71,17 +71,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			this.i2_sequence = value;
 		}
 		
-		protected void clearEvents() {
-			start = false;
-			reset = false;
-		}
-		protected void clearOutEvents() {
-		
-		e = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

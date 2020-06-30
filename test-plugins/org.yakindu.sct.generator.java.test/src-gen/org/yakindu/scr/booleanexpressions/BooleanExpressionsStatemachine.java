@@ -82,11 +82,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 			this.notequal = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e1;

@@ -15,7 +15,6 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 	}
 	
-	
 	protected class SCIAImpl implements SCIA {
 	
 		private boolean e;
@@ -33,11 +32,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 			return eValue;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCIAEvBuf {
 		private boolean e;

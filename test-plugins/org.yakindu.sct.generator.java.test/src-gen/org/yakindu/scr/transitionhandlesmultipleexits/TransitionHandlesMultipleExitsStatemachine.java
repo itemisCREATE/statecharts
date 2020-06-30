@@ -39,13 +39,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-			g = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

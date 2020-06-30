@@ -43,14 +43,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 			this.c = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-			g = false;
-			h = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

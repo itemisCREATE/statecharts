@@ -153,7 +153,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

@@ -59,12 +59,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			this.enteredBother = value;
 		}
 		
-		protected void clearEvents() {
-			b = false;
-			d = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean b;

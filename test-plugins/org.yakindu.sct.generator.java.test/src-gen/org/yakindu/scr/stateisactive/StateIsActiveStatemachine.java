@@ -12,11 +12,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 			event1 = true;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean event1;

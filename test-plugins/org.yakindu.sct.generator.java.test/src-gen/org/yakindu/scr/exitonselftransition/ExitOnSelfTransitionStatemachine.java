@@ -39,12 +39,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 			this.exitCount = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

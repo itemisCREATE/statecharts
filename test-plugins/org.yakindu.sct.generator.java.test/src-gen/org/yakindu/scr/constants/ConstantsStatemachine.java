@@ -45,12 +45,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			this.result = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			e2 = false;
-		}
 	}
-	
 	
 	protected class SCINamedImpl implements SCINamed {
 	
@@ -63,7 +58,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 		
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

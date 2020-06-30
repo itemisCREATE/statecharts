@@ -26,13 +26,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			g = true;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-			g = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

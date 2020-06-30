@@ -27,16 +27,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 			e2 = true;
 		}
 		
-		protected void clearEvents() {
-			e2 = false;
-		}
-		protected void clearOutEvents() {
-		
-		e1 = false;
-		}
-		
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e2;

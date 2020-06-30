@@ -31,7 +31,6 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

@@ -33,14 +33,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 			next = true;
 		}
 		
-		protected void clearEvents() {
-			toA = false;
-			toB = false;
-			toHistory = false;
-			next = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean toA;

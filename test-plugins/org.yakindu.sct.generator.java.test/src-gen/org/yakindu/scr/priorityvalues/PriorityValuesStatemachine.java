@@ -19,12 +19,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 			event2 = true;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-			event2 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean event1;

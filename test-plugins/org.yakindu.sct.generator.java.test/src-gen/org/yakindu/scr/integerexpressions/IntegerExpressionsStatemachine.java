@@ -252,11 +252,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.decrementAssign = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e1;

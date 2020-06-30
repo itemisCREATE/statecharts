@@ -459,12 +459,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.volatileVariable = value;
 		}
 		
-		protected void clearEvents() {
-			whileEvent = false;
-			ev = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean whileEvent;

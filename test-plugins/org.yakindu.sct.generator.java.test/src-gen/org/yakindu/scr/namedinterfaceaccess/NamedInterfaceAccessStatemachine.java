@@ -42,16 +42,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			return closeObservable;
 		}
 		
-		protected void clearEvents() {
-		}
-		protected void clearOutEvents() {
-		
-		open = false;
-		close = false;
-		}
-		
 	}
-	
 	
 	protected class SCIUserImpl implements SCIUser {
 	
@@ -77,12 +68,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			reset = true;
 		}
 		
-		protected void clearEvents() {
-			numberPressed = false;
-			reset = false;
-		}
 	}
-	
 	
 	private static class SCIUserEvBuf {
 		private boolean numberPressed;

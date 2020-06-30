@@ -61,18 +61,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 			event8 = true;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-			event2 = false;
-			event3 = false;
-			event4 = false;
-			event5 = false;
-			event6 = false;
-			event7 = false;
-			event8 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean event1;

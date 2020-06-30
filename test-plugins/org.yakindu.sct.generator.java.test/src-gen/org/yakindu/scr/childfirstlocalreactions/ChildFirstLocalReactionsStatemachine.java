@@ -103,12 +103,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 			this.sm_local = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			doSelfTransition = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

@@ -60,17 +60,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 			return o2Observable;
 		}
 		
-		protected void clearEvents() {
-			i = false;
-		}
-		protected void clearOutEvents() {
-		
-		o1 = false;
-		o2 = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

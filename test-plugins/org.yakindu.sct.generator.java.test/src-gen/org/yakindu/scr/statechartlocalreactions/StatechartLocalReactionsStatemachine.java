@@ -17,7 +17,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

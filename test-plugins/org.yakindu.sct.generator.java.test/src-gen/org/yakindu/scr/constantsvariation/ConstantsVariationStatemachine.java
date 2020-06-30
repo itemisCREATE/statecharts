@@ -23,7 +23,6 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		
 	}
 	
-	
 	protected class SCINamedImpl implements SCINamed {
 	
 		public boolean getB() {
@@ -43,7 +42,6 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		}
 		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

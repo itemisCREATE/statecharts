@@ -33,12 +33,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

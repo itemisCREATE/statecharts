@@ -13,7 +13,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 	}
 	
-	
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private SCInterfaceOperationCallback operationCallback;
@@ -29,11 +28,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			ev = true;
 		}
 		
-		protected void clearEvents() {
-			ev = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean ev;

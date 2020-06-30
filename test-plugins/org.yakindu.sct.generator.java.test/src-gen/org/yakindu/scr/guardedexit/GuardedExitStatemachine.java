@@ -32,11 +32,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 			this.done = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

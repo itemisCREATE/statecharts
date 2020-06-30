@@ -49,16 +49,7 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 			return oObservable;
 		}
 		
-		protected void clearEvents() {
-			i = false;
-		}
-		protected void clearOutEvents() {
-		
-		o = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	

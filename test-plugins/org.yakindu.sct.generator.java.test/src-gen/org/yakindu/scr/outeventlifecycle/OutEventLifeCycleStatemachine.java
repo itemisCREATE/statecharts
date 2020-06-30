@@ -51,16 +51,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			this.f_available_in_next_cycle = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
-		protected void clearOutEvents() {
-		
-		f = false;
-		}
-		
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

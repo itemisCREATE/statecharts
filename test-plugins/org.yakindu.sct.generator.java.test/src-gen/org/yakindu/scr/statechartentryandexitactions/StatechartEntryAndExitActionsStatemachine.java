@@ -37,7 +37,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

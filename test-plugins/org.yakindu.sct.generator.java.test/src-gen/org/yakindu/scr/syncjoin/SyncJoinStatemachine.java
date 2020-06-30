@@ -43,14 +43,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-			jc = false;
-			jd = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;

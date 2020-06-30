@@ -17,7 +17,6 @@ public class ShadowValueParameterStatemachine implements IShadowValueParameterSt
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

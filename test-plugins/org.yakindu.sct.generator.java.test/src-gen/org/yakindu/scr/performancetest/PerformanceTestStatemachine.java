@@ -57,13 +57,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			this.c = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-			e2 = false;
-			e3 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e1;

@@ -92,11 +92,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			this.bitwiseXor = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e1;

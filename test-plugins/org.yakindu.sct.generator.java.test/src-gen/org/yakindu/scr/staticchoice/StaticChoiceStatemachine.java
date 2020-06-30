@@ -22,11 +22,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 			this.number = value;
 		}
 		
-		protected void clearEvents() {
-			reset = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean reset;

@@ -22,11 +22,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 			this.myInt = value;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-		}
 	}
-	
 	
 	private static class SCIMyInterfaceEvBuf {
 		private boolean event1;

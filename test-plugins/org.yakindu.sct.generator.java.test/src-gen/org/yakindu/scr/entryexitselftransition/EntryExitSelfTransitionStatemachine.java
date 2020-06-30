@@ -39,12 +39,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 			this.entries = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			e1 = false;
-		}
 	}
-	
 	
 	private static class SCInterfaceEvBuf {
 		private boolean e;
