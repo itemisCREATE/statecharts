@@ -29,6 +29,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.submodules.StatechartTypes
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class InnerClassesProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
@@ -44,6 +45,7 @@ class InnerClassesProvider implements ISourceFragment {
 	@Inject protected extension TracingFunctions
 	@Inject protected extension LifecycleFunctions
 	@Inject protected extension StatechartTypes
+	@Inject protected extension INamingService
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
@@ -107,8 +109,7 @@ class InnerClassesProvider implements ISourceFragment {
 		«ENDFOR»
 		
 		«FOR p : getProperties»
-			«p.type.cType» «p.name»;
+			«p.type.cType» «p.name.asEscapedIdentifier»;
 		«ENDFOR»
 	'''
-	
 }

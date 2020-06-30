@@ -48,8 +48,10 @@ class ConstructorProvider implements ISourceFragment {
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
 			«constructorDefinition»
+			
 			«destructorDefinition»
 			«FOR iface : interfaces»
+				
 				«it.ifaceConstructorDefintion(iface)»
 			«ENDFOR»
 		'''
@@ -84,6 +86,7 @@ class ConstructorProvider implements ISourceFragment {
 				toInit.add(OCB_Instance, NULL_LITERAL)
 			}
 		]
+		properties.forEach[p | toInit.add(p.name.asEscapedIdentifier, p.type.initialValue)]
 		toInit
 	}
 
