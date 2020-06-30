@@ -128,7 +128,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			
 			clearInEvents();
 			nextEvent();
-		} while (sCInterface.e);
+		} while ((sCInterface.e || timeEvents[0]));
 		
 		
 		isExecuting = false;

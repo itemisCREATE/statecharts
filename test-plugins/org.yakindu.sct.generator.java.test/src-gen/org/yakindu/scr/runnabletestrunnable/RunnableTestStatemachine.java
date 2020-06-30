@@ -268,7 +268,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			
 			clearInEvents();
 			nextEvent();
-		} while (sCInterface.ev_in);
+		} while ((((sCInterface.ev_in || timeEvents[0]) || timeEvents[1]) || timeEvents[2]));
 		
 		
 		isExecuting = false;

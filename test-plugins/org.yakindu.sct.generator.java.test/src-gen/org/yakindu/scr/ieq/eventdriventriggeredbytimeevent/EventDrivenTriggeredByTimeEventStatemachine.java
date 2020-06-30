@@ -124,7 +124,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			
 			clearInEvents();
 			nextEvent();
-		} while (true);
+		} while ((timeEvents[0] || timeEvents[1]));
 		
 		
 		isExecuting = false;
