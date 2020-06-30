@@ -174,7 +174,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		isExecuting = false;
 	}
 	
-	public void enter() {
+	public synchronized void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
 			        "The state machine needs to be initialized first by calling the init() function.");
@@ -192,7 +192,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		isExecuting = false;
 	}
 	
-	public void exit() {
+	public synchronized void exit() {
 		if (getIsExecuting()) {
 			return;
 		}
@@ -203,7 +203,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		isExecuting = false;
 	}
 	
-	public void runCycle() {
+	public synchronized void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
 			        "The state machine needs to be initialized first by calling the init() function.");

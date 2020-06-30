@@ -15,6 +15,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.FlowCode
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.generator.java.features.Synchronized
 
 /**
  * 
@@ -26,6 +27,8 @@ class MethodGenerator {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
 	@Inject extension FlowCode
+	@Inject extension Synchronized
+	
 
 	def toImplementation(Iterable<Method> methods) '''
 		«FOR m : methods»
@@ -35,14 +38,14 @@ class MethodGenerator {
 	'''
 	
 	def toImplementation(Method it) '''
-		«implementationModifier»«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»«p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+		«methodModifier»«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»«p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
 			«body.code»
 		}
 	'''
 	
-	protected def implementationModifier(Method it) {
+	protected def methodModifier(Method it) {
 		if (isPublic)
-			'''public '''
+			'''public «sync»'''
 		else 
 			'''private '''
 	}
