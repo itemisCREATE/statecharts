@@ -185,7 +185,7 @@ class EventProcessing {
 	}
 
 	def Step _processEventQueues(ExecutionFlow it, Step body) {
-		if (hasLocalEvents || applyIncomingEventQueue) {
+		if (hasLocalEvents || (hasIncomingEvents && applyIncomingEventQueue)) {
 		
 			_sequence(
 				_conceptSequence(NEXT_EVENT),
@@ -194,7 +194,7 @@ class EventProcessing {
 					_clearInEvents,
 					_clearInternalEvents,
 					_conceptSequence(NEXT_EVENT)
-				))._while( #[incomingEvents,localEvents]
+				))._while( #[incomingEvents,localEvents,timeEvents]
 							.flatten
 							.map[ ev | ev._ref as Expression ]
 							.reduce[ e1, e2 | e1._or(e2) ]
