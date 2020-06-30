@@ -29,14 +29,11 @@ import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
-import org.yakindu.sct.generator.core.submodules.lifecycle.Enter;
-import org.yakindu.sct.generator.core.submodules.lifecycle.Exit;
 import org.yakindu.sct.generator.core.submodules.lifecycle.Init;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsActive;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsStateActive;
 import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
-import org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle;
 import org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.CppEventDrivenIncludeProvider;
@@ -58,13 +55,11 @@ import org.yakindu.sct.generator.cpp.providers.eventdriven.StatechartEvents;
 import org.yakindu.sct.generator.cpp.providers.eventdriven.UsingNamespaceProvider;
 import org.yakindu.sct.generator.cpp.providers.eventdriven.classdecl.QueueMemberProvider;
 import org.yakindu.sct.generator.cpp.submodules.EventCode;
-import org.yakindu.sct.generator.cpp.submodules.EventConceptCode;
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions;
 import org.yakindu.sct.generator.cpp.submodules.RunCycleMethodCode;
 import org.yakindu.sct.generator.cpp.submodules.TimingFunctions;
 import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenInterfaceFunctions;
-import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenRunCycle;
 import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenTimingFunctions;
 import org.yakindu.sct.generator.cpp.submodules.lifecycle.LifecycleFunctions;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -119,15 +114,13 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
 		
-		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.EventCode.class).to(EventConceptCode.class);
+		binder.bind(org.yakindu.sct.generator.core.submodules.lifecycle.EventCode.class).to(EventCode.class);
 		binder.bind(MicroStepCode.class).to(RunCycleMethodCode.class);
 		binder.bind(TraceCode.class).to(org.yakindu.sct.generator.cpp.submodules.TraceCode.class);
 		
 		bindTracingProperty(entry, binder);
 		if ((new AnnotationExtensions()).isEventDriven(entry)) {
 			bindEventDrivenClasses(binder);
-		} else {
-			bindCycleBasedClasses(binder);
 		}
 		bindDefaultClasses(binder);
 		bindIGenArtifactConfigurations(entry, binder);
@@ -198,7 +191,6 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	protected void bindEventDrivenClasses(Binder binder) {
 		bindEventRaisingCode(binder);
 		binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-		binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
 		binder.bind(InterfaceFunctions.class).to(EventDrivenInterfaceFunctions.class);
 		binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
 
@@ -209,16 +201,9 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(EventRaisingCode.class).to(EventDrivenEventRaisingCode.class);
 	}
 
-	/** Only for cycle based case */
-	protected void bindCycleBasedClasses(Binder binder) {
-		binder.bind(RunCycle.class).to(LifecycleFunctions.class);
-	}
-
 	/** Needed for cycle based AND event driven */
 	protected void bindDefaultClasses(Binder binder) {
 		binder.bind(Init.class).to(LifecycleFunctions.class);
-		binder.bind(Enter.class).to(LifecycleFunctions.class);
-		binder.bind(Exit.class).to(LifecycleFunctions.class);
 		binder.bind(IsActive.class).to(LifecycleFunctions.class);
 		binder.bind(IsFinal.class).to(LifecycleFunctions.class);
 		binder.bind(IsStateActive.class).to(LifecycleFunctions.class);

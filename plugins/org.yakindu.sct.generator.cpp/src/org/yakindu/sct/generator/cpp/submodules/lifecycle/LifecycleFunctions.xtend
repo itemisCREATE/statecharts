@@ -12,13 +12,10 @@ package org.yakindu.sct.generator.cpp.submodules.lifecycle
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.sct.generator.core.submodules.lifecycle.Enter
-import org.yakindu.sct.generator.core.submodules.lifecycle.Exit
 import org.yakindu.sct.generator.core.submodules.lifecycle.Init
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsActive
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsStateActive
-import org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle
 import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.ErrorCode
@@ -35,11 +32,12 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 import org.yakindu.sct.generator.cpp.FlowCode
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
+import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
 
-class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActive, Exit, IsFinal {
+class LifecycleFunctions implements Init, IsActive, IsStateActive, IsFinal {
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension FlowCode
@@ -49,10 +47,11 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	@Inject protected extension CppExpressionsGenerator
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension CLiterals
-	@Inject protected extension StatechartAnnotations
 	@Inject protected extension GeneratorPredicate
 	@Inject protected extension EventNaming
 	
+	@Inject extension ExecutionGuard
+	@Inject extension EventProcessing
 	@Inject protected GeneratorEntry entry
 	
 	def IStatemachineFunctions() '''
@@ -98,74 +97,16 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 			«ENDIF»
 			«STATEVECTOR_POS» = 0;
 			
-			«IF statechart.isSuperStep»
-			«STATEVECTOR_CHANGED» = false;
-			«ENDIF»
-		
-			«clearInEventsFctID»();
-			«clearOutEventsFctID»();
-			
+			«_clearInEvents.code»
+			«_clearInternalEvents.code»
+			«_clearOutEvents.code»
 			«initSequence.code»
+			«_initIsExecuting.code»
 			«IF entry.checkUnimplementedOCBs»
 			return errorCode;
 			«ENDIF»
 		}
 	'''
-	
-	override enter(ExecutionFlow it) '''
-		void «module»::«enterFctID»()
-		{
-			«IF needsRunCycleGuard»
-				«getRunCycleGuard» = true;
-			«ENDIF»
-			«enterSequences.defaultSequence.code»
-			«IF needsRunCycleGuard»
-				«getRunCycleGuard» = false;
-			«ENDIF»
-		}
-	'''
-	
-	override runCycle(ExecutionFlow it) '''
-		void «module»::«runCycleFctID»()
-		{
-			«clearOutEventsFctID»();
-			«runCycleFunctionForLoop»
-			«clearInEventsFctID»();
-		}
-	'''
-	
-	protected def superStepLoop(CharSequence microStep) '''
-		do {
-			«STATEVECTOR_CHANGED» = false;
-			«microStep»
-		} while(«STATEVECTOR_CHANGED»);
-	'''
-	
-	def runCycleFunctionForLoop(ExecutionFlow it) {
-		val microStep = '''
-		for («STATEVECTOR_POS» = 0;
-			«STATEVECTOR_POS» < «orthogonalStatesConst»;
-			«STATEVECTOR_POS»++)
-			{
-				
-			switch («STATEVECTOR»[«STATEVECTOR_POS»])
-			{
-			«FOR state : states.filter[isLeaf]»
-				«IF state.reactMethod !== null»
-				case «state.shortName.asEscapedIdentifier» :
-				{
-					«state.reactMethod.shortName»(true);
-					break;
-				}
-				«ENDIF»
-			«ENDFOR»
-			default:
-				break;
-			}
-		}
-		'''
-		return if (statechart.isSuperStep) superStepLoop(microStep) else microStep
-	}
 	
 	override isActive(ExecutionFlow it) '''
 		«BOOL_TYPE» «module»::«isActiveFctID»() const
@@ -187,19 +128,6 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 				«ENDFOR»
 				default: return false;
 			}
-		}
-	'''
-	
-	override exit(ExecutionFlow it) '''
-		void «module»::«exitFctID»()
-		{
-			«IF needsRunCycleGuard»
-				«getRunCycleGuard» = true;
-			«ENDIF»
-			«exitSequence.code»
-			«IF needsRunCycleGuard»
-				«getRunCycleGuard» = false;
-			«ENDIF»
 		}
 	'''
 	

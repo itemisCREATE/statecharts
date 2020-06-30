@@ -118,4 +118,8 @@ class EventDrivenEventCode extends EventCode {
 			else if	( isInEvent )	 inEventQueue 
 			else 					 null
 	}
+	
+	override eventNextCode(ExecutionFlow it) '''
+		«dispatchEventFctID»(«nextEventFctID»());
+	'''
 }

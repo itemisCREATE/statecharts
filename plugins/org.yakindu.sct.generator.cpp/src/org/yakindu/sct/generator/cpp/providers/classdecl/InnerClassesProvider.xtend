@@ -28,14 +28,13 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InternalScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.generator.c.submodules.StatechartTypes
 
 class InnerClassesProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension StatechartExtensions
-	@Inject protected extension StatechartAnnotations
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -44,6 +43,7 @@ class InnerClassesProvider implements ISourceFragment {
 	@Inject protected extension TimingFunctions
 	@Inject protected extension TracingFunctions
 	@Inject protected extension LifecycleFunctions
+	@Inject protected extension StatechartTypes
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
@@ -93,13 +93,21 @@ class InnerClassesProvider implements ISourceFragment {
 		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«historyStatesConst»];«ENDIF»
 		«USHORT_TYPE» «STATEVECTOR_POS»;
 		
-		«IF statechart.isSuperStep»
-		«BOOL_TYPE» «STATEVECTOR_CHANGED»;
-		«ENDIF»
-		
 		«FOR s : getInterfaces»
 			«s.interfaceName» «s.instance»;
 			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
+		«ENDFOR»
+		
+		«FOR t : derivedComplexTypes»
+			typedef struct {
+				«FOR f : t.features»
+					«f.structMember»
+				«ENDFOR»
+			}«t.cType»;
+		«ENDFOR»
+		
+		«FOR p : getProperties»
+			«p.type.cType» «p.name»;
 		«ENDFOR»
 	'''
 	

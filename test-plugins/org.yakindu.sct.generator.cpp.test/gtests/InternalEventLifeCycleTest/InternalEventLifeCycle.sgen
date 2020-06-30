@@ -1,7 +1,7 @@
 GeneratorModel for yakindu::cpp {
 	statechart InternalEventLifeCycle {
 		feature Outlet {
-			targetProject = "gtests"
+			targetProject = "test"
 			targetFolder = "InternalEventLifeCycleTest"
 		}
 		feature FunctionInlining {
@@ -18,6 +18,11 @@ GeneratorModel for yakindu::cpp {
 		feature OutEventAPI {
 			getters = true
 			observables = false
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = false
+			internalEventBuffer = false
 		}
 	}
 }

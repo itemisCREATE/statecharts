@@ -19,15 +19,22 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 /**
  * @author René Beckmann
  */
-class EventCode {
+class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.EventCode {
 	@Inject protected extension org.yakindu.sct.generator.cpp.CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension CppExpressionsGenerator
+	@Inject protected extension EventProcessing
+	@Inject protected extension ExpressionBuilder
 	
 	def generateEvents(ExecutionFlow it, StatechartScope scope)
 		'''
@@ -146,4 +153,18 @@ class EventCode {
 		
 	def needsRaiser(EventDefinition it) { it.isInEvent || it.isLocalEvent }
 	def needsRaised(EventDefinition it) { it.isLocalEvent || it.isOutEvent } // && getter feature?
+	
+	override eventClearCode(ExecutionFlow flow, Expression event) '''
+	«event.code» = false;
+	'''
+	
+	override eventMoveCode(ExecutionFlow flow, Expression source, Expression target) '''
+		«target.code» = «source.code»;
+		«IF source.event.hasValue»«target._meta(target.event.valueFeature).code» = «source._meta(source.event.valueFeature).code»;«ENDIF»
+		«source.code» = false;
+	'''
+	
+	override eventNextCode(ExecutionFlow flow) {
+		throw new UnsupportedOperationException("Something went wrong - generating 'eventNext' not supported for cycle based statecharts.")
+	}
 }
