@@ -40,7 +40,6 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
@@ -199,17 +198,10 @@ class Naming {
 		else 'internal'
 	}
 
-	def functionPrefix(Scope it, Declaration decl) {
-		// only non-unique declarations in different scopes will be prefixed with the name of the scope
-		if (!isUniqueName(it, decl) && !entryStatemachinePrefix.nullOrEmpty)
-			return entryStatemachinePrefix + separator + it.instance.toFirstUpper
+	def functionPrefix(Scope it) {
 		if (!entryStatemachinePrefix.nullOrEmpty)
-			return entryStatemachinePrefix
+			return entryStatemachinePrefix + separator + it.instance.toFirstUpper
 		return type.toFirstLower
-	}
-
-	protected def boolean isUniqueName(Scope scope, Declaration decl) {
-		(scope.eContainer as ScopedElement).scopes.map[declarations].flatten.filter[it.name == decl.name].size == 1
 	}
 
 	def functionPrefix(ExecutionFlow it) {
@@ -447,11 +439,11 @@ class Naming {
 	def dispatch String asSetter(EObject it) '''Cannot find setter for «it»'''
 	
 	def asFunction(OperationDefinition it) {
-		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix + separator + name.asIdentifier.toFirstLower
 	}
 	
 	def accessFunction(Declaration it, String funcName) {
-		scope.functionPrefix(it) + separator + funcName + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix + separator + funcName + separator + name.asIdentifier.toFirstLower
 	}
 	
 	def variable(Property it) {
