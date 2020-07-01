@@ -87,7 +87,7 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	
 	override dispatch CharSequence code(FeatureCall it, Property target) '''«context»«target.access»'''
 	
-	override dispatch CharSequence metaCode(ElementReferenceExpression it, EventDefinition owner, Property feature)
+	override dispatch CharSequence metaCode(ElementReferenceExpression it, Event owner, Property feature)
 		'''«owner.scope.instance».«owner.name.asEscapedIdentifier»_«feature.name.asEscapedIdentifier»'''
 	
 	protected def dispatch context(FeatureCall it) {
