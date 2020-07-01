@@ -980,6 +980,10 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature EventProcessing {
+			internalEventBuffer = false
+		}
 	}
 
 	statechart JavaKeywords {

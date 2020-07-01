@@ -92,12 +92,14 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			this.bitwiseXor = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e1;
+	}
+	private static class BitExpressionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -112,6 +114,17 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	
 	private int nextStateIndex;
 	
+	private BitExpressionsStatemachineEvBuf _current = new BitExpressionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public BitExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -121,8 +134,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setMyBit1(0);
 		
 		sCInterface.setMyBit2(0);
@@ -138,22 +152,42 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		sCInterface.setBitwiseOr(0);
 		
 		sCInterface.setBitwiseXor(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -166,10 +200,8 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -187,17 +219,13 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e1 = sCInterface.e1;
+		sCInterface.e1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e1 = false;
 	}
 	
 	/**
@@ -368,7 +396,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e1) {
+				if (_current.iface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {

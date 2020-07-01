@@ -71,17 +71,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			this.i2_sequence = value;
 		}
 		
-		protected void clearEvents() {
-			start = false;
-			reset = false;
-		}
-		protected void clearOutEvents() {
-		
-		e = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -104,6 +94,15 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private boolean i1;
 	private boolean i2;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public EventDrivenInternalEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -113,93 +112,87 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		for (int i = 0; i < 3; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
+		
 		sCInterface.setX(0);
 		
 		sCInterface.setI1_sequence(0);
 		
 		sCInterface.setI2_sequence(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 		enterSequence_check_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r1();
+		exitSequence_r2();
+		exitSequence_check();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+			        "The state machine needs to be initialized first by calling the init() function.");
 		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
+		if (getIsExecuting()) {
+			return;
 		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case eventDrivenInternalEvent_r1_A:
-				r1_A_react(true);
-				break;
-			case eventDrivenInternalEvent_r1_B:
-				r1_B_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_C:
-				r2_C_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_D:
-				r2_D_react(true);
-				break;
-			case eventDrivenInternalEvent_check_VALID:
-				check_VALID_react(true);
-				break;
-			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-				check_MULTIPLEEVENTS_react(true);
-				break;
-			default:
-				// $NullState$
+		isExecuting = true;
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case eventDrivenInternalEvent_r1_A:
+					r1_A_react(true);
+					break;
+				case eventDrivenInternalEvent_r1_B:
+					r1_B_react(true);
+					break;
+				case eventDrivenInternalEvent_r2_C:
+					r2_C_react(true);
+					break;
+				case eventDrivenInternalEvent_r2_D:
+					r2_D_react(true);
+					break;
+				case eventDrivenInternalEvent_check_VALID:
+					check_VALID_react(true);
+					break;
+				case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
+					check_MULTIPLEEVENTS_react(true);
+					break;
+				default:
+					// $NullState$
+				}
 			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!internalEventQueue.isEmpty()) {
-			return internalEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
-	}
-	
-	public void exit() {
-		exitSequence_r1();
-		exitSequence_r2();
-		exitSequence_check();
+			
+			clearInEvents();
+			clearInternalEvents();
+			nextEvent();
+		} while ((((sCInterface.start || sCInterface.reset) || i1) || i2));
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -217,22 +210,22 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearInEvents() {
+		sCInterface.start = false;
+		sCInterface.reset = false;
+	}
+	
+	private void clearInternalEvents() {
 		i1 = false;
 		i2 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	protected void nextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			internalEventQueue.poll().run();
+			return;
+		}
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -262,20 +255,18 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private void raiseI1() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				i1 = true;					
-				singleCycle();
 			}
 		});
 	}
 	
 	private void raiseI2() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				i2 = true;					
-				singleCycle();
 			}
 		});
 	}

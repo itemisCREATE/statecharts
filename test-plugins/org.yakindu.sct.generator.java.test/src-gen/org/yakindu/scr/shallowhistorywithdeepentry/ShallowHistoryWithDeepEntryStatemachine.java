@@ -33,15 +33,17 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			toA = true;
 		}
 		
-		protected void clearEvents() {
-			toZ = false;
-			toY = false;
-			toC = false;
-			toA = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean toZ;
+		private boolean toY;
+		private boolean toC;
+		private boolean toA;
+	}
+	private static class ShallowHistoryWithDeepEntryStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -60,6 +62,17 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	
 	private int nextStateIndex;
 	
+	private ShallowHistoryWithDeepEntryStatemachineEvBuf _current = new ShallowHistoryWithDeepEntryStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ShallowHistoryWithDeepEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -72,24 +85,45 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		for (int i = 0; i < 1; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Y:
@@ -105,10 +139,8 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -126,17 +158,25 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.toZ = sCInterface.toZ;
+		sCInterface.toZ = false;
+		
+		_current.iface.toY = sCInterface.toY;
+		sCInterface.toY = false;
+		
+		_current.iface.toC = sCInterface.toC;
+		sCInterface.toC = false;
+		
+		_current.iface.toA = sCInterface.toA;
+		sCInterface.toA = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.toZ = false;
+		sCInterface.toY = false;
+		sCInterface.toC = false;
+		sCInterface.toA = false;
 	}
 	
 	/**
@@ -341,11 +381,11 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.toZ) {
+				if (_current.iface.toZ) {
 					exitSequence_main_region_Y();
 					enterSequence_main_region_Z_default();
 				} else {
-					if (sCInterface.toC) {
+					if (_current.iface.toC) {
 						exitSequence_main_region_Y();
 						enterSequence_main_region_Z__region0_B__region0_C_default();
 						historyVector[0] = stateVector[0];
@@ -363,7 +403,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.toY) {
+				if (_current.iface.toY) {
 					exitSequence_main_region_Z();
 					enterSequence_main_region_Y_default();
 				} else {
@@ -379,7 +419,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		
 		if (try_transition) {
 			if (main_region_Z_react(try_transition)==false) {
-				if (sCInterface.toC) {
+				if (_current.iface.toC) {
 					exitSequence_main_region_Z__region0_A();
 					enterSequence_main_region_Z__region0_B__region0_C_default();
 					historyVector[0] = stateVector[0];
@@ -407,7 +447,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		
 		if (try_transition) {
 			if (main_region_Z__region0_B_react(try_transition)==false) {
-				if (sCInterface.toA) {
+				if (_current.iface.toA) {
 					exitSequence_main_region_Z__region0_B();
 					enterSequence_main_region_Z__region0_A_default();
 				} else {

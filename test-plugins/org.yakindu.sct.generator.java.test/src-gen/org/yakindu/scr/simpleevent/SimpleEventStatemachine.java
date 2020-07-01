@@ -12,12 +12,14 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			event1 = true;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean event1;
+	}
+	private static class SimpleEventStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -33,6 +35,17 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	
 	private int nextStateIndex;
 	
+	private SimpleEventStatemachineEvBuf _current = new SimpleEventStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public SimpleEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -42,24 +55,45 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -75,10 +109,8 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -94,17 +126,13 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	public boolean isFinal() {
 		return (stateVector[0] == State.main_region__final_);
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.event1 = sCInterface.event1;
+		sCInterface.event1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.event1 = false;
 	}
 	
 	/**
@@ -204,7 +232,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.event1) {
+				if (_current.iface.event1) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {

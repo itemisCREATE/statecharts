@@ -55,7 +55,6 @@ class APIGenerator {
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension InternalFunctionsGenerator
-	@Inject protected extension MethodGenerator
 	
 	@Inject protected extension EnterMethod
 	@Inject protected extension ExitMethod	

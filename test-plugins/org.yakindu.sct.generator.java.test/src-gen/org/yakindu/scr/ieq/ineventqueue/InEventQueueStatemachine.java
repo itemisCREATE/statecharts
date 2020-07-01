@@ -17,15 +17,12 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		
 		
 		public void raiseE() {
-			inEventQueue.add(
-				new Runnable() {
-					@Override
-					public void run() {
-						e = true;
-						singleCycle();
-					}
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					e = true;
 				}
-			);
+			});
 			runCycle();
 		}
 		
@@ -35,16 +32,13 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		
 		
 		public void raiseF(final long value) {
-			inEventQueue.add(
-				new Runnable() {
-					@Override
-					public void run() {
-						fValue = value;
-						f = true;
-						singleCycle();
-					}
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					fValue = value;
+					f = true;
 				}
-			);
+			});
 			runCycle();
 		}
 		protected long getFValue() {
@@ -63,12 +57,7 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 			this.cycles = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
-	
 	
 	protected class SCIIImpl implements SCII {
 	
@@ -76,23 +65,16 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		
 		
 		public void raiseG() {
-			inEventQueue.add(
-				new Runnable() {
-					@Override
-					public void run() {
-						g = true;
-						singleCycle();
-					}
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					g = true;
 				}
-			);
+			});
 			runCycle();
 		}
 		
-		protected void clearEvents() {
-			g = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -114,8 +96,16 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
-	private boolean isRunning = false;
 	private boolean h;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public InEventQueueStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCII = new SCIIImpl();
@@ -130,92 +120,73 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
+		
 		sCInterface.setCycles(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
-		isRunning = true;
+		isExecuting = true;
 		enterSequence_main_region_default();
-		isRunning = false;
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+			        "The state machine needs to be initialized first by calling the init() function.");
 		
-		if (isRunning) {
+		if (getIsExecuting()) {
 			return;
 		}
-		isRunning = true;
-		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
-		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-		isRunning = false;
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case inEventQueue_main_region_A:
-				main_region_A_react(true);
-				break;
-			case inEventQueue_main_region_B:
-				main_region_B_react(true);
-				break;
-			case inEventQueue_main_region_C:
-				main_region_C_react(true);
-				break;
-			case inEventQueue_main_region_dispatch:
-				main_region_dispatch_react(true);
-				break;
-			default:
-				// $NullState$
+		isExecuting = true;
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case inEventQueue_main_region_A:
+					main_region_A_react(true);
+					break;
+				case inEventQueue_main_region_B:
+					main_region_B_react(true);
+					break;
+				case inEventQueue_main_region_C:
+					main_region_C_react(true);
+					break;
+				case inEventQueue_main_region_dispatch:
+					main_region_dispatch_react(true);
+					break;
+				default:
+					// $NullState$
+				}
 			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!internalEventQueue.isEmpty()) {
-			return internalEventQueue.poll();
-		}
-		if(!inEventQueue.isEmpty()) {
-			return inEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
-	}
-	
-	public void exit() {
-		isRunning = true;
-		exitSequence_main_region();
-		isRunning = false;
+			
+			clearInEvents();
+			clearInternalEvents();
+			nextEvent();
+		} while ((((sCInterface.e || sCInterface.f) || sCII.g) || h));
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -233,21 +204,26 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
-		sCII.clearEvents();
+	private void clearInEvents() {
+		sCInterface.e = false;
+		sCInterface.f = false;
+		sCII.g = false;
+	}
+	
+	private void clearInternalEvents() {
 		h = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	protected void nextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			internalEventQueue.poll().run();
+			return;
+		}
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
+			return;
+		}
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -277,10 +253,9 @@ public class InEventQueueStatemachine implements IInEventQueueStatemachine {
 	
 	private void raiseH() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				h = true;					
-				singleCycle();
 			}
 		});
 	}

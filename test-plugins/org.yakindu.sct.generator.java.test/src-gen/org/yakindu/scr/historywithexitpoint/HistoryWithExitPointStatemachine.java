@@ -26,14 +26,16 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 			next = true;
 		}
 		
-		protected void clearEvents() {
-			push = false;
-			back = false;
-			next = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean push;
+		private boolean back;
+		private boolean next;
+	}
+	private static class HistoryWithExitPointStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -51,6 +53,17 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	
 	private int nextStateIndex;
 	
+	private HistoryWithExitPointStatemachineEvBuf _current = new HistoryWithExitPointStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public HistoryWithExitPointStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -63,24 +76,45 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		for (int i = 0; i < 1; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_mr_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_mr();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case mr_A_r_X1:
@@ -96,10 +130,8 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_mr();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -117,17 +149,21 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.push = sCInterface.push;
+		sCInterface.push = false;
+		
+		_current.iface.back = sCInterface.back;
+		sCInterface.back = false;
+		
+		_current.iface.next = sCInterface.next;
+		sCInterface.next = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.push = false;
+		sCInterface.back = false;
+		sCInterface.next = false;
 	}
 	
 	/**
@@ -316,11 +352,11 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		
 		if (try_transition) {
 			if (mr_A_react(try_transition)==false) {
-				if (sCInterface.next) {
+				if (_current.iface.next) {
 					exitSequence_mr_A_r_X1();
 					enterSequence_mr_A_r_X2_default();
 				} else {
-					if (sCInterface.push) {
+					if (_current.iface.push) {
 						exitSequence_mr_A_r_X1();
 						react_mr_A_r_exit_to_B();
 					} else {
@@ -337,11 +373,11 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		
 		if (try_transition) {
 			if (mr_A_react(try_transition)==false) {
-				if (sCInterface.next) {
+				if (_current.iface.next) {
 					exitSequence_mr_A_r_X2();
 					enterSequence_mr_A_r_X1_default();
 				} else {
-					if (sCInterface.push) {
+					if (_current.iface.push) {
 						exitSequence_mr_A_r_X2();
 						react_mr_A_r_exit_to_B();
 					} else {
@@ -358,7 +394,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.back) {
+				if (_current.iface.back) {
 					exitSequence_mr_B();
 					enterSequence_mr_A_default();
 				} else {

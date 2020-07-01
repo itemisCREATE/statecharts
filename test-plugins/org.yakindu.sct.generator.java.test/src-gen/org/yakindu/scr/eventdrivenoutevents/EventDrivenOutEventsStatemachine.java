@@ -28,16 +28,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			return e2Observable;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-		}
-		protected void clearOutEvents() {
-		
-		e2 = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -55,6 +46,15 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	
 	private int nextStateIndex;
 	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public EventDrivenOutEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -64,25 +64,46 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
 		enterSequence_second_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		exitSequence_second_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -101,11 +122,9 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
-		exitSequence_second_region();
+		
+		clearInEvents();
+		isExecuting = false;
 	}
 	
 	/**
@@ -123,20 +142,12 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearInEvents() {
+		sCInterface.e1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	protected void nextEvent() {
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

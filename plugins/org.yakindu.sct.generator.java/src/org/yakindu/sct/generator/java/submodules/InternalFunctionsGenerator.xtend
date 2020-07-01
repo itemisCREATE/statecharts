@@ -12,68 +12,25 @@ package org.yakindu.sct.generator.java.submodules
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.FlowCode
-import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 @Singleton
 class InternalFunctionsGenerator {
-	@Inject protected extension Naming
-	@Inject protected extension JavaNamingService
-	@Inject protected extension SExecExtensions
-	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension FlowCode
-	@Inject protected extension GenmodelEntries
 	
-	@Inject protected extension FieldDeclarationGenerator
-	@Inject protected extension InterfaceFunctionsGenerator
-	@Inject protected extension EventCode
-	
-	def clearInEvents(ExecutionFlow flow) '''
-		/**
-		* This method resets the incoming events (time events included).
-		*/
-		protected void clearEvents() {
-			«FOR scope : flow.interfaceScopes»
-				«IF scope.hasEvents»
-					«scope.interfaceName.asEscapedIdentifier».clearEvents();
-				«ENDIF»
-			«ENDFOR»
-			«FOR scope : flow.internalScopes»
-				«FOR event : scope.eventDefinitions»
-				«event.identifier» = false;
-				«ENDFOR»
-			«ENDFOR»
-			«IF flow.timed»
-			for (int i=0; i<timeEvents.length; i++) {
-				timeEvents[i] = false;
-			}
-			«ENDIF»
-		}
-
-	'''
-	def clearOutEvents(ExecutionFlow flow) '''
-		/**
-		* This method resets the outgoing events.
-		*/
-		protected void clearOutEvents() {
-			«FOR scope : flow.interfaceScopes»
-				«IF scope.hasOutgoingEvents»
-					«scope.interfaceName.asEscapedIdentifier».clearOutEvents();
-				«ENDIF»
-			«ENDFOR»
-		}
-
-	'''
+	@Inject extension Naming
+	@Inject extension JavaNamingService
+	@Inject extension SExecExtensions
+	@Inject extension FlowCode
+	@Inject extension EventCode
+	@Inject extension MethodGenerator
 	
 	def internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
@@ -107,21 +64,8 @@ class InternalFunctionsGenerator {
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
-		«reactMethods.toDefinitions»
+		«reactMethods.toImplementation»
 	'''
-	
-	def toDefinitions(List<Method> methods) '''
-	 	«FOR m : methods»
-	 		«m.implementation»
-	 		
-	 	«ENDFOR»
-	 '''
-	 
-	 def implementation(Method it) '''
-	 	private «typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»«p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-	 		«body.code»
-	 	}
-	 '''
 	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»

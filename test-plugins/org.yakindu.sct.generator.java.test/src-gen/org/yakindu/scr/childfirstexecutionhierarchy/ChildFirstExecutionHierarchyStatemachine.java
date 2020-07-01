@@ -102,12 +102,14 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			this.aaa_local = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+	}
+	private static class ChildFirstExecutionHierarchyStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -124,6 +126,17 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	
 	private int nextStateIndex;
 	
+	private ChildFirstExecutionHierarchyStatemachineEvBuf _current = new ChildFirstExecutionHierarchyStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ChildFirstExecutionHierarchyStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -133,8 +146,9 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setDisable_a(false);
 		
 		sCInterface.setDisable_aa(false);
@@ -152,22 +166,42 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		sCInterface.setAa_local(false);
 		
 		sCInterface.setAaa_local(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_r_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
@@ -180,10 +214,8 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -201,17 +233,13 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
 	}
 	
 	/**
@@ -439,7 +467,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
+			if (((_current.iface.e) && (!sCInterface.getDisable_a()))) {
 				exitSequence_r_A();
 				sCInterface.setA_reacted(true);
 				
@@ -461,7 +489,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
+			if (((_current.iface.e) && (!sCInterface.getDisable_aa()))) {
 				exitSequence_r_A();
 				sCInterface.setAa_reacted(true);
 				
@@ -483,7 +511,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
+			if (((_current.iface.e) && (!sCInterface.getDisable_aaa()))) {
 				exitSequence_r_A();
 				sCInterface.setAaa_reacted(true);
 				
@@ -505,7 +533,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (_current.iface.e) {
 				exitSequence_r_B();
 				enterSequence_r_A_default();
 				react();

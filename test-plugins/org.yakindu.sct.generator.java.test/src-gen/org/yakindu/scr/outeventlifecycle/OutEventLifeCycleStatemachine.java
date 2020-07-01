@@ -51,17 +51,14 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			this.f_available_in_next_cycle = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
-		protected void clearOutEvents() {
-		
-		f = false;
-		}
-		
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+	}
+	private static class OutEventLifeCycleStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -77,6 +74,17 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	
 	private int nextStateIndex;
 	
+	private OutEventLifeCycleStatemachineEvBuf _current = new OutEventLifeCycleStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public OutEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -86,28 +94,52 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
+		
+		clearInEvents();
 		clearOutEvents();
+		
 		sCInterface.setF_available_in_cycle(false);
 		
 		sCInterface.setF_available_in_next_cycle(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_r1_default();
 		enterSequence_r2_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r1();
+		exitSequence_r2();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		clearOutEvents();
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r1_A:
@@ -123,11 +155,8 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r1();
-		exitSequence_r2();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -145,18 +174,17 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearOutEvents() {
+		sCInterface.f = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+	}
+	
+	private void clearInEvents() {
+		sCInterface.e = false;
 	}
 	
 	/**
@@ -294,7 +322,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_r1_A();
 					sCInterface.raiseF();
 					

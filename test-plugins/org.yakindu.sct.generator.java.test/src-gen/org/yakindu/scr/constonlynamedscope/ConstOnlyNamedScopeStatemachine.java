@@ -20,11 +20,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 			return eValue;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	protected class SCIAImpl implements SCIA {
 	
@@ -38,7 +34,14 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		
+		private long eValue;
+	}
+	private static class ConstOnlyNamedScopeStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	protected SCIAImpl sCIA;
@@ -56,6 +59,17 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	
 	private int nextStateIndex;
 	
+	private ConstOnlyNamedScopeStatemachineEvBuf _current = new ConstOnlyNamedScopeStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ConstOnlyNamedScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIA = new SCIAImpl();
@@ -66,24 +80,45 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case constOnlyNamedScope_main_region_A:
@@ -99,10 +134,8 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -120,17 +153,14 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		_current.iface.eValue = sCInterface.eValue;
+		sCInterface.e = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
 	}
 	
 	/**
@@ -234,11 +264,11 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.e) && (sCInterface.getEValue()==sCIA.getB()))) {
+				if (((_current.iface.e) && (_current.iface.eValue==sCIA.getB()))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					if (((sCInterface.e) && (sCInterface.getEValue()==sCIA.getC()))) {
+					if (((_current.iface.e) && (_current.iface.eValue==sCIA.getC()))) {
 						exitSequence_main_region_A();
 						enterSequence_main_region_C_default();
 					} else {

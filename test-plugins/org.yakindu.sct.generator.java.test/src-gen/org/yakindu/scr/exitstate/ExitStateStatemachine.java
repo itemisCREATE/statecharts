@@ -26,14 +26,16 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			g = true;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-			g = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean f;
+		private boolean g;
+	}
+	private static class ExitStateStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -50,6 +52,17 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	
 	private int nextStateIndex;
 	
+	private ExitStateStatemachineEvBuf _current = new ExitStateStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ExitStateStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -59,24 +72,45 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_r_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case exitState_r_A_r_B:
@@ -92,10 +126,8 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -113,17 +145,21 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.f = sCInterface.f;
+		sCInterface.f = false;
+		
+		_current.iface.g = sCInterface.g;
+		sCInterface.g = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
+		sCInterface.f = false;
+		sCInterface.g = false;
 	}
 	
 	/**
@@ -301,15 +337,15 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		
 		if (try_transition) {
 			if (r_A_react(try_transition)==false) {
-				if (sCInterface.g) {
+				if (_current.iface.g) {
 					exitSequence_r_A_r_B();
 					react_r_A_r_g();
 				} else {
-					if (sCInterface.f) {
+					if (_current.iface.f) {
 						exitSequence_r_A_r_B();
 						react_r_A_r_f();
 					} else {
-						if (sCInterface.e) {
+						if (_current.iface.e) {
 							exitSequence_r_A_r_B();
 							react_r_A_r__exit_Default();
 						} else {

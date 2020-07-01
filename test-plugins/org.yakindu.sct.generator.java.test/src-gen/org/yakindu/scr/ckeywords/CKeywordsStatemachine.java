@@ -279,13 +279,15 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.whileVariable = value;
 		}
 		
-		protected void clearEvents() {
-			auto = false;
-			breakEvent = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean auto;
+		private boolean breakEvent;
+	}
+	private static class CKeywordsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -303,6 +305,17 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 	private int nextStateIndex;
 	
+	private CKeywordsStatemachineEvBuf _current = new CKeywordsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public CKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -315,8 +328,9 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		for (int i = 0; i < 2; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setCase(false);
 		
 		sCInterface.setDo(0);
@@ -368,22 +382,42 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		sCInterface.setVolatile(false);
 		
 		sCInterface.setWhile(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_auto_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_auto();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case auto_char:
@@ -396,10 +430,8 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_auto();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -417,17 +449,17 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.auto = sCInterface.auto;
+		sCInterface.auto = false;
+		
+		_current.iface.breakEvent = sCInterface.breakEvent;
+		sCInterface.breakEvent = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.auto = false;
+		sCInterface.breakEvent = false;
 	}
 	
 	/**
@@ -905,7 +937,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.auto) && (sCInterface.getCase()))) {
+				if (((_current.iface.auto) && (sCInterface.getCase()))) {
 					exitSequence_auto_char();
 					sCInterface.setDo(sCInterface.getDo() + 1);
 					

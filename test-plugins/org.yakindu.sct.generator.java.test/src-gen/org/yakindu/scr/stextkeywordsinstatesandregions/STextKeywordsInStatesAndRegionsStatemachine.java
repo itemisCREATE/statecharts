@@ -19,13 +19,15 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			e2 = true;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-			e2 = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e1;
+		private boolean e2;
+	}
+	private static class STextKeywordsInStatesAndRegionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -77,6 +79,17 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	
 	private int nextStateIndex;
 	
+	private STextKeywordsInStatesAndRegionsStatemachineEvBuf _current = new STextKeywordsInStatesAndRegionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public STextKeywordsInStatesAndRegionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -86,16 +99,22 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		for (int i = 0; i < 20; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_default_default();
 		enterSequence_operation_default();
 		enterSequence_namespace_default();
@@ -116,13 +135,47 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		enterSequence_raise_default();
 		enterSequence_valueof_default();
 		enterSequence_active_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_default();
+		exitSequence_operation();
+		exitSequence_namespace();
+		exitSequence_local();
+		exitSequence_interface();
+		exitSequence_internal();
+		exitSequence_event();
+		exitSequence_in();
+		exitSequence_out();
+		exitSequence_var();
+		exitSequence_readonly();
+		exitSequence_external();
+		exitSequence_else();
+		exitSequence_entry();
+		exitSequence_exit();
+		exitSequence_always();
+		exitSequence_oncycle();
+		exitSequence_raise();
+		exitSequence_valueof();
+		exitSequence_active();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case default_namespace:
@@ -246,29 +299,8 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_default();
-		exitSequence_operation();
-		exitSequence_namespace();
-		exitSequence_local();
-		exitSequence_interface();
-		exitSequence_internal();
-		exitSequence_event();
-		exitSequence_in();
-		exitSequence_out();
-		exitSequence_var();
-		exitSequence_readonly();
-		exitSequence_external();
-		exitSequence_else();
-		exitSequence_entry();
-		exitSequence_exit();
-		exitSequence_always();
-		exitSequence_oncycle();
-		exitSequence_raise();
-		exitSequence_valueof();
-		exitSequence_active();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -286,17 +318,17 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e1 = sCInterface.e1;
+		sCInterface.e1 = false;
+		
+		_current.iface.e2 = sCInterface.e2;
+		sCInterface.e2 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e1 = false;
+		sCInterface.e2 = false;
 	}
 	
 	/**
@@ -1364,7 +1396,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.default_namespace)))) {
+			if (((_current.iface.e1) && (isStateActive(State.default_namespace)))) {
 				exitSequence_operation_interface();
 				enterSequence_operation_internal_default();
 			} else {
@@ -1387,7 +1419,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.operation_internal)))) {
+			if (((_current.iface.e2) && (isStateActive(State.operation_internal)))) {
 				exitSequence_namespace_event();
 				enterSequence_namespace_local_default();
 			} else {
@@ -1410,7 +1442,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.namespace_local)))) {
+			if (((_current.iface.e1) && (isStateActive(State.namespace_local)))) {
 				exitSequence_local_in();
 				enterSequence_local_out_default();
 			} else {
@@ -1433,7 +1465,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.local_out)))) {
+			if (((_current.iface.e2) && (isStateActive(State.local_out)))) {
 				exitSequence_interface_var();
 				enterSequence_interface_readonly_default();
 			} else {
@@ -1456,7 +1488,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.interface_readonly)))) {
+			if (((_current.iface.e1) && (isStateActive(State.interface_readonly)))) {
 				exitSequence_internal_external();
 				enterSequence_internal_operation_default();
 			} else {
@@ -1479,7 +1511,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.internal_operation)))) {
+			if (((_current.iface.e2) && (isStateActive(State.internal_operation)))) {
 				exitSequence_event_default();
 				enterSequence_event_else_default();
 			} else {
@@ -1502,7 +1534,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.event_else)))) {
+			if (((_current.iface.e1) && (isStateActive(State.event_else)))) {
 				exitSequence_in_entry();
 				enterSequence_in_exit_default();
 			} else {
@@ -1525,7 +1557,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.in_exit)))) {
+			if (((_current.iface.e2) && (isStateActive(State.in_exit)))) {
 				exitSequence_out_always();
 				enterSequence_out_oncycle_default();
 			} else {
@@ -1548,7 +1580,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.out_oncycle)))) {
+			if (((_current.iface.e1) && (isStateActive(State.out_oncycle)))) {
 				exitSequence_var_raise();
 				enterSequence_var_valueof_default();
 			} else {
@@ -1571,7 +1603,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.var_valueof)))) {
+			if (((_current.iface.e2) && (isStateActive(State.var_valueof)))) {
 				exitSequence_readonly_active();
 				enterSequence_readonly_namespace_default();
 			} else {
@@ -1594,7 +1626,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.readonly_namespace)))) {
+			if (((_current.iface.e1) && (isStateActive(State.readonly_namespace)))) {
 				exitSequence_external_interface();
 				enterSequence_external_internal_default();
 			} else {
@@ -1617,7 +1649,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.external_internal)))) {
+			if (((_current.iface.e2) && (isStateActive(State.external_internal)))) {
 				exitSequence_else_event();
 				enterSequence_else_local_default();
 			} else {
@@ -1640,7 +1672,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.else_local)))) {
+			if (((_current.iface.e1) && (isStateActive(State.else_local)))) {
 				exitSequence_entry_in();
 				enterSequence_entry_out_default();
 			} else {
@@ -1663,7 +1695,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.entry_out)))) {
+			if (((_current.iface.e2) && (isStateActive(State.entry_out)))) {
 				exitSequence_exit_var();
 				enterSequence_exit_readonly_default();
 			} else {
@@ -1686,7 +1718,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.exit_readonly)))) {
+			if (((_current.iface.e1) && (isStateActive(State.exit_readonly)))) {
 				exitSequence_always_external();
 				enterSequence_always_operation_default();
 			} else {
@@ -1709,7 +1741,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.always_operation)))) {
+			if (((_current.iface.e2) && (isStateActive(State.always_operation)))) {
 				exitSequence_oncycle_default();
 				enterSequence_oncycle_else_default();
 			} else {
@@ -1732,7 +1764,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.oncycle_else)))) {
+			if (((_current.iface.e1) && (isStateActive(State.oncycle_else)))) {
 				exitSequence_raise_entry();
 				enterSequence_raise_exit_default();
 			} else {
@@ -1755,7 +1787,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e2) && (isStateActive(State.raise_exit)))) {
+			if (((_current.iface.e2) && (isStateActive(State.raise_exit)))) {
 				exitSequence_valueof_always();
 				enterSequence_valueof_oncycle_default();
 			} else {
@@ -1778,7 +1810,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.e1) && (isStateActive(State.valueof_oncycle)))) {
+			if (((_current.iface.e1) && (isStateActive(State.valueof_oncycle)))) {
 				exitSequence_active_raise();
 				enterSequence_active_valueof_default();
 			} else {

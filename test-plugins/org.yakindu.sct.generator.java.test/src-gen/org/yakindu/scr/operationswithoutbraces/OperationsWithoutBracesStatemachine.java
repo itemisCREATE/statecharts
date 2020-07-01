@@ -13,7 +13,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		}
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -34,6 +33,15 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	
 	private int nextStateIndex;
 	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public OperationsWithoutBracesStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -47,25 +55,45 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
 		enterSequence_another_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		exitSequence_another_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -96,11 +124,8 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
-		exitSequence_another_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -118,18 +143,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-	}
-	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

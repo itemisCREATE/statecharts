@@ -13,7 +13,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		}
 	}
 	
-	
 	protected class SCIIF2Impl implements SCIIF2 {
 	
 		private SCIIF2OperationCallback operationCallback;
@@ -23,7 +22,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			this.operationCallback = operationCallback;
 		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -42,6 +40,15 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	private int nextStateIndex;
 	
 	private InternalOperationCallback operationCallback;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public VariadicFunctionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIIF2 = new SCIIF2Impl();
@@ -63,24 +70,43 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -93,10 +119,8 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -114,18 +138,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-	}
-	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

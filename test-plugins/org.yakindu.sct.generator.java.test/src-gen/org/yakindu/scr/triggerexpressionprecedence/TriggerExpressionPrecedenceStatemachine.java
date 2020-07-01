@@ -59,13 +59,15 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 			this.e2_transition = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-			e2 = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e1;
+		private boolean e2;
+	}
+	private static class TriggerExpressionPrecedenceStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -79,6 +81,17 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	
 	private int nextStateIndex;
 	
+	private TriggerExpressionPrecedenceStatemachineEvBuf _current = new TriggerExpressionPrecedenceStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public TriggerExpressionPrecedenceStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -88,8 +101,9 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setC1(false);
 		
 		sCInterface.setC2(false);
@@ -97,22 +111,42 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		sCInterface.setE1_transition(false);
 		
 		sCInterface.setE2_transition(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case triggerExpressionPrecedence_main_region_A:
@@ -122,10 +156,8 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -143,17 +175,17 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e1 = sCInterface.e1;
+		sCInterface.e1 = false;
+		
+		_current.iface.e2 = sCInterface.e2;
+		sCInterface.e2 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e1 = false;
+		sCInterface.e2 = false;
 	}
 	
 	/**
@@ -255,13 +287,13 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.e1) && ((sCInterface.getC1() || sCInterface.getC2())))) {
+				if (((_current.iface.e1) && ((sCInterface.getC1() || sCInterface.getC2())))) {
 					exitSequence_main_region_A();
 					sCInterface.setE1_transition(true);
 					
 					enterSequence_main_region_A_default();
 				} else {
-					if (sCInterface.e2) {
+					if (_current.iface.e2) {
 						exitSequence_main_region_A();
 						sCInterface.setE2_transition(true);
 						

@@ -11,6 +11,7 @@ package org.yakindu.sct.generator.java.submodules
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
@@ -50,10 +51,6 @@ class FieldDeclarationGenerator {
 
 		«stateVectors(flow)»
 		
-		«IF flow.statechart.isSuperStep»
-		private boolean stateVectorChanged = false;
-		
-		«ENDIF»
 		private int nextStateIndex;
 		
 		«IF entry.tracingUsed»
@@ -65,14 +62,17 @@ class FieldDeclarationGenerator {
 		
 		«ENDIF»
 		«flow.internalEventFields»
-		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
-			«generateVariableDefinition(variable)»
+		«FOR v : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
+			«v.code»
 			
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations()»
 				private «internal.getInternalOperationCallbackName()» operationCallback;
 			«ENDIF»
+		«ENDFOR»
+		«FOR v : flow.features.filter(Property)»
+			«v.code»
 		«ENDFOR»
 	'''
 	

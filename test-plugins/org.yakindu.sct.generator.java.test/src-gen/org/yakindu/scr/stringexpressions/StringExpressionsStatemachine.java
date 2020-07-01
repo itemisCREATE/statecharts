@@ -102,12 +102,14 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			this.guardStringEqual = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+	}
+	private static class StringExpressionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -126,6 +128,17 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 	private int nextStateIndex;
 	
+	private StringExpressionsStatemachineEvBuf _current = new StringExpressionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public StringExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -135,8 +148,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setStringA("A");
 		
 		sCInterface.setStringA2("A");
@@ -154,22 +168,42 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		sCInterface.setGuardStringNotEqual(false);
 		
 		sCInterface.setGuardStringEqual(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_AssignmentChecked:
@@ -194,10 +228,8 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -215,17 +247,13 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
 	}
 	
 	/**
@@ -332,51 +360,51 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_0_tr1_tr1() {
-		return sCInterface.e;
+		return _current.iface.e;
 	}
 	
 	private boolean check_main_region__choice_1_tr1_tr1() {
-		return ((sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringA2() ==null :sCInterface.getStringA().equals(sCInterface.getStringA2()))));
+		return ((_current.iface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringA2() ==null :sCInterface.getStringA().equals(sCInterface.getStringA2()))));
 	}
 	
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return ((sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringB() !=null : !sCInterface.getStringA().equals(sCInterface.getStringB()))));
+		return ((_current.iface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringB() !=null : !sCInterface.getStringA().equals(sCInterface.getStringB()))));
 	}
 	
 	private boolean check_main_region__choice_3_tr0_tr0() {
-		return sCInterface.e;
+		return _current.iface.e;
 	}
 	
 	private boolean check_main_region__choice_4_tr1_tr1() {
-		return ((sCInterface.e) && ((sCInterface.getStringA()== null?"A" ==null :sCInterface.getStringA().equals("A"))));
+		return ((_current.iface.e) && ((sCInterface.getStringA()== null?"A" ==null :sCInterface.getStringA().equals("A"))));
 	}
 	
 	private boolean check_main_region__choice_5_tr1_tr1() {
-		return ((sCInterface.e) && ((sCInterface.getStringA()== null?"B" !=null : !sCInterface.getStringA().equals("B"))));
+		return ((_current.iface.e) && ((sCInterface.getStringA()== null?"B" !=null : !sCInterface.getStringA().equals("B"))));
 	}
 	
 	private boolean check_main_region__choice_7_tr0_tr0() {
-		return sCInterface.e;
+		return _current.iface.e;
 	}
 	
 	private boolean check_main_region__choice_8_tr1_tr1() {
-		return ((sCInterface.e) && (("A"== null?sCInterface.getStringA() ==null :"A".equals(sCInterface.getStringA()))));
+		return ((_current.iface.e) && (("A"== null?sCInterface.getStringA() ==null :"A".equals(sCInterface.getStringA()))));
 	}
 	
 	private boolean check_main_region__choice_9_tr1_tr1() {
-		return ((sCInterface.e) && (("A"== null?sCInterface.getStringB() !=null : !"A".equals(sCInterface.getStringB()))));
+		return ((_current.iface.e) && (("A"== null?sCInterface.getStringB() !=null : !"A".equals(sCInterface.getStringB()))));
 	}
 	
 	private boolean check_main_region__choice_11_tr0_tr0() {
-		return sCInterface.e;
+		return _current.iface.e;
 	}
 	
 	private boolean check_main_region__choice_12_tr1_tr1() {
-		return ((sCInterface.e) && (("A"== null?"A" ==null :"A".equals("A"))));
+		return ((_current.iface.e) && (("A"== null?"A" ==null :"A".equals("A"))));
 	}
 	
 	private boolean check_main_region__choice_13_tr1_tr1() {
-		return ((sCInterface.e) && (("A"== null?"B" !=null : !"A".equals("B"))));
+		return ((_current.iface.e) && (("A"== null?"B" !=null : !"A".equals("B"))));
 	}
 	
 	private void effect_main_region__choice_0_tr1() {
@@ -759,7 +787,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_AssignmentChecked();
 					sCInterface.setStringVarEqual((sCInterface.stringA== null?sCInterface.stringA2 ==null :sCInterface.stringA.equals(sCInterface.stringA2)));
 					
@@ -788,7 +816,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_VarToVarCompareSucceeded();
 					sCInterface.setStringVarEqual((sCInterface.stringA== null?"A" ==null :sCInterface.stringA.equals("A")));
 					
@@ -806,7 +834,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_VarToConstCompareSucceeded();
 					sCInterface.setStringVarEqual(("A"== null?sCInterface.stringA ==null :"A".equals(sCInterface.stringA)));
 					
@@ -824,7 +852,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (_current.iface.e) {
 					exitSequence_main_region_ConstToVarCompareSucceeded();
 					sCInterface.setStringVarEqual(("A"== null?"A" ==null :"A".equals("A")));
 					

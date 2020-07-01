@@ -30,6 +30,7 @@ class EnterMethod {
 
 	@Inject protected extension ExecutionGuard
 	@Inject protected extension EventProcessing
+	@Inject protected extension InitializedCheck
 
 	@Inject protected extension SExecExtensions
 	@Inject protected extension TypeBuilder
@@ -47,6 +48,7 @@ class EnterMethod {
 			m._public
 			m._type(_void)
 			m._body(
+				_isInitializedCheck,
 				_guardExecution( _sequence(
 					_traceEnter,
 					enterSequences.defaultSequence._clone

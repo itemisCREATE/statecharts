@@ -459,13 +459,15 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.volatileVariable = value;
 		}
 		
-		protected void clearEvents() {
-			whileEvent = false;
-			ev = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean whileEvent;
+		private boolean ev;
+	}
+	private static class JavaKeywordsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -485,6 +487,17 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 	private int nextStateIndex;
 	
+	private JavaKeywordsStatemachineEvBuf _current = new JavaKeywordsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public JavaKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -497,8 +510,9 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		for (int i = 0; i < 2; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setAbstract(false);
 		
 		sCInterface.setAssert(false);
@@ -586,22 +600,42 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.setVoid(false);
 		
 		sCInterface.setVolatile(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_goto_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_goto();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case goto_abstract:
@@ -620,10 +654,8 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_goto();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -641,17 +673,17 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.whileEvent = sCInterface.whileEvent;
+		sCInterface.whileEvent = false;
+		
+		_current.iface.ev = sCInterface.ev;
+		sCInterface.ev = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.whileEvent = false;
+		sCInterface.ev = false;
 	}
 	
 	/**
@@ -1413,7 +1445,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.whileEvent) && (true))) {
+				if (((_current.iface.whileEvent) && (true))) {
 					exitSequence_goto_abstract();
 					sCInterface.setNative(false);
 					
@@ -1431,11 +1463,11 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.whileEvent) {
+				if (_current.iface.whileEvent) {
 					exitSequence_goto_boolean();
 					enterSequence_goto_void_default();
 				} else {
-					if (sCInterface.ev) {
+					if (_current.iface.ev) {
 						exitSequence_goto_boolean();
 						enterSequence_goto_void_try();
 					} else {
@@ -1485,7 +1517,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (goto_void_react(try_transition)==false) {
-				if (sCInterface.ev) {
+				if (_current.iface.ev) {
 					exitSequence_goto_void_volatile_state();
 					enterSequence_goto_void_volatile_transient_this();
 				} else {

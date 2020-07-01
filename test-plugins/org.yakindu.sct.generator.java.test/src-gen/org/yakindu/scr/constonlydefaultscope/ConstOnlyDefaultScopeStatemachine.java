@@ -15,7 +15,6 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 	}
 	
-	
 	protected class SCIAImpl implements SCIA {
 	
 		private boolean e;
@@ -33,12 +32,16 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 			return eValue;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
 	
-	
+	private static class SCIAEvBuf {
+		private boolean e;
+		
+		private long eValue;
+	}
+	private static class ConstOnlyDefaultScopeStatemachineEvBuf {
+		private SCIAEvBuf ifaceA = new SCIAEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	protected SCIAImpl sCIA;
@@ -56,6 +59,17 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 	
 	private int nextStateIndex;
 	
+	private ConstOnlyDefaultScopeStatemachineEvBuf _current = new ConstOnlyDefaultScopeStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ConstOnlyDefaultScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIA = new SCIAImpl();
@@ -66,24 +80,45 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case constOnlyDefaultScope_main_region_A:
@@ -99,10 +134,8 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -120,17 +153,14 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCIA.clearEvents();
+	private void swapInEvents() {
+		_current.ifaceA.e = sCIA.e;
+		_current.ifaceA.eValue = sCIA.eValue;
+		sCIA.e = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCIA.e = false;
 	}
 	
 	/**
@@ -238,11 +268,11 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCIA.e) && (sCIA.getEValue()==sCInterface.getB()))) {
+				if (((_current.ifaceA.e) && (_current.ifaceA.eValue==sCInterface.getB()))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					if (((sCIA.e) && (sCIA.getEValue()==sCInterface.getC()))) {
+					if (((_current.ifaceA.e) && (_current.ifaceA.eValue==sCInterface.getC()))) {
 						exitSequence_main_region_A();
 						enterSequence_main_region_C_default();
 					} else {

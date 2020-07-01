@@ -16,7 +16,7 @@ import com.google.inject.Singleton
 
 /**
  * Derives a flow configuration required by the model sequencer from the 
- * C code generator gmodel.
+ * C code generator model.
  * 
  * @author axel terfloth
  */

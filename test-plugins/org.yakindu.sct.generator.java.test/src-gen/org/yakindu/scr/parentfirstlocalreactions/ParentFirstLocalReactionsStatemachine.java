@@ -103,13 +103,15 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			this.sm_local = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			doSelfTransition = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean doSelfTransition;
+	}
+	private static class ParentFirstLocalReactionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -128,6 +130,17 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	
 	private int nextStateIndex;
 	
+	private ParentFirstLocalReactionsStatemachineEvBuf _current = new ParentFirstLocalReactionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ParentFirstLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -137,8 +150,9 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setCnt(0);
 		
 		sCInterface.setDisable_a(false);
@@ -154,22 +168,42 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		sCInterface.setAaa_local(0);
 		
 		sCInterface.setSm_local(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_r_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case parentFirstLocalReactions_r_A_r_AA_r_AAA:
@@ -188,10 +222,8 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -209,17 +241,17 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.doSelfTransition = sCInterface.doSelfTransition;
+		sCInterface.doSelfTransition = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
+		sCInterface.doSelfTransition = false;
 	}
 	
 	/**
@@ -493,11 +525,11 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
+				if (((_current.iface.e) && (!sCInterface.getDisable_a()))) {
 					exitSequence_r_A();
 					enterSequence_r_B_default();
 				} else {
-					if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_a()))) {
+					if (((_current.iface.doSelfTransition) && (!sCInterface.getDisable_a()))) {
 						exitSequence_r_A();
 						enterSequence_r_A_default();
 					} else {
@@ -517,7 +549,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (r_A_react(try_transition)==false) {
-				if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
+				if (((_current.iface.e) && (!sCInterface.getDisable_aa()))) {
 					exitSequence_r_A_r_AA();
 					enterSequence_r_A_r_AB_default();
 				} else {
@@ -536,11 +568,11 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (r_A_r_AA_react(try_transition)==false) {
-				if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
+				if (((_current.iface.e) && (!sCInterface.getDisable_aaa()))) {
 					exitSequence_r_A_r_AA_r_AAA();
 					enterSequence_r_A_r_AA_r_AAB_default();
 				} else {
-					if (((sCInterface.doSelfTransition) && (!sCInterface.getDisable_aaa()))) {
+					if (((_current.iface.doSelfTransition) && (!sCInterface.getDisable_aaa()))) {
 						exitSequence_r_A_r_AA_r_AAA();
 						enterSequence_r_A_r_AA_r_AAA_default();
 					} else {

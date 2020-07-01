@@ -59,10 +59,7 @@ class EventBuffer {
 				val scopeBufferType = _complexType() => [ scopeType |
 					scope.declarations
 						.filter(Event)
-						.filter[ e |
-							   (applyIncomingEventBuffer && e.direction == Direction.IN)
-							|| (applyInternalEventBuffer && e.direction == Direction.LOCAL) 
-						]
+						.filter[ e | e.isBuffered]
 						.forEach[ e | e.createBufferEvent => [
 							scopeType.features.add(it)
 							it.traceOrigin(e)
@@ -112,7 +109,7 @@ class EventBuffer {
 			.filter[ p | p.type instanceof ComplexType && p.type.isEventBuffer]
 	}
 
-	def List<List<Declaration>> bufferEvents(Property it) {
+	def List<List<Declaration>> bufferEventPaths(Property it) {
 
 		val l = newArrayList
 		l.addAll(
@@ -124,13 +121,18 @@ class EventBuffer {
 		features
 			.filter(Property)
 			.filter[p | p.type.isEventBuffer]
-			.map[ p | p.bufferEvents]
+			.map[ p | p.bufferEventPaths]
 			.forEach[ bel | 
 				bel.forEach[ be | be.add(0,it)] 
 				l.addAll(bel)
 			]
 
 		return l			
+	}
+	
+	def isBuffered(Event e) {
+		(applyIncomingEventBuffer && e.direction == Direction.IN) || 
+		(applyInternalEventBuffer && e.direction == Direction.LOCAL) 
 	}
 	
 	

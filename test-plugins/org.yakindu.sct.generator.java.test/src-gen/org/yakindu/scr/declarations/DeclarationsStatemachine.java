@@ -141,20 +141,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varE = value;
 		}
 		
-		protected void clearEvents() {
-			evA = false;
-			evC = false;
-			evE = false;
-		}
-		protected void clearOutEvents() {
-		
-		evB = false;
-		evD = false;
-		evF = false;
-		}
-		
 	}
-	
 	
 	protected class SCIIfAImpl implements SCIIfA {
 	
@@ -293,21 +280,47 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varE = value;
 		}
 		
-		protected void clearEvents() {
-			evA = false;
-			evC = false;
-			evE = false;
-		}
-		protected void clearOutEvents() {
-		
-		evB = false;
-		evD = false;
-		evF = false;
-		}
-		
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean evA;
+		private boolean evC;
+		
+		private boolean evCValue;
+		private boolean evE;
+		
+		private double evEValue;
+	}
+	private static class SCIIfAEvBuf {
+		private boolean evA;
+		private boolean evC;
+		
+		private boolean evCValue;
+		private boolean evE;
+		
+		private double evEValue;
+	}
+	private static class DeclarationsStatemachineInternalEvBuf {
+		private boolean evInA;
+		private boolean evInB;
+		private boolean evInC;
+		
+		private boolean evInCValue;
+		private boolean evInD;
+		
+		private long evInDValue;
+		private boolean evInE;
+		
+		private double evInEValue;
+		private boolean evInF;
+		
+		private String evInFValue;
+	}
+	private static class DeclarationsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private SCIIfAEvBuf ifaceIfA = new SCIIfAEvBuf();
+		private DeclarationsStatemachineInternalEvBuf internal = new DeclarationsStatemachineInternalEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	protected SCIIfAImpl sCIIfA;
@@ -393,6 +406,17 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 	
 	
+	private DeclarationsStatemachineEvBuf _current = new DeclarationsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public DeclarationsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIIfA = new SCIIfAImpl();
@@ -403,8 +427,10 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
+		
 		sCInterface.setVarA(false);
 		
 		sCInterface.setVarB(1);
@@ -434,38 +460,60 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		setVarInD("myString");
 		
 		setVarInE(0x10);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		isExecuting = true;
+		swapInEvents();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case main_region_A:
+					main_region_A_react(true);
+					break;
+				case main_region_B:
+					main_region_B_react(true);
+					break;
+				default:
+					// $NullState$
+				}
+			}
+			
+			swapInternalEvents();
+		} while ((((((_current.internal.evInA || _current.internal.evInB) || _current.internal.evInC) || _current.internal.evInD) || _current.internal.evInE) || _current.internal.evInF));
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -483,26 +531,76 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
-		sCIIfA.clearEvents();
+	private void swapInEvents() {
+		_current.iface.evA = sCInterface.evA;
+		sCInterface.evA = false;
+		
+		_current.iface.evC = sCInterface.evC;
+		_current.iface.evCValue = sCInterface.evCValue;
+		sCInterface.evC = false;
+		
+		_current.iface.evE = sCInterface.evE;
+		_current.iface.evEValue = sCInterface.evEValue;
+		sCInterface.evE = false;
+		
+		_current.ifaceIfA.evA = sCIIfA.evA;
+		sCIIfA.evA = false;
+		
+		_current.ifaceIfA.evC = sCIIfA.evC;
+		_current.ifaceIfA.evCValue = sCIIfA.evCValue;
+		sCIIfA.evC = false;
+		
+		_current.ifaceIfA.evE = sCIIfA.evE;
+		_current.ifaceIfA.evEValue = sCIIfA.evEValue;
+		sCIIfA.evE = false;
+	}
+	
+	private void clearInEvents() {
+		sCInterface.evA = false;
+		sCInterface.evC = false;
+		sCInterface.evE = false;
+		sCIIfA.evA = false;
+		sCIIfA.evC = false;
+		sCIIfA.evE = false;
+	}
+	
+	private void swapInternalEvents() {
+		_current.iface.evA = false;
+		_current.iface.evC = false;
+		_current.iface.evE = false;
+		_current.ifaceIfA.evA = false;
+		_current.ifaceIfA.evC = false;
+		_current.ifaceIfA.evE = false;
+		_current.internal.evInA = evInA;
+		evInA = false;
+		
+		_current.internal.evInB = evInB;
+		evInB = false;
+		
+		_current.internal.evInC = evInC;
+		_current.internal.evInCValue = evInCValue;
+		evInC = false;
+		
+		_current.internal.evInD = evInD;
+		_current.internal.evInDValue = evInDValue;
+		evInD = false;
+		
+		_current.internal.evInE = evInE;
+		_current.internal.evInEValue = evInEValue;
+		evInE = false;
+		
+		_current.internal.evInF = evInF;
+		_current.internal.evInFValue = evInFValue;
+		evInF = false;
+	}
+	
+	private void clearInternalEvents() {
 		evInA = false;
 		evInB = false;
 		evInC = false;
 		evInD = false;
 		evInE = false;
 		evInF = false;
-	}
-	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
-		sCIIfA.clearOutEvents();
 	}
 	
 	/**
@@ -711,11 +809,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (evInA) {
+				if (_current.internal.evInA) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					if (evInC) {
+					if (_current.internal.evInC) {
 						exitSequence_main_region_A();
 						enterSequence_main_region_A_default();
 					} else {
@@ -732,19 +830,19 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (evInB) {
+				if (_current.internal.evInB) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
-					if (evInD) {
+					if (_current.internal.evInD) {
 						exitSequence_main_region_B();
 						enterSequence_main_region_B_default();
 					} else {
-						if (evInE) {
+						if (_current.internal.evInE) {
 							exitSequence_main_region_B();
 							enterSequence_main_region_B_default();
 						} else {
-							if (evInF) {
+							if (_current.internal.evInF) {
 								exitSequence_main_region_B();
 								enterSequence_main_region_A_default();
 							} else {

@@ -12,9 +12,11 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import java.util.List
+import org.yakindu.sct.generator.core.submodules.lifecycle.NamedConceptSequenceCode
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
+import org.yakindu.sct.model.sexec.DoWhile
 import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExitState
@@ -34,10 +36,11 @@ import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.TraceStateEntered
 import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sexec.concepts.SuperStep
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 class FlowCode {
 	
@@ -46,7 +49,9 @@ class FlowCode {
 	@Inject extension JavaExpressionsGenerator
 	@Inject extension SExecExtensions
 	@Inject extension GenmodelEntries
-	@Inject extension StatechartAnnotations
+	@Inject extension NamedConceptSequenceCode
+	@Inject extension StateMachineBehaviorConcept
+	@Inject extension SuperStep
 	
 	@Inject GeneratorEntry entry
 	
@@ -62,22 +67,22 @@ class FlowCode {
 		//ERROR: FlowCode for Step '«getClass().name»' not defined
 	'''
 	
-	// ignore all trace steps not explicitly suppotrrted
+	// ignore all trace steps not explicitly supported
 	def dispatch CharSequence code(Trace it)''''''
 	
 	def dispatch CharSequence code(TraceStateEntered it) '''
 		«IF entry.tracingEnterState»
-		for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
-			«traceSingleInstance».«stateEnteredTraceFunctionID»(State.«it.state.stateName»);
-		}
+			for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
+				«traceSingleInstance».«stateEnteredTraceFunctionID»(State.«it.state.stateName»);
+			}
 		«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
-		for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
-			«traceSingleInstance».«stateExitedTraceFunctionID»(State.«it.state.stateName»);
-		}
+			for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
+				«traceSingleInstance».«stateExitedTraceFunctionID»(State.«it.state.stateName»);
+			}
 		«ENDIF»
 	'''
 	
@@ -107,25 +112,26 @@ class FlowCode {
 		timer.unsetTimer(this, «getTimeEvents.indexOf(timeEvent)»);
 	'''
 	
-	def dispatch CharSequence code(Execution it) {'''
+	def dispatch CharSequence code(Execution it) '''
 		«statement.code»;
 	'''
-	}
 	
-	def dispatch CharSequence code(Call it) '''
-		«step.functionName()»();'''
+	def dispatch CharSequence code(Call it) '''«step.functionName()»();'''
 	
 	def dispatch CharSequence code(Sequence it) {
-		steps.map[code].join('\n')
+		if (isStateMachineConcept) {
+			flow.stateMachineConceptCode(it)
+		} else {
+			steps.map[code.toString].filter[!nullOrEmpty].join('\n')
+		}
 	}
 	
-	def dispatch CharSequence code(Check it) '''
-		«IF this !== null»
-			«condition.code()»
-		«ELSE»
-			true
- 		«ENDIF»
-	'''
+	def dispatch CharSequence code(Check it) {
+		if (condition !== null) 
+			condition.code
+		else 
+			"true"
+	}
 
 	def dispatch CharSequence code(CheckRef it) '''«IF check !== null»«comment»«check.functionName()»()«ELSE»true«ENDIF»'''
 	
@@ -133,8 +139,7 @@ class FlowCode {
 		effect.code;
 	}
 	
-	def dispatch CharSequence code(If it) 
-	'''
+	def dispatch CharSequence code(If it) '''
 		«stepComment»
 		if («check.code.toString.trim») {
 			«thenStep.code»
@@ -142,22 +147,27 @@ class FlowCode {
 			«elseStep.code»
 		}
 		«ENDIF»
-		'''
+	'''
+	
+	def dispatch CharSequence code(DoWhile it) '''
+		«stepComment»
+		do { 
+			«body.code»
+		} while («check.code»);
+	'''
 	
 	def dispatch CharSequence code(EnterState it) '''
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
 		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;
-		«IF flow.statechart.isSuperStep»
-		stateVectorChanged = true;
-		«ENDIF»
-		'''
+		«flow._stateChanged.code»
+	'''
 	
 	def dispatch CharSequence code(ExitState it) '''
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
 		stateVector[«state.stateVector.offset»] = State.«getNullStateName()»;
-		'''
+	'''
 	
 	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
@@ -169,12 +179,12 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(SaveHistory it) '''
-	«stepComment»
-	historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
+		«stepComment»
+		historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 	'''
 	
 	def private getTimeEvents(Step it) {
-		if (timeEvents===null) {
+		if (timeEvents === null) {
 			timeEvents = flow.timeEvents
 		}
 		return timeEvents
@@ -188,7 +198,6 @@ class FlowCode {
 		«variable.typeSpecifier.type» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
 	'''
 	
-	def dispatch CharSequence code(Statement it) 
-		'''«expression.code»;'''
+	def dispatch CharSequence code(Statement it) '''«expression.code»;'''
 
 }

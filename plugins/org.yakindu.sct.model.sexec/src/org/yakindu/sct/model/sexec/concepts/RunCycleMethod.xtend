@@ -29,6 +29,7 @@ class RunCycleMethod {
 	@Inject extension ExecutionGuard
 	@Inject extension EventProcessing
 	@Inject extension SuperStep
+	@Inject extension InitializedCheck
 	
 	@Inject extension TypeBuilder
 	@Inject extension SexecBuilder
@@ -46,6 +47,7 @@ class RunCycleMethod {
 			m._public
 			m._type(_void)
 			m._body(
+				_isInitializedCheck,
 				_guardExecution( _sequence(
 					_traceBeginRunCycle,
 					_eventProcessing(

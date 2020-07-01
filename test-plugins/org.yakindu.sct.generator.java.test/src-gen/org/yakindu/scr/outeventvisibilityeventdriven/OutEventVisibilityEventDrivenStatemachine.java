@@ -60,17 +60,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 			return o2Observable;
 		}
 		
-		protected void clearEvents() {
-			i = false;
-		}
-		protected void clearOutEvents() {
-		
-		o1 = false;
-		o2 = false;
-		}
-		
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -91,6 +81,15 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private boolean l;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public OutEventVisibilityEventDrivenStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -100,81 +99,77 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
 		clearOutEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+			        "The state machine needs to be initialized first by calling the init() function.");
 		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
-		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case outEventVisibilityEventDriven_main_region_A:
-				main_region_A_react(true);
-				break;
-			case outEventVisibilityEventDriven_main_region_B:
-				main_region_B_react(true);
-				break;
-			case outEventVisibilityEventDriven_main_region_C:
-				main_region_C_react(true);
-				break;
-			case outEventVisibilityEventDriven_main_region_D:
-				main_region_D_react(true);
-				break;
-			case outEventVisibilityEventDriven_main_region_E:
-				main_region_E_react(true);
-				break;
-			default:
-				// $NullState$
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case outEventVisibilityEventDriven_main_region_A:
+					main_region_A_react(true);
+					break;
+				case outEventVisibilityEventDriven_main_region_B:
+					main_region_B_react(true);
+					break;
+				case outEventVisibilityEventDriven_main_region_C:
+					main_region_C_react(true);
+					break;
+				case outEventVisibilityEventDriven_main_region_D:
+					main_region_D_react(true);
+					break;
+				case outEventVisibilityEventDriven_main_region_E:
+					main_region_E_react(true);
+					break;
+				default:
+					// $NullState$
+				}
 			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!internalEventQueue.isEmpty()) {
-			return internalEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
-	}
-	
-	public void exit() {
-		exitSequence_main_region();
+			
+			clearInEvents();
+			clearInternalEvents();
+			nextEvent();
+		} while ((sCInterface.i || l));
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -192,21 +187,25 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearOutEvents() {
+		sCInterface.o1 = false;
+		sCInterface.o2 = false;
+	}
+	
+	private void clearInEvents() {
+		sCInterface.i = false;
+	}
+	
+	private void clearInternalEvents() {
 		l = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCInterface.clearOutEvents();
+	protected void nextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			internalEventQueue.poll().run();
+			return;
+		}
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -234,10 +233,9 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	
 	private void raiseL() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				l = true;					
-				singleCycle();
 			}
 		});
 	}

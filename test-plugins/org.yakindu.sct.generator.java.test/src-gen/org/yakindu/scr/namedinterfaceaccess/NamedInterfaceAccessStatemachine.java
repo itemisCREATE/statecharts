@@ -42,16 +42,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			return closeObservable;
 		}
 		
-		protected void clearEvents() {
-		}
-		protected void clearOutEvents() {
-		
-		open = false;
-		close = false;
-		}
-		
 	}
-	
 	
 	protected class SCIUserImpl implements SCIUser {
 	
@@ -77,13 +68,17 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			reset = true;
 		}
 		
-		protected void clearEvents() {
-			numberPressed = false;
-			reset = false;
-		}
 	}
 	
-	
+	private static class SCIUserEvBuf {
+		private boolean numberPressed;
+		
+		private long numberPressedValue;
+		private boolean reset;
+	}
+	private static class NamedInterfaceAccessStatemachineEvBuf {
+		private SCIUserEvBuf ifaceUser = new SCIUserEvBuf();
+	}
 	protected SCISafeImpl sCISafe;
 	
 	protected SCIUserImpl sCIUser;
@@ -137,6 +132,17 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 	
 	
+	private NamedInterfaceAccessStatemachineEvBuf _current = new NamedInterfaceAccessStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public NamedInterfaceAccessStatemachine() {
 		sCISafe = new SCISafeImpl();
 		sCIUser = new SCIUserImpl();
@@ -147,30 +153,54 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
+		
+		clearInEvents();
 		clearOutEvents();
+		
 		setNumber1(3);
 		
 		setNumber2(7);
 		
 		setNumber3(5);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_region_1_default();
 		enterSequence__region1_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_region_1();
+		exitSequence__region1();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		clearOutEvents();
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case region_1_Idle:
@@ -195,11 +225,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_region_1();
-		exitSequence__region1();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -217,19 +244,23 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCISafe.clearEvents();
-		sCIUser.clearEvents();
+	private void clearOutEvents() {
+		sCISafe.open = false;
+		sCISafe.close = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-		sCISafe.clearOutEvents();
+	private void swapInEvents() {
+		_current.ifaceUser.numberPressed = sCIUser.numberPressed;
+		_current.ifaceUser.numberPressedValue = sCIUser.numberPressedValue;
+		sCIUser.numberPressed = false;
+		
+		_current.ifaceUser.reset = sCIUser.reset;
+		sCIUser.reset = false;
+	}
+	
+	private void clearInEvents() {
+		sCIUser.numberPressed = false;
+		sCIUser.reset = false;
 	}
 	
 	/**
@@ -410,7 +441,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber1()))) {
+				if (((_current.ifaceUser.numberPressed) && (_current.ifaceUser.numberPressedValue==getNumber1()))) {
 					exitSequence_region_1_Idle();
 					enterSequence_region_1_Number1Pressed_default();
 				} else {
@@ -426,11 +457,11 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber2()))) {
+				if (((_current.ifaceUser.numberPressed) && (_current.ifaceUser.numberPressedValue==getNumber2()))) {
 					exitSequence_region_1_Number1Pressed();
 					enterSequence_region_1_Number2Pressed_default();
 				} else {
-					if (sCIUser.numberPressed) {
+					if (_current.ifaceUser.numberPressed) {
 						exitSequence_region_1_Number1Pressed();
 						enterSequence_region_1_Idle_default();
 					} else {
@@ -447,11 +478,11 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber3()))) {
+				if (((_current.ifaceUser.numberPressed) && (_current.ifaceUser.numberPressedValue==getNumber3()))) {
 					exitSequence_region_1_Number2Pressed();
 					enterSequence_region_1_Number3Pressed_default();
 				} else {
-					if (sCIUser.numberPressed) {
+					if (_current.ifaceUser.numberPressed) {
 						exitSequence_region_1_Number2Pressed();
 						enterSequence_region_1_Idle_default();
 					} else {
@@ -468,7 +499,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCIUser.numberPressed) {
+				if (_current.ifaceUser.numberPressed) {
 					exitSequence_region_1_Number3Pressed();
 					enterSequence_region_1_Idle_default();
 				} else {

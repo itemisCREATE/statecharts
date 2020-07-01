@@ -12,12 +12,14 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 			event1 = true;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean event1;
+	}
+	private static class StateIsActiveStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -34,6 +36,17 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	
 	private int nextStateIndex;
 	
+	private StateIsActiveStatemachineEvBuf _current = new StateIsActiveStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public StateIsActiveStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -43,25 +56,47 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_R1_default();
 		enterSequence_R2_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_R1();
+		exitSequence_R2();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r1_R1A:
@@ -80,11 +115,8 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_R1();
-		exitSequence_R2();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -102,17 +134,13 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.event1 = sCInterface.event1;
+		sCInterface.event1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.event1 = false;
 	}
 	
 	/**
@@ -273,7 +301,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.event1) {
+			if (_current.iface.event1) {
 				exitSequence_R2_R2A();
 				enterSequence_R2_R2B_default();
 			} else {

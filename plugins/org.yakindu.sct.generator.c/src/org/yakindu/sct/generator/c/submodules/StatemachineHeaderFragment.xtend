@@ -11,12 +11,10 @@
 package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
-import java.util.LinkedList
 import java.util.Set
-import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.Property
+import org.yakindu.base.types.annotations.VisibilityAnnotations
 import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IHeaderFragment
@@ -36,7 +34,6 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.annotations.VisibilityAnnotations
 
 /**
  * @author rbeckmann

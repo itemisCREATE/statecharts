@@ -29,13 +29,15 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 			this.b = value;
 		}
 		
-		protected void clearEvents() {
-			e1 = false;
-			e2 = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e1;
+		private boolean e2;
+	}
+	private static class TriggerGuardExpressionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -50,6 +52,17 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 	
 	private int nextStateIndex;
 	
+	private TriggerGuardExpressionsStatemachineEvBuf _current = new TriggerGuardExpressionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public TriggerGuardExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -59,25 +72,46 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setB(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -90,10 +124,8 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -111,17 +143,17 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e1 = sCInterface.e1;
+		sCInterface.e1 = false;
+		
+		_current.iface.e2 = sCInterface.e2;
+		sCInterface.e2 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e1 = false;
+		sCInterface.e2 = false;
 	}
 	
 	/**
@@ -216,7 +248,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((((sCInterface.e1 || sCInterface.e2)) && (sCInterface.getB()))) {
+				if ((((_current.iface.e1 || _current.iface.e2)) && (sCInterface.getB()))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {

@@ -13,7 +13,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 	}
 	
-	
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private SCInterfaceOperationCallback operationCallback;
@@ -29,12 +28,14 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			ev = true;
 		}
 		
-		protected void clearEvents() {
-			ev = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean ev;
+	}
+	private static class OperationsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCIInterface1Impl sCIInterface1;
 	
 	protected SCInterfaceImpl sCInterface;
@@ -65,6 +66,17 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	
 	
 	private InternalOperationCallback operationCallback;
+	private OperationsStatemachineEvBuf _current = new OperationsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public OperationsStatemachine() {
 		sCIInterface1 = new SCIInterface1Impl();
 		sCInterface = new SCInterfaceImpl();
@@ -86,25 +98,46 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		setMyBool(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_B:
@@ -123,10 +156,8 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -144,17 +175,13 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.ev = sCInterface.ev;
+		sCInterface.ev = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.ev = false;
 	}
 	
 	/**
@@ -340,7 +367,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.ev) && (sCInterface.operationCallback.alwaysTrue()))) {
+				if (((_current.iface.ev) && (sCInterface.operationCallback.alwaysTrue()))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {
@@ -356,7 +383,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.ev) {
+				if (_current.iface.ev) {
 					exitSequence_main_region_C();
 					enterSequence_main_region_D_default();
 				} else {

@@ -39,12 +39,7 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			i = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -60,6 +55,15 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 	
 	private int nextStateIndex;
 	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public NoLocalEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -69,25 +73,45 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setX(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case noLocalEvents_main_region_StateA:
@@ -100,10 +124,9 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		clearInEvents();
+		isExecuting = false;
 	}
 	
 	/**
@@ -121,19 +144,13 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearInEvents() {
+		sCInterface.e = false;
+		sCInterface.i = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	protected void nextEvent() {
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

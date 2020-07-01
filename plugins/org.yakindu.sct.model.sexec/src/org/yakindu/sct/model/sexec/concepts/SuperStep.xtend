@@ -40,19 +40,14 @@ class SuperStep {
 		if (appliesSuperStep) 
 			it.features += _variable(STATE_CHANGED, _boolean)		
 	}
-
-	def org.yakindu.base.types.Property hasStateChanged(ExecutionFlow it) {
-		features.filter( typeof(Property) ).filter( m | m.name == STATE_CHANGED).head
-	}
-
 	
 	def Step _superStepLoop(ExecutionFlow it, Step body) {
 		
 		if (appliesSuperStep)
 			_do( _sequence(
-				hasStateChanged._assign(_false),
+				stateChangedProperty._assign(_false),
 				body
-			))._while(hasStateChanged._ref)
+			))._while(stateChangedProperty._ref)
 		else 
 			body
 	}
@@ -65,7 +60,7 @@ class SuperStep {
 	}	
 	
 	def Property stateChangedProperty(ExecutionFlow it) {
-		features.filter( typeof(Property) ).filter( m | m.name == STATE_CHANGED).head
+		features.filter(Property).filter( m | m.name == STATE_CHANGED).head
 	}
 	
 	

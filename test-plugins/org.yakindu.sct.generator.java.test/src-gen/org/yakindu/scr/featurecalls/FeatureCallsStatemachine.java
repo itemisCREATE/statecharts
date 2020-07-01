@@ -22,12 +22,14 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 			this.myInt = value;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-		}
 	}
 	
-	
+	private static class SCIMyInterfaceEvBuf {
+		private boolean event1;
+	}
+	private static class FeatureCallsStatemachineEvBuf {
+		private SCIMyInterfaceEvBuf ifaceMyInterface = new SCIMyInterfaceEvBuf();
+	}
 	protected SCIMyInterfaceImpl sCIMyInterface;
 	
 	private boolean initialized = false;
@@ -42,6 +44,17 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	
 	private int nextStateIndex;
 	
+	private FeatureCallsStatemachineEvBuf _current = new FeatureCallsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public FeatureCallsStatemachine() {
 		sCIMyInterface = new SCIMyInterfaceImpl();
 	}
@@ -51,25 +64,46 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCIMyInterface.setMyInt(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -82,10 +116,8 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -103,17 +135,13 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCIMyInterface.clearEvents();
+	private void swapInEvents() {
+		_current.ifaceMyInterface.event1 = sCIMyInterface.event1;
+		sCIMyInterface.event1 = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCIMyInterface.event1 = false;
 	}
 	
 	/**
@@ -200,7 +228,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCIMyInterface.event1) {
+				if (_current.ifaceMyInterface.event1) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
@@ -216,7 +244,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCIMyInterface.event1) {
+				if (_current.ifaceMyInterface.event1) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {

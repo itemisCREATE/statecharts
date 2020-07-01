@@ -29,13 +29,15 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			this.x = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-			f = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+		private boolean f;
+	}
+	private static class CycleBasedSuperStepStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -53,10 +55,28 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	
 	private final State[] stateVector = new State[1];
 	
-	private boolean stateVectorChanged = false;
-	
 	private int nextStateIndex;
 	
+	private CycleBasedSuperStepStatemachineEvBuf _current = new CycleBasedSuperStepStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
+	private boolean stateConfVectorChanged;
+	
+	protected boolean getStateConfVectorChanged() {
+		return stateConfVectorChanged;
+	}
+	
+	protected void setStateConfVectorChanged(boolean value) {
+		this.stateConfVectorChanged = value;
+	}
 	public CycleBasedSuperStepStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -66,27 +86,48 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setX(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		do {
-			stateVectorChanged = false;
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
+		do { 
+			stateConfVectorChanged = false;
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
 				case cycleBasedSuperStep_main_region_A:
@@ -114,11 +155,9 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 					// $NullState$
 				}
 			}
-		} while(stateVectorChanged);
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		} while (getStateConfVectorChanged());
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -136,17 +175,17 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
+		
+		_current.iface.f = sCInterface.f;
+		sCInterface.f = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
+		sCInterface.f = false;
 	}
 	
 	/**
@@ -198,49 +237,49 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_A;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_B;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_C;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_main_region_D_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_D;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state G */
 	private void enterSequence_main_region_G_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_G;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state H */
 	private void enterSequence_main_region_H_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_H;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for state I */
 	private void enterSequence_main_region_I_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.cycleBasedSuperStep_main_region_I;
-		stateVectorChanged = true;
+		stateConfVectorChanged = true;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -332,12 +371,12 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (_current.iface.e) {
 				exitSequence_main_region_A();
 				enterSequence_main_region_B_default();
 				react();
 			} else {
-				if (sCInterface.f) {
+				if (_current.iface.f) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_G_default();
 					react();
@@ -356,7 +395,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (_current.iface.e) {
 				exitSequence_main_region_B();
 				enterSequence_main_region_C_default();
 				react();
@@ -374,7 +413,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.f) {
+			if (_current.iface.f) {
 				exitSequence_main_region_C();
 				enterSequence_main_region_D_default();
 				react();
@@ -383,7 +422,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.e) {
+			if (_current.iface.e) {
 				sCInterface.setX(42);
 			}
 			did_transition = react();
@@ -395,12 +434,12 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.f) && (sCInterface.getX()==0))) {
+			if (((_current.iface.f) && (sCInterface.getX()==0))) {
 				exitSequence_main_region_D();
 				enterSequence_main_region_A_default();
 				react();
 			} else {
-				if (sCInterface.f) {
+				if (_current.iface.f) {
 					exitSequence_main_region_D();
 					sCInterface.setX(sCInterface.getX() - 1);
 					
@@ -449,7 +488,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (_current.iface.e) {
 				exitSequence_main_region_I();
 				enterSequence_main_region_A_default();
 				react();

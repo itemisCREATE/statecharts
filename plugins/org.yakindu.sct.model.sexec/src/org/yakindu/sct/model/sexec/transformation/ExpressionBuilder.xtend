@@ -31,7 +31,6 @@ class ExpressionBuilder {
 		if (p instanceof ElementReferenceExpression) return p
 		createElementReferenceExpression => [
 			reference = p
-			operationCall = false
 			operationCall = p instanceof Operation
 			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]
@@ -41,7 +40,6 @@ class ExpressionBuilder {
 		createFeatureCall => [
 			owner = o
 			feature = p
-			operationCall = false
 			operationCall = p instanceof Operation
 			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]
@@ -51,7 +49,6 @@ class ExpressionBuilder {
 		createMetaCall => [
 			owner = o
 			feature = p
-			operationCall = false
 			operationCall = p instanceof Operation
 			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]

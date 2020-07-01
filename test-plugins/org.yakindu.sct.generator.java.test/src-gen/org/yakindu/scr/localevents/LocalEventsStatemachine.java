@@ -55,11 +55,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			this.checksum = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
-	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -88,6 +84,15 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private boolean activate_d;
 	
 	private long activate_dValue;
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public LocalEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -97,8 +102,10 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		clearInternalEvents();
+		
 		sCInterface.setCycleCountSm(0);
 		
 		sCInterface.setCycleCount1(0);
@@ -106,87 +113,79 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		sCInterface.setCycleCount2(0);
 		
 		sCInterface.setChecksum(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_r1_default();
 		enterSequence_r2_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r1();
+		exitSequence_r2();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+			        "The state machine needs to be initialized first by calling the init() function.");
 		
-		clearOutEvents();
-	
-		Runnable task = getNextEvent();
-		if (task == null) {
-			task = getDefaultEvent();
+		if (getIsExecuting()) {
+			return;
 		}
-		
-		while (task != null) {
-			task.run();
-			clearEvents();
-			task = getNextEvent();
-		}
-		
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case localEvents_r1_Comp1_r_A1:
-				r1_Comp1_r_A1_react(true);
-				break;
-			case localEvents_r1_Comp1_r_C1:
-				r1_Comp1_r_C1_react(true);
-				break;
-			case localEvents_r1_Comp1_r_D1:
-				r1_Comp1_r_D1_react(true);
-				break;
-			case localEvents_r2_Comp2_r_A2:
-				r2_Comp2_r_A2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_B2:
-				r2_Comp2_r_B2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_C2:
-				r2_Comp2_r_C2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_D2:
-				r2_Comp2_r_D2_react(true);
-				break;
-			default:
-				// $NullState$
+		isExecuting = true;
+		nextEvent();
+		do { 
+			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+				switch (stateVector[nextStateIndex]) {
+				case localEvents_r1_Comp1_r_A1:
+					r1_Comp1_r_A1_react(true);
+					break;
+				case localEvents_r1_Comp1_r_C1:
+					r1_Comp1_r_C1_react(true);
+					break;
+				case localEvents_r1_Comp1_r_D1:
+					r1_Comp1_r_D1_react(true);
+					break;
+				case localEvents_r2_Comp2_r_A2:
+					r2_Comp2_r_A2_react(true);
+					break;
+				case localEvents_r2_Comp2_r_B2:
+					r2_Comp2_r_B2_react(true);
+					break;
+				case localEvents_r2_Comp2_r_C2:
+					r2_Comp2_r_C2_react(true);
+					break;
+				case localEvents_r2_Comp2_r_D2:
+					r2_Comp2_r_D2_react(true);
+					break;
+				default:
+					// $NullState$
+				}
 			}
-		}
-	}
-	
-	protected Runnable getNextEvent() {
-		if(!internalEventQueue.isEmpty()) {
-			return internalEventQueue.poll();
-		}
-		return null;
-	}
-	
-	protected Runnable getDefaultEvent() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				singleCycle();
-			}
-		};
-	}
-	
-	public void exit() {
-		exitSequence_r1();
-		exitSequence_r2();
+			
+			clearInEvents();
+			clearInternalEvents();
+			nextEvent();
+		} while ((((sCInterface.e || activate_b) || activate_c) || activate_d));
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -204,22 +203,22 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void clearInEvents() {
+		sCInterface.e = false;
+	}
+	
+	private void clearInternalEvents() {
 		activate_b = false;
 		activate_c = false;
 		activate_d = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	protected void nextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			internalEventQueue.poll().run();
+			return;
+		}
 	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
@@ -257,31 +256,28 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private void raiseActivate_b() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				activate_b = true;					
-				singleCycle();
 			}
 		});
 	}
 	
 	private void raiseActivate_c() {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				activate_c = true;					
-				singleCycle();
 			}
 		});
 	}
 	
 	private void raiseActivate_d(final long value) {
 	
-		internalEventQueue.add( new Runnable() {
+		internalEventQueue.add(new Runnable() {
 			@Override public void run() {
 				activate_dValue = value;
 				activate_d = true;					
-				singleCycle();
 			}
 		});
 	}

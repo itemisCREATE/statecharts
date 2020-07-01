@@ -59,13 +59,15 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			this.enteredBother = value;
 		}
 		
-		protected void clearEvents() {
-			b = false;
-			d = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean b;
+		private boolean d;
+	}
+	private static class EntryReactionActionStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -84,6 +86,17 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	private int nextStateIndex;
 	
+	private EntryReactionActionStatemachineEvBuf _current = new EntryReactionActionStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public EntryReactionActionStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -96,8 +109,9 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		for (int i = 0; i < 1; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setEnteredR1(false);
 		
 		sCInterface.setEnteredR2(false);
@@ -105,23 +119,44 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		sCInterface.setEnteredBdefault(false);
 		
 		sCInterface.setEnteredBother(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_r2_default();
 		enterSequence_r1_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r2();
+		exitSequence_r1();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case entryReactionAction_r2_B_r_BA:
@@ -140,11 +175,8 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_r2();
-		exitSequence_r1();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -162,17 +194,17 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.b = sCInterface.b;
+		sCInterface.b = false;
+		
+		_current.iface.d = sCInterface.d;
+		sCInterface.d = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.b = false;
+		sCInterface.d = false;
 	}
 	
 	/**
@@ -426,7 +458,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.d) {
+				if (_current.iface.d) {
 					exitSequence_r2_B();
 					enterSequence_r2_D_default();
 				} else {
@@ -442,7 +474,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		
 		if (try_transition) {
 			if (r2_B_react(try_transition)==false) {
-				if (sCInterface.b) {
+				if (_current.iface.b) {
 					exitSequence_r2_B_r_BA();
 					enterSequence_r2_B_r_BB_default();
 				} else {
@@ -458,7 +490,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		
 		if (try_transition) {
 			if (r2_B_react(try_transition)==false) {
-				if (sCInterface.b) {
+				if (_current.iface.b) {
 					exitSequence_r2_B_r_BB();
 					enterSequence_r2_B_r_BA_default();
 				} else {
@@ -474,11 +506,11 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.b) {
+				if (_current.iface.b) {
 					exitSequence_r2_D();
 					enterSequence_r2_B_other();
 				} else {
-					if (sCInterface.d) {
+					if (_current.iface.d) {
 						exitSequence_r2_D();
 						enterSequence_r2_B_default();
 					} else {

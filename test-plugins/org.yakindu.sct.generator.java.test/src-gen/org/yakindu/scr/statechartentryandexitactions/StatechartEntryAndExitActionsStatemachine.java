@@ -37,7 +37,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		
 	}
 	
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -51,6 +50,15 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	
 	private int nextStateIndex;
 	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public StatechartEntryAndExitActionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -60,21 +68,26 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		
 		sCInterface.setX(0);
 		
 		sCInterface.setY(0);
 		
 		sCInterface.setB(false);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		sCInterface.setX(2);
 		
 		sCInterface.setY(3);
@@ -83,13 +96,34 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 			sCInterface.setX(sCInterface.getX() + sCInterface.y);
 		}
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		sCInterface.setX(8);
+		
+		sCInterface.setY(2);
+		
+		if (sCInterface.getB()) {
+			sCInterface.setX(sCInterface.getX() - sCInterface.y);
+		}
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case statechartEntryAndExitActions_main_region_A:
@@ -99,17 +133,8 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
-		sCInterface.setX(8);
 		
-		sCInterface.setY(2);
-		
-		if (sCInterface.getB()) {
-			sCInterface.setX(sCInterface.getX() - sCInterface.y);
-		}
+		isExecuting = false;
 	}
 	
 	/**
@@ -127,18 +152,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-	}
-	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
-	}
-	
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

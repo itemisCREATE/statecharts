@@ -33,15 +33,17 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 			next = true;
 		}
 		
-		protected void clearEvents() {
-			toA = false;
-			toB = false;
-			toHistory = false;
-			next = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean toA;
+		private boolean toB;
+		private boolean toHistory;
+		private boolean next;
+	}
+	private static class HistoryWithoutInitialStepStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -61,6 +63,17 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	
 	private int nextStateIndex;
 	
+	private HistoryWithoutInitialStepStatemachineEvBuf _current = new HistoryWithoutInitialStepStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public HistoryWithoutInitialStepStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -73,24 +86,45 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		for (int i = 0; i < 1; i++) {
 			historyVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -109,10 +143,8 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -130,17 +162,25 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.toA = sCInterface.toA;
+		sCInterface.toA = false;
+		
+		_current.iface.toB = sCInterface.toB;
+		sCInterface.toB = false;
+		
+		_current.iface.toHistory = sCInterface.toHistory;
+		sCInterface.toHistory = false;
+		
+		_current.iface.next = sCInterface.next;
+		sCInterface.next = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.toA = false;
+		sCInterface.toB = false;
+		sCInterface.toHistory = false;
+		sCInterface.next = false;
 	}
 	
 	/**
@@ -375,11 +415,11 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.toB) {
+				if (_current.iface.toB) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					if (sCInterface.toHistory) {
+					if (_current.iface.toHistory) {
 						exitSequence_main_region_A();
 						react_main_region_B_r1_he();
 					} else {
@@ -396,7 +436,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.toA) {
+				if (_current.iface.toA) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
@@ -412,7 +452,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (sCInterface.next) {
+				if (_current.iface.next) {
 					exitSequence_main_region_B_r1_C();
 					enterSequence_main_region_B_r1_D_default();
 				} else {
@@ -428,7 +468,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (sCInterface.next) {
+				if (_current.iface.next) {
 					exitSequence_main_region_B_r1_D();
 					enterSequence_main_region_B_r1_E_default();
 				} else {
@@ -444,7 +484,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (sCInterface.next) {
+				if (_current.iface.next) {
 					exitSequence_main_region_B_r1_E();
 					enterSequence_main_region_B_r1_C_default();
 				} else {

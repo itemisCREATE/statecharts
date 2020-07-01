@@ -28,7 +28,13 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		
 	}
 	
-	
+	private static class TimedTransitionsStatemachineTimeEventsEvBuf {
+		private boolean timedTransitions_main_region_Start_time_event_0;
+		private boolean timedTransitions_time_event_0;
+	}
+	private static class TimedTransitionsStatemachineEvBuf {
+		private TimedTransitionsStatemachineTimeEventsEvBuf timeEvents = new TimedTransitionsStatemachineTimeEventsEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -47,6 +53,17 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	private final boolean[] timeEvents = new boolean[2];
 	
+	private TimedTransitionsStatemachineEvBuf _current = new TimedTransitionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public TimedTransitionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -59,32 +76,58 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setSeconds(0);
 		
 		sCInterface.setCycles(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
-		}
+			        "The state machine needs to be initialized first by calling the init() function.");
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
 		timer.setTimer(this, 1, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		timer.unsetTimer(this, 1);
+		
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		if (timer == null) {
+			throw new IllegalStateException("timer not set.");
+		}
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Start:
@@ -97,11 +140,8 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
-		timer.unsetTimer(this, 1);
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -119,19 +159,17 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		for (int i=0; i<timeEvents.length; i++) {
-			timeEvents[i] = false;
-		}
+	private void swapInEvents() {
+		_current.timeEvents.timedTransitions_main_region_Start_time_event_0 = timeEvents[0];
+		timeEvents[0] = false;
+		
+		_current.timeEvents.timedTransitions_time_event_0 = timeEvents[1];
+		timeEvents[1] = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		timeEvents[0] = false;
+		timeEvents[1] = false;
 	}
 	
 	/**
@@ -255,7 +293,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	}
 	
 	private boolean react() {
-		if (timeEvents[1]) {
+		if (_current.timeEvents.timedTransitions_time_event_0) {
 			sCInterface.setSeconds(sCInterface.getSeconds() + 1);
 		}
 		sCInterface.setCycles(sCInterface.getCycles() + 1);
@@ -268,7 +306,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (timeEvents[0]) {
+				if (_current.timeEvents.timedTransitions_main_region_Start_time_event_0) {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_End_default();
 				} else {

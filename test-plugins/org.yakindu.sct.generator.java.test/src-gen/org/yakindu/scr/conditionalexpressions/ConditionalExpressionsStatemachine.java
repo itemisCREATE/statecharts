@@ -52,12 +52,14 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			this.stringCondition = value;
 		}
 		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean e;
+	}
+	private static class ConditionalExpressionsStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -72,6 +74,17 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 	private int nextStateIndex;
 	
+	private ConditionalExpressionsStatemachineEvBuf _current = new ConditionalExpressionsStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public ConditionalExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -81,8 +94,9 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setCondition(sCInterface.boolVar ? 3 : 2);
 		
 		sCInterface.setBoolVar(true);
@@ -90,22 +104,42 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		sCInterface.setStringVar("");
 		
 		sCInterface.setStringCondition("");
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -118,10 +152,8 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -139,17 +171,13 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.e = sCInterface.e;
+		sCInterface.e = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.e = false;
 	}
 	
 	/**
@@ -278,7 +306,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.e) && (1==(sCInterface.getBoolVar() ? 1 : 0)))) {
+				if (((_current.iface.e) && (1==(sCInterface.getBoolVar() ? 1 : 0)))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {

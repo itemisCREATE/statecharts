@@ -36,14 +36,16 @@ public class GuardStatemachine implements IGuardStatemachine {
 			this.myVar = value;
 		}
 		
-		protected void clearEvents() {
-			event1 = false;
-			event2 = false;
-			returnEvent = false;
-		}
 	}
 	
-	
+	private static class SCInterfaceEvBuf {
+		private boolean event1;
+		private boolean event2;
+		private boolean returnEvent;
+	}
+	private static class GuardStatemachineEvBuf {
+		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+	}
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -58,6 +60,17 @@ public class GuardStatemachine implements IGuardStatemachine {
 	
 	private int nextStateIndex;
 	
+	private GuardStatemachineEvBuf _current = new GuardStatemachineEvBuf();
+	
+	private boolean isExecuting;
+	
+	protected boolean getIsExecuting() {
+		return isExecuting;
+	}
+	
+	protected void setIsExecuting(boolean value) {
+		this.isExecuting = value;
+	}
 	public GuardStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -67,25 +80,46 @@ public class GuardStatemachine implements IGuardStatemachine {
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		clearEvents();
-		clearOutEvents();
+		
+		clearInEvents();
+		
 		sCInterface.setMyVar(0);
+		
+		isExecuting = false;
 	}
 	
 	public void enter() {
-		if (!initialized) {
+		if (!initialized)
 			throw new IllegalStateException(
-				"The state machine needs to be initialized first by calling the init() function."
-			);
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
 		}
+		isExecuting = true;
 		enterSequence_main_region_default();
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_main_region();
+		isExecuting = false;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
@@ -98,10 +132,8 @@ public class GuardStatemachine implements IGuardStatemachine {
 				// $NullState$
 			}
 		}
-		clearEvents();
-	}
-	public void exit() {
-		exitSequence_main_region();
+		
+		isExecuting = false;
 	}
 	
 	/**
@@ -119,17 +151,21 @@ public class GuardStatemachine implements IGuardStatemachine {
 	public boolean isFinal() {
 		return false;
 	}
-	/**
-	* This method resets the incoming events (time events included).
-	*/
-	protected void clearEvents() {
-		sCInterface.clearEvents();
+	private void swapInEvents() {
+		_current.iface.event1 = sCInterface.event1;
+		sCInterface.event1 = false;
+		
+		_current.iface.event2 = sCInterface.event2;
+		sCInterface.event2 = false;
+		
+		_current.iface.returnEvent = sCInterface.returnEvent;
+		sCInterface.returnEvent = false;
 	}
 	
-	/**
-	* This method resets the outgoing events.
-	*/
-	protected void clearOutEvents() {
+	private void clearInEvents() {
+		sCInterface.event1 = false;
+		sCInterface.event2 = false;
+		sCInterface.returnEvent = false;
 	}
 	
 	/**
@@ -234,11 +270,11 @@ public class GuardStatemachine implements IGuardStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.event1) && (sCInterface.getMyVar()==10))) {
+				if (((_current.iface.event1) && (sCInterface.getMyVar()==10))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					if (sCInterface.event2) {
+					if (_current.iface.event2) {
 						exitSequence_main_region_A();
 						enterSequence_main_region_B_default();
 					} else {
@@ -255,7 +291,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.returnEvent) {
+				if (_current.iface.returnEvent) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
