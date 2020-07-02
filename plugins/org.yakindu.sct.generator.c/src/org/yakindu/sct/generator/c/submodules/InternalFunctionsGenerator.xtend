@@ -34,11 +34,17 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.CheckRef
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.types.Operation
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Parameter
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.base.types.ComplexType
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent
+import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.EnterState
+import org.yakindu.sct.model.sexec.ExitState
+import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sexec.SaveHistory
+import org.yakindu.sct.model.sexec.StateSwitch
 
 /**
  * @author rbeckmann
@@ -197,6 +203,13 @@ class InternalFunctionsGenerator {
 	def dispatch requiresHandle(CheckRef e) { true }
 	def dispatch requiresHandle(ElementReferenceExpression e) { (e.reference.isMethod) || (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
 	def dispatch requiresHandle(FeatureCall e) { (! (e.feature instanceof Parameter)) && (!e.feature.isLocalVariable) && (!e.feature.declaredInHeader) }
+	def dispatch requiresHandle(ScheduleTimeEvent it) { true }
+	def dispatch requiresHandle(UnscheduleTimeEvent it) { true }
+	def dispatch requiresHandle(EnterState it) { true }
+	def dispatch requiresHandle(ExitState it) { true }
+	def dispatch requiresHandle(HistoryEntry it) { true }
+	def dispatch requiresHandle(SaveHistory it) { true }
+	def dispatch requiresHandle(StateSwitch it) { true }
 	
 	def isLocalVariable(EObject o) {
 		(o instanceof org.yakindu.base.types.Property) && (o.eContainer instanceof LocalVariableDefinition)	
