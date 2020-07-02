@@ -1,0 +1,37 @@
+GeneratorModel for sctunit::interpreter {
+
+	test InternalEventLifeCycleBuffered {
+
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+		
+	}
+
+	test InternalEventLifeCycleUnbuffered {
+
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
+
+	test InEventLifeCycleBuffered {
+
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+		
+	}
+	
+	test InEventLifeCycleUnbuffered {
+
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
+
+}
