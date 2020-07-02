@@ -108,5 +108,6 @@ testsuite AllTests {
 	ValuedEvents,
 	TypeAlias,
 	StatemachineKeywords,
-	TimedTransitions
+	TimedTransitions,
+	UnreachableStates
 } 
