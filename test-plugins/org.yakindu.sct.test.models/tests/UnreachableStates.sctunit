@@ -1,0 +1,12 @@
+testclass UnreachableStates for statechart UnreachableStates {
+	
+	@Test
+	operation test() {
+		enter
+		proceed 1 cycle
+		assert active  (main_region.A) 
+		assert !active (main_region.B)
+		assert !active (main_region.C)
+		exit
+	}
+}

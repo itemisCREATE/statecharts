@@ -92,7 +92,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	ValuedEvents.class,
 	TypeAlias.class,
 	StatemachineKeywords.class,
-	TimedTransitions.class
+	TimedTransitions.class,
+	UnreachableStates.class
 	})
 public class AllTests {
 }
