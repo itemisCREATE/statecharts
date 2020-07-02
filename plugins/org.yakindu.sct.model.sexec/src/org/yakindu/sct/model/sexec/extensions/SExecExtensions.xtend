@@ -315,9 +315,9 @@ class SExecExtensions {
 	 
 	def List<Step> effectFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		funcs += referencedEffects
-		states.forEach( s | funcs += s.referencedEffects )
-		nodes.forEach( n | funcs += n.referencedEffects )
+		funcs += referencedEffects.filter[reachable]
+		states.forEach( s | funcs += s.referencedEffects.filter[reachable] )
+		nodes.forEach( n | funcs += n.referencedEffects.filter[reachable] )
 		return funcs
 	}
 	 
