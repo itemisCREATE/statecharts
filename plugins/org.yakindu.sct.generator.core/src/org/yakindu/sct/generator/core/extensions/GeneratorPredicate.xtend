@@ -11,14 +11,14 @@
 package org.yakindu.sct.generator.core.extensions
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.core.extensions.AnnotationExtensions
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
+import org.yakindu.sct.generator.core.library.ICoreLibraryConstants
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.base.types.Event
-import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
-import org.yakindu.base.types.Direction
 
 abstract class GeneratorPredicate {
 	@Inject protected extension SExecExtensions
@@ -79,7 +79,21 @@ abstract class GeneratorPredicate {
 		isEventDriven && (flow.hasLocalEvents || (flow.hasInEvents && useInEventQueue))
 	}
 	
-	def boolean useInEventQueue();
+	def boolean useInEventQueue() {
+		val eventProcessingFeature = entry.getFeatureConfiguration(ICoreLibraryConstants::FEATURE_EVENT_PROCESSING)
+		val eventProcessingInEventQueue = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_IN_EVENT_QUEUE)
+		if (eventProcessingInEventQueue !== null) {
+			return entry.applyInEventQueue
+		}
+		return useInEventQueueDeprecated
+	}
+	
+	/**
+	 * Can be overridden to check for deprecated inEventQueue feature. Defaults to false. Can be removed if not used anymore.
+	 */
+	def boolean useInEventQueueDeprecated() {
+		false
+	}
 	
 	def getQueuedEvents(ExecutionFlow it) {
 		it.allEvents.filter[isQueued]

@@ -24,6 +24,9 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}
+		
+		feature EventProcessing {
 			inEventQueue = true
 		}
 
@@ -53,6 +56,9 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}
+		
+		feature EventProcessing {
 			inEventQueue = true
 		}
 
@@ -84,6 +90,9 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}
+		
+		feature EventProcessing {
 			inEventQueue = true
 		}
 
@@ -113,6 +122,9 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}
+		
+		feature EventProcessing {
 			inEventQueue = true
 		}
 
@@ -142,6 +154,9 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}
+		
+		feature EventProcessing {
 			inEventQueue = true
 		}
 
@@ -167,12 +182,14 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr.ieq"
-			
 		}
 		
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}
+		
+		feature EventProcessing {
 			inEventQueue = true
 		}
 	}

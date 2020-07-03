@@ -17,7 +17,7 @@ import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 class EventDrivenPredicate extends GeneratorPredicate {
 	@Inject protected extension GenmodelEntriesExtension
 	
-	override useInEventQueue() {
+	override useInEventQueueDeprecated() {
 		entry.inEventQueue
 	}
 	

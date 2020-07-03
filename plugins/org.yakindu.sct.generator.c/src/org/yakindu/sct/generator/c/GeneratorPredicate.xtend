@@ -9,7 +9,7 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	@Inject protected GenmodelEntries entries
 	@Inject protected extension SExecExtensions
 		
-	override useInEventQueue() {
+	override useInEventQueueDeprecated() {
 		entries.getInEventQueueUsed(entry)
 	}
 	
