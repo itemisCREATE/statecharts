@@ -22,14 +22,18 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		private boolean ev_out;
 		
 		
-		public synchronized boolean isRaisedEv_out() {
-			return ev_out;
+		public boolean isRaisedEv_out() {
+			synchronized(WrapperTestStatemachine.this) {
+				return ev_out;
+			}
 		}
 		
 		protected void raiseEv_out() {
-			ev_out = true;
-			for (SCInterfaceListener listener : listeners) {
-				listener.onEv_outRaised();
+			synchronized(WrapperTestStatemachine.this) {
+				ev_out = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onEv_outRaised();
+				}
 			}
 		}
 		
@@ -37,37 +41,51 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 		
 		public void raiseEv_in() {
-			ev_in = true;
+			synchronized(WrapperTestStatemachine.this) {
+				ev_in = true;
+			}
 		}
 		
 		private long afterCalls;
 		
 		public synchronized long getAfterCalls() {
-			return afterCalls;
+			synchronized(WrapperTestStatemachine.this) {
+				return afterCalls;
+			}
 		}
 		
-		public synchronized void setAfterCalls(long value) {
-			this.afterCalls = value;
+		public void setAfterCalls(long value) {
+			synchronized(WrapperTestStatemachine.this) {
+				this.afterCalls = value;
+			}
 		}
 		
 		private long cycles;
 		
 		public synchronized long getCycles() {
-			return cycles;
+			synchronized(WrapperTestStatemachine.this) {
+				return cycles;
+			}
 		}
 		
-		public synchronized void setCycles(long value) {
-			this.cycles = value;
+		public void setCycles(long value) {
+			synchronized(WrapperTestStatemachine.this) {
+				this.cycles = value;
+			}
 		}
 		
 		private long s2_entered;
 		
 		public synchronized long getS2_entered() {
-			return s2_entered;
+			synchronized(WrapperTestStatemachine.this) {
+				return s2_entered;
+			}
 		}
 		
-		public synchronized void setS2_entered(long value) {
-			this.s2_entered = value;
+		public void setS2_entered(long value) {
+			synchronized(WrapperTestStatemachine.this) {
+				this.s2_entered = value;
+			}
 		}
 		
 		protected void clearEvents() {

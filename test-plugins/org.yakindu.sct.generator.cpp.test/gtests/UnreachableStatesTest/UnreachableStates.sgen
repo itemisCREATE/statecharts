@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::cpp {
+	statechart UnreachableStates {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "UnreachableStatesTest"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}

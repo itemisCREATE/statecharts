@@ -13,36 +13,25 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for EventDrivenTriggeredByEvent
+ * Unit TestCase for UnreachableStates
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class EventDrivenTriggeredByEvent extends AbstractExecutionFlowTest {
+public class UnreachableStates extends AbstractExecutionFlowTest {
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByEvent.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("UnreachableStates.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void internalEventTriggersRunCycle() throws Exception {
+	public void test() throws Exception {
 		interpreter.enter();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
-		raiseEvent("e");
-		assertTrue(isStateActive("B"));
-		assertTrue(getInteger("x") == 0l);
-		raiseEvent("e");
-		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("x") == 0l);
-		interpreter.exit();
-	}
-	@Test
-	public void proceedTimeDoesNotTriggerRunCycle() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		timer.timeLeap(120l*1000l);
-		assertTrue(getInteger("x") == 0l);
+		assertTrue(!isStateActive("B"));
+		assertTrue(!isStateActive("C"));
 		interpreter.exit();
 	}
 }

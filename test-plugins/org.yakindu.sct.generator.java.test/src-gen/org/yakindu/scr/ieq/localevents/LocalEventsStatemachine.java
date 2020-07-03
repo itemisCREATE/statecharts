@@ -463,45 +463,8 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		}
 	}
 	
-	/* Default exit sequence for region r */
-	private void exitSequence_localEvents_r1_Comp1_r() {
-		switch (stateVector[0]) {
-		case localEvents_r1_Comp1_r_A1:
-			exitSequence_localEvents_r1_Comp1_r_A1();
-			break;
-		case localEvents_r1_Comp1_r_C1:
-			exitSequence_localEvents_r1_Comp1_r_C1();
-			break;
-		case localEvents_r1_Comp1_r_D1:
-			exitSequence_localEvents_r1_Comp1_r_D1();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default exit sequence for region r2 */
 	private void exitSequence_localEvents_r2() {
-		switch (stateVector[1]) {
-		case localEvents_r2_Comp2_r_A2:
-			exitSequence_localEvents_r2_Comp2_r_A2();
-			break;
-		case localEvents_r2_Comp2_r_B2:
-			exitSequence_localEvents_r2_Comp2_r_B2();
-			break;
-		case localEvents_r2_Comp2_r_C2:
-			exitSequence_localEvents_r2_Comp2_r_C2();
-			break;
-		case localEvents_r2_Comp2_r_D2:
-			exitSequence_localEvents_r2_Comp2_r_D2();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r */
-	private void exitSequence_localEvents_r2_Comp2_r() {
 		switch (stateVector[1]) {
 		case localEvents_r2_Comp2_r_A2:
 			exitSequence_localEvents_r2_Comp2_r_A2();

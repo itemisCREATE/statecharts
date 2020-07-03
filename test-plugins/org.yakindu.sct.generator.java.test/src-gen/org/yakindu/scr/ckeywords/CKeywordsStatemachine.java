@@ -871,28 +871,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 	}
 	
-	/* Default exit sequence for region switch */
-	private void exitSequence_auto_loop_switch() {
-		switch (stateVector[0]) {
-		case auto_loop_switch_case_enum_asm:
-			exitSequence_auto_loop_switch_case_enum_asm();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region enum */
-	private void exitSequence_auto_loop_switch_case_enum() {
-		switch (stateVector[0]) {
-		case auto_loop_switch_case_enum_asm:
-			exitSequence_auto_loop_switch_case_enum_asm();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_auto__entry_Default() {
 		enterSequence_auto_char_default();
