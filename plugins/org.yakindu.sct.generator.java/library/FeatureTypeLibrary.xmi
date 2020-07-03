@@ -35,6 +35,8 @@
         parameterType="BOOLEAN"/>
     <parameters
         name="inEventQueue"
+		deprecated="true"
+        comment="Use EventProcessing > inEventQueue instead. If set to true, a queue for incoming events is generated."
         optional="true"
         parameterType="BOOLEAN"/>
     <parameters
