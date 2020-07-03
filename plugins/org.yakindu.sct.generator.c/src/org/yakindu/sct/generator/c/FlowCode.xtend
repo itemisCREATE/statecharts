@@ -219,7 +219,14 @@ class FlowCode {
 	def dispatch requiresHandle(CheckRef e) { true }
 	def dispatch requiresHandle(ElementReferenceExpression e) {(e.reference.isMethod) || (! (e.reference instanceof Parameter)) && (!e.reference.isLocalVariable) && (!e.reference.declaredInHeader) }
 	def dispatch requiresHandle(FeatureCall e) { ! ((e.feature instanceof Parameter) || e.feature.isLocalVariable) }
-
+	def dispatch requiresHandle(ScheduleTimeEvent it) { true }
+	def dispatch requiresHandle(UnscheduleTimeEvent it) { true }
+	def dispatch requiresHandle(EnterState it) { true }
+	def dispatch requiresHandle(ExitState it) { true }
+	def dispatch requiresHandle(HistoryEntry it) { true }
+	def dispatch requiresHandle(SaveHistory it) { true }
+	def dispatch requiresHandle(StateSwitch it) { true }
+	
 	def isLocalVariable(EObject o) {
 		(o instanceof Property) && (o.eContainer instanceof LocalVariableDefinition)	
 	}
