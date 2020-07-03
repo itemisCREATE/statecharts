@@ -44,22 +44,28 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		private long ev_outValue;
 		
 		
-		public synchronized boolean isRaisedEv_out() {
-			return ev_out;
-		}
-		
-		protected synchronized void raiseEv_out(long value) {
-			ev_outValue = value;
-			ev_out = true;
-			for (SCInterfaceListener listener : listeners) {
-				listener.onEv_outRaised(value);
+		public boolean isRaisedEv_out() {
+			synchronized(RunnableTestStatemachine.this) {
+				return ev_out;
 			}
 		}
 		
-		public synchronized long getEv_outValue() {
-			if (! ev_out ) 
-				throw new IllegalStateException("Illegal event value access. Event Ev_out is not raised!");
-			return ev_outValue;
+		protected void raiseEv_out(long value) {
+			synchronized(RunnableTestStatemachine.this) {
+				ev_outValue = value;
+				ev_out = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onEv_outRaised(value);
+				}
+			}
+		}
+		
+		public long getEv_outValue() {
+			synchronized(RunnableTestStatemachine.this) {
+				if (! ev_out ) 
+					throw new IllegalStateException("Illegal event value access. Event Ev_out is not raised!");
+				return ev_outValue;
+			}
 		}
 		
 		private boolean ev_in;
@@ -67,62 +73,82 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		private long ev_inValue;
 		
 		
-		public synchronized void raiseEv_in(final long value) {
-			inEventQueue.add(
-				new Runnable() {
-					@Override
-					public void run() {
-						ev_inValue = value;
-						ev_in = true;
-						runCycle();
+		public void raiseEv_in(final long value) {
+			synchronized(RunnableTestStatemachine.this) {
+				inEventQueue.add(
+					new Runnable() {
+						@Override
+						public void run() {
+							ev_inValue = value;
+							ev_in = true;
+							runCycle();
+						}
 					}
-				}
-			);
+				);
+			}
 		}
-		protected synchronized long getEv_inValue() {
-			if (! ev_in ) 
-				throw new IllegalStateException("Illegal event value access. Event Ev_in is not raised!");
-			return ev_inValue;
+		protected long getEv_inValue() {
+			synchronized(RunnableTestStatemachine.this) {
+				if (! ev_in ) 
+					throw new IllegalStateException("Illegal event value access. Event Ev_in is not raised!");
+				return ev_inValue;
+			}
 		}
 		
 		private long myVar;
 		
 		public synchronized long getMyVar() {
-			return myVar;
+			synchronized(RunnableTestStatemachine.this) {
+				return myVar;
+			}
 		}
 		
-		public synchronized void setMyVar(long value) {
-			this.myVar = value;
+		public void setMyVar(long value) {
+			synchronized(RunnableTestStatemachine.this) {
+				this.myVar = value;
+			}
 		}
 		
 		private long afterCalls;
 		
 		public synchronized long getAfterCalls() {
-			return afterCalls;
+			synchronized(RunnableTestStatemachine.this) {
+				return afterCalls;
+			}
 		}
 		
-		public synchronized void setAfterCalls(long value) {
-			this.afterCalls = value;
+		public void setAfterCalls(long value) {
+			synchronized(RunnableTestStatemachine.this) {
+				this.afterCalls = value;
+			}
 		}
 		
 		private long cycles;
 		
 		public synchronized long getCycles() {
-			return cycles;
+			synchronized(RunnableTestStatemachine.this) {
+				return cycles;
+			}
 		}
 		
-		public synchronized void setCycles(long value) {
-			this.cycles = value;
+		public void setCycles(long value) {
+			synchronized(RunnableTestStatemachine.this) {
+				this.cycles = value;
+			}
 		}
 		
 		private long s2_entered;
 		
 		public synchronized long getS2_entered() {
-			return s2_entered;
+			synchronized(RunnableTestStatemachine.this) {
+				return s2_entered;
+			}
 		}
 		
-		public synchronized void setS2_entered(long value) {
-			this.s2_entered = value;
+		public void setS2_entered(long value) {
+			synchronized(RunnableTestStatemachine.this) {
+				this.s2_entered = value;
+			}
 		}
 		
 		protected void clearEvents() {

@@ -833,17 +833,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 	}
 	
-	/* Default exit sequence for region r */
-	private void exitSequence_main_region_A_r_AC_r_ACA_r() {
-		switch (stateVector[0]) {
-		case main_region_A_r_AC_r_ACA_r_ACAA:
-			exitSequence_main_region_A_r_AC_r_ACA_r_exitSequence_main_region_A_r_AC_r_ACA_r_ACAA();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_A_r_AD_r1() {
 		switch (stateVector[0]) {

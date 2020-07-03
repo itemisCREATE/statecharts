@@ -436,17 +436,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 	}
 	
-	/* Default exit sequence for region r */
-	private void exitSequence_r_A_r() {
-		switch (stateVector[0]) {
-		case r_A_r_B:
-			exitSequence_r_A_r_B();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[1]) {
@@ -491,28 +480,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	/* Default exit sequence for region r3 */
 	private void exitSequence_r3() {
-		switch (stateVector[2]) {
-		case r3_D_r_DA_r_DAA:
-			exitSequence_r3_D_r_DA_r_DAA();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r */
-	private void exitSequence_r3_D_r() {
-		switch (stateVector[2]) {
-		case r3_D_r_DA_r_DAA:
-			exitSequence_r3_D_r_DA_r_DAA();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r */
-	private void exitSequence_r3_D_r_DA_r() {
 		switch (stateVector[2]) {
 		case r3_D_r_DA_r_DAA:
 			exitSequence_r3_D_r_DA_r_DAA();

@@ -185,17 +185,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		}
 	}
 	
-	/* Default exit sequence for region subregion1 */
-	private void exitSequence_main_region_B_subregion1() {
-		switch (stateVector[0]) {
-		case main_region_B_subregion1_B1:
-			exitSequence_main_region_B_subregion1_B1();
-			break;
-		default:
-			break;
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
