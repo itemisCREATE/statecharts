@@ -1,0 +1,158 @@
+GeneratorModel for sctunit::c {
+
+	
+	test InternalEventLifeCycleBuffered {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/InternalEventLifeCycleBuffered"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = false
+			internalEventBuffer = true
+		}
+		
+		feature IdentifierSettings {
+			moduleName =  "InternalEventLifeCycleBuffered"
+		}
+		
+	}
+	
+	test InternalEventLifeCycleUnbuffered {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/InternalEventLifeCycleUnbuffered"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = true
+			internalEventBuffer = false
+		}
+		
+		feature IdentifierSettings {
+			moduleName =  "InternalEventLifeCycleUnbuffered"
+		}
+		
+	}
+	
+	test InEventLifeCycleBuffered {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/InEventLifeCycleBuffered"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = true
+		}
+		
+		feature IdentifierSettings {
+			moduleName =  "InEventLifeCycleBuffered"
+		}
+		
+	}
+	
+	test InEventLifeCycleUnbuffered {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/InEventLifeCycleUnbuffered"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = false
+		}
+		
+		feature IdentifierSettings {
+			moduleName =  "InEventLifeCycleUnbuffered"
+		}
+		
+	}
+
+}

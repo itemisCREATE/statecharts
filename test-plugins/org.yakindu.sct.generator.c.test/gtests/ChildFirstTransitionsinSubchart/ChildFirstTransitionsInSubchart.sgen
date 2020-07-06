@@ -22,6 +22,7 @@ GeneratorModel for yakindu::c {
 		feature EventProcessing {
 			inEventBuffer = false
 			internalEventBuffer = false
+			inEventQueue = false
 		}
 	}
 }
