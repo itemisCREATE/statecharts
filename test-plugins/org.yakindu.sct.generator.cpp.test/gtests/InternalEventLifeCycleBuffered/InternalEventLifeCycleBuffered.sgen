@@ -1,0 +1,32 @@
+GeneratorModel for yakindu::cpp {
+	statechart eventbuffers.InternalEventLifeCycle {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "InternalEventLifeCycleBuffered"
+		}
+		feature IdentifierSettings {
+			moduleName =  "InternalEventLifeCycleBuffered" 
+			maxIdentifierLength = 31
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+		feature OutEventAPI {
+			getters = true
+			observables = false
+		}
+		feature EventProcessing {
+			inEventBuffer = false
+			internalEventBuffer = true
+			inEventQueue = false
+		}
+	}
+}
