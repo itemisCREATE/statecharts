@@ -45,6 +45,9 @@ public class InEventLifeCycleBuffered {
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
+		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_C));
+		timer.cycleLeap(1l);
+		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
 		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_D));
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
@@ -52,6 +55,9 @@ public class InEventLifeCycleBuffered {
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
+		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_C));
+		timer.cycleLeap(1l);
+		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_B));
 		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_C));
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_B));
