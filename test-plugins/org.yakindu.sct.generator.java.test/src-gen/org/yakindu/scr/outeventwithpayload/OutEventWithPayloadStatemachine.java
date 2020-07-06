@@ -159,8 +159,6 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		sCInterface.i = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

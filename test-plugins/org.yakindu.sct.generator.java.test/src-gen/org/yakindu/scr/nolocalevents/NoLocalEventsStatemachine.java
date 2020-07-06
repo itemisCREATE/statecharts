@@ -149,8 +149,6 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		sCInterface.i = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

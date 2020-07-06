@@ -146,8 +146,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		sCInterface.e1 = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

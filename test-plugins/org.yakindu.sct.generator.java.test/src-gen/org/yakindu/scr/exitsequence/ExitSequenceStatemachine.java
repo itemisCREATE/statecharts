@@ -310,8 +310,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		sCInterface.f = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
