@@ -13,20 +13,20 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for InternalEventLifeCycle
+ * Unit TestCase for InEventLifeCycle
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class InternalEventLifeCycle extends AbstractExecutionFlowTest {
+public class InEventLifeCycleBuffered extends AbstractExecutionFlowTest {
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("InternalEventLifeCycle.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventbuffers/InEventLifeCycle.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void internalEventLifeCycleTest() throws Exception {
+	public void inEventLifeCycleBufferedTest() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("C"));
@@ -42,7 +42,7 @@ public class InternalEventLifeCycle extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("C"));
 		timer.timeLeap(getCyclePeriod());
-		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("B"));
 		assertTrue(isStateActive("C"));
 	}
 }

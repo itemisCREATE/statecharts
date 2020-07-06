@@ -1,0 +1,72 @@
+GeneratorModel for yakindu::java {
+
+	statechart eventbuffers.InternalEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr"
+			implementationSuffix = "Unbuffered" 
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = true
+			internalEventBuffer = false
+		}
+	}
+	
+	statechart eventbuffers.InternalEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
+			implementationSuffix = "Buffered"
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = false
+			internalEventBuffer = true
+		}
+	}
+	
+	statechart eventbuffers.InEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr"
+			implementationSuffix = "Buffered" 
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = true
+		}
+	}
+	
+	statechart eventbuffers.InEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr"
+			implementationSuffix = "Unbuffered"
+		}
+		
+		feature EventProcessing {
+			inEventBuffer = false
+		}
+	}
+}

@@ -1,8 +1,12 @@
-GeneratorModel for yakindu::c {
-	statechart InternalEventLifeCycle {
+GeneratorModel for yakindu::cpp {
+	statechart eventbuffers.InternalEventLifeCycle {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "InternalEventLifeCycle"
+			targetFolder = "InternalEventLifeCycleUnbuffered"
+		}
+		feature IdentifierSettings {
+			moduleName =  "InternalEventLifeCycleUnbuffered" 
+			maxIdentifierLength = 31
 		}
 		feature FunctionInlining {
 			inlineReactions = false
@@ -20,8 +24,9 @@ GeneratorModel for yakindu::c {
 			observables = false
 		}
 		feature EventProcessing {
-			inEventBuffer = false
+			inEventBuffer = true
 			internalEventBuffer = false
+			inEventQueue = false
 		}
 	}
 }

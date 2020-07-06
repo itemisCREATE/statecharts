@@ -9,20 +9,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/InternalEventLifeCycle/InternalEventLifeCycleTest.cc",
-	program = "gtests/InternalEventLifeCycle/InternalEventLifeCycle",
-	model = "testmodels/SCTUnit/InternalEventLifeCycle.sct",
+	sourceFile = "gtests/InEventLifeCycleUnbuffered/InEventLifeCycleUnbuffered.cc",
+	program = "gtests/InEventLifeCycleUnbuffered/InEventLifeCycleUnbuffered",
+	model = "testmodels/SCTUnit/eventbuffers/InEventLifeCycle.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
-		"InternalEventLifeCycle.c",
+		"InEventLifeCycleUnbuffered.c",
 		"sc_timer_service.c"
 	}
 )
 @RunWith(GTestRunner.class)
-public class InternalEventLifeCycleTest {
+public class InEventLifeCycleUnbuffered {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 

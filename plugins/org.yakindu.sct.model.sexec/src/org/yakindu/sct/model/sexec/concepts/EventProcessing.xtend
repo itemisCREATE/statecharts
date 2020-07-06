@@ -153,61 +153,90 @@ class EventProcessing {
 		]
 	}
 	
+
 	def Step _eventProcessing(ExecutionFlow it, Step body) {
 		
-		if (isCycleBased) 
-			_sequence(
-				_clearOutEvents,
-				_swapIncomingEvents,
-				_eventLoop(body),
-				_clearInEvents._when(!applyIncomingEventBuffer),
-				_clearInternalEvents._when(!applyInternalEventBuffer)	
-			)
-		else 
-			_sequence(
-				_clearOutEvents,
-				_processEventQueues(body)
-			)
-			
-	}
-
-
-	def Step _eventLoop(ExecutionFlow it, Step body) {
-		if (hasLocalEvents && applyInternalEventBuffer) 
-			_do(_sequence(
+		_sequence(
+			_clearOutEvents,
+			_activateInitialEvents,
+			_eventLoop( _sequence( 
 				body,
-				_swapInternalEvents
-			))._while(
-				bufferEventExpressions.internal.reduce[r1, r2| r1._or(r2)]
-			)
-		else 
-			body	
+				_clearCurrentEvents
+			))			
+		)
 	}
 
-	def Step _processEventQueues(ExecutionFlow it, Step body) {
-		if (hasLocalEvents || (hasIncomingEvents && applyIncomingEventQueue)) {
-		
+
+	protected def Step _eventLoop(ExecutionFlow it, Step body) { 
+		if ( requiresEventLoop ) {
 			_sequence(
-				_conceptSequence(NEXT_EVENT),
 				_do(_sequence(
 					body,
-					_clearInEvents,
-					_clearInternalEvents,
-					_conceptSequence(NEXT_EVENT)
-				))._while( #[incomingEvents,localEvents,timeEvents]
-							.flatten
-							.map[ ev | ev._ref as Expression ]
-							.reduce[ e1, e2 | e1._or(e2) ]
-				) 
-			)			
-		}
-		else 
-			_sequence(
-				body,
-				_clearInEvents,
-				_clearInternalEvents	
+					_activateNextEvents
+				))._while( _hasCurrentEvents	)
 			)
+		} else {
+			body
+		}
+	} 
+	
+	
+	def requiresEventLoop(ExecutionFlow it) {
+		(isCycleBased && hasLocalEvents && applyInternalEventBuffer) 
+		|| requiresEventQueue	
 	}
+	
+	def requiresEventQueue(ExecutionFlow it) {
+		requiresInternalEventQueue || requiresIncomingEventQueue
+	}
+	
+	def requiresIncomingEventQueue(ExecutionFlow it) {
+		isEventDriven && hasIncomingEvents && applyIncomingEventQueue
+	}
+
+	def requiresInternalEventQueue(ExecutionFlow it) {
+		isEventDriven && hasLocalEvents
+	}
+	
+	protected def Step _activateInitialEvents(ExecutionFlow it) {
+		if (isCycleBased) {
+			_swapIncomingEvents
+		} else if (requiresEventQueue) {
+			_conceptSequence(NEXT_EVENT)
+		} else {
+			_empty
+		}
+	}
+	
+	protected def Step _activateNextEvents(ExecutionFlow it) {
+		if (isCycleBased) {
+			_swapInternalEvents
+		} else if (requiresEventQueue) {
+			_conceptSequence(NEXT_EVENT)
+		} else {
+			_empty
+		}
+		
+	}
+	
+	protected def Expression _hasCurrentEvents(ExecutionFlow it) {
+		if (isCycleBased) {
+			bufferEventExpressions.internal.reduce[r1, r2| r1._or(r2)]
+		} else {
+			#[incomingEvents,localEvents,timeEvents]
+				.flatten
+				.map[ ev | ev._ref as Expression ]
+				.reduce[ e1, e2 | e1._or(e2) ]
+		}		
+	}
+	
+	protected def Step _clearCurrentEvents(ExecutionFlow it) {
+		_sequence(
+			_clearInEvents._when(!(isCycleBased && applyIncomingEventBuffer)),
+			_clearInternalEvents._when(!(isCycleBased && applyInternalEventBuffer))			
+		)
+	}
+	
 
 	def Step _clearOutEvents(ExecutionFlow it) {
 		if ( clearOutEvents !== null ) clearOutEvents._call._statement 

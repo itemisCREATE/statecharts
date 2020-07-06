@@ -151,8 +151,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		timeEvents[1] = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

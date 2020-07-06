@@ -55,7 +55,6 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String HISTORY_WITHOUT_INITIAL_STEP = "HistoryWithoutInitialStep.sct";
 	public static final String IN_EVENT_LIFE_CYCLE = "InEventLifeCycle.sct";
 	public static final String INTEGER_EXPRESSIONS = "IntegerExpressions.sct";
-	public static final String INTERNAT_EVENT_LIFE_CYCLE = "InternalEventLifeCycle.sct";
 	public static final String JAVA_KEYWORDS_M = "JavaKeywords.sct";
 	public static final String LOCAL_REACTIONS = "LocalReactions.sct";
 	public static final String LOGICAL_AND = "LogicalAnd.sct";

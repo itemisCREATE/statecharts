@@ -31,7 +31,6 @@ encoding//testmodels/SCTUnit/HistoryWithExitPoint.sct=UTF-8
 encoding//testmodels/SCTUnit/HistoryWithoutInitialStep.sct=UTF-8
 encoding//testmodels/SCTUnit/InEventLifeCycle.sct=UTF-8
 encoding//testmodels/SCTUnit/IntegerExpressions.sct=UTF-8
-encoding//testmodels/SCTUnit/InternalEventLifeCycle.sct=UTF-8
 encoding//testmodels/SCTUnit/JavaKeywords.sct=UTF-8
 encoding//testmodels/SCTUnit/LocalReactions.sct=UTF-8
 encoding//testmodels/SCTUnit/LogicalAnd.sct=UTF-8

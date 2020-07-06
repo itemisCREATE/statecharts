@@ -1,0 +1,37 @@
+/** 
+ * @author axel terfloth
+ */
+testclass InEventLifeCycleUnbuffered for statechart eventbuffers.InEventLifeCycle {
+	@Test
+	operation InEventLifeCycleUnbufferedTest(){
+		 
+		enter
+		 
+		assert active(eventbuffers.InEventLifeCycle.r1.A)
+		assert active(eventbuffers.InEventLifeCycle.r2.C)
+		
+		// the in event i1 must be raised and consumed in the low priority 
+		// region within the same cycle
+		raise e
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycle.r1.A)
+		assert active(eventbuffers.InEventLifeCycle.r2.D)
+
+		// make sure nothing happens during an empty cycle		
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycle.r1.A)
+		assert active(eventbuffers.InEventLifeCycle.r2.D)
+		
+		// the in event i2 should have no impact since it is raised 
+		// in a low priority region and will be cleared after the cycle
+		raise f
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycle.r1.A)
+		assert active(eventbuffers.InEventLifeCycle.r2.C) 
+		
+		// make sure nothing happens during an empty cycle
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycle.r1.A)
+		assert active(eventbuffers.InEventLifeCycle.r2.C) 
+	} 
+}

@@ -1,8 +1,12 @@
 GeneratorModel for yakindu::cpp {
-	statechart InternalEventLifeCycle {
+	statechart eventbuffers.InternalEventLifeCycle {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "InternalEventLifeCycleTest"
+			targetFolder = "InternalEventLifeCycleBuffered"
+		}
+		feature IdentifierSettings {
+			moduleName =  "InternalEventLifeCycleBuffered" 
+			maxIdentifierLength = 31
 		}
 		feature FunctionInlining {
 			inlineReactions = false
@@ -21,7 +25,8 @@ GeneratorModel for yakindu::cpp {
 		}
 		feature EventProcessing {
 			inEventBuffer = false
-			internalEventBuffer = false
+			internalEventBuffer = true
+			inEventQueue = false
 		}
 	}
 }

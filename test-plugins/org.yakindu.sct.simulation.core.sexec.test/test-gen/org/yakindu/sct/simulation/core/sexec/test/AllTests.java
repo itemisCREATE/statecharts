@@ -11,6 +11,10 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyInternalScope.class,
 	ConstOnlyNamedScope.class,
 	EntryReactionAction.class,
+//	InEventLifeCycleBuffered.class, // no event buffering in interpreter
+	InEventLifeCycleUnbuffered.class,
+//	InternalEventLifeCycleBuffered.class, // no event buffering in interpreter
+	InternalEventLifeCycleUnbuffered.class,
 	EventDriven.class,
 	EventDrivenInternalEvent.class,
 	EventDrivenTriggeredByEvent.class,
@@ -65,7 +69,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	HistoryWithoutInitialStep.class,
 	InEventLifeCycle.class,
 	IntegerExpressions.class,
-	InternalEventLifeCycle.class,
 	LocalReactions.class,
 	LogicalAndTests.class,
 	LogicalOrTests.class,

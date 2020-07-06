@@ -152,8 +152,6 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		sCInterface.g = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

@@ -193,8 +193,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		sCInterface.go = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

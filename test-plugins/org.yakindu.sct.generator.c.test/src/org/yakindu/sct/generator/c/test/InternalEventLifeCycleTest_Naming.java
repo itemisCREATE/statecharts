@@ -11,7 +11,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	statechartBundle = "org.yakindu.sct.test.models",
 	sourceFile = "gtests/InternalEventLifeCycle_Naming/InternalEventLifeCycleTest.cc",
 	program = "gtests/InternalEventLifeCycle_Naming/InternalEventLifeCycle",
-	model = "testmodels/SCTUnit/InternalEventLifeCycle.sct",
+	model = "testmodels/SCTUnit/eventbuffers/InternalEventLifeCycle.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"

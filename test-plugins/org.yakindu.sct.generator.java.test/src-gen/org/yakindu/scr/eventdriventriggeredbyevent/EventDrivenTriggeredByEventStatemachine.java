@@ -147,8 +147,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		timeEvents[0] = false;
 	}
 	
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/

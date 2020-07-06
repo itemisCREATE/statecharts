@@ -110,8 +110,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 	public boolean isFinal() {
 		return (stateVector[0] == State.main_region__final_);
 	}
-	protected void nextEvent() {
-	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
 	*/
