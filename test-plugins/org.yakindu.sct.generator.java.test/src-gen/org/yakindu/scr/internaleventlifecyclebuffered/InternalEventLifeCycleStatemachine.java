@@ -127,10 +127,10 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 				}
 			}
 			
+			clearInEvents();
 			swapInternalEvents();
 		} while ((_current.internal.i1 || _current.internal.i2));
 		
-		clearInEvents();
 		isExecuting = false;
 	}
 	
