@@ -9,5 +9,6 @@ Require-Bundle: org.yakindu.base.types;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.yakindu.base.expressions,
  org.yakindu.sct.model.sruntime;visibility:=reexport
-Export-Package: org.yakindu.base.expressions.interpreter
+Export-Package: org.yakindu.base.expressions.interpreter,
+ org.yakindu.base.expressions.interpreter.base
 Automatic-Module-Name: org.yakindu.base.expressions.interpreter
