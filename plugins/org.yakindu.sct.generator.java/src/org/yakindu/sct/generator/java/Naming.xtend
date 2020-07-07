@@ -11,25 +11,26 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.base.NamedElement
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.base.types.Type
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class Naming {
 
@@ -38,6 +39,8 @@ class Naming {
 	@Inject extension SExecExtensions
 	@Inject extension OriginTracing
 	@Inject extension ShadowMemberScope
+	@Inject GeneratorEntry entry
+	@Inject extension GenmodelEntries
 	
 	def iStatemachine() {
 		"IStatemachine"
@@ -68,6 +71,8 @@ class Naming {
 	}
 	
 	def dot(String a, String b) {
+		if (a.isEmpty) return b
+		if (b.isEmpty) return a
 		a + "." + b
 	}
 
@@ -116,19 +121,11 @@ class Naming {
 		return newName
 	}
 
-	def statemachineClassName(ExecutionFlow it) {
-		name.statemachineName
-	}
-	
-	def statemachineClassName(Statechart it) {
-		name.statemachineName
+	def statemachineClassName(NamedElement it) {
+		entry.typeName ?: name.statemachineName
 	}
 
-	def statemachineInterfaceName(ExecutionFlow it) {
-		"I" + statemachineClassName
-	}
-	
-	def statemachineInterfaceName(Statechart it) {
+	def statemachineInterfaceName(NamedElement it) {
 		"I" + statemachineClassName
 	}
 

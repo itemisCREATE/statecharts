@@ -44,14 +44,14 @@ class EventBasedRunnableWrapper {
 	
 	def generateEventBasedRunnableWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.eventBasedWrapperClassName(entry).java
+		var filename = entry.basePackage + '/' + flow.eventBasedWrapperClassName(entry).java
 		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
 	
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
-		package «flow.getImplementationPackageName(entry)»;
+		package «entry.basePackage»;
 		«flow.createImports(entry)»
 		
 		/**

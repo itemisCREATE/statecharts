@@ -22,12 +22,12 @@ class TimerService {
 	@Inject extension GenmodelEntries
 	
 	def generateTimerService(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(entry.basePackagePath + '/' + timerServiceClass.java, content(entry))
+		fsa.generateFile(entry.basePackage.toPath + '/' + timerServiceClass.java, content(entry))
 	}
 	
 	def private content(GeneratorEntry entry) '''
 		«entry.licenseText»
-		package «entry.getBasePackageName()»;
+		package «entry.getBasePackage()»;
 		
 		import java.util.ArrayList;
 		import java.util.List;

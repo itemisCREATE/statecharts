@@ -19,10 +19,12 @@ import java.util.regex.Pattern;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * 
@@ -33,15 +35,22 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_\\.]*)+[a-zA-Z_][a-zA-Z0-9_]*";
-	private static final String SUFFIX_REGEX = "[a-zA-Z0-9_]*";
+	private static final String TYPE_NAME_REGEX = "[a-zA-Z_$][a-zA-Z0-9_$]*";
 
 	@Override
 	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement) {
 		if (parameterValue.getParameter().getName().equals(BASE_PACKAGE)) {
-			parameterValue.setValue("org.yakindu.sct");
-		} else if (parameterValue.getParameter().getName().equals(IMPLEMENTATION_SUFFIX)) {
-			parameterValue.setValue("impl");
+			parameterValue.setValue(BASE_PACKAGE_DEFAULT);
+		} else if (parameterValue.getParameter().getName().equals(LIBRARY_PACKAGE)) {
+			parameterValue.setValue(LIBRARY_PACKAGE_DEFAULT);
+		} else if (parameterValue.getParameter().getName().equals(TYPE_NAME)) {
+			if (contextElement instanceof GeneratorEntry) {
+				EObject element = ((GeneratorEntry) contextElement).getElementRef();
+				if (element instanceof NamedElement) {
+					parameterValue.setValue(((NamedElement) element).getName());
+				}
+			}
 		} else if (featureType.getName().equals(FEATURE_RUNNABLE_WRAPPER)) {
 			if (parameterValue.getParameter().getName().equals(VALUE_NAME_PREFIX)) {
 				parameterValue.setValue(RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT);
@@ -63,7 +72,10 @@ public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvide
 
 	public IStatus validateParameterValue(FeatureParameterValue value) {
 		String name = value.getParameter().getName();
-		if (BASE_PACKAGE.equals(name)) {
+		if (BASE_PACKAGE.equals(name) || LIBRARY_PACKAGE.equals(name) || API_PACKAGE.equals(name)) {
+			if (value.getStringValue().isEmpty()) {
+				return Status.OK_STATUS;
+			}
 			if (!value.getStringValue().matches(PACKAGE_NAME_REGEX)) {
 				return error("Invalid package name");
 			}
@@ -76,15 +88,15 @@ public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvide
 				}
 			}
 		}
-		if (IMPLEMENTATION_SUFFIX.equals(name)) {
-			if (!value.getStringValue().matches(SUFFIX_REGEX)) {
+		if (TYPE_NAME.equals(name)) {
+			if (!value.getStringValue().matches(TYPE_NAME_REGEX)) {
 				return error("Invalid value");
 			}
 			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {
 				Pattern pattern = Pattern.compile("^" + keyword + "$");
 				Matcher matcher = pattern.matcher(value.getStringValue());
 				while (matcher.find()) {
-					return error("Java keyword '" + matcher.group() + "' is not allowed as suffix.");
+					return error("Java keyword '" + matcher.group() + "' is not allowed as type name.");
 				}
 			}
 

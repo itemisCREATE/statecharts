@@ -28,12 +28,12 @@ class ITimerCallback {
 		if (entry.skipLibraryFiles) {
 			return
 		}
-		val fileName = entry.basePackagePath + '/' + iTimerCallback.java
+		val fileName = entry.libraryPackage.toPath + '/' + iTimerCallback.java
 		fsa.generateFile(fileName, entry.libraryOutputConfig, content(entry))
 	}
 	
 	def content(GeneratorEntry entry) {
-		content(entry.licenseText, entry.basePackageName)
+		content(entry.licenseText, entry.basePackage)
 	}
 	
 	def content(String licenseText, String basePackageName) {

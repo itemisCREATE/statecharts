@@ -53,7 +53,7 @@ class StatemachineInterface {
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		this.entry = entry
 		this.flow = flow
-		val filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
+		val filename = entry.apiPackage.toPath + '/' + flow.statemachineInterfaceName.java
 		fsa.generateFile(filename, entry.apiOutputConfig, content)
 	}
 
@@ -61,10 +61,10 @@ class StatemachineInterface {
 		FileTemplate
 			.create
 			.fileComment(entry.licenseText)
-			.packageName(flow.getImplementationPackageName(entry))
+			.packageName(entry.apiPackage)
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
-			.addImport(entry.basePackageName.dot(iTimerCallback), flow.timed)
-			.addImport(entry.basePackageName.dot(iStatemachine))
+			.addImport(entry.basePackage.dot(iTimerCallback), flow.timed)
+			.addImport(entry.libraryPackage.dot(iStatemachine))
 			.addImport(rxPackage.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(

@@ -46,11 +46,11 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 			val typesRes = (sourceElement as Statechart).eResource.resourceSet.getResource(p.uri, true);
 			val submachineChart = typesRes.subchart
 			val submachineClass = submachineChart.statemachineClassName
-			val submachineImport = submachineChart.getImplementationPackageName(entry) + "." + submachineClass
+			val submachineImport = entry.basePackage + "." + submachineClass
 			imports.add(submachineImport)
 			if (submachineChart.scopes.filter(InterfaceScope).exists[declarations.filter(Event).exists[direction == Direction.OUT]]) {
 				val submachineInterface = submachineChart.statemachineInterfaceName
-				imports.add(submachineChart.getImplementationPackageName(entry) + "." + submachineInterface)
+				imports.add(entry.apiPackage + "." + submachineInterface)
 			}
 		}
 		return imports

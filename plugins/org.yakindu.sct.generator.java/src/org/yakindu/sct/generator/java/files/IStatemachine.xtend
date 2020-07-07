@@ -28,14 +28,14 @@ class IStatemachine {
 		if (entry.skipLibraryFiles) {
 			return
 		}
-		val fileName = entry.basePackagePath + '/' + iStatemachine.java
+		val fileName = entry.libraryPackage.toPath + '/' + iStatemachine.java
 		fsa.generateFile(fileName, entry.libraryOutputConfig, content(entry))
 	}
 	
-	def private content(GeneratorEntry entry) {
+	def private content(GeneratorEntry it) {
 		'''
-			«entry.licenseText»
-			package «entry.getBasePackageName()»;
+			«licenseText»
+			package «libraryPackage»;
 			
 			/**
 			 * Basic interface for state machines.

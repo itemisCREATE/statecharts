@@ -46,14 +46,14 @@ class CycleBasedSynchronizedWrapper {
 
 	def generateCycleWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.cycleWrapperClassName(entry).java
+		var filename = entry.basePackage + '/' + flow.cycleWrapperClassName(entry).java
 		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
 
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
-		package «flow.getImplementationPackageName(entry)»;
+		package «entry.basePackage»;
 		«flow.createImports(entry)»
 		
 		/**
@@ -151,10 +151,10 @@ class CycleBasedSynchronizedWrapper {
 			import «rxPackage».«observableClass»;
 		«ENDIF»
 		«IF flow.timed»
-			import «entry.getBasePackageName()».ITimer;
-			import «entry.getBasePackageName()».ITimerCallback;
+			import «entry.getBasePackage()».ITimer;
+			import «entry.getBasePackage()».ITimerCallback;
 		«ENDIF»
-		import «flow.getImplementationPackageName(entry)».«flow.statemachineClassName».State;
+		import «entry.basePackage».«flow.statemachineClassName».State;
 	'''
 
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''

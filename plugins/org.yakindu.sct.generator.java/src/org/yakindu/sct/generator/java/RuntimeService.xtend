@@ -23,13 +23,13 @@ class RuntimeService {
 	extension GenmodelEntries
 	
 	def generateRuntimeService(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(entry.basePackagePath + '/' + runtimeServiceClass.java, content(entry))
+		fsa.generateFile(entry.basePackage.toPath + '/' + runtimeServiceClass.java, content(entry))
 	}
 	
 	def private content(GeneratorEntry entry) {
 		'''
 		«entry.licenseText»
-		package «entry.getBasePackageName()»;
+		package «entry.getBasePackage()»;
 		
 		import java.util.HashMap;
 		import java.util.LinkedList;

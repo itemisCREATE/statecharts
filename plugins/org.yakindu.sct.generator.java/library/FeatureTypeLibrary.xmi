@@ -9,10 +9,18 @@
   <types name="Naming"
       optional="true">
     <parameters
-        name="basePackage"/>
-    <parameters
-        name="implementationSuffix"
+        name="libraryPackage"
         optional="true"/>
+	<parameters
+        name="apiPackage"
+		optional="true"/>    
+	<parameters
+        name="basePackage"
+		optional="true"/>
+	<parameters
+        name="typeName"
+		optional="true"/>
+	
   </types>
   <types name="GeneralFeatures"
       optional="true">
