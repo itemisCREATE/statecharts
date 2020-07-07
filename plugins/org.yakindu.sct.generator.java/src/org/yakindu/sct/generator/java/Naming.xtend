@@ -107,7 +107,7 @@ class Naming {
 		"onStateExited"
 	}
 
-	def dispatch String statemachineName(String name) {
+	def String statemachineName(String name) {
 		// remove whitespaces;
 		var String newName = name.replace(" ", "")
 		if (name.isKeyword) {
@@ -116,20 +116,12 @@ class Naming {
 		return newName
 	}
 
-	def dispatch String statemachineName(ExecutionFlow it) {
-		return name.statemachineName.toFirstUpper()
-	}
-	
-	def dispatch String statemachineName(Statechart it) {
-		return name.statemachineName.toFirstUpper()
-	}
-
 	def statemachineClassName(ExecutionFlow it) {
-		statemachineName + "Statemachine"
+		name.statemachineName
 	}
 	
 	def statemachineClassName(Statechart it) {
-		statemachineName + "Statemachine"
+		name.statemachineName
 	}
 
 	def statemachineInterfaceName(ExecutionFlow it) {

@@ -98,16 +98,16 @@ class GenmodelEntries {
 
 	def getImplementationSuffix(GeneratorEntry it, ExecutionFlow flow) {
 		if (implementationSuffixParameter !== null) {
-			return flow.statemachineName + implementationSuffixParameter.stringValue
+			return flow.statemachineClassName + implementationSuffixParameter.stringValue
 		}
-		return flow.statemachineName
+		return flow.statemachineClassName
 	}
 	
 	def getImplementationSuffix(GeneratorEntry it, Statechart sct) {
 		if (implementationSuffixParameter !== null) {
-			return sct.statemachineName + implementationSuffixParameter.stringValue
+			return sct.statemachineClassName + implementationSuffixParameter.stringValue
 		}
-		return sct.statemachineName
+		return sct.statemachineClassName
 	}
 
 	def getImplementationPackageName(ExecutionFlow it, GeneratorEntry entry) {
