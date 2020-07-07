@@ -14,8 +14,12 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.*
+import org.yakindu.sct.model.sgraph.Statechart
+import com.google.inject.Inject
 
 class GenmodelEntries {
+
+	@Inject extension Naming
 
 	def private getLicenseFeature(GeneratorEntry it) {
 		getFeatureConfiguration(LICENSE_HEADER)
@@ -93,11 +97,14 @@ class GenmodelEntries {
 	}
 
 	def getBasePackage(GeneratorEntry it) {
-		basePackageParameter?.stringValue ?: BASE_PACKAGE_DEFAULT
+		(basePackageParameter?.stringValue ?: BASE_PACKAGE_DEFAULT).dot(statechart.namespace)
 	}
-	
+
 	def getApiPackage(GeneratorEntry it) {
-		apiPackageParameter?.stringValue ?: basePackage
+		if (apiPackageParameter !== null)
+			apiPackageParameter?.stringValue.dot(statechart.namespace)
+		else
+			basePackage
 	}
 	
 	def getLibraryPackage(GeneratorEntry it) {
@@ -186,5 +193,9 @@ class GenmodelEntries {
 		} else {
 			false
 		}
+	}
+	
+	def getStatechart(GeneratorEntry it) {
+		elementRef as Statechart
 	}
 }

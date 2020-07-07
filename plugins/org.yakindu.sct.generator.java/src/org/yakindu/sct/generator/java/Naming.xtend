@@ -71,8 +71,8 @@ class Naming {
 	}
 	
 	def dot(String a, String b) {
-		if (a.isEmpty) return b
-		if (b.isEmpty) return a
+		if (a.nullOrEmpty) return b
+		if (b.nullOrEmpty) return a
 		a + "." + b
 	}
 
