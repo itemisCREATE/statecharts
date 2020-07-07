@@ -44,6 +44,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.java.util.StringHelper
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -55,6 +56,7 @@ class Statemachine {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension StringHelper
 	
 	@Inject protected extension EventCode
 	@Inject protected extension InterfaceFunctionsGenerator

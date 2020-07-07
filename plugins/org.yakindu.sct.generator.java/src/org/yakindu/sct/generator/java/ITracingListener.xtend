@@ -12,9 +12,11 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.generator.java.util.StringHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
 class ITracingListener {

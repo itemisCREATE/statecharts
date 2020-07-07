@@ -25,6 +25,7 @@ import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.OutEventObservables
 import org.yakindu.sct.generator.java.templates.ClassTemplate
 import org.yakindu.sct.generator.java.templates.FileTemplate
+import org.yakindu.sct.generator.java.util.StringHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -46,6 +47,7 @@ class StatemachineInterface {
 	@Inject extension OutEventObservables
 	@Inject extension OutputConfigProvider
 	@Inject extension GeneratorPredicate
+	@Inject extension StringHelper
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry

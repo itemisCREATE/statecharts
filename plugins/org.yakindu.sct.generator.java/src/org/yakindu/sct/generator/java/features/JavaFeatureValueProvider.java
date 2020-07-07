@@ -10,7 +10,22 @@
  */
 package org.yakindu.sct.generator.java.features;
 
-import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.*;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.API_PACKAGE;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE_PACKAGE;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE_PACKAGE_DEFAULT;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.FEATURE_RUNNABLE_WRAPPER;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.FEATURE_SYCHRONIZED_WRAPPER;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.JAVA_KEYWORDS;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_PACKAGE;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_PACKAGE_DEFAULT;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.TYPE_NAME;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.VALUE_NAME_PREFIX;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.VALUE_NAME_SUFFIX;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -21,10 +36,15 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.java.GenmodelEntries;
+import org.yakindu.sct.generator.java.util.StringHelper;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgraph.Statechart;
+
+import com.google.inject.Inject;
 
 /**
  * 
@@ -37,6 +57,9 @@ public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvide
 	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_\\.]*)+[a-zA-Z_][a-zA-Z0-9_]*";
 	private static final String TYPE_NAME_REGEX = "[a-zA-Z_$][a-zA-Z0-9_$]*";
 
+	@Inject private GenmodelEntries entries;
+	@Inject private StringHelper helper;
+	
 	@Override
 	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement) {
@@ -102,5 +125,31 @@ public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvide
 
 		}
 		return Status.OK_STATUS;
+	}
+	
+	@Override
+	public IStatus validateGeneratorEntry(GeneratorEntry entry) {
+		if (generatesToDefaultPackage(entry)) {
+			return warning("Generation into default package is discouraged. Use a statechart namespace, or set the Naming.basePackage parameter.");
+		}
+		if (generatesLowerCaseType(entry)) {
+			return warning("Generation of types starting with a lowercase letter is discouraged. Rename the statechart, or set the Naming.typeName parameter.");
+		}
+		return Status.OK_STATUS;
+	}
+
+	private boolean generatesLowerCaseType(GeneratorEntry entry) {
+		Statechart statechart = entries.getStatechart(entry);
+		if (statechart == null) 
+			return false;
+		
+		String sctName = statechart.getName();
+		String typeName = entries.getTypeName(entry);
+
+		return (typeName == null && helper.isLowercase(sctName)) || (typeName != null && helper.isLowercase(typeName));
+	}
+	
+	private boolean generatesToDefaultPackage(GeneratorEntry entry) {
+		return entries.getBasePackage(entry).isEmpty();
 	}
 }

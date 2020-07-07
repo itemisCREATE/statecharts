@@ -30,7 +30,10 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
  * @author rbeckmann
  */
 class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter implements BuiltinDeclarationNames {
-
+	
+	def dispatch Object execute(Void expression) {
+		null
+	}
 	override dispatch Object execute(ElementReferenceExpression expression) {
 		if (expression.reference instanceof Property) {
 			switch ((expression.reference as Property).name) {

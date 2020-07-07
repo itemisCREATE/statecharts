@@ -69,12 +69,6 @@ class Naming {
 	def java(String it) {
 		it + ".java"
 	}
-	
-	def dot(String a, String b) {
-		if (a.nullOrEmpty) return b
-		if (b.nullOrEmpty) return a
-		a + "." + b
-	}
 
 	def asPrivate(String it) {
 		"private " + it

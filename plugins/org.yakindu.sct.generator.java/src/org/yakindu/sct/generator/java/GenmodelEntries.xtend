@@ -9,17 +9,18 @@
  */
 package org.yakindu.sct.generator.java
 
+import com.google.inject.Inject
+import org.yakindu.sct.generator.java.util.StringHelper
 import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.*
-import org.yakindu.sct.model.sgraph.Statechart
-import com.google.inject.Inject
 
 class GenmodelEntries {
-
-	@Inject extension Naming
+	
+	@Inject extension StringHelper
 
 	def private getLicenseFeature(GeneratorEntry it) {
 		getFeatureConfiguration(LICENSE_HEADER)
@@ -97,7 +98,7 @@ class GenmodelEntries {
 	}
 
 	def getBasePackage(GeneratorEntry it) {
-		(basePackageParameter?.stringValue ?: BASE_PACKAGE_DEFAULT).dot(statechart.namespace)
+		(basePackageParameter?.stringValue ?: BASE_PACKAGE_DEFAULT).dot(statechart?.namespace)
 	}
 
 	def getApiPackage(GeneratorEntry it) {
@@ -110,11 +111,11 @@ class GenmodelEntries {
 	def getLibraryPackage(GeneratorEntry it) {
 		libraryPackageParameter?.stringValue ?: LIBRARY_PACKAGE_DEFAULT
 	}
-
+		
 	def toPath(String packageName) {
 		packageName.replace('.', '/')
 	}
-	
+
 	def getTypeName(GeneratorEntry it) {
 		typeNameParameter?.stringValue
 	}
@@ -196,6 +197,9 @@ class GenmodelEntries {
 	}
 	
 	def getStatechart(GeneratorEntry it) {
-		elementRef as Statechart
+		if (elementRef instanceof Statechart) 
+			elementRef as Statechart
+		else
+			null as Statechart
 	}
 }
