@@ -3,7 +3,7 @@ package org.yakindu.base.expressions.interpreter.base
 class ExpressionInterpreter extends BaseInterpreter  {
 
 	
-	protected extension IInterpreter.Execution execution // TODO: injection ...
+	protected IInterpreter.Execution execution // TODO: injection ...
 	
 	new() {
 		this.execution = new ExpressionExecution	
@@ -12,10 +12,18 @@ class ExpressionInterpreter extends BaseInterpreter  {
 	
 	
 	override void prepareExecution(Object program) {
-		program.provideExecution
+		execution.provideExecution(program)
 	}
 	
 	override resolve(Object owner, Object symbol) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+		
+	override getValue(Object slot) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override setValue(Object slot, Object value) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	

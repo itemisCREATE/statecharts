@@ -19,6 +19,8 @@ import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.RelationalOperator
 
 class ExpressionBuilder {
 
@@ -163,6 +165,14 @@ class ExpressionBuilder {
 		createLogicalOrExpression => [
 			leftOperand = e1
 			rightOperand = e2
+		]
+	}
+	
+	def LogicalRelationExpression _smaller(Expression e1, Expression e2) {
+		createLogicalRelationExpression => [
+			leftOperand = e1
+			rightOperand = e2
+			operator = RelationalOperator.SMALLER
 		]
 	}
 	

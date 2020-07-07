@@ -35,16 +35,48 @@ class SexecExecutiontest {
 		injector.injectMembers(this)
 	} 
 	
+	
 	@Test def void testAssign() {
 
 		val x = _variable("x", "integer")
-		executionContext.slots.add(createExecutionVariable => [name = x.name])	
+		executionContext.slots.add(createExecutionVariable => [
+			fqName = x.name
+			name = x.name
+		])	
 		
-		_sequence(
-			x._declare,
-			x._assign(_integer(42))
-		).evaluate
+		x._assign(_integer(42)).evaluate
 
 		assertEquals(42L, executionContext.getSlot("x").value)		
 	}
+
+
+	@Test def void testGetValue() {
+
+		val x = _variable("x", "integer")
+		executionContext.slots.add(createExecutionVariable => [
+			fqName = x.name
+			name = x.name
+		])	
+		executionContext.getSlot("x").value = 42
+		
+		assertEquals(42, x._ref.evaluate.value)		
+	}
+
+
+	@Test def void testDoWhileLoop() {
+
+		val x = _variable("x", "integer")
+		executionContext.slots.add(createExecutionVariable => [
+			fqName = x.name
+			name = x.name
+		])	
+		executionContext.getSlot("x").value = 0
+			
+		_do(
+			x._assign(x._ref._plus(_integer(1)))
+		)._while(x._ref._smaller(_integer(20))).evaluate
+
+		assertEquals(20L, executionContext.getSlot("x").value)		
+	}
+
 }

@@ -35,11 +35,14 @@ abstract class BaseInterpreter implements IInterpreter, IInterpreter.Control, II
 	
 	
 	def void process( List<Promise> queue ) {
+//		System.out.println("--- START ---")
 		while (! (queue.empty || suspended)) {
 			val head = queue.head
 			queue.remove(0)
+//			System.out.println(head.description)
 			head.execute
 		}
+//		System.out.println("--- END ---")
 	}
 	
 	
@@ -52,20 +55,21 @@ abstract class BaseInterpreter implements IInterpreter, IInterpreter.Control, II
 	}
 
 
-	override void _execute(()=>Object f) {
-		workQueue.add(_promise(f))
+	override void _execute(String description, ()=>Object f) {
+		workQueue.add(_promise(description, f))
 	}
 		
-	override void _return(()=>Object f) {
-		workQueue.add( _promise(f)._then[ v | 
+	override void _return(String description, ()=>Object f) {
+		workQueue.add( _promise(description, f)._then[ v | 
 			stack.push(v)
 		] )
 	}
 	
 	
-	def _promise(Function0<Object> f) {
+	def _promise(String desc, Function0<Object> f) {
 		new Promise => [
 			execution = f
+			description = desc
 		]
 	}
 
@@ -77,9 +81,14 @@ abstract class BaseInterpreter implements IInterpreter, IInterpreter.Control, II
 	
 	static class Promise {
 
-		protected extension (Object)=>void then = null;
-		protected ()=>Object execution = null;
-
+		protected extension (Object)=>void then = null
+		protected ()=>Object execution = null
+		protected String description
+		
+		def String getDescription() {
+			description
+		}
+		
 		def void setThen((Object)=>void then) {
 			this.then = then
 		}		

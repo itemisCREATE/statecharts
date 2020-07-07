@@ -16,8 +16,11 @@ public interface IInterpreter {
 		void pushValue(Object value);
 		Object popValue();
 		
-		void _execute(Function0<?> f);
-		void _return(Function0<?> f);
+		void _execute(String description, Function0<?> f);
+		void _return(String description, Function0<?> f);
+		
+		void setValue(Object slot, Object value);
+		Object getValue(Object slot);
 		
 		Object resolve(Object owner, Object symbol);
 	}

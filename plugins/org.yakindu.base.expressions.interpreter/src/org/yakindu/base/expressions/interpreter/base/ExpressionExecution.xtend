@@ -17,6 +17,10 @@ import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.interpreter.CoreFunction
 import org.yakindu.base.expressions.interpreter.base.IInterpreter.Context
 import org.yakindu.base.types.Expression
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.expressions.FeatureCall
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
 	
@@ -43,13 +47,48 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	}
 	
 
+	def dispatch void execution(AssignmentExpression expr) {
+		expr.expression._exec
+		_value
+		expr.varRef._exec
+		_execute[ 
+			val slotRef = popValue
+			val value = popValue							
+			slotRef.setValue(value) 
+			null
+		]
+	}
+	
+	def dispatch void execution(ElementReferenceExpression expr) {
+		_return [
+			resolve(null, expr.reference.symbol)
+		]
+	}
+
+	def dispatch void execution(FeatureCall expr) {
+		expr.owner._exec
+		_return [
+			popValue.resolve(expr.feature.symbol)
+		]
+	}
+
+	def dispatch String symbol(Object it) {
+		null
+	}
+	
+	def dispatch String symbol(NamedElement it) {
+		it.name
+	}
+	
 	def dispatch void execution(BinaryExpression it) {
 		binaryExpressionExecution(operator.getName, leftOperand, rightOperand)
 	}
 
 	protected def void binaryExpressionExecution(String operator, Expression left, Expression right) {
-		left._exec
-		right._exec
+		left._exec  
+		_value
+		right._exec 
+		_value
 		_return [ 
 			val rightValue = popValue
 			val leftValue = popValue
@@ -61,12 +100,14 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	
 	def dispatch void execution(LogicalOrExpression expr) {
 		expr.leftOperand._exec
+		_value
 		_execute [ 
 			if (popValue == true) { 
 				_return[true]
 			}
 			else {
 				expr.rightOperand._exec
+				_value
 				_return[popValue]
 			}
 			null
@@ -76,12 +117,14 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 
 	def dispatch void execution(LogicalAndExpression expr) {
 		expr.leftOperand._exec
+		_value
 		_execute [ 
 			if (popValue == false) { 
 				_return[false]
 			}
 			else {
 				expr.rightOperand._exec
+				_value
 				_return[popValue]
 			}
 			null
@@ -101,7 +144,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		binaryExpressionExecution(CoreFunction.BIT_XOR, leftOperand, rightOperand)
 	}
 	
-	
+		
 	def dispatch valueLiteral(IntLiteral literal) {
 		return literal.value as long
 	}

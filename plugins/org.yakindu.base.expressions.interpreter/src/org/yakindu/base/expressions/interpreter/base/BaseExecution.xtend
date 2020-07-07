@@ -12,5 +12,19 @@ abstract class BaseExecution implements IInterpreter.Execution  {
 		o.provideExecution	
 	}
 
+	def void _value() {
+		_return("value", [
+			popValue.getValue
+		])
+	}
+
+	def void _return(()=>Object f) {
+		_return("return", f)
+	}
+	
+	def void _execute(()=>Object f) {
+		_execute("execute", f)
+	}
+	
 	
 }
