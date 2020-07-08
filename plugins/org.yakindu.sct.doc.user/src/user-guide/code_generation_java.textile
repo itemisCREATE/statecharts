@@ -885,16 +885,20 @@ The *Naming* feature allows the configuration of package names for the generated
 
 It is an _optional_ feature and has the following parameters:
 
-* _basePackage_ (String, required): Package name for the generated Java classes
-* _implementationSuffix_ (String, optional): Name suffix for the implementing classes
+* _basePackage_ (String, optional): Package name for the generated statechart class. In case the statechart defines a namespace, it will be appended to this package name.
+* _apiPackage_ (String, optional): Package name for the generated statechart interface. In case the statechart defines a namespace, it will be appended to this package name.
+* _libraryPackage_ (String, optional): Package name for model-independent classes and interfaces.
+* _typeName_ (String, optional): Name to be used for the generated statechart class.
 
 ==<div class="example">==
 
 Example:
 
 bc. feature Naming {
-    basePackage = "org.ourproject.sct"
-    implementationSuffix = "Impl"
+    basePackage = "org.ourproject.sct.impl"
+    apiPackage = "org.ourproject.sct.api"
+    libraryPackage = "org.ourproject.sct.lib"
+    typeName = "MyStatemachine"
 }
 
 ==</div>==
