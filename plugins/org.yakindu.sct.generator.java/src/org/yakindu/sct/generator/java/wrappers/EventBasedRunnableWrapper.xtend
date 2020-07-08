@@ -44,7 +44,7 @@ class EventBasedRunnableWrapper {
 	
 	def generateEventBasedRunnableWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		
-		var filename = entry.basePackage + '/' + flow.eventBasedWrapperClassName(entry).java
+		var filename = entry.basePackage.toPath + '/' + flow.eventBasedWrapperClassName(entry).java
 		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}

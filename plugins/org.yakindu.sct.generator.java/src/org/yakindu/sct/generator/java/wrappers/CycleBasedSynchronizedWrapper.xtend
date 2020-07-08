@@ -46,7 +46,7 @@ class CycleBasedSynchronizedWrapper {
 
 	def generateCycleWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
-		var filename = entry.basePackage + '/' + flow.cycleWrapperClassName(entry).java
+		var filename = entry.basePackage.toPath + '/' + flow.cycleWrapperClassName(entry).java
 		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
@@ -151,8 +151,8 @@ class CycleBasedSynchronizedWrapper {
 			import «rxPackage».«observableClass»;
 		«ENDIF»
 		«IF flow.timed»
-			import «entry.getBasePackage()».ITimer;
-			import «entry.getBasePackage()».ITimerCallback;
+			import «entry.libraryPackage».ITimer;
+			import «entry.libraryPackage».ITimerCallback;
 		«ENDIF»
 		import «entry.basePackage».«flow.statemachineClassName».State;
 	'''

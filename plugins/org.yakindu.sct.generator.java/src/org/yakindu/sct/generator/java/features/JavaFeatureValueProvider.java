@@ -122,7 +122,6 @@ public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvide
 					return error("Java keyword '" + matcher.group() + "' is not allowed as type name.");
 				}
 			}
-
 		}
 		return Status.OK_STATUS;
 	}

@@ -33,13 +33,13 @@ class ITimerCallback {
 	}
 	
 	def content(GeneratorEntry entry) {
-		content(entry.licenseText, entry.basePackage)
+		content(entry.licenseText, entry.libraryPackage)
 	}
 	
-	def content(String licenseText, String basePackageName) {
+	def content(String licenseText, String pkg) {
 		'''
 			«licenseText»
-			package «basePackageName»;
+			package «pkg»;
 			
 			/**
 			* Interface for state machines which use timed event triggers.

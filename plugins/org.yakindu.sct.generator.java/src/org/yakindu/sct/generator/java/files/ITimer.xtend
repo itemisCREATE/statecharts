@@ -31,15 +31,15 @@ class ITimer {
 		val fileName = entry.libraryPackage.toPath + '/' + iTimer.java
 		fsa.generateFile(fileName, entry.libraryOutputConfig, content(entry))
 	}
-
+	
 	def content(GeneratorEntry entry) {
-		content(entry.licenseText, entry.basePackage)
+		content(entry.licenseText, entry.libraryPackage)
 	}
 	
-	def content(String licenceText, String basePackage) {
+	def content(String licenseText, String pkg) {
 		'''
-			«licenceText»
-			package «basePackage»;
+			«licenseText»
+			package «pkg»;
 			
 			/**
 			 * Interface a timer has to implement. Use to implement your own timer

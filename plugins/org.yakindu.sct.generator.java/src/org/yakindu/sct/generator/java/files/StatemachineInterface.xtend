@@ -65,7 +65,7 @@ class StatemachineInterface {
 			.fileComment(entry.licenseText)
 			.packageName(entry.apiPackage)
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
-			.addImport(entry.basePackage.dot(iTimerCallback), flow.timed)
+			.addImport(entry.libraryPackage.dot(iTimerCallback), flow.timed)
 			.addImport(entry.libraryPackage.dot(iStatemachine))
 			.addImport(rxPackage.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)

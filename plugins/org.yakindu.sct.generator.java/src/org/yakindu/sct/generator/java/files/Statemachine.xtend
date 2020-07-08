@@ -158,7 +158,7 @@ class Statemachine {
 		}
 		
 		if (flow.timed) {
-			importSet += "" + entry.getBasePackage() + ".ITimer"
+			importSet += "" + entry.libraryPackage + ".ITimer"
 		}
 		
 		for(JavaIncludeProvider jip : includeProviders) {
@@ -166,7 +166,7 @@ class Statemachine {
 		}
 		
 		if (tracingUsed(entry)) {
-			importSet += entry.getBasePackage() + "." + traceInterface
+			importSet += entry.libraryPackage + "." + traceInterface
 			importSet += JavaList
 			importSet += JavaLinkedList
 		}
