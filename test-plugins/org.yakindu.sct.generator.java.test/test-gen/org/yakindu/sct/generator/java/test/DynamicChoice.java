@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine;
-import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine.State;	
+import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,8 +40,8 @@ public class DynamicChoice {
 	@Test
 	public void dynamicChoiceTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_Start));
+		assertTrue(statemachine.isStateActive(DynamicChoiceStatemachine.State.main_region_Start));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(DynamicChoiceStatemachine.State.main_region_A));
 	}
 }

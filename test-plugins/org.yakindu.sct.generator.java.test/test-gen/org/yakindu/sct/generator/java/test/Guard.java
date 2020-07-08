@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guard.GuardStatemachine;
-import org.yakindu.scr.guard.GuardStatemachine.State;	
+import org.yakindu.scr.guard.GuardStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,21 +40,21 @@ public class Guard {
 	@Test
 	public void guardTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardStatemachine.State.main_region_A));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardStatemachine.State.main_region_A));
 		statemachine.raiseEvent2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(GuardStatemachine.State.main_region_B));
 		statemachine.raiseReturn();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardStatemachine.State.main_region_A));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(GuardStatemachine.State.main_region_B));
 		statemachine.raiseReturn();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardStatemachine.State.main_region_A));
 	}
 }

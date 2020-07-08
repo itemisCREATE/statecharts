@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine;
-import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine.State;	
+import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,16 +40,16 @@ public class StatechartLocalReactions {
 	@Test
 	public void statechartLocalReactionsTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_S1));
-		assertTrue(statemachine.isStateActive(State.region2_a));
+		assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.main_region_S1));
+		assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.region2_a));
 		long cycles = 0l;
 		while (cycles < 10l) {
-			assertTrue(statemachine.isStateActive(State.region2_a));
+			assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.region2_a));
 			if (statemachine.getMyInt()%2l == 0l) {
-				assertTrue(statemachine.isStateActive(State.main_region_S1));
+				assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.main_region_S1));
 			}
 			else {
-				assertTrue(statemachine.isStateActive(State.main_region_S2));
+				assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.main_region_S2));
 			}
 			timer.cycleLeap(1l);
 			cycles += 1l;

@@ -11,7 +11,7 @@ import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine;
-import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;	
+import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -71,13 +71,13 @@ public class OperationsWithoutBraces {
 		});
 		 
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.another_region_A));
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.another_region_A));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.main_region_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.another_region_C));
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.another_region_C));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.main_region_C));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_D));
-		assertTrue(statemachine.isStateActive(State.another_region_D));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.main_region_D));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.another_region_D));
 	}
 }

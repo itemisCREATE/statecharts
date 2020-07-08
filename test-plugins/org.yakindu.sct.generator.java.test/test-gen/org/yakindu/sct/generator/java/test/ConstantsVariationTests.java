@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constantsvariation.ConstantsVariationStatemachine;
-import org.yakindu.scr.constantsvariation.ConstantsVariationStatemachine.State;	
+import org.yakindu.scr.constantsvariation.ConstantsVariationStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,7 +40,7 @@ public class ConstantsVariationTests {
 	@Test
 	public void constantDefinition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(ConstantsVariationStatemachine.State.main_region_StateA));
 		assertTrue(statemachine.getB2() == true);
 		assertTrue(statemachine.getInterfaceNamed().getB() == true);
 		assertTrue(statemachine.getI2() == 5l);

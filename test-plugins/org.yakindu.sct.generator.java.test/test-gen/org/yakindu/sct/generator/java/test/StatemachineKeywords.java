@@ -11,7 +11,7 @@ import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine;
-import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine.State;	
+import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -55,6 +55,6 @@ public class StatemachineKeywords {
 	@Test
 	public void statemachineKeywords() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_Timer));
+		assertTrue(statemachine.isStateActive(StatechartKeywordsStatemachine.State.main_region_Timer));
 	}
 }

@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.eventdriven.NoLocalEventsStatemachine;
-import org.yakindu.scr.eventdriven.NoLocalEventsStatemachine.State;	
+import org.yakindu.scr.eventdriven.NoLocalEventsStatemachine.State;
 
 /**
  * Unit TestCase for NoLocalEvents
@@ -33,14 +33,14 @@ public class NoLocalEvents {
 	@Test
 	public void test() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateA));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateA));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateB));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateB));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateA));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateA));
 		assertTrue((statemachine.getX() == 0l));
 		statemachine.raiseI(42l);
-		assertTrue(statemachine.isStateActive(State.noLocalEvents_main_region_StateB));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateB));
 		assertTrue((statemachine.getX() == 42l));
 		statemachine.exit();
 	}

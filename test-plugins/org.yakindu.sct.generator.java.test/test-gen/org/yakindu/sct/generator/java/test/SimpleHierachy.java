@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.simplehierachy.SimpleHierachyStatemachine;
-import org.yakindu.scr.simplehierachy.SimpleHierachyStatemachine.State;	
+import org.yakindu.scr.simplehierachy.SimpleHierachyStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,12 +40,12 @@ public class SimpleHierachy {
 	@Test
 	public void simpleHierachyTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.main_region_A));
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
-		assertTrue(statemachine.isStateActive(State.main_region_B_subregion1_B1));
+		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.main_region_B_subregion1_B1));
 	}
 }

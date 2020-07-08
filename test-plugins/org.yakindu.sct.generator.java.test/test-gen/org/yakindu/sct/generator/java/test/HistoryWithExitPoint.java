@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine;
-import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine.State;	
+import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,21 +40,21 @@ public class HistoryWithExitPoint {
 	@Test
 	public void historyEntryAfterExit() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
+		assertTrue(statemachine.isStateActive(HistoryWithExitPointStatemachine.State.mr_A_r_X1));
 		statemachine.raisePush();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.mr_B));
+		assertTrue(statemachine.isStateActive(HistoryWithExitPointStatemachine.State.mr_B));
 		statemachine.raiseBack();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
+		assertTrue(statemachine.isStateActive(HistoryWithExitPointStatemachine.State.mr_A_r_X1));
 		statemachine.raiseNext();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
+		assertTrue(statemachine.isStateActive(HistoryWithExitPointStatemachine.State.mr_A_r_X2));
 		statemachine.raisePush();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.mr_B));
+		assertTrue(statemachine.isStateActive(HistoryWithExitPointStatemachine.State.mr_B));
 		statemachine.raiseBack();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
+		assertTrue(statemachine.isStateActive(HistoryWithExitPointStatemachine.State.mr_A_r_X2));
 	}
 }

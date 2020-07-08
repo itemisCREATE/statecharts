@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.transitionwithoutcondition.TransitionWithoutConditionStatemachine;
-import org.yakindu.scr.transitionwithoutcondition.TransitionWithoutConditionStatemachine.State;	
+import org.yakindu.scr.transitionwithoutcondition.TransitionWithoutConditionStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,8 +40,8 @@ public class TransitionWithoutCondition {
 	@Test
 	public void transitionWithoutConditionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(TransitionWithoutConditionStatemachine.State.main_region_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(TransitionWithoutConditionStatemachine.State.main_region_B));
 	}
 }

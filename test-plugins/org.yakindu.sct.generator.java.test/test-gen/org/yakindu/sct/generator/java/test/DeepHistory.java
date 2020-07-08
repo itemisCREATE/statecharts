@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.deephistory.DeepHistoryStatemachine;
-import org.yakindu.scr.deephistory.DeepHistoryStatemachine.State;	
+import org.yakindu.scr.deephistory.DeepHistoryStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -48,15 +48,15 @@ public class DeepHistory {
 		timer.cycleLeap(1l);
 		statemachine.raiseEvent7();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
-		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State1));
+		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		statemachine.raiseEvent2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.mainRegion_State1));
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State1));
+		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
-		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State1));
+		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	}
 }

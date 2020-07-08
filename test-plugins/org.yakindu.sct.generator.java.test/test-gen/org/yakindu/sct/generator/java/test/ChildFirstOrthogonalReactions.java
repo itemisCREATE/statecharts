@@ -11,7 +11,7 @@ import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.executionorder.ChildFirstOrthogonalReactionsStatemachine;
-import org.yakindu.scr.executionorder.ChildFirstOrthogonalReactionsStatemachine.State;	
+import org.yakindu.scr.executionorder.ChildFirstOrthogonalReactionsStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;

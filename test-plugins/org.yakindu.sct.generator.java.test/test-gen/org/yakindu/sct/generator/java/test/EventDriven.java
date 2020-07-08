@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.eventdriven.EventDrivenStatemachine;
-import org.yakindu.scr.eventdriven.EventDrivenStatemachine.State;	
+import org.yakindu.scr.eventdriven.EventDrivenStatemachine.State;
 
 /**
  * Unit TestCase for eventDriven
@@ -38,12 +38,12 @@ public class EventDriven {
 		assertTrue(statemachine.isRaisedOe1());
 		assertTrue(statemachine.isRaisedOe2());
 		assertTrue(statemachine.isRaisedOe3());
-		assertTrue(statemachine.isStateActive(State.main_region_StateD));
+		assertTrue(statemachine.isStateActive(EventDrivenStatemachine.State.main_region_StateD));
 		statemachine.raiseInEventBool(true);
-		assertTrue(statemachine.isStateActive(State.main_region_StateE));
-		assertTrue(statemachine.isStateActive(State.main_region_StateE__region0_State2));
+		assertTrue(statemachine.isStateActive(EventDrivenStatemachine.State.main_region_StateE));
+		assertTrue(statemachine.isStateActive(EventDrivenStatemachine.State.main_region_StateE__region0_State2));
 		statemachine.raiseInEvent();
-		assertTrue(statemachine.isStateActive(State.main_region_StateF));
+		assertTrue(statemachine.isStateActive(EventDrivenStatemachine.State.main_region_StateF));
 		statemachine.getInterfaceNamedI().raiseNamedInEvent();
 		assertTrue(statemachine.isFinal());
 		statemachine.exit();

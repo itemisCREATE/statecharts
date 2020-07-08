@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine;
-import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine.State;	
+import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,7 +40,7 @@ public class IntegerExpressions {
 	@Test
 	public void integerExpressions() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(IntegerExpressionsStatemachine.State.main_region_StateA));
 		assertTrue(statemachine.getMyInt1() == 10l);
 		assertTrue(statemachine.getMyInt2() == 5l);
 		statemachine.raiseE1();

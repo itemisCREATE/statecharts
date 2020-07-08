@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.historywithoutinitialstep.HistoryWithoutInitialStepStatemachine;
-import org.yakindu.scr.historywithoutinitialstep.HistoryWithoutInitialStepStatemachine.State;	
+import org.yakindu.scr.historywithoutinitialstep.HistoryWithoutInitialStepStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,22 +40,22 @@ public class HistoryWithoutInitialStep {
 	@Test
 	public void enterThroughInitialEntry() {
 		init();
-		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_B_r1_C));
 		statemachine.raiseNext();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_B_r1_D));
 	}
 	
 	@Test
 	public void enterCThroughHistory() {
 		init();
-		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_B_r1_C));
 		statemachine.raiseToA();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_A));
 		statemachine.raiseToHistory();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_B_r1_C));
 	}
 	
 	@Test
@@ -63,27 +63,27 @@ public class HistoryWithoutInitialStep {
 		init();
 		statemachine.raiseNext();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_B_r1_D));
 		statemachine.raiseToA();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_A));
 		statemachine.raiseToHistory();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_B_r1_D));
 	}
 	
 	@Test
 	public void enterThroughHistoryWithoutInit() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_A));
 		statemachine.raiseToHistory();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_B_r1_C));
 	}
 	
 	public void init() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(HistoryWithoutInitialStepStatemachine.State.main_region_A));
 		statemachine.raiseToB();
 		timer.cycleLeap(1l);
 	}

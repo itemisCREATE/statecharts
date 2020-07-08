@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.enterstate.EnterStateStatemachine;
-import org.yakindu.scr.enterstate.EnterStateStatemachine.State;	
+import org.yakindu.scr.enterstate.EnterStateStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,27 +40,27 @@ public class EnterState {
 	@Test
 	public void defaultEntry() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_A));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.r_B_r_E));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_B_r_E));
 	}
 	
 	@Test
 	public void namedEntryThroughNamedTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_A));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.r_B_r_F));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_B_r_F));
 	}
 	
 	@Test
 	public void namedEntryThroughDefaultTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_A));
 		statemachine.raiseG();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.r_B_r_E));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_B_r_E));
 	}
 }

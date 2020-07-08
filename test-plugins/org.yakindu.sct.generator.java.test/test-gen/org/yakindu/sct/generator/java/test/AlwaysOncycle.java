@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine;
-import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine.State;	
+import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,28 +40,28 @@ public class AlwaysOncycle {
 	@Test
 	public void alwaysOnCycleTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateA));
 		long count = 0l;
 		while (count < 5l) {
 			timer.cycleLeap(1l);
-			assertTrue(statemachine.isStateActive(State.main_region_StateA));
+			assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateA));
 			count++;
 		}
 		assertTrue((statemachine.getValue() == 5l));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateB));
 		assertTrue(statemachine.getValue() == 0l);
 		count = 0l;
 		while (count < 5l) {
 			timer.cycleLeap(1l);
-			assertTrue(statemachine.isStateActive(State.main_region_StateB));
+			assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateB));
 			count++;
 		}
 		assertTrue((statemachine.getValue() == 5l));
 		assertTrue((statemachine.getX() == 5l));
 		assertTrue((statemachine.getY() == 5l));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateA));
 		assertTrue(statemachine.getValue() == 0l);
 	}
 }

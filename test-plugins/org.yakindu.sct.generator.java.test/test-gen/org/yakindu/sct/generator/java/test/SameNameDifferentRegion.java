@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine;
-import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine.State;	
+import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,14 +40,14 @@ public class SameNameDifferentRegion {
 	@Test
 	public void sameNameDifferenRegionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateA));
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_StateB));
-		assertTrue(statemachine.isStateActive(State.main_region_StateB_r1_StateA));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB_r1_StateA));
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_StateB));
-		assertTrue(statemachine.isStateActive(State.main_region_StateB_r1_StateB));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB_r1_StateB));
 	}
 }

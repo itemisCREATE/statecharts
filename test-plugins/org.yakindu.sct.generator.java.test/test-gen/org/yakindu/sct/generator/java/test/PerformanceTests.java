@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.performancetest.PerformanceTestStatemachine;
-import org.yakindu.scr.performancetest.PerformanceTestStatemachine.State;	
+import org.yakindu.scr.performancetest.PerformanceTestStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -55,9 +55,9 @@ public class PerformanceTests {
 	
 	public void performance(long perf) {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.mr_A));
+		assertTrue(statemachine.isStateActive(PerformanceTestStatemachine.State.mr_A));
 		while (statemachine.getC() < perf) {
-			if (statemachine.isStateActive(State.mr_A)) {
+			if (statemachine.isStateActive(PerformanceTestStatemachine.State.mr_A)) {
 				statemachine.raiseE1();
 			}
 			else {

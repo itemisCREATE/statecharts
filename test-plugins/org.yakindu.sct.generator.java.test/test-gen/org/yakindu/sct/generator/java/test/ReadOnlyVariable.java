@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine;
-import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine.State;	
+import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,7 +40,7 @@ public class ReadOnlyVariable {
 	@Test
 	public void readOnlyVariableTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(ReadOnlyVariableStatemachine.State.main_region_StateA));
 		assertTrue(statemachine.getMyInt() == 0l);
 		assertTrue(statemachine.getMyString().equals("testString"));
 		assertTrue(statemachine.getMyBool() == true);
@@ -50,7 +50,7 @@ public class ReadOnlyVariable {
 		assertTrue(statemachine.getInterfaceA().getMyBool() == true);
 		assertTrue(statemachine.getInterfaceA().getMyReal() == 1.1);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(ReadOnlyVariableStatemachine.State.main_region_StateB));
 		assertTrue(statemachine.getMyInt() == 100l);
 		assertTrue(statemachine.getMyString().equals("fail"));
 		assertTrue(statemachine.getMyBool() == false);

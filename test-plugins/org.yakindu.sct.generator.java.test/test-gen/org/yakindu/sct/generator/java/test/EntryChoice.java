@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.entrychoice.EntryChoiceStatemachine;
-import org.yakindu.scr.entrychoice.EntryChoiceStatemachine.State;	
+import org.yakindu.scr.entrychoice.EntryChoiceStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -42,6 +42,6 @@ public class EntryChoice {
 		statemachine.enter();
 		timer.cycleLeap(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(EntryChoiceStatemachine.State.main_region_A));
 	}
 }

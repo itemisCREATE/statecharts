@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.ckeywords.CKeywordsStatemachine;
-import org.yakindu.scr.ckeywords.CKeywordsStatemachine.State;	
+import org.yakindu.scr.ckeywords.CKeywordsStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,11 +40,11 @@ public class CKeywords {
 	@Test
 	public void cKeywordsTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.auto_char));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_char));
 		statemachine.raiseAuto();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.auto_loop));
-		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case));
-		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case_enum_asm));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_loop));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_loop_switch_case));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_loop_switch_case_enum_asm));
 	}
 }

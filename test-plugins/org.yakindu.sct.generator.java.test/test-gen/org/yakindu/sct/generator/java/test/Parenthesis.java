@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.parenthesis.ParenthesisStatemachine;
-import org.yakindu.scr.parenthesis.ParenthesisStatemachine.State;	
+import org.yakindu.scr.parenthesis.ParenthesisStatemachine.State;
 import org.yakindu.sct.VirtualTimer;
 import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
@@ -40,7 +40,7 @@ public class Parenthesis {
 	@Test
 	public void simple() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.mainRegion_A));
+		assertTrue(statemachine.isStateActive(ParenthesisStatemachine.State.mainRegion_A));
 		assertTrue(statemachine.getErg() == 8l);
 	}
 }
