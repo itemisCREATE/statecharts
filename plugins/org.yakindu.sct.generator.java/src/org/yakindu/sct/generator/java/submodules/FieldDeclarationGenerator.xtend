@@ -79,9 +79,9 @@ class FieldDeclarationGenerator {
 	protected def statesEnum(ExecutionFlow it) '''
 		public enum State {
 			«FOR state : states»
-				«state.stateName.asEscapedIdentifier»,
+				«state.stateName»,
 			«ENDFOR»
-			«getNullStateName()»
+			«nullStateName»
 		};
 	'''
 	

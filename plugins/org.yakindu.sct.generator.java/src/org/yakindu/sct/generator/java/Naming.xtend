@@ -27,15 +27,18 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
+import static extension org.eclipse.xtext.EcoreUtil2.*;
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.FinalState
+
 class Naming {
 
 	@Inject extension JavaNamingService namingService;
-	@Inject StextNameProvider provider;
 	@Inject extension SExecExtensions
 	@Inject extension OriginTracing
 	@Inject extension ShadowMemberScope
@@ -163,17 +166,18 @@ class Naming {
 		interfaceName + "OperationCallback"
 	}
 
-	def private String fullQualifiedStateName(String name) {
-		name.substring(name.indexOf(".") + 1).replace(".", "_")
-	}
-
-	def dispatch String stateName(State state) {
-		val String name = provider.getFullyQualifiedName(state).toString();
-		name.fullQualifiedStateName
+	def dispatch String stateName(RegularState state) {
+		val names = state.allContainers.takeWhile[!(it instanceof Statechart)].filter(NamedElement).map[name].toList.reverse
+		names += state.name
+		names.filterNull.map[replaceAll(" ", "_").toUpperCase].join("_")
 	}
 
 	def dispatch String stateName(ExecutionState it) {
-		name.fullQualifiedStateName
+		val state = sourceElement as RegularState
+		if (state instanceof FinalState)
+			state.stateName + simpleName.toUpperCase
+		else
+			state.stateName
 	}
 
 	def asName(String it) {
@@ -227,7 +231,7 @@ class Naming {
 	}
 
 	def String getNullStateName() {
-		"$NullState$";
+		"$NULLSTATE$";
 	}
 
 	def functionName(Step it) { shortName }

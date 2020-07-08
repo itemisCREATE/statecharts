@@ -49,7 +49,7 @@ class IsFinal implements org.yakindu.sct.generator.core.submodules.lifecycle.IsF
 			{if (finalStateImpactVector.isCompletelyCovered) {
 			'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»stateVector[«i»] == «
 							IF fs.stateVector.offset == i
-								»State.«fs.stateName.asEscapedIdentifier»«
+								»State.«fs.stateName»«
 							ELSE
 								»State.«nullStateName»«
 							ENDIF»«

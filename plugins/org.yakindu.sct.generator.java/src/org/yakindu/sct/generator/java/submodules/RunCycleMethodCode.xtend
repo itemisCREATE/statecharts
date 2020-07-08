@@ -31,13 +31,13 @@ class RunCycleMethodCode implements MicroStepCode {
 			switch (stateVector[nextStateIndex]) {
 			«FOR state : flow.states.filter[isLeaf]»
 				«IF state.reactMethod !== null»
-					case «state.stateName.asEscapedIdentifier»:
+					case «state.stateName»:
 						«state.reactMethod.shortName»(true);
 						break;
 				«ENDIF»
 			«ENDFOR»
 			default:
-				// «getNullStateName()»
+				// «nullStateName»
 			}
 		}
 	'''

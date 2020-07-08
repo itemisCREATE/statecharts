@@ -93,7 +93,7 @@ class FlowCode {
 			switch (stateVector[«stateConfigurationIdx»]) {
 		«ENDIF»
 		«FOR stateCase : cases»
-			case «stateCase.state.stateName.asEscapedIdentifier»:
+			case «stateCase.state.stateName»:
 				«stateCase.step.code»
 				break;
 		«ENDFOR»
@@ -159,7 +159,7 @@ class FlowCode {
 	def dispatch CharSequence code(EnterState it) '''
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
-		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;
+		stateVector[«state.stateVector.offset»] = State.«state.stateName»;
 		«flow._stateChanged.code»
 	'''
 	
