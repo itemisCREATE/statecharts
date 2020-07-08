@@ -41,7 +41,7 @@ public class GuardedEntry {
 	public void entryNotTakenOnStatechartEnter() {
 		assertTrue(statemachine.getGuard() == false);
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getDone() == false);
 	}
 	
@@ -49,7 +49,7 @@ public class GuardedEntry {
 	public void entryTakenOnStatechartEnter() {
 		statemachine.setGuard(true);
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getDone() == true);
 	}
 	
@@ -67,14 +67,14 @@ public class GuardedEntry {
 	
 	public void initEntryInTransition(boolean guardVar, boolean doneVar) {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_B));
 		statemachine.setGuard(guardVar);
 		statemachine.setDone(doneVar);
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 	}
 }

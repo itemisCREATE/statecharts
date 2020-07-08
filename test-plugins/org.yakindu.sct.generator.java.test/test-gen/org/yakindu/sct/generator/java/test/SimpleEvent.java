@@ -40,12 +40,12 @@ public class SimpleEvent {
 	@Test
 	public void simpleEventTest() {
 		statemachine.enter();
-		assertTrue("Expected A to be active",statemachine.isStateActive(SimpleEventStatemachine.State.main_region_A));
+		assertTrue("Expected A to be active",statemachine.isStateActive(SimpleEventStatemachine.State.MAIN_REGION_A));
 		assertTrue(5l == 5l);
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue("Expected B to be active",statemachine.isStateActive(SimpleEventStatemachine.State.main_region_B));
+		assertTrue("Expected B to be active",statemachine.isStateActive(SimpleEventStatemachine.State.MAIN_REGION_B));
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(SimpleEventStatemachine.State.main_region_B));
+		assertTrue(!statemachine.isStateActive(SimpleEventStatemachine.State.MAIN_REGION_B));
 	}
 }

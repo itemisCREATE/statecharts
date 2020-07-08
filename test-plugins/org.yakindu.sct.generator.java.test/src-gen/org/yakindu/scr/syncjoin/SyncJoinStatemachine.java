@@ -59,13 +59,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_B,
-		main_region_B_r1_C1,
-		main_region_B_r1_C2,
-		main_region_B_r2_D1,
-		main_region_B_r2_D2,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		MAIN_REGION_B_R1_C1,
+		MAIN_REGION_B_R1_C2,
+		MAIN_REGION_B_R2_D1,
+		MAIN_REGION_B_R2_D2,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -90,7 +90,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -134,23 +134,23 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
-			case main_region_B_r1_C1:
+			case MAIN_REGION_B_R1_C1:
 				main_region_B_r1_C1_react(true);
 				break;
-			case main_region_B_r1_C2:
+			case MAIN_REGION_B_R1_C2:
 				main_region_B_r1_C2_react(true);
 				break;
-			case main_region_B_r2_D1:
+			case MAIN_REGION_B_R2_D1:
 				main_region_B_r2_D1_react(true);
 				break;
-			case main_region_B_r2_D2:
+			case MAIN_REGION_B_R2_D2:
 				main_region_B_r2_D2_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -161,7 +161,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -199,19 +199,19 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
-		case main_region_B:
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
 			return stateVector[0].ordinal() >= State.
-					main_region_B.ordinal()&& stateVector[0].ordinal() <= State.main_region_B_r2_D2.ordinal();
-		case main_region_B_r1_C1:
-			return stateVector[0] == State.main_region_B_r1_C1;
-		case main_region_B_r1_C2:
-			return stateVector[0] == State.main_region_B_r1_C2;
-		case main_region_B_r2_D1:
-			return stateVector[1] == State.main_region_B_r2_D1;
-		case main_region_B_r2_D2:
-			return stateVector[1] == State.main_region_B_r2_D2;
+					MAIN_REGION_B.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_B_R2_D2.ordinal();
+		case MAIN_REGION_B_R1_C1:
+			return stateVector[0] == State.MAIN_REGION_B_R1_C1;
+		case MAIN_REGION_B_R1_C2:
+			return stateVector[0] == State.MAIN_REGION_B_R1_C2;
+		case MAIN_REGION_B_R2_D1:
+			return stateVector[1] == State.MAIN_REGION_B_R2_D1;
+		case MAIN_REGION_B_R2_D2:
+			return stateVector[1] == State.MAIN_REGION_B_R2_D2;
 		default:
 			return false;
 		}
@@ -254,7 +254,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private void enterSequence_main_region_A_default() {
 		entryAction_main_region_A();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -266,25 +266,25 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	/* 'default' enter sequence for state C1 */
 	private void enterSequence_main_region_B_r1_C1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B_r1_C1;
+		stateVector[0] = State.MAIN_REGION_B_R1_C1;
 	}
 	
 	/* 'default' enter sequence for state C2 */
 	private void enterSequence_main_region_B_r1_C2_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B_r1_C2;
+		stateVector[0] = State.MAIN_REGION_B_R1_C2;
 	}
 	
 	/* 'default' enter sequence for state D1 */
 	private void enterSequence_main_region_B_r2_D1_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_B_r2_D1;
+		stateVector[1] = State.MAIN_REGION_B_R2_D1;
 	}
 	
 	/* 'default' enter sequence for state D2 */
 	private void enterSequence_main_region_B_r2_D2_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_B_r2_D2;
+		stateVector[1] = State.MAIN_REGION_B_R2_D2;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -305,7 +305,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
@@ -317,37 +317,37 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	/* Default exit sequence for state C1 */
 	private void exitSequence_main_region_B_r1_C1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C2 */
 	private void exitSequence_main_region_B_r1_C2() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D1 */
 	private void exitSequence_main_region_B_r2_D1() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D2 */
 	private void exitSequence_main_region_B_r2_D2() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case main_region_B_r1_C1:
+		case MAIN_REGION_B_R1_C1:
 			exitSequence_main_region_B_r1_C1();
 			break;
-		case main_region_B_r1_C2:
+		case MAIN_REGION_B_R1_C2:
 			exitSequence_main_region_B_r1_C2();
 			break;
 		default:
@@ -355,10 +355,10 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 		
 		switch (stateVector[1]) {
-		case main_region_B_r2_D1:
+		case MAIN_REGION_B_R2_D1:
 			exitSequence_main_region_B_r2_D1();
 			break;
-		case main_region_B_r2_D2:
+		case MAIN_REGION_B_R2_D2:
 			exitSequence_main_region_B_r2_D2();
 			break;
 		default:
@@ -369,10 +369,10 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_B_r1() {
 		switch (stateVector[0]) {
-		case main_region_B_r1_C1:
+		case MAIN_REGION_B_R1_C1:
 			exitSequence_main_region_B_r1_C1();
 			break;
-		case main_region_B_r1_C2:
+		case MAIN_REGION_B_R1_C2:
 			exitSequence_main_region_B_r1_C2();
 			break;
 		default:
@@ -383,10 +383,10 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	/* Default exit sequence for region r2 */
 	private void exitSequence_main_region_B_r2() {
 		switch (stateVector[1]) {
-		case main_region_B_r2_D1:
+		case MAIN_REGION_B_R2_D1:
 			exitSequence_main_region_B_r2_D1();
 			break;
-		case main_region_B_r2_D2:
+		case MAIN_REGION_B_R2_D2:
 			exitSequence_main_region_B_r2_D2();
 			break;
 		default:
@@ -466,7 +466,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (((_current.iface.jc && isStateActive(State.main_region_B_r2_D2)) && _current.iface.jd)) {
+				if (((_current.iface.jc && isStateActive(State.MAIN_REGION_B_R2_D2)) && _current.iface.jd)) {
 					exitSequence_main_region_B();
 					react_main_region__sync0();
 				} else {
@@ -495,7 +495,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.jd && isStateActive(State.main_region_B_r1_C2)) && _current.iface.jc)) {
+			if (((_current.iface.jd && isStateActive(State.MAIN_REGION_B_R1_C2)) && _current.iface.jc)) {
 				exitSequence_main_region_B();
 				react_main_region__sync0();
 			} else {

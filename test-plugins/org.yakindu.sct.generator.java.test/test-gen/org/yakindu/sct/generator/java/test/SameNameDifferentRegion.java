@@ -40,14 +40,14 @@ public class SameNameDifferentRegion {
 	@Test
 	public void sameNameDifferenRegionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.MAIN_REGION_STATEA));
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB));
-		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB_r1_StateA));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.MAIN_REGION_STATEB));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.MAIN_REGION_STATEB_R1_STATEA));
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB));
-		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.main_region_StateB_r1_StateB));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.MAIN_REGION_STATEB));
+		assertTrue(statemachine.isStateActive(SameNameDifferentRegionStatemachine.State.MAIN_REGION_STATEB_R1_STATEB));
 	}
 }

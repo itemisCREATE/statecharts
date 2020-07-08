@@ -48,15 +48,15 @@ public class DeepHistory {
 		timer.cycleLeap(1l);
 		statemachine.raiseEvent7();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State1));
-		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.MAINREGION_STATE1));
+		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.MAINREGION_STATE2_STATE4_STATE7_STATE9));
 		statemachine.raiseEvent2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State1));
-		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.MAINREGION_STATE1));
+		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.MAINREGION_STATE2_STATE4_STATE7_STATE9));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State1));
-		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(DeepHistoryStatemachine.State.MAINREGION_STATE1));
+		assertTrue(statemachine.isStateActive(DeepHistoryStatemachine.State.MAINREGION_STATE2_STATE4_STATE7_STATE9));
 	}
 }

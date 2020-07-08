@@ -115,13 +115,13 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_AssignmentChecked,
-		main_region_Failed,
-		main_region_VarToVarCompareSucceeded,
-		main_region_VarToConstCompareSucceeded,
-		main_region_ConstToVarCompareSucceeded,
-		main_region_ConstToConstCompareSucceeded,
-		$NullState$
+		MAIN_REGION_ASSIGNMENTCHECKED,
+		MAIN_REGION_FAILED,
+		MAIN_REGION_VARTOVARCOMPARESUCCEEDED,
+		MAIN_REGION_VARTOCONSTCOMPARESUCCEEDED,
+		MAIN_REGION_CONSTTOVARCOMPARESUCCEEDED,
+		MAIN_REGION_CONSTTOCONSTCOMPARESUCCEEDED,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -146,7 +146,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -206,26 +206,26 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_AssignmentChecked:
+			case MAIN_REGION_ASSIGNMENTCHECKED:
 				main_region_AssignmentChecked_react(true);
 				break;
-			case main_region_Failed:
+			case MAIN_REGION_FAILED:
 				main_region_Failed_react(true);
 				break;
-			case main_region_VarToVarCompareSucceeded:
+			case MAIN_REGION_VARTOVARCOMPARESUCCEEDED:
 				main_region_VarToVarCompareSucceeded_react(true);
 				break;
-			case main_region_VarToConstCompareSucceeded:
+			case MAIN_REGION_VARTOCONSTCOMPARESUCCEEDED:
 				main_region_VarToConstCompareSucceeded_react(true);
 				break;
-			case main_region_ConstToVarCompareSucceeded:
+			case MAIN_REGION_CONSTTOVARCOMPARESUCCEEDED:
 				main_region_ConstToVarCompareSucceeded_react(true);
 				break;
-			case main_region_ConstToConstCompareSucceeded:
+			case MAIN_REGION_CONSTTOCONSTCOMPARESUCCEEDED:
 				main_region_ConstToConstCompareSucceeded_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -236,7 +236,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -262,18 +262,18 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_AssignmentChecked:
-			return stateVector[0] == State.main_region_AssignmentChecked;
-		case main_region_Failed:
-			return stateVector[0] == State.main_region_Failed;
-		case main_region_VarToVarCompareSucceeded:
-			return stateVector[0] == State.main_region_VarToVarCompareSucceeded;
-		case main_region_VarToConstCompareSucceeded:
-			return stateVector[0] == State.main_region_VarToConstCompareSucceeded;
-		case main_region_ConstToVarCompareSucceeded:
-			return stateVector[0] == State.main_region_ConstToVarCompareSucceeded;
-		case main_region_ConstToConstCompareSucceeded:
-			return stateVector[0] == State.main_region_ConstToConstCompareSucceeded;
+		case MAIN_REGION_ASSIGNMENTCHECKED:
+			return stateVector[0] == State.MAIN_REGION_ASSIGNMENTCHECKED;
+		case MAIN_REGION_FAILED:
+			return stateVector[0] == State.MAIN_REGION_FAILED;
+		case MAIN_REGION_VARTOVARCOMPARESUCCEEDED:
+			return stateVector[0] == State.MAIN_REGION_VARTOVARCOMPARESUCCEEDED;
+		case MAIN_REGION_VARTOCONSTCOMPARESUCCEEDED:
+			return stateVector[0] == State.MAIN_REGION_VARTOCONSTCOMPARESUCCEEDED;
+		case MAIN_REGION_CONSTTOVARCOMPARESUCCEEDED:
+			return stateVector[0] == State.MAIN_REGION_CONSTTOVARCOMPARESUCCEEDED;
+		case MAIN_REGION_CONSTTOCONSTCOMPARESUCCEEDED:
+			return stateVector[0] == State.MAIN_REGION_CONSTTOCONSTCOMPARESUCCEEDED;
 		default:
 			return false;
 		}
@@ -550,37 +550,37 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void enterSequence_main_region_AssignmentChecked_default() {
 		entryAction_main_region_AssignmentChecked();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_AssignmentChecked;
+		stateVector[0] = State.MAIN_REGION_ASSIGNMENTCHECKED;
 	}
 	
 	/* 'default' enter sequence for state Failed */
 	private void enterSequence_main_region_Failed_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Failed;
+		stateVector[0] = State.MAIN_REGION_FAILED;
 	}
 	
 	/* 'default' enter sequence for state VarToVarCompareSucceeded */
 	private void enterSequence_main_region_VarToVarCompareSucceeded_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_VarToVarCompareSucceeded;
+		stateVector[0] = State.MAIN_REGION_VARTOVARCOMPARESUCCEEDED;
 	}
 	
 	/* 'default' enter sequence for state VarToConstCompareSucceeded */
 	private void enterSequence_main_region_VarToConstCompareSucceeded_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_VarToConstCompareSucceeded;
+		stateVector[0] = State.MAIN_REGION_VARTOCONSTCOMPARESUCCEEDED;
 	}
 	
 	/* 'default' enter sequence for state ConstToVarCompareSucceeded */
 	private void enterSequence_main_region_ConstToVarCompareSucceeded_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_ConstToVarCompareSucceeded;
+		stateVector[0] = State.MAIN_REGION_CONSTTOVARCOMPARESUCCEEDED;
 	}
 	
 	/* 'default' enter sequence for state ConstToConstCompareSucceeded */
 	private void enterSequence_main_region_ConstToConstCompareSucceeded_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_ConstToConstCompareSucceeded;
+		stateVector[0] = State.MAIN_REGION_CONSTTOCONSTCOMPARESUCCEEDED;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -591,58 +591,58 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	/* Default exit sequence for state AssignmentChecked */
 	private void exitSequence_main_region_AssignmentChecked() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Failed */
 	private void exitSequence_main_region_Failed() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state VarToVarCompareSucceeded */
 	private void exitSequence_main_region_VarToVarCompareSucceeded() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state VarToConstCompareSucceeded */
 	private void exitSequence_main_region_VarToConstCompareSucceeded() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state ConstToVarCompareSucceeded */
 	private void exitSequence_main_region_ConstToVarCompareSucceeded() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state ConstToConstCompareSucceeded */
 	private void exitSequence_main_region_ConstToConstCompareSucceeded() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_AssignmentChecked:
+		case MAIN_REGION_ASSIGNMENTCHECKED:
 			exitSequence_main_region_AssignmentChecked();
 			break;
-		case main_region_Failed:
+		case MAIN_REGION_FAILED:
 			exitSequence_main_region_Failed();
 			break;
-		case main_region_VarToVarCompareSucceeded:
+		case MAIN_REGION_VARTOVARCOMPARESUCCEEDED:
 			exitSequence_main_region_VarToVarCompareSucceeded();
 			break;
-		case main_region_VarToConstCompareSucceeded:
+		case MAIN_REGION_VARTOCONSTCOMPARESUCCEEDED:
 			exitSequence_main_region_VarToConstCompareSucceeded();
 			break;
-		case main_region_ConstToVarCompareSucceeded:
+		case MAIN_REGION_CONSTTOVARCOMPARESUCCEEDED:
 			exitSequence_main_region_ConstToVarCompareSucceeded();
 			break;
-		case main_region_ConstToConstCompareSucceeded:
+		case MAIN_REGION_CONSTTOCONSTCOMPARESUCCEEDED:
 			exitSequence_main_region_ConstToConstCompareSucceeded();
 			break;
 		default:

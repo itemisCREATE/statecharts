@@ -45,7 +45,7 @@ public class CastExpressions {
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getRealValue() == 15l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(CastExpressionsStatemachine.State.main_region_C));
+		assertTrue(statemachine.isStateActive(CastExpressionsStatemachine.State.MAIN_REGION_C));
 		assertTrue(statemachine.getRealValue() == 757l);
 	}
 }

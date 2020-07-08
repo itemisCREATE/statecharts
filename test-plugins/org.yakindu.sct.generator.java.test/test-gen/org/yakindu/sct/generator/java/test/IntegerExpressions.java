@@ -40,7 +40,7 @@ public class IntegerExpressions {
 	@Test
 	public void integerExpressions() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(IntegerExpressionsStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(IntegerExpressionsStatemachine.State.MAIN_REGION_STATEA));
 		assertTrue(statemachine.getMyInt1() == 10l);
 		assertTrue(statemachine.getMyInt2() == 5l);
 		statemachine.raiseE1();

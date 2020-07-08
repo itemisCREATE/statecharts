@@ -33,9 +33,9 @@ public class EventDrivenSuperStep {
 	@Test
 	public void superStepOnInternalEventQueue() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.eventDrivenSuperStep_main_region_A));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.eventDrivenSuperStep_main_region_C));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_C));
 		assertTrue(statemachine.getX() == 17l);
 		statemachine.exit();
 	}
@@ -44,7 +44,7 @@ public class EventDrivenSuperStep {
 	public void superStepIteratesUsingAlwaysTrigger() {
 		statemachine.enter();
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.eventDrivenSuperStep_main_region_I));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_I));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}
@@ -52,12 +52,12 @@ public class EventDrivenSuperStep {
 	@Test
 	public void superStepIteratesUsingSameEventAndGuard() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.eventDrivenSuperStep_main_region_A));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.eventDrivenSuperStep_main_region_C));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_C));
 		assertTrue(statemachine.getX() == 17l);
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.eventDrivenSuperStep_main_region_I));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_I));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}

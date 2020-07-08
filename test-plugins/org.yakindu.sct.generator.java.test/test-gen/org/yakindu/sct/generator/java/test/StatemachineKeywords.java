@@ -55,6 +55,6 @@ public class StatemachineKeywords {
 	@Test
 	public void statemachineKeywords() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(StatechartKeywordsStatemachine.State.main_region_Timer));
+		assertTrue(statemachine.isStateActive(StatechartKeywordsStatemachine.State.MAIN_REGION_TIMER));
 	}
 }

@@ -41,11 +41,11 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		exitState_r_A,
-		exitState_r_A_r_B,
-		exitState_r_E,
-		exitState_r_F,
-		$NullState$
+		R_A,
+		R_A_R_B,
+		R_E,
+		R_F,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -70,7 +70,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -113,17 +113,17 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case exitState_r_A_r_B:
+			case R_A_R_B:
 				r_A_r_B_react(true);
 				break;
-			case exitState_r_E:
+			case R_E:
 				r_E_react(true);
 				break;
-			case exitState_r_F:
+			case R_F:
 				r_F_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -134,7 +134,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -168,15 +168,15 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case exitState_r_A:
+		case R_A:
 			return stateVector[0].ordinal() >= State.
-					exitState_r_A.ordinal()&& stateVector[0].ordinal() <= State.exitState_r_A_r_B.ordinal();
-		case exitState_r_A_r_B:
-			return stateVector[0] == State.exitState_r_A_r_B;
-		case exitState_r_E:
-			return stateVector[0] == State.exitState_r_E;
-		case exitState_r_F:
-			return stateVector[0] == State.exitState_r_F;
+					R_A.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_B.ordinal();
+		case R_A_R_B:
+			return stateVector[0] == State.R_A_R_B;
+		case R_E:
+			return stateVector[0] == State.R_E;
+		case R_F:
+			return stateVector[0] == State.R_F;
 		default:
 			return false;
 		}
@@ -216,19 +216,19 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r_A_r_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.exitState_r_A_r_B;
+		stateVector[0] = State.R_A_R_B;
 	}
 	
 	/* 'default' enter sequence for state E */
 	private void enterSequence_r_E_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.exitState_r_E;
+		stateVector[0] = State.R_E;
 	}
 	
 	/* 'default' enter sequence for state F */
 	private void enterSequence_r_F_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.exitState_r_F;
+		stateVector[0] = State.R_F;
 	}
 	
 	/* 'default' enter sequence for region r */
@@ -249,31 +249,31 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	/* Default exit sequence for state B */
 	private void exitSequence_r_A_r_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state E */
 	private void exitSequence_r_E() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state F */
 	private void exitSequence_r_F() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case exitState_r_A_r_B:
+		case R_A_R_B:
 			exitSequence_r_A_r_B();
 			break;
-		case exitState_r_E:
+		case R_E:
 			exitSequence_r_E();
 			break;
-		case exitState_r_F:
+		case R_F:
 			exitSequence_r_F();
 			break;
 		default:
@@ -284,7 +284,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	/* Default exit sequence for region r */
 	private void exitSequence_r_A_r() {
 		switch (stateVector[0]) {
-		case exitState_r_A_r_B:
+		case R_A_R_B:
 			exitSequence_r_A_r_B();
 			break;
 		default:

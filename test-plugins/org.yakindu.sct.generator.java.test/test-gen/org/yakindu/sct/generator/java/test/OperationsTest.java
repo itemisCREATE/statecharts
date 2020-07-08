@@ -65,9 +65,9 @@ public class OperationsTest {
 		});
 		 
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_B));
 		verify(internalMock, atLeastOnce()).internalOperation1();
 		 
 		verify(internalMock, atLeastOnce()).internalOperation2((4l));
@@ -86,7 +86,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.main_region_C));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_C));
 		verify(interface1Mock, atLeastOnce()).interfaceOperation1();
 		 
 		verify(interface1Mock, atLeastOnce()).interfaceOperation2((4l));
@@ -105,7 +105,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.main_region_D));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_D));
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation1();
 		 
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation2((4l));
@@ -134,7 +134,7 @@ public class OperationsTest {
 		});
 		 
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_A));
 		verify(internalMock, never()).internalOperation1();
 		 
 		verify(internalMock, never()).internalOperation2((4l));
@@ -153,7 +153,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_B));
 		verify(interface1Mock, never()).interfaceOperation1();
 		 
 		verify(interface1Mock, never()).interfaceOperation2((4l));
@@ -172,7 +172,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.main_region_C));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_C));
 		verify(defaultMock, never()).unnamedInterfaceOperation1();
 		 
 		verify(defaultMock, never()).unnamedInterfaceOperation2((4l));

@@ -122,8 +122,8 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_Timer,
-		$NullState$
+		MAIN_REGION_TIMER,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -231,7 +231,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		}
 		
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -307,11 +307,11 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case main_region_Timer:
+				case MAIN_REGION_TIMER:
 					main_region_Timer_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -325,7 +325,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -365,8 +365,8 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_Timer:
-			return stateVector[0] == State.main_region_Timer;
+		case MAIN_REGION_TIMER:
+			return stateVector[0] == State.MAIN_REGION_TIMER;
 		default:
 			return false;
 		}
@@ -416,7 +416,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	/* 'default' enter sequence for state Timer */
 	private void enterSequence_main_region_Timer_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Timer;
+		stateVector[0] = State.MAIN_REGION_TIMER;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -427,13 +427,13 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	/* Default exit sequence for state Timer */
 	private void exitSequence_main_region_Timer() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_Timer:
+		case MAIN_REGION_TIMER:
 			exitSequence_main_region_Timer();
 			break;
 		default:

@@ -67,16 +67,16 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		localEvents_r1_Comp1,
-		localEvents_r1_Comp1_r_A1,
-		localEvents_r1_Comp1_r_C1,
-		localEvents_r1_Comp1_r_D1,
-		localEvents_r2_Comp2,
-		localEvents_r2_Comp2_r_A2,
-		localEvents_r2_Comp2_r_B2,
-		localEvents_r2_Comp2_r_C2,
-		localEvents_r2_Comp2_r_D2,
-		$NullState$
+		R1_COMP1,
+		R1_COMP1_R_A1,
+		R1_COMP1_R_C1,
+		R1_COMP1_R_D1,
+		R2_COMP2,
+		R2_COMP2_R_A2,
+		R2_COMP2_R_B2,
+		R2_COMP2_R_C2,
+		R2_COMP2_R_D2,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -106,7 +106,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -160,29 +160,29 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case localEvents_r1_Comp1_r_A1:
+				case R1_COMP1_R_A1:
 					r1_Comp1_r_A1_react(true);
 					break;
-				case localEvents_r1_Comp1_r_C1:
+				case R1_COMP1_R_C1:
 					r1_Comp1_r_C1_react(true);
 					break;
-				case localEvents_r1_Comp1_r_D1:
+				case R1_COMP1_R_D1:
 					r1_Comp1_r_D1_react(true);
 					break;
-				case localEvents_r2_Comp2_r_A2:
+				case R2_COMP2_R_A2:
 					r2_Comp2_r_A2_react(true);
 					break;
-				case localEvents_r2_Comp2_r_B2:
+				case R2_COMP2_R_B2:
 					r2_Comp2_r_B2_react(true);
 					break;
-				case localEvents_r2_Comp2_r_C2:
+				case R2_COMP2_R_C2:
 					r2_Comp2_r_C2_react(true);
 					break;
-				case localEvents_r2_Comp2_r_D2:
+				case R2_COMP2_R_D2:
 					r2_Comp2_r_D2_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -198,7 +198,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -235,26 +235,26 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case localEvents_r1_Comp1:
+		case R1_COMP1:
 			return stateVector[0].ordinal() >= State.
-					localEvents_r1_Comp1.ordinal()&& stateVector[0].ordinal() <= State.localEvents_r1_Comp1_r_D1.ordinal();
-		case localEvents_r1_Comp1_r_A1:
-			return stateVector[0] == State.localEvents_r1_Comp1_r_A1;
-		case localEvents_r1_Comp1_r_C1:
-			return stateVector[0] == State.localEvents_r1_Comp1_r_C1;
-		case localEvents_r1_Comp1_r_D1:
-			return stateVector[0] == State.localEvents_r1_Comp1_r_D1;
-		case localEvents_r2_Comp2:
+					R1_COMP1.ordinal()&& stateVector[0].ordinal() <= State.R1_COMP1_R_D1.ordinal();
+		case R1_COMP1_R_A1:
+			return stateVector[0] == State.R1_COMP1_R_A1;
+		case R1_COMP1_R_C1:
+			return stateVector[0] == State.R1_COMP1_R_C1;
+		case R1_COMP1_R_D1:
+			return stateVector[0] == State.R1_COMP1_R_D1;
+		case R2_COMP2:
 			return stateVector[1].ordinal() >= State.
-					localEvents_r2_Comp2.ordinal()&& stateVector[1].ordinal() <= State.localEvents_r2_Comp2_r_D2.ordinal();
-		case localEvents_r2_Comp2_r_A2:
-			return stateVector[1] == State.localEvents_r2_Comp2_r_A2;
-		case localEvents_r2_Comp2_r_B2:
-			return stateVector[1] == State.localEvents_r2_Comp2_r_B2;
-		case localEvents_r2_Comp2_r_C2:
-			return stateVector[1] == State.localEvents_r2_Comp2_r_C2;
-		case localEvents_r2_Comp2_r_D2:
-			return stateVector[1] == State.localEvents_r2_Comp2_r_D2;
+					R2_COMP2.ordinal()&& stateVector[1].ordinal() <= State.R2_COMP2_R_D2.ordinal();
+		case R2_COMP2_R_A2:
+			return stateVector[1] == State.R2_COMP2_R_A2;
+		case R2_COMP2_R_B2:
+			return stateVector[1] == State.R2_COMP2_R_B2;
+		case R2_COMP2_R_C2:
+			return stateVector[1] == State.R2_COMP2_R_C2;
+		case R2_COMP2_R_D2:
+			return stateVector[1] == State.R2_COMP2_R_D2;
 		default:
 			return false;
 		}
@@ -341,44 +341,44 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	/* 'default' enter sequence for state A1 */
 	private void enterSequence_r1_Comp1_r_A1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.localEvents_r1_Comp1_r_A1;
+		stateVector[0] = State.R1_COMP1_R_A1;
 	}
 	
 	/* 'default' enter sequence for state C1 */
 	private void enterSequence_r1_Comp1_r_C1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.localEvents_r1_Comp1_r_C1;
+		stateVector[0] = State.R1_COMP1_R_C1;
 	}
 	
 	/* 'default' enter sequence for state D1 */
 	private void enterSequence_r1_Comp1_r_D1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.localEvents_r1_Comp1_r_D1;
+		stateVector[0] = State.R1_COMP1_R_D1;
 	}
 	
 	/* 'default' enter sequence for state A2 */
 	private void enterSequence_r2_Comp2_r_A2_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.localEvents_r2_Comp2_r_A2;
+		stateVector[1] = State.R2_COMP2_R_A2;
 	}
 	
 	/* 'default' enter sequence for state B2 */
 	private void enterSequence_r2_Comp2_r_B2_default() {
 		entryAction_r2_Comp2_r_B2();
 		nextStateIndex = 1;
-		stateVector[1] = State.localEvents_r2_Comp2_r_B2;
+		stateVector[1] = State.R2_COMP2_R_B2;
 	}
 	
 	/* 'default' enter sequence for state C2 */
 	private void enterSequence_r2_Comp2_r_C2_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.localEvents_r2_Comp2_r_C2;
+		stateVector[1] = State.R2_COMP2_R_C2;
 	}
 	
 	/* 'default' enter sequence for state D2 */
 	private void enterSequence_r2_Comp2_r_D2_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.localEvents_r2_Comp2_r_D2;
+		stateVector[1] = State.R2_COMP2_R_D2;
 	}
 	
 	/* 'default' enter sequence for region r1 */
@@ -394,55 +394,55 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	/* Default exit sequence for state A1 */
 	private void exitSequence_r1_Comp1_r_A1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C1 */
 	private void exitSequence_r1_Comp1_r_C1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D1 */
 	private void exitSequence_r1_Comp1_r_D1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state A2 */
 	private void exitSequence_r2_Comp2_r_A2() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B2 */
 	private void exitSequence_r2_Comp2_r_B2() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C2 */
 	private void exitSequence_r2_Comp2_r_C2() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D2 */
 	private void exitSequence_r2_Comp2_r_D2() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r1() {
 		switch (stateVector[0]) {
-		case localEvents_r1_Comp1_r_A1:
+		case R1_COMP1_R_A1:
 			exitSequence_r1_Comp1_r_A1();
 			break;
-		case localEvents_r1_Comp1_r_C1:
+		case R1_COMP1_R_C1:
 			exitSequence_r1_Comp1_r_C1();
 			break;
-		case localEvents_r1_Comp1_r_D1:
+		case R1_COMP1_R_D1:
 			exitSequence_r1_Comp1_r_D1();
 			break;
 		default:
@@ -453,16 +453,16 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[1]) {
-		case localEvents_r2_Comp2_r_A2:
+		case R2_COMP2_R_A2:
 			exitSequence_r2_Comp2_r_A2();
 			break;
-		case localEvents_r2_Comp2_r_B2:
+		case R2_COMP2_R_B2:
 			exitSequence_r2_Comp2_r_B2();
 			break;
-		case localEvents_r2_Comp2_r_C2:
+		case R2_COMP2_R_C2:
 			exitSequence_r2_Comp2_r_C2();
 			break;
-		case localEvents_r2_Comp2_r_D2:
+		case R2_COMP2_R_D2:
 			exitSequence_r2_Comp2_r_D2();
 			break;
 		default:

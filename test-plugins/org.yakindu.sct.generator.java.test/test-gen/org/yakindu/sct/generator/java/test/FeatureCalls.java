@@ -40,8 +40,8 @@ public class FeatureCalls {
 	@Test
 	public void featureCalls() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(FeatureCallsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(FeatureCallsStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(FeatureCallsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(FeatureCallsStatemachine.State.MAIN_REGION_A));
 	}
 }

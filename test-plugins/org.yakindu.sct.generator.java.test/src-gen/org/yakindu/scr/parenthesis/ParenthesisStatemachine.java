@@ -22,8 +22,8 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		mainRegion_A,
-		$NullState$
+		MAINREGION_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -46,7 +46,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
@@ -88,11 +88,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case mainRegion_A:
+			case MAINREGION_A:
 				mainRegion_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -103,7 +103,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -120,8 +120,8 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case mainRegion_A:
-			return stateVector[0] == State.mainRegion_A;
+		case MAINREGION_A:
+			return stateVector[0] == State.MAINREGION_A;
 		default:
 			return false;
 		}
@@ -148,7 +148,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	private void enterSequence_mainRegion_A_default() {
 		entryAction_mainRegion_A();
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_A;
+		stateVector[0] = State.MAINREGION_A;
 	}
 	
 	/* 'default' enter sequence for region mainRegion */
@@ -159,13 +159,13 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_mainRegion_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region mainRegion */
 	private void exitSequence_mainRegion() {
 		switch (stateVector[0]) {
-		case mainRegion_A:
+		case MAINREGION_A:
 			exitSequence_mainRegion_A();
 			break;
 		default:

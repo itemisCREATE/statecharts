@@ -40,7 +40,7 @@ public class StaticChoice {
 	@Test
 	public void staticChoiceTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(StaticChoiceStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(StaticChoiceStatemachine.State.MAIN_REGION_START));
 		timer.cycleLeap(1l);
 	}
 }

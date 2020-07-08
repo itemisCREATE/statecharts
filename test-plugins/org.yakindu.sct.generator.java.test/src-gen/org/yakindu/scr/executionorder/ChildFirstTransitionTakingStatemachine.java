@@ -48,23 +48,23 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	private boolean initialized = false;
 	
 	public enum State {
-		childFirstTransitionTaking_r1_A,
-		childFirstTransitionTaking_r1_A_r1_AA,
-		childFirstTransitionTaking_r1_A_r1_AB,
-		childFirstTransitionTaking_r1_A_r1_AB_r1_ABA,
-		childFirstTransitionTaking_r1_A_r1_AB_r2_ABB,
-		childFirstTransitionTaking_r1_B,
-		childFirstTransitionTaking_r2_C,
-		childFirstTransitionTaking_r2_C_r_CA,
-		childFirstTransitionTaking_r2_C_r_CA_r_CAA,
-		childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA,
-		childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB,
-		childFirstTransitionTaking_r2_C_r_CA_r_CAB,
-		childFirstTransitionTaking_r2_C_r_CB,
-		childFirstTransitionTaking_r2_C_r_CB_r1_CBA,
-		childFirstTransitionTaking_r2_C_r_CB_r2_CBB,
-		childFirstTransitionTaking_r2_C_r_CB_r3_CBC,
-		$NullState$
+		R1_A,
+		R1_A_R1_AA,
+		R1_A_R1_AB,
+		R1_A_R1_AB_R1_ABA,
+		R1_A_R1_AB_R2_ABB,
+		R1_B,
+		R2_C,
+		R2_C_R_CA,
+		R2_C_R_CA_R_CAA,
+		R2_C_R_CA_R_CAA_R1_CAAA,
+		R2_C_R_CA_R_CAA_R2_CAAB,
+		R2_C_R_CA_R_CAB,
+		R2_C_R_CB,
+		R2_C_R_CB_R1_CBA,
+		R2_C_R_CB_R2_CBB,
+		R2_C_R_CB_R3_CBC,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[5];
@@ -87,7 +87,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 5; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -134,38 +134,38 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case childFirstTransitionTaking_r1_A_r1_AA:
+			case R1_A_R1_AA:
 				r1_A_r1_AA_react(true);
 				break;
-			case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
+			case R1_A_R1_AB_R1_ABA:
 				r1_A_r1_AB_r1_ABA_react(true);
 				break;
-			case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
+			case R1_A_R1_AB_R2_ABB:
 				r1_A_r1_AB_r2_ABB_react(true);
 				break;
-			case childFirstTransitionTaking_r1_B:
+			case R1_B:
 				r1_B_react(true);
 				break;
-			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
+			case R2_C_R_CA_R_CAA_R1_CAAA:
 				r2_C_r_CA_r_CAA_r1_CAAA_react(true);
 				break;
-			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
+			case R2_C_R_CA_R_CAA_R2_CAAB:
 				r2_C_r_CA_r_CAA_r2_CAAB_react(true);
 				break;
-			case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
+			case R2_C_R_CA_R_CAB:
 				r2_C_r_CA_r_CAB_react(true);
 				break;
-			case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
+			case R2_C_R_CB_R1_CBA:
 				r2_C_r_CB_r1_CBA_react(true);
 				break;
-			case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
+			case R2_C_R_CB_R2_CBB:
 				r2_C_r_CB_r2_CBB_react(true);
 				break;
-			case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
+			case R2_C_R_CB_R3_CBC:
 				r2_C_r_CB_r3_CBC_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -177,7 +177,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$||stateVector[3] != State.$NullState$||stateVector[4] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$||stateVector[2] != State.$NULLSTATE$||stateVector[3] != State.$NULLSTATE$||stateVector[4] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -199,44 +199,44 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case childFirstTransitionTaking_r1_A:
+		case R1_A:
 			return stateVector[0].ordinal() >= State.
-					childFirstTransitionTaking_r1_A.ordinal()&& stateVector[0].ordinal() <= State.childFirstTransitionTaking_r1_A_r1_AB_r2_ABB.ordinal();
-		case childFirstTransitionTaking_r1_A_r1_AA:
-			return stateVector[0] == State.childFirstTransitionTaking_r1_A_r1_AA;
-		case childFirstTransitionTaking_r1_A_r1_AB:
+					R1_A.ordinal()&& stateVector[0].ordinal() <= State.R1_A_R1_AB_R2_ABB.ordinal();
+		case R1_A_R1_AA:
+			return stateVector[0] == State.R1_A_R1_AA;
+		case R1_A_R1_AB:
 			return stateVector[0].ordinal() >= State.
-					childFirstTransitionTaking_r1_A_r1_AB.ordinal()&& stateVector[0].ordinal() <= State.childFirstTransitionTaking_r1_A_r1_AB_r2_ABB.ordinal();
-		case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
-			return stateVector[0] == State.childFirstTransitionTaking_r1_A_r1_AB_r1_ABA;
-		case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
-			return stateVector[1] == State.childFirstTransitionTaking_r1_A_r1_AB_r2_ABB;
-		case childFirstTransitionTaking_r1_B:
-			return stateVector[0] == State.childFirstTransitionTaking_r1_B;
-		case childFirstTransitionTaking_r2_C:
+					R1_A_R1_AB.ordinal()&& stateVector[0].ordinal() <= State.R1_A_R1_AB_R2_ABB.ordinal();
+		case R1_A_R1_AB_R1_ABA:
+			return stateVector[0] == State.R1_A_R1_AB_R1_ABA;
+		case R1_A_R1_AB_R2_ABB:
+			return stateVector[1] == State.R1_A_R1_AB_R2_ABB;
+		case R1_B:
+			return stateVector[0] == State.R1_B;
+		case R2_C:
 			return stateVector[2].ordinal() >= State.
-					childFirstTransitionTaking_r2_C.ordinal()&& stateVector[2].ordinal() <= State.childFirstTransitionTaking_r2_C_r_CB_r3_CBC.ordinal();
-		case childFirstTransitionTaking_r2_C_r_CA:
+					R2_C.ordinal()&& stateVector[2].ordinal() <= State.R2_C_R_CB_R3_CBC.ordinal();
+		case R2_C_R_CA:
 			return stateVector[2].ordinal() >= State.
-					childFirstTransitionTaking_r2_C_r_CA.ordinal()&& stateVector[2].ordinal() <= State.childFirstTransitionTaking_r2_C_r_CA_r_CAB.ordinal();
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA:
+					R2_C_R_CA.ordinal()&& stateVector[2].ordinal() <= State.R2_C_R_CA_R_CAB.ordinal();
+		case R2_C_R_CA_R_CAA:
 			return stateVector[2].ordinal() >= State.
-					childFirstTransitionTaking_r2_C_r_CA_r_CAA.ordinal()&& stateVector[2].ordinal() <= State.childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB.ordinal();
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
-			return stateVector[2] == State.childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA;
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
-			return stateVector[3] == State.childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB;
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
-			return stateVector[2] == State.childFirstTransitionTaking_r2_C_r_CA_r_CAB;
-		case childFirstTransitionTaking_r2_C_r_CB:
+					R2_C_R_CA_R_CAA.ordinal()&& stateVector[2].ordinal() <= State.R2_C_R_CA_R_CAA_R2_CAAB.ordinal();
+		case R2_C_R_CA_R_CAA_R1_CAAA:
+			return stateVector[2] == State.R2_C_R_CA_R_CAA_R1_CAAA;
+		case R2_C_R_CA_R_CAA_R2_CAAB:
+			return stateVector[3] == State.R2_C_R_CA_R_CAA_R2_CAAB;
+		case R2_C_R_CA_R_CAB:
+			return stateVector[2] == State.R2_C_R_CA_R_CAB;
+		case R2_C_R_CB:
 			return stateVector[2].ordinal() >= State.
-					childFirstTransitionTaking_r2_C_r_CB.ordinal()&& stateVector[2].ordinal() <= State.childFirstTransitionTaking_r2_C_r_CB_r3_CBC.ordinal();
-		case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
-			return stateVector[2] == State.childFirstTransitionTaking_r2_C_r_CB_r1_CBA;
-		case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
-			return stateVector[3] == State.childFirstTransitionTaking_r2_C_r_CB_r2_CBB;
-		case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
-			return stateVector[4] == State.childFirstTransitionTaking_r2_C_r_CB_r3_CBC;
+					R2_C_R_CB.ordinal()&& stateVector[2].ordinal() <= State.R2_C_R_CB_R3_CBC.ordinal();
+		case R2_C_R_CB_R1_CBA:
+			return stateVector[2] == State.R2_C_R_CB_R1_CBA;
+		case R2_C_R_CB_R2_CBB:
+			return stateVector[3] == State.R2_C_R_CB_R2_CBB;
+		case R2_C_R_CB_R3_CBC:
+			return stateVector[4] == State.R2_C_R_CB_R3_CBC;
 		default:
 			return false;
 		}
@@ -278,7 +278,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* 'default' enter sequence for state AA */
 	private void enterSequence_r1_A_r1_AA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstTransitionTaking_r1_A_r1_AA;
+		stateVector[0] = State.R1_A_R1_AA;
 	}
 	
 	/* 'default' enter sequence for state AB */
@@ -290,19 +290,19 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* 'default' enter sequence for state ABA */
 	private void enterSequence_r1_A_r1_AB_r1_ABA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstTransitionTaking_r1_A_r1_AB_r1_ABA;
+		stateVector[0] = State.R1_A_R1_AB_R1_ABA;
 	}
 	
 	/* 'default' enter sequence for state ABB */
 	private void enterSequence_r1_A_r1_AB_r2_ABB_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.childFirstTransitionTaking_r1_A_r1_AB_r2_ABB;
+		stateVector[1] = State.R1_A_R1_AB_R2_ABB;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r1_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstTransitionTaking_r1_B;
+		stateVector[0] = State.R1_B;
 	}
 	
 	/* 'default' enter sequence for state C */
@@ -324,19 +324,19 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* 'default' enter sequence for state CAAA */
 	private void enterSequence_r2_C_r_CA_r_CAA_r1_CAAA_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA;
+		stateVector[2] = State.R2_C_R_CA_R_CAA_R1_CAAA;
 	}
 	
 	/* 'default' enter sequence for state CAAB */
 	private void enterSequence_r2_C_r_CA_r_CAA_r2_CAAB_default() {
 		nextStateIndex = 3;
-		stateVector[3] = State.childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB;
+		stateVector[3] = State.R2_C_R_CA_R_CAA_R2_CAAB;
 	}
 	
 	/* 'default' enter sequence for state CAB */
 	private void enterSequence_r2_C_r_CA_r_CAB_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.childFirstTransitionTaking_r2_C_r_CA_r_CAB;
+		stateVector[2] = State.R2_C_R_CA_R_CAB;
 	}
 	
 	/* 'default' enter sequence for state CB */
@@ -349,19 +349,19 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* 'default' enter sequence for state CBA */
 	private void enterSequence_r2_C_r_CB_r1_CBA_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.childFirstTransitionTaking_r2_C_r_CB_r1_CBA;
+		stateVector[2] = State.R2_C_R_CB_R1_CBA;
 	}
 	
 	/* 'default' enter sequence for state CBB */
 	private void enterSequence_r2_C_r_CB_r2_CBB_default() {
 		nextStateIndex = 3;
-		stateVector[3] = State.childFirstTransitionTaking_r2_C_r_CB_r2_CBB;
+		stateVector[3] = State.R2_C_R_CB_R2_CBB;
 	}
 	
 	/* 'default' enter sequence for state CBC */
 	private void enterSequence_r2_C_r_CB_r3_CBC_default() {
 		nextStateIndex = 4;
-		stateVector[4] = State.childFirstTransitionTaking_r2_C_r_CB_r3_CBC;
+		stateVector[4] = State.R2_C_R_CB_R3_CBC;
 	}
 	
 	/* 'default' enter sequence for region r1 */
@@ -432,7 +432,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for state AA */
 	private void exitSequence_r1_A_r1_AA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state AB */
@@ -444,19 +444,19 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for state ABA */
 	private void exitSequence_r1_A_r1_AB_r1_ABA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state ABB */
 	private void exitSequence_r1_A_r1_AB_r2_ABB() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_r1_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state CA */
@@ -473,19 +473,19 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for state CAAA */
 	private void exitSequence_r2_C_r_CA_r_CAA_r1_CAAA() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state CAAB */
 	private void exitSequence_r2_C_r_CA_r_CAA_r2_CAAB() {
 		nextStateIndex = 3;
-		stateVector[3] = State.$NullState$;
+		stateVector[3] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state CAB */
 	private void exitSequence_r2_C_r_CA_r_CAB() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state CB */
@@ -498,31 +498,31 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for state CBA */
 	private void exitSequence_r2_C_r_CB_r1_CBA() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state CBB */
 	private void exitSequence_r2_C_r_CB_r2_CBB() {
 		nextStateIndex = 3;
-		stateVector[3] = State.$NullState$;
+		stateVector[3] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state CBC */
 	private void exitSequence_r2_C_r_CB_r3_CBC() {
 		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
+		stateVector[4] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r1() {
 		switch (stateVector[0]) {
-		case childFirstTransitionTaking_r1_A_r1_AA:
+		case R1_A_R1_AA:
 			exitSequence_r1_A_r1_AA();
 			break;
-		case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
+		case R1_A_R1_AB_R1_ABA:
 			exitSequence_r1_A_r1_AB_r1_ABA();
 			break;
-		case childFirstTransitionTaking_r1_B:
+		case R1_B:
 			exitSequence_r1_B();
 			break;
 		default:
@@ -530,7 +530,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 		
 		switch (stateVector[1]) {
-		case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
+		case R1_A_R1_AB_R2_ABB:
 			exitSequence_r1_A_r1_AB_r2_ABB();
 			break;
 		default:
@@ -541,10 +541,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r1_A_r1() {
 		switch (stateVector[0]) {
-		case childFirstTransitionTaking_r1_A_r1_AA:
+		case R1_A_R1_AA:
 			exitSequence_r1_A_r1_AA();
 			break;
-		case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
+		case R1_A_R1_AB_R1_ABA:
 			exitSequence_r1_A_r1_AB_r1_ABA();
 			break;
 		default:
@@ -552,7 +552,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 		
 		switch (stateVector[1]) {
-		case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
+		case R1_A_R1_AB_R2_ABB:
 			exitSequence_r1_A_r1_AB_r2_ABB();
 			break;
 		default:
@@ -563,7 +563,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r1_A_r1_AB_r1() {
 		switch (stateVector[0]) {
-		case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
+		case R1_A_R1_AB_R1_ABA:
 			exitSequence_r1_A_r1_AB_r1_ABA();
 			break;
 		default:
@@ -574,7 +574,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r1_A_r1_AB_r2() {
 		switch (stateVector[1]) {
-		case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
+		case R1_A_R1_AB_R2_ABB:
 			exitSequence_r1_A_r1_AB_r2_ABB();
 			break;
 		default:
@@ -585,13 +585,13 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[2]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
+		case R2_C_R_CA_R_CAA_R1_CAAA:
 			exitSequence_r2_C_r_CA_r_CAA_r1_CAAA();
 			break;
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
+		case R2_C_R_CA_R_CAB:
 			exitSequence_r2_C_r_CA_r_CAB();
 			break;
-		case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
+		case R2_C_R_CB_R1_CBA:
 			exitSequence_r2_C_r_CB_r1_CBA();
 			break;
 		default:
@@ -599,10 +599,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 		
 		switch (stateVector[3]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
+		case R2_C_R_CA_R_CAA_R2_CAAB:
 			exitSequence_r2_C_r_CA_r_CAA_r2_CAAB();
 			break;
-		case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
+		case R2_C_R_CB_R2_CBB:
 			exitSequence_r2_C_r_CB_r2_CBB();
 			break;
 		default:
@@ -610,7 +610,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 		
 		switch (stateVector[4]) {
-		case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
+		case R2_C_R_CB_R3_CBC:
 			exitSequence_r2_C_r_CB_r3_CBC();
 			break;
 		default:
@@ -621,10 +621,10 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r */
 	private void exitSequence_r2_C_r_CA_r() {
 		switch (stateVector[2]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
+		case R2_C_R_CA_R_CAA_R1_CAAA:
 			exitSequence_r2_C_r_CA_r_CAA_r1_CAAA();
 			break;
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
+		case R2_C_R_CA_R_CAB:
 			exitSequence_r2_C_r_CA_r_CAB();
 			break;
 		default:
@@ -632,7 +632,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 		
 		switch (stateVector[3]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
+		case R2_C_R_CA_R_CAA_R2_CAAB:
 			exitSequence_r2_C_r_CA_r_CAA_r2_CAAB();
 			break;
 		default:
@@ -643,7 +643,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r2_C_r_CA_r_CAA_r1() {
 		switch (stateVector[2]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
+		case R2_C_R_CA_R_CAA_R1_CAAA:
 			exitSequence_r2_C_r_CA_r_CAA_r1_CAAA();
 			break;
 		default:
@@ -654,7 +654,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2_C_r_CA_r_CAA_r2() {
 		switch (stateVector[3]) {
-		case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
+		case R2_C_R_CA_R_CAA_R2_CAAB:
 			exitSequence_r2_C_r_CA_r_CAA_r2_CAAB();
 			break;
 		default:
@@ -665,7 +665,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r2_C_r_CB_r1() {
 		switch (stateVector[2]) {
-		case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
+		case R2_C_R_CB_R1_CBA:
 			exitSequence_r2_C_r_CB_r1_CBA();
 			break;
 		default:
@@ -676,7 +676,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2_C_r_CB_r2() {
 		switch (stateVector[3]) {
-		case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
+		case R2_C_R_CB_R2_CBB:
 			exitSequence_r2_C_r_CB_r2_CBB();
 			break;
 		default:
@@ -687,7 +687,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	/* Default exit sequence for region r3 */
 	private void exitSequence_r2_C_r_CB_r3() {
 		switch (stateVector[4]) {
-		case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
+		case R2_C_R_CB_R3_CBC:
 			exitSequence_r2_C_r_CB_r3_CBC();
 			break;
 		default:

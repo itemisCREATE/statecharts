@@ -33,11 +33,11 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	private boolean initialized = false;
 	
 	public enum State {
-		internalEventLifeCycle_r1_A,
-		internalEventLifeCycle_r1_B,
-		internalEventLifeCycle_r2_C,
-		internalEventLifeCycle_r2_D,
-		$NullState$
+		R1_A,
+		R1_B,
+		R2_C,
+		R2_D,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -64,7 +64,7 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -110,20 +110,20 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case internalEventLifeCycle_r1_A:
+			case R1_A:
 				r1_A_react(true);
 				break;
-			case internalEventLifeCycle_r1_B:
+			case R1_B:
 				r1_B_react(true);
 				break;
-			case internalEventLifeCycle_r2_C:
+			case R2_C:
 				r2_C_react(true);
 				break;
-			case internalEventLifeCycle_r2_D:
+			case R2_D:
 				r2_D_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -135,7 +135,7 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -170,14 +170,14 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case internalEventLifeCycle_r1_A:
-			return stateVector[0] == State.internalEventLifeCycle_r1_A;
-		case internalEventLifeCycle_r1_B:
-			return stateVector[0] == State.internalEventLifeCycle_r1_B;
-		case internalEventLifeCycle_r2_C:
-			return stateVector[1] == State.internalEventLifeCycle_r2_C;
-		case internalEventLifeCycle_r2_D:
-			return stateVector[1] == State.internalEventLifeCycle_r2_D;
+		case R1_A:
+			return stateVector[0] == State.R1_A;
+		case R1_B:
+			return stateVector[0] == State.R1_B;
+		case R2_C:
+			return stateVector[1] == State.R2_C;
+		case R2_D:
+			return stateVector[1] == State.R2_D;
 		default:
 			return false;
 		}
@@ -206,25 +206,25 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r1_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.internalEventLifeCycle_r1_A;
+		stateVector[0] = State.R1_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r1_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.internalEventLifeCycle_r1_B;
+		stateVector[0] = State.R1_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_r2_C_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.internalEventLifeCycle_r2_C;
+		stateVector[1] = State.R2_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_r2_D_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.internalEventLifeCycle_r2_D;
+		stateVector[1] = State.R2_D;
 	}
 	
 	/* 'default' enter sequence for region r1 */
@@ -240,34 +240,34 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	/* Default exit sequence for state A */
 	private void exitSequence_r1_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_r1_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_r2_C() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_r2_D() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r1() {
 		switch (stateVector[0]) {
-		case internalEventLifeCycle_r1_A:
+		case R1_A:
 			exitSequence_r1_A();
 			break;
-		case internalEventLifeCycle_r1_B:
+		case R1_B:
 			exitSequence_r1_B();
 			break;
 		default:
@@ -278,10 +278,10 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[1]) {
-		case internalEventLifeCycle_r2_C:
+		case R2_C:
 			exitSequence_r2_C();
 			break;
-		case internalEventLifeCycle_r2_D:
+		case R2_D:
 			exitSequence_r2_D();
 			break;
 		default:

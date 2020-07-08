@@ -40,16 +40,16 @@ public class StatechartLocalReactions {
 	@Test
 	public void statechartLocalReactionsTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.main_region_S1));
-		assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.region2_a));
+		assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.MAIN_REGION_S1));
+		assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.REGION2_A));
 		long cycles = 0l;
 		while (cycles < 10l) {
-			assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.region2_a));
+			assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.REGION2_A));
 			if (statemachine.getMyInt()%2l == 0l) {
-				assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.main_region_S1));
+				assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.MAIN_REGION_S1));
 			}
 			else {
-				assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.main_region_S2));
+				assertTrue(statemachine.isStateActive(StatechartLocalReactionsStatemachine.State.MAIN_REGION_S2));
 			}
 			timer.cycleLeap(1l);
 			cycles += 1l;

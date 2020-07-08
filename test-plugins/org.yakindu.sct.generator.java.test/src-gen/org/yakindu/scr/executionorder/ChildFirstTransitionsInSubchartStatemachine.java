@@ -188,15 +188,15 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	private boolean initialized = false;
 	
 	public enum State {
-		childFirstTransitionsInSubchart_r_A,
-		childFirstTransitionsInSubchart_r_A_r1_AA,
-		childFirstTransitionsInSubchart_r_A_r1_AB,
-		childFirstTransitionsInSubchart_r_A_r2_AC,
-		childFirstTransitionsInSubchart_r_A_r2_AD,
-		childFirstTransitionsInSubchart_r_B,
-		childFirstTransitionsInSubchart_r2_C,
-		childFirstTransitionsInSubchart_r2_D,
-		$NullState$
+		R_A,
+		R_A_R1_AA,
+		R_A_R1_AB,
+		R_A_R2_AC,
+		R_A_R2_AD,
+		R_B,
+		R2_C,
+		R2_D,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[3];
@@ -223,7 +223,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		}
 		
 		for (int i = 0; i < 3; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
@@ -299,29 +299,29 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case childFirstTransitionsInSubchart_r_A_r1_AA:
+			case R_A_R1_AA:
 				r_A_r1_AA_react(true);
 				break;
-			case childFirstTransitionsInSubchart_r_A_r1_AB:
+			case R_A_R1_AB:
 				r_A_r1_AB_react(true);
 				break;
-			case childFirstTransitionsInSubchart_r_A_r2_AC:
+			case R_A_R2_AC:
 				r_A_r2_AC_react(true);
 				break;
-			case childFirstTransitionsInSubchart_r_A_r2_AD:
+			case R_A_R2_AD:
 				r_A_r2_AD_react(true);
 				break;
-			case childFirstTransitionsInSubchart_r_B:
+			case R_B:
 				r_B_react(true);
 				break;
-			case childFirstTransitionsInSubchart_r2_C:
+			case R2_C:
 				r2_C_react(true);
 				break;
-			case childFirstTransitionsInSubchart_r2_D:
+			case R2_D:
 				r2_D_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -332,7 +332,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$||stateVector[2] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -349,23 +349,23 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case childFirstTransitionsInSubchart_r_A:
+		case R_A:
 			return stateVector[0].ordinal() >= State.
-					childFirstTransitionsInSubchart_r_A.ordinal()&& stateVector[0].ordinal() <= State.childFirstTransitionsInSubchart_r_A_r2_AD.ordinal();
-		case childFirstTransitionsInSubchart_r_A_r1_AA:
-			return stateVector[0] == State.childFirstTransitionsInSubchart_r_A_r1_AA;
-		case childFirstTransitionsInSubchart_r_A_r1_AB:
-			return stateVector[0] == State.childFirstTransitionsInSubchart_r_A_r1_AB;
-		case childFirstTransitionsInSubchart_r_A_r2_AC:
-			return stateVector[1] == State.childFirstTransitionsInSubchart_r_A_r2_AC;
-		case childFirstTransitionsInSubchart_r_A_r2_AD:
-			return stateVector[1] == State.childFirstTransitionsInSubchart_r_A_r2_AD;
-		case childFirstTransitionsInSubchart_r_B:
-			return stateVector[0] == State.childFirstTransitionsInSubchart_r_B;
-		case childFirstTransitionsInSubchart_r2_C:
-			return stateVector[2] == State.childFirstTransitionsInSubchart_r2_C;
-		case childFirstTransitionsInSubchart_r2_D:
-			return stateVector[2] == State.childFirstTransitionsInSubchart_r2_D;
+					R_A.ordinal()&& stateVector[0].ordinal() <= State.R_A_R2_AD.ordinal();
+		case R_A_R1_AA:
+			return stateVector[0] == State.R_A_R1_AA;
+		case R_A_R1_AB:
+			return stateVector[0] == State.R_A_R1_AB;
+		case R_A_R2_AC:
+			return stateVector[1] == State.R_A_R2_AC;
+		case R_A_R2_AD:
+			return stateVector[1] == State.R_A_R2_AD;
+		case R_B:
+			return stateVector[0] == State.R_B;
+		case R2_C:
+			return stateVector[2] == State.R2_C;
+		case R2_D:
+			return stateVector[2] == State.R2_D;
 		default:
 			return false;
 		}
@@ -520,43 +520,43 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	/* 'default' enter sequence for state AA */
 	private void enterSequence_r_A_r1_AA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstTransitionsInSubchart_r_A_r1_AA;
+		stateVector[0] = State.R_A_R1_AA;
 	}
 	
 	/* 'default' enter sequence for state AB */
 	private void enterSequence_r_A_r1_AB_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstTransitionsInSubchart_r_A_r1_AB;
+		stateVector[0] = State.R_A_R1_AB;
 	}
 	
 	/* 'default' enter sequence for state AC */
 	private void enterSequence_r_A_r2_AC_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.childFirstTransitionsInSubchart_r_A_r2_AC;
+		stateVector[1] = State.R_A_R2_AC;
 	}
 	
 	/* 'default' enter sequence for state AD */
 	private void enterSequence_r_A_r2_AD_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.childFirstTransitionsInSubchart_r_A_r2_AD;
+		stateVector[1] = State.R_A_R2_AD;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstTransitionsInSubchart_r_B;
+		stateVector[0] = State.R_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_r2_C_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.childFirstTransitionsInSubchart_r2_C;
+		stateVector[2] = State.R2_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_r2_D_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.childFirstTransitionsInSubchart_r2_D;
+		stateVector[2] = State.R2_D;
 	}
 	
 	/* 'default' enter sequence for region r */
@@ -588,55 +588,55 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	/* Default exit sequence for state AA */
 	private void exitSequence_r_A_r1_AA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state AB */
 	private void exitSequence_r_A_r1_AB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state AC */
 	private void exitSequence_r_A_r2_AC() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state AD */
 	private void exitSequence_r_A_r2_AD() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_r_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_r2_C() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_r2_D() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case childFirstTransitionsInSubchart_r_A_r1_AA:
+		case R_A_R1_AA:
 			exitSequence_r_A_r1_AA();
 			break;
-		case childFirstTransitionsInSubchart_r_A_r1_AB:
+		case R_A_R1_AB:
 			exitSequence_r_A_r1_AB();
 			break;
-		case childFirstTransitionsInSubchart_r_B:
+		case R_B:
 			exitSequence_r_B();
 			break;
 		default:
@@ -644,10 +644,10 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		}
 		
 		switch (stateVector[1]) {
-		case childFirstTransitionsInSubchart_r_A_r2_AC:
+		case R_A_R2_AC:
 			exitSequence_r_A_r2_AC();
 			break;
-		case childFirstTransitionsInSubchart_r_A_r2_AD:
+		case R_A_R2_AD:
 			exitSequence_r_A_r2_AD();
 			break;
 		default:
@@ -658,10 +658,10 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r_A_r1() {
 		switch (stateVector[0]) {
-		case childFirstTransitionsInSubchart_r_A_r1_AA:
+		case R_A_R1_AA:
 			exitSequence_r_A_r1_AA();
 			break;
-		case childFirstTransitionsInSubchart_r_A_r1_AB:
+		case R_A_R1_AB:
 			exitSequence_r_A_r1_AB();
 			break;
 		default:
@@ -672,10 +672,10 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r_A_r2() {
 		switch (stateVector[1]) {
-		case childFirstTransitionsInSubchart_r_A_r2_AC:
+		case R_A_R2_AC:
 			exitSequence_r_A_r2_AC();
 			break;
-		case childFirstTransitionsInSubchart_r_A_r2_AD:
+		case R_A_R2_AD:
 			exitSequence_r_A_r2_AD();
 			break;
 		default:
@@ -686,10 +686,10 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[2]) {
-		case childFirstTransitionsInSubchart_r2_C:
+		case R2_C:
 			exitSequence_r2_C();
 			break;
-		case childFirstTransitionsInSubchart_r2_D:
+		case R2_D:
 			exitSequence_r2_D();
 			break;
 		default:

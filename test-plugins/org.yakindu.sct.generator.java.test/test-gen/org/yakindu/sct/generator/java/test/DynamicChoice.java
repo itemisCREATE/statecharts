@@ -40,8 +40,8 @@ public class DynamicChoice {
 	@Test
 	public void dynamicChoiceTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(DynamicChoiceStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(DynamicChoiceStatemachine.State.MAIN_REGION_START));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(DynamicChoiceStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(DynamicChoiceStatemachine.State.MAIN_REGION_A));
 	}
 }

@@ -42,11 +42,11 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region_StateB,
-		second_region_StateC,
-		second_region_StateD,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_STATEB,
+		SECOND_REGION_STATEC,
+		SECOND_REGION_STATED,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -70,7 +70,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -116,20 +116,20 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case main_region_StateA:
+				case MAIN_REGION_STATEA:
 					main_region_StateA_react(true);
 					break;
-				case main_region_StateB:
+				case MAIN_REGION_STATEB:
 					main_region_StateB_react(true);
 					break;
-				case second_region_StateC:
+				case SECOND_REGION_STATEC:
 					second_region_StateC_react(true);
 					break;
-				case second_region_StateD:
+				case SECOND_REGION_STATED:
 					second_region_StateD_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -144,7 +144,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -171,14 +171,14 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
-		case second_region_StateC:
-			return stateVector[1] == State.second_region_StateC;
-		case second_region_StateD:
-			return stateVector[1] == State.second_region_StateD;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB;
+		case SECOND_REGION_STATEC:
+			return stateVector[1] == State.SECOND_REGION_STATEC;
+		case SECOND_REGION_STATED:
+			return stateVector[1] == State.SECOND_REGION_STATED;
 		default:
 			return false;
 		}
@@ -204,26 +204,26 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_default() {
 		entryAction_main_region_StateB();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for state StateC */
 	private void enterSequence_second_region_StateC_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.second_region_StateC;
+		stateVector[1] = State.SECOND_REGION_STATEC;
 	}
 	
 	/* 'default' enter sequence for state StateD */
 	private void enterSequence_second_region_StateD_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.second_region_StateD;
+		stateVector[1] = State.SECOND_REGION_STATED;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -239,34 +239,34 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateC */
 	private void exitSequence_second_region_StateC() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateD */
 	private void exitSequence_second_region_StateD() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB:
+		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
 		default:
@@ -277,10 +277,10 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	/* Default exit sequence for region second region */
 	private void exitSequence_second_region() {
 		switch (stateVector[1]) {
-		case second_region_StateC:
+		case SECOND_REGION_STATEC:
 			exitSequence_second_region_StateC();
 			break;
-		case second_region_StateD:
+		case SECOND_REGION_STATED:
 			exitSequence_second_region_StateD();
 			break;
 		default:

@@ -41,34 +41,34 @@ public class TimedTransitions {
 	@Test
 	public void timer01() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_START));
 		timer.timeLeap(2030l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_End));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_END));
 	}
 	
 	@Test
 	public void timer02() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_START));
 		timer.timeLeap(2l*1000l);
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_End));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_END));
 	}
 	
 	@Test
 	public void noAdditionalCycle() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_START));
 		timer.timeLeap(1950l);
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_START));
 		timer.timeLeap(100l);
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_End));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_END));
 	}
 	
 	@Test
 	public void countCycles() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(TimedTransitionsStatemachine.State.MAIN_REGION_START));
 		assertTrue((statemachine.getCycles() == 0l));
 		assertTrue((statemachine.getSeconds() == 0l));
 		timer.timeLeap(100l);

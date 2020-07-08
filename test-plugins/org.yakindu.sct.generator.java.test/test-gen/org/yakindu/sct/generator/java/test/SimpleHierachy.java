@@ -40,12 +40,12 @@ public class SimpleHierachy {
 	@Test
 	public void simpleHierachyTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.main_region_B));
-		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.main_region_B_subregion1_B1));
+		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.MAIN_REGION_B));
+		assertTrue(statemachine.isStateActive(SimpleHierachyStatemachine.State.MAIN_REGION_B_SUBREGION1_B1));
 	}
 }

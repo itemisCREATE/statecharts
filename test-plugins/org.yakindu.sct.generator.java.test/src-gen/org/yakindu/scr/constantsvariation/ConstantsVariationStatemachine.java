@@ -50,9 +50,9 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region__final_,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_FINAL_0,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -96,7 +96,7 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
@@ -137,14 +137,14 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case main_region__final_:
+			case MAIN_REGION_FINAL_0:
 				main_region__final__react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -155,14 +155,14 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.main_region__final_);
+		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -170,10 +170,10 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region__final_:
-			return stateVector[0] == State.main_region__final_;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_FINAL_0:
+			return stateVector[0] == State.MAIN_REGION_FINAL_0;
 		default:
 			return false;
 		}
@@ -206,13 +206,13 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region__final_;
+		stateVector[0] = State.MAIN_REGION_FINAL_0;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -223,22 +223,22 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for final state. */
 	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region__final_:
+		case MAIN_REGION_FINAL_0:
 			exitSequence_main_region__final_();
 			break;
 		default:

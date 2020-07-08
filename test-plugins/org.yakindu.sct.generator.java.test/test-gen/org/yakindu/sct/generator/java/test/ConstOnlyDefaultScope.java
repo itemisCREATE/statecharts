@@ -40,7 +40,7 @@ public class ConstOnlyDefaultScope {
 	@Test
 	public void statechartEntry() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ConstOnlyDefaultScopeStatemachine.State.constOnlyDefaultScope_main_region_A));
+		assertTrue(statemachine.isStateActive(ConstOnlyDefaultScopeStatemachine.State.MAIN_REGION_A));
 	}
 	
 	@Test
@@ -48,6 +48,6 @@ public class ConstOnlyDefaultScope {
 		statemachine.enter();
 		statemachine.getInterfaceA().raiseE(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ConstOnlyDefaultScopeStatemachine.State.constOnlyDefaultScope_main_region_B));
+		assertTrue(statemachine.isStateActive(ConstOnlyDefaultScopeStatemachine.State.MAIN_REGION_B));
 	}
 }

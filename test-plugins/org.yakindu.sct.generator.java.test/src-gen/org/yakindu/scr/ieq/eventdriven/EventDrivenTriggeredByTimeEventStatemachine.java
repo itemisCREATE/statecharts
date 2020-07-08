@@ -35,9 +35,9 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	private boolean initialized = false;
 	
 	public enum State {
-		eventDrivenTriggeredByTimeEvent_r_A,
-		eventDrivenTriggeredByTimeEvent_r_B,
-		$NullState$
+		R_A,
+		R_B,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -68,7 +68,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			throw new IllegalStateException("timer not set.");
 		}
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -121,14 +121,14 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case eventDrivenTriggeredByTimeEvent_r_A:
+				case R_A:
 					r_A_react(true);
 					break;
-				case eventDrivenTriggeredByTimeEvent_r_B:
+				case R_B:
 					r_B_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -143,7 +143,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -171,10 +171,10 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case eventDrivenTriggeredByTimeEvent_r_A:
-			return stateVector[0] == State.eventDrivenTriggeredByTimeEvent_r_A;
-		case eventDrivenTriggeredByTimeEvent_r_B:
-			return stateVector[0] == State.eventDrivenTriggeredByTimeEvent_r_B;
+		case R_A:
+			return stateVector[0] == State.R_A;
+		case R_B:
+			return stateVector[0] == State.R_B;
 		default:
 			return false;
 		}
@@ -254,14 +254,14 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	private void enterSequence_r_A_default() {
 		entryAction_r_A();
 		nextStateIndex = 0;
-		stateVector[0] = State.eventDrivenTriggeredByTimeEvent_r_A;
+		stateVector[0] = State.R_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r_B_default() {
 		entryAction_r_B();
 		nextStateIndex = 0;
-		stateVector[0] = State.eventDrivenTriggeredByTimeEvent_r_B;
+		stateVector[0] = State.R_B;
 	}
 	
 	/* 'default' enter sequence for region r */
@@ -272,7 +272,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	/* Default exit sequence for state A */
 	private void exitSequence_r_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_r_A();
 	}
@@ -280,7 +280,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	/* Default exit sequence for state B */
 	private void exitSequence_r_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_r_B();
 	}
@@ -288,10 +288,10 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case eventDrivenTriggeredByTimeEvent_r_A:
+		case R_A:
 			exitSequence_r_A();
 			break;
-		case eventDrivenTriggeredByTimeEvent_r_B:
+		case R_B:
 			exitSequence_r_B();
 			break;
 		default:

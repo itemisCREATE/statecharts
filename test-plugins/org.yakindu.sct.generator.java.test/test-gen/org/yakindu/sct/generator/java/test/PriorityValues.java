@@ -40,19 +40,19 @@ public class PriorityValues {
 	@Test
 	public void transitionPriority() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.main_region_C));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.MAIN_REGION_C));
 	}
 	
 	@Test
 	public void regionPriority() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.someRegion_A));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.SOMEREGION_A));
 		statemachine.raiseEvent2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.someRegion_B));
-		assertTrue(!statemachine.isStateActive(PriorityValuesStatemachine.State.main_region_E));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.SOMEREGION_B));
+		assertTrue(!statemachine.isStateActive(PriorityValuesStatemachine.State.MAIN_REGION_E));
 	}
 }

@@ -43,11 +43,11 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_B,
-		main_region_C,
-		main_region_D,
-		main_region_A,
-		$NullState$
+		MAIN_REGION_B,
+		MAIN_REGION_C,
+		MAIN_REGION_D,
+		MAIN_REGION_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -96,7 +96,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 		
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -140,20 +140,20 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_B:
+			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
-			case main_region_C:
+			case MAIN_REGION_C:
 				main_region_C_react(true);
 				break;
-			case main_region_D:
+			case MAIN_REGION_D:
 				main_region_D_react(true);
 				break;
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -164,7 +164,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -190,14 +190,14 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_B:
-			return stateVector[0] == State.main_region_B;
-		case main_region_C:
-			return stateVector[0] == State.main_region_C;
-		case main_region_D:
-			return stateVector[0] == State.main_region_D;
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
+		case MAIN_REGION_C:
+			return stateVector[0] == State.MAIN_REGION_C;
+		case MAIN_REGION_D:
+			return stateVector[0] == State.MAIN_REGION_D;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
 		default:
 			return false;
 		}
@@ -281,27 +281,27 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private void enterSequence_main_region_B_default() {
 		entryAction_main_region_B();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		entryAction_main_region_C();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_C;
+		stateVector[0] = State.MAIN_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_main_region_D_default() {
 		entryAction_main_region_D();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_D;
+		stateVector[0] = State.MAIN_REGION_D;
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -312,40 +312,40 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_main_region_D() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
-		case main_region_C:
+		case MAIN_REGION_C:
 			exitSequence_main_region_C();
 			break;
-		case main_region_D:
+		case MAIN_REGION_D:
 			exitSequence_main_region_D();
 			break;
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
 		default:

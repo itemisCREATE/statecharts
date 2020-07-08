@@ -53,9 +53,9 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_B,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -80,7 +80,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -126,14 +126,14 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
-			case main_region_B:
+			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -144,7 +144,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -174,10 +174,10 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
-		case main_region_B:
-			return stateVector[0] == State.main_region_B;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
 		default:
 			return false;
 		}
@@ -225,13 +225,13 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	private void enterSequence_main_region_A_default() {
 		entryAction_main_region_A();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -242,7 +242,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A();
 	}
@@ -250,16 +250,16 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
 		default:

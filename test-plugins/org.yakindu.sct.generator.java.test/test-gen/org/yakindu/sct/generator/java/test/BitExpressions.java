@@ -40,12 +40,12 @@ public class BitExpressions {
 	@Test
 	public void bitExpressions() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(BitExpressionsStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(BitExpressionsStatemachine.State.MAIN_REGION_STATEA));
 		assertTrue(statemachine.getMyBit1() == 5l);
 		assertTrue(statemachine.getMyBit2() == 7l);
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(BitExpressionsStatemachine.State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(BitExpressionsStatemachine.State.MAIN_REGION_STATEB));
 		assertTrue(statemachine.getLeftBitshift() == 10l);
 		assertTrue(statemachine.getRightBitshift() == 2l);
 		assertTrue(statemachine.getComplementBitshift() == - 6l );

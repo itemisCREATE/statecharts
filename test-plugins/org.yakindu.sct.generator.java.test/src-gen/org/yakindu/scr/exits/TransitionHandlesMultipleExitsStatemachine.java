@@ -46,11 +46,11 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	private boolean initialized = false;
 	
 	public enum State {
-		transitionHandlesMultipleExits_main_region_A,
-		transitionHandlesMultipleExits_main_region_A_r_AA,
-		transitionHandlesMultipleExits_main_region_B,
-		transitionHandlesMultipleExits_main_region_B_r_BB,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_A_R_AA,
+		MAIN_REGION_B,
+		MAIN_REGION_B_R_BB,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -73,7 +73,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -116,14 +116,14 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case transitionHandlesMultipleExits_main_region_A_r_AA:
+			case MAIN_REGION_A_R_AA:
 				main_region_A_r_AA_react(true);
 				break;
-			case transitionHandlesMultipleExits_main_region_B_r_BB:
+			case MAIN_REGION_B_R_BB:
 				main_region_B_r_BB_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -135,7 +135,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -158,16 +158,16 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case transitionHandlesMultipleExits_main_region_A:
+		case MAIN_REGION_A:
 			return stateVector[0].ordinal() >= State.
-					transitionHandlesMultipleExits_main_region_A.ordinal()&& stateVector[0].ordinal() <= State.transitionHandlesMultipleExits_main_region_A_r_AA.ordinal();
-		case transitionHandlesMultipleExits_main_region_A_r_AA:
-			return stateVector[0] == State.transitionHandlesMultipleExits_main_region_A_r_AA;
-		case transitionHandlesMultipleExits_main_region_B:
+					MAIN_REGION_A.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A_R_AA.ordinal();
+		case MAIN_REGION_A_R_AA:
+			return stateVector[0] == State.MAIN_REGION_A_R_AA;
+		case MAIN_REGION_B:
 			return stateVector[0].ordinal() >= State.
-					transitionHandlesMultipleExits_main_region_B.ordinal()&& stateVector[0].ordinal() <= State.transitionHandlesMultipleExits_main_region_B_r_BB.ordinal();
-		case transitionHandlesMultipleExits_main_region_B_r_BB:
-			return stateVector[0] == State.transitionHandlesMultipleExits_main_region_B_r_BB;
+					MAIN_REGION_B.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_B_R_BB.ordinal();
+		case MAIN_REGION_B_R_BB:
+			return stateVector[0] == State.MAIN_REGION_B_R_BB;
 		default:
 			return false;
 		}
@@ -225,7 +225,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	/* 'default' enter sequence for state AA */
 	private void enterSequence_main_region_A_r_AA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.transitionHandlesMultipleExits_main_region_A_r_AA;
+		stateVector[0] = State.MAIN_REGION_A_R_AA;
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -236,7 +236,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	/* 'default' enter sequence for state BB */
 	private void enterSequence_main_region_B_r_BB_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.transitionHandlesMultipleExits_main_region_B_r_BB;
+		stateVector[0] = State.MAIN_REGION_B_R_BB;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -262,7 +262,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	/* Default exit sequence for state AA */
 	private void exitSequence_main_region_A_r_AA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
@@ -273,16 +273,16 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	/* Default exit sequence for state BB */
 	private void exitSequence_main_region_B_r_BB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case transitionHandlesMultipleExits_main_region_A_r_AA:
+		case MAIN_REGION_A_R_AA:
 			exitSequence_main_region_A_r_AA();
 			break;
-		case transitionHandlesMultipleExits_main_region_B_r_BB:
+		case MAIN_REGION_B_R_BB:
 			exitSequence_main_region_B_r_BB();
 			break;
 		default:
@@ -293,7 +293,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	/* Default exit sequence for region r */
 	private void exitSequence_main_region_A_r() {
 		switch (stateVector[0]) {
-		case transitionHandlesMultipleExits_main_region_A_r_AA:
+		case MAIN_REGION_A_R_AA:
 			exitSequence_main_region_A_r_AA();
 			break;
 		default:
@@ -304,7 +304,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	/* Default exit sequence for region r */
 	private void exitSequence_main_region_B_r() {
 		switch (stateVector[0]) {
-		case transitionHandlesMultipleExits_main_region_B_r_BB:
+		case MAIN_REGION_B_R_BB:
 			exitSequence_main_region_B_r_BB();
 			break;
 		default:

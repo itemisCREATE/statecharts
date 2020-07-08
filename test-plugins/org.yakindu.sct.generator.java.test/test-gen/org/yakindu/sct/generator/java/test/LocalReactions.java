@@ -40,7 +40,7 @@ public class LocalReactions {
 	@Test
 	public void localReactionsTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(LocalReactionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(LocalReactionsStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getX() == 1l);
 	}

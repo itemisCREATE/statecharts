@@ -40,7 +40,7 @@ public class ReadOnlyVariable {
 	@Test
 	public void readOnlyVariableTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ReadOnlyVariableStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(ReadOnlyVariableStatemachine.State.MAIN_REGION_STATEA));
 		assertTrue(statemachine.getMyInt() == 0l);
 		assertTrue(statemachine.getMyString().equals("testString"));
 		assertTrue(statemachine.getMyBool() == true);
@@ -50,7 +50,7 @@ public class ReadOnlyVariable {
 		assertTrue(statemachine.getInterfaceA().getMyBool() == true);
 		assertTrue(statemachine.getInterfaceA().getMyReal() == 1.1);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ReadOnlyVariableStatemachine.State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(ReadOnlyVariableStatemachine.State.MAIN_REGION_STATEB));
 		assertTrue(statemachine.getMyInt() == 100l);
 		assertTrue(statemachine.getMyString().equals("fail"));
 		assertTrue(statemachine.getMyBool() == false);

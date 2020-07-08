@@ -40,33 +40,33 @@ public class AssignmentAsExpression {
 	@Test
 	public void simpleAssignment() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_Add));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_ADD));
 		assertTrue(statemachine.getB() == 5l);
 		assertTrue(statemachine.getA() == 9l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_Subtract));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_SUBTRACT));
 		assertTrue(statemachine.getD() == 6l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_Multiply));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_MULTIPLY));
 		assertTrue(statemachine.getE() == 15l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_Divide));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_DIVIDE));
 		assertTrue(statemachine.getG() == 1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_Modulo));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_MODULO));
 		assertTrue(statemachine.getI() == 1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_Shift));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_SHIFT));
 		assertTrue(statemachine.getJ() == 16l);
 		assertTrue(statemachine.getK() == 4l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_boolean_And));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_BOOLEAN_AND));
 		assertTrue(statemachine.getL() == 1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_boolean_Or));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_BOOLEAN_OR));
 		assertTrue(statemachine.getP() == 15l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.main_region_boolean_Xor));
+		assertTrue(statemachine.isStateActive(AssignmentAsExpressionStatemachine.State.MAIN_REGION_BOOLEAN_XOR));
 		assertTrue(statemachine.getU() == 12l);
 		statemachine.exit();
 	}

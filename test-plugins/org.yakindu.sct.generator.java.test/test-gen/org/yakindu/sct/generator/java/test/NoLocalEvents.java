@@ -33,14 +33,14 @@ public class NoLocalEvents {
 	@Test
 	public void test() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateA));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.MAIN_REGION_STATEA));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateB));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.MAIN_REGION_STATEB));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateA));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.MAIN_REGION_STATEA));
 		assertTrue((statemachine.getX() == 0l));
 		statemachine.raiseI(42l);
-		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.noLocalEvents_main_region_StateB));
+		assertTrue(statemachine.isStateActive(NoLocalEventsStatemachine.State.MAIN_REGION_STATEB));
 		assertTrue((statemachine.getX() == 42l));
 		statemachine.exit();
 	}

@@ -40,9 +40,9 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_Start,
-		main_region_End,
-		$NullState$
+		MAIN_REGION_START,
+		MAIN_REGION_END,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -74,7 +74,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 			throw new IllegalStateException("timer not set.");
 		}
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -130,14 +130,14 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_Start:
+			case MAIN_REGION_START:
 				main_region_Start_react(true);
 				break;
-			case main_region_End:
+			case MAIN_REGION_END:
 				main_region_End_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -148,7 +148,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -178,10 +178,10 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_Start:
-			return stateVector[0] == State.main_region_Start;
-		case main_region_End:
-			return stateVector[0] == State.main_region_End;
+		case MAIN_REGION_START:
+			return stateVector[0] == State.MAIN_REGION_START;
+		case MAIN_REGION_END:
+			return stateVector[0] == State.MAIN_REGION_END;
 		default:
 			return false;
 		}
@@ -245,13 +245,13 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	private void enterSequence_main_region_Start_default() {
 		entryAction_main_region_Start();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Start;
+		stateVector[0] = State.MAIN_REGION_START;
 	}
 	
 	/* 'default' enter sequence for state End */
 	private void enterSequence_main_region_End_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_End;
+		stateVector[0] = State.MAIN_REGION_END;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -262,7 +262,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	/* Default exit sequence for state Start */
 	private void exitSequence_main_region_Start() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_Start();
 	}
@@ -270,16 +270,16 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	/* Default exit sequence for state End */
 	private void exitSequence_main_region_End() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_Start:
+		case MAIN_REGION_START:
 			exitSequence_main_region_Start();
 			break;
-		case main_region_End:
+		case MAIN_REGION_END:
 			exitSequence_main_region_End();
 			break;
 		default:

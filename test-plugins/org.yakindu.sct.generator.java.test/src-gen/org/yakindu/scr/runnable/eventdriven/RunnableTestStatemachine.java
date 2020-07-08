@@ -150,11 +150,11 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	private boolean initialized = false;
 	
 	public enum State {
-		runnableTest_main_region__final_,
-		runnableTest_main_region_Composite_s1_s2,
-		runnableTest_main_region_Composite_s1_s2_inner_region_s1,
-		runnableTest_main_region_Composite_s1_s2_inner_region_s2,
-		$NullState$
+		MAIN_REGION_FINAL_0,
+		MAIN_REGION_COMPOSITE_S1_S2,
+		MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1,
+		MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -193,7 +193,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		}
 		
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -254,17 +254,17 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case runnableTest_main_region__final_:
+				case MAIN_REGION_FINAL_0:
 					main_region__final__react(true);
 					break;
-				case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
+				case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1:
 					main_region_Composite_s1_s2_inner_region_s1_react(true);
 					break;
-				case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
+				case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2:
 					main_region_Composite_s1_s2_inner_region_s2_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -279,14 +279,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	 * @see IStatemachine#isActive()
 	 */
 	public synchronized boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
 	* @see IStatemachine#isFinal()
 	*/
 	public synchronized boolean isFinal() {
-		return (stateVector[0] == State.runnableTest_main_region__final_);
+		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
 	}
 	private void clearInEvents() {
 		defaultInterface.ev_in = false;
@@ -307,15 +307,15 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	public synchronized boolean isStateActive(State state) {
 	
 		switch (state) {
-		case runnableTest_main_region__final_:
-			return stateVector[0] == State.runnableTest_main_region__final_;
-		case runnableTest_main_region_Composite_s1_s2:
+		case MAIN_REGION_FINAL_0:
+			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION_COMPOSITE_S1_S2:
 			return stateVector[0].ordinal() >= State.
-					runnableTest_main_region_Composite_s1_s2.ordinal()&& stateVector[0].ordinal() <= State.runnableTest_main_region_Composite_s1_s2_inner_region_s2.ordinal();
-		case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
-			return stateVector[0] == State.runnableTest_main_region_Composite_s1_s2_inner_region_s1;
-		case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
-			return stateVector[0] == State.runnableTest_main_region_Composite_s1_s2_inner_region_s2;
+					MAIN_REGION_COMPOSITE_S1_S2.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2.ordinal();
+		case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1:
+			return stateVector[0] == State.MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1;
+		case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2:
+			return stateVector[0] == State.MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2;
 		default:
 			return false;
 		}
@@ -425,7 +425,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.runnableTest_main_region__final_;
+		stateVector[0] = State.MAIN_REGION_FINAL_0;
 	}
 	
 	/* 'default' enter sequence for state Composite_s1_s2 */
@@ -438,14 +438,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	private void enterSequence_main_region_Composite_s1_s2_inner_region_s1_default() {
 		entryAction_main_region_Composite_s1_s2_inner_region_s1();
 		nextStateIndex = 0;
-		stateVector[0] = State.runnableTest_main_region_Composite_s1_s2_inner_region_s1;
+		stateVector[0] = State.MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1;
 	}
 	
 	/* 'default' enter sequence for state s2 */
 	private void enterSequence_main_region_Composite_s1_s2_inner_region_s2_default() {
 		entryAction_main_region_Composite_s1_s2_inner_region_s2();
 		nextStateIndex = 0;
-		stateVector[0] = State.runnableTest_main_region_Composite_s1_s2_inner_region_s2;
+		stateVector[0] = State.MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -461,7 +461,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	/* Default exit sequence for final state. */
 	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Composite_s1_s2 */
@@ -473,7 +473,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	/* Default exit sequence for state s1 */
 	private void exitSequence_main_region_Composite_s1_s2_inner_region_s1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_Composite_s1_s2_inner_region_s1();
 	}
@@ -481,20 +481,20 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	/* Default exit sequence for state s2 */
 	private void exitSequence_main_region_Composite_s1_s2_inner_region_s2() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case runnableTest_main_region__final_:
+		case MAIN_REGION_FINAL_0:
 			exitSequence_main_region__final_();
 			break;
-		case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
+		case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1:
 			exitSequence_main_region_Composite_s1_s2_inner_region_s1();
 			exitAction_main_region_Composite_s1_s2();
 			break;
-		case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
+		case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2:
 			exitSequence_main_region_Composite_s1_s2_inner_region_s2();
 			exitAction_main_region_Composite_s1_s2();
 			break;
@@ -506,10 +506,10 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	/* Default exit sequence for region inner region */
 	private void exitSequence_main_region_Composite_s1_s2_inner_region() {
 		switch (stateVector[0]) {
-		case runnableTest_main_region_Composite_s1_s2_inner_region_s1:
+		case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1:
 			exitSequence_main_region_Composite_s1_s2_inner_region_s1();
 			break;
-		case runnableTest_main_region_Composite_s1_s2_inner_region_s2:
+		case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2:
 			exitSequence_main_region_Composite_s1_s2_inner_region_s2();
 			break;
 		default:

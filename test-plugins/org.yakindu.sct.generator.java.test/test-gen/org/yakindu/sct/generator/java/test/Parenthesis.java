@@ -40,7 +40,7 @@ public class Parenthesis {
 	@Test
 	public void simple() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ParenthesisStatemachine.State.mainRegion_A));
+		assertTrue(statemachine.isStateActive(ParenthesisStatemachine.State.MAINREGION_A));
 		assertTrue(statemachine.getErg() == 8l);
 	}
 }

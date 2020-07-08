@@ -40,15 +40,15 @@ public class TypeAlias {
 	@Test
 	public void typeAliasTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.main_region_Start));
+		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.MAIN_REGION_START));
 		assertTrue(statemachine.getMyVar() == 1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.main_region_Mid));
+		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.MAIN_REGION_MID));
 		assertTrue(statemachine.getMyString().equals("TypeSystem"));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.main_region_Mid2));
+		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.MAIN_REGION_MID2));
 		statemachine.raiseMyEvent();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.main_region_End));
+		assertTrue(statemachine.isStateActive(TypeAliasStatemachine.State.MAIN_REGION_END));
 	}
 }

@@ -44,7 +44,7 @@ public class EntryExitSelfTransition {
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.getExits() == 1l);
-		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.main_region_A__region0_C));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__C));
 		statemachine.exit();
 	}
 	
@@ -55,10 +55,10 @@ public class EntryExitSelfTransition {
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 0l);
 		assertTrue(statemachine.getExits() == 0l);
-		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.main_region_A__region0_C));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__C));
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.main_region_A__region0_B));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__B));
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.getExits() == 1l);
 		statemachine.exit();
@@ -68,7 +68,7 @@ public class EntryExitSelfTransition {
 		statemachine.enter();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 1l);
-		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.main_region_A__region0_B));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__B));
 		statemachine.setEntries(0l);
 	}
 }

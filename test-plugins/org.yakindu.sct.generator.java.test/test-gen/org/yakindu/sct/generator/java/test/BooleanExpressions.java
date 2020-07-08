@@ -40,12 +40,12 @@ public class BooleanExpressions {
 	@Test
 	public void booleanExpressions() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(BooleanExpressionsStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(BooleanExpressionsStatemachine.State.MAIN_REGION_STATEA));
 		assertTrue(statemachine.getMyBool1() == true);
 		assertTrue(statemachine.getMyBool2() == false);
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(BooleanExpressionsStatemachine.State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(BooleanExpressionsStatemachine.State.MAIN_REGION_STATEB));
 		assertTrue(statemachine.getAnd() == false);
 		assertTrue(statemachine.getOr() == true);
 		assertTrue(statemachine.getNot() == false);

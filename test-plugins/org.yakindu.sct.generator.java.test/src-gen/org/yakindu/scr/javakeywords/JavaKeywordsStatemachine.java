@@ -473,13 +473,13 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		goto_abstract,
-		goto_boolean,
-		goto_void,
-		goto_void_volatile_transient,
-		goto_void_volatile_transient_throw_false,
-		goto_void_volatile_state,
-		$NullState$
+		GOTO_ABSTRACT,
+		GOTO_BOOLEAN,
+		GOTO_VOID,
+		GOTO_VOID_VOLATILE_TRANSIENT,
+		GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE,
+		GOTO_VOID_VOLATILE_STATE,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[2];
@@ -505,10 +505,10 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 2; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -638,20 +638,20 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case goto_abstract:
+			case GOTO_ABSTRACT:
 				goto_abstract_react(true);
 				break;
-			case goto_boolean:
+			case GOTO_BOOLEAN:
 				goto_boolean_react(true);
 				break;
-			case goto_void_volatile_transient_throw_false:
+			case GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE:
 				goto_void_volatile_transient_throw_false_react(true);
 				break;
-			case goto_void_volatile_state:
+			case GOTO_VOID_VOLATILE_STATE:
 				goto_void_volatile_state_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -662,7 +662,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -692,20 +692,20 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case goto_abstract:
-			return stateVector[0] == State.goto_abstract;
-		case goto_boolean:
-			return stateVector[0] == State.goto_boolean;
-		case goto_void:
+		case GOTO_ABSTRACT:
+			return stateVector[0] == State.GOTO_ABSTRACT;
+		case GOTO_BOOLEAN:
+			return stateVector[0] == State.GOTO_BOOLEAN;
+		case GOTO_VOID:
 			return stateVector[0].ordinal() >= State.
-					goto_void.ordinal()&& stateVector[0].ordinal() <= State.goto_void_volatile_state.ordinal();
-		case goto_void_volatile_transient:
+					GOTO_VOID.ordinal()&& stateVector[0].ordinal() <= State.GOTO_VOID_VOLATILE_STATE.ordinal();
+		case GOTO_VOID_VOLATILE_TRANSIENT:
 			return stateVector[0].ordinal() >= State.
-					goto_void_volatile_transient.ordinal()&& stateVector[0].ordinal() <= State.goto_void_volatile_transient_throw_false.ordinal();
-		case goto_void_volatile_transient_throw_false:
-			return stateVector[0] == State.goto_void_volatile_transient_throw_false;
-		case goto_void_volatile_state:
-			return stateVector[0] == State.goto_void_volatile_state;
+					GOTO_VOID_VOLATILE_TRANSIENT.ordinal()&& stateVector[0].ordinal() <= State.GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE.ordinal();
+		case GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE:
+			return stateVector[0] == State.GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE;
+		case GOTO_VOID_VOLATILE_STATE:
+			return stateVector[0] == State.GOTO_VOID_VOLATILE_STATE;
 		default:
 			return false;
 		}
@@ -1259,14 +1259,14 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private void enterSequence_goto_abstract_default() {
 		entryAction_goto_abstract();
 		nextStateIndex = 0;
-		stateVector[0] = State.goto_abstract;
+		stateVector[0] = State.GOTO_ABSTRACT;
 	}
 	
 	/* 'default' enter sequence for state boolean */
 	private void enterSequence_goto_boolean_default() {
 		entryAction_goto_boolean();
 		nextStateIndex = 0;
-		stateVector[0] = State.goto_boolean;
+		stateVector[0] = State.GOTO_BOOLEAN;
 	}
 	
 	/* 'default' enter sequence for state void */
@@ -1294,7 +1294,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	/* 'default' enter sequence for state false */
 	private void enterSequence_goto_void_volatile_transient_throw_false_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.goto_void_volatile_transient_throw_false;
+		stateVector[0] = State.GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE;
 		
 		historyVector[1] = stateVector[0];
 	}
@@ -1302,7 +1302,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	/* 'default' enter sequence for state state */
 	private void enterSequence_goto_void_volatile_state_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.goto_void_volatile_state;
+		stateVector[0] = State.GOTO_VOID_VOLATILE_STATE;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -1325,10 +1325,10 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	/* shallow enterSequence with history in child volatile */
 	private void shallowEnterSequence_goto_void_volatile() {
 		switch (historyVector[0]) {
-		case goto_void_volatile_transient_throw_false:
+		case GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE:
 			enterSequence_goto_void_volatile_transient_default();
 			break;
-		case goto_void_volatile_state:
+		case GOTO_VOID_VOLATILE_STATE:
 			enterSequence_goto_void_volatile_state_default();
 			break;
 		default:
@@ -1349,7 +1349,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	/* deep enterSequence with history in child throw */
 	private void deepEnterSequence_goto_void_volatile_transient_throw() {
 		switch (historyVector[1]) {
-		case goto_void_volatile_transient_throw_false:
+		case GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE:
 			enterSequence_goto_void_volatile_transient_throw_false_default();
 			break;
 		default:
@@ -1360,40 +1360,40 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	/* Default exit sequence for state abstract */
 	private void exitSequence_goto_abstract() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state boolean */
 	private void exitSequence_goto_boolean() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state false */
 	private void exitSequence_goto_void_volatile_transient_throw_false() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state state */
 	private void exitSequence_goto_void_volatile_state() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region goto */
 	private void exitSequence_goto() {
 		switch (stateVector[0]) {
-		case goto_abstract:
+		case GOTO_ABSTRACT:
 			exitSequence_goto_abstract();
 			break;
-		case goto_boolean:
+		case GOTO_BOOLEAN:
 			exitSequence_goto_boolean();
 			break;
-		case goto_void_volatile_transient_throw_false:
+		case GOTO_VOID_VOLATILE_TRANSIENT_THROW_FALSE:
 			exitSequence_goto_void_volatile_transient_throw_false();
 			break;
-		case goto_void_volatile_state:
+		case GOTO_VOID_VOLATILE_STATE:
 			exitSequence_goto_void_volatile_state();
 			break;
 		default:
@@ -1409,7 +1409,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	/* Default react sequence for shallow history entry try */
 	private void react_goto_void_volatile_try() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_goto_void_volatile();
 		} else {
 			enterSequence_goto_void_volatile_state_default();
@@ -1419,7 +1419,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	/* Default react sequence for deep history entry this */
 	private void react_goto_void_volatile_transient_throw_this() {
 		/* Enter the region with deep history */
-		if (historyVector[1] != State.$NullState$) {
+		if (historyVector[1] != State.$NULLSTATE$) {
 			deepEnterSequence_goto_void_volatile_transient_throw();
 		} else {
 			enterSequence_goto_void_volatile_transient_throw_false_default();

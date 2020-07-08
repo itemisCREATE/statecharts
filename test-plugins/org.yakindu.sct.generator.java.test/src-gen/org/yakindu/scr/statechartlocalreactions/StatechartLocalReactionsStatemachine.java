@@ -22,10 +22,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_S1,
-		main_region_S2,
-		region2_a,
-		$NullState$
+		MAIN_REGION_S1,
+		MAIN_REGION_S2,
+		REGION2_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -48,7 +48,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
@@ -92,17 +92,17 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_S1:
+			case MAIN_REGION_S1:
 				main_region_S1_react(true);
 				break;
-			case main_region_S2:
+			case MAIN_REGION_S2:
 				main_region_S2_react(true);
 				break;
-			case region2_a:
+			case REGION2_A:
 				region2_a_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -113,7 +113,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -130,12 +130,12 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_S1:
-			return stateVector[0] == State.main_region_S1;
-		case main_region_S2:
-			return stateVector[0] == State.main_region_S2;
-		case region2_a:
-			return stateVector[1] == State.region2_a;
+		case MAIN_REGION_S1:
+			return stateVector[0] == State.MAIN_REGION_S1;
+		case MAIN_REGION_S2:
+			return stateVector[0] == State.MAIN_REGION_S2;
+		case REGION2_A:
+			return stateVector[1] == State.REGION2_A;
 		default:
 			return false;
 		}
@@ -156,19 +156,19 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	/* 'default' enter sequence for state S1 */
 	private void enterSequence_main_region_S1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_S1;
+		stateVector[0] = State.MAIN_REGION_S1;
 	}
 	
 	/* 'default' enter sequence for state S2 */
 	private void enterSequence_main_region_S2_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_S2;
+		stateVector[0] = State.MAIN_REGION_S2;
 	}
 	
 	/* 'default' enter sequence for state a */
 	private void enterSequence_region2_a_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.region2_a;
+		stateVector[1] = State.REGION2_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -184,28 +184,28 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	/* Default exit sequence for state S1 */
 	private void exitSequence_main_region_S1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state S2 */
 	private void exitSequence_main_region_S2() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state a */
 	private void exitSequence_region2_a() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_S1:
+		case MAIN_REGION_S1:
 			exitSequence_main_region_S1();
 			break;
-		case main_region_S2:
+		case MAIN_REGION_S2:
 			exitSequence_main_region_S2();
 			break;
 		default:
@@ -216,7 +216,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	/* Default exit sequence for region region2 */
 	private void exitSequence_region2() {
 		switch (stateVector[1]) {
-		case region2_a:
+		case REGION2_A:
 			exitSequence_region2_a();
 			break;
 		default:

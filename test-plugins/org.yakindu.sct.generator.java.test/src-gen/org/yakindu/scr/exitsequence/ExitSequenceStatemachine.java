@@ -158,19 +158,19 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_A_r_AA,
-		main_region_A_r_AB,
-		main_region_A_r_AB_r1_ABA,
-		main_region_A_r_AB_r2_ABB,
-		main_region_A_r_AC,
-		main_region_A_r_AC_r_ACA,
-		main_region_A_r_AC_r_ACA_r_ACAA,
-		main_region_A_r_AD,
-		main_region_A_r_AD_r1_ADA,
-		main_region_A_r_AD_r2_ADB,
-		main_region_A_r_AD_r3_ADC,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_A_R_AA,
+		MAIN_REGION_A_R_AB,
+		MAIN_REGION_A_R_AB_R1_ABA,
+		MAIN_REGION_A_R_AB_R2_ABB,
+		MAIN_REGION_A_R_AC,
+		MAIN_REGION_A_R_AC_R_ACA,
+		MAIN_REGION_A_R_AC_R_ACA_R_ACAA,
+		MAIN_REGION_A_R_AD,
+		MAIN_REGION_A_R_AD_R1_ADA,
+		MAIN_REGION_A_R_AD_R2_ADB,
+		MAIN_REGION_A_R_AD_R3_ADC,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[3];
@@ -193,7 +193,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 3; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -260,29 +260,29 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A_r_AA:
+			case MAIN_REGION_A_R_AA:
 				main_region_A_r_AA_react(true);
 				break;
-			case main_region_A_r_AB_r1_ABA:
+			case MAIN_REGION_A_R_AB_R1_ABA:
 				main_region_A_r_AB_r1_ABA_react(true);
 				break;
-			case main_region_A_r_AB_r2_ABB:
+			case MAIN_REGION_A_R_AB_R2_ABB:
 				main_region_A_r_AB_r2_ABB_react(true);
 				break;
-			case main_region_A_r_AC_r_ACA_r_ACAA:
+			case MAIN_REGION_A_R_AC_R_ACA_R_ACAA:
 				main_region_A_r_AC_r_ACA_r_ACAA_react(true);
 				break;
-			case main_region_A_r_AD_r1_ADA:
+			case MAIN_REGION_A_R_AD_R1_ADA:
 				main_region_A_r_AD_r1_ADA_react(true);
 				break;
-			case main_region_A_r_AD_r2_ADB:
+			case MAIN_REGION_A_R_AD_R2_ADB:
 				main_region_A_r_AD_r2_ADB_react(true);
 				break;
-			case main_region_A_r_AD_r3_ADC:
+			case MAIN_REGION_A_R_AD_R3_ADC:
 				main_region_A_r_AD_r3_ADC_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -294,7 +294,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$||stateVector[2] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -316,35 +316,35 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			return stateVector[0].ordinal() >= State.
-					main_region_A.ordinal()&& stateVector[0].ordinal() <= State.main_region_A_r_AD_r3_ADC.ordinal();
-		case main_region_A_r_AA:
-			return stateVector[0] == State.main_region_A_r_AA;
-		case main_region_A_r_AB:
+					MAIN_REGION_A.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A_R_AD_R3_ADC.ordinal();
+		case MAIN_REGION_A_R_AA:
+			return stateVector[0] == State.MAIN_REGION_A_R_AA;
+		case MAIN_REGION_A_R_AB:
 			return stateVector[0].ordinal() >= State.
-					main_region_A_r_AB.ordinal()&& stateVector[0].ordinal() <= State.main_region_A_r_AB_r2_ABB.ordinal();
-		case main_region_A_r_AB_r1_ABA:
-			return stateVector[0] == State.main_region_A_r_AB_r1_ABA;
-		case main_region_A_r_AB_r2_ABB:
-			return stateVector[1] == State.main_region_A_r_AB_r2_ABB;
-		case main_region_A_r_AC:
+					MAIN_REGION_A_R_AB.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A_R_AB_R2_ABB.ordinal();
+		case MAIN_REGION_A_R_AB_R1_ABA:
+			return stateVector[0] == State.MAIN_REGION_A_R_AB_R1_ABA;
+		case MAIN_REGION_A_R_AB_R2_ABB:
+			return stateVector[1] == State.MAIN_REGION_A_R_AB_R2_ABB;
+		case MAIN_REGION_A_R_AC:
 			return stateVector[0].ordinal() >= State.
-					main_region_A_r_AC.ordinal()&& stateVector[0].ordinal() <= State.main_region_A_r_AC_r_ACA_r_ACAA.ordinal();
-		case main_region_A_r_AC_r_ACA:
+					MAIN_REGION_A_R_AC.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A_R_AC_R_ACA_R_ACAA.ordinal();
+		case MAIN_REGION_A_R_AC_R_ACA:
 			return stateVector[0].ordinal() >= State.
-					main_region_A_r_AC_r_ACA.ordinal()&& stateVector[0].ordinal() <= State.main_region_A_r_AC_r_ACA_r_ACAA.ordinal();
-		case main_region_A_r_AC_r_ACA_r_ACAA:
-			return stateVector[0] == State.main_region_A_r_AC_r_ACA_r_ACAA;
-		case main_region_A_r_AD:
+					MAIN_REGION_A_R_AC_R_ACA.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A_R_AC_R_ACA_R_ACAA.ordinal();
+		case MAIN_REGION_A_R_AC_R_ACA_R_ACAA:
+			return stateVector[0] == State.MAIN_REGION_A_R_AC_R_ACA_R_ACAA;
+		case MAIN_REGION_A_R_AD:
 			return stateVector[0].ordinal() >= State.
-					main_region_A_r_AD.ordinal()&& stateVector[0].ordinal() <= State.main_region_A_r_AD_r3_ADC.ordinal();
-		case main_region_A_r_AD_r1_ADA:
-			return stateVector[0] == State.main_region_A_r_AD_r1_ADA;
-		case main_region_A_r_AD_r2_ADB:
-			return stateVector[1] == State.main_region_A_r_AD_r2_ADB;
-		case main_region_A_r_AD_r3_ADC:
-			return stateVector[2] == State.main_region_A_r_AD_r3_ADC;
+					MAIN_REGION_A_R_AD.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A_R_AD_R3_ADC.ordinal();
+		case MAIN_REGION_A_R_AD_R1_ADA:
+			return stateVector[0] == State.MAIN_REGION_A_R_AD_R1_ADA;
+		case MAIN_REGION_A_R_AD_R2_ADB:
+			return stateVector[1] == State.MAIN_REGION_A_R_AD_R2_ADB;
+		case MAIN_REGION_A_R_AD_R3_ADC:
+			return stateVector[2] == State.MAIN_REGION_A_R_AD_R3_ADC;
 		default:
 			return false;
 		}
@@ -534,7 +534,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* 'default' enter sequence for state AA */
 	private void enterSequence_main_region_A_r_AA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A_r_AA;
+		stateVector[0] = State.MAIN_REGION_A_R_AA;
 	}
 	
 	/* 'default' enter sequence for state AB */
@@ -546,13 +546,13 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* 'default' enter sequence for state ABA */
 	private void enterSequence_main_region_A_r_AB_r1_ABA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A_r_AB_r1_ABA;
+		stateVector[0] = State.MAIN_REGION_A_R_AB_R1_ABA;
 	}
 	
 	/* 'default' enter sequence for state ABB */
 	private void enterSequence_main_region_A_r_AB_r2_ABB_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_A_r_AB_r2_ABB;
+		stateVector[1] = State.MAIN_REGION_A_R_AB_R2_ABB;
 	}
 	
 	/* 'default' enter sequence for state AC */
@@ -568,7 +568,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* 'default' enter sequence for state ACAA */
 	private void enterSequence_main_region_A_r_AC_r_ACA_r_ACAA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A_r_AC_r_ACA_r_ACAA;
+		stateVector[0] = State.MAIN_REGION_A_R_AC_R_ACA_R_ACAA;
 	}
 	
 	/* 'default' enter sequence for state AD */
@@ -581,19 +581,19 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* 'default' enter sequence for state ADA */
 	private void enterSequence_main_region_A_r_AD_r1_ADA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A_r_AD_r1_ADA;
+		stateVector[0] = State.MAIN_REGION_A_R_AD_R1_ADA;
 	}
 	
 	/* 'default' enter sequence for state ADB */
 	private void enterSequence_main_region_A_r_AD_r2_ADB_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_A_r_AD_r2_ADB;
+		stateVector[1] = State.MAIN_REGION_A_R_AD_R2_ADB;
 	}
 	
 	/* 'default' enter sequence for state ADC */
 	private void enterSequence_main_region_A_r_AD_r3_ADC_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.main_region_A_r_AD_r3_ADC;
+		stateVector[2] = State.MAIN_REGION_A_R_AD_R3_ADC;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -650,7 +650,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for state AA */
 	private void exitSequence_main_region_A_r_exitSequence_main_region_A_r_AA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A_r_AA();
 	}
@@ -665,7 +665,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for state ABA */
 	private void exitSequence_main_region_A_r_AB_r1_exitSequence_main_region_A_r_AB_r1_ABA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A_r_AB_r1_ABA();
 	}
@@ -673,7 +673,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for state ABB */
 	private void exitSequence_main_region_A_r_AB_r2_exitSequence_main_region_A_r_AB_r2_ABB() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A_r_AB_r2_ABB();
 	}
@@ -687,7 +687,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for state ACAA */
 	private void exitSequence_main_region_A_r_AC_r_ACA_r_exitSequence_main_region_A_r_AC_r_ACA_r_ACAA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A_r_AC_r_ACA_r_ACAA();
 	}
@@ -703,7 +703,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for state ADA */
 	private void exitSequence_main_region_A_r_AD_r1_exitSequence_main_region_A_r_AD_r1_ADA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A_r_AD_r1_ADA();
 	}
@@ -711,7 +711,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for state ADB */
 	private void exitSequence_main_region_A_r_AD_r2_exitSequence_main_region_A_r_AD_r2_ADB() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A_r_AD_r2_ADB();
 	}
@@ -719,7 +719,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for state ADC */
 	private void exitSequence_main_region_A_r_AD_r3_exitSequence_main_region_A_r_AD_r3_ADC() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 		
 		exitAction_main_region_A_r_AD_r3_ADC();
 	}
@@ -727,20 +727,20 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A_r_AA:
+		case MAIN_REGION_A_R_AA:
 			exitSequence_main_region_A_r_exitSequence_main_region_A_r_AA();
 			exitAction_main_region_A();
 			break;
-		case main_region_A_r_AB_r1_ABA:
+		case MAIN_REGION_A_R_AB_R1_ABA:
 			exitSequence_main_region_A_r_AB_r1_exitSequence_main_region_A_r_AB_r1_ABA();
 			break;
-		case main_region_A_r_AC_r_ACA_r_ACAA:
+		case MAIN_REGION_A_R_AC_R_ACA_R_ACAA:
 			exitSequence_main_region_A_r_AC_r_ACA_r_exitSequence_main_region_A_r_AC_r_ACA_r_ACAA();
 			exitAction_main_region_A_r_AC_r_ACA();
 			exitAction_main_region_A_r_AC();
 			exitAction_main_region_A();
 			break;
-		case main_region_A_r_AD_r1_ADA:
+		case MAIN_REGION_A_R_AD_R1_ADA:
 			exitSequence_main_region_A_r_AD_r1_exitSequence_main_region_A_r_AD_r1_ADA();
 			break;
 		default:
@@ -748,12 +748,12 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 		
 		switch (stateVector[1]) {
-		case main_region_A_r_AB_r2_ABB:
+		case MAIN_REGION_A_R_AB_R2_ABB:
 			exitSequence_main_region_A_r_AB_r2_exitSequence_main_region_A_r_AB_r2_ABB();
 			exitAction_main_region_A_r_AB();
 			exitAction_main_region_A();
 			break;
-		case main_region_A_r_AD_r2_ADB:
+		case MAIN_REGION_A_R_AD_R2_ADB:
 			exitSequence_main_region_A_r_AD_r2_exitSequence_main_region_A_r_AD_r2_ADB();
 			break;
 		default:
@@ -761,7 +761,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 		
 		switch (stateVector[2]) {
-		case main_region_A_r_AD_r3_ADC:
+		case MAIN_REGION_A_R_AD_R3_ADC:
 			exitSequence_main_region_A_r_AD_r3_exitSequence_main_region_A_r_AD_r3_ADC();
 			exitAction_main_region_A_r_AD();
 			exitAction_main_region_A();
@@ -774,18 +774,18 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region r */
 	private void exitSequence_main_region_A_r() {
 		switch (stateVector[0]) {
-		case main_region_A_r_AA:
+		case MAIN_REGION_A_R_AA:
 			exitSequence_main_region_A_r_exitSequence_main_region_A_r_AA();
 			break;
-		case main_region_A_r_AB_r1_ABA:
+		case MAIN_REGION_A_R_AB_R1_ABA:
 			exitSequence_main_region_A_r_AB_r1_exitSequence_main_region_A_r_AB_r1_ABA();
 			break;
-		case main_region_A_r_AC_r_ACA_r_ACAA:
+		case MAIN_REGION_A_R_AC_R_ACA_R_ACAA:
 			exitSequence_main_region_A_r_AC_r_ACA_r_exitSequence_main_region_A_r_AC_r_ACA_r_ACAA();
 			exitAction_main_region_A_r_AC_r_ACA();
 			exitAction_main_region_A_r_AC();
 			break;
-		case main_region_A_r_AD_r1_ADA:
+		case MAIN_REGION_A_R_AD_R1_ADA:
 			exitSequence_main_region_A_r_AD_r1_exitSequence_main_region_A_r_AD_r1_ADA();
 			break;
 		default:
@@ -793,11 +793,11 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 		
 		switch (stateVector[1]) {
-		case main_region_A_r_AB_r2_ABB:
+		case MAIN_REGION_A_R_AB_R2_ABB:
 			exitSequence_main_region_A_r_AB_r2_exitSequence_main_region_A_r_AB_r2_ABB();
 			exitAction_main_region_A_r_AB();
 			break;
-		case main_region_A_r_AD_r2_ADB:
+		case MAIN_REGION_A_R_AD_R2_ADB:
 			exitSequence_main_region_A_r_AD_r2_exitSequence_main_region_A_r_AD_r2_ADB();
 			break;
 		default:
@@ -805,7 +805,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 		
 		switch (stateVector[2]) {
-		case main_region_A_r_AD_r3_ADC:
+		case MAIN_REGION_A_R_AD_R3_ADC:
 			exitSequence_main_region_A_r_AD_r3_exitSequence_main_region_A_r_AD_r3_ADC();
 			exitAction_main_region_A_r_AD();
 			break;
@@ -817,7 +817,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_A_r_AB_r1() {
 		switch (stateVector[0]) {
-		case main_region_A_r_AB_r1_ABA:
+		case MAIN_REGION_A_R_AB_R1_ABA:
 			exitSequence_main_region_A_r_AB_r1_exitSequence_main_region_A_r_AB_r1_ABA();
 			break;
 		default:
@@ -828,7 +828,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region r2 */
 	private void exitSequence_main_region_A_r_AB_r2() {
 		switch (stateVector[1]) {
-		case main_region_A_r_AB_r2_ABB:
+		case MAIN_REGION_A_R_AB_R2_ABB:
 			exitSequence_main_region_A_r_AB_r2_exitSequence_main_region_A_r_AB_r2_ABB();
 			break;
 		default:
@@ -839,7 +839,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region r */
 	private void exitSequence_main_region_A_r_AC_r() {
 		switch (stateVector[0]) {
-		case main_region_A_r_AC_r_ACA_r_ACAA:
+		case MAIN_REGION_A_R_AC_R_ACA_R_ACAA:
 			exitSequence_main_region_A_r_AC_r_ACA_r_exitSequence_main_region_A_r_AC_r_ACA_r_ACAA();
 			exitAction_main_region_A_r_AC_r_ACA();
 			break;
@@ -851,7 +851,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_A_r_AD_r1() {
 		switch (stateVector[0]) {
-		case main_region_A_r_AD_r1_ADA:
+		case MAIN_REGION_A_R_AD_R1_ADA:
 			exitSequence_main_region_A_r_AD_r1_exitSequence_main_region_A_r_AD_r1_ADA();
 			break;
 		default:
@@ -862,7 +862,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region r2 */
 	private void exitSequence_main_region_A_r_AD_r2() {
 		switch (stateVector[1]) {
-		case main_region_A_r_AD_r2_ADB:
+		case MAIN_REGION_A_R_AD_R2_ADB:
 			exitSequence_main_region_A_r_AD_r2_exitSequence_main_region_A_r_AD_r2_ADB();
 			break;
 		default:
@@ -873,7 +873,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	/* Default exit sequence for region r3 */
 	private void exitSequence_main_region_A_r_AD_r3() {
 		switch (stateVector[2]) {
-		case main_region_A_r_AD_r3_ADC:
+		case MAIN_REGION_A_R_AD_R3_ADC:
 			exitSequence_main_region_A_r_AD_r3_exitSequence_main_region_A_r_AD_r3_ADC();
 			break;
 		default:

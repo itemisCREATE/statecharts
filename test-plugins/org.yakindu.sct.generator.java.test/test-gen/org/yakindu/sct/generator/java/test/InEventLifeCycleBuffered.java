@@ -40,27 +40,27 @@ public class InEventLifeCycleBuffered {
 	@Test
 	public void inEventLifeCycleBufferedTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R2_C));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R2_C));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r2_D));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R2_D));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r2_D));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R2_D));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R2_C));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r1_B));
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R1_B));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R2_C));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r1_B));
-		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R1_B));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleBufferedStatemachine.State.R2_C));
 	}
 }

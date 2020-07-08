@@ -67,12 +67,12 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	private boolean initialized = false;
 	
 	public enum State {
-		outEventVisibilityEventDriven_main_region_A,
-		outEventVisibilityEventDriven_main_region_B,
-		outEventVisibilityEventDriven_main_region_C,
-		outEventVisibilityEventDriven_main_region_D,
-		outEventVisibilityEventDriven_main_region_E,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		MAIN_REGION_C,
+		MAIN_REGION_D,
+		MAIN_REGION_E,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -97,7 +97,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -144,23 +144,23 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case outEventVisibilityEventDriven_main_region_A:
+				case MAIN_REGION_A:
 					main_region_A_react(true);
 					break;
-				case outEventVisibilityEventDriven_main_region_B:
+				case MAIN_REGION_B:
 					main_region_B_react(true);
 					break;
-				case outEventVisibilityEventDriven_main_region_C:
+				case MAIN_REGION_C:
 					main_region_C_react(true);
 					break;
-				case outEventVisibilityEventDriven_main_region_D:
+				case MAIN_REGION_D:
 					main_region_D_react(true);
 					break;
-				case outEventVisibilityEventDriven_main_region_E:
+				case MAIN_REGION_E:
 					main_region_E_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -176,7 +176,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -212,16 +212,16 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case outEventVisibilityEventDriven_main_region_A:
-			return stateVector[0] == State.outEventVisibilityEventDriven_main_region_A;
-		case outEventVisibilityEventDriven_main_region_B:
-			return stateVector[0] == State.outEventVisibilityEventDriven_main_region_B;
-		case outEventVisibilityEventDriven_main_region_C:
-			return stateVector[0] == State.outEventVisibilityEventDriven_main_region_C;
-		case outEventVisibilityEventDriven_main_region_D:
-			return stateVector[0] == State.outEventVisibilityEventDriven_main_region_D;
-		case outEventVisibilityEventDriven_main_region_E:
-			return stateVector[0] == State.outEventVisibilityEventDriven_main_region_E;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
+		case MAIN_REGION_C:
+			return stateVector[0] == State.MAIN_REGION_C;
+		case MAIN_REGION_D:
+			return stateVector[0] == State.MAIN_REGION_D;
+		case MAIN_REGION_E:
+			return stateVector[0] == State.MAIN_REGION_E;
 		default:
 			return false;
 		}
@@ -255,31 +255,31 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.outEventVisibilityEventDriven_main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.outEventVisibilityEventDriven_main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.outEventVisibilityEventDriven_main_region_C;
+		stateVector[0] = State.MAIN_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_main_region_D_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.outEventVisibilityEventDriven_main_region_D;
+		stateVector[0] = State.MAIN_REGION_D;
 	}
 	
 	/* 'default' enter sequence for state E */
 	private void enterSequence_main_region_E_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.outEventVisibilityEventDriven_main_region_E;
+		stateVector[0] = State.MAIN_REGION_E;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -290,49 +290,49 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_main_region_D() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state E */
 	private void exitSequence_main_region_E() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case outEventVisibilityEventDriven_main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case outEventVisibilityEventDriven_main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
-		case outEventVisibilityEventDriven_main_region_C:
+		case MAIN_REGION_C:
 			exitSequence_main_region_C();
 			break;
-		case outEventVisibilityEventDriven_main_region_D:
+		case MAIN_REGION_D:
 			exitSequence_main_region_D();
 			break;
-		case outEventVisibilityEventDriven_main_region_E:
+		case MAIN_REGION_E:
 			exitSequence_main_region_E();
 			break;
 		default:

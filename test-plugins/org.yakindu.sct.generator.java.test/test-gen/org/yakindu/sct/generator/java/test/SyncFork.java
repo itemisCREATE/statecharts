@@ -40,24 +40,24 @@ public class SyncFork {
 	@Test
 	public void syncForkTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B));
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B_r1_C1));
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B_r2_D1));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B_R1_C1));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B_R2_D1));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B));
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B_r1_C2));
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B_r2_D2));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B_R1_C2));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B_R2_D2));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B));
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B_r1_C1));
-		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.main_region_B_r2_D1));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B_R1_C1));
+		assertTrue(statemachine.isStateActive(SyncForkStatemachine.State.MAIN_REGION_B_R2_D1));
 	}
 }

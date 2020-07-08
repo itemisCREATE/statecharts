@@ -77,22 +77,22 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private boolean initialized = false;
 	
 	public enum State {
-		mr_A,
-		mr_B,
-		mr_B_r1_X,
-		mr_B_r1_Y,
-		mr_B_r1_Z,
-		mr_B_r1_V,
-		mr_B_r1_W,
-		mr_B_r1_S,
-		mr_B_r1_T,
-		mr_B_r1_U,
-		mr_B_r2_S,
-		mr_B_r2_T,
-		mr_B_r2_U,
-		mr_B_r2_V,
-		mr_B_r2_W,
-		$NullState$
+		MR_A,
+		MR_B,
+		MR_B_R1_X,
+		MR_B_R1_Y,
+		MR_B_R1_Z,
+		MR_B_R1_V,
+		MR_B_R1_W,
+		MR_B_R1_S,
+		MR_B_R1_T,
+		MR_B_R1_U,
+		MR_B_R2_S,
+		MR_B_R2_T,
+		MR_B_R2_U,
+		MR_B_R2_V,
+		MR_B_R2_W,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[1];
@@ -125,10 +125,10 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			throw new IllegalStateException("timer not set.");
 		}
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 1; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -190,50 +190,50 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case mr_A:
+			case MR_A:
 				mr_A_react(true);
 				break;
-			case mr_B_r1_X:
+			case MR_B_R1_X:
 				mr_B_r1_X_react(true);
 				break;
-			case mr_B_r1_Y:
+			case MR_B_R1_Y:
 				mr_B_r1_Y_react(true);
 				break;
-			case mr_B_r1_Z:
+			case MR_B_R1_Z:
 				mr_B_r1_Z_react(true);
 				break;
-			case mr_B_r1_V:
+			case MR_B_R1_V:
 				mr_B_r1_V_react(true);
 				break;
-			case mr_B_r1_W:
+			case MR_B_R1_W:
 				mr_B_r1_W_react(true);
 				break;
-			case mr_B_r1_S:
+			case MR_B_R1_S:
 				mr_B_r1_S_react(true);
 				break;
-			case mr_B_r1_T:
+			case MR_B_R1_T:
 				mr_B_r1_T_react(true);
 				break;
-			case mr_B_r1_U:
+			case MR_B_R1_U:
 				mr_B_r1_U_react(true);
 				break;
-			case mr_B_r2_S:
+			case MR_B_R2_S:
 				mr_B_r2_S_react(true);
 				break;
-			case mr_B_r2_T:
+			case MR_B_R2_T:
 				mr_B_r2_T_react(true);
 				break;
-			case mr_B_r2_U:
+			case MR_B_R2_U:
 				mr_B_r2_U_react(true);
 				break;
-			case mr_B_r2_V:
+			case MR_B_R2_V:
 				mr_B_r2_V_react(true);
 				break;
-			case mr_B_r2_W:
+			case MR_B_R2_W:
 				mr_B_r2_W_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -244,7 +244,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -286,37 +286,37 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case mr_A:
-			return stateVector[0] == State.mr_A;
-		case mr_B:
+		case MR_A:
+			return stateVector[0] == State.MR_A;
+		case MR_B:
 			return stateVector[0].ordinal() >= State.
-					mr_B.ordinal()&& stateVector[0].ordinal() <= State.mr_B_r2_W.ordinal();
-		case mr_B_r1_X:
-			return stateVector[0] == State.mr_B_r1_X;
-		case mr_B_r1_Y:
-			return stateVector[0] == State.mr_B_r1_Y;
-		case mr_B_r1_Z:
-			return stateVector[0] == State.mr_B_r1_Z;
-		case mr_B_r1_V:
-			return stateVector[0] == State.mr_B_r1_V;
-		case mr_B_r1_W:
-			return stateVector[0] == State.mr_B_r1_W;
-		case mr_B_r1_S:
-			return stateVector[0] == State.mr_B_r1_S;
-		case mr_B_r1_T:
-			return stateVector[0] == State.mr_B_r1_T;
-		case mr_B_r1_U:
-			return stateVector[0] == State.mr_B_r1_U;
-		case mr_B_r2_S:
-			return stateVector[1] == State.mr_B_r2_S;
-		case mr_B_r2_T:
-			return stateVector[1] == State.mr_B_r2_T;
-		case mr_B_r2_U:
-			return stateVector[1] == State.mr_B_r2_U;
-		case mr_B_r2_V:
-			return stateVector[1] == State.mr_B_r2_V;
-		case mr_B_r2_W:
-			return stateVector[1] == State.mr_B_r2_W;
+					MR_B.ordinal()&& stateVector[0].ordinal() <= State.MR_B_R2_W.ordinal();
+		case MR_B_R1_X:
+			return stateVector[0] == State.MR_B_R1_X;
+		case MR_B_R1_Y:
+			return stateVector[0] == State.MR_B_R1_Y;
+		case MR_B_R1_Z:
+			return stateVector[0] == State.MR_B_R1_Z;
+		case MR_B_R1_V:
+			return stateVector[0] == State.MR_B_R1_V;
+		case MR_B_R1_W:
+			return stateVector[0] == State.MR_B_R1_W;
+		case MR_B_R1_S:
+			return stateVector[0] == State.MR_B_R1_S;
+		case MR_B_R1_T:
+			return stateVector[0] == State.MR_B_R1_T;
+		case MR_B_R1_U:
+			return stateVector[0] == State.MR_B_R1_U;
+		case MR_B_R2_S:
+			return stateVector[1] == State.MR_B_R2_S;
+		case MR_B_R2_T:
+			return stateVector[1] == State.MR_B_R2_T;
+		case MR_B_R2_U:
+			return stateVector[1] == State.MR_B_R2_U;
+		case MR_B_R2_V:
+			return stateVector[1] == State.MR_B_R2_V;
+		case MR_B_R2_W:
+			return stateVector[1] == State.MR_B_R2_W;
 		default:
 			return false;
 		}
@@ -463,7 +463,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private void enterSequence_mr_A_default() {
 		entryAction_mr_A();
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_A;
+		stateVector[0] = State.MR_A;
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -475,7 +475,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state X */
 	private void enterSequence_mr_B_r1_X_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_X;
+		stateVector[0] = State.MR_B_R1_X;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -483,7 +483,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state Y */
 	private void enterSequence_mr_B_r1_Y_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_Y;
+		stateVector[0] = State.MR_B_R1_Y;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -491,7 +491,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state Z */
 	private void enterSequence_mr_B_r1_Z_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_Z;
+		stateVector[0] = State.MR_B_R1_Z;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -499,7 +499,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state V */
 	private void enterSequence_mr_B_r1_V_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_V;
+		stateVector[0] = State.MR_B_R1_V;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -507,7 +507,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state W */
 	private void enterSequence_mr_B_r1_W_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_W;
+		stateVector[0] = State.MR_B_R1_W;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -515,7 +515,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state S */
 	private void enterSequence_mr_B_r1_S_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_S;
+		stateVector[0] = State.MR_B_R1_S;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -523,7 +523,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state T */
 	private void enterSequence_mr_B_r1_T_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_T;
+		stateVector[0] = State.MR_B_R1_T;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -531,7 +531,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state U */
 	private void enterSequence_mr_B_r1_U_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B_r1_U;
+		stateVector[0] = State.MR_B_R1_U;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -539,31 +539,31 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* 'default' enter sequence for state S */
 	private void enterSequence_mr_B_r2_S_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.mr_B_r2_S;
+		stateVector[1] = State.MR_B_R2_S;
 	}
 	
 	/* 'default' enter sequence for state T */
 	private void enterSequence_mr_B_r2_T_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.mr_B_r2_T;
+		stateVector[1] = State.MR_B_R2_T;
 	}
 	
 	/* 'default' enter sequence for state U */
 	private void enterSequence_mr_B_r2_U_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.mr_B_r2_U;
+		stateVector[1] = State.MR_B_R2_U;
 	}
 	
 	/* 'default' enter sequence for state V */
 	private void enterSequence_mr_B_r2_V_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.mr_B_r2_V;
+		stateVector[1] = State.MR_B_R2_V;
 	}
 	
 	/* 'default' enter sequence for state W */
 	private void enterSequence_mr_B_r2_W_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.mr_B_r2_W;
+		stateVector[1] = State.MR_B_R2_W;
 	}
 	
 	/* 'default' enter sequence for region mr */
@@ -579,28 +579,28 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* shallow enterSequence with history in child r1 */
 	private void shallowEnterSequence_mr_B_r1() {
 		switch (historyVector[0]) {
-		case mr_B_r1_X:
+		case MR_B_R1_X:
 			enterSequence_mr_B_r1_X_default();
 			break;
-		case mr_B_r1_Y:
+		case MR_B_R1_Y:
 			enterSequence_mr_B_r1_Y_default();
 			break;
-		case mr_B_r1_Z:
+		case MR_B_R1_Z:
 			enterSequence_mr_B_r1_Z_default();
 			break;
-		case mr_B_r1_V:
+		case MR_B_R1_V:
 			enterSequence_mr_B_r1_V_default();
 			break;
-		case mr_B_r1_W:
+		case MR_B_R1_W:
 			enterSequence_mr_B_r1_W_default();
 			break;
-		case mr_B_r1_S:
+		case MR_B_R1_S:
 			enterSequence_mr_B_r1_S_default();
 			break;
-		case mr_B_r1_T:
+		case MR_B_R1_T:
 			enterSequence_mr_B_r1_T_default();
 			break;
-		case mr_B_r1_U:
+		case MR_B_R1_U:
 			enterSequence_mr_B_r1_U_default();
 			break;
 		default:
@@ -616,7 +616,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* Default exit sequence for state A */
 	private void exitSequence_mr_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
@@ -628,109 +628,109 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* Default exit sequence for state X */
 	private void exitSequence_mr_B_r1_X() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Y */
 	private void exitSequence_mr_B_r1_Y() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Z */
 	private void exitSequence_mr_B_r1_Z() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state V */
 	private void exitSequence_mr_B_r1_V() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state W */
 	private void exitSequence_mr_B_r1_W() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state S */
 	private void exitSequence_mr_B_r1_S() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state T */
 	private void exitSequence_mr_B_r1_T() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state U */
 	private void exitSequence_mr_B_r1_U() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state S */
 	private void exitSequence_mr_B_r2_S() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state T */
 	private void exitSequence_mr_B_r2_T() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state U */
 	private void exitSequence_mr_B_r2_U() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state V */
 	private void exitSequence_mr_B_r2_V() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state W */
 	private void exitSequence_mr_B_r2_W() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region mr */
 	private void exitSequence_mr() {
 		switch (stateVector[0]) {
-		case mr_A:
+		case MR_A:
 			exitSequence_mr_A();
 			break;
-		case mr_B_r1_X:
+		case MR_B_R1_X:
 			exitSequence_mr_B_r1_X();
 			break;
-		case mr_B_r1_Y:
+		case MR_B_R1_Y:
 			exitSequence_mr_B_r1_Y();
 			break;
-		case mr_B_r1_Z:
+		case MR_B_R1_Z:
 			exitSequence_mr_B_r1_Z();
 			break;
-		case mr_B_r1_V:
+		case MR_B_R1_V:
 			exitSequence_mr_B_r1_V();
 			break;
-		case mr_B_r1_W:
+		case MR_B_R1_W:
 			exitSequence_mr_B_r1_W();
 			break;
-		case mr_B_r1_S:
+		case MR_B_R1_S:
 			exitSequence_mr_B_r1_S();
 			break;
-		case mr_B_r1_T:
+		case MR_B_R1_T:
 			exitSequence_mr_B_r1_T();
 			break;
-		case mr_B_r1_U:
+		case MR_B_R1_U:
 			exitSequence_mr_B_r1_U();
 			break;
 		default:
@@ -738,19 +738,19 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		
 		switch (stateVector[1]) {
-		case mr_B_r2_S:
+		case MR_B_R2_S:
 			exitSequence_mr_B_r2_S();
 			break;
-		case mr_B_r2_T:
+		case MR_B_R2_T:
 			exitSequence_mr_B_r2_T();
 			break;
-		case mr_B_r2_U:
+		case MR_B_R2_U:
 			exitSequence_mr_B_r2_U();
 			break;
-		case mr_B_r2_V:
+		case MR_B_R2_V:
 			exitSequence_mr_B_r2_V();
 			break;
-		case mr_B_r2_W:
+		case MR_B_R2_W:
 			exitSequence_mr_B_r2_W();
 			break;
 		default:
@@ -761,28 +761,28 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* Default exit sequence for region r1 */
 	private void exitSequence_mr_B_r1() {
 		switch (stateVector[0]) {
-		case mr_B_r1_X:
+		case MR_B_R1_X:
 			exitSequence_mr_B_r1_X();
 			break;
-		case mr_B_r1_Y:
+		case MR_B_R1_Y:
 			exitSequence_mr_B_r1_Y();
 			break;
-		case mr_B_r1_Z:
+		case MR_B_R1_Z:
 			exitSequence_mr_B_r1_Z();
 			break;
-		case mr_B_r1_V:
+		case MR_B_R1_V:
 			exitSequence_mr_B_r1_V();
 			break;
-		case mr_B_r1_W:
+		case MR_B_R1_W:
 			exitSequence_mr_B_r1_W();
 			break;
-		case mr_B_r1_S:
+		case MR_B_R1_S:
 			exitSequence_mr_B_r1_S();
 			break;
-		case mr_B_r1_T:
+		case MR_B_R1_T:
 			exitSequence_mr_B_r1_T();
 			break;
-		case mr_B_r1_U:
+		case MR_B_R1_U:
 			exitSequence_mr_B_r1_U();
 			break;
 		default:
@@ -793,19 +793,19 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* Default exit sequence for region r2 */
 	private void exitSequence_mr_B_r2() {
 		switch (stateVector[1]) {
-		case mr_B_r2_S:
+		case MR_B_R2_S:
 			exitSequence_mr_B_r2_S();
 			break;
-		case mr_B_r2_T:
+		case MR_B_R2_T:
 			exitSequence_mr_B_r2_T();
 			break;
-		case mr_B_r2_U:
+		case MR_B_R2_U:
 			exitSequence_mr_B_r2_U();
 			break;
-		case mr_B_r2_V:
+		case MR_B_R2_V:
 			exitSequence_mr_B_r2_V();
 			break;
-		case mr_B_r2_W:
+		case MR_B_R2_W:
 			exitSequence_mr_B_r2_W();
 			break;
 		default:
@@ -859,7 +859,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	/* Default react sequence for shallow history entry  */
 	private void react_mr_B_r1__entry_Default() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_mr_B_r1();
 		} else {
 			enterSequence_mr_B_r1_S_default();
@@ -1006,7 +1006,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_S();
 					react_mr_B_r1__choice_0();
 				} else {
-					if (((true && isStateActive(State.mr_B_r2_W)) && _current.iface.e3)) {
+					if (((true && isStateActive(State.MR_B_R2_W)) && _current.iface.e3)) {
 						exitSequence_mr_B();
 						react_mr__sync0();
 					} else {
@@ -1120,7 +1120,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e3 && isStateActive(State.mr_B_r1_S)) && true)) {
+			if (((_current.iface.e3 && isStateActive(State.MR_B_R1_S)) && true)) {
 				exitSequence_mr_B();
 				react_mr__sync0();
 			} else {

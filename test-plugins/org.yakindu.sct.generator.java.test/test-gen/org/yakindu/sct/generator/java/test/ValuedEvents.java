@@ -47,10 +47,10 @@ public class ValuedEvents {
 		statemachine.raiseRealEvent(20l);
 		statemachine.raiseStringEvent("tool");
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.integer_region_D));
-		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.string_region_D));
-		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.boolean_region_D));
-		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.real_region_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.INTEGER_REGION_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.STRING_REGION_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.BOOLEAN_REGION_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.REAL_REGION_D));
 		assertTrue(statemachine.getMyInt() == 23l);
 		assertTrue(statemachine.getMyBool() == false);
 		assertTrue(statemachine.getMyReal() == 20l);

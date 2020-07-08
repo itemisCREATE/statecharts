@@ -40,7 +40,7 @@ public class ExitOnSelfTransition {
 	@Test
 	public void exitOnSelfTransitionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ExitOnSelfTransitionStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(ExitOnSelfTransitionStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getEntryCount() == 1l);
 		assertTrue(statemachine.getExitCount() == 0l);
 		statemachine.raiseE();

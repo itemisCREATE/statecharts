@@ -40,11 +40,11 @@ public class CKeywords {
 	@Test
 	public void cKeywordsTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_char));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.AUTO_CHAR));
 		statemachine.raiseAuto();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_loop));
-		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_loop_switch_case));
-		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.auto_loop_switch_case_enum_asm));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.AUTO_LOOP));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.AUTO_LOOP_SWITCH_CASE));
+		assertTrue(statemachine.isStateActive(CKeywordsStatemachine.State.AUTO_LOOP_SWITCH_CASE_ENUM_ASM));
 	}
 }

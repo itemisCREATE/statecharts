@@ -49,13 +49,13 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_B,
-		main_region_B_r1_C,
-		main_region_B_r1_D,
-		main_region_B_r1_E,
-		main_region_B_r1_E__region0_F,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		MAIN_REGION_B_R1_C,
+		MAIN_REGION_B_R1_D,
+		MAIN_REGION_B_R1_E,
+		MAIN_REGION_B_R1_E_F,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[1];
@@ -81,10 +81,10 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 1; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -127,20 +127,20 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
-			case main_region_B_r1_C:
+			case MAIN_REGION_B_R1_C:
 				main_region_B_r1_C_react(true);
 				break;
-			case main_region_B_r1_D:
+			case MAIN_REGION_B_R1_D:
 				main_region_B_r1_D_react(true);
 				break;
-			case main_region_B_r1_E__region0_F:
+			case MAIN_REGION_B_R1_E_F:
 				main_region_B_r1_E__region0_F_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -151,7 +151,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -189,20 +189,20 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
-		case main_region_B:
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
 			return stateVector[0].ordinal() >= State.
-					main_region_B.ordinal()&& stateVector[0].ordinal() <= State.main_region_B_r1_E__region0_F.ordinal();
-		case main_region_B_r1_C:
-			return stateVector[0] == State.main_region_B_r1_C;
-		case main_region_B_r1_D:
-			return stateVector[0] == State.main_region_B_r1_D;
-		case main_region_B_r1_E:
+					MAIN_REGION_B.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_B_R1_E_F.ordinal();
+		case MAIN_REGION_B_R1_C:
+			return stateVector[0] == State.MAIN_REGION_B_R1_C;
+		case MAIN_REGION_B_R1_D:
+			return stateVector[0] == State.MAIN_REGION_B_R1_D;
+		case MAIN_REGION_B_R1_E:
 			return stateVector[0].ordinal() >= State.
-					main_region_B_r1_E.ordinal()&& stateVector[0].ordinal() <= State.main_region_B_r1_E__region0_F.ordinal();
-		case main_region_B_r1_E__region0_F:
-			return stateVector[0] == State.main_region_B_r1_E__region0_F;
+					MAIN_REGION_B_R1_E.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_B_R1_E_F.ordinal();
+		case MAIN_REGION_B_R1_E_F:
+			return stateVector[0] == State.MAIN_REGION_B_R1_E_F;
 		default:
 			return false;
 		}
@@ -231,7 +231,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -242,7 +242,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_B_r1_C_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B_r1_C;
+		stateVector[0] = State.MAIN_REGION_B_R1_C;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -250,7 +250,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* 'default' enter sequence for state D */
 	private void enterSequence_main_region_B_r1_D_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B_r1_D;
+		stateVector[0] = State.MAIN_REGION_B_R1_D;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -264,7 +264,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* 'default' enter sequence for state F */
 	private void enterSequence_main_region_B_r1_E__region0_F_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B_r1_E__region0_F;
+		stateVector[0] = State.MAIN_REGION_B_R1_E_F;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -280,13 +280,13 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* shallow enterSequence with history in child r1 */
 	private void shallowEnterSequence_main_region_B_r1() {
 		switch (historyVector[0]) {
-		case main_region_B_r1_C:
+		case MAIN_REGION_B_R1_C:
 			enterSequence_main_region_B_r1_C_default();
 			break;
-		case main_region_B_r1_D:
+		case MAIN_REGION_B_R1_D:
 			enterSequence_main_region_B_r1_D_default();
 			break;
-		case main_region_B_r1_E__region0_F:
+		case MAIN_REGION_B_R1_E_F:
 			enterSequence_main_region_B_r1_E_default();
 			break;
 		default:
@@ -302,7 +302,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
@@ -313,13 +313,13 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_B_r1_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_main_region_B_r1_D() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state E */
@@ -330,22 +330,22 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* Default exit sequence for state F */
 	private void exitSequence_main_region_B_r1_E__region0_F() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case main_region_B_r1_C:
+		case MAIN_REGION_B_R1_C:
 			exitSequence_main_region_B_r1_C();
 			break;
-		case main_region_B_r1_D:
+		case MAIN_REGION_B_R1_D:
 			exitSequence_main_region_B_r1_D();
 			break;
-		case main_region_B_r1_E__region0_F:
+		case MAIN_REGION_B_R1_E_F:
 			exitSequence_main_region_B_r1_E__region0_F();
 			break;
 		default:
@@ -356,13 +356,13 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_B_r1() {
 		switch (stateVector[0]) {
-		case main_region_B_r1_C:
+		case MAIN_REGION_B_R1_C:
 			exitSequence_main_region_B_r1_C();
 			break;
-		case main_region_B_r1_D:
+		case MAIN_REGION_B_R1_D:
 			exitSequence_main_region_B_r1_D();
 			break;
-		case main_region_B_r1_E__region0_F:
+		case MAIN_REGION_B_R1_E_F:
 			exitSequence_main_region_B_r1_E__region0_F();
 			break;
 		default:
@@ -373,7 +373,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* Default exit sequence for region null */
 	private void exitSequence_main_region_B_r1_E__region0() {
 		switch (stateVector[0]) {
-		case main_region_B_r1_E__region0_F:
+		case MAIN_REGION_B_R1_E_F:
 			exitSequence_main_region_B_r1_E__region0_F();
 			break;
 		default:
@@ -394,7 +394,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	/* Default react sequence for shallow history entry he */
 	private void react_main_region_B_r1_he() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_main_region_B_r1();
 		} else {
 			enterSequence_main_region_B_r1_C_default();

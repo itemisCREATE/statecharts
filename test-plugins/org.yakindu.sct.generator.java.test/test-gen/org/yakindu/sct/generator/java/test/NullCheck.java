@@ -40,8 +40,8 @@ public class NullCheck {
 	@Test
 	public void simpleNullCheckTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(NullCheckStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(NullCheckStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(NullCheckStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(NullCheckStatemachine.State.MAIN_REGION_B));
 	}
 }

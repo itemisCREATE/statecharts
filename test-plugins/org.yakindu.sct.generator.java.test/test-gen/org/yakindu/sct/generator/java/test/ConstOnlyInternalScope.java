@@ -40,7 +40,7 @@ public class ConstOnlyInternalScope {
 	@Test
 	public void statechartEntry() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ConstOnlyInternalScopeStatemachine.State.constOnlyInternalScope_main_region_A));
+		assertTrue(statemachine.isStateActive(ConstOnlyInternalScopeStatemachine.State.MAIN_REGION_A));
 	}
 	
 	@Test
@@ -48,6 +48,6 @@ public class ConstOnlyInternalScope {
 		statemachine.enter();
 		statemachine.raiseE(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ConstOnlyInternalScopeStatemachine.State.constOnlyInternalScope_main_region_B));
+		assertTrue(statemachine.isStateActive(ConstOnlyInternalScopeStatemachine.State.MAIN_REGION_B));
 	}
 }

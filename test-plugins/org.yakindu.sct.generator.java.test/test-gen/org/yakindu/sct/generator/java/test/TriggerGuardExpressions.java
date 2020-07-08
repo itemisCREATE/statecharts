@@ -40,38 +40,38 @@ public class TriggerGuardExpressions {
 	@Test
 	public void trueGuard() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE1();
 		statemachine.setB(true);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_B));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_B));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE1();
 		statemachine.raiseE2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_B));
 	}
 	
 	@Test
 	public void falseGuard() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_A));
 		statemachine.setB(false);
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE1();
 		statemachine.raiseE2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TriggerGuardExpressionsStatemachine.State.MAIN_REGION_A));
 	}
 }

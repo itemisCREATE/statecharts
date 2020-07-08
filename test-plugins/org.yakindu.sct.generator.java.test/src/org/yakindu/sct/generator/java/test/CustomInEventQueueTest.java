@@ -75,7 +75,7 @@ public class CustomInEventQueueTest {
 	@Test
 	public void testSetup() {
 		machine.enter();
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_A));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_A));
 		assertEquals(0, machine.getCycles());
 	}
 
@@ -83,7 +83,7 @@ public class CustomInEventQueueTest {
 	public void testEventTriggersCycle() {
 		machine.enter();
 		machine.raiseE();
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_dispatch));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_DISPATCH));
 		assertEquals(1, machine.getCycles());
 	}
 
@@ -92,7 +92,7 @@ public class CustomInEventQueueTest {
 		callback.mode = 'e';
 		machine.enter();
 		machine.raiseE();
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_A));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_A));
 		assertEquals(2, machine.getCycles());
 	}
 
@@ -101,7 +101,7 @@ public class CustomInEventQueueTest {
 		callback.mode = 'f';
 		machine.enter();
 		machine.raiseE();
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_B));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_B));
 		assertEquals(2, machine.getCycles());
 	}
 
@@ -110,11 +110,11 @@ public class CustomInEventQueueTest {
 		callback.mode = 'f';
 		machine.enter();
 		machine.raiseE();
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_B));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_B));
 		assertEquals(2, machine.getCycles());
 		callback.mode = '\0';
 		machine.raiseF(12);
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_dispatch));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_DISPATCH));
 		assertEquals(4, machine.getCycles());
 	}
 
@@ -123,10 +123,10 @@ public class CustomInEventQueueTest {
 		callback.mode = 'f';
 		machine.enter();
 		machine.raiseE();
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_B));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_B));
 		assertEquals(2, machine.getCycles());
 		machine.raiseF(12);
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_B));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_B));
 		assertEquals(5, machine.getCycles());
 	}
 
@@ -135,7 +135,7 @@ public class CustomInEventQueueTest {
 		callback.mode = 'g';
 		machine.enter();
 		machine.raiseE();
-		assertTrue(machine.isStateActive(State.inEventQueue_main_region_C));
+		assertTrue(machine.isStateActive(State.INEVENTQUEUE_MAIN_REGION_C));
 		assertEquals(2, machine.getCycles());
 	}
 

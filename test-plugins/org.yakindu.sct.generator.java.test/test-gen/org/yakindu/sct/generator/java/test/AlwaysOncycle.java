@@ -40,28 +40,28 @@ public class AlwaysOncycle {
 	@Test
 	public void alwaysOnCycleTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.MAIN_REGION_STATEA));
 		long count = 0l;
 		while (count < 5l) {
 			timer.cycleLeap(1l);
-			assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateA));
+			assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.MAIN_REGION_STATEA));
 			count++;
 		}
 		assertTrue((statemachine.getValue() == 5l));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.MAIN_REGION_STATEB));
 		assertTrue(statemachine.getValue() == 0l);
 		count = 0l;
 		while (count < 5l) {
 			timer.cycleLeap(1l);
-			assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateB));
+			assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.MAIN_REGION_STATEB));
 			count++;
 		}
 		assertTrue((statemachine.getValue() == 5l));
 		assertTrue((statemachine.getX() == 5l));
 		assertTrue((statemachine.getY() == 5l));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(AlwaysOncycleStatemachine.State.MAIN_REGION_STATEA));
 		assertTrue(statemachine.getValue() == 0l);
 	}
 }

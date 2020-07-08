@@ -40,12 +40,12 @@ public class StateIsActive {
 	@Test
 	public void stateIsActive() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.r1_R1A));
-		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.r2_R2A));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R1_R1A));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R2_R2A));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.r1_R1B));
-		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.r2_R2B));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R1_R1B));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R2_R2B));
 	}
 }

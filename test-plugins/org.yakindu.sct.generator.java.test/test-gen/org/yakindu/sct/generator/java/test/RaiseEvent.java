@@ -40,12 +40,12 @@ public class RaiseEvent {
 	@Test
 	public void raiseEvent() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.second_region_SateA));
-		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.SECOND_REGION_SATEA));
+		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.MAIN_REGION_STATEA));
 		statemachine.raiseE2();
 		timer.cycleLeap(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.second_region_StateB));
-		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.SECOND_REGION_STATEB));
+		assertTrue(statemachine.isStateActive(RaiseEventStatemachine.State.MAIN_REGION_STATEB));
 	}
 }

@@ -73,12 +73,12 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	private boolean initialized = false;
 	
 	public enum State {
-		entryReactionAction_r2_B,
-		entryReactionAction_r2_B_r_BA,
-		entryReactionAction_r2_B_r_BB,
-		entryReactionAction_r2_D,
-		entryReactionAction_r1_A,
-		$NullState$
+		R2_B,
+		R2_B_R_BA,
+		R2_B_R_BB,
+		R2_D,
+		R1_A,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[1];
@@ -104,10 +104,10 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 1; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -159,20 +159,20 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case entryReactionAction_r2_B_r_BA:
+			case R2_B_R_BA:
 				r2_B_r_BA_react(true);
 				break;
-			case entryReactionAction_r2_B_r_BB:
+			case R2_B_R_BB:
 				r2_B_r_BB_react(true);
 				break;
-			case entryReactionAction_r2_D:
+			case R2_D:
 				r2_D_react(true);
 				break;
-			case entryReactionAction_r1_A:
+			case R1_A:
 				r1_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -183,7 +183,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -213,17 +213,17 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case entryReactionAction_r2_B:
+		case R2_B:
 			return stateVector[0].ordinal() >= State.
-					entryReactionAction_r2_B.ordinal()&& stateVector[0].ordinal() <= State.entryReactionAction_r2_B_r_BB.ordinal();
-		case entryReactionAction_r2_B_r_BA:
-			return stateVector[0] == State.entryReactionAction_r2_B_r_BA;
-		case entryReactionAction_r2_B_r_BB:
-			return stateVector[0] == State.entryReactionAction_r2_B_r_BB;
-		case entryReactionAction_r2_D:
-			return stateVector[0] == State.entryReactionAction_r2_D;
-		case entryReactionAction_r1_A:
-			return stateVector[1] == State.entryReactionAction_r1_A;
+					R2_B.ordinal()&& stateVector[0].ordinal() <= State.R2_B_R_BB.ordinal();
+		case R2_B_R_BA:
+			return stateVector[0] == State.R2_B_R_BA;
+		case R2_B_R_BB:
+			return stateVector[0] == State.R2_B_R_BB;
+		case R2_D:
+			return stateVector[0] == State.R2_D;
+		case R1_A:
+			return stateVector[1] == State.R1_A;
 		default:
 			return false;
 		}
@@ -286,7 +286,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* 'default' enter sequence for state BA */
 	private void enterSequence_r2_B_r_BA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.entryReactionAction_r2_B_r_BA;
+		stateVector[0] = State.R2_B_R_BA;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -294,7 +294,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* 'default' enter sequence for state BB */
 	private void enterSequence_r2_B_r_BB_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.entryReactionAction_r2_B_r_BB;
+		stateVector[0] = State.R2_B_R_BB;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -302,13 +302,13 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* 'default' enter sequence for state D */
 	private void enterSequence_r2_D_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.entryReactionAction_r2_D;
+		stateVector[0] = State.R2_D;
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r1_A_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.entryReactionAction_r1_A;
+		stateVector[1] = State.R1_A;
 	}
 	
 	/* 'default' enter sequence for region r2 */
@@ -329,10 +329,10 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* shallow enterSequence with history in child r */
 	private void shallowEnterSequence_r2_B_r() {
 		switch (historyVector[0]) {
-		case entryReactionAction_r2_B_r_BA:
+		case R2_B_R_BA:
 			enterSequence_r2_B_r_BA_default();
 			break;
-		case entryReactionAction_r2_B_r_BB:
+		case R2_B_R_BB:
 			enterSequence_r2_B_r_BB_default();
 			break;
 		default:
@@ -353,37 +353,37 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* Default exit sequence for state BA */
 	private void exitSequence_r2_B_r_BA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state BB */
 	private void exitSequence_r2_B_r_BB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_r2_D() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state A */
 	private void exitSequence_r1_A() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[0]) {
-		case entryReactionAction_r2_B_r_BA:
+		case R2_B_R_BA:
 			exitSequence_r2_B_r_BA();
 			break;
-		case entryReactionAction_r2_B_r_BB:
+		case R2_B_R_BB:
 			exitSequence_r2_B_r_BB();
 			break;
-		case entryReactionAction_r2_D:
+		case R2_D:
 			exitSequence_r2_D();
 			break;
 		default:
@@ -394,10 +394,10 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* Default exit sequence for region r */
 	private void exitSequence_r2_B_r() {
 		switch (stateVector[0]) {
-		case entryReactionAction_r2_B_r_BA:
+		case R2_B_R_BA:
 			exitSequence_r2_B_r_BA();
 			break;
-		case entryReactionAction_r2_B_r_BB:
+		case R2_B_R_BB:
 			exitSequence_r2_B_r_BB();
 			break;
 		default:
@@ -408,7 +408,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r1() {
 		switch (stateVector[1]) {
-		case entryReactionAction_r1_A:
+		case R1_A:
 			exitSequence_r1_A();
 			break;
 		default:
@@ -426,7 +426,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	/* Default react sequence for shallow history entry default */
 	private void react_r2_B_r_default() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_r2_B_r();
 		} else {
 			defaultInterface.setEnteredBdefault(true);

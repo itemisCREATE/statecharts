@@ -86,13 +86,13 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	private boolean initialized = false;
 	
 	public enum State {
-		region_1_Idle,
-		region_1_Number1Pressed,
-		region_1_Number2Pressed,
-		region_1_Number3Pressed,
-		_region1_Closed,
-		_region1_Open,
-		$NullState$
+		REGION_1_IDLE,
+		REGION_1_NUMBER1PRESSED,
+		REGION_1_NUMBER2PRESSED,
+		REGION_1_NUMBER3PRESSED,
+		CLOSED,
+		OPEN,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -151,7 +151,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -203,26 +203,26 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case region_1_Idle:
+			case REGION_1_IDLE:
 				region_1_Idle_react(true);
 				break;
-			case region_1_Number1Pressed:
+			case REGION_1_NUMBER1PRESSED:
 				region_1_Number1Pressed_react(true);
 				break;
-			case region_1_Number2Pressed:
+			case REGION_1_NUMBER2PRESSED:
 				region_1_Number2Pressed_react(true);
 				break;
-			case region_1_Number3Pressed:
+			case REGION_1_NUMBER3PRESSED:
 				region_1_Number3Pressed_react(true);
 				break;
-			case _region1_Closed:
+			case CLOSED:
 				_region1_Closed_react(true);
 				break;
-			case _region1_Open:
+			case OPEN:
 				_region1_Open_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -233,7 +233,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -269,18 +269,18 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case region_1_Idle:
-			return stateVector[0] == State.region_1_Idle;
-		case region_1_Number1Pressed:
-			return stateVector[0] == State.region_1_Number1Pressed;
-		case region_1_Number2Pressed:
-			return stateVector[0] == State.region_1_Number2Pressed;
-		case region_1_Number3Pressed:
-			return stateVector[0] == State.region_1_Number3Pressed;
-		case _region1_Closed:
-			return stateVector[1] == State._region1_Closed;
-		case _region1_Open:
-			return stateVector[1] == State._region1_Open;
+		case REGION_1_IDLE:
+			return stateVector[0] == State.REGION_1_IDLE;
+		case REGION_1_NUMBER1PRESSED:
+			return stateVector[0] == State.REGION_1_NUMBER1PRESSED;
+		case REGION_1_NUMBER2PRESSED:
+			return stateVector[0] == State.REGION_1_NUMBER2PRESSED;
+		case REGION_1_NUMBER3PRESSED:
+			return stateVector[0] == State.REGION_1_NUMBER3PRESSED;
+		case CLOSED:
+			return stateVector[1] == State.CLOSED;
+		case OPEN:
+			return stateVector[1] == State.OPEN;
 		default:
 			return false;
 		}
@@ -308,38 +308,38 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	private void enterSequence_region_1_Idle_default() {
 		entryAction_region_1_Idle();
 		nextStateIndex = 0;
-		stateVector[0] = State.region_1_Idle;
+		stateVector[0] = State.REGION_1_IDLE;
 	}
 	
 	/* 'default' enter sequence for state Number1Pressed */
 	private void enterSequence_region_1_Number1Pressed_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.region_1_Number1Pressed;
+		stateVector[0] = State.REGION_1_NUMBER1PRESSED;
 	}
 	
 	/* 'default' enter sequence for state Number2Pressed */
 	private void enterSequence_region_1_Number2Pressed_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.region_1_Number2Pressed;
+		stateVector[0] = State.REGION_1_NUMBER2PRESSED;
 	}
 	
 	/* 'default' enter sequence for state Number3Pressed */
 	private void enterSequence_region_1_Number3Pressed_default() {
 		entryAction_region_1_Number3Pressed();
 		nextStateIndex = 0;
-		stateVector[0] = State.region_1_Number3Pressed;
+		stateVector[0] = State.REGION_1_NUMBER3PRESSED;
 	}
 	
 	/* 'default' enter sequence for state Closed */
 	private void enterSequence__region1_Closed_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State._region1_Closed;
+		stateVector[1] = State.CLOSED;
 	}
 	
 	/* 'default' enter sequence for state Open */
 	private void enterSequence__region1_Open_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State._region1_Open;
+		stateVector[1] = State.OPEN;
 	}
 	
 	/* 'default' enter sequence for region region 1 */
@@ -355,52 +355,52 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	/* Default exit sequence for state Idle */
 	private void exitSequence_region_1_Idle() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Number1Pressed */
 	private void exitSequence_region_1_Number1Pressed() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Number2Pressed */
 	private void exitSequence_region_1_Number2Pressed() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Number3Pressed */
 	private void exitSequence_region_1_Number3Pressed() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Closed */
 	private void exitSequence__region1_Closed() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Open */
 	private void exitSequence__region1_Open() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region region 1 */
 	private void exitSequence_region_1() {
 		switch (stateVector[0]) {
-		case region_1_Idle:
+		case REGION_1_IDLE:
 			exitSequence_region_1_Idle();
 			break;
-		case region_1_Number1Pressed:
+		case REGION_1_NUMBER1PRESSED:
 			exitSequence_region_1_Number1Pressed();
 			break;
-		case region_1_Number2Pressed:
+		case REGION_1_NUMBER2PRESSED:
 			exitSequence_region_1_Number2Pressed();
 			break;
-		case region_1_Number3Pressed:
+		case REGION_1_NUMBER3PRESSED:
 			exitSequence_region_1_Number3Pressed();
 			break;
 		default:
@@ -411,10 +411,10 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	/* Default exit sequence for region null */
 	private void exitSequence__region1() {
 		switch (stateVector[1]) {
-		case _region1_Closed:
+		case CLOSED:
 			exitSequence__region1_Closed();
 			break;
-		case _region1_Open:
+		case OPEN:
 			exitSequence__region1_Open();
 			break;
 		default:

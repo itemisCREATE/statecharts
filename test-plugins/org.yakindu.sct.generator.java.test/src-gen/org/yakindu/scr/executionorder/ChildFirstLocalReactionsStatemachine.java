@@ -117,13 +117,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	private boolean initialized = false;
 	
 	public enum State {
-		childFirstLocalReactions_r_A,
-		childFirstLocalReactions_r_A_r_AA,
-		childFirstLocalReactions_r_A_r_AA_r_AAA,
-		childFirstLocalReactions_r_A_r_AA_r_AAB,
-		childFirstLocalReactions_r_A_r_AB,
-		childFirstLocalReactions_r_B,
-		$NullState$
+		R_A,
+		R_A_R_AA,
+		R_A_R_AA_R_AAA,
+		R_A_R_AA_R_AAB,
+		R_A_R_AB,
+		R_B,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -148,7 +148,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -206,20 +206,20 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case childFirstLocalReactions_r_A_r_AA_r_AAA:
+			case R_A_R_AA_R_AAA:
 				r_A_r_AA_r_AAA_react(true);
 				break;
-			case childFirstLocalReactions_r_A_r_AA_r_AAB:
+			case R_A_R_AA_R_AAB:
 				r_A_r_AA_r_AAB_react(true);
 				break;
-			case childFirstLocalReactions_r_A_r_AB:
+			case R_A_R_AB:
 				r_A_r_AB_react(true);
 				break;
-			case childFirstLocalReactions_r_B:
+			case R_B:
 				r_B_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -230,7 +230,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -260,20 +260,20 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case childFirstLocalReactions_r_A:
+		case R_A:
 			return stateVector[0].ordinal() >= State.
-					childFirstLocalReactions_r_A.ordinal()&& stateVector[0].ordinal() <= State.childFirstLocalReactions_r_A_r_AB.ordinal();
-		case childFirstLocalReactions_r_A_r_AA:
+					R_A.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_AB.ordinal();
+		case R_A_R_AA:
 			return stateVector[0].ordinal() >= State.
-					childFirstLocalReactions_r_A_r_AA.ordinal()&& stateVector[0].ordinal() <= State.childFirstLocalReactions_r_A_r_AA_r_AAB.ordinal();
-		case childFirstLocalReactions_r_A_r_AA_r_AAA:
-			return stateVector[0] == State.childFirstLocalReactions_r_A_r_AA_r_AAA;
-		case childFirstLocalReactions_r_A_r_AA_r_AAB:
-			return stateVector[0] == State.childFirstLocalReactions_r_A_r_AA_r_AAB;
-		case childFirstLocalReactions_r_A_r_AB:
-			return stateVector[0] == State.childFirstLocalReactions_r_A_r_AB;
-		case childFirstLocalReactions_r_B:
-			return stateVector[0] == State.childFirstLocalReactions_r_B;
+					R_A_R_AA.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_AA_R_AAB.ordinal();
+		case R_A_R_AA_R_AAA:
+			return stateVector[0] == State.R_A_R_AA_R_AAA;
+		case R_A_R_AA_R_AAB:
+			return stateVector[0] == State.R_A_R_AA_R_AAB;
+		case R_A_R_AB:
+			return stateVector[0] == State.R_A_R_AB;
+		case R_B:
+			return stateVector[0] == State.R_B;
 		default:
 			return false;
 		}
@@ -378,25 +378,25 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	/* 'default' enter sequence for state AAA */
 	private void enterSequence_r_A_r_AA_r_AAA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstLocalReactions_r_A_r_AA_r_AAA;
+		stateVector[0] = State.R_A_R_AA_R_AAA;
 	}
 	
 	/* 'default' enter sequence for state AAB */
 	private void enterSequence_r_A_r_AA_r_AAB_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstLocalReactions_r_A_r_AA_r_AAB;
+		stateVector[0] = State.R_A_R_AA_R_AAB;
 	}
 	
 	/* 'default' enter sequence for state AB */
 	private void enterSequence_r_A_r_AB_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstLocalReactions_r_A_r_AB;
+		stateVector[0] = State.R_A_R_AB;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstLocalReactions_r_B;
+		stateVector[0] = State.R_B;
 	}
 	
 	/* 'default' enter sequence for region r */
@@ -427,40 +427,40 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	/* Default exit sequence for state AAA */
 	private void exitSequence_r_A_r_AA_r_AAA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state AAB */
 	private void exitSequence_r_A_r_AA_r_AAB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state AB */
 	private void exitSequence_r_A_r_AB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_r_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case childFirstLocalReactions_r_A_r_AA_r_AAA:
+		case R_A_R_AA_R_AAA:
 			exitSequence_r_A_r_AA_r_AAA();
 			break;
-		case childFirstLocalReactions_r_A_r_AA_r_AAB:
+		case R_A_R_AA_R_AAB:
 			exitSequence_r_A_r_AA_r_AAB();
 			break;
-		case childFirstLocalReactions_r_A_r_AB:
+		case R_A_R_AB:
 			exitSequence_r_A_r_AB();
 			break;
-		case childFirstLocalReactions_r_B:
+		case R_B:
 			exitSequence_r_B();
 			break;
 		default:
@@ -471,13 +471,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	/* Default exit sequence for region r */
 	private void exitSequence_r_A_r() {
 		switch (stateVector[0]) {
-		case childFirstLocalReactions_r_A_r_AA_r_AAA:
+		case R_A_R_AA_R_AAA:
 			exitSequence_r_A_r_AA_r_AAA();
 			break;
-		case childFirstLocalReactions_r_A_r_AA_r_AAB:
+		case R_A_R_AA_R_AAB:
 			exitSequence_r_A_r_AA_r_AAB();
 			break;
-		case childFirstLocalReactions_r_A_r_AB:
+		case R_A_R_AB:
 			exitSequence_r_A_r_AB();
 			break;
 		default:
@@ -488,10 +488,10 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	/* Default exit sequence for region r */
 	private void exitSequence_r_A_r_AA_r() {
 		switch (stateVector[0]) {
-		case childFirstLocalReactions_r_A_r_AA_r_AAA:
+		case R_A_R_AA_R_AAA:
 			exitSequence_r_A_r_AA_r_AAA();
 			break;
-		case childFirstLocalReactions_r_A_r_AA_r_AAB:
+		case R_A_R_AA_R_AAB:
 			exitSequence_r_A_r_AA_r_AAB();
 			break;
 		default:

@@ -105,9 +105,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region_StateB,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_STATEB,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -132,7 +132,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -190,14 +190,14 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case main_region_StateB:
+			case MAIN_REGION_STATEB:
 				main_region_StateB_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -208,7 +208,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -234,10 +234,10 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB;
 		default:
 			return false;
 		}
@@ -341,14 +341,14 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	private void enterSequence_main_region_StateA_default() {
 		entryAction_main_region_StateA();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_default() {
 		entryAction_main_region_StateB();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -359,22 +359,22 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB:
+		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
 		default:

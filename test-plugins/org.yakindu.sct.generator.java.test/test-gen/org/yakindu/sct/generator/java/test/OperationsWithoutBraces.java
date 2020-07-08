@@ -71,13 +71,13 @@ public class OperationsWithoutBraces {
 		});
 		 
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.another_region_A));
-		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.ANOTHER_REGION_A));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.another_region_C));
-		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.main_region_C));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.ANOTHER_REGION_C));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.MAIN_REGION_C));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.main_region_D));
-		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.another_region_D));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.MAIN_REGION_D));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.ANOTHER_REGION_D));
 	}
 }

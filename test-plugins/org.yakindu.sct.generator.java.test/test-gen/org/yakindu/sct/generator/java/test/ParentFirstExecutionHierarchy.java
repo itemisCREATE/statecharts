@@ -40,12 +40,12 @@ public class ParentFirstExecutionHierarchy {
 	@Test
 	public void childShouldTakeTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_A_R_AA_R_AAA));
 		statemachine.setDisable_a(true);
 		statemachine.setDisable_aa(true);
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_B));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_B));
 		assertTrue(!statemachine.getA_reacted());
 		assertTrue(!statemachine.getAa_reacted());
 		assertTrue(statemachine.getAaa_reacted());
@@ -57,11 +57,11 @@ public class ParentFirstExecutionHierarchy {
 	@Test
 	public void parentShouldTakeTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_A_R_AA_R_AAA));
 		statemachine.setDisable_a(true);
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_B));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_B));
 		assertTrue(!statemachine.getA_reacted());
 		assertTrue(statemachine.getAa_reacted());
 		assertTrue(!statemachine.getAaa_reacted());
@@ -73,10 +73,10 @@ public class ParentFirstExecutionHierarchy {
 	@Test
 	public void grandparentShouldTakeTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_A_R_AA_R_AAA));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_B));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_B));
 		assertTrue(statemachine.getA_reacted());
 		assertTrue(!statemachine.getAa_reacted());
 		assertTrue(!statemachine.getAaa_reacted());
@@ -86,9 +86,9 @@ public class ParentFirstExecutionHierarchy {
 	@Test
 	public void expectLocalReactrionsExecuteWithNoTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_A_R_AA_R_AAA));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.parentFirstExecutionHierarchy_r_A_r_AA_r_AAA));
+		assertTrue(statemachine.isStateActive(ParentFirstExecutionHierarchyStatemachine.State.R_A_R_AA_R_AAA));
 		assertTrue(statemachine.getA_local());
 		assertTrue(statemachine.getAa_local());
 		assertTrue(statemachine.getAaa_local());

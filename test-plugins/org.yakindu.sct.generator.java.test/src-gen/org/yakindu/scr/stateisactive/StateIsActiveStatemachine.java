@@ -25,11 +25,11 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		r1_R1A,
-		r1_R1B,
-		r2_R2A,
-		r2_R2B,
-		$NullState$
+		R1_R1A,
+		R1_R1B,
+		R2_R2A,
+		R2_R2B,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -54,7 +54,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -99,20 +99,20 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case r1_R1A:
+			case R1_R1A:
 				r1_R1A_react(true);
 				break;
-			case r1_R1B:
+			case R1_R1B:
 				r1_R1B_react(true);
 				break;
-			case r2_R2A:
+			case R2_R2A:
 				r2_R2A_react(true);
 				break;
-			case r2_R2B:
+			case R2_R2B:
 				r2_R2B_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -123,7 +123,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -149,14 +149,14 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case r1_R1A:
-			return stateVector[0] == State.r1_R1A;
-		case r1_R1B:
-			return stateVector[0] == State.r1_R1B;
-		case r2_R2A:
-			return stateVector[1] == State.r2_R2A;
-		case r2_R2B:
-			return stateVector[1] == State.r2_R2B;
+		case R1_R1A:
+			return stateVector[0] == State.R1_R1A;
+		case R1_R1B:
+			return stateVector[0] == State.R1_R1B;
+		case R2_R2A:
+			return stateVector[1] == State.R2_R2A;
+		case R2_R2B:
+			return stateVector[1] == State.R2_R2B;
 		default:
 			return false;
 		}
@@ -173,25 +173,25 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	/* 'default' enter sequence for state R1A */
 	private void enterSequence_R1_R1A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.r1_R1A;
+		stateVector[0] = State.R1_R1A;
 	}
 	
 	/* 'default' enter sequence for state R1B */
 	private void enterSequence_R1_R1B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.r1_R1B;
+		stateVector[0] = State.R1_R1B;
 	}
 	
 	/* 'default' enter sequence for state R2A */
 	private void enterSequence_R2_R2A_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.r2_R2A;
+		stateVector[1] = State.R2_R2A;
 	}
 	
 	/* 'default' enter sequence for state R2B */
 	private void enterSequence_R2_R2B_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.r2_R2B;
+		stateVector[1] = State.R2_R2B;
 	}
 	
 	/* 'default' enter sequence for region R1 */
@@ -207,34 +207,34 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	/* Default exit sequence for state R1A */
 	private void exitSequence_R1_R1A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state R1B */
 	private void exitSequence_R1_R1B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state R2A */
 	private void exitSequence_R2_R2A() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state R2B */
 	private void exitSequence_R2_R2B() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region R1 */
 	private void exitSequence_R1() {
 		switch (stateVector[0]) {
-		case r1_R1A:
+		case R1_R1A:
 			exitSequence_R1_R1A();
 			break;
-		case r1_R1B:
+		case R1_R1B:
 			exitSequence_R1_R1B();
 			break;
 		default:
@@ -245,10 +245,10 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	/* Default exit sequence for region R2 */
 	private void exitSequence_R2() {
 		switch (stateVector[1]) {
-		case r2_R2A:
+		case R2_R2A:
 			exitSequence_R2_R2A();
 			break;
-		case r2_R2B:
+		case R2_R2B:
 			exitSequence_R2_R2B();
 			break;
 		default:
@@ -275,7 +275,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (isStateActive(State.r2_R2B)) {
+				if (isStateActive(State.R2_R2B)) {
 					exitSequence_R1_R1A();
 					enterSequence_R1_R1B_default();
 				} else {

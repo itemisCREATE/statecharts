@@ -40,11 +40,11 @@ public class ConditionalExpression {
 	@Test
 	public void conditionalExpressionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(ConditionalExpressionsStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(ConditionalExpressionsStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getCondition() == 1l);
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ConditionalExpressionsStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(ConditionalExpressionsStatemachine.State.MAIN_REGION_B));
 		assertTrue(statemachine.getCondition() == 2l);
 	}
 }

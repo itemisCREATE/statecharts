@@ -33,13 +33,13 @@ public class EventDrivenInternalEvent {
 	@Test
 	public void checkInternlEventQueueing() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.eventDrivenInternalEvent_r1_A));
-		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.eventDrivenInternalEvent_r2_C));
-		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.eventDrivenInternalEvent_check_VALID));
+		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.R2_C));
+		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.CHECK_VALID));
 		statemachine.raiseStart();
-		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.eventDrivenInternalEvent_r1_B));
-		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.eventDrivenInternalEvent_r2_D));
-		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.eventDrivenInternalEvent_check_VALID));
+		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.R1_B));
+		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.R2_D));
+		assertTrue(statemachine.isStateActive(EventDrivenInternalEventStatemachine.State.CHECK_VALID));
 		assertTrue(statemachine.getI1_sequence() == 2l);
 		assertTrue(statemachine.getI2_sequence() == 3l);
 		statemachine.exit();

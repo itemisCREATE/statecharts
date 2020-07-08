@@ -41,11 +41,11 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	private boolean initialized = false;
 	
 	public enum State {
-		mr_A,
-		mr_A_r_X1,
-		mr_A_r_X2,
-		mr_B,
-		$NullState$
+		MR_A,
+		MR_A_R_X1,
+		MR_A_R_X2,
+		MR_B,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[1];
@@ -71,10 +71,10 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 1; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -117,17 +117,17 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case mr_A_r_X1:
+			case MR_A_R_X1:
 				mr_A_r_X1_react(true);
 				break;
-			case mr_A_r_X2:
+			case MR_A_R_X2:
 				mr_A_r_X2_react(true);
 				break;
-			case mr_B:
+			case MR_B:
 				mr_B_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -138,7 +138,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -172,15 +172,15 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case mr_A:
+		case MR_A:
 			return stateVector[0].ordinal() >= State.
-					mr_A.ordinal()&& stateVector[0].ordinal() <= State.mr_A_r_X2.ordinal();
-		case mr_A_r_X1:
-			return stateVector[0] == State.mr_A_r_X1;
-		case mr_A_r_X2:
-			return stateVector[0] == State.mr_A_r_X2;
-		case mr_B:
-			return stateVector[0] == State.mr_B;
+					MR_A.ordinal()&& stateVector[0].ordinal() <= State.MR_A_R_X2.ordinal();
+		case MR_A_R_X1:
+			return stateVector[0] == State.MR_A_R_X1;
+		case MR_A_R_X2:
+			return stateVector[0] == State.MR_A_R_X2;
+		case MR_B:
+			return stateVector[0] == State.MR_B;
 		default:
 			return false;
 		}
@@ -215,7 +215,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	/* 'default' enter sequence for state X1 */
 	private void enterSequence_mr_A_r_X1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_A_r_X1;
+		stateVector[0] = State.MR_A_R_X1;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -223,7 +223,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	/* 'default' enter sequence for state X2 */
 	private void enterSequence_mr_A_r_X2_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_A_r_X2;
+		stateVector[0] = State.MR_A_R_X2;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -231,7 +231,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	/* 'default' enter sequence for state B */
 	private void enterSequence_mr_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mr_B;
+		stateVector[0] = State.MR_B;
 	}
 	
 	/* 'default' enter sequence for region mr */
@@ -247,10 +247,10 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	/* shallow enterSequence with history in child r */
 	private void shallowEnterSequence_mr_A_r() {
 		switch (historyVector[0]) {
-		case mr_A_r_X1:
+		case MR_A_R_X1:
 			enterSequence_mr_A_r_X1_default();
 			break;
-		case mr_A_r_X2:
+		case MR_A_R_X2:
 			enterSequence_mr_A_r_X2_default();
 			break;
 		default:
@@ -266,31 +266,31 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	/* Default exit sequence for state X1 */
 	private void exitSequence_mr_A_r_X1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state X2 */
 	private void exitSequence_mr_A_r_X2() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_mr_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region mr */
 	private void exitSequence_mr() {
 		switch (stateVector[0]) {
-		case mr_A_r_X1:
+		case MR_A_R_X1:
 			exitSequence_mr_A_r_X1();
 			break;
-		case mr_A_r_X2:
+		case MR_A_R_X2:
 			exitSequence_mr_A_r_X2();
 			break;
-		case mr_B:
+		case MR_B:
 			exitSequence_mr_B();
 			break;
 		default:
@@ -301,10 +301,10 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	/* Default exit sequence for region r */
 	private void exitSequence_mr_A_r() {
 		switch (stateVector[0]) {
-		case mr_A_r_X1:
+		case MR_A_R_X1:
 			exitSequence_mr_A_r_X1();
 			break;
-		case mr_A_r_X2:
+		case MR_A_R_X2:
 			exitSequence_mr_A_r_X2();
 			break;
 		default:
@@ -320,7 +320,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	/* Default react sequence for shallow history entry  */
 	private void react_mr_A_r__entry_Default() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_mr_A_r();
 		} else {
 			enterSequence_mr_A_r_X1_default();

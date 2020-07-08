@@ -115,11 +115,11 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	private boolean initialized = false;
 	
 	public enum State {
-		childFirstExecutionHierarchy_r_A,
-		childFirstExecutionHierarchy_r_A_r_AA,
-		childFirstExecutionHierarchy_r_A_r_AA_r_AAA,
-		childFirstExecutionHierarchy_r_B,
-		$NullState$
+		R_A,
+		R_A_R_AA,
+		R_A_R_AA_R_AAA,
+		R_B,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -144,7 +144,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -204,14 +204,14 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
+			case R_A_R_AA_R_AAA:
 				r_A_r_AA_r_AAA_react(true);
 				break;
-			case childFirstExecutionHierarchy_r_B:
+			case R_B:
 				r_B_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -222,7 +222,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -248,16 +248,16 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case childFirstExecutionHierarchy_r_A:
+		case R_A:
 			return stateVector[0].ordinal() >= State.
-					childFirstExecutionHierarchy_r_A.ordinal()&& stateVector[0].ordinal() <= State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA.ordinal();
-		case childFirstExecutionHierarchy_r_A_r_AA:
+					R_A.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_AA_R_AAA.ordinal();
+		case R_A_R_AA:
 			return stateVector[0].ordinal() >= State.
-					childFirstExecutionHierarchy_r_A_r_AA.ordinal()&& stateVector[0].ordinal() <= State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA.ordinal();
-		case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-			return stateVector[0] == State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA;
-		case childFirstExecutionHierarchy_r_B:
-			return stateVector[0] == State.childFirstExecutionHierarchy_r_B;
+					R_A_R_AA.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_AA_R_AAA.ordinal();
+		case R_A_R_AA_R_AAA:
+			return stateVector[0] == State.R_A_R_AA_R_AAA;
+		case R_B:
+			return stateVector[0] == State.R_B;
 		default:
 			return false;
 		}
@@ -378,13 +378,13 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	/* 'default' enter sequence for state AAA */
 	private void enterSequence_r_A_r_AA_r_AAA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstExecutionHierarchy_r_A_r_AA_r_AAA;
+		stateVector[0] = State.R_A_R_AA_R_AAA;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.childFirstExecutionHierarchy_r_B;
+		stateVector[0] = State.R_B;
 	}
 	
 	/* 'default' enter sequence for region r */
@@ -410,22 +410,22 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	/* Default exit sequence for state AAA */
 	private void exitSequence_r_A_r_AA_r_AAA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_r_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
+		case R_A_R_AA_R_AAA:
 			exitSequence_r_A_r_AA_r_AAA();
 			break;
-		case childFirstExecutionHierarchy_r_B:
+		case R_B:
 			exitSequence_r_B();
 			break;
 		default:
@@ -436,7 +436,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	/* Default exit sequence for region r */
 	private void exitSequence_r_A_r() {
 		switch (stateVector[0]) {
-		case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
+		case R_A_R_AA_R_AAA:
 			exitSequence_r_A_r_AA_r_AAA();
 			break;
 		default:

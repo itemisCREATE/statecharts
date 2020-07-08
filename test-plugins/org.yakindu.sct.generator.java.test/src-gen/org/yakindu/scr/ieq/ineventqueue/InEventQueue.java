@@ -83,11 +83,11 @@ public class InEventQueue implements IInEventQueue {
 	private boolean initialized = false;
 	
 	public enum State {
-		inEventQueue_main_region_A,
-		inEventQueue_main_region_B,
-		inEventQueue_main_region_C,
-		inEventQueue_main_region_dispatch,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		MAIN_REGION_C,
+		MAIN_REGION_DISPATCH,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -118,7 +118,7 @@ public class InEventQueue implements IInEventQueue {
 		}
 		
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -164,20 +164,20 @@ public class InEventQueue implements IInEventQueue {
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case inEventQueue_main_region_A:
+				case MAIN_REGION_A:
 					main_region_A_react(true);
 					break;
-				case inEventQueue_main_region_B:
+				case MAIN_REGION_B:
 					main_region_B_react(true);
 					break;
-				case inEventQueue_main_region_C:
+				case MAIN_REGION_C:
 					main_region_C_react(true);
 					break;
-				case inEventQueue_main_region_dispatch:
+				case MAIN_REGION_DISPATCH:
 					main_region_dispatch_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -193,7 +193,7 @@ public class InEventQueue implements IInEventQueue {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -230,14 +230,14 @@ public class InEventQueue implements IInEventQueue {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case inEventQueue_main_region_A:
-			return stateVector[0] == State.inEventQueue_main_region_A;
-		case inEventQueue_main_region_B:
-			return stateVector[0] == State.inEventQueue_main_region_B;
-		case inEventQueue_main_region_C:
-			return stateVector[0] == State.inEventQueue_main_region_C;
-		case inEventQueue_main_region_dispatch:
-			return stateVector[0] == State.inEventQueue_main_region_dispatch;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
+		case MAIN_REGION_C:
+			return stateVector[0] == State.MAIN_REGION_C;
+		case MAIN_REGION_DISPATCH:
+			return stateVector[0] == State.MAIN_REGION_DISPATCH;
 		default:
 			return false;
 		}
@@ -284,26 +284,26 @@ public class InEventQueue implements IInEventQueue {
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.inEventQueue_main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.inEventQueue_main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.inEventQueue_main_region_C;
+		stateVector[0] = State.MAIN_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state dispatch */
 	private void enterSequence_main_region_dispatch_default() {
 		entryAction_main_region_dispatch();
 		nextStateIndex = 0;
-		stateVector[0] = State.inEventQueue_main_region_dispatch;
+		stateVector[0] = State.MAIN_REGION_DISPATCH;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -314,40 +314,40 @@ public class InEventQueue implements IInEventQueue {
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state dispatch */
 	private void exitSequence_main_region_dispatch() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case inEventQueue_main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case inEventQueue_main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
-		case inEventQueue_main_region_C:
+		case MAIN_REGION_C:
 			exitSequence_main_region_C();
 			break;
-		case inEventQueue_main_region_dispatch:
+		case MAIN_REGION_DISPATCH:
 			exitSequence_main_region_dispatch();
 			break;
 		default:

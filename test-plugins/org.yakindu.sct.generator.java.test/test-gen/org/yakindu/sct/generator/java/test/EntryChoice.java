@@ -42,6 +42,6 @@ public class EntryChoice {
 		statemachine.enter();
 		timer.cycleLeap(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(EntryChoiceStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(EntryChoiceStatemachine.State.MAIN_REGION_A));
 	}
 }

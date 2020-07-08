@@ -25,11 +25,11 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region_StateB,
-		main_region_StateB_r1_StateA,
-		main_region_StateB_r1_StateB,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_STATEB,
+		MAIN_REGION_STATEB_R1_STATEA,
+		MAIN_REGION_STATEB_R1_STATEB,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -54,7 +54,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -97,17 +97,17 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case main_region_StateB_r1_StateA:
+			case MAIN_REGION_STATEB_R1_STATEA:
 				main_region_StateB_r1_StateA_react(true);
 				break;
-			case main_region_StateB_r1_StateB:
+			case MAIN_REGION_STATEB_R1_STATEB:
 				main_region_StateB_r1_StateB_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -118,7 +118,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -144,15 +144,15 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_STATEB:
 			return stateVector[0].ordinal() >= State.
-					main_region_StateB.ordinal()&& stateVector[0].ordinal() <= State.main_region_StateB_r1_StateB.ordinal();
-		case main_region_StateB_r1_StateA:
-			return stateVector[0] == State.main_region_StateB_r1_StateA;
-		case main_region_StateB_r1_StateB:
-			return stateVector[0] == State.main_region_StateB_r1_StateB;
+					MAIN_REGION_STATEB.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_STATEB_R1_STATEB.ordinal();
+		case MAIN_REGION_STATEB_R1_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEB_R1_STATEA;
+		case MAIN_REGION_STATEB_R1_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB_R1_STATEB;
 		default:
 			return false;
 		}
@@ -169,7 +169,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
@@ -180,13 +180,13 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateB_r1_StateA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB_r1_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEB_R1_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_r1_StateB_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB_r1_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB_R1_STATEB;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -202,31 +202,31 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateB_r1_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB_r1_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB_r1_StateA:
+		case MAIN_REGION_STATEB_R1_STATEA:
 			exitSequence_main_region_StateB_r1_StateA();
 			break;
-		case main_region_StateB_r1_StateB:
+		case MAIN_REGION_STATEB_R1_STATEB:
 			exitSequence_main_region_StateB_r1_StateB();
 			break;
 		default:

@@ -78,13 +78,13 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	private boolean initialized = false;
 	
 	public enum State {
-		eventDrivenInternalEvent_r1_A,
-		eventDrivenInternalEvent_r1_B,
-		eventDrivenInternalEvent_r2_C,
-		eventDrivenInternalEvent_r2_D,
-		eventDrivenInternalEvent_check_VALID,
-		eventDrivenInternalEvent_check_MULTIPLEEVENTS,
-		$NullState$
+		R1_A,
+		R1_B,
+		R2_C,
+		R2_D,
+		CHECK_VALID,
+		CHECK_MULTIPLEEVENTS,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[3];
@@ -110,7 +110,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 3; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -164,26 +164,26 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case eventDrivenInternalEvent_r1_A:
+				case R1_A:
 					r1_A_react(true);
 					break;
-				case eventDrivenInternalEvent_r1_B:
+				case R1_B:
 					r1_B_react(true);
 					break;
-				case eventDrivenInternalEvent_r2_C:
+				case R2_C:
 					r2_C_react(true);
 					break;
-				case eventDrivenInternalEvent_r2_D:
+				case R2_D:
 					r2_D_react(true);
 					break;
-				case eventDrivenInternalEvent_check_VALID:
+				case CHECK_VALID:
 					check_VALID_react(true);
 					break;
-				case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
+				case CHECK_MULTIPLEEVENTS:
 					check_MULTIPLEEVENTS_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -199,7 +199,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$||stateVector[2] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -232,18 +232,18 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case eventDrivenInternalEvent_r1_A:
-			return stateVector[0] == State.eventDrivenInternalEvent_r1_A;
-		case eventDrivenInternalEvent_r1_B:
-			return stateVector[0] == State.eventDrivenInternalEvent_r1_B;
-		case eventDrivenInternalEvent_r2_C:
-			return stateVector[1] == State.eventDrivenInternalEvent_r2_C;
-		case eventDrivenInternalEvent_r2_D:
-			return stateVector[1] == State.eventDrivenInternalEvent_r2_D;
-		case eventDrivenInternalEvent_check_VALID:
-			return stateVector[2] == State.eventDrivenInternalEvent_check_VALID;
-		case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-			return stateVector[2] == State.eventDrivenInternalEvent_check_MULTIPLEEVENTS;
+		case R1_A:
+			return stateVector[0] == State.R1_A;
+		case R1_B:
+			return stateVector[0] == State.R1_B;
+		case R2_C:
+			return stateVector[1] == State.R2_C;
+		case R2_D:
+			return stateVector[1] == State.R2_D;
+		case CHECK_VALID:
+			return stateVector[2] == State.CHECK_VALID;
+		case CHECK_MULTIPLEEVENTS:
+			return stateVector[2] == State.CHECK_MULTIPLEEVENTS;
 		default:
 			return false;
 		}
@@ -310,37 +310,37 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r1_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.eventDrivenInternalEvent_r1_A;
+		stateVector[0] = State.R1_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r1_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.eventDrivenInternalEvent_r1_B;
+		stateVector[0] = State.R1_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_r2_C_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.eventDrivenInternalEvent_r2_C;
+		stateVector[1] = State.R2_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_r2_D_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.eventDrivenInternalEvent_r2_D;
+		stateVector[1] = State.R2_D;
 	}
 	
 	/* 'default' enter sequence for state VALID */
 	private void enterSequence_check_VALID_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.eventDrivenInternalEvent_check_VALID;
+		stateVector[2] = State.CHECK_VALID;
 	}
 	
 	/* 'default' enter sequence for state MULTIPLEEVENTS */
 	private void enterSequence_check_MULTIPLEEVENTS_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.eventDrivenInternalEvent_check_MULTIPLEEVENTS;
+		stateVector[2] = State.CHECK_MULTIPLEEVENTS;
 	}
 	
 	/* 'default' enter sequence for region r1 */
@@ -361,46 +361,46 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	/* Default exit sequence for state A */
 	private void exitSequence_r1_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_r1_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_r2_C() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_r2_D() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state VALID */
 	private void exitSequence_check_VALID() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state MULTIPLEEVENTS */
 	private void exitSequence_check_MULTIPLEEVENTS() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r1 */
 	private void exitSequence_r1() {
 		switch (stateVector[0]) {
-		case eventDrivenInternalEvent_r1_A:
+		case R1_A:
 			exitSequence_r1_A();
 			break;
-		case eventDrivenInternalEvent_r1_B:
+		case R1_B:
 			exitSequence_r1_B();
 			break;
 		default:
@@ -411,10 +411,10 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[1]) {
-		case eventDrivenInternalEvent_r2_C:
+		case R2_C:
 			exitSequence_r2_C();
 			break;
-		case eventDrivenInternalEvent_r2_D:
+		case R2_D:
 			exitSequence_r2_D();
 			break;
 		default:
@@ -425,10 +425,10 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	/* Default exit sequence for region check */
 	private void exitSequence_check() {
 		switch (stateVector[2]) {
-		case eventDrivenInternalEvent_check_VALID:
+		case CHECK_VALID:
 			exitSequence_check_VALID();
 			break;
-		case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
+		case CHECK_MULTIPLEEVENTS:
 			exitSequence_check_MULTIPLEEVENTS();
 			break;
 		default:

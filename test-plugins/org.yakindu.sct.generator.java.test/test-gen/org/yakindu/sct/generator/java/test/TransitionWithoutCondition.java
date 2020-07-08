@@ -40,8 +40,8 @@ public class TransitionWithoutCondition {
 	@Test
 	public void transitionWithoutConditionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(TransitionWithoutConditionStatemachine.State.main_region_A));
+		assertTrue(statemachine.isStateActive(TransitionWithoutConditionStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(TransitionWithoutConditionStatemachine.State.main_region_B));
+		assertTrue(statemachine.isStateActive(TransitionWithoutConditionStatemachine.State.MAIN_REGION_B));
 	}
 }

@@ -40,27 +40,27 @@ public class EnterState {
 	@Test
 	public void defaultEntry() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_A));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.R_A));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_B_r_E));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.R_B_R_E));
 	}
 	
 	@Test
 	public void namedEntryThroughNamedTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_A));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.R_A));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_B_r_F));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.R_B_R_F));
 	}
 	
 	@Test
 	public void namedEntryThroughDefaultTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_A));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.R_A));
 		statemachine.raiseG();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.r_B_r_E));
+		assertTrue(statemachine.isStateActive(EnterStateStatemachine.State.R_B_R_E));
 	}
 }

@@ -41,11 +41,11 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		r_A,
-		r_B,
-		r_B_r_E,
-		r_B_r_F,
-		$NullState$
+		R_A,
+		R_B,
+		R_B_R_E,
+		R_B_R_F,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -70,7 +70,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -113,17 +113,17 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case r_A:
+			case R_A:
 				r_A_react(true);
 				break;
-			case r_B_r_E:
+			case R_B_R_E:
 				r_B_r_E_react(true);
 				break;
-			case r_B_r_F:
+			case R_B_R_F:
 				r_B_r_F_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -134,7 +134,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -168,15 +168,15 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case r_A:
-			return stateVector[0] == State.r_A;
-		case r_B:
+		case R_A:
+			return stateVector[0] == State.R_A;
+		case R_B:
 			return stateVector[0].ordinal() >= State.
-					r_B.ordinal()&& stateVector[0].ordinal() <= State.r_B_r_F.ordinal();
-		case r_B_r_E:
-			return stateVector[0] == State.r_B_r_E;
-		case r_B_r_F:
-			return stateVector[0] == State.r_B_r_F;
+					R_B.ordinal()&& stateVector[0].ordinal() <= State.R_B_R_F.ordinal();
+		case R_B_R_E:
+			return stateVector[0] == State.R_B_R_E;
+		case R_B_R_F:
+			return stateVector[0] == State.R_B_R_F;
 		default:
 			return false;
 		}
@@ -201,7 +201,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.r_A;
+		stateVector[0] = State.R_A;
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -222,13 +222,13 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	/* 'default' enter sequence for state E */
 	private void enterSequence_r_B_r_E_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.r_B_r_E;
+		stateVector[0] = State.R_B_R_E;
 	}
 	
 	/* 'default' enter sequence for state F */
 	private void enterSequence_r_B_r_F_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.r_B_r_F;
+		stateVector[0] = State.R_B_R_F;
 	}
 	
 	/* 'default' enter sequence for region r */
@@ -249,31 +249,31 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_r_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state E */
 	private void exitSequence_r_B_r_E() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state F */
 	private void exitSequence_r_B_r_F() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case r_A:
+		case R_A:
 			exitSequence_r_A();
 			break;
-		case r_B_r_E:
+		case R_B_R_E:
 			exitSequence_r_B_r_E();
 			break;
-		case r_B_r_F:
+		case R_B_R_F:
 			exitSequence_r_B_r_F();
 			break;
 		default:
