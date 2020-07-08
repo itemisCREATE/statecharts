@@ -17,6 +17,7 @@ import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.Event
 
 class StatechartUtil {
 	
@@ -61,6 +62,10 @@ class StatechartUtil {
 	
 	def getOriginScope(EObject it) {
 		originTraces.filter(Scope).head
+	}
+	
+	def getOriginEvent(EObject it) {
+		originTraces.filter(Event).head
 	}
 	
 }

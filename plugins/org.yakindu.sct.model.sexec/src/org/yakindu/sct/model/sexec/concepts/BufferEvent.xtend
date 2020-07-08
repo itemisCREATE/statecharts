@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
+import org.eclipse.emf.ecore.EObject
 
 /**
  * This class defines the general concept of buffer events. Such events are used in event buffers. 
@@ -41,8 +42,12 @@ class BufferEvent {
 	}
 	
 	
-	def isBufferEvent(Event it){
+	def dispatch isBufferEvent(Event it){
 		annotations.exists[ a | a.type.name == BUFFER_EVENT_ANNOTATION]		
+	}
+	
+	def dispatch isBufferEvent(EObject it){
+		false
 	}
 	
 }

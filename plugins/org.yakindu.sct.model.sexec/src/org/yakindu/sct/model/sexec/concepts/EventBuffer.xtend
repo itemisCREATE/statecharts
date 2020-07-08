@@ -157,4 +157,9 @@ class EventBuffer {
 		if (it.type instanceof ComplexType) (type as ComplexType).features
 		else #[]
 	}
+	
+	def features(Type it) {
+		if (it instanceof ComplexType) (it as ComplexType).features
+		else #[]
+	}
 }
