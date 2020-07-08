@@ -19,13 +19,15 @@ import org.yakindu.base.expressions.interpreter.IOperationExecutor;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
+import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
-import org.yakindu.sct.simulation.core.sexec.container.DefaultExecutionContextInitializer;
+import org.yakindu.sct.simulation.core.sexec.container.ComplexTypeAwareContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
@@ -65,7 +67,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends IExecutionContextInitializer> bindIExecutionContextInitializer() {
-		return DefaultExecutionContextInitializer.class;
+		return ComplexTypeAwareContextInitializer.class;
 	}
 
 	public Class<? extends ISimulationEngineFactory> bindISimulationEngineFactory() {
@@ -74,6 +76,10 @@ public class GenericSimulationModule extends AbstractGenericModule {
 
 	public Class<? extends IModelSequencer> bindIModelSequencer() {
 		return ModelSequencer.class;
+	}
+	
+	public Class<? extends INamingService> bindINamingService(){
+		return DefaultNamingService.class;
 	}
 
 	public Class<? extends ExecutionContext> bindExecutionContext() {

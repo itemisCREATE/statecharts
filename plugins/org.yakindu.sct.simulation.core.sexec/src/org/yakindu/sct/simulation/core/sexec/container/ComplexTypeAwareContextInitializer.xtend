@@ -54,13 +54,13 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 	 * Do not use <code>create</code> here because properties within complex types are the same for multiple variables 
 	 * of same complex type
 	 */
-	def dispatch ExecutionSlot transform(Property prop) {
+	override dispatch ExecutionSlot transform(Property prop) {
 		val slot = createExecutionSlotFor(prop)
 		slot.writable = slot.writable && !prop.const
 		slot
 	}
 
-	def dispatch ExecutionSlot transform(Operation op) {
+	override dispatch ExecutionSlot transform(Operation op) {
 		val slot = createExecutionSlotFor(op)
 		slot
 	}
