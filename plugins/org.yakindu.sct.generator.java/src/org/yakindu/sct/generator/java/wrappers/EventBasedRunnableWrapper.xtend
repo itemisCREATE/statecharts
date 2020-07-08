@@ -51,7 +51,7 @@ class EventBasedRunnableWrapper {
 	
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
-		package «entry.basePackage»;
+		«IF !entry.basePackage.nullOrEmpty»package «entry.basePackage»;«ENDIF»
 		«flow.createImports(entry)»
 		
 		/**
