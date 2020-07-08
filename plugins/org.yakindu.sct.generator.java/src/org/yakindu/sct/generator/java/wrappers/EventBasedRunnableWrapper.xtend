@@ -111,7 +111,7 @@ class EventBasedRunnableWrapper {
 		/**
 		 * Interface object for «scope.interfaceName»
 		 */		
-		protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier» = new «scope.wrapperInterfaceName(entry)»() {
+		protected «scope.interfaceName» «scope.interfaceVariableName» = new «scope.wrapperInterfaceName(entry)»() {
 			«scope.toImplementation(entry)»
 		};
 		

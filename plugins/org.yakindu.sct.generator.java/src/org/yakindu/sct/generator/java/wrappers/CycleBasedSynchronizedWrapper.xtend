@@ -69,7 +69,7 @@ class CycleBasedSynchronizedWrapper {
 			
 			public «flow.cycleWrapperClassName(entry)»() {
 				«FOR scope : flow.interfaceScopes»
-					«scope.interfaceName.asEscapedIdentifier» = new «scope.wrapperInterfaceName(entry)»();
+					«scope.interfaceVariableName» = new «scope.wrapperInterfaceName(entry)»();
 				«ENDFOR»
 			}
 			
@@ -173,7 +173,7 @@ class CycleBasedSynchronizedWrapper {
 				«scope.toImplementation(entry)»
 			};
 			
-			protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier»;
+			protected «scope.interfaceName» «scope.interfaceVariableName»;
 		«ENDFOR»
 	'''
 
@@ -273,7 +273,7 @@ class CycleBasedSynchronizedWrapper {
 	def protected interfaceAccessors(ExecutionFlow flow) '''
 		«FOR scope : flow.interfaceScopes»
 			public synchronized «scope.interfaceName» get«scope.interfaceName»() {
-				return «scope.interfaceName.asEscapedIdentifier»;
+				return «scope.interfaceVariableName»;
 			}
 		«ENDFOR»
 	'''

@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.java.submodules
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.sct.generator.java.GenmodelEntries
-import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -24,7 +23,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 class InterfaceFunctionsGenerator {
 	
 	@Inject extension Naming
-	@Inject extension JavaNamingService
 	@Inject extension GenmodelEntries
 	@Inject extension SExecExtensions
 	@Inject extension EventCode

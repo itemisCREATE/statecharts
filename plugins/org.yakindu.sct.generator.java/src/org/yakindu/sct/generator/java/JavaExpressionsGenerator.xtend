@@ -241,7 +241,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String getContext(Property it) {
 		if (interfaceScope !== null) {
-			return interfaceScope.interfaceName.asEscapedIdentifier + "."
+			return interfaceScope.interfaceVariableName + "."
 		}
 		return ""
 	}
@@ -274,7 +274,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String getContext(Declaration it) {
 		if (interfaceScope !== null) {
-			return interfaceScope.interfaceName.asEscapedIdentifier + "."
+			return interfaceScope.interfaceVariableName + "."
 		}
 		return ""
 	}

@@ -48,8 +48,8 @@ class Init implements org.yakindu.sct.generator.core.submodules.lifecycle.Init {
 			«ENDIF»
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasOperations»
-					if (this.«scope.interfaceName.asEscapedIdentifier».operationCallback == null) {
-						throw new IllegalStateException("Operation callback for interface «scope.interfaceName.asEscapedIdentifier» must be set.");
+					if (this.«scope.interfaceVariableName».operationCallback == null) {
+						throw new IllegalStateException("Operation callback for interface «scope.interfaceName» must be set.");
 					}
 					
 				«ENDIF»

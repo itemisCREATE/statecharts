@@ -253,4 +253,19 @@ class Naming {
 		statemachineClassName
 	}
 	
+	def String getInterfaceName(InterfaceScope it) {
+		if (name !== null) {
+			return "Interface" + name.toFirstUpper()
+		} else {
+			return "Interface";
+		}
+	}
+	
+	def String getInterfaceVariableName(InterfaceScope it) {
+		if (name.nullOrEmpty)
+			"defaultInterface"
+		else
+			interfaceName.asEscapedIdentifier
+	}
+	
 }

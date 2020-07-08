@@ -42,7 +42,7 @@ class FieldDeclarationGenerator {
 	
 	def createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
-			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
+			protected «scope.interfaceImplName» «scope.interfaceVariableName»;
 			
 		«ENDFOR»
 		private boolean initialized = false;
