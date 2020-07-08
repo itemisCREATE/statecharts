@@ -57,7 +57,9 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
-		flow.features.forEach[context.slots += transform]
+		flow.features.forEach[context.slots += transform => [
+			visible = false
+		]]
 	}
 
 	def create it : createCompositeSlot importSlot(ExecutionFlow flow) {
