@@ -43,7 +43,7 @@ public class ConstantsTests {
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getX() == 10l);
 		assertTrue(statemachine.getY() == 20l);
-		assertTrue(statemachine.getSCINamed().getY().equals("Hello World"));
+		assertTrue(statemachine.getInterfaceNamed().getY().equals("Hello World"));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getResult() == 20l);

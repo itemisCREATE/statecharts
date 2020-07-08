@@ -42,13 +42,13 @@ public class ConstantsVariationTests {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getB2() == true);
-		assertTrue(statemachine.getSCINamed().getB() == true);
+		assertTrue(statemachine.getInterfaceNamed().getB() == true);
 		assertTrue(statemachine.getI2() == 5l);
-		assertTrue(statemachine.getSCINamed().getI() == 5l);
+		assertTrue(statemachine.getInterfaceNamed().getI() == 5l);
 		assertTrue(statemachine.getR2() == 5l);
-		assertTrue(statemachine.getSCINamed().getR() == 5l);
+		assertTrue(statemachine.getInterfaceNamed().getR() == 5l);
 		assertTrue(statemachine.getStr2().equals("String"));
-		assertTrue(statemachine.getSCINamed().getStr().equals("String"));
+		assertTrue(statemachine.getInterfaceNamed().getStr().equals("String"));
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isFinal());
 	}

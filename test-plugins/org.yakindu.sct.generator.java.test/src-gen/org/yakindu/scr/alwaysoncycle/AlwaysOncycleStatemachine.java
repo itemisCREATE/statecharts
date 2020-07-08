@@ -3,7 +3,7 @@ package org.yakindu.scr.alwaysoncycle;
 
 
 public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -54,13 +54,13 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 	}
 	private static class AlwaysOncycleStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -86,7 +86,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		this.isExecuting = value;
 	}
 	public AlwaysOncycleStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -97,13 +97,13 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setValue(0);
+		defaultInterface.setValue(0);
 		
-		sCInterface.setV2(false);
+		defaultInterface.setV2(false);
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
-		sCInterface.setY(0);
+		defaultInterface.setY(0);
 		
 		isExecuting = false;
 	}
@@ -172,12 +172,12 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -195,54 +195,54 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public long getValue() {
-		return sCInterface.getValue();
+		return defaultInterface.getValue();
 	}
 	
 	public void setValue(long value) {
-		sCInterface.setValue(value);
+		defaultInterface.setValue(value);
 	}
 	
 	public boolean getV2() {
-		return sCInterface.getV2();
+		return defaultInterface.getV2();
 	}
 	
 	public void setV2(boolean value) {
-		sCInterface.setV2(value);
+		defaultInterface.setV2(value);
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public long getY() {
-		return sCInterface.getY();
+		return defaultInterface.getY();
 	}
 	
 	public void setY(long value) {
-		sCInterface.setY(value);
+		defaultInterface.setY(value);
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.setValue(0);
+		defaultInterface.setValue(0);
 	}
 	
 	/* Exit action for state 'StateA'. */
 	private void exitAction_main_region_StateA() {
-		sCInterface.setValue(0);
+		defaultInterface.setValue(0);
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -305,7 +305,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getValue()==5) {
+				if (defaultInterface.getValue()==5) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {
@@ -314,7 +314,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setValue(sCInterface.getValue() + 1);
+			defaultInterface.setValue(defaultInterface.getValue() + 1);
 		}
 		return did_transition;
 	}
@@ -324,7 +324,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getValue()==5) {
+				if (defaultInterface.getValue()==5) {
 					exitSequence_main_region_StateB();
 					enterSequence_main_region_StateA_default();
 				} else {
@@ -333,11 +333,11 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setValue(sCInterface.getValue() + 1);
+			defaultInterface.setValue(defaultInterface.getValue() + 1);
 			
-			sCInterface.setX(sCInterface.getX() + 1);
+			defaultInterface.setX(defaultInterface.getX() + 1);
 			
-			sCInterface.setY(sCInterface.getY() + 1);
+			defaultInterface.setY(defaultInterface.getY() + 1);
 		}
 		return did_transition;
 	}

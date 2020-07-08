@@ -8,7 +8,7 @@ import org.yakindu.sct.rx.Observable;
 
 public interface IWrapperTestStatemachine extends ITimerCallback,IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public Observable<Void> getEv_out();
 		
@@ -26,21 +26,21 @@ public interface IWrapperTestStatemachine extends ITimerCallback,IStatemachine {
 		
 		public void setS2_entered(long value);
 		
-		public List<SCInterfaceListener> getListeners();
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public List<InterfaceListener> getListeners();
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceListener {
+	public interface InterfaceListener {
 	
 		public void onEv_outRaised();
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public void displayTime();
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

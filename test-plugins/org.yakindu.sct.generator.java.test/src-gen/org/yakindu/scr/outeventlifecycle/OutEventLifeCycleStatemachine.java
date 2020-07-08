@@ -4,7 +4,7 @@ package org.yakindu.scr.outeventlifecycle;
 import org.yakindu.sct.rx.Observable;
 
 public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -53,13 +53,13 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 	}
 	private static class OutEventLifeCycleStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -86,7 +86,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		this.isExecuting = value;
 	}
 	public OutEventLifeCycleStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -98,9 +98,9 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		clearInEvents();
 		clearOutEvents();
 		
-		sCInterface.setF_available_in_cycle(false);
+		defaultInterface.setF_available_in_cycle(false);
 		
-		sCInterface.setF_available_in_next_cycle(false);
+		defaultInterface.setF_available_in_next_cycle(false);
 		
 		isExecuting = false;
 	}
@@ -175,16 +175,16 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		return false;
 	}
 	private void clearOutEvents() {
-		sCInterface.f = false;
+		defaultInterface.f = false;
 	}
 	
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -204,32 +204,32 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public boolean isRaisedF() {
-		return sCInterface.isRaisedF();
+		return defaultInterface.isRaisedF();
 	}
 	
 	public boolean getF_available_in_cycle() {
-		return sCInterface.getF_available_in_cycle();
+		return defaultInterface.getF_available_in_cycle();
 	}
 	
 	public void setF_available_in_cycle(boolean value) {
-		sCInterface.setF_available_in_cycle(value);
+		defaultInterface.setF_available_in_cycle(value);
 	}
 	
 	public boolean getF_available_in_next_cycle() {
-		return sCInterface.getF_available_in_next_cycle();
+		return defaultInterface.getF_available_in_next_cycle();
 	}
 	
 	public void setF_available_in_next_cycle(boolean value) {
-		sCInterface.setF_available_in_next_cycle(value);
+		defaultInterface.setF_available_in_next_cycle(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -324,7 +324,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			if (react()==false) {
 				if (_current.iface.e) {
 					exitSequence_r1_A();
-					sCInterface.raiseF();
+					defaultInterface.raiseF();
 					
 					enterSequence_r1_B_default();
 				} else {
@@ -344,8 +344,8 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.f) {
-				sCInterface.setF_available_in_next_cycle(true);
+			if (defaultInterface.f) {
+				defaultInterface.setF_available_in_next_cycle(true);
 			}
 		}
 		return did_transition;
@@ -358,8 +358,8 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			if (sCInterface.f) {
-				sCInterface.setF_available_in_cycle(true);
+			if (defaultInterface.f) {
+				defaultInterface.setF_available_in_cycle(true);
 			}
 		}
 		return did_transition;

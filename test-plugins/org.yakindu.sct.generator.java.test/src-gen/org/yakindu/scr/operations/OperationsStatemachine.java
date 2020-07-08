@@ -3,22 +3,22 @@ package org.yakindu.scr.operations;
 
 
 public class OperationsStatemachine implements IOperationsStatemachine {
-	protected class SCIInterface1Impl implements SCIInterface1 {
+	protected class InterfaceInterface1Impl implements InterfaceInterface1 {
 	
-		private SCIInterface1OperationCallback operationCallback;
+		private InterfaceInterface1OperationCallback operationCallback;
 		
-		public void setSCIInterface1OperationCallback(
-				SCIInterface1OperationCallback operationCallback) {
+		public void setInterfaceInterface1OperationCallback(
+				InterfaceInterface1OperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 	}
 	
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private boolean ev;
@@ -30,15 +30,15 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean ev;
 	}
 	private static class OperationsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCIInterface1Impl sCIInterface1;
+	protected InterfaceInterface1Impl interfaceInterface1;
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -78,8 +78,8 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		this.isExecuting = value;
 	}
 	public OperationsStatemachine() {
-		sCIInterface1 = new SCIInterface1Impl();
-		sCInterface = new SCInterfaceImpl();
+		interfaceInterface1 = new InterfaceInterface1Impl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -87,12 +87,12 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		if (this.sCIInterface1.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCIInterface1 must be set.");
+		if (this.interfaceInterface1.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface InterfaceInterface1 must be set.");
 		}
 		
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
@@ -176,12 +176,12 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.ev = sCInterface.ev;
-		sCInterface.ev = false;
+		_current.iface.ev = defaultInterface.ev;
+		defaultInterface.ev = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.ev = false;
+		defaultInterface.ev = false;
 	}
 	
 	/**
@@ -203,12 +203,12 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 	}
 	
-	public SCIInterface1 getSCIInterface1() {
-		return sCIInterface1;
+	public InterfaceInterface1 getInterfaceInterface1() {
+		return interfaceInterface1;
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void setInternalOperationCallback(
@@ -217,7 +217,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 	
 	public void raiseEv() {
-		sCInterface.raiseEv();
+		defaultInterface.raiseEv();
 	}
 	
 	/* Entry action for state 'B'. */
@@ -241,40 +241,40 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCIInterface1.operationCallback.interfaceOperation1();
+		interfaceInterface1.operationCallback.interfaceOperation1();
 		
-		sCIInterface1.operationCallback.interfaceOperation2(4);
+		interfaceInterface1.operationCallback.interfaceOperation2(4);
 		
-		sCIInterface1.operationCallback.interfaceOperation3();
+		interfaceInterface1.operationCallback.interfaceOperation3();
 		
-		sCIInterface1.operationCallback.interfaceOperation3a(1.0);
+		interfaceInterface1.operationCallback.interfaceOperation3a(1.0);
 		
-		sCIInterface1.operationCallback.interfaceOperation4();
+		interfaceInterface1.operationCallback.interfaceOperation4();
 		
-		sCIInterface1.operationCallback.interfaceOperation4a(5);
+		interfaceInterface1.operationCallback.interfaceOperation4a(5);
 		
-		sCIInterface1.operationCallback.interfaceOperation5();
+		interfaceInterface1.operationCallback.interfaceOperation5();
 		
-		sCIInterface1.operationCallback.interfaceOperation5a("");
+		interfaceInterface1.operationCallback.interfaceOperation5a("");
 	}
 	
 	/* Entry action for state 'D'. */
 	private void entryAction_main_region_D() {
-		sCInterface.operationCallback.unnamedInterfaceOperation1();
+		defaultInterface.operationCallback.unnamedInterfaceOperation1();
 		
-		sCInterface.operationCallback.unnamedInterfaceOperation2(4);
+		defaultInterface.operationCallback.unnamedInterfaceOperation2(4);
 		
-		sCInterface.operationCallback.unnamedOperation3();
+		defaultInterface.operationCallback.unnamedOperation3();
 		
-		sCInterface.operationCallback.unnamedOperation3a(1.0);
+		defaultInterface.operationCallback.unnamedOperation3a(1.0);
 		
-		sCInterface.operationCallback.unnamedOperation4();
+		defaultInterface.operationCallback.unnamedOperation4();
 		
-		sCInterface.operationCallback.unnamedOperation4a(5);
+		defaultInterface.operationCallback.unnamedOperation4a(5);
 		
-		sCInterface.operationCallback.unnamedOperation5();
+		defaultInterface.operationCallback.unnamedOperation5();
 		
-		sCInterface.operationCallback.unnamedOperation5a("");
+		defaultInterface.operationCallback.unnamedOperation5a("");
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -367,7 +367,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((_current.iface.ev) && (sCInterface.operationCallback.alwaysTrue()))) {
+				if (((_current.iface.ev) && (defaultInterface.operationCallback.alwaysTrue()))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {

@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IAssignmentAsExpressionStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getA();
 		
@@ -101,6 +101,6 @@ public interface IAssignmentAsExpressionStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

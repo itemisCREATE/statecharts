@@ -3,7 +3,7 @@ package org.yakindu.scr.logicaland;
 
 
 public class LogicalAndStatemachine implements ILogicalAndStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long x;
 		
@@ -31,7 +31,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -54,7 +54,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		this.isExecuting = value;
 	}
 	public LogicalAndStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -64,9 +64,9 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		}
 		
 		
-		sCInterface.setX(1);
+		defaultInterface.setX(1);
 		
-		sCInterface.setB(false);
+		defaultInterface.setB(false);
 		
 		isExecuting = false;
 	}
@@ -143,24 +143,24 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public boolean getB() {
-		return sCInterface.getB();
+		return defaultInterface.getB();
 	}
 	
 	public void setB(boolean value) {
-		sCInterface.setB(value);
+		defaultInterface.setB(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -205,9 +205,9 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getX()==1) {
+				if (defaultInterface.getX()==1) {
 					exitSequence_main_region_A();
-					sCInterface.setB((((sCInterface.assignX(sCInterface.getX() + 1))==2 && (sCInterface.assignX(sCInterface.getX() * 2))==4)));
+					defaultInterface.setB((((defaultInterface.assignX(defaultInterface.getX() + 1))==2 && (defaultInterface.assignX(defaultInterface.getX() * 2))==4)));
 					
 					enterSequence_main_region_A_default();
 				} else {

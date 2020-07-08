@@ -3,7 +3,7 @@ package org.yakindu.scr.localreactions;
 
 
 public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long x;
 		
@@ -17,7 +17,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -40,7 +40,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		this.isExecuting = value;
 	}
 	public LocalReactionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -50,7 +50,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		}
 		
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		isExecuting = false;
 	}
@@ -127,16 +127,16 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -185,8 +185,8 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.getX()==0) {
-				sCInterface.setX(sCInterface.getX() + 1);
+			if (defaultInterface.getX()==0) {
+				defaultInterface.setX(defaultInterface.getX() + 1);
 			}
 		}
 		return did_transition;

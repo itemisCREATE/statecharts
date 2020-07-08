@@ -4,7 +4,7 @@ package org.yakindu.scr.raiseevent;
 import org.yakindu.sct.rx.Observable;
 
 public class RaiseEventStatemachine implements IRaiseEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -29,13 +29,13 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e2;
 	}
 	private static class RaiseEventStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -63,7 +63,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		this.isExecuting = value;
 	}
 	public RaiseEventStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -150,12 +150,12 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e2 = sCInterface.e2;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		defaultInterface.e2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e2 = false;
+		defaultInterface.e2 = false;
 	}
 	
 	/**
@@ -177,21 +177,21 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public Observable<Void> getE1() {
-		return sCInterface.getE1();
+		return defaultInterface.getE1();
 	}
 	
 	public void raiseE2() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -326,7 +326,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e1) {
+			if (defaultInterface.e1) {
 				exitSequence_second_region_SateA();
 				enterSequence_second_region_StateB_default();
 			} else {

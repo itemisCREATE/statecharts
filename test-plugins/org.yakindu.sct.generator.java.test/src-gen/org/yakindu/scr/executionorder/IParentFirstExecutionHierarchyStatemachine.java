@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IParentFirstExecutionHierarchyStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -47,6 +47,6 @@ public interface IParentFirstExecutionHierarchyStatemachine extends IStatemachin
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

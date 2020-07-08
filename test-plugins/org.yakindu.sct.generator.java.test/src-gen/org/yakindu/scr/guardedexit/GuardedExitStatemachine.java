@@ -3,7 +3,7 @@ package org.yakindu.scr.guardedexit;
 
 
 public class GuardedExitStatemachine implements IGuardedExitStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -34,13 +34,13 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 	}
 	private static class GuardedExitStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -66,7 +66,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		this.isExecuting = value;
 	}
 	public GuardedExitStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -77,9 +77,9 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setGuard(false);
+		defaultInterface.setGuard(false);
 		
-		sCInterface.setDone(false);
+		defaultInterface.setDone(false);
 		
 		isExecuting = false;
 	}
@@ -148,12 +148,12 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -171,34 +171,34 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public boolean getGuard() {
-		return sCInterface.getGuard();
+		return defaultInterface.getGuard();
 	}
 	
 	public void setGuard(boolean value) {
-		sCInterface.setGuard(value);
+		defaultInterface.setGuard(value);
 	}
 	
 	public boolean getDone() {
-		return sCInterface.getDone();
+		return defaultInterface.getDone();
 	}
 	
 	public void setDone(boolean value) {
-		sCInterface.setDone(value);
+		defaultInterface.setDone(value);
 	}
 	
 	/* Exit action for state 'A'. */
 	private void exitAction_main_region_A() {
-		if (sCInterface.getGuard()) {
-			sCInterface.setDone(true);
+		if (defaultInterface.getGuard()) {
+			defaultInterface.setDone(true);
 		}
 	}
 	

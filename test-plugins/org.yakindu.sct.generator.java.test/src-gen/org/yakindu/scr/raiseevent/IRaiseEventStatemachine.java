@@ -6,7 +6,7 @@ import org.yakindu.sct.rx.Observable;
 
 public interface IRaiseEventStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public Observable<Void> getE1();
 		
@@ -14,6 +14,6 @@ public interface IRaiseEventStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

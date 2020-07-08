@@ -3,7 +3,7 @@ package org.yakindu.scr.ineventlifecycle;
 
 
 public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -24,13 +24,13 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 	}
 	private static class InEventLifeCycleStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -55,7 +55,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		this.isExecuting = value;
 	}
 	public InEventLifeCycleStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -66,7 +66,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		
 		clearInEvents();
 		
-		sCInterface.setI(0);
+		defaultInterface.setI(0);
 		
 		isExecuting = false;
 	}
@@ -132,12 +132,12 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -153,20 +153,20 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public long getI() {
-		return sCInterface.getI();
+		return defaultInterface.getI();
 	}
 	
 	public void setI(long value) {
-		sCInterface.setI(value);
+		defaultInterface.setI(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -216,7 +216,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		}
 		if (did_transition==false) {
 			if (_current.iface.e) {
-				sCInterface.setI(sCInterface.getI() + 1);
+				defaultInterface.setI(defaultInterface.getI() + 1);
 			}
 		}
 		return did_transition;

@@ -5,32 +5,32 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IVariadicFunctionsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public void myVarOperation(String... name);
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 	
-	public interface SCIIF2 {
+	public interface InterfaceIF2 {
 	
-		public void setSCIIF2OperationCallback(SCIIF2OperationCallback operationCallback);
+		public void setInterfaceIF2OperationCallback(InterfaceIF2OperationCallback operationCallback);
 	}
 	
-	public interface SCIIF2OperationCallback {
+	public interface InterfaceIF2OperationCallback {
 	
 		public void myVarOperation2(long argCount, long... args);
 		
 	}
 	
-	public SCIIF2 getSCIIF2();
+	public InterfaceIF2 getInterfaceIF2();
 	
 	public interface InternalOperationCallback {
 	

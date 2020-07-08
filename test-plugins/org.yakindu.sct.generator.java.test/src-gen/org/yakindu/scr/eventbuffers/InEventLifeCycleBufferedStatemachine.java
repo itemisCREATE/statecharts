@@ -3,7 +3,7 @@ package org.yakindu.scr.eventbuffers;
 
 
 public class InEventLifeCycleBufferedStatemachine implements IInEventLifeCycleBufferedStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -35,16 +35,16 @@ public class InEventLifeCycleBufferedStatemachine implements IInEventLifeCycleBu
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 		private boolean i1;
 		private boolean i2;
 	}
 	private static class InEventLifeCycleBufferedStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -72,7 +72,7 @@ public class InEventLifeCycleBufferedStatemachine implements IInEventLifeCycleBu
 		this.isExecuting = value;
 	}
 	public InEventLifeCycleBufferedStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -159,24 +159,24 @@ public class InEventLifeCycleBufferedStatemachine implements IInEventLifeCycleBu
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 		
-		_current.iface.i1 = sCInterface.i1;
-		sCInterface.i1 = false;
+		_current.iface.i1 = defaultInterface.i1;
+		defaultInterface.i1 = false;
 		
-		_current.iface.i2 = sCInterface.i2;
-		sCInterface.i2 = false;
+		_current.iface.i2 = defaultInterface.i2;
+		defaultInterface.i2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
-		sCInterface.i1 = false;
-		sCInterface.i2 = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
+		defaultInterface.i1 = false;
+		defaultInterface.i2 = false;
 	}
 	
 	/**
@@ -198,24 +198,24 @@ public class InEventLifeCycleBufferedStatemachine implements IInEventLifeCycleBu
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public void raiseI1() {
-		sCInterface.raiseI1();
+		defaultInterface.raiseI1();
 	}
 	
 	public void raiseI2() {
-		sCInterface.raiseI2();
+		defaultInterface.raiseI2();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -333,7 +333,7 @@ public class InEventLifeCycleBufferedStatemachine implements IInEventLifeCycleBu
 		}
 		if (did_transition==false) {
 			if (_current.iface.e) {
-				sCInterface.raiseI1();
+				defaultInterface.raiseI1();
 			}
 		}
 		return did_transition;
@@ -375,7 +375,7 @@ public class InEventLifeCycleBufferedStatemachine implements IInEventLifeCycleBu
 		if (try_transition) {
 			if (_current.iface.f) {
 				exitSequence_r2_D();
-				sCInterface.raiseI2();
+				defaultInterface.raiseI2();
 				
 				enterSequence_r2_C_default();
 			} else {

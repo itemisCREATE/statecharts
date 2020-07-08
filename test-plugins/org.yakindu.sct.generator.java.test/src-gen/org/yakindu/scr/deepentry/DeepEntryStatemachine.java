@@ -3,7 +3,7 @@ package org.yakindu.scr.deepentry;
 
 
 public class DeepEntryStatemachine implements IDeepEntryStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -51,14 +51,14 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 	}
 	private static class DeepEntryStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -93,7 +93,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		this.isExecuting = value;
 	}
 	public DeepEntryStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -107,11 +107,11 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
-		sCInterface.setY(0);
+		defaultInterface.setY(0);
 		
-		sCInterface.setZ(0);
+		defaultInterface.setZ(0);
 		
 		isExecuting = false;
 	}
@@ -193,16 +193,16 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
 	}
 	
 	/**
@@ -241,60 +241,60 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public long getY() {
-		return sCInterface.getY();
+		return defaultInterface.getY();
 	}
 	
 	public void setY(long value) {
-		sCInterface.setY(value);
+		defaultInterface.setY(value);
 	}
 	
 	public long getZ() {
-		return sCInterface.getZ();
+		return defaultInterface.getZ();
 	}
 	
 	public void setZ(long value) {
-		sCInterface.setZ(value);
+		defaultInterface.setZ(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_r_A() {
-		sCInterface.setX(sCInterface.getX() + 1);
+		defaultInterface.setX(defaultInterface.getX() + 1);
 	}
 	
 	/* Entry action for state 'BA'. */
 	private void entryAction_r2_B_r_BA() {
-		sCInterface.setY(sCInterface.getY() + 1);
+		defaultInterface.setY(defaultInterface.getY() + 1);
 	}
 	
 	/* Entry action for state 'D'. */
 	private void entryAction_r3_D() {
-		sCInterface.setZ(sCInterface.getZ() + 1);
+		defaultInterface.setZ(defaultInterface.getZ() + 1);
 	}
 	
 	/* Entry action for state 'DA'. */
 	private void entryAction_r3_D_r_DA() {
-		sCInterface.setZ(sCInterface.getZ() + 1);
+		defaultInterface.setZ(defaultInterface.getZ() + 1);
 	}
 	
 	/* 'default' enter sequence for state B */

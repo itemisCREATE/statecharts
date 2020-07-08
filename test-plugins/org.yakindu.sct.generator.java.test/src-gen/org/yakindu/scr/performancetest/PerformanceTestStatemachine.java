@@ -4,7 +4,7 @@ package org.yakindu.scr.performancetest;
 import org.yakindu.sct.ITimer;
 
 public class PerformanceTestStatemachine implements IPerformanceTestStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -59,7 +59,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 		private boolean e2;
 		private boolean e3;
@@ -69,10 +69,10 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		private boolean performanceTest_time_event_1;
 	}
 	private static class PerformanceTestStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 		private PerformanceTestStatemachineTimeEventsEvBuf timeEvents = new PerformanceTestStatemachineTimeEventsEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -116,7 +116,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		this.isExecuting = value;
 	}
 	public PerformanceTestStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -133,11 +133,11 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
-		sCInterface.setA(0);
+		defaultInterface.setA(0);
 		
-		sCInterface.setC(0);
+		defaultInterface.setC(0);
 		
 		isExecuting = false;
 	}
@@ -256,14 +256,14 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 		
-		_current.iface.e2 = sCInterface.e2;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		defaultInterface.e2 = false;
 		
-		_current.iface.e3 = sCInterface.e3;
-		sCInterface.e3 = false;
+		_current.iface.e3 = defaultInterface.e3;
+		defaultInterface.e3 = false;
 		
 		_current.timeEvents.performanceTest_time_event_0 = timeEvents[0];
 		timeEvents[0] = false;
@@ -273,9 +273,9 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
-		sCInterface.e2 = false;
-		sCInterface.e3 = false;
+		defaultInterface.e1 = false;
+		defaultInterface.e2 = false;
+		defaultInterface.e3 = false;
 		timeEvents[0] = false;
 		timeEvents[1] = false;
 	}
@@ -346,76 +346,76 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		timeEvents[eventID] = true;
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public void raiseE2() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	public void raiseE3() {
-		sCInterface.raiseE3();
+		defaultInterface.raiseE3();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public long getA() {
-		return sCInterface.getA();
+		return defaultInterface.getA();
 	}
 	
 	public void setA(long value) {
-		sCInterface.setA(value);
+		defaultInterface.setA(value);
 	}
 	
 	public long getC() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	public void setC(long value) {
-		sCInterface.setC(value);
+		defaultInterface.setC(value);
 	}
 	
 	private boolean check_mr_B_r1__choice_1_tr0_tr0() {
-		return sCInterface.getX()==4;
+		return defaultInterface.getX()==4;
 	}
 	
 	private boolean check_mr_B_r1__choice_1_tr1_tr1() {
-		return sCInterface.getX()==5;
+		return defaultInterface.getX()==5;
 	}
 	
 	private boolean check_mr_B_r1__choice_1_tr2_tr2() {
-		return sCInterface.getX()==6;
+		return defaultInterface.getX()==6;
 	}
 	
 	private boolean check_mr_B_r1__choice_1_tr3_tr3() {
-		return sCInterface.getX()==7;
+		return defaultInterface.getX()==7;
 	}
 	
 	private boolean check_mr_B_r1__choice_1_tr4_tr4() {
-		return sCInterface.getX()==8;
+		return defaultInterface.getX()==8;
 	}
 	
 	private boolean check_mr_B_r1__choice_1_tr5_tr5() {
-		return sCInterface.getX()==3;
+		return defaultInterface.getX()==3;
 	}
 	
 	private boolean check_mr_B_r1__choice_1_tr6_tr6() {
-		return sCInterface.getX()==2;
+		return defaultInterface.getX()==2;
 	}
 	
 	private void effect_mr_B_r1__choice_0_tr0() {
-		sCInterface.setX(sCInterface.getX() + 1);
+		defaultInterface.setX(defaultInterface.getX() + 1);
 		
 		react_mr_B_r1__choice_1();
 	}
@@ -437,7 +437,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 	
 	private void effect_mr_B_r1__choice_1_tr4() {
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		enterSequence_mr_B_r1_Z_default();
 	}
@@ -456,7 +456,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_mr_A() {
-		sCInterface.setA(sCInterface.getA() + 1);
+		defaultInterface.setA(defaultInterface.getA() + 1);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -877,15 +877,15 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 	
 	private boolean react() {
-		sCInterface.setC(sCInterface.getC() + 1);
+		defaultInterface.setC(defaultInterface.getC() + 1);
 		
 		if (_current.timeEvents.performanceTest_time_event_0) {
-			sCInterface.raiseE2();
+			defaultInterface.raiseE2();
 			
-			sCInterface.raiseE1();
+			defaultInterface.raiseE1();
 		}
 		if (_current.timeEvents.performanceTest_time_event_1) {
-			sCInterface.raiseE3();
+			defaultInterface.raiseE3();
 		}
 		return false;
 	}

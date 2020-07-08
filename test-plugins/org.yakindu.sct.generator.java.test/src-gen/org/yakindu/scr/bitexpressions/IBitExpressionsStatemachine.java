@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IBitExpressionsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE1();
 		
@@ -43,6 +43,6 @@ public interface IBitExpressionsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

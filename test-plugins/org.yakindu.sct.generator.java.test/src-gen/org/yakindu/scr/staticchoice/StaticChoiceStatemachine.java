@@ -3,7 +3,7 @@ package org.yakindu.scr.staticchoice;
 
 
 public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean reset;
 		
@@ -24,13 +24,13 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean reset;
 	}
 	private static class StaticChoiceStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -57,7 +57,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		this.isExecuting = value;
 	}
 	public StaticChoiceStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -68,7 +68,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setNumber(0);
+		defaultInterface.setNumber(0);
 		
 		isExecuting = false;
 	}
@@ -140,12 +140,12 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.reset = sCInterface.reset;
-		sCInterface.reset = false;
+		_current.iface.reset = defaultInterface.reset;
+		defaultInterface.reset = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.reset = false;
+		defaultInterface.reset = false;
 	}
 	
 	/**
@@ -165,24 +165,24 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseReset() {
-		sCInterface.raiseReset();
+		defaultInterface.raiseReset();
 	}
 	
 	public long getNumber() {
-		return sCInterface.getNumber();
+		return defaultInterface.getNumber();
 	}
 	
 	public void setNumber(long value) {
-		sCInterface.setNumber(value);
+		defaultInterface.setNumber(value);
 	}
 	
 	private boolean check_main_region__choice_0_tr1_tr1() {
-		return sCInterface.getNumber()==2;
+		return defaultInterface.getNumber()==2;
 	}
 	
 	private void effect_main_region__choice_0_tr1() {
@@ -195,7 +195,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		sCInterface.setNumber(1);
+		defaultInterface.setNumber(1);
 	}
 	
 	/* 'default' enter sequence for state Start */
@@ -281,7 +281,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		if (try_transition) {
 			if (react()==false) {
 				exitSequence_main_region_Start();
-				sCInterface.setNumber(sCInterface.getNumber() + 1);
+				defaultInterface.setNumber(defaultInterface.getNumber() + 1);
 				
 				react_main_region__choice_0();
 			}

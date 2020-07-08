@@ -8,7 +8,7 @@ import org.yakindu.sct.rx.Observable;
 
 public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatemachine {
 	
-	public interface SCIIf {
+	public interface InterfaceIf {
 	
 		public Observable<Void> getOperationCallbackEvent();
 		
@@ -34,23 +34,23 @@ public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatema
 		
 		public void setRunCycle(long value);
 		
-		public List<SCIIfListener> getListeners();
-		public void setSCIIfOperationCallback(SCIIfOperationCallback operationCallback);
+		public List<InterfaceIfListener> getListeners();
+		public void setInterfaceIfOperationCallback(InterfaceIfOperationCallback operationCallback);
 	}
 	
-	public interface SCIIfListener {
+	public interface InterfaceIfListener {
 	
 		public void onOperationCallbackRaised();
 		public void onListenersRaised();
 	}
 	
-	public interface SCIIfOperationCallback {
+	public interface InterfaceIfOperationCallback {
 	
 		public void myOperation();
 		
 	}
 	
-	public SCIIf getSCIIf();
+	public InterfaceIf getInterfaceIf();
 	
 	public interface InternalOperationCallback {
 	

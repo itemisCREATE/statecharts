@@ -41,12 +41,12 @@ public class NamedInterfaceAccess {
 	public void safeOpenSuccess() {
 		statemachine.enter();
 		timer.cycleLeap(1l);
-		statemachine.getSCIUser().raiseNumberPressed(3l);
+		statemachine.getInterfaceUser().raiseNumberPressed(3l);
 		timer.cycleLeap(1l);
-		statemachine.getSCIUser().raiseNumberPressed(7l);
+		statemachine.getInterfaceUser().raiseNumberPressed(7l);
 		timer.cycleLeap(1l);
-		statemachine.getSCIUser().raiseNumberPressed(5l);
+		statemachine.getInterfaceUser().raiseNumberPressed(5l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.getSCISafe().isRaisedOpen());
+		assertTrue(statemachine.getInterfaceSafe().isRaisedOpen());
 	}
 }

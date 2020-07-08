@@ -3,7 +3,7 @@ package org.yakindu.scr.supersteps;
 
 
 public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -31,14 +31,14 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 	}
 	private static class CycleBasedSuperStepStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -78,7 +78,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		this.stateConfVectorChanged = value;
 	}
 	public CycleBasedSuperStepStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -89,7 +89,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		isExecuting = false;
 	}
@@ -176,16 +176,16 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
 	}
 	
 	/**
@@ -213,24 +213,24 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -423,7 +423,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		}
 		if (did_transition==false) {
 			if (_current.iface.e) {
-				sCInterface.setX(42);
+				defaultInterface.setX(42);
 			}
 			did_transition = react();
 		}
@@ -434,14 +434,14 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.f) && (sCInterface.getX()==0))) {
+			if (((_current.iface.f) && (defaultInterface.getX()==0))) {
 				exitSequence_main_region_D();
 				enterSequence_main_region_A_default();
 				react();
 			} else {
 				if (_current.iface.f) {
 					exitSequence_main_region_D();
-					sCInterface.setX(sCInterface.getX() - 1);
+					defaultInterface.setX(defaultInterface.getX() - 1);
 					
 					enterSequence_main_region_D_default();
 					react();

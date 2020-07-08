@@ -3,7 +3,7 @@ package org.yakindu.scr.samenamedifferentregion;
 
 
 public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRegionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -14,13 +14,13 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 	}
 	private static class SameNameDifferentRegionStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -48,7 +48,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		this.isExecuting = value;
 	}
 	public SameNameDifferentRegionStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -130,12 +130,12 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
+		defaultInterface.e1 = false;
 	}
 	
 	/**
@@ -158,12 +158,12 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	/* 'default' enter sequence for state StateA */

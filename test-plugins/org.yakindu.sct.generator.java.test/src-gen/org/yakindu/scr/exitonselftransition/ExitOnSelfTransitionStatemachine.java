@@ -3,7 +3,7 @@ package org.yakindu.scr.exitonselftransition;
 
 
 public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -41,14 +41,14 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 	}
 	private static class ExitOnSelfTransitionStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -74,7 +74,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		this.isExecuting = value;
 	}
 	public ExitOnSelfTransitionStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -85,9 +85,9 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		
 		clearInEvents();
 		
-		sCInterface.setEntryCount(0);
+		defaultInterface.setEntryCount(0);
 		
-		sCInterface.setExitCount(0);
+		defaultInterface.setExitCount(0);
 		
 		isExecuting = false;
 	}
@@ -156,16 +156,16 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
 	}
 	
 	/**
@@ -183,42 +183,42 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public long getEntryCount() {
-		return sCInterface.getEntryCount();
+		return defaultInterface.getEntryCount();
 	}
 	
 	public void setEntryCount(long value) {
-		sCInterface.setEntryCount(value);
+		defaultInterface.setEntryCount(value);
 	}
 	
 	public long getExitCount() {
-		return sCInterface.getExitCount();
+		return defaultInterface.getExitCount();
 	}
 	
 	public void setExitCount(long value) {
-		sCInterface.setExitCount(value);
+		defaultInterface.setExitCount(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.setEntryCount(sCInterface.getEntryCount() + 1);
+		defaultInterface.setEntryCount(defaultInterface.getEntryCount() + 1);
 	}
 	
 	/* Exit action for state 'A'. */
 	private void exitAction_main_region_A() {
-		sCInterface.setExitCount(sCInterface.getExitCount() + 1);
+		defaultInterface.setExitCount(defaultInterface.getExitCount() + 1);
 	}
 	
 	/* 'default' enter sequence for state A */

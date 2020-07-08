@@ -6,7 +6,7 @@ import java.util.Queue;
 import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenStatemachine implements IEventDrivenStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean inEvent;
 		
@@ -124,7 +124,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 	}
 	
-	protected class SCINamedIImpl implements SCINamedI {
+	protected class InterfaceNamedIImpl implements InterfaceNamedI {
 	
 		private boolean namedInEvent;
 		
@@ -136,9 +136,9 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCINamedIImpl sCINamedI;
+	protected InterfaceNamedIImpl interfaceNamedI;
 	
 	private boolean initialized = false;
 	
@@ -177,8 +177,8 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		this.isExecuting = value;
 	}
 	public EventDrivenStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCINamedI = new SCINamedIImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceNamedI = new InterfaceNamedIImpl();
 	}
 	
 	public void init() {
@@ -272,7 +272,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			clearInEvents();
 			clearInternalEvents();
 			nextEvent();
-		} while (((((((sCInterface.inEvent || sCInterface.inEventBool) || sCINamedI.namedInEvent) || locEvent) || e1) || e2) || e3));
+		} while (((((((defaultInterface.inEvent || defaultInterface.inEventBool) || interfaceNamedI.namedInEvent) || locEvent) || e1) || e2) || e3));
 		
 		isExecuting = false;
 	}
@@ -291,17 +291,17 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		return (stateVector[0] == State.main_region__final_) && (stateVector[1] == State.$NullState$);
 	}
 	private void clearOutEvents() {
-		sCInterface.outEvent = false;
-		sCInterface.running = false;
-		sCInterface.oe1 = false;
-		sCInterface.oe2 = false;
-		sCInterface.oe3 = false;
+		defaultInterface.outEvent = false;
+		defaultInterface.running = false;
+		defaultInterface.oe1 = false;
+		defaultInterface.oe2 = false;
+		defaultInterface.oe3 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.inEvent = false;
-		sCInterface.inEventBool = false;
-		sCINamedI.namedInEvent = false;
+		defaultInterface.inEvent = false;
+		defaultInterface.inEventBool = false;
+		interfaceNamedI.namedInEvent = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -353,12 +353,12 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCINamedI getSCINamedI() {
-		return sCINamedI;
+	public InterfaceNamedI getInterfaceNamedI() {
+		return interfaceNamedI;
 	}
 	
 	private void raiseLocEvent() {
@@ -398,46 +398,46 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	}
 	
 	public void raiseInEvent() {
-		sCInterface.raiseInEvent();
+		defaultInterface.raiseInEvent();
 	}
 	
 	public void raiseInEventBool(boolean value) {
-		sCInterface.raiseInEventBool(value);
+		defaultInterface.raiseInEventBool(value);
 	}
 	
 	public boolean isRaisedOutEvent() {
-		return sCInterface.isRaisedOutEvent();
+		return defaultInterface.isRaisedOutEvent();
 	}
 	
 	public boolean isRaisedRunning() {
-		return sCInterface.isRaisedRunning();
+		return defaultInterface.isRaisedRunning();
 	}
 	
 	public boolean isRaisedOe1() {
-		return sCInterface.isRaisedOe1();
+		return defaultInterface.isRaisedOe1();
 	}
 	
 	public boolean isRaisedOe2() {
-		return sCInterface.isRaisedOe2();
+		return defaultInterface.isRaisedOe2();
 	}
 	
 	public boolean isRaisedOe3() {
-		return sCInterface.isRaisedOe3();
+		return defaultInterface.isRaisedOe3();
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.raiseRunning();
+		defaultInterface.raiseRunning();
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.raiseOe1();
+		defaultInterface.raiseOe1();
 	}
 	
 	/* Entry action for state 'StateC'. */
 	private void entryAction_main_region_StateC() {
-		sCInterface.raiseOe2();
+		defaultInterface.raiseOe2();
 	}
 	
 	/* Entry action for state 'State3'. */
@@ -457,7 +457,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	
 	/* Entry action for state 'StateD'. */
 	private void entryAction_main_region_StateD() {
-		sCInterface.raiseOe3();
+		defaultInterface.raiseOe3();
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -736,7 +736,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.inEvent) {
+			if (defaultInterface.inEvent) {
 				raiseE1();
 				
 				raiseE2();
@@ -825,7 +825,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.inEvent) {
+			if (defaultInterface.inEvent) {
 				raiseE1();
 			}
 		}
@@ -871,7 +871,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCINamedI.namedInEvent) {
+				if (interfaceNamedI.namedInEvent) {
 					exitSequence_main_region_StateF();
 					enterSequence_main_region__final__default();
 				} else {
@@ -887,7 +887,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.inEventBool) && (sCInterface.getInEventBoolValue()==true))) {
+				if (((defaultInterface.inEventBool) && (defaultInterface.getInEventBoolValue()==true))) {
 					exitSequence_main_region_StateD();
 					enterSequence_main_region_StateE_default();
 				} else {

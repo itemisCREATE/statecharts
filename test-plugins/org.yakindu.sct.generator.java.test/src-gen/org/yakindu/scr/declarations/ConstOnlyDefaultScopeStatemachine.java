@@ -3,7 +3,7 @@ package org.yakindu.scr.declarations;
 
 
 public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScopeStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		public long getB() {
 			return b;
@@ -15,7 +15,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 	}
 	
-	protected class SCIAImpl implements SCIA {
+	protected class InterfaceAImpl implements InterfaceA {
 	
 		private boolean e;
 		
@@ -34,17 +34,17 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 	}
 	
-	private static class SCIAEvBuf {
+	private static class InterfaceAEvBuf {
 		private boolean e;
 		
 		private long eValue;
 	}
 	private static class ConstOnlyDefaultScopeStatemachineEvBuf {
-		private SCIAEvBuf ifaceA = new SCIAEvBuf();
+		private InterfaceAEvBuf ifaceA = new InterfaceAEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCIAImpl sCIA;
+	protected InterfaceAImpl interfaceA;
 	
 	private boolean initialized = false;
 	
@@ -71,8 +71,8 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		this.isExecuting = value;
 	}
 	public ConstOnlyDefaultScopeStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCIA = new SCIAImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceA = new InterfaceAImpl();
 	}
 	
 	public void init() {
@@ -154,13 +154,13 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		return false;
 	}
 	private void swapInEvents() {
-		_current.ifaceA.e = sCIA.e;
-		_current.ifaceA.eValue = sCIA.eValue;
-		sCIA.e = false;
+		_current.ifaceA.e = interfaceA.e;
+		_current.ifaceA.eValue = interfaceA.eValue;
+		interfaceA.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCIA.e = false;
+		interfaceA.e = false;
 	}
 	
 	/**
@@ -180,20 +180,20 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCIA getSCIA() {
-		return sCIA;
+	public InterfaceA getInterfaceA() {
+		return interfaceA;
 	}
 	
 	public long getB() {
-		return sCInterface.getB();
+		return defaultInterface.getB();
 	}
 	
 	public long getC() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -268,11 +268,11 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((_current.ifaceA.e) && (_current.ifaceA.eValue==sCInterface.getB()))) {
+				if (((_current.ifaceA.e) && (_current.ifaceA.eValue==defaultInterface.getB()))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					if (((_current.ifaceA.e) && (_current.ifaceA.eValue==sCInterface.getC()))) {
+					if (((_current.ifaceA.e) && (_current.ifaceA.eValue==defaultInterface.getC()))) {
 						exitSequence_main_region_A();
 						enterSequence_main_region_C_default();
 					} else {

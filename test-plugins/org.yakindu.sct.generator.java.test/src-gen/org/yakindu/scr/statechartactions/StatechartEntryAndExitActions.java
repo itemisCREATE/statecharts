@@ -3,7 +3,7 @@ package org.yakindu.scr.statechartactions;
 
 
 public class StatechartEntryAndExitActions implements IStatechartEntryAndExitActions {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long x;
 		
@@ -37,7 +37,7 @@ public class StatechartEntryAndExitActions implements IStatechartEntryAndExitAct
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -60,7 +60,7 @@ public class StatechartEntryAndExitActions implements IStatechartEntryAndExitAct
 		this.isExecuting = value;
 	}
 	public StatechartEntryAndExitActions() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -70,11 +70,11 @@ public class StatechartEntryAndExitActions implements IStatechartEntryAndExitAct
 		}
 		
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
-		sCInterface.setY(0);
+		defaultInterface.setY(0);
 		
-		sCInterface.setB(false);
+		defaultInterface.setB(false);
 		
 		isExecuting = false;
 	}
@@ -88,12 +88,12 @@ public class StatechartEntryAndExitActions implements IStatechartEntryAndExitAct
 			return;
 		}
 		isExecuting = true;
-		sCInterface.setX(2);
+		defaultInterface.setX(2);
 		
-		sCInterface.setY(3);
+		defaultInterface.setY(3);
 		
-		if (sCInterface.getB()) {
-			sCInterface.setX(sCInterface.getX() + sCInterface.y);
+		if (defaultInterface.getB()) {
+			defaultInterface.setX(defaultInterface.getX() + defaultInterface.y);
 		}
 		enterSequence_main_region_default();
 		isExecuting = false;
@@ -105,12 +105,12 @@ public class StatechartEntryAndExitActions implements IStatechartEntryAndExitAct
 		}
 		isExecuting = true;
 		exitSequence_main_region();
-		sCInterface.setX(8);
+		defaultInterface.setX(8);
 		
-		sCInterface.setY(2);
+		defaultInterface.setY(2);
 		
-		if (sCInterface.getB()) {
-			sCInterface.setX(sCInterface.getX() - sCInterface.y);
+		if (defaultInterface.getB()) {
+			defaultInterface.setX(defaultInterface.getX() - defaultInterface.y);
 		}
 		isExecuting = false;
 	}
@@ -165,32 +165,32 @@ public class StatechartEntryAndExitActions implements IStatechartEntryAndExitAct
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public long getY() {
-		return sCInterface.getY();
+		return defaultInterface.getY();
 	}
 	
 	public void setY(long value) {
-		sCInterface.setY(value);
+		defaultInterface.setY(value);
 	}
 	
 	public boolean getB() {
-		return sCInterface.getB();
+		return defaultInterface.getB();
 	}
 	
 	public void setB(boolean value) {
-		sCInterface.setB(value);
+		defaultInterface.setB(value);
 	}
 	
 	/* 'default' enter sequence for state A */

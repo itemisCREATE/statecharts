@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IJavaKeywordsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseWhile();
 		
@@ -189,6 +189,6 @@ public interface IJavaKeywordsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

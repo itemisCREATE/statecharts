@@ -21,7 +21,7 @@ import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
  */
 @SuppressWarnings("all")
 public class ChildFirstTransitionsinSubchart {
-	SCInterfaceOperationCallback defaultMock;
+	InterfaceOperationCallback defaultMock;
 	
 	private ChildFirstTransitionsInSubchartStatemachine statemachine;	
 	private VirtualTimer timer;
@@ -32,8 +32,8 @@ public class ChildFirstTransitionsinSubchart {
 		statemachine = new ChildFirstTransitionsInSubchartStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
-		defaultMock = mock(SCInterfaceOperationCallback.class);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
+		defaultMock = mock(InterfaceOperationCallback.class);
+		statemachine.getInterface().setInterfaceOperationCallback(defaultMock);
 		
 		statemachine.init();
 		
@@ -41,7 +41,7 @@ public class ChildFirstTransitionsinSubchart {
 
 	@After
 	public void childFirstTransitionsinSubchart_tearDown() {
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(null);
+		statemachine.getInterface().setInterfaceOperationCallback(null);
 		statemachine = null;
 		
 		timer = null;

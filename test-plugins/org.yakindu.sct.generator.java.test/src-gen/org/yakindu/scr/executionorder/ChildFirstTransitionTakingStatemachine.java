@@ -3,7 +3,7 @@ package org.yakindu.scr.executionorder;
 
 
 public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransitionTakingStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -43,7 +43,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -81,7 +81,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		this.isExecuting = value;
 	}
 	public ChildFirstTransitionTakingStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -92,9 +92,9 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		clearInEvents();
 		
-		sCInterface.setCLocalReaction(0);
+		defaultInterface.setCLocalReaction(0);
 		
-		sCInterface.setCaLocalReaction(0);
+		defaultInterface.setCaLocalReaction(0);
 		
 		isExecuting = false;
 	}
@@ -189,8 +189,8 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.go = false;
+		defaultInterface.e = false;
+		defaultInterface.go = false;
 	}
 	
 	/**
@@ -242,32 +242,32 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseGo() {
-		sCInterface.raiseGo();
+		defaultInterface.raiseGo();
 	}
 	
 	public long getCLocalReaction() {
-		return sCInterface.getCLocalReaction();
+		return defaultInterface.getCLocalReaction();
 	}
 	
 	public void setCLocalReaction(long value) {
-		sCInterface.setCLocalReaction(value);
+		defaultInterface.setCLocalReaction(value);
 	}
 	
 	public long getCaLocalReaction() {
-		return sCInterface.getCaLocalReaction();
+		return defaultInterface.getCaLocalReaction();
 	}
 	
 	public void setCaLocalReaction(long value) {
-		sCInterface.setCaLocalReaction(value);
+		defaultInterface.setCaLocalReaction(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -763,7 +763,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_r1_A();
 				enterSequence_r1_B_default();
 			} else {
@@ -777,7 +777,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.go) {
+			if (defaultInterface.go) {
 				exitSequence_r1_A_r1_AA();
 				enterSequence_r1_A_r1_AB_default();
 				r1_A_react(false);
@@ -807,7 +807,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.go) {
+			if (defaultInterface.go) {
 				exitSequence_r1_A_r1_AB();
 				enterSequence_r1_A_r1_AA_default();
 				r1_A_react(false);
@@ -834,7 +834,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_r1_B();
 				enterSequence_r1_A_default();
 			} else {
@@ -851,7 +851,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			sCInterface.setCLocalReaction(sCInterface.getCLocalReaction() + 1);
+			defaultInterface.setCLocalReaction(defaultInterface.getCLocalReaction() + 1);
 			
 			did_transition = react();
 		}
@@ -862,7 +862,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_r2_C_r_CA();
 				enterSequence_r2_C_r_CB_default();
 				r2_C_react(false);
@@ -871,7 +871,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setCaLocalReaction(sCInterface.getCaLocalReaction() + 1);
+			defaultInterface.setCaLocalReaction(defaultInterface.getCaLocalReaction() + 1);
 			
 			did_transition = r2_C_react(try_transition);
 		}
@@ -882,7 +882,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.go) {
+			if (defaultInterface.go) {
 				exitSequence_r2_C_r_CA_r_CAA();
 				enterSequence_r2_C_r_CA_r_CAB_default();
 				r2_C_r_CA_react(false);
@@ -921,7 +921,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.go) {
+			if (defaultInterface.go) {
 				exitSequence_r2_C_r_CA_r_CAB();
 				enterSequence_r2_C_r_CA_r_CAA_default();
 				r2_C_r_CA_react(false);
@@ -939,7 +939,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_r2_C_r_CB();
 				enterSequence_r2_C_r_CA_default();
 				r2_C_react(false);

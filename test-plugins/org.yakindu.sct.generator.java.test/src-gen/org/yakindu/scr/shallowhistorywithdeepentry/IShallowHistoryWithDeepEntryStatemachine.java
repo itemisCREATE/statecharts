@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IShallowHistoryWithDeepEntryStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseToZ();
 		
@@ -17,6 +17,6 @@ public interface IShallowHistoryWithDeepEntryStatemachine extends IStatemachine 
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

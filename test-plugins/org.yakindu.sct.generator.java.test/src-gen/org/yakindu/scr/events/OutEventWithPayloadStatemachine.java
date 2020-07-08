@@ -4,7 +4,7 @@ package org.yakindu.scr.events;
 import org.yakindu.sct.rx.Observable;
 
 public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean i;
 		
@@ -51,7 +51,7 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -74,7 +74,7 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		this.isExecuting = value;
 	}
 	public OutEventWithPayloadStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -152,11 +152,11 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		return false;
 	}
 	private void clearOutEvents() {
-		sCInterface.o = false;
+		defaultInterface.o = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.i = false;
+		defaultInterface.i = false;
 	}
 	
 	/**
@@ -172,20 +172,20 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseI(long value) {
-		sCInterface.raiseI(value);
+		defaultInterface.raiseI(value);
 	}
 	
 	public boolean isRaisedO() {
-		return sCInterface.isRaisedO();
+		return defaultInterface.isRaisedO();
 	}
 	
 	public long getOValue() {
-		return sCInterface.getOValue();
+		return defaultInterface.getOValue();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -232,8 +232,8 @@ public class OutEventWithPayloadStatemachine implements IOutEventWithPayloadStat
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			if (sCInterface.i) {
-				sCInterface.raiseO((sCInterface.getIValue() * 2));
+			if (defaultInterface.i) {
+				defaultInterface.raiseO((defaultInterface.getIValue() * 2));
 			}
 			did_transition = react();
 		}

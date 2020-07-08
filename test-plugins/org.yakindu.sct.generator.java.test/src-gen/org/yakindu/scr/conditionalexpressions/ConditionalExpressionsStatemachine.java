@@ -3,7 +3,7 @@ package org.yakindu.scr.conditionalexpressions;
 
 
 public class ConditionalExpressionsStatemachine implements IConditionalExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -54,13 +54,13 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 	}
 	private static class ConditionalExpressionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -86,7 +86,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		this.isExecuting = value;
 	}
 	public ConditionalExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -97,13 +97,13 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		
 		clearInEvents();
 		
-		sCInterface.setCondition(sCInterface.boolVar ? 3 : 2);
+		defaultInterface.setCondition(defaultInterface.boolVar ? 3 : 2);
 		
-		sCInterface.setBoolVar(true);
+		defaultInterface.setBoolVar(true);
 		
-		sCInterface.setStringVar("");
+		defaultInterface.setStringVar("");
 		
-		sCInterface.setStringCondition("");
+		defaultInterface.setStringCondition("");
 		
 		isExecuting = false;
 	}
@@ -172,12 +172,12 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -195,56 +195,56 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public long getCondition() {
-		return sCInterface.getCondition();
+		return defaultInterface.getCondition();
 	}
 	
 	public void setCondition(long value) {
-		sCInterface.setCondition(value);
+		defaultInterface.setCondition(value);
 	}
 	
 	public boolean getBoolVar() {
-		return sCInterface.getBoolVar();
+		return defaultInterface.getBoolVar();
 	}
 	
 	public void setBoolVar(boolean value) {
-		sCInterface.setBoolVar(value);
+		defaultInterface.setBoolVar(value);
 	}
 	
 	public String getStringVar() {
-		return sCInterface.getStringVar();
+		return defaultInterface.getStringVar();
 	}
 	
 	public void setStringVar(String value) {
-		sCInterface.setStringVar(value);
+		defaultInterface.setStringVar(value);
 	}
 	
 	public String getStringCondition() {
-		return sCInterface.getStringCondition();
+		return defaultInterface.getStringCondition();
 	}
 	
 	public void setStringCondition(String value) {
-		sCInterface.setStringCondition(value);
+		defaultInterface.setStringCondition(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.setCondition(sCInterface.boolVar ? 1 : 0);
+		defaultInterface.setCondition(defaultInterface.boolVar ? 1 : 0);
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setCondition(((sCInterface.condition==2) ? 1 : 2));
+		defaultInterface.setCondition(((defaultInterface.condition==2) ? 1 : 2));
 		
-		sCInterface.setStringCondition(((sCInterface.condition==2) ? "True" : "False"));
+		defaultInterface.setStringCondition(((defaultInterface.condition==2) ? "True" : "False"));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -306,7 +306,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((_current.iface.e) && (1==(sCInterface.getBoolVar() ? 1 : 0)))) {
+				if (((_current.iface.e) && (1==(defaultInterface.getBoolVar() ? 1 : 0)))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {

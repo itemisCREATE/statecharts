@@ -27,17 +27,17 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		}
 	}
 	
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private List<SCInterfaceListener> listeners = new LinkedList<SCInterfaceListener>();
+		private List<InterfaceListener> listeners = new LinkedList<InterfaceListener>();
 		
-		public List<SCInterfaceListener> getListeners() {
+		public List<InterfaceListener> getListeners() {
 			return listeners;
 		}
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public synchronized void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public synchronized void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private boolean ev_out;
@@ -49,7 +49,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			synchronized(RunnableTestStatemachine.this) {
 				ev_outValue = value;
 				ev_out = true;
-				for (SCInterfaceListener listener : listeners) {
+				for (InterfaceListener listener : listeners) {
 					listener.onEv_outRaised(value);
 				}
 				ev_outObservable.next(value);
@@ -145,7 +145,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -180,7 +180,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		}
 	}
 	public RunnableTestStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public synchronized void init() {
@@ -188,8 +188,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
@@ -198,13 +198,13 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		
 		clearInEvents();
 		
-		sCInterface.setMyVar(0);
+		defaultInterface.setMyVar(0);
 		
-		sCInterface.setAfterCalls(0);
+		defaultInterface.setAfterCalls(0);
 		
-		sCInterface.setCycles(0);
+		defaultInterface.setCycles(0);
 		
-		sCInterface.setS2_entered(0);
+		defaultInterface.setS2_entered(0);
 		
 		isExecuting = false;
 	}
@@ -270,7 +270,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 			
 			clearInEvents();
 			nextEvent();
-		} while ((((sCInterface.ev_in || timeEvents[0]) || timeEvents[1]) || timeEvents[2]));
+		} while ((((defaultInterface.ev_in || timeEvents[0]) || timeEvents[1]) || timeEvents[2]));
 		
 		isExecuting = false;
 	}
@@ -289,7 +289,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		return (stateVector[0] == State.runnableTest_main_region__final_);
 	}
 	private void clearInEvents() {
-		sCInterface.ev_in = false;
+		defaultInterface.ev_in = false;
 		timeEvents[0] = false;
 		timeEvents[1] = false;
 		timeEvents[2] = false;
@@ -351,48 +351,48 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		runCycle();
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public synchronized Observable<Long> getEv_out() {
-		return sCInterface.getEv_out();
+		return defaultInterface.getEv_out();
 	}
 	
 	public synchronized void raiseEv_in(long value) {
-		sCInterface.raiseEv_in(value);
+		defaultInterface.raiseEv_in(value);
 	}
 	
 	public synchronized long getMyVar() {
-		return sCInterface.getMyVar();
+		return defaultInterface.getMyVar();
 	}
 	
 	public synchronized void setMyVar(long value) {
-		sCInterface.setMyVar(value);
+		defaultInterface.setMyVar(value);
 	}
 	
 	public synchronized long getAfterCalls() {
-		return sCInterface.getAfterCalls();
+		return defaultInterface.getAfterCalls();
 	}
 	
 	public synchronized void setAfterCalls(long value) {
-		sCInterface.setAfterCalls(value);
+		defaultInterface.setAfterCalls(value);
 	}
 	
 	public synchronized long getCycles() {
-		return sCInterface.getCycles();
+		return defaultInterface.getCycles();
 	}
 	
 	public synchronized void setCycles(long value) {
-		sCInterface.setCycles(value);
+		defaultInterface.setCycles(value);
 	}
 	
 	public synchronized long getS2_entered() {
-		return sCInterface.getS2_entered();
+		return defaultInterface.getS2_entered();
 	}
 	
 	public synchronized void setS2_entered(long value) {
-		sCInterface.setS2_entered(value);
+		defaultInterface.setS2_entered(value);
 	}
 	
 	/* Entry action for state 'Composite_s1_s2'. */
@@ -404,12 +404,12 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	private void entryAction_main_region_Composite_s1_s2_inner_region_s1() {
 		timer.setTimer(this, 1, 500, false);
 		
-		sCInterface.raiseEv_out(2);
+		defaultInterface.raiseEv_out(2);
 	}
 	
 	/* Entry action for state 's2'. */
 	private void entryAction_main_region_Composite_s1_s2_inner_region_s2() {
-		sCInterface.setS2_entered(sCInterface.getS2_entered() + 1);
+		defaultInterface.setS2_entered(defaultInterface.getS2_entered() + 1);
 	}
 	
 	/* Exit action for state 'Composite_s1_s2'. */
@@ -529,9 +529,9 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 	
 	private boolean react() {
 		if (timeEvents[2]) {
-			sCInterface.operationCallback.displayTime();
+			defaultInterface.operationCallback.displayTime();
 		}
-		sCInterface.setCycles(sCInterface.getCycles() + 1);
+		defaultInterface.setCycles(defaultInterface.getCycles() + 1);
 		
 		return false;
 	}
@@ -568,13 +568,13 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		
 		if (try_transition) {
 			if (main_region_Composite_s1_s2_react(try_transition)==false) {
-				if (sCInterface.ev_in) {
+				if (defaultInterface.ev_in) {
 					exitSequence_main_region_Composite_s1_s2_inner_region_s1();
 					enterSequence_main_region_Composite_s1_s2_inner_region_s2_default();
 				} else {
 					if (timeEvents[1]) {
 						exitSequence_main_region_Composite_s1_s2_inner_region_s1();
-						sCInterface.setAfterCalls(sCInterface.getAfterCalls() + 1);
+						defaultInterface.setAfterCalls(defaultInterface.getAfterCalls() + 1);
 						
 						enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 					} else {
@@ -591,7 +591,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine, Runn
 		
 		if (try_transition) {
 			if (main_region_Composite_s1_s2_react(try_transition)==false) {
-				if (sCInterface.ev_in) {
+				if (defaultInterface.ev_in) {
 					exitSequence_main_region_Composite_s1_s2_inner_region_s2();
 					enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 				} else {

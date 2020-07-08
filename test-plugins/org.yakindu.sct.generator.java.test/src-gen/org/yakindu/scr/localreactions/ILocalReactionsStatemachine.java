@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ILocalReactionsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getX();
 		
@@ -13,6 +13,6 @@ public interface ILocalReactionsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

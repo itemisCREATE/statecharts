@@ -3,7 +3,7 @@ package org.yakindu.scr.castexpressions;
 
 
 public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private double realValue;
 		
@@ -27,7 +27,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -52,7 +52,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		this.isExecuting = value;
 	}
 	public CastExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -62,9 +62,9 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		}
 		
 		
-		sCInterface.setRealValue((((double) 5)));
+		defaultInterface.setRealValue((((double) 5)));
 		
-		sCInterface.setIntValue((((long) 5.5)));
+		defaultInterface.setIntValue((((long) 5.5)));
 		
 		isExecuting = false;
 	}
@@ -151,34 +151,34 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public double getRealValue() {
-		return sCInterface.getRealValue();
+		return defaultInterface.getRealValue();
 	}
 	
 	public void setRealValue(double value) {
-		sCInterface.setRealValue(value);
+		defaultInterface.setRealValue(value);
 	}
 	
 	public long getIntValue() {
-		return sCInterface.getIntValue();
+		return defaultInterface.getIntValue();
 	}
 	
 	public void setIntValue(long value) {
-		sCInterface.setIntValue(value);
+		defaultInterface.setIntValue(value);
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setRealValue((3 * ((long) 5.5)));
+		defaultInterface.setRealValue((3 * ((long) 5.5)));
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setRealValue(((long) (((sCInterface.realValue * sCInterface.intValue) * 10.1))));
+		defaultInterface.setRealValue(((long) (((defaultInterface.realValue * defaultInterface.intValue) * 10.1))));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -267,7 +267,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((((double) ((sCInterface.getRealValue() * 0.1)))>((long) 1.4) && ((long) ((sCInterface.getRealValue() * sCInterface.getIntValue())))<((double) 100))) {
+				if ((((double) ((defaultInterface.getRealValue() * 0.1)))>((long) 1.4) && ((long) ((defaultInterface.getRealValue() * defaultInterface.getIntValue())))<((double) 100))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {

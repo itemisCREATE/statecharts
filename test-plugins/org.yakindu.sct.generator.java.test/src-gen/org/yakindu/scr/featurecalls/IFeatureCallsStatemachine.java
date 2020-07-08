@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IFeatureCallsStatemachine extends IStatemachine {
 	
-	public interface SCIMyInterface {
+	public interface InterfaceMyInterface {
 	
 		public void raiseEvent1();
 		
@@ -15,6 +15,6 @@ public interface IFeatureCallsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCIMyInterface getSCIMyInterface();
+	public InterfaceMyInterface getInterfaceMyInterface();
 	
 }

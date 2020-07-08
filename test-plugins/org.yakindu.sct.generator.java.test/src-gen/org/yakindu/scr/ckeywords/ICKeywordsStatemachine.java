@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ICKeywordsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseAuto();
 		
@@ -117,6 +117,6 @@ public interface ICKeywordsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

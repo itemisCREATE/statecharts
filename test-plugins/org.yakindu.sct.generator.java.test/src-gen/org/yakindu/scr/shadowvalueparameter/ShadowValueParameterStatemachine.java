@@ -3,7 +3,7 @@ package org.yakindu.scr.shadowvalueparameter;
 
 
 public class ShadowValueParameterStatemachine implements IShadowValueParameterStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long value;
 		
@@ -17,7 +17,7 @@ public class ShadowValueParameterStatemachine implements IShadowValueParameterSt
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -40,7 +40,7 @@ public class ShadowValueParameterStatemachine implements IShadowValueParameterSt
 		this.isExecuting = value;
 	}
 	public ShadowValueParameterStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -50,7 +50,7 @@ public class ShadowValueParameterStatemachine implements IShadowValueParameterSt
 		}
 		
 		
-		sCInterface.setValue(0);
+		defaultInterface.setValue(0);
 		
 		isExecuting = false;
 	}
@@ -127,16 +127,16 @@ public class ShadowValueParameterStatemachine implements IShadowValueParameterSt
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getValue() {
-		return sCInterface.getValue();
+		return defaultInterface.getValue();
 	}
 	
 	public void setValue(long value) {
-		sCInterface.setValue(value);
+		defaultInterface.setValue(value);
 	}
 	
 	/* 'default' enter sequence for state StateA */

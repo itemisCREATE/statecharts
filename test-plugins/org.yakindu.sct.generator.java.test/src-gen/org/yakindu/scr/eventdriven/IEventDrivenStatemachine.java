@@ -8,7 +8,7 @@ import org.yakindu.sct.rx.Observable;
 
 public interface IEventDrivenStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseInEvent();
 		
@@ -36,15 +36,15 @@ public interface IEventDrivenStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 	
-	public interface SCINamedI {
+	public interface InterfaceNamedI {
 	
 		public void raiseNamedInEvent();
 		
 	}
 	
-	public SCINamedI getSCINamedI();
+	public InterfaceNamedI getInterfaceNamedI();
 	
 }

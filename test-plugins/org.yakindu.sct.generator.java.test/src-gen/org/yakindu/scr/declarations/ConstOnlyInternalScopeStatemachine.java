@@ -3,7 +3,7 @@ package org.yakindu.scr.declarations;
 
 
 public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalScopeStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -22,15 +22,15 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		
 		private long eValue;
 	}
 	private static class ConstOnlyInternalScopeStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -67,7 +67,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		this.isExecuting = value;
 	}
 	public ConstOnlyInternalScopeStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -149,13 +149,13 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		_current.iface.eValue = sCInterface.eValue;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		_current.iface.eValue = defaultInterface.eValue;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -175,12 +175,12 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE(long value) {
-		sCInterface.raiseE(value);
+		defaultInterface.raiseE(value);
 	}
 	
 	/* 'default' enter sequence for state A */

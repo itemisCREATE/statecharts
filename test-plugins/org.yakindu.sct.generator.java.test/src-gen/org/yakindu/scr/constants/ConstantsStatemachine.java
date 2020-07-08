@@ -3,7 +3,7 @@ package org.yakindu.scr.constants;
 
 
 public class ConstantsStatemachine implements IConstantsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -47,7 +47,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		
 	}
 	
-	protected class SCINamedImpl implements SCINamed {
+	protected class InterfaceNamedImpl implements InterfaceNamed {
 	
 		public String getY() {
 			return y;
@@ -59,18 +59,18 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean e2;
 		
 		private long e2Value;
 	}
 	private static class ConstantsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCINamedImpl sCINamed;
+	protected InterfaceNamedImpl interfaceNamed;
 	
 	private boolean initialized = false;
 	
@@ -102,8 +102,8 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		this.isExecuting = value;
 	}
 	public ConstantsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCINamed = new SCINamedImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceNamed = new InterfaceNamedImpl();
 	}
 	
 	public void init() {
@@ -114,7 +114,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setResult(0);
+		defaultInterface.setResult(0);
 		
 		isExecuting = false;
 	}
@@ -186,17 +186,17 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.e2 = sCInterface.e2;
-		_current.iface.e2Value = sCInterface.e2Value;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		_current.iface.e2Value = defaultInterface.e2Value;
+		defaultInterface.e2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.e2 = false;
+		defaultInterface.e = false;
+		defaultInterface.e2 = false;
 	}
 	
 	/**
@@ -216,46 +216,46 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCINamed getSCINamed() {
-		return sCINamed;
+	public InterfaceNamed getInterfaceNamed() {
+		return interfaceNamed;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseE2(long value) {
-		sCInterface.raiseE2(value);
+		defaultInterface.raiseE2(value);
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public long getY() {
-		return sCInterface.getY();
+		return defaultInterface.getY();
 	}
 	
 	public long getResult() {
-		return sCInterface.getResult();
+		return defaultInterface.getResult();
 	}
 	
 	public void setResult(long value) {
-		sCInterface.setResult(value);
+		defaultInterface.setResult(value);
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setResult((SCINamed.two * SCInterface.x));
+		defaultInterface.setResult((InterfaceNamed.two * Interface.x));
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setResult((sCInterface.result * IConstantsStatemachine.internalConstant));
+		defaultInterface.setResult((defaultInterface.result * IConstantsStatemachine.internalConstant));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -366,7 +366,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			if (react()==false) {
 				if (_current.iface.e2) {
 					exitSequence_main_region_C();
-					sCInterface.setResult((((_current.iface.e2Value * SCInterface.x) * SCINamed.two) * IConstantsStatemachine.internalConstant));
+					defaultInterface.setResult((((_current.iface.e2Value * Interface.x) * InterfaceNamed.two) * IConstantsStatemachine.internalConstant));
 					
 					enterSequence_main_region_A_default();
 				} else {

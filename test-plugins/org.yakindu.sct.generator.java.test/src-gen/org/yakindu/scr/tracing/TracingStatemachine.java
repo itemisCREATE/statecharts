@@ -6,11 +6,11 @@ import java.util.List;
 import org.yakindu.sct.ITracingListener;
 
 public class TracingStatemachine implements ITracingStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -36,7 +36,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 		this.isExecuting = value;
 	}
 	public TracingStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -125,8 +125,8 @@ public class TracingStatemachine implements ITracingStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void addTraceObserver(ITracingListener<State> ifaceTraceObserver) {

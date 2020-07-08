@@ -3,7 +3,7 @@ package org.yakindu.scr.choice;
 
 
 public class ChoiceStatemachine implements IChoiceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -45,16 +45,16 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 		private boolean g;
 		private boolean h;
 	}
 	private static class ChoiceStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -81,7 +81,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		this.isExecuting = value;
 	}
 	public ChoiceStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -92,7 +92,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setC(false);
+		defaultInterface.setC(false);
 		
 		isExecuting = false;
 	}
@@ -164,24 +164,24 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 		
-		_current.iface.g = sCInterface.g;
-		sCInterface.g = false;
+		_current.iface.g = defaultInterface.g;
+		defaultInterface.g = false;
 		
-		_current.iface.h = sCInterface.h;
-		sCInterface.h = false;
+		_current.iface.h = defaultInterface.h;
+		defaultInterface.h = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
-		sCInterface.g = false;
-		sCInterface.h = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
+		defaultInterface.g = false;
+		defaultInterface.h = false;
 	}
 	
 	/**
@@ -201,48 +201,48 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public void raiseG() {
-		sCInterface.raiseG();
+		defaultInterface.raiseG();
 	}
 	
 	public void raiseH() {
-		sCInterface.raiseH();
+		defaultInterface.raiseH();
 	}
 	
 	public boolean getC() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	public void setC(boolean value) {
-		sCInterface.setC(value);
+		defaultInterface.setC(value);
 	}
 	
 	private boolean check_main_region__choice_0_tr1_tr1() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private boolean check_main_region__choice_1_tr0_tr0() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private boolean check_main_region__choice_3_tr1_tr1() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private void effect_main_region__choice_0_tr1() {

@@ -3,7 +3,7 @@ package org.yakindu.scr.typealias;
 
 
 public class TypeAliasStatemachine implements ITypeAliasStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean myEvent;
 		
@@ -34,13 +34,13 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean myEvent;
 	}
 	private static class TypeAliasStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -68,7 +68,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		this.isExecuting = value;
 	}
 	public TypeAliasStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -79,9 +79,9 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setMyVar(0);
+		defaultInterface.setMyVar(0);
 		
-		sCInterface.setMyString("");
+		defaultInterface.setMyString("");
 		
 		isExecuting = false;
 	}
@@ -156,12 +156,12 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.myEvent = sCInterface.myEvent;
-		sCInterface.myEvent = false;
+		_current.iface.myEvent = defaultInterface.myEvent;
+		defaultInterface.myEvent = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.myEvent = false;
+		defaultInterface.myEvent = false;
 	}
 	
 	/**
@@ -183,38 +183,38 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseMyEvent() {
-		sCInterface.raiseMyEvent();
+		defaultInterface.raiseMyEvent();
 	}
 	
 	public long getMyVar() {
-		return sCInterface.getMyVar();
+		return defaultInterface.getMyVar();
 	}
 	
 	public void setMyVar(long value) {
-		sCInterface.setMyVar(value);
+		defaultInterface.setMyVar(value);
 	}
 	
 	public String getMyString() {
-		return sCInterface.getMyString();
+		return defaultInterface.getMyString();
 	}
 	
 	public void setMyString(String value) {
-		sCInterface.setMyString(value);
+		defaultInterface.setMyString(value);
 	}
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		sCInterface.setMyVar(1);
+		defaultInterface.setMyVar(1);
 	}
 	
 	/* Entry action for state 'Mid'. */
 	private void entryAction_main_region_Mid() {
-		sCInterface.setMyString("TypeSystem");
+		defaultInterface.setMyString("TypeSystem");
 	}
 	
 	/* 'default' enter sequence for state Start */
@@ -306,7 +306,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getMyVar()==1) {
+				if (defaultInterface.getMyVar()==1) {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_Mid_default();
 				} else {
@@ -322,7 +322,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((sCInterface.getMyString()== null?"TypeSystem" ==null :sCInterface.getMyString().equals("TypeSystem"))) {
+				if ((defaultInterface.getMyString()== null?"TypeSystem" ==null :defaultInterface.getMyString().equals("TypeSystem"))) {
 					exitSequence_main_region_Mid();
 					enterSequence_main_region_Mid2_default();
 				} else {

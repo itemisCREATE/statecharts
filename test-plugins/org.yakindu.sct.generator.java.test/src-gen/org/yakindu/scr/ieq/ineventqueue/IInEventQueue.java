@@ -7,7 +7,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IInEventQueue extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -17,24 +17,24 @@ public interface IInEventQueue extends IStatemachine {
 		
 		public void setCycles(long value);
 		
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public void askOracle();
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 	
-	public interface SCII {
+	public interface InterfaceI {
 	
 		public void raiseG();
 		
 	}
 	
-	public SCII getSCII();
+	public InterfaceI getInterfaceI();
 	
 }

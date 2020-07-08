@@ -5,16 +5,16 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IConstOnlyNamedScopeStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE(long value);
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 	
-	public interface SCIA {
+	public interface InterfaceA {
 	
 		public static final long b = 1;
 		
@@ -26,6 +26,6 @@ public interface IConstOnlyNamedScopeStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCIA getSCIA();
+	public InterfaceA getInterfaceA();
 	
 }

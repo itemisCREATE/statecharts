@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IHistoryWithoutInitialStepStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseToA();
 		
@@ -17,6 +17,6 @@ public interface IHistoryWithoutInitialStepStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

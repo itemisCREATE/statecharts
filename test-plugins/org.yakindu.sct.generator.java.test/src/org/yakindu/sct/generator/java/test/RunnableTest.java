@@ -35,8 +35,8 @@ public class RunnableTest {
 		
 		RunnableTestStatemachine sm = new RunnableTestStatemachine();
 
-		sm.getSCInterface().setSCInterfaceOperationCallback(
-				new IRunnableTestStatemachine.SCInterfaceOperationCallback() {
+		sm.getInterface().setInterfaceOperationCallback(
+				new IRunnableTestStatemachine.InterfaceOperationCallback() {
 
 					@Override
 					public void displayTime() {
@@ -53,7 +53,7 @@ public class RunnableTest {
 		assertTrue(sm.isStateActive(RunnableTestStatemachine.State.runnableTest_main_region__final_));
 		sm.exit();
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
-		assertTrue((timer.getTimerCallbackCount(1) - sm.getSCInterface().getAfterCalls()) <= 1);
+		assertTrue((timer.getTimerCallbackCount(1) - sm.getInterface().getAfterCalls()) <= 1);
 	}
 
 	@After

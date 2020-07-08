@@ -3,7 +3,7 @@ package org.yakindu.scr.eventdriven;
 
 
 public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -41,7 +41,7 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -65,7 +65,7 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		this.isExecuting = value;
 	}
 	public NoLocalEventsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -76,7 +76,7 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		isExecuting = false;
 	}
@@ -145,8 +145,8 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.i = false;
+		defaultInterface.e = false;
+		defaultInterface.i = false;
 	}
 	
 	/**
@@ -164,24 +164,24 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseI(long value) {
-		sCInterface.raiseI(value);
+		defaultInterface.raiseI(value);
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -241,13 +241,13 @@ public class NoLocalEventsStatemachine implements INoLocalEventsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (defaultInterface.e) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {
-					if (sCInterface.i) {
+					if (defaultInterface.i) {
 						exitSequence_main_region_StateA();
-						sCInterface.setX(sCInterface.getIValue());
+						defaultInterface.setX(defaultInterface.getIValue());
 						
 						enterSequence_main_region_StateB_default();
 					} else {

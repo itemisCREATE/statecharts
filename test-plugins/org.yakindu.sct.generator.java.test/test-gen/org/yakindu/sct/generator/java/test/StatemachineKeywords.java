@@ -21,7 +21,7 @@ import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
  */
 @SuppressWarnings("all")
 public class StatemachineKeywords {
-	SCIIfOperationCallback ifMock;
+	InterfaceIfOperationCallback ifMock;
 	InternalOperationCallback internalMock;
 	
 	private StatechartKeywordsStatemachine statemachine;	
@@ -34,8 +34,8 @@ public class StatemachineKeywords {
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		statemachine.setTimer(timer);
-		ifMock = mock(SCIIfOperationCallback.class);
-		statemachine.getSCIIf().setSCIIfOperationCallback(ifMock);
+		ifMock = mock(InterfaceIfOperationCallback.class);
+		statemachine.getInterfaceIf().setInterfaceIfOperationCallback(ifMock);
 		internalMock = mock(InternalOperationCallback.class);
 		statemachine.setInternalOperationCallback(internalMock);
 		
@@ -45,7 +45,7 @@ public class StatemachineKeywords {
 
 	@After
 	public void statemachineKeywords_tearDown() {
-		statemachine.getSCIIf().setSCIIfOperationCallback(null);
+		statemachine.getInterfaceIf().setInterfaceIfOperationCallback(null);
 		statemachine.setInternalOperationCallback(null);
 		statemachine = null;
 		

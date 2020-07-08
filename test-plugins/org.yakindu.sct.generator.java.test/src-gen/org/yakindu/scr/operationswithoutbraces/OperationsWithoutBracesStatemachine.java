@@ -3,17 +3,17 @@ package org.yakindu.scr.operationswithoutbraces;
 
 
 public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBracesStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -43,13 +43,13 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		this.isExecuting = value;
 	}
 	public OperationsWithoutBracesStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
 		for (int i = 0; i < 2; i++) {
@@ -170,8 +170,8 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -339,7 +339,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (!sCInterface.operationCallback.myBoolOp()) {
+				if (!defaultInterface.operationCallback.myBoolOp()) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
@@ -355,7 +355,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.operationCallback.myIntOp()==0) {
+				if (defaultInterface.operationCallback.myIntOp()==0) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {
@@ -371,7 +371,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.operationCallback.myRealOp()==0.0) {
+				if (defaultInterface.operationCallback.myRealOp()==0.0) {
 					exitSequence_main_region_C();
 					enterSequence_main_region_D_default();
 				} else {
@@ -397,7 +397,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (!sCInterface.operationCallback.myBoolOp()) {
+			if (!defaultInterface.operationCallback.myBoolOp()) {
 				exitSequence_another_region_A();
 				enterSequence_another_region_B_default();
 			} else {
@@ -411,7 +411,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.myIntOp()==0) {
+			if (defaultInterface.operationCallback.myIntOp()==0) {
 				exitSequence_another_region_B();
 				enterSequence_another_region_C_default();
 			} else {
@@ -425,7 +425,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.myRealOp()==0.0) {
+			if (defaultInterface.operationCallback.myRealOp()==0.0) {
 				exitSequence_another_region_C();
 				enterSequence_another_region_D_default();
 			} else {

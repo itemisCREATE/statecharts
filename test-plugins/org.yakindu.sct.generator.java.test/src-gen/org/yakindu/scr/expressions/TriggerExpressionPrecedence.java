@@ -3,7 +3,7 @@ package org.yakindu.scr.expressions;
 
 
 public class TriggerExpressionPrecedence implements ITriggerExpressionPrecedence {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -61,14 +61,14 @@ public class TriggerExpressionPrecedence implements ITriggerExpressionPrecedence
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 		private boolean e2;
 	}
 	private static class TriggerExpressionPrecedenceEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -93,7 +93,7 @@ public class TriggerExpressionPrecedence implements ITriggerExpressionPrecedence
 		this.isExecuting = value;
 	}
 	public TriggerExpressionPrecedence() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -104,13 +104,13 @@ public class TriggerExpressionPrecedence implements ITriggerExpressionPrecedence
 		
 		clearInEvents();
 		
-		sCInterface.setC1(false);
+		defaultInterface.setC1(false);
 		
-		sCInterface.setC2(false);
+		defaultInterface.setC2(false);
 		
-		sCInterface.setE1_transition(false);
+		defaultInterface.setE1_transition(false);
 		
-		sCInterface.setE2_transition(false);
+		defaultInterface.setE2_transition(false);
 		
 		isExecuting = false;
 	}
@@ -176,16 +176,16 @@ public class TriggerExpressionPrecedence implements ITriggerExpressionPrecedence
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 		
-		_current.iface.e2 = sCInterface.e2;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		defaultInterface.e2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
-		sCInterface.e2 = false;
+		defaultInterface.e1 = false;
+		defaultInterface.e2 = false;
 	}
 	
 	/**
@@ -201,48 +201,48 @@ public class TriggerExpressionPrecedence implements ITriggerExpressionPrecedence
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public void raiseE2() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	public boolean getC1() {
-		return sCInterface.getC1();
+		return defaultInterface.getC1();
 	}
 	
 	public void setC1(boolean value) {
-		sCInterface.setC1(value);
+		defaultInterface.setC1(value);
 	}
 	
 	public boolean getC2() {
-		return sCInterface.getC2();
+		return defaultInterface.getC2();
 	}
 	
 	public void setC2(boolean value) {
-		sCInterface.setC2(value);
+		defaultInterface.setC2(value);
 	}
 	
 	public boolean getE1_transition() {
-		return sCInterface.getE1_transition();
+		return defaultInterface.getE1_transition();
 	}
 	
 	public void setE1_transition(boolean value) {
-		sCInterface.setE1_transition(value);
+		defaultInterface.setE1_transition(value);
 	}
 	
 	public boolean getE2_transition() {
-		return sCInterface.getE2_transition();
+		return defaultInterface.getE2_transition();
 	}
 	
 	public void setE2_transition(boolean value) {
-		sCInterface.setE2_transition(value);
+		defaultInterface.setE2_transition(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -287,15 +287,15 @@ public class TriggerExpressionPrecedence implements ITriggerExpressionPrecedence
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((_current.iface.e1) && ((sCInterface.getC1() || sCInterface.getC2())))) {
+				if (((_current.iface.e1) && ((defaultInterface.getC1() || defaultInterface.getC2())))) {
 					exitSequence_main_region_A();
-					sCInterface.setE1_transition(true);
+					defaultInterface.setE1_transition(true);
 					
 					enterSequence_main_region_A_default();
 				} else {
 					if (_current.iface.e2) {
 						exitSequence_main_region_A();
-						sCInterface.setE2_transition(true);
+						defaultInterface.setE2_transition(true);
 						
 						enterSequence_main_region_A_default();
 					} else {

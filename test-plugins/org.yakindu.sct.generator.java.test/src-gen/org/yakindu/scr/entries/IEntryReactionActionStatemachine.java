@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IEntryReactionActionStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseB();
 		
@@ -29,6 +29,6 @@ public interface IEntryReactionActionStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

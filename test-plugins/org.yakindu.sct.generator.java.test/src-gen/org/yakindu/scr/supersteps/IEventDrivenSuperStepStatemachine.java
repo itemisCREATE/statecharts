@@ -7,7 +7,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IEventDrivenSuperStepStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -19,6 +19,6 @@ public interface IEventDrivenSuperStepStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

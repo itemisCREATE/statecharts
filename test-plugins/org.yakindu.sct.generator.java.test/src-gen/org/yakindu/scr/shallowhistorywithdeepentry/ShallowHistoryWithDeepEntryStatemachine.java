@@ -3,7 +3,7 @@ package org.yakindu.scr.shallowhistorywithdeepentry;
 
 
 public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryWithDeepEntryStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean toZ;
 		
@@ -35,16 +35,16 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean toZ;
 		private boolean toY;
 		private boolean toC;
 		private boolean toA;
 	}
 	private static class ShallowHistoryWithDeepEntryStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -74,7 +74,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		this.isExecuting = value;
 	}
 	public ShallowHistoryWithDeepEntryStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -159,24 +159,24 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.toZ = sCInterface.toZ;
-		sCInterface.toZ = false;
+		_current.iface.toZ = defaultInterface.toZ;
+		defaultInterface.toZ = false;
 		
-		_current.iface.toY = sCInterface.toY;
-		sCInterface.toY = false;
+		_current.iface.toY = defaultInterface.toY;
+		defaultInterface.toY = false;
 		
-		_current.iface.toC = sCInterface.toC;
-		sCInterface.toC = false;
+		_current.iface.toC = defaultInterface.toC;
+		defaultInterface.toC = false;
 		
-		_current.iface.toA = sCInterface.toA;
-		sCInterface.toA = false;
+		_current.iface.toA = defaultInterface.toA;
+		defaultInterface.toA = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.toZ = false;
-		sCInterface.toY = false;
-		sCInterface.toC = false;
-		sCInterface.toA = false;
+		defaultInterface.toZ = false;
+		defaultInterface.toY = false;
+		defaultInterface.toC = false;
+		defaultInterface.toA = false;
 	}
 	
 	/**
@@ -202,24 +202,24 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseToZ() {
-		sCInterface.raiseToZ();
+		defaultInterface.raiseToZ();
 	}
 	
 	public void raiseToY() {
-		sCInterface.raiseToY();
+		defaultInterface.raiseToY();
 	}
 	
 	public void raiseToC() {
-		sCInterface.raiseToC();
+		defaultInterface.raiseToC();
 	}
 	
 	public void raiseToA() {
-		sCInterface.raiseToA();
+		defaultInterface.raiseToA();
 	}
 	
 	/* 'default' enter sequence for state Y */

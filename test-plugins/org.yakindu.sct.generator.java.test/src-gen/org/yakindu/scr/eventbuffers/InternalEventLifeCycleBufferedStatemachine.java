@@ -3,7 +3,7 @@ package org.yakindu.scr.eventbuffers;
 
 
 public class InternalEventLifeCycleBufferedStatemachine implements IInternalEventLifeCycleBufferedStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -28,7 +28,7 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 	private static class InternalEventLifeCycleBufferedStatemachineEvBuf {
 		private InternalEventLifeCycleBufferedStatemachineInternalEvBuf internal = new InternalEventLifeCycleBufferedStatemachineInternalEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -58,7 +58,7 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 		this.isExecuting = value;
 	}
 	public InternalEventLifeCycleBufferedStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -150,8 +150,8 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
 	}
 	
 	private void swapInternalEvents() {
@@ -186,8 +186,8 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	private void raiseI1() {
@@ -199,11 +199,11 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -320,7 +320,7 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				raiseI1();
 			}
 		}
@@ -332,7 +332,7 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (defaultInterface.e) {
 					exitSequence_r1_B();
 					enterSequence_r1_A_default();
 				} else {
@@ -361,7 +361,7 @@ public class InternalEventLifeCycleBufferedStatemachine implements IInternalEven
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.f) {
+			if (defaultInterface.f) {
 				exitSequence_r2_D();
 				raiseI2();
 				

@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IValuedEventsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseIntegerEvent(long value);
 		
@@ -33,6 +33,6 @@ public interface IValuedEventsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

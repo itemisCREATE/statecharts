@@ -3,7 +3,7 @@ package org.yakindu.scr.stextkeywordsinstatesandregions;
 
 
 public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywordsInStatesAndRegionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -21,14 +21,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 		private boolean e2;
 	}
 	private static class STextKeywordsInStatesAndRegionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -91,7 +91,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		this.isExecuting = value;
 	}
 	public STextKeywordsInStatesAndRegionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -319,16 +319,16 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 		
-		_current.iface.e2 = sCInterface.e2;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		defaultInterface.e2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
-		sCInterface.e2 = false;
+		defaultInterface.e1 = false;
+		defaultInterface.e2 = false;
 	}
 	
 	/**
@@ -420,16 +420,16 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public void raiseE2() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	/* 'default' enter sequence for state namespace */

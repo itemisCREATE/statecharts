@@ -4,7 +4,7 @@ package org.yakindu.scr.namedinterfaceaccess;
 import org.yakindu.sct.rx.Observable;
 
 public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessStatemachine {
-	protected class SCISafeImpl implements SCISafe {
+	protected class InterfaceSafeImpl implements InterfaceSafe {
 	
 		private boolean open;
 		
@@ -44,7 +44,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 	}
 	
-	protected class SCIUserImpl implements SCIUser {
+	protected class InterfaceUserImpl implements InterfaceUser {
 	
 		private boolean numberPressed;
 		
@@ -70,18 +70,18 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 	}
 	
-	private static class SCIUserEvBuf {
+	private static class InterfaceUserEvBuf {
 		private boolean numberPressed;
 		
 		private long numberPressedValue;
 		private boolean reset;
 	}
 	private static class NamedInterfaceAccessStatemachineEvBuf {
-		private SCIUserEvBuf ifaceUser = new SCIUserEvBuf();
+		private InterfaceUserEvBuf ifaceUser = new InterfaceUserEvBuf();
 	}
-	protected SCISafeImpl sCISafe;
+	protected InterfaceSafeImpl interfaceSafe;
 	
-	protected SCIUserImpl sCIUser;
+	protected InterfaceUserImpl interfaceUser;
 	
 	private boolean initialized = false;
 	
@@ -144,8 +144,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		this.isExecuting = value;
 	}
 	public NamedInterfaceAccessStatemachine() {
-		sCISafe = new SCISafeImpl();
-		sCIUser = new SCIUserImpl();
+		interfaceSafe = new InterfaceSafeImpl();
+		interfaceUser = new InterfaceUserImpl();
 	}
 	
 	public void init() {
@@ -245,22 +245,22 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		return false;
 	}
 	private void clearOutEvents() {
-		sCISafe.open = false;
-		sCISafe.close = false;
+		interfaceSafe.open = false;
+		interfaceSafe.close = false;
 	}
 	
 	private void swapInEvents() {
-		_current.ifaceUser.numberPressed = sCIUser.numberPressed;
-		_current.ifaceUser.numberPressedValue = sCIUser.numberPressedValue;
-		sCIUser.numberPressed = false;
+		_current.ifaceUser.numberPressed = interfaceUser.numberPressed;
+		_current.ifaceUser.numberPressedValue = interfaceUser.numberPressedValue;
+		interfaceUser.numberPressed = false;
 		
-		_current.ifaceUser.reset = sCIUser.reset;
-		sCIUser.reset = false;
+		_current.ifaceUser.reset = interfaceUser.reset;
+		interfaceUser.reset = false;
 	}
 	
 	private void clearInEvents() {
-		sCIUser.numberPressed = false;
-		sCIUser.reset = false;
+		interfaceUser.numberPressed = false;
+		interfaceUser.reset = false;
 	}
 	
 	/**
@@ -286,22 +286,22 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		}
 	}
 	
-	public SCISafe getSCISafe() {
-		return sCISafe;
+	public InterfaceSafe getInterfaceSafe() {
+		return interfaceSafe;
 	}
 	
-	public SCIUser getSCIUser() {
-		return sCIUser;
+	public InterfaceUser getInterfaceUser() {
+		return interfaceUser;
 	}
 	
 	/* Entry action for state 'Idle'. */
 	private void entryAction_region_1_Idle() {
-		sCISafe.raiseClose();
+		interfaceSafe.raiseClose();
 	}
 	
 	/* Entry action for state 'Number3Pressed'. */
 	private void entryAction_region_1_Number3Pressed() {
-		sCISafe.raiseOpen();
+		interfaceSafe.raiseOpen();
 	}
 	
 	/* 'default' enter sequence for state Idle */
@@ -514,7 +514,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCISafe.open) {
+			if (interfaceSafe.open) {
 				exitSequence__region1_Closed();
 				enterSequence__region1_Open_default();
 			} else {
@@ -528,7 +528,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCISafe.close) {
+			if (interfaceSafe.close) {
 				exitSequence__region1_Open();
 				enterSequence__region1_Closed_default();
 			} else {

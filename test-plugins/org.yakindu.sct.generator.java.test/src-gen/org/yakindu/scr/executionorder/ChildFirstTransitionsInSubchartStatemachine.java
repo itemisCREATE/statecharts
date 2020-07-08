@@ -3,12 +3,12 @@ package org.yakindu.scr.executionorder;
 
 
 public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstTransitionsInSubchartStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private long a_local;
@@ -183,7 +183,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -213,13 +213,13 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		this.isExecuting = value;
 	}
 	public ChildFirstTransitionsInSubchartStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
 		for (int i = 0; i < 3; i++) {
@@ -227,39 +227,39 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		}
 		
 		
-		sCInterface.setA_local(0);
+		defaultInterface.setA_local(0);
 		
-		sCInterface.setC_local(0);
+		defaultInterface.setC_local(0);
 		
-		sCInterface.setAa_local(0);
+		defaultInterface.setAa_local(0);
 		
-		sCInterface.setAb_local(0);
+		defaultInterface.setAb_local(0);
 		
-		sCInterface.setAc_local(0);
+		defaultInterface.setAc_local(0);
 		
-		sCInterface.setAd_local(0);
+		defaultInterface.setAd_local(0);
 		
-		sCInterface.setAaa_local(0);
+		defaultInterface.setAaa_local(0);
 		
-		sCInterface.setAac_local(0);
+		defaultInterface.setAac_local(0);
 		
-		sCInterface.setA_check(0);
+		defaultInterface.setA_check(0);
 		
-		sCInterface.setAa_check(0);
+		defaultInterface.setAa_check(0);
 		
-		sCInterface.setAb_check(0);
+		defaultInterface.setAb_check(0);
 		
-		sCInterface.setAac_check(0);
+		defaultInterface.setAac_check(0);
 		
-		sCInterface.setAc_check(0);
+		defaultInterface.setAc_check(0);
 		
-		sCInterface.setAd_check(0);
+		defaultInterface.setAd_check(0);
 		
-		sCInterface.setC_check(0);
+		defaultInterface.setC_check(0);
 		
-		sCInterface.setSm_local(0);
+		defaultInterface.setSm_local(0);
 		
-		sCInterface.setCnt(0);
+		defaultInterface.setCnt(0);
 		
 		isExecuting = false;
 	}
@@ -371,144 +371,144 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getA_local() {
-		return sCInterface.getA_local();
+		return defaultInterface.getA_local();
 	}
 	
 	public void setA_local(long value) {
-		sCInterface.setA_local(value);
+		defaultInterface.setA_local(value);
 	}
 	
 	public long getC_local() {
-		return sCInterface.getC_local();
+		return defaultInterface.getC_local();
 	}
 	
 	public void setC_local(long value) {
-		sCInterface.setC_local(value);
+		defaultInterface.setC_local(value);
 	}
 	
 	public long getAa_local() {
-		return sCInterface.getAa_local();
+		return defaultInterface.getAa_local();
 	}
 	
 	public void setAa_local(long value) {
-		sCInterface.setAa_local(value);
+		defaultInterface.setAa_local(value);
 	}
 	
 	public long getAb_local() {
-		return sCInterface.getAb_local();
+		return defaultInterface.getAb_local();
 	}
 	
 	public void setAb_local(long value) {
-		sCInterface.setAb_local(value);
+		defaultInterface.setAb_local(value);
 	}
 	
 	public long getAc_local() {
-		return sCInterface.getAc_local();
+		return defaultInterface.getAc_local();
 	}
 	
 	public void setAc_local(long value) {
-		sCInterface.setAc_local(value);
+		defaultInterface.setAc_local(value);
 	}
 	
 	public long getAd_local() {
-		return sCInterface.getAd_local();
+		return defaultInterface.getAd_local();
 	}
 	
 	public void setAd_local(long value) {
-		sCInterface.setAd_local(value);
+		defaultInterface.setAd_local(value);
 	}
 	
 	public long getAaa_local() {
-		return sCInterface.getAaa_local();
+		return defaultInterface.getAaa_local();
 	}
 	
 	public void setAaa_local(long value) {
-		sCInterface.setAaa_local(value);
+		defaultInterface.setAaa_local(value);
 	}
 	
 	public long getAac_local() {
-		return sCInterface.getAac_local();
+		return defaultInterface.getAac_local();
 	}
 	
 	public void setAac_local(long value) {
-		sCInterface.setAac_local(value);
+		defaultInterface.setAac_local(value);
 	}
 	
 	public long getA_check() {
-		return sCInterface.getA_check();
+		return defaultInterface.getA_check();
 	}
 	
 	public void setA_check(long value) {
-		sCInterface.setA_check(value);
+		defaultInterface.setA_check(value);
 	}
 	
 	public long getAa_check() {
-		return sCInterface.getAa_check();
+		return defaultInterface.getAa_check();
 	}
 	
 	public void setAa_check(long value) {
-		sCInterface.setAa_check(value);
+		defaultInterface.setAa_check(value);
 	}
 	
 	public long getAb_check() {
-		return sCInterface.getAb_check();
+		return defaultInterface.getAb_check();
 	}
 	
 	public void setAb_check(long value) {
-		sCInterface.setAb_check(value);
+		defaultInterface.setAb_check(value);
 	}
 	
 	public long getAac_check() {
-		return sCInterface.getAac_check();
+		return defaultInterface.getAac_check();
 	}
 	
 	public void setAac_check(long value) {
-		sCInterface.setAac_check(value);
+		defaultInterface.setAac_check(value);
 	}
 	
 	public long getAc_check() {
-		return sCInterface.getAc_check();
+		return defaultInterface.getAc_check();
 	}
 	
 	public void setAc_check(long value) {
-		sCInterface.setAc_check(value);
+		defaultInterface.setAc_check(value);
 	}
 	
 	public long getAd_check() {
-		return sCInterface.getAd_check();
+		return defaultInterface.getAd_check();
 	}
 	
 	public void setAd_check(long value) {
-		sCInterface.setAd_check(value);
+		defaultInterface.setAd_check(value);
 	}
 	
 	public long getC_check() {
-		return sCInterface.getC_check();
+		return defaultInterface.getC_check();
 	}
 	
 	public void setC_check(long value) {
-		sCInterface.setC_check(value);
+		defaultInterface.setC_check(value);
 	}
 	
 	public long getSm_local() {
-		return sCInterface.getSm_local();
+		return defaultInterface.getSm_local();
 	}
 	
 	public void setSm_local(long value) {
-		sCInterface.setSm_local(value);
+		defaultInterface.setSm_local(value);
 	}
 	
 	public long getCnt() {
-		return sCInterface.getCnt();
+		return defaultInterface.getCnt();
 	}
 	
 	public void setCnt(long value) {
-		sCInterface.setCnt(value);
+		defaultInterface.setCnt(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -718,7 +718,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	}
 	
 	private boolean react() {
-		sCInterface.setSm_local(sCInterface.operationCallback.next());
+		defaultInterface.setSm_local(defaultInterface.operationCallback.next());
 		
 		return false;
 	}
@@ -727,7 +727,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.check("A")) {
+			if (defaultInterface.operationCallback.check("A")) {
 				exitSequence_r_A();
 				enterSequence_r_B_default();
 			} else {
@@ -735,7 +735,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setA_local(sCInterface.operationCallback.next());
+			defaultInterface.setA_local(defaultInterface.operationCallback.next());
 		}
 		return did_transition;
 	}
@@ -744,7 +744,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.check("AA")) {
+			if (defaultInterface.operationCallback.check("AA")) {
 				exitSequence_r_A_r1_AA();
 				enterSequence_r_A_r1_AB_default();
 			} else {
@@ -752,7 +752,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setAa_local(sCInterface.operationCallback.next());
+			defaultInterface.setAa_local(defaultInterface.operationCallback.next());
 		}
 		return did_transition;
 	}
@@ -761,7 +761,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.check("AB")) {
+			if (defaultInterface.operationCallback.check("AB")) {
 				exitSequence_r_A_r1_AB();
 				enterSequence_r_A_r1_AA_default();
 			} else {
@@ -769,7 +769,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setAb_local(sCInterface.operationCallback.next());
+			defaultInterface.setAb_local(defaultInterface.operationCallback.next());
 		}
 		return did_transition;
 	}
@@ -778,7 +778,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.check("AC")) {
+			if (defaultInterface.operationCallback.check("AC")) {
 				exitSequence_r_A_r2_AC();
 				enterSequence_r_A_r2_AD_default();
 				r_A_react(false);
@@ -787,7 +787,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setAc_local(sCInterface.operationCallback.next());
+			defaultInterface.setAc_local(defaultInterface.operationCallback.next());
 			
 			did_transition = r_A_react(try_transition);
 		}
@@ -798,7 +798,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.check("AD")) {
+			if (defaultInterface.operationCallback.check("AD")) {
 				exitSequence_r_A_r2_AD();
 				enterSequence_r_A_r2_AC_default();
 				r_A_react(false);
@@ -807,7 +807,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setAd_local(sCInterface.operationCallback.next());
+			defaultInterface.setAd_local(defaultInterface.operationCallback.next());
 			
 			did_transition = r_A_react(try_transition);
 		}
@@ -827,7 +827,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.operationCallback.check("C")) {
+			if (defaultInterface.operationCallback.check("C")) {
 				exitSequence_r2_C();
 				enterSequence_r2_D_default();
 				react();
@@ -836,7 +836,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setC_local(sCInterface.operationCallback.next());
+			defaultInterface.setC_local(defaultInterface.operationCallback.next());
 			
 			did_transition = react();
 		}

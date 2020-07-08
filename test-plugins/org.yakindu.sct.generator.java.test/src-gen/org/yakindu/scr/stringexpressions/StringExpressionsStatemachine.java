@@ -3,7 +3,7 @@ package org.yakindu.scr.stringexpressions;
 
 
 public class StringExpressionsStatemachine implements IStringExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -104,13 +104,13 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 	}
 	private static class StringExpressionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -140,7 +140,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		this.isExecuting = value;
 	}
 	public StringExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -151,23 +151,23 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 		clearInEvents();
 		
-		sCInterface.setStringA("A");
+		defaultInterface.setStringA("A");
 		
-		sCInterface.setStringA2("A");
+		defaultInterface.setStringA2("A");
 		
-		sCInterface.setStringB("B");
+		defaultInterface.setStringB("B");
 		
-		sCInterface.setQuotedStringX("\"X\"");
+		defaultInterface.setQuotedStringX("\"X\"");
 		
-		sCInterface.setQuotedStringY("\"Y\"");
+		defaultInterface.setQuotedStringY("\"Y\"");
 		
-		sCInterface.setStringVarEqual(false);
+		defaultInterface.setStringVarEqual(false);
 		
-		sCInterface.setStringVarNotEqual(false);
+		defaultInterface.setStringVarNotEqual(false);
 		
-		sCInterface.setGuardStringNotEqual(false);
+		defaultInterface.setGuardStringNotEqual(false);
 		
-		sCInterface.setGuardStringEqual(false);
+		defaultInterface.setGuardStringEqual(false);
 		
 		isExecuting = false;
 	}
@@ -248,12 +248,12 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -279,84 +279,84 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public String getStringA() {
-		return sCInterface.getStringA();
+		return defaultInterface.getStringA();
 	}
 	
 	public void setStringA(String value) {
-		sCInterface.setStringA(value);
+		defaultInterface.setStringA(value);
 	}
 	
 	public String getStringA2() {
-		return sCInterface.getStringA2();
+		return defaultInterface.getStringA2();
 	}
 	
 	public void setStringA2(String value) {
-		sCInterface.setStringA2(value);
+		defaultInterface.setStringA2(value);
 	}
 	
 	public String getStringB() {
-		return sCInterface.getStringB();
+		return defaultInterface.getStringB();
 	}
 	
 	public void setStringB(String value) {
-		sCInterface.setStringB(value);
+		defaultInterface.setStringB(value);
 	}
 	
 	public String getQuotedStringX() {
-		return sCInterface.getQuotedStringX();
+		return defaultInterface.getQuotedStringX();
 	}
 	
 	public void setQuotedStringX(String value) {
-		sCInterface.setQuotedStringX(value);
+		defaultInterface.setQuotedStringX(value);
 	}
 	
 	public String getQuotedStringY() {
-		return sCInterface.getQuotedStringY();
+		return defaultInterface.getQuotedStringY();
 	}
 	
 	public void setQuotedStringY(String value) {
-		sCInterface.setQuotedStringY(value);
+		defaultInterface.setQuotedStringY(value);
 	}
 	
 	public boolean getStringVarEqual() {
-		return sCInterface.getStringVarEqual();
+		return defaultInterface.getStringVarEqual();
 	}
 	
 	public void setStringVarEqual(boolean value) {
-		sCInterface.setStringVarEqual(value);
+		defaultInterface.setStringVarEqual(value);
 	}
 	
 	public boolean getStringVarNotEqual() {
-		return sCInterface.getStringVarNotEqual();
+		return defaultInterface.getStringVarNotEqual();
 	}
 	
 	public void setStringVarNotEqual(boolean value) {
-		sCInterface.setStringVarNotEqual(value);
+		defaultInterface.setStringVarNotEqual(value);
 	}
 	
 	public boolean getGuardStringNotEqual() {
-		return sCInterface.getGuardStringNotEqual();
+		return defaultInterface.getGuardStringNotEqual();
 	}
 	
 	public void setGuardStringNotEqual(boolean value) {
-		sCInterface.setGuardStringNotEqual(value);
+		defaultInterface.setGuardStringNotEqual(value);
 	}
 	
 	public boolean getGuardStringEqual() {
-		return sCInterface.getGuardStringEqual();
+		return defaultInterface.getGuardStringEqual();
 	}
 	
 	public void setGuardStringEqual(boolean value) {
-		sCInterface.setGuardStringEqual(value);
+		defaultInterface.setGuardStringEqual(value);
 	}
 	
 	private boolean check_main_region__choice_0_tr1_tr1() {
@@ -364,11 +364,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_1_tr1_tr1() {
-		return ((_current.iface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringA2() ==null :sCInterface.getStringA().equals(sCInterface.getStringA2()))));
+		return ((_current.iface.e) && ((defaultInterface.getStringA()== null?defaultInterface.getStringA2() ==null :defaultInterface.getStringA().equals(defaultInterface.getStringA2()))));
 	}
 	
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return ((_current.iface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringB() !=null : !sCInterface.getStringA().equals(sCInterface.getStringB()))));
+		return ((_current.iface.e) && ((defaultInterface.getStringA()== null?defaultInterface.getStringB() !=null : !defaultInterface.getStringA().equals(defaultInterface.getStringB()))));
 	}
 	
 	private boolean check_main_region__choice_3_tr0_tr0() {
@@ -376,11 +376,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_4_tr1_tr1() {
-		return ((_current.iface.e) && ((sCInterface.getStringA()== null?"A" ==null :sCInterface.getStringA().equals("A"))));
+		return ((_current.iface.e) && ((defaultInterface.getStringA()== null?"A" ==null :defaultInterface.getStringA().equals("A"))));
 	}
 	
 	private boolean check_main_region__choice_5_tr1_tr1() {
-		return ((_current.iface.e) && ((sCInterface.getStringA()== null?"B" !=null : !sCInterface.getStringA().equals("B"))));
+		return ((_current.iface.e) && ((defaultInterface.getStringA()== null?"B" !=null : !defaultInterface.getStringA().equals("B"))));
 	}
 	
 	private boolean check_main_region__choice_7_tr0_tr0() {
@@ -388,11 +388,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_8_tr1_tr1() {
-		return ((_current.iface.e) && (("A"== null?sCInterface.getStringA() ==null :"A".equals(sCInterface.getStringA()))));
+		return ((_current.iface.e) && (("A"== null?defaultInterface.getStringA() ==null :"A".equals(defaultInterface.getStringA()))));
 	}
 	
 	private boolean check_main_region__choice_9_tr1_tr1() {
-		return ((_current.iface.e) && (("A"== null?sCInterface.getStringB() !=null : !"A".equals(sCInterface.getStringB()))));
+		return ((_current.iface.e) && (("A"== null?defaultInterface.getStringB() !=null : !"A".equals(defaultInterface.getStringB()))));
 	}
 	
 	private boolean check_main_region__choice_11_tr0_tr0() {
@@ -408,7 +408,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_0_tr1() {
-		sCInterface.setStringVarNotEqual((sCInterface.stringA== null?sCInterface.stringB !=null : !sCInterface.stringA.equals(sCInterface.stringB)));
+		defaultInterface.setStringVarNotEqual((defaultInterface.stringA== null?defaultInterface.stringB !=null : !defaultInterface.stringA.equals(defaultInterface.stringB)));
 		
 		react_main_region__choice_1();
 	}
@@ -418,7 +418,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_1_tr1() {
-		sCInterface.setGuardStringEqual((sCInterface.stringA== null?sCInterface.stringA2 ==null :sCInterface.stringA.equals(sCInterface.stringA2)));
+		defaultInterface.setGuardStringEqual((defaultInterface.stringA== null?defaultInterface.stringA2 ==null :defaultInterface.stringA.equals(defaultInterface.stringA2)));
 		
 		react_main_region__choice_2();
 	}
@@ -428,7 +428,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_2_tr1() {
-		sCInterface.setGuardStringNotEqual((sCInterface.stringA== null?sCInterface.stringB !=null : !sCInterface.stringA.equals(sCInterface.stringB)));
+		defaultInterface.setGuardStringNotEqual((defaultInterface.stringA== null?defaultInterface.stringB !=null : !defaultInterface.stringA.equals(defaultInterface.stringB)));
 		
 		enterSequence_main_region_VarToVarCompareSucceeded_default();
 	}
@@ -438,7 +438,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_3_tr0() {
-		sCInterface.setStringVarNotEqual((sCInterface.stringA== null?"B" !=null : !sCInterface.stringA.equals("B")));
+		defaultInterface.setStringVarNotEqual((defaultInterface.stringA== null?"B" !=null : !defaultInterface.stringA.equals("B")));
 		
 		react_main_region__choice_4();
 	}
@@ -448,7 +448,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_4_tr1() {
-		sCInterface.setGuardStringEqual((sCInterface.stringA== null?"A" ==null :sCInterface.stringA.equals("A")));
+		defaultInterface.setGuardStringEqual((defaultInterface.stringA== null?"A" ==null :defaultInterface.stringA.equals("A")));
 		
 		react_main_region__choice_5();
 	}
@@ -458,7 +458,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_5_tr1() {
-		sCInterface.setGuardStringNotEqual((sCInterface.stringA== null?"B" !=null : !sCInterface.stringA.equals("B")));
+		defaultInterface.setGuardStringNotEqual((defaultInterface.stringA== null?"B" !=null : !defaultInterface.stringA.equals("B")));
 		
 		enterSequence_main_region_VarToConstCompareSucceeded_default();
 	}
@@ -472,7 +472,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_7_tr0() {
-		sCInterface.setStringVarNotEqual(("A"== null?sCInterface.stringB !=null : !"A".equals(sCInterface.stringB)));
+		defaultInterface.setStringVarNotEqual(("A"== null?defaultInterface.stringB !=null : !"A".equals(defaultInterface.stringB)));
 		
 		react_main_region__choice_8();
 	}
@@ -482,7 +482,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_8_tr1() {
-		sCInterface.setGuardStringEqual(("A"== null?sCInterface.stringA ==null :"A".equals(sCInterface.stringA)));
+		defaultInterface.setGuardStringEqual(("A"== null?defaultInterface.stringA ==null :"A".equals(defaultInterface.stringA)));
 		
 		react_main_region__choice_9();
 	}
@@ -492,7 +492,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_9_tr1() {
-		sCInterface.setGuardStringNotEqual(("A"== null?sCInterface.stringB !=null : !"A".equals(sCInterface.stringB)));
+		defaultInterface.setGuardStringNotEqual(("A"== null?defaultInterface.stringB !=null : !"A".equals(defaultInterface.stringB)));
 		
 		enterSequence_main_region_ConstToVarCompareSucceeded_default();
 	}
@@ -506,7 +506,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_11_tr0() {
-		sCInterface.setStringVarNotEqual(("A"== null?"B" !=null : !"A".equals("B")));
+		defaultInterface.setStringVarNotEqual(("A"== null?"B" !=null : !"A".equals("B")));
 		
 		react_main_region__choice_12();
 	}
@@ -516,7 +516,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_12_tr1() {
-		sCInterface.setGuardStringEqual(("A"== null?"A" ==null :"A".equals("A")));
+		defaultInterface.setGuardStringEqual(("A"== null?"A" ==null :"A".equals("A")));
 		
 		react_main_region__choice_13();
 	}
@@ -526,7 +526,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private void effect_main_region__choice_13_tr1() {
-		sCInterface.setGuardStringNotEqual(("A"== null?"B" !=null : !"A".equals("B")));
+		defaultInterface.setGuardStringNotEqual(("A"== null?"B" !=null : !"A".equals("B")));
 		
 		enterSequence_main_region_ConstToConstCompareSucceeded_default();
 	}
@@ -541,9 +541,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 	/* Entry action for state 'AssignmentChecked'. */
 	private void entryAction_main_region_AssignmentChecked() {
-		sCInterface.setStringVarNotEqual(!(sCInterface.stringA== null?sCInterface.stringB ==null :sCInterface.stringA.equals(sCInterface.stringB)));
+		defaultInterface.setStringVarNotEqual(!(defaultInterface.stringA== null?defaultInterface.stringB ==null :defaultInterface.stringA.equals(defaultInterface.stringB)));
 		
-		sCInterface.setStringVarEqual(!(sCInterface.stringA== null?sCInterface.stringA2 !=null : !sCInterface.stringA.equals(sCInterface.stringA2)));
+		defaultInterface.setStringVarEqual(!(defaultInterface.stringA== null?defaultInterface.stringA2 !=null : !defaultInterface.stringA.equals(defaultInterface.stringA2)));
 	}
 	
 	/* 'default' enter sequence for state AssignmentChecked */
@@ -789,7 +789,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			if (react()==false) {
 				if (_current.iface.e) {
 					exitSequence_main_region_AssignmentChecked();
-					sCInterface.setStringVarEqual((sCInterface.stringA== null?sCInterface.stringA2 ==null :sCInterface.stringA.equals(sCInterface.stringA2)));
+					defaultInterface.setStringVarEqual((defaultInterface.stringA== null?defaultInterface.stringA2 ==null :defaultInterface.stringA.equals(defaultInterface.stringA2)));
 					
 					react_main_region__choice_0();
 				} else {
@@ -818,7 +818,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			if (react()==false) {
 				if (_current.iface.e) {
 					exitSequence_main_region_VarToVarCompareSucceeded();
-					sCInterface.setStringVarEqual((sCInterface.stringA== null?"A" ==null :sCInterface.stringA.equals("A")));
+					defaultInterface.setStringVarEqual((defaultInterface.stringA== null?"A" ==null :defaultInterface.stringA.equals("A")));
 					
 					react_main_region__choice_3();
 				} else {
@@ -836,7 +836,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			if (react()==false) {
 				if (_current.iface.e) {
 					exitSequence_main_region_VarToConstCompareSucceeded();
-					sCInterface.setStringVarEqual(("A"== null?sCInterface.stringA ==null :"A".equals(sCInterface.stringA)));
+					defaultInterface.setStringVarEqual(("A"== null?defaultInterface.stringA ==null :"A".equals(defaultInterface.stringA)));
 					
 					react_main_region__choice_7();
 				} else {
@@ -854,7 +854,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			if (react()==false) {
 				if (_current.iface.e) {
 					exitSequence_main_region_ConstToVarCompareSucceeded();
-					sCInterface.setStringVarEqual(("A"== null?"A" ==null :"A".equals("A")));
+					defaultInterface.setStringVarEqual(("A"== null?"A" ==null :"A".equals("A")));
 					
 					react_main_region__choice_11();
 				} else {

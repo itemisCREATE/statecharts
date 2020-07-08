@@ -3,7 +3,7 @@ package org.yakindu.scr.javakeywords;
 
 
 public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean whileEvent;
 		
@@ -461,14 +461,14 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean whileEvent;
 		private boolean ev;
 	}
 	private static class JavaKeywordsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -499,7 +499,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		this.isExecuting = value;
 	}
 	public JavaKeywordsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -513,93 +513,93 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setAbstract(false);
+		defaultInterface.setAbstract(false);
 		
-		sCInterface.setAssert(false);
+		defaultInterface.setAssert(false);
 		
-		sCInterface.setBoolean(false);
+		defaultInterface.setBoolean(false);
 		
-		sCInterface.setBreak(false);
+		defaultInterface.setBreak(false);
 		
-		sCInterface.setByte(false);
+		defaultInterface.setByte(false);
 		
-		sCInterface.setCase(false);
+		defaultInterface.setCase(false);
 		
-		sCInterface.setCatch(false);
+		defaultInterface.setCatch(false);
 		
-		sCInterface.setChar(false);
+		defaultInterface.setChar(false);
 		
-		sCInterface.setClass(false);
+		defaultInterface.setClass(false);
 		
-		sCInterface.setContinue(false);
+		defaultInterface.setContinue(false);
 		
-		sCInterface.setDo(false);
+		defaultInterface.setDo(false);
 		
-		sCInterface.setDouble(false);
+		defaultInterface.setDouble(false);
 		
-		sCInterface.setEnum(false);
+		defaultInterface.setEnum(false);
 		
-		sCInterface.setExtends(false);
+		defaultInterface.setExtends(false);
 		
-		sCInterface.setFinal(false);
+		defaultInterface.setFinal(false);
 		
-		sCInterface.setFinally(false);
+		defaultInterface.setFinally(false);
 		
-		sCInterface.setFloat(false);
+		defaultInterface.setFloat(false);
 		
-		sCInterface.setFor(false);
+		defaultInterface.setFor(false);
 		
-		sCInterface.setGoto(false);
+		defaultInterface.setGoto(false);
 		
-		sCInterface.setIf(false);
+		defaultInterface.setIf(false);
 		
-		sCInterface.setImplements(false);
+		defaultInterface.setImplements(false);
 		
-		sCInterface.setInstanceof(false);
+		defaultInterface.setInstanceof(false);
 		
-		sCInterface.setInt(false);
+		defaultInterface.setInt(false);
 		
-		sCInterface.setLong(false);
+		defaultInterface.setLong(false);
 		
-		sCInterface.setNative(false);
+		defaultInterface.setNative(false);
 		
-		sCInterface.setNew(false);
+		defaultInterface.setNew(false);
 		
-		sCInterface.setPackage(false);
+		defaultInterface.setPackage(false);
 		
-		sCInterface.setPrivate(false);
+		defaultInterface.setPrivate(false);
 		
-		sCInterface.setProtected(false);
+		defaultInterface.setProtected(false);
 		
-		sCInterface.setPublic(false);
+		defaultInterface.setPublic(false);
 		
-		sCInterface.setReturn(false);
+		defaultInterface.setReturn(false);
 		
-		sCInterface.setShort(false);
+		defaultInterface.setShort(false);
 		
-		sCInterface.setStatic(false);
+		defaultInterface.setStatic(false);
 		
-		sCInterface.setStrictfp(false);
+		defaultInterface.setStrictfp(false);
 		
-		sCInterface.setSuper(false);
+		defaultInterface.setSuper(false);
 		
-		sCInterface.setSwitch(false);
+		defaultInterface.setSwitch(false);
 		
-		sCInterface.setSynchronized(false);
+		defaultInterface.setSynchronized(false);
 		
-		sCInterface.setThis(false);
+		defaultInterface.setThis(false);
 		
-		sCInterface.setThrow(false);
+		defaultInterface.setThrow(false);
 		
-		sCInterface.setThrows(false);
+		defaultInterface.setThrows(false);
 		
-		sCInterface.setTransient(false);
+		defaultInterface.setTransient(false);
 		
-		sCInterface.setTry(false);
+		defaultInterface.setTry(false);
 		
-		sCInterface.setVoid(false);
+		defaultInterface.setVoid(false);
 		
-		sCInterface.setVolatile(false);
+		defaultInterface.setVolatile(false);
 		
 		isExecuting = false;
 	}
@@ -674,16 +674,16 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.whileEvent = sCInterface.whileEvent;
-		sCInterface.whileEvent = false;
+		_current.iface.whileEvent = defaultInterface.whileEvent;
+		defaultInterface.whileEvent = false;
 		
-		_current.iface.ev = sCInterface.ev;
-		sCInterface.ev = false;
+		_current.iface.ev = defaultInterface.ev;
+		defaultInterface.ev = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.whileEvent = false;
-		sCInterface.ev = false;
+		defaultInterface.whileEvent = false;
+		defaultInterface.ev = false;
 	}
 	
 	/**
@@ -711,548 +711,548 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseWhile() {
-		sCInterface.raiseWhile();
+		defaultInterface.raiseWhile();
 	}
 	
 	public void raiseEv() {
-		sCInterface.raiseEv();
+		defaultInterface.raiseEv();
 	}
 	
 	public boolean getAbstract() {
-		return sCInterface.getAbstract();
+		return defaultInterface.getAbstract();
 	}
 	
 	public void setAbstract(boolean value) {
-		sCInterface.setAbstract(value);
+		defaultInterface.setAbstract(value);
 	}
 	
 	public boolean getAssert() {
-		return sCInterface.getAssert();
+		return defaultInterface.getAssert();
 	}
 	
 	public void setAssert(boolean value) {
-		sCInterface.setAssert(value);
+		defaultInterface.setAssert(value);
 	}
 	
 	public boolean getBoolean() {
-		return sCInterface.getBoolean();
+		return defaultInterface.getBoolean();
 	}
 	
 	public void setBoolean(boolean value) {
-		sCInterface.setBoolean(value);
+		defaultInterface.setBoolean(value);
 	}
 	
 	public boolean getBreak() {
-		return sCInterface.getBreak();
+		return defaultInterface.getBreak();
 	}
 	
 	public void setBreak(boolean value) {
-		sCInterface.setBreak(value);
+		defaultInterface.setBreak(value);
 	}
 	
 	public boolean getByte() {
-		return sCInterface.getByte();
+		return defaultInterface.getByte();
 	}
 	
 	public void setByte(boolean value) {
-		sCInterface.setByte(value);
+		defaultInterface.setByte(value);
 	}
 	
 	public boolean getCase() {
-		return sCInterface.getCase();
+		return defaultInterface.getCase();
 	}
 	
 	public void setCase(boolean value) {
-		sCInterface.setCase(value);
+		defaultInterface.setCase(value);
 	}
 	
 	public boolean getCatch() {
-		return sCInterface.getCatch();
+		return defaultInterface.getCatch();
 	}
 	
 	public void setCatch(boolean value) {
-		sCInterface.setCatch(value);
+		defaultInterface.setCatch(value);
 	}
 	
 	public boolean getChar() {
-		return sCInterface.getChar();
+		return defaultInterface.getChar();
 	}
 	
 	public void setChar(boolean value) {
-		sCInterface.setChar(value);
+		defaultInterface.setChar(value);
 	}
 	
 	public boolean getClassVariable() {
-		return sCInterface.getClassVariable();
+		return defaultInterface.getClassVariable();
 	}
 	
 	public void setClass(boolean value) {
-		sCInterface.setClass(value);
+		defaultInterface.setClass(value);
 	}
 	
 	public boolean getContinue() {
-		return sCInterface.getContinue();
+		return defaultInterface.getContinue();
 	}
 	
 	public void setContinue(boolean value) {
-		sCInterface.setContinue(value);
+		defaultInterface.setContinue(value);
 	}
 	
 	public boolean getDo() {
-		return sCInterface.getDo();
+		return defaultInterface.getDo();
 	}
 	
 	public void setDo(boolean value) {
-		sCInterface.setDo(value);
+		defaultInterface.setDo(value);
 	}
 	
 	public boolean getDouble() {
-		return sCInterface.getDouble();
+		return defaultInterface.getDouble();
 	}
 	
 	public void setDouble(boolean value) {
-		sCInterface.setDouble(value);
+		defaultInterface.setDouble(value);
 	}
 	
 	public boolean getEnum() {
-		return sCInterface.getEnum();
+		return defaultInterface.getEnum();
 	}
 	
 	public void setEnum(boolean value) {
-		sCInterface.setEnum(value);
+		defaultInterface.setEnum(value);
 	}
 	
 	public boolean getExtends() {
-		return sCInterface.getExtends();
+		return defaultInterface.getExtends();
 	}
 	
 	public void setExtends(boolean value) {
-		sCInterface.setExtends(value);
+		defaultInterface.setExtends(value);
 	}
 	
 	public boolean getFinal() {
-		return sCInterface.getFinal();
+		return defaultInterface.getFinal();
 	}
 	
 	public void setFinal(boolean value) {
-		sCInterface.setFinal(value);
+		defaultInterface.setFinal(value);
 	}
 	
 	public boolean getFinally() {
-		return sCInterface.getFinally();
+		return defaultInterface.getFinally();
 	}
 	
 	public void setFinally(boolean value) {
-		sCInterface.setFinally(value);
+		defaultInterface.setFinally(value);
 	}
 	
 	public boolean getFloat() {
-		return sCInterface.getFloat();
+		return defaultInterface.getFloat();
 	}
 	
 	public void setFloat(boolean value) {
-		sCInterface.setFloat(value);
+		defaultInterface.setFloat(value);
 	}
 	
 	public boolean getFor() {
-		return sCInterface.getFor();
+		return defaultInterface.getFor();
 	}
 	
 	public void setFor(boolean value) {
-		sCInterface.setFor(value);
+		defaultInterface.setFor(value);
 	}
 	
 	public boolean getGoto() {
-		return sCInterface.getGoto();
+		return defaultInterface.getGoto();
 	}
 	
 	public void setGoto(boolean value) {
-		sCInterface.setGoto(value);
+		defaultInterface.setGoto(value);
 	}
 	
 	public boolean getIf() {
-		return sCInterface.getIf();
+		return defaultInterface.getIf();
 	}
 	
 	public void setIf(boolean value) {
-		sCInterface.setIf(value);
+		defaultInterface.setIf(value);
 	}
 	
 	public boolean getImplements() {
-		return sCInterface.getImplements();
+		return defaultInterface.getImplements();
 	}
 	
 	public void setImplements(boolean value) {
-		sCInterface.setImplements(value);
+		defaultInterface.setImplements(value);
 	}
 	
 	public boolean getInstanceof() {
-		return sCInterface.getInstanceof();
+		return defaultInterface.getInstanceof();
 	}
 	
 	public void setInstanceof(boolean value) {
-		sCInterface.setInstanceof(value);
+		defaultInterface.setInstanceof(value);
 	}
 	
 	public boolean getInt() {
-		return sCInterface.getInt();
+		return defaultInterface.getInt();
 	}
 	
 	public void setInt(boolean value) {
-		sCInterface.setInt(value);
+		defaultInterface.setInt(value);
 	}
 	
 	public boolean getLong() {
-		return sCInterface.getLong();
+		return defaultInterface.getLong();
 	}
 	
 	public void setLong(boolean value) {
-		sCInterface.setLong(value);
+		defaultInterface.setLong(value);
 	}
 	
 	public boolean getNative() {
-		return sCInterface.getNative();
+		return defaultInterface.getNative();
 	}
 	
 	public void setNative(boolean value) {
-		sCInterface.setNative(value);
+		defaultInterface.setNative(value);
 	}
 	
 	public boolean getNew() {
-		return sCInterface.getNew();
+		return defaultInterface.getNew();
 	}
 	
 	public void setNew(boolean value) {
-		sCInterface.setNew(value);
+		defaultInterface.setNew(value);
 	}
 	
 	public boolean getPackage() {
-		return sCInterface.getPackage();
+		return defaultInterface.getPackage();
 	}
 	
 	public void setPackage(boolean value) {
-		sCInterface.setPackage(value);
+		defaultInterface.setPackage(value);
 	}
 	
 	public boolean getPrivate() {
-		return sCInterface.getPrivate();
+		return defaultInterface.getPrivate();
 	}
 	
 	public void setPrivate(boolean value) {
-		sCInterface.setPrivate(value);
+		defaultInterface.setPrivate(value);
 	}
 	
 	public boolean getProtected() {
-		return sCInterface.getProtected();
+		return defaultInterface.getProtected();
 	}
 	
 	public void setProtected(boolean value) {
-		sCInterface.setProtected(value);
+		defaultInterface.setProtected(value);
 	}
 	
 	public boolean getPublic() {
-		return sCInterface.getPublic();
+		return defaultInterface.getPublic();
 	}
 	
 	public void setPublic(boolean value) {
-		sCInterface.setPublic(value);
+		defaultInterface.setPublic(value);
 	}
 	
 	public boolean getReturn() {
-		return sCInterface.getReturn();
+		return defaultInterface.getReturn();
 	}
 	
 	public void setReturn(boolean value) {
-		sCInterface.setReturn(value);
+		defaultInterface.setReturn(value);
 	}
 	
 	public boolean getShort() {
-		return sCInterface.getShort();
+		return defaultInterface.getShort();
 	}
 	
 	public void setShort(boolean value) {
-		sCInterface.setShort(value);
+		defaultInterface.setShort(value);
 	}
 	
 	public boolean getStatic() {
-		return sCInterface.getStatic();
+		return defaultInterface.getStatic();
 	}
 	
 	public void setStatic(boolean value) {
-		sCInterface.setStatic(value);
+		defaultInterface.setStatic(value);
 	}
 	
 	public boolean getStrictfp() {
-		return sCInterface.getStrictfp();
+		return defaultInterface.getStrictfp();
 	}
 	
 	public void setStrictfp(boolean value) {
-		sCInterface.setStrictfp(value);
+		defaultInterface.setStrictfp(value);
 	}
 	
 	public boolean getSuper() {
-		return sCInterface.getSuper();
+		return defaultInterface.getSuper();
 	}
 	
 	public void setSuper(boolean value) {
-		sCInterface.setSuper(value);
+		defaultInterface.setSuper(value);
 	}
 	
 	public boolean getSwitch() {
-		return sCInterface.getSwitch();
+		return defaultInterface.getSwitch();
 	}
 	
 	public void setSwitch(boolean value) {
-		sCInterface.setSwitch(value);
+		defaultInterface.setSwitch(value);
 	}
 	
 	public boolean getSynchronized() {
-		return sCInterface.getSynchronized();
+		return defaultInterface.getSynchronized();
 	}
 	
 	public void setSynchronized(boolean value) {
-		sCInterface.setSynchronized(value);
+		defaultInterface.setSynchronized(value);
 	}
 	
 	public boolean getThis() {
-		return sCInterface.getThis();
+		return defaultInterface.getThis();
 	}
 	
 	public void setThis(boolean value) {
-		sCInterface.setThis(value);
+		defaultInterface.setThis(value);
 	}
 	
 	public boolean getThrow() {
-		return sCInterface.getThrow();
+		return defaultInterface.getThrow();
 	}
 	
 	public void setThrow(boolean value) {
-		sCInterface.setThrow(value);
+		defaultInterface.setThrow(value);
 	}
 	
 	public boolean getThrows() {
-		return sCInterface.getThrows();
+		return defaultInterface.getThrows();
 	}
 	
 	public void setThrows(boolean value) {
-		sCInterface.setThrows(value);
+		defaultInterface.setThrows(value);
 	}
 	
 	public boolean getTransient() {
-		return sCInterface.getTransient();
+		return defaultInterface.getTransient();
 	}
 	
 	public void setTransient(boolean value) {
-		sCInterface.setTransient(value);
+		defaultInterface.setTransient(value);
 	}
 	
 	public boolean getTry() {
-		return sCInterface.getTry();
+		return defaultInterface.getTry();
 	}
 	
 	public void setTry(boolean value) {
-		sCInterface.setTry(value);
+		defaultInterface.setTry(value);
 	}
 	
 	public boolean getVoid() {
-		return sCInterface.getVoid();
+		return defaultInterface.getVoid();
 	}
 	
 	public void setVoid(boolean value) {
-		sCInterface.setVoid(value);
+		defaultInterface.setVoid(value);
 	}
 	
 	public boolean getVolatile() {
-		return sCInterface.getVolatile();
+		return defaultInterface.getVolatile();
 	}
 	
 	public void setVolatile(boolean value) {
-		sCInterface.setVolatile(value);
+		defaultInterface.setVolatile(value);
 	}
 	
 	/* Entry action for state 'abstract'. */
 	private void entryAction_goto_abstract() {
-		sCInterface.setAbstract(true);
+		defaultInterface.setAbstract(true);
 		
-		sCInterface.setAssert(true);
+		defaultInterface.setAssert(true);
 		
-		sCInterface.setBoolean(true);
+		defaultInterface.setBoolean(true);
 		
-		sCInterface.setBreak(true);
+		defaultInterface.setBreak(true);
 		
-		sCInterface.setByte(true);
+		defaultInterface.setByte(true);
 		
-		sCInterface.setCase(true);
+		defaultInterface.setCase(true);
 		
-		sCInterface.setCatch(true);
+		defaultInterface.setCatch(true);
 		
-		sCInterface.setChar(true);
+		defaultInterface.setChar(true);
 		
-		sCInterface.setClass(true);
+		defaultInterface.setClass(true);
 		
-		sCInterface.setContinue(true);
+		defaultInterface.setContinue(true);
 		
-		sCInterface.setDo(true);
+		defaultInterface.setDo(true);
 		
-		sCInterface.setDouble(true);
+		defaultInterface.setDouble(true);
 		
-		sCInterface.setEnum(true);
+		defaultInterface.setEnum(true);
 		
-		sCInterface.setExtends(true);
+		defaultInterface.setExtends(true);
 		
-		sCInterface.setFinal(true);
+		defaultInterface.setFinal(true);
 		
-		sCInterface.setFinally(true);
+		defaultInterface.setFinally(true);
 		
-		sCInterface.setFloat(true);
+		defaultInterface.setFloat(true);
 		
-		sCInterface.setFor(true);
+		defaultInterface.setFor(true);
 		
-		sCInterface.setGoto(true);
+		defaultInterface.setGoto(true);
 		
-		sCInterface.setIf(true);
+		defaultInterface.setIf(true);
 		
-		sCInterface.setImplements(true);
+		defaultInterface.setImplements(true);
 		
-		sCInterface.setInstanceof(true);
+		defaultInterface.setInstanceof(true);
 		
-		sCInterface.setInt(true);
+		defaultInterface.setInt(true);
 		
-		sCInterface.setLong(true);
+		defaultInterface.setLong(true);
 		
-		sCInterface.setNative(true);
+		defaultInterface.setNative(true);
 		
-		sCInterface.setNew(true);
+		defaultInterface.setNew(true);
 		
-		sCInterface.setPackage(true);
+		defaultInterface.setPackage(true);
 		
-		sCInterface.setPrivate(true);
+		defaultInterface.setPrivate(true);
 		
-		sCInterface.setProtected(true);
+		defaultInterface.setProtected(true);
 		
-		sCInterface.setPublic(true);
+		defaultInterface.setPublic(true);
 		
-		sCInterface.setReturn(true);
+		defaultInterface.setReturn(true);
 		
-		sCInterface.setShort(true);
+		defaultInterface.setShort(true);
 		
-		sCInterface.setStatic(true);
+		defaultInterface.setStatic(true);
 		
-		sCInterface.setStrictfp(true);
+		defaultInterface.setStrictfp(true);
 		
-		sCInterface.setSuper(true);
+		defaultInterface.setSuper(true);
 		
-		sCInterface.setSwitch(true);
+		defaultInterface.setSwitch(true);
 		
-		sCInterface.setSynchronized(true);
+		defaultInterface.setSynchronized(true);
 		
-		sCInterface.setThis(true);
+		defaultInterface.setThis(true);
 		
-		sCInterface.setThrow(true);
+		defaultInterface.setThrow(true);
 		
-		sCInterface.setThrows(true);
+		defaultInterface.setThrows(true);
 		
-		sCInterface.setTransient(true);
+		defaultInterface.setTransient(true);
 		
-		sCInterface.setTry(true);
+		defaultInterface.setTry(true);
 		
-		sCInterface.setVoid(true);
+		defaultInterface.setVoid(true);
 		
-		sCInterface.setVolatile(true);
+		defaultInterface.setVolatile(true);
 	}
 	
 	/* Entry action for state 'boolean'. */
 	private void entryAction_goto_boolean() {
-		sCInterface.setAbstract(false);
+		defaultInterface.setAbstract(false);
 		
-		sCInterface.setAssert(false);
+		defaultInterface.setAssert(false);
 		
-		sCInterface.setBoolean(false);
+		defaultInterface.setBoolean(false);
 		
-		sCInterface.setBreak(false);
+		defaultInterface.setBreak(false);
 		
-		sCInterface.setByte(false);
+		defaultInterface.setByte(false);
 		
-		sCInterface.setCase(false);
+		defaultInterface.setCase(false);
 		
-		sCInterface.setCatch(false);
+		defaultInterface.setCatch(false);
 		
-		sCInterface.setChar(false);
+		defaultInterface.setChar(false);
 		
-		sCInterface.setClass(false);
+		defaultInterface.setClass(false);
 		
-		sCInterface.setContinue(false);
+		defaultInterface.setContinue(false);
 		
-		sCInterface.setDo(false);
+		defaultInterface.setDo(false);
 		
-		sCInterface.setDouble(false);
+		defaultInterface.setDouble(false);
 		
-		sCInterface.setEnum(false);
+		defaultInterface.setEnum(false);
 		
-		sCInterface.setExtends(false);
+		defaultInterface.setExtends(false);
 		
-		sCInterface.setFinal(false);
+		defaultInterface.setFinal(false);
 		
-		sCInterface.setFinally(false);
+		defaultInterface.setFinally(false);
 		
-		sCInterface.setFloat(false);
+		defaultInterface.setFloat(false);
 		
-		sCInterface.setFor(false);
+		defaultInterface.setFor(false);
 		
-		sCInterface.setGoto(false);
+		defaultInterface.setGoto(false);
 		
-		sCInterface.setIf(false);
+		defaultInterface.setIf(false);
 		
-		sCInterface.setImplements(false);
+		defaultInterface.setImplements(false);
 		
-		sCInterface.setInstanceof(false);
+		defaultInterface.setInstanceof(false);
 		
-		sCInterface.setInt(false);
+		defaultInterface.setInt(false);
 		
-		sCInterface.setLong(false);
+		defaultInterface.setLong(false);
 		
-		sCInterface.setNew(false);
+		defaultInterface.setNew(false);
 		
-		sCInterface.setPackage(false);
+		defaultInterface.setPackage(false);
 		
-		sCInterface.setPrivate(false);
+		defaultInterface.setPrivate(false);
 		
-		sCInterface.setProtected(false);
+		defaultInterface.setProtected(false);
 		
-		sCInterface.setPublic(false);
+		defaultInterface.setPublic(false);
 		
-		sCInterface.setReturn(false);
+		defaultInterface.setReturn(false);
 		
-		sCInterface.setShort(false);
+		defaultInterface.setShort(false);
 		
-		sCInterface.setStatic(false);
+		defaultInterface.setStatic(false);
 		
-		sCInterface.setStrictfp(false);
+		defaultInterface.setStrictfp(false);
 		
-		sCInterface.setSuper(false);
+		defaultInterface.setSuper(false);
 		
-		sCInterface.setSwitch(false);
+		defaultInterface.setSwitch(false);
 		
-		sCInterface.setSynchronized(false);
+		defaultInterface.setSynchronized(false);
 		
-		sCInterface.setThis(false);
+		defaultInterface.setThis(false);
 		
-		sCInterface.setThrow(false);
+		defaultInterface.setThrow(false);
 		
-		sCInterface.setThrows(false);
+		defaultInterface.setThrows(false);
 		
-		sCInterface.setTransient(false);
+		defaultInterface.setTransient(false);
 		
-		sCInterface.setTry(false);
+		defaultInterface.setTry(false);
 		
-		sCInterface.setVoid(false);
+		defaultInterface.setVoid(false);
 		
-		sCInterface.setVolatile(false);
+		defaultInterface.setVolatile(false);
 	}
 	
 	/* 'default' enter sequence for state abstract */
@@ -1447,7 +1447,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			if (react()==false) {
 				if (((_current.iface.whileEvent) && (true))) {
 					exitSequence_goto_abstract();
-					sCInterface.setNative(false);
+					defaultInterface.setNative(false);
 					
 					enterSequence_goto_boolean_default();
 				} else {

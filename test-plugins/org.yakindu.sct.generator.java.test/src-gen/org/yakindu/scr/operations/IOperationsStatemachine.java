@@ -27,12 +27,12 @@ public interface IOperationsStatemachine extends IStatemachine {
 	public void setInternalOperationCallback(InternalOperationCallback operationCallback);
 	
 	
-	public interface SCIInterface1 {
+	public interface InterfaceInterface1 {
 	
-		public void setSCIInterface1OperationCallback(SCIInterface1OperationCallback operationCallback);
+		public void setInterfaceInterface1OperationCallback(InterfaceInterface1OperationCallback operationCallback);
 	}
 	
-	public interface SCIInterface1OperationCallback {
+	public interface InterfaceInterface1OperationCallback {
 	
 		public void interfaceOperation1();
 		
@@ -52,17 +52,17 @@ public interface IOperationsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCIInterface1 getSCIInterface1();
+	public InterfaceInterface1 getInterfaceInterface1();
 	
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseEv();
 		
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public void unnamedInterfaceOperation1();
 		
@@ -84,6 +84,6 @@ public interface IOperationsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

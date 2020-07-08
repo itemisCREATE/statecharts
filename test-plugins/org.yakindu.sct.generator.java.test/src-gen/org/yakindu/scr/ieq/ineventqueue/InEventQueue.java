@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class InEventQueue implements IInEventQueue {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private boolean e;
@@ -59,7 +59,7 @@ public class InEventQueue implements IInEventQueue {
 		
 	}
 	
-	protected class SCIIImpl implements SCII {
+	protected class InterfaceIImpl implements InterfaceI {
 	
 		private boolean g;
 		
@@ -76,9 +76,9 @@ public class InEventQueue implements IInEventQueue {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCIIImpl sCII;
+	protected InterfaceIImpl interfaceI;
 	
 	private boolean initialized = false;
 	
@@ -107,14 +107,14 @@ public class InEventQueue implements IInEventQueue {
 		this.isExecuting = value;
 	}
 	public InEventQueue() {
-		sCInterface = new SCInterfaceImpl();
-		sCII = new SCIIImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceI = new InterfaceIImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
@@ -124,7 +124,7 @@ public class InEventQueue implements IInEventQueue {
 		clearInEvents();
 		clearInternalEvents();
 		
-		sCInterface.setCycles(0);
+		defaultInterface.setCycles(0);
 		
 		isExecuting = false;
 	}
@@ -184,7 +184,7 @@ public class InEventQueue implements IInEventQueue {
 			clearInEvents();
 			clearInternalEvents();
 			nextEvent();
-		} while ((((sCInterface.e || sCInterface.f) || sCII.g) || h));
+		} while ((((defaultInterface.e || defaultInterface.f) || interfaceI.g) || h));
 		
 		isExecuting = false;
 	}
@@ -205,9 +205,9 @@ public class InEventQueue implements IInEventQueue {
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
-		sCII.g = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
+		interfaceI.g = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -243,12 +243,12 @@ public class InEventQueue implements IInEventQueue {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCII getSCII() {
-		return sCII;
+	public InterfaceI getInterfaceI() {
+		return interfaceI;
 	}
 	
 	private void raiseH() {
@@ -261,24 +261,24 @@ public class InEventQueue implements IInEventQueue {
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF(long value) {
-		sCInterface.raiseF(value);
+		defaultInterface.raiseF(value);
 	}
 	
 	public long getCycles() {
-		return sCInterface.getCycles();
+		return defaultInterface.getCycles();
 	}
 	
 	public void setCycles(long value) {
-		sCInterface.setCycles(value);
+		defaultInterface.setCycles(value);
 	}
 	
 	/* Entry action for state 'dispatch'. */
 	private void entryAction_main_region_dispatch() {
-		sCInterface.operationCallback.askOracle();
+		defaultInterface.operationCallback.askOracle();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -361,7 +361,7 @@ public class InEventQueue implements IInEventQueue {
 	}
 	
 	private boolean react() {
-		sCInterface.setCycles(sCInterface.getCycles() + 1);
+		defaultInterface.setCycles(defaultInterface.getCycles() + 1);
 		
 		return false;
 	}
@@ -384,7 +384,7 @@ public class InEventQueue implements IInEventQueue {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (!sCInterface.f) {
+			if (!defaultInterface.f) {
 				exitSequence_main_region_B();
 				enterSequence_main_region_dispatch_default();
 				react();
@@ -393,7 +393,7 @@ public class InEventQueue implements IInEventQueue {
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.f) {
+			if (defaultInterface.f) {
 				raiseH();
 			}
 			did_transition = react();
@@ -419,17 +419,17 @@ public class InEventQueue implements IInEventQueue {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_dispatch();
 				enterSequence_main_region_A_default();
 				react();
 			} else {
-				if (sCInterface.f) {
+				if (defaultInterface.f) {
 					exitSequence_main_region_dispatch();
 					enterSequence_main_region_B_default();
 					react();
 				} else {
-					if (sCII.g) {
+					if (interfaceI.g) {
 						exitSequence_main_region_dispatch();
 						enterSequence_main_region_C_default();
 						react();

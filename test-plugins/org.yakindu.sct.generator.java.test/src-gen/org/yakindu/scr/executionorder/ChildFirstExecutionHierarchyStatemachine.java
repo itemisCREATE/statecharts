@@ -3,7 +3,7 @@ package org.yakindu.scr.executionorder;
 
 
 public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExecutionHierarchyStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -104,13 +104,13 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 	}
 	private static class ChildFirstExecutionHierarchyStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -138,7 +138,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		this.isExecuting = value;
 	}
 	public ChildFirstExecutionHierarchyStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -149,23 +149,23 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		
 		clearInEvents();
 		
-		sCInterface.setDisable_a(false);
+		defaultInterface.setDisable_a(false);
 		
-		sCInterface.setDisable_aa(false);
+		defaultInterface.setDisable_aa(false);
 		
-		sCInterface.setDisable_aaa(false);
+		defaultInterface.setDisable_aaa(false);
 		
-		sCInterface.setA_reacted(false);
+		defaultInterface.setA_reacted(false);
 		
-		sCInterface.setAa_reacted(false);
+		defaultInterface.setAa_reacted(false);
 		
-		sCInterface.setAaa_reacted(false);
+		defaultInterface.setAaa_reacted(false);
 		
-		sCInterface.setA_local(false);
+		defaultInterface.setA_local(false);
 		
-		sCInterface.setAa_local(false);
+		defaultInterface.setAa_local(false);
 		
-		sCInterface.setAaa_local(false);
+		defaultInterface.setAaa_local(false);
 		
 		isExecuting = false;
 	}
@@ -234,12 +234,12 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	/**
@@ -263,105 +263,105 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public boolean getDisable_a() {
-		return sCInterface.getDisable_a();
+		return defaultInterface.getDisable_a();
 	}
 	
 	public void setDisable_a(boolean value) {
-		sCInterface.setDisable_a(value);
+		defaultInterface.setDisable_a(value);
 	}
 	
 	public boolean getDisable_aa() {
-		return sCInterface.getDisable_aa();
+		return defaultInterface.getDisable_aa();
 	}
 	
 	public void setDisable_aa(boolean value) {
-		sCInterface.setDisable_aa(value);
+		defaultInterface.setDisable_aa(value);
 	}
 	
 	public boolean getDisable_aaa() {
-		return sCInterface.getDisable_aaa();
+		return defaultInterface.getDisable_aaa();
 	}
 	
 	public void setDisable_aaa(boolean value) {
-		sCInterface.setDisable_aaa(value);
+		defaultInterface.setDisable_aaa(value);
 	}
 	
 	public boolean getA_reacted() {
-		return sCInterface.getA_reacted();
+		return defaultInterface.getA_reacted();
 	}
 	
 	public void setA_reacted(boolean value) {
-		sCInterface.setA_reacted(value);
+		defaultInterface.setA_reacted(value);
 	}
 	
 	public boolean getAa_reacted() {
-		return sCInterface.getAa_reacted();
+		return defaultInterface.getAa_reacted();
 	}
 	
 	public void setAa_reacted(boolean value) {
-		sCInterface.setAa_reacted(value);
+		defaultInterface.setAa_reacted(value);
 	}
 	
 	public boolean getAaa_reacted() {
-		return sCInterface.getAaa_reacted();
+		return defaultInterface.getAaa_reacted();
 	}
 	
 	public void setAaa_reacted(boolean value) {
-		sCInterface.setAaa_reacted(value);
+		defaultInterface.setAaa_reacted(value);
 	}
 	
 	public boolean getA_local() {
-		return sCInterface.getA_local();
+		return defaultInterface.getA_local();
 	}
 	
 	public void setA_local(boolean value) {
-		sCInterface.setA_local(value);
+		defaultInterface.setA_local(value);
 	}
 	
 	public boolean getAa_local() {
-		return sCInterface.getAa_local();
+		return defaultInterface.getAa_local();
 	}
 	
 	public void setAa_local(boolean value) {
-		sCInterface.setAa_local(value);
+		defaultInterface.setAa_local(value);
 	}
 	
 	public boolean getAaa_local() {
-		return sCInterface.getAaa_local();
+		return defaultInterface.getAaa_local();
 	}
 	
 	public void setAaa_local(boolean value) {
-		sCInterface.setAaa_local(value);
+		defaultInterface.setAaa_local(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_r_A() {
-		sCInterface.setA_reacted(false);
+		defaultInterface.setA_reacted(false);
 		
-		sCInterface.setAa_reacted(false);
+		defaultInterface.setAa_reacted(false);
 		
-		sCInterface.setAaa_reacted(false);
+		defaultInterface.setAaa_reacted(false);
 		
-		sCInterface.setA_local(false);
+		defaultInterface.setA_local(false);
 		
-		sCInterface.setAa_local(false);
+		defaultInterface.setAa_local(false);
 		
-		sCInterface.setAaa_local(false);
+		defaultInterface.setAaa_local(false);
 		
-		sCInterface.setDisable_a(false);
+		defaultInterface.setDisable_a(false);
 		
-		sCInterface.setDisable_aa(false);
+		defaultInterface.setDisable_aa(false);
 		
-		sCInterface.setDisable_aaa(false);
+		defaultInterface.setDisable_aaa(false);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -467,9 +467,9 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e) && (!sCInterface.getDisable_a()))) {
+			if (((_current.iface.e) && (!defaultInterface.getDisable_a()))) {
 				exitSequence_r_A();
-				sCInterface.setA_reacted(true);
+				defaultInterface.setA_reacted(true);
 				
 				enterSequence_r_B_default();
 				react();
@@ -478,7 +478,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setA_local(true);
+			defaultInterface.setA_local(true);
 			
 			did_transition = react();
 		}
@@ -489,9 +489,9 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e) && (!sCInterface.getDisable_aa()))) {
+			if (((_current.iface.e) && (!defaultInterface.getDisable_aa()))) {
 				exitSequence_r_A();
-				sCInterface.setAa_reacted(true);
+				defaultInterface.setAa_reacted(true);
 				
 				enterSequence_r_B_default();
 				react();
@@ -500,7 +500,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setAa_local(true);
+			defaultInterface.setAa_local(true);
 			
 			did_transition = r_A_react(try_transition);
 		}
@@ -511,9 +511,9 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e) && (!sCInterface.getDisable_aaa()))) {
+			if (((_current.iface.e) && (!defaultInterface.getDisable_aaa()))) {
 				exitSequence_r_A();
-				sCInterface.setAaa_reacted(true);
+				defaultInterface.setAaa_reacted(true);
 				
 				enterSequence_r_B_default();
 				react();
@@ -522,7 +522,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setAaa_local(true);
+			defaultInterface.setAaa_local(true);
 			
 			did_transition = r_A_r_AA_react(try_transition);
 		}

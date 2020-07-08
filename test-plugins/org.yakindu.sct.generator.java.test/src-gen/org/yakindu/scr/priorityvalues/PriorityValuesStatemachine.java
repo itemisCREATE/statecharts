@@ -3,7 +3,7 @@ package org.yakindu.scr.priorityvalues;
 
 
 public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean event1;
 		
@@ -21,14 +21,14 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean event1;
 		private boolean event2;
 	}
 	private static class PriorityValuesStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -59,7 +59,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		this.isExecuting = value;
 	}
 	public PriorityValuesStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -155,16 +155,16 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.event1 = sCInterface.event1;
-		sCInterface.event1 = false;
+		_current.iface.event1 = defaultInterface.event1;
+		defaultInterface.event1 = false;
 		
-		_current.iface.event2 = sCInterface.event2;
-		sCInterface.event2 = false;
+		_current.iface.event2 = defaultInterface.event2;
+		defaultInterface.event2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.event1 = false;
-		sCInterface.event2 = false;
+		defaultInterface.event1 = false;
+		defaultInterface.event2 = false;
 	}
 	
 	/**
@@ -192,16 +192,16 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseEvent1() {
-		sCInterface.raiseEvent1();
+		defaultInterface.raiseEvent1();
 	}
 	
 	public void raiseEvent2() {
-		sCInterface.raiseEvent2();
+		defaultInterface.raiseEvent2();
 	}
 	
 	/* 'default' enter sequence for state A */

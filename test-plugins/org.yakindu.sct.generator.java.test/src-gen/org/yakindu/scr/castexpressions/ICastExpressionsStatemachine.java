@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ICastExpressionsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public double getRealValue();
 		
@@ -17,6 +17,6 @@ public interface ICastExpressionsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

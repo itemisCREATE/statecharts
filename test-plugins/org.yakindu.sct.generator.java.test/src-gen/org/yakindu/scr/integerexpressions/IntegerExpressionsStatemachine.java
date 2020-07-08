@@ -3,7 +3,7 @@ package org.yakindu.scr.integerexpressions;
 
 
 public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -254,13 +254,13 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 	}
 	private static class IntegerExpressionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -286,7 +286,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		this.isExecuting = value;
 	}
 	public IntegerExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -297,53 +297,53 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		
 		clearInEvents();
 		
-		sCInterface.setMyInt1(0);
+		defaultInterface.setMyInt1(0);
 		
-		sCInterface.setMyInt2(0);
+		defaultInterface.setMyInt2(0);
 		
-		sCInterface.setLess(false);
+		defaultInterface.setLess(false);
 		
-		sCInterface.setGreater(false);
+		defaultInterface.setGreater(false);
 		
-		sCInterface.setEqualOrLess(false);
+		defaultInterface.setEqualOrLess(false);
 		
-		sCInterface.setEqualOrGreater(false);
+		defaultInterface.setEqualOrGreater(false);
 		
-		sCInterface.setEqual(false);
+		defaultInterface.setEqual(false);
 		
-		sCInterface.setNotEqual(false);
+		defaultInterface.setNotEqual(false);
 		
-		sCInterface.setPlus(0);
+		defaultInterface.setPlus(0);
 		
-		sCInterface.setMinus(0);
+		defaultInterface.setMinus(0);
 		
-		sCInterface.setMultiply(0);
+		defaultInterface.setMultiply(0);
 		
-		sCInterface.setDivision(0);
+		defaultInterface.setDivision(0);
 		
-		sCInterface.setModulo(0);
+		defaultInterface.setModulo(0);
 		
-		sCInterface.setNegat(0);
+		defaultInterface.setNegat(0);
 		
-		sCInterface.setComplement(false);
+		defaultInterface.setComplement(false);
 		
-		sCInterface.setMultiAssign(2);
+		defaultInterface.setMultiAssign(2);
 		
-		sCInterface.setDivAssign(20);
+		defaultInterface.setDivAssign(20);
 		
-		sCInterface.setPlusAssign(2);
+		defaultInterface.setPlusAssign(2);
 		
-		sCInterface.setMinusAssign(2);
+		defaultInterface.setMinusAssign(2);
 		
-		sCInterface.setModuloAssign(20);
+		defaultInterface.setModuloAssign(20);
 		
-		sCInterface.setIncrement(0);
+		defaultInterface.setIncrement(0);
 		
-		sCInterface.setIncrementAssign(0);
+		defaultInterface.setIncrementAssign(0);
 		
-		sCInterface.setDecrement(0);
+		defaultInterface.setDecrement(0);
 		
-		sCInterface.setDecrementAssign(0);
+		defaultInterface.setDecrementAssign(0);
 		
 		isExecuting = false;
 	}
@@ -412,12 +412,12 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
+		defaultInterface.e1 = false;
 	}
 	
 	/**
@@ -435,256 +435,256 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public long getMyInt1() {
-		return sCInterface.getMyInt1();
+		return defaultInterface.getMyInt1();
 	}
 	
 	public void setMyInt1(long value) {
-		sCInterface.setMyInt1(value);
+		defaultInterface.setMyInt1(value);
 	}
 	
 	public long getMyInt2() {
-		return sCInterface.getMyInt2();
+		return defaultInterface.getMyInt2();
 	}
 	
 	public void setMyInt2(long value) {
-		sCInterface.setMyInt2(value);
+		defaultInterface.setMyInt2(value);
 	}
 	
 	public boolean getLess() {
-		return sCInterface.getLess();
+		return defaultInterface.getLess();
 	}
 	
 	public void setLess(boolean value) {
-		sCInterface.setLess(value);
+		defaultInterface.setLess(value);
 	}
 	
 	public boolean getGreater() {
-		return sCInterface.getGreater();
+		return defaultInterface.getGreater();
 	}
 	
 	public void setGreater(boolean value) {
-		sCInterface.setGreater(value);
+		defaultInterface.setGreater(value);
 	}
 	
 	public boolean getEqualOrLess() {
-		return sCInterface.getEqualOrLess();
+		return defaultInterface.getEqualOrLess();
 	}
 	
 	public void setEqualOrLess(boolean value) {
-		sCInterface.setEqualOrLess(value);
+		defaultInterface.setEqualOrLess(value);
 	}
 	
 	public boolean getEqualOrGreater() {
-		return sCInterface.getEqualOrGreater();
+		return defaultInterface.getEqualOrGreater();
 	}
 	
 	public void setEqualOrGreater(boolean value) {
-		sCInterface.setEqualOrGreater(value);
+		defaultInterface.setEqualOrGreater(value);
 	}
 	
 	public boolean getEqual() {
-		return sCInterface.getEqual();
+		return defaultInterface.getEqual();
 	}
 	
 	public void setEqual(boolean value) {
-		sCInterface.setEqual(value);
+		defaultInterface.setEqual(value);
 	}
 	
 	public boolean getNotEqual() {
-		return sCInterface.getNotEqual();
+		return defaultInterface.getNotEqual();
 	}
 	
 	public void setNotEqual(boolean value) {
-		sCInterface.setNotEqual(value);
+		defaultInterface.setNotEqual(value);
 	}
 	
 	public long getPlus() {
-		return sCInterface.getPlus();
+		return defaultInterface.getPlus();
 	}
 	
 	public void setPlus(long value) {
-		sCInterface.setPlus(value);
+		defaultInterface.setPlus(value);
 	}
 	
 	public long getMinus() {
-		return sCInterface.getMinus();
+		return defaultInterface.getMinus();
 	}
 	
 	public void setMinus(long value) {
-		sCInterface.setMinus(value);
+		defaultInterface.setMinus(value);
 	}
 	
 	public long getMultiply() {
-		return sCInterface.getMultiply();
+		return defaultInterface.getMultiply();
 	}
 	
 	public void setMultiply(long value) {
-		sCInterface.setMultiply(value);
+		defaultInterface.setMultiply(value);
 	}
 	
 	public long getDivision() {
-		return sCInterface.getDivision();
+		return defaultInterface.getDivision();
 	}
 	
 	public void setDivision(long value) {
-		sCInterface.setDivision(value);
+		defaultInterface.setDivision(value);
 	}
 	
 	public long getModulo() {
-		return sCInterface.getModulo();
+		return defaultInterface.getModulo();
 	}
 	
 	public void setModulo(long value) {
-		sCInterface.setModulo(value);
+		defaultInterface.setModulo(value);
 	}
 	
 	public long getNegat() {
-		return sCInterface.getNegat();
+		return defaultInterface.getNegat();
 	}
 	
 	public void setNegat(long value) {
-		sCInterface.setNegat(value);
+		defaultInterface.setNegat(value);
 	}
 	
 	public boolean getComplement() {
-		return sCInterface.getComplement();
+		return defaultInterface.getComplement();
 	}
 	
 	public void setComplement(boolean value) {
-		sCInterface.setComplement(value);
+		defaultInterface.setComplement(value);
 	}
 	
 	public long getMultiAssign() {
-		return sCInterface.getMultiAssign();
+		return defaultInterface.getMultiAssign();
 	}
 	
 	public void setMultiAssign(long value) {
-		sCInterface.setMultiAssign(value);
+		defaultInterface.setMultiAssign(value);
 	}
 	
 	public long getDivAssign() {
-		return sCInterface.getDivAssign();
+		return defaultInterface.getDivAssign();
 	}
 	
 	public void setDivAssign(long value) {
-		sCInterface.setDivAssign(value);
+		defaultInterface.setDivAssign(value);
 	}
 	
 	public long getPlusAssign() {
-		return sCInterface.getPlusAssign();
+		return defaultInterface.getPlusAssign();
 	}
 	
 	public void setPlusAssign(long value) {
-		sCInterface.setPlusAssign(value);
+		defaultInterface.setPlusAssign(value);
 	}
 	
 	public long getMinusAssign() {
-		return sCInterface.getMinusAssign();
+		return defaultInterface.getMinusAssign();
 	}
 	
 	public void setMinusAssign(long value) {
-		sCInterface.setMinusAssign(value);
+		defaultInterface.setMinusAssign(value);
 	}
 	
 	public long getModuloAssign() {
-		return sCInterface.getModuloAssign();
+		return defaultInterface.getModuloAssign();
 	}
 	
 	public void setModuloAssign(long value) {
-		sCInterface.setModuloAssign(value);
+		defaultInterface.setModuloAssign(value);
 	}
 	
 	public long getIncrement() {
-		return sCInterface.getIncrement();
+		return defaultInterface.getIncrement();
 	}
 	
 	public void setIncrement(long value) {
-		sCInterface.setIncrement(value);
+		defaultInterface.setIncrement(value);
 	}
 	
 	public long getIncrementAssign() {
-		return sCInterface.getIncrementAssign();
+		return defaultInterface.getIncrementAssign();
 	}
 	
 	public void setIncrementAssign(long value) {
-		sCInterface.setIncrementAssign(value);
+		defaultInterface.setIncrementAssign(value);
 	}
 	
 	public long getDecrement() {
-		return sCInterface.getDecrement();
+		return defaultInterface.getDecrement();
 	}
 	
 	public void setDecrement(long value) {
-		sCInterface.setDecrement(value);
+		defaultInterface.setDecrement(value);
 	}
 	
 	public long getDecrementAssign() {
-		return sCInterface.getDecrementAssign();
+		return defaultInterface.getDecrementAssign();
 	}
 	
 	public void setDecrementAssign(long value) {
-		sCInterface.setDecrementAssign(value);
+		defaultInterface.setDecrementAssign(value);
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.setMyInt1(10);
+		defaultInterface.setMyInt1(10);
 		
-		sCInterface.setMyInt2(5);
+		defaultInterface.setMyInt2(5);
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setLess((sCInterface.myInt1<sCInterface.myInt2));
+		defaultInterface.setLess((defaultInterface.myInt1<defaultInterface.myInt2));
 		
-		sCInterface.setGreater((sCInterface.myInt1>sCInterface.myInt2));
+		defaultInterface.setGreater((defaultInterface.myInt1>defaultInterface.myInt2));
 		
-		sCInterface.setEqualOrLess((sCInterface.myInt1<=sCInterface.myInt2));
+		defaultInterface.setEqualOrLess((defaultInterface.myInt1<=defaultInterface.myInt2));
 		
-		sCInterface.setEqualOrGreater((sCInterface.myInt1>=sCInterface.myInt2));
+		defaultInterface.setEqualOrGreater((defaultInterface.myInt1>=defaultInterface.myInt2));
 		
-		sCInterface.setEqual((sCInterface.myInt1==sCInterface.myInt2));
+		defaultInterface.setEqual((defaultInterface.myInt1==defaultInterface.myInt2));
 		
-		sCInterface.setNotEqual((sCInterface.myInt1!=sCInterface.myInt2));
+		defaultInterface.setNotEqual((defaultInterface.myInt1!=defaultInterface.myInt2));
 		
-		sCInterface.setPlus((sCInterface.myInt1 + sCInterface.myInt2));
+		defaultInterface.setPlus((defaultInterface.myInt1 + defaultInterface.myInt2));
 		
-		sCInterface.setMinus((sCInterface.myInt1 - sCInterface.myInt2));
+		defaultInterface.setMinus((defaultInterface.myInt1 - defaultInterface.myInt2));
 		
-		sCInterface.setMultiply((sCInterface.myInt1 * sCInterface.myInt2));
+		defaultInterface.setMultiply((defaultInterface.myInt1 * defaultInterface.myInt2));
 		
-		sCInterface.setDivision((sCInterface.myInt1 / sCInterface.myInt2));
+		defaultInterface.setDivision((defaultInterface.myInt1 / defaultInterface.myInt2));
 		
-		sCInterface.setModulo((sCInterface.myInt1 % sCInterface.myInt2));
+		defaultInterface.setModulo((defaultInterface.myInt1 % defaultInterface.myInt2));
 		
-		sCInterface.setNegat(-sCInterface.myInt1);
+		defaultInterface.setNegat(-defaultInterface.myInt1);
 		
-		sCInterface.setMultiAssign(sCInterface.getMultiAssign() * sCInterface.myInt1);
+		defaultInterface.setMultiAssign(defaultInterface.getMultiAssign() * defaultInterface.myInt1);
 		
-		sCInterface.setDivAssign(sCInterface.getDivAssign() / sCInterface.myInt1);
+		defaultInterface.setDivAssign(defaultInterface.getDivAssign() / defaultInterface.myInt1);
 		
-		sCInterface.setPlusAssign(sCInterface.getPlusAssign() + sCInterface.myInt1);
+		defaultInterface.setPlusAssign(defaultInterface.getPlusAssign() + defaultInterface.myInt1);
 		
-		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myInt1);
+		defaultInterface.setMinusAssign(defaultInterface.getMinusAssign() - defaultInterface.myInt1);
 		
-		sCInterface.setModuloAssign(sCInterface.getModuloAssign() % sCInterface.myInt1);
+		defaultInterface.setModuloAssign(defaultInterface.getModuloAssign() % defaultInterface.myInt1);
 		
-		sCInterface.setIncrementAssign(sCInterface.increment++);
+		defaultInterface.setIncrementAssign(defaultInterface.increment++);
 		
-		sCInterface.setDecrementAssign(sCInterface.decrement--);
+		defaultInterface.setDecrementAssign(defaultInterface.decrement--);
 		
-		sCInterface.increment++;
+		defaultInterface.increment++;
 		
-		sCInterface.decrement--;
+		defaultInterface.decrement--;
 	}
 	
 	/* 'default' enter sequence for state StateA */

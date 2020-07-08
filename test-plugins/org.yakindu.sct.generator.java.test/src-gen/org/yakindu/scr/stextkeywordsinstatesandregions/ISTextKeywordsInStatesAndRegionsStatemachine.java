@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ISTextKeywordsInStatesAndRegionsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE1();
 		
@@ -13,6 +13,6 @@ public interface ISTextKeywordsInStatesAndRegionsStatemachine extends IStatemach
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

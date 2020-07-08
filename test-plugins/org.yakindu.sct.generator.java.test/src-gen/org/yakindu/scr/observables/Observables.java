@@ -4,7 +4,7 @@ package org.yakindu.scr.observables;
 import org.yakindu.sct.rx.Observable;
 
 public class Observables implements IObservables {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean dummy;
 		
@@ -22,7 +22,7 @@ public class Observables implements IObservables {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -45,7 +45,7 @@ public class Observables implements IObservables {
 		this.isExecuting = value;
 	}
 	public Observables() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -131,12 +131,12 @@ public class Observables implements IObservables {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public Observable<Void> getDummy() {
-		return sCInterface.getDummy();
+		return defaultInterface.getDummy();
 	}
 	
 	/* 'default' enter sequence for state StateA */

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LocalEventsStatemachine implements ILocalEventsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -57,7 +57,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -94,7 +94,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		this.isExecuting = value;
 	}
 	public LocalEventsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -106,13 +106,13 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		clearInEvents();
 		clearInternalEvents();
 		
-		sCInterface.setCycleCountSm(0);
+		defaultInterface.setCycleCountSm(0);
 		
-		sCInterface.setCycleCount1(0);
+		defaultInterface.setCycleCount1(0);
 		
-		sCInterface.setCycleCount2(0);
+		defaultInterface.setCycleCount2(0);
 		
-		sCInterface.setChecksum(0);
+		defaultInterface.setChecksum(0);
 		
 		isExecuting = false;
 	}
@@ -183,7 +183,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			clearInEvents();
 			clearInternalEvents();
 			nextEvent();
-		} while ((((sCInterface.e || activate_b) || activate_c) || activate_d));
+		} while ((((defaultInterface.e || activate_b) || activate_c) || activate_d));
 		
 		isExecuting = false;
 	}
@@ -204,7 +204,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -250,8 +250,8 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	private void raiseActivate_b() {
@@ -288,39 +288,39 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public long getCycleCountSm() {
-		return sCInterface.getCycleCountSm();
+		return defaultInterface.getCycleCountSm();
 	}
 	
 	public void setCycleCountSm(long value) {
-		sCInterface.setCycleCountSm(value);
+		defaultInterface.setCycleCountSm(value);
 	}
 	
 	public long getCycleCount1() {
-		return sCInterface.getCycleCount1();
+		return defaultInterface.getCycleCount1();
 	}
 	
 	public void setCycleCount1(long value) {
-		sCInterface.setCycleCount1(value);
+		defaultInterface.setCycleCount1(value);
 	}
 	
 	public long getCycleCount2() {
-		return sCInterface.getCycleCount2();
+		return defaultInterface.getCycleCount2();
 	}
 	
 	public void setCycleCount2(long value) {
-		sCInterface.setCycleCount2(value);
+		defaultInterface.setCycleCount2(value);
 	}
 	
 	public long getChecksum() {
-		return sCInterface.getChecksum();
+		return defaultInterface.getChecksum();
 	}
 	
 	public void setChecksum(long value) {
-		sCInterface.setChecksum(value);
+		defaultInterface.setChecksum(value);
 	}
 	
 	/* Entry action for state 'B2'. */
@@ -475,9 +475,9 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			raiseActivate_d(1);
 		}
 		if (activate_d) {
-			sCInterface.setChecksum(sCInterface.getChecksum() + (getActivate_dValue()));
+			defaultInterface.setChecksum(defaultInterface.getChecksum() + (getActivate_dValue()));
 		}
-		sCInterface.setCycleCountSm(sCInterface.getCycleCountSm() + 1);
+		defaultInterface.setCycleCountSm(defaultInterface.getCycleCountSm() + 1);
 		
 		return false;
 	}
@@ -491,7 +491,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setCycleCount1(sCInterface.getCycleCount1() + 1);
+			defaultInterface.setCycleCount1(defaultInterface.getCycleCount1() + 1);
 		}
 		return did_transition;
 	}
@@ -510,7 +510,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				raiseActivate_b();
 			}
 		}
@@ -553,7 +553,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			sCInterface.setCycleCount2(sCInterface.getCycleCount2() + 1);
+			defaultInterface.setCycleCount2(defaultInterface.getCycleCount2() + 1);
 		}
 		return did_transition;
 	}

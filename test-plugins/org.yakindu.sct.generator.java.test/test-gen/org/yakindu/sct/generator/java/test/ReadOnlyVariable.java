@@ -45,19 +45,19 @@ public class ReadOnlyVariable {
 		assertTrue(statemachine.getMyString().equals("testString"));
 		assertTrue(statemachine.getMyBool() == true);
 		assertTrue(statemachine.getMyReal() == 1.1);
-		assertTrue(statemachine.getSCIA().getMyInt() == 0l);
-		assertTrue(statemachine.getSCIA().getMyString().equals("testString"));
-		assertTrue(statemachine.getSCIA().getMyBool() == true);
-		assertTrue(statemachine.getSCIA().getMyReal() == 1.1);
+		assertTrue(statemachine.getInterfaceA().getMyInt() == 0l);
+		assertTrue(statemachine.getInterfaceA().getMyString().equals("testString"));
+		assertTrue(statemachine.getInterfaceA().getMyBool() == true);
+		assertTrue(statemachine.getInterfaceA().getMyReal() == 1.1);
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getMyInt() == 100l);
 		assertTrue(statemachine.getMyString().equals("fail"));
 		assertTrue(statemachine.getMyBool() == false);
 		assertTrue(statemachine.getMyReal() == 6.6);
-		assertTrue(statemachine.getSCIA().getMyInt() == 200l);
-		assertTrue(statemachine.getSCIA().getMyString().equals("A_fail"));
-		assertTrue(statemachine.getSCIA().getMyBool() == false);
-		assertTrue(statemachine.getSCIA().getMyReal() == 7.7);
+		assertTrue(statemachine.getInterfaceA().getMyInt() == 200l);
+		assertTrue(statemachine.getInterfaceA().getMyString().equals("A_fail"));
+		assertTrue(statemachine.getInterfaceA().getMyBool() == false);
+		assertTrue(statemachine.getInterfaceA().getMyReal() == 7.7);
 	}
 }

@@ -7,17 +7,17 @@ import org.yakindu.sct.ITimer;
 import org.yakindu.sct.rx.Observable;
 
 public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatemachine {
-	protected class SCIIfImpl implements SCIIf {
+	protected class InterfaceIfImpl implements InterfaceIf {
 	
-		private List<SCIIfListener> listeners = new LinkedList<SCIIfListener>();
+		private List<InterfaceIfListener> listeners = new LinkedList<InterfaceIfListener>();
 		
-		public List<SCIIfListener> getListeners() {
+		public List<InterfaceIfListener> getListeners() {
 			return listeners;
 		}
-		private SCIIfOperationCallback operationCallback;
+		private InterfaceIfOperationCallback operationCallback;
 		
-		public void setSCIIfOperationCallback(
-				SCIIfOperationCallback operationCallback) {
+		public void setInterfaceIfOperationCallback(
+				InterfaceIfOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private boolean operationCallbackEvent;
@@ -25,7 +25,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		protected void raiseOperationCallback() {
 			operationCallbackEvent = true;
-			for (SCIIfListener listener : listeners) {
+			for (InterfaceIfListener listener : listeners) {
 				listener.onOperationCallbackRaised();
 			}
 			operationCallbackEventObservable.next(null);
@@ -42,7 +42,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		protected void raiseListeners() {
 			listenersEvent = true;
-			for (SCIIfListener listener : listeners) {
+			for (InterfaceIfListener listener : listeners) {
 				listener.onListenersRaised();
 			}
 			listenersEventObservable.next(null);
@@ -117,7 +117,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		private StatechartKeywordsStatemachineInternalEvBuf internal = new StatechartKeywordsStatemachineInternalEvBuf();
 		private StatechartKeywordsStatemachineTimeEventsEvBuf timeEvents = new StatechartKeywordsStatemachineTimeEventsEvBuf();
 	}
-	protected SCIIfImpl sCIIf;
+	protected InterfaceIfImpl interfaceIf;
 	
 	private boolean initialized = false;
 	
@@ -191,14 +191,14 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	}
 	
 	
-	private long sCIIfVariable;
+	private long sCIIf;
 	
-	protected long getSCIIfVariable() {
-		return sCIIfVariable;
+	protected long getSCIIf() {
+		return sCIIf;
 	}
 	
-	protected void setSCIIfVariable(long value) {
-		this.sCIIfVariable = value;
+	protected void setSCIIf(long value) {
+		this.sCIIf = value;
 	}
 	
 	
@@ -215,7 +215,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		this.isExecuting = value;
 	}
 	public StatechartKeywordsStatemachine() {
-		sCIIf = new SCIIfImpl();
+		interfaceIf = new InterfaceIfImpl();
 	}
 	
 	public void init() {
@@ -226,8 +226,8 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		if (this.sCIIf.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCIIf must be set.");
+		if (this.interfaceIf.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface InterfaceIf must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
@@ -237,15 +237,15 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		clearInEvents();
 		clearInternalEvents();
 		
-		sCIIf.setTimer(0);
+		interfaceIf.setTimer(0);
 		
-		sCIIf.setIsActive(0);
+		interfaceIf.setIsActive(0);
 		
-		sCIIf.setInit(0);
+		interfaceIf.setInit(0);
 		
-		sCIIf.setEnter(0);
+		interfaceIf.setEnter(0);
 		
-		sCIIf.setRunCycle(0);
+		interfaceIf.setRunCycle(0);
 		
 		setTimerVariable(0);
 		
@@ -257,7 +257,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		setRunCycle(0);
 		
-		setSCIIfVariable(0);
+		setSCIIf(0);
 		
 		isExecuting = false;
 	}
@@ -396,8 +396,8 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		timeEvents[eventID] = true;
 	}
 	
-	public SCIIf getSCIIf() {
-		return sCIIf;
+	public InterfaceIf getInterfaceIf() {
+		return interfaceIf;
 	}
 	
 	private void raiseOperationCallback() {

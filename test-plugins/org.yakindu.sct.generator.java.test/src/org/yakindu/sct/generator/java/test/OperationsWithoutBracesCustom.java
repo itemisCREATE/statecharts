@@ -18,20 +18,20 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine;
-import org.yakindu.scr.operationswithoutbraces.IOperationsWithoutBracesStatemachine.SCInterfaceOperationCallback;
+import org.yakindu.scr.operationswithoutbraces.IOperationsWithoutBracesStatemachine.InterfaceOperationCallback;
 import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;
 /**
  *  Unit TestCase for OperationsWithoutBraces
  */
 @SuppressWarnings("all")
-public class OperationsWithoutBracesCustom implements SCInterfaceOperationCallback{
+public class OperationsWithoutBracesCustom implements InterfaceOperationCallback{
 
 	private OperationsWithoutBracesStatemachine statemachine;
 
 	@Before
 	public void setUp() {
 		statemachine = new OperationsWithoutBracesStatemachine();
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(this);
+		statemachine.getInterface().setInterfaceOperationCallback(this);
 		statemachine.init();
 	}
 

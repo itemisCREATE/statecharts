@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IConditionalExpressionsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -27,6 +27,6 @@ public interface IConditionalExpressionsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

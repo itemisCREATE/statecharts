@@ -3,7 +3,7 @@ package org.yakindu.scr.parenthesis;
 
 
 public class ParenthesisStatemachine implements IParenthesisStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long erg;
 		
@@ -17,7 +17,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -40,7 +40,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		this.isExecuting = value;
 	}
 	public ParenthesisStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -50,7 +50,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		}
 		
 		
-		sCInterface.setErg(0);
+		defaultInterface.setErg(0);
 		
 		isExecuting = false;
 	}
@@ -127,21 +127,21 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getErg() {
-		return sCInterface.getErg();
+		return defaultInterface.getErg();
 	}
 	
 	public void setErg(long value) {
-		sCInterface.setErg(value);
+		defaultInterface.setErg(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_mainRegion_A() {
-		sCInterface.setErg((4 * ((3 - 1))));
+		defaultInterface.setErg((4 * ((3 - 1))));
 	}
 	
 	/* 'default' enter sequence for state A */

@@ -3,7 +3,7 @@ package org.yakindu.scr.booleanexpressions;
 
 
 public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -84,13 +84,13 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 	}
 	private static class BooleanExpressionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -116,7 +116,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		this.isExecuting = value;
 	}
 	public BooleanExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -127,19 +127,19 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		
 		clearInEvents();
 		
-		sCInterface.setMyBool1(false);
+		defaultInterface.setMyBool1(false);
 		
-		sCInterface.setMyBool2(false);
+		defaultInterface.setMyBool2(false);
 		
-		sCInterface.setAnd(false);
+		defaultInterface.setAnd(false);
 		
-		sCInterface.setOr(false);
+		defaultInterface.setOr(false);
 		
-		sCInterface.setNot(false);
+		defaultInterface.setNot(false);
 		
-		sCInterface.setEqual(false);
+		defaultInterface.setEqual(false);
 		
-		sCInterface.setNotequal(false);
+		defaultInterface.setNotequal(false);
 		
 		isExecuting = false;
 	}
@@ -208,12 +208,12 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
+		defaultInterface.e1 = false;
 	}
 	
 	/**
@@ -231,88 +231,88 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public boolean getMyBool1() {
-		return sCInterface.getMyBool1();
+		return defaultInterface.getMyBool1();
 	}
 	
 	public void setMyBool1(boolean value) {
-		sCInterface.setMyBool1(value);
+		defaultInterface.setMyBool1(value);
 	}
 	
 	public boolean getMyBool2() {
-		return sCInterface.getMyBool2();
+		return defaultInterface.getMyBool2();
 	}
 	
 	public void setMyBool2(boolean value) {
-		sCInterface.setMyBool2(value);
+		defaultInterface.setMyBool2(value);
 	}
 	
 	public boolean getAnd() {
-		return sCInterface.getAnd();
+		return defaultInterface.getAnd();
 	}
 	
 	public void setAnd(boolean value) {
-		sCInterface.setAnd(value);
+		defaultInterface.setAnd(value);
 	}
 	
 	public boolean getOr() {
-		return sCInterface.getOr();
+		return defaultInterface.getOr();
 	}
 	
 	public void setOr(boolean value) {
-		sCInterface.setOr(value);
+		defaultInterface.setOr(value);
 	}
 	
 	public boolean getNot() {
-		return sCInterface.getNot();
+		return defaultInterface.getNot();
 	}
 	
 	public void setNot(boolean value) {
-		sCInterface.setNot(value);
+		defaultInterface.setNot(value);
 	}
 	
 	public boolean getEqual() {
-		return sCInterface.getEqual();
+		return defaultInterface.getEqual();
 	}
 	
 	public void setEqual(boolean value) {
-		sCInterface.setEqual(value);
+		defaultInterface.setEqual(value);
 	}
 	
 	public boolean getNotequal() {
-		return sCInterface.getNotequal();
+		return defaultInterface.getNotequal();
 	}
 	
 	public void setNotequal(boolean value) {
-		sCInterface.setNotequal(value);
+		defaultInterface.setNotequal(value);
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.setMyBool1(true);
+		defaultInterface.setMyBool1(true);
 		
-		sCInterface.setMyBool2(false);
+		defaultInterface.setMyBool2(false);
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setAnd((sCInterface.myBool1 && sCInterface.myBool2));
+		defaultInterface.setAnd((defaultInterface.myBool1 && defaultInterface.myBool2));
 		
-		sCInterface.setOr((sCInterface.myBool1 || sCInterface.myBool2));
+		defaultInterface.setOr((defaultInterface.myBool1 || defaultInterface.myBool2));
 		
-		sCInterface.setNot(!sCInterface.myBool1);
+		defaultInterface.setNot(!defaultInterface.myBool1);
 		
-		sCInterface.setEqual(sCInterface.myBool1==sCInterface.myBool2);
+		defaultInterface.setEqual(defaultInterface.myBool1==defaultInterface.myBool2);
 		
-		sCInterface.setNotequal((sCInterface.myBool1!=sCInterface.myBool2));
+		defaultInterface.setNotequal((defaultInterface.myBool1!=defaultInterface.myBool2));
 	}
 	
 	/* 'default' enter sequence for state StateA */

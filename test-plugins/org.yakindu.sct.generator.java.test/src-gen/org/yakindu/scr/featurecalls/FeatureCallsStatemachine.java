@@ -3,7 +3,7 @@ package org.yakindu.scr.featurecalls;
 
 
 public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
-	protected class SCIMyInterfaceImpl implements SCIMyInterface {
+	protected class InterfaceMyInterfaceImpl implements InterfaceMyInterface {
 	
 		private boolean event1;
 		
@@ -24,13 +24,13 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		
 	}
 	
-	private static class SCIMyInterfaceEvBuf {
+	private static class InterfaceMyInterfaceEvBuf {
 		private boolean event1;
 	}
 	private static class FeatureCallsStatemachineEvBuf {
-		private SCIMyInterfaceEvBuf ifaceMyInterface = new SCIMyInterfaceEvBuf();
+		private InterfaceMyInterfaceEvBuf ifaceMyInterface = new InterfaceMyInterfaceEvBuf();
 	}
-	protected SCIMyInterfaceImpl sCIMyInterface;
+	protected InterfaceMyInterfaceImpl interfaceMyInterface;
 	
 	private boolean initialized = false;
 	
@@ -56,7 +56,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		this.isExecuting = value;
 	}
 	public FeatureCallsStatemachine() {
-		sCIMyInterface = new SCIMyInterfaceImpl();
+		interfaceMyInterface = new InterfaceMyInterfaceImpl();
 	}
 	
 	public void init() {
@@ -67,7 +67,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		
 		clearInEvents();
 		
-		sCIMyInterface.setMyInt(0);
+		interfaceMyInterface.setMyInt(0);
 		
 		isExecuting = false;
 	}
@@ -136,12 +136,12 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.ifaceMyInterface.event1 = sCIMyInterface.event1;
-		sCIMyInterface.event1 = false;
+		_current.ifaceMyInterface.event1 = interfaceMyInterface.event1;
+		interfaceMyInterface.event1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCIMyInterface.event1 = false;
+		interfaceMyInterface.event1 = false;
 	}
 	
 	/**
@@ -159,15 +159,15 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		}
 	}
 	
-	public SCIMyInterface getSCIMyInterface() {
-		return sCIMyInterface;
+	public InterfaceMyInterface getInterfaceMyInterface() {
+		return interfaceMyInterface;
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCIMyInterface.setMyInt(42);
+		interfaceMyInterface.setMyInt(42);
 		
-		sCIMyInterface.raiseEvent1();
+		interfaceMyInterface.raiseEvent1();
 	}
 	
 	/* 'default' enter sequence for state A */

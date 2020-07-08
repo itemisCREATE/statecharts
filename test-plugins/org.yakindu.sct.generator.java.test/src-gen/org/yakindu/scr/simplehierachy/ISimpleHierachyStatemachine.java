@@ -5,12 +5,12 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ISimpleHierachyStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseEvent1();
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

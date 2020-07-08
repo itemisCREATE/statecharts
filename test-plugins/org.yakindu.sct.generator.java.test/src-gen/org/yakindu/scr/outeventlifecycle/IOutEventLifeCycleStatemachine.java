@@ -6,7 +6,7 @@ import org.yakindu.sct.rx.Observable;
 
 public interface IOutEventLifeCycleStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -24,6 +24,6 @@ public interface IOutEventLifeCycleStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

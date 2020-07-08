@@ -3,7 +3,7 @@ package org.yakindu.scr.triggerguardexpressions;
 
 
 public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -31,14 +31,14 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 		private boolean e2;
 	}
 	private static class TriggerGuardExpressionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -64,7 +64,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		this.isExecuting = value;
 	}
 	public TriggerGuardExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -75,7 +75,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		
 		clearInEvents();
 		
-		sCInterface.setB(false);
+		defaultInterface.setB(false);
 		
 		isExecuting = false;
 	}
@@ -144,16 +144,16 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 		
-		_current.iface.e2 = sCInterface.e2;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		defaultInterface.e2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
-		sCInterface.e2 = false;
+		defaultInterface.e1 = false;
+		defaultInterface.e2 = false;
 	}
 	
 	/**
@@ -171,24 +171,24 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public void raiseE2() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	public boolean getB() {
-		return sCInterface.getB();
+		return defaultInterface.getB();
 	}
 	
 	public void setB(boolean value) {
-		sCInterface.setB(value);
+		defaultInterface.setB(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -248,7 +248,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((((_current.iface.e1 || _current.iface.e2)) && (sCInterface.getB()))) {
+				if ((((_current.iface.e1 || _current.iface.e2)) && (defaultInterface.getB()))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {

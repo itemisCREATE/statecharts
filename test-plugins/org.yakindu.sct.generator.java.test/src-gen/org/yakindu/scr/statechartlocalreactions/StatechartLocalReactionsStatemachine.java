@@ -3,7 +3,7 @@ package org.yakindu.scr.statechartlocalreactions;
 
 
 public class StatechartLocalReactionsStatemachine implements IStatechartLocalReactionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long myInt;
 		
@@ -17,7 +17,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -42,7 +42,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		this.isExecuting = value;
 	}
 	public StatechartLocalReactionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -52,7 +52,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		}
 		
 		
-		sCInterface.setMyInt(0);
+		defaultInterface.setMyInt(0);
 		
 		isExecuting = false;
 	}
@@ -141,16 +141,16 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getMyInt() {
-		return sCInterface.getMyInt();
+		return defaultInterface.getMyInt();
 	}
 	
 	public void setMyInt(long value) {
-		sCInterface.setMyInt(value);
+		defaultInterface.setMyInt(value);
 	}
 	
 	/* 'default' enter sequence for state S1 */
@@ -235,10 +235,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	}
 	
 	private boolean react() {
-		sCInterface.setMyInt(sCInterface.getMyInt() + 1);
+		defaultInterface.setMyInt(defaultInterface.getMyInt() + 1);
 		
-		if (sCInterface.getMyInt()==100) {
-			sCInterface.setMyInt(0);
+		if (defaultInterface.getMyInt()==100) {
+			defaultInterface.setMyInt(0);
 		}
 		return false;
 	}

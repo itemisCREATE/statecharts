@@ -6,7 +6,7 @@ import java.util.Queue;
 import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenInternalEventStatemachine implements IEventDrivenInternalEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean start;
 		
@@ -83,7 +83,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -115,7 +115,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		this.isExecuting = value;
 	}
 	public EventDrivenInternalEventStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -127,11 +127,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		clearInEvents();
 		clearInternalEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
-		sCInterface.setI1_sequence(0);
+		defaultInterface.setI1_sequence(0);
 		
-		sCInterface.setI2_sequence(0);
+		defaultInterface.setI2_sequence(0);
 		
 		isExecuting = false;
 	}
@@ -201,7 +201,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			clearInEvents();
 			clearInternalEvents();
 			nextEvent();
-		} while ((((sCInterface.start || sCInterface.reset) || i1) || i2));
+		} while ((((defaultInterface.start || defaultInterface.reset) || i1) || i2));
 		
 		isExecuting = false;
 	}
@@ -222,8 +222,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.start = false;
-		sCInterface.reset = false;
+		defaultInterface.start = false;
+		defaultInterface.reset = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -264,8 +264,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	private void raiseI1() {
@@ -287,39 +287,39 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	public void raiseStart() {
-		sCInterface.raiseStart();
+		defaultInterface.raiseStart();
 	}
 	
 	public void raiseReset() {
-		sCInterface.raiseReset();
+		defaultInterface.raiseReset();
 	}
 	
 	public Observable<Long> getE() {
-		return sCInterface.getE();
+		return defaultInterface.getE();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public long getI1_sequence() {
-		return sCInterface.getI1_sequence();
+		return defaultInterface.getI1_sequence();
 	}
 	
 	public void setI1_sequence(long value) {
-		sCInterface.setI1_sequence(value);
+		defaultInterface.setI1_sequence(value);
 	}
 	
 	public long getI2_sequence() {
-		return sCInterface.getI2_sequence();
+		return defaultInterface.getI2_sequence();
 	}
 	
 	public void setI2_sequence(long value) {
-		sCInterface.setI2_sequence(value);
+		defaultInterface.setI2_sequence(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -467,7 +467,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	private boolean react() {
-		sCInterface.setX(sCInterface.getX() + 1);
+		defaultInterface.setX(defaultInterface.getX() + 1);
 		
 		return false;
 	}
@@ -479,7 +479,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			if (react()==false) {
 				if (i2) {
 					exitSequence_r1_A();
-					sCInterface.setI2_sequence(sCInterface.x);
+					defaultInterface.setI2_sequence(defaultInterface.x);
 					
 					enterSequence_r1_B_default();
 				} else {
@@ -488,7 +488,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.start) {
+			if (defaultInterface.start) {
 				raiseI1();
 			}
 		}
@@ -500,7 +500,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.reset) {
+				if (defaultInterface.reset) {
 					exitSequence_r1_B();
 					enterSequence_r1_A_default();
 				} else {
@@ -509,8 +509,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 		if (did_transition==false) {
-			if (((i2) && (sCInterface.getI2_sequence()<10))) {
-				sCInterface.setI2_sequence(sCInterface.getI2_sequence() + 1);
+			if (((i2) && (defaultInterface.getI2_sequence()<10))) {
+				defaultInterface.setI2_sequence(defaultInterface.getI2_sequence() + 1);
 			}
 		}
 		return did_transition;
@@ -522,7 +522,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		if (try_transition) {
 			if (i1) {
 				exitSequence_r2_C();
-				sCInterface.setI1_sequence(sCInterface.x);
+				defaultInterface.setI1_sequence(defaultInterface.x);
 				
 				raiseI2();
 				
@@ -538,7 +538,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.reset) {
+			if (defaultInterface.reset) {
 				exitSequence_r2_D();
 				enterSequence_r2_C_default();
 			} else {
@@ -546,8 +546,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 		if (did_transition==false) {
-			if (((i1) && (sCInterface.getI1_sequence()<10))) {
-				sCInterface.setI1_sequence(sCInterface.getI1_sequence() + 1);
+			if (((i1) && (defaultInterface.getI1_sequence()<10))) {
+				defaultInterface.setI1_sequence(defaultInterface.getI1_sequence() + 1);
 			}
 		}
 		return did_transition;
@@ -557,7 +557,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((((sCInterface.start && i1)) || ((sCInterface.start && i2))) || ((i1 && i2)))) {
+			if (((((defaultInterface.start && i1)) || ((defaultInterface.start && i2))) || ((i1 && i2)))) {
 				exitSequence_check_VALID();
 				enterSequence_check_MULTIPLEEVENTS_default();
 			} else {
@@ -571,7 +571,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.reset) {
+			if (defaultInterface.reset) {
 				exitSequence_check_MULTIPLEEVENTS();
 				enterSequence_check_VALID_default();
 			} else {

@@ -44,7 +44,7 @@ public class EventDriven {
 		assertTrue(statemachine.isStateActive(State.main_region_StateE__region0_State2));
 		statemachine.raiseInEvent();
 		assertTrue(statemachine.isStateActive(State.main_region_StateF));
-		statemachine.getSCINamedI().raiseNamedInEvent();
+		statemachine.getInterfaceNamedI().raiseNamedInEvent();
 		assertTrue(statemachine.isFinal());
 		statemachine.exit();
 	}

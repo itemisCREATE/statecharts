@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ITypeAliasStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseMyEvent();
 		
@@ -19,6 +19,6 @@ public interface ITypeAliasStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

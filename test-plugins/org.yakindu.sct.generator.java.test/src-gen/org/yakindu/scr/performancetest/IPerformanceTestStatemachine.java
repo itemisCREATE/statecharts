@@ -6,7 +6,7 @@ import org.yakindu.sct.ITimerCallback;
 
 public interface IPerformanceTestStatemachine extends ITimerCallback,IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE1();
 		
@@ -28,6 +28,6 @@ public interface IPerformanceTestStatemachine extends ITimerCallback,IStatemachi
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

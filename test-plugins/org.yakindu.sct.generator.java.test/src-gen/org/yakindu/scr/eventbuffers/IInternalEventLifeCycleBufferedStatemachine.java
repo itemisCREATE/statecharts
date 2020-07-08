@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IInternalEventLifeCycleBufferedStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -13,6 +13,6 @@ public interface IInternalEventLifeCycleBufferedStatemachine extends IStatemachi
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

@@ -3,7 +3,7 @@ package org.yakindu.scr.simplehierachy;
 
 
 public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean event1;
 		
@@ -14,13 +14,13 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean event1;
 	}
 	private static class SimpleHierachyStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -47,7 +47,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		this.isExecuting = value;
 	}
 	public SimpleHierachyStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -126,12 +126,12 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.event1 = sCInterface.event1;
-		sCInterface.event1 = false;
+		_current.iface.event1 = defaultInterface.event1;
+		defaultInterface.event1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.event1 = false;
+		defaultInterface.event1 = false;
 	}
 	
 	/**
@@ -152,12 +152,12 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseEvent1() {
-		sCInterface.raiseEvent1();
+		defaultInterface.raiseEvent1();
 	}
 	
 	/* 'default' enter sequence for state A */

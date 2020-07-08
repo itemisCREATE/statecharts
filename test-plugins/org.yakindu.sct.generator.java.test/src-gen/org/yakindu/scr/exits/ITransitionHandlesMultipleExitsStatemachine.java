@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ITransitionHandlesMultipleExitsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -19,6 +19,6 @@ public interface ITransitionHandlesMultipleExitsStatemachine extends IStatemachi
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

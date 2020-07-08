@@ -6,7 +6,7 @@ import org.yakindu.sct.ITimerCallback;
 
 public interface ITimedTransitionsStatemachine extends ITimerCallback,IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getSeconds();
 		
@@ -18,6 +18,6 @@ public interface ITimedTransitionsStatemachine extends ITimerCallback,IStatemach
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

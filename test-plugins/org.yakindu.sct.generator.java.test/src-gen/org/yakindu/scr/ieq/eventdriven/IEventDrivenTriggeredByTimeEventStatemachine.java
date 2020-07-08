@@ -8,7 +8,7 @@ import org.yakindu.sct.ITimerCallback;
 
 public interface IEventDrivenTriggeredByTimeEventStatemachine extends ITimerCallback,IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getX();
 		
@@ -20,6 +20,6 @@ public interface IEventDrivenTriggeredByTimeEventStatemachine extends ITimerCall
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

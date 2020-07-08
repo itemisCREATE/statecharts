@@ -6,7 +6,7 @@ import java.util.Queue;
 import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -37,7 +37,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -64,7 +64,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		this.isExecuting = value;
 	}
 	public EventDrivenOutEventsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -135,7 +135,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 			
 			clearInEvents();
 			nextEvent();
-		} while (sCInterface.e1);
+		} while (defaultInterface.e1);
 		
 		isExecuting = false;
 	}
@@ -156,7 +156,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e1 = false;
+		defaultInterface.e1 = false;
 	}
 	
 	protected void nextEvent() {
@@ -184,21 +184,21 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public Observable<Void> getE2() {
-		return sCInterface.getE2();
+		return defaultInterface.getE2();
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -307,7 +307,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e1) {
+				if (defaultInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {
@@ -333,7 +333,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e2) {
+			if (defaultInterface.e2) {
 				exitSequence_second_region_StateC();
 				enterSequence_second_region_StateD_default();
 			} else {

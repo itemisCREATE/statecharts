@@ -3,29 +3,29 @@ package org.yakindu.scr.variadicfunctions;
 
 
 public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 	}
 	
-	protected class SCIIF2Impl implements SCIIF2 {
+	protected class InterfaceIF2Impl implements InterfaceIF2 {
 	
-		private SCIIF2OperationCallback operationCallback;
+		private InterfaceIF2OperationCallback operationCallback;
 		
-		public void setSCIIF2OperationCallback(
-				SCIIF2OperationCallback operationCallback) {
+		public void setInterfaceIF2OperationCallback(
+				InterfaceIF2OperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCIIF2Impl sCIIF2;
+	protected InterfaceIF2Impl interfaceIF2;
 	
 	private boolean initialized = false;
 	
@@ -50,8 +50,8 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		this.isExecuting = value;
 	}
 	public VariadicFunctionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCIIF2 = new SCIIF2Impl();
+		defaultInterface = new InterfaceImpl();
+		interfaceIF2 = new InterfaceIF2Impl();
 	}
 	
 	public void init() {
@@ -59,12 +59,12 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
-		if (this.sCIIF2.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCIIF2 must be set.");
+		if (this.interfaceIF2.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface InterfaceIF2 must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
@@ -153,12 +153,12 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCIIF2 getSCIIF2() {
-		return sCIIF2;
+	public InterfaceIF2 getInterfaceIF2() {
+		return interfaceIF2;
 	}
 	
 	public void setInternalOperationCallback(
@@ -168,20 +168,20 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.operationCallback.myVarOperation();
+		defaultInterface.operationCallback.myVarOperation();
 		
-		sCInterface.operationCallback.myVarOperation("one");
+		defaultInterface.operationCallback.myVarOperation("one");
 		
-		sCInterface.operationCallback.myVarOperation("one", "two", "three");
+		defaultInterface.operationCallback.myVarOperation("one", "two", "three");
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCIIF2.operationCallback.myVarOperation2(1);
+		interfaceIF2.operationCallback.myVarOperation2(1);
 		
-		sCIIF2.operationCallback.myVarOperation2(1, 2);
+		interfaceIF2.operationCallback.myVarOperation2(1, 2);
 		
-		sCIIF2.operationCallback.myVarOperation2(1, 2, 3, 4);
+		interfaceIF2.operationCallback.myVarOperation2(1, 2, 3, 4);
 	}
 	
 	/* 'default' enter sequence for state StateA */

@@ -4,7 +4,7 @@ package org.yakindu.scr.declarations;
 import org.yakindu.sct.rx.Observable;
 
 public class DeclarationsStatemachine implements IDeclarationsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean evA;
 		
@@ -143,7 +143,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 	}
 	
-	protected class SCIIfAImpl implements SCIIfA {
+	protected class InterfaceIfAImpl implements InterfaceIfA {
 	
 		private boolean evA;
 		
@@ -282,7 +282,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean evA;
 		private boolean evC;
 		
@@ -291,7 +291,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private double evEValue;
 	}
-	private static class SCIIfAEvBuf {
+	private static class InterfaceIfAEvBuf {
 		private boolean evA;
 		private boolean evC;
 		
@@ -317,13 +317,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private String evInFValue;
 	}
 	private static class DeclarationsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
-		private SCIIfAEvBuf ifaceIfA = new SCIIfAEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
+		private InterfaceIfAEvBuf ifaceIfA = new InterfaceIfAEvBuf();
 		private DeclarationsStatemachineInternalEvBuf internal = new DeclarationsStatemachineInternalEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCIIfAImpl sCIIfA;
+	protected InterfaceIfAImpl interfaceIfA;
 	
 	private boolean initialized = false;
 	
@@ -418,8 +418,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		this.isExecuting = value;
 	}
 	public DeclarationsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCIIfA = new SCIIfAImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceIfA = new InterfaceIfAImpl();
 	}
 	
 	public void init() {
@@ -431,25 +431,25 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		clearInEvents();
 		clearInternalEvents();
 		
-		sCInterface.setVarA(false);
+		defaultInterface.setVarA(false);
 		
-		sCInterface.setVarB(1);
+		defaultInterface.setVarB(1);
 		
-		sCInterface.setVarC(1.0);
+		defaultInterface.setVarC(1.0);
 		
-		sCInterface.setVarD("myString");
+		defaultInterface.setVarD("myString");
 		
-		sCInterface.setVarE(0x10);
+		defaultInterface.setVarE(0x10);
 		
-		sCIIfA.setVarA(false);
+		interfaceIfA.setVarA(false);
 		
-		sCIIfA.setVarB(1);
+		interfaceIfA.setVarB(1);
 		
-		sCIIfA.setVarC(1.0);
+		interfaceIfA.setVarC(1.0);
 		
-		sCIIfA.setVarD("myString");
+		interfaceIfA.setVarD("myString");
 		
-		sCIIfA.setVarE(0x10);
+		interfaceIfA.setVarE(0x10);
 		
 		setVarInA(false);
 		
@@ -532,36 +532,36 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.evA = sCInterface.evA;
-		sCInterface.evA = false;
+		_current.iface.evA = defaultInterface.evA;
+		defaultInterface.evA = false;
 		
-		_current.iface.evC = sCInterface.evC;
-		_current.iface.evCValue = sCInterface.evCValue;
-		sCInterface.evC = false;
+		_current.iface.evC = defaultInterface.evC;
+		_current.iface.evCValue = defaultInterface.evCValue;
+		defaultInterface.evC = false;
 		
-		_current.iface.evE = sCInterface.evE;
-		_current.iface.evEValue = sCInterface.evEValue;
-		sCInterface.evE = false;
+		_current.iface.evE = defaultInterface.evE;
+		_current.iface.evEValue = defaultInterface.evEValue;
+		defaultInterface.evE = false;
 		
-		_current.ifaceIfA.evA = sCIIfA.evA;
-		sCIIfA.evA = false;
+		_current.ifaceIfA.evA = interfaceIfA.evA;
+		interfaceIfA.evA = false;
 		
-		_current.ifaceIfA.evC = sCIIfA.evC;
-		_current.ifaceIfA.evCValue = sCIIfA.evCValue;
-		sCIIfA.evC = false;
+		_current.ifaceIfA.evC = interfaceIfA.evC;
+		_current.ifaceIfA.evCValue = interfaceIfA.evCValue;
+		interfaceIfA.evC = false;
 		
-		_current.ifaceIfA.evE = sCIIfA.evE;
-		_current.ifaceIfA.evEValue = sCIIfA.evEValue;
-		sCIIfA.evE = false;
+		_current.ifaceIfA.evE = interfaceIfA.evE;
+		_current.ifaceIfA.evEValue = interfaceIfA.evEValue;
+		interfaceIfA.evE = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.evA = false;
-		sCInterface.evC = false;
-		sCInterface.evE = false;
-		sCIIfA.evA = false;
-		sCIIfA.evC = false;
-		sCIIfA.evE = false;
+		defaultInterface.evA = false;
+		defaultInterface.evC = false;
+		defaultInterface.evE = false;
+		interfaceIfA.evA = false;
+		interfaceIfA.evC = false;
+		interfaceIfA.evE = false;
 	}
 	
 	private void swapInternalEvents() {
@@ -618,12 +618,12 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCIIfA getSCIIfA() {
-		return sCIIfA;
+	public InterfaceIfA getInterfaceIfA() {
+		return interfaceIfA;
 	}
 	
 	private void raiseEvInA() {
@@ -675,67 +675,67 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 	
 	public void raiseEvA() {
-		sCInterface.raiseEvA();
+		defaultInterface.raiseEvA();
 	}
 	
 	public Observable<Void> getEvB() {
-		return sCInterface.getEvB();
+		return defaultInterface.getEvB();
 	}
 	
 	public void raiseEvC(boolean value) {
-		sCInterface.raiseEvC(value);
+		defaultInterface.raiseEvC(value);
 	}
 	
 	public Observable<Long> getEvD() {
-		return sCInterface.getEvD();
+		return defaultInterface.getEvD();
 	}
 	
 	public void raiseEvE(double value) {
-		sCInterface.raiseEvE(value);
+		defaultInterface.raiseEvE(value);
 	}
 	
 	public Observable<String> getEvF() {
-		return sCInterface.getEvF();
+		return defaultInterface.getEvF();
 	}
 	
 	public boolean getVarA() {
-		return sCInterface.getVarA();
+		return defaultInterface.getVarA();
 	}
 	
 	public void setVarA(boolean value) {
-		sCInterface.setVarA(value);
+		defaultInterface.setVarA(value);
 	}
 	
 	public long getVarB() {
-		return sCInterface.getVarB();
+		return defaultInterface.getVarB();
 	}
 	
 	public void setVarB(long value) {
-		sCInterface.setVarB(value);
+		defaultInterface.setVarB(value);
 	}
 	
 	public double getVarC() {
-		return sCInterface.getVarC();
+		return defaultInterface.getVarC();
 	}
 	
 	public void setVarC(double value) {
-		sCInterface.setVarC(value);
+		defaultInterface.setVarC(value);
 	}
 	
 	public String getVarD() {
-		return sCInterface.getVarD();
+		return defaultInterface.getVarD();
 	}
 	
 	public void setVarD(String value) {
-		sCInterface.setVarD(value);
+		defaultInterface.setVarD(value);
 	}
 	
 	public long getVarE() {
-		return sCInterface.getVarE();
+		return defaultInterface.getVarE();
 	}
 	
 	public void setVarE(long value) {
-		sCInterface.setVarE(value);
+		defaultInterface.setVarE(value);
 	}
 	
 	/* Entry action for state 'A'. */

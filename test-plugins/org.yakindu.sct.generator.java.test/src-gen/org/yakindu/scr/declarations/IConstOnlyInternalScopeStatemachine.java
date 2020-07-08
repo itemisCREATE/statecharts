@@ -9,12 +9,12 @@ public interface IConstOnlyInternalScopeStatemachine extends IStatemachine {
 	public static final long c = 2;
 	
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE(long value);
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

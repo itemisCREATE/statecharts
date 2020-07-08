@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -35,7 +35,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -77,7 +77,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		this.stateConfVectorChanged = value;
 	}
 	public EventDrivenSuperStepStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -89,7 +89,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		clearInEvents();
 		clearInternalEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		isExecuting = false;
 	}
@@ -164,7 +164,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 			clearInEvents();
 			clearInternalEvents();
 			nextEvent();
-		} while ((((sCInterface.e || sCInterface.f) || l1) || l2));
+		} while ((((defaultInterface.e || defaultInterface.f) || l1) || l2));
 		
 		isExecuting = false;
 	}
@@ -185,8 +185,8 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -227,8 +227,8 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	private void raiseL1() {
@@ -250,19 +250,19 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -419,14 +419,14 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_A();
 				raiseL1();
 				
 				enterSequence_main_region_B_default();
 				react();
 			} else {
-				if (sCInterface.f) {
+				if (defaultInterface.f) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_G_default();
 					react();
@@ -445,7 +445,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_B();
 				raiseL2();
 				
@@ -465,7 +465,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.f) {
+			if (defaultInterface.f) {
 				exitSequence_main_region_C();
 				enterSequence_main_region_D_default();
 				react();
@@ -480,8 +480,8 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.e) {
-				sCInterface.setX(42);
+			if (defaultInterface.e) {
+				defaultInterface.setX(42);
 			}
 			did_transition = react();
 		}
@@ -492,14 +492,14 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.f) && (sCInterface.getX()==0))) {
+			if (((defaultInterface.f) && (defaultInterface.getX()==0))) {
 				exitSequence_main_region_D();
 				enterSequence_main_region_A_default();
 				react();
 			} else {
-				if (sCInterface.f) {
+				if (defaultInterface.f) {
 					exitSequence_main_region_D();
-					sCInterface.setX(sCInterface.getX() - 1);
+					defaultInterface.setX(defaultInterface.getX() - 1);
 					
 					enterSequence_main_region_D_default();
 					react();
@@ -546,7 +546,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_I();
 				enterSequence_main_region_A_default();
 				react();
@@ -569,9 +569,9 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 				enterSequence_main_region_C_default();
 				react();
 			} else {
-				if (((l1) && (sCInterface.getX()>17))) {
+				if (((l1) && (defaultInterface.getX()>17))) {
 					exitSequence_main_region_L();
-					sCInterface.setX(sCInterface.getX() - 1);
+					defaultInterface.setX(defaultInterface.getX() - 1);
 					
 					enterSequence_main_region_L_default();
 					react();

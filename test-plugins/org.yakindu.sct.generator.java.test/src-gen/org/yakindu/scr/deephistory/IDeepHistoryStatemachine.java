@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IDeepHistoryStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseEvent1();
 		
@@ -27,6 +27,6 @@ public interface IDeepHistoryStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

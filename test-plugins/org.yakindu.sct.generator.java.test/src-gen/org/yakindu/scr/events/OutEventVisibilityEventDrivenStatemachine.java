@@ -6,7 +6,7 @@ import java.util.Queue;
 import org.yakindu.sct.rx.Observable;
 
 public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisibilityEventDrivenStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean i;
 		
@@ -62,7 +62,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -91,7 +91,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		this.isExecuting = value;
 	}
 	public OutEventVisibilityEventDrivenStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -167,7 +167,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 			clearInEvents();
 			clearInternalEvents();
 			nextEvent();
-		} while ((sCInterface.i || l));
+		} while ((defaultInterface.i || l));
 		
 		isExecuting = false;
 	}
@@ -188,12 +188,12 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		return false;
 	}
 	private void clearOutEvents() {
-		sCInterface.o1 = false;
-		sCInterface.o2 = false;
+		defaultInterface.o1 = false;
+		defaultInterface.o2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.i = false;
+		defaultInterface.i = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -227,8 +227,8 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	private void raiseL() {
@@ -241,15 +241,15 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	}
 	
 	public void raiseI(long value) {
-		sCInterface.raiseI(value);
+		defaultInterface.raiseI(value);
 	}
 	
 	public boolean isRaisedO1() {
-		return sCInterface.isRaisedO1();
+		return defaultInterface.isRaisedO1();
 	}
 	
 	public boolean isRaisedO2() {
-		return sCInterface.isRaisedO2();
+		return defaultInterface.isRaisedO2();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -353,18 +353,18 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((sCInterface.i) && (sCInterface.getIValue()==1))) {
+			if (((defaultInterface.i) && (defaultInterface.getIValue()==1))) {
 				exitSequence_main_region_A();
-				sCInterface.raiseO1();
+				defaultInterface.raiseO1();
 				
 				raiseL();
 				
 				enterSequence_main_region_B_default();
 				react();
 			} else {
-				if (sCInterface.i) {
+				if (defaultInterface.i) {
 					exitSequence_main_region_A();
-					sCInterface.raiseO1();
+					defaultInterface.raiseO1();
 					
 					enterSequence_main_region_C_default();
 					react();
@@ -385,7 +385,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		if (try_transition) {
 			if (l) {
 				exitSequence_main_region_B();
-				sCInterface.raiseO2();
+				defaultInterface.raiseO2();
 				
 				enterSequence_main_region_B_default();
 				react();
@@ -403,9 +403,9 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.i) {
+			if (defaultInterface.i) {
 				exitSequence_main_region_C();
-				sCInterface.raiseO2();
+				defaultInterface.raiseO2();
 				
 				enterSequence_main_region_D_default();
 				react();
@@ -423,11 +423,11 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.i) {
+			if (defaultInterface.i) {
 				exitSequence_main_region_D();
-				sCInterface.raiseO1();
+				defaultInterface.raiseO1();
 				
-				sCInterface.raiseO2();
+				defaultInterface.raiseO2();
 				
 				enterSequence_main_region_E_default();
 				react();

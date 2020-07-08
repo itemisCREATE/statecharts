@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IConstOnlyDefaultScopeStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public static final long b = 1;
 		
@@ -17,15 +17,15 @@ public interface IConstOnlyDefaultScopeStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 	
-	public interface SCIA {
+	public interface InterfaceA {
 	
 		public void raiseE(long value);
 		
 	}
 	
-	public SCIA getSCIA();
+	public InterfaceA getInterfaceA();
 	
 }

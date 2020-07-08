@@ -6,12 +6,12 @@ import org.yakindu.sct.rx.Observable;
 
 public interface IObservables extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public Observable<Void> getDummy();
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

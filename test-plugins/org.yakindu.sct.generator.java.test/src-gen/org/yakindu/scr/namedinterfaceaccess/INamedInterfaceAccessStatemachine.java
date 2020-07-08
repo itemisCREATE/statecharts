@@ -6,7 +6,7 @@ import org.yakindu.sct.rx.Observable;
 
 public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 	
-	public interface SCISafe {
+	public interface InterfaceSafe {
 	
 		public boolean isRaisedOpen();
 		
@@ -18,10 +18,10 @@ public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCISafe getSCISafe();
+	public InterfaceSafe getInterfaceSafe();
 	
 	
-	public interface SCIUser {
+	public interface InterfaceUser {
 	
 		public void raiseNumberPressed(long value);
 		
@@ -29,6 +29,6 @@ public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCIUser getSCIUser();
+	public InterfaceUser getInterfaceUser();
 	
 }

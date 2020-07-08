@@ -5,10 +5,10 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ITracingStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

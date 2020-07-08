@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IDynamicChoiceStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseReset();
 		
@@ -15,6 +15,6 @@ public interface IDynamicChoiceStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

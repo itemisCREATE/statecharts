@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IChildFirstTransitionsInSubchartStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getA_local();
 		
@@ -75,10 +75,10 @@ public interface IChildFirstTransitionsInSubchartStatemachine extends IStatemach
 		
 		public void setCnt(long value);
 		
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public boolean check(String value);
 		
@@ -86,6 +86,6 @@ public interface IChildFirstTransitionsInSubchartStatemachine extends IStatemach
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

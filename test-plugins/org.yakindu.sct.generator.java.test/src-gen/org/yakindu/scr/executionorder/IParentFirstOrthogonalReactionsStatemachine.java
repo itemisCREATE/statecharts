@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IParentFirstOrthogonalReactionsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getA_local();
 		
@@ -63,10 +63,10 @@ public interface IParentFirstOrthogonalReactionsStatemachine extends IStatemachi
 		
 		public void setCnt(long value);
 		
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public long next();
 		
@@ -74,6 +74,6 @@ public interface IParentFirstOrthogonalReactionsStatemachine extends IStatemachi
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

@@ -6,7 +6,7 @@ import org.yakindu.sct.rx.Observable;
 
 public interface IDeclarationsStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseEvA();
 		
@@ -42,10 +42,10 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 	
-	public interface SCIIfA {
+	public interface InterfaceIfA {
 	
 		public void raiseEvA();
 		
@@ -81,6 +81,6 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCIIfA getSCIIfA();
+	public InterfaceIfA getInterfaceIfA();
 	
 }

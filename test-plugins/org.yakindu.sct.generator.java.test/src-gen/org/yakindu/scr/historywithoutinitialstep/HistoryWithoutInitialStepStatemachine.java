@@ -3,7 +3,7 @@ package org.yakindu.scr.historywithoutinitialstep;
 
 
 public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutInitialStepStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean toA;
 		
@@ -35,16 +35,16 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean toA;
 		private boolean toB;
 		private boolean toHistory;
 		private boolean next;
 	}
 	private static class HistoryWithoutInitialStepStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -75,7 +75,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		this.isExecuting = value;
 	}
 	public HistoryWithoutInitialStepStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -163,24 +163,24 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.toA = sCInterface.toA;
-		sCInterface.toA = false;
+		_current.iface.toA = defaultInterface.toA;
+		defaultInterface.toA = false;
 		
-		_current.iface.toB = sCInterface.toB;
-		sCInterface.toB = false;
+		_current.iface.toB = defaultInterface.toB;
+		defaultInterface.toB = false;
 		
-		_current.iface.toHistory = sCInterface.toHistory;
-		sCInterface.toHistory = false;
+		_current.iface.toHistory = defaultInterface.toHistory;
+		defaultInterface.toHistory = false;
 		
-		_current.iface.next = sCInterface.next;
-		sCInterface.next = false;
+		_current.iface.next = defaultInterface.next;
+		defaultInterface.next = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.toA = false;
-		sCInterface.toB = false;
-		sCInterface.toHistory = false;
-		sCInterface.next = false;
+		defaultInterface.toA = false;
+		defaultInterface.toB = false;
+		defaultInterface.toHistory = false;
+		defaultInterface.next = false;
 	}
 	
 	/**
@@ -208,24 +208,24 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseToA() {
-		sCInterface.raiseToA();
+		defaultInterface.raiseToA();
 	}
 	
 	public void raiseToB() {
-		sCInterface.raiseToB();
+		defaultInterface.raiseToB();
 	}
 	
 	public void raiseToHistory() {
-		sCInterface.raiseToHistory();
+		defaultInterface.raiseToHistory();
 	}
 	
 	public void raiseNext() {
-		sCInterface.raiseNext();
+		defaultInterface.raiseNext();
 	}
 	
 	/* 'default' enter sequence for state A */

@@ -6,7 +6,7 @@ import java.util.Queue;
 import org.yakindu.sct.ITimer;
 
 public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTriggeredByEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -33,7 +33,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -62,7 +62,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		this.isExecuting = value;
 	}
 	public EventDrivenTriggeredByEventStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -76,7 +76,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		isExecuting = false;
 	}
@@ -135,7 +135,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			
 			clearInEvents();
 			nextEvent();
-		} while ((sCInterface.e || timeEvents[0]));
+		} while ((defaultInterface.e || timeEvents[0]));
 		
 		isExecuting = false;
 	}
@@ -156,7 +156,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
+		defaultInterface.e = false;
 		timeEvents[0] = false;
 	}
 	
@@ -211,20 +211,20 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		runCycle();
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	/* Entry action for state 'B'. */
@@ -297,7 +297,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (defaultInterface.e) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
@@ -306,7 +306,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setX(sCInterface.getX() + 1);
+			defaultInterface.setX(defaultInterface.getX() + 1);
 		}
 		return did_transition;
 	}
@@ -316,7 +316,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.e) {
+				if (defaultInterface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
@@ -325,10 +325,10 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setX(sCInterface.getX() + 1);
+			defaultInterface.setX(defaultInterface.getX() + 1);
 			
 			if (timeEvents[0]) {
-				sCInterface.setX(sCInterface.getX() + 0);
+				defaultInterface.setX(defaultInterface.getX() + 0);
 			}
 		}
 		return did_transition;

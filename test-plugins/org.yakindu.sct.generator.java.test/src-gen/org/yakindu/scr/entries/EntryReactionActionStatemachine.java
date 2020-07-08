@@ -3,7 +3,7 @@ package org.yakindu.scr.entries;
 
 
 public class EntryReactionActionStatemachine implements IEntryReactionActionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean b;
 		
@@ -61,14 +61,14 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean b;
 		private boolean d;
 	}
 	private static class EntryReactionActionStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -98,7 +98,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		this.isExecuting = value;
 	}
 	public EntryReactionActionStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -112,13 +112,13 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		
 		clearInEvents();
 		
-		sCInterface.setEnteredR1(false);
+		defaultInterface.setEnteredR1(false);
 		
-		sCInterface.setEnteredR2(false);
+		defaultInterface.setEnteredR2(false);
 		
-		sCInterface.setEnteredBdefault(false);
+		defaultInterface.setEnteredBdefault(false);
 		
-		sCInterface.setEnteredBother(false);
+		defaultInterface.setEnteredBother(false);
 		
 		isExecuting = false;
 	}
@@ -195,16 +195,16 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.b = sCInterface.b;
-		sCInterface.b = false;
+		_current.iface.b = defaultInterface.b;
+		defaultInterface.b = false;
 		
-		_current.iface.d = sCInterface.d;
-		sCInterface.d = false;
+		_current.iface.d = defaultInterface.d;
+		defaultInterface.d = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.b = false;
-		sCInterface.d = false;
+		defaultInterface.b = false;
+		defaultInterface.d = false;
 	}
 	
 	/**
@@ -229,48 +229,48 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseB() {
-		sCInterface.raiseB();
+		defaultInterface.raiseB();
 	}
 	
 	public void raiseD() {
-		sCInterface.raiseD();
+		defaultInterface.raiseD();
 	}
 	
 	public boolean getEnteredR1() {
-		return sCInterface.getEnteredR1();
+		return defaultInterface.getEnteredR1();
 	}
 	
 	public void setEnteredR1(boolean value) {
-		sCInterface.setEnteredR1(value);
+		defaultInterface.setEnteredR1(value);
 	}
 	
 	public boolean getEnteredR2() {
-		return sCInterface.getEnteredR2();
+		return defaultInterface.getEnteredR2();
 	}
 	
 	public void setEnteredR2(boolean value) {
-		sCInterface.setEnteredR2(value);
+		defaultInterface.setEnteredR2(value);
 	}
 	
 	public boolean getEnteredBdefault() {
-		return sCInterface.getEnteredBdefault();
+		return defaultInterface.getEnteredBdefault();
 	}
 	
 	public void setEnteredBdefault(boolean value) {
-		sCInterface.setEnteredBdefault(value);
+		defaultInterface.setEnteredBdefault(value);
 	}
 	
 	public boolean getEnteredBother() {
-		return sCInterface.getEnteredBother();
+		return defaultInterface.getEnteredBother();
 	}
 	
 	public void setEnteredBother(boolean value) {
-		sCInterface.setEnteredBother(value);
+		defaultInterface.setEnteredBother(value);
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -418,7 +418,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	/* Default react sequence for initial entry default */
 	private void react_r2_default() {
-		sCInterface.setEnteredR2(true);
+		defaultInterface.setEnteredR2(true);
 		
 		enterSequence_r2_B_default();
 	}
@@ -429,7 +429,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_r2_B_r();
 		} else {
-			sCInterface.setEnteredBdefault(true);
+			defaultInterface.setEnteredBdefault(true);
 			
 			enterSequence_r2_B_r_BA_default();
 		}
@@ -437,14 +437,14 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	/* Default react sequence for initial entry other */
 	private void react_r2_B_r_other() {
-		sCInterface.setEnteredBother(true);
+		defaultInterface.setEnteredBother(true);
 		
 		enterSequence_r2_B_r_BB_default();
 	}
 	
 	/* Default react sequence for initial entry  */
 	private void react_r1__entry_Default() {
-		sCInterface.setEnteredR1(true);
+		defaultInterface.setEnteredR1(true);
 		
 		enterSequence_r1_A_default();
 	}

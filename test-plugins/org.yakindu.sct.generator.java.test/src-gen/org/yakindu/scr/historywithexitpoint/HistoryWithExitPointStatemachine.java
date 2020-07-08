@@ -3,7 +3,7 @@ package org.yakindu.scr.historywithexitpoint;
 
 
 public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean push;
 		
@@ -28,15 +28,15 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean push;
 		private boolean back;
 		private boolean next;
 	}
 	private static class HistoryWithExitPointStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -65,7 +65,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		this.isExecuting = value;
 	}
 	public HistoryWithExitPointStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -150,20 +150,20 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.push = sCInterface.push;
-		sCInterface.push = false;
+		_current.iface.push = defaultInterface.push;
+		defaultInterface.push = false;
 		
-		_current.iface.back = sCInterface.back;
-		sCInterface.back = false;
+		_current.iface.back = defaultInterface.back;
+		defaultInterface.back = false;
 		
-		_current.iface.next = sCInterface.next;
-		sCInterface.next = false;
+		_current.iface.next = defaultInterface.next;
+		defaultInterface.next = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.push = false;
-		sCInterface.back = false;
-		sCInterface.next = false;
+		defaultInterface.push = false;
+		defaultInterface.back = false;
+		defaultInterface.next = false;
 	}
 	
 	/**
@@ -186,20 +186,20 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raisePush() {
-		sCInterface.raisePush();
+		defaultInterface.raisePush();
 	}
 	
 	public void raiseBack() {
-		sCInterface.raiseBack();
+		defaultInterface.raiseBack();
 	}
 	
 	public void raiseNext() {
-		sCInterface.raiseNext();
+		defaultInterface.raiseNext();
 	}
 	
 	private void effect_mr_A_tr0() {

@@ -3,7 +3,7 @@ package org.yakindu.scr.guard;
 
 
 public class GuardStatemachine implements IGuardStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean event1;
 		
@@ -38,15 +38,15 @@ public class GuardStatemachine implements IGuardStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean event1;
 		private boolean event2;
 		private boolean returnEvent;
 	}
 	private static class GuardStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -72,7 +72,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		this.isExecuting = value;
 	}
 	public GuardStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -83,7 +83,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setMyVar(0);
+		defaultInterface.setMyVar(0);
 		
 		isExecuting = false;
 	}
@@ -152,20 +152,20 @@ public class GuardStatemachine implements IGuardStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.event1 = sCInterface.event1;
-		sCInterface.event1 = false;
+		_current.iface.event1 = defaultInterface.event1;
+		defaultInterface.event1 = false;
 		
-		_current.iface.event2 = sCInterface.event2;
-		sCInterface.event2 = false;
+		_current.iface.event2 = defaultInterface.event2;
+		defaultInterface.event2 = false;
 		
-		_current.iface.returnEvent = sCInterface.returnEvent;
-		sCInterface.returnEvent = false;
+		_current.iface.returnEvent = defaultInterface.returnEvent;
+		defaultInterface.returnEvent = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.event1 = false;
-		sCInterface.event2 = false;
-		sCInterface.returnEvent = false;
+		defaultInterface.event1 = false;
+		defaultInterface.event2 = false;
+		defaultInterface.returnEvent = false;
 	}
 	
 	/**
@@ -183,33 +183,33 @@ public class GuardStatemachine implements IGuardStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseEvent1() {
-		sCInterface.raiseEvent1();
+		defaultInterface.raiseEvent1();
 	}
 	
 	public void raiseEvent2() {
-		sCInterface.raiseEvent2();
+		defaultInterface.raiseEvent2();
 	}
 	
 	public void raiseReturn() {
-		sCInterface.raiseReturn();
+		defaultInterface.raiseReturn();
 	}
 	
 	public long getMyVar() {
-		return sCInterface.getMyVar();
+		return defaultInterface.getMyVar();
 	}
 	
 	public void setMyVar(long value) {
-		sCInterface.setMyVar(value);
+		defaultInterface.setMyVar(value);
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setMyVar(10);
+		defaultInterface.setMyVar(10);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -270,7 +270,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((_current.iface.event1) && (sCInterface.getMyVar()==10))) {
+				if (((_current.iface.event1) && (defaultInterface.getMyVar()==10))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {

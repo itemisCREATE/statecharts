@@ -3,7 +3,7 @@ package org.yakindu.scr.exits;
 
 
 public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHandlesMultipleExitsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -41,7 +41,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -67,7 +67,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		this.isExecuting = value;
 	}
 	public TransitionHandlesMultipleExitsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -78,7 +78,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		isExecuting = false;
 	}
@@ -147,9 +147,9 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
-		sCInterface.g = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
+		defaultInterface.g = false;
 	}
 	
 	/**
@@ -173,28 +173,28 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public void raiseG() {
-		sCInterface.raiseG();
+		defaultInterface.raiseG();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	private void effect_main_region_A_tr0() {
@@ -211,7 +211,7 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 	
 	private void effect_main_region_B_tr1() {
 		exitSequence_main_region_B();
-		sCInterface.setX(sCInterface.getX() * 2);
+		defaultInterface.setX(defaultInterface.getX() * 2);
 		
 		enterSequence_main_region_A_default();
 		react();
@@ -372,15 +372,15 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_A_r_AA();
-				sCInterface.setX(1);
+				defaultInterface.setX(1);
 				
 				react_main_region_A_r_ex1();
 			} else {
-				if (sCInterface.f) {
+				if (defaultInterface.f) {
 					exitSequence_main_region_A_r_AA();
-					sCInterface.setX(2);
+					defaultInterface.setX(2);
 					
 					react_main_region_A_r_ex2();
 				} else {
@@ -410,21 +410,21 @@ public class TransitionHandlesMultipleExitsStatemachine implements ITransitionHa
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_B_r_BB();
-				sCInterface.setX(11);
+				defaultInterface.setX(11);
 				
 				react_main_region_B_r_ex1();
 			} else {
-				if (sCInterface.f) {
+				if (defaultInterface.f) {
 					exitSequence_main_region_B_r_BB();
-					sCInterface.setX(12);
+					defaultInterface.setX(12);
 					
 					react_main_region_B_r_ex2();
 				} else {
-					if (sCInterface.g) {
+					if (defaultInterface.g) {
 						exitSequence_main_region_B_r_BB();
-						sCInterface.setX(10);
+						defaultInterface.setX(10);
 						
 						react_main_region_B_r_ex3();
 					} else {

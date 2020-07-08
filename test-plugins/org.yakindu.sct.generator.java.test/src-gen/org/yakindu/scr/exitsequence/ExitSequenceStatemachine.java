@@ -3,7 +3,7 @@ package org.yakindu.scr.exitsequence;
 
 
 public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -153,7 +153,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -187,7 +187,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		this.isExecuting = value;
 	}
 	public ExitSequenceStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -198,31 +198,31 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setA_exit(0);
+		defaultInterface.setA_exit(0);
 		
-		sCInterface.setAa_exit(0);
+		defaultInterface.setAa_exit(0);
 		
-		sCInterface.setAb_exit(0);
+		defaultInterface.setAb_exit(0);
 		
-		sCInterface.setAba_exit(0);
+		defaultInterface.setAba_exit(0);
 		
-		sCInterface.setAbb_exit(0);
+		defaultInterface.setAbb_exit(0);
 		
-		sCInterface.setAc_exit(0);
+		defaultInterface.setAc_exit(0);
 		
-		sCInterface.setAca_exit(0);
+		defaultInterface.setAca_exit(0);
 		
-		sCInterface.setAcaa_exit(0);
+		defaultInterface.setAcaa_exit(0);
 		
-		sCInterface.setAd_exit(0);
+		defaultInterface.setAd_exit(0);
 		
-		sCInterface.setAda_exit(0);
+		defaultInterface.setAda_exit(0);
 		
-		sCInterface.setAdb_exit(0);
+		defaultInterface.setAdb_exit(0);
 		
-		sCInterface.setAdc_exit(0);
+		defaultInterface.setAdc_exit(0);
 		
-		sCInterface.setC(1);
+		defaultInterface.setC(1);
 		
 		isExecuting = false;
 	}
@@ -306,8 +306,8 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		return false;
 	}
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
 	}
 	
 	/**
@@ -350,180 +350,180 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public long getA_exit() {
-		return sCInterface.getA_exit();
+		return defaultInterface.getA_exit();
 	}
 	
 	public void setA_exit(long value) {
-		sCInterface.setA_exit(value);
+		defaultInterface.setA_exit(value);
 	}
 	
 	public long getAa_exit() {
-		return sCInterface.getAa_exit();
+		return defaultInterface.getAa_exit();
 	}
 	
 	public void setAa_exit(long value) {
-		sCInterface.setAa_exit(value);
+		defaultInterface.setAa_exit(value);
 	}
 	
 	public long getAb_exit() {
-		return sCInterface.getAb_exit();
+		return defaultInterface.getAb_exit();
 	}
 	
 	public void setAb_exit(long value) {
-		sCInterface.setAb_exit(value);
+		defaultInterface.setAb_exit(value);
 	}
 	
 	public long getAba_exit() {
-		return sCInterface.getAba_exit();
+		return defaultInterface.getAba_exit();
 	}
 	
 	public void setAba_exit(long value) {
-		sCInterface.setAba_exit(value);
+		defaultInterface.setAba_exit(value);
 	}
 	
 	public long getAbb_exit() {
-		return sCInterface.getAbb_exit();
+		return defaultInterface.getAbb_exit();
 	}
 	
 	public void setAbb_exit(long value) {
-		sCInterface.setAbb_exit(value);
+		defaultInterface.setAbb_exit(value);
 	}
 	
 	public long getAc_exit() {
-		return sCInterface.getAc_exit();
+		return defaultInterface.getAc_exit();
 	}
 	
 	public void setAc_exit(long value) {
-		sCInterface.setAc_exit(value);
+		defaultInterface.setAc_exit(value);
 	}
 	
 	public long getAca_exit() {
-		return sCInterface.getAca_exit();
+		return defaultInterface.getAca_exit();
 	}
 	
 	public void setAca_exit(long value) {
-		sCInterface.setAca_exit(value);
+		defaultInterface.setAca_exit(value);
 	}
 	
 	public long getAcaa_exit() {
-		return sCInterface.getAcaa_exit();
+		return defaultInterface.getAcaa_exit();
 	}
 	
 	public void setAcaa_exit(long value) {
-		sCInterface.setAcaa_exit(value);
+		defaultInterface.setAcaa_exit(value);
 	}
 	
 	public long getAd_exit() {
-		return sCInterface.getAd_exit();
+		return defaultInterface.getAd_exit();
 	}
 	
 	public void setAd_exit(long value) {
-		sCInterface.setAd_exit(value);
+		defaultInterface.setAd_exit(value);
 	}
 	
 	public long getAda_exit() {
-		return sCInterface.getAda_exit();
+		return defaultInterface.getAda_exit();
 	}
 	
 	public void setAda_exit(long value) {
-		sCInterface.setAda_exit(value);
+		defaultInterface.setAda_exit(value);
 	}
 	
 	public long getAdb_exit() {
-		return sCInterface.getAdb_exit();
+		return defaultInterface.getAdb_exit();
 	}
 	
 	public void setAdb_exit(long value) {
-		sCInterface.setAdb_exit(value);
+		defaultInterface.setAdb_exit(value);
 	}
 	
 	public long getAdc_exit() {
-		return sCInterface.getAdc_exit();
+		return defaultInterface.getAdc_exit();
 	}
 	
 	public void setAdc_exit(long value) {
-		sCInterface.setAdc_exit(value);
+		defaultInterface.setAdc_exit(value);
 	}
 	
 	public long getC() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	public void setC(long value) {
-		sCInterface.setC(value);
+		defaultInterface.setC(value);
 	}
 	
 	/* Exit action for state 'A'. */
 	private void exitAction_main_region_A() {
-		sCInterface.setA_exit(sCInterface.c++);
+		defaultInterface.setA_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'AA'. */
 	private void exitAction_main_region_A_r_AA() {
-		sCInterface.setAa_exit(sCInterface.c++);
+		defaultInterface.setAa_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'AB'. */
 	private void exitAction_main_region_A_r_AB() {
-		sCInterface.setAb_exit(sCInterface.c++);
+		defaultInterface.setAb_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'ABA'. */
 	private void exitAction_main_region_A_r_AB_r1_ABA() {
-		sCInterface.setAba_exit(sCInterface.c++);
+		defaultInterface.setAba_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'ABB'. */
 	private void exitAction_main_region_A_r_AB_r2_ABB() {
-		sCInterface.setAbb_exit(sCInterface.c++);
+		defaultInterface.setAbb_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'AC'. */
 	private void exitAction_main_region_A_r_AC() {
-		sCInterface.setAc_exit(sCInterface.c++);
+		defaultInterface.setAc_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'ACA'. */
 	private void exitAction_main_region_A_r_AC_r_ACA() {
-		sCInterface.setAca_exit(sCInterface.c++);
+		defaultInterface.setAca_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'ACAA'. */
 	private void exitAction_main_region_A_r_AC_r_ACA_r_ACAA() {
-		sCInterface.setAcaa_exit(sCInterface.c++);
+		defaultInterface.setAcaa_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'AD'. */
 	private void exitAction_main_region_A_r_AD() {
-		sCInterface.setAd_exit(sCInterface.c++);
+		defaultInterface.setAd_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'ADA'. */
 	private void exitAction_main_region_A_r_AD_r1_ADA() {
-		sCInterface.setAda_exit(sCInterface.c++);
+		defaultInterface.setAda_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'ADB'. */
 	private void exitAction_main_region_A_r_AD_r2_ADB() {
-		sCInterface.setAdb_exit(sCInterface.c++);
+		defaultInterface.setAdb_exit(defaultInterface.c++);
 	}
 	
 	/* Exit action for state 'ADC'. */
 	private void exitAction_main_region_A_r_AD_r3_ADC() {
-		sCInterface.setAdc_exit(sCInterface.c++);
+		defaultInterface.setAdc_exit(defaultInterface.c++);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -934,7 +934,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.f) {
+			if (defaultInterface.f) {
 				exitSequence_main_region_exitSequence_main_region_A();
 				enterSequence_main_region_A_default();
 				react();
@@ -952,7 +952,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_A_r_exitSequence_main_region_A_r_AA();
 				enterSequence_main_region_A_r_AB_default();
 				main_region_A_react(false);
@@ -970,7 +970,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_A_r_exitSequence_main_region_A_r_AB();
 				enterSequence_main_region_A_r_AC_default();
 				main_region_A_react(false);
@@ -1009,7 +1009,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_A_r_exitSequence_main_region_A_r_AC();
 				enterSequence_main_region_A_r_AD_default();
 				main_region_A_react(false);
@@ -1051,7 +1051,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e) {
+			if (defaultInterface.e) {
 				exitSequence_main_region_A_r_exitSequence_main_region_A_r_AD();
 				enterSequence_main_region_A_r_AA_default();
 				main_region_A_react(false);

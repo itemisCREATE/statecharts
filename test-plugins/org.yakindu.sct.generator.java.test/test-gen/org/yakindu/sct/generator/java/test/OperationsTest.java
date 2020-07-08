@@ -22,8 +22,8 @@ import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 @SuppressWarnings("all")
 public class OperationsTest {
 	InternalOperationCallback internalMock;
-	SCIInterface1OperationCallback interface1Mock;
-	SCInterfaceOperationCallback defaultMock;
+	InterfaceInterface1OperationCallback interface1Mock;
+	InterfaceOperationCallback defaultMock;
 	
 	private OperationsStatemachine statemachine;	
 	private VirtualTimer timer;
@@ -36,10 +36,10 @@ public class OperationsTest {
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		internalMock = mock(InternalOperationCallback.class);
 		statemachine.setInternalOperationCallback(internalMock);
-		interface1Mock = mock(SCIInterface1OperationCallback.class);
-		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface1Mock);
-		defaultMock = mock(SCInterfaceOperationCallback.class);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
+		interface1Mock = mock(InterfaceInterface1OperationCallback.class);
+		statemachine.getInterfaceInterface1().setInterfaceInterface1OperationCallback(interface1Mock);
+		defaultMock = mock(InterfaceOperationCallback.class);
+		statemachine.getInterface().setInterfaceOperationCallback(defaultMock);
 		
 		statemachine.init();
 		
@@ -48,8 +48,8 @@ public class OperationsTest {
 	@After
 	public void operationsTest_tearDown() {
 		statemachine.setInternalOperationCallback(null);
-		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(null);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(null);
+		statemachine.getInterfaceInterface1().setInterfaceInterface1OperationCallback(null);
+		statemachine.getInterface().setInterfaceOperationCallback(null);
 		statemachine = null;
 		
 		timer = null;

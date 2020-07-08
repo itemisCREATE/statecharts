@@ -3,7 +3,7 @@ package org.yakindu.scr.constantsvariation;
 
 
 public class ConstantsVariationStatemachine implements IConstantsVariationStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		public boolean getB2() {
 			return b2;
@@ -23,7 +23,7 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		
 	}
 	
-	protected class SCINamedImpl implements SCINamed {
+	protected class InterfaceNamedImpl implements InterfaceNamed {
 	
 		public boolean getB() {
 			return b;
@@ -43,9 +43,9 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCINamedImpl sCINamed;
+	protected InterfaceNamedImpl interfaceNamed;
 	
 	private boolean initialized = false;
 	
@@ -89,8 +89,8 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		this.isExecuting = value;
 	}
 	public ConstantsVariationStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCINamed = new SCINamedImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceNamed = new InterfaceNamedImpl();
 	}
 	
 	public void init() {
@@ -179,28 +179,28 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCINamed getSCINamed() {
-		return sCINamed;
+	public InterfaceNamed getInterfaceNamed() {
+		return interfaceNamed;
 	}
 	
 	public boolean getB2() {
-		return sCInterface.getB2();
+		return defaultInterface.getB2();
 	}
 	
 	public String getStr2() {
-		return sCInterface.getStr2();
+		return defaultInterface.getStr2();
 	}
 	
 	public double getR2() {
-		return sCInterface.getR2();
+		return defaultInterface.getR2();
 	}
 	
 	public long getI2() {
-		return sCInterface.getI2();
+		return defaultInterface.getI2();
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -260,7 +260,7 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((((((((((((getB()==true && (getStr()== null?"String" ==null :getStr().equals("String"))) && getR()==5) && getI()==5) && sCInterface.getB2()==true) && (sCInterface.getStr2()== null?"String" ==null :sCInterface.getStr2().equals("String"))) && sCInterface.getR2()==5) && sCInterface.getI2()==5) && sCINamed.getB()==true) && (sCINamed.getStr()== null?"String" ==null :sCINamed.getStr().equals("String"))) && sCINamed.getR()==5) && sCINamed.getI()==5)) {
+				if ((((((((((((getB()==true && (getStr()== null?"String" ==null :getStr().equals("String"))) && getR()==5) && getI()==5) && defaultInterface.getB2()==true) && (defaultInterface.getStr2()== null?"String" ==null :defaultInterface.getStr2().equals("String"))) && defaultInterface.getR2()==5) && defaultInterface.getI2()==5) && interfaceNamed.getB()==true) && (interfaceNamed.getStr()== null?"String" ==null :interfaceNamed.getStr().equals("String"))) && interfaceNamed.getR()==5) && interfaceNamed.getI()==5)) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region__final__default();
 				} else {

@@ -5,12 +5,12 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IOperationsWithoutBracesStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public boolean myBoolOp();
 		
@@ -20,6 +20,6 @@ public interface IOperationsWithoutBracesStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

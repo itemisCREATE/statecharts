@@ -4,7 +4,7 @@ package org.yakindu.scr.eventdriven;
 import org.yakindu.sct.ITimer;
 
 public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDrivenTriggeredByTimeEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long x;
 		
@@ -28,7 +28,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -56,7 +56,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		this.isExecuting = value;
 	}
 	public EventDrivenTriggeredByTimeEventStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -70,9 +70,9 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
-		sCInterface.setTransition_count(0);
+		defaultInterface.setTransition_count(0);
 		
 		isExecuting = false;
 	}
@@ -191,24 +191,24 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		runCycle();
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public long getTransition_count() {
-		return sCInterface.getTransition_count();
+		return defaultInterface.getTransition_count();
 	}
 	
 	public void setTransition_count(long value) {
-		sCInterface.setTransition_count(value);
+		defaultInterface.setTransition_count(value);
 	}
 	
 	/* Entry action for state 'A'. */
@@ -296,7 +296,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			if (react()==false) {
 				if (timeEvents[0]) {
 					exitSequence_r_A();
-					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
+					defaultInterface.setTransition_count(defaultInterface.getTransition_count() + 1);
 					
 					enterSequence_r_B_default();
 				} else {
@@ -305,7 +305,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setX(sCInterface.getX() + 1);
+			defaultInterface.setX(defaultInterface.getX() + 1);
 		}
 		return did_transition;
 	}
@@ -317,7 +317,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			if (react()==false) {
 				if (timeEvents[1]) {
 					exitSequence_r_B();
-					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
+					defaultInterface.setTransition_count(defaultInterface.getTransition_count() + 1);
 					
 					enterSequence_r_A_default();
 				} else {
@@ -326,7 +326,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			}
 		}
 		if (did_transition==false) {
-			sCInterface.setX(sCInterface.getX() + 1);
+			defaultInterface.setX(defaultInterface.getX() + 1);
 		}
 		return did_transition;
 	}

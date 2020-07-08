@@ -4,7 +4,7 @@ package org.yakindu.scr.timedtransitions;
 import org.yakindu.sct.ITimer;
 
 public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long seconds;
 		
@@ -35,7 +35,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	private static class TimedTransitionsStatemachineEvBuf {
 		private TimedTransitionsStatemachineTimeEventsEvBuf timeEvents = new TimedTransitionsStatemachineTimeEventsEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -65,7 +65,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		this.isExecuting = value;
 	}
 	public TimedTransitionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -79,9 +79,9 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		
 		clearInEvents();
 		
-		sCInterface.setSeconds(0);
+		defaultInterface.setSeconds(0);
 		
-		sCInterface.setCycles(0);
+		defaultInterface.setCycles(0);
 		
 		isExecuting = false;
 	}
@@ -211,24 +211,24 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		timeEvents[eventID] = true;
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getSeconds() {
-		return sCInterface.getSeconds();
+		return defaultInterface.getSeconds();
 	}
 	
 	public void setSeconds(long value) {
-		sCInterface.setSeconds(value);
+		defaultInterface.setSeconds(value);
 	}
 	
 	public long getCycles() {
-		return sCInterface.getCycles();
+		return defaultInterface.getCycles();
 	}
 	
 	public void setCycles(long value) {
-		sCInterface.setCycles(value);
+		defaultInterface.setCycles(value);
 	}
 	
 	/* Entry action for state 'Start'. */
@@ -294,9 +294,9 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	private boolean react() {
 		if (_current.timeEvents.timedTransitions_time_event_0) {
-			sCInterface.setSeconds(sCInterface.getSeconds() + 1);
+			defaultInterface.setSeconds(defaultInterface.getSeconds() + 1);
 		}
-		sCInterface.setCycles(sCInterface.getCycles() + 1);
+		defaultInterface.setCycles(defaultInterface.getCycles() + 1);
 		
 		return false;
 	}

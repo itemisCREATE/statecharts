@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IStatechartEntryAndExitActions extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getX();
 		
@@ -21,6 +21,6 @@ public interface IStatechartEntryAndExitActions extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

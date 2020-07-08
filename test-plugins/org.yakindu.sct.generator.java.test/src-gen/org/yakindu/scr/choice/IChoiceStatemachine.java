@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IChoiceStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE();
 		
@@ -21,6 +21,6 @@ public interface IChoiceStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

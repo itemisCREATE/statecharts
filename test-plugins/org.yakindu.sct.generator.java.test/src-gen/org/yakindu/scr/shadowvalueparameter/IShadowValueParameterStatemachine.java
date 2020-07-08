@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IShadowValueParameterStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public long getValue();
 		
@@ -13,6 +13,6 @@ public interface IShadowValueParameterStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

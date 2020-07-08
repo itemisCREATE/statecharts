@@ -5,7 +5,7 @@ import org.yakindu.sct.IStatemachine;
 
 public interface IHistoryWithExitPointStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raisePush();
 		
@@ -15,6 +15,6 @@ public interface IHistoryWithExitPointStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

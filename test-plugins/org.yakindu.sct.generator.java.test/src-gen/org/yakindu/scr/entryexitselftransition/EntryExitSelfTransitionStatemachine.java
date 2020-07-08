@@ -3,7 +3,7 @@ package org.yakindu.scr.entryexitselftransition;
 
 
 public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransitionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -41,14 +41,14 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean e1;
 	}
 	private static class EntryExitSelfTransitionStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -75,7 +75,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		this.isExecuting = value;
 	}
 	public EntryExitSelfTransitionStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -86,9 +86,9 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		
 		clearInEvents();
 		
-		sCInterface.setExits(0);
+		defaultInterface.setExits(0);
 		
-		sCInterface.setEntries(0);
+		defaultInterface.setEntries(0);
 		
 		isExecuting = false;
 	}
@@ -157,16 +157,16 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.e1 = false;
+		defaultInterface.e = false;
+		defaultInterface.e1 = false;
 	}
 	
 	/**
@@ -187,42 +187,42 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public long getExits() {
-		return sCInterface.getExits();
+		return defaultInterface.getExits();
 	}
 	
 	public void setExits(long value) {
-		sCInterface.setExits(value);
+		defaultInterface.setExits(value);
 	}
 	
 	public long getEntries() {
-		return sCInterface.getEntries();
+		return defaultInterface.getEntries();
 	}
 	
 	public void setEntries(long value) {
-		sCInterface.setEntries(value);
+		defaultInterface.setEntries(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.setEntries(sCInterface.getEntries() + 1);
+		defaultInterface.setEntries(defaultInterface.getEntries() + 1);
 	}
 	
 	/* Exit action for state 'A'. */
 	private void exitAction_main_region_A() {
-		sCInterface.setExits(sCInterface.getExits() + 1);
+		defaultInterface.setExits(defaultInterface.getExits() + 1);
 	}
 	
 	/* 'default' enter sequence for state A */

@@ -3,7 +3,7 @@ package org.yakindu.scr.syncjoin;
 
 
 public class SyncJoinStatemachine implements ISyncJoinStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -45,16 +45,16 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 		private boolean jc;
 		private boolean jd;
 	}
 	private static class SyncJoinStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -84,7 +84,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		this.isExecuting = value;
 	}
 	public SyncJoinStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -95,7 +95,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
 		isExecuting = false;
 	}
@@ -173,24 +173,24 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 		
-		_current.iface.jc = sCInterface.jc;
-		sCInterface.jc = false;
+		_current.iface.jc = defaultInterface.jc;
+		defaultInterface.jc = false;
 		
-		_current.iface.jd = sCInterface.jd;
-		sCInterface.jd = false;
+		_current.iface.jd = defaultInterface.jd;
+		defaultInterface.jd = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
-		sCInterface.jc = false;
-		sCInterface.jd = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
+		defaultInterface.jc = false;
+		defaultInterface.jd = false;
 	}
 	
 	/**
@@ -217,37 +217,37 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public void raiseJc() {
-		sCInterface.raiseJc();
+		defaultInterface.raiseJc();
 	}
 	
 	public void raiseJd() {
-		sCInterface.raiseJd();
+		defaultInterface.raiseJd();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.setX(sCInterface.getX() + 1);
+		defaultInterface.setX(defaultInterface.getX() + 1);
 	}
 	
 	/* 'default' enter sequence for state A */

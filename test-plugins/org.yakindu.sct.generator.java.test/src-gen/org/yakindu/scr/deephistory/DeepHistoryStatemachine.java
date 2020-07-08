@@ -3,7 +3,7 @@ package org.yakindu.scr.deephistory;
 
 
 public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean event1;
 		
@@ -70,7 +70,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean event1;
 		private boolean event2;
 		private boolean event3;
@@ -82,9 +82,9 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		private boolean event9;
 	}
 	private static class DeepHistoryStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -118,7 +118,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		this.isExecuting = value;
 	}
 	public DeepHistoryStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -212,44 +212,44 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.event1 = sCInterface.event1;
-		sCInterface.event1 = false;
+		_current.iface.event1 = defaultInterface.event1;
+		defaultInterface.event1 = false;
 		
-		_current.iface.event2 = sCInterface.event2;
-		sCInterface.event2 = false;
+		_current.iface.event2 = defaultInterface.event2;
+		defaultInterface.event2 = false;
 		
-		_current.iface.event3 = sCInterface.event3;
-		sCInterface.event3 = false;
+		_current.iface.event3 = defaultInterface.event3;
+		defaultInterface.event3 = false;
 		
-		_current.iface.event4 = sCInterface.event4;
-		sCInterface.event4 = false;
+		_current.iface.event4 = defaultInterface.event4;
+		defaultInterface.event4 = false;
 		
-		_current.iface.event5 = sCInterface.event5;
-		sCInterface.event5 = false;
+		_current.iface.event5 = defaultInterface.event5;
+		defaultInterface.event5 = false;
 		
-		_current.iface.event6 = sCInterface.event6;
-		sCInterface.event6 = false;
+		_current.iface.event6 = defaultInterface.event6;
+		defaultInterface.event6 = false;
 		
-		_current.iface.event7 = sCInterface.event7;
-		sCInterface.event7 = false;
+		_current.iface.event7 = defaultInterface.event7;
+		defaultInterface.event7 = false;
 		
-		_current.iface.event8 = sCInterface.event8;
-		sCInterface.event8 = false;
+		_current.iface.event8 = defaultInterface.event8;
+		defaultInterface.event8 = false;
 		
-		_current.iface.event9 = sCInterface.event9;
-		sCInterface.event9 = false;
+		_current.iface.event9 = defaultInterface.event9;
+		defaultInterface.event9 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.event1 = false;
-		sCInterface.event2 = false;
-		sCInterface.event3 = false;
-		sCInterface.event4 = false;
-		sCInterface.event5 = false;
-		sCInterface.event6 = false;
-		sCInterface.event7 = false;
-		sCInterface.event8 = false;
-		sCInterface.event9 = false;
+		defaultInterface.event1 = false;
+		defaultInterface.event2 = false;
+		defaultInterface.event3 = false;
+		defaultInterface.event4 = false;
+		defaultInterface.event5 = false;
+		defaultInterface.event6 = false;
+		defaultInterface.event7 = false;
+		defaultInterface.event8 = false;
+		defaultInterface.event9 = false;
 	}
 	
 	/**
@@ -284,44 +284,44 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseEvent1() {
-		sCInterface.raiseEvent1();
+		defaultInterface.raiseEvent1();
 	}
 	
 	public void raiseEvent2() {
-		sCInterface.raiseEvent2();
+		defaultInterface.raiseEvent2();
 	}
 	
 	public void raiseEvent3() {
-		sCInterface.raiseEvent3();
+		defaultInterface.raiseEvent3();
 	}
 	
 	public void raiseEvent4() {
-		sCInterface.raiseEvent4();
+		defaultInterface.raiseEvent4();
 	}
 	
 	public void raiseEvent5() {
-		sCInterface.raiseEvent5();
+		defaultInterface.raiseEvent5();
 	}
 	
 	public void raiseEvent6() {
-		sCInterface.raiseEvent6();
+		defaultInterface.raiseEvent6();
 	}
 	
 	public void raiseEvent7() {
-		sCInterface.raiseEvent7();
+		defaultInterface.raiseEvent7();
 	}
 	
 	public void raiseEvent8() {
-		sCInterface.raiseEvent8();
+		defaultInterface.raiseEvent8();
 	}
 	
 	public void raiseEvent9() {
-		sCInterface.raiseEvent9();
+		defaultInterface.raiseEvent9();
 	}
 	
 	/* 'default' enter sequence for state State1 */

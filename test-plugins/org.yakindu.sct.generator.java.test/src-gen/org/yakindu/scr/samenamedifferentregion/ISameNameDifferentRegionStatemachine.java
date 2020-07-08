@@ -5,12 +5,12 @@ import org.yakindu.sct.IStatemachine;
 
 public interface ISameNameDifferentRegionStatemachine extends IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public void raiseE1();
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

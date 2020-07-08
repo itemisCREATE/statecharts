@@ -7,11 +7,11 @@ public interface IConstantsStatemachine extends IStatemachine {
 	public static final long internalConstant = 5;
 	
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public static final long x = 10;
 		
-		public static final long y = (SCInterface.x * 2);
+		public static final long y = (Interface.x * 2);
 		
 		public void raiseE();
 		
@@ -27,10 +27,10 @@ public interface IConstantsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 	
-	public interface SCINamed {
+	public interface InterfaceNamed {
 	
 		public static final String y = "Hello World";
 		
@@ -42,6 +42,6 @@ public interface IConstantsStatemachine extends IStatemachine {
 		
 	}
 	
-	public SCINamed getSCINamed();
+	public InterfaceNamed getInterfaceNamed();
 	
 }

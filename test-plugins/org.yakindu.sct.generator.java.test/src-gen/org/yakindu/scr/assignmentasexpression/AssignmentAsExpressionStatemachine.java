@@ -3,7 +3,7 @@ package org.yakindu.scr.assignmentasexpression;
 
 
 public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long a;
 		
@@ -277,7 +277,7 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
@@ -308,7 +308,7 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		this.isExecuting = value;
 	}
 	public AssignmentAsExpressionStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -318,51 +318,51 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		}
 		
 		
-		sCInterface.setA(0);
+		defaultInterface.setA(0);
 		
-		sCInterface.setB(0);
+		defaultInterface.setB(0);
 		
-		sCInterface.setC(0);
+		defaultInterface.setC(0);
 		
-		sCInterface.setD(0);
+		defaultInterface.setD(0);
 		
-		sCInterface.setE(1);
+		defaultInterface.setE(1);
 		
-		sCInterface.setF(1);
+		defaultInterface.setF(1);
 		
-		sCInterface.setG(4);
+		defaultInterface.setG(4);
 		
-		sCInterface.setH(32);
+		defaultInterface.setH(32);
 		
-		sCInterface.setI(7);
+		defaultInterface.setI(7);
 		
-		sCInterface.setI1(7);
+		defaultInterface.setI1(7);
 		
-		sCInterface.setJ(8);
+		defaultInterface.setJ(8);
 		
-		sCInterface.setJ1(2);
+		defaultInterface.setJ1(2);
 		
-		sCInterface.setK(8);
+		defaultInterface.setK(8);
 		
-		sCInterface.setK1(4);
+		defaultInterface.setK1(4);
 		
-		sCInterface.setL(3);
+		defaultInterface.setL(3);
 		
-		sCInterface.setM(7);
+		defaultInterface.setM(7);
 		
-		sCInterface.setN(5);
+		defaultInterface.setN(5);
 		
-		sCInterface.setP(0);
+		defaultInterface.setP(0);
 		
-		sCInterface.setR(7);
+		defaultInterface.setR(7);
 		
-		sCInterface.setT(10);
+		defaultInterface.setT(10);
 		
-		sCInterface.setU(6);
+		defaultInterface.setU(6);
 		
-		sCInterface.setV(13);
+		defaultInterface.setV(13);
 		
-		sCInterface.setW(7);
+		defaultInterface.setW(7);
 		
 		isExecuting = false;
 	}
@@ -479,239 +479,239 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getA() {
-		return sCInterface.getA();
+		return defaultInterface.getA();
 	}
 	
 	public void setA(long value) {
-		sCInterface.setA(value);
+		defaultInterface.setA(value);
 	}
 	
 	public long getB() {
-		return sCInterface.getB();
+		return defaultInterface.getB();
 	}
 	
 	public void setB(long value) {
-		sCInterface.setB(value);
+		defaultInterface.setB(value);
 	}
 	
 	public long getC() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	public void setC(long value) {
-		sCInterface.setC(value);
+		defaultInterface.setC(value);
 	}
 	
 	public long getD() {
-		return sCInterface.getD();
+		return defaultInterface.getD();
 	}
 	
 	public void setD(long value) {
-		sCInterface.setD(value);
+		defaultInterface.setD(value);
 	}
 	
 	public long getE() {
-		return sCInterface.getE();
+		return defaultInterface.getE();
 	}
 	
 	public void setE(long value) {
-		sCInterface.setE(value);
+		defaultInterface.setE(value);
 	}
 	
 	public long getF() {
-		return sCInterface.getF();
+		return defaultInterface.getF();
 	}
 	
 	public void setF(long value) {
-		sCInterface.setF(value);
+		defaultInterface.setF(value);
 	}
 	
 	public long getG() {
-		return sCInterface.getG();
+		return defaultInterface.getG();
 	}
 	
 	public void setG(long value) {
-		sCInterface.setG(value);
+		defaultInterface.setG(value);
 	}
 	
 	public long getH() {
-		return sCInterface.getH();
+		return defaultInterface.getH();
 	}
 	
 	public void setH(long value) {
-		sCInterface.setH(value);
+		defaultInterface.setH(value);
 	}
 	
 	public long getI() {
-		return sCInterface.getI();
+		return defaultInterface.getI();
 	}
 	
 	public void setI(long value) {
-		sCInterface.setI(value);
+		defaultInterface.setI(value);
 	}
 	
 	public long getI1() {
-		return sCInterface.getI1();
+		return defaultInterface.getI1();
 	}
 	
 	public void setI1(long value) {
-		sCInterface.setI1(value);
+		defaultInterface.setI1(value);
 	}
 	
 	public long getJ() {
-		return sCInterface.getJ();
+		return defaultInterface.getJ();
 	}
 	
 	public void setJ(long value) {
-		sCInterface.setJ(value);
+		defaultInterface.setJ(value);
 	}
 	
 	public long getJ1() {
-		return sCInterface.getJ1();
+		return defaultInterface.getJ1();
 	}
 	
 	public void setJ1(long value) {
-		sCInterface.setJ1(value);
+		defaultInterface.setJ1(value);
 	}
 	
 	public long getK() {
-		return sCInterface.getK();
+		return defaultInterface.getK();
 	}
 	
 	public void setK(long value) {
-		sCInterface.setK(value);
+		defaultInterface.setK(value);
 	}
 	
 	public long getK1() {
-		return sCInterface.getK1();
+		return defaultInterface.getK1();
 	}
 	
 	public void setK1(long value) {
-		sCInterface.setK1(value);
+		defaultInterface.setK1(value);
 	}
 	
 	public long getL() {
-		return sCInterface.getL();
+		return defaultInterface.getL();
 	}
 	
 	public void setL(long value) {
-		sCInterface.setL(value);
+		defaultInterface.setL(value);
 	}
 	
 	public long getM() {
-		return sCInterface.getM();
+		return defaultInterface.getM();
 	}
 	
 	public void setM(long value) {
-		sCInterface.setM(value);
+		defaultInterface.setM(value);
 	}
 	
 	public long getN() {
-		return sCInterface.getN();
+		return defaultInterface.getN();
 	}
 	
 	public void setN(long value) {
-		sCInterface.setN(value);
+		defaultInterface.setN(value);
 	}
 	
 	public long getP() {
-		return sCInterface.getP();
+		return defaultInterface.getP();
 	}
 	
 	public void setP(long value) {
-		sCInterface.setP(value);
+		defaultInterface.setP(value);
 	}
 	
 	public long getR() {
-		return sCInterface.getR();
+		return defaultInterface.getR();
 	}
 	
 	public void setR(long value) {
-		sCInterface.setR(value);
+		defaultInterface.setR(value);
 	}
 	
 	public long getT() {
-		return sCInterface.getT();
+		return defaultInterface.getT();
 	}
 	
 	public void setT(long value) {
-		sCInterface.setT(value);
+		defaultInterface.setT(value);
 	}
 	
 	public long getU() {
-		return sCInterface.getU();
+		return defaultInterface.getU();
 	}
 	
 	public void setU(long value) {
-		sCInterface.setU(value);
+		defaultInterface.setU(value);
 	}
 	
 	public long getV() {
-		return sCInterface.getV();
+		return defaultInterface.getV();
 	}
 	
 	public void setV(long value) {
-		sCInterface.setV(value);
+		defaultInterface.setV(value);
 	}
 	
 	public long getW() {
-		return sCInterface.getW();
+		return defaultInterface.getW();
 	}
 	
 	public void setW(long value) {
-		sCInterface.setW(value);
+		defaultInterface.setW(value);
 	}
 	
 	/* Entry action for state 'Add'. */
 	private void entryAction_main_region_Add() {
-		sCInterface.setA(((sCInterface.assignB(5)) + 4));
+		defaultInterface.setA(((defaultInterface.assignB(5)) + 4));
 	}
 	
 	/* Entry action for state 'Multiply'. */
 	private void entryAction_main_region_Multiply() {
-		sCInterface.setE(sCInterface.getE() * (((sCInterface.assignF(sCInterface.getF() * 5)) * 3)));
+		defaultInterface.setE(defaultInterface.getE() * (((defaultInterface.assignF(defaultInterface.getF() * 5)) * 3)));
 	}
 	
 	/* Entry action for state 'Divide'. */
 	private void entryAction_main_region_Divide() {
-		sCInterface.setG(sCInterface.getG() / (((sCInterface.assignH(sCInterface.getH() / 2)) / 4)));
+		defaultInterface.setG(defaultInterface.getG() / (((defaultInterface.assignH(defaultInterface.getH() / 2)) / 4)));
 	}
 	
 	/* Entry action for state 'Modulo'. */
 	private void entryAction_main_region_Modulo() {
-		sCInterface.setI(sCInterface.getI() % (((sCInterface.assignI1(sCInterface.getI1() % 4)) % 4)));
+		defaultInterface.setI(defaultInterface.getI() % (((defaultInterface.assignI1(defaultInterface.getI1() % 4)) % 4)));
 	}
 	
 	/* Entry action for state 'Shift'. */
 	private void entryAction_main_region_Shift() {
-		sCInterface.setJ(sCInterface.getJ() << ((sCInterface.assignJ1(sCInterface.getJ1() >> 1))));
+		defaultInterface.setJ(defaultInterface.getJ() << ((defaultInterface.assignJ1(defaultInterface.getJ1() >> 1))));
 		
-		sCInterface.setK(sCInterface.getK() >> ((sCInterface.assignK1(sCInterface.getK1() >> 2))));
+		defaultInterface.setK(defaultInterface.getK() >> ((defaultInterface.assignK1(defaultInterface.getK1() >> 2))));
 	}
 	
 	/* Entry action for state 'boolean And'. */
 	private void entryAction_main_region_boolean_And() {
-		sCInterface.setL(sCInterface.getL() & ((sCInterface.assignN(sCInterface.getN() & sCInterface.m))));
+		defaultInterface.setL(defaultInterface.getL() & ((defaultInterface.assignN(defaultInterface.getN() & defaultInterface.m))));
 	}
 	
 	/* Entry action for state 'boolean Or'. */
 	private void entryAction_main_region_boolean_Or() {
-		sCInterface.setP(sCInterface.getP() | ((sCInterface.assignR(sCInterface.getR() | sCInterface.t))));
+		defaultInterface.setP(defaultInterface.getP() | ((defaultInterface.assignR(defaultInterface.getR() | defaultInterface.t))));
 	}
 	
 	/* Entry action for state 'boolean Xor'. */
 	private void entryAction_main_region_boolean_Xor() {
-		sCInterface.setU(sCInterface.getU() ^ ((sCInterface.assignV(sCInterface.getV() ^ sCInterface.w))));
+		defaultInterface.setU(defaultInterface.getU() ^ ((defaultInterface.assignV(defaultInterface.getV() ^ defaultInterface.w))));
 	}
 	
 	/* Entry action for state 'Subtract'. */
 	private void entryAction_main_region_Subtract() {
-		sCInterface.setD(sCInterface.getD() - (((sCInterface.assignC(sCInterface.getC() - 5)) - 1)));
+		defaultInterface.setD(defaultInterface.getD() - (((defaultInterface.assignC(defaultInterface.getC() - 5)) - 1)));
 	}
 	
 	/* 'default' enter sequence for state Add */
