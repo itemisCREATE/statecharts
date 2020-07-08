@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test.ieq;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.ieq.eventdrivenoutevents.EventDrivenOutEventsStatemachine;
-import org.yakindu.scr.ieq.eventdrivenoutevents.EventDrivenOutEventsStatemachine.State;	
+import org.yakindu.scr.ieq.EventDrivenOutEventsStatemachine;
+import org.yakindu.scr.ieq.EventDrivenOutEventsStatemachine.State;	
 
 /**
  * Unit TestCase for EventDrivenOutEvents

@@ -13,6 +13,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "OutEventVisibilityEventDrivenStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -29,6 +30,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "OutEventWithPayloadStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}

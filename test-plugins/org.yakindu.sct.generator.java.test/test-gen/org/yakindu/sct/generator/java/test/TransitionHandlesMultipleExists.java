@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.transitionhandlesmultipleexits.TransitionHandlesMultipleExitsStatemachine;
-import org.yakindu.scr.transitionhandlesmultipleexits.TransitionHandlesMultipleExitsStatemachine.State;	
+import org.yakindu.scr.exits.TransitionHandlesMultipleExitsStatemachine;
+import org.yakindu.scr.exits.TransitionHandlesMultipleExitsStatemachine.State;	
 
 /**
  * Unit TestCase for TransitionHandlesMultipleExits

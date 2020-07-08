@@ -6,9 +6,9 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.finalstate.FinalStateStatemachine;
 import org.yakindu.scr.finalstate.FinalStateStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for FinalState

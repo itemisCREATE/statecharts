@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test.ieq;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.ieq.eventdriveninternalevent.EventDrivenInternalEventStatemachine;
-import org.yakindu.scr.ieq.eventdriveninternalevent.EventDrivenInternalEventStatemachine.State;	
+import org.yakindu.scr.ieq.eventdriven.EventDrivenInternalEventStatemachine;
+import org.yakindu.scr.ieq.eventdriven.EventDrivenInternalEventStatemachine.State;	
 
 /**
  * Unit TestCase for EventDrivenInternalEvent

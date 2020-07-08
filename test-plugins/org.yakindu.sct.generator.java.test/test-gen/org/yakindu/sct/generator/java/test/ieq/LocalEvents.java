@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test.ieq;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.ieq.localevents.LocalEventsStatemachine;
-import org.yakindu.scr.ieq.localevents.LocalEventsStatemachine.State;	
+import org.yakindu.scr.ieq.eventdriven.LocalEventsStatemachine;
+import org.yakindu.scr.ieq.eventdriven.LocalEventsStatemachine.State;	
 
 /**
  * Unit TestCase for localEvents

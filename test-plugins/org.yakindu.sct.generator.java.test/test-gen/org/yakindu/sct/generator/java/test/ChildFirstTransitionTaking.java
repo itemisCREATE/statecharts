@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.childfirsttransitiontaking.ChildFirstTransitionTakingStatemachine;
-import org.yakindu.scr.childfirsttransitiontaking.ChildFirstTransitionTakingStatemachine.State;	
+import org.yakindu.scr.executionorder.ChildFirstTransitionTakingStatemachine;
+import org.yakindu.scr.executionorder.ChildFirstTransitionTakingStatemachine.State;	
 
 /**
  * Unit TestCase for ChildFirstTransitionTaking

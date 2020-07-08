@@ -15,9 +15,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.scr.ieq.ineventqueue.IInEventQueueStatemachine.SCInterfaceOperationCallback;
-import org.yakindu.scr.ieq.ineventqueue.InEventQueueStatemachine;
-import org.yakindu.scr.ieq.ineventqueue.InEventQueueStatemachine.State;
+import org.yakindu.scr.ieq.ineventqueue.IInEventQueue.SCInterfaceOperationCallback;
+import org.yakindu.scr.ieq.ineventqueue.InEventQueue;
+import org.yakindu.scr.ieq.ineventqueue.InEventQueue.State;
 
 /**
  * 
@@ -28,9 +28,9 @@ public class CustomInEventQueueTest {
 	public static class Callback implements SCInterfaceOperationCallback {
 		protected char mode;
 
-		protected InEventQueueStatemachine machine;
+		protected InEventQueue machine;
 
-		public Callback(InEventQueueStatemachine machine) {
+		public Callback(InEventQueue machine) {
 			this.machine = machine;
 		}
 
@@ -61,12 +61,12 @@ public class CustomInEventQueueTest {
 		}
 	}
 
-	protected InEventQueueStatemachine machine;
+	protected InEventQueue machine;
 	protected Callback callback;
 
 	@Before
 	public void setup() {
-		machine = new InEventQueueStatemachine();
+		machine = new InEventQueue();
 		callback = new Callback(machine);
 		machine.getSCInterface().setSCInterfaceOperationCallback(callback);
 		machine.init();

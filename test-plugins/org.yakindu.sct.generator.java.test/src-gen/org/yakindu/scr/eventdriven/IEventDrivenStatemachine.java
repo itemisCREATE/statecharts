@@ -3,7 +3,7 @@ package org.yakindu.scr.eventdriven;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import org.yakindu.scr.IStatemachine;
+import org.yakindu.sct.IStatemachine;
 import org.yakindu.sct.rx.Observable;
 
 public interface IEventDrivenStatemachine extends IStatemachine {

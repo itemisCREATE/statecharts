@@ -6,9 +6,9 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.deephistory.DeepHistoryStatemachine;
 import org.yakindu.scr.deephistory.DeepHistoryStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for DeepHistory

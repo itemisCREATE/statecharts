@@ -3,7 +3,7 @@ package org.yakindu.scr.tracing;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.yakindu.scr.ITracingListener;
+import org.yakindu.sct.ITracingListener;
 
 public class TracingStatemachine implements ITracingStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {

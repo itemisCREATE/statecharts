@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.outeventvisibilityeventdriven.OutEventVisibilityEventDrivenStatemachine;
-import org.yakindu.scr.outeventvisibilityeventdriven.OutEventVisibilityEventDrivenStatemachine.State;	
+import org.yakindu.scr.events.OutEventVisibilityEventDrivenStatemachine;
+import org.yakindu.scr.events.OutEventVisibilityEventDrivenStatemachine.State;	
 
 /**
  * Unit TestCase for OutEventVisibilityEventDriven

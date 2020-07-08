@@ -22,7 +22,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage = "org.yakindu.scr.alwaysoncycle"
+			typeName = "AlwaysOncycleStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -38,7 +39,25 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.assignmentasexpression" 
+			typeName = "AssignmentAsExpressionStatemachine"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+	
+	test BooleanExpressions {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage =  "org.yakindu.scr.booleanexpressions" 
+			typeName = "BooleanExpressionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -54,7 +73,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.bitexpressions" 
+			typeName = "BitExpressionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -70,12 +90,13 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.bitwiseexecutionorder" 
+			typeName = "BitwiseExecutionOrderStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
-
-	test BooleanExpressions {
+	
+	test Choice {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"
 		}
@@ -86,7 +107,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.choice" 
+			typeName = "ChoiceStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -102,23 +124,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
-			libraryTargetFolder = "src-gen"
-		}
-	}
-
-	test Choice {
-		feature Naming {
-			basePackage = "org.yakindu.sct.generator.java.test"
-		}
-
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "test-gen"
-		}
-		
-		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.castexpressions" 
+			typeName = "CastExpressionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -134,7 +141,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.ckeywords" 
+			typeName = "CKeywordsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -150,7 +158,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.conditionalexpressions"
+			typeName = "ConditionalExpressionsStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -166,7 +175,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.constants" 
+			typeName = "ConstantsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -182,7 +192,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.constantsvariation" 
+			typeName = "ConstantsVariationStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -199,6 +210,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ConstOnlyInternalScopeStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -215,6 +227,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ConstOnlyDefaultScopeStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -231,6 +244,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ConstOnlyNamedScopeStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -246,7 +260,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.declarations" 
+			typeName = "DeclarationsStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -262,7 +277,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.deephistory" 
+			typeName = "DeepHistoryStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -278,7 +294,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.deepentry" 
+			typeName = "DeepEntryStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -294,7 +311,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.dynamicchoice" 
+			typeName = "DynamicChoiceStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -310,7 +328,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.emptytransition" 
+			typeName = "EmptyTransitionStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -326,7 +345,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.enterstate" 
+			typeName = "EnterStateStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -342,7 +362,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.entrychoice" 
+			typeName = "EntryChoiceStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -358,7 +379,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.entryexitselftransition" 
+			typeName = "EntryExitSelfTransitionStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -375,6 +397,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "EntryReactionActionStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -390,7 +413,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.exitonselftransition" 
+			typeName = "ExitOnSelfTransitionStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -406,7 +430,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.exitsequence" 
+			typeName = "ExitSequenceStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -422,7 +447,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.featurecalls" 
+			typeName = "FeatureCallsStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -438,7 +464,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.finalstate" 
+			typeName = "FinalStateStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -454,7 +481,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.floatmodulo" 
+			typeName = "FloatModuloStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -470,7 +498,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.guard" 
+			typeName = "GuardStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -486,7 +515,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.guardedentry" 
+			typeName = "GuardedEntryStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -502,7 +532,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.guardedexit" 
+			typeName = "GuardedExitStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -518,7 +549,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.historywithexitpoint" 
+			typeName = "HistoryWithExitPointStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -534,7 +566,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.historywithoutinitialstep"
+			typeName = "HistoryWithoutInitialStepStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -550,7 +583,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.ineventlifecycle" 
+			typeName = "InEventLifeCycleStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -566,7 +600,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.integerexpressions" 
+			typeName = "IntegerExpressionsStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -582,7 +617,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.localreactions" 
+			typeName = "LocalReactionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -598,7 +634,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.logicaland" 
+			typeName = "LogicalAndStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -614,7 +651,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.logicalor"
+			typeName = "LogicalOrStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -630,7 +668,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.namedinterfaceaccess" 
+			typeName = "NamedInterfaceAccessStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -646,7 +685,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.nullcheck"
+			typeName = "NullCheckStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -662,7 +702,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.operations"
+			typeName = "OperationsStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -678,7 +719,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.operationswithoutbraces" 
+			typeName = "OperationsWithoutBracesStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -694,7 +736,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.outeventlifecycle" 
+			typeName = "OutEventLifeCycleStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -710,7 +753,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.parenthesis" 
+			typeName = "ParenthesisStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -726,7 +770,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.performancetest"
+			typeName = "PerformanceTestStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -742,7 +787,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.priorityvalues"
+			typeName = "PriorityValuesStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -758,7 +804,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.raiseevent" 
+			typeName = "RaiseEventStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -774,7 +821,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.readonlyvariable" 
+			typeName = "ReadOnlyVariableStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -790,7 +838,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.samenamedifferentregion"
+			typeName = "SameNameDifferentRegionStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -806,7 +855,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.shadowvalueparameter"
+			typeName = "ShadowValueParameterStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -822,7 +872,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.shallowhistory"
+			typeName = "ShallowHistoryStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -838,7 +889,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.shallowhistorywithdeepentry"
+			typeName = "ShallowHistoryWithDeepEntryStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -854,7 +906,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.simpleevent" 
+			typeName = "SimpleEventStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -870,7 +923,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.simplehierachy"
+			typeName = "SimpleHierachyStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -886,7 +940,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.statechartlocalreactions" 
+			typeName = "StatechartLocalReactionsStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -902,7 +957,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.statechartactive" 
+			typeName = "StatechartActiveStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -918,7 +974,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.stateisactive" 
+			typeName = "StateIsActiveStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -934,7 +991,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.staticchoice" 
+			typeName = "StaticChoiceStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -950,7 +1008,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.stextkeywordsinstatesandregions"
+			typeName = "STextKeywordsInStatesAndRegionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -966,7 +1025,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.stringexpressions" 
+			typeName = "StringExpressionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -982,7 +1042,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.syncfork" 
+			typeName = "SyncForkStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -998,7 +1059,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.syncjoin" 
+			typeName = "SyncJoinStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1014,7 +1076,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.timedtransitions" 
+			typeName = "TimedTransitionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1030,7 +1093,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.typealias" 
+			typeName = "TypeAliasStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1046,7 +1110,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.transitionwithoutcondition"
+			typeName = "TransitionWithoutConditionStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1062,7 +1127,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.triggerguardexpressions" 
+			typeName = "TriggerGuardExpressionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1079,6 +1145,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "TriggerExpressionPrecedenceStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1094,7 +1161,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.valuedevents" 
+			typeName = "ValuedEventsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1110,7 +1178,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.statechartkeywords" 
+			typeName = "StatechartKeywordsStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -1126,7 +1195,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage =  "org.yakindu.scr.unreachablestates" 
+			typeName = "UnreachableStatesStatemachine" 
 			libraryTargetFolder = "src-gen"
 		}
 	}

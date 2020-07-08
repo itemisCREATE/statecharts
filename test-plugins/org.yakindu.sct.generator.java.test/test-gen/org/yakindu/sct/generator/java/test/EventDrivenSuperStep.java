@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.eventdrivensuperstep.EventDrivenSuperStepStatemachine;
-import org.yakindu.scr.eventdrivensuperstep.EventDrivenSuperStepStatemachine.State;	
+import org.yakindu.scr.supersteps.EventDrivenSuperStepStatemachine;
+import org.yakindu.scr.supersteps.EventDrivenSuperStepStatemachine.State;	
 
 /**
  * Unit TestCase for EventDrivenSuperStep

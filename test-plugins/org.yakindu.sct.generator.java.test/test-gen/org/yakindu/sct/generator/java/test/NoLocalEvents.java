@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.nolocalevents.NoLocalEventsStatemachine;
-import org.yakindu.scr.nolocalevents.NoLocalEventsStatemachine.State;	
+import org.yakindu.scr.eventdriven.NoLocalEventsStatemachine;
+import org.yakindu.scr.eventdriven.NoLocalEventsStatemachine.State;	
 
 /**
  * Unit TestCase for NoLocalEvents

@@ -3,8 +3,8 @@ package org.yakindu.scr.runnabletest;
 import java.util.List;
 
 import org.yakindu.sct.rx.Observable;
-import org.yakindu.scr.ITimer;
-import org.yakindu.scr.ITimerCallback;
+import org.yakindu.sct.ITimer;
+import org.yakindu.sct.ITimerCallback;
 import org.yakindu.scr.runnabletest.RunnableTestStatemachine.State;
 
 /**

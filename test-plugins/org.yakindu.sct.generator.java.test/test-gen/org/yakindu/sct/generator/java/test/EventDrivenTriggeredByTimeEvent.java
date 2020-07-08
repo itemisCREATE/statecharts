@@ -4,9 +4,9 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.eventdriventriggeredbytimeevent.EventDrivenTriggeredByTimeEventStatemachine;
-import org.yakindu.scr.eventdriventriggeredbytimeevent.EventDrivenTriggeredByTimeEventStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
+import org.yakindu.scr.eventdriven.EventDrivenTriggeredByTimeEventStatemachine;
+import org.yakindu.scr.eventdriven.EventDrivenTriggeredByTimeEventStatemachine.State;	
+import org.yakindu.sct.VirtualTimer;
 
 /**
  * Unit TestCase for EventDrivenTriggeredByTimeEvent

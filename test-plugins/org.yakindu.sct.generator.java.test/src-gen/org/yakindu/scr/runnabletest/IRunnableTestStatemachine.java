@@ -2,8 +2,8 @@
 package org.yakindu.scr.runnabletest;
 
 import java.util.List;
-import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.ITimerCallback;
+import org.yakindu.sct.IStatemachine;
+import org.yakindu.sct.ITimerCallback;
 import org.yakindu.sct.rx.Observable;
 
 public interface IRunnableTestStatemachine extends ITimerCallback,IStatemachine {

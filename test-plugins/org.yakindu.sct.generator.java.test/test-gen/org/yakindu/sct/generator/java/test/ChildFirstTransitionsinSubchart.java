@@ -5,16 +5,16 @@ package org.yakindu.sct.generator.java.test;
 import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.*;
 import static org.hamcrest.CoreMatchers.*;
-import org.yakindu.scr.childfirsttransitionsinsubchart.IChildFirstTransitionsInSubchartStatemachine.*;	
+import org.yakindu.scr.executionorder.IChildFirstTransitionsInSubchartStatemachine.*;	
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.childfirsttransitionsinsubchart.ChildFirstTransitionsInSubchartStatemachine;
-import org.yakindu.scr.childfirsttransitionsinsubchart.ChildFirstTransitionsInSubchartStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.executionorder.ChildFirstTransitionsInSubchartStatemachine;
+import org.yakindu.scr.executionorder.ChildFirstTransitionsInSubchartStatemachine.State;	
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ChildFirstTransitionsInSubchart

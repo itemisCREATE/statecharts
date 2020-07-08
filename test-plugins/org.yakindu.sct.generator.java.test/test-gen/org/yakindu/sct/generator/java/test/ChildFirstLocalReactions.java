@@ -4,11 +4,11 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.childfirstlocalreactions.ChildFirstLocalReactionsStatemachine;
-import org.yakindu.scr.childfirstlocalreactions.ChildFirstLocalReactionsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.executionorder.ChildFirstLocalReactionsStatemachine;
+import org.yakindu.scr.executionorder.ChildFirstLocalReactionsStatemachine.State;	
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ChildFirstLocalReactions

@@ -13,7 +13,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
-			implementationSuffix = "Buffered"
+			typeName = "InternalEventLifeCycleBufferedStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 		
@@ -32,7 +32,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
-			implementationSuffix = "Unbuffered"
+			typeName = "InternalEventLifeCycleUnbufferedStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -50,7 +50,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
-			implementationSuffix = "Buffered"
+			typeName = "InEventLifeCycleBufferedStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 		
@@ -69,7 +69,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
-			implementationSuffix = "Unbuffered"
+			typeName = "InEventLifeCycleUnbufferedStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}

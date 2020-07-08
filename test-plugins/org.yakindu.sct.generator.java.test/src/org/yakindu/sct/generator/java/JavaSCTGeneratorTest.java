@@ -21,6 +21,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.util.AbstractJavaGeneratorTest;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import org.yakindu.sct.test.models.TestModelInjectorProvider;
@@ -44,11 +45,14 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	@Before
 	public void setup() {
 		
+		GeneratorEntry entry = createGeneratorEntry(statechart.getName(), SRC_GEN);
+		
 		new TestModelInjectorProvider(new Module(){
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(ICodegenTypeSystemAccess.class).to(JavaTypeSystemAccess.class);
 				binder.bind(INamingService.class).to(JavaNamingService.class).in(Scopes.SINGLETON);
+				binder.bind(GeneratorEntry.class).toInstance(entry);
 			}
 		}).getInjector().injectMembers(this);
 	} 

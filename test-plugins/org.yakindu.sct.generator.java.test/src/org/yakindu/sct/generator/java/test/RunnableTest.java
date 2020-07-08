@@ -16,8 +16,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.scr.RuntimeService;
-import org.yakindu.scr.runnabletestrunnable.RunnableTestStatemachine;
+import org.yakindu.sct.RuntimeService;
+import org.yakindu.scr.runnable.eventdriven.IRunnableTestStatemachine;
+import org.yakindu.scr.runnable.eventdriven.RunnableTestStatemachine;
 
 public class RunnableTest {
 	protected int operationCallbacks;
@@ -35,7 +36,7 @@ public class RunnableTest {
 		RunnableTestStatemachine sm = new RunnableTestStatemachine();
 
 		sm.getSCInterface().setSCInterfaceOperationCallback(
-				new org.yakindu.scr.runnabletestrunnable.IRunnableTestStatemachine.SCInterfaceOperationCallback() {
+				new IRunnableTestStatemachine.SCInterfaceOperationCallback() {
 
 					@Override
 					public void displayTime() {
@@ -49,7 +50,7 @@ public class RunnableTest {
 		thread.start();
 		sleep(waitTimeSeconds);
 		thread.interrupt();
-		assertTrue(sm.isStateActive(org.yakindu.scr.runnabletestrunnable.RunnableTestStatemachine.State.runnableTest_main_region__final_));
+		assertTrue(sm.isStateActive(RunnableTestStatemachine.State.runnableTest_main_region__final_));
 		sm.exit();
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
 		assertTrue((timer.getTimerCallbackCount(1) - sm.getSCInterface().getAfterCalls()) <= 1);

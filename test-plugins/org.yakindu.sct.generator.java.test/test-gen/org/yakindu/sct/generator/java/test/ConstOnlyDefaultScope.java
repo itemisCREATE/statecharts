@@ -4,11 +4,11 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.constonlydefaultscope.ConstOnlyDefaultScopeStatemachine;
-import org.yakindu.scr.constonlydefaultscope.ConstOnlyDefaultScopeStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.declarations.ConstOnlyDefaultScopeStatemachine;
+import org.yakindu.scr.declarations.ConstOnlyDefaultScopeStatemachine.State;	
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ConstOnlyDefaultScope

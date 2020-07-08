@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.outeventwithpayload.OutEventWithPayloadStatemachine;
-import org.yakindu.scr.outeventwithpayload.OutEventWithPayloadStatemachine.State;	
+import org.yakindu.scr.events.OutEventWithPayloadStatemachine;
+import org.yakindu.scr.events.OutEventWithPayloadStatemachine.State;	
 
 /**
  * Unit TestCase for OutEventWithPayload

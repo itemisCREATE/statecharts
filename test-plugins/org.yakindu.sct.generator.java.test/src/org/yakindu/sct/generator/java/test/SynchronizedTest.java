@@ -16,10 +16,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.scr.RuntimeService;
-import org.yakindu.scr.wrappertestsync.IWrapperTestStatemachine.SCInterfaceOperationCallback;
-import org.yakindu.scr.wrappertestsync.WrapperTestStatemachine;
-import org.yakindu.scr.wrappertestsync.WrapperTestStatemachine.State;
+import org.yakindu.sct.RuntimeService;
+import org.yakindu.scr.sync.IWrapperTestStatemachine.SCInterfaceOperationCallback;
+import org.yakindu.scr.sync.WrapperTestStatemachine;
+import org.yakindu.scr.sync.WrapperTestStatemachine.State;
 
 public class SynchronizedTest {
 

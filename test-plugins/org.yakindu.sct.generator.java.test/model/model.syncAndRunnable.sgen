@@ -8,8 +8,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage = "org.yakindu.scr"
-			implementationSuffix = "Sync"
+			basePackage = "org.yakindu.scr.sync"
+			typeName = "WrapperTestStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -27,8 +27,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr"
-			implementationSuffix = "Runnable"
+			basePackage =  "org.yakindu.scr.runnable"
+			typeName = "RunnableTestStatemachine"
 		}
 
 		feature GeneralFeatures {

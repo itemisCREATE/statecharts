@@ -3,7 +3,7 @@ package org.yakindu.scr.runnabletest;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.yakindu.scr.ITimer;
+import org.yakindu.sct.ITimer;
 import org.yakindu.sct.rx.Observable;
 
 public class RunnableTestStatemachine implements IRunnableTestStatemachine {
