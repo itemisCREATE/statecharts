@@ -97,8 +97,9 @@ class SubchartInterpreterProvider {
 		callStack.remove(callStack.size() - 1)
 		
 		val fqn = callStack.map[featureOrReference].filter(NamedElement).map[name].toList
-		val prefix = if (context.contextFqn !== null) context.fqName else ""
-		val name = '''«prefix»«fqn.join(".")» : «owner.type.name»'''
+		if (context.contextFqn !== null)
+			fqn.add(0, context.fqName)
+		val name = '''«fqn.join(".")» : «owner.type.name»'''
 		
 		return launch.debugTargets.filter[t | try t.name == name catch(DebugException e) false].head
 	}
