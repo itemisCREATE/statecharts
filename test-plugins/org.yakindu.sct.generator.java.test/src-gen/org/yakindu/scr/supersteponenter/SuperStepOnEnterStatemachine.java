@@ -54,30 +54,6 @@ public class SuperStepOnEnterStatemachine implements ISuperStepOnEnterStatemachi
 		isExecuting = false;
 	}
 	
-	public void enter() {
-		if (!initialized)
-			throw new IllegalStateException(
-			        "The state machine needs to be initialized first by calling the init() function.");
-		
-		if (getIsExecuting()) {
-			return;
-		}
-		isExecuting = true;
-		enterSequence_r1_default();
-		enterSequence_r2_default();
-		isExecuting = false;
-	}
-	
-	public void exit() {
-		if (getIsExecuting()) {
-			return;
-		}
-		isExecuting = true;
-		exitSequence_r1();
-		exitSequence_r2();
-		isExecuting = false;
-	}
-	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -115,6 +91,31 @@ public class SuperStepOnEnterStatemachine implements ISuperStepOnEnterStatemachi
 			nextEvent();
 		} while (e);
 		
+		isExecuting = false;
+	}
+	
+	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		enterSequence_r1_default();
+		enterSequence_r2_default();
+		isExecuting = false;
+		runCycle();
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r1();
+		exitSequence_r2();
 		isExecuting = false;
 	}
 	
