@@ -42,7 +42,7 @@ import org.yakindu.sct.ui.editor.wizards.CreationWizard.DiagramCreationDesccript
  */
 public class NewStatechartProjectWizard extends Wizard implements INewWizard {
 
-	private static final String STATECHART_NAME = "model.sct";
+	private static final String STATECHART_NAME = "Statechart.sct";
 
 	private WizardNewProjectCreationPage mainPage;
 
