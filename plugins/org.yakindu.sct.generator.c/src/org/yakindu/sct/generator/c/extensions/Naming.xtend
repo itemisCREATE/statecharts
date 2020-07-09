@@ -200,7 +200,7 @@ class Naming {
 
 	def functionPrefix(Scope it) {
 		if (!entryStatemachinePrefix.nullOrEmpty)
-			return entryStatemachinePrefix + separator + it.instance.toFirstUpper
+			return entryStatemachinePrefix + it.instance.toFirstUpper
 		return type.toFirstLower
 	}
 
