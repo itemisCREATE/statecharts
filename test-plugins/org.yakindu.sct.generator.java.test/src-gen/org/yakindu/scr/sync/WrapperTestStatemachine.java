@@ -110,7 +110,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	public enum State {
 		MAIN_REGION_S1,
 		MAIN_REGION_S2,
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		$NULLSTATE$
 	};
 	
@@ -215,7 +215,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			case MAIN_REGION_S2:
 				main_region_s2_react(true);
 				break;
-			case MAIN_REGION_FINAL_0:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
@@ -237,7 +237,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public synchronized boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	private void swapInEvents() {
 		_current.iface.ev_in = defaultInterface.ev_in;
@@ -266,8 +266,8 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			return stateVector[0] == State.MAIN_REGION_S1;
 		case MAIN_REGION_S2:
 			return stateVector[0] == State.MAIN_REGION_S2;
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -367,7 +367,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -404,7 +404,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		case MAIN_REGION_S2:
 			exitSequence_main_region_s2();
 			break;
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:

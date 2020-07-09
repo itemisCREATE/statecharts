@@ -161,7 +161,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		R_A,
 		R_A_R_AA,
 		R_A_R_AA_R_AAA,
-		R_A_R_AA__AAC,
+		R_A_R_AA__REGION1_AAC,
 		R_A_R2_AC,
 		R_B,
 		R2_C,
@@ -266,7 +266,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			case R_A_R_AA_R_AAA:
 				r_A_r_AA_r_AAA_react(true);
 				break;
-			case R_A_R_AA__AAC:
+			case R_A_R_AA__REGION1_AAC:
 				r_A_r_AA__region1_AAC_react(true);
 				break;
 			case R_A_R2_AC:
@@ -315,11 +315,11 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 					R_A.ordinal()&& stateVector[0].ordinal() <= State.R_A_R2_AC.ordinal();
 		case R_A_R_AA:
 			return stateVector[0].ordinal() >= State.
-					R_A_R_AA.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_AA__AAC.ordinal();
+					R_A_R_AA.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_AA__REGION1_AAC.ordinal();
 		case R_A_R_AA_R_AAA:
 			return stateVector[0] == State.R_A_R_AA_R_AAA;
-		case R_A_R_AA__AAC:
-			return stateVector[1] == State.R_A_R_AA__AAC;
+		case R_A_R_AA__REGION1_AAC:
+			return stateVector[1] == State.R_A_R_AA__REGION1_AAC;
 		case R_A_R2_AC:
 			return stateVector[2] == State.R_A_R2_AC;
 		case R_B:
@@ -470,7 +470,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	/* 'default' enter sequence for state AAC */
 	private void enterSequence_r_A_r_AA__region1_AAC_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.R_A_R_AA__AAC;
+		stateVector[1] = State.R_A_R_AA__REGION1_AAC;
 	}
 	
 	/* 'default' enter sequence for state AC */
@@ -583,7 +583,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		}
 		
 		switch (stateVector[1]) {
-		case R_A_R_AA__AAC:
+		case R_A_R_AA__REGION1_AAC:
 			exitSequence_r_A_r_AA__region1_AAC();
 			break;
 		default:
@@ -610,7 +610,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		}
 		
 		switch (stateVector[1]) {
-		case R_A_R_AA__AAC:
+		case R_A_R_AA__REGION1_AAC:
 			exitSequence_r_A_r_AA__region1_AAC();
 			break;
 		default:

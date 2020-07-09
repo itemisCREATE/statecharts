@@ -116,7 +116,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		MAIN_REGION_COMPOSITE_S1_S2,
 		MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1,
 		MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2,
@@ -216,7 +216,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case MAIN_REGION_FINAL_0:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1:
@@ -244,7 +244,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	private void swapInEvents() {
 		_current.iface.ev_in = defaultInterface.ev_in;
@@ -274,8 +274,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		case MAIN_REGION_COMPOSITE_S1_S2:
 			return stateVector[0].ordinal() >= State.
 					MAIN_REGION_COMPOSITE_S1_S2.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S2.ordinal();
@@ -386,7 +386,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for state Composite_s1_s2 */
@@ -448,7 +448,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		case MAIN_REGION_COMPOSITE_S1_S2_INNER_REGION_S1:

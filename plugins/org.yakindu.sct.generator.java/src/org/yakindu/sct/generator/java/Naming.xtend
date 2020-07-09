@@ -26,24 +26,25 @@ import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sgen.GeneratorEntry
 
-import static extension org.eclipse.xtext.EcoreUtil2.*;
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.FinalState
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class Naming {
 
-	@Inject extension JavaNamingService namingService;
+	@Inject extension JavaNamingService
 	@Inject extension SExecExtensions
 	@Inject extension OriginTracing
 	@Inject extension ShadowMemberScope
-	@Inject GeneratorEntry entry
 	@Inject extension GenmodelEntries
+	@Inject extension StextNameProvider
+
+	@Inject GeneratorEntry entry
 	
 	def iStatemachine() {
 		"IStatemachine"
@@ -110,7 +111,6 @@ class Naming {
 	}
 
 	def String statemachineName(String name) {
-		// remove whitespaces;
 		var String newName = name.replace(" ", "")
 		if (name.isKeyword) {
 			return newName + "SM"
@@ -126,40 +126,23 @@ class Naming {
 		"I" + statemachineClassName
 	}
 
-	def dispatch identifier(Property it) {
-		escaped.asIdentifier
-	}
-
-	def dispatch identifier(Event it) {
-		escaped.asIdentifier
-	}
-	
-	def dispatch identifier(Method it){
-		'''«shortName»'''
-	}
-	
-	def dispatch identifier(Operation it) {
-		name
-	}
-	
-	def dispatch identifier(Enumerator it) {
-		name
-	}
-	
-	def dispatch identifier(Declaration it){
-		'''«shortName»'''
-	}
+	def dispatch identifier(Property it) { escaped.asIdentifier }
+	def dispatch identifier(Event it) { escaped.asIdentifier }
+	def dispatch identifier(Method it) { shortName }
+	def dispatch identifier(Operation it) { name }
+	def dispatch identifier(Enumerator it) { name }
+	def dispatch identifier(Declaration it){ shortName }
 
 	def String getValueIdentifier(Event it) {
 		name.asIdentifier + "Value"
 	}
 	
 	def String getInterfaceImplName(InterfaceScope it) {
-		getInterfaceName() + "Impl";
+		interfaceName + "Impl"
 	}
 
 	def String getInterfaceListenerName(InterfaceScope it) {
-		interfaceName + "Listener";
+		interfaceName + "Listener"
 	}
 
 	def String getInterfaceOperationCallbackName(InterfaceScope it) {
@@ -167,17 +150,21 @@ class Naming {
 	}
 
 	def dispatch String stateName(RegularState state) {
-		val names = state.allContainers.takeWhile[!(it instanceof Statechart)].filter(NamedElement).map[name].toList.reverse
-		names += state.name
-		names.filterNull.map[replaceAll(" ", "_").toUpperCase].join("_")
+		val statechart = state.getContainerOfType(Statechart)
+		val statechartFqn = statechart.fullyQualifiedName
+		val stateFqn = state.fullyQualifiedName
+		
+		val trimmedFqn = stateFqn.skipFirst(statechartFqn.segmentCount)
+		return trimmedFqn.segments.join("_").toUpperCase
 	}
 
 	def dispatch String stateName(ExecutionState it) {
 		val state = sourceElement as RegularState
-		if (state instanceof FinalState)
-			state.stateName + simpleName.toUpperCase
-		else
-			state.stateName
+		state.stateName
+	}
+	
+	def String getNullStateName() {
+		"$NULLSTATE$"
 	}
 
 	def asName(String it) {
@@ -213,7 +200,7 @@ class Naming {
 	}
 
 	def String setter(Property it) {
-		methodName("set", "");
+		methodName("set", "")
 	}
 	
 	def String assign(Property it) {
@@ -228,10 +215,6 @@ class Naming {
 		}
 
 		return methodName + suffix
-	}
-
-	def String getNullStateName() {
-		"$NULLSTATE$";
 	}
 
 	def functionName(Step it) { shortName }
@@ -258,11 +241,10 @@ class Naming {
 	}
 	
 	def String getInterfaceName(InterfaceScope it) {
-		if (name !== null) {
+		if (name.nullOrEmpty)
+			return "Interface"
+		else
 			return "Interface" + name.toFirstUpper()
-		} else {
-			return "Interface";
-		}
 	}
 	
 	def String getInterfaceVariableName(InterfaceScope it) {

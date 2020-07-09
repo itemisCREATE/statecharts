@@ -90,8 +90,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		REGION_1_NUMBER1PRESSED,
 		REGION_1_NUMBER2PRESSED,
 		REGION_1_NUMBER3PRESSED,
-		CLOSED,
-		OPEN,
+		_REGION1_CLOSED,
+		_REGION1_OPEN,
 		$NULLSTATE$
 	};
 	
@@ -215,10 +215,10 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			case REGION_1_NUMBER3PRESSED:
 				region_1_Number3Pressed_react(true);
 				break;
-			case CLOSED:
+			case _REGION1_CLOSED:
 				_region1_Closed_react(true);
 				break;
-			case OPEN:
+			case _REGION1_OPEN:
 				_region1_Open_react(true);
 				break;
 			default:
@@ -277,10 +277,10 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			return stateVector[0] == State.REGION_1_NUMBER2PRESSED;
 		case REGION_1_NUMBER3PRESSED:
 			return stateVector[0] == State.REGION_1_NUMBER3PRESSED;
-		case CLOSED:
-			return stateVector[1] == State.CLOSED;
-		case OPEN:
-			return stateVector[1] == State.OPEN;
+		case _REGION1_CLOSED:
+			return stateVector[1] == State._REGION1_CLOSED;
+		case _REGION1_OPEN:
+			return stateVector[1] == State._REGION1_OPEN;
 		default:
 			return false;
 		}
@@ -333,13 +333,13 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	/* 'default' enter sequence for state Closed */
 	private void enterSequence__region1_Closed_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.CLOSED;
+		stateVector[1] = State._REGION1_CLOSED;
 	}
 	
 	/* 'default' enter sequence for state Open */
 	private void enterSequence__region1_Open_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.OPEN;
+		stateVector[1] = State._REGION1_OPEN;
 	}
 	
 	/* 'default' enter sequence for region region 1 */
@@ -411,10 +411,10 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	/* Default exit sequence for region null */
 	private void exitSequence__region1() {
 		switch (stateVector[1]) {
-		case CLOSED:
+		case _REGION1_CLOSED:
 			exitSequence__region1_Closed();
 			break;
-		case OPEN:
+		case _REGION1_OPEN:
 			exitSequence__region1_Open();
 			break;
 		default:

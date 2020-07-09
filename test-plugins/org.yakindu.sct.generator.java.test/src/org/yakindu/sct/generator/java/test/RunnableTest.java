@@ -50,7 +50,7 @@ public class RunnableTest {
 		thread.start();
 		sleep(waitTimeSeconds);
 		thread.interrupt();
-		assertTrue(sm.isStateActive(RunnableTestStatemachine.State.runnableTest_main_region__final_));
+		assertTrue(sm.isStateActive(RunnableTestStatemachine.State.MAIN_REGION__FINAL_));
 		sm.exit();
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
 		assertTrue((timer.getTimerCallbackCount(1) - sm.getInterface().getAfterCalls()) <= 1);

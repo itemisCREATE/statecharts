@@ -44,7 +44,7 @@ public class WrapperTest {
 
 		sleep(waitTimeSeconds);
 		RuntimeService.getInstance().cancelTimer();
-		assertTrue(sm.isStateActive(State.main_region__final_));
+		assertTrue(sm.isStateActive(State.MAIN_REGION__FINAL_));
 		assertTrue(sm.getInterface().getCycles() >= waitTimeSeconds * 1000 / CYCLE_TIME);
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
 		assertTrue((timer.getTimerCallbackCount(0) - sm.getInterface().getAfterCalls()) <= 1);
@@ -74,7 +74,7 @@ public class WrapperTest {
 		thread.start();
 		sleep(waitTimeSeconds);
 		thread.interrupt();
-		assertTrue(sm.isStateActive(org.yakindu.scr.runnabletest.RunnableTestStatemachine.State.main_region__final_));
+		assertTrue(sm.isStateActive(org.yakindu.scr.runnabletest.RunnableTestStatemachine.State.MAIN_REGION__FINAL_));
 		sm.exit();
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
 		assertTrue((timer.getTimerCallbackCount(1) - sm.getInterface().getAfterCalls()) <= 1);

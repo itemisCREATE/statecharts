@@ -54,8 +54,8 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	
 	public enum State {
 		MAIN_REGION_A,
-		MAIN_REGION_A__B,
-		MAIN_REGION_A__C,
+		MAIN_REGION_A__REGION0_B,
+		MAIN_REGION_A__REGION0_C,
 		$NULLSTATE$
 	};
 	
@@ -127,10 +127,10 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case MAIN_REGION_A__B:
+			case MAIN_REGION_A__REGION0_B:
 				main_region_A__region0_B_react(true);
 				break;
-			case MAIN_REGION_A__C:
+			case MAIN_REGION_A__REGION0_C:
 				main_region_A__region0_C_react(true);
 				break;
 			default:
@@ -177,11 +177,11 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		switch (state) {
 		case MAIN_REGION_A:
 			return stateVector[0].ordinal() >= State.
-					MAIN_REGION_A.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A__C.ordinal();
-		case MAIN_REGION_A__B:
-			return stateVector[0] == State.MAIN_REGION_A__B;
-		case MAIN_REGION_A__C:
-			return stateVector[0] == State.MAIN_REGION_A__C;
+					MAIN_REGION_A.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A__REGION0_C.ordinal();
+		case MAIN_REGION_A__REGION0_B:
+			return stateVector[0] == State.MAIN_REGION_A__REGION0_B;
+		case MAIN_REGION_A__REGION0_C:
+			return stateVector[0] == State.MAIN_REGION_A__REGION0_C;
 		default:
 			return false;
 		}
@@ -234,13 +234,13 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_A__region0_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_A__B;
+		stateVector[0] = State.MAIN_REGION_A__REGION0_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_A__region0_C_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_A__C;
+		stateVector[0] = State.MAIN_REGION_A__REGION0_C;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -274,11 +274,11 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case MAIN_REGION_A__B:
+		case MAIN_REGION_A__REGION0_B:
 			exitSequence_main_region_A__region0_B();
 			exitAction_main_region_A();
 			break;
-		case MAIN_REGION_A__C:
+		case MAIN_REGION_A__REGION0_C:
 			exitSequence_main_region_A__region0_C();
 			exitAction_main_region_A();
 			break;
@@ -290,10 +290,10 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	/* Default exit sequence for region  */
 	private void exitSequence_main_region_A__region0() {
 		switch (stateVector[0]) {
-		case MAIN_REGION_A__B:
+		case MAIN_REGION_A__REGION0_B:
 			exitSequence_main_region_A__region0_B();
 			break;
-		case MAIN_REGION_A__C:
+		case MAIN_REGION_A__REGION0_C:
 			exitSequence_main_region_A__region0_C();
 			break;
 		default:

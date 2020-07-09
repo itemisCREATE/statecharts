@@ -91,13 +91,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	public enum State {
 		MAINREGION_STATE1,
 		MAINREGION_STATE2,
-		MAINREGION_STATE2_A,
-		MAINREGION_STATE2_STATE4,
-		MAINREGION_STATE2_STATE4_STATE6,
-		MAINREGION_STATE2_STATE4_STATE7,
-		MAINREGION_STATE2_STATE4_STATE7_STATE8,
-		MAINREGION_STATE2_STATE4_STATE7_STATE9,
-		MAINREGION_STATE2_STATE5,
+		MAINREGION_STATE2__REGION0_A,
+		MAINREGION_STATE2__REGION0_STATE4,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9,
+		MAINREGION_STATE2__REGION0_STATE5,
 		$NULLSTATE$
 	};
 	
@@ -173,19 +173,19 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			case MAINREGION_STATE1:
 				mainRegion_State1_react(true);
 				break;
-			case MAINREGION_STATE2_A:
+			case MAINREGION_STATE2__REGION0_A:
 				mainRegion_State2__region0_a_react(true);
 				break;
-			case MAINREGION_STATE2_STATE4_STATE6:
+			case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 				mainRegion_State2__region0_State4__region0_State6_react(true);
 				break;
-			case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+			case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
 				break;
-			case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+			case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
 				break;
-			case MAINREGION_STATE2_STATE5:
+			case MAINREGION_STATE2__REGION0_STATE5:
 				mainRegion_State2__region0_State5_react(true);
 				break;
 			default:
@@ -262,23 +262,23 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			return stateVector[0] == State.MAINREGION_STATE1;
 		case MAINREGION_STATE2:
 			return stateVector[0].ordinal() >= State.
-					MAINREGION_STATE2.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2_STATE5.ordinal();
-		case MAINREGION_STATE2_A:
-			return stateVector[0] == State.MAINREGION_STATE2_A;
-		case MAINREGION_STATE2_STATE4:
+					MAINREGION_STATE2.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2__REGION0_STATE5.ordinal();
+		case MAINREGION_STATE2__REGION0_A:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_A;
+		case MAINREGION_STATE2__REGION0_STATE4:
 			return stateVector[0].ordinal() >= State.
-					MAINREGION_STATE2_STATE4.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2_STATE4_STATE7_STATE9.ordinal();
-		case MAINREGION_STATE2_STATE4_STATE6:
-			return stateVector[0] == State.MAINREGION_STATE2_STATE4_STATE6;
-		case MAINREGION_STATE2_STATE4_STATE7:
+					MAINREGION_STATE2__REGION0_STATE4.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9.ordinal();
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6;
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7:
 			return stateVector[0].ordinal() >= State.
-					MAINREGION_STATE2_STATE4_STATE7.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2_STATE4_STATE7_STATE9.ordinal();
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
-			return stateVector[0] == State.MAINREGION_STATE2_STATE4_STATE7_STATE8;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
-			return stateVector[0] == State.MAINREGION_STATE2_STATE4_STATE7_STATE9;
-		case MAINREGION_STATE2_STATE5:
-			return stateVector[0] == State.MAINREGION_STATE2_STATE5;
+					MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9.ordinal();
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8;
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9;
+		case MAINREGION_STATE2__REGION0_STATE5:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE5;
 		default:
 			return false;
 		}
@@ -338,7 +338,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* 'default' enter sequence for state a */
 	private void enterSequence_mainRegion_State2__region0_a_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAINREGION_STATE2_A;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_A;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -352,7 +352,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* 'default' enter sequence for state State6 */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State6_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAINREGION_STATE2_STATE4_STATE6;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6;
 		
 		historyVector[1] = stateVector[0];
 	}
@@ -366,7 +366,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* 'default' enter sequence for state State8 */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAINREGION_STATE2_STATE4_STATE7_STATE8;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8;
 		
 		historyVector[2] = stateVector[0];
 	}
@@ -374,7 +374,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* 'default' enter sequence for state State9 */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAINREGION_STATE2_STATE4_STATE7_STATE9;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9;
 		
 		historyVector[2] = stateVector[0];
 	}
@@ -382,7 +382,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* 'default' enter sequence for state State5 */
 	private void enterSequence_mainRegion_State2__region0_State5_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAINREGION_STATE2_STATE5;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE5;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -400,19 +400,19 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* deep enterSequence with history in child null */
 	private void deepEnterSequence_mainRegion_State2__region0() {
 		switch (historyVector[0]) {
-		case MAINREGION_STATE2_A:
+		case MAINREGION_STATE2__REGION0_A:
 			enterSequence_mainRegion_State2__region0_a_default();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			deepEnterSequence_mainRegion_State2__region0_State4__region0();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			deepEnterSequence_mainRegion_State2__region0_State4__region0();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			deepEnterSequence_mainRegion_State2__region0_State4__region0();
 			break;
-		case MAINREGION_STATE2_STATE5:
+		case MAINREGION_STATE2__REGION0_STATE5:
 			enterSequence_mainRegion_State2__region0_State5_default();
 			break;
 		default:
@@ -428,13 +428,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* deep enterSequence with history in child null */
 	private void deepEnterSequence_mainRegion_State2__region0_State4__region0() {
 		switch (historyVector[1]) {
-		case MAINREGION_STATE2_STATE4_STATE6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			deepEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			deepEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0();
 			break;
 		default:
@@ -450,10 +450,10 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* deep enterSequence with history in child null */
 	private void deepEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0() {
 		switch (historyVector[2]) {
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default();
 			break;
 		default:
@@ -518,19 +518,19 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		case MAINREGION_STATE1:
 			exitSequence_mainRegion_State1();
 			break;
-		case MAINREGION_STATE2_A:
+		case MAINREGION_STATE2__REGION0_A:
 			exitSequence_mainRegion_State2__region0_a();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			exitSequence_mainRegion_State2__region0_State4__region0_State6();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
-		case MAINREGION_STATE2_STATE5:
+		case MAINREGION_STATE2__REGION0_STATE5:
 			exitSequence_mainRegion_State2__region0_State5();
 			break;
 		default:
@@ -541,19 +541,19 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* Default exit sequence for region null */
 	private void exitSequence_mainRegion_State2__region0() {
 		switch (stateVector[0]) {
-		case MAINREGION_STATE2_A:
+		case MAINREGION_STATE2__REGION0_A:
 			exitSequence_mainRegion_State2__region0_a();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			exitSequence_mainRegion_State2__region0_State4__region0_State6();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
-		case MAINREGION_STATE2_STATE5:
+		case MAINREGION_STATE2__REGION0_STATE5:
 			exitSequence_mainRegion_State2__region0_State5();
 			break;
 		default:
@@ -564,13 +564,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* Default exit sequence for region null */
 	private void exitSequence_mainRegion_State2__region0_State4__region0() {
 		switch (stateVector[0]) {
-		case MAINREGION_STATE2_STATE4_STATE6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			exitSequence_mainRegion_State2__region0_State4__region0_State6();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
 		default:
@@ -581,10 +581,10 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/* Default exit sequence for region null */
 	private void exitSequence_mainRegion_State2__region0_State4__region0_State7__region0() {
 		switch (stateVector[0]) {
-		case MAINREGION_STATE2_STATE4_STATE7_STATE8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case MAINREGION_STATE2_STATE4_STATE7_STATE9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
 		default:

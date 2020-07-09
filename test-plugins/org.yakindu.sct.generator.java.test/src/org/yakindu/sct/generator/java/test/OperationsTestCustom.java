@@ -62,9 +62,9 @@ public class OperationsTestCustom{
 	@Test
 	public void testOperationsSimpleTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_A));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_B));
 	}
 	
 	@Test
@@ -75,12 +75,12 @@ public class OperationsTestCustom{
 		ArgumentCaptor<String> stringCapture = ArgumentCaptor.forClass(String.class);
 		
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_A));
 		statemachine.runCycle();
 		
 		//State is active
 	    
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_B));
 		
 		//Operations in State B used 
 		
@@ -110,7 +110,7 @@ public class OperationsTestCustom{
 		
 		//State is active
 		
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_C));
 		
 		//Operations in State C used
 		
@@ -140,7 +140,7 @@ public class OperationsTestCustom{
 		
 		//State is active
 		
-		assertTrue(statemachine.isStateActive(State.main_region_D));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_D));
 		
 		//Operations in State D used
 		

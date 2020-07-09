@@ -7,7 +7,7 @@ public class BitwiseExecutionOrderStatemachine implements IBitwiseExecutionOrder
 	
 	public enum State {
 		MAIN_REGION_STATEB,
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		$NULLSTATE$
 	};
 	
@@ -99,7 +99,7 @@ public class BitwiseExecutionOrderStatemachine implements IBitwiseExecutionOrder
 			case MAIN_REGION_STATEB:
 				main_region_StateB_react(true);
 				break;
-			case MAIN_REGION_FINAL_0:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
@@ -121,7 +121,7 @@ public class BitwiseExecutionOrderStatemachine implements IBitwiseExecutionOrder
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -131,8 +131,8 @@ public class BitwiseExecutionOrderStatemachine implements IBitwiseExecutionOrder
 		switch (state) {
 		case MAIN_REGION_STATEB:
 			return stateVector[0] == State.MAIN_REGION_STATEB;
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -155,7 +155,7 @@ public class BitwiseExecutionOrderStatemachine implements IBitwiseExecutionOrder
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -181,7 +181,7 @@ public class BitwiseExecutionOrderStatemachine implements IBitwiseExecutionOrder
 		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:

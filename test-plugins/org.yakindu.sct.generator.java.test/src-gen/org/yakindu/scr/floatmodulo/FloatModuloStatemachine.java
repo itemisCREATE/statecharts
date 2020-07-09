@@ -59,7 +59,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	
 	public enum State {
 		MAIN_REGION_STATEA,
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		$NULLSTATE$
 	};
 	
@@ -135,7 +135,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case MAIN_REGION_FINAL_0:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
@@ -157,7 +157,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -167,8 +167,8 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		switch (state) {
 		case MAIN_REGION_STATEA:
 			return stateVector[0] == State.MAIN_REGION_STATEA;
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -299,7 +299,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -325,7 +325,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:

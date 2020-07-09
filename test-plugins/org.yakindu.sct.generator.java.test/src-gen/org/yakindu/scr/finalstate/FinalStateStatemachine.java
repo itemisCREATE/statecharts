@@ -7,7 +7,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	
 	public enum State {
 		MAIN_REGION_MYSTATE,
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		$NULLSTATE$
 	};
 	
@@ -74,7 +74,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 			case MAIN_REGION_MYSTATE:
 				main_region_myState_react(true);
 				break;
-			case MAIN_REGION_FINAL_0:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
@@ -96,7 +96,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -106,8 +106,8 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		switch (state) {
 		case MAIN_REGION_MYSTATE:
 			return stateVector[0] == State.MAIN_REGION_MYSTATE;
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -122,7 +122,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -148,7 +148,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		case MAIN_REGION_MYSTATE:
 			exitSequence_main_region_myState();
 			break;
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:

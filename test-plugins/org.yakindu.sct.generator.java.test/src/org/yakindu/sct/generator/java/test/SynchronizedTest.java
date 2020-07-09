@@ -54,7 +54,7 @@ public class SynchronizedTest {
 
 		sleep(waitTimeSeconds);
 		RuntimeService.getInstance().cancelTimer();
-		assertTrue(sm.isStateActive(State.main_region__final_));
+		assertTrue(sm.isStateActive(State.MAIN_REGION__FINAL_));
 		assertTrue(sm.getInterface().getCycles() >= waitTimeSeconds * 1000 / CYCLE_TIME);
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
 		assertTrue((timer.getTimerCallbackCount(0) - sm.getInterface().getAfterCalls()) <= 1);

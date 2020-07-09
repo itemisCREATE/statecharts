@@ -16,7 +16,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	public enum State {
 		MAIN_REGION_STATEA,
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		$NULLSTATE$
 	};
 	
@@ -86,7 +86,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case MAIN_REGION_FINAL_0:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
@@ -108,7 +108,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -118,8 +118,8 @@ public class TracingStatemachine implements ITracingStatemachine {
 		switch (state) {
 		case MAIN_REGION_STATEA:
 			return stateVector[0] == State.MAIN_REGION_STATEA;
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -153,11 +153,11 @@ public class TracingStatemachine implements ITracingStatemachine {
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		for(ITracingListener<State> ifaceTraceObserver : ifaceTraceObservers) {
-			ifaceTraceObserver.onStateEntered(State.MAIN_REGION_FINAL_0);
+			ifaceTraceObserver.onStateEntered(State.MAIN_REGION__FINAL_);
 		}
 		
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -181,7 +181,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 		stateVector[0] = State.$NULLSTATE$;
 		
 		for(ITracingListener<State> ifaceTraceObserver : ifaceTraceObservers) {
-			ifaceTraceObserver.onStateExited(State.MAIN_REGION_FINAL_0);
+			ifaceTraceObserver.onStateExited(State.MAIN_REGION__FINAL_);
 		}
 	}
 	
@@ -191,7 +191,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:

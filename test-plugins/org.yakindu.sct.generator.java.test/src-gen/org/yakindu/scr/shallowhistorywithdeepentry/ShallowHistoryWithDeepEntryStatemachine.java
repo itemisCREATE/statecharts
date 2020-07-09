@@ -51,9 +51,9 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	public enum State {
 		MAIN_REGION_Y,
 		MAIN_REGION_Z,
-		MAIN_REGION_Z_A,
-		MAIN_REGION_Z_B,
-		MAIN_REGION_Z_B_C,
+		MAIN_REGION_Z__REGION0_A,
+		MAIN_REGION_Z__REGION0_B,
+		MAIN_REGION_Z__REGION0_B__REGION0_C,
 		$NULLSTATE$
 	};
 	
@@ -129,10 +129,10 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			case MAIN_REGION_Y:
 				main_region_Y_react(true);
 				break;
-			case MAIN_REGION_Z_A:
+			case MAIN_REGION_Z__REGION0_A:
 				main_region_Z__region0_A_react(true);
 				break;
-			case MAIN_REGION_Z_B_C:
+			case MAIN_REGION_Z__REGION0_B__REGION0_C:
 				main_region_Z__region0_B__region0_C_react(true);
 				break;
 			default:
@@ -189,14 +189,14 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			return stateVector[0] == State.MAIN_REGION_Y;
 		case MAIN_REGION_Z:
 			return stateVector[0].ordinal() >= State.
-					MAIN_REGION_Z.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_Z_B_C.ordinal();
-		case MAIN_REGION_Z_A:
-			return stateVector[0] == State.MAIN_REGION_Z_A;
-		case MAIN_REGION_Z_B:
+					MAIN_REGION_Z.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_Z__REGION0_B__REGION0_C.ordinal();
+		case MAIN_REGION_Z__REGION0_A:
+			return stateVector[0] == State.MAIN_REGION_Z__REGION0_A;
+		case MAIN_REGION_Z__REGION0_B:
 			return stateVector[0].ordinal() >= State.
-					MAIN_REGION_Z_B.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_Z_B_C.ordinal();
-		case MAIN_REGION_Z_B_C:
-			return stateVector[0] == State.MAIN_REGION_Z_B_C;
+					MAIN_REGION_Z__REGION0_B.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_Z__REGION0_B__REGION0_C.ordinal();
+		case MAIN_REGION_Z__REGION0_B__REGION0_C:
+			return stateVector[0] == State.MAIN_REGION_Z__REGION0_B__REGION0_C;
 		default:
 			return false;
 		}
@@ -236,7 +236,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_Z__region0_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_Z_A;
+		stateVector[0] = State.MAIN_REGION_Z__REGION0_A;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -250,7 +250,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_Z__region0_B__region0_C_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_Z_B_C;
+		stateVector[0] = State.MAIN_REGION_Z__REGION0_B__REGION0_C;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -266,10 +266,10 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	/* shallow enterSequence with history in child null */
 	private void shallowEnterSequence_main_region_Z__region0() {
 		switch (historyVector[0]) {
-		case MAIN_REGION_Z_A:
+		case MAIN_REGION_Z__REGION0_A:
 			enterSequence_main_region_Z__region0_A_default();
 			break;
-		case MAIN_REGION_Z_B_C:
+		case MAIN_REGION_Z__REGION0_B__REGION0_C:
 			enterSequence_main_region_Z__region0_B_default();
 			break;
 		default:
@@ -316,10 +316,10 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		case MAIN_REGION_Y:
 			exitSequence_main_region_Y();
 			break;
-		case MAIN_REGION_Z_A:
+		case MAIN_REGION_Z__REGION0_A:
 			exitSequence_main_region_Z__region0_A();
 			break;
-		case MAIN_REGION_Z_B_C:
+		case MAIN_REGION_Z__REGION0_B__REGION0_C:
 			exitSequence_main_region_Z__region0_B__region0_C();
 			break;
 		default:
@@ -330,10 +330,10 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	/* Default exit sequence for region null */
 	private void exitSequence_main_region_Z__region0() {
 		switch (stateVector[0]) {
-		case MAIN_REGION_Z_A:
+		case MAIN_REGION_Z__REGION0_A:
 			exitSequence_main_region_Z__region0_A();
 			break;
-		case MAIN_REGION_Z_B_C:
+		case MAIN_REGION_Z__REGION0_B__REGION0_C:
 			exitSequence_main_region_Z__region0_B__region0_C();
 			break;
 		default:
@@ -344,7 +344,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	/* Default exit sequence for region null */
 	private void exitSequence_main_region_Z__region0_B__region0() {
 		switch (stateVector[0]) {
-		case MAIN_REGION_Z_B_C:
+		case MAIN_REGION_Z__REGION0_B__REGION0_C:
 			exitSequence_main_region_Z__region0_B__region0_C();
 			break;
 		default:

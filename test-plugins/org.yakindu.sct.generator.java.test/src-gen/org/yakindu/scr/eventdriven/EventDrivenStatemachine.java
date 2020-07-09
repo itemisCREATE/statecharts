@@ -147,14 +147,14 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		MAIN_REGION_STATEB,
 		MAIN_REGION_STATEC,
 		MAIN_REGION_STATEE,
-		MAIN_REGION_STATEE__STATE1,
-		MAIN_REGION_STATEE__STATE2,
-		MAIN_REGION_STATEE__STATE3,
-		MAIN_REGION_STATEE__STATE1,
-		MAIN_REGION_STATEE__STATE2,
+		MAIN_REGION_STATEE__REGION0_STATE1,
+		MAIN_REGION_STATEE__REGION0_STATE2,
+		MAIN_REGION_STATEE__REGION0_STATE3,
+		MAIN_REGION_STATEE__REGION1_STATE1,
+		MAIN_REGION_STATEE__REGION1_STATE2,
 		MAIN_REGION_STATEF,
 		MAIN_REGION_STATED,
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		$NULLSTATE$
 	};
 	
@@ -240,19 +240,19 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 				case MAIN_REGION_STATEC:
 					main_region_StateC_react(true);
 					break;
-				case MAIN_REGION_STATEE__STATE1:
+				case MAIN_REGION_STATEE__REGION0_STATE1:
 					main_region_StateE__region0_State1_react(true);
 					break;
-				case MAIN_REGION_STATEE__STATE2:
+				case MAIN_REGION_STATEE__REGION0_STATE2:
 					main_region_StateE__region0_State2_react(true);
 					break;
-				case MAIN_REGION_STATEE__STATE3:
+				case MAIN_REGION_STATEE__REGION0_STATE3:
 					main_region_StateE__region0_State3_react(true);
 					break;
-				case MAIN_REGION_STATEE__STATE1:
+				case MAIN_REGION_STATEE__REGION1_STATE1:
 					main_region_StateE__region1_State1_react(true);
 					break;
-				case MAIN_REGION_STATEE__STATE2:
+				case MAIN_REGION_STATEE__REGION1_STATE2:
 					main_region_StateE__region1_State2_react(true);
 					break;
 				case MAIN_REGION_STATEF:
@@ -261,7 +261,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 				case MAIN_REGION_STATED:
 					main_region_StateD_react(true);
 					break;
-				case MAIN_REGION_FINAL_0:
+				case MAIN_REGION__FINAL_:
 					main_region__final__react(true);
 					break;
 				default:
@@ -288,7 +288,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0) && (stateVector[1] == State.$NULLSTATE$);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_) && (stateVector[1] == State.$NULLSTATE$);
 	}
 	private void clearOutEvents() {
 		defaultInterface.outEvent = false;
@@ -331,23 +331,23 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			return stateVector[0] == State.MAIN_REGION_STATEC;
 		case MAIN_REGION_STATEE:
 			return stateVector[0].ordinal() >= State.
-					MAIN_REGION_STATEE.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_STATEE__STATE2.ordinal();
-		case MAIN_REGION_STATEE__STATE1:
-			return stateVector[0] == State.MAIN_REGION_STATEE__STATE1;
-		case MAIN_REGION_STATEE__STATE2:
-			return stateVector[0] == State.MAIN_REGION_STATEE__STATE2;
-		case MAIN_REGION_STATEE__STATE3:
-			return stateVector[0] == State.MAIN_REGION_STATEE__STATE3;
-		case MAIN_REGION_STATEE__STATE1:
-			return stateVector[1] == State.MAIN_REGION_STATEE__STATE1;
-		case MAIN_REGION_STATEE__STATE2:
-			return stateVector[1] == State.MAIN_REGION_STATEE__STATE2;
+					MAIN_REGION_STATEE.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_STATEE__REGION1_STATE2.ordinal();
+		case MAIN_REGION_STATEE__REGION0_STATE1:
+			return stateVector[0] == State.MAIN_REGION_STATEE__REGION0_STATE1;
+		case MAIN_REGION_STATEE__REGION0_STATE2:
+			return stateVector[0] == State.MAIN_REGION_STATEE__REGION0_STATE2;
+		case MAIN_REGION_STATEE__REGION0_STATE3:
+			return stateVector[0] == State.MAIN_REGION_STATEE__REGION0_STATE3;
+		case MAIN_REGION_STATEE__REGION1_STATE1:
+			return stateVector[1] == State.MAIN_REGION_STATEE__REGION1_STATE1;
+		case MAIN_REGION_STATEE__REGION1_STATE2:
+			return stateVector[1] == State.MAIN_REGION_STATEE__REGION1_STATE2;
 		case MAIN_REGION_STATEF:
 			return stateVector[0] == State.MAIN_REGION_STATEF;
 		case MAIN_REGION_STATED:
 			return stateVector[0] == State.MAIN_REGION_STATED;
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -490,34 +490,34 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* 'default' enter sequence for state State1 */
 	private void enterSequence_main_region_StateE__region0_State1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_STATEE__STATE1;
+		stateVector[0] = State.MAIN_REGION_STATEE__REGION0_STATE1;
 	}
 	
 	/* 'default' enter sequence for state State2 */
 	private void enterSequence_main_region_StateE__region0_State2_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_STATEE__STATE2;
+		stateVector[0] = State.MAIN_REGION_STATEE__REGION0_STATE2;
 	}
 	
 	/* 'default' enter sequence for state State3 */
 	private void enterSequence_main_region_StateE__region0_State3_default() {
 		entryAction_main_region_StateE__region0_State3();
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_STATEE__STATE3;
+		stateVector[0] = State.MAIN_REGION_STATEE__REGION0_STATE3;
 	}
 	
 	/* 'default' enter sequence for state State1 */
 	private void enterSequence_main_region_StateE__region1_State1_default() {
 		entryAction_main_region_StateE__region1_State1();
 		nextStateIndex = 1;
-		stateVector[1] = State.MAIN_REGION_STATEE__STATE1;
+		stateVector[1] = State.MAIN_REGION_STATEE__REGION1_STATE1;
 	}
 	
 	/* 'default' enter sequence for state State2 */
 	private void enterSequence_main_region_StateE__region1_State2_default() {
 		entryAction_main_region_StateE__region1_State2();
 		nextStateIndex = 1;
-		stateVector[1] = State.MAIN_REGION_STATEE__STATE2;
+		stateVector[1] = State.MAIN_REGION_STATEE__REGION1_STATE2;
 	}
 	
 	/* 'default' enter sequence for state StateF */
@@ -536,7 +536,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -638,13 +638,13 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		case MAIN_REGION_STATEC:
 			exitSequence_main_region_StateC();
 			break;
-		case MAIN_REGION_STATEE__STATE1:
+		case MAIN_REGION_STATEE__REGION0_STATE1:
 			exitSequence_main_region_StateE__region0_State1();
 			break;
-		case MAIN_REGION_STATEE__STATE2:
+		case MAIN_REGION_STATEE__REGION0_STATE2:
 			exitSequence_main_region_StateE__region0_State2();
 			break;
-		case MAIN_REGION_STATEE__STATE3:
+		case MAIN_REGION_STATEE__REGION0_STATE3:
 			exitSequence_main_region_StateE__region0_State3();
 			break;
 		case MAIN_REGION_STATEF:
@@ -653,7 +653,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		case MAIN_REGION_STATED:
 			exitSequence_main_region_StateD();
 			break;
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:
@@ -661,10 +661,10 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		}
 		
 		switch (stateVector[1]) {
-		case MAIN_REGION_STATEE__STATE1:
+		case MAIN_REGION_STATEE__REGION1_STATE1:
 			exitSequence_main_region_StateE__region1_State1();
 			break;
-		case MAIN_REGION_STATEE__STATE2:
+		case MAIN_REGION_STATEE__REGION1_STATE2:
 			exitSequence_main_region_StateE__region1_State2();
 			break;
 		default:
@@ -675,13 +675,13 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* Default exit sequence for region  */
 	private void exitSequence_main_region_StateE__region0() {
 		switch (stateVector[0]) {
-		case MAIN_REGION_STATEE__STATE1:
+		case MAIN_REGION_STATEE__REGION0_STATE1:
 			exitSequence_main_region_StateE__region0_State1();
 			break;
-		case MAIN_REGION_STATEE__STATE2:
+		case MAIN_REGION_STATEE__REGION0_STATE2:
 			exitSequence_main_region_StateE__region0_State2();
 			break;
-		case MAIN_REGION_STATEE__STATE3:
+		case MAIN_REGION_STATEE__REGION0_STATE3:
 			exitSequence_main_region_StateE__region0_State3();
 			break;
 		default:
@@ -692,10 +692,10 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* Default exit sequence for region  */
 	private void exitSequence_main_region_StateE__region1() {
 		switch (stateVector[1]) {
-		case MAIN_REGION_STATEE__STATE1:
+		case MAIN_REGION_STATEE__REGION1_STATE1:
 			exitSequence_main_region_StateE__region1_State1();
 			break;
-		case MAIN_REGION_STATEE__STATE2:
+		case MAIN_REGION_STATEE__REGION1_STATE2:
 			exitSequence_main_region_StateE__region1_State2();
 			break;
 		default:

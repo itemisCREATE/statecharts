@@ -43,13 +43,13 @@ public class ShallowHistoryWithDeepEntry {
 		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Y));
 		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_A));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_A));
 		statemachine.raiseToY();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Y));
 		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_A));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_A));
 	}
 	
 	@Test
@@ -58,18 +58,18 @@ public class ShallowHistoryWithDeepEntry {
 		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Y));
 		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_A));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_A));
 		statemachine.raiseToC();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B_C));
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B__REGION0_C));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B));
 		statemachine.raiseToY();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Y));
 		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B_C));
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B__REGION0_C));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B));
 	}
 	
 	@Test
@@ -78,14 +78,14 @@ public class ShallowHistoryWithDeepEntry {
 		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Y));
 		statemachine.raiseToC();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B_C));
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B__REGION0_C));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B));
 		statemachine.raiseToY();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Y));
 		statemachine.raiseToZ();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B_C));
-		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z_B));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B__REGION0_C));
+		assertTrue(statemachine.isStateActive(ShallowHistoryWithDeepEntryStatemachine.State.MAIN_REGION_Z__REGION0_B));
 	}
 }

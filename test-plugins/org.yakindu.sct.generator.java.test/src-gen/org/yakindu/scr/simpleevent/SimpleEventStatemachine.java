@@ -27,7 +27,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	public enum State {
 		MAIN_REGION_A,
 		MAIN_REGION_B,
-		MAIN_REGION_FINAL_0,
+		MAIN_REGION__FINAL_,
 		$NULLSTATE$
 	};
 	
@@ -102,7 +102,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
-			case MAIN_REGION_FINAL_0:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
@@ -124,7 +124,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.MAIN_REGION_FINAL_0);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	private void swapInEvents() {
 		_current.iface.event1 = defaultInterface.event1;
@@ -145,8 +145,8 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			return stateVector[0] == State.MAIN_REGION_A;
 		case MAIN_REGION_B:
 			return stateVector[0] == State.MAIN_REGION_B;
-		case MAIN_REGION_FINAL_0:
-			return stateVector[0] == State.MAIN_REGION_FINAL_0;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -175,7 +175,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.MAIN_REGION_FINAL_0;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -210,7 +210,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
-		case MAIN_REGION_FINAL_0:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:
