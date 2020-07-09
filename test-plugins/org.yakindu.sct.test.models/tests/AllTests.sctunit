@@ -49,6 +49,7 @@ testsuite AllTests {
     // supersteps
     CycleBasedSuperStep,
     EventDrivenSuperStep,
+    SuperStepOnEnter,
 
 	// not grouped
 	AlwaysOncycle,

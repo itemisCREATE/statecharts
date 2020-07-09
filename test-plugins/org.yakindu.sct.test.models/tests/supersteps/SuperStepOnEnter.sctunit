@@ -1,0 +1,12 @@
+testclass SuperStepOnEnter for statechart supersteps.SuperStepOnEnter {
+	
+	@Test
+	operation test() {
+		enter
+		
+		assert active(supersteps.SuperStepOnEnter.r1.StateB)
+		assert active(supersteps.SuperStepOnEnter.r2.StateB)
+
+		exit
+	}
+}
