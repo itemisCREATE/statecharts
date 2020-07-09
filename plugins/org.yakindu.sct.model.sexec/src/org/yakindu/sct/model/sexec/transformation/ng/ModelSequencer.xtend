@@ -119,10 +119,10 @@ class ModelSequencer implements IModelSequencer {
 		
 		eventProcessing.defineFeatures(ef)
 		executionGuard.defineFeatures(ef)
-		enterMethod.defineFeatures(ef)
-		exitMethod.defineFeatures(ef)
 		superStep.defineFeatures(ef)
 		runCycleMethod.defineFeatures(ef)
+		enterMethod.defineFeatures(ef)
+		exitMethod.defineFeatures(ef)
 
 
 		//clear create caches to avoid memory leak with repetetive generator cycles
