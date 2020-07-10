@@ -3,7 +3,7 @@ package org.yakindu.scr.entryexitselftransition;
 
 
 public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransitionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -41,22 +41,22 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean e1;
 	}
 	private static class EntryExitSelfTransitionStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_A__region0_B,
-		main_region_A__region0_C,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_A__REGION0_B,
+		MAIN_REGION_A__REGION0_C,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -75,20 +75,20 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		this.isExecuting = value;
 	}
 	public EntryExitSelfTransitionStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setExits(0);
+		defaultInterface.setExits(0);
 		
-		sCInterface.setEntries(0);
+		defaultInterface.setEntries(0);
 		
 		isExecuting = false;
 	}
@@ -127,14 +127,14 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A__region0_B:
+			case MAIN_REGION_A__REGION0_B:
 				main_region_A__region0_B_react(true);
 				break;
-			case main_region_A__region0_C:
+			case MAIN_REGION_A__REGION0_C:
 				main_region_A__region0_C_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -145,7 +145,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -157,16 +157,16 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.e1 = false;
+		defaultInterface.e = false;
+		defaultInterface.e1 = false;
 	}
 	
 	/**
@@ -175,54 +175,54 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			return stateVector[0].ordinal() >= State.
-					main_region_A.ordinal()&& stateVector[0].ordinal() <= State.main_region_A__region0_C.ordinal();
-		case main_region_A__region0_B:
-			return stateVector[0] == State.main_region_A__region0_B;
-		case main_region_A__region0_C:
-			return stateVector[0] == State.main_region_A__region0_C;
+					MAIN_REGION_A.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_A__REGION0_C.ordinal();
+		case MAIN_REGION_A__REGION0_B:
+			return stateVector[0] == State.MAIN_REGION_A__REGION0_B;
+		case MAIN_REGION_A__REGION0_C:
+			return stateVector[0] == State.MAIN_REGION_A__REGION0_C;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public long getExits() {
-		return sCInterface.getExits();
+		return defaultInterface.getExits();
 	}
 	
 	public void setExits(long value) {
-		sCInterface.setExits(value);
+		defaultInterface.setExits(value);
 	}
 	
 	public long getEntries() {
-		return sCInterface.getEntries();
+		return defaultInterface.getEntries();
 	}
 	
 	public void setEntries(long value) {
-		sCInterface.setEntries(value);
+		defaultInterface.setEntries(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.setEntries(sCInterface.getEntries() + 1);
+		defaultInterface.setEntries(defaultInterface.getEntries() + 1);
 	}
 	
 	/* Exit action for state 'A'. */
 	private void exitAction_main_region_A() {
-		sCInterface.setExits(sCInterface.getExits() + 1);
+		defaultInterface.setExits(defaultInterface.getExits() + 1);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -234,13 +234,13 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_A__region0_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A__region0_B;
+		stateVector[0] = State.MAIN_REGION_A__REGION0_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_A__region0_C_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A__region0_C;
+		stateVector[0] = State.MAIN_REGION_A__REGION0_C;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -262,23 +262,23 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_A__region0_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_A__region0_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A__region0_B:
+		case MAIN_REGION_A__REGION0_B:
 			exitSequence_main_region_A__region0_B();
 			exitAction_main_region_A();
 			break;
-		case main_region_A__region0_C:
+		case MAIN_REGION_A__REGION0_C:
 			exitSequence_main_region_A__region0_C();
 			exitAction_main_region_A();
 			break;
@@ -290,10 +290,10 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	/* Default exit sequence for region  */
 	private void exitSequence_main_region_A__region0() {
 		switch (stateVector[0]) {
-		case main_region_A__region0_B:
+		case MAIN_REGION_A__REGION0_B:
 			exitSequence_main_region_A__region0_B();
 			break;
-		case main_region_A__region0_C:
+		case MAIN_REGION_A__REGION0_C:
 			exitSequence_main_region_A__region0_C();
 			break;
 		default:

@@ -7,8 +7,8 @@ import java.util.TimerTask;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.yakindu.scr.ITimer;
-import org.yakindu.scr.ITimerCallback;
+import org.yakindu.sct.ITimer;
+import org.yakindu.sct.ITimerCallback;
 
 /**
  * Default timer service implementation.

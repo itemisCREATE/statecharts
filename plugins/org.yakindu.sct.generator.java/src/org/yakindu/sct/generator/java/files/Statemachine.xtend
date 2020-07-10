@@ -44,6 +44,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.java.util.StringHelper
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -55,6 +56,7 @@ class Statemachine {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension StringHelper
 	
 	@Inject protected extension EventCode
 	@Inject protected extension InterfaceFunctionsGenerator
@@ -84,7 +86,7 @@ class Statemachine {
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		this.flow = flow
 		this.entry = entry
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineClassName.java
+		var filename = entry.basePackage.toPath + '/' + flow.statemachineClassName.java
 		fsa.generateFile(filename, content)
 	}
 	
@@ -92,8 +94,9 @@ class Statemachine {
 		FileTemplate
 			.create
 			.fileComment(entry.licenseText)
-			.packageName(getImplementationPackageName(flow, entry))
+			.packageName(entry.basePackage)
 			.addImports(imports)
+			.addImport(entry.apiPackage.dot(flow.statemachineInterfaceName), entry.apiPackage != entry.basePackage)
 			.addImport(rxPackage.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
 			.addImport(rxPackage.dot(observerClass), !flow.shadowEvents.nullOrEmpty)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
@@ -155,7 +158,7 @@ class Statemachine {
 		}
 		
 		if (flow.timed) {
-			importSet += "" + entry.getBasePackageName() + ".ITimer"
+			importSet += "" + entry.libraryPackage + ".ITimer"
 		}
 		
 		for(JavaIncludeProvider jip : includeProviders) {
@@ -163,7 +166,7 @@ class Statemachine {
 		}
 		
 		if (tracingUsed(entry)) {
-			importSet += entry.getBasePackageName() + "." + traceInterface
+			importSet += entry.libraryPackage + "." + traceInterface
 			importSet += JavaList
 			importSet += JavaLinkedList
 		}

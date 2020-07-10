@@ -2,13 +2,13 @@
 package org.yakindu.scr.statechartkeywords;
 
 import java.util.List;
-import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.ITimerCallback;
+import org.yakindu.sct.IStatemachine;
+import org.yakindu.sct.ITimerCallback;
 import org.yakindu.sct.rx.Observable;
 
 public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatemachine {
 	
-	public interface SCIIf {
+	public interface InterfaceIf {
 	
 		public Observable<Void> getOperationCallbackEvent();
 		
@@ -34,23 +34,23 @@ public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatema
 		
 		public void setRunCycle(long value);
 		
-		public List<SCIIfListener> getListeners();
-		public void setSCIIfOperationCallback(SCIIfOperationCallback operationCallback);
+		public List<InterfaceIfListener> getListeners();
+		public void setInterfaceIfOperationCallback(InterfaceIfOperationCallback operationCallback);
 	}
 	
-	public interface SCIIfListener {
+	public interface InterfaceIfListener {
 	
 		public void onOperationCallbackRaised();
 		public void onListenersRaised();
 	}
 	
-	public interface SCIIfOperationCallback {
+	public interface InterfaceIfOperationCallback {
 	
 		public void myOperation();
 		
 	}
 	
-	public SCIIf getSCIIf();
+	public InterfaceIf getInterfaceIf();
 	
 	public interface InternalOperationCallback {
 	

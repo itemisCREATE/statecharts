@@ -4,7 +4,7 @@ package org.yakindu.scr.raiseevent;
 import org.yakindu.sct.rx.Observable;
 
 public class RaiseEventStatemachine implements IRaiseEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -29,22 +29,22 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e2;
 	}
 	private static class RaiseEventStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region_StateB,
-		second_region_SateA,
-		second_region_StateB,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_STATEB,
+		SECOND_REGION_SATEA,
+		SECOND_REGION_STATEB,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -63,13 +63,13 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		this.isExecuting = value;
 	}
 	public RaiseEventStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -114,20 +114,20 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case main_region_StateB:
+			case MAIN_REGION_STATEB:
 				main_region_StateB_react(true);
 				break;
-			case second_region_SateA:
+			case SECOND_REGION_SATEA:
 				second_region_SateA_react(true);
 				break;
-			case second_region_StateB:
+			case SECOND_REGION_STATEB:
 				second_region_StateB_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -138,7 +138,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -150,12 +150,12 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e2 = sCInterface.e2;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		defaultInterface.e2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e2 = false;
+		defaultInterface.e2 = false;
 	}
 	
 	/**
@@ -164,59 +164,59 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
-		case second_region_SateA:
-			return stateVector[1] == State.second_region_SateA;
-		case second_region_StateB:
-			return stateVector[1] == State.second_region_StateB;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB;
+		case SECOND_REGION_SATEA:
+			return stateVector[1] == State.SECOND_REGION_SATEA;
+		case SECOND_REGION_STATEB:
+			return stateVector[1] == State.SECOND_REGION_STATEB;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public Observable<Void> getE1() {
-		return sCInterface.getE1();
+		return defaultInterface.getE1();
 	}
 	
 	public void raiseE2() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_default() {
 		entryAction_main_region_StateB();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for state SateA */
 	private void enterSequence_second_region_SateA_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.second_region_SateA;
+		stateVector[1] = State.SECOND_REGION_SATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_second_region_StateB_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.second_region_StateB;
+		stateVector[1] = State.SECOND_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -232,34 +232,34 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state SateA */
 	private void exitSequence_second_region_SateA() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_second_region_StateB() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB:
+		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
 		default:
@@ -270,10 +270,10 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	/* Default exit sequence for region second region */
 	private void exitSequence_second_region() {
 		switch (stateVector[1]) {
-		case second_region_SateA:
+		case SECOND_REGION_SATEA:
 			exitSequence_second_region_SateA();
 			break;
-		case second_region_StateB:
+		case SECOND_REGION_STATEB:
 			exitSequence_second_region_StateB();
 			break;
 		default:
@@ -326,7 +326,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e1) {
+			if (defaultInterface.e1) {
 				exitSequence_second_region_SateA();
 				enterSequence_second_region_StateB_default();
 			} else {

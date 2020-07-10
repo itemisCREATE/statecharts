@@ -13,6 +13,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ChildFirstExecutionHierarchyStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -30,6 +31,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ChildFirstLocalReactionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -47,6 +49,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ChildFirstOrthogonalReactionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -63,6 +66,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ChildFirstTransitionTakingStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -79,6 +83,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ChildFirstTransitionsInSubchartStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -97,6 +102,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ParentFirstExecutionHierarchyStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -114,6 +120,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ParentFirstLocalReactionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -130,6 +137,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "ParentFirstOrthogonalReactionsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}

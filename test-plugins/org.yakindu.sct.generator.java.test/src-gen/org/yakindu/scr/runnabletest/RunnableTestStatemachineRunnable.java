@@ -22,9 +22,9 @@ public class RunnableTestStatemachineRunnable extends SynchronizedRunnableTestSt
 	protected BlockingQueue<Runnable> eventQueue = new LinkedBlockingQueue<Runnable>();
 	
 	/**
-	 * Interface object for SCInterface
+	 * Interface object for Interface
 	 */		
-	protected SCInterface sCInterface = new SynchronizedSCInterface() {
+	protected Interface defaultInterface = new SynchronizedInterface() {
 		public void raiseEv_in(final long value) {
 			
 			eventQueue.add( new Runnable() {
@@ -32,7 +32,7 @@ public class RunnableTestStatemachineRunnable extends SynchronizedRunnableTestSt
 				@Override
 				public void run() {
 					synchronized (statemachine) {
-						statemachine.getSCInterface().raiseEv_in(value);
+						statemachine.getInterface().raiseEv_in(value);
 						statemachine.runCycle();
 					}
 				}

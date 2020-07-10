@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.eventdrivenoutevents.EventDrivenOutEventsStatemachine;
-import org.yakindu.scr.eventdrivenoutevents.EventDrivenOutEventsStatemachine.State;	
+import org.yakindu.scr.eventdrivenoutevents.EventDrivenOutEventsStatemachine.State;
 
 /**
  * Unit TestCase for EventDrivenOutEvents
@@ -33,11 +33,11 @@ public class EventDrivenOutEvents {
 	@Test
 	public void test() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		assertTrue(statemachine.isStateActive(State.second_region_StateC));
+		assertTrue(statemachine.isStateActive(EventDrivenOutEventsStatemachine.State.MAIN_REGION_STATEA));
+		assertTrue(statemachine.isStateActive(EventDrivenOutEventsStatemachine.State.SECOND_REGION_STATEC));
 		statemachine.raiseE1();
-		assertTrue(statemachine.isStateActive(State.main_region_StateB));
-		assertTrue(statemachine.isStateActive(State.second_region_StateD));
+		assertTrue(statemachine.isStateActive(EventDrivenOutEventsStatemachine.State.MAIN_REGION_STATEB));
+		assertTrue(statemachine.isStateActive(EventDrivenOutEventsStatemachine.State.SECOND_REGION_STATED));
 		statemachine.exit();
 	}
 }

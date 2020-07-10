@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.entryexitselftransition.EntryExitSelfTransitionStatemachine;
-import org.yakindu.scr.entryexitselftransition.EntryExitSelfTransitionStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.entryexitselftransition.EntryExitSelfTransitionStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for EntryExitSelfTransition
@@ -44,7 +44,7 @@ public class EntryExitSelfTransition {
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.getExits() == 1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__REGION0_C));
 		statemachine.exit();
 	}
 	
@@ -55,10 +55,10 @@ public class EntryExitSelfTransition {
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 0l);
 		assertTrue(statemachine.getExits() == 0l);
-		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__REGION0_C));
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__REGION0_B));
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.getExits() == 1l);
 		statemachine.exit();
@@ -68,7 +68,7 @@ public class EntryExitSelfTransition {
 		statemachine.enter();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getEntries() == 1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
+		assertTrue(statemachine.isStateActive(EntryExitSelfTransitionStatemachine.State.MAIN_REGION_A__REGION0_B));
 		statemachine.setEntries(0l);
 	}
 }

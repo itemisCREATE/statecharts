@@ -3,7 +3,7 @@ package org.yakindu.scr.dynamicchoice;
 
 
 public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean reset;
 		
@@ -24,21 +24,21 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean reset;
 	}
 	private static class DynamicChoiceStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_Start,
-		main_region_A,
-		main_region_B,
-		$NullState$
+		MAIN_REGION_START,
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -57,18 +57,18 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		this.isExecuting = value;
 	}
 	public DynamicChoiceStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setNumber(0);
+		defaultInterface.setNumber(0);
 		
 		isExecuting = false;
 	}
@@ -107,17 +107,17 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_Start:
+			case MAIN_REGION_START:
 				main_region_Start_react(true);
 				break;
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
-			case main_region_B:
+			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -128,7 +128,7 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -140,12 +140,12 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.reset = sCInterface.reset;
-		sCInterface.reset = false;
+		_current.iface.reset = defaultInterface.reset;
+		defaultInterface.reset = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.reset = false;
+		defaultInterface.reset = false;
 	}
 	
 	/**
@@ -154,35 +154,35 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_Start:
-			return stateVector[0] == State.main_region_Start;
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
-		case main_region_B:
-			return stateVector[0] == State.main_region_B;
+		case MAIN_REGION_START:
+			return stateVector[0] == State.MAIN_REGION_START;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseReset() {
-		sCInterface.raiseReset();
+		defaultInterface.raiseReset();
 	}
 	
 	public long getNumber() {
-		return sCInterface.getNumber();
+		return defaultInterface.getNumber();
 	}
 	
 	public void setNumber(long value) {
-		sCInterface.setNumber(value);
+		defaultInterface.setNumber(value);
 	}
 	
 	private boolean check_main_region__choice_0_tr0_tr0() {
-		return sCInterface.getNumber()==2;
+		return defaultInterface.getNumber()==2;
 	}
 	
 	private void effect_main_region__choice_0_tr0() {
@@ -195,26 +195,26 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		sCInterface.setNumber(1);
+		defaultInterface.setNumber(1);
 	}
 	
 	/* 'default' enter sequence for state Start */
 	private void enterSequence_main_region_Start_default() {
 		entryAction_main_region_Start();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Start;
+		stateVector[0] = State.MAIN_REGION_START;
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -225,31 +225,31 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	/* Default exit sequence for state Start */
 	private void exitSequence_main_region_Start() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_Start:
+		case MAIN_REGION_START:
 			exitSequence_main_region_Start();
 			break;
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
 		default:
@@ -281,7 +281,7 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		if (try_transition) {
 			if (react()==false) {
 				exitSequence_main_region_Start();
-				sCInterface.setNumber(sCInterface.getNumber() + 1);
+				defaultInterface.setNumber(defaultInterface.getNumber() + 1);
 				
 				react_main_region__choice_0();
 			}

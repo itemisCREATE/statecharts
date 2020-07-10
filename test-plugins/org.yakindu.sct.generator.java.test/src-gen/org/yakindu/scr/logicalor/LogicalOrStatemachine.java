@@ -3,7 +3,7 @@ package org.yakindu.scr.logicalor;
 
 
 public class LogicalOrStatemachine implements ILogicalOrStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long x;
 		
@@ -31,13 +31,13 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		$NullState$
+		MAIN_REGION_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -54,19 +54,19 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		this.isExecuting = value;
 	}
 	public LogicalOrStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
-		sCInterface.setX(1);
+		defaultInterface.setX(1);
 		
-		sCInterface.setB(false);
+		defaultInterface.setB(false);
 		
 		isExecuting = false;
 	}
@@ -104,11 +104,11 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -119,7 +119,7 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -136,37 +136,37 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public boolean getB() {
-		return sCInterface.getB();
+		return defaultInterface.getB();
 	}
 	
 	public void setB(boolean value) {
-		sCInterface.setB(value);
+		defaultInterface.setB(value);
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -177,13 +177,13 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
 		default:
@@ -205,9 +205,9 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getX()==1) {
+				if (defaultInterface.getX()==1) {
 					exitSequence_main_region_A();
-					sCInterface.setB((((sCInterface.assignX(sCInterface.getX() + 1))!=2 || (sCInterface.assignX(sCInterface.getX() * 2))==4)));
+					defaultInterface.setB((((defaultInterface.assignX(defaultInterface.getX() + 1))!=2 || (defaultInterface.assignX(defaultInterface.getX() * 2))==4)));
 					
 					enterSequence_main_region_A_default();
 				} else {

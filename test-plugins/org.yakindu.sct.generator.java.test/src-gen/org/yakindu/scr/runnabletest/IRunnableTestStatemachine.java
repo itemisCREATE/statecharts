@@ -2,13 +2,13 @@
 package org.yakindu.scr.runnabletest;
 
 import java.util.List;
-import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.ITimerCallback;
+import org.yakindu.sct.IStatemachine;
+import org.yakindu.sct.ITimerCallback;
 import org.yakindu.sct.rx.Observable;
 
 public interface IRunnableTestStatemachine extends ITimerCallback,IStatemachine {
 	
-	public interface SCInterface {
+	public interface Interface {
 	
 		public Observable<Long> getEv_out();
 		
@@ -30,21 +30,21 @@ public interface IRunnableTestStatemachine extends ITimerCallback,IStatemachine 
 		
 		public void setS2_entered(long value);
 		
-		public List<SCInterfaceListener> getListeners();
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
+		public List<InterfaceListener> getListeners();
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback);
 	}
 	
-	public interface SCInterfaceListener {
+	public interface InterfaceListener {
 	
 		public void onEv_outRaised(long value);
 	}
 	
-	public interface SCInterfaceOperationCallback {
+	public interface InterfaceOperationCallback {
 	
 		public void displayTime();
 		
 	}
 	
-	public SCInterface getSCInterface();
+	public Interface getInterface();
 	
 }

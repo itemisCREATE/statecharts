@@ -133,7 +133,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(ActiveStateReferenceExpression it) {
-		"isStateActive(State." + value.stateName.asEscapedIdentifier + ")";
+		"isStateActive(State." + value.stateName + ")";
 	}
 
 	def dispatch String code(EventRaisingExpression it) {
@@ -196,7 +196,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		val statechart = stateEnum.eContainer.getOriginStatechart
 		val state = stateEnum.originState
 		
-		'''«statechart.statemachineClassName».State.«IF state !== null»«state.stateName.asEscapedIdentifier»«ELSE»«nullStateName»«ENDIF»'''
+		'''«statechart.statemachineClassName».State.«IF state !== null»«state.stateName»«ELSE»«nullStateName»«ENDIF»'''
 	}
 	
 	def dispatch protected String operationCall(Method it, ArgumentExpression exp) {
@@ -241,7 +241,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String getContext(Property it) {
 		if (interfaceScope !== null) {
-			return interfaceScope.interfaceName.asEscapedIdentifier + "."
+			return interfaceScope.interfaceVariableName + "."
 		}
 		return ""
 	}
@@ -274,7 +274,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String getContext(Declaration it) {
 		if (interfaceScope !== null) {
-			return interfaceScope.interfaceName.asEscapedIdentifier + "."
+			return interfaceScope.interfaceVariableName + "."
 		}
 		return ""
 	}

@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.stateisactive.StateIsActiveStatemachine;
-import org.yakindu.scr.stateisactive.StateIsActiveStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.stateisactive.StateIsActiveStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for StateIsActive
@@ -40,12 +40,12 @@ public class StateIsActive {
 	@Test
 	public void stateIsActive() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r1_R1A));
-		assertTrue(statemachine.isStateActive(State.r2_R2A));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R1_R1A));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R2_R2A));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.r1_R1B));
-		assertTrue(statemachine.isStateActive(State.r2_R2B));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R1_R1B));
+		assertTrue(statemachine.isStateActive(StateIsActiveStatemachine.State.R2_R2B));
 	}
 }

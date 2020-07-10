@@ -18,20 +18,20 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine;
-import org.yakindu.scr.operationswithoutbraces.IOperationsWithoutBracesStatemachine.SCInterfaceOperationCallback;
+import org.yakindu.scr.operationswithoutbraces.IOperationsWithoutBracesStatemachine.InterfaceOperationCallback;
 import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;
 /**
  *  Unit TestCase for OperationsWithoutBraces
  */
 @SuppressWarnings("all")
-public class OperationsWithoutBracesCustom implements SCInterfaceOperationCallback{
+public class OperationsWithoutBracesCustom implements InterfaceOperationCallback{
 
 	private OperationsWithoutBracesStatemachine statemachine;
 
 	@Before
 	public void setUp() {
 		statemachine = new OperationsWithoutBracesStatemachine();
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(this);
+		statemachine.getInterface().setInterfaceOperationCallback(this);
 		statemachine.init();
 	}
 
@@ -43,17 +43,17 @@ public class OperationsWithoutBracesCustom implements SCInterfaceOperationCallba
 	@Test
 	public void testOperationsWithoutBracesTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.isStateActive(State.another_region_A));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_A));
+		assertTrue(statemachine.isStateActive(State.ANOTHER_REGION_A));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_B));
-		assertTrue(statemachine.isStateActive(State.another_region_B));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_B));
+		assertTrue(statemachine.isStateActive(State.ANOTHER_REGION_B));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_C));
-		assertTrue(statemachine.isStateActive(State.another_region_C));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_C));
+		assertTrue(statemachine.isStateActive(State.ANOTHER_REGION_C));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_D));
-		assertTrue(statemachine.isStateActive(State.another_region_D));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_D));
+		assertTrue(statemachine.isStateActive(State.ANOTHER_REGION_D));
 	}
 	
 	// Default Implementation for Operations

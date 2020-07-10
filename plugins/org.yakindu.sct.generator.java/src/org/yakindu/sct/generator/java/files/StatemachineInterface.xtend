@@ -25,6 +25,7 @@ import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.OutEventObservables
 import org.yakindu.sct.generator.java.templates.ClassTemplate
 import org.yakindu.sct.generator.java.templates.FileTemplate
+import org.yakindu.sct.generator.java.util.StringHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -46,6 +47,7 @@ class StatemachineInterface {
 	@Inject extension OutEventObservables
 	@Inject extension OutputConfigProvider
 	@Inject extension GeneratorPredicate
+	@Inject extension StringHelper
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
@@ -53,7 +55,7 @@ class StatemachineInterface {
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		this.entry = entry
 		this.flow = flow
-		val filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
+		val filename = entry.apiPackage.toPath + '/' + flow.statemachineInterfaceName.java
 		fsa.generateFile(filename, entry.apiOutputConfig, content)
 	}
 
@@ -61,10 +63,10 @@ class StatemachineInterface {
 		FileTemplate
 			.create
 			.fileComment(entry.licenseText)
-			.packageName(flow.getImplementationPackageName(entry))
+			.packageName(entry.apiPackage)
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
-			.addImport(entry.basePackageName.dot(iTimerCallback), flow.timed)
-			.addImport(entry.basePackageName.dot(iStatemachine))
+			.addImport(entry.libraryPackage.dot(iTimerCallback), flow.timed)
+			.addImport(entry.libraryPackage.dot(iStatemachine))
 			.addImport(rxPackage.dot(observableClass), useOutEventObservables && flow.hasOutgoingEvents)
 			.addImports(includeProviders.map[getImports(flow, entry)].flatten)
 			.classTemplate(

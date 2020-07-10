@@ -4,9 +4,9 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.eventdriventriggeredbyevent.EventDrivenTriggeredByEventStatemachine;
-import org.yakindu.scr.eventdriventriggeredbyevent.EventDrivenTriggeredByEventStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
+import org.yakindu.scr.eventdriven.EventDrivenTriggeredByEventStatemachine;
+import org.yakindu.scr.eventdriven.EventDrivenTriggeredByEventStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
 
 /**
  * Unit TestCase for EventDrivenTriggeredByEvent
@@ -38,12 +38,12 @@ public class EventDrivenTriggeredByEvent {
 	@Test
 	public void internalEventTriggersRunCycle() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_A));
+		assertTrue(statemachine.isStateActive(EventDrivenTriggeredByEventStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_B));
+		assertTrue(statemachine.isStateActive(EventDrivenTriggeredByEventStatemachine.State.MAIN_REGION_B));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_A));
+		assertTrue(statemachine.isStateActive(EventDrivenTriggeredByEventStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}
@@ -51,7 +51,7 @@ public class EventDrivenTriggeredByEvent {
 	@Test
 	public void proceedTimeDoesNotTriggerRunCycle() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.eventDrivenTriggeredByEvent_main_region_A));
+		assertTrue(statemachine.isStateActive(EventDrivenTriggeredByEventStatemachine.State.MAIN_REGION_A));
 		timer.timeLeap(120l*1000l);
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();

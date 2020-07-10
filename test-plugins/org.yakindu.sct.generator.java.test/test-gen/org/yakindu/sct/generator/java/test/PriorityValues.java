@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.priorityvalues.PriorityValuesStatemachine;
-import org.yakindu.scr.priorityvalues.PriorityValuesStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.priorityvalues.PriorityValuesStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for PriorityValues
@@ -40,19 +40,19 @@ public class PriorityValues {
 	@Test
 	public void transitionPriority() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.MAIN_REGION_C));
 	}
 	
 	@Test
 	public void regionPriority() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.someRegion_A));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.SOMEREGION_A));
 		statemachine.raiseEvent2();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.someRegion_B));
-		assertTrue(!statemachine.isStateActive(State.main_region_E));
+		assertTrue(statemachine.isStateActive(PriorityValuesStatemachine.State.SOMEREGION_B));
+		assertTrue(!statemachine.isStateActive(PriorityValuesStatemachine.State.MAIN_REGION_E));
 	}
 }

@@ -3,7 +3,7 @@ package org.yakindu.scr.bitexpressions;
 
 
 public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -94,20 +94,20 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 	}
 	private static class BitExpressionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region_StateB,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_STATEB,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -126,32 +126,32 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		this.isExecuting = value;
 	}
 	public BitExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setMyBit1(0);
+		defaultInterface.setMyBit1(0);
 		
-		sCInterface.setMyBit2(0);
+		defaultInterface.setMyBit2(0);
 		
-		sCInterface.setLeftBitshift(0);
+		defaultInterface.setLeftBitshift(0);
 		
-		sCInterface.setRightBitshift(0);
+		defaultInterface.setRightBitshift(0);
 		
-		sCInterface.setComplementBitshift(0);
+		defaultInterface.setComplementBitshift(0);
 		
-		sCInterface.setBitwiseAnd(0);
+		defaultInterface.setBitwiseAnd(0);
 		
-		sCInterface.setBitwiseOr(0);
+		defaultInterface.setBitwiseOr(0);
 		
-		sCInterface.setBitwiseXor(0);
+		defaultInterface.setBitwiseXor(0);
 		
 		isExecuting = false;
 	}
@@ -190,14 +190,14 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case main_region_StateB:
+			case MAIN_REGION_STATEB:
 				main_region_StateB_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -208,7 +208,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -220,12 +220,12 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
+		defaultInterface.e1 = false;
 	}
 	
 	/**
@@ -234,121 +234,121 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public long getMyBit1() {
-		return sCInterface.getMyBit1();
+		return defaultInterface.getMyBit1();
 	}
 	
 	public void setMyBit1(long value) {
-		sCInterface.setMyBit1(value);
+		defaultInterface.setMyBit1(value);
 	}
 	
 	public long getMyBit2() {
-		return sCInterface.getMyBit2();
+		return defaultInterface.getMyBit2();
 	}
 	
 	public void setMyBit2(long value) {
-		sCInterface.setMyBit2(value);
+		defaultInterface.setMyBit2(value);
 	}
 	
 	public long getLeftBitshift() {
-		return sCInterface.getLeftBitshift();
+		return defaultInterface.getLeftBitshift();
 	}
 	
 	public void setLeftBitshift(long value) {
-		sCInterface.setLeftBitshift(value);
+		defaultInterface.setLeftBitshift(value);
 	}
 	
 	public long getRightBitshift() {
-		return sCInterface.getRightBitshift();
+		return defaultInterface.getRightBitshift();
 	}
 	
 	public void setRightBitshift(long value) {
-		sCInterface.setRightBitshift(value);
+		defaultInterface.setRightBitshift(value);
 	}
 	
 	public long getComplementBitshift() {
-		return sCInterface.getComplementBitshift();
+		return defaultInterface.getComplementBitshift();
 	}
 	
 	public void setComplementBitshift(long value) {
-		sCInterface.setComplementBitshift(value);
+		defaultInterface.setComplementBitshift(value);
 	}
 	
 	public long getBitwiseAnd() {
-		return sCInterface.getBitwiseAnd();
+		return defaultInterface.getBitwiseAnd();
 	}
 	
 	public void setBitwiseAnd(long value) {
-		sCInterface.setBitwiseAnd(value);
+		defaultInterface.setBitwiseAnd(value);
 	}
 	
 	public long getBitwiseOr() {
-		return sCInterface.getBitwiseOr();
+		return defaultInterface.getBitwiseOr();
 	}
 	
 	public void setBitwiseOr(long value) {
-		sCInterface.setBitwiseOr(value);
+		defaultInterface.setBitwiseOr(value);
 	}
 	
 	public long getBitwiseXor() {
-		return sCInterface.getBitwiseXor();
+		return defaultInterface.getBitwiseXor();
 	}
 	
 	public void setBitwiseXor(long value) {
-		sCInterface.setBitwiseXor(value);
+		defaultInterface.setBitwiseXor(value);
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.setMyBit1(5);
+		defaultInterface.setMyBit1(5);
 		
-		sCInterface.setMyBit2(7);
+		defaultInterface.setMyBit2(7);
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setLeftBitshift((sCInterface.myBit1 << 1));
+		defaultInterface.setLeftBitshift((defaultInterface.myBit1 << 1));
 		
-		sCInterface.setRightBitshift((sCInterface.myBit1 >> 1));
+		defaultInterface.setRightBitshift((defaultInterface.myBit1 >> 1));
 		
-		sCInterface.setComplementBitshift(~sCInterface.myBit1);
+		defaultInterface.setComplementBitshift(~defaultInterface.myBit1);
 		
-		sCInterface.setBitwiseAnd((sCInterface.myBit1 & sCInterface.myBit2));
+		defaultInterface.setBitwiseAnd((defaultInterface.myBit1 & defaultInterface.myBit2));
 		
-		sCInterface.setBitwiseOr((sCInterface.myBit1 | sCInterface.myBit2));
+		defaultInterface.setBitwiseOr((defaultInterface.myBit1 | defaultInterface.myBit2));
 		
-		sCInterface.setBitwiseXor((sCInterface.myBit1 ^ sCInterface.myBit2));
+		defaultInterface.setBitwiseXor((defaultInterface.myBit1 ^ defaultInterface.myBit2));
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		entryAction_main_region_StateA();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_default() {
 		entryAction_main_region_StateB();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -359,22 +359,22 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB:
+		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
 		default:

@@ -4,11 +4,11 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.ineventlifecycleunbuffered.InEventLifeCycleStatemachine;
-import org.yakindu.scr.ineventlifecycleunbuffered.InEventLifeCycleStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.eventbuffers.InEventLifeCycleUnbufferedStatemachine;
+import org.yakindu.scr.eventbuffers.InEventLifeCycleUnbufferedStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for InEventLifeCycle
@@ -16,13 +16,13 @@ import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
 @SuppressWarnings("all")
 public class InEventLifeCycleUnbuffered {
 	
-	private InEventLifeCycleStatemachine statemachine;	
+	private InEventLifeCycleUnbufferedStatemachine statemachine;	
 	private VirtualTimer timer;
 	
 	
 	@Before
 	public void inEventLifeCycleUnbuffered_setUp() {
-		statemachine = new InEventLifeCycleStatemachine();
+		statemachine = new InEventLifeCycleUnbufferedStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		
@@ -40,21 +40,21 @@ public class InEventLifeCycleUnbuffered {
 	@Test
 	public void inEventLifeCycleUnbufferedTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R2_C));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_D));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R2_D));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_D));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R2_D));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R2_C));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r1_A));
-		assertTrue(statemachine.isStateActive(State.inEventLifeCycle_r2_C));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R1_A));
+		assertTrue(statemachine.isStateActive(InEventLifeCycleUnbufferedStatemachine.State.R2_C));
 	}
 }

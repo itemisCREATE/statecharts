@@ -9,6 +9,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "ConstOnlyDefaultScopeStatemachine"
 		}
 		
 
@@ -39,6 +40,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "ConstOnlyNamedScopeStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -68,6 +70,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "ConstOnlyInternalScopeStatemachine"
 		}
 
 		feature GeneralFeatures {

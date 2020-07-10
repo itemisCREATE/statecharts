@@ -3,21 +3,21 @@ package org.yakindu.scr.wrappertest;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.yakindu.scr.ITimer;
+import org.yakindu.sct.ITimer;
 import org.yakindu.sct.rx.Observable;
 
 public class WrapperTestStatemachine implements IWrapperTestStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private List<SCInterfaceListener> listeners = new LinkedList<SCInterfaceListener>();
+		private List<InterfaceListener> listeners = new LinkedList<InterfaceListener>();
 		
-		public List<SCInterfaceListener> getListeners() {
+		public List<InterfaceListener> getListeners() {
 			return listeners;
 		}
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private boolean ev_out;
@@ -25,7 +25,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 		protected void raiseEv_out() {
 			ev_out = true;
-			for (SCInterfaceListener listener : listeners) {
+			for (InterfaceListener listener : listeners) {
 				listener.onEv_outRaised();
 			}
 			ev_outObservable.next(null);
@@ -76,7 +76,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean ev_in;
 	}
 	private static class WrapperTestStatemachineTimeEventsEvBuf {
@@ -84,18 +84,18 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		private boolean wrapperTest_time_event_0;
 	}
 	private static class WrapperTestStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 		private WrapperTestStatemachineTimeEventsEvBuf timeEvents = new WrapperTestStatemachineTimeEventsEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_s1,
-		main_region_s2,
-		main_region__final_,
-		$NullState$
+		MAIN_REGION_S1,
+		MAIN_REGION_S2,
+		MAIN_REGION__FINAL_,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -118,7 +118,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		this.isExecuting = value;
 	}
 	public WrapperTestStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -126,21 +126,21 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setAfterCalls(0);
+		defaultInterface.setAfterCalls(0);
 		
-		sCInterface.setCycles(0);
+		defaultInterface.setCycles(0);
 		
-		sCInterface.setS2_entered(0);
+		defaultInterface.setS2_entered(0);
 		
 		isExecuting = false;
 	}
@@ -189,17 +189,17 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_s1:
+			case MAIN_REGION_S1:
 				main_region_s1_react(true);
 				break;
-			case main_region_s2:
+			case MAIN_REGION_S2:
 				main_region_s2_react(true);
 				break;
-			case main_region__final_:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -210,18 +210,18 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.main_region__final_);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	private void swapInEvents() {
-		_current.iface.ev_in = sCInterface.ev_in;
-		sCInterface.ev_in = false;
+		_current.iface.ev_in = defaultInterface.ev_in;
+		defaultInterface.ev_in = false;
 		
 		_current.timeEvents.wrapperTest_main_region_s1_time_event_0 = timeEvents[0];
 		timeEvents[0] = false;
@@ -231,7 +231,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	}
 	
 	private void clearInEvents() {
-		sCInterface.ev_in = false;
+		defaultInterface.ev_in = false;
 		timeEvents[0] = false;
 		timeEvents[1] = false;
 	}
@@ -242,12 +242,12 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_s1:
-			return stateVector[0] == State.main_region_s1;
-		case main_region_s2:
-			return stateVector[0] == State.main_region_s2;
-		case main_region__final_:
-			return stateVector[0] == State.main_region__final_;
+		case MAIN_REGION_S1:
+			return stateVector[0] == State.MAIN_REGION_S1;
+		case MAIN_REGION_S2:
+			return stateVector[0] == State.MAIN_REGION_S2;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -277,52 +277,52 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		timeEvents[eventID] = true;
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public Observable<Void> getEv_out() {
-		return sCInterface.getEv_out();
+		return defaultInterface.getEv_out();
 	}
 	
 	public void raiseEv_in() {
-		sCInterface.raiseEv_in();
+		defaultInterface.raiseEv_in();
 	}
 	
 	public long getAfterCalls() {
-		return sCInterface.getAfterCalls();
+		return defaultInterface.getAfterCalls();
 	}
 	
 	public void setAfterCalls(long value) {
-		sCInterface.setAfterCalls(value);
+		defaultInterface.setAfterCalls(value);
 	}
 	
 	public long getCycles() {
-		return sCInterface.getCycles();
+		return defaultInterface.getCycles();
 	}
 	
 	public void setCycles(long value) {
-		sCInterface.setCycles(value);
+		defaultInterface.setCycles(value);
 	}
 	
 	public long getS2_entered() {
-		return sCInterface.getS2_entered();
+		return defaultInterface.getS2_entered();
 	}
 	
 	public void setS2_entered(long value) {
-		sCInterface.setS2_entered(value);
+		defaultInterface.setS2_entered(value);
 	}
 	
 	/* Entry action for state 's1'. */
 	private void entryAction_main_region_s1() {
 		timer.setTimer(this, 0, 500, false);
 		
-		sCInterface.raiseEv_out();
+		defaultInterface.raiseEv_out();
 	}
 	
 	/* Entry action for state 's2'. */
 	private void entryAction_main_region_s2() {
-		sCInterface.setS2_entered(sCInterface.getS2_entered() + 1);
+		defaultInterface.setS2_entered(defaultInterface.getS2_entered() + 1);
 	}
 	
 	/* Exit action for state 's1'. */
@@ -334,20 +334,20 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	private void enterSequence_main_region_s1_default() {
 		entryAction_main_region_s1();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_s1;
+		stateVector[0] = State.MAIN_REGION_S1;
 	}
 	
 	/* 'default' enter sequence for state s2 */
 	private void enterSequence_main_region_s2_default() {
 		entryAction_main_region_s2();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_s2;
+		stateVector[0] = State.MAIN_REGION_S2;
 	}
 	
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region__final_;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -358,7 +358,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	/* Default exit sequence for state s1 */
 	private void exitSequence_main_region_s1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 		
 		exitAction_main_region_s1();
 	}
@@ -366,25 +366,25 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	/* Default exit sequence for state s2 */
 	private void exitSequence_main_region_s2() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for final state. */
 	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_s1:
+		case MAIN_REGION_S1:
 			exitSequence_main_region_s1();
 			break;
-		case main_region_s2:
+		case MAIN_REGION_S2:
 			exitSequence_main_region_s2();
 			break;
-		case main_region__final_:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:
@@ -399,9 +399,9 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	private boolean react() {
 		if (_current.timeEvents.wrapperTest_time_event_0) {
-			sCInterface.operationCallback.displayTime();
+			defaultInterface.operationCallback.displayTime();
 		}
-		sCInterface.setCycles(sCInterface.getCycles() + 1);
+		defaultInterface.setCycles(defaultInterface.getCycles() + 1);
 		
 		return false;
 	}
@@ -411,7 +411,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getCycles()==40) {
+				if (defaultInterface.getCycles()==40) {
 					exitSequence_main_region_s1();
 					enterSequence_main_region__final__default();
 				} else {
@@ -421,7 +421,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 					} else {
 						if (_current.timeEvents.wrapperTest_main_region_s1_time_event_0) {
 							exitSequence_main_region_s1();
-							sCInterface.setAfterCalls(sCInterface.getAfterCalls() + 1);
+							defaultInterface.setAfterCalls(defaultInterface.getAfterCalls() + 1);
 							
 							enterSequence_main_region_s1_default();
 						} else {

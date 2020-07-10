@@ -3,7 +3,7 @@ package org.yakindu.scr.parenthesis;
 
 
 public class ParenthesisStatemachine implements IParenthesisStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long erg;
 		
@@ -17,13 +17,13 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		mainRegion_A,
-		$NullState$
+		MAINREGION_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -40,17 +40,17 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		this.isExecuting = value;
 	}
 	public ParenthesisStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
-		sCInterface.setErg(0);
+		defaultInterface.setErg(0);
 		
 		isExecuting = false;
 	}
@@ -88,11 +88,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case mainRegion_A:
+			case MAINREGION_A:
 				mainRegion_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -103,7 +103,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -120,35 +120,35 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case mainRegion_A:
-			return stateVector[0] == State.mainRegion_A;
+		case MAINREGION_A:
+			return stateVector[0] == State.MAINREGION_A;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public long getErg() {
-		return sCInterface.getErg();
+		return defaultInterface.getErg();
 	}
 	
 	public void setErg(long value) {
-		sCInterface.setErg(value);
+		defaultInterface.setErg(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_mainRegion_A() {
-		sCInterface.setErg((4 * ((3 - 1))));
+		defaultInterface.setErg((4 * ((3 - 1))));
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_mainRegion_A_default() {
 		entryAction_mainRegion_A();
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_A;
+		stateVector[0] = State.MAINREGION_A;
 	}
 	
 	/* 'default' enter sequence for region mainRegion */
@@ -159,13 +159,13 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_mainRegion_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region mainRegion */
 	private void exitSequence_mainRegion() {
 		switch (stateVector[0]) {
-		case mainRegion_A:
+		case MAINREGION_A:
 			exitSequence_mainRegion_A();
 			break;
 		default:

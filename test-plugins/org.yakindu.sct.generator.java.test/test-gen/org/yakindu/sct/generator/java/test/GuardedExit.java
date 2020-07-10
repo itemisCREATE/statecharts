@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guardedexit.GuardedExitStatemachine;
-import org.yakindu.scr.guardedexit.GuardedExitStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.guardedexit.GuardedExitStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for GuardedExit
@@ -40,7 +40,7 @@ public class GuardedExit {
 	@Test
 	public void exitTaken() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedExitStatemachine.State.MAIN_REGION_A));
 		assertTrue(!statemachine.getGuard());
 		checkDone(false);
 	}
@@ -48,7 +48,7 @@ public class GuardedExit {
 	@Test
 	public void exitNotTaken() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedExitStatemachine.State.MAIN_REGION_A));
 		statemachine.setGuard(true);
 		checkDone(true);
 	}
@@ -56,7 +56,7 @@ public class GuardedExit {
 	public void checkDone(boolean shouldBeDone) {
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(GuardedExitStatemachine.State.MAIN_REGION_B));
 		assertTrue(shouldBeDone ? statemachine.getDone() : !statemachine.getDone());
 	}
 }

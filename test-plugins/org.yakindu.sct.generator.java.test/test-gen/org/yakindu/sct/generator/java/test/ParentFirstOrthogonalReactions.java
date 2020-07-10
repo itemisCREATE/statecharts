@@ -5,23 +5,23 @@ package org.yakindu.sct.generator.java.test;
 import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.*;
 import static org.hamcrest.CoreMatchers.*;
-import org.yakindu.scr.parentfirstorthogonalreactions.IParentFirstOrthogonalReactionsStatemachine.*;	
+import org.yakindu.scr.executionorder.IParentFirstOrthogonalReactionsStatemachine.*;	
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.parentfirstorthogonalreactions.ParentFirstOrthogonalReactionsStatemachine;
-import org.yakindu.scr.parentfirstorthogonalreactions.ParentFirstOrthogonalReactionsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.executionorder.ParentFirstOrthogonalReactionsStatemachine;
+import org.yakindu.scr.executionorder.ParentFirstOrthogonalReactionsStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ParentFirstOrthogonalReactions
  */
 @SuppressWarnings("all")
 public class ParentFirstOrthogonalReactions {
-	SCInterfaceOperationCallback defaultMock;
+	InterfaceOperationCallback defaultMock;
 	
 	private ParentFirstOrthogonalReactionsStatemachine statemachine;	
 	private VirtualTimer timer;
@@ -32,8 +32,8 @@ public class ParentFirstOrthogonalReactions {
 		statemachine = new ParentFirstOrthogonalReactionsStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
-		defaultMock = mock(SCInterfaceOperationCallback.class);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
+		defaultMock = mock(InterfaceOperationCallback.class);
+		statemachine.getInterface().setInterfaceOperationCallback(defaultMock);
 		
 		statemachine.init();
 		
@@ -41,7 +41,7 @@ public class ParentFirstOrthogonalReactions {
 
 	@After
 	public void parentFirstOrthogonalReactions_tearDown() {
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(null);
+		statemachine.getInterface().setInterfaceOperationCallback(null);
 		statemachine = null;
 		
 		timer = null;

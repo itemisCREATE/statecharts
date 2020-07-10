@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * 
@@ -25,16 +26,18 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
  */
 public interface IDefaultFeatureValueProvider {
 
-	public FeatureConfiguration createDefaultFeatureConfiguration(
-			FeatureType type, EObject contextElement);
-	
+	public FeatureConfiguration createDefaultFeatureConfiguration(FeatureType type, EObject contextElement);
+
 	public IStatus validateParameterValue(FeatureParameterValue value);
-	
+
 	public default IStatus validateConfiguration(FeatureConfiguration configuration) {
+		return Status.OK_STATUS;
+	}
+	
+	public default IStatus validateGeneratorEntry(GeneratorEntry entry) {
 		return Status.OK_STATUS;
 	}
 
 	public boolean isProviderFor(FeatureTypeLibrary library);
-	
-	
+
 }

@@ -24,8 +24,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.yakindu.scr.variadicfunctions.IVariadicFunctionsStatemachine.InternalOperationCallback;
-import org.yakindu.scr.variadicfunctions.IVariadicFunctionsStatemachine.SCIIF2OperationCallback;
-import org.yakindu.scr.variadicfunctions.IVariadicFunctionsStatemachine.SCInterfaceOperationCallback;
+import org.yakindu.scr.variadicfunctions.IVariadicFunctionsStatemachine.InterfaceIF2OperationCallback;
+import org.yakindu.scr.variadicfunctions.IVariadicFunctionsStatemachine.InterfaceOperationCallback;
 import org.yakindu.scr.variadicfunctions.VariadicFunctionsStatemachine;
 
 /**
@@ -49,14 +49,14 @@ public class VariadicOperationsTestCustom {
 	public void test() {
 		InternalOperationCallback internalMock = mock(InternalOperationCallback.class);
 		ArgumentCaptor<Double> internalCapture = ArgumentCaptor.forClass(Double.class);
-		SCInterfaceOperationCallback interfaceMock = mock(SCInterfaceOperationCallback.class);
+		InterfaceOperationCallback interfaceMock = mock(InterfaceOperationCallback.class);
 		ArgumentCaptor<String> interfaceCapture = ArgumentCaptor.forClass(String.class);
-		SCIIF2OperationCallback interface2Mock = mock(SCIIF2OperationCallback.class);
+		InterfaceIF2OperationCallback interface2Mock = mock(InterfaceIF2OperationCallback.class);
 		ArgumentCaptor<Long> interface2Capture = ArgumentCaptor.forClass(Long.class);
 
 		statemachine.setInternalOperationCallback(internalMock);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(interfaceMock);
-		statemachine.getSCIIF2().setSCIIF2OperationCallback(interface2Mock);
+		statemachine.getInterface().setInterfaceOperationCallback(interfaceMock);
+		statemachine.getInterfaceIF2().setInterfaceIF2OperationCallback(interface2Mock);
 		statemachine.init();
 		statemachine.enter();
 

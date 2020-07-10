@@ -8,6 +8,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "CycleBasedSuperStepStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -36,6 +37,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "EventDrivenSuperStepStatemachine"
 		}
 
 		feature GeneralFeatures {
