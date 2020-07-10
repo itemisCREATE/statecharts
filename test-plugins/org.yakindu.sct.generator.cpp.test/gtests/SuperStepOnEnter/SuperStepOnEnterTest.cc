@@ -38,7 +38,7 @@ TEST_F(SuperStepOnEnterTest, test) {
 	
 	EXPECT_TRUE(statechart->isStateActive(supersteps::SuperStepOnEnter::r1_StateB));
 	
-	EXPECT_TRUE(statechart->isStateActive(supersteps::SuperStepOnEnter::r2_StateB));
+	EXPECT_TRUE(statechart->isStateActive(supersteps::SuperStepOnEnter::r2_StateA));
 	
 	statechart->exit();
 	

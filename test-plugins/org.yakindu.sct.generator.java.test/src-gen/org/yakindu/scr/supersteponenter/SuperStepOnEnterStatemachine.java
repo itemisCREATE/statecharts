@@ -54,6 +54,35 @@ public class SuperStepOnEnterStatemachine implements ISuperStepOnEnterStatemachi
 		isExecuting = false;
 	}
 	
+	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+			        "The state machine needs to be initialized first by calling the init() function.");
+		
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		enterSequence_r1_default();
+		enterSequence_r2_default();
+		do { 
+			stateConfVectorChanged = false;
+			microStep();
+		} while (getStateConfVectorChanged());
+		
+		isExecuting = false;
+	}
+	
+	public void exit() {
+		if (getIsExecuting()) {
+			return;
+		}
+		isExecuting = true;
+		exitSequence_r1();
+		exitSequence_r2();
+		isExecuting = false;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -67,55 +96,13 @@ public class SuperStepOnEnterStatemachine implements ISuperStepOnEnterStatemachi
 		do { 
 			do { 
 				stateConfVectorChanged = false;
-				for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-					switch (stateVector[nextStateIndex]) {
-					case superStepOnEnter_r1_StateA:
-						r1_StateA_react(true);
-						break;
-					case superStepOnEnter_r1_StateB:
-						r1_StateB_react(true);
-						break;
-					case superStepOnEnter_r2_StateA:
-						r2_StateA_react(true);
-						break;
-					case superStepOnEnter_r2_StateB:
-						r2_StateB_react(true);
-						break;
-					default:
-						// $NullState$
-					}
-				}
+				microStep();
 			} while (getStateConfVectorChanged());
 			
 			clearInternalEvents();
 			nextEvent();
 		} while (e);
 		
-		isExecuting = false;
-	}
-	
-	public void enter() {
-		if (!initialized)
-			throw new IllegalStateException(
-			        "The state machine needs to be initialized first by calling the init() function.");
-		
-		if (getIsExecuting()) {
-			return;
-		}
-		isExecuting = true;
-		enterSequence_r1_default();
-		enterSequence_r2_default();
-		isExecuting = false;
-		runCycle();
-	}
-	
-	public void exit() {
-		if (getIsExecuting()) {
-			return;
-		}
-		isExecuting = true;
-		exitSequence_r1();
-		exitSequence_r2();
 		isExecuting = false;
 	}
 	
@@ -136,6 +123,27 @@ public class SuperStepOnEnterStatemachine implements ISuperStepOnEnterStatemachi
 	}
 	private void clearInternalEvents() {
 		e = false;
+	}
+	
+	private void microStep() {
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case superStepOnEnter_r1_StateA:
+				r1_StateA_react(true);
+				break;
+			case superStepOnEnter_r1_StateB:
+				r1_StateB_react(true);
+				break;
+			case superStepOnEnter_r2_StateA:
+				r2_StateA_react(true);
+				break;
+			case superStepOnEnter_r2_StateB:
+				r2_StateB_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
 	}
 	
 	protected void nextEvent() {

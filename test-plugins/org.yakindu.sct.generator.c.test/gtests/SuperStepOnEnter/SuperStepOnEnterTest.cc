@@ -44,7 +44,7 @@ void SuperStepOnEnterTest::test()
 {
 	superStepOnEnter_enter(&statechart);
 	EXPECT_TRUE(superStepOnEnter_isStateActive(&statechart, SuperStepOnEnter_r1_StateB));
-	EXPECT_TRUE(superStepOnEnter_isStateActive(&statechart, SuperStepOnEnter_r2_StateB));
+	EXPECT_TRUE(superStepOnEnter_isStateActive(&statechart, SuperStepOnEnter_r2_StateA));
 	superStepOnEnter_exit(&statechart);
 }
 

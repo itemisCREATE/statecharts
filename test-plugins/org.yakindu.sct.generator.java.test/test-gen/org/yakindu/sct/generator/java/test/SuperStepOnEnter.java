@@ -34,7 +34,7 @@ public class SuperStepOnEnter {
 	public void test() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.superStepOnEnter_r1_StateB));
-		assertTrue(statemachine.isStateActive(State.superStepOnEnter_r2_StateB));
+		assertTrue(statemachine.isStateActive(State.superStepOnEnter_r2_StateA));
 		statemachine.exit();
 	}
 }
