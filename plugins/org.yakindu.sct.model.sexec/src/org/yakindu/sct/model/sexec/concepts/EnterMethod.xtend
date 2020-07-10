@@ -52,9 +52,11 @@ class EnterMethod {
 				_isInitializedCheck,
 				_guardExecution( _sequence(
 					_traceEnter,
-					enterSequences.defaultSequence._clone
-				)),
-				runCycle._call.toStep._when(appliesSuperStep)
+					enterSequences.defaultSequence._clone,
+					_superStepLoop(
+						_microStep	
+					)._when(appliesSuperStep)
+				))
 			)
 			m.body.comment = "Activates the state machine."
 		]

@@ -5,7 +5,9 @@ testclass SuperStepOnEnter for statechart supersteps.SuperStepOnEnter {
 		enter
 		
 		assert active(supersteps.SuperStepOnEnter.r1.StateB)
-		assert active(supersteps.SuperStepOnEnter.r2.StateB)
+		
+		// no event handling on enter despite super step semantic
+		assert active(supersteps.SuperStepOnEnter.r2.StateA)
 
 		exit
 	}
