@@ -510,6 +510,22 @@ bc. namespace trafficlights
 
 ==<!-- End stext_keyword_namespace -->==
 
+==<!-- Start stext_keyword_import -->==
+
+h4(#sclang_imports). Imports
+
+*Imports* can be used to make elements visible that are defined in another file. In the default domain it is possible to import other statechart types (see also "multi state machine modeling":../user-guide/multi_state_machine.html#multi_state_machine_modelling ). 
+
+Different statechart domains allow to import different file types. For example, the "C/C++ domain":../user-guide/c-domain.html#cdom_deep_c_integration allows to import header files.
+
+bc. 
+// multi state machine modeling (default domain)
+import: "LED.sct"
+// header import in C/C++ domain
+import: "MyHeader.h"
+
+==<!-- End stext_keyword_import -->==
+
 
 ==<!-- Start stext_keyword_interface -->==
 
@@ -551,7 +567,7 @@ bc. internal:
 
 ==<!-- End stext_keyword_internal -->==
 
-
+==<!-- Start stext_keyword_var -->==
 
 h3(#sclang_variables). Variables
 
