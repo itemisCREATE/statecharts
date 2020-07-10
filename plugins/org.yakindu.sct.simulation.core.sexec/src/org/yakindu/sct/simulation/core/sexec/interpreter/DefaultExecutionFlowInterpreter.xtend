@@ -128,6 +128,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		if (!executionContext.snapshot) {
 			isRunning = true
 			flow.enterSequences?.defaultSequence?.scheduleAndRun
+			if (useSuperStep) superStepLoop([rtcStep])
 			isRunning = false
 		}
 		else {
