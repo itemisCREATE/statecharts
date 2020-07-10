@@ -66,6 +66,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "SuperStepOnEnterStatemachine"
 		}
 
 		feature GeneralFeatures {

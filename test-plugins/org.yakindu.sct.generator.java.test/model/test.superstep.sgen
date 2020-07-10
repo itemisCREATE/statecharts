@@ -47,6 +47,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "SuperStepOnEnterStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}

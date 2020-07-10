@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.supersteponenter.SuperStepOnEnterStatemachine;
-import org.yakindu.scr.supersteponenter.SuperStepOnEnterStatemachine.State;	
+import org.yakindu.scr.supersteps.SuperStepOnEnterStatemachine;
+import org.yakindu.scr.supersteps.SuperStepOnEnterStatemachine.State;
 
 /**
  * Unit TestCase for SuperStepOnEnter
@@ -33,8 +33,8 @@ public class SuperStepOnEnter {
 	@Test
 	public void test() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.superStepOnEnter_r1_StateB));
-		assertTrue(statemachine.isStateActive(State.superStepOnEnter_r2_StateA));
+		assertTrue(statemachine.isStateActive(SuperStepOnEnterStatemachine.State.R1_STATEB));
+		assertTrue(statemachine.isStateActive(SuperStepOnEnterStatemachine.State.R2_STATEA));
 		statemachine.exit();
 	}
 }
