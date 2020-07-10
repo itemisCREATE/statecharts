@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constants.ConstantsStatemachine;
-import org.yakindu.scr.constants.ConstantsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.constants.ConstantsStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for Constants
@@ -40,20 +40,20 @@ public class ConstantsTests {
 	@Test
 	public void constantDefinition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(ConstantsStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getX() == 10l);
 		assertTrue(statemachine.getY() == 20l);
-		assertTrue(statemachine.getSCINamed().getY().equals("Hello World"));
+		assertTrue(statemachine.getInterfaceNamed().getY().equals("Hello World"));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getResult() == 20l);
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(ConstantsStatemachine.State.MAIN_REGION_C));
 		assertTrue(statemachine.getResult() == 100l);
 		statemachine.raiseE2(statemachine.getX());
 		timer.cycleLeap(1l);
 		assertTrue(statemachine.getResult() == 1000l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(ConstantsStatemachine.State.MAIN_REGION_A));
 	}
 }

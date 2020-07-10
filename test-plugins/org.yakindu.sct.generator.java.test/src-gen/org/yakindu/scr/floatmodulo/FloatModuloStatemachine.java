@@ -3,7 +3,7 @@ package org.yakindu.scr.floatmodulo;
 
 
 public class FloatModuloStatemachine implements IFloatModuloStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private double r;
 		
@@ -27,7 +27,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 	}
 	
-	protected class SCIAImpl implements SCIA {
+	protected class InterfaceAImpl implements InterfaceA {
 	
 		private double r;
 		
@@ -51,16 +51,16 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCIAImpl sCIA;
+	protected InterfaceAImpl interfaceA;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region__final_,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION__FINAL_,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -77,24 +77,24 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		this.isExecuting = value;
 	}
 	public FloatModuloStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCIA = new SCIAImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceA = new InterfaceAImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
 		isExecuting = false;
 	}
@@ -132,14 +132,14 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case main_region__final_:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -150,14 +150,14 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.main_region__final_);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -165,141 +165,141 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region__final_:
-			return stateVector[0] == State.main_region__final_;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCIA getSCIA() {
-		return sCIA;
+	public InterfaceA getInterfaceA() {
+		return interfaceA;
 	}
 	
 	public double getR() {
-		return sCInterface.getR();
+		return defaultInterface.getR();
 	}
 	
 	public void setR(double value) {
-		sCInterface.setR(value);
+		defaultInterface.setR(value);
 	}
 	
 	public long getI() {
-		return sCInterface.getI();
+		return defaultInterface.getI();
 	}
 	
 	public void setI(long value) {
-		sCInterface.setI(value);
+		defaultInterface.setI(value);
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.setR(sCInterface.getR() % sCInterface.r);
+		defaultInterface.setR(defaultInterface.getR() % defaultInterface.r);
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCInterface.setR((sCInterface.r % sCInterface.r));
+		defaultInterface.setR((defaultInterface.r % defaultInterface.r));
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCInterface.setI((sCInterface.i % sCInterface.i));
+		defaultInterface.setI((defaultInterface.i % defaultInterface.i));
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCInterface.setI(sCInterface.getI() % sCInterface.i);
+		defaultInterface.setI(defaultInterface.getI() % defaultInterface.i);
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCInterface.setR((sCInterface.r % sCInterface.i));
+		defaultInterface.setR((defaultInterface.r % defaultInterface.i));
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.getR() % sCInterface.i);
+		defaultInterface.setR(defaultInterface.getR() % defaultInterface.i);
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCInterface.setR((sCInterface.i % sCInterface.r));
+		defaultInterface.setR((defaultInterface.i % defaultInterface.r));
 		
-		sCInterface.setR(3.4);
+		defaultInterface.setR(3.4);
 		
-		sCInterface.setI(2);
+		defaultInterface.setI(2);
 		
-		sCInterface.setR((sCInterface.i % sCInterface.i));
+		defaultInterface.setR((defaultInterface.i % defaultInterface.i));
 		
-		sCIA.setR(sCIA.getR() % (sCIA.r));
+		interfaceA.setR(interfaceA.getR() % (interfaceA.r));
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
-		sCIA.setR((sCIA.r % sCIA.r));
+		interfaceA.setR((interfaceA.r % interfaceA.r));
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
-		sCIA.setI((sCIA.i % sCIA.i));
+		interfaceA.setI((interfaceA.i % interfaceA.i));
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
-		sCIA.setI(sCIA.getI() % (sCIA.i));
+		interfaceA.setI(interfaceA.getI() % (interfaceA.i));
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
-		sCIA.setR((sCIA.r % sCIA.i));
+		interfaceA.setR((interfaceA.r % interfaceA.i));
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
-		sCIA.setR(sCIA.getR() % (sCIA.i));
+		interfaceA.setR(interfaceA.getR() % (interfaceA.i));
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
-		sCIA.setR((sCIA.i % sCIA.r));
+		interfaceA.setR((interfaceA.i % interfaceA.r));
 		
-		sCIA.setR(3.4);
+		interfaceA.setR(3.4);
 		
-		sCIA.setI(2);
+		interfaceA.setI(2);
 		
-		sCIA.setR((sCIA.i % sCIA.i));
+		interfaceA.setR((interfaceA.i % interfaceA.i));
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		entryAction_main_region_StateA();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region__final_;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -310,22 +310,22 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for final state. */
 	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region__final_:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:

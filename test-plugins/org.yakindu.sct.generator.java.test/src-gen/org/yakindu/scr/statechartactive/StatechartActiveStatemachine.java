@@ -6,8 +6,8 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	private boolean initialized = false;
 	
 	public enum State {
-		r_A,
-		$NullState$
+		R_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -29,7 +29,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
@@ -70,11 +70,11 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case r_A:
+			case R_A:
 				r_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -85,7 +85,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -102,8 +102,8 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case r_A:
-			return stateVector[0] == State.r_A;
+		case R_A:
+			return stateVector[0] == State.R_A;
 		default:
 			return false;
 		}
@@ -112,7 +112,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.r_A;
+		stateVector[0] = State.R_A;
 	}
 	
 	/* 'default' enter sequence for region r */
@@ -123,13 +123,13 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	/* Default exit sequence for state A */
 	private void exitSequence_r_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case r_A:
+		case R_A:
 			exitSequence_r_A();
 			break;
 		default:

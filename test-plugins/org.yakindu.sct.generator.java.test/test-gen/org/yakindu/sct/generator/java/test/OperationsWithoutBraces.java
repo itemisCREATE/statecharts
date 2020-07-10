@@ -11,17 +11,17 @@ import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine;
-import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for OperationsWithoutBraces
  */
 @SuppressWarnings("all")
 public class OperationsWithoutBraces {
-	SCInterfaceOperationCallback defaultMock;
+	InterfaceOperationCallback defaultMock;
 	
 	private OperationsWithoutBracesStatemachine statemachine;	
 	private VirtualTimer timer;
@@ -32,8 +32,8 @@ public class OperationsWithoutBraces {
 		statemachine = new OperationsWithoutBracesStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
-		defaultMock = mock(SCInterfaceOperationCallback.class);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
+		defaultMock = mock(InterfaceOperationCallback.class);
+		statemachine.getInterface().setInterfaceOperationCallback(defaultMock);
 		
 		statemachine.init();
 		
@@ -41,7 +41,7 @@ public class OperationsWithoutBraces {
 
 	@After
 	public void operationsWithoutBraces_tearDown() {
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(null);
+		statemachine.getInterface().setInterfaceOperationCallback(null);
 		statemachine = null;
 		
 		timer = null;
@@ -71,13 +71,13 @@ public class OperationsWithoutBraces {
 		});
 		 
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.another_region_A));
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.ANOTHER_REGION_A));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.another_region_C));
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.ANOTHER_REGION_C));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.MAIN_REGION_C));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_D));
-		assertTrue(statemachine.isStateActive(State.another_region_D));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.MAIN_REGION_D));
+		assertTrue(statemachine.isStateActive(OperationsWithoutBracesStatemachine.State.ANOTHER_REGION_D));
 	}
 }

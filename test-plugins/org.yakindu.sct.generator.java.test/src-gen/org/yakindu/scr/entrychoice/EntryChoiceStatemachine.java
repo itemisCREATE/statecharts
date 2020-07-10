@@ -6,8 +6,8 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		$NullState$
+		MAIN_REGION_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -29,7 +29,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
@@ -70,11 +70,11 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -85,7 +85,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -102,8 +102,8 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
 		default:
 			return false;
 		}
@@ -116,7 +116,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -127,13 +127,13 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
 		default:

@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.simpleevent.SimpleEventStatemachine;
-import org.yakindu.scr.simpleevent.SimpleEventStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.simpleevent.SimpleEventStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for SimpleEvent
@@ -40,12 +40,12 @@ public class SimpleEvent {
 	@Test
 	public void simpleEventTest() {
 		statemachine.enter();
-		assertTrue("Expected A to be active",statemachine.isStateActive(State.main_region_A));
+		assertTrue("Expected A to be active",statemachine.isStateActive(SimpleEventStatemachine.State.MAIN_REGION_A));
 		assertTrue(5l == 5l);
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue("Expected B to be active",statemachine.isStateActive(State.main_region_B));
+		assertTrue("Expected B to be active",statemachine.isStateActive(SimpleEventStatemachine.State.MAIN_REGION_B));
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.main_region_B));
+		assertTrue(!statemachine.isStateActive(SimpleEventStatemachine.State.MAIN_REGION_B));
 	}
 }

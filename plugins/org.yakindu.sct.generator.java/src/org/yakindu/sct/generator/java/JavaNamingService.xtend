@@ -31,6 +31,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 class JavaNamingService extends DefaultNamingService {
 
 	@Inject extension SExecExtensions
+	@Inject extension Naming
 
 	Set<String> derivedIdentifiers = new HashSet
 
@@ -113,11 +114,4 @@ class JavaNamingService extends DefaultNamingService {
 		return derivedIdentifiers
 	}
 
-	def String getInterfaceName(InterfaceScope it) {
-		if (name !== null) {
-			return "SCI" + name.toFirstUpper()
-		} else {
-			return "SCInterface";
-		}
-	}
 }

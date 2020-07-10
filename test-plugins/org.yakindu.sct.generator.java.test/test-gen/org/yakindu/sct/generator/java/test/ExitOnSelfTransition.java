@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine;
-import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ExitOnSelfTransition
@@ -40,7 +40,7 @@ public class ExitOnSelfTransition {
 	@Test
 	public void exitOnSelfTransitionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(ExitOnSelfTransitionStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getEntryCount() == 1l);
 		assertTrue(statemachine.getExitCount() == 0l);
 		statemachine.raiseE();

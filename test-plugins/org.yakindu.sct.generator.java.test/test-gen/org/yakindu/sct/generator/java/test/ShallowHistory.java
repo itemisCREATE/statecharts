@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.shallowhistory.ShallowHistoryStatemachine;
-import org.yakindu.scr.shallowhistory.ShallowHistoryStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.shallowhistory.ShallowHistoryStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ShallowHistory
@@ -48,27 +48,27 @@ public class ShallowHistory {
 		timer.cycleLeap(1l);
 		statemachine.raiseEvent7();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
-		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE1));
+		assertTrue(statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9));
 		statemachine.raiseEvent6();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
-		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State6));
+		assertTrue(!statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9));
+		assertTrue(statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6));
 		statemachine.raiseEvent5();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State8));
-		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8));
+		assertTrue(statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9));
 		statemachine.raiseEvent2();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
-		assertTrue(statemachine.isStateActive(State.mainRegion_State1));
+		assertTrue(!statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9));
+		assertTrue(statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE1));
 		statemachine.raiseEvent1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State6));
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
+		assertTrue(statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6));
+		assertTrue(!statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE1));
 		statemachine.raiseEvent5();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State6));
-		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6));
+		assertTrue(statemachine.isStateActive(ShallowHistoryStatemachine.State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9));
 	}
 }

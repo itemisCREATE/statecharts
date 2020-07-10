@@ -7,7 +7,7 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.observables" 
 		}
 		
 		feature OutEventAPI {

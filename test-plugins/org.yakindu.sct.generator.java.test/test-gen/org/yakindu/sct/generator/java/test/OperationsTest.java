@@ -11,10 +11,10 @@ import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.operations.OperationsStatemachine;
-import org.yakindu.scr.operations.OperationsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.operations.OperationsStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for Operations
@@ -22,8 +22,8 @@ import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
 @SuppressWarnings("all")
 public class OperationsTest {
 	InternalOperationCallback internalMock;
-	SCIInterface1OperationCallback interface1Mock;
-	SCInterfaceOperationCallback defaultMock;
+	InterfaceInterface1OperationCallback interface1Mock;
+	InterfaceOperationCallback defaultMock;
 	
 	private OperationsStatemachine statemachine;	
 	private VirtualTimer timer;
@@ -36,10 +36,10 @@ public class OperationsTest {
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		internalMock = mock(InternalOperationCallback.class);
 		statemachine.setInternalOperationCallback(internalMock);
-		interface1Mock = mock(SCIInterface1OperationCallback.class);
-		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface1Mock);
-		defaultMock = mock(SCInterfaceOperationCallback.class);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
+		interface1Mock = mock(InterfaceInterface1OperationCallback.class);
+		statemachine.getInterfaceInterface1().setInterfaceInterface1OperationCallback(interface1Mock);
+		defaultMock = mock(InterfaceOperationCallback.class);
+		statemachine.getInterface().setInterfaceOperationCallback(defaultMock);
 		
 		statemachine.init();
 		
@@ -48,8 +48,8 @@ public class OperationsTest {
 	@After
 	public void operationsTest_tearDown() {
 		statemachine.setInternalOperationCallback(null);
-		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(null);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(null);
+		statemachine.getInterfaceInterface1().setInterfaceInterface1OperationCallback(null);
+		statemachine.getInterface().setInterfaceOperationCallback(null);
 		statemachine = null;
 		
 		timer = null;
@@ -65,9 +65,9 @@ public class OperationsTest {
 		});
 		 
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_B));
 		verify(internalMock, atLeastOnce()).internalOperation1();
 		 
 		verify(internalMock, atLeastOnce()).internalOperation2((4l));
@@ -86,7 +86,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_C));
 		verify(interface1Mock, atLeastOnce()).interfaceOperation1();
 		 
 		verify(interface1Mock, atLeastOnce()).interfaceOperation2((4l));
@@ -105,7 +105,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_D));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_D));
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation1();
 		 
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation2((4l));
@@ -134,7 +134,7 @@ public class OperationsTest {
 		});
 		 
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_A));
 		verify(internalMock, never()).internalOperation1();
 		 
 		verify(internalMock, never()).internalOperation2((4l));
@@ -153,7 +153,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_B));
 		verify(interface1Mock, never()).interfaceOperation1();
 		 
 		verify(interface1Mock, never()).interfaceOperation2((4l));
@@ -172,7 +172,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(OperationsStatemachine.State.MAIN_REGION_C));
 		verify(defaultMock, never()).unnamedInterfaceOperation1();
 		 
 		verify(defaultMock, never()).unnamedInterfaceOperation2((4l));

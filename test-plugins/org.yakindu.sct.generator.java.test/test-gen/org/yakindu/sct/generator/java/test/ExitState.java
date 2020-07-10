@@ -4,11 +4,11 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.exitstate.ExitStateStatemachine;
-import org.yakindu.scr.exitstate.ExitStateStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.exits.ExitStateStatemachine;
+import org.yakindu.scr.exits.ExitStateStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ExitState
@@ -40,35 +40,35 @@ public class ExitState {
 	@Test
 	public void defaultExit() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.exitState_r_A));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_A));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.exitState_r_E));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_E));
 	}
 	
 	@Test
 	public void namedExitThroughNamedTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.exitState_r_A));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_A));
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.exitState_r_F));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_F));
 	}
 	
 	@Test
 	public void namedExitThroughDefaultTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.exitState_r_A));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_A));
 		statemachine.raiseG();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.exitState_r_E));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_E));
 	}
 	
 	@Test
 	public void remainInA() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.exitState_r_A));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_A));
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.exitState_r_A));
+		assertTrue(statemachine.isStateActive(ExitStateStatemachine.State.R_A));
 	}
 }

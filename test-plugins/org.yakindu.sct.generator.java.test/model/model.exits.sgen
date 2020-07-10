@@ -9,6 +9,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "ExitStateStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -38,6 +39,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "TransitionHandlesMultipleExitsStatemachine"
 		}
 
 		feature GeneralFeatures {

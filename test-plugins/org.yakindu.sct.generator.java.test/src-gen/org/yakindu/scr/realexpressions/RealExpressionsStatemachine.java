@@ -3,7 +3,7 @@ package org.yakindu.scr.realexpressions;
 
 
 public class RealExpressionsStatemachine implements IRealExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -278,20 +278,20 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 	}
 	private static class RealExpressionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region_StateB,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_STATEB,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -310,68 +310,68 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		this.isExecuting = value;
 	}
 	public RealExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setMyReal1(0.0);
+		defaultInterface.setMyReal1(0.0);
 		
-		sCInterface.setMyReal2(0.0);
+		defaultInterface.setMyReal2(0.0);
 		
-		sCInterface.setMyFloat(1.0f);
+		defaultInterface.setMyFloat(1.0f);
 		
-		sCInterface.setMyDouble(2.0);
+		defaultInterface.setMyDouble(2.0);
 		
-		sCInterface.setLess(false);
+		defaultInterface.setLess(false);
 		
-		sCInterface.setGreater(false);
+		defaultInterface.setGreater(false);
 		
-		sCInterface.setEqualOrLess(false);
+		defaultInterface.setEqualOrLess(false);
 		
-		sCInterface.setEqualOrGreater(false);
+		defaultInterface.setEqualOrGreater(false);
 		
-		sCInterface.setEqual(false);
+		defaultInterface.setEqual(false);
 		
-		sCInterface.setNotEqual(false);
+		defaultInterface.setNotEqual(false);
 		
-		sCInterface.setPlus(false);
+		defaultInterface.setPlus(false);
 		
-		sCInterface.setMinus(false);
+		defaultInterface.setMinus(false);
 		
-		sCInterface.setMultiply(false);
+		defaultInterface.setMultiply(false);
 		
-		sCInterface.setDivision(false);
+		defaultInterface.setDivision(false);
 		
-		sCInterface.setModulo(false);
+		defaultInterface.setModulo(false);
 		
-		sCInterface.setNegat(0.0);
+		defaultInterface.setNegat(0.0);
 		
-		sCInterface.setComplement(false);
+		defaultInterface.setComplement(false);
 		
-		sCInterface.setMultiAssign(2.2);
+		defaultInterface.setMultiAssign(2.2);
 		
-		sCInterface.setDivAssign(22.79);
+		defaultInterface.setDivAssign(22.79);
 		
-		sCInterface.setPlusAssign(2.2);
+		defaultInterface.setPlusAssign(2.2);
 		
-		sCInterface.setMinusAssign(8.6);
+		defaultInterface.setMinusAssign(8.6);
 		
-		sCInterface.setModuloAssign(false);
+		defaultInterface.setModuloAssign(false);
 		
-		sCInterface.setIncrement(0);
+		defaultInterface.setIncrement(0);
 		
-		sCInterface.setIncrementAssign(0);
+		defaultInterface.setIncrementAssign(0);
 		
-		sCInterface.setDecrement(0);
+		defaultInterface.setDecrement(0);
 		
-		sCInterface.setDecrementAssign(0);
+		defaultInterface.setDecrementAssign(0);
 		
 		isExecuting = false;
 	}
@@ -410,14 +410,14 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
-			case main_region_StateB:
+			case MAIN_REGION_STATEB:
 				main_region_StateB_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -428,7 +428,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -440,12 +440,12 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
+		defaultInterface.e1 = false;
 	}
 	
 	/**
@@ -454,295 +454,295 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public double getMyReal1() {
-		return sCInterface.getMyReal1();
+		return defaultInterface.getMyReal1();
 	}
 	
 	public void setMyReal1(double value) {
-		sCInterface.setMyReal1(value);
+		defaultInterface.setMyReal1(value);
 	}
 	
 	public double getMyReal2() {
-		return sCInterface.getMyReal2();
+		return defaultInterface.getMyReal2();
 	}
 	
 	public void setMyReal2(double value) {
-		sCInterface.setMyReal2(value);
+		defaultInterface.setMyReal2(value);
 	}
 	
 	public double getMyFloat() {
-		return sCInterface.getMyFloat();
+		return defaultInterface.getMyFloat();
 	}
 	
 	public void setMyFloat(double value) {
-		sCInterface.setMyFloat(value);
+		defaultInterface.setMyFloat(value);
 	}
 	
 	public double getMyDouble() {
-		return sCInterface.getMyDouble();
+		return defaultInterface.getMyDouble();
 	}
 	
 	public void setMyDouble(double value) {
-		sCInterface.setMyDouble(value);
+		defaultInterface.setMyDouble(value);
 	}
 	
 	public boolean getLess() {
-		return sCInterface.getLess();
+		return defaultInterface.getLess();
 	}
 	
 	public void setLess(boolean value) {
-		sCInterface.setLess(value);
+		defaultInterface.setLess(value);
 	}
 	
 	public boolean getGreater() {
-		return sCInterface.getGreater();
+		return defaultInterface.getGreater();
 	}
 	
 	public void setGreater(boolean value) {
-		sCInterface.setGreater(value);
+		defaultInterface.setGreater(value);
 	}
 	
 	public boolean getEqualOrLess() {
-		return sCInterface.getEqualOrLess();
+		return defaultInterface.getEqualOrLess();
 	}
 	
 	public void setEqualOrLess(boolean value) {
-		sCInterface.setEqualOrLess(value);
+		defaultInterface.setEqualOrLess(value);
 	}
 	
 	public boolean getEqualOrGreater() {
-		return sCInterface.getEqualOrGreater();
+		return defaultInterface.getEqualOrGreater();
 	}
 	
 	public void setEqualOrGreater(boolean value) {
-		sCInterface.setEqualOrGreater(value);
+		defaultInterface.setEqualOrGreater(value);
 	}
 	
 	public boolean getEqual() {
-		return sCInterface.getEqual();
+		return defaultInterface.getEqual();
 	}
 	
 	public void setEqual(boolean value) {
-		sCInterface.setEqual(value);
+		defaultInterface.setEqual(value);
 	}
 	
 	public boolean getNotEqual() {
-		return sCInterface.getNotEqual();
+		return defaultInterface.getNotEqual();
 	}
 	
 	public void setNotEqual(boolean value) {
-		sCInterface.setNotEqual(value);
+		defaultInterface.setNotEqual(value);
 	}
 	
 	public boolean getPlus() {
-		return sCInterface.getPlus();
+		return defaultInterface.getPlus();
 	}
 	
 	public void setPlus(boolean value) {
-		sCInterface.setPlus(value);
+		defaultInterface.setPlus(value);
 	}
 	
 	public boolean getMinus() {
-		return sCInterface.getMinus();
+		return defaultInterface.getMinus();
 	}
 	
 	public void setMinus(boolean value) {
-		sCInterface.setMinus(value);
+		defaultInterface.setMinus(value);
 	}
 	
 	public boolean getMultiply() {
-		return sCInterface.getMultiply();
+		return defaultInterface.getMultiply();
 	}
 	
 	public void setMultiply(boolean value) {
-		sCInterface.setMultiply(value);
+		defaultInterface.setMultiply(value);
 	}
 	
 	public boolean getDivision() {
-		return sCInterface.getDivision();
+		return defaultInterface.getDivision();
 	}
 	
 	public void setDivision(boolean value) {
-		sCInterface.setDivision(value);
+		defaultInterface.setDivision(value);
 	}
 	
 	public boolean getModulo() {
-		return sCInterface.getModulo();
+		return defaultInterface.getModulo();
 	}
 	
 	public void setModulo(boolean value) {
-		sCInterface.setModulo(value);
+		defaultInterface.setModulo(value);
 	}
 	
 	public double getNegat() {
-		return sCInterface.getNegat();
+		return defaultInterface.getNegat();
 	}
 	
 	public void setNegat(double value) {
-		sCInterface.setNegat(value);
+		defaultInterface.setNegat(value);
 	}
 	
 	public boolean getComplement() {
-		return sCInterface.getComplement();
+		return defaultInterface.getComplement();
 	}
 	
 	public void setComplement(boolean value) {
-		sCInterface.setComplement(value);
+		defaultInterface.setComplement(value);
 	}
 	
 	public double getMultiAssign() {
-		return sCInterface.getMultiAssign();
+		return defaultInterface.getMultiAssign();
 	}
 	
 	public void setMultiAssign(double value) {
-		sCInterface.setMultiAssign(value);
+		defaultInterface.setMultiAssign(value);
 	}
 	
 	public double getDivAssign() {
-		return sCInterface.getDivAssign();
+		return defaultInterface.getDivAssign();
 	}
 	
 	public void setDivAssign(double value) {
-		sCInterface.setDivAssign(value);
+		defaultInterface.setDivAssign(value);
 	}
 	
 	public double getPlusAssign() {
-		return sCInterface.getPlusAssign();
+		return defaultInterface.getPlusAssign();
 	}
 	
 	public void setPlusAssign(double value) {
-		sCInterface.setPlusAssign(value);
+		defaultInterface.setPlusAssign(value);
 	}
 	
 	public double getMinusAssign() {
-		return sCInterface.getMinusAssign();
+		return defaultInterface.getMinusAssign();
 	}
 	
 	public void setMinusAssign(double value) {
-		sCInterface.setMinusAssign(value);
+		defaultInterface.setMinusAssign(value);
 	}
 	
 	public boolean getModuloAssign() {
-		return sCInterface.getModuloAssign();
+		return defaultInterface.getModuloAssign();
 	}
 	
 	public void setModuloAssign(boolean value) {
-		sCInterface.setModuloAssign(value);
+		defaultInterface.setModuloAssign(value);
 	}
 	
 	public double getIncrement() {
-		return sCInterface.getIncrement();
+		return defaultInterface.getIncrement();
 	}
 	
 	public void setIncrement(double value) {
-		sCInterface.setIncrement(value);
+		defaultInterface.setIncrement(value);
 	}
 	
 	public double getIncrementAssign() {
-		return sCInterface.getIncrementAssign();
+		return defaultInterface.getIncrementAssign();
 	}
 	
 	public void setIncrementAssign(double value) {
-		sCInterface.setIncrementAssign(value);
+		defaultInterface.setIncrementAssign(value);
 	}
 	
 	public double getDecrement() {
-		return sCInterface.getDecrement();
+		return defaultInterface.getDecrement();
 	}
 	
 	public void setDecrement(double value) {
-		sCInterface.setDecrement(value);
+		defaultInterface.setDecrement(value);
 	}
 	
 	public double getDecrementAssign() {
-		return sCInterface.getDecrementAssign();
+		return defaultInterface.getDecrementAssign();
 	}
 	
 	public void setDecrementAssign(double value) {
-		sCInterface.setDecrementAssign(value);
+		defaultInterface.setDecrementAssign(value);
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.setMyReal1(5.3);
+		defaultInterface.setMyReal1(5.3);
 		
-		sCInterface.setMyReal2(10.6);
+		defaultInterface.setMyReal2(10.6);
 		
-		sCInterface.setMyFloat(3.3);
+		defaultInterface.setMyFloat(3.3);
 		
-		sCInterface.setMyDouble(4.4);
+		defaultInterface.setMyDouble(4.4);
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setLess(sCInterface.myReal1<sCInterface.myReal2);
+		defaultInterface.setLess(defaultInterface.myReal1<defaultInterface.myReal2);
 		
-		sCInterface.setGreater(sCInterface.myReal1>sCInterface.myReal2);
+		defaultInterface.setGreater(defaultInterface.myReal1>defaultInterface.myReal2);
 		
-		sCInterface.setEqualOrLess(sCInterface.myReal1<=sCInterface.myReal2);
+		defaultInterface.setEqualOrLess(defaultInterface.myReal1<=defaultInterface.myReal2);
 		
-		sCInterface.setEqualOrGreater(sCInterface.myReal1>=sCInterface.myReal2);
+		defaultInterface.setEqualOrGreater(defaultInterface.myReal1>=defaultInterface.myReal2);
 		
-		sCInterface.setEqual(sCInterface.myReal1==sCInterface.myReal2);
+		defaultInterface.setEqual(defaultInterface.myReal1==defaultInterface.myReal2);
 		
-		sCInterface.setNotEqual(sCInterface.myReal1!=sCInterface.myReal2);
+		defaultInterface.setNotEqual(defaultInterface.myReal1!=defaultInterface.myReal2);
 		
-		sCInterface.setPlus(((15.89<=((sCInterface.myReal1 + sCInterface.myReal2)) && ((sCInterface.myReal1 + sCInterface.myReal2))<=16.91)));
+		defaultInterface.setPlus(((15.89<=((defaultInterface.myReal1 + defaultInterface.myReal2)) && ((defaultInterface.myReal1 + defaultInterface.myReal2))<=16.91)));
 		
-		sCInterface.setMinus(((5.29<=((sCInterface.myReal2 - sCInterface.myReal1)) && ((sCInterface.myReal1 - sCInterface.myReal2))<=5.31)));
+		defaultInterface.setMinus(((5.29<=((defaultInterface.myReal2 - defaultInterface.myReal1)) && ((defaultInterface.myReal1 - defaultInterface.myReal2))<=5.31)));
 		
-		sCInterface.setMultiply(((56.17<=((sCInterface.myReal1 * sCInterface.myReal2)) && ((sCInterface.myReal1 * sCInterface.myReal2))<=56.19)));
+		defaultInterface.setMultiply(((56.17<=((defaultInterface.myReal1 * defaultInterface.myReal2)) && ((defaultInterface.myReal1 * defaultInterface.myReal2))<=56.19)));
 		
-		sCInterface.setDivision(((1.9<=((sCInterface.myReal2 / sCInterface.myReal1)) && ((sCInterface.myReal1 / sCInterface.myReal2))<=2.1)));
+		defaultInterface.setDivision(((1.9<=((defaultInterface.myReal2 / defaultInterface.myReal1)) && ((defaultInterface.myReal1 / defaultInterface.myReal2))<=2.1)));
 		
-		sCInterface.setModulo(((-0.1<=((sCInterface.myReal2 % sCInterface.myReal1)) && ((sCInterface.myReal1 % sCInterface.myReal2))<=0.1)));
+		defaultInterface.setModulo(((-0.1<=((defaultInterface.myReal2 % defaultInterface.myReal1)) && ((defaultInterface.myReal1 % defaultInterface.myReal2))<=0.1)));
 		
-		sCInterface.setNegat(-sCInterface.myReal1);
+		defaultInterface.setNegat(-defaultInterface.myReal1);
 		
-		sCInterface.setMultiAssign(sCInterface.getMultiAssign() * sCInterface.myReal1);
+		defaultInterface.setMultiAssign(defaultInterface.getMultiAssign() * defaultInterface.myReal1);
 		
-		sCInterface.setDivAssign(sCInterface.getDivAssign() / sCInterface.myReal1);
+		defaultInterface.setDivAssign(defaultInterface.getDivAssign() / defaultInterface.myReal1);
 		
-		sCInterface.setPlusAssign(sCInterface.getPlusAssign() + sCInterface.myReal1);
+		defaultInterface.setPlusAssign(defaultInterface.getPlusAssign() + defaultInterface.myReal1);
 		
-		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myReal1);
+		defaultInterface.setMinusAssign(defaultInterface.getMinusAssign() - defaultInterface.myReal1);
 		
-		sCInterface.setModuloAssign((-0.1<=(sCInterface.assignMyReal1(sCInterface.getMyReal1() % sCInterface.myReal1))));
+		defaultInterface.setModuloAssign((-0.1<=(defaultInterface.assignMyReal1(defaultInterface.getMyReal1() % defaultInterface.myReal1))));
 		
-		sCInterface.setIncrementAssign(sCInterface.increment++);
+		defaultInterface.setIncrementAssign(defaultInterface.increment++);
 		
-		sCInterface.setDecrementAssign(sCInterface.decrement++);
+		defaultInterface.setDecrementAssign(defaultInterface.decrement++);
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		entryAction_main_region_StateA();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_default() {
 		entryAction_main_region_StateB();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -753,22 +753,22 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB:
+		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
 		default:

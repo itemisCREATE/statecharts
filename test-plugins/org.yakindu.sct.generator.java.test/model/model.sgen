@@ -8,7 +8,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.tracing"
+			typeName = "TracingStatemachine"
 		}
 
 		feature FunctionInlining {
@@ -35,7 +36,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr"
+			typeName = "EntryReactionActionStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -64,6 +66,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "TriggerExpressionPrecedenceStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -91,7 +94,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.alwaysoncycle"
+			typeName = "AlwaysOncycleStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -120,7 +124,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.assignmentasexpression" 
+			typeName = "AssignmentAsExpressionStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -148,7 +153,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.booleanexpressions" 
+			typeName = "BooleanExpressionsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -176,7 +182,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.bitexpressions" 
+			typeName = "BitExpressionsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -204,7 +211,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.bitwiseexecutionorder" 
+			typeName = "BitwiseExecutionOrderStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -232,7 +240,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.choice" 
+			typeName = "ChoiceStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -260,7 +269,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.castexpressions" 
+			typeName = "CastExpressionsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -288,7 +298,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.ckeywords" 
+			typeName = "CKeywordsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -316,7 +327,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.conditionalexpressions"
+			typeName = "ConditionalExpressionsStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -344,7 +356,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.constants" 
+			typeName = "ConstantsStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -372,7 +385,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.constantsvariation" 
+			typeName = "ConstantsVariationStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -400,7 +414,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.declarations" 
+			typeName = "DeclarationsStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -428,7 +443,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.deepentry" 
+			typeName = "DeepEntryStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -456,7 +472,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.deephistory" 
+			typeName = "DeepHistoryStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -484,7 +501,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.dynamicchoice" 
+			typeName = "DynamicChoiceStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -512,7 +530,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.emptytransition" 
+			typeName = "EmptyTransitionStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -540,7 +559,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.enterstate" 
+			typeName = "EnterStateStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -568,7 +588,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.entrychoice" 
+			typeName = "EntryChoiceStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -596,7 +617,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.entryexitselftransition" 
+			typeName = "EntryExitSelfTransitionStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -624,7 +646,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.exitonselftransition" 
+			typeName = "ExitOnSelfTransitionStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -652,7 +675,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.exitsequence" 
+			typeName = "ExitSequenceStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -681,7 +705,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.featurecalls" 
+			typeName = "FeatureCallsStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -709,7 +734,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.finalstate" 
+			typeName = "FinalStateStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -737,7 +763,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.floatmodulo" 
+			typeName = "FloatModuloStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -765,7 +792,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.guard" 
+			typeName = "GuardStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -793,7 +821,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.guardedentry" 
+			typeName = "GuardedEntryStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -821,7 +850,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.guardedexit" 
+			typeName = "GuardedExitStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -849,7 +879,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.historywithexitpoint" 
+			typeName = "HistoryWithExitPointStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -877,7 +908,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.historywithoutinitialstep"
+			typeName = "HistoryWithoutInitialStepStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -905,7 +937,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.ineventlifecycle" 
+			typeName = "InEventLifeCycleStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -933,7 +966,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.integerexpressions" 
+			typeName = "IntegerExpressionsStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -961,7 +995,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.javakeywords" 
+			typeName = "JavaKeywordsStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -989,7 +1024,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.localreactions" 
+			typeName = "LocalReactionsStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1017,7 +1053,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.logicaland" 
+			typeName = "LogicalAndStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1046,7 +1083,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.logicalor"
+			typeName = "LogicalOrStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1075,7 +1113,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.namedinterfaceaccess" 
+			typeName = "NamedInterfaceAccessStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1107,7 +1146,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.nullcheck"
+			typeName = "NullCheckStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1135,7 +1175,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.operationswithoutbraces" 
+			typeName = "OperationsWithoutBracesStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1163,7 +1204,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.operations"
+			typeName = "OperationsStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1191,7 +1233,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.outeventlifecycle" 
+			typeName = "OutEventLifeCycleStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1223,7 +1266,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.parenthesis" 
+			typeName = "ParenthesisStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1251,7 +1295,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.performancetest"
+			typeName = "PerformanceTestStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1279,7 +1324,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.priorityvalues"
+			typeName = "PriorityValuesStatemachine"   
 		}
 
 		feature GeneralFeatures {
@@ -1307,7 +1353,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.raiseevent" 
+			typeName = "RaiseEventStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1335,7 +1382,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.readonlyvariable" 
+			typeName = "ReadOnlyVariableStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1363,7 +1411,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.realexpressions"
+			typeName = "RealExpressionsStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1391,7 +1440,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.samenamedifferentregion"
+			typeName = "SameNameDifferentRegionStatemachine"   
 		}
 
 		feature GeneralFeatures {
@@ -1419,7 +1469,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.shadowvalueparameter"
+			typeName = "ShadowValueParameterStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1447,7 +1498,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.shallowhistory"
+			typeName = "ShallowHistoryStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1475,7 +1527,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.shallowhistorywithdeepentry"
+			typeName = "ShallowHistoryWithDeepEntryStatemachine"   
 		}
 
 		feature GeneralFeatures {
@@ -1503,7 +1556,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.simpleevent" 
+			typeName = "SimpleEventStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1532,7 +1586,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.simplehierachy"
+			typeName = "SimpleHierachyStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1560,7 +1615,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.statechartlocalreactions" 
+			typeName = "StatechartLocalReactionsStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1588,7 +1644,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.statechartactive" 
+			typeName = "StatechartActiveStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1616,7 +1673,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.stateisactive" 
+			typeName = "StateIsActiveStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1644,7 +1702,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.staticchoice" 
+			typeName = "StaticChoiceStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1672,7 +1731,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.stextkeywordsinstatesandregions"
+			typeName = "STextKeywordsInStatesAndRegionsStatemachine"  
 		}
 
 		feature GeneralFeatures {
@@ -1700,7 +1760,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.stringexpressions" 
+			typeName = "StringExpressionsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1728,7 +1789,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.syncfork" 
+			typeName = "SyncForkStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1756,7 +1818,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.syncjoin" 
+			typeName = "SyncJoinStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1784,7 +1847,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.typealias" 
+			typeName = "TypeAliasStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1812,7 +1876,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.timedtransitions" 
+			typeName = "TimedTransitionsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1840,7 +1905,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.transitionwithoutcondition"
+			typeName = "TransitionWithoutConditionStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1868,7 +1934,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.triggerguardexpressions" 
+			typeName = "TriggerGuardExpressionsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1896,7 +1963,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.valuedevents" 
+			typeName = "ValuedEventsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1924,7 +1992,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.variadicfunctions" 
+			typeName = "VariadicFunctionsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1953,7 +2022,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.wrappertest" 
+			typeName = "WrapperTestStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -1975,7 +2045,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.runnabletest"
+			typeName = "RunnableTestStatemachine" 
 		}
 
 		feature GeneralFeatures {
@@ -1997,7 +2068,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.statechartkeywords" 
+			typeName = "StatechartKeywordsStatemachine" 
 		}
 		
 		feature GeneralFeatures {
@@ -2025,7 +2097,8 @@ GeneratorModel for yakindu::java {
 		}
 		
 		feature Naming {
-			basePackage =  "org.yakindu.scr" 
+			basePackage =  "org.yakindu.scr.unreachablestates" 
+			typeName = "UnreachableStatesStatemachine" 
 		}
 		
 		feature FunctionInlining {

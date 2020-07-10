@@ -3,8 +3,8 @@ package org.yakindu.scr.runnabletest;
 import java.util.List;
 
 import org.yakindu.sct.rx.Observable;
-import org.yakindu.scr.ITimer;
-import org.yakindu.scr.ITimerCallback;
+import org.yakindu.sct.ITimer;
+import org.yakindu.sct.ITimerCallback;
 import org.yakindu.scr.runnabletest.RunnableTestStatemachine.State;
 
 /**
@@ -24,94 +24,94 @@ public class SynchronizedRunnableTestStatemachine implements IRunnableTestStatem
 	protected RunnableTestStatemachine statemachine = new RunnableTestStatemachine();
 	
 	/**
-	 * Interface object for SCInterface
+	 * Interface object for Interface
 	 */		
-	protected class SynchronizedSCInterface implements SCInterface {
+	protected class SynchronizedInterface implements Interface {
 		
-		public List<SCInterfaceListener> getListeners() {
+		public List<InterfaceListener> getListeners() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().getListeners();
+				return statemachine.getInterface().getListeners();
 			}
 		}
 		
-		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(InterfaceOperationCallback operationCallback) {
 			synchronized(statemachine) {
-				statemachine.getSCInterface().setSCInterfaceOperationCallback(operationCallback);
+				statemachine.getInterface().setInterfaceOperationCallback(operationCallback);
 			}
 		}
 		
 		public Observable<Long> getEv_out() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().getEv_out();
+				return statemachine.getInterface().getEv_out();
 			}
 		}
 		
 		public void raiseEv_in(final long value) {
 			
 			synchronized (statemachine) {
-				statemachine.getSCInterface().raiseEv_in(value);
+				statemachine.getInterface().raiseEv_in(value);
 				statemachine.runCycle();
 			}
 		}
 		
 		public long getMyVar() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().getMyVar();
+				return statemachine.getInterface().getMyVar();
 			}
 		}
 		
 		public void setMyVar(final long value) {
 			synchronized(statemachine) {
-				statemachine.getSCInterface().setMyVar(value);
+				statemachine.getInterface().setMyVar(value);
 			}
 		}
 		
 		public long getAfterCalls() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().getAfterCalls();
+				return statemachine.getInterface().getAfterCalls();
 			}
 		}
 		
 		public void setAfterCalls(final long value) {
 			synchronized(statemachine) {
-				statemachine.getSCInterface().setAfterCalls(value);
+				statemachine.getInterface().setAfterCalls(value);
 			}
 		}
 		
 		public long getCycles() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().getCycles();
+				return statemachine.getInterface().getCycles();
 			}
 		}
 		
 		public void setCycles(final long value) {
 			synchronized(statemachine) {
-				statemachine.getSCInterface().setCycles(value);
+				statemachine.getInterface().setCycles(value);
 			}
 		}
 		
 		public long getS2_entered() {
 			synchronized(statemachine) {
-				return statemachine.getSCInterface().getS2_entered();
+				return statemachine.getInterface().getS2_entered();
 			}
 		}
 		
 		public void setS2_entered(final long value) {
 			synchronized(statemachine) {
-				statemachine.getSCInterface().setS2_entered(value);
+				statemachine.getInterface().setS2_entered(value);
 			}
 		}
 		
 	};
 	
-	protected SCInterface sCInterface;
+	protected Interface defaultInterface;
 	
 	public SynchronizedRunnableTestStatemachine() {
-		sCInterface = new SynchronizedSCInterface();
+		defaultInterface = new SynchronizedInterface();
 	}
 	
-	public synchronized SCInterface getSCInterface() {
-		return sCInterface;
+	public synchronized Interface getInterface() {
+		return defaultInterface;
 	}
 	/*================ TIME EVENT HANDLING ================
 	

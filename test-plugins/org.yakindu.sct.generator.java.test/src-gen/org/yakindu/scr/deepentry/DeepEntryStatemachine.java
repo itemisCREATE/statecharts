@@ -3,7 +3,7 @@ package org.yakindu.scr.deepentry;
 
 
 public class DeepEntryStatemachine implements IDeepEntryStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -51,29 +51,29 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 	}
 	private static class DeepEntryStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		r_A,
-		r_A_r_B,
-		r2_B,
-		r2_B_r_BA,
-		r2_B_r_BA_r_BAA,
-		r2_B_r_BB,
-		r2_C,
-		r3_D,
-		r3_D_r_DA,
-		r3_D_r_DA_r_DAA,
-		$NullState$
+		R_A,
+		R_A_R_B,
+		R2_B,
+		R2_B_R_BA,
+		R2_B_R_BA_R_BAA,
+		R2_B_R_BB,
+		R2_C,
+		R3_D,
+		R3_D_R_DA,
+		R3_D_R_DA_R_DAA,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[4];
@@ -93,25 +93,25 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		this.isExecuting = value;
 	}
 	public DeepEntryStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 3; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 4; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setX(0);
+		defaultInterface.setX(0);
 		
-		sCInterface.setY(0);
+		defaultInterface.setY(0);
 		
-		sCInterface.setZ(0);
+		defaultInterface.setZ(0);
 		
 		isExecuting = false;
 	}
@@ -154,23 +154,23 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case r_A_r_B:
+			case R_A_R_B:
 				r_A_r_B_react(true);
 				break;
-			case r2_B_r_BA_r_BAA:
+			case R2_B_R_BA_R_BAA:
 				r2_B_r_BA_r_BAA_react(true);
 				break;
-			case r2_B_r_BB:
+			case R2_B_R_BB:
 				r2_B_r_BB_react(true);
 				break;
-			case r2_C:
+			case R2_C:
 				r2_C_react(true);
 				break;
-			case r3_D_r_DA_r_DAA:
+			case R3_D_R_DA_R_DAA:
 				r3_D_r_DA_r_DAA_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -181,7 +181,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$||stateVector[2] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -193,16 +193,16 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
 	}
 	
 	/**
@@ -211,96 +211,96 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case r_A:
+		case R_A:
 			return stateVector[0].ordinal() >= State.
-					r_A.ordinal()&& stateVector[0].ordinal() <= State.r_A_r_B.ordinal();
-		case r_A_r_B:
-			return stateVector[0] == State.r_A_r_B;
-		case r2_B:
+					R_A.ordinal()&& stateVector[0].ordinal() <= State.R_A_R_B.ordinal();
+		case R_A_R_B:
+			return stateVector[0] == State.R_A_R_B;
+		case R2_B:
 			return stateVector[1].ordinal() >= State.
-					r2_B.ordinal()&& stateVector[1].ordinal() <= State.r2_B_r_BB.ordinal();
-		case r2_B_r_BA:
+					R2_B.ordinal()&& stateVector[1].ordinal() <= State.R2_B_R_BB.ordinal();
+		case R2_B_R_BA:
 			return stateVector[1].ordinal() >= State.
-					r2_B_r_BA.ordinal()&& stateVector[1].ordinal() <= State.r2_B_r_BA_r_BAA.ordinal();
-		case r2_B_r_BA_r_BAA:
-			return stateVector[1] == State.r2_B_r_BA_r_BAA;
-		case r2_B_r_BB:
-			return stateVector[1] == State.r2_B_r_BB;
-		case r2_C:
-			return stateVector[1] == State.r2_C;
-		case r3_D:
+					R2_B_R_BA.ordinal()&& stateVector[1].ordinal() <= State.R2_B_R_BA_R_BAA.ordinal();
+		case R2_B_R_BA_R_BAA:
+			return stateVector[1] == State.R2_B_R_BA_R_BAA;
+		case R2_B_R_BB:
+			return stateVector[1] == State.R2_B_R_BB;
+		case R2_C:
+			return stateVector[1] == State.R2_C;
+		case R3_D:
 			return stateVector[2].ordinal() >= State.
-					r3_D.ordinal()&& stateVector[2].ordinal() <= State.r3_D_r_DA_r_DAA.ordinal();
-		case r3_D_r_DA:
+					R3_D.ordinal()&& stateVector[2].ordinal() <= State.R3_D_R_DA_R_DAA.ordinal();
+		case R3_D_R_DA:
 			return stateVector[2].ordinal() >= State.
-					r3_D_r_DA.ordinal()&& stateVector[2].ordinal() <= State.r3_D_r_DA_r_DAA.ordinal();
-		case r3_D_r_DA_r_DAA:
-			return stateVector[2] == State.r3_D_r_DA_r_DAA;
+					R3_D_R_DA.ordinal()&& stateVector[2].ordinal() <= State.R3_D_R_DA_R_DAA.ordinal();
+		case R3_D_R_DA_R_DAA:
+			return stateVector[2] == State.R3_D_R_DA_R_DAA;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public long getX() {
-		return sCInterface.getX();
+		return defaultInterface.getX();
 	}
 	
 	public void setX(long value) {
-		sCInterface.setX(value);
+		defaultInterface.setX(value);
 	}
 	
 	public long getY() {
-		return sCInterface.getY();
+		return defaultInterface.getY();
 	}
 	
 	public void setY(long value) {
-		sCInterface.setY(value);
+		defaultInterface.setY(value);
 	}
 	
 	public long getZ() {
-		return sCInterface.getZ();
+		return defaultInterface.getZ();
 	}
 	
 	public void setZ(long value) {
-		sCInterface.setZ(value);
+		defaultInterface.setZ(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_r_A() {
-		sCInterface.setX(sCInterface.getX() + 1);
+		defaultInterface.setX(defaultInterface.getX() + 1);
 	}
 	
 	/* Entry action for state 'BA'. */
 	private void entryAction_r2_B_r_BA() {
-		sCInterface.setY(sCInterface.getY() + 1);
+		defaultInterface.setY(defaultInterface.getY() + 1);
 	}
 	
 	/* Entry action for state 'D'. */
 	private void entryAction_r3_D() {
-		sCInterface.setZ(sCInterface.getZ() + 1);
+		defaultInterface.setZ(defaultInterface.getZ() + 1);
 	}
 	
 	/* Entry action for state 'DA'. */
 	private void entryAction_r3_D_r_DA() {
-		sCInterface.setZ(sCInterface.getZ() + 1);
+		defaultInterface.setZ(defaultInterface.getZ() + 1);
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_r_A_r_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.r_A_r_B;
+		stateVector[0] = State.R_A_R_B;
 	}
 	
 	/* 'default' enter sequence for state B */
@@ -318,13 +318,13 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* 'default' enter sequence for state BAA */
 	private void enterSequence_r2_B_r_BA_r_BAA_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.r2_B_r_BA_r_BAA;
+		stateVector[1] = State.R2_B_R_BA_R_BAA;
 	}
 	
 	/* 'default' enter sequence for state BB */
 	private void enterSequence_r2_B_r_BB_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.r2_B_r_BB;
+		stateVector[1] = State.R2_B_R_BB;
 		
 		historyVector[0] = stateVector[1];
 	}
@@ -332,13 +332,13 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* 'default' enter sequence for state C */
 	private void enterSequence_r2_C_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.r2_C;
+		stateVector[1] = State.R2_C;
 	}
 	
 	/* 'default' enter sequence for state DAA */
 	private void enterSequence_r3_D_r_DA_r_DAA_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.r3_D_r_DA_r_DAA;
+		stateVector[2] = State.R3_D_R_DA_R_DAA;
 		
 		historyVector[3] = stateVector[2];
 	}
@@ -361,10 +361,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* shallow enterSequence with history in child r */
 	private void shallowEnterSequence_r2_B_r() {
 		switch (historyVector[0]) {
-		case r2_B_r_BA_r_BAA:
+		case R2_B_R_BA_R_BAA:
 			enterSequence_r2_B_r_BA_default();
 			break;
-		case r2_B_r_BB:
+		case R2_B_R_BB:
 			enterSequence_r2_B_r_BB_default();
 			break;
 		default:
@@ -385,7 +385,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* deep enterSequence with history in child r3 */
 	private void deepEnterSequence_r3() {
 		switch (historyVector[1]) {
-		case r3_D_r_DA_r_DAA:
+		case R3_D_R_DA_R_DAA:
 			entryAction_r3_D();
 			deepEnterSequence_r3_D_r();
 			break;
@@ -397,7 +397,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* deep enterSequence with history in child r */
 	private void deepEnterSequence_r3_D_r() {
 		switch (historyVector[2]) {
-		case r3_D_r_DA_r_DAA:
+		case R3_D_R_DA_R_DAA:
 			entryAction_r3_D_r_DA();
 			deepEnterSequence_r3_D_r_DA_r();
 			break;
@@ -409,7 +409,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* deep enterSequence with history in child r */
 	private void deepEnterSequence_r3_D_r_DA_r() {
 		switch (historyVector[3]) {
-		case r3_D_r_DA_r_DAA:
+		case R3_D_R_DA_R_DAA:
 			enterSequence_r3_D_r_DA_r_DAA_default();
 			break;
 		default:
@@ -420,7 +420,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default exit sequence for state B */
 	private void exitSequence_r_A_r_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
@@ -436,31 +436,31 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default exit sequence for state BAA */
 	private void exitSequence_r2_B_r_BA_r_BAA() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state BB */
 	private void exitSequence_r2_B_r_BB() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_r2_C() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state DAA */
 	private void exitSequence_r3_D_r_DA_r_DAA() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region r */
 	private void exitSequence_r() {
 		switch (stateVector[0]) {
-		case r_A_r_B:
+		case R_A_R_B:
 			exitSequence_r_A_r_B();
 			break;
 		default:
@@ -471,13 +471,13 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default exit sequence for region r2 */
 	private void exitSequence_r2() {
 		switch (stateVector[1]) {
-		case r2_B_r_BA_r_BAA:
+		case R2_B_R_BA_R_BAA:
 			exitSequence_r2_B_r_BA_r_BAA();
 			break;
-		case r2_B_r_BB:
+		case R2_B_R_BB:
 			exitSequence_r2_B_r_BB();
 			break;
-		case r2_C:
+		case R2_C:
 			exitSequence_r2_C();
 			break;
 		default:
@@ -488,10 +488,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default exit sequence for region r */
 	private void exitSequence_r2_B_r() {
 		switch (stateVector[1]) {
-		case r2_B_r_BA_r_BAA:
+		case R2_B_R_BA_R_BAA:
 			exitSequence_r2_B_r_BA_r_BAA();
 			break;
-		case r2_B_r_BB:
+		case R2_B_R_BB:
 			exitSequence_r2_B_r_BB();
 			break;
 		default:
@@ -502,7 +502,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default exit sequence for region r */
 	private void exitSequence_r2_B_r_BA_r() {
 		switch (stateVector[1]) {
-		case r2_B_r_BA_r_BAA:
+		case R2_B_R_BA_R_BAA:
 			exitSequence_r2_B_r_BA_r_BAA();
 			break;
 		default:
@@ -513,7 +513,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default exit sequence for region r3 */
 	private void exitSequence_r3() {
 		switch (stateVector[2]) {
-		case r3_D_r_DA_r_DAA:
+		case R3_D_R_DA_R_DAA:
 			exitSequence_r3_D_r_DA_r_DAA();
 			break;
 		default:
@@ -530,7 +530,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default react sequence for shallow history entry  */
 	private void react_r2_B_r__entry_Default() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_r2_B_r();
 		} else {
 			entryAction_r2_B_r_BA();
@@ -552,7 +552,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* Default react sequence for deep history entry  */
 	private void react_r3__entry_Default() {
 		/* Enter the region with deep history */
-		if (historyVector[1] != State.$NullState$) {
+		if (historyVector[1] != State.$NULLSTATE$) {
 			deepEnterSequence_r3();
 		} else {
 			entryAction_r3_D();

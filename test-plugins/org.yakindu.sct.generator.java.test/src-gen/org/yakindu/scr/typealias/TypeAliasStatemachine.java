@@ -3,7 +3,7 @@ package org.yakindu.scr.typealias;
 
 
 public class TypeAliasStatemachine implements ITypeAliasStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean myEvent;
 		
@@ -34,22 +34,22 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean myEvent;
 	}
 	private static class TypeAliasStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_Start,
-		main_region_Mid,
-		main_region_Mid2,
-		main_region_End,
-		$NullState$
+		MAIN_REGION_START,
+		MAIN_REGION_MID,
+		MAIN_REGION_MID2,
+		MAIN_REGION_END,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -68,20 +68,20 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		this.isExecuting = value;
 	}
 	public TypeAliasStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setMyVar(0);
+		defaultInterface.setMyVar(0);
 		
-		sCInterface.setMyString("");
+		defaultInterface.setMyString("");
 		
 		isExecuting = false;
 	}
@@ -120,20 +120,20 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_Start:
+			case MAIN_REGION_START:
 				main_region_Start_react(true);
 				break;
-			case main_region_Mid:
+			case MAIN_REGION_MID:
 				main_region_Mid_react(true);
 				break;
-			case main_region_Mid2:
+			case MAIN_REGION_MID2:
 				main_region_Mid2_react(true);
 				break;
-			case main_region_End:
+			case MAIN_REGION_END:
 				main_region_End_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -144,7 +144,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -156,12 +156,12 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.myEvent = sCInterface.myEvent;
-		sCInterface.myEvent = false;
+		_current.iface.myEvent = defaultInterface.myEvent;
+		defaultInterface.myEvent = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.myEvent = false;
+		defaultInterface.myEvent = false;
 	}
 	
 	/**
@@ -170,77 +170,77 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_Start:
-			return stateVector[0] == State.main_region_Start;
-		case main_region_Mid:
-			return stateVector[0] == State.main_region_Mid;
-		case main_region_Mid2:
-			return stateVector[0] == State.main_region_Mid2;
-		case main_region_End:
-			return stateVector[0] == State.main_region_End;
+		case MAIN_REGION_START:
+			return stateVector[0] == State.MAIN_REGION_START;
+		case MAIN_REGION_MID:
+			return stateVector[0] == State.MAIN_REGION_MID;
+		case MAIN_REGION_MID2:
+			return stateVector[0] == State.MAIN_REGION_MID2;
+		case MAIN_REGION_END:
+			return stateVector[0] == State.MAIN_REGION_END;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseMyEvent() {
-		sCInterface.raiseMyEvent();
+		defaultInterface.raiseMyEvent();
 	}
 	
 	public long getMyVar() {
-		return sCInterface.getMyVar();
+		return defaultInterface.getMyVar();
 	}
 	
 	public void setMyVar(long value) {
-		sCInterface.setMyVar(value);
+		defaultInterface.setMyVar(value);
 	}
 	
 	public String getMyString() {
-		return sCInterface.getMyString();
+		return defaultInterface.getMyString();
 	}
 	
 	public void setMyString(String value) {
-		sCInterface.setMyString(value);
+		defaultInterface.setMyString(value);
 	}
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		sCInterface.setMyVar(1);
+		defaultInterface.setMyVar(1);
 	}
 	
 	/* Entry action for state 'Mid'. */
 	private void entryAction_main_region_Mid() {
-		sCInterface.setMyString("TypeSystem");
+		defaultInterface.setMyString("TypeSystem");
 	}
 	
 	/* 'default' enter sequence for state Start */
 	private void enterSequence_main_region_Start_default() {
 		entryAction_main_region_Start();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Start;
+		stateVector[0] = State.MAIN_REGION_START;
 	}
 	
 	/* 'default' enter sequence for state Mid */
 	private void enterSequence_main_region_Mid_default() {
 		entryAction_main_region_Mid();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Mid;
+		stateVector[0] = State.MAIN_REGION_MID;
 	}
 	
 	/* 'default' enter sequence for state Mid2 */
 	private void enterSequence_main_region_Mid2_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Mid2;
+		stateVector[0] = State.MAIN_REGION_MID2;
 	}
 	
 	/* 'default' enter sequence for state End */
 	private void enterSequence_main_region_End_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_End;
+		stateVector[0] = State.MAIN_REGION_END;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -251,40 +251,40 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	/* Default exit sequence for state Start */
 	private void exitSequence_main_region_Start() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Mid */
 	private void exitSequence_main_region_Mid() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state Mid2 */
 	private void exitSequence_main_region_Mid2() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state End */
 	private void exitSequence_main_region_End() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_Start:
+		case MAIN_REGION_START:
 			exitSequence_main_region_Start();
 			break;
-		case main_region_Mid:
+		case MAIN_REGION_MID:
 			exitSequence_main_region_Mid();
 			break;
-		case main_region_Mid2:
+		case MAIN_REGION_MID2:
 			exitSequence_main_region_Mid2();
 			break;
-		case main_region_End:
+		case MAIN_REGION_END:
 			exitSequence_main_region_End();
 			break;
 		default:
@@ -306,7 +306,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getMyVar()==1) {
+				if (defaultInterface.getMyVar()==1) {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_Mid_default();
 				} else {
@@ -322,7 +322,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((sCInterface.getMyString()== null?"TypeSystem" ==null :sCInterface.getMyString().equals("TypeSystem"))) {
+				if ((defaultInterface.getMyString()== null?"TypeSystem" ==null :defaultInterface.getMyString().equals("TypeSystem"))) {
 					exitSequence_main_region_Mid();
 					enterSequence_main_region_Mid2_default();
 				} else {

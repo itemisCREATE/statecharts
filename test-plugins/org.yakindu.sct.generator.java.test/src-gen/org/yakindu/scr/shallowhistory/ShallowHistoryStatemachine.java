@@ -3,7 +3,7 @@ package org.yakindu.scr.shallowhistory;
 
 
 public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean event1;
 		
@@ -63,7 +63,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean event1;
 		private boolean event2;
 		private boolean event3;
@@ -74,23 +74,23 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		private boolean event8;
 	}
 	private static class ShallowHistoryStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		mainRegion_State1,
-		mainRegion_State2,
-		mainRegion_State2__region0_State3,
-		mainRegion_State2__region0_State4,
-		mainRegion_State2__region0_State4__region0_State6,
-		mainRegion_State2__region0_State4__region0_State7,
-		mainRegion_State2__region0_State4__region0_State7__region0_State8,
-		mainRegion_State2__region0_State4__region0_State7__region0_State9,
-		mainRegion_State2__region0_State5,
-		$NullState$
+		MAINREGION_STATE1,
+		MAINREGION_STATE2,
+		MAINREGION_STATE2__REGION0_STATE3,
+		MAINREGION_STATE2__REGION0_STATE4,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8,
+		MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9,
+		MAINREGION_STATE2__REGION0_STATE5,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[2];
@@ -110,16 +110,16 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		this.isExecuting = value;
 	}
 	public ShallowHistoryStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 2; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -162,26 +162,26 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case mainRegion_State1:
+			case MAINREGION_STATE1:
 				mainRegion_State1_react(true);
 				break;
-			case mainRegion_State2__region0_State3:
+			case MAINREGION_STATE2__REGION0_STATE3:
 				mainRegion_State2__region0_State3_react(true);
 				break;
-			case mainRegion_State2__region0_State4__region0_State6:
+			case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 				mainRegion_State2__region0_State4__region0_State6_react(true);
 				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+			case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
 				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+			case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
 				break;
-			case mainRegion_State2__region0_State5:
+			case MAINREGION_STATE2__REGION0_STATE5:
 				mainRegion_State2__region0_State5_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -192,7 +192,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -204,40 +204,40 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.event1 = sCInterface.event1;
-		sCInterface.event1 = false;
+		_current.iface.event1 = defaultInterface.event1;
+		defaultInterface.event1 = false;
 		
-		_current.iface.event2 = sCInterface.event2;
-		sCInterface.event2 = false;
+		_current.iface.event2 = defaultInterface.event2;
+		defaultInterface.event2 = false;
 		
-		_current.iface.event3 = sCInterface.event3;
-		sCInterface.event3 = false;
+		_current.iface.event3 = defaultInterface.event3;
+		defaultInterface.event3 = false;
 		
-		_current.iface.event4 = sCInterface.event4;
-		sCInterface.event4 = false;
+		_current.iface.event4 = defaultInterface.event4;
+		defaultInterface.event4 = false;
 		
-		_current.iface.event5 = sCInterface.event5;
-		sCInterface.event5 = false;
+		_current.iface.event5 = defaultInterface.event5;
+		defaultInterface.event5 = false;
 		
-		_current.iface.event6 = sCInterface.event6;
-		sCInterface.event6 = false;
+		_current.iface.event6 = defaultInterface.event6;
+		defaultInterface.event6 = false;
 		
-		_current.iface.event7 = sCInterface.event7;
-		sCInterface.event7 = false;
+		_current.iface.event7 = defaultInterface.event7;
+		defaultInterface.event7 = false;
 		
-		_current.iface.event8 = sCInterface.event8;
-		sCInterface.event8 = false;
+		_current.iface.event8 = defaultInterface.event8;
+		defaultInterface.event8 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.event1 = false;
-		sCInterface.event2 = false;
-		sCInterface.event3 = false;
-		sCInterface.event4 = false;
-		sCInterface.event5 = false;
-		sCInterface.event6 = false;
-		sCInterface.event7 = false;
-		sCInterface.event8 = false;
+		defaultInterface.event1 = false;
+		defaultInterface.event2 = false;
+		defaultInterface.event3 = false;
+		defaultInterface.event4 = false;
+		defaultInterface.event5 = false;
+		defaultInterface.event6 = false;
+		defaultInterface.event7 = false;
+		defaultInterface.event8 = false;
 	}
 	
 	/**
@@ -246,72 +246,72 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case mainRegion_State1:
-			return stateVector[0] == State.mainRegion_State1;
-		case mainRegion_State2:
+		case MAINREGION_STATE1:
+			return stateVector[0] == State.MAINREGION_STATE1;
+		case MAINREGION_STATE2:
 			return stateVector[0].ordinal() >= State.
-					mainRegion_State2.ordinal()&& stateVector[0].ordinal() <= State.mainRegion_State2__region0_State5.ordinal();
-		case mainRegion_State2__region0_State3:
-			return stateVector[0] == State.mainRegion_State2__region0_State3;
-		case mainRegion_State2__region0_State4:
+					MAINREGION_STATE2.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2__REGION0_STATE5.ordinal();
+		case MAINREGION_STATE2__REGION0_STATE3:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE3;
+		case MAINREGION_STATE2__REGION0_STATE4:
 			return stateVector[0].ordinal() >= State.
-					mainRegion_State2__region0_State4.ordinal()&& stateVector[0].ordinal() <= State.mainRegion_State2__region0_State4__region0_State7__region0_State9.ordinal();
-		case mainRegion_State2__region0_State4__region0_State6:
-			return stateVector[0] == State.mainRegion_State2__region0_State4__region0_State6;
-		case mainRegion_State2__region0_State4__region0_State7:
+					MAINREGION_STATE2__REGION0_STATE4.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9.ordinal();
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6;
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7:
 			return stateVector[0].ordinal() >= State.
-					mainRegion_State2__region0_State4__region0_State7.ordinal()&& stateVector[0].ordinal() <= State.mainRegion_State2__region0_State4__region0_State7__region0_State9.ordinal();
-		case mainRegion_State2__region0_State4__region0_State7__region0_State8:
-			return stateVector[0] == State.mainRegion_State2__region0_State4__region0_State7__region0_State8;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State9:
-			return stateVector[0] == State.mainRegion_State2__region0_State4__region0_State7__region0_State9;
-		case mainRegion_State2__region0_State5:
-			return stateVector[0] == State.mainRegion_State2__region0_State5;
+					MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7.ordinal()&& stateVector[0].ordinal() <= State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9.ordinal();
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8;
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9;
+		case MAINREGION_STATE2__REGION0_STATE5:
+			return stateVector[0] == State.MAINREGION_STATE2__REGION0_STATE5;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseEvent1() {
-		sCInterface.raiseEvent1();
+		defaultInterface.raiseEvent1();
 	}
 	
 	public void raiseEvent2() {
-		sCInterface.raiseEvent2();
+		defaultInterface.raiseEvent2();
 	}
 	
 	public void raiseEvent3() {
-		sCInterface.raiseEvent3();
+		defaultInterface.raiseEvent3();
 	}
 	
 	public void raiseEvent4() {
-		sCInterface.raiseEvent4();
+		defaultInterface.raiseEvent4();
 	}
 	
 	public void raiseEvent5() {
-		sCInterface.raiseEvent5();
+		defaultInterface.raiseEvent5();
 	}
 	
 	public void raiseEvent6() {
-		sCInterface.raiseEvent6();
+		defaultInterface.raiseEvent6();
 	}
 	
 	public void raiseEvent7() {
-		sCInterface.raiseEvent7();
+		defaultInterface.raiseEvent7();
 	}
 	
 	public void raiseEvent8() {
-		sCInterface.raiseEvent8();
+		defaultInterface.raiseEvent8();
 	}
 	
 	/* 'default' enter sequence for state State1 */
 	private void enterSequence_mainRegion_State1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_State1;
+		stateVector[0] = State.MAINREGION_STATE1;
 	}
 	
 	/* 'default' enter sequence for state State2 */
@@ -322,7 +322,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* 'default' enter sequence for state State3 */
 	private void enterSequence_mainRegion_State2__region0_State3_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_State2__region0_State3;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE3;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -336,7 +336,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* 'default' enter sequence for state State6 */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State6_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6;
 	}
 	
 	/* 'default' enter sequence for state State7 */
@@ -347,7 +347,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* 'default' enter sequence for state State8 */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State8;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8;
 		
 		historyVector[1] = stateVector[0];
 	}
@@ -355,7 +355,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* 'default' enter sequence for state State9 */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State9;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9;
 		
 		historyVector[1] = stateVector[0];
 	}
@@ -363,7 +363,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* 'default' enter sequence for state State5 */
 	private void enterSequence_mainRegion_State2__region0_State5_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_State2__region0_State5;
+		stateVector[0] = State.MAINREGION_STATE2__REGION0_STATE5;
 		
 		historyVector[0] = stateVector[0];
 	}
@@ -381,19 +381,19 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* shallow enterSequence with history in child null */
 	private void shallowEnterSequence_mainRegion_State2__region0() {
 		switch (historyVector[0]) {
-		case mainRegion_State2__region0_State3:
+		case MAINREGION_STATE2__REGION0_STATE3:
 			enterSequence_mainRegion_State2__region0_State3_default();
 			break;
-		case mainRegion_State2__region0_State4__region0_State6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			enterSequence_mainRegion_State2__region0_State4_default();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			enterSequence_mainRegion_State2__region0_State4_default();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			enterSequence_mainRegion_State2__region0_State4_default();
 			break;
-		case mainRegion_State2__region0_State5:
+		case MAINREGION_STATE2__REGION0_STATE5:
 			enterSequence_mainRegion_State2__region0_State5_default();
 			break;
 		default:
@@ -414,10 +414,10 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* shallow enterSequence with history in child null */
 	private void shallowEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0() {
 		switch (historyVector[1]) {
-		case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default();
 			break;
 		default:
@@ -428,7 +428,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default exit sequence for state State1 */
 	private void exitSequence_mainRegion_State1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State2 */
@@ -439,7 +439,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default exit sequence for state State3 */
 	private void exitSequence_mainRegion_State2__region0_State3() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State4 */
@@ -450,7 +450,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default exit sequence for state State6 */
 	private void exitSequence_mainRegion_State2__region0_State4__region0_State6() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State7 */
@@ -461,40 +461,40 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default exit sequence for state State8 */
 	private void exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State9 */
 	private void exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State5 */
 	private void exitSequence_mainRegion_State2__region0_State5() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region mainRegion */
 	private void exitSequence_mainRegion() {
 		switch (stateVector[0]) {
-		case mainRegion_State1:
+		case MAINREGION_STATE1:
 			exitSequence_mainRegion_State1();
 			break;
-		case mainRegion_State2__region0_State3:
+		case MAINREGION_STATE2__REGION0_STATE3:
 			exitSequence_mainRegion_State2__region0_State3();
 			break;
-		case mainRegion_State2__region0_State4__region0_State6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			exitSequence_mainRegion_State2__region0_State4__region0_State6();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
-		case mainRegion_State2__region0_State5:
+		case MAINREGION_STATE2__REGION0_STATE5:
 			exitSequence_mainRegion_State2__region0_State5();
 			break;
 		default:
@@ -505,19 +505,19 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default exit sequence for region null */
 	private void exitSequence_mainRegion_State2__region0() {
 		switch (stateVector[0]) {
-		case mainRegion_State2__region0_State3:
+		case MAINREGION_STATE2__REGION0_STATE3:
 			exitSequence_mainRegion_State2__region0_State3();
 			break;
-		case mainRegion_State2__region0_State4__region0_State6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			exitSequence_mainRegion_State2__region0_State4__region0_State6();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
-		case mainRegion_State2__region0_State5:
+		case MAINREGION_STATE2__REGION0_STATE5:
 			exitSequence_mainRegion_State2__region0_State5();
 			break;
 		default:
@@ -528,13 +528,13 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default exit sequence for region null */
 	private void exitSequence_mainRegion_State2__region0_State4__region0() {
 		switch (stateVector[0]) {
-		case mainRegion_State2__region0_State4__region0_State6:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE6:
 			exitSequence_mainRegion_State2__region0_State4__region0_State6();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
 		default:
@@ -545,10 +545,10 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default exit sequence for region null */
 	private void exitSequence_mainRegion_State2__region0_State4__region0_State7__region0() {
 		switch (stateVector[0]) {
-		case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE8:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 			break;
-		case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+		case MAINREGION_STATE2__REGION0_STATE4__REGION0_STATE7__REGION0_STATE9:
 			exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 			break;
 		default:
@@ -564,7 +564,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default react sequence for shallow history entry  */
 	private void react_mainRegion_State2__region0__entry_Default() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_mainRegion_State2__region0();
 		} else {
 			enterSequence_mainRegion_State2__region0_State3_default();
@@ -579,7 +579,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* Default react sequence for shallow history entry  */
 	private void react_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default() {
 		/* Enter the region with shallow history */
-		if (historyVector[1] != State.$NullState$) {
+		if (historyVector[1] != State.$NULLSTATE$) {
 			shallowEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0();
 		} else {
 			enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();

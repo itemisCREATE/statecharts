@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.scr.RuntimeService;
+import org.yakindu.sct.RuntimeService;
 import org.yakindu.scr.runnabletest.RunnableTestStatemachineRunnable;
-import org.yakindu.scr.wrappertest.IWrapperTestStatemachine.SCInterfaceOperationCallback;
+import org.yakindu.scr.wrappertest.IWrapperTestStatemachine.InterfaceOperationCallback;
 import org.yakindu.scr.wrappertest.SynchronizedWrapperTestStatemachine;
 import org.yakindu.scr.wrappertest.WrapperTestStatemachine.State;
 
@@ -28,7 +28,7 @@ public class WrapperTest {
 		int waitTimeSeconds = 10;
 		SynchronizedWrapperTestStatemachine sm = new SynchronizedWrapperTestStatemachine();
 
-		sm.getSCInterface().setSCInterfaceOperationCallback(new SCInterfaceOperationCallback() {
+		sm.getInterface().setInterfaceOperationCallback(new InterfaceOperationCallback() {
 
 			@Override
 			public void displayTime() {
@@ -44,10 +44,10 @@ public class WrapperTest {
 
 		sleep(waitTimeSeconds);
 		RuntimeService.getInstance().cancelTimer();
-		assertTrue(sm.isStateActive(State.main_region__final_));
-		assertTrue(sm.getSCInterface().getCycles() >= waitTimeSeconds * 1000 / CYCLE_TIME);
+		assertTrue(sm.isStateActive(State.MAIN_REGION__FINAL_));
+		assertTrue(sm.getInterface().getCycles() >= waitTimeSeconds * 1000 / CYCLE_TIME);
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
-		assertTrue((timer.getTimerCallbackCount(0) - sm.getSCInterface().getAfterCalls()) <= 1);
+		assertTrue((timer.getTimerCallbackCount(0) - sm.getInterface().getAfterCalls()) <= 1);
 	}
 
 	@Test
@@ -57,8 +57,8 @@ public class WrapperTest {
 		
 		RunnableTestStatemachineRunnable sm = new RunnableTestStatemachineRunnable();
 
-		sm.getSCInterface().setSCInterfaceOperationCallback(
-				new org.yakindu.scr.runnabletest.IRunnableTestStatemachine.SCInterfaceOperationCallback() {
+		sm.getInterface().setInterfaceOperationCallback(
+				new org.yakindu.scr.runnabletest.IRunnableTestStatemachine.InterfaceOperationCallback() {
 
 					@Override
 					public void displayTime() {
@@ -74,10 +74,10 @@ public class WrapperTest {
 		thread.start();
 		sleep(waitTimeSeconds);
 		thread.interrupt();
-		assertTrue(sm.isStateActive(org.yakindu.scr.runnabletest.RunnableTestStatemachine.State.main_region__final_));
+		assertTrue(sm.isStateActive(org.yakindu.scr.runnabletest.RunnableTestStatemachine.State.MAIN_REGION__FINAL_));
 		sm.exit();
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
-		assertTrue((timer.getTimerCallbackCount(1) - sm.getSCInterface().getAfterCalls()) <= 1);
+		assertTrue((timer.getTimerCallbackCount(1) - sm.getInterface().getAfterCalls()) <= 1);
 	}
 
 	@After

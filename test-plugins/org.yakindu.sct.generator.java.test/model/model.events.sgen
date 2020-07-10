@@ -9,6 +9,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "OutEventVisibilityEventDrivenStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -42,6 +43,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "OutEventWithPayloadStatemachine"
 		}
 
 		feature GeneralFeatures {

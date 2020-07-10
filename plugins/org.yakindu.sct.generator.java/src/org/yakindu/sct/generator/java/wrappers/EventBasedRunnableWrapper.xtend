@@ -44,14 +44,14 @@ class EventBasedRunnableWrapper {
 	
 	def generateEventBasedRunnableWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.eventBasedWrapperClassName(entry).java
+		var filename = entry.basePackage.toPath + '/' + flow.eventBasedWrapperClassName(entry).java
 		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
 	
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
-		package «flow.getImplementationPackageName(entry)»;
+		«IF !entry.basePackage.nullOrEmpty»package «entry.basePackage»;«ENDIF»
 		«flow.createImports(entry)»
 		
 		/**
@@ -111,7 +111,7 @@ class EventBasedRunnableWrapper {
 		/**
 		 * Interface object for «scope.interfaceName»
 		 */		
-		protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier» = new «scope.wrapperInterfaceName(entry)»() {
+		protected «scope.interfaceName» «scope.interfaceVariableName» = new «scope.wrapperInterfaceName(entry)»() {
 			«scope.toImplementation(entry)»
 		};
 		

@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine;
-import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for EmptyTransition
@@ -41,7 +41,7 @@ public class EmptyTransition {
 	public void emptyTransitionTest() {
 		statemachine.enter();
 		timer.cycleLeap(1l);
-		assertTrue(!statemachine.isStateActive(State.main_region_B));
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(!statemachine.isStateActive(EmptyTransitionStatemachine.State.MAIN_REGION_B));
+		assertTrue(statemachine.isStateActive(EmptyTransitionStatemachine.State.MAIN_REGION_A));
 	}
 }

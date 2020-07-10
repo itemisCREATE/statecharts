@@ -46,14 +46,14 @@ class CycleBasedSynchronizedWrapper {
 
 	def generateCycleWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.cycleWrapperClassName(entry).java
+		var filename = entry.basePackage.toPath + '/' + flow.cycleWrapperClassName(entry).java
 		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
 
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
-		package «flow.getImplementationPackageName(entry)»;
+		«IF !entry.basePackage.nullOrEmpty»package «entry.basePackage»;«ENDIF»
 		«flow.createImports(entry)»
 		
 		/**
@@ -69,7 +69,7 @@ class CycleBasedSynchronizedWrapper {
 			
 			public «flow.cycleWrapperClassName(entry)»() {
 				«FOR scope : flow.interfaceScopes»
-					«scope.interfaceName.asEscapedIdentifier» = new «scope.wrapperInterfaceName(entry)»();
+					«scope.interfaceVariableName» = new «scope.wrapperInterfaceName(entry)»();
 				«ENDFOR»
 			}
 			
@@ -151,10 +151,10 @@ class CycleBasedSynchronizedWrapper {
 			import «rxPackage».«observableClass»;
 		«ENDIF»
 		«IF flow.timed»
-			import «entry.getBasePackageName()».ITimer;
-			import «entry.getBasePackageName()».ITimerCallback;
+			import «entry.libraryPackage».ITimer;
+			import «entry.libraryPackage».ITimerCallback;
 		«ENDIF»
-		import «flow.getImplementationPackageName(entry)».«flow.statemachineClassName».State;
+		import «entry.basePackage».«flow.statemachineClassName».State;
 	'''
 
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
@@ -173,7 +173,7 @@ class CycleBasedSynchronizedWrapper {
 				«scope.toImplementation(entry)»
 			};
 			
-			protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier»;
+			protected «scope.interfaceName» «scope.interfaceVariableName»;
 		«ENDFOR»
 	'''
 
@@ -273,7 +273,7 @@ class CycleBasedSynchronizedWrapper {
 	def protected interfaceAccessors(ExecutionFlow flow) '''
 		«FOR scope : flow.interfaceScopes»
 			public synchronized «scope.interfaceName» get«scope.interfaceName»() {
-				return «scope.interfaceName.asEscapedIdentifier»;
+				return «scope.interfaceVariableName»;
 			}
 		«ENDFOR»
 	'''

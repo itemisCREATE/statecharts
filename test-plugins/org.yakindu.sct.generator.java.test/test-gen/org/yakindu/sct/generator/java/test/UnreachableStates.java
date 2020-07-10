@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.unreachablestates.UnreachableStatesStatemachine;
-import org.yakindu.scr.unreachablestates.UnreachableStatesStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.unreachablestates.UnreachableStatesStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for UnreachableStates
@@ -41,9 +41,9 @@ public class UnreachableStates {
 	public void test() {
 		statemachine.enter();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(!statemachine.isStateActive(State.main_region_B));
-		assertTrue(!statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(UnreachableStatesStatemachine.State.MAIN_REGION_A));
+		assertTrue(!statemachine.isStateActive(UnreachableStatesStatemachine.State.MAIN_REGION_B));
+		assertTrue(!statemachine.isStateActive(UnreachableStatesStatemachine.State.MAIN_REGION_C));
 		statemachine.exit();
 	}
 }

@@ -9,7 +9,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr"
-			implementationSuffix = "Unbuffered" 
+			typeName = "InternalEventLifeCycleUnbufferedStatemachine" 
 		}
 		
 		feature EventProcessing {
@@ -27,7 +27,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
-			implementationSuffix = "Buffered"
+			typeName = "InternalEventLifeCycleBufferedStatemachine" 
 		}
 		
 		feature EventProcessing {
@@ -45,7 +45,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr"
-			implementationSuffix = "Buffered" 
+			typeName = "InEventLifeCycleBufferedStatemachine"
 		}
 		
 		feature EventProcessing {
@@ -62,7 +62,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr"
-			implementationSuffix = "Unbuffered"
+			typeName = "InEventLifeCycleUnbufferedStatemachine"
 		}
 		
 		feature EventProcessing {

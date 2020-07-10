@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.staticchoice.StaticChoiceStatemachine;
-import org.yakindu.scr.staticchoice.StaticChoiceStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.staticchoice.StaticChoiceStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for StaticChoice
@@ -40,7 +40,7 @@ public class StaticChoice {
 	@Test
 	public void staticChoiceTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_Start));
+		assertTrue(statemachine.isStateActive(StaticChoiceStatemachine.State.MAIN_REGION_START));
 		timer.cycleLeap(1l);
 	}
 }

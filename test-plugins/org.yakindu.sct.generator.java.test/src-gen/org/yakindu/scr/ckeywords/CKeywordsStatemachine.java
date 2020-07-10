@@ -3,7 +3,7 @@ package org.yakindu.scr.ckeywords;
 
 
 public class CKeywordsStatemachine implements ICKeywordsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean auto;
 		
@@ -281,23 +281,23 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean auto;
 		private boolean breakEvent;
 	}
 	private static class CKeywordsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		auto_char,
-		auto_loop,
-		auto_loop_switch_case,
-		auto_loop_switch_case_enum_asm,
-		$NullState$
+		AUTO_CHAR,
+		AUTO_LOOP,
+		AUTO_LOOP_SWITCH_CASE,
+		AUTO_LOOP_SWITCH_CASE_ENUM_ASM,
+		$NULLSTATE$
 	};
 	
 	private State[] historyVector = new State[2];
@@ -317,71 +317,71 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		this.isExecuting = value;
 	}
 	public CKeywordsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		for (int i = 0; i < 2; i++) {
-			historyVector[i] = State.$NullState$;
+			historyVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setCase(false);
+		defaultInterface.setCase(false);
 		
-		sCInterface.setDo(0);
+		defaultInterface.setDo(0);
 		
-		sCInterface.setContinue(false);
+		defaultInterface.setContinue(false);
 		
-		sCInterface.setDouble(false);
+		defaultInterface.setDouble(false);
 		
-		sCInterface.setEnum(false);
+		defaultInterface.setEnum(false);
 		
-		sCInterface.setExtern(false);
+		defaultInterface.setExtern(false);
 		
-		sCInterface.setFloat(false);
+		defaultInterface.setFloat(false);
 		
-		sCInterface.setFor(false);
+		defaultInterface.setFor(false);
 		
-		sCInterface.setGoto(false);
+		defaultInterface.setGoto(false);
 		
-		sCInterface.setIf(false);
+		defaultInterface.setIf(false);
 		
-		sCInterface.setInt(false);
+		defaultInterface.setInt(false);
 		
-		sCInterface.setLong(false);
+		defaultInterface.setLong(false);
 		
-		sCInterface.setRegister(false);
+		defaultInterface.setRegister(false);
 		
-		sCInterface.setReturn(false);
+		defaultInterface.setReturn(false);
 		
-		sCInterface.setShort(false);
+		defaultInterface.setShort(false);
 		
-		sCInterface.setSigned(false);
+		defaultInterface.setSigned(false);
 		
-		sCInterface.setSizeof(false);
+		defaultInterface.setSizeof(false);
 		
-		sCInterface.setStatic(false);
+		defaultInterface.setStatic(false);
 		
-		sCInterface.setStruct(false);
+		defaultInterface.setStruct(false);
 		
-		sCInterface.setSwitch(false);
+		defaultInterface.setSwitch(false);
 		
-		sCInterface.setTypedef(false);
+		defaultInterface.setTypedef(false);
 		
-		sCInterface.setUnion(false);
+		defaultInterface.setUnion(false);
 		
-		sCInterface.setUnsigned(false);
+		defaultInterface.setUnsigned(false);
 		
-		sCInterface.setVoid(false);
+		defaultInterface.setVoid(false);
 		
-		sCInterface.setVolatile(false);
+		defaultInterface.setVolatile(false);
 		
-		sCInterface.setWhile(false);
+		defaultInterface.setWhile(false);
 		
 		isExecuting = false;
 	}
@@ -420,14 +420,14 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case auto_char:
+			case AUTO_CHAR:
 				auto_char_react(true);
 				break;
-			case auto_loop_switch_case_enum_asm:
+			case AUTO_LOOP_SWITCH_CASE_ENUM_ASM:
 				auto_loop_switch_case_enum_asm_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -438,7 +438,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -450,16 +450,16 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.auto = sCInterface.auto;
-		sCInterface.auto = false;
+		_current.iface.auto = defaultInterface.auto;
+		defaultInterface.auto = false;
 		
-		_current.iface.breakEvent = sCInterface.breakEvent;
-		sCInterface.breakEvent = false;
+		_current.iface.breakEvent = defaultInterface.breakEvent;
+		defaultInterface.breakEvent = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.auto = false;
-		sCInterface.breakEvent = false;
+		defaultInterface.auto = false;
+		defaultInterface.breakEvent = false;
 	}
 	
 	/**
@@ -468,356 +468,356 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case auto_char:
-			return stateVector[0] == State.auto_char;
-		case auto_loop:
+		case AUTO_CHAR:
+			return stateVector[0] == State.AUTO_CHAR;
+		case AUTO_LOOP:
 			return stateVector[0].ordinal() >= State.
-					auto_loop.ordinal()&& stateVector[0].ordinal() <= State.auto_loop_switch_case_enum_asm.ordinal();
-		case auto_loop_switch_case:
+					AUTO_LOOP.ordinal()&& stateVector[0].ordinal() <= State.AUTO_LOOP_SWITCH_CASE_ENUM_ASM.ordinal();
+		case AUTO_LOOP_SWITCH_CASE:
 			return stateVector[0].ordinal() >= State.
-					auto_loop_switch_case.ordinal()&& stateVector[0].ordinal() <= State.auto_loop_switch_case_enum_asm.ordinal();
-		case auto_loop_switch_case_enum_asm:
-			return stateVector[0] == State.auto_loop_switch_case_enum_asm;
+					AUTO_LOOP_SWITCH_CASE.ordinal()&& stateVector[0].ordinal() <= State.AUTO_LOOP_SWITCH_CASE_ENUM_ASM.ordinal();
+		case AUTO_LOOP_SWITCH_CASE_ENUM_ASM:
+			return stateVector[0] == State.AUTO_LOOP_SWITCH_CASE_ENUM_ASM;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseAuto() {
-		sCInterface.raiseAuto();
+		defaultInterface.raiseAuto();
 	}
 	
 	public void raiseBreak() {
-		sCInterface.raiseBreak();
+		defaultInterface.raiseBreak();
 	}
 	
 	public boolean getCase() {
-		return sCInterface.getCase();
+		return defaultInterface.getCase();
 	}
 	
 	public void setCase(boolean value) {
-		sCInterface.setCase(value);
+		defaultInterface.setCase(value);
 	}
 	
 	public long getDo() {
-		return sCInterface.getDo();
+		return defaultInterface.getDo();
 	}
 	
 	public void setDo(long value) {
-		sCInterface.setDo(value);
+		defaultInterface.setDo(value);
 	}
 	
 	public boolean getContinue() {
-		return sCInterface.getContinue();
+		return defaultInterface.getContinue();
 	}
 	
 	public void setContinue(boolean value) {
-		sCInterface.setContinue(value);
+		defaultInterface.setContinue(value);
 	}
 	
 	public boolean getDouble() {
-		return sCInterface.getDouble();
+		return defaultInterface.getDouble();
 	}
 	
 	public void setDouble(boolean value) {
-		sCInterface.setDouble(value);
+		defaultInterface.setDouble(value);
 	}
 	
 	public boolean getEnum() {
-		return sCInterface.getEnum();
+		return defaultInterface.getEnum();
 	}
 	
 	public void setEnum(boolean value) {
-		sCInterface.setEnum(value);
+		defaultInterface.setEnum(value);
 	}
 	
 	public boolean getExtern() {
-		return sCInterface.getExtern();
+		return defaultInterface.getExtern();
 	}
 	
 	public void setExtern(boolean value) {
-		sCInterface.setExtern(value);
+		defaultInterface.setExtern(value);
 	}
 	
 	public boolean getFloat() {
-		return sCInterface.getFloat();
+		return defaultInterface.getFloat();
 	}
 	
 	public void setFloat(boolean value) {
-		sCInterface.setFloat(value);
+		defaultInterface.setFloat(value);
 	}
 	
 	public boolean getFor() {
-		return sCInterface.getFor();
+		return defaultInterface.getFor();
 	}
 	
 	public void setFor(boolean value) {
-		sCInterface.setFor(value);
+		defaultInterface.setFor(value);
 	}
 	
 	public boolean getGoto() {
-		return sCInterface.getGoto();
+		return defaultInterface.getGoto();
 	}
 	
 	public void setGoto(boolean value) {
-		sCInterface.setGoto(value);
+		defaultInterface.setGoto(value);
 	}
 	
 	public boolean getIf() {
-		return sCInterface.getIf();
+		return defaultInterface.getIf();
 	}
 	
 	public void setIf(boolean value) {
-		sCInterface.setIf(value);
+		defaultInterface.setIf(value);
 	}
 	
 	public boolean getInt() {
-		return sCInterface.getInt();
+		return defaultInterface.getInt();
 	}
 	
 	public void setInt(boolean value) {
-		sCInterface.setInt(value);
+		defaultInterface.setInt(value);
 	}
 	
 	public boolean getLong() {
-		return sCInterface.getLong();
+		return defaultInterface.getLong();
 	}
 	
 	public void setLong(boolean value) {
-		sCInterface.setLong(value);
+		defaultInterface.setLong(value);
 	}
 	
 	public boolean getRegister() {
-		return sCInterface.getRegister();
+		return defaultInterface.getRegister();
 	}
 	
 	public void setRegister(boolean value) {
-		sCInterface.setRegister(value);
+		defaultInterface.setRegister(value);
 	}
 	
 	public boolean getReturn() {
-		return sCInterface.getReturn();
+		return defaultInterface.getReturn();
 	}
 	
 	public void setReturn(boolean value) {
-		sCInterface.setReturn(value);
+		defaultInterface.setReturn(value);
 	}
 	
 	public boolean getShort() {
-		return sCInterface.getShort();
+		return defaultInterface.getShort();
 	}
 	
 	public void setShort(boolean value) {
-		sCInterface.setShort(value);
+		defaultInterface.setShort(value);
 	}
 	
 	public boolean getSigned() {
-		return sCInterface.getSigned();
+		return defaultInterface.getSigned();
 	}
 	
 	public void setSigned(boolean value) {
-		sCInterface.setSigned(value);
+		defaultInterface.setSigned(value);
 	}
 	
 	public boolean getSizeof() {
-		return sCInterface.getSizeof();
+		return defaultInterface.getSizeof();
 	}
 	
 	public void setSizeof(boolean value) {
-		sCInterface.setSizeof(value);
+		defaultInterface.setSizeof(value);
 	}
 	
 	public boolean getStatic() {
-		return sCInterface.getStatic();
+		return defaultInterface.getStatic();
 	}
 	
 	public void setStatic(boolean value) {
-		sCInterface.setStatic(value);
+		defaultInterface.setStatic(value);
 	}
 	
 	public boolean getStruct() {
-		return sCInterface.getStruct();
+		return defaultInterface.getStruct();
 	}
 	
 	public void setStruct(boolean value) {
-		sCInterface.setStruct(value);
+		defaultInterface.setStruct(value);
 	}
 	
 	public boolean getSwitch() {
-		return sCInterface.getSwitch();
+		return defaultInterface.getSwitch();
 	}
 	
 	public void setSwitch(boolean value) {
-		sCInterface.setSwitch(value);
+		defaultInterface.setSwitch(value);
 	}
 	
 	public boolean getTypedef() {
-		return sCInterface.getTypedef();
+		return defaultInterface.getTypedef();
 	}
 	
 	public void setTypedef(boolean value) {
-		sCInterface.setTypedef(value);
+		defaultInterface.setTypedef(value);
 	}
 	
 	public boolean getUnion() {
-		return sCInterface.getUnion();
+		return defaultInterface.getUnion();
 	}
 	
 	public void setUnion(boolean value) {
-		sCInterface.setUnion(value);
+		defaultInterface.setUnion(value);
 	}
 	
 	public boolean getUnsigned() {
-		return sCInterface.getUnsigned();
+		return defaultInterface.getUnsigned();
 	}
 	
 	public void setUnsigned(boolean value) {
-		sCInterface.setUnsigned(value);
+		defaultInterface.setUnsigned(value);
 	}
 	
 	public boolean getVoid() {
-		return sCInterface.getVoid();
+		return defaultInterface.getVoid();
 	}
 	
 	public void setVoid(boolean value) {
-		sCInterface.setVoid(value);
+		defaultInterface.setVoid(value);
 	}
 	
 	public boolean getVolatile() {
-		return sCInterface.getVolatile();
+		return defaultInterface.getVolatile();
 	}
 	
 	public void setVolatile(boolean value) {
-		sCInterface.setVolatile(value);
+		defaultInterface.setVolatile(value);
 	}
 	
 	public boolean getWhile() {
-		return sCInterface.getWhile();
+		return defaultInterface.getWhile();
 	}
 	
 	public void setWhile(boolean value) {
-		sCInterface.setWhile(value);
+		defaultInterface.setWhile(value);
 	}
 	
 	/* Entry action for state 'char'. */
 	private void entryAction_auto_char() {
-		sCInterface.setCase(true);
+		defaultInterface.setCase(true);
 		
-		sCInterface.setDo(0);
+		defaultInterface.setDo(0);
 		
-		sCInterface.setContinue(true);
+		defaultInterface.setContinue(true);
 		
-		sCInterface.setDouble(true);
+		defaultInterface.setDouble(true);
 		
-		sCInterface.setEnum(true);
+		defaultInterface.setEnum(true);
 		
-		sCInterface.setExtern(true);
+		defaultInterface.setExtern(true);
 		
-		sCInterface.setFloat(true);
+		defaultInterface.setFloat(true);
 		
-		sCInterface.setFor(true);
+		defaultInterface.setFor(true);
 		
-		sCInterface.setGoto(true);
+		defaultInterface.setGoto(true);
 		
-		sCInterface.setIf(true);
+		defaultInterface.setIf(true);
 		
-		sCInterface.setInt(true);
+		defaultInterface.setInt(true);
 		
-		sCInterface.setLong(true);
+		defaultInterface.setLong(true);
 		
-		sCInterface.setRegister(true);
+		defaultInterface.setRegister(true);
 		
-		sCInterface.setReturn(true);
+		defaultInterface.setReturn(true);
 		
-		sCInterface.setShort(true);
+		defaultInterface.setShort(true);
 		
-		sCInterface.setSigned(true);
+		defaultInterface.setSigned(true);
 		
-		sCInterface.setSizeof(true);
+		defaultInterface.setSizeof(true);
 		
-		sCInterface.setStatic(true);
+		defaultInterface.setStatic(true);
 		
-		sCInterface.setStruct(true);
+		defaultInterface.setStruct(true);
 		
-		sCInterface.setSwitch(true);
+		defaultInterface.setSwitch(true);
 		
-		sCInterface.setTypedef(true);
+		defaultInterface.setTypedef(true);
 		
-		sCInterface.setUnion(true);
+		defaultInterface.setUnion(true);
 		
-		sCInterface.setUnsigned(true);
+		defaultInterface.setUnsigned(true);
 		
-		sCInterface.setVoid(true);
+		defaultInterface.setVoid(true);
 		
-		sCInterface.setVolatile(true);
+		defaultInterface.setVolatile(true);
 		
-		sCInterface.setWhile(true);
+		defaultInterface.setWhile(true);
 	}
 	
 	/* Entry action for state 'asm'. */
 	private void entryAction_auto_loop_switch_case_enum_asm() {
-		sCInterface.setCase(false);
+		defaultInterface.setCase(false);
 		
-		sCInterface.setDo(0);
+		defaultInterface.setDo(0);
 		
-		sCInterface.setContinue(false);
+		defaultInterface.setContinue(false);
 		
-		sCInterface.setDouble(false);
+		defaultInterface.setDouble(false);
 		
-		sCInterface.setEnum(false);
+		defaultInterface.setEnum(false);
 		
-		sCInterface.setExtern(false);
+		defaultInterface.setExtern(false);
 		
-		sCInterface.setFloat(false);
+		defaultInterface.setFloat(false);
 		
-		sCInterface.setFor(false);
+		defaultInterface.setFor(false);
 		
-		sCInterface.setGoto(false);
+		defaultInterface.setGoto(false);
 		
-		sCInterface.setIf(false);
+		defaultInterface.setIf(false);
 		
-		sCInterface.setInt(false);
+		defaultInterface.setInt(false);
 		
-		sCInterface.setLong(false);
+		defaultInterface.setLong(false);
 		
-		sCInterface.setRegister(false);
+		defaultInterface.setRegister(false);
 		
-		sCInterface.setReturn(false);
+		defaultInterface.setReturn(false);
 		
-		sCInterface.setShort(false);
+		defaultInterface.setShort(false);
 		
-		sCInterface.setSigned(false);
+		defaultInterface.setSigned(false);
 		
-		sCInterface.setSizeof(false);
+		defaultInterface.setSizeof(false);
 		
-		sCInterface.setStatic(false);
+		defaultInterface.setStatic(false);
 		
-		sCInterface.setStruct(false);
+		defaultInterface.setStruct(false);
 		
-		sCInterface.setSwitch(false);
+		defaultInterface.setSwitch(false);
 		
-		sCInterface.setTypedef(false);
+		defaultInterface.setTypedef(false);
 		
-		sCInterface.setUnion(false);
+		defaultInterface.setUnion(false);
 		
-		sCInterface.setUnsigned(false);
+		defaultInterface.setUnsigned(false);
 		
-		sCInterface.setVoid(false);
+		defaultInterface.setVoid(false);
 		
-		sCInterface.setVolatile(false);
+		defaultInterface.setVolatile(false);
 		
-		sCInterface.setWhile(false);
+		defaultInterface.setWhile(false);
 	}
 	
 	/* 'default' enter sequence for state char */
 	private void enterSequence_auto_char_default() {
 		entryAction_auto_char();
 		nextStateIndex = 0;
-		stateVector[0] = State.auto_char;
+		stateVector[0] = State.AUTO_CHAR;
 	}
 	
 	/* 'default' enter sequence for state loop */
@@ -835,7 +835,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	private void enterSequence_auto_loop_switch_case_enum_asm_default() {
 		entryAction_auto_loop_switch_case_enum_asm();
 		nextStateIndex = 0;
-		stateVector[0] = State.auto_loop_switch_case_enum_asm;
+		stateVector[0] = State.AUTO_LOOP_SWITCH_CASE_ENUM_ASM;
 		
 		historyVector[1] = stateVector[0];
 	}
@@ -853,7 +853,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	/* shallow enterSequence with history in child switch */
 	private void shallowEnterSequence_auto_loop_switch() {
 		switch (historyVector[0]) {
-		case auto_loop_switch_case_enum_asm:
+		case AUTO_LOOP_SWITCH_CASE_ENUM_ASM:
 			enterSequence_auto_loop_switch_case_default();
 			break;
 		default:
@@ -869,7 +869,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	/* deep enterSequence with history in child enum */
 	private void deepEnterSequence_auto_loop_switch_case_enum() {
 		switch (historyVector[1]) {
-		case auto_loop_switch_case_enum_asm:
+		case AUTO_LOOP_SWITCH_CASE_ENUM_ASM:
 			enterSequence_auto_loop_switch_case_enum_asm_default();
 			break;
 		default:
@@ -880,22 +880,22 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	/* Default exit sequence for state char */
 	private void exitSequence_auto_char() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state asm */
 	private void exitSequence_auto_loop_switch_case_enum_asm() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region auto */
 	private void exitSequence_auto() {
 		switch (stateVector[0]) {
-		case auto_char:
+		case AUTO_CHAR:
 			exitSequence_auto_char();
 			break;
-		case auto_loop_switch_case_enum_asm:
+		case AUTO_LOOP_SWITCH_CASE_ENUM_ASM:
 			exitSequence_auto_loop_switch_case_enum_asm();
 			break;
 		default:
@@ -911,7 +911,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	/* Default react sequence for shallow history entry  */
 	private void react_auto_loop_switch__entry_Default() {
 		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
+		if (historyVector[0] != State.$NULLSTATE$) {
 			shallowEnterSequence_auto_loop_switch();
 		} else {
 			enterSequence_auto_loop_switch_case_default();
@@ -921,7 +921,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	/* Default react sequence for deep history entry  */
 	private void react_auto_loop_switch_case_enum__entry_Default() {
 		/* Enter the region with deep history */
-		if (historyVector[1] != State.$NullState$) {
+		if (historyVector[1] != State.$NULLSTATE$) {
 			deepEnterSequence_auto_loop_switch_case_enum();
 		} else {
 			enterSequence_auto_loop_switch_case_enum_asm_default();
@@ -937,9 +937,9 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((_current.iface.auto) && (sCInterface.getCase()))) {
+				if (((_current.iface.auto) && (defaultInterface.getCase()))) {
 					exitSequence_auto_char();
-					sCInterface.setDo(sCInterface.getDo() + 1);
+					defaultInterface.setDo(defaultInterface.getDo() + 1);
 					
 					enterSequence_auto_loop_default();
 				} else {

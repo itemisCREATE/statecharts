@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test.ieq;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.ieq.localevents.LocalEventsStatemachine;
-import org.yakindu.scr.ieq.localevents.LocalEventsStatemachine.State;	
+import org.yakindu.scr.ieq.eventdriven.LocalEventsStatemachine;
+import org.yakindu.scr.ieq.eventdriven.LocalEventsStatemachine.State;
 
 /**
  * Unit TestCase for localEvents
@@ -33,11 +33,11 @@ public class LocalEvents {
 	@Test
 	public void test() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.localEvents_r1_Comp1_r_A1));
-		assertTrue(statemachine.isStateActive(State.localEvents_r2_Comp2_r_A2));
+		assertTrue(statemachine.isStateActive(LocalEventsStatemachine.State.R1_COMP1_R_A1));
+		assertTrue(statemachine.isStateActive(LocalEventsStatemachine.State.R2_COMP2_R_A2));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.localEvents_r1_Comp1_r_D1));
-		assertTrue(statemachine.isStateActive(State.localEvents_r2_Comp2_r_D2));
+		assertTrue(statemachine.isStateActive(LocalEventsStatemachine.State.R1_COMP1_R_D1));
+		assertTrue(statemachine.isStateActive(LocalEventsStatemachine.State.R2_COMP2_R_D2));
 		assertTrue(statemachine.getCycleCountSm() == 5l);
 		assertTrue(statemachine.getCycleCount1() == 5l);
 		assertTrue(statemachine.getCycleCount2() == 5l);

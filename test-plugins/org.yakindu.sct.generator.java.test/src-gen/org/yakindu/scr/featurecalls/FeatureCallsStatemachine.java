@@ -3,7 +3,7 @@ package org.yakindu.scr.featurecalls;
 
 
 public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
-	protected class SCIMyInterfaceImpl implements SCIMyInterface {
+	protected class InterfaceMyInterfaceImpl implements InterfaceMyInterface {
 	
 		private boolean event1;
 		
@@ -24,20 +24,20 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		
 	}
 	
-	private static class SCIMyInterfaceEvBuf {
+	private static class InterfaceMyInterfaceEvBuf {
 		private boolean event1;
 	}
 	private static class FeatureCallsStatemachineEvBuf {
-		private SCIMyInterfaceEvBuf ifaceMyInterface = new SCIMyInterfaceEvBuf();
+		private InterfaceMyInterfaceEvBuf ifaceMyInterface = new InterfaceMyInterfaceEvBuf();
 	}
-	protected SCIMyInterfaceImpl sCIMyInterface;
+	protected InterfaceMyInterfaceImpl interfaceMyInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_B,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -56,18 +56,18 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		this.isExecuting = value;
 	}
 	public FeatureCallsStatemachine() {
-		sCIMyInterface = new SCIMyInterfaceImpl();
+		interfaceMyInterface = new InterfaceMyInterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCIMyInterface.setMyInt(0);
+		interfaceMyInterface.setMyInt(0);
 		
 		isExecuting = false;
 	}
@@ -106,14 +106,14 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
-			case main_region_B:
+			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -124,7 +124,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -136,12 +136,12 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.ifaceMyInterface.event1 = sCIMyInterface.event1;
-		sCIMyInterface.event1 = false;
+		_current.ifaceMyInterface.event1 = interfaceMyInterface.event1;
+		interfaceMyInterface.event1 = false;
 	}
 	
 	private void clearInEvents() {
-		sCIMyInterface.event1 = false;
+		interfaceMyInterface.event1 = false;
 	}
 	
 	/**
@@ -150,37 +150,37 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
-		case main_region_B:
-			return stateVector[0] == State.main_region_B;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
 		default:
 			return false;
 		}
 	}
 	
-	public SCIMyInterface getSCIMyInterface() {
-		return sCIMyInterface;
+	public InterfaceMyInterface getInterfaceMyInterface() {
+		return interfaceMyInterface;
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCIMyInterface.setMyInt(42);
+		interfaceMyInterface.setMyInt(42);
 		
-		sCIMyInterface.raiseEvent1();
+		interfaceMyInterface.raiseEvent1();
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		entryAction_main_region_B();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -191,22 +191,22 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
 		default:
