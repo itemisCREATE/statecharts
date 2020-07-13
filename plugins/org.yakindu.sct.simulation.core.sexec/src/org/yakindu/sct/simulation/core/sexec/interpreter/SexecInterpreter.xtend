@@ -32,10 +32,13 @@ class SexecInterpreter extends ExpressionInterpreter {
 	
 	
 	def newInstance(ExecutionFlow flow) {
-		val instance = contextInitializer.newInstance(flow) => [
-			name = flow.name + "#"+ (heap.slots.size + 1)	
-			heap.slots += it
-		]
+		val instance = heap
+		contextInitializer.initialize(heap, flow)
+
+//		val instance = contextInitializer.newInstance(flow) => [
+//			name = flow.name + "#"+ (heap.slots.size + 1)	
+//			heap.slots += it
+//		]		
 		val delegate = new ExecutionFlowInstanceDelegate =>[
 			it.setUp(instance, flow, this)
 		]

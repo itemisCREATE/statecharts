@@ -30,6 +30,7 @@ import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
+import org.eclipse.xtext.EcoreUtil2
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver {
 	
@@ -217,7 +218,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 	/** TODO: DIRTY HACK - remove activeStates from ExecutionContext */
 	def protected executionContext(){
-		return instance.eContainer as ExecutionContext	
+		return EcoreUtil2.getContainerOfType(instance, ExecutionContext)	
 	}
 	
 	def protected boolean hasMethod(String name) {
