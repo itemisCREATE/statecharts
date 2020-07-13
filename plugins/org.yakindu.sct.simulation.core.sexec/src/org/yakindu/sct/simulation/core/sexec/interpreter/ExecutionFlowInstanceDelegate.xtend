@@ -26,6 +26,8 @@ import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.SaveHistory
+import org.yakindu.sct.model.sexec.HistoryEntry
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver {
 	
@@ -57,6 +59,8 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			EnterState : program.execution
 			ExitState : program.execution
 			StateSwitch : program.execution
+			SaveHistory : program.execution
+			HistoryEntry : program.execution
 			
 			Call : _executeNamedSequence(program.step)				
 
@@ -119,9 +123,8 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		])
 	}
 
-
 	def protected dispatch void execution(StateSwitch stateSwitch) {
-		_execute ("switch", [
+		_execute ("stateSwitch", [
 			val historyRegion = stateSwitch.historyRegion
 			if (historyRegion !== null) {
 				val historyState = historyStateConfiguration.get(historyRegion.historyVector.offset)
@@ -131,6 +134,25 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			}
 		])
 	}
+
+	def protected dispatch void execution(SaveHistory it) {
+		_execute ("saveHistory(" + it.region.name + ")", [
+			var region = it.region
+			historyStateConfiguration.put(region.historyVector.offset,
+				activeStateConfiguration.get(region.stateVector.offset))
+		])
+	}
+
+	def dispatch void execution(HistoryEntry entry) {
+		_execute("histoiryEntry", [
+			if (historyStateConfiguration.get(entry.region.historyVector.offset) !== null) {
+				entry.historyStep?._executeNamedSequence
+			} else {
+				entry.initialStep?._executeNamedSequence
+			}			
+		])
+	}
+
 
 
 	def protected void microStep() {
