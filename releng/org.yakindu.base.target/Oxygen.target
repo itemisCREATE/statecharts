@@ -29,7 +29,6 @@
 <unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.3.2.201709090201"/>
 <unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="1.5.0.v20170613-0242"/>
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170609-0928"/>
-<unit id="org.eclipse.epp.logging.aeri.feature.feature.group" version="2.0.7.v20170906-1327"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.11.0.201706061354"/>
 <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.11.0.201706061437"/>
 <unit id="org.eclipse.jdt.feature.group" version="3.13.3.v20180301-0715"/>
