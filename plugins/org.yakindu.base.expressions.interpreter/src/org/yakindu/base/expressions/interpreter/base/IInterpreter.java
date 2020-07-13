@@ -12,7 +12,7 @@ public interface IInterpreter {
 	}
 	
 	public static interface Resolver {
-		Object resolve(Object owner, Object symbol);		
+		Object resolve(Object owner, Object symbol);
 	}
 	
 	public static interface Context extends Resolver {
@@ -25,6 +25,7 @@ public interface IInterpreter {
 		void _requestExecution(Object program, Execution requester);
 		
 		void setValue(Object slot, Object value);
+		void raise(Object slot, Object value);
 		Object getValue(Object slot);
 		
 		

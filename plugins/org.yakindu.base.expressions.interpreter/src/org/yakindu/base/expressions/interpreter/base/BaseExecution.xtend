@@ -47,5 +47,4 @@ abstract class BaseExecution implements IInterpreter.Execution  {
 		program._requestExecution(this)
 	}
 	
-	
 }

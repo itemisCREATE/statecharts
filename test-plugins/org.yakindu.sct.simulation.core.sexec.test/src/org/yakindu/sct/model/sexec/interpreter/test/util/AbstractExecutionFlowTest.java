@@ -165,6 +165,8 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected void raiseEvent(String eventName, Object value) {
+		
+		
 		if (isEventDriven()) {
 			ExecutionEvent event = context().getEvent(eventName);
 			event.setValue(value);

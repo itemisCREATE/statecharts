@@ -28,6 +28,8 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver {
 	
@@ -39,6 +41,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	protected int activeStateIndex
 	
 	extension StateMachineBehaviorConcept = new StateMachineBehaviorConcept // TODO: Inject!!!
+	extension ExecutionContextExtensions = new ExecutionContextExtensions // TODO: Inject!!
 	
 	def setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
 		this.instance = instance	
@@ -153,6 +156,13 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		])
 	}
 
+
+	def dispatch void execution(ActiveStateReferenceExpression it) {
+		_return("isActive(" + value.name + ")", [
+			val state = it.value			
+			return executionContext.allActiveStates.contains(state)
+		])
+	}
 
 
 	def protected void microStep() {

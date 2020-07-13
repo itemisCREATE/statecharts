@@ -161,15 +161,17 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	}
 
 	override raise(ExecutionEvent ev, Object value) {
-		if (useInternalEventQueue && ev.direction == Direction::LOCAL) {
-			internalEventQueue.add(new Event(ev, value));
-		} else if (useInEventQueue && ev.direction == Direction::IN) {
-			inEventQueue.add(new Event(ev, value));
-			runCycle
-		} else {
-			ev.value = value
-			ev.raised = true
-		}
+		ev._raise(value)
+		
+//		if (useInternalEventQueue && ev.direction == Direction::LOCAL) {
+//			internalEventQueue.add(new Event(ev, value));
+//		} else if (useInEventQueue && ev.direction == Direction::IN) {
+//			inEventQueue.add(new Event(ev, value));
+//			runCycle
+//		} else {
+//			ev.value = value
+//			ev.raised = true
+//		}
 	}
 
 	override boolean isActive() {

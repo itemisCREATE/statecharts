@@ -12,10 +12,14 @@ import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
 import org.yakindu.sct.model.sruntime.ExecutionEvent
+import org.yakindu.sct.model.stext.stext.StextFactory
+import org.yakindu.sct.model.sruntime.ExecutionSlot
+import org.eclipse.emf.ecore.EObject
 
 class SexecInterpreter extends ExpressionInterpreter {
 
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
+	protected extension StextFactory stextFactory = StextFactory.eINSTANCE
 	@Inject protected IExecutionContextInitializer contextInitializer
 	
 	protected List<Type> types
@@ -58,6 +62,19 @@ class SexecInterpreter extends ExpressionInterpreter {
 	} 
 	
 	
+	def _raise(ExecutionEvent e, Object value) {
+		stack.clear
+		nextExecutions.clear
+	
+		enterCall("_raise_(" + e.name + ")")
+		
+		_execute("raise " + e.name, [
+			e.raise(value)		
+		])
+		
+		process
+	}
+	
 	override _requestExecution(Object program, Execution requester) {
 		if (requester === this.execution) {
 			SELF?.delegate?.provideExecution(program)
@@ -67,8 +84,15 @@ class SexecInterpreter extends ExpressionInterpreter {
 	}
 	
 	
-	def delegate(CompositeSlot it) {
-		slots.findFirst[name == "_delegate_"]?.value as IInterpreter.Execution
+	def dispatch IInterpreter.Execution delegate(EObject it) {
+		eContainer?.delegate
+	}
+	
+	def dispatch IInterpreter.Execution delegate(CompositeSlot it) {
+		val del = slots.findFirst[name == "_delegate_"]
+		
+		if (del !== null ) del.value as IInterpreter.Execution
+		else eContainer?.delegate
 	}
 	
 	override setValue(Object slot, Object value) {
@@ -77,7 +101,7 @@ class SexecInterpreter extends ExpressionInterpreter {
 		
 
 	def dispatch setSlotValue(Object o, Object value) {
-		throw new UnsupportedOperationException("Cannot assign value to slot of type " + value.class.name);		
+		throw new UnsupportedOperationException("Cannot assign value to slot of type " + o.class.name);		
 	}
 	
 	def dispatch setSlotValue(ExecutionVariable it, Object value) {
@@ -100,7 +124,24 @@ class SexecInterpreter extends ExpressionInterpreter {
 	def dispatch Object asValue(ExecutionEvent slot) {
 		slot.raised
 	}
+
 	
+	override raise(Object slot, Object value) {
+		raiseSlot(slot, value)
+	}
+		
+
+	def dispatch raiseSlot(Object o, Object value) {
+		throw new UnsupportedOperationException("Cannot raise on slot of type " + o.class.name);		
+	}
+	
+	def dispatch raiseSlot(ExecutionEvent it, Object value) {
+		it.raised = true
+		it.value = value
+	}
+	 
+
+
 	
 	override resolve(Object owner, Object symbol) {
 		if (owner === null) {
@@ -111,6 +152,7 @@ class SexecInterpreter extends ExpressionInterpreter {
 		}
 		else owner.resolveSlot(symbol)
 	}
+
 
 	def dispatch Object resolveSlot(Object slot, Object symbol) {
 		throw new IllegalArgumentException("Cannot resolve symbol '" + symbol + "' on slot '" + slot + "'!")	
@@ -128,7 +170,7 @@ class SexecInterpreter extends ExpressionInterpreter {
 		}
 		if (resolvedSlot !== null) return resolvedSlot
 		
-		// TODO extract getThisor rename to self
+		// TODO extract getThis or rename to self
 		val selfSlot = slot.slots.findFirst[ s | s.name == BaseExecution.SELF_NAME]
 		if (selfSlot !== null ) {
 			val SELF = selfSlot.value

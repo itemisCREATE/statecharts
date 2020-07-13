@@ -23,6 +23,7 @@ import org.yakindu.base.expressions.interpreter.CoreFunction
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.sct.model.sruntime.ExecutionEvent
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
 	
@@ -200,6 +201,5 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	def dispatch void executionCall(Object it) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")		
 	}
-	
 	
 }

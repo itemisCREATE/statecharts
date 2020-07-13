@@ -1,6 +1,7 @@
 package org.yakindu.base.expressions.interpreter.base
 
 import org.yakindu.base.expressions.interpreter.base.IInterpreter.Execution
+import org.yakindu.sct.model.sruntime.ExecutionSlot
 
 class ExpressionInterpreter extends SRuntimeInterpreter  {
 
@@ -31,6 +32,10 @@ class ExpressionInterpreter extends SRuntimeInterpreter  {
 	
 	
 	override _requestExecution(Object program, Execution requester) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override raise(Object slot, Object value) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	

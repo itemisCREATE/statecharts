@@ -104,7 +104,7 @@ class SexecExecution extends StextExecution  {
 
 	def dispatch void execution(SaveHistory it) { _delegate }
 
-	def dispatch void execution(HistoryEntry entry) { _delegate	}
+	def dispatch void execution(HistoryEntry it) { _delegate	}
 
 	def dispatch void execution(StateSwitch it) { _delegate } 
 	
