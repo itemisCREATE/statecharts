@@ -1,6 +1,5 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
-import org.yakindu.base.expressions.interpreter.base.ExpressionExecution
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.DoWhile
@@ -21,7 +20,7 @@ import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 
-class SexecExecution extends ExpressionExecution  {
+class SexecExecution extends StextExecution  {
 	
 //	@Inject(optional=true) ITraceStepInterpreter traceInterpreter
 	 

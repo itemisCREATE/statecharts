@@ -145,31 +145,6 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	}
 
 
-	def dispatch Object execute(SaveHistory action) {
-		var region = action.region
-		historyStateConfiguration.put(region.historyVector.offset,
-			activeStateConfiguration.get(region.stateVector.offset))
-	}
-
-	def dispatch Object execute(HistoryEntry entry) {
-		if (historyStateConfiguration.get(entry.region.historyVector.offset) !== null) {
-			entry.historyStep?.execute
-		} else {
-			entry.initialStep?.execute
-		}
-		null
-	}
-
-	def dispatch Object execute(StateSwitch stateSwitch) {
-		val historyRegion = stateSwitch.historyRegion
-		if (historyRegion !== null) {
-//			val historyState = historyStateConfiguration.get(historyRegion.historyVector.offset)
-//			stateSwitch.cases.filter[it.state == historyState].forEach[step.schedule]
-		} else {
-//			stateSwitch.cases.filter[activeStateConfiguration.contains(state)].forEach[step.schedule]
-		}
-		null
-	}
 
 	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
 		val timeEvent = scheduleTimeEvent.timeEvent

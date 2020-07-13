@@ -21,7 +21,7 @@ class SexecInterpreter extends ExpressionInterpreter {
 	protected List<Type> types
 
 	new() {
-		this.heap = createExecutionContext
+		this.heap = createExecutionContext // TODO : tidy up context creation ...
 		this.execution = new SexecExecution	
 		this.execution.executionContext = this
 	}
