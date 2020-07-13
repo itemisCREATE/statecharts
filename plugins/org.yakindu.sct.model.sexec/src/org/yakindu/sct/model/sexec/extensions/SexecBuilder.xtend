@@ -64,13 +64,13 @@ class SexecBuilder {
 	}	
 
 
-	def _equals(Expression left, Expression right) {
-		ExpressionsFactory.eINSTANCE.createLogicalRelationExpression => [ eq |
-			eq.operator = RelationalOperator.EQUALS;
-			eq.leftOperand = left
-			eq.rightOperand = right
-		]
-	}	
+//	def _equals(Expression left, Expression right) {
+//		ExpressionsFactory.eINSTANCE.createLogicalRelationExpression => [ eq |
+//			eq.operator = RelationalOperator.EQUALS;
+//			eq.leftOperand = left
+//			eq.rightOperand = right
+//		]
+//	}	
 	
 	def _assign(Property prop, Expression value) {
 		createStatement => [
@@ -241,12 +241,12 @@ class SexecBuilder {
 	}
 	
 	
-	def _variable(String name, String typeName) {
-		TypesFactory.eINSTANCE.createProperty => [ prop |
-			prop.name = name
-			prop._type(typeName)
-		]	
-	}
+//	def _variable(String name, String typeName) {
+//		TypesFactory.eINSTANCE.createProperty => [ prop |
+//			prop.name = name
+//			prop._type(typeName)
+//		]	
+//	}
 	
 	def _call(Step callee) {
 		createCall => [step = callee]

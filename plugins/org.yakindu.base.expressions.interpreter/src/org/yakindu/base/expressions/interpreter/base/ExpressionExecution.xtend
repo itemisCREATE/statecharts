@@ -1,11 +1,16 @@
 package org.yakindu.base.expressions.interpreter.base
 
+import java.util.Map
+import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BinaryExpression
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.DoubleLiteral
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
@@ -15,14 +20,24 @@ import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.interpreter.CoreFunction
-import org.yakindu.base.expressions.interpreter.base.IInterpreter.Context
 import org.yakindu.base.types.Expression
-import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.base.NamedElement
-import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Operation
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
+	
+	protected static Map<AssignmentOperator, String> assignFunctionMap = #{
+		AssignmentOperator.MULT_ASSIGN -> "*",
+		AssignmentOperator.DIV_ASSIGN -> "/",
+		AssignmentOperator.MOD_ASSIGN -> "%",
+		AssignmentOperator.ADD_ASSIGN -> "+",
+		AssignmentOperator.SUB_ASSIGN -> "-",
+		AssignmentOperator.LEFT_SHIFT_ASSIGN -> "<<",
+		AssignmentOperator.RIGHT_SHIFT_ASSIGN -> ">>",
+		AssignmentOperator.AND_ASSIGN -> "&",
+		AssignmentOperator.XOR_ASSIGN -> "^",
+		AssignmentOperator.OR_ASSIGN -> "|"
+	};
 	
 	protected extension CoreFunctionExecution cf = new CoreFunctionExecution
 		
@@ -36,7 +51,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 
 
 	def dispatch void execution(PrimitiveValueExpression expr) {
-		_return([
+		_return(expr.value.valueLiteral.toString, [
 			expr.value.valueLiteral
 		])
 	}
@@ -51,18 +66,29 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		expr.expression._exec
 		_value
 		expr.varRef._exec
-		_execute[ 
-			val slotRef = popValue
-			val value = popValue							
-			slotRef.setValue(value) 
-			null
-		]
+		_execute( expr.operator.literal, [ 
+			val f = assignFunctionMap.get(expr.operator)
+			val varRef = popValue
+			var value = popValue
+
+			if ( expr.operator !== AssignmentOperator.ASSIGN) {
+				val varValue = varRef.value
+				value = evaluate(f, varValue, value)
+			}
+			
+			varRef.setValue = value
+		])
 	}
 	
 	def dispatch void execution(ElementReferenceExpression expr) {
-		_return [
-			resolve(null, expr.reference.symbol)
-		]
+		if (expr.reference instanceof Operation) {
+			expr.arguments.forEach[ value._exec ]			
+			expr.reference._call
+		} else {
+			_return [
+				resolve(null, expr.reference.symbol)
+			]
+		}
 	}
 
 	def dispatch void execution(FeatureCall expr) {
@@ -89,19 +115,19 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		_value
 		right._exec 
 		_value
-		_return [ 
+		_return (operator, [ 
 			val rightValue = popValue
 			val leftValue = popValue
 			
 			evaluate(operator, leftValue, rightValue)
-		]		
+		])
 	}
 	
 	
 	def dispatch void execution(LogicalOrExpression expr) {
 		expr.leftOperand._exec
 		_value
-		_execute [ 
+		_execute ('||', [ 
 			if (popValue == true) { 
 				_return[true]
 			}
@@ -110,15 +136,14 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 				_value
 				_return[popValue]
 			}
-			null
-		]
+		])
 	}
 	
 
 	def dispatch void execution(LogicalAndExpression expr) {
 		expr.leftOperand._exec
 		_value
-		_execute [ 
+		_execute ('&&', [ 
 			if (popValue == false) { 
 				_return[false]
 			}
@@ -127,8 +152,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 				_value
 				_return[popValue]
 			}
-			null
-		]
+		])
 	}
 	
 	
@@ -169,6 +193,13 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		return null
 	}
 	
+	def void _call(Object it) {
+		executionCall
+	}
+
+	def dispatch void executionCall(Object it) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")		
+	}
 	
 	
 }

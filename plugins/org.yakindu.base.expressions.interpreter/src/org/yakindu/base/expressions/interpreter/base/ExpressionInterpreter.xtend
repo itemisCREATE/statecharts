@@ -1,6 +1,8 @@
 package org.yakindu.base.expressions.interpreter.base
 
-class ExpressionInterpreter extends BaseInterpreter  {
+import org.yakindu.base.expressions.interpreter.base.IInterpreter.Execution
+
+class ExpressionInterpreter extends SRuntimeInterpreter  {
 
 	
 	protected IInterpreter.Execution execution // TODO: injection ...
@@ -26,6 +28,12 @@ class ExpressionInterpreter extends BaseInterpreter  {
 	override setValue(Object slot, Object value) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
+	
+	
+	override _requestExecution(Object program, Execution requester) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 	
 	
 }

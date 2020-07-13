@@ -35,6 +35,7 @@ import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInt
 import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
+import org.yakindu.sct.simulation.core.sexec.interpreter.SexecInterpreterAdapter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.StextExpressionInterpreter;
 
 import com.google.inject.Binder;
@@ -87,11 +88,11 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends IExecutionFlowInterpreter> bindIExecutionFlowInterpreter() {
-		return DefaultExecutionFlowInterpreter.class;
+		return SexecInterpreterAdapter.class;
 	}
 
 	public Class<? extends IEventRaiser> bindIEventRaiser() {
-		return DefaultExecutionFlowInterpreter.class;
+		return SexecInterpreterAdapter.class;
 	}
 
 	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {

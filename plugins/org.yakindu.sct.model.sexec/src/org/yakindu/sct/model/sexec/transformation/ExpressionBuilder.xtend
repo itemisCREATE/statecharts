@@ -168,6 +168,14 @@ class ExpressionBuilder {
 		]
 	}
 	
+	def LogicalRelationExpression _equals(Expression e1, Expression e2) {
+		createLogicalRelationExpression => [
+			leftOperand = e1
+			rightOperand = e2
+			operator = RelationalOperator.EQUALS
+		]
+	}
+	
 	def LogicalRelationExpression _smaller(Expression e1, Expression e2) {
 		createLogicalRelationExpression => [
 			leftOperand = e1
