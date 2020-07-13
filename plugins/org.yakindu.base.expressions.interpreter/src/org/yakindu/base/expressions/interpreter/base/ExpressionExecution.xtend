@@ -24,6 +24,16 @@ import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.sct.model.sruntime.ExecutionEvent
+import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.Enumerator
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
 	
@@ -93,10 +103,15 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	}
 
 	def dispatch void execution(FeatureCall expr) {
-		expr.owner._exec
-		_return [
-			popValue.resolve(expr.feature.symbol)
-		]
+		expr.owner._exec		
+		if (expr.feature instanceof Operation) {
+			expr.arguments.forEach[ value._exec ]			
+			expr.feature._call   // TODO: handle receiver / owner
+		} else {
+			_return [
+				popValue.resolve(expr.feature.symbol)
+			]			
+		}
 	}
 
 	def dispatch String symbol(Object it) {
@@ -123,6 +138,17 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 			evaluate(operator, leftValue, rightValue)
 		])
 	}
+	
+	protected def void unaryExpressionExecution(String operator, Expression expr) {
+		expr._exec  
+		_value
+		_return (operator, [ 
+			val value = popValue
+			
+			evaluate(operator, value)
+		])
+	}
+	
 	
 	
 	def dispatch void execution(LogicalOrExpression expr) {
@@ -156,6 +182,27 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		])
 	}
 	
+	def dispatch void execution(LogicalNotExpression it) {
+		operand._exec
+		_value
+		_return [
+			popValue == false
+		]
+	}
+	
+	
+	def dispatch void execution(ConditionalExpression it) {
+		condition._exec
+		_value
+		_execute[
+			if (popValue == true) {
+				trueCase._exec
+			} else  {
+				falseCase._exec
+			}
+		]
+	}
+	
 	
 	def dispatch void execution(BitwiseAndExpression it) {
 		binaryExpressionExecution(CoreFunction.BIT_AND, leftOperand, rightOperand)
@@ -168,6 +215,66 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	def dispatch void execution(BitwiseXorExpression it) {
 		binaryExpressionExecution(CoreFunction.BIT_XOR, leftOperand, rightOperand)
 	}
+	
+	def dispatch void execution(NumericalUnaryExpression expression) {
+		unaryExpressionExecution(expression.operator.literal, expression.operand)
+	}
+	
+	def dispatch void execution(PostFixUnaryExpression it) {
+		operand._exec
+		_execute( it.operator.literal, [ 
+			val varRef = popValue
+			val varValue = varRef.value
+			val opValue = evaluate(operator.literal, varValue)
+			varRef.setValue(opValue)
+		])
+	}	
+	
+	def dispatch void execution(TypeCastExpression expression) {
+		expression.operand._exec
+		_value
+		_return("cast("+ expression.type.originType.name + ")", [
+			// TODO: requires type system
+//			val operandValue = popValue
+//			typeCast(operandValue, expression.type.originType)		
+		])
+	}
+
+
+//	def protected dispatch Object typeCast(Long value, Type type) {
+//		if(type instanceof EnumerationType) return value
+//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
+//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+//		throw new IllegalArgumentException("unknown type " + type.name)
+//	}
+//
+//	def protected dispatch Object typeCast(Float value, Type type) {
+//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
+//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+//		throw new IllegalArgumentException("Invalid cast from Float to " + type.name)
+//	}
+//
+//	def protected dispatch Object typeCast(Double value, Type type) {
+//		if(ts.isSuperType(type, ts.getType(ITypeSystem.INTEGER))) return value.longValue
+//		if(ts.isSuperType(type, ts.getType(ITypeSystem.REAL))) return Double.valueOf(value)
+//		throw new IllegalArgumentException("Invalid cast from Double to " + type.name)
+//	}
+//
+//	def protected dispatch Object typeCast(Boolean value, Type type) {
+//		if(ts.isSuperType(type, ts.getType(ITypeSystem.BOOLEAN))) return value
+//		throw new IllegalArgumentException("Invalid cast from Boolean to " + type.name)
+//	}
+//
+//	def protected dispatch Object typeCast(String value, Type type) {
+//		if(ts.isSuperType(type, ts.getType(ITypeSystem.STRING))) return value
+//		throw new IllegalArgumentException("Invalid cast from String to " + type.name)
+//	}
+//
+//	def protected dispatch Object typeCast(Enumerator value, Type type) {
+//		if(ts.isSuperType(type, value.owningEnumeration)) return value
+//		throw new IllegalArgumentException("Invalid cast from Enumerator to " + type.name)
+//	}
+
 	
 		
 	def dispatch valueLiteral(IntLiteral literal) {
