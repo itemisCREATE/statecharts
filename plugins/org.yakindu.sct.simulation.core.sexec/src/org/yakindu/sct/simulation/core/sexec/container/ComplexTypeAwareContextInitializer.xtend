@@ -28,6 +28,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Direction
 
 /**
  * Execution context initializer which recursively builds composite slots for variables with complex types.
@@ -119,6 +121,15 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		createExecutionVariable => [
 			it.type = type
 			it.init(element)
+		]
+	}
+
+	def protected dispatch ExecutionSlot transformByType(Type type, Event element,
+		InferenceResult inferenceResult) {
+		createExecutionEvent => [
+			it.type = type
+			it.init(element)
+			it.direction = Direction.get(element.direction.value)
 		]
 	}
 
