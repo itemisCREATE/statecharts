@@ -65,6 +65,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			StateSwitch : program.execution
 			SaveHistory : program.execution
 			HistoryEntry : program.execution
+			ActiveStateReferenceExpression : program.execution
 			
 			Call : _executeNamedSequence(program.step)				
 
