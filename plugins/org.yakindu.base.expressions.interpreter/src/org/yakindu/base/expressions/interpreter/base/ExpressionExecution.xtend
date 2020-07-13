@@ -3,37 +3,31 @@ package org.yakindu.base.expressions.interpreter.base
 import java.util.Map
 import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BinaryExpression
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.interpreter.CoreFunction
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
-import org.yakindu.base.expressions.expressions.AssignmentOperator
-import org.yakindu.sct.model.sruntime.ExecutionEvent
-import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
-import org.yakindu.base.expressions.expressions.LogicalNotExpression
-import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
-import org.yakindu.base.expressions.expressions.TypeCastExpression
-import org.yakindu.base.types.EnumerationType
-import org.yakindu.base.types.typesystem.GenericTypeSystem
-import org.yakindu.base.types.Type
-import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.base.types.Enumerator
-import org.yakindu.base.expressions.expressions.ConditionalExpression
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
 	

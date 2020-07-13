@@ -97,8 +97,10 @@ class SexecInterpreter extends ExpressionInterpreter {
 
 	def dispatch IInterpreter.Execution delegate(CompositeSlot it) {
 		val del = it.getExistingAdapter(ExecutionFlowInstanceDelegateAdapter)
-		if(del !== null) (del as ExecutionFlowInstanceDelegateAdapter).
-			instance as IInterpreter.Execution else eContainer?.delegate
+		if(del !== null) 
+			(del as ExecutionFlowInstanceDelegateAdapter).instance as IInterpreter.Execution 
+		else 
+			eContainer?.delegate
 	}
 
 	override setValue(Object slot, Object value) {
