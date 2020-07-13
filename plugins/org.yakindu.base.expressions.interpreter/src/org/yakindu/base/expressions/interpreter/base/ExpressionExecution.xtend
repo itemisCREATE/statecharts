@@ -28,6 +28,9 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.interpreter.CoreFunction
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
+import org.yakindu.base.expressions.expressions.MetaCall
+import org.yakindu.sct.model.sruntime.ExecutionEvent
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
 	
@@ -71,7 +74,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		expr.expression._exec
 		_value
 		expr.varRef._exec
-		_execute( expr.operator.literal, [ 
+		_return( expr.operator.literal, [ 
 			val f = assignFunctionMap.get(expr.operator)
 			val varRef = popValue
 			var value = popValue
@@ -82,6 +85,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 			}
 			
 			varRef.setValue = value
+			value
 		])
 	}
 	
@@ -106,6 +110,22 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 				popValue.resolve(expr.feature.symbol)
 			]			
 		}
+	}
+
+	def dispatch void execution(MetaCall expr) {
+		
+		val metaFeature = expr.feature
+		if (metaFeature instanceof Property) {
+			if (metaFeature.name == "value") {
+				expr.owner._exec
+				_return[
+					val eventSlot = popValue()
+					(eventSlot as ExecutionEvent).value
+				]
+				return		
+			}
+		} 
+		throw new IllegalArgumentException("Cannot resolve meta call e '" + expr +"'")
 	}
 
 	def dispatch String symbol(Object it) {

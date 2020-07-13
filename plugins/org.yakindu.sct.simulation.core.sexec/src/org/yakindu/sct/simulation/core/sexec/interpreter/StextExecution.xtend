@@ -30,17 +30,7 @@ class StextExecution extends ExpressionExecution {
 		_return[
 			val eventSlot = popValue()
 			(eventSlot as ExecutionEvent).value
-		]
-		
-//		for (event : context.raisedEvents) {
-//			val slot = context.resolve(expression.value)
-//				.orElseThrow(SlotResolutionExceptionSupplier.forContext(expression.value))
-//			if (slot instanceof ExecutionEvent && slot.fqName == event.fqName) {
-//				return event.getValue;
-//			}
-//		}
-//		throw new UndefinedValueException("Undefined value of event '" + expression.value.eventName + "'\n" +
-//			"Event values only exist in the same cycle in which the event was raised.")
+		]		
 	}
 	
 	
