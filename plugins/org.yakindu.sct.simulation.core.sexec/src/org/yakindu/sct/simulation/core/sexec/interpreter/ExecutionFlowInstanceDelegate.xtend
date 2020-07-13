@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 import org.yakindu.sct.model.sruntime.ExecutionEvent
+import org.yakindu.sct.model.sexec.StateSwitch
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver {
 	
@@ -55,6 +56,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 			EnterState : program.execution
 			ExitState : program.execution
+			StateSwitch : program.execution
 			
 			Call : _executeNamedSequence(program.step)				
 
@@ -114,6 +116,19 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			activeStateConfiguration.set(exitState.state.stateVector.offset, null)
 			var exitStates = executionContext.activeStates.filter[EcoreUtil::equals(it, exitState.state.sourceElement)]
 			executionContext.activeStates.removeAll(exitStates)
+		])
+	}
+
+
+	def protected dispatch void execution(StateSwitch stateSwitch) {
+		_execute ("switch", [
+			val historyRegion = stateSwitch.historyRegion
+			if (historyRegion !== null) {
+				val historyState = historyStateConfiguration.get(historyRegion.historyVector.offset)
+				stateSwitch.cases.filter[it.state == historyState].forEach[step._delegate]
+			} else {
+				stateSwitch.cases.filter[activeStateConfiguration.contains(state)].forEach[step._delegate]
+			}
 		])
 	}
 
