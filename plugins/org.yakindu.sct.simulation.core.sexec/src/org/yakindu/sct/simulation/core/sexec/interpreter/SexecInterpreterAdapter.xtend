@@ -111,7 +111,7 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	}
 
 	override exit() {
-		stateMachine._invoke("enter")
+		stateMachine._invoke("exit")
 	}
 
 
@@ -144,21 +144,6 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	override tearDown() {
 	}
 
-
-	def dispatch Object execute(EnterState enterState) {
-		activeStateConfiguration.set(enterState.state.stateVector.offset, enterState.state)
-		executionContext.activeStates += enterState.state.sourceElement as RegularState
-		activeStateIndex = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...
-		stateVectorChanged = true
-		null
-	}
-
-	def dispatch Object execute(ExitState exitState) {
-		activeStateConfiguration.set(exitState.state.stateVector.offset, null)
-		var activeStates = executionContext.activeStates.filter[EcoreUtil::equals(it, exitState.state.sourceElement)]
-		executionContext.activeStates.removeAll(activeStates)
-		null
-	}
 
 	def dispatch Object execute(SaveHistory action) {
 		var region = action.region
