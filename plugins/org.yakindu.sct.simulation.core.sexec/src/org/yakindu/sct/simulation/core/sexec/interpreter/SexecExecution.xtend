@@ -19,6 +19,8 @@ import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 class SexecExecution extends StextExecution  {
 	
@@ -111,6 +113,22 @@ class SexecExecution extends StextExecution  {
 	def dispatch void execution(ScheduleTimeEvent it) { _delegate }
 
 	def dispatch void execution (UnscheduleTimeEvent it) { _delegate }
+	
+	
+	override dispatch void execution(ElementReferenceExpression expr) {
+		
+		val refParent = expr.reference.eContainer
+		if (refParent instanceof InterfaceScope) {
+			val scopeName = if (refParent.name.nullOrEmpty) 
+				"default"  // TODO :use some extension
+			else 
+				refParent.name
+				
+			_return [
+				resolve(null, scopeName).resolve(expr.reference.symbol)
+			]
+		} else super._execution(expr)		
+	}
 	
 
 	def dispatch void executionCall(Method it) {

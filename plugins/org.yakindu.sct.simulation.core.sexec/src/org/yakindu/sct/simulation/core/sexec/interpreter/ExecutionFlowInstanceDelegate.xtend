@@ -248,7 +248,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}	
 
 	def dispatch ExecutionSlot resolveSlot(CompositeSlot slot, String symbol) {
-		var s = slot.slots.findFirst[ s | s.name == symbol]
+		var s = slot.slotByName(symbol)
 		if (s === null) {
 			if (defaultInterface !== null && slot !== defaultInterface) 
 				s = defaultInterface.resolveSlot(symbol)
@@ -257,7 +257,11 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}	
 
 	def  defaultInterface() {
-		resolveSlot(instance, "default") as CompositeSlot
+		instance.slotByName("default")
+	}
+	
+	def protected slotByName(CompositeSlot slot, String symbol) {
+		slot.slots.findFirst[ s | s.name == symbol]
 	}
 	
 	def protected allMethods(ExecutionFlow it) {

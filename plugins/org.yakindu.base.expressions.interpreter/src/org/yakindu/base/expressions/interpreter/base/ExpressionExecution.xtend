@@ -90,6 +90,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	}
 	
 	def dispatch void execution(ElementReferenceExpression expr) {
+				
 		if (expr.reference instanceof Operation) {
 			expr.arguments.forEach[ value._exec ]			
 			expr.reference._call
