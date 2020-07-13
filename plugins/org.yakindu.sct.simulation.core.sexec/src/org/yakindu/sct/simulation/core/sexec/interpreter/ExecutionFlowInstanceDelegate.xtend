@@ -76,7 +76,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			Sequence case program.name == ExitMethod.TRACE_EXIT : _execute[]		// TODO	
 			Sequence case program.name == InitializedCheck.INIT_CHECK : _execute[]	// do nothing so far ...		
 			 
-			Method case type.features.contains(program): program.invoke 
+			Method case type.allMethods.contains(program): program.invoke 
 						
 			String case program.hasMethod : program.lookupMethod.invoke 
 			
@@ -257,5 +257,12 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 	def  defaultInterface() {
 		resolveSlot(instance, "default") as CompositeSlot
+	}
+	
+	def protected allMethods(ExecutionFlow it) {
+		val allMethods = features.filter(Method).toList
+		allMethods.addAll(states.map[features.filter(Method)].flatten)
+		
+		allMethods
 	}
 }
