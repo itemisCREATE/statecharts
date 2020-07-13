@@ -2,35 +2,47 @@ package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
 import java.util.List
+import org.eclipse.emf.common.notify.impl.AdapterImpl
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.base.expressions.interpreter.base.BaseExecution
 import org.yakindu.base.expressions.interpreter.base.ExpressionInterpreter
 import org.yakindu.base.expressions.interpreter.base.IInterpreter
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sruntime.CompositeSlot
+import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
-import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
-import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.stext.StextFactory
-import org.yakindu.sct.model.sruntime.ExecutionSlot
-import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 class SexecInterpreter extends ExpressionInterpreter {
 
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
 	protected extension StextFactory stextFactory = StextFactory.eINSTANCE
 	@Inject protected IExecutionContextInitializer contextInitializer
-	
+
+	static class ExecutionFlowInstanceDelegateAdapter extends AdapterImpl {
+		@Accessors
+		ExecutionFlowInstanceDelegate instance
+
+		override isAdapterForType(Object type) {
+			return type == ExecutionFlowInstanceDelegateAdapter
+		}
+
+	}
+
 	protected List<Type> types
 
 	new() {
 		this.heap = createExecutionContext // TODO : tidy up context creation ...
-		this.execution = new SexecExecution	
+		this.execution = new SexecExecution
 		this.execution.executionContext = this
 	}
-	
-	
+
 	def newInstance(ExecutionFlow flow) {
 		val instance = heap
 		contextInitializer.initialize(heap, flow)
@@ -39,45 +51,38 @@ class SexecInterpreter extends ExpressionInterpreter {
 //			name = flow.name + "#"+ (heap.slots.size + 1)	
 //			heap.slots += it
 //		]		
-		val delegate = new ExecutionFlowInstanceDelegate =>[
-			it.setUp(instance, flow, this)
+		instance.eAdapters += new ExecutionFlowInstanceDelegateAdapter() => [
+			instance = new ExecutionFlowInstanceDelegate => [
+				it.setUp(instance, flow, this)
+			]
 		]
-		createExecutionVariable => [
-			name = "_delegate_"
-			visible = true
-			value = delegate
-			instance.slots += it	
-		]
-	
-		return instance
+		instance
 	}
-	
-	
+
 	def _invoke(CompositeSlot receiver, String operation) {
 		stack.clear
 		nextExecutions.clear
-		
+
 		enterCall("_invoke_(" + operation + ")")
-		
+
 		receiver.delegate.provideExecution(operation)
 
 		process
-	} 
-	
-	
+	}
+
 	def _raise(ExecutionEvent e, Object value) {
 		stack.clear
 		nextExecutions.clear
-	
+
 		enterCall("_raise_(" + e.name + ")")
-		
+
 		_execute("raise " + e.name, [
-			e.raise(value)		
+			e.raise(value)
 		])
-		
+
 		process
 	}
-	
+
 	override _requestExecution(Object program, Execution requester) {
 		if (requester === this.execution) {
 			SELF?.delegate?.provideExecution(program)
@@ -85,32 +90,28 @@ class SexecInterpreter extends ExpressionInterpreter {
 			this.execution.provideExecution(program)
 		}
 	}
-	
-	
+
 	def dispatch IInterpreter.Execution delegate(EObject it) {
 		eContainer?.delegate
 	}
-	
+
 	def dispatch IInterpreter.Execution delegate(CompositeSlot it) {
-		val del = slots.findFirst[name == "_delegate_"]
-		
-		if (del !== null ) del.value as IInterpreter.Execution
-		else eContainer?.delegate
+		val del = it.getExistingAdapter(ExecutionFlowInstanceDelegateAdapter)
+		if(del !== null) (del as ExecutionFlowInstanceDelegateAdapter).
+			instance as IInterpreter.Execution else eContainer?.delegate
 	}
-	
+
 	override setValue(Object slot, Object value) {
 		setSlotValue(slot, value)
 	}
-		
 
 	def dispatch setSlotValue(Object o, Object value) {
-		throw new UnsupportedOperationException("Cannot assign value to slot of type " + o.class.name);		
+		throw new UnsupportedOperationException("Cannot assign value to slot of type " + o.class.name);
 	}
-	
+
 	def dispatch setSlotValue(ExecutionVariable it, Object value) {
 		it.value = value
 	}
-	 
 
 	override getValue(Object slot) {
 		slot.asValue
@@ -123,74 +124,62 @@ class SexecInterpreter extends ExpressionInterpreter {
 	def dispatch Object asValue(ExecutionVariable slot) {
 		slot.value
 	}
-	
+
 	def dispatch Object asValue(ExecutionEvent slot) {
 		slot.raised
 	}
 
-	
 	override raise(Object slot, Object value) {
 		raiseSlot(slot, value)
 	}
-		
 
 	def dispatch raiseSlot(Object o, Object value) {
-		throw new UnsupportedOperationException("Cannot raise on slot of type " + o.class.name);		
+		throw new UnsupportedOperationException("Cannot raise on slot of type " + o.class.name);
 	}
-	
+
 	def dispatch raiseSlot(ExecutionEvent it, Object value) {
 		it.raised = true
 		it.value = value
 	}
-	 
 
-
-	
 	override resolve(Object owner, Object symbol) {
 		if (owner === null) {
 			val slot = localScope?.resolveSlot(symbol)
-			if (slot !== null) return slot
-			
-			heap.resolveSlot(symbol)		
-		}
-		else owner.resolveSlot(symbol)
+			if(slot !== null) return slot
+
+			heap.resolveSlot(symbol)
+		} else
+			owner.resolveSlot(symbol)
 	}
 
-
 	def dispatch Object resolveSlot(Object slot, Object symbol) {
-		throw new IllegalArgumentException("Cannot resolve symbol '" + symbol + "' on slot '" + slot + "'!")	
+		throw new IllegalArgumentException("Cannot resolve symbol '" + symbol + "' on slot '" + slot + "'!")
 	}
 
 	def dispatch Object resolveSlot(CompositeSlot slot, String symbol) {
-		
-		// 
-		var Object resolvedSlot = slot.slots.findFirst[ s | s.name == symbol]
-		if (resolvedSlot !== null) return resolvedSlot
-		
-		val delegate = slot.delegate 
+
+		//
+		var Object resolvedSlot = slot.slots.findFirst[s|s.name == symbol]
+		if(resolvedSlot !== null) return resolvedSlot
+
+		val delegate = slot.delegate
 		if (delegate !== null && delegate instanceof IInterpreter.Resolver) {
 			resolvedSlot = (delegate as IInterpreter.Resolver).resolve(slot, symbol)
 		}
-		if (resolvedSlot !== null) return resolvedSlot
-		
+		if(resolvedSlot !== null) return resolvedSlot
+
 		// TODO extract getThis or rename to self
-		val selfSlot = slot.slots.findFirst[ s | s.name == BaseExecution.SELF_NAME]
-		if (selfSlot !== null ) {
+		val selfSlot = slot.slots.findFirst[s|s.name == BaseExecution.SELF_NAME]
+		if (selfSlot !== null) {
 			val SELF = selfSlot.value
-			if (SELF !== slot)	resolvedSlot = SELF.resolve(symbol) 
+			if(SELF !== slot) resolvedSlot = SELF.resolve(symbol)
 		}
-		
+
 		return resolvedSlot
-	}	
-	
-	
+	}
+
 	def CompositeSlot SELF() {
 		localScope?.resolve(BaseExecution.SELF_NAME).value as CompositeSlot
 	}
-	
-	
-	
-	
-	
-	
+
 }
