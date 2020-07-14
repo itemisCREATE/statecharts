@@ -52,10 +52,6 @@ class ExpressionsChecker {
 		leftOperand.infer.type.isString || rightOperand.infer.type.isString
 	}
 	
-	def isConstString(VariableDefinition it) {
-		const && isStringType
-	}
-	
 	def protected isStringType(VariableDefinition it) {
 		isString(typeSpecifier.type)
 	}

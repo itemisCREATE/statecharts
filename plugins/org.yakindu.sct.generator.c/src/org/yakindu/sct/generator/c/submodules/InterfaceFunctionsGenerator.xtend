@@ -67,7 +67,7 @@ class InterfaceFunctionsGenerator {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.isConstString»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
+				«variable.typeSpecifier.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
 				{
 					«IF variable.isConst»
 						«unusedParam(scHandle)»
