@@ -146,7 +146,7 @@ class RxCSource implements IContentTemplate {
 		
 		void sc_observer_sc_string_next(sc_observer_sc_string *self, sc_string value)
 		{
-			if (self != NULL && self->next != NULL)
+			if (self != «NULL» && self->next != «NULL»)
 			{
 				self->next(self->object, value);
 			}
@@ -154,7 +154,7 @@ class RxCSource implements IContentTemplate {
 		
 		void sc_observable_sc_string_init(sc_observable_sc_string *self)
 		{
-			self->subscriptions = NULL;
+			self->subscriptions = «NULL»;
 		}
 		
 		sc_boolean sc_observable_sc_string_subscribe(sc_observable_sc_string *self, sc_subscription_sc_string *s) {
@@ -168,13 +168,13 @@ class RxCSource implements IContentTemplate {
 		void sc_observable_sc_string_next(sc_observable_sc_string *self, sc_string value)
 		{
 			sc_subscription_sc_string *sub = self->subscriptions;
-			while (sub != NULL)
+			while (sub != «NULL»)
 			{
-				if (sub->observer != NULL)
+				if (sub->observer != «NULL»)
 				{
 					sc_observer_sc_string_next(sub->observer, value);
 				}
-				sub = (sub->next != sub) ? sub->next : NULL;
+				sub = (sub->next != sub) ? sub->next : «NULL»;
 			}
 		}
 		
@@ -195,7 +195,7 @@ class RxCSource implements IContentTemplate {
 		void sc_subscription_sc_string_init(sc_subscription_sc_string *self, sc_observer_sc_string *o)
 		{
 			self->observer = o;
-			self->next = NULL;
+			self->next = «NULL»;
 		}
 	'''
 	
