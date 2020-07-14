@@ -4,7 +4,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.base.expressions.interpreter.base.ExpressionInterpreter;
 import org.yakindu.base.expressions.interpreter.base.IInterpreter;
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder;
 
@@ -18,10 +17,8 @@ public class ExpressionExecutionTest {
   
   @Before
   public void setUp() {
-    ExpressionBuilder _expressionBuilder = new ExpressionBuilder();
-    this.exprBuilder = _expressionBuilder;
-    ExpressionInterpreter _expressionInterpreter = new ExpressionInterpreter();
-    this.exprInterpreter = _expressionInterpreter;
+    throw new Error("Unresolved compilation problems:"
+      + "\nExpressionInterpreter cannot be resolved.");
   }
   
   @Test

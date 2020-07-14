@@ -6,8 +6,8 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.base.expressions.interpreter.base.BaseExecution
-import org.yakindu.base.expressions.interpreter.base.ExpressionInterpreter
 import org.yakindu.base.expressions.interpreter.base.IInterpreter
+import org.yakindu.base.expressions.interpreter.base.SRuntimeInterpreter
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sruntime.CompositeSlot
@@ -16,18 +16,19 @@ import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 
-class SexecInterpreter extends ExpressionInterpreter {
+class SexecInterpreter extends SRuntimeInterpreter {
 
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
 	protected extension StextFactory stextFactory = StextFactory.eINSTANCE
 	@Inject protected IExecutionContextInitializer contextInitializer
 	@Inject protected ITimeTaskScheduler timingService
 	
+	protected IInterpreter.Execution execution 	
 
 	static class ExecutionFlowInstanceDelegateAdapter extends AdapterImpl {
 		@Accessors
@@ -41,12 +42,12 @@ class SexecInterpreter extends ExpressionInterpreter {
 
 	protected List<Type> types
 
-	new() {
+	@Inject new(SexecExecution exec) {
 		this.heap = createExecutionContext // TODO : tidy up context creation ...
-		this.execution = new SexecExecution
+		this.execution = exec
 		this.execution.executionContext = this
 	}
-
+	
 	def newInstance(ExecutionFlow flow) {
 		val instance = heap
 		contextInitializer.initialize(heap, flow)
@@ -62,6 +63,13 @@ class SexecInterpreter extends ExpressionInterpreter {
 		]
 		instance
 	}
+	
+	
+	override void prepareExecution(Object program) {
+		execution.provideExecution(program)
+	}
+	
+	
 
 	def _invoke(CompositeSlot receiver, String operation) {
 		stack.clear

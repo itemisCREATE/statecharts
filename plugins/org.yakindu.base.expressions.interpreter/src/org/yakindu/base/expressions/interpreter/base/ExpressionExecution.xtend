@@ -31,6 +31,8 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.expressions.expressions.MetaCall
 import org.yakindu.sct.model.sruntime.ExecutionEvent
+import com.google.inject.Inject
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
 	
@@ -48,6 +50,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	};
 	
 	protected extension CoreFunctionExecution cf = new CoreFunctionExecution
+	@Inject protected extension IQualifiedNameProvider
 		
 	override provideExecution(Object program) {
 		program.execution
@@ -134,7 +137,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	}
 	
 	def dispatch String symbol(NamedElement it) {
-		it.name
+		it.fullyQualifiedName.lastSegment
 	}
 	
 	def dispatch void execution(BinaryExpression it) {

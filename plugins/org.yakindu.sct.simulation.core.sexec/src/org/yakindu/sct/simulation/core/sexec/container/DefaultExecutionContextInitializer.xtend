@@ -193,6 +193,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			fqName = event.fullyQualifiedName.toString
 			type = getType(ITypeSystem.INTEGER)
 			value = type.defaultValue
+			direction = Direction.IN
 		]
 	}
 }
