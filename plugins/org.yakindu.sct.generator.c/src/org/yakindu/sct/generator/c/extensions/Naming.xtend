@@ -75,6 +75,7 @@ class Naming {
 	@Inject extension OriginTracing
 	@Inject extension EventBuffer
 	@Inject protected extension ShadowMemberScope
+	@Inject protected extension EventNaming
 	
 	
 	def getFullyQualifiedName(State state) {
@@ -280,7 +281,7 @@ class Naming {
 	 */
 	def scopeShadowEventMember(Event it) {
 		'''
-		«SINGLE_SUBSCRIPTION_OBSERVER_TYPE» «eventName»;
+		«SINGLE_SUBSCRIPTION_OBSERVER_TYPE»«eventType» «eventName»;
 		'''
 	}
 
@@ -290,7 +291,7 @@ class Naming {
 	def dispatch scopeTypeDeclMember(Event it) {
 		'''
 		«IF useOutEventObservables && direction == Direction.OUT»
-			«OBSERVABLE_TYPE» «eventName»;
+			«OBSERVABLE_TYPE»«eventType» «eventName»;
 		«ENDIF»
 		«IF (useOutEventGetters && direction == Direction.OUT) || direction == Direction.IN || direction == Direction.LOCAL»
 			«BOOL_TYPE» «eventRaisedFlag»;

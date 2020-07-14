@@ -25,6 +25,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.c.extensions.EventNaming
 
 /**
  * @author rbeckmann
@@ -44,6 +45,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension TraceCode
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension CLiterals
+	@Inject protected extension EventNaming
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
@@ -96,7 +98,7 @@ class InterfaceFunctionsGenerator {
 		{
 			«FOR e : variable.shadowEventsByScope.keySet.map[members].flatten.filter(Event)»
 				«val outEvent = variable.getShadowEvent(e)»
-				«IF outEvent !== null»sc_single_subscription_observer_«method»(&(«variable.getShadowEvent(e).accessObservable»), «e.asObservableGetter»(«variable.access»));«ENDIF»
+				«IF outEvent !== null»sc_single_subscription_observer«outEvent.eventType»_«method»(&(«variable.getShadowEvent(e).accessObservable»), «e.asObservableGetter»(«variable.access»));«ENDIF»
 			«ENDFOR»
 		}
 		«ENDIF»'''

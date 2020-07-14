@@ -60,7 +60,7 @@ class InternalFunctionsGenerator {
 
 	def observerCallbacksImplementations(ExecutionFlow it) '''
 		«FOR e : shadowEvents»
-			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»*«ENDIF» value)
+			static void «e.observerCallbackFctID»(«scHandleDecl», «IF e.typeSpecifier === null»void*«ELSE»«e.typeSpecifier.targetLanguageName»«ENDIF» value)
 			{
 				«e.traceCode( if (e.hasValue) "&value" else "sc_null" )»
 				«interfaceIncomingEventRaiserBody(e as EventDefinition, true)»

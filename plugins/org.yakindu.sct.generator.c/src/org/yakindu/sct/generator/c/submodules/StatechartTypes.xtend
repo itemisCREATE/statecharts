@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.extensions.EventNaming
 
 /**
  * @author rbeckmann
@@ -46,6 +47,7 @@ class StatechartTypes {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension StatechartAnnotations
 	@Inject extension ShadowEventExtensions
+	@Inject protected extension EventNaming
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject extension GeneratorPredicate
@@ -189,7 +191,7 @@ class StatechartTypes {
 	def dispatch structMember(Event it) {
 		'''
 		«IF useOutEventObservables && direction == Direction.OUT»
-			«OBSERVABLE_TYPE» «eventName»;
+			«OBSERVABLE_TYPE»«eventType» «eventName»;
 		«ENDIF»
 		«IF (useOutEventGetters && direction == Direction.OUT) || direction == Direction.IN || direction == Direction.LOCAL»
 			«BOOL_TYPE» «eventRaisedFlag»;

@@ -487,6 +487,7 @@ typedef struct SingleSubCounter {
 } SingleSubCounter;
 
 void SingleSubCounter_next(SingleSubCounter *self, void* value) {
+	(void) value;
 	self->count++;
 }
 

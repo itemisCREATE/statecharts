@@ -1051,7 +1051,7 @@ static UnnamedOperation5Mock* unnamedOperation5Mock;
 
 class UnnamedOperation5aMock{
 	struct parameters {
-		const sc_string param1;
+		sc_string param1;
 		int callCount;
 		inline bool operator==(const parameters& other) {
 			return (strcmp(this->param1, other.param1) == 0);

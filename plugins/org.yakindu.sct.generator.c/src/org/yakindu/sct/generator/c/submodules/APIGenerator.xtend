@@ -15,6 +15,7 @@ import com.google.inject.Singleton
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.types.CLiterals
@@ -33,6 +34,7 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.types.Event
 
 /**
  * @author rbeckmann
@@ -55,6 +57,7 @@ class APIGenerator {
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension ShadowEventExtensions
 	@Inject protected extension InternalFunctionsGenerator
+	@Inject protected extension EventNaming
 	
 	@Inject protected extension EnterMethod
 	@Inject protected extension ExitMethod	
@@ -137,16 +140,23 @@ class APIGenerator {
 	protected def CharSequence initializeObserver(ExecutionFlow it){
 		'''
 		«FOR e : shadowEvents»
-			sc_single_subscription_observer_init(&(«e.accessObserver»), «scHandle», («OBSERVER_NEXT_FP_TYPE»)«e.observerCallbackFctID»);
+			sc_single_subscription_observer«e.eventType»_init(&(«e.accessObserver»), «scHandle», («e.functionType»)«e.observerCallbackFctID»);
 		«ENDFOR»
 		'''
+	}
+	
+	def private functionType(Event it) {
+		if (hasValue) {
+			return '''sc_observer_next«eventType»_fp'''
+		}
+		return OBSERVER_NEXT_FP_TYPE
 	}
 	
 	
 	def initializeObservables(ExecutionFlow it) {
 		'''
 		«FOR outEvent : scopes.filter(InterfaceScope).map[events].flatten.filter[direction === Direction.OUT]»
-			sc_observable_init(&«outEvent.accessObservable»);
+			sc_observable«outEvent.eventType»_init(&«outEvent.accessObservable»);
 		«ENDFOR»
 		'''
 	}
