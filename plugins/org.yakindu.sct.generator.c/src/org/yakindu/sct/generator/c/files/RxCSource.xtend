@@ -32,15 +32,15 @@ class RxCSource implements IContentTemplate {
 		
 		void sc_observer_init(sc_observer *self, sc_object_ref o, sc_observer_next_fp nf)
 		{
-			self->observer = o;
+			self->object = o;
 			self->next = (sc_observer_next_fp) nf;
 		}
 		
-		void sc_observer_next(sc_observer *self, void* value)
+		void sc_observer_next(sc_observer *self)
 		{
 			if (self != «NULL» && self->next != «NULL»)
 			{
-				self->next(self->observer, value);
+				self->next(self->object);
 			}
 		}
 		
@@ -99,14 +99,14 @@ class RxCSource implements IContentTemplate {
 		}
 		
 		
-		void sc_observable_next(sc_observable *self, void* value)
+		void sc_observable_next(sc_observable *self)
 		{
 			sc_subscription *sub = self->subscriptions;
 			while (sub != «NULL»)
 			{
 				if (sub->observer != «NULL»)
 				{
-					sc_observer_next(sub->observer, value);
+					sc_observer_next(sub->observer);
 				}
 				sub = (sub->next != sub) ? sub->next : «NULL»;
 			}
@@ -127,6 +127,16 @@ class RxCSource implements IContentTemplate {
 		sc_boolean sc_single_subscription_observer_unsubscribe(sc_single_subscription_observer *self, sc_observable *o) {
 			return sc_observable_unsubscribe(o, &(self->subscription));
 		}
+		
+		
+		/* -----------------------------------------------------------
+		 * declaration of reactive extensions for all Y-SCT default types
+		 */
+		
+		define_sc_reactive_extensions(sc_boolean)
+		define_sc_reactive_extensions(sc_integer)
+		define_sc_reactive_extensions(sc_real)
+		define_sc_reactive_extensions(sc_string)
 
 	'''
 	
