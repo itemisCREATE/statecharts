@@ -39,9 +39,7 @@ class SexecExecution extends StextExecution  {
 			_value
 		}
 		_execute("return statement", [
-			if (value !== null) {
-				exitCall(null)
-			}			
+			exitCall( if(it.value === null) null else popValue)
 		])
 	}
 
