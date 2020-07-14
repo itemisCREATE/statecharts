@@ -34,9 +34,14 @@ class SexecExecution extends StextExecution  {
 	}
 
 	def dispatch void execution(Return it) {
-		value._exec // TODO : without expression 
+		if (value !== null) {
+			value._exec
+			_value
+		}
 		_execute("return statement", [
-			exitCall(popValue)
+			if (value !== null) {
+				exitCall(null)
+			}			
 		])
 	}
 

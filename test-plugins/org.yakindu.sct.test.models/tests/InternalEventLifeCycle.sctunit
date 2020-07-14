@@ -31,11 +31,11 @@ testclass InternalEventLifeCycle for statechart InternalEventLifeCycle {
 		raise f
 		proceed 1 cycle
 		assert active(InternalEventLifeCycle.r1.A)
-		assert active(InternalEventLifeCycle.r2.C) 
+		assert active(InternalEventLifeCycle.r2.D) 
 		
 		// make sure nothing happens during an empty cycle
 		proceed 1 cycle
 		assert active(InternalEventLifeCycle.r1.A)
-		assert active(InternalEventLifeCycle.r2.C) 
+		assert active(InternalEventLifeCycle.r2.D) 
 	} 
 }

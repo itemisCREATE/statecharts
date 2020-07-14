@@ -3,6 +3,7 @@ testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocal
 	 @Test operation expectBottomUpLocalReactionOrder() {
 
 	 	enter
+	 	
 	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
 	 	proceed 1 cycle
