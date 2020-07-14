@@ -103,7 +103,10 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	def dispatch void execution(ElementReferenceExpression expr) {
 				
 		if (expr.reference instanceof Operation) {
-			expr.arguments.forEach[ value._exec ]			
+			expr.arguments.forEach[ 
+				value._exec 
+				_value
+			]			
 			expr.reference._call
 		} else {
 			_return ('''revolve «expr.reference.symbol»''', [
@@ -115,7 +118,10 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	def dispatch void execution(FeatureCall expr) {
 		expr.owner._exec		
 		if (expr.feature instanceof Operation) {
-			expr.arguments.forEach[ value._exec ]			
+			expr.arguments.forEach[ 
+				value._exec 
+				_value
+			]			
 			expr.feature._call   // TODO: handle receiver / owner
 		} else {
 			_return ('''revolve «expr.feature.symbol»''', [
@@ -253,7 +259,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 			val varValue = varRef.value
 			val opValue = evaluate(operator.literal, varValue)
 			varRef.setValue(opValue)
-			opValue
+			varValue
 		])
 	}	
 	
