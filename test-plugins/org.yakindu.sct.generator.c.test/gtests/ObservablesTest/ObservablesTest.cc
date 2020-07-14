@@ -134,7 +134,7 @@ TEST_F(ObservableTest, testSubscribe) {
 	sc_observable_int observable;
 	sc_observable_int_init(&observable);
 
-	EXPECT_TRUE(sc_observable_int_subscribe(&observable,&sub));
+	EXPECT_TRUE(sc_observable_int_subscribe(&observable, &sub));
 	EXPECT_EQ(sub.next, &sub);
 }
 
