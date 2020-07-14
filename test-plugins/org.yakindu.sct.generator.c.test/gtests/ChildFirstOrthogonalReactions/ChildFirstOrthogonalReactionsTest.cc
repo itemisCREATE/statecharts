@@ -41,7 +41,7 @@ static ChildFirstOrthogonalReactionsTest * tc;
 class CheckMock{
 	typedef sc_boolean (CheckMock::*functiontype)();
 	struct parameters {
-		const sc_string value;
+		sc_string value;
 		sc_boolean (CheckMock::*behavior)();
 		inline bool operator==(const parameters& other) {
 			return (strcmp(this->value, other.value) == 0);

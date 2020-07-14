@@ -81,13 +81,13 @@ class InterfaceFunctions {
 	def generateVariables(ExecutionFlow it, StatechartScope scope)
 		'''
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.isConstString»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
+				«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
 				{
 					return «variable.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					«IF variable.isConstString»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»() const
+					«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»() const
 					{
 						return «variable.access»;
 					}
@@ -246,7 +246,7 @@ class InterfaceFunctions {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
-		«IF isConstString»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
+		«typeSpecifier.targetLanguageName» «it.asGetter»() const;
 		
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */

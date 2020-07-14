@@ -226,7 +226,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «IF isConstString»const «ENDIF»«typeSpecifier.targetLanguageName» «asGetter»(const «scHandleDecl»);
+		extern «typeSpecifier.targetLanguageName» «asGetter»(const «scHandleDecl»);
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern void «asSetter»(«scHandleDecl», «typeSpecifier.targetLanguageName» value);
