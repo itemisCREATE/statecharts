@@ -55,7 +55,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	extension ExecutionContextExtensions = new ExecutionContextExtensions // TODO: Inject!!
 	extension StatechartAnnotations = new StatechartAnnotations // TODO: Inject!!
 	
-	def setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
+	def void setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
 		this.instance = instance	
 		this.type = type
 		this.context = context
@@ -316,7 +316,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}	
 
 	def dispatch ExecutionSlot resolveSlot(CompositeSlot slot, String symbol) {
-		var ExecutionSlot s = null
+		var ExecutionSlot s = slot.slotByName(symbol)
 		 
 		if (s === null) {
 			if (defaultInterface !== null && slot !== defaultInterface) {
@@ -333,7 +333,6 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 				s = timeEventScope.slotByName(symbol)
 			}
 		}	
-		if (s !== null) s = slot.slotByName(symbol)
 		
 		return s
 	}	
