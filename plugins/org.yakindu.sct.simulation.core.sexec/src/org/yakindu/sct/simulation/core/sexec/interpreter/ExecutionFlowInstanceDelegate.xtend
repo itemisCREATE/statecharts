@@ -1,38 +1,45 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
-import org.yakindu.sct.model.sexec.ExecutionState
+import java.util.ArrayDeque
+import java.util.LinkedList
 import java.util.Map
-import org.yakindu.sct.model.sruntime.CompositeSlot
-import org.yakindu.sct.model.sexec.ExecutionFlow
+import java.util.Queue
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.interpreter.base.BaseExecution
 import org.yakindu.base.expressions.interpreter.base.IInterpreter
-import org.yakindu.sct.model.sruntime.ExecutionSlot
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.Method
-import org.yakindu.sct.model.sexec.EnterState
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sruntime.ExecutionContext
-import org.yakindu.sct.model.sexec.Step
+import org.yakindu.base.expressions.interpreter.base.SRuntimeInterpreter.EventInstance
+import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.Call
-import org.yakindu.sct.model.sexec.concepts.RunCycleMethod
-import org.yakindu.sct.model.sexec.concepts.EventProcessing
+import org.yakindu.sct.model.sexec.EnterState
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.ExitState
+import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.SaveHistory
+import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.concepts.EnterMethod
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
 import org.yakindu.sct.model.sexec.concepts.ExitMethod
 import org.yakindu.sct.model.sexec.concepts.InitializedCheck
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.ExitState
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.yakindu.base.types.Expression
+import org.yakindu.sct.model.sexec.concepts.RunCycleMethod
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sruntime.CompositeSlot
+import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.sexec.SaveHistory
-import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sruntime.ExecutionSlot
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.types.Direction
 
-class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver {
+class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
 	
 	protected CompositeSlot instance
 	protected ExecutionFlow type
@@ -41,13 +48,22 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	protected Map<Integer, ExecutionState> historyStateConfiguration
 	protected int activeStateIndex
 	
+	protected Queue<EventInstance> internalEventQueue = null 
+	protected Queue<EventInstance> inEventQueue = null
+	
 	extension StateMachineBehaviorConcept = new StateMachineBehaviorConcept // TODO: Inject!!!
 	extension ExecutionContextExtensions = new ExecutionContextExtensions // TODO: Inject!!
+	extension StatechartAnnotations = new StatechartAnnotations // TODO: Inject!!
 	
 	def setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
 		this.instance = instance	
 		this.type = type
 		this.context = context
+		
+		if (( type.sourceElement as Statechart).isEventDriven ) {
+			this.internalEventQueue = new ArrayDeque<EventInstance>
+			this.inEventQueue = new ArrayDeque<EventInstance>
+		}
 	}
 	
 	def _executeNamedSequence(Step it) {
@@ -72,7 +88,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			Sequence case program.name == RunCycleMethod.MICRO_STEP : microStep			
 			Sequence case program.name == EventProcessing.CLEAR_EVENT : clearEvent(program.expression )			
 			Sequence case program.name == EventProcessing.MOVE_EVENT : moveEvent(program.expression, program.getExpression(1))			
-			Sequence case program.name == EventProcessing.NEXT_EVENT : _execute[]	// TODO		
+			Sequence case program.name == EventProcessing.NEXT_EVENT : nextEvent		
 			Sequence case program.name == EnterMethod.TRACE_ENTER : _execute[]		// TODO
 			Sequence case program.name == ExitMethod.TRACE_EXIT : _execute[]		// TODO	
 			Sequence case program.name == InitializedCheck.INIT_CHECK : _execute[]	// do nothing so far ...		
@@ -210,6 +226,18 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		])		
 	}
 		
+		
+	def protected void nextEvent() {
+		_execute("@nextEvent()", [
+			var EventInstance event = internalEventQueue?.poll ?: inEventQueue?.poll
+			if ( event !== null ){
+				event.event.raised = true
+				event.event.value = event.getValue()				
+			}
+		])		
+	}
+		
+
 	// TODO remove and use sexecexteion instead
 	
 	def Method reactMethod(ExecutionNode it) {
@@ -236,6 +264,27 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		])
 	}
 	
+	
+	override raise(Object slot, Object value) {
+		if (slot instanceof ExecutionEvent) {
+			_execute('''raise «slot.name»''', [
+				if (slot.direction == Direction::LOCAL && internalEventQueue !== null) {
+					_execute('''internalEventQueue.add(«slot.name»)''', [
+						internalEventQueue.add(new EventInstance(slot, value));
+					])
+				} else if (slot.direction == Direction::IN && inEventQueue !== null) {
+					_execute('''inEventQueue.add(«slot.name»)''', [
+						inEventQueue.add(new EventInstance(slot, value));
+					])
+					"runCycle"._exec
+				} else {
+					slot.value = value
+					slot.raised = true
+				}				
+			])	
+		}	
+	}
+	
 	override resolve(Object owner, Object symbol) {
 		
 		if (owner === instance) {
@@ -250,14 +299,26 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	def dispatch ExecutionSlot resolveSlot(CompositeSlot slot, String symbol) {
 		var s = slot.slotByName(symbol)
 		if (s === null) {
-			if (defaultInterface !== null && slot !== defaultInterface) 
+			if (defaultInterface !== null && slot !== defaultInterface) {
 				s = defaultInterface.resolveSlot(symbol)
+							
+			}
+				
 		}
-		s
+		if ( s === null ) {
+			if (internalScope !== null && slot !== internalScope) {
+				s = internalScope.resolveSlot(symbol)
+			}
+		}	
+		return s
 	}	
 
 	def  defaultInterface() {
 		instance.slotByName("default")
+	}
+	
+	def internalScope() {
+		instance.slotByName("internal")
 	}
 	
 	def protected slotByName(CompositeSlot slot, String symbol) {
@@ -270,4 +331,6 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		
 		allMethods
 	}
+	
+	
 }

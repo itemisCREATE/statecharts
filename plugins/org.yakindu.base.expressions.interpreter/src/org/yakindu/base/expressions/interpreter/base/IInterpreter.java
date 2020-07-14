@@ -43,4 +43,10 @@ public interface IInterpreter {
 
 	}
 	
+	public static interface Instance {
+		
+		void raise(Object slot, Object value);
+
+	}
+	
 }

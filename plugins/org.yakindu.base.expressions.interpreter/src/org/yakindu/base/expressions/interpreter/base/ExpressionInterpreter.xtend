@@ -1,8 +1,5 @@
 package org.yakindu.base.expressions.interpreter.base
 
-import org.yakindu.base.expressions.interpreter.base.IInterpreter.Execution
-import org.yakindu.sct.model.sruntime.ExecutionSlot
-
 class ExpressionInterpreter extends SRuntimeInterpreter  {
 
 	

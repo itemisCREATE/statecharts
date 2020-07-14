@@ -95,9 +95,9 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 			expr.arguments.forEach[ value._exec ]			
 			expr.reference._call
 		} else {
-			_return [
+			_return ('''revolve «expr.reference.symbol»''', [
 				resolve(null, expr.reference.symbol)
-			]
+			])
 		}
 	}
 
@@ -107,9 +107,9 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 			expr.arguments.forEach[ value._exec ]			
 			expr.feature._call   // TODO: handle receiver / owner
 		} else {
-			_return [
+			_return ('''revolve «expr.feature.symbol»''', [
 				popValue.resolve(expr.feature.symbol)
-			]			
+			])
 		}
 	}
 

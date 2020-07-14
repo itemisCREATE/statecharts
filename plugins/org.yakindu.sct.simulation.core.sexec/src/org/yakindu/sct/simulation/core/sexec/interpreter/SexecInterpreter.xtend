@@ -91,6 +91,10 @@ class SexecInterpreter extends ExpressionInterpreter {
 		}
 	}
 
+	def IInterpreter.Instance instance(EObject it) {
+		eContainer?.delegate as Instance 
+	}
+
 	def dispatch IInterpreter.Execution delegate(EObject it) {
 		eContainer?.delegate
 	}
@@ -131,8 +135,8 @@ class SexecInterpreter extends ExpressionInterpreter {
 		slot.raised
 	}
 
-	override raise(Object slot, Object value) {
-		raiseSlot(slot, value)
+	override raise(Object o, Object value) {
+			raiseSlot(o, value)
 	}
 
 	def dispatch raiseSlot(Object o, Object value) {
@@ -140,8 +144,12 @@ class SexecInterpreter extends ExpressionInterpreter {
 	}
 
 	def dispatch raiseSlot(ExecutionEvent it, Object value) {
-		it.raised = true
-		it.value = value
+		if (it.instance !== null) {
+			it.instance.raise(it, value)
+		} else {
+			it.raised = true
+			it.value = value
+		}
 	}
 
 	override resolve(Object owner, Object symbol) {

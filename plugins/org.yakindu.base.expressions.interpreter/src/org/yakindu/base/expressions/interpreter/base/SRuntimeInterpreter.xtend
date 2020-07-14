@@ -10,6 +10,7 @@ import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.CompositeSlot
+import org.eclipse.xtend.lib.annotations.Data
 
 abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control, IInterpreter.Context {
 
@@ -22,6 +23,19 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	protected boolean suspended = false
 	protected boolean debug = true
 
+
+	@Data public static class EventInstance {
+
+		public ExecutionEvent event;
+		public Object value;
+
+		new(ExecutionEvent ev, Object value) {
+			this.event = ev
+			this.value = value
+		}
+	}
+
+	
 
 	def getHeap(){
 		return heap
