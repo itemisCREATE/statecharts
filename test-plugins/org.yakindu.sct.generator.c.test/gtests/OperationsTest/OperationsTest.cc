@@ -347,7 +347,7 @@ static InternalOperation5Mock* internalOperation5Mock;
 
 class InternalOperation5aMock{
 	struct parameters {
-		const sc_string param1;
+		sc_string param1;
 		int callCount;
 		inline bool operator==(const parameters& other) {
 			return (strcmp(this->param1, other.param1) == 0);
@@ -699,7 +699,7 @@ static Interface1InterfaceOperation5Mock* interface1InterfaceOperation5Mock;
 
 class Interface1InterfaceOperation5aMock{
 	struct parameters {
-		const sc_string param1;
+		sc_string param1;
 		int callCount;
 		inline bool operator==(const parameters& other) {
 			return (strcmp(this->param1, other.param1) == 0);
@@ -1051,7 +1051,7 @@ static UnnamedOperation5Mock* unnamedOperation5Mock;
 
 class UnnamedOperation5aMock{
 	struct parameters {
-		const sc_string param1;
+		sc_string param1;
 		int callCount;
 		inline bool operator==(const parameters& other) {
 			return (strcmp(this->param1, other.param1) == 0);
