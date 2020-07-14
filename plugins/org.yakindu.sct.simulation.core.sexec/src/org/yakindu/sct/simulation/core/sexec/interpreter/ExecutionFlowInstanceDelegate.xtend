@@ -151,7 +151,9 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		_execute ("enter(" + enterState.state.name + ")", [
 			activeStateConfiguration.set(enterState.state.stateVector.offset, enterState.state)
 			executionContext.activeStates += enterState.state.sourceElement as RegularState
-			activeStateIndex = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...			
+			activeStateIndex = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...	
+			val changedSlot = instance.resolve("stateConfVectorChanged")
+			changedSlot?.setValue(true)		
 		])
 	}
 
