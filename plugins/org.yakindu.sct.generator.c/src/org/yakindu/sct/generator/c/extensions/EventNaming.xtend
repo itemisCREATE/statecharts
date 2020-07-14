@@ -16,6 +16,7 @@ import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 /**
  * @author René Beckmann
@@ -25,6 +26,7 @@ class EventNaming {
 	@Inject extension Naming
 	@Inject extension SExecExtensions
 	@Inject extension INamingService
+	@Inject extension ICodegenTypeSystemAccess
 
 	def eventEnumMemberName(Event it) {
 		'''«scope.functionPrefix(it)»_«name.asIdentifier»'''
@@ -121,4 +123,7 @@ class EventNaming {
 	def addToQueueValueFctID(ExecutionFlow it) {
 		'''«functionPrefix»add_value_event_to_queue'''
 	}
+	
+	def eventType(Event it) { if(hasValue) return '''_«typeSpecifier.targetLanguageName»''' }
+	
 }
