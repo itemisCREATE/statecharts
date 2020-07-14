@@ -237,11 +237,12 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	
 	def dispatch void execution(PostFixUnaryExpression it) {
 		operand._exec
-		_execute( it.operator.literal, [ 
+		_return( it.operator.literal, [ 
 			val varRef = popValue
 			val varValue = varRef.value
 			val opValue = evaluate(operator.literal, varValue)
 			varRef.setValue(opValue)
+			opValue
 		])
 	}	
 	
