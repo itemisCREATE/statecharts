@@ -3,21 +3,13 @@ package org.yakindu.sct.simulation.core.sexec.interpreter
 import com.google.inject.Inject
 import java.util.LinkedList
 import java.util.List
-import java.util.Map
 import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
-import org.yakindu.base.types.Direction
-import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.ExitState
-import org.yakindu.sct.model.sexec.HistoryEntry
-import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.SexecFactory
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -61,6 +53,7 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
+	
 	@Inject protected extension ExecutionContextExtensions
 	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
@@ -69,16 +62,8 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 
 	protected ExecutionFlow flow
 	protected ExecutionState[] activeStateConfiguration
-	protected Map<Integer, ExecutionState> historyStateConfiguration
-	protected List<Step> executionStack
-	protected int activeStateIndex
-	protected boolean useInternalEventQueue
-	protected boolean useInEventQueue
 
-//	protected boolean useSuperStep
-	protected boolean stateVectorChanged
 
-	protected boolean isRunning = false
 
 	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
 	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle

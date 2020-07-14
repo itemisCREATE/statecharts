@@ -110,9 +110,26 @@ class SexecExecution extends StextExecution  {
 
 	def dispatch void execution(StateSwitch it) { _delegate } 
 	
-	def dispatch void execution(ScheduleTimeEvent it) { _delegate }
+	def dispatch void execution(ScheduleTimeEvent it) { 
+		it.timeValue._exec
+		_value
+		_return [
+			resolve(null, it.timeEvent.symbol)
+		]
+		_execute('''schedule «it.timeEvent.name»''', [
+			val timeEventSlot = popValue
+			val duration = popValue as Long
+			_schedule(it.timeEvent.name, duration, it.timeEvent.periodic, [
+				raise(timeEventSlot, null)
+			])	
+		])		
+	}
 
-	def dispatch void execution (UnscheduleTimeEvent it) { _delegate }
+	def dispatch void execution (UnscheduleTimeEvent it) { 
+		_execute('''unschedule «it.timeEvent.name»''', [
+			_unschedule(it.timeEvent.name)
+		])		
+	}
 	
 	
 	override dispatch void execution(ElementReferenceExpression expr) {

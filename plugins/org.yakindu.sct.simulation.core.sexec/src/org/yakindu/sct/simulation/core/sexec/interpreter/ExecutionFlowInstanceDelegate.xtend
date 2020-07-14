@@ -300,29 +300,37 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		var s = slot.slotByName(symbol)
 		if (s === null) {
 			if (defaultInterface !== null && slot !== defaultInterface) {
-				s = defaultInterface.resolveSlot(symbol)
-							
-			}
-				
+				s = defaultInterface.slotByName(symbol)
+			}	
 		}
 		if ( s === null ) {
 			if (internalScope !== null && slot !== internalScope) {
-				s = internalScope.resolveSlot(symbol)
+				s = internalScope.slotByName(symbol)
 			}
 		}	
+		if ( s === null ) {
+			if (timeEventScope !== null && slot !== timeEventScope) {
+				s = timeEventScope.slotByName(symbol)
+			}
+		}	
+		
 		return s
 	}	
 
 	def  defaultInterface() {
-		instance.slotByName("default")
+		instance.slotByName("default") as CompositeSlot
 	}
 	
 	def internalScope() {
-		instance.slotByName("internal")
+		instance.slotByName("internal") as CompositeSlot
+	}
+	
+	def timeEventScope() {
+		instance.slotByName("time events") as CompositeSlot
 	}
 	
 	def protected slotByName(CompositeSlot slot, String symbol) {
-		slot.slots.findFirst[ s | s.name == symbol]
+		slot.slots.findFirst[ s | s.name == symbol || s.fqName == symbol] 
 	}
 	
 	def protected allMethods(ExecutionFlow it) {

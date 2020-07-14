@@ -34,6 +34,9 @@ public interface IInterpreter {
 
 		/** defines variable in current scope */
 		Object defineVariable(String name, Object value);
+		
+		void _schedule(String jobId, long duration, boolean periodic, Runnable action);
+		void _unschedule(String jobId);
 	}
 	
 	public static interface Execution {

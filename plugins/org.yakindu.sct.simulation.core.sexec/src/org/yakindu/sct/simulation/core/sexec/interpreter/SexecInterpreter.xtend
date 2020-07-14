@@ -15,15 +15,19 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 
 class SexecInterpreter extends ExpressionInterpreter {
 
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
 	protected extension StextFactory stextFactory = StextFactory.eINSTANCE
 	@Inject protected IExecutionContextInitializer contextInitializer
+	@Inject protected ITimeTaskScheduler timingService
+	
 
 	static class ExecutionFlowInstanceDelegateAdapter extends AdapterImpl {
 		@Accessors
@@ -90,6 +94,16 @@ class SexecInterpreter extends ExpressionInterpreter {
 			this.execution.provideExecution(program)
 		}
 	}
+
+
+	override _schedule(String jobId, long duration, boolean periodic, Runnable action) {
+		timingService.scheduleTimeTask(new TimeTask(jobId, action), periodic, duration) 
+	}
+	
+	override _unschedule(String jobId) {
+		timingService.unscheduleTimeTask(jobId)
+	}
+
 
 	def IInterpreter.Instance instance(EObject it) {
 		eContainer?.delegate as Instance 
@@ -191,5 +205,5 @@ class SexecInterpreter extends ExpressionInterpreter {
 	def CompositeSlot SELF() {
 		localScope?.resolve(BaseExecution.SELF_NAME).value as CompositeSlot
 	}
-
+	
 }
