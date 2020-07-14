@@ -1,17 +1,12 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
-import java.util.LinkedList
 import java.util.List
-import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.Trace
-import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
@@ -19,37 +14,15 @@ import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
-import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 
 class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser {
 	
-
-	@Data static class Event {
-
-		public ExecutionEvent event;
-		public Object value;
-
-		new(ExecutionEvent ev, Object value) {
-			this.event = ev
-			this.value = value
-		}
-	}
-
+	
 	@Inject protected extension SexecInterpreter interpreter
 
 	protected CompositeSlot stateMachine
-	protected Queue<Event> internalEventQueue = new LinkedList<Event>()
-	protected Queue<Event> inEventQueue = new LinkedList<Event>()
-
-
-	
-
-	
-	@Inject
-	ITimeTaskScheduler timingService
 
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
@@ -61,9 +34,6 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	protected extension StatechartAnnotations
 
 	protected ExecutionFlow flow
-	protected ExecutionState[] activeStateConfiguration
-
-
 
 	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
 	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
@@ -130,39 +100,20 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	}
 
 
-
-	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
-		val timeEvent = scheduleTimeEvent.timeEvent
-		val duration = interpreter.evaluate(scheduleTimeEvent.timeValue)
-		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [
-			executionContext.getEvent(timeEvent.name).raised = true
-		]), timeEvent.periodic, duration as Long)
-		null
-	}
-
-	def dispatch Object execute(UnscheduleTimeEvent timeEvent) {
-		timingService.unscheduleTimeTask(timeEvent.timeEvent.name)
-		null
-	}
-
 	override raise(ExecutionEvent ev, Object value) {
-		ev._raise(value)
-		
-//		if (useInternalEventQueue && ev.direction == Direction::LOCAL) {
-//			internalEventQueue.add(new Event(ev, value));
-//		} else if (useInEventQueue && ev.direction == Direction::IN) {
-//			inEventQueue.add(new Event(ev, value));
-//			runCycle
-//		} else {
-//			ev.value = value
-//			ev.raised = true
-//		}
+		ev._raise(value)		
 	}
 
+	/**
+	 * TODO: move to instance delegate
+	 */
 	override boolean isActive() {
 		return executionContext.getAllActiveStates().size > 0
 	}
-
+	
+	/**
+	 * TODO: move to instance delegate
+	 */
 	override boolean isFinal() {
 		var List<ExecutionState>[] list = stateVectorExtensions.finalStateImpactVector(flow);
 		var boolean isCompletlyCovered = stateVectorExtensions.isCompletelyCovered(list);
@@ -183,10 +134,7 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	}
 	
 	override isStateActive(String stateName) {
-		return if(stateName === null){
-			activeStateConfiguration.exists[it === null]
-		} else
-			activeStateConfiguration.filterNull.exists[(it.sourceElement as RegularState).name == stateName]
+		return stateMachine._invoke("isStateActive", stateName) == true
 	}
 
 	override getExecutionFlow() {

@@ -98,6 +98,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			String case program.hasMethod : program.lookupMethod.invoke 
 			
 			case 'init': init
+			case 'isStateActive': isStateActive
 
 			default : 
 				throw new IllegalArgumentException("Cannot execute '" + program +"'")
@@ -122,6 +123,24 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}
 	
 
+	def void isStateActive() {
+		
+		
+		instance._executeOperation( "isStateActive", #["stateName"], [
+
+			val stateName = resolve("stateName")
+			val isActive =  if(stateName === null)
+								activeStateConfiguration.exists[it === null]
+							else
+								activeStateConfiguration
+								.filterNull
+								.exists[(it.sourceElement as RegularState).name == stateName]
+
+			exitCall(isActive)			
+		])
+	}
+	
+	
 
 
 	def protected dispatch void execution(Object it) {
@@ -297,7 +316,8 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}	
 
 	def dispatch ExecutionSlot resolveSlot(CompositeSlot slot, String symbol) {
-		var s = slot.slotByName(symbol)
+		var ExecutionSlot s = null
+		 
 		if (s === null) {
 			if (defaultInterface !== null && slot !== defaultInterface) {
 				s = defaultInterface.slotByName(symbol)
@@ -313,6 +333,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 				s = timeEventScope.slotByName(symbol)
 			}
 		}	
+		if (s !== null) s = slot.slotByName(symbol)
 		
 		return s
 	}	
