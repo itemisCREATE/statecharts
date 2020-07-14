@@ -136,8 +136,67 @@ class RxCSource implements IContentTemplate {
 		define_sc_reactive_extensions(sc_boolean)
 		define_sc_reactive_extensions(sc_integer)
 		define_sc_reactive_extensions(sc_real)
-		define_sc_reactive_extensions(sc_string)
-
+		
+		/* declaration of declare_sc_reactive_extensions(sc_string) */
+		void sc_observer_sc_string_init(sc_observer_sc_string *self, sc_object_ref o, sc_observer_next_sc_string_fp nf)
+		{
+			self->object = o;
+			self->next = nf;
+		}
+		
+		void sc_observer_sc_string_next(sc_observer_sc_string *self, sc_string value)
+		{
+			if (self != NULL && self->next != NULL)
+			{
+				self->next(self->object, value);
+			}
+		}
+		
+		void sc_observable_sc_string_init(sc_observable_sc_string *self)
+		{
+			self->subscriptions = NULL;
+		}
+		
+		sc_boolean sc_observable_sc_string_subscribe(sc_observable_sc_string *self, sc_subscription_sc_string *s) {
+			return sc_observable_subscribe((sc_observable*) self, (sc_subscription *) s);
+		}
+		
+		sc_boolean sc_observable_sc_string_unsubscribe(sc_observable_sc_string *self, sc_subscription_sc_string *s) {
+			return sc_observable_unsubscribe((sc_observable*) self, (sc_subscription *) s);
+		}
+		
+		void sc_observable_sc_string_next(sc_observable_sc_string *self, sc_string value)
+		{
+			sc_subscription_sc_string *sub = self->subscriptions;
+			while (sub != NULL)
+			{
+				if (sub->observer != NULL)
+				{
+					sc_observer_sc_string_next(sub->observer, value);
+				}
+				sub = (sub->next != sub) ? sub->next : NULL;
+			}
+		}
+		
+		void sc_single_subscription_observer_sc_string_init(sc_single_subscription_observer_sc_string *self, sc_object_ref o, sc_observer_next_sc_string_fp nf)
+		{
+			sc_observer_sc_string_init(&(self->observer), o, nf);
+			sc_subscription_sc_string_init(&(self->subscription), &(self->observer));
+		}
+		
+		sc_boolean sc_single_subscription_observer_sc_string_subscribe(sc_single_subscription_observer_sc_string *self, sc_observable_sc_string *o) {
+			return sc_observable_subscribe((sc_observable *) o, (sc_subscription *) &(self->subscription));
+		}
+		
+		sc_boolean sc_single_subscription_observer_sc_string_unsubscribe(sc_single_subscription_observer_sc_string *self, sc_observable_sc_string *o) {
+			return sc_observable_unsubscribe((sc_observable *)o, (sc_subscription *) &(self->subscription));
+		}
+		
+		void sc_subscription_sc_string_init(sc_subscription_sc_string *self, sc_observer_sc_string *o)
+		{
+			self->observer = o;
+			self->next = NULL;
+		}
 	'''
 	
 	

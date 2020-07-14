@@ -242,7 +242,43 @@ class RxCHeader implements IContentTemplate {
 		declare_sc_reactive_extensions(sc_boolean)
 		declare_sc_reactive_extensions(sc_integer)
 		declare_sc_reactive_extensions(sc_real)
-		declare_sc_reactive_extensions(sc_string)
+		
+		/* declaration of declare_sc_reactive_extensions(sc_string */
+		typedef void (*sc_observer_next_sc_string_fp)(sc_object_ref, sc_string);
+		typedef struct sc_observer_sc_string sc_observer_sc_string;
+		struct sc_observer_sc_string {
+			sc_object_ref object;
+			sc_observer_next_sc_string_fp next;
+		};
+		extern void sc_observer_sc_string_init(sc_observer_sc_string *self, sc_object_ref o, sc_observer_next_sc_string_fp nf);
+		extern void sc_observer_sc_string_next(sc_observer_sc_string *self, sc_string value);
+		
+		typedef struct sc_subscription_sc_string sc_subscription_sc_string;
+		struct sc_subscription_sc_string {
+			sc_observer_sc_string *observer;
+			sc_subscription_sc_string *next;
+		};
+		extern void sc_subscription_sc_string_init(sc_subscription_sc_string *self, sc_observer_sc_string *o);
+		
+		typedef struct sc_observable_sc_string sc_observable_sc_string;
+		struct sc_observable_sc_string {
+			sc_uinteger observer_count;
+			sc_subscription_sc_string *subscriptions;
+		};
+		extern void sc_observable_sc_string_init(sc_observable_sc_string *self);
+		extern sc_boolean sc_observable_sc_string_subscribe(sc_observable_sc_string *self, sc_subscription_sc_string *s);
+		extern sc_boolean sc_observable_sc_string_unsubscribe(sc_observable_sc_string *self, sc_subscription_sc_string *s);
+		extern void sc_observable_sc_string_next(sc_observable_sc_string *self, sc_string value);
+		
+		typedef struct sc_single_subscription_observer_sc_string sc_single_subscription_observer_sc_string;
+		struct sc_single_subscription_observer_sc_string {
+			sc_observer_sc_string observer;
+			sc_subscription_sc_string subscription;
+		};
+		extern void sc_single_subscription_observer_sc_string_init(sc_single_subscription_observer_sc_string *self, sc_object_ref o, sc_observer_next_sc_string_fp nf);
+		extern sc_boolean sc_single_subscription_observer_sc_string_subscribe(sc_single_subscription_observer_sc_string *self, sc_observable_sc_string *o);
+		extern sc_boolean sc_single_subscription_observer_sc_string_unsubscribe(sc_single_subscription_observer_sc_string *self, sc_observable_sc_string *o);
+		
 		
 		
 		#ifdef __cplusplus
