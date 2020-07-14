@@ -43,8 +43,7 @@ class Types implements IContentTemplate {
 		#include <stdint.h>
 		#include <stdbool.h>
 		
-		#define sc_string		char*
-		 
+		typedef char* 			«CGeneratorConstants::STRING_TYPE»;
 		typedef bool			«CGeneratorConstants::BOOL_TYPE»;
 		typedef int_fast16_t	«CGeneratorConstants::SHORT_TYPE»;
 		typedef uint_fast16_t	«CGeneratorConstants::USHORT_TYPE»;
