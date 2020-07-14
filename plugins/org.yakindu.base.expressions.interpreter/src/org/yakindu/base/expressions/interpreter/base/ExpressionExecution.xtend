@@ -33,6 +33,12 @@ import org.yakindu.base.expressions.expressions.MetaCall
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.Enumerator
+import org.yakindu.sct.model.sruntime.ExecutionVariable
 
 class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
 	
@@ -49,8 +55,9 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		AssignmentOperator.OR_ASSIGN -> "|"
 	};
 	
-	protected extension CoreFunctionExecution cf = new CoreFunctionExecution
-	@Inject protected extension IQualifiedNameProvider
+	@Inject protected extension CoreFunctionExecution cf 
+	@Inject protected extension IQualifiedNameProvider qnp
+	@Inject protected extension ITypeSystem ts;
 		
 	override provideExecution(Object program) {
 		program.execution
@@ -87,8 +94,9 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 				value = evaluate(f, varValue, value)
 			}
 			
-			varRef.setValue = value
-			value
+			varRef.setValue = cast(value, (varRef as ExecutionVariable).type)
+			
+			return value
 		])
 	}
 	
@@ -253,46 +261,53 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		expression.operand._exec
 		_value
 		_return("cast("+ expression.type.originType.name + ")", [
-			// TODO: requires type system
-//			val operandValue = popValue
-//			typeCast(operandValue, expression.type.originType)		
+			val operandValue = popValue
+			typeCast(operandValue, expression.type.originType)		
 		])
 	}
 
 
-//	def protected dispatch Object typeCast(Long value, Type type) {
-//		if(type instanceof EnumerationType) return value
-//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
-//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
-//		throw new IllegalArgumentException("unknown type " + type.name)
-//	}
-//
-//	def protected dispatch Object typeCast(Float value, Type type) {
-//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
-//		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
-//		throw new IllegalArgumentException("Invalid cast from Float to " + type.name)
-//	}
-//
-//	def protected dispatch Object typeCast(Double value, Type type) {
-//		if(ts.isSuperType(type, ts.getType(ITypeSystem.INTEGER))) return value.longValue
-//		if(ts.isSuperType(type, ts.getType(ITypeSystem.REAL))) return Double.valueOf(value)
-//		throw new IllegalArgumentException("Invalid cast from Double to " + type.name)
-//	}
-//
-//	def protected dispatch Object typeCast(Boolean value, Type type) {
-//		if(ts.isSuperType(type, ts.getType(ITypeSystem.BOOLEAN))) return value
-//		throw new IllegalArgumentException("Invalid cast from Boolean to " + type.name)
-//	}
-//
-//	def protected dispatch Object typeCast(String value, Type type) {
-//		if(ts.isSuperType(type, ts.getType(ITypeSystem.STRING))) return value
-//		throw new IllegalArgumentException("Invalid cast from String to " + type.name)
-//	}
-//
-//	def protected dispatch Object typeCast(Enumerator value, Type type) {
-//		if(ts.isSuperType(type, value.owningEnumeration)) return value
-//		throw new IllegalArgumentException("Invalid cast from Enumerator to " + type.name)
-//	}
+	def Object cast(Object value, Type type) {
+		if (type !== null) {
+			typeCast(value, type.originType)
+		} else {
+			value
+		}
+	}
+
+	def protected dispatch Object typeCast(Long value, Type type) {
+		if(type instanceof EnumerationType) return value
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+		throw new IllegalArgumentException("unknown type " + type.name)
+	}
+
+	def protected dispatch Object typeCast(Float value, Type type) {
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+		throw new IllegalArgumentException("Invalid cast from Float to " + type.name)
+	}
+
+	def protected dispatch Object typeCast(Double value, Type type) {
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.INTEGER))) return value.longValue
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.REAL))) return Double.valueOf(value)
+		throw new IllegalArgumentException("Invalid cast from Double to " + type.name)
+	}
+
+	def protected dispatch Object typeCast(Boolean value, Type type) {
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.BOOLEAN))) return value
+		throw new IllegalArgumentException("Invalid cast from Boolean to " + type.name)
+	}
+
+	def protected dispatch Object typeCast(String value, Type type) {
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.STRING))) return value
+		throw new IllegalArgumentException("Invalid cast from String to " + type.name)
+	}
+
+	def protected dispatch Object typeCast(Enumerator value, Type type) {
+		if(ts.isSuperType(type, value.owningEnumeration)) return value
+		throw new IllegalArgumentException("Invalid cast from Enumerator to " + type.name)
+	}
 
 	
 		
