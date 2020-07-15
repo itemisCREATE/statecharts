@@ -11,6 +11,7 @@ import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.eclipse.xtend.lib.annotations.Data
+import java.nio.CharBuffer
 
 abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control, IInterpreter.Context {
 
@@ -22,9 +23,9 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	
 	protected boolean suspended = false
 	protected boolean debug = true
+	protected int frameCount = 0
 
-
-	@Data public static class EventInstance {
+	@Data static class EventInstance {
 
 		public ExecutionEvent event;
 		public Object value;
@@ -71,39 +72,80 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	}
 	
 	def void process() {
-		logDebug["--- START ---"]
+//		logDebug["--- START ---"]
 		
 		activateNexteExecutions
 		while ( currentFrame !== null ) {
 			while (! (currentFrame.executionQueue.empty || suspended)) {
 				val head = currentFrame.executionQueue.head
 				currentFrame.executionQueue.remove(0)
-				logDebug['''«head.description» «currentFrame.executionQueue.map[description]»''']
+				logDebug['''«ident»«head.description»''']
 				head.execute
 				activateNexteExecutions
 			}
 			if (currentFrame !== null) 
 				exitCall(if (stack.peek instanceof StackFrame) null else popValue)
 		}
-		logDebug["--- END ---"]
+//		logDebug["--- END ---"]
 	}
 	
+	
+	def Object process(String name, Runnable action) {
+			
+		stack.clear
+		nextExecutions.clear
+		frameCount = 0
+		
+		enterCall('''process<«name»>''')
+		
+		action.run
+		
+		process
+		
+		return stack.peek // TODO clear stack ...
+	}
+	
+	
 	protected def void activateNexteExecutions() {
-		currentFrame.executionQueue.addAll(0, nextExecutions)
+		logDebug[ if (nextExecutions.empty) null else '''«ident»    «nextExecutions.map[description]» + «currentFrame.executionQueue.map[description]»''']
+
+		currentFrame?.executionQueue?.addAll(0, nextExecutions)
 		nextExecutions.clear	
 	}
 	
 	override popValue() {
 		val v = stack.pop
-		logDebug['''    < «v.description» «stack.map[description]»''']
+
+		if(v instanceof StackFrame) {
+			frameCount--
+			logDebug['''«ident»<< «v.description» «stack.map[description]»''']
+		} else {
+			logDebug['''«ident»    < «v.description» «stack.map[description]»''']		
+		}
+		
 		v 
 	}
 
 	override pushValue(Object value) {
 		stack.push(value)
-		logDebug['''    > «value.description»  «stack.map[description]»''']
+
+		if(value instanceof StackFrame) {
+			logDebug['''«ident»>> «value.description»  «stack.map[description]»''']
+			frameCount++
+		} else {
+			logDebug['''«ident»    > «value.description»  «stack.map[description]»''']		
+		}
+
+		 
 	}
 
+	def ident() {
+		ident(frameCount)
+	} 
+ 	
+ 	def create new StringBuffer ident(int n) {
+ 		for(i : 0..<n) it.append('''    ''')	
+ 	}
  	
 	override void _execute(String description, Runnable r) {
 		nextExecutions.add(_promise(description, [ 
@@ -222,6 +264,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	}
 	
 	
+	
 	static class StackFrame {
 		public String name
 		public ExecutionContext variables = SRuntimeFactory.eINSTANCE.createExecutionContext 
@@ -229,7 +272,9 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	}
 	
 	def void logDebug(()=>Object it) {
-		if(debug) System.out.println(it.apply
-		)		
+		if(debug) {
+			val output = it.apply
+			if (output !== null) System.out.println(it.apply)
+		}
 	}
 }

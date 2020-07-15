@@ -109,7 +109,9 @@ class SexecInterpreter extends SRuntimeInterpreter {
 
 
 	override _schedule(String jobId, long duration, boolean periodic, Runnable action) {
-		timingService.scheduleTimeTask(new TimeTask(jobId, action), periodic, duration) 
+		timingService.scheduleTimeTask(new TimeTask(jobId, [
+			process('''scheduled(«jobId»)''', action)
+		]), periodic, duration) 
 	}
 	
 	override _unschedule(String jobId) {
