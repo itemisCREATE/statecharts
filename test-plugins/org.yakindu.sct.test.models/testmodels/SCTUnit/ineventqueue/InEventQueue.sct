@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_uu3csBgDEemhUpAihcYpFA" specification="namespace ineventqueue&#xA;&#xA;@EventDriven&#xA;@ChildFirstExecution&#xA;&#xA;interface:&#xA;&#x9;var cycles : integer = 0&#xA;&#x9;in event e&#xA;&#x9;in event f : integer&#xA;&#x9;operation askOracle() : void&#xA;&#xA;interface i:&#xA;&#x9;in event g&#xA;&#xA;internal:&#xA;&#x9;event h&#xA;&#x9;oncycle / cycles += 1&#xA;" namespace="ineventqueue" name="InEventQueue">
     <regions xmi:id="_0KYDIBgDEemhUpAihcYpFA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_0KYDIRgDEemhUpAihcYpFA">

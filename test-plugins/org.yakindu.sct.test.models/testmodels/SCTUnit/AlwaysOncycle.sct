@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_z1asQJ6iEeGR-6jhjFPx5A" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;var value:integer&#xD;&#xA;var v2 : boolean&#xD;&#xA;&#xD;&#xA;in event e&#xD;&#xA;var x : integer&#xD;&#xA;var y : integer&#xD;&#xA;" name="AlwaysOncycle">
     <regions xmi:id="_z1asQ56iEeGR-6jhjFPx5A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_z1j2OZ6iEeGR-6jhjFPx5A">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_GAg-QMUEEeGBt-G4bU7TpQ" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;var stringA :string = &quot;A&quot;&#xD;&#xA;var stringA2 :string = &quot;A&quot;&#xD;&#xA;var stringB : string = &quot;B&quot;&#xD;&#xA;&#xD;&#xA;var quotedStringX : string = '&quot;X&quot;'&#xD;&#xA;var quotedStringY : string = &quot;\&quot;Y\&quot;&quot;&#xD;&#xA;&#xD;&#xA;var stringVarEqual : boolean&#xD;&#xA;var stringVarNotEqual : boolean&#xD;&#xA;&#xD;&#xA;var guardStringNotEqual : boolean&#xD;&#xA;var guardStringEqual : boolean&#xD;&#xA;&#xD;&#xA;in event e &#xD;&#xA;" name="StringExpressions">
     <regions xmi:id="_GAg-Q8UEEeGBt-G4bU7TpQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_GCmo9sUEEeGBt-G4bU7TpQ">

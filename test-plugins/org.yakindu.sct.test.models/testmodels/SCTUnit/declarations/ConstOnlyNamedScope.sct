@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_O_-jsDkTEeanS76kJ96c-g" specification="/*&#xA; * A named interface scope that only &#xA; * includes constants must be handled &#xA; * correctly in any target language. &#xA; * Even if no scope constructs are &#xA; * generated (like in C).&#xA; */&#xA;&#xA;namespace declarations&#xA;&#xA;@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;&#xA;in event e : integer&#xA;&#xA;&#xA;interface A:&#xA;&#xA;const B : integer = 1&#xA;const C : integer = 2&#xA;&#xA;&#xA;" namespace="declarations" name="ConstOnlyNamedScope">
     <regions xmi:id="_PAAY4jkTEeanS76kJ96c-g" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PAEDQTkTEeanS76kJ96c-g">

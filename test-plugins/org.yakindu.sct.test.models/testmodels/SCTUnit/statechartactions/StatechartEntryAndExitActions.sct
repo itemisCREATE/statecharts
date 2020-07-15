@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_uu3Q0O1-EeiR9ayMzEN_RA" specification="namespace statechartactions&#xA;&#xA;@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;&#x9;var x : integer&#xA;&#x9;var y : integer&#xA;&#x9;var b : boolean&#xA;&#xA;internal:&#xA;&#xA;// all entry actions must be executed&#xA;// in the declared order&#xA;// and guards must be considered&#xA;entry / x = 2; y = 3&#xA;entry [b] / x += y&#xA;&#xA;// all exit actions must be executed&#xA;// in the declared order&#xA;// and guards must be considered&#xA;exit / x = 8; y = 2&#xA;exit [b] / x -= y" namespace="statechartactions" name="StatechartEntryAndExitActions">
     <regions xmi:id="_uu4e8-1-EeiR9ayMzEN_RA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_uu-lkO1-EeiR9ayMzEN_RA">

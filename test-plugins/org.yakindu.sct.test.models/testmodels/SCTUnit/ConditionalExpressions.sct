@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_zaodgNQ1EeO6OdDmZN5_6A" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;in event e&#xD;&#xA;var condition : integer = boolVar ? 3 : 2&#xD;&#xA;var boolVar : boolean = true&#xD;&#xA;var stringVar : string = &quot;&quot;&#xD;&#xA;var stringCondition : string = &quot;&quot;" name="ConditionalExpressions">
     <regions xmi:id="_zaprotQ1EeO6OdDmZN5_6A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_zat9EdQ1EeO6OdDmZN5_6A">

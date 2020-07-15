@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_wjNuELRyEeWmXuBC8a26Lg" specification="namespace entries &#xD;&#xA;&#xD;&#xA;@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#xD;&#xA;var enteredR1:boolean = false&#xD;&#xA;var enteredR2:boolean = false&#xD;&#xA;var enteredBdefault: boolean = false&#xD;&#xA;var enteredBother:boolean = false&#xD;&#xA;&#xD;&#xA;in event b&#xD;&#xA;in event d&#xA;" namespace="entries" name="EntryReactionAction">
     <regions xmi:id="_CnddALR7EeWj5quH-sy1Ww" name="r2">
       <vertices xsi:type="sgraph:Entry" xmi:id="_CnddAbR7EeWj5quH-sy1Ww" name="default">

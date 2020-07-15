@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_W3v4UCA6EeO5Bsh-9TRWYA" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface: &#xA;&#xA;&#x9;var x : integer = 1&#xA;&#x9;var b : boolean = false&#xA;&#x9;&#xA;&#x9;" name="LogicalOr">
     <regions xmi:id="_W3wfYiA6EeO5Bsh-9TRWYA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_W3zisCA6EeO5Bsh-9TRWYA">

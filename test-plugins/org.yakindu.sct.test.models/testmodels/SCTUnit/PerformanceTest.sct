@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_pyTdwANZEeKwQP8D-v2eag" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;&#xA;interface:&#xA;&#xA;&#x9;in event e1&#xA;&#x9;in event e2&#xA;&#x9;in event e3&#xA;&#x9;&#xA;&#x9;var x : integer = 0&#xA;&#xA;&#x9;var a : integer = 0&#xA;&#x9;&#xA;&#x9;var c: integer = 0&#xA;&#x9;&#xA;&#x9;&#xA;internal:&#xA;&#xA;&#x9;always / c += 1&#xA;&#x9;every 2000ms / raise e2; raise e1&#xA;&#x9;every 6200ms / raise e3&#xA;" name="PerformanceTest">
     <regions xmi:id="_pyUr4gNZEeKwQP8D-v2eag" name="mr">
       <vertices xsi:type="sgraph:Entry" xmi:id="_pyYWQwNZEeKwQP8D-v2eag">
