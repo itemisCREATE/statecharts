@@ -72,20 +72,17 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	
 
 	def _invoke(CompositeSlot receiver, String operation, Object... args) {
+		stack.clear
+		nextExecutions.clear
+
+		enterCall("_invoke_(" + operation + ")")
+
+		args.forEach[ pushValue ]
+		receiver.delegate.provideExecution(operation)
+
+		process
 		
-		process("_invoke_(" + operation + ")", [
-			args.forEach[ pushValue ]
-			receiver.delegate.provideExecution(operation)			
-		])
-//		stack.clear
-//		nextExecutions.clear
-//
-//		enterCall("_invoke_(" + operation + ")")
-//
-//
-//		process
-//		
-//		return stack.peek // TODO clear stack ... 
+		return stack.peek // TODO clear stack ... 
 		
 	}
 
@@ -94,8 +91,8 @@ class SexecInterpreter extends SRuntimeInterpreter {
 		process("_raise_(" + e.name + ")", [
 			_execute( ['''raise «e.name»'''], [
 				e.raise(value)
-			])			
-		])
+			])		
+		])		
 	}
 
 	override _requestExecution(Object program, Execution requester) {
