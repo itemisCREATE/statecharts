@@ -32,14 +32,14 @@ TEST_F(InternalEventLifeCycleTest, InternalEventLifeCycleTest) {
 	intlEvent_enter(&statechart);
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r1_A));
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r2_C));
-	intlEvent_raise_e(&statechart);
+	intlEventIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r1_A));
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r2_D));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r1_A));
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r2_D));
-	intlEvent_raise_f(&statechart);
+	intlEventIface_raise_f(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r1_A));
 	EXPECT_TRUE(intlEvent_isStateActive(&statechart, intlEvent_r2_C));
