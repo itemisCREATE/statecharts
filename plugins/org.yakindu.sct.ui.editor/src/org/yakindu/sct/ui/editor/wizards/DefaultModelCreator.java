@@ -39,20 +39,19 @@ public class DefaultModelCreator implements IModelCreator {
 
 	/* @formatter:off */
 	protected static final String INITIAL_SPECIFICATION = ""
-			+ "@" + StatechartAnnotations.EVENT_DRIVEN_ANNOTATION + "\n"
 			+ "// Use the event driven execution model.\n"
-			+ "// Runs a run-to-completion step\n" + "// each time an event is raised.\n"
 			+ "// Switch to cycle based behavior\n" + "// by specifying '@CycleBased(200)'\n"
 			+ "// instead.\n"
+			+ "@" + StatechartAnnotations.EVENT_DRIVEN_ANNOTATION + "\n"
 			+ "\n"
-			+ "@" + StatechartAnnotations.CHILD_FIRST_ANNOTATION + "\n"
-			+ "// In composite states, execute\n" + "// child states first.\n"
-			+ "// @" + StatechartAnnotations.PARENT_FIRST_ANNOTATION + " does the opposite.\n"
+			+ "// Use @" + StatechartAnnotations.SUPERSTEP_ANNOTATION + "(yes) to enable\n" 
+			+ "// super step semantics.\n"
+			+ "@" + StatechartAnnotations.SUPERSTEP_ANNOTATION + "(no)\n"
 			+ "\n"
 			+ "interface:\n"
-			+ "// Define events\n"
-			+ "// and variables here. \n"
-			+ "// Use CTRL + Space for content assist.";
+			+ "\t// Define events\n"
+			+ "\t// and variables here. \n"
+			+ "\t// Use CTRL + Space for content assist.";
 	/* @formatter:on */
 	protected static final String INITIAL_REGION_NAME = "main region";
 	protected static final int INITIAL_REGION_WIDTH = 400;

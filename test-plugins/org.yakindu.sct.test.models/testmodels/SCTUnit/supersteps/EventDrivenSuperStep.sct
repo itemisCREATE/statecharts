@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_P50_YAn8EeqI1dIc2wACug" specification="namespace supersteps&#xA;&#xA;@SuperStep&#xA;@EventDriven&#xA;@ChildFirstExecution&#xA;&#xA;internal:&#xA;event l1&#xA;event l2&#xA;&#xA;interface:&#xA;&#xA;in event e&#xA;in event f&#xA;&#xA;&#xA;var x : integer = 0" namespace="supersteps" name="EventDrivenSuperStep">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_P50_YAn8EeqI1dIc2wACug" specification="namespace supersteps&#xA;&#xA;@SuperSteps(yes)&#xA;@EventDriven&#xA;@ChildFirstExecution&#xA;&#xA;internal:&#xA;event l1&#xA;event l2&#xA;&#xA;interface:&#xA;&#xA;in event e&#xA;in event f&#xA;&#xA;&#xA;var x : integer = 0" namespace="supersteps" name="EventDrivenSuperStep">
     <regions xmi:id="_UNUN0An8EeqI1dIc2wACug" name="main region">
       <vertices xsi:type="sgraph:State" xmi:id="_X7g94An8EeqI1dIc2wACug" name="A" incomingTransitions="_Y4Q6AAn8EeqI1dIc2wACug _oJwHEAn8EeqI1dIc2wACug _vi0mYAn8EeqI1dIc2wACug">
         <outgoingTransitions xmi:id="_gbKqwAn8EeqI1dIc2wACug" specification="e / raise l1" target="_ZUaDcAn8EeqI1dIc2wACug"/>

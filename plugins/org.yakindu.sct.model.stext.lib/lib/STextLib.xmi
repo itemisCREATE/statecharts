@@ -19,7 +19,7 @@
   <member xsi:type="types:AnnotationType"
       name="ParentFirstExecution"/>
   <member xsi:type="types:AnnotationType"
-      name="SuperStep">
+      name="SuperSteps">
         <parameters name="enabled">
         	<typeSpecifier xsi:type="types:TypeSpecifier" type="types:PrimitiveType /types#boolean" />
         </parameters>
