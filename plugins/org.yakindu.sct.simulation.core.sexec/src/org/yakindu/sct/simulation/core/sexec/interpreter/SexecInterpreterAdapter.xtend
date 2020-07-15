@@ -16,6 +16,9 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser {
 	
@@ -23,9 +26,25 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	@Inject protected extension SexecInterpreter interpreter
 
 	protected CompositeSlot stateMachine
-
+	
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
+	TimerTaskSchedulerAdapter timeTaskSchedulerAdapter
+	
+	(()=>Object)=>Object executeWithoutContextAdapter = [ f | 
+
+			val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext,
+				EventDrivenCycleAdapter) as EventDrivenCycleAdapter
+	
+			try {
+				if (cycleAdapter !== null) executionContext.eAdapters.remove(cycleAdapter)
+
+				f.apply
+				
+			} finally {
+				if (cycleAdapter !== null) executionContext.eAdapters.add(cycleAdapter)
+			}
+	]
 	
 	@Inject protected extension ExecutionContextExtensions
 	@Inject
@@ -33,18 +52,32 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	@Inject
 	protected extension StatechartAnnotations
 
+	@Inject protected ITimeTaskScheduler timingService
+
 	protected ExecutionFlow flow
 
 	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
 	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
 
+	
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
 	}
 
 	override initialize(ExecutionFlow flow, ExecutionContext context, boolean useInternalEventQueue) {
 
+		timeTaskSchedulerAdapter = new TimerTaskSchedulerAdapter
+		timeTaskSchedulerAdapter.timeTaskAdapter = [ task |
+			executeWithoutContextAdapter.apply([ 
+				task.run 
+				return null
+			])			
+		]
+		
 		interpreter.heap = context
+		timeTaskSchedulerAdapter.original = interpreter.timingService
+		interpreter.timingService = timeTaskSchedulerAdapter
+		
 		this.flow = flow
 		
 		stateMachine = interpreter.newInstance(flow)
@@ -58,35 +91,36 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	
 
 	def init() {
-		stateMachine._invoke("init")		
+		
+		executeWithoutContextAdapter.apply([
+			
+			stateMachine._invoke("init")				
+		])
 	}
 	
 	override enter() {
-		stateMachine._invoke("enter")
+		executeWithoutContextAdapter.apply([	
+			
+			stateMachine._invoke("enter")
+		])
 	}
 
 	override exit() {
-		stateMachine._invoke("exit")
+		
+		executeWithoutContextAdapter.apply([
+
+			stateMachine._invoke("exit")		
+		])
 	}
 
 
 	override runCycle() {
 		
-		// TODO Should not care about cycle adapter here - move to simulation engine where it is defined.  
-		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext,
-			EventDrivenCycleAdapter) as EventDrivenCycleAdapter
-		try {
-			if (cycleAdapter !== null)
-				executionContext.eAdapters.remove(cycleAdapter)
-
-		stateMachine._invoke("runCycle")
+		executeWithoutContextAdapter.apply([
 			
-		} finally {
-
-			if (cycleAdapter !== null)
-				executionContext.eAdapters.add(cycleAdapter)
-			
-		}
+			stateMachine._invoke("runCycle")
+		])
+						
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
@@ -101,7 +135,11 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 
 
 	override raise(ExecutionEvent ev, Object value) {
-		ev._raise(value)		
+				
+		executeWithoutContextAdapter.apply([
+
+			ev._raise(value)					
+		])
 	}
 
 	/**
@@ -134,12 +172,66 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	}
 	
 	override isStateActive(String stateName) {
-		return stateMachine._invoke("isStateActive", stateName) == true
+		
+		executeWithoutContextAdapter.apply([
+			stateMachine._invoke("isStateActive", stateName)
+		])  == true
 	}
 
 	override getExecutionFlow() {
 		flow
 	}
 	
+		
+	protected static class TimerTaskSchedulerAdapter implements ITimeTaskScheduler {
+		
+		@Accessors protected ITimeTaskScheduler original
+		@Accessors protected (Runnable)=>void timeTaskAdapter
+		
+		override getCurrentTime() {
+			original?.currentTime
+		}
+		
+		override resume() {
+			original?.resume
+		}
+		
+		override scheduleTimeTask(TimeTask task, boolean isPeriodical, long duration) {
+			original?.scheduleTimeTask( 
+										if (timeTaskAdapter === null) 
+											task 
+				                        else
+											 new TimeTask(task.name, [
+												timeTaskAdapter.apply(task)
+					 					]), 
+					 					isPeriodical, 
+					 					duration)
+		}
+		
+		override start() {
+			original?.start
+		}
+		
+		override step() {
+			original?.step
+		}
+		
+		override suspend() {
+			original?.suspend
+		}
+		
+		override terminate() {
+			original?.terminate
+		}
+		
+		override timeLeap(long ms) {
+			original?.timeLeap(ms)
+		}
+		
+		override unscheduleTimeTask(String eventName) {
+			original?.unscheduleTimeTask(eventName)
+		}
+		
+	}
 		
 }

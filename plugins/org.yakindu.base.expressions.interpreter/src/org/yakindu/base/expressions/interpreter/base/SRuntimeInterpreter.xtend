@@ -1,17 +1,16 @@
 package org.yakindu.base.expressions.interpreter.base
 
-import java.util.List
+import java.util.ArrayDeque
 import java.util.Deque
 import java.util.LinkedList
-import java.util.ArrayDeque
-import org.eclipse.xtext.xbase.lib.Functions.Function0
-import org.yakindu.sct.model.sruntime.ExecutionContext
-import org.yakindu.sct.model.sruntime.SRuntimeFactory
-import org.yakindu.sct.model.sruntime.ExecutionVariable
-import org.yakindu.sct.model.sruntime.ExecutionEvent
-import org.yakindu.sct.model.sruntime.CompositeSlot
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Data
-import java.nio.CharBuffer
+import org.eclipse.xtext.xbase.lib.Functions.Function0
+import org.yakindu.sct.model.sruntime.CompositeSlot
+import org.yakindu.sct.model.sruntime.ExecutionContext
+import org.yakindu.sct.model.sruntime.ExecutionEvent
+import org.yakindu.sct.model.sruntime.ExecutionVariable
+import org.yakindu.sct.model.sruntime.SRuntimeFactory
 
 abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control, IInterpreter.Context {
 
@@ -21,12 +20,13 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	protected ExecutionContext heap
 	protected List<Promise> nextExecutions = new LinkedList<Promise>
 	
-	protected boolean debug = false
+	protected boolean debug = true
 
 	protected boolean suspended = false
 	protected boolean isProcessing = false
 	
 	protected int frameCount = 0
+	protected int instructionCount = 0
 
 	@Data static class EventInstance {
 
@@ -39,7 +39,6 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 		}
 	}
 
-	
 
 	def getHeap(){
 		return heap
@@ -84,12 +83,13 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 				currentFrame.executionQueue.remove(0)
 				logDebug['''«ident»«head.description»''']
 				head.execute
+				instructionCount++
 				activateNexteExecutions
 			}
 			if (currentFrame !== null) 
 				exitCall(if (stack.peek instanceof StackFrame) null else popValue)
 		}
-//		logDebug["--- END ---"]
+		logDebug['''processed «instructionCount» instructions''']
 	}
 	
 	
@@ -103,7 +103,8 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 			if ( ! wasProcessing ) {
 				stack.clear
 				nextExecutions.clear
-				frameCount = 0				
+				frameCount = 0	
+				instructionCount = 0			
 			}
 			
 			enterCall('''process<«name»>''')

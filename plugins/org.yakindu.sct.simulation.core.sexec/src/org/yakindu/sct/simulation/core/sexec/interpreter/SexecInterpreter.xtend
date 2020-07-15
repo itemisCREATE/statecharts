@@ -26,7 +26,8 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
 	protected extension StextFactory stextFactory = StextFactory.eINSTANCE
 	@Inject protected IExecutionContextInitializer contextInitializer
-	@Inject protected ITimeTaskScheduler timingService
+
+	@Accessors @Inject protected ITimeTaskScheduler timingService
 	
 	protected IInterpreter.Execution execution 	
 
@@ -65,6 +66,8 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	}
 	
 	
+	
+	
 	override void prepareExecution(Object program) {
 		execution.provideExecution(program)
 	}
@@ -72,18 +75,12 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	
 
 	def _invoke(CompositeSlot receiver, String operation, Object... args) {
-		stack.clear
-		nextExecutions.clear
-
-		enterCall("_invoke_(" + operation + ")")
-
-		args.forEach[ pushValue ]
-		receiver.delegate.provideExecution(operation)
-
-		process
 		
-		return stack.peek // TODO clear stack ... 
-		
+		process("_invoke_(" + operation + ")", [
+			args.forEach[ pushValue ]
+			receiver.delegate.provideExecution(operation)
+		])
+				
 	}
 
 	def _raise(ExecutionEvent e, Object value) {
