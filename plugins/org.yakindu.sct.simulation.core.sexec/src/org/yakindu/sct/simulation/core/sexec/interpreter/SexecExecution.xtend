@@ -38,7 +38,7 @@ class SexecExecution extends StextExecution  {
 			value._exec
 			_value
 		}
-		_execute("return statement", [
+		_execute(["return statement"], [
 			exitCall( if(it.value === null) null else popValue)
 		])
 	}
@@ -70,7 +70,7 @@ class SexecExecution extends StextExecution  {
 	def dispatch void execution(If it) {
 		check._exec
 		_value
-		_execute ('if', [
+		_execute (['if'], [
 			val checkResult = (popValue == true)
 			if (checkResult) thenStep._exec
 			else if (elseStep !== null) elseStep._exec
@@ -91,7 +91,7 @@ class SexecExecution extends StextExecution  {
 	def dispatch void execution(LocalVariableDefinition it) {
 		if ( initialValue !== null) {
 			initialValue._exec
-			_execute('''var «it.variable.name»''', [ 
+			_execute(['''var «it.variable.name»'''], [ 
 				val value = popValue
 				defineVariable(it.variable.name, value)
 			]) 
@@ -119,7 +119,7 @@ class SexecExecution extends StextExecution  {
 		_return [
 			resolve(null, it.timeEvent.symbol)
 		]
-		_execute('''schedule «it.timeEvent.name»''', [
+		_execute(['''schedule «it.timeEvent.name»'''], [
 			val timeEventSlot = popValue
 			val duration = popValue as Long
 			_schedule(it.timeEvent.name, duration, it.timeEvent.periodic, [
@@ -129,7 +129,7 @@ class SexecExecution extends StextExecution  {
 	}
 
 	def dispatch void execution (UnscheduleTimeEvent it) { 
-		_execute('''unschedule «it.timeEvent.name»''', [
+		_execute(['''unschedule «it.timeEvent.name»'''], [
 			_unschedule(it.timeEvent.name)
 		])		
 	}

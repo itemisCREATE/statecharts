@@ -69,7 +69,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 
 
 	def dispatch void execution(PrimitiveValueExpression expr) {
-		_return(expr.value.valueLiteral.toString, [
+		_return([expr.value.valueLiteral.toString], [
 			expr.value.valueLiteral
 		])
 	}
@@ -84,7 +84,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		expr.expression._exec
 		_value
 		expr.varRef._exec
-		_return( expr.operator.literal, [ 
+		_return([ expr.operator.literal ], [ 
 			val f = assignFunctionMap.get(expr.operator)
 			val varRef = popValue
 			var value = popValue
@@ -109,7 +109,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 			]			
 			expr.reference._call
 		} else {
-			_return ('''revolve «expr.reference.symbol»''', [
+			_return (['''revolve «expr.reference.symbol»'''], [
 				resolve(null, expr.reference.symbol)
 			])
 		}
@@ -124,7 +124,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 			]			
 			expr.feature._call   // TODO: handle receiver / owner
 		} else {
-			_return ('''revolve «expr.feature.symbol»''', [
+			_return (['''revolve «expr.feature.symbol»'''], [
 				popValue.resolve(expr.feature.symbol)
 			])
 		}
@@ -163,7 +163,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 		_value
 		right._exec 
 		_value
-		_return (operator, [ 
+		_return ([operator], [ 
 			val rightValue = popValue
 			val leftValue = popValue
 			
@@ -174,7 +174,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	protected def void unaryExpressionExecution(String operator, Expression expr) {
 		expr._exec  
 		_value
-		_return (operator, [ 
+		_return ([operator], [ 
 			val value = popValue
 			
 			evaluate(operator, value)
@@ -186,7 +186,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	def dispatch void execution(LogicalOrExpression expr) {
 		expr.leftOperand._exec
 		_value
-		_execute ('||', [ 
+		_execute (['||'], [ 
 			if (popValue == true) { 
 				_return[true]
 			}
@@ -202,7 +202,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	def dispatch void execution(LogicalAndExpression expr) {
 		expr.leftOperand._exec
 		_value
-		_execute ('&&', [ 
+		_execute (['&&'], [ 
 			if (popValue == false) { 
 				_return[false]
 			}
@@ -254,7 +254,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	
 	def dispatch void execution(PostFixUnaryExpression it) {
 		operand._exec
-		_return( it.operator.literal, [ 
+		_return( [it.operator.literal], [ 
 			val varRef = popValue
 			val varValue = varRef.value
 			val opValue = evaluate(operator.literal, varValue)
@@ -266,7 +266,7 @@ class ExpressionExecution extends BaseExecution implements IInterpreter.Executio
 	def dispatch void execution(TypeCastExpression expression) {
 		expression.operand._exec
 		_value
-		_return("cast("+ expression.type.originType.name + ")", [
+		_return(['''cast(«expression.type.originType.name»)'''], [
 			val operandValue = popValue
 			typeCast(operandValue, expression.type.originType)		
 		])

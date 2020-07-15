@@ -17,21 +17,21 @@ abstract class BaseExecution implements IInterpreter.Execution  {
 	}
 
 	def void _value() {
-		_return("value", [
+		_return(["value"], [
 			popValue.getValue
 		])
 	}
 
 	def void _return(()=>Object f) {
-		_return("return", f)
+		_return(["return"], f)
 	}
 	
 	def void _execute(Runnable f) {
-		_execute("execute", f)
+		_execute(["execute"], f)
 	}
 	
 	def void _executeOperation(Object owner, String name, List<String> parameters, Runnable body) {
-		_execute ('''«name»''', [ 
+		_execute (['''«name»'''], [ 
 			val paramValues = new ArrayList<Object>
 			parameters.forEach[paramValues.add(popValue)]
 			enterCall(name)

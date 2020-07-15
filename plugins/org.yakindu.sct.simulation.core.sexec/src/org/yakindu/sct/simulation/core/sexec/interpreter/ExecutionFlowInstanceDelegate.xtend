@@ -148,7 +148,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}
 
 	def protected dispatch void execution(EnterState enterState) {
-		_execute ("enter(" + enterState.state.name + ")", [
+		_execute (['''enter(«enterState.state.name»)'''], [
 			activeStateConfiguration.set(enterState.state.stateVector.offset, enterState.state)
 			executionContext.activeStates += enterState.state.sourceElement as RegularState
 			activeStateIndex = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...	
@@ -158,7 +158,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}
 
 	def protected dispatch void execution(ExitState exitState) {
-		_execute ("exit(" + exitState.state.name + ")", [
+		_execute (['''exit("«exitState.state.name»)'''], [
 			activeStateConfiguration.set(exitState.state.stateVector.offset, null)
 			var exitStates = executionContext.activeStates.filter[EcoreUtil::equals(it, exitState.state.sourceElement)]
 			executionContext.activeStates.removeAll(exitStates)
@@ -166,7 +166,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}
 
 	def protected dispatch void execution(StateSwitch stateSwitch) {
-		_execute ("stateSwitch", [
+		_execute (["stateSwitch"], [
 			val historyRegion = stateSwitch.historyRegion
 			if (historyRegion !== null) {
 				val historyState = historyStateConfiguration.get(historyRegion.historyVector.offset)
@@ -178,7 +178,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}
 
 	def protected dispatch void execution(SaveHistory it) {
-		_execute ("saveHistory(" + it.region.name + ")", [
+		_execute (['''saveHistory(«it.region.name»)'''], [
 			var region = it.region
 			historyStateConfiguration.put(region.historyVector.offset,
 				activeStateConfiguration.get(region.stateVector.offset))
@@ -186,7 +186,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}
 
 	def dispatch void execution(HistoryEntry entry) {
-		_execute("histoiryEntry", [
+		_execute(["histoiryEntry"], [
 			if (historyStateConfiguration.get(entry.region.historyVector.offset) !== null) {
 				entry.historyStep?._executeNamedSequence
 			} else {
@@ -197,7 +197,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 
 	def dispatch void execution(ActiveStateReferenceExpression it) {
-		_return("isActive(" + value.name + ")", [
+		_return(['''isActive(«value.name»)'''], [
 			val state = it.value			
 			return executionContext.allActiveStates.contains(state)
 		])
@@ -206,14 +206,14 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 	def protected void microStep() {
 
-		_execute("@microStep(init)",[
+		_execute(["@microStep(init)"],[
 			activeStateIndex = 0
 			// TODO : check if neccessary
 			if(executionContext.executedElements.size > 0) executionContext.executedElements.clear 
 		])
 		for(var int i = 0; i<activeStateConfiguration.size; i++ ) {
 			val j = i
-			_execute("@microStep("+j+")", [
+			_execute(["@microStep("+j+")"], [
 				if(activeStateIndex <= j) {
 					var state = activeStateConfiguration.get(j)
 					_return[ true ]
@@ -227,7 +227,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	
 	def protected void clearEvent(Expression event) {
 		event._delegate
-		_execute("@clearEvent()", [
+		_execute(["@clearEvent()"], [
 			val Object eventSlot = popValue()
 			(eventSlot as ExecutionEvent).raised = false
 		])		
@@ -237,7 +237,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	def protected void moveEvent(Expression from, Expression to) {
 		from._delegate
 		to._delegate
-		_execute("@moveEvent()", [
+		_execute(["@moveEvent()"], [
 			val Object toSlot = popValue()
 			val Object fromSlot = popValue()
 			
@@ -249,7 +249,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		
 		
 	def protected void nextEvent() {
-		_execute("@nextEvent()", [
+		_execute(["@nextEvent()"], [
 			var EventInstance event = internalEventQueue?.poll ?: inEventQueue?.poll
 			if ( event !== null ){
 				event.event.raised = true
@@ -288,13 +288,13 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	
 	override raise(Object slot, Object value) {
 		if (slot instanceof ExecutionEvent) {
-			_execute('''raise «slot.name»''', [
+			_execute(['''raise «slot.name»'''], [
 				if (slot.direction == Direction::LOCAL && internalEventQueue !== null) {
-					_execute('''internalEventQueue.add(«slot.name»)''', [
+					_execute(['''internalEventQueue.add(«slot.name»)'''], [
 						internalEventQueue.add(new EventInstance(slot, value));
 					])
 				} else if (slot.direction == Direction::IN && inEventQueue !== null) {
-					_execute('''inEventQueue.add(«slot.name»)''', [
+					_execute(['''inEventQueue.add(«slot.name»)'''], [
 						inEventQueue.add(new EventInstance(slot, value));
 					])
 					"runCycle"._exec

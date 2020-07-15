@@ -20,8 +20,8 @@ public interface IInterpreter {
 		void pushValue(Object value);
 		Object popValue();
 		
-		void _execute(String description, Runnable r); 
-		void _return(String description, Function0<?> f);
+		void _execute(Function0<? extends CharSequence> description, Runnable action); 
+		void _return(Function0<? extends CharSequence> description, Function0<?> action);
 		void _requestExecution(Object program, Execution requester);
 		
 		void setValue(Object slot, Object value);
