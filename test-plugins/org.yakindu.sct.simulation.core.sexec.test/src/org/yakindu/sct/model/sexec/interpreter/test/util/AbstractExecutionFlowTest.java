@@ -90,7 +90,7 @@ public abstract class AbstractExecutionFlowTest {
 				Long cyclePeriod = DEFAULT_CYCLE_PERIOD;
 				Annotation cycleBased = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
 				if (cycleBased != null) {
-					cyclePeriod = (Long) stmtInterpreter.evaluate(cycleBased.getArguments().get(0),
+					cyclePeriod = (Long) stmtInterpreter.evaluate(cycleBased.getExpressions().get(0),
 							SRuntimeFactory.eINSTANCE.createExecutionContext());
 				}
 
@@ -197,7 +197,7 @@ public abstract class AbstractExecutionFlowTest {
 		Annotation annotation = ((Statechart) flow.getSourceElement()).getAnnotationOfType(CYCLE_BASED_ANNOTATION);
 		long cyclePeriod = 200;
 		if (annotation != null) {
-			cyclePeriod = (Long) stmtInterpreter.evaluate(annotation.getArguments().get(0), context);
+			cyclePeriod = (Long) stmtInterpreter.evaluate(annotation.getExpressions().get(0), context);
 
 		}
 		return cyclePeriod;

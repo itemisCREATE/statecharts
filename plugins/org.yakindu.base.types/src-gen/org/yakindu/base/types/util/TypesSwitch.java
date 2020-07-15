@@ -285,8 +285,11 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.ANNOTATION_TYPE: {
 				AnnotationType annotationType = (AnnotationType)theEObject;
 				T result = caseAnnotationType(annotationType);
-				if (result == null) result = caseType(annotationType);
+				if (result == null) result = caseOperation(annotationType);
+				if (result == null) result = caseTypedDeclaration(annotationType);
+				if (result == null) result = caseGenericElement(annotationType);
 				if (result == null) result = caseDeclaration(annotationType);
+				if (result == null) result = caseTypedElement(annotationType);
 				if (result == null) result = caseNamedElement(annotationType);
 				if (result == null) result = caseAnnotatableElement(annotationType);
 				if (result == null) result = caseMetaComposite(annotationType);

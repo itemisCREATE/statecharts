@@ -806,18 +806,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getAnnotationType_Properties() {
-		return (EReference)annotationTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getAnnotationType_Targets() {
-		return (EReference)annotationTypeEClass.getEStructuralFeatures().get(1);
+		return (EReference)annotationTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1000,7 +990,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEAttribute(arrayTypeSpecifierEClass, ARRAY_TYPE_SPECIFIER__SIZE);
 
 		annotationTypeEClass = createEClass(ANNOTATION_TYPE);
-		createEReference(annotationTypeEClass, ANNOTATION_TYPE__PROPERTIES);
 		createEReference(annotationTypeEClass, ANNOTATION_TYPE__TARGETS);
 
 		expressionEClass = createEClass(EXPRESSION);
@@ -1071,7 +1060,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeAliasEClass.getESuperTypes().add(this.getTypedDeclaration());
 		typeAliasEClass.getESuperTypes().add(this.getType());
 		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
-		annotationTypeEClass.getESuperTypes().add(this.getType());
+		annotationTypeEClass.getESuperTypes().add(this.getOperation());
 		typedDeclarationEClass.getESuperTypes().add(this.getDeclaration());
 		typedDeclarationEClass.getESuperTypes().add(this.getTypedElement());
 
@@ -1145,7 +1134,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotation_Type(), this.getAnnotationType(), null, "type", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_Arguments(), this.getArgument(), null, "arguments", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(annotationEClass, this.getExpression(), "getExpressions", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1160,7 +1151,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEOperation(arrayTypeSpecifierEClass, this.getType(), "getElementType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(annotationTypeEClass, AnnotationType.class, "AnnotationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnnotationType_Properties(), this.getProperty(), null, "properties", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotationType_Targets(), ecorePackage.getEObject(), null, "targets", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

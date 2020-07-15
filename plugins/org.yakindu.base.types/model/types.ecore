@@ -88,9 +88,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="#//TypedDeclaration #//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation">
+    <eOperations name="getExpressions" upperBound="-1" eType="#//Expression"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AnnotationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="#//Argument" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement">
     <eOperations name="getAnnotationOfType" eType="#//Annotation">
@@ -105,9 +106,7 @@
     <eOperations name="getElementType" eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AnnotationType" eSuperTypes="#//Type">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//Property" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationType" eSuperTypes="#//Operation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>

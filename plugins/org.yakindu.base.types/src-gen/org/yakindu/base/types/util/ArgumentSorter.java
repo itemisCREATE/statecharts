@@ -9,7 +9,7 @@
  * 	itemis AG - initial API and implementation
  * 
  */
-package org.yakindu.base.expressions.expressions.util;
+package org.yakindu.base.types.util;
 
 import java.util.List;
 

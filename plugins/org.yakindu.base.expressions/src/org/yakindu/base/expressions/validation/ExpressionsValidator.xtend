@@ -180,6 +180,12 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 			assertOperationArguments(operation, call.getExpressions())
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	def void checkAnnotationArguments(Annotation annotation) {
+		assertOperationArguments(annotation.type, annotation.expressions)
+		typeInferrer.infer(annotation, this)
+	}
 
 	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE = "WrongNrOfArgs"
 	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s ."
@@ -281,13 +287,5 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 				TypesPackage.Literals.PROPERTY__READONLY)
 		}
 	}
-
-	@Check(CheckType.FAST)
-	def void checkAnnotationArguments(Annotation annotation) {
-		if (annotation.getType() !== null &&
-			annotation.getArguments().size() !== annotation.getType().getProperties().size()) {
-			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
-				ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE)
-		}
-	}
+	
 }

@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -15,8 +16,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
+import org.yakindu.base.types.Argument;
 import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.util.ArgumentSorter;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,7 +55,7 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Expression> arguments;
+	protected EList<Argument> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -118,11 +122,25 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 	 * @generated
 	 */
 	@Override
-	public EList<Expression> getArguments() {
+	public EList<Argument> getArguments() {
 		if (arguments == null) {
-			arguments = new EObjectContainmentEList<Expression>(Expression.class, this, TypesPackage.ANNOTATION__ARGUMENTS);
+			arguments = new EObjectContainmentEList<Argument>(Argument.class, this, TypesPackage.ANNOTATION__ARGUMENTS);
 		}
 		return arguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public EList<Expression> getExpressions() {
+		if (getType() instanceof Operation) {
+			return ArgumentSorter.getOrderedExpressions(getArguments(), (Operation) getType());
+		} else {
+			return new BasicEList<Expression>();
+		}
 	}
 
 	/**
@@ -170,7 +188,7 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 				return;
 			case TypesPackage.ANNOTATION__ARGUMENTS:
 				getArguments().clear();
-				getArguments().addAll((Collection<? extends Expression>)newValue);
+				getArguments().addAll((Collection<? extends Argument>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

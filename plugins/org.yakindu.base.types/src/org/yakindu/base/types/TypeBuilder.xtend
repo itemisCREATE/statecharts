@@ -217,7 +217,7 @@ class TypeBuilder {
 		elem.annotations += createAnnotation => [
 			type = annotationType
 			if (!args.nullOrEmpty) {
-				arguments += args.toList
+				arguments += args.map[exp|createArgument => [value = exp]]
 			}
 		]
 		elem
@@ -229,7 +229,7 @@ class TypeBuilder {
 		elem.annotations += createAnnotation => [
 			type = _annotationType(annotationName)
 			if (!args.nullOrEmpty) {
-				arguments += args.toList
+				arguments += args.map[exp|createArgument => [value = exp]]
 			}
 		]
 		elem

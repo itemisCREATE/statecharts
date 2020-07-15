@@ -78,7 +78,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = new SimpleScope(parentScope,
-				filterPropertiesOfLibrary(context, reference, filter).getAllElements());
+				filterParameterOfLibrary(context, reference, filter).getAllElements());
 		Statechart statechart = utils.getStatechart(context);
 		if (statechart == null)
 			return IScope.NULLSCOPE;
@@ -113,13 +113,13 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		return result;
 	}
 
-	protected IScope filterPropertiesOfLibrary(Resource context, EReference reference,
+	protected IScope filterParameterOfLibrary(Resource context, EReference reference,
 			Predicate<IEObjectDescription> filter) {
 		return new FilteringScope(libraryScope.getScope(context, reference, filter),
 				new Predicate<IEObjectDescription>() {
 					@Override
 					public boolean apply(IEObjectDescription input) {
-						return input.getEClass() != TypesPackage.Literals.PROPERTY;
+						return input.getEClass() != TypesPackage.Literals.PARAMETER;
 					}
 				});
 	}

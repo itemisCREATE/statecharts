@@ -10,13 +10,27 @@
       name="EventDriven"/>
   <member xsi:type="types:AnnotationType"
       name="CycleBased">
-    <properties
-        name="period"/>
+        <parameters name="period">
+        	<typeSpecifier xsi:type="types:TypeSpecifier" type="types:PrimitiveType /types#integer" />
+        </parameters>
   </member>
   <member xsi:type="types:AnnotationType"
       name="ChildFirstExecution"/>
   <member xsi:type="types:AnnotationType"
       name="ParentFirstExecution"/>
   <member xsi:type="types:AnnotationType"
-      name="SuperStep"/>
+      name="SuperStep">
+        <parameters name="enabled">
+        	<typeSpecifier xsi:type="types:TypeSpecifier" type="types:PrimitiveType /types#boolean" />
+        </parameters>
+  </member>
+  <member xsi:type="types:AnnotationType"
+      name="EventBuffering">
+        <parameters name="inEvents">
+        	<typeSpecifier xsi:type="types:TypeSpecifier" type="types:PrimitiveType /types#boolean" />
+        </parameters>
+        <parameters name="localEvents">
+        	<typeSpecifier xsi:type="types:TypeSpecifier" type="types:PrimitiveType /types#boolean" />
+        </parameters>
+  </member>
 </types:Package>

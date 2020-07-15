@@ -49,7 +49,7 @@ public class CycleBasedSimulationEngine extends AbstractExecutionFlowSimulationE
 		Long cyclePeriod = DEFAULT_CYCLE_PERIOD;
 		Annotation cycleBased = getStatechart().getAnnotationOfType(CYCLE_BASED_ANNOTATION);
 		if (cycleBased != null) {
-			cyclePeriod = (Long) statementInterpreter.evaluate(cycleBased.getArguments().get(0),
+			cyclePeriod = (Long) statementInterpreter.evaluate(cycleBased.getExpressions().get(0),
 					SRuntimeFactory.eINSTANCE.createExecutionContext());
 		}
 
