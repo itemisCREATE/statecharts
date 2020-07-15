@@ -21,7 +21,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	protected ExecutionContext heap
 	protected List<Promise> nextExecutions = new LinkedList<Promise>
 	
-	protected boolean debug = true
+	protected boolean debug = false
 
 	protected boolean suspended = false
 	protected boolean isProcessing = false
@@ -159,14 +159,14 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
  		for(i : 0..<n) it.append('''    ''')	
  	}
  	
-	override void _execute(()=>CharSequence description, Runnable action) {
+	override void _execute(String description, Runnable r) {
 		nextExecutions.add(_promise(description, [ 
-			action.run 
+			r.run 
 			null
 		]))
 	}
 		
-	override void _return(()=>CharSequence description, ()=>Object f) {
+	override void _return(String description, ()=>Object f) {
 		nextExecutions.add( _promise(description, f)._then[ v | 
 			v.pushValue 		
 		] )
@@ -194,7 +194,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	}
 	
 	
-	def _promise(()=>CharSequence desc, Function0<Object> f) {
+	def _promise(String desc, Function0<Object> f) {
 		new Promise => [
 			execution = f
 			description = desc
@@ -211,10 +211,10 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 
 		protected extension (Object)=>void then = null
 		protected ()=>Object execution = null
-		protected ()=>CharSequence description
+		protected String description
 		
 		def String getDescription() {
-			description.apply.toString
+			description
 		}
 		
 		def void setThen((Object)=>void then) {

@@ -89,7 +89,7 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	def _raise(ExecutionEvent e, Object value) {
 		
 		process("_raise_(" + e.name + ")", [
-			_execute( ['''raise «e.name»'''], [
+			_execute("raise " + e.name, [
 				e.raise(value)
 			])		
 		])		
