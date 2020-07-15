@@ -15,10 +15,10 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.expressions.expressions.util.ArgumentSorter
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Argument
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.util.ArgumentSorter
 import org.yakindu.sct.model.sruntime.ExecutionContext
 
 /**
