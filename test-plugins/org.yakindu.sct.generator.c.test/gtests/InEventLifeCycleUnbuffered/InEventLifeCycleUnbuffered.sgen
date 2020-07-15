@@ -1,5 +1,5 @@
 GeneratorModel for yakindu::c {
-	statechart eventbuffers.InEventLifeCycle {
+	statechart eventbuffers.InEventLifeCycleUnbuffered {
 		feature Outlet {
 			targetProject = "gtests"
 			targetFolder = "InEventLifeCycleUnbuffered"
@@ -22,11 +22,6 @@ GeneratorModel for yakindu::c {
 		feature OutEventAPI {
 			getters = true
 			observables = false
-		}
-		feature EventProcessing {
-			inEventBuffer = false
-			internalEventBuffer = false
-			inEventQueue = false
 		}
 	}
 }

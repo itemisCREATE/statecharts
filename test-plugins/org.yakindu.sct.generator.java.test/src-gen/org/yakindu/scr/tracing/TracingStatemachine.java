@@ -3,6 +3,7 @@ package org.yakindu.scr.tracing;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import org.yakindu.sct.ITracingListener;
 
 public class TracingStatemachine implements ITracingStatemachine {
@@ -26,6 +27,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	private List <ITracingListener<State>> ifaceTraceObservers = new LinkedList <ITracingListener<State>>();
 	
+	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean isExecuting;
 	
 	protected boolean getIsExecuting() {

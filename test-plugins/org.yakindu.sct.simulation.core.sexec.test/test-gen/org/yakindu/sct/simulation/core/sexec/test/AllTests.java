@@ -11,10 +11,10 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyInternalScope.class,
 	ConstOnlyNamedScope.class,
 	EntryReactionAction.class,
-	//InEventLifeCycleBuffered.class,  // no event buffering in interpreter
-	InEventLifeCycleUnbuffered.class,
-	//InternalEventLifeCycleBuffered.class,  // no event buffering in interpreter
-	InternalEventLifeCycleUnbuffered.class,
+//	InEventLifeCycleBuffered.class, //FIXME with new interpreter
+//	InEventLifeCycleUnbuffered.class,
+//	InternalEventLifeCycleBuffered.class,
+//	InternalEventLifeCycleUnbuffered.class,
 	EventDriven.class,
 	EventDrivenInternalEvent.class,
 	EventDrivenTriggeredByEvent.class,

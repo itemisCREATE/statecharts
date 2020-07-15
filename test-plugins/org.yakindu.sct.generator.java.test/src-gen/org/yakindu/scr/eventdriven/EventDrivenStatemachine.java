@@ -12,7 +12,12 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		
 		public void raiseInEvent() {
-			inEvent = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					inEvent = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -22,8 +27,13 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		
 		public void raiseInEventBool(final boolean value) {
-			inEventBoolValue = value;
-			inEventBool = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					inEventBoolValue = value;
+					inEventBool = true;
+				}
+			});
 			runCycle();
 		}
 		protected boolean getInEventBoolValue() {
@@ -130,7 +140,12 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		
 		public void raiseNamedInEvent() {
-			namedInEvent = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					namedInEvent = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -163,6 +178,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
+	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean locEvent;
 	private boolean e1;
 	private boolean e2;
@@ -314,6 +330,10 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	protected void nextEvent() {
 		if(!internalEventQueue.isEmpty()) {
 			internalEventQueue.poll().run();
+			return;
+		}
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
 			return;
 		}
 	}

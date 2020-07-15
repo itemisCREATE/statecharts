@@ -21,13 +21,6 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 		
 	}
 	
-	private static class InterfaceEvBuf {
-		private boolean e;
-		private boolean f;
-	}
-	private static class InternalEventLifeCycleUnbufferedStatemachineEvBuf {
-		private InterfaceEvBuf iface = new InterfaceEvBuf();
-	}
 	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
@@ -46,8 +39,6 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	
 	private boolean i1;
 	private boolean i2;
-	private InternalEventLifeCycleUnbufferedStatemachineEvBuf _current = new InternalEventLifeCycleUnbufferedStatemachineEvBuf();
-	
 	private boolean isExecuting;
 	
 	protected boolean getIsExecuting() {
@@ -107,7 +98,6 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 			return;
 		}
 		isExecuting = true;
-		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case R1_A:
@@ -127,6 +117,7 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 			}
 		}
 		
+		clearInEvents();
 		clearInternalEvents();
 		isExecuting = false;
 	}
@@ -146,14 +137,6 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 	public boolean isFinal() {
 		return false;
 	}
-	private void swapInEvents() {
-		_current.iface.e = defaultInterface.e;
-		defaultInterface.e = false;
-		
-		_current.iface.f = defaultInterface.f;
-		defaultInterface.f = false;
-	}
-	
 	private void clearInEvents() {
 		defaultInterface.e = false;
 		defaultInterface.f = false;
@@ -317,7 +300,7 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 			}
 		}
 		if (did_transition==false) {
-			if (_current.iface.e) {
+			if (defaultInterface.e) {
 				raiseI1();
 			}
 		}
@@ -329,7 +312,7 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (_current.iface.e) {
+				if (defaultInterface.e) {
 					exitSequence_r1_B();
 					enterSequence_r1_A_default();
 				} else {
@@ -358,7 +341,7 @@ public class InternalEventLifeCycleUnbufferedStatemachine implements IInternalEv
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (_current.iface.f) {
+			if (defaultInterface.f) {
 				exitSequence_r2_D();
 				raiseI2();
 				

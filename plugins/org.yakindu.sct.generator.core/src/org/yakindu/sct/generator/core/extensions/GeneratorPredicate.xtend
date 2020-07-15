@@ -113,6 +113,6 @@ abstract class GeneratorPredicate {
 	}
 
 	def dispatch Statechart getStatechart(GeneratorEntry it) {
-		it.statechart as Statechart
+		it.elementRef as Statechart
 	}
 }

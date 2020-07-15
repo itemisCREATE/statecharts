@@ -14,8 +14,13 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 		
 		
 		public void raiseI(final long value) {
-			iValue = value;
-			i = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					iValue = value;
+					i = true;
+				}
+			});
 			runCycle();
 		}
 		protected long getIValue() {
@@ -80,6 +85,7 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
+	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean l;
 	private boolean isExecuting;
 	
@@ -203,6 +209,10 @@ public class OutEventVisibilityEventDrivenStatemachine implements IOutEventVisib
 	protected void nextEvent() {
 		if(!internalEventQueue.isEmpty()) {
 			internalEventQueue.poll().run();
+			return;
+		}
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
 			return;
 		}
 	}

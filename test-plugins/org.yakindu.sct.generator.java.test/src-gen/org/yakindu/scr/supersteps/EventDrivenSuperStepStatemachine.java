@@ -11,7 +11,12 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		
 		
 		public void raiseE() {
-			e = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					e = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -19,7 +24,12 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		
 		
 		public void raiseF() {
-			f = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					f = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -56,6 +66,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
+	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean l1;
 	private boolean l2;
 	private boolean isExecuting;
@@ -197,6 +208,10 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	protected void nextEvent() {
 		if(!internalEventQueue.isEmpty()) {
 			internalEventQueue.poll().run();
+			return;
+		}
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
 			return;
 		}
 	}

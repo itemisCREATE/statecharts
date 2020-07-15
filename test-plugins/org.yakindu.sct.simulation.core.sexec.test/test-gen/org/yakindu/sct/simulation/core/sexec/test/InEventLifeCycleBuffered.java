@@ -13,7 +13,7 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for InEventLifeCycle
+ * Unit TestCase for InEventLifeCycleBuffered
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
@@ -22,7 +22,7 @@ public class InEventLifeCycleBuffered extends AbstractExecutionFlowTest {
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventbuffers/InEventLifeCycle.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventbuffers/InEventLifeCycleBuffered.sct");
 		initInterpreter(flow);
 	}
 	@Test

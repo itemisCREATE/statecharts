@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 @Deprecated
 public class AnnotationExtensions {
 	
-	@Inject StatechartAnnotations statechartAnnotations;
+	@Inject StatechartAnnotations statechartAnnotations = new StatechartAnnotations();
 	
 	public boolean isEventDriven(GeneratorEntry entry) {
 		Statechart statechart = (Statechart) entry.getElementRef();

@@ -13,7 +13,7 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for InternalEventLifeCycle
+ * Unit TestCase for InternalEventLifeCycleBuffered
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)

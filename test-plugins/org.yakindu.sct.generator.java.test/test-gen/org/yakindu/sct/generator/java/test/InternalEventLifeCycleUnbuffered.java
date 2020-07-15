@@ -11,7 +11,7 @@ import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
 import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
- * Unit TestCase for InternalEventLifeCycle
+ * Unit TestCase for InternalEventLifeCycleUnbuffered
  */
 @SuppressWarnings("all")
 public class InternalEventLifeCycleUnbuffered {
