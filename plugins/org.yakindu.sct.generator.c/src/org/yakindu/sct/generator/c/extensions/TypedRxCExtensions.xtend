@@ -29,6 +29,6 @@ class TypedRxCExtensions {
 	 */
 	def getPayloadTypes(ExecutionFlow it) {
 		return eAllContents.filter(Event).filter[hasValue].map[type].
-			filter[e|!concreteTypes.map[name].contains(e.name)].toSet
+			filter[e|!concreteTypes.map[name].toList.contains(e.name)].toSet
 	}
 }
