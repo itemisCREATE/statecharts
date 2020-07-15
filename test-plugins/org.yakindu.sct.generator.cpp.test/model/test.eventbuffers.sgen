@@ -29,11 +29,6 @@ GeneratorModel for sctunit::cpp {
 			GenerateSGen = true
 		}
 		
-		feature EventProcessing {
-			inEventBuffer = false
-			internalEventBuffer = true
-		}
-		
 		feature IdentifierSettings {
 			moduleName =  "InternalEventLifeCycleBuffered"
 		}
@@ -66,11 +61,6 @@ GeneratorModel for sctunit::cpp {
 		
 		feature SGenModel{
 			GenerateSGen = true
-		}
-		
-		feature EventProcessing {
-			inEventBuffer = true
-			internalEventBuffer = false
 		}
 		
 		feature IdentifierSettings {
@@ -107,10 +97,6 @@ GeneratorModel for sctunit::cpp {
 			GenerateSGen = true
 		}
 		
-		feature EventProcessing {
-			inEventBuffer = true
-		}
-		
 		feature IdentifierSettings {
 			moduleName =  "InEventLifeCycleBuffered"
 		}
@@ -143,10 +129,6 @@ GeneratorModel for sctunit::cpp {
 		
 		feature SGenModel{
 			GenerateSGen = true
-		}
-		
-		feature EventProcessing {
-			inEventBuffer = false
 		}
 		
 		feature IdentifierSettings {

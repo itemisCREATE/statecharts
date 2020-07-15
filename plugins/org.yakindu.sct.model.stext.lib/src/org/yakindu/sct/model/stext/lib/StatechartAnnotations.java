@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.model.stext.lib;
 
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
-
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Expression;
@@ -62,11 +60,25 @@ public class StatechartAnnotations {
 	public boolean isChildFirstExecution(Statechart statechart) {
 		return statechart.getAnnotationOfType(CHILD_FIRST_ANNOTATION) != null;
 	}
+	
+	public boolean isInternalEventBuffer(Statechart statechart) {
+		Annotation eventBuffering = statechart.getAnnotationOfType(EVENTBUFFERING_ANNOTATION);
+		if(eventBuffering == null)
+			return true; //Enabled by default
+		return (Boolean) interpreter.evaluate(eventBuffering.getExpressions().get(1), SRuntimeFactory.eINSTANCE.createExecutionContext());
+	}
+	
+	public boolean isInEventBuffer(Statechart statechart) {
+		Annotation eventBuffering = statechart.getAnnotationOfType(EVENTBUFFERING_ANNOTATION);
+		if(eventBuffering == null)
+			return true; //Enabled by default
+		return (Boolean) interpreter.evaluate(eventBuffering.getExpressions().get(0), SRuntimeFactory.eINSTANCE.createExecutionContext());
+	}
 
 	public boolean isSuperStep(Statechart statechart) {
 		Annotation superStep = statechart.getAnnotationOfType(SUPERSTEP_ANNOTATION);
 		if (superStep == null)
-			return false; // SuperSteps are disabled by default
+			return false; // Disabled by default
 		Expression expression = superStep.getExpressions().get(0);
 		return (Boolean) interpreter.evaluate(expression, SRuntimeFactory.eINSTANCE.createExecutionContext());
 

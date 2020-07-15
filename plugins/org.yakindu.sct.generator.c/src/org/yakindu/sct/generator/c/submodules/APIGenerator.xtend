@@ -40,7 +40,7 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.*
  * 
  */
 
-@Singleton // Guice
+@Singleton
 class APIGenerator {
 	@Inject protected extension FlowCode
 	@Inject protected extension INamingService

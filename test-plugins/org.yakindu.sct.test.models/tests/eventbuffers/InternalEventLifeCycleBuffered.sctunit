@@ -1,21 +1,21 @@
 /** 
  * @author axel terfloth
  */
-testclass InternalEventLifeCycleBuffered for statechart eventbuffers.InternalEventLifeCycle {
+testclass InternalEventLifeCycleBuffered for statechart eventbuffers.InternalEventLifeCycleBuffered {
 	@Test
 	operation InternalEventLifeCycleBufferedTest(){
 		 
 		enter
 		 
-		assert active(eventbuffers.InternalEventLifeCycle.r1.A)
-		assert active(eventbuffers.InternalEventLifeCycle.r2.C)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r2.C)
 		
 		// the internal event i1 must be raised and consumed in the low priority 
 		// region within the same cycle
 		raise e
 		proceed 1 cycle
-		assert active(eventbuffers.InternalEventLifeCycle.r1.A)
-		assert active(eventbuffers.InternalEventLifeCycle.r2.D)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r2.D)
 
 		// the internal event must not be visible after the cycle
 		// but we can't access internal elements yet : assert ! i1
@@ -23,19 +23,19 @@ testclass InternalEventLifeCycleBuffered for statechart eventbuffers.InternalEve
 
 		// make sure nothing happens during an empty cycle		
 		proceed 1 cycle
-		assert active(eventbuffers.InternalEventLifeCycle.r1.A)
-		assert active(eventbuffers.InternalEventLifeCycle.r2.D)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r2.D)
 		
 		// the internal event i2 should be buffered and is visible in
 		// low priority region within the same cycle
 		raise f
 		proceed 1 cycle
-		assert active(eventbuffers.InternalEventLifeCycle.r1.B)
-		assert active(eventbuffers.InternalEventLifeCycle.r2.C) 
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r1.B)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r2.C) 
 		
 		// make sure nothing happens during an empty cycle
 		proceed 1 cycle
-		assert active(eventbuffers.InternalEventLifeCycle.r1.B)
-		assert active(eventbuffers.InternalEventLifeCycle.r2.C)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r1.B)
+		assert active(eventbuffers.InternalEventLifeCycleBuffered.r2.C)
 	} 
 }

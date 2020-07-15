@@ -1,22 +1,25 @@
 package org.yakindu.sct.generator.core.extensions;
 
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
-
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 
+import com.google.inject.Inject;
+//Use StatechartAnnotations
+@Deprecated
 public class AnnotationExtensions {
+	
+	@Inject StatechartAnnotations statechartAnnotations;
+	
 	public boolean isEventDriven(GeneratorEntry entry) {
 		Statechart statechart = (Statechart) entry.getElementRef();
 		return isEventDriven(statechart);
 	}
 
 	public boolean isEventDriven(Statechart statechart) {
-		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-		return eventDrivenAnnotation != null;
+		return statechartAnnotations.isEventDriven(statechart);
 	}
 
 	public boolean isEventDriven(ExecutionFlow flow) {

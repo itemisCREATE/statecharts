@@ -10,7 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyInternalScopeTest.class,
 	ConstOnlyNamedScopeTest.class,
 	EntryReactionActionTest.class,
-	InEventLifeCycleBuffered.class,
+	InEventLifeCycleBufferedTest.class,
 	InEventLifeCycleUnbuffered.class,
 	InternalEventLifeCycleBuffered.class,
 	InternalEventLifeCycleUnbuffered.class,

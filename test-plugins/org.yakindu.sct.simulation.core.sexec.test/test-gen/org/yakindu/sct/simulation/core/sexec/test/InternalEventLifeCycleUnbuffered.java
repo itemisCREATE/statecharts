@@ -22,7 +22,7 @@ public class InternalEventLifeCycleUnbuffered extends AbstractExecutionFlowTest 
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventbuffers/InternalEventLifeCycle.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventbuffers/InternalEventLifeCycleBuffered.sct");
 		initInterpreter(flow);
 	}
 	@Test
