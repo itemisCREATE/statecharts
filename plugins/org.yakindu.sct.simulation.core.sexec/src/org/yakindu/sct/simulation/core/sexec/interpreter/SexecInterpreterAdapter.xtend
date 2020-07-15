@@ -19,7 +19,10 @@ import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.eclipse.xtend.lib.annotations.Accessors
+import com.google.inject.Singleton
 
+
+@Singleton
 class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser {
 	
 	
