@@ -62,6 +62,7 @@ public class GenericElementImpl extends NamedElementImpl implements GenericEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
 			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS);

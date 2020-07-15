@@ -3,6 +3,7 @@
 package org.yakindu.base.expressions.expressions;
 
 import org.eclipse.emf.common.util.EList;
+import org.yakindu.base.types.Argument;
 import org.yakindu.base.types.Expression;
 
 /**
@@ -24,7 +25,7 @@ import org.yakindu.base.types.Expression;
 public interface ArgumentExpression extends Expression {
 	/**
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.expressions.expressions.Argument}.
+	 * The list contents are of type {@link org.yakindu.base.types.Argument}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Arguments</em>' containment reference isn't clear,

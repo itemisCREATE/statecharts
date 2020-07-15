@@ -25,7 +25,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
 import org.eclipse.xtext.validation.ComposedChecks
-import org.yakindu.base.expressions.expressions.Argument
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
@@ -34,6 +33,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.types.AnnotatableElement
 import org.yakindu.base.types.Annotation
+import org.yakindu.base.types.Argument
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
@@ -41,8 +41,8 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypesPackage
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
-import org.yakindu.base.types.validation.TypesJavaValidator
 import org.yakindu.base.types.validation.TypeValidator
+import org.yakindu.base.types.validation.TypesJavaValidator
 
 /** 
  * @author andreas muelder - Initial contribution and API

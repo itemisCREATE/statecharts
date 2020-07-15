@@ -17,7 +17,6 @@ import java.util.Map
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.base.expressions.expressions.Argument
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
@@ -49,14 +48,15 @@ import org.yakindu.base.expressions.expressions.UnaryOperator
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.AnnotationType
+import org.yakindu.base.types.Argument
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.GenericElement
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.Package
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeAlias
 import org.yakindu.base.types.TypeParameter

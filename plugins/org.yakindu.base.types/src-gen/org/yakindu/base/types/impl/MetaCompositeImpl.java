@@ -5,17 +5,12 @@ package org.yakindu.base.types.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.TypesPackage;
@@ -68,6 +63,7 @@ public class MetaCompositeImpl extends EObjectImpl implements MetaComposite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.META_COMPOSITE__META_FEATURES);

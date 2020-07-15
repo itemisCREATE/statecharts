@@ -97,5 +97,9 @@
     <genClasses ecoreClass="types.ecore#//MetaComposite">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//MetaComposite/metaFeatures"/>
     </genClasses>
+    <genClasses ecoreClass="types.ecore#//Argument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Argument/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Argument/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -70,6 +70,7 @@ public class EventImpl extends TypedDeclarationImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Direction getDirection() {
 		return direction;
 	}
@@ -79,6 +80,7 @@ public class EventImpl extends TypedDeclarationImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDirection(Direction newDirection) {
 		Direction oldDirection = direction;
 		direction = newDirection == null ? DIRECTION_EDEFAULT : newDirection;

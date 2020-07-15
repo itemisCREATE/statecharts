@@ -117,4 +117,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaFeatures" upperBound="-1"
         eType="#//Declaration" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

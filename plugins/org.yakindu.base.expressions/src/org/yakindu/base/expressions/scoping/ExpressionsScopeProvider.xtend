@@ -12,13 +12,13 @@ package org.yakindu.base.expressions.scoping
 
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Argument
 import org.yakindu.base.types.Operation
-import org.yakindu.base.expressions.expressions.Argument
-import org.eclipse.xtext.scoping.IScope
 
 /**
  * 

@@ -1,6 +1,6 @@
 /**
  */
-package org.yakindu.base.expressions.expressions.provider;
+package org.yakindu.base.types.provider;
 
 
 import java.util.Collection;
@@ -8,8 +8,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,12 +22,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.expressions.expressions.Argument;
-import org.yakindu.base.expressions.expressions.ExpressionsFactory;
-import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+
+import org.yakindu.base.types.Argument;
+import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.expressions.expressions.Argument} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.Argument} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -76,7 +79,7 @@ public class ArgumentItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Argument_parameter_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Argument_parameter_feature", "_UI_Argument_type"),
-				 ExpressionsPackage.Literals.ARGUMENT__PARAMETER,
+				 TypesPackage.Literals.ARGUMENT__PARAMETER,
 				 true,
 				 false,
 				 true,
@@ -97,7 +100,7 @@ public class ArgumentItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.ARGUMENT__VALUE);
+			childrenFeatures.add(TypesPackage.Literals.ARGUMENT__VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -136,7 +139,7 @@ public class ArgumentItemProvider
 	public String getText(Object object) {
 		return getString("_UI_Argument_type");
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -150,7 +153,7 @@ public class ArgumentItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Argument.class)) {
-			case ExpressionsPackage.ARGUMENT__VALUE:
+			case TypesPackage.ARGUMENT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -167,106 +170,6 @@ public class ArgumentItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createMetaCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
-				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
 	}
 
 	/**
@@ -277,7 +180,7 @@ public class ArgumentItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return ExpressionsEditPlugin.INSTANCE;
+		return TypesEditPlugin.INSTANCE;
 	}
 
 }

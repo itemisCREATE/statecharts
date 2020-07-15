@@ -722,29 +722,6 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.Argument} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ArgumentItemProvider argumentItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.Argument}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createArgumentAdapter() {
-		if (argumentItemProvider == null) {
-			argumentItemProvider = new ArgumentItemProvider(this);
-		}
-
-		return argumentItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -877,7 +854,6 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();
 		if (parenthesizedExpressionItemProvider != null) parenthesizedExpressionItemProvider.dispose();
 		if (typeCastExpressionItemProvider != null) typeCastExpressionItemProvider.dispose();
-		if (argumentItemProvider != null) argumentItemProvider.dispose();
 	}
 
 }

@@ -60,7 +60,7 @@ public class StateVectorExtensions {
             ArrayList<ExecutionState> _arrayList = new ArrayList<ExecutionState>();
             vector[(i).intValue()] = _arrayList;
           }
-          vector[(i).intValue()].add(fs);
+          (vector[(i).intValue()]).add(fs);
         }
       }
     };
