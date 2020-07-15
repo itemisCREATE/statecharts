@@ -79,7 +79,7 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 			if (cycleAdapter !== null)
 				executionContext.eAdapters.remove(cycleAdapter)
 
-		stateMachine._invoke("runCycle")
+			stateMachine._invoke("runCycle")
 			
 		} finally {
 
