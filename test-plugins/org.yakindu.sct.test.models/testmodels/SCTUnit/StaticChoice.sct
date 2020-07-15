@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_iXFpsHd_EeOs5MmX1Up0pg" specification="interface:&#xD;&#xA;var number : integer&#xD;&#xA;in event reset" name="StaticChoice">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_iXFpsHd_EeOs5MmX1Up0pg" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;var number : integer&#xD;&#xA;in event reset" name="StaticChoice">
     <regions xmi:id="_iXGQwnd_EeOs5MmX1Up0pg" name="main region">
       <vertices xsi:type="sgraph:State" xmi:id="_G_VY8HeAEeOs5MmX1Up0pg" specification="entry / number = 1" name="Start" incomingTransitions="_IpaVIHeAEeOs5MmX1Up0pg">
         <outgoingTransitions xmi:id="_I_nOoHeAEeOs5MmX1Up0pg" specification="always / number +=1" target="_H_E-sHeAEeOs5MmX1Up0pg"/>

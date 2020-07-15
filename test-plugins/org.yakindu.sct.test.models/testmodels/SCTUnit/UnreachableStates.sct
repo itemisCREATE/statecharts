@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_LuL4IKVUEeScuOFVbGbKIg" name="UnreachableStates">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_LuL4IKVUEeScuOFVbGbKIg" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;" name="UnreachableStates">
     <regions xmi:id="_LuNGQqVUEeScuOFVbGbKIg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_LuQwpqVUEeScuOFVbGbKIg">
         <outgoingTransitions xmi:id="_Le38kLxtEeqjGZtI9C-3cw" specification="" target="_K5pIkLxtEeqjGZtI9C-3cw"/>

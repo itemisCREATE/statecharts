@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_uQwOMETEEeKfA_OEKWLq8A" specification="&#xA;interface:&#xA;&#x9;in event e1&#xA;&#x9;in event e2" name="STextKeywordsInStatesAndRegions">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_uQwOMETEEeKfA_OEKWLq8A" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;&#xA;interface:&#xA;&#x9;in event e1&#xA;&#x9;in event e2" name="STextKeywordsInStatesAndRegions">
     <regions xmi:id="_uRNhMETEEeKfA_OEKWLq8A" name="default">
       <vertices xsi:type="sgraph:Entry" xmi:id="_uR8hAETEEeKfA_OEKWLq8A">
         <outgoingTransitions xmi:id="_uSM_sETEEeKfA_OEKWLq8A" target="_uSALYETEEeKfA_OEKWLq8A"/>

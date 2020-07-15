@@ -38,7 +38,7 @@ public class StatechartAnnotations {
 	private IExpressionInterpreter interpreter;
 
 	public boolean isCycleBased(Statechart statechart) {
-		return statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) == null;
+		return statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION) != null;
 	}
 
 	public long getCyclePeriod(Statechart statechart) {
@@ -47,13 +47,12 @@ public class StatechartAnnotations {
 		if (annotation != null) {
 			cyclePeriod = (Long) interpreter.evaluate(annotation.getExpressions().get(0),
 					SRuntimeFactory.eINSTANCE.createExecutionContext());
-
 		}
 		return cyclePeriod;
 	}
 
 	public boolean isEventDriven(Statechart statechart) {
-		return statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) != null;
+		return statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION) == null;
 	}
 
 	public boolean isParentFirstExecution(Statechart statechart) {

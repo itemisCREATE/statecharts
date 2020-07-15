@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_uu3csBgDEemhUpAihcYpFA" specification="namespace ineventqueue&#xA;&#xA;@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;var cycles : integer = 0&#xA;&#xA;in event e&#xA;in event f : integer&#xA;&#xA;operation askOracle() : void&#xA;&#xA;interface i:&#xA; &#xA;in event g&#xA;&#xA;&#xA;internal:&#xA;&#xA;event h&#xA;&#xA;oncycle / cycles += 1&#xA;" namespace="ineventqueue" name="InEventQueue">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_uu3csBgDEemhUpAihcYpFA" specification="namespace ineventqueue&#xA;&#xA;@EventDriven&#xA;@ChildFirstExecution&#xA;&#xA;interface:&#xA;&#x9;var cycles : integer = 0&#xA;&#x9;in event e&#xA;&#x9;in event f : integer&#xA;&#x9;operation askOracle() : void&#xA;&#xA;interface i:&#xA;&#x9;in event g&#xA;&#xA;internal:&#xA;&#x9;event h&#xA;&#x9;oncycle / cycles += 1&#xA;" namespace="ineventqueue" name="InEventQueue">
     <regions xmi:id="_0KYDIBgDEemhUpAihcYpFA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_0KYDIRgDEemhUpAihcYpFA">
         <outgoingTransitions xmi:id="_0KYDIhgDEemhUpAihcYpFA" target="_0KYqMBgDEemhUpAihcYpFA"/>
@@ -118,7 +118,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0KVADxgDEemhUpAihcYpFA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_0KVAEBgDEemhUpAihcYpFA" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0KVAERgDEemhUpAihcYpFA" x="32" y="12" width="424" height="380"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0KVAERgDEemhUpAihcYpFA" x="32" y="12" width="449" height="381"/>
     </children>
     <styles xsi:type="notation:BooleanValueStyle" xmi:id="_uu548RgDEemhUpAihcYpFA" name="inlineDefinitionSection"/>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_uu548hgDEemhUpAihcYpFA"/>

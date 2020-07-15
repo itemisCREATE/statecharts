@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_DNPG4G5CEeSiWI4Gr0wiOg" specification="&#xA;interface:&#xA;&#xA;&#x9;in event e1&#xA;&#x9;in event e2&#xA;&#x9;var b : boolean" name="TriggerGuardExpressions">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_DNPG4G5CEeSiWI4Gr0wiOg" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;&#xA;interface:&#xA;&#xA;&#x9;in event e1&#xA;&#x9;in event e2&#xA;&#x9;var b : boolean" name="TriggerGuardExpressions">
     <regions xmi:id="_DNPt8m5CEeSiWI4Gr0wiOg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_DNPt_G5CEeSiWI4Gr0wiOg">
         <outgoingTransitions xmi:id="_DNQ8GW5CEeSiWI4Gr0wiOg" target="_DNQVCm5CEeSiWI4Gr0wiOg"/>

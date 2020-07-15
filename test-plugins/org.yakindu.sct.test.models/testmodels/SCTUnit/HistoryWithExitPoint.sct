@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_Vq7iQH00EeOVe4RUhhrB-g" specification="interface:&#xA;in event push&#xA;in event back&#xA;in event next" name="HistoryWithExitPoint">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_Vq7iQH00EeOVe4RUhhrB-g" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;in event push&#xA;in event back&#xA;in event next" name="HistoryWithExitPoint">
     <regions xmi:id="_VrTVsn00EeOVe4RUhhrB-g" name="mr">
       <vertices xsi:type="sgraph:Entry" xmi:id="_VrT8wX00EeOVe4RUhhrB-g">
         <outgoingTransitions xmi:id="_VrVK4X00EeOVe4RUhhrB-g" target="_VrT8zH00EeOVe4RUhhrB-g"/>

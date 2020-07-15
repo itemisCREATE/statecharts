@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_cBQVsGBCEeSsUaOig5ODSg" specification="&#xA;interface:&#xA;&#xA;&#x9;in event toZ&#xA;&#x9;in event toY&#xA;&#x9;in event toC&#xA;&#x9;in event toA" name="ShallowHistoryWithDeepEntry">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_cBQVsGBCEeSsUaOig5ODSg" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;&#xA;&#x9;in event toZ&#xA;&#x9;in event toY&#xA;&#x9;in event toC&#xA;&#x9;in event toA" name="ShallowHistoryWithDeepEntry">
     <regions xmi:id="_cBQ8wmBCEeSsUaOig5ODSg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_cBTZA2BCEeSsUaOig5ODSg">
         <outgoingTransitions xmi:id="_cBVOMWBCEeSsUaOig5ODSg" target="_cBUAF2BCEeSsUaOig5ODSg"/>

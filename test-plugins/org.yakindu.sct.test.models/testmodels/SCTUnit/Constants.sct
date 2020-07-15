@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_WbmUAHDFEeS-kPXuwFs1pA" specification="interface:&#xD;&#xA;in event e&#xD;&#xA;in event e2 : integer&#xD;&#xA;const x : integer = 10&#xD;&#xA;const y :integer = x *2&#xD;&#xA;&#xD;&#xA;var result : integer = 0&#xD;&#xA;&#xD;&#xA;interface Named:&#xD;&#xA;const y : string = &quot;Hello World&quot;&#xD;&#xA;const two : integer = 2&#xD;&#xA;&#xD;&#xA;internal:&#xD;&#xA;const internalConstant : integer = 5" name="Constants">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_WbmUAHDFEeS-kPXuwFs1pA" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;in event e&#xD;&#xA;in event e2 : integer&#xD;&#xA;const x : integer = 10&#xD;&#xA;const y :integer = x *2&#xD;&#xA;&#xD;&#xA;var result : integer = 0&#xD;&#xA;&#xD;&#xA;interface Named:&#xD;&#xA;const y : string = &quot;Hello World&quot;&#xD;&#xA;const two : integer = 2&#xD;&#xA;&#xD;&#xA;internal:&#xD;&#xA;const internalConstant : integer = 5" name="Constants">
     <regions xmi:id="_WboJMnDFEeS-kPXuwFs1pA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_WbqldnDFEeS-kPXuwFs1pA">
         <outgoingTransitions xmi:id="_WbtBs3DFEeS-kPXuwFs1pA" target="_WbrzlHDFEeS-kPXuwFs1pA"/>
@@ -86,7 +86,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbqldHDFEeS-kPXuwFs1pA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_WbowQXDFEeS-kPXuwFs1pA" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbqldXDFEeS-kPXuwFs1pA" x="260" y="10" width="876" height="251"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbqldXDFEeS-kPXuwFs1pA" x="260" y="10" width="876" height="271"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_WbuP03DFEeS-kPXuwFs1pA" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_WbuP1XDFEeS-kPXuwFs1pA" type="StatechartName">
@@ -96,7 +96,7 @@
       <children xsi:type="notation:Shape" xmi:id="_WbuP2HDFEeS-kPXuwFs1pA" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbuP2XDFEeS-kPXuwFs1pA"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Wbu24HDFEeS-kPXuwFs1pA" x="10" y="10" width="246" height="251"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Wbu24HDFEeS-kPXuwFs1pA" x="10" y="10" width="246" height="271"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_WboJMXDFEeS-kPXuwFs1pA"/>
     <edges xmi:id="_WbtowHDFEeS-kPXuwFs1pA" type="Transition" element="_WbtBs3DFEeS-kPXuwFs1pA" source="_WbrMgHDFEeS-kPXuwFs1pA" target="_Wbrzl3DFEeS-kPXuwFs1pA">

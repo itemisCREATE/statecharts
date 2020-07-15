@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_h7DX0PfmEeS9Au3-0BK9ZQ" name="FinalState">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_h7DX0PfmEeS9Au3-0BK9ZQ" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;" name="FinalState">
     <regions xmi:id="_h7El8vfmEeS9Au3-0BK9ZQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_h7YvA_fmEeS9Au3-0BK9ZQ">
         <outgoingTransitions xmi:id="_h7bLQffmEeS9Au3-0BK9ZQ" target="_h7Z9IffmEeS9Au3-0BK9ZQ"/>

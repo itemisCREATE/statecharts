@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_wjNuELRyEeWmXuBC8a26Lg" specification="namespace entries &#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#xD;&#xA;var enteredR1:boolean = false&#xD;&#xA;var enteredR2:boolean = false&#xD;&#xA;var enteredBdefault: boolean = false&#xD;&#xA;var enteredBother:boolean = false&#xD;&#xA;&#xD;&#xA;in event b&#xD;&#xA;in event d&#xA;" namespace="entries" name="EntryReactionAction">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_wjNuELRyEeWmXuBC8a26Lg" specification="namespace entries &#xD;&#xA;&#xD;&#xA;@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#xD;&#xA;var enteredR1:boolean = false&#xD;&#xA;var enteredR2:boolean = false&#xD;&#xA;var enteredBdefault: boolean = false&#xD;&#xA;var enteredBother:boolean = false&#xD;&#xA;&#xD;&#xA;in event b&#xD;&#xA;in event d&#xA;" namespace="entries" name="EntryReactionAction">
     <regions xmi:id="_CnddALR7EeWj5quH-sy1Ww" name="r2">
       <vertices xsi:type="sgraph:Entry" xmi:id="_CnddAbR7EeWj5quH-sy1Ww" name="default">
         <outgoingTransitions xmi:id="_CnddArR7EeWj5quH-sy1Ww" specification="/ enteredR2=true" target="_CneEFbR7EeWj5quH-sy1Ww"/>
@@ -43,7 +43,7 @@
       <children xsi:type="notation:Shape" xmi:id="_wklAA7RyEeWmXuBC8a26Lg" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wklABLRyEeWmXuBC8a26Lg"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wklABbRyEeWmXuBC8a26Lg" x="10" y="4" width="377" height="159"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wklABbRyEeWmXuBC8a26Lg" x="10" y="4" width="377" height="240"/>
     </children>
     <children xmi:id="_Cnbn0LR7EeWj5quH-sy1Ww" type="Region" element="_CnddALR7EeWj5quH-sy1Ww">
       <children xsi:type="notation:DecorationNode" xmi:id="_Cnbn0bR7EeWj5quH-sy1Ww" type="RegionName">
@@ -169,7 +169,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_CnboCbR7EeWj5quH-sy1Ww"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_CnboCrR7EeWj5quH-sy1Ww" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_CnboC7R7EeWj5quH-sy1Ww" x="10" y="292" width="377" height="365"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_CnboC7R7EeWj5quH-sy1Ww" x="405" y="150" width="377" height="365"/>
     </children>
     <children xmi:id="_wkA_ULRyEeWmXuBC8a26Lg" type="Region" element="_wj5qkLRyEeWmXuBC8a26Lg">
       <children xsi:type="notation:DecorationNode" xmi:id="_wkNzoLRyEeWmXuBC8a26Lg" type="RegionName">
@@ -209,7 +209,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wkPo0bRyEeWmXuBC8a26Lg"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_wkBmYLRyEeWmXuBC8a26Lg" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wkQ28LRyEeWmXuBC8a26Lg" x="10" y="160" width="377" height="133"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wkQ28LRyEeWmXuBC8a26Lg" x="405" y="4" width="377" height="133"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_wj5DgbRyEeWmXuBC8a26Lg"/>
     <edges xmi:id="_wkjK0LRyEeWmXuBC8a26Lg" type="Transition" element="_wkcdILRyEeWmXuBC8a26Lg" source="_wkSsILRyEeWmXuBC8a26Lg" target="_wkW9kLRyEeWmXuBC8a26Lg">

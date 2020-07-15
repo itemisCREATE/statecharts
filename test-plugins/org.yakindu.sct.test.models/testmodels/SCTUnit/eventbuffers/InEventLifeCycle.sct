@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_PaEEIPZzEeGjYrgSHyBHaA" specification="namespace eventbuffers&#xA;&#xA;interface:&#xA;&#x9;in event e&#xA;&#x9;in event f&#xA;&#x9;&#xA;&#x9;in event i1&#xA;&#x9;in event i2&#xA;&#x9;&#xA;&#xA;&#x9;" namespace="eventbuffers" name="InEventLifeCycle">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_PaEEIPZzEeGjYrgSHyBHaA" specification="namespace eventbuffers&#xA;&#xA;@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;&#x9;in event e&#xA;&#x9;in event f&#xA;&#x9;&#xA;&#x9;in event i1&#xA;&#x9;in event i2&#xA;&#x9;&#xA;&#xA;&#x9;" namespace="eventbuffers" name="InEventLifeCycle">
     <regions xmi:id="_Pa2uUPZzEeGjYrgSHyBHaA" name="r1">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PbYSwPZzEeGjYrgSHyBHaA">
         <outgoingTransitions xmi:id="_PbfngPZzEeGjYrgSHyBHaA" target="_PbaH8PZzEeGjYrgSHyBHaA"/>

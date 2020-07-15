@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_UYAMsCdmEeKIUcvKJ7R2Xg" specification="&#xA;&#xA;interface :&#xA;&#xA;&#x9;in event e&#xA;&#x9;out event f&#xA;&#x9;&#xA;&#x9;var f_available_in_cycle : boolean = false&#x9;&#xA;&#x9;var f_available_in_next_cycle : boolean = false" name="OutEventLifeCycle">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_UYAMsCdmEeKIUcvKJ7R2Xg" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface :&#xA;&#xA;&#x9;in event e&#xA;&#x9;out event f&#xA;&#x9;&#xA;&#x9;var f_available_in_cycle : boolean = false&#x9;&#xA;&#x9;var f_available_in_next_cycle : boolean = false" name="OutEventLifeCycle">
     <regions xmi:id="_UYCB4idmEeKIUcvKJ7R2Xg" name="r1">
       <vertices xsi:type="sgraph:Entry" xmi:id="_UYHhcSdmEeKIUcvKJ7R2Xg">
         <outgoingTransitions xmi:id="_UYKkwydmEeKIUcvKJ7R2Xg" target="_UYIvlCdmEeKIUcvKJ7R2Xg"/>
@@ -69,7 +69,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYG6ZCdmEeKIUcvKJ7R2Xg"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_UYEeISdmEeKIUcvKJ7R2Xg" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYHhcCdmEeKIUcvKJ7R2Xg" x="10" y="168" width="511" height="171"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYHhcCdmEeKIUcvKJ7R2Xg" x="5" y="215" width="511" height="171"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_UYMZ8CdmEeKIUcvKJ7R2Xg" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_UYMZ8idmEeKIUcvKJ7R2Xg" type="StatechartName">
@@ -79,7 +79,7 @@
       <children xsi:type="notation:Shape" xmi:id="_UYMZ9SdmEeKIUcvKJ7R2Xg" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYNBACdmEeKIUcvKJ7R2Xg"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYNBASdmEeKIUcvKJ7R2Xg" x="10" y="10" width="511" height="159"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYNBASdmEeKIUcvKJ7R2Xg" x="10" y="10" width="511" height="186"/>
     </children>
     <children xmi:id="__WAvwCkJEeKkhf1edRNNAA" type="Region" element="__V-TgCkJEeKkhf1edRNNAA">
       <children xsi:type="notation:DecorationNode" xmi:id="__WDzECkJEeKkhf1edRNNAA" type="RegionName">
@@ -117,7 +117,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="__WEaISkJEeKkhf1edRNNAA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="__WAvwSkJEeKkhf1edRNNAA" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="__WAvwikJEeKkhf1edRNNAA" x="10" y="338" width="511" height="157"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="__WAvwikJEeKkhf1edRNNAA" x="5" y="395" width="511" height="157"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_UYCB4SdmEeKIUcvKJ7R2Xg"/>
     <edges xmi:id="_UYLy4CdmEeKIUcvKJ7R2Xg" type="Transition" element="_UYKkwydmEeKIUcvKJ7R2Xg" source="_UYHhcidmEeKIUcvKJ7R2Xg" target="_UYJWoCdmEeKIUcvKJ7R2Xg">

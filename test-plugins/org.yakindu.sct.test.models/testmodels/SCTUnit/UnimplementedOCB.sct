@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_TvpisM9oEeejKJ6u2IsdcA" specification="interface:&#xA;operation defaultInterfaceOperation()&#xA;&#xA;interface named:&#xA;operation namedInterfaceOperation()&#xA;&#xA;internal:&#xA;operation internalInterfaceOperation()" name="UnimplementedOCB">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+  <sgraph:Statechart xmi:id="_TvpisM9oEeejKJ6u2IsdcA" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;&#xA;interface:&#xA;operation defaultInterfaceOperation()&#xA;&#xA;interface named:&#xA;operation namedInterfaceOperation()&#xA;&#xA;internal:&#xA;operation internalInterfaceOperation()" name="UnimplementedOCB">
     <regions xmi:id="_Tvqw0s9oEeejKJ6u2IsdcA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_TvvpU89oEeejKJ6u2IsdcA">
         <outgoingTransitions xmi:id="_TvysoM9oEeejKJ6u2IsdcA" target="_Tvw3dM9oEeejKJ6u2IsdcA"/>
