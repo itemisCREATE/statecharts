@@ -104,6 +104,11 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		}
 		isExecuting = true;
 		enterSequence_main_region_default();
+		do { 
+			stateConfVectorChanged = false;
+			microStep();
+		} while (getStateConfVectorChanged());
+		
 		isExecuting = false;
 	}
 	
@@ -128,33 +133,7 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 		swapInEvents();
 		do { 
 			stateConfVectorChanged = false;
-			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-				switch (stateVector[nextStateIndex]) {
-				case MAIN_REGION_A:
-					main_region_A_react(true);
-					break;
-				case MAIN_REGION_B:
-					main_region_B_react(true);
-					break;
-				case MAIN_REGION_C:
-					main_region_C_react(true);
-					break;
-				case MAIN_REGION_D:
-					main_region_D_react(true);
-					break;
-				case MAIN_REGION_G:
-					main_region_G_react(true);
-					break;
-				case MAIN_REGION_H:
-					main_region_H_react(true);
-					break;
-				case MAIN_REGION_I:
-					main_region_I_react(true);
-					break;
-				default:
-					// $NULLSTATE$
-				}
-			}
+			microStep();
 		} while (getStateConfVectorChanged());
 		
 		isExecuting = false;
@@ -186,6 +165,36 @@ public class CycleBasedSuperStepStatemachine implements ICycleBasedSuperStepStat
 	private void clearInEvents() {
 		defaultInterface.e = false;
 		defaultInterface.f = false;
+	}
+	
+	private void microStep() {
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case MAIN_REGION_A:
+				main_region_A_react(true);
+				break;
+			case MAIN_REGION_B:
+				main_region_B_react(true);
+				break;
+			case MAIN_REGION_C:
+				main_region_C_react(true);
+				break;
+			case MAIN_REGION_D:
+				main_region_D_react(true);
+				break;
+			case MAIN_REGION_G:
+				main_region_G_react(true);
+				break;
+			case MAIN_REGION_H:
+				main_region_H_react(true);
+				break;
+			case MAIN_REGION_I:
+				main_region_I_react(true);
+				break;
+			default:
+				// $NULLSTATE$
+			}
+		}
 	}
 	
 	/**

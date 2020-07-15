@@ -33,6 +33,9 @@ public class InEventLifeCycleBuffered extends AbstractExecutionFlowTest {
 		raiseEvent("e");
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("C"));
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("D"));
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
@@ -40,6 +43,9 @@ public class InEventLifeCycleBuffered extends AbstractExecutionFlowTest {
 		raiseEvent("f");
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("C"));
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("B"));
 		assertTrue(isStateActive("C"));
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));

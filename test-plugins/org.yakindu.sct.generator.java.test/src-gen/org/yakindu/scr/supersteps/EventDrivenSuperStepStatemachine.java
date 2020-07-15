@@ -104,6 +104,11 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		}
 		isExecuting = true;
 		enterSequence_main_region_default();
+		do { 
+			stateConfVectorChanged = false;
+			microStep();
+		} while (getStateConfVectorChanged());
+		
 		isExecuting = false;
 	}
 	
@@ -129,36 +134,7 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 		do { 
 			do { 
 				stateConfVectorChanged = false;
-				for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-					switch (stateVector[nextStateIndex]) {
-					case MAIN_REGION_A:
-						main_region_A_react(true);
-						break;
-					case MAIN_REGION_B:
-						main_region_B_react(true);
-						break;
-					case MAIN_REGION_C:
-						main_region_C_react(true);
-						break;
-					case MAIN_REGION_D:
-						main_region_D_react(true);
-						break;
-					case MAIN_REGION_G:
-						main_region_G_react(true);
-						break;
-					case MAIN_REGION_H:
-						main_region_H_react(true);
-						break;
-					case MAIN_REGION_I:
-						main_region_I_react(true);
-						break;
-					case MAIN_REGION_L:
-						main_region_L_react(true);
-						break;
-					default:
-						// $NULLSTATE$
-					}
-				}
+				microStep();
 			} while (getStateConfVectorChanged());
 			
 			clearInEvents();
@@ -192,6 +168,39 @@ public class EventDrivenSuperStepStatemachine implements IEventDrivenSuperStepSt
 	private void clearInternalEvents() {
 		l1 = false;
 		l2 = false;
+	}
+	
+	private void microStep() {
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case MAIN_REGION_A:
+				main_region_A_react(true);
+				break;
+			case MAIN_REGION_B:
+				main_region_B_react(true);
+				break;
+			case MAIN_REGION_C:
+				main_region_C_react(true);
+				break;
+			case MAIN_REGION_D:
+				main_region_D_react(true);
+				break;
+			case MAIN_REGION_G:
+				main_region_G_react(true);
+				break;
+			case MAIN_REGION_H:
+				main_region_H_react(true);
+				break;
+			case MAIN_REGION_I:
+				main_region_I_react(true);
+				break;
+			case MAIN_REGION_L:
+				main_region_L_react(true);
+				break;
+			default:
+				// $NULLSTATE$
+			}
+		}
 	}
 	
 	protected void nextEvent() {

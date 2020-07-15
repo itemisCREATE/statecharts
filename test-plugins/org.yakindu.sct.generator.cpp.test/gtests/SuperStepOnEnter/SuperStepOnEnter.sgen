@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::cpp {
-	statechart UnreachableStates {
+	statechart supersteps.SuperStepOnEnter {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "UnreachableStatesTest"
+			targetFolder = "SuperStepOnEnter"
 		}
 		feature FunctionInlining {
 			inlineReactions = false
