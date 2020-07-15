@@ -12,20 +12,17 @@ package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
-import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionVariable;
-import org.yakindu.sct.model.sruntime.SRuntimeFactory;
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask;
@@ -87,13 +84,7 @@ public abstract class AbstractExecutionFlowTest {
 			if (stateChartAnnotations.isEventDriven(statechart)) {
 				context.eAdapters().add(new EventDrivenCycleAdapter(interpreter));
 			} else {
-				Long cyclePeriod = DEFAULT_CYCLE_PERIOD;
-				Annotation cycleBased = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
-				if (cycleBased != null) {
-					cyclePeriod = (Long) stmtInterpreter.evaluate(cycleBased.getExpressions().get(0),
-							SRuntimeFactory.eINSTANCE.createExecutionContext());
-				}
-
+				Long cyclePeriod = getCyclePeriod();
 				TimeTask cycleTask = new TimeTask("$cycle", () -> {
 					interpreter.runCycle();
 				}, Priority.LOW);
