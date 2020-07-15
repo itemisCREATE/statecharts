@@ -21,8 +21,11 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	protected ExecutionContext heap
 	protected List<Promise> nextExecutions = new LinkedList<Promise>
 	
+	protected boolean debug = false
+
 	protected boolean suspended = false
-	protected boolean debug = true
+	protected boolean isProcessing = false
+	
 	protected int frameCount = 0
 
 	@Data static class EventInstance {
@@ -76,7 +79,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 		
 		activateNexteExecutions
 		while ( currentFrame !== null ) {
-			while (! (currentFrame.executionQueue.empty || suspended)) {
+			while (! (currentFrame ===null || currentFrame.executionQueue.empty || suspended)) {
 				val head = currentFrame.executionQueue.head
 				currentFrame.executionQueue.remove(0)
 				logDebug['''«ident»«head.description»''']
@@ -92,17 +95,26 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	
 	def Object process(String name, Runnable action) {
 			
-		stack.clear
-		nextExecutions.clear
-		frameCount = 0
+		val wasProcessing = isProcessing
 		
-		enterCall('''process<«name»>''')
-		
-		action.run
-		
-		process
-		
-		return stack.peek // TODO clear stack ...
+		try {
+			isProcessing = true
+
+			if ( ! wasProcessing ) {
+				stack.clear
+				nextExecutions.clear
+				frameCount = 0				
+			}
+			
+			enterCall('''process<«name»>''')
+			action.run
+			process
+			
+			return stack.peek // TODO clear stack ...
+			
+		} finally {
+			isProcessing = wasProcessing
+		}
 	}
 	
 	
