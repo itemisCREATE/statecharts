@@ -29,6 +29,10 @@ import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import org.yakindu.sct.generator.c.files.Tracing
 import org.yakindu.sct.generator.c.files.RxCHeader
 import org.yakindu.sct.generator.c.files.RxCSource
+import org.yakindu.sct.generator.c.files.TypedRxCHeader
+import java.util.Set
+import org.yakindu.sct.generator.c.files.TypedRxCSource
+import org.yakindu.sct.generator.c.extensions.TypedRxCExtensions
 
 /**
  * This is the C code generators main class. 
@@ -48,6 +52,9 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension GenmodelEntries
 	@Inject extension Naming
 	@Inject extension ICoreLibraryHelper
+	@Inject protected Set<IncludeProvider> includeProviders
+	@Inject extension TypedRxCExtensions
+	
 
 	@Inject
 	IGenArtifactConfigurations configs
@@ -78,8 +85,13 @@ class CGenerator implements IExecutionFlowGenerator {
 			locations.configure(flow.tracingModule.h, entry.libraryOutput, tracing, getSkipLibraryFiles(entry))
 		}
 		if(entry.outEventObservablesUsed && hasOutgoingEvents) {
-			locations.configure(flow.rxcModule.h, entry.libraryOutput, rxcHeader, getSkipLibraryFiles(entry))
-			locations.configure(flow.rxcModule.c, entry.libraryOutput, rxcSource, getSkipLibraryFiles(entry))
+			for(payloadType : payloadTypes) {
+				locations.configure(payloadType.typedRxcModule.h, entry.libraryOutput,  new TypedRxCHeader(payloadType, _naming, _genmodelEntries, includeProviders), getSkipLibraryFiles(entry))
+				locations.configure(payloadType.typedRxcModule.c, entry.libraryOutput,  new TypedRxCSource(payloadType, _naming, _genmodelEntries), getSkipLibraryFiles(entry))
+			}
+			locations.configure(rxcModule.h, entry.libraryOutput, rxcHeader, getSkipLibraryFiles(entry))
+			locations.configure(rxcModule.c, entry.libraryOutput, rxcSource, getSkipLibraryFiles(entry))
+			
 		}
 	}
 

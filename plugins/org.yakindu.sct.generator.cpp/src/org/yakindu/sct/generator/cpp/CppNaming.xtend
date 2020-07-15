@@ -130,7 +130,7 @@ class CppNaming extends Naming {
 		YSC_NAMESPACE
 	}
 	
-	override rxcModule(ExecutionFlow it) {
+	override rxcModule() {
 		RXCPP_MODULE
 	}
 	

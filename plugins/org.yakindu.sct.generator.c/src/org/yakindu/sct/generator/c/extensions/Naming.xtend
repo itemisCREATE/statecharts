@@ -608,8 +608,12 @@ class Naming {
 		TRACING_MODULE
 	}
 	
-	def rxcModule(ExecutionFlow it) {
+	def rxcModule() {
 		RXC_MODULE
+	}
+	
+	def getTypedRxcModule(Type it) {
+		rxcModule + "_" + name
 	}
 	
 	def metaModule(ExecutionFlow it) {
