@@ -10,6 +10,8 @@
  */
 package org.yakindu.base.expressions.interpreter;
 
+import java.util.List;
+
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
@@ -37,6 +39,15 @@ public interface IOperationExecutor {
 	 */
 	public Object execute(ArgumentExpression expression, ExecutionContext context);
 
+	
+	/**
+	 * Called when the operation is executed with already calculated arguments
+	 * 
+	 * @return the operations return value, maybe null
+	 */
+	public Object execute(ArgumentExpression expression, ExecutionContext context, List<Object> argValues);
+
+	
 	/**
 	 * @author Johannes Dicks - Initial contribution and API
 	 */
@@ -51,6 +62,12 @@ public interface IOperationExecutor {
 		public Object execute(ArgumentExpression expression, ExecutionContext context) {
 			return null;
 		}
+		
+		@Override
+		public Object execute(ArgumentExpression expression, ExecutionContext context, List<Object> argValues ) {
+			return null;
+		}
+
 	}
 
 }

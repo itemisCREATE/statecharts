@@ -39,7 +39,7 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-public class JavaOperationMockup extends AbstractOperationExecutor implements IOperationExecutor {
+public class JavaOperationMockup extends AbstractOperationExecutor {
 
 	@Inject
 	protected IExecutionSlotResolver resolver;
@@ -83,7 +83,13 @@ public class JavaOperationMockup extends AbstractOperationExecutor implements IO
 		return false;
 	}
 
+	@Override
 	public Object execute(ArgumentExpression expression, ExecutionContext context) {
+		return execute(expression, context, null);
+	}
+	
+	@Override
+	public Object execute(ArgumentExpression expression, ExecutionContext context, List<Object> argValues) {
 		Operation definition = getOperation(expression);
 		List<Object> targets = callbacks;
 		if (definition.eContainer() instanceof InterfaceScope) {
@@ -97,7 +103,7 @@ public class JavaOperationMockup extends AbstractOperationExecutor implements IO
 				definition.getParameters().size(), definition.getParameters().size(),
 				targets.size() > 0 ? targets : callbacks);
 		try {
-			return dispatcher.invoke(executeArguments(expression.getArguments(), context, definition));
+			return dispatcher.invoke(provideArguments(argValues, expression.getArguments(), context, definition));
 		} catch (Exception ex) {
 			throw new WrappedException("Error during invocation of operation '" + definition.getName()
 					+ "' with params " + definition.getParameters() + " '", ex);

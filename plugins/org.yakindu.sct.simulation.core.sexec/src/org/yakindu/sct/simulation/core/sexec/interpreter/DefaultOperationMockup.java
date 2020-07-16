@@ -20,7 +20,6 @@ import java.util.Map;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.interpreter.AbstractOperationExecutor;
-import org.yakindu.base.expressions.interpreter.IOperationExecutor;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 
@@ -34,7 +33,7 @@ import com.google.inject.Singleton;
  *
  */
 @Singleton
-public class DefaultOperationMockup extends AbstractOperationExecutor implements IOperationExecutor {
+public class DefaultOperationMockup extends AbstractOperationExecutor {
 
 	protected MockReturnMap mockReturn = new MockReturnMap();
 	protected Multimap<String, List<Object>> verifyCalls = ArrayListMultimap.create();
@@ -46,8 +45,13 @@ public class DefaultOperationMockup extends AbstractOperationExecutor implements
 
 	@Override
 	public Object execute(ArgumentExpression expression, ExecutionContext context) {
+		return execute(expression, context, null);
+	}
+	
+	@Override
+	public Object execute(ArgumentExpression expression, ExecutionContext context, List<Object> argValues) {
 		Operation definition = getOperation(expression);
-		List<Object> arguments = Arrays.asList(executeArguments(expression.getArguments(), context, definition));
+		List<Object> arguments = Arrays.asList(provideArguments(argValues, expression.getArguments(), context, definition));
 		verifyCalls.put(definition.getName(), arguments);
 		return mockReturn.get(definition.getName(), arguments);
 	}
