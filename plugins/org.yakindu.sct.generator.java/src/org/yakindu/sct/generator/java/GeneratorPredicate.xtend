@@ -18,10 +18,6 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 		super.useInEventQueue || needsRunnable
 	}
 
-	override useInEventQueueDeprecated() {
-		entry.inEventQueue
-	}
-	
 	def needsSynchronized() {
 		entry.synchronized || needsRunnable
 	}

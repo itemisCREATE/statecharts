@@ -20,13 +20,15 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
 
-abstract class GeneratorPredicate {
+class GeneratorPredicate {
 
 	@Inject protected extension SExecExtensions
 	@Inject protected extension StatechartAnnotations;
 	@Inject protected GeneratorEntry entry
 	@Inject protected extension ICoreLibraryHelper
+	@Inject protected extension EventProcessing
 
 	def boolean isEventDriven() {
 		entry.statechart.eventDriven
@@ -45,7 +47,7 @@ abstract class GeneratorPredicate {
 	}
 
 	def boolean needsQueues(ExecutionFlow it) {
-		needsInternalEventQueue || needsInEventQueue
+		requiresEventQueue
 	}
 
 	def boolean needsDispatchEventFunction(ExecutionFlow it) {
@@ -57,12 +59,11 @@ abstract class GeneratorPredicate {
 	}
 
 	def boolean needsInternalEventQueue(ExecutionFlow it) {
-		getStatechart.isInternalEventBuffer && hasLocalEvents
+		requiresInternalEventQueue
 	}
 
 	def boolean needsInEventQueue(ExecutionFlow it) {
-
-		isEventDriven && useInEventQueue
+		requiresIncomingEventQueue
 	}
 
 	def boolean needsRunCycleGuard(ExecutionFlow it) {
@@ -83,13 +84,6 @@ abstract class GeneratorPredicate {
 
 	def boolean useInEventQueue() {
 		entry.statechart.isInEventBuffer
-	}
-
-	/**
-	 * Can be overridden to check for deprecated inEventQueue feature. Defaults to false. Can be removed if not used anymore.
-	 */
-	def boolean useInEventQueueDeprecated() {
-		false
 	}
 
 	def getQueuedEvents(ExecutionFlow it) {

@@ -11,10 +11,10 @@
 package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -31,7 +31,7 @@ class StatechartEvents implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension EventDrivenPredicate
+	@Inject protected extension GeneratorPredicate
 	
 	@Inject extension EventNaming eventNaming
 	

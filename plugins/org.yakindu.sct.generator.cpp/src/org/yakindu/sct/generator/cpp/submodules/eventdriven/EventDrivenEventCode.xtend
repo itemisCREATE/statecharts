@@ -11,7 +11,7 @@
 package org.yakindu.sct.generator.cpp.submodules.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.submodules.EventCode
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -23,7 +23,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  */
 class EventDrivenEventCode extends EventCode {
 	@Inject extension EventNaming eventNaming
-	@Inject extension EventDrivenPredicate
+	@Inject extension GeneratorPredicate
 	
 	
 	override generateEvents(ExecutionFlow it, StatechartScope scope)

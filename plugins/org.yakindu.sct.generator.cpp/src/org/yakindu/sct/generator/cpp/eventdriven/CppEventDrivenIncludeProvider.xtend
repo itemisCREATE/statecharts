@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
 import java.util.List
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -23,7 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
  */
 class CppEventDrivenIncludeProvider implements IncludeProvider {
 	
-	@Inject protected extension EventDrivenPredicate
+	@Inject protected extension GeneratorPredicate
 	
 	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		val List<CharSequence> includes = newArrayList

@@ -9,10 +9,6 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	@Inject protected GenmodelEntries entries
 	@Inject protected extension SExecExtensions
 		
-	override useInEventQueueDeprecated() {
-		entries.getInEventQueueUsed(entry)
-	}
-	
 	def userAllocatesInQueue(ExecutionFlow it) {
 		needsInEventQueue && entries.getQueueAllocatedByUser(entry)
 	}
