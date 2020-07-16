@@ -774,13 +774,13 @@ p.
 
 ==<div class="r4-feature">==
 
-==<!-- Start stext_keyword_superstep -->==
+==<!-- Start stext_keyword_supersteps -->==
 
-h4(#sclang_superstep). @SuperSteps
+h4(#sclang_supersteps). @SuperSteps
 
 The <code>@SuperSteps(yes | no)</code> annotation enables or disables the _superstep_ semantic for a run-to-completion step. In contrast to a regular step, a superstep executes all valid subsequent state transitions. If no <code>@SuperSteps</code> annotation is specified, the state machine wil behave as if <code>@SuperSteps(no)</code> would have been coded.
 
-==<!-- End stext_keyword_superstep -->==
+==<!-- End stext_keyword_supersteps -->==
 
 Take a look at the example model below:
 
@@ -848,9 +848,14 @@ If the definition section contains neither the <code>@ParentFirstExecution</code
 
 h4(#sclang_eventbuffering). @EventBuffering
 
-The <code>@EventBuffering</code> annotation specifies ...
+The <code>@EventBuffering</code> annotation specifies the event processing strategy. The annotation has two parameters to specify if 'in' and 'local' events should be buffered:
 
-TBD
+<code>@EventBuffering(inEvents = true, localEvents = true)</code>
+
+* _inEvents_ (Boolean): the state machine applies event buffering for incoming events in cycle based execution mode. Events can safely be raised during a run to completion step. Buffering requires double memory for event storage. Default true.
+
+* _localEvents_ (Boolean): the state machine applies event buffering for internal events in cycle based execution mode. If enabled internal events are processed in a separate step. If disabled internal events are just visible in lower priority regions. Buffering requires double memory for event storage. Default true.
+
 
 ==<!-- End stext_keyword_eventbuffering -->==
 
