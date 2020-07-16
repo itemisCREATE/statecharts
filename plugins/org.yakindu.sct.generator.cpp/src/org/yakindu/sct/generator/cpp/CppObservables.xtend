@@ -29,7 +29,7 @@ class CppObservables {
 
 	def createObserverClass(Event shadowEvent, ClassDeclaration observerDecl, StatechartScope scope) {
 		observerDecl.name(shadowEvent.observerClass)
-		observerDecl.superType('''public sc::rx::SingleSubscriptionObserver<«shadowEvent.type.targetLanguageName»>''')
+		observerDecl.superType('''public sc::rx::SingleSubscriptionObserver<«shadowEvent.typeSpecifier.targetLanguageName»>''')
 		observerDecl.member(ClassDeclaration::PUBLIC, shadowEvent.createObserverConstructor(scope))
 		observerDecl.member(ClassDeclaration::PUBLIC, shadowEvent.createObserverNextImpl )
 		observerDecl.member(ClassDeclaration::PUBLIC, scope.createInterfaceMember)
@@ -57,8 +57,8 @@ class CppObservables {
 	
 	def CharSequence createObserverNextImpl(Event it) {
 		'''
-		virtual void next(«IF ITypeSystem.VOID !== type.targetLanguageName»«type.targetLanguageName» value«ENDIF») {
-			this->«interfaceMember»->«event.asRaiser»(«IF ITypeSystem.VOID !== type.targetLanguageName»value«ENDIF»);
+		virtual void next(«IF ITypeSystem.VOID !== typeSpecifier.targetLanguageName»«typeSpecifier.targetLanguageName» value«ENDIF») {
+			this->«interfaceMember»->«event.asRaiser»(«IF hasValue»value«ENDIF»);
 		}
 		'''
 	}
