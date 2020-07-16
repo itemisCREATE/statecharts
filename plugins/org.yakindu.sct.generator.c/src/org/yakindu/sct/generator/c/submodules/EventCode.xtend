@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.generator.c.extensions.EventNaming
 
 /**
  * @author rbeckmann
@@ -48,6 +49,7 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	@Inject protected extension	TraceCode 
 	@Inject extension ExpressionExtensions
 	@Inject extension GeneratorPredicate
+	@Inject extension EventNaming
 	
 	@Inject protected extension GeneratorEntry entry
 	@Inject protected extension GenmodelEntries
@@ -106,10 +108,10 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 				«IF value !== null»
 					{
 						«event.definition.event.valueDeclaration» = «exp.code(value)»;
-						sc_observable_next(&«eventDefintion.accessObservable», &«eventDefintion.valueName»);
+						sc_observable«eventDefintion.eventType»_next(&«eventDefintion.accessObservable», «eventDefintion.valueName»);
 					}
 				«ELSE»
-					sc_observable_next(&«eventDefintion.accessObservable», sc_null)«IF useOutEventGetters»;«ENDIF»
+					sc_observable_next(&«eventDefintion.accessObservable»)«IF useOutEventGetters»;«ENDIF»
 				«ENDIF»
 			«ENDIF»
 			«IF (useOutEventGetters && eventDefintion.direction == Direction.OUT) || eventDefintion.direction == Direction.IN || eventDefintion.direction == Direction.LOCAL»
@@ -138,9 +140,9 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	
 	def eventValueGetterSignature(ExecutionFlow it, EventDefinition event) '''«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)'''
 	
-	def eventObservableSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»* «event.asObservableGetter»(«scHandleDecl»)'''
+	def eventObservableSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»«event.eventType»* «event.asObservableGetter»(«scHandleDecl»)'''
 	
-	def eventObserverNextSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»* «event.asObservableGetter»(«scHandleDecl»)'''
+	def eventObserverNextSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»«event.eventType»* «event.asObservableGetter»(«scHandleDecl»)'''
 	
 	
 	override eventClearCode(ExecutionFlow flow, Expression event) '''

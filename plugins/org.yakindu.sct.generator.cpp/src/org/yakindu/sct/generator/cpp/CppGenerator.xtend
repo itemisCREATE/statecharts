@@ -87,7 +87,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 			locations.configure(scTracing.h, entry.libraryOutput, tracingContent);
 		}
 		if(entry.outEventObservablesUsed && flow.hasOutgoingEvents) {
-			locations.configure(flow.rxcModule.h, entry.libraryOutput, rxcpp, getSkipLibraryFiles(entry))
+			locations.configure(rxcModule.h, entry.libraryOutput, rxcpp, getSkipLibraryFiles(entry))
 		}
 	}
 
