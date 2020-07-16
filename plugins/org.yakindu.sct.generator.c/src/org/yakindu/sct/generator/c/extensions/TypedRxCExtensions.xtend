@@ -10,10 +10,10 @@
  */
 package org.yakindu.sct.generator.c.extensions
 
-import org.yakindu.base.types.Event
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import com.google.inject.Inject
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 /**
@@ -28,7 +28,7 @@ class TypedRxCExtensions {
 	 * which are already defined & declared in the rcx module.
 	 */
 	def getPayloadTypes(ExecutionFlow it) {
-		return eAllContents.filter(Event).filter[hasValue].map[type].
-			filter[e|!concreteTypes.map[name].toList.contains(e.name)].toSet
+		return eAllContents.filter(Event).filter[hasValue].map[typeSpecifier].
+			filter[ts|!concreteTypes.map[name].toList.contains(ts.type.name)].toSet
 	}
 }

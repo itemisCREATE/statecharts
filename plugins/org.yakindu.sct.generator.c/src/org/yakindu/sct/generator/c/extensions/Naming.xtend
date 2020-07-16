@@ -51,6 +51,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.types.TypeSpecifier
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -604,8 +605,26 @@ class Naming {
 		RXC_MODULE
 	}
 	
-	def getTypedRxcModule(Type it) {
-		rxcModule + "_" + name
+	def getTypedRxcModule(TypeSpecifier it) {
+		rxcModule + "_" + getTypeModuleName
+	}
+	
+	def String getTypeModuleName(TypeSpecifier it) {
+		if(type.name == "pointer")
+			return type.name + "_" + typeArguments.head.getTypeModuleName
+		return type.name
+	}
+	
+	def String getTypeName(TypeSpecifier it) {
+		if(type.name == "pointer")
+			return typeArguments.head.getTypeName + "_" + type.name
+		return type.name
+	}
+	
+	def String getPointerType(TypeSpecifier it) {
+		if(type.name == "pointer")
+			return typeArguments.head.pointerType + "*"
+		return type.name
 	}
 	
 	def metaModule(ExecutionFlow it) {

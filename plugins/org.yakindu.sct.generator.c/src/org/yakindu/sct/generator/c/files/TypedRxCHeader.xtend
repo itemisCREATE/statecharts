@@ -11,17 +11,19 @@
 package org.yakindu.sct.generator.c.files
 
 import com.google.inject.Inject
+import java.util.Set
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.types.Package
+import org.yakindu.base.types.PrimitiveType
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.sct.generator.c.IContentTemplate
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.IncludeProvider
-import java.util.Set
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.base.types.Type
-import org.yakindu.base.types.PrimitiveType
 
 /**
  * @author Robin Herrmann
@@ -30,13 +32,13 @@ class TypedRxCHeader implements IContentTemplate {
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
 
-	Type payloadType
+	TypeSpecifier ts
 	Set<IncludeProvider> includeProviders
 
-	new(Type typeAlias, Naming naming, GenmodelEntries genmodelEntries, Set<IncludeProvider> includeProviders) {
+	new(TypeSpecifier ts, Naming naming, GenmodelEntries genmodelEntries, Set<IncludeProvider> includeProviders) {
 		this._naming = naming
 		this._genmodelEntries = genmodelEntries
-		this.payloadType = typeAlias
+		this.ts = ts
 		this.includeProviders = includeProviders
 	}
 	
@@ -44,38 +46,60 @@ class TypedRxCHeader implements IContentTemplate {
 		'''
 		«entry.licenseText»
 		
-		#ifndef «payloadType.typedRxcModule.define»_H_
-		#define «payloadType.typedRxcModule.define»_H_
+		#ifndef «ts.typedRxcModule.define»_H_
+		#define «ts.typedRxcModule.define»_H_
 		
-		#include "«(rxcModule.h).relativeTo(payloadType.typedRxcModule.h)»"
+		#include "«(rxcModule.h).relativeTo(ts.typedRxcModule.h)»"
 		«getTypeAliasInclude(locations)»
 		
 		#ifdef __cplusplus
 		extern "C" {
 		#endif
-
-		declare_sc_reactive_extensions(«payloadType.name»)
-
+		
+		«pointerTypedef»
+		declare_sc_reactive_extensions(«ts.typeName»)
+		
 		#ifdef __cplusplus
 		}
 		#endif
 		
-				
-		#endif /* «payloadType.typedRxcModule.define»_H_ */
+		
+		#endif /* «ts.typedRxcModule.define»_H_ */
+		'''
+	}
+		
+	def pointerTypedef() {
+		'''
+		«IF ts.type.isPointer»
+		typedef «ts.pointerType» «ts.typeName»;
+		
+		«ENDIF»
 		'''
 	}
 	
 	def getTypeAliasInclude(ExecutionFlow flow, IGenArtifactConfigurations locations) {
+		val payloadType = ts.getBaseType
 		// primitve types like int32_t are handled in sc_types.h, which is already included in sc_rxc.h
 		if(payloadType instanceof PrimitiveType) {
 			return ''''''
 		}
-		val package = EcoreUtil2.getContainerOfType(payloadType, org.yakindu.base.types.Package)
+		val package = EcoreUtil2.getContainerOfType(payloadType, Package)
 		val header =  package.name.split("\\.").last.h
 		for (i : includeProviders){
 			return i.getIncludes(flow, locations).findFirst[include | include.toString.contains(header)]
 		}
 		return '''// Can not find include for «payloadType.name»'''
+	}
+		
+	def Type getBaseType(TypeSpecifier it) {
+		if(type.isPointer) {
+			return typeArguments.head.baseType
+		}
+		return type
+	}
+	
+	def isPointer(Type it) {
+		return name == "pointer"
 	}
 
 }

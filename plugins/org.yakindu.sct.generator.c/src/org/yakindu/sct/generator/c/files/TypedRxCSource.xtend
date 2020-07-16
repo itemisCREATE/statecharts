@@ -17,7 +17,7 @@ import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypeSpecifier
 
 /**
  * @author Robin Herrmann
@@ -26,10 +26,10 @@ class TypedRxCSource implements IContentTemplate {
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
 
-	Type payloadType
+	TypeSpecifier ts
 
-	new(Type typeAlias, Naming naming, GenmodelEntries genmodelEntries) {
-		this.payloadType = typeAlias
+	new(TypeSpecifier ts, Naming naming, GenmodelEntries genmodelEntries) {
+		this.ts = ts
 		this._naming = naming
 		this._genmodelEntries = genmodelEntries
 	}
@@ -38,9 +38,9 @@ class TypedRxCSource implements IContentTemplate {
 		'''
 		«entry.licenseText»
 		
-		#include "«(payloadType.typedRxcModule.h).relativeTo(payloadType.typedRxcModule.c)»"
+		#include "«(ts.typedRxcModule.h).relativeTo(ts.typedRxcModule.c)»"
 		
-		define_sc_reactive_extensions(«payloadType.name»)
+		define_sc_reactive_extensions(«ts.typeName»)
 
 		'''
 	}
