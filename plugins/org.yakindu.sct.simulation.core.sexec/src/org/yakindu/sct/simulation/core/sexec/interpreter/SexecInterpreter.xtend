@@ -1,14 +1,13 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
-import java.util.List
+import com.google.inject.Injector
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.base.expressions.interpreter.base.BaseExecution
 import org.yakindu.base.expressions.interpreter.base.IInterpreter
 import org.yakindu.base.expressions.interpreter.base.SRuntimeInterpreter
-import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionEvent
@@ -20,7 +19,6 @@ import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.Time
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import com.google.inject.Injector
 
 class SexecInterpreter extends SRuntimeInterpreter {
 

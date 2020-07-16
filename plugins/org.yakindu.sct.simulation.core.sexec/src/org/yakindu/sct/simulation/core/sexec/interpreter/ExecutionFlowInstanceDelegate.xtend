@@ -1,5 +1,6 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
+import com.google.inject.Inject
 import java.util.ArrayDeque
 import java.util.Map
 import java.util.Queue
@@ -38,7 +39,7 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import com.google.inject.Inject
+import org.yakindu.sct.model.sexec.Trace
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
 	
@@ -55,6 +56,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	@Inject protected extension StateMachineBehaviorConcept
 	@Inject protected extension ExecutionContextExtensions
 	@Inject protected extension StatechartAnnotations
+	@Inject(optional=true) ITraceStepInterpreter traceInterpreter
 	
 	
 	def void setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
@@ -83,6 +85,8 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			StateSwitch : program.execution
 			SaveHistory : program.execution
 			HistoryEntry : program.execution
+			Trace : program.execution
+			
 			ActiveStateReferenceExpression : program.execution
 			
 			Call : _executeNamedSequence(program.step)				
@@ -232,12 +236,19 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		])
 	}
 
-
 	def dispatch void execution(ActiveStateReferenceExpression it) {
 		_return("isActive(" + value.name + ")", [
 			val state = it.value			
 			return executionContext.allActiveStates.contains(state)
 		])
+	}
+
+	def dispatch void execution(Trace it) {
+		if ( traceInterpreter !== null) {
+			_execute("delegate trace", [
+				traceInterpreter?.evaluate(it, executionContext)
+			])	
+		}
 	}
 
 

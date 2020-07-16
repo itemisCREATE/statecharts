@@ -25,8 +25,7 @@ import com.google.inject.Inject
 
 class SexecExecution extends StextExecution  {
 	
-//	@Inject(optional=true) ITraceStepInterpreter traceInterpreter
-	 
+
 	@Inject extension StateMachineBehaviorConcept smbc
 
 	def dispatch void execution(Call it) { _delegate }
@@ -96,7 +95,7 @@ class SexecExecution extends StextExecution  {
 		}
 	}
 
-	def dispatch void execution(Trace it) { /*_delegate*/ }
+	def dispatch void execution(Trace it) { _delegate }
 	
 	def dispatch void execution(EnterState it) { _delegate }
 
