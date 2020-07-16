@@ -29,6 +29,7 @@ import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
+import org.yakindu.sct.generator.core.extensions.CoreFlowConfiguration;
 import org.yakindu.sct.generator.core.submodules.lifecycle.Init;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsActive;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal;
@@ -102,7 +103,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 
 		includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
 		
-		binder.bind(IFlowConfiguration.class).to(CppFlowConfiguration.class);
+		binder.bind(IFlowConfiguration.class).to(CoreFlowConfiguration.class);
 
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
