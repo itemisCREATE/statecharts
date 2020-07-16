@@ -20,7 +20,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	protected ExecutionContext heap
 	protected List<Promise> nextExecutions = new LinkedList<Promise>
 	
-	protected boolean debug = true
+	protected boolean debug = false
 
 	protected boolean suspended = false
 	protected boolean isProcessing = false
