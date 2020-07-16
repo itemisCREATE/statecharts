@@ -20,16 +20,20 @@ import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.Time
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import com.google.inject.Injector
 
 class SexecInterpreter extends SRuntimeInterpreter {
 
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
 	protected extension StextFactory stextFactory = StextFactory.eINSTANCE
-	@Inject protected IExecutionContextInitializer contextInitializer
 
-	@Accessors @Inject protected ITimeTaskScheduler timingService
+	@Inject protected IExecutionContextInitializer contextInitializer
+	@Inject protected extension Injector injector
+	@Inject @Accessors protected ITimeTaskScheduler timingService
+	
 	
 	protected IInterpreter.Execution execution 	
+
 
 	static class ExecutionFlowInstanceDelegateAdapter extends AdapterImpl {
 		@Accessors
@@ -40,8 +44,6 @@ class SexecInterpreter extends SRuntimeInterpreter {
 		}
 
 	}
-
-	protected List<Type> types
 
 	@Inject new(SexecExecution exec) {
 		this.heap = createExecutionContext // TODO : tidy up context creation ...
@@ -58,7 +60,9 @@ class SexecInterpreter extends SRuntimeInterpreter {
 //			heap.slots += it
 //		]		
 		instance.eAdapters += new ExecutionFlowInstanceDelegateAdapter() => [
+			
 			instance = new ExecutionFlowInstanceDelegate => [
+				it.injectMembers
 				it.setUp(instance, flow, this)
 			]
 		]

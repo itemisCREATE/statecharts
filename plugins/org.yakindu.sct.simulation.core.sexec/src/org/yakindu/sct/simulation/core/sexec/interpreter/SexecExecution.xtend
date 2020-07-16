@@ -21,17 +21,15 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import com.google.inject.Inject
 
 class SexecExecution extends StextExecution  {
 	
 //	@Inject(optional=true) ITraceStepInterpreter traceInterpreter
 	 
-	// TODO: inject
-	extension StateMachineBehaviorConcept smbc = new StateMachineBehaviorConcept
+	@Inject extension StateMachineBehaviorConcept smbc
 
-	def dispatch void execution(Call it) { _delegate
-//		step._exec // TODO : add frame
-	}
+	def dispatch void execution(Call it) { _delegate }
 
 	def dispatch void execution(Return it) {
 		if (value !== null) {
@@ -98,11 +96,8 @@ class SexecExecution extends StextExecution  {
 		}
 	}
 
-	def dispatch void execution(Trace it) {
-//		traceInterpreter?.evaluate(it, context) 
-	}
+	def dispatch void execution(Trace it) { /*_delegate*/ }
 	
-
 	def dispatch void execution(EnterState it) { _delegate }
 
 	def dispatch void execution(ExitState it) { _delegate }

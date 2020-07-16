@@ -28,6 +28,7 @@ import org.yakindu.sct.model.sexec.concepts.ExitMethod
 import org.yakindu.sct.model.sexec.concepts.InitializedCheck
 import org.yakindu.sct.model.sexec.concepts.RunCycleMethod
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sruntime.CompositeSlot
@@ -37,8 +38,7 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import java.util.List
-import org.yakindu.sct.model.sgraph.FinalState
+import com.google.inject.Inject
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
 	
@@ -52,9 +52,10 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	protected Queue<EventInstance> internalEventQueue = null 
 	protected Queue<EventInstance> inEventQueue = null
 	
-	extension StateMachineBehaviorConcept = new StateMachineBehaviorConcept // TODO: Inject!!!
-	extension ExecutionContextExtensions = new ExecutionContextExtensions // TODO: Inject!!
-	extension StatechartAnnotations = new StatechartAnnotations // TODO: Inject!!
+	@Inject protected extension StateMachineBehaviorConcept
+	@Inject protected extension ExecutionContextExtensions
+	@Inject protected extension StatechartAnnotations
+	
 	
 	def void setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
 		this.instance = instance	
