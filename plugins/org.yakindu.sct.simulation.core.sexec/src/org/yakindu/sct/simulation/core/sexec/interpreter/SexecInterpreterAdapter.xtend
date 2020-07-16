@@ -1,26 +1,17 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
-import java.util.List
+import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.Trace
-import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
-import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
-import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
-import org.eclipse.xtend.lib.annotations.Accessors
-import com.google.inject.Singleton
-
+import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
 
 @Singleton
 class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser {
@@ -32,6 +23,8 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
+	
+	
 	TimerTaskSchedulerAdapter timeTaskSchedulerAdapter
 	
 	(()=>Object)=>Object executeWithoutContextAdapter = [ f | 
@@ -49,11 +42,6 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 			}
 	]
 	
-	@Inject protected extension ExecutionContextExtensions
-	@Inject
-	protected StateVectorExtensions stateVectorExtensions;
-	@Inject
-	protected extension StatechartAnnotations
 
 	@Inject protected ITimeTaskScheduler timingService
 
@@ -95,23 +83,20 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 
 	def init() {
 		
-		executeWithoutContextAdapter.apply([
-			
+		execute([	
 			stateMachine._invoke("init")				
 		])
 	}
 	
 	override enter() {
-		executeWithoutContextAdapter.apply([	
-			
+		execute([	
 			stateMachine._invoke("enter")
 		])
 	}
 
 	override exit() {
 		
-		executeWithoutContextAdapter.apply([
-
+		execute([
 			stateMachine._invoke("exit")		
 		])
 	}
@@ -119,72 +104,37 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 
 	override runCycle() {
 		
-		executeWithoutContextAdapter.apply([
-			
+		execute([
 			stateMachine._invoke("runCycle")
 		])
 						
 	}
 
-	def ExecutionState toExecutionState(RegularState state) {
-		return flow.eAllContents.filter(ExecutionState).findFirst [
-			EcoreUtil.equals(sourceElement, state)
-		]
-	}
-
-
-	override tearDown() {
-	}
-
-
 	override raise(ExecutionEvent ev, Object value) {
-				
-		executeWithoutContextAdapter.apply([
-
-			ev._raise(value)					
-		])
+		execute([ ev._raise(value) ])
 	}
 
-	/**
-	 * TODO: move to instance delegate
-	 */
 	override boolean isActive() {
-		return executionContext.getAllActiveStates().size > 0
+		execute([ stateMachine._invoke("isActive") ]) == true
 	}
 	
-	/**
-	 * TODO: move to instance delegate
-	 */
 	override boolean isFinal() {
-		var List<ExecutionState>[] list = stateVectorExtensions.finalStateImpactVector(flow);
-		var boolean isCompletlyCovered = stateVectorExtensions.isCompletelyCovered(list);
-		if (!isCompletlyCovered) {
-			return false;
-		} else {
-			var List<RegularState> activeStates = executionContext.getAllActiveStates();
-			if (activeStates.isEmpty) {
-				return false;
-			}
-			for (RegularState regularState : activeStates) {
-				if (!(regularState instanceof FinalState)) {
-					return false;
-				}
-			}
-			return true;
-		}
+		execute([ stateMachine._invoke("isFinal") ]) == true
 	}
 	
 	override isStateActive(String stateName) {
-		
-		executeWithoutContextAdapter.apply([
-			stateMachine._invoke("isStateActive", stateName)
-		])  == true
+		execute([ stateMachine._invoke("isStateActive", stateName) ]) == true
 	}
+
+	override tearDown() {}
 
 	override getExecutionFlow() {
 		flow
 	}
 	
+	protected def Object execute(()=>Object action) {
+		executeWithoutContextAdapter.apply(action)
+	} 
 		
 	protected static class TimerTaskSchedulerAdapter implements ITimeTaskScheduler {
 		
@@ -192,7 +142,7 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 		@Accessors protected (Runnable)=>void timeTaskAdapter
 		
 		override getCurrentTime() {
-			original?.currentTime
+			if (original !== null) original.currentTime else 0
 		}
 		
 		override resume() {

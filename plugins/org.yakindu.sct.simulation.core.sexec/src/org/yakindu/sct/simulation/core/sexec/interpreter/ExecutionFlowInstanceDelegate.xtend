@@ -1,7 +1,6 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import java.util.ArrayDeque
-import java.util.LinkedList
 import java.util.Map
 import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -9,6 +8,7 @@ import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.interpreter.base.BaseExecution
 import org.yakindu.base.expressions.interpreter.base.IInterpreter
 import org.yakindu.base.expressions.interpreter.base.SRuntimeInterpreter.EventInstance
+import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.EnterState
@@ -37,7 +37,8 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import org.yakindu.base.types.Direction
+import java.util.List
+import org.yakindu.sct.model.sgraph.FinalState
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
 	
@@ -98,6 +99,8 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			String case program.hasMethod : program.lookupMethod.invoke 
 			
 			case 'init': init
+			case 'isActive': isActive
+			case 'isFinal': isFinal
 			case 'isStateActive': isStateActive
 
 			default : 
@@ -122,6 +125,19 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		
 	}
 	
+	def void isActive() {
+		
+		
+		instance._executeOperation( "isActive", #[], [
+
+			val isActive = ! activeStateConfiguration
+								.filterNull
+								.empty
+
+			exitCall(isActive)			
+		])
+	}
+
 
 	def void isStateActive() {
 		
@@ -141,6 +157,26 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	}
 	
 	
+	def void isFinal() {
+		
+		
+		instance._executeOperation( "isFinal", #[], [
+
+			val activeStates = activeStateConfiguration.filterNull.toList
+			
+			var isFinal = 	
+				if (activeStates.empty) false
+				else {
+					activeStates.forall[
+						it.sourceElement instanceof FinalState
+					]
+				}
+			
+			exitCall(isFinal)			
+		])
+	}
+
+
 
 
 	def protected dispatch void execution(Object it) {
