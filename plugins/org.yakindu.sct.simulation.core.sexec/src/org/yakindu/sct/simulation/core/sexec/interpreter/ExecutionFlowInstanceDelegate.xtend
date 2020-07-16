@@ -40,6 +40,8 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 import org.yakindu.sct.model.sexec.Trace
+import org.eclipse.emf.edit.command.CreateChildCommand.Helper
+import org.yakindu.sct.model.sexec.SexecFactory
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
 	
@@ -245,7 +247,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 	def dispatch void execution(Trace it) {
 		if ( traceInterpreter !== null) {
-			_execute("delegate trace", [
+			_execute('''trace «it.class.simpleName»''', [
 				traceInterpreter?.evaluate(it, executionContext)
 			])	
 		}
@@ -254,6 +256,11 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 	def protected void microStep() {
 
+//		if (traceInterpreter !== null ) {
+//			_execute("@microStep(trace begin)") [
+//				traceInterpreter?.evaluate(SexecFactory.eINSTANCE.createTraceBeginRunCycle, executionContext)
+//			]			
+//		}
 		_execute("@microStep(init)",[
 			activeStateIndex = 0
 			// TODO : check if neccessary
@@ -269,7 +276,12 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 					_execute[ activeStateIndex = activeStateIndex + 1 ]					
 				}
 			])
-		}			
+		}
+//		if (traceInterpreter !== null ) {
+//			_execute("@microStep(trace end)") [
+//				traceInterpreter?.evaluate(SexecFactory.eINSTANCE.createTraceEndRunCycle, executionContext)
+//			]			
+//		}		
 	}
 	
 	
