@@ -24,6 +24,7 @@ import org.yakindu.base.types.Event
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 
 /**
  * @author andreas muelder
@@ -33,6 +34,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension StatechartUtil
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension ShadowEventExtensions
 	
 	protected static val String ARRAY = "array"
 	protected static val String POINTER = "pointer"
@@ -79,8 +81,10 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 	def pointerSymbol(TypeSpecifier it) {
 		if (useOutEventObservables) {
 			val event = EcoreUtil2.getContainerOfType(it, Event)
-			if( event !== null && event.direction === Direction.OUT) {
-				return "_pointer"
+			if (event !== null) {
+				if (event.direction === Direction.OUT || event.getOutEvent !== null) {
+					return "_pointer"
+				}
 			}
 		}
 		return "*"
