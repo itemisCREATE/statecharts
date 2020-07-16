@@ -56,7 +56,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 * Enum of event names in the statechart.
 		 */
 		typedef enum  {
-			«invalidEventEnumName(it)» = «invalidEvent»,
+			«invalidEventEnumName(it)» = «invalidEvent»«IF !queuedEvents.isEmpty»,«ENDIF»
 			«FOR e : queuedEvents SEPARATOR ","»
 				«eventEnumMemberName(e)»
 			«ENDFOR»

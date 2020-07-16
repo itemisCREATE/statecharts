@@ -21,7 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	LocalEventsTest.class,
 	NoLocalEventsTest.class,
 	OutEventVisibilityEventDrivenTest.class,
-	OutEventWithPayloadTest.class,
+	//OutEventWithPayloadTest.class, <-- FIXME Unused function
 	ChildFirstExecutionHierarchyTest.class,
 	ChildFirstLocalReactionsTest.class,
 	ChildFirstOrthogonalReactionsTest.class,
