@@ -72,7 +72,8 @@ as separate classes.
 
 """
 
-class SCI_user:
+
+class SCIUser:
 
 	"""Implementation of scope sci_user.
 	"""
@@ -84,20 +85,19 @@ class SCI_user:
 		self.statemachine = statemachine
 	
 	
+	def set_brightness(self, value):
+		self.brightness = value
 	
-	def raise_on_button(self):
+	def get_brightness(self):
+		return brightness
+	
+	def raise_on_button(self,):
 		self.on_button = True
 		self.statemachine.run_cycle()
-		
-	def raise_off_button(self):
+	
+	def raise_off_button(self,):
 		self.off_button = True
 		self.statemachine.run_cycle()
-		
-	def clear_events(self):
-		self.on_button = False
-		self.off_button = False
-		
-
 
 p. 
 
@@ -120,15 +120,24 @@ The generated code contains fundamental methods to initialize, enter, and exit a
 
 
 bc.. 
-# Implementation of statechart lightswitch_statemachine.
+# Implementation of statechart light_switch.
 
-import warnings
 # implemented interfaces:
-from .lightswitch_statemachine_interfaces import SCI_user
-# to store states:
-from enum import Enum
+from .light_switch_interfaces import SCIUser
+
+
 
 class LightSwitch:
+
+	""" State Enum
+	"""
+	class State:
+		(
+			main_region_off,
+			main_region_on,
+			null_state
+		) = range(3)
+	
 
 	"""
 	
@@ -139,16 +148,14 @@ class LightSwitch:
 	def __init__(self):
 		""" Declares all necessary variables including list of states, histories etc. 
 		"""
-		self.sci_user = SCI_user(self)
+		self.sci_user = SCIUser(self)
 		self.initialized = False
-		self.state_vector = [None] * 1		
-		self.next_state_index = None		
+		self.state_vector = [None] * 1
+		self.next_state_index = None
 		# enumeration of all states:
-		self.State = Enum('State', '\
-		main_region_off,\
-		main_region_on,\
-		null_state')
-	
+		self.State =  LightSwitch.State
+		self.is_executing = None
+		
 	def init(self):
 		"""	Initializes the state machine by checking the timer, 
 		initializing states and clearing events.
@@ -156,19 +163,9 @@ class LightSwitch:
 		self.initialized = True
 		for state_index in range(1):
 			self.state_vector[state_index] = self.State.null_state
-		self._clear_events()
 		self.sci_user.brightness = 0
-	
-	def enter(self):
-		if self.initialized is not True:
-			raise ValueError(
-					'The state machine needs to be initialized first by calling the init() function.')
-		self.enter_sequence_main_region_default()
-	
-	def exit(self):
-		"""	Exit the the state machine.
-		"""
-		self.exit_sequence_main_region()
+		self.is_executing = False
+		
 	
 	def is_active(self):
 		""" @see IStatemachine#is_active()
@@ -181,107 +178,123 @@ class LightSwitch:
 		"""
 		return False
 			
-	def _clear_events(self):
-		""" Resets incoming events (time events included).
-		"""
-		self.sci_user.clear_events()
-	
 	def is_state_active(self, state):
 		""" Returns True if the given state is currently active otherwise false.
 		"""
-		s = state.name
-		if s == 'main_region_off':
+		s = state
+		if s == self.State.main_region_off:
 			return self.state_vector[0] == self.State.main_region_off
-		elif s == 'main_region_on':
+		elif s == self.State.main_region_on:
 			return self.state_vector[0] == self.State.main_region_on
 		else:
 			return False
 	
-	def entry_action_main_region_off(self):
+	def entry_action_main_region__off(self):
 		self.sci_user.brightness = 0
 		
-	def enter_sequence_main_region_off_default(self):
-		self.entry_action_main_region_off()
+	def enter_sequence_main_region__off_default(self):
+		self.entry_action_main_region__off()
 		self.next_state_index = 0
 		self.state_vector[0] = self.State.main_region_off
+		self.state_conf_vector_changed = True
 		
-	def enter_sequence_main_region_on_default(self):
+	def enter_sequence_main_region__on_default(self):
 		self.next_state_index = 0
 		self.state_vector[0] = self.State.main_region_on
+		self.state_conf_vector_changed = True
 		
 	def enter_sequence_main_region_default(self):
-		self.react_main_region__entry_default()
+		self.react_main_region__entry__default()
 		
-	def exit_sequence_main_region_off(self):
+	def exit_sequence_main_region__off(self):
 		self.next_state_index = 0
 		self.state_vector[0] = self.State.null_state
 		
-	def exit_sequence_main_region_on(self):
+	def exit_sequence_main_region__on(self):
 		self.next_state_index = 0
 		self.state_vector[0] = self.State.null_state
 		
 	def exit_sequence_main_region(self):
-		state = self.state_vector[0].name
-		if state == 'main_region_off':
-			self.exit_sequence_main_region_off()		
-		elif state == 'main_region_on':
-			self.exit_sequence_main_region_on()
+		state = self.state_vector[0]
+		if state == self.State.main_region_off:
+			self.exit_sequence_main_region__off()
+		elif state == self.State.main_region_on:
+			self.exit_sequence_main_region__on()
 		
-	def react_main_region__entry_default(self):
-		self.enter_sequence_main_region_off_default()
+	def react_main_region__entry__default(self):
+		self.enter_sequence_main_region__off_default()
 		
 	def react(self):
 		return False
 	
 	
-	def main_region_off_react(self,  try_transition):
+	def main_region__off_react(self,  try_transition):
 		did_transition = try_transition
-		
 		if try_transition:
-			if (self.react()) == False:
+			if self.react() == False:
 				if self.sci_user.on_button:
-					self.exit_sequence_main_region_off()
+					self.exit_sequence_main_region__off()
 					self.sci_user.brightness = 1
-					self.enter_sequence_main_region_on_default()
+					self.enter_sequence_main_region__on_default()
 				else:
 					did_transition = False
-		
 		return did_transition
 	
 	
-	def main_region_on_react(self,  try_transition):
+	def main_region__on_react(self,  try_transition):
 		did_transition = try_transition
-		
 		if try_transition:
-			if (self.react()) == False:
+			if self.react() == False:
 				if self.sci_user.off_button:
-					self.exit_sequence_main_region_on()
-					self.enter_sequence_main_region_off_default()
-				elif ((self.sci_user.on_button) and ((self.sci_user.brightness) < 10)):
-					self.exit_sequence_main_region_on()
+					self.exit_sequence_main_region__on()
+					self.enter_sequence_main_region__off_default()
+				elif ((self.sci_user.on_button) and (self.sci_user.brightness < 10)):
+					self.exit_sequence_main_region__on()
 					self.sci_user.brightness = self.sci_user.brightness + 1
-					self.enter_sequence_main_region_on_default()
+					self.enter_sequence_main_region__on_default()
 				else:
 					did_transition = False
-		
 		return did_transition
+	
+	
+	def clear_in_events(self):
+		self.sci_user.on_button = False
+		self.sci_user.off_button = False
+	
+	
+	def enter(self):
+		if self.initialized is not True:
+			raise ValueError('The state machine needs to be initialized first by calling the init() function.')
+		if self.is_executing:
+			return
+		self.is_executing = True
+		self.enter_sequence_main_region_default()
+		self.is_executing = False
+	
+	
+	def exit(self):
+		if self.is_executing:
+			return
+		self.is_executing = True
+		self.exit_sequence_main_region()
+		self.is_executing = False
 	
 	
 	def run_cycle(self):
-		""" Starts a cycle in the state machine. 
-		"""
 		if self.initialized is not True:
-			raise ValueError(
-					'The state machine needs to be initialized first by calling the init() function.')
+			raise ValueError('The state machine needs to be initialized first by calling the init() function.')
+		if self.is_executing:
+			return
+		self.is_executing = True
 		self.next_state_index = 0
 		while self.next_state_index < len(self.state_vector):
-			if self.state_vector[self.next_state_index].name == 'main_region_off' :
-				self.main_region_off_react(True)
-			elif self.state_vector[self.next_state_index].name == 'main_region_on' :
-				self.main_region_on_react(True)
+			if self.state_vector[self.next_state_index] == self.State.main_region_off :
+				self.main_region__off_react(True)
+			elif self.state_vector[self.next_state_index] == self.State.main_region_on :
+				self.main_region__on_react(True)
 			self.next_state_index += 1
-			
-		self._clear_events()
+		self.clear_in_events()
+		self.is_executing = False
 
 p. 
 
@@ -299,7 +312,7 @@ Calling the operation __myOp__ in the __On__ state of the __LightSwitch__ exampl
 
 bc.. 
 def entry_action_main_region_on(self):
-	self.sci_interface.operationCallback.myOp()
+	self.sci_interface.operation_callback.my_op()
 p. 
 
 The operation callback must be set through the state machine's API. At first, the Callback must be implemented:
@@ -310,7 +323,7 @@ class Callback
 		#empty constructor
 		pass
 	
-	def myOp(self):
+	def my_op(self):
 		print('Operation myOp has been called by the state machine')
 p. 
 
@@ -323,7 +336,7 @@ class Main:
         self.cb = Callback()
 
     def setup(self):
-        self.sm.sci_interface.operationCallback = self.cb
+        self.sm.sci_interface.operation_callback = self.cb
         self.sm.init()
         self.sm.enter()
 p. 
@@ -351,10 +364,10 @@ from lightswitch.timer.sct_timer import Timer
 class Main:
     def __init__(self):
         self.sm = LightSwitch()
-        self.ti = Timer()
+        self.timer = Timer()
 
     def setup(self):
-        self.sm.set_timer(self.ti)
+        self.sm.set_timer(self.timer)
         self.sm.init()
         self.sm.enter()
 p. 

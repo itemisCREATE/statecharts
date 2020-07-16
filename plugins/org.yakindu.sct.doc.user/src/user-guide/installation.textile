@@ -170,13 +170,13 @@ bq. *Please note:* On macOS, this only works if your _.app_ file is located in y
 
 In the the _Help_ menu, select the _Install New Software_ menu item:
 
-!images/inst_eclipse_010_eclipse_menu_install_new_software.png(Selecting "Help → Install New Software" in the main menu)!
+!images/inst_eclipse_01_new_software.png(Selecting "Help → Install New Software" in the main menu)!
 
 p=. Selecting _Help → Install New Software_ in the main menu
 
 The _Install_ wizard opens:
 
-!images/inst_eclipse_020_eclipse_install_wizard.png(The "Install" wizard)!
+!images/inst_eclipse_02_available_software.png(The "Install" wizard)!
 
 p=. The _Install_ wizard
 
@@ -186,25 +186,25 @@ A dialog opens, asking you to specify the update repository you want to install 
 
 bq. *Please note:* Update site URLs are available online via the "YAKINDU Statechart Tools download page":https://info.itemis.com/state-machine/download-yakindu-statechart-tools.
 
-!images/inst_eclipse_030_eclipse_add_repository.png(Adding a software repository)!
+!images/inst_eclipse_03_add_repository.png(Adding a software repository)!
 
 p=. Adding a software repository
 
-After entering name and location of the update repository, click _OK_.
+After entering name and location of the update repository, click _Add_.
 
 Eclipse establishes a network connection to the update repository, asks it for available software items and shows them in the install wizard:
 
-!images/inst_eclipse_040_eclipse_software_items.png(Selecting YAKINDU Statechart Tools software items)!
+!images/inst_eclipse_04_software_items.png(Selecting YAKINDU Statechart Tools software items)!
 
 p=. Selecting YAKINDU Statechart Tools software items
 
-Please check at least _Xtext Integration Utilities_ and – no surprise – _YAKINDU SCT_. (You can also install the respective source code items. However, unless you want to have a look at that source code or even want to modify it, you don't need them.)
+Please check the items you want to install. (You can select any YAKINDU Statechart Tools version.)
 
 Click _Next &gt;_.
 
 Eclipse tries to integrate the new software with the software that is already installed. If it detects any mismatches between requirements and provisions, Eclipse will try to find a solution in order to mitigate this problem. The screenshot below shows such a case:
 
-!images/inst_eclipse_050_eclipse_trouble.png(Install remediation page)!
+!images/inst_eclipse_05_trouble.png(Install remediation page)!
 
 p=. Install remediation page
 
@@ -212,7 +212,7 @@ Select the most appropriate solution, then click _Next &gt;_.
 
 The wizard shows the software to be installed and gives you the opportunity to review the changes:
 
-!images/inst_eclipse_060_eclipse_review.png(Reviewing the items to be installed)!
+!images/inst_eclipse_06_review.png(Reviewing the items to be installed)!
 
 p=. Reviewing the items to be installed
 
@@ -220,7 +220,7 @@ Click _Next &gt;_.
 
 The wizard asks you to review and accept the terms of the new software's license agreements.
 
-!images/inst_eclipse_070_eclipse_licenses.png(Accepting the new software's license agreements)!
+!images/inst_eclipse_07_licenses.png(Accepting the new software's license agreements)!
 
 p=. Accepting the new software's license agreements
 
@@ -228,19 +228,19 @@ Select the radio button labelled _I accept the terms of the license agreements_ 
 
 Eclipse starts to download the software and installs it on your computer. This may take some time.
 
-!images/inst_eclipse_080_eclipse_installation.png(Installing software in progress ...)!
+!images/inst_eclipse_08_installation.png(Installing software in progress ...)!
 
 p=. Installing software in progress ...
 
 If the installation was completed successfully, Eclipse needs a restart in order to have the changes take effect. A dialog asks whether you want to restart Eclipse right now or later:
 
-!images/inst_eclipse_090_eclipse_restart.png(Restarting Eclipse after software installation)!
+!images/inst_eclipse_09_restart.png(Restarting Eclipse after software installation)!
 
 p=. Restarting Eclipse after software installation
 
 After the restart, Eclipse displays its _Welcome_ window, now also featuring YAKINDU Statechart Tools:
 
-!images/inst_eclipse_100_eclipse_sct_help.png(Eclipse presenting the "Welcome" window)!
+!images/inst_eclipse_10_sct.png(Eclipse presenting the "Welcome" window)!
 
 p=. Eclipse presenting the _Welcome_ window
 

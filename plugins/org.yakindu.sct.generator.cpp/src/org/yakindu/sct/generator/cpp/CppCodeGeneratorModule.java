@@ -21,7 +21,6 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IncludeProvider;
-import org.yakindu.sct.generator.c.ScTypesIncludeProvider;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.StatechartIncludeProvider;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
@@ -125,7 +124,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		}
 		bindDefaultClasses(binder);
 		bindIGenArtifactConfigurations(entry, binder);
-		addIncludeProvider(ScTypesIncludeProvider.class);
+		addIncludeProvider(CppScTypesIncludeProvider.class);
 		addIncludeProvider(CppInterfaceIncludeProvider.class);
 		addIncludeProvider(StatechartIncludeProvider.class);
 	}

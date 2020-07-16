@@ -18,7 +18,6 @@ import static org.yakindu.base.types.TypesFactory.*
  * 
  */
 @Singleton 
-
 class GenericTypeSystem extends AbstractTypeSystem {
 
 	static final GenericTypeSystem INSTANCE = new GenericTypeSystem()

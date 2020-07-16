@@ -36,7 +36,8 @@ class EnterMethod {
 	@Inject protected extension TypeBuilder
 	@Inject protected extension SexecBuilder
 	
-
+	@Inject protected extension SuperStep
+	@Inject protected extension RunCycleMethod
 	
 	def defineFeatures (ExecutionFlow it) {
 		defineEnter	
@@ -51,7 +52,10 @@ class EnterMethod {
 				_isInitializedCheck,
 				_guardExecution( _sequence(
 					_traceEnter,
-					enterSequences.defaultSequence._clone
+					enterSequences.defaultSequence._clone,
+					_superStepLoop(
+						_microStep	
+					)._when(appliesSuperStep)
 				))
 			)
 			m.body.comment = "Activates the state machine."

@@ -36,6 +36,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	StatechartEntryExitActions.class,
 	CycleBasedSuperStepTest.class,
 	EventDrivenSuperStepTest.class,
+	SuperStepOnEnterTest.class,
 	AlwaysOncycleTest.class,
 	AssignmentAsExpressionTest.class,
 	BitExpressionsTest.class,
