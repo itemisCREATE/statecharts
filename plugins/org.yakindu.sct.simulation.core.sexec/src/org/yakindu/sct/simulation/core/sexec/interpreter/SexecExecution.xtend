@@ -1,5 +1,8 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
+import com.google.inject.Inject
+import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.DoWhile
@@ -19,9 +22,7 @@ import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import com.google.inject.Inject
 
 class SexecExecution extends StextExecution  {
 	
@@ -103,7 +104,7 @@ class SexecExecution extends StextExecution  {
 
 	def dispatch void execution(SaveHistory it) { _delegate }
 
-	def dispatch void execution(HistoryEntry it) { _delegate	}
+	def dispatch void execution(HistoryEntry it) { _delegate }
 
 	def dispatch void execution(StateSwitch it) { _delegate } 
 	
@@ -128,10 +129,9 @@ class SexecExecution extends StextExecution  {
 		])		
 	}
 	
-	
-	override dispatch void execution(ElementReferenceExpression expr) {
-		
-		val refParent = expr.reference.eContainer
+
+	override dispatch void execution(NamedElement item, ElementReferenceExpression context){	
+		val refParent = item.eContainer
 		if (refParent instanceof InterfaceScope) {
 			val scopeName = if (refParent.name.nullOrEmpty) 
 				"default"  // TODO :use some extension
@@ -139,19 +139,16 @@ class SexecExecution extends StextExecution  {
 				refParent.name
 				
 			_return [
-				resolve(null, scopeName).resolve(expr.reference.symbol)
+				resolve(null, scopeName).resolve(item.symbol)
 			]
-		} else super._execution(expr)		
+		} else super._execution(item, context)		
 	}
+	
 	
 
 	def dispatch void executionCall(Method it) {
-
-		_delegate
-				
-//		_executeOperation(null, it.name, parameters.map[name], [
-//			body._exec
-//		])
+		_delegate				
 	}
+	
 	
 }

@@ -1,7 +1,12 @@
 package org.yakindu.base.expressions.interpreter.base
 
+import com.google.inject.Inject
+import java.util.List
 import java.util.Map
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.expressions.Argument
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BinaryExpression
@@ -18,6 +23,7 @@ import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
+import org.yakindu.base.expressions.expressions.MetaCall
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
@@ -25,19 +31,17 @@ import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.expressions.expressions.util.ArgumentSorter
 import org.yakindu.base.expressions.interpreter.CoreFunction
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
-import org.yakindu.base.expressions.expressions.MetaCall
-import org.yakindu.sct.model.sruntime.ExecutionEvent
-import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.Type
-import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.typesystem.GenericTypeSystem
-import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 
 class ExpressionExecution extends BaseExecution {
@@ -76,7 +80,6 @@ class ExpressionExecution extends BaseExecution {
 	
 	def dispatch void execution(ParenthesizedExpression expr) {
 		expr.expression._exec
-		_return[ popValue ]
 	}
 	
 
@@ -101,35 +104,47 @@ class ExpressionExecution extends BaseExecution {
 	}
 	
 	def dispatch void execution(ElementReferenceExpression expr) {
-				
-		if (expr.reference instanceof Operation) {
-			expr.arguments.forEach[ 
-				value._exec 
-				_value
-			]			
-			expr.reference._call
-		} else {
-			_return ('''revolve «expr.reference.symbol»''', [
-				resolve(null, expr.reference.symbol)
-			])
-		}
+		expr.reference.execution(expr)		
 	}
 
 	def dispatch void execution(FeatureCall expr) {
-		expr.owner._exec		
-		if (expr.feature instanceof Operation) {
-			expr.arguments.forEach[ 
+		expr.feature.execution(expr)
+	}
+
+	def dispatch void execution(Object item, Object context){	
+		throw new IllegalArgumentException('''Don't know how to execute «item.class.simpleName» in context «context.class.simpleName»''')
+	}
+	
+	def dispatch void execution(Operation item, ArgumentExpression context){	
+		item.executeArguments(context.arguments)
+		context._call(item)
+	}
+	
+	def dispatch void execution(NamedElement item, ElementReferenceExpression context){	
+		_return ('''revolve «item.symbol»''', [
+			resolve(null, item.symbol)
+		])
+	}
+	
+	def dispatch void execution(NamedElement item, FeatureCall context){	
+		context.owner._exec
+		_return ('''revolve «item.symbol»''', [
+			popValue.resolve(item.symbol)
+		])
+	}
+	
+	
+	
+	def protected void executeArguments( Operation op, List<Argument> args) {
+		ArgumentSorter
+			.getOrderedExpressions(args, op)
+			.forEach[ 
 				value._exec 
 				_value
 			]			
-			expr.feature._call   // TODO: handle receiver / owner
-		} else {
-			_return ('''revolve «expr.feature.symbol»''', [
-				popValue.resolve(expr.feature.symbol)
-			])
-		}
 	}
-
+	
+	
 	def dispatch void execution(MetaCall expr) {
 		
 		val metaFeature = expr.feature
@@ -143,7 +158,7 @@ class ExpressionExecution extends BaseExecution {
 				return		
 			}
 		} 
-		throw new IllegalArgumentException("Cannot resolve meta call e '" + expr +"'")
+		throw new IllegalArgumentException("Cannot resolve meta call '" + expr +"'")
 	}
 
 	def dispatch String symbol(Object it) {
@@ -341,12 +356,16 @@ class ExpressionExecution extends BaseExecution {
 		return null
 	}
 	
-	def void _call(Object it) {
-		executionCall
+	def void _call(Object caller, Object operation) {
+		executionCall(new Invokation(caller, operation))
 	}
 
 	def dispatch void executionCall(Object it) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")		
+		throw new UnsupportedOperationException("Don't know how to call operations")		
+	}
+	
+	def dispatch void executionCall(Invokation it) {
+		_delegate				
 	}
 	
 }

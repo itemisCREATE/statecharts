@@ -2,6 +2,7 @@ package org.yakindu.base.expressions.interpreter.base
 
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Data
 
 abstract class BaseExecution implements IInterpreter.Execution  {
 
@@ -47,4 +48,10 @@ abstract class BaseExecution implements IInterpreter.Execution  {
 		program._requestExecution(this)
 	}
 	
+	@Data static class Invokation {
+		
+		protected Object caller
+		protected Object operation
+		
+	}
 }

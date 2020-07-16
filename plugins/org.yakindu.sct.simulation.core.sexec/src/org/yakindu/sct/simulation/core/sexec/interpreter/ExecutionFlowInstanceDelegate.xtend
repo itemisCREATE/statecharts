@@ -1,16 +1,22 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
+import com.google.common.collect.Sets
 import com.google.inject.Inject
 import java.util.ArrayDeque
+import java.util.ArrayList
 import java.util.Map
 import java.util.Queue
+import java.util.Set
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.expressions.expressions.ArgumentExpression
+import org.yakindu.base.expressions.interpreter.IOperationExecutor
 import org.yakindu.base.expressions.interpreter.base.BaseExecution
 import org.yakindu.base.expressions.interpreter.base.IInterpreter
 import org.yakindu.base.expressions.interpreter.base.SRuntimeInterpreter.EventInstance
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -23,6 +29,7 @@ import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.concepts.EnterMethod
 import org.yakindu.sct.model.sexec.concepts.EventProcessing
 import org.yakindu.sct.model.sexec.concepts.ExitMethod
@@ -39,9 +46,6 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import org.yakindu.sct.model.sexec.Trace
-import org.eclipse.emf.edit.command.CreateChildCommand.Helper
-import org.yakindu.sct.model.sexec.SexecFactory
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
 	
@@ -58,7 +62,9 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	@Inject protected extension StateMachineBehaviorConcept
 	@Inject protected extension ExecutionContextExtensions
 	@Inject protected extension StatechartAnnotations
-	@Inject(optional=true) ITraceStepInterpreter traceInterpreter
+	@Inject(optional=true) protected ITraceStepInterpreter traceInterpreter
+	@Inject(optional=true) protected Set<IOperationExecutor> operationExecutors = Sets.newHashSet
+	
 	
 	
 	def void setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
@@ -100,6 +106,8 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			Sequence case program.name == EnterMethod.TRACE_ENTER : _execute[]		// TODO
 			Sequence case program.name == ExitMethod.TRACE_EXIT : _execute[]		// TODO	
 			Sequence case program.name == InitializedCheck.INIT_CHECK : _execute[]	// do nothing so far ...		
+			
+			Invokation : program.caller.invoke(program.operation)
 			 
 			Method case type.allMethods.contains(program): program.invoke 
 						
@@ -342,6 +350,36 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	def void invoke(Method it) {
 		_executeOperation(instance, name, parameters.map[name], [
 			body._delegate
+		])
+	}
+
+	def dispatch void invoke(Object caller, Object operation) {
+		throw new UnsupportedOperationException('''Don't know how «caller» calls «operation»''')				
+	}
+
+	def dispatch void invoke(ArgumentExpression caller, Method operation) {
+		operation.invoke				
+	}
+
+	def dispatch void invoke(ArgumentExpression caller, Operation it) {
+				
+		_execute ('''invoke «name»''', [ 
+			val paramValues = new ArrayList<Object>
+			parameters.forEach[paramValues.add(popValue)]
+			enterCall(name)
+	
+			_execute[
+				var Object result = null
+				val executor = operationExecutors.findFirst[canExecute(caller, executionContext)]
+				if (executor !== null) {
+					result = executor.execute(caller, executionContext, paramValues)
+				} else {
+					throw new UnsupportedOperationException('''No operation executor for «it.name» ''')				
+		
+				}
+				
+				exitCall(result)
+			]
 		])
 	}
 	
