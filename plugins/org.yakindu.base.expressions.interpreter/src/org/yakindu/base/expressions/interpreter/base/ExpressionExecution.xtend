@@ -40,7 +40,7 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.Enumerator
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 
-class ExpressionExecution extends BaseExecution implements IInterpreter.Execution {
+class ExpressionExecution extends BaseExecution {
 	
 	protected static Map<AssignmentOperator, String> assignFunctionMap = #{
 		AssignmentOperator.MULT_ASSIGN -> "*",
