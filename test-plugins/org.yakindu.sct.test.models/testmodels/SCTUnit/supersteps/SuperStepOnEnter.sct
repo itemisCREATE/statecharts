@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_wMq6wMG-EeqSVKNdJDW9Ig" specification="namespace supersteps&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;internal:&#xA;event e" namespace="supersteps" name="SuperStepOnEnter">
     <regions xmi:id="_wMsv88G-EeqSVKNdJDW9Ig" name="r1">
       <vertices xsi:type="sgraph:Entry" xmi:id="_wM_q4cG-EeqSVKNdJDW9Ig">
