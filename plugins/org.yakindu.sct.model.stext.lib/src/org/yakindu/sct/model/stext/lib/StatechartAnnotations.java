@@ -56,9 +56,9 @@ public class StatechartAnnotations {
 	public boolean isParentFirstExecution(Statechart statechart) {
 		return statechart.getAnnotationOfType(PARENT_FIRST_ANNOTATION) != null;
 	}
-
+	
 	public boolean isChildFirstExecution(Statechart statechart) {
-		return statechart.getAnnotationOfType(PARENT_FIRST_ANNOTATION) == null;
+		return statechart.getAnnotationOfType(CHILD_FIRST_ANNOTATION) != null;
 	}
 	
 	public boolean isInternalEventBuffer(Statechart statechart) {
