@@ -19,10 +19,5 @@ GeneratorModel for yakindu::c {
 			getters = true
 			observables = false
 		}
-		feature EventProcessing {
-			inEventBuffer = false
-			internalEventBuffer = false
-			inEventQueue = false
-		}
 	}
 }

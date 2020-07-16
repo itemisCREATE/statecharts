@@ -9,7 +9,7 @@
  * 	itemis AG - initial API and implementation
  * 
  */
-package org.yakindu.base.expressions.expressions.util;
+package org.yakindu.base.types.util;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.yakindu.base.expressions.expressions.Argument;
-import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.Argument;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.TypesPackage;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class ArgumentSorter {
 		for (int index = 0; index < arguments.size(); index++) {
 			Argument argument = arguments.get(index);
 			List<INode> nodes = NodeModelUtils.findNodesForFeature(argument,
-					ExpressionsPackage.Literals.ARGUMENT__PARAMETER);
+					TypesPackage.Literals.ARGUMENT__PARAMETER);
 			if (nodes.isEmpty()) {
 				result[index] = argument.getValue();
 			} else {

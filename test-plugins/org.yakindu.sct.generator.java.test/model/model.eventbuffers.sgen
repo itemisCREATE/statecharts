@@ -1,6 +1,6 @@
 GeneratorModel for yakindu::java {
 
-	statechart eventbuffers.InternalEventLifeCycle {
+	statechart eventbuffers.InternalEventLifeCycleUnbuffered {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -12,13 +12,9 @@ GeneratorModel for yakindu::java {
 			typeName = "InternalEventLifeCycleUnbufferedStatemachine" 
 		}
 		
-		feature EventProcessing {
-			inEventBuffer = true
-			internalEventBuffer = false
-		}
 	}
 	
-	statechart eventbuffers.InternalEventLifeCycle {
+	statechart eventbuffers.InternalEventLifeCycleBuffered {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -30,13 +26,9 @@ GeneratorModel for yakindu::java {
 			typeName = "InternalEventLifeCycleBufferedStatemachine" 
 		}
 		
-		feature EventProcessing {
-			inEventBuffer = false
-			internalEventBuffer = true
-		}
 	}
 	
-	statechart eventbuffers.InEventLifeCycle {
+	statechart eventbuffers.InEventLifeCycleBuffered {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -48,12 +40,9 @@ GeneratorModel for yakindu::java {
 			typeName = "InEventLifeCycleBufferedStatemachine"
 		}
 		
-		feature EventProcessing {
-			inEventBuffer = true
-		}
 	}
 	
-	statechart eventbuffers.InEventLifeCycle {
+	statechart eventbuffers.InEventLifeCycleUnbuffered {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -65,8 +54,5 @@ GeneratorModel for yakindu::java {
 			typeName = "InEventLifeCycleUnbufferedStatemachine"
 		}
 		
-		feature EventProcessing {
-			inEventBuffer = false
-		}
 	}
 }

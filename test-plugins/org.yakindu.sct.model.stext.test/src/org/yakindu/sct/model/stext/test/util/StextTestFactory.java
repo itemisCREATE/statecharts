@@ -15,7 +15,6 @@ package org.yakindu.sct.model.stext.test.util;
 import java.util.Arrays;
 
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
@@ -24,6 +23,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.types.Argument;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeSpecifier;

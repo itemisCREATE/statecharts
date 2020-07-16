@@ -293,32 +293,6 @@ bc. feature Debug {
 
 ==<!-- End sgen_feature_debug -->==
 
-
-==<!-- Start sgen_feature_eventprocessing -->==
-
-h3(#codegen_generating_code_eventprocessing_feature). EventProcessing feature
-
-The *EventProcessing* feature enables different generator features, which are used for determining the event processing strategy:
-
-* _inEventBuffer_ (Boolean, optional): the state machine applies event buffering for incoming events in cycle based execution mode. Events can safely be raised during a run to completion step. Buffering requires double memory for event storage. Default true.
-* _internalEventBuffer_ (Boolean, optional): the state machine applies event buffering for internal events in cycle based execution mode. If enabled internal events are processed in a separate step. If disabled internal events are just visible in lower priority regions. Buffering requires double memory for event storage. Default true.
-* _inEventQueue_ (Boolean, optional): use an event queue for incoming events in event driven execution mode. Events can safely be raised during a run to completion step. Buffering requires double memory for event storage. Default true.
-
-==<div class="example">==
-
-Example:
-
-bc. feature EventProcessing {
-    inEventBuffer = false
-    internalEventBuffer = true
-    inEventQueue = false
-}
-
-==</div>==
-
-==<!-- End sgen_feature_eventprocessing -->==
-
-
 h3(#codegen_using_properties_and_expressions_in_generator_models). Using properties and expressions in generator models
 
 An SGen generator model may assign values to properties and later use these properties in expressions. The following sample generator model uses the *var* keyword to declare the properties _projectName_, _version_, _isBeta_, and _generateTimerService_ with their respective types and default values. The model then uses these values in *feature* clauses by referring to the properties:

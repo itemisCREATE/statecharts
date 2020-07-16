@@ -448,11 +448,6 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 ExpressionsFactory.eINSTANCE.createArgument()));
 	}
 
   /**

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_72u4oOSzEeOiVrie-SZr-g" specification="interface:&#xD;&#xA;var x : integer = 0" name="LocalReactions">
+  <sgraph:Statechart xmi:id="_72u4oOSzEeOiVrie-SZr-g" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;var x : integer = 0" name="LocalReactions">
     <regions xmi:id="_73cqUOSzEeOiVrie-SZr-g" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_735WQOSzEeOiVrie-SZr-g">
         <outgoingTransitions xmi:id="_74DuUOSzEeOiVrie-SZr-g" target="_737ygOSzEeOiVrie-SZr-g"/>

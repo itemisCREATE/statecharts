@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -61,10 +62,22 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected TypeAnnotations typeAnnotations;
 
 	public AbstractTypeSystem() {
-		resource = new ResourceImpl(URI.createURI("types")) {
+		resource = new ResourceImpl(URI.createURI("/types")) {
 			@Override
 			protected void doUnload() {
 				// Unloading should not be performed for in memory resource
+			}
+			
+			@Override
+			protected EObject getEObjectByID(String id) {
+				// TODO Auto-generated method stub
+				return super.getEObjectByID(id);
+			}
+			
+			@Override
+			public EObject getEObject(String uriFragment) {
+				// TODO Auto-generated method stub
+				return super.getEObject(uriFragment);
 			}
 		};
 		typeAnnotations = new TypeAnnotations();

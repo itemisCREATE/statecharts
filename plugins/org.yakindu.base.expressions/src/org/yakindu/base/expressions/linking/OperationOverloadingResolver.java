@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
-import org.yakindu.base.expressions.expressions.util.ArgumentSorter;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -27,6 +26,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.base.types.util.ArgumentSorter;
 
 import com.google.inject.Inject;
 

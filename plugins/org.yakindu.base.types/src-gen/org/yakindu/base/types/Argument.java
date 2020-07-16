@@ -1,10 +1,8 @@
 /**
  */
-package org.yakindu.base.expressions.expressions;
+package org.yakindu.base.types;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.types.Expression;
-import org.yakindu.base.types.Parameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,11 +13,11 @@ import org.yakindu.base.types.Parameter;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.expressions.expressions.Argument#getParameter <em>Parameter</em>}</li>
- *   <li>{@link org.yakindu.base.expressions.expressions.Argument#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Argument#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Argument#getValue <em>Value</em>}</li>
  * </ul>
  *
- * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getArgument()
+ * @see org.yakindu.base.types.TypesPackage#getArgument()
  * @model
  * @generated
  */
@@ -27,21 +25,17 @@ public interface Argument extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parameter</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter</em>' reference.
 	 * @see #setParameter(Parameter)
-	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getArgument_Parameter()
+	 * @see org.yakindu.base.types.TypesPackage#getArgument_Parameter()
 	 * @model
 	 * @generated
 	 */
 	Parameter getParameter();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.Argument#getParameter <em>Parameter</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.base.types.Argument#getParameter <em>Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Parameter</em>' reference.
@@ -53,21 +47,17 @@ public interface Argument extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(Expression)
-	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getArgument_Value()
+	 * @see org.yakindu.base.types.TypesPackage#getArgument_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Expression getValue();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.Argument#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.yakindu.base.types.Argument#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' containment reference.

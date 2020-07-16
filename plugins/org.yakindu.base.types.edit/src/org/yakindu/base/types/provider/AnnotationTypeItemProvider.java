@@ -8,12 +8,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.types.AnnotationType;
-import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -22,7 +19,7 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class AnnotationTypeItemProvider extends TypeItemProvider {
+public class AnnotationTypeItemProvider extends OperationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -72,36 +69,6 @@ public class AnnotationTypeItemProvider extends TypeItemProvider {
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.ANNOTATION_TYPE__PROPERTIES);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns AnnotationType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,14 +83,12 @@ public class AnnotationTypeItemProvider extends TypeItemProvider {
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((AnnotationType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_AnnotationType_type") :
-			getString("_UI_AnnotationType_type") + " " + label;
+		return label;
 	}
 	
 
@@ -137,12 +102,6 @@ public class AnnotationTypeItemProvider extends TypeItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(AnnotationType.class)) {
-			case TypesPackage.ANNOTATION_TYPE__PROPERTIES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -156,11 +115,6 @@ public class AnnotationTypeItemProvider extends TypeItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATION_TYPE__PROPERTIES,
-				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**
@@ -177,7 +131,8 @@ public class AnnotationTypeItemProvider extends TypeItemProvider {
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
 			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
-			childFeature == TypesPackage.Literals.ANNOTATION_TYPE__PROPERTIES;
+			childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
+			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
 
 		if (qualify) {
 			return getString

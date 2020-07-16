@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="__sryEPgvEeG-WPrThBMM5w" specification="&#xA;&#xA;interface:&#xA;&#xA;&#x9;in event e&#xA;&#x9;var guard : boolean = false&#xA;&#x9;var done : boolean = false" name="GuardedExit">
+  <sgraph:Statechart xmi:id="__sryEPgvEeG-WPrThBMM5w" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;&#xA;interface:&#xA;&#xA;&#x9;in event e&#xA;&#x9;var guard : boolean = false&#xA;&#x9;var done : boolean = false" name="GuardedExit">
     <regions xmi:id="__stnQvgvEeG-WPrThBMM5w" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="__tJsIfgvEeG-WPrThBMM5w">
         <outgoingTransitions xmi:id="__tMvcPgvEeG-WPrThBMM5w" target="__tK6QfgvEeG-WPrThBMM5w"/>

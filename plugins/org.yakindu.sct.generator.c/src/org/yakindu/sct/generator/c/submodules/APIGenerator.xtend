@@ -42,7 +42,7 @@ import org.yakindu.base.types.Event
  * 
  */
 
-@Singleton // Guice
+@Singleton
 class APIGenerator {
 	@Inject protected extension FlowCode
 	@Inject protected extension INamingService

@@ -86,22 +86,4 @@
         optional="true"
         parameterType="BOOLEAN"/>
   </types>
-  <types name="EventProcessing"
-      optional="true">
-    <parameters
-        name="inEventQueue"
-        comment="If set to true, a queue for incoming events is generated."
-        optional="true"
-        parameterType="BOOLEAN"/>
-    <parameters
-        name="inEventBuffer"
-        comment="Use event buffer for incoming events if the statechart is cycle based. Using buffering events can be raised on the statechart during statechart execution. "
-        optional="true"
-        parameterType="BOOLEAN"/>
-    <parameters
-        name="internalEventBuffer"
-        comment="Use event buffer for internal events if the statechart is cycle based. Internal events are processed after processing incoming events and there are no restrictions regarding visibility within different regions."
-        optional="true"
-        parameterType="BOOLEAN"/>
-  </types>
 </sgen:FeatureTypeLibrary>

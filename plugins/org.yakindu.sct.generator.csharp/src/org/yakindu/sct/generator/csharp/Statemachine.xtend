@@ -14,8 +14,8 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.extensions.GeneratorPredicate
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -30,7 +30,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
-import org.yakindu.sct.generator.csharp.eventdriven.EventDrivenPredicate
 
 class Statemachine {
 	
@@ -41,7 +40,7 @@ class Statemachine {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
-	@Inject protected extension EventDrivenPredicate
+	@Inject protected extension GeneratorPredicate
 	
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.statemachineClassName.csharp

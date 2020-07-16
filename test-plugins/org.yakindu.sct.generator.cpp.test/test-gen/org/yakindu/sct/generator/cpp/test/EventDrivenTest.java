@@ -10,8 +10,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/EventDrivenTest/EventDrivenTest.cc",
-	program = "gtests/EventDrivenTest/EventDriven",
+	sourceFile = "gtests/EventDriven/EventDrivenTest.cc",
+	program = "gtests/EventDriven/EventDriven",
 	model = "testmodels/SCTUnit/EventDriven.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",

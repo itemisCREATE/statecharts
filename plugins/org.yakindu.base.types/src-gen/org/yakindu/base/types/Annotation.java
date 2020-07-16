@@ -51,7 +51,7 @@ public interface Annotation extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Expression}.
+	 * The list contents are of type {@link org.yakindu.base.types.Argument}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Arguments</em>' reference isn't clear,
@@ -63,6 +63,14 @@ public interface Annotation extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Expression> getArguments();
+	EList<Argument> getArguments();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<Expression> getExpressions();
 
 } // Annotation

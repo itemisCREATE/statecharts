@@ -17,7 +17,6 @@ import java.util.Map
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.base.expressions.expressions.Argument
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
@@ -49,14 +48,15 @@ import org.yakindu.base.expressions.expressions.UnaryOperator
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.AnnotationType
+import org.yakindu.base.types.Argument
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.GenericElement
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.Package
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeAlias
 import org.yakindu.base.types.TypeParameter
@@ -213,7 +213,7 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 	def InferenceResult doInfer(Type type) {
 		return InferenceResult.from(type.getOriginType())
 	}
-	
+
 	def InferenceResult doInfer(Package pkg) {
 		return null
 	}
@@ -244,7 +244,7 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 		if (result === null) {
 			return getAnyType()
 		}
-		
+
 		if (e.isArrayAccess && result?.type.name == ITypeSystem.ARRAY) {
 			return getResult(result, e.arraySelector.size)
 		}
@@ -260,13 +260,13 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 				return getAnyType()
 			}
 		}
-		var result =  inferTypeDispatch(e.getReference())
+		var result = inferTypeDispatch(e.getReference())
 		if (e.isArrayAccess && result?.type.name == ITypeSystem.ARRAY) {
 			return getResult(result, e.arraySelector.size)
 		}
 		result
 	}
-
+	
 	def protected InferenceResult inferOperation(ArgumentExpression e, Operation op,
 		Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		// resolve type parameter from operation call
@@ -476,13 +476,12 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 	}
 
 	def InferenceResult doInfer(Annotation ad) {
-		var EList<Expression> arguments = ad.getArguments()
-		inferAnnotationProperty(ad.getType(), arguments)
+		validateParameters(newHashMap, ad.type, ad.expressions, acceptor)
 		return getResultFor(VOID)
 	}
 
-	def protected void inferAnnotationProperty(AnnotationType type, EList<Expression> arguments) {
-		var EList<Property> properties = type.getProperties()
+	def protected void inferAnnotationProperty(AnnotationType type, EList<Argument> arguments) {
+		var EList<Parameter> properties = type.parameters
 		if (properties.size() === arguments.size()) {
 			for (var int i = 0; i < properties.size(); i++) {
 				var InferenceResult type1 = inferTypeDispatch(properties.get(i))
@@ -491,7 +490,7 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 			}
 		}
 	}
-	
+
 	def protected InferenceResult getResult(InferenceResult result, int i) {
 		if (i == 1) {
 			return result.bindings.head

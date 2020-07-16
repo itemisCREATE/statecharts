@@ -25,7 +25,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.CheckType
 import org.eclipse.xtext.validation.ComposedChecks
-import org.yakindu.base.expressions.expressions.Argument
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
@@ -34,6 +33,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.types.AnnotatableElement
 import org.yakindu.base.types.Annotation
+import org.yakindu.base.types.Argument
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
@@ -41,8 +41,8 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypesPackage
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
-import org.yakindu.base.types.validation.TypesJavaValidator
 import org.yakindu.base.types.validation.TypeValidator
+import org.yakindu.base.types.validation.TypesJavaValidator
 
 /** 
  * @author andreas muelder - Initial contribution and API
@@ -180,6 +180,12 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 			assertOperationArguments(operation, call.getExpressions())
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	def void checkAnnotationArguments(Annotation annotation) {
+		assertOperationArguments(annotation.type, annotation.expressions)
+		typeInferrer.infer(annotation, this)
+	}
 
 	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE = "WrongNrOfArgs"
 	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s ."
@@ -281,13 +287,5 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 				TypesPackage.Literals.PROPERTY__READONLY)
 		}
 	}
-
-	@Check(CheckType.FAST)
-	def void checkAnnotationArguments(Annotation annotation) {
-		if (annotation.getType() !== null &&
-			annotation.getArguments().size() !== annotation.getType().getProperties().size()) {
-			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
-				ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE)
-		}
-	}
+	
 }

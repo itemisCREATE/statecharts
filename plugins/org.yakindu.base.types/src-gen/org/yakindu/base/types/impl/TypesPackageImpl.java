@@ -17,6 +17,7 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
+import org.yakindu.base.types.Argument;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
@@ -211,6 +212,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass argumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum directionEEnum = null;
 
 	/**
@@ -282,6 +290,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackage() {
 		return packageEClass;
 	}
@@ -291,6 +300,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackage_Member() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(0);
 	}
@@ -300,6 +310,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackage_Import() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(1);
 	}
@@ -308,6 +319,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getType() {
 		return typeEClass;
 	}
@@ -317,6 +329,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getType_Abstract() {
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
 	}
@@ -326,6 +339,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getType_Visible() {
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(1);
 	}
@@ -335,6 +349,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_SuperTypes() {
 		return (EReference)typeEClass.getEStructuralFeatures().get(2);
 	}
@@ -344,6 +359,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDeclaration() {
 		return declarationEClass;
 	}
@@ -353,6 +369,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDeclaration_Static() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(0);
 	}
@@ -362,6 +379,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDeclaration_Id() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(1);
 	}
@@ -370,6 +388,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOperation() {
 		return operationEClass;
 	}
@@ -378,6 +397,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_Parameters() {
 		return (EReference)operationEClass.getEStructuralFeatures().get(0);
 	}
@@ -387,6 +407,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOperation_Variadic() {
 		return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
 	}
@@ -395,6 +416,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProperty() {
 		return propertyEClass;
 	}
@@ -404,6 +426,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProperty_Const() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
 	}
@@ -413,6 +436,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProperty_Readonly() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
 	}
@@ -422,6 +446,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProperty_InitialValue() {
 		return (EReference)propertyEClass.getEStructuralFeatures().get(2);
 	}
@@ -430,6 +455,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParameter() {
 		return parameterEClass;
 	}
@@ -438,6 +464,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameter_OwningOperation() {
 		return (EReference)parameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -447,6 +474,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getParameter_VarArgs() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -456,6 +484,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getParameter_Optional() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(2);
 	}
@@ -464,6 +493,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypedElement() {
 		return typedElementEClass;
 	}
@@ -472,6 +502,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedElement_Type() {
 		return (EReference)typedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -481,6 +512,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedElement_TypeSpecifier() {
 		return (EReference)typedElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -490,6 +522,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeSpecifier() {
 		return typeSpecifierEClass;
 	}
@@ -499,6 +532,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeSpecifier_Type() {
 		return (EReference)typeSpecifierEClass.getEStructuralFeatures().get(0);
 	}
@@ -508,6 +542,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeSpecifier_TypeArguments() {
 		return (EReference)typeSpecifierEClass.getEStructuralFeatures().get(1);
 	}
@@ -516,6 +551,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEvent() {
 		return eventEClass;
 	}
@@ -525,6 +561,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEvent_Direction() {
 		return (EAttribute)eventEClass.getEStructuralFeatures().get(0);
 	}
@@ -533,6 +570,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnumerationType() {
 		return enumerationTypeEClass;
 	}
@@ -541,6 +579,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnumerationType_Enumerator() {
 		return (EReference)enumerationTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -549,6 +588,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveType() {
 		return primitiveTypeEClass;
 	}
@@ -558,6 +598,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComplexType() {
 		return complexTypeEClass;
 	}
@@ -567,6 +608,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComplexType_Features() {
 		return (EReference)complexTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -575,6 +617,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnumerator() {
 		return enumeratorEClass;
 	}
@@ -583,6 +626,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnumerator_OwningEnumeration() {
 		return (EReference)enumeratorEClass.getEStructuralFeatures().get(0);
 	}
@@ -591,6 +635,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEnumerator_LiteralValue() {
 		return (EAttribute)enumeratorEClass.getEStructuralFeatures().get(1);
 	}
@@ -600,6 +645,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeParameter() {
 		return typeParameterEClass;
 	}
@@ -609,6 +655,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeParameter_Bound() {
 		return (EReference)typeParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -618,6 +665,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGenericElement() {
 		return genericElementEClass;
 	}
@@ -627,6 +675,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGenericElement_TypeParameters() {
 		return (EReference)genericElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -636,6 +685,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomain() {
 		return domainEClass;
 	}
@@ -645,6 +695,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomain_DomainID() {
 		return (EAttribute)domainEClass.getEStructuralFeatures().get(0);
 	}
@@ -654,6 +705,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeAlias() {
 		return typeAliasEClass;
 	}
@@ -663,6 +715,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnnotation() {
 		return annotationEClass;
 	}
@@ -672,6 +725,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotation_Type() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(0);
 	}
@@ -681,6 +735,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotation_Arguments() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(1);
 	}
@@ -690,6 +745,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnnotatableElement() {
 		return annotatableElementEClass;
 	}
@@ -699,6 +755,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotatableElement_Annotations() {
 		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -708,6 +765,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotatableElement_AnnotationInfo() {
 		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -717,6 +775,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getArrayTypeSpecifier() {
 		return arrayTypeSpecifierEClass;
 	}
@@ -726,6 +785,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getArrayTypeSpecifier_Size() {
 		return (EAttribute)arrayTypeSpecifierEClass.getEStructuralFeatures().get(0);
 	}
@@ -735,6 +795,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnnotationType() {
 		return annotationTypeEClass;
 	}
@@ -744,7 +805,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnnotationType_Properties() {
+	@Override
+	public EReference getAnnotationType_Targets() {
 		return (EReference)annotationTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -753,15 +815,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnnotationType_Targets() {
-		return (EReference)annotationTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getExpression() {
 		return expressionEClass;
 	}
@@ -771,6 +825,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypedDeclaration() {
 		return typedDeclarationEClass;
 	}
@@ -780,6 +835,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMetaComposite() {
 		return metaCompositeEClass;
 	}
@@ -789,6 +845,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMetaComposite_MetaFeatures() {
 		return (EReference)metaCompositeEClass.getEStructuralFeatures().get(0);
 	}
@@ -798,6 +855,37 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getArgument() {
+		return argumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArgument_Parameter() {
+		return (EReference)argumentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArgument_Value() {
+		return (EReference)argumentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -806,6 +894,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypesFactory getTypesFactory() {
 		return (TypesFactory)getEFactoryInstance();
 	}
@@ -901,7 +990,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEAttribute(arrayTypeSpecifierEClass, ARRAY_TYPE_SPECIFIER__SIZE);
 
 		annotationTypeEClass = createEClass(ANNOTATION_TYPE);
-		createEReference(annotationTypeEClass, ANNOTATION_TYPE__PROPERTIES);
 		createEReference(annotationTypeEClass, ANNOTATION_TYPE__TARGETS);
 
 		expressionEClass = createEClass(EXPRESSION);
@@ -910,6 +998,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		metaCompositeEClass = createEClass(META_COMPOSITE);
 		createEReference(metaCompositeEClass, META_COMPOSITE__META_FEATURES);
+
+		argumentEClass = createEClass(ARGUMENT);
+		createEReference(argumentEClass, ARGUMENT__PARAMETER);
+		createEReference(argumentEClass, ARGUMENT__VALUE);
 
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
@@ -968,7 +1060,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeAliasEClass.getESuperTypes().add(this.getTypedDeclaration());
 		typeAliasEClass.getESuperTypes().add(this.getType());
 		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
-		annotationTypeEClass.getESuperTypes().add(this.getType());
+		annotationTypeEClass.getESuperTypes().add(this.getOperation());
 		typedDeclarationEClass.getESuperTypes().add(this.getDeclaration());
 		typedDeclarationEClass.getESuperTypes().add(this.getTypedElement());
 
@@ -1042,7 +1134,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotation_Type(), this.getAnnotationType(), null, "type", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_Arguments(), this.getArgument(), null, "arguments", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(annotationEClass, this.getExpression(), "getExpressions", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1057,7 +1151,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEOperation(arrayTypeSpecifierEClass, this.getType(), "getElementType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(annotationTypeEClass, AnnotationType.class, "AnnotationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnnotationType_Properties(), this.getProperty(), null, "properties", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotationType_Targets(), ecorePackage.getEObject(), null, "targets", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1066,6 +1159,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(metaCompositeEClass, MetaComposite.class, "MetaComposite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMetaComposite_MetaFeatures(), this.getDeclaration(), null, "metaFeatures", null, 0, -1, MetaComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(argumentEClass, Argument.class, "Argument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArgument_Parameter(), this.getParameter(), null, "parameter", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArgument_Value(), this.getExpression(), null, "value", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

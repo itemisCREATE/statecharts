@@ -11,7 +11,12 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		
 		
 		public void raiseE() {
-			e = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					e = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -79,6 +84,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
+	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean activate_b;
 	private boolean activate_c;
 	private boolean activate_d;
@@ -216,6 +222,10 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	protected void nextEvent() {
 		if(!internalEventQueue.isEmpty()) {
 			internalEventQueue.poll().run();
+			return;
+		}
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
 			return;
 		}
 	}

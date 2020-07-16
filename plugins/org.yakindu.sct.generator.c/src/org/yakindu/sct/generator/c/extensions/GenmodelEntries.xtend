@@ -113,15 +113,6 @@ class GenmodelEntries {
 		getFeatureConfiguration(ICFeatureConstants::FEATURE_GENERATOR_OPTIONS)
 	}
 	
-	def getInEventQueueUsed(GeneratorEntry it) {
-		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_IN_EVENT_QUEUE)
-		if(parameter !== null) {
-			parameter.booleanValue
-		} else {
-			false
-		}
-	}
-	
 	def getQueueAllocatedByUser(GeneratorEntry it) {
 		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_USER_ALLOCATED_QUEUE)
 		if(parameter !== null) {

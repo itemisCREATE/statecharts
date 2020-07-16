@@ -497,11 +497,6 @@ public class StatechartScopeItemProvider extends ScopeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 ExpressionsFactory.eINSTANCE.createArgument()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
 

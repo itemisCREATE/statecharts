@@ -78,8 +78,8 @@ enum Direction returns types::Direction:
 	IN='in' | OUT='out';
 
 Annotation returns types::Annotation:
-	'@' type=[types::AnnotationType|QID] ('(' (arguments+=ConditionalExpression (','
-	arguments+=ConditionalExpression)*)? ')')?;
+	'@' type=[types::AnnotationType|QID] ('(' (arguments+=Argument (','
+	arguments+=Argument)*)? ')')?;
 
 Parameter returns types::Parameter:
 	name=IDWithKeywords (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;

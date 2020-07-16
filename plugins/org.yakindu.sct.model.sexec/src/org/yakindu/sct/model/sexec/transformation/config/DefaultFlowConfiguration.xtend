@@ -23,7 +23,7 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 @Singleton
 class DefaultFlowConfiguration implements IFlowConfiguration {
 
-	@Inject protected extension StatechartAnnotations annotations
+	@Inject protected extension StatechartAnnotations
 	 
 	protected boolean _isEventDriven = false
 	protected boolean _isSuperStep = false
@@ -35,8 +35,10 @@ class DefaultFlowConfiguration implements IFlowConfiguration {
 	protected boolean _applyIncomingEventQueue = true
 		
 	override defineConfigurationForStatechart(Statechart sc) {
-		_isEventDriven = annotations.isEventDriven(sc)
-		_isSuperStep = annotations.isSuperStep(sc)
+		_isEventDriven = sc.isEventDriven
+		_isSuperStep = sc.isSuperStep()
+		_applyIncomingEventBuffer = sc.isInEventBuffer
+		_applyInternalEventBuffer = sc.isInternalEventBuffer
 	}
 	
 	override applyIncomingEventBuffer() {
@@ -61,7 +63,7 @@ class DefaultFlowConfiguration implements IFlowConfiguration {
 		isEventDriven && _applyIncomingEventQueue
 	}
 	
-	@javax.inject.Singleton
+	@Singleton
 	static class AllFeaturesDisabled extends DefaultFlowConfiguration {
 		
 		override void defineConfigurationForStatechart(Statechart sc) {

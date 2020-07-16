@@ -122,6 +122,7 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
@@ -134,6 +135,7 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
@@ -158,6 +160,7 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -177,6 +180,7 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.DECLARATION__META_FEATURES);

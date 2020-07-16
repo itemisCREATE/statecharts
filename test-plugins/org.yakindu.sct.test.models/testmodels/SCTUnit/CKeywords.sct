@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_DYt1UMqFEeGCh8O3kx-14A" specification="interface :&#xD;&#xA;in event auto&#xD;&#xA;in event break&#xD;&#xA;var case : boolean&#xD;&#xA;var do : integer&#xD;&#xA;var continue : boolean&#xD;&#xA;var double : boolean&#xD;&#xA;var enum: boolean&#xD;&#xA;var extern : boolean&#xD;&#xA;var float : boolean&#xD;&#xA;var for : boolean&#xD;&#xA;var goto : boolean&#xD;&#xA;var if :boolean&#xD;&#xA;var int : boolean&#xD;&#xA;var long : boolean&#xD;&#xA;var register : boolean&#xD;&#xA;var return : boolean&#xD;&#xA;var short : boolean&#xD;&#xA;var signed : boolean&#xD;&#xA;var sizeof : boolean&#xD;&#xA;var static : boolean&#xD;&#xA;var struct : boolean&#xD;&#xA;var switch : boolean&#xD;&#xA;var typedef : boolean&#xD;&#xA;var union : boolean&#xD;&#xA;var unsigned : boolean&#xD;&#xA;var void : boolean&#xD;&#xA;var volatile : boolean&#xD;&#xA;var while : boolean" name="CKeywords">
+  <sgraph:Statechart xmi:id="_DYt1UMqFEeGCh8O3kx-14A" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface :&#xD;&#xA;in event auto&#xD;&#xA;in event break&#xD;&#xA;var case : boolean&#xD;&#xA;var do : integer&#xD;&#xA;var continue : boolean&#xD;&#xA;var double : boolean&#xD;&#xA;var enum: boolean&#xD;&#xA;var extern : boolean&#xD;&#xA;var float : boolean&#xD;&#xA;var for : boolean&#xD;&#xA;var goto : boolean&#xD;&#xA;var if :boolean&#xD;&#xA;var int : boolean&#xD;&#xA;var long : boolean&#xD;&#xA;var register : boolean&#xD;&#xA;var return : boolean&#xD;&#xA;var short : boolean&#xD;&#xA;var signed : boolean&#xD;&#xA;var sizeof : boolean&#xD;&#xA;var static : boolean&#xD;&#xA;var struct : boolean&#xD;&#xA;var switch : boolean&#xD;&#xA;var typedef : boolean&#xD;&#xA;var union : boolean&#xD;&#xA;var unsigned : boolean&#xD;&#xA;var void : boolean&#xD;&#xA;var volatile : boolean&#xD;&#xA;var while : boolean" name="CKeywords">
     <regions xmi:id="_DZ6IIsqFEeGCh8O3kx-14A" name="auto">
       <vertices xsi:type="sgraph:Entry" xmi:id="_Daf-AcqFEeGCh8O3kx-14A">
         <outgoingTransitions xmi:id="_DapvDsqFEeGCh8O3kx-14A" target="_Daf-DMqFEeGCh8O3kx-14A"/>
@@ -165,7 +165,7 @@
       <children xsi:type="notation:Shape" xmi:id="_Day4_MqFEeGCh8O3kx-14A" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Day4_cqFEeGCh8O3kx-14A"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Day4_sqFEeGCh8O3kx-14A" x="8" y="-15" width="200" height="400"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Day4_sqFEeGCh8O3kx-14A" x="8" width="200" height="478"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_DZ6IIcqFEeGCh8O3kx-14A"/>
     <edges xmi:id="_Day48MqFEeGCh8O3kx-14A" type="Transition" element="_DapvDsqFEeGCh8O3kx-14A" source="_Daf-AsqFEeGCh8O3kx-14A" target="_DapvAcqFEeGCh8O3kx-14A">

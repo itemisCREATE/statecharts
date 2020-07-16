@@ -11,7 +11,7 @@
 package org.yakindu.sct.generator.cpp.submodules.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -22,7 +22,7 @@ import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
 class EventDrivenInterfaceFunctions extends InterfaceFunctions {
 	@Inject protected extension INamingService
-	@Inject protected extension EventDrivenPredicate
+	@Inject protected extension GeneratorPredicate
 	@Inject protected extension EventNaming
 	
 	override CharSequence protectedInnerClassMembers(StatechartScope it) {

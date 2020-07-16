@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_-_ezoL-hEeGY1JN0_LPdVA" specification="interface :&#xD;&#xA;var myBit1 : integer&#xD;&#xA;var myBit2 : integer&#xD;&#xA;&#xD;&#xA;var leftBitshift : integer&#xD;&#xA;var rightBitshift : integer&#xD;&#xA;var complementBitshift : integer&#xD;&#xA;&#xD;&#xA;var bitwiseAnd : integer&#xD;&#xA;var bitwiseOr : integer&#xD;&#xA;var bitwiseXor : integer&#xD;&#xA;&#xD;&#xA;in event e1 &#xD;&#xA;" name="BitExpressions">
+  <sgraph:Statechart xmi:id="_-_ezoL-hEeGY1JN0_LPdVA" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface :&#xD;&#xA;var myBit1 : integer&#xD;&#xA;var myBit2 : integer&#xD;&#xA;&#xD;&#xA;var leftBitshift : integer&#xD;&#xA;var rightBitshift : integer&#xD;&#xA;var complementBitshift : integer&#xD;&#xA;&#xD;&#xA;var bitwiseAnd : integer&#xD;&#xA;var bitwiseOr : integer&#xD;&#xA;var bitwiseXor : integer&#xD;&#xA;&#xD;&#xA;in event e1 &#xD;&#xA;" name="BitExpressions">
     <regions xmi:id="_-_ezo7-hEeGY1JN0_LPdVA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_-_n9mb-hEeGY1JN0_LPdVA">
         <outgoingTransitions xmi:id="_-_n9s7-hEeGY1JN0_LPdVA" target="_-_n9pL-hEeGY1JN0_LPdVA"/>

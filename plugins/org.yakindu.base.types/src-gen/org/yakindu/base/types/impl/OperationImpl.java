@@ -91,6 +91,7 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
 			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.OPERATION__TYPE_PARAMETERS);
@@ -103,6 +104,7 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Parameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, TypesPackage.OPERATION__PARAMETERS, TypesPackage.PARAMETER__OWNING_OPERATION);

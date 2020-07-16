@@ -12,7 +12,12 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 		
 		public void raiseStart() {
-			start = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					start = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -20,7 +25,12 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 		
 		public void raiseReset() {
-			reset = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					reset = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -92,6 +102,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
+	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean i1;
 	private boolean i2;
 	private boolean isExecuting;
@@ -223,6 +234,10 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	protected void nextEvent() {
 		if(!internalEventQueue.isEmpty()) {
 			internalEventQueue.poll().run();
+			return;
+		}
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
 			return;
 		}
 	}

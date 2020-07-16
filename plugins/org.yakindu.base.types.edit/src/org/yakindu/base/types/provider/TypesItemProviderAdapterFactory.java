@@ -561,11 +561,35 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Argument} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArgumentItemProvider argumentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Argument}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createArgumentAdapter() {
+		if (argumentItemProvider == null) {
+			argumentItemProvider = new ArgumentItemProvider(this);
+		}
+
+		return argumentItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -576,6 +600,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -624,6 +649,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -634,6 +660,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -644,6 +671,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -658,6 +686,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		if (packageItemProvider != null) packageItemProvider.dispose();
 		if (typeItemProvider != null) typeItemProvider.dispose();
@@ -680,6 +709,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (annotationTypeItemProvider != null) annotationTypeItemProvider.dispose();
 		if (typedDeclarationItemProvider != null) typedDeclarationItemProvider.dispose();
 		if (metaCompositeItemProvider != null) metaCompositeItemProvider.dispose();
+		if (argumentItemProvider != null) argumentItemProvider.dispose();
 	}
 
 }

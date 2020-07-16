@@ -1,17 +1,17 @@
 /**
  */
-package org.yakindu.base.expressions.expressions.impl;
+package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.yakindu.base.expressions.expressions.Argument;
-import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.yakindu.base.types.Argument;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,13 +21,13 @@ import org.yakindu.base.types.Parameter;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.expressions.expressions.impl.ArgumentImpl#getParameter <em>Parameter</em>}</li>
- *   <li>{@link org.yakindu.base.expressions.expressions.impl.ArgumentImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ArgumentImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ArgumentImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argument {
+public class ArgumentImpl extends EObjectImpl implements Argument {
 	/**
 	 * The cached value of the '{@link #getParameter() <em>Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -64,7 +64,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ExpressionsPackage.Literals.ARGUMENT;
+		return TypesPackage.Literals.ARGUMENT;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 			parameter = (Parameter)eResolveProxy(oldParameter);
 			if (parameter != oldParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.ARGUMENT__PARAMETER, oldParameter, parameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.ARGUMENT__PARAMETER, oldParameter, parameter));
 			}
 		}
 		return parameter;
@@ -104,7 +104,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 		Parameter oldParameter = parameter;
 		parameter = newParameter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ARGUMENT__PARAMETER, oldParameter, parameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.ARGUMENT__PARAMETER, oldParameter, parameter));
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 		Expression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ARGUMENT__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.ARGUMENT__VALUE, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -142,14 +142,14 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.ARGUMENT__VALUE, null, msgs);
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.ARGUMENT__VALUE, null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.ARGUMENT__VALUE, null, msgs);
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.ARGUMENT__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ARGUMENT__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.ARGUMENT__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.ARGUMENT__VALUE:
+			case TypesPackage.ARGUMENT__VALUE:
 				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -174,10 +174,10 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.ARGUMENT__PARAMETER:
+			case TypesPackage.ARGUMENT__PARAMETER:
 				if (resolve) return getParameter();
 				return basicGetParameter();
-			case ExpressionsPackage.ARGUMENT__VALUE:
+			case TypesPackage.ARGUMENT__VALUE:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -191,10 +191,10 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.ARGUMENT__PARAMETER:
+			case TypesPackage.ARGUMENT__PARAMETER:
 				setParameter((Parameter)newValue);
 				return;
-			case ExpressionsPackage.ARGUMENT__VALUE:
+			case TypesPackage.ARGUMENT__VALUE:
 				setValue((Expression)newValue);
 				return;
 		}
@@ -209,10 +209,10 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.ARGUMENT__PARAMETER:
+			case TypesPackage.ARGUMENT__PARAMETER:
 				setParameter((Parameter)null);
 				return;
-			case ExpressionsPackage.ARGUMENT__VALUE:
+			case TypesPackage.ARGUMENT__VALUE:
 				setValue((Expression)null);
 				return;
 		}
@@ -227,9 +227,9 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.ARGUMENT__PARAMETER:
+			case TypesPackage.ARGUMENT__PARAMETER:
 				return parameter != null;
-			case ExpressionsPackage.ARGUMENT__VALUE:
+			case TypesPackage.ARGUMENT__VALUE:
 				return value != null;
 		}
 		return super.eIsSet(featureID);
