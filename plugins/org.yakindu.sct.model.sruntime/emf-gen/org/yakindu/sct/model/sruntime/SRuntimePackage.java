@@ -31,6 +31,7 @@ import org.yakindu.base.base.BasePackage;
  * <!-- end-user-doc -->
  * @see org.yakindu.sct.model.sruntime.SRuntimeFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/emf/2002/GenModel copyrightText='Copyright (c) 2018 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n' operationReflection='false' prefix='SRuntime' modelDirectory='/org.yakindu.sct.model.sruntime/emf-gen' suppressEMFTypes='true' importerID='org.eclipse.emf.importer.ecore' publicConstructors='true' interfaceNamePattern='' dataTypeConverters='true' basePackage='org.yakindu.sct.model'"
  * @generated
  */
 public interface SRuntimePackage extends EPackage {

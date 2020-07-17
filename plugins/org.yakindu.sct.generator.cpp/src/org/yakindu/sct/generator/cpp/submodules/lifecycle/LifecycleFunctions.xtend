@@ -99,6 +99,8 @@ class LifecycleFunctions implements Init, IsActive, IsStateActive, IsFinal {
 			
 			«_clearInEvents.code»
 			«_clearInternalEvents.code»
+			«_swapIncomingEvents.code»
+			«_swapInternalEvents.code»
 			«_clearOutEvents.code»
 			«initSequence.code»
 			«_initIsExecuting.code»
