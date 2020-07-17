@@ -1,22 +1,40 @@
 package org.yakindu.sct.model.sexec.interpreter.test
 
+import com.google.inject.AbstractModule
+import com.google.inject.Guice
+import com.google.inject.Inject
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.junit.Before
 import org.junit.Test
-import org.yakindu.base.expressions.interpreter.base.IInterpreter
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer
+import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer
+import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.simulation.core.sexec.interpreter.SexecInterpreter
 
 import static org.junit.Assert.assertEquals
-import org.yakindu.base.expressions.interpreter.base.ExpressionInterpreter
 
 class ExpressionExecutionTest {
 
-	extension ExpressionBuilder exprBuilder
-	extension IInterpreter exprInterpreter
+	@Inject extension ExpressionBuilder exprBuilder
+	@Inject extension SexecInterpreter exprInterpreter
+
+	protected static class TestModule extends AbstractModule {
+		
+		override protected configure() {
+			bind(ITypeSystem).to(GenericTypeSystem)
+			bind(IQualifiedNameProvider).to(StextNameProvider);
+			bind(ITypeSystemInferrer).to(STextTypeInferrer);
+		}
+	}
 	
 	@Before def void setUp() {
-		exprBuilder = new ExpressionBuilder
-		exprInterpreter = new ExpressionInterpreter
+		val injector = Guice.createInjector(new TestModule)
+		injector.injectMembers(this)
 	} 
+	
 	
 	@Test def void testPrimitiveIntegerValueExpression() {
 		assertEquals(42L, _integer(42).evaluate());
