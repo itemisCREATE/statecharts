@@ -5,5 +5,3 @@ plugins/org\.yakindu\.sct\.doc\.user/yakindu_license\.log
 /.metadata/
 *._trace
 */xtend-gen/
-*._trace
-*._trace
