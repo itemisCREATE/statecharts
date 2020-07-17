@@ -33,7 +33,6 @@ import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFa
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.container.SimulationFlowConfiguration;
-import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
