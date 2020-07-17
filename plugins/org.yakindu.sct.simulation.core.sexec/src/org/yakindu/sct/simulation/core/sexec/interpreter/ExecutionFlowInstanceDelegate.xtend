@@ -46,6 +46,11 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
+import org.yakindu.base.types.typesystem.GenericTypeSystem
+import java.lang.invoke.VolatileCallSite
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.TypeBuilder
+import org.yakindu.base.types.typesystem.ITypeValueProvider
 
 class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
 	
@@ -64,7 +69,8 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	@Inject protected extension StatechartAnnotations
 	@Inject(optional=true) protected ITraceStepInterpreter traceInterpreter
 	@Inject(optional=true) protected Set<IOperationExecutor> operationExecutors = Sets.newHashSet
-	
+	@Inject protected extension TypeBuilder
+	@Inject protected extension ITypeValueProvider
 	
 	
 	def void setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
@@ -373,6 +379,9 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 				val executor = operationExecutors.findFirst[canExecute(caller, executionContext)]
 				if (executor !== null) {
 					result = executor.execute(caller, executionContext, paramValues)
+					if (result === null && it.type != _void) {
+						result = it.type?.defaultValue
+					} 
 				} else {
 					throw new UnsupportedOperationException('''No operation executor for «it.name» ''')				
 		
