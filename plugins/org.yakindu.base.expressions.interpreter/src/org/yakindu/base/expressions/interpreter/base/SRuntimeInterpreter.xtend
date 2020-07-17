@@ -20,13 +20,13 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	protected ExecutionContext heap
 	protected List<Promise> nextExecutions = new LinkedList<Promise>
 	
-	protected boolean debug = false
+	protected boolean debug = true
 
 	protected boolean suspended = false
 	protected boolean isProcessing = false
 	
 	protected int frameCount = 0
-	protected int instructionCount = 0
+	static protected int instructionCount = 0
 
 	@Data static class EventInstance {
 
@@ -104,7 +104,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 				stack.clear
 				nextExecutions.clear
 				frameCount = 0	
-				instructionCount = 0			
+//				instructionCount = 0			
 			}
 			
 			enterCall('''process<«name»>''')
