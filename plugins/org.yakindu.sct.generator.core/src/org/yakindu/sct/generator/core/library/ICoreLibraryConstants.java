@@ -46,8 +46,4 @@ public interface ICoreLibraryConstants {
 	String PARAMETER_OUT_EVENT_OBSERVABLES = "observables";
 	String PARAMETER_OUT_EVENT_GETTERS = "getters";
 
-	String FEATURE_EVENT_PROCESSING = "EventProcessing";
-	String PARAMETER_IN_EVENT_QUEUE = "inEventQueue";
-	String PARAMETER_IN_EVENT_BUFFER = "inEventBuffer";
-	String PARAMETER_INTERNAL_EVENT_BUFFER = "internalEventBuffer";
 }

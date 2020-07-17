@@ -11,14 +11,14 @@ package org.yakindu.sct.generator.java.submodules.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Event
-import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.concepts.EventProcessing
 
 class EventDrivenEventCode extends EventCode {
 	
-	@Inject protected extension GeneratorPredicate
+	@Inject protected extension EventProcessing
 	@Inject protected extension Synchronized
 	
 	override internalEventRaiser(Event it) '''
@@ -70,20 +70,22 @@ class EventDrivenEventCode extends EventCode {
 	override eventNextCode(ExecutionFlow flow) '''nextEvent();'''
 	
 	override nextEvent(ExecutionFlow it) '''
+		«IF requiresEventLoop»
 		protected void nextEvent() {
-			«IF needsInternalEventQueue»
+			«IF requiresInternalEventQueue»
 			if(!internalEventQueue.isEmpty()) {
 				internalEventQueue.poll().run();
 				return;
 			}
 			«ENDIF»
-			«IF needsInEventQueue»
+			«IF requiresIncomingEventQueue»
 			if(!inEventQueue.isEmpty()) {
 				inEventQueue.poll().run();
 				return;
 			}
 			«ENDIF»
 		}
+		«ENDIF»
 	'''
 	
 	

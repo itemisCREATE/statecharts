@@ -37,9 +37,9 @@ class IsStateActive implements org.yakindu.sct.generator.core.submodules.lifecyc
 
 			switch (state) {
 			«FOR s : flow.states»
-			case «s.stateName.asEscapedIdentifier»:
-				return «IF s.leaf»stateVector[«s.stateVector.offset»] == State.«s.stateName.asEscapedIdentifier»«ELSE»stateVector[«s.stateVector.offset»].ordinal() >= State.
-						«s.stateName.asEscapedIdentifier».ordinal()&& stateVector[«s.stateVector.offset»].ordinal() <= State.«s.subStates.last.stateName.asEscapedIdentifier».ordinal()«ENDIF»;
+			case «s.stateName»:
+				return «IF s.leaf»stateVector[«s.stateVector.offset»] == State.«s.stateName»«ELSE»stateVector[«s.stateVector.offset»].ordinal() >= State.
+						«s.stateName».ordinal()&& stateVector[«s.stateVector.offset»].ordinal() <= State.«s.subStates.last.stateName».ordinal()«ENDIF»;
 			«ENDFOR»
 			default:
 				return false;

@@ -24,7 +24,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	ActiveBeforeInit.class,
 	OperationsWithoutBracesCustom.class,
-	InternalEventLifeCycleTest_Naming.class,
+	//InternalEventLifeCycleTest_Naming.class, //FIXME
 	PedanticNoLocalEventsTest.class,
 	VariadicOperations.class,
 	StateNumTest.class,

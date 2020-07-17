@@ -1,6 +1,6 @@
 package org.yakindu.src.operationcallbackimpl;
 
-import org.yakindu.scr.IStatemachine;
+import org.yakindu.sct.IStatemachine;
 
 public interface IOperationCallbackImplStatemachine extends IStatemachine {
 

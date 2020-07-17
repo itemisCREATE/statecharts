@@ -3,7 +3,7 @@ package org.yakindu.scr.readonlyvariable;
 
 
 public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private long myInt;
 		
@@ -47,7 +47,7 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		
 	}
 	
-	protected class SCIAImpl implements SCIA {
+	protected class InterfaceAImpl implements InterfaceA {
 	
 		private long myInt;
 		
@@ -91,16 +91,16 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCIAImpl sCIA;
+	protected InterfaceAImpl interfaceA;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateB,
-		main_region_StateA,
-		$NullState$
+		MAIN_REGION_STATEB,
+		MAIN_REGION_STATEA,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -117,32 +117,32 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		this.isExecuting = value;
 	}
 	public ReadOnlyVariableStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCIA = new SCIAImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceA = new InterfaceAImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
-		sCInterface.setMyInt(0);
+		defaultInterface.setMyInt(0);
 		
-		sCInterface.setMyString("testString");
+		defaultInterface.setMyString("testString");
 		
-		sCInterface.setMyBool(true);
+		defaultInterface.setMyBool(true);
 		
-		sCInterface.setMyReal(1.1);
+		defaultInterface.setMyReal(1.1);
 		
-		sCIA.setMyInt(0);
+		interfaceA.setMyInt(0);
 		
-		sCIA.setMyString("testString");
+		interfaceA.setMyString("testString");
 		
-		sCIA.setMyBool(true);
+		interfaceA.setMyBool(true);
 		
-		sCIA.setMyReal(1.1);
+		interfaceA.setMyReal(1.1);
 		
 		isExecuting = false;
 	}
@@ -180,14 +180,14 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_StateB:
+			case MAIN_REGION_STATEB:
 				main_region_StateB_react(true);
 				break;
-			case main_region_StateA:
+			case MAIN_REGION_STATEA:
 				main_region_StateA_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -198,7 +198,7 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -215,69 +215,69 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
+		case MAIN_REGION_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB;
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCIA getSCIA() {
-		return sCIA;
+	public InterfaceA getInterfaceA() {
+		return interfaceA;
 	}
 	
 	public long getMyInt() {
-		return sCInterface.getMyInt();
+		return defaultInterface.getMyInt();
 	}
 	
 	public String getMyString() {
-		return sCInterface.getMyString();
+		return defaultInterface.getMyString();
 	}
 	
 	public boolean getMyBool() {
-		return sCInterface.getMyBool();
+		return defaultInterface.getMyBool();
 	}
 	
 	public double getMyReal() {
-		return sCInterface.getMyReal();
+		return defaultInterface.getMyReal();
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setMyInt(100);
+		defaultInterface.setMyInt(100);
 		
-		sCInterface.setMyString("fail");
+		defaultInterface.setMyString("fail");
 		
-		sCInterface.setMyBool(false);
+		defaultInterface.setMyBool(false);
 		
-		sCInterface.setMyReal(6.6);
+		defaultInterface.setMyReal(6.6);
 		
-		sCIA.setMyInt(200);
+		interfaceA.setMyInt(200);
 		
-		sCIA.setMyString("A_fail");
+		interfaceA.setMyString("A_fail");
 		
-		sCIA.setMyBool(false);
+		interfaceA.setMyBool(false);
 		
-		sCIA.setMyReal(7.7);
+		interfaceA.setMyReal(7.7);
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_default() {
 		entryAction_main_region_StateB();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -288,22 +288,22 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateB:
+		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
 		default:

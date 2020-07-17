@@ -8,6 +8,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "CycleBasedSuperStepStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -36,6 +37,36 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr" 
+			typeName = "EventDrivenSuperStepStatemachine"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+	
+	statechart supersteps.SuperStepOnEnter {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
+			typeName = "SuperStepOnEnterStatemachine"
 		}
 
 		feature GeneralFeatures {

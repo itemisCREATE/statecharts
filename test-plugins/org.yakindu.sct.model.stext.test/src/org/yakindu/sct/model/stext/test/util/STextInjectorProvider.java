@@ -33,7 +33,7 @@ public class STextInjectorProvider implements IInjectorProvider {
 	public Injector getInjector() {
 		return Guice.createInjector(getModule());
 	}
-
+ 
 	protected Module getModule() {
 		return Modules.combine(new STextRuntimeTestModule(), new AbstractModule() {
 			@Override

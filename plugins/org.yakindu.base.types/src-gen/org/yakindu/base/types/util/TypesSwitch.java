@@ -14,6 +14,7 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
+import org.yakindu.base.types.Argument;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
@@ -284,8 +285,11 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.ANNOTATION_TYPE: {
 				AnnotationType annotationType = (AnnotationType)theEObject;
 				T result = caseAnnotationType(annotationType);
-				if (result == null) result = caseType(annotationType);
+				if (result == null) result = caseOperation(annotationType);
+				if (result == null) result = caseTypedDeclaration(annotationType);
+				if (result == null) result = caseGenericElement(annotationType);
 				if (result == null) result = caseDeclaration(annotationType);
+				if (result == null) result = caseTypedElement(annotationType);
 				if (result == null) result = caseNamedElement(annotationType);
 				if (result == null) result = caseAnnotatableElement(annotationType);
 				if (result == null) result = caseMetaComposite(annotationType);
@@ -312,6 +316,12 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.META_COMPOSITE: {
 				MetaComposite metaComposite = (MetaComposite)theEObject;
 				T result = caseMetaComposite(metaComposite);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.ARGUMENT: {
+				Argument argument = (Argument)theEObject;
+				T result = caseArgument(argument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -698,6 +708,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMetaComposite(MetaComposite object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgument(Argument object) {
 		return null;
 	}
 

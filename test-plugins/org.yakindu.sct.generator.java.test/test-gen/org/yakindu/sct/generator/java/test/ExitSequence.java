@@ -5,7 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.exitsequence.ExitSequenceStatemachine;
-import org.yakindu.scr.exitsequence.ExitSequenceStatemachine.State;	
+import org.yakindu.scr.exitsequence.ExitSequenceStatemachine.State;
 
 /**
  * Unit TestCase for ExitSequence
@@ -33,7 +33,7 @@ public class ExitSequence {
 	@Test
 	public void exitStatechartFromLeafSlimState() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AA));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 0l));
 		assertTrue((statemachine.getAb_exit() == 0l));
@@ -48,7 +48,7 @@ public class ExitSequence {
 		assertTrue((statemachine.getAdb_exit() == 0l));
 		assertTrue((statemachine.getAdc_exit() == 0l));
 		statemachine.exit();
-		assertTrue(!statemachine.isStateActive(State.main_region_A));
+		assertTrue(!statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A));
 		assertTrue((statemachine.getA_exit() == 2l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 0l));
@@ -68,7 +68,7 @@ public class ExitSequence {
 	public void exitLeafSlimStateByTransition() {
 		statemachine.enter();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AB));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AB));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 0l));
@@ -88,7 +88,7 @@ public class ExitSequence {
 	public void exitLeafSlimStateByTransitionFromParent() {
 		statemachine.enter();
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AA));
 		assertTrue((statemachine.getA_exit() == 2l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 0l));
@@ -108,9 +108,9 @@ public class ExitSequence {
 	public void exitStatechartFromLeafSlimOrthogonalState() {
 		statemachine.enter();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AB));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AB));
 		statemachine.exit();
-		assertTrue(!statemachine.isStateActive(State.main_region_A));
+		assertTrue(!statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A));
 		assertTrue((statemachine.getA_exit() == 5l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -131,7 +131,7 @@ public class ExitSequence {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AC));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AC));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -151,9 +151,9 @@ public class ExitSequence {
 	public void exitLeafSlimOrthogonalStateByTransitionFromParent() {
 		statemachine.enter();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AB));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AB));
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AA));
 		assertTrue((statemachine.getA_exit() == 5l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -173,9 +173,9 @@ public class ExitSequence {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AC));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AC));
 		statemachine.exit();
-		assertTrue(!statemachine.isStateActive(State.main_region_A));
+		assertTrue(!statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A));
 		assertTrue((statemachine.getA_exit() == 8l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -196,7 +196,7 @@ public class ExitSequence {
 		statemachine.raiseE();
 		statemachine.raiseE();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AD));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -216,9 +216,9 @@ public class ExitSequence {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AC));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AC));
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AA));
 		assertTrue((statemachine.getA_exit() == 8l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -239,9 +239,9 @@ public class ExitSequence {
 		statemachine.raiseE();
 		statemachine.raiseE();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AD));
 		statemachine.exit();
-		assertTrue(!statemachine.isStateActive(State.main_region_A));
+		assertTrue(!statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A));
 		assertTrue((statemachine.getA_exit() == 12l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -262,9 +262,9 @@ public class ExitSequence {
 		statemachine.raiseE();
 		statemachine.raiseE();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AD));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AA));
 		assertTrue((statemachine.getA_exit() == 0l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));
@@ -285,9 +285,9 @@ public class ExitSequence {
 		statemachine.raiseE();
 		statemachine.raiseE();
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AD));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AD));
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(State.main_region_A_r_AA));
+		assertTrue(statemachine.isStateActive(ExitSequenceStatemachine.State.MAIN_REGION_A_R_AA));
 		assertTrue((statemachine.getA_exit() == 12l));
 		assertTrue((statemachine.getAa_exit() == 1l));
 		assertTrue((statemachine.getAb_exit() == 4l));

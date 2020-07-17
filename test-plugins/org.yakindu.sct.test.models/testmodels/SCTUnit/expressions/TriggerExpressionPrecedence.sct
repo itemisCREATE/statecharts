@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_eGVTMM51EeWP64SB222YgA" specification="namespace expressions&#xA;&#xA;interface:&#xA;&#xA;in event e1&#xA;in event e2&#xA;&#xA;var c1 : boolean&#xA;var c2 : boolean&#xA;&#xA;&#xA;var e1_transition : boolean&#xA;var e2_transition : boolean&#xA;&#xA;" namespace="expressions" name="TriggerExpressionPrecedence">
+  <sgraph:Statechart xmi:id="_eGVTMM51EeWP64SB222YgA" specification="namespace expressions&#xA;&#xA;@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;&#xA;in event e1&#xA;in event e2&#xA;&#xA;var c1 : boolean&#xA;var c2 : boolean&#xA;&#xA;&#xA;var e1_transition : boolean&#xA;var e2_transition : boolean&#xA;&#xA;" namespace="expressions" name="TriggerExpressionPrecedence">
     <regions xmi:id="_eGtGoM51EeWP64SB222YgA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_eHABkM51EeWP64SB222YgA">
         <outgoingTransitions xmi:id="_eHH9YM51EeWP64SB222YgA" target="_eHB2wM51EeWP64SB222YgA"/>

@@ -961,16 +961,6 @@ public interface ExpressionsPackage extends EPackage {
 	int TYPE_CAST_EXPRESSION = 31;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ArgumentImpl <em>Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.ArgumentImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getArgument()
-	 * @generated
-	 */
-	int ARGUMENT = 32;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.PostFixUnaryExpressionImpl <em>Post Fix Unary Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1270,33 +1260,6 @@ public interface ExpressionsPackage extends EPackage {
 	int TYPE_CAST_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT__PARAMETER = 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT__VALUE = 1;
-
-	/**
-	 * The number of structural features of the '<em>Argument</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AssignmentOperator <em>Assignment Operator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1304,7 +1267,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 33;
+	int ASSIGNMENT_OPERATOR = 32;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1314,7 +1277,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 34;
+	int SHIFT_OPERATOR = 33;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1324,7 +1287,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 35;
+	int ADDITIVE_OPERATOR = 34;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1334,7 +1297,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 36;
+	int MULTIPLICATIVE_OPERATOR = 35;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1344,7 +1307,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 37;
+	int UNARY_OPERATOR = 36;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1354,7 +1317,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 38;
+	int RELATIONAL_OPERATOR = 37;
 
 
 	/**
@@ -1365,7 +1328,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
 	 * @generated
 	 */
-	int LOGICAL_OPERATOR = 39;
+	int LOGICAL_OPERATOR = 38;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
@@ -1375,7 +1338,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
 	 * @generated
 	 */
-	int BITWISE_OPERATOR = 40;
+	int BITWISE_OPERATOR = 39;
 
 
 	/**
@@ -1386,7 +1349,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPostFixOperator()
 	 * @generated
 	 */
-	int POST_FIX_OPERATOR = 41;
+	int POST_FIX_OPERATOR = 40;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.Literal <em>Literal</em>}'.
@@ -1997,38 +1960,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypeCastExpression_TypeSpecifier();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.Argument <em>Argument</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Argument</em>'.
-	 * @see org.yakindu.base.expressions.expressions.Argument
-	 * @generated
-	 */
-	EClass getArgument();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.base.expressions.expressions.Argument#getParameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parameter</em>'.
-	 * @see org.yakindu.base.expressions.expressions.Argument#getParameter()
-	 * @see #getArgument()
-	 * @generated
-	 */
-	EReference getArgument_Parameter();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.Argument#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
-	 * @see org.yakindu.base.expressions.expressions.Argument#getValue()
-	 * @see #getArgument()
-	 * @generated
-	 */
-	EReference getArgument_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.PostFixUnaryExpression <em>Post Fix Unary Expression</em>}'.
@@ -2756,32 +2687,6 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_CAST_EXPRESSION__TYPE_SPECIFIER = eINSTANCE.getTypeCastExpression_TypeSpecifier();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ArgumentImpl <em>Argument</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.expressions.expressions.impl.ArgumentImpl
-		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getArgument()
-		 * @generated
-		 */
-		EClass ARGUMENT = eINSTANCE.getArgument();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARGUMENT__PARAMETER = eINSTANCE.getArgument_Parameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARGUMENT__VALUE = eINSTANCE.getArgument_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.PostFixUnaryExpressionImpl <em>Post Fix Unary Expression</em>}' class.

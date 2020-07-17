@@ -3,7 +3,7 @@ package org.yakindu.scr.valuedevents;
 
 
 public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean integerEvent;
 		
@@ -107,7 +107,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean integerEvent;
 		
 		private long integerEventValue;
@@ -122,27 +122,27 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		private String stringEventValue;
 	}
 	private static class ValuedEventsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region1_A,
-		integer_region_B,
-		integer_region_C,
-		integer_region_D,
-		boolean_region_B,
-		boolean_region_C,
-		boolean_region_D,
-		real_region_B,
-		real_region_C,
-		real_region_D,
-		string_region_B,
-		string_region_C,
-		string_region_D,
-		$NullState$
+		MAIN_REGION1_A,
+		INTEGER_REGION_B,
+		INTEGER_REGION_C,
+		INTEGER_REGION_D,
+		BOOLEAN_REGION_B,
+		BOOLEAN_REGION_C,
+		BOOLEAN_REGION_D,
+		REAL_REGION_B,
+		REAL_REGION_C,
+		REAL_REGION_D,
+		STRING_REGION_B,
+		STRING_REGION_C,
+		STRING_REGION_D,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[5];
@@ -161,24 +161,24 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		this.isExecuting = value;
 	}
 	public ValuedEventsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 5; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setMyInt(0);
+		defaultInterface.setMyInt(0);
 		
-		sCInterface.setMyBool(false);
+		defaultInterface.setMyBool(false);
 		
-		sCInterface.setMyReal(0.0);
+		defaultInterface.setMyReal(0.0);
 		
-		sCInterface.setMyString("");
+		defaultInterface.setMyString("");
 		
 		isExecuting = false;
 	}
@@ -225,47 +225,47 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region1_A:
+			case MAIN_REGION1_A:
 				main_region1_A_react(true);
 				break;
-			case integer_region_B:
+			case INTEGER_REGION_B:
 				integer_region_B_react(true);
 				break;
-			case integer_region_C:
+			case INTEGER_REGION_C:
 				integer_region_C_react(true);
 				break;
-			case integer_region_D:
+			case INTEGER_REGION_D:
 				integer_region_D_react(true);
 				break;
-			case boolean_region_B:
+			case BOOLEAN_REGION_B:
 				boolean_region_B_react(true);
 				break;
-			case boolean_region_C:
+			case BOOLEAN_REGION_C:
 				boolean_region_C_react(true);
 				break;
-			case boolean_region_D:
+			case BOOLEAN_REGION_D:
 				boolean_region_D_react(true);
 				break;
-			case real_region_B:
+			case REAL_REGION_B:
 				real_region_B_react(true);
 				break;
-			case real_region_C:
+			case REAL_REGION_C:
 				real_region_C_react(true);
 				break;
-			case real_region_D:
+			case REAL_REGION_D:
 				real_region_D_react(true);
 				break;
-			case string_region_B:
+			case STRING_REGION_B:
 				string_region_B_react(true);
 				break;
-			case string_region_C:
+			case STRING_REGION_C:
 				string_region_C_react(true);
 				break;
-			case string_region_D:
+			case STRING_REGION_D:
 				string_region_D_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -276,7 +276,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$||stateVector[3] != State.$NullState$||stateVector[4] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$||stateVector[2] != State.$NULLSTATE$||stateVector[3] != State.$NULLSTATE$||stateVector[4] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -288,28 +288,28 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.integerEvent = sCInterface.integerEvent;
-		_current.iface.integerEventValue = sCInterface.integerEventValue;
-		sCInterface.integerEvent = false;
+		_current.iface.integerEvent = defaultInterface.integerEvent;
+		_current.iface.integerEventValue = defaultInterface.integerEventValue;
+		defaultInterface.integerEvent = false;
 		
-		_current.iface.booleanEvent = sCInterface.booleanEvent;
-		_current.iface.booleanEventValue = sCInterface.booleanEventValue;
-		sCInterface.booleanEvent = false;
+		_current.iface.booleanEvent = defaultInterface.booleanEvent;
+		_current.iface.booleanEventValue = defaultInterface.booleanEventValue;
+		defaultInterface.booleanEvent = false;
 		
-		_current.iface.realEvent = sCInterface.realEvent;
-		_current.iface.realEventValue = sCInterface.realEventValue;
-		sCInterface.realEvent = false;
+		_current.iface.realEvent = defaultInterface.realEvent;
+		_current.iface.realEventValue = defaultInterface.realEventValue;
+		defaultInterface.realEvent = false;
 		
-		_current.iface.stringEvent = sCInterface.stringEvent;
-		_current.iface.stringEventValue = sCInterface.stringEventValue;
-		sCInterface.stringEvent = false;
+		_current.iface.stringEvent = defaultInterface.stringEvent;
+		_current.iface.stringEventValue = defaultInterface.stringEventValue;
+		defaultInterface.stringEvent = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.integerEvent = false;
-		sCInterface.booleanEvent = false;
-		sCInterface.realEvent = false;
-		sCInterface.stringEvent = false;
+		defaultInterface.integerEvent = false;
+		defaultInterface.booleanEvent = false;
+		defaultInterface.realEvent = false;
+		defaultInterface.stringEvent = false;
 	}
 	
 	/**
@@ -318,177 +318,177 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region1_A:
-			return stateVector[0] == State.main_region1_A;
-		case integer_region_B:
-			return stateVector[1] == State.integer_region_B;
-		case integer_region_C:
-			return stateVector[1] == State.integer_region_C;
-		case integer_region_D:
-			return stateVector[1] == State.integer_region_D;
-		case boolean_region_B:
-			return stateVector[2] == State.boolean_region_B;
-		case boolean_region_C:
-			return stateVector[2] == State.boolean_region_C;
-		case boolean_region_D:
-			return stateVector[2] == State.boolean_region_D;
-		case real_region_B:
-			return stateVector[3] == State.real_region_B;
-		case real_region_C:
-			return stateVector[3] == State.real_region_C;
-		case real_region_D:
-			return stateVector[3] == State.real_region_D;
-		case string_region_B:
-			return stateVector[4] == State.string_region_B;
-		case string_region_C:
-			return stateVector[4] == State.string_region_C;
-		case string_region_D:
-			return stateVector[4] == State.string_region_D;
+		case MAIN_REGION1_A:
+			return stateVector[0] == State.MAIN_REGION1_A;
+		case INTEGER_REGION_B:
+			return stateVector[1] == State.INTEGER_REGION_B;
+		case INTEGER_REGION_C:
+			return stateVector[1] == State.INTEGER_REGION_C;
+		case INTEGER_REGION_D:
+			return stateVector[1] == State.INTEGER_REGION_D;
+		case BOOLEAN_REGION_B:
+			return stateVector[2] == State.BOOLEAN_REGION_B;
+		case BOOLEAN_REGION_C:
+			return stateVector[2] == State.BOOLEAN_REGION_C;
+		case BOOLEAN_REGION_D:
+			return stateVector[2] == State.BOOLEAN_REGION_D;
+		case REAL_REGION_B:
+			return stateVector[3] == State.REAL_REGION_B;
+		case REAL_REGION_C:
+			return stateVector[3] == State.REAL_REGION_C;
+		case REAL_REGION_D:
+			return stateVector[3] == State.REAL_REGION_D;
+		case STRING_REGION_B:
+			return stateVector[4] == State.STRING_REGION_B;
+		case STRING_REGION_C:
+			return stateVector[4] == State.STRING_REGION_C;
+		case STRING_REGION_D:
+			return stateVector[4] == State.STRING_REGION_D;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseIntegerEvent(long value) {
-		sCInterface.raiseIntegerEvent(value);
+		defaultInterface.raiseIntegerEvent(value);
 	}
 	
 	public void raiseBooleanEvent(boolean value) {
-		sCInterface.raiseBooleanEvent(value);
+		defaultInterface.raiseBooleanEvent(value);
 	}
 	
 	public void raiseRealEvent(double value) {
-		sCInterface.raiseRealEvent(value);
+		defaultInterface.raiseRealEvent(value);
 	}
 	
 	public void raiseStringEvent(String value) {
-		sCInterface.raiseStringEvent(value);
+		defaultInterface.raiseStringEvent(value);
 	}
 	
 	public long getMyInt() {
-		return sCInterface.getMyInt();
+		return defaultInterface.getMyInt();
 	}
 	
 	public void setMyInt(long value) {
-		sCInterface.setMyInt(value);
+		defaultInterface.setMyInt(value);
 	}
 	
 	public boolean getMyBool() {
-		return sCInterface.getMyBool();
+		return defaultInterface.getMyBool();
 	}
 	
 	public void setMyBool(boolean value) {
-		sCInterface.setMyBool(value);
+		defaultInterface.setMyBool(value);
 	}
 	
 	public double getMyReal() {
-		return sCInterface.getMyReal();
+		return defaultInterface.getMyReal();
 	}
 	
 	public void setMyReal(double value) {
-		sCInterface.setMyReal(value);
+		defaultInterface.setMyReal(value);
 	}
 	
 	public String getMyString() {
-		return sCInterface.getMyString();
+		return defaultInterface.getMyString();
 	}
 	
 	public void setMyString(String value) {
-		sCInterface.setMyString(value);
+		defaultInterface.setMyString(value);
 	}
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region1_A() {
-		sCInterface.raiseIntegerEvent((2 * 21));
+		defaultInterface.raiseIntegerEvent((2 * 21));
 		
-		sCInterface.raiseRealEvent(10);
+		defaultInterface.raiseRealEvent(10);
 		
-		sCInterface.raiseBooleanEvent((true || false));
+		defaultInterface.raiseBooleanEvent((true || false));
 		
-		sCInterface.raiseStringEvent("sct");
+		defaultInterface.raiseStringEvent("sct");
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region1_A_default() {
 		entryAction_main_region1_A();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region1_A;
+		stateVector[0] = State.MAIN_REGION1_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_integer_region_B_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.integer_region_B;
+		stateVector[1] = State.INTEGER_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_integer_region_C_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.integer_region_C;
+		stateVector[1] = State.INTEGER_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_integer_region_D_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.integer_region_D;
+		stateVector[1] = State.INTEGER_REGION_D;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_boolean_region_B_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.boolean_region_B;
+		stateVector[2] = State.BOOLEAN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_boolean_region_C_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.boolean_region_C;
+		stateVector[2] = State.BOOLEAN_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_boolean_region_D_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.boolean_region_D;
+		stateVector[2] = State.BOOLEAN_REGION_D;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_real_region_B_default() {
 		nextStateIndex = 3;
-		stateVector[3] = State.real_region_B;
+		stateVector[3] = State.REAL_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_real_region_C_default() {
 		nextStateIndex = 3;
-		stateVector[3] = State.real_region_C;
+		stateVector[3] = State.REAL_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_real_region_D_default() {
 		nextStateIndex = 3;
-		stateVector[3] = State.real_region_D;
+		stateVector[3] = State.REAL_REGION_D;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_string_region_B_default() {
 		nextStateIndex = 4;
-		stateVector[4] = State.string_region_B;
+		stateVector[4] = State.STRING_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_string_region_C_default() {
 		nextStateIndex = 4;
-		stateVector[4] = State.string_region_C;
+		stateVector[4] = State.STRING_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_string_region_D_default() {
 		nextStateIndex = 4;
-		stateVector[4] = State.string_region_D;
+		stateVector[4] = State.STRING_REGION_D;
 	}
 	
 	/* 'default' enter sequence for region main region1 */
@@ -519,85 +519,85 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region1_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_integer_region_B() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_integer_region_C() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_integer_region_D() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_boolean_region_B() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_boolean_region_C() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_boolean_region_D() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_real_region_B() {
 		nextStateIndex = 3;
-		stateVector[3] = State.$NullState$;
+		stateVector[3] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_real_region_C() {
 		nextStateIndex = 3;
-		stateVector[3] = State.$NullState$;
+		stateVector[3] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_real_region_D() {
 		nextStateIndex = 3;
-		stateVector[3] = State.$NullState$;
+		stateVector[3] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_string_region_B() {
 		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
+		stateVector[4] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_string_region_C() {
 		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
+		stateVector[4] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_string_region_D() {
 		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
+		stateVector[4] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region1 */
 	private void exitSequence_main_region1() {
 		switch (stateVector[0]) {
-		case main_region1_A:
+		case MAIN_REGION1_A:
 			exitSequence_main_region1_A();
 			break;
 		default:
@@ -608,13 +608,13 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	/* Default exit sequence for region integer_region */
 	private void exitSequence_integer_region() {
 		switch (stateVector[1]) {
-		case integer_region_B:
+		case INTEGER_REGION_B:
 			exitSequence_integer_region_B();
 			break;
-		case integer_region_C:
+		case INTEGER_REGION_C:
 			exitSequence_integer_region_C();
 			break;
-		case integer_region_D:
+		case INTEGER_REGION_D:
 			exitSequence_integer_region_D();
 			break;
 		default:
@@ -625,13 +625,13 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	/* Default exit sequence for region boolean_region */
 	private void exitSequence_boolean_region() {
 		switch (stateVector[2]) {
-		case boolean_region_B:
+		case BOOLEAN_REGION_B:
 			exitSequence_boolean_region_B();
 			break;
-		case boolean_region_C:
+		case BOOLEAN_REGION_C:
 			exitSequence_boolean_region_C();
 			break;
-		case boolean_region_D:
+		case BOOLEAN_REGION_D:
 			exitSequence_boolean_region_D();
 			break;
 		default:
@@ -642,13 +642,13 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	/* Default exit sequence for region real_region */
 	private void exitSequence_real_region() {
 		switch (stateVector[3]) {
-		case real_region_B:
+		case REAL_REGION_B:
 			exitSequence_real_region_B();
 			break;
-		case real_region_C:
+		case REAL_REGION_C:
 			exitSequence_real_region_C();
 			break;
-		case real_region_D:
+		case REAL_REGION_D:
 			exitSequence_real_region_D();
 			break;
 		default:
@@ -659,13 +659,13 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	/* Default exit sequence for region string_region */
 	private void exitSequence_string_region() {
 		switch (stateVector[4]) {
-		case string_region_B:
+		case STRING_REGION_B:
 			exitSequence_string_region_B();
 			break;
-		case string_region_C:
+		case STRING_REGION_C:
 			exitSequence_string_region_C();
 			break;
-		case string_region_D:
+		case STRING_REGION_D:
 			exitSequence_string_region_D();
 			break;
 		default:
@@ -719,7 +719,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.integerEvent) {
 				exitSequence_integer_region_B();
-				sCInterface.setMyInt(_current.iface.integerEventValue);
+				defaultInterface.setMyInt(_current.iface.integerEventValue);
 				
 				enterSequence_integer_region_C_default();
 			} else {
@@ -735,7 +735,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.integerEvent) {
 				exitSequence_integer_region_C();
-				sCInterface.setMyInt(_current.iface.integerEventValue);
+				defaultInterface.setMyInt(_current.iface.integerEventValue);
 				
 				enterSequence_integer_region_D_default();
 			} else {
@@ -760,7 +760,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.booleanEvent) {
 				exitSequence_boolean_region_B();
-				sCInterface.setMyBool(_current.iface.booleanEventValue);
+				defaultInterface.setMyBool(_current.iface.booleanEventValue);
 				
 				enterSequence_boolean_region_C_default();
 			} else {
@@ -776,7 +776,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.booleanEvent) {
 				exitSequence_boolean_region_C();
-				sCInterface.setMyBool(_current.iface.booleanEventValue);
+				defaultInterface.setMyBool(_current.iface.booleanEventValue);
 				
 				enterSequence_boolean_region_D_default();
 			} else {
@@ -801,7 +801,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.realEvent) {
 				exitSequence_real_region_B();
-				sCInterface.setMyReal(_current.iface.realEventValue);
+				defaultInterface.setMyReal(_current.iface.realEventValue);
 				
 				enterSequence_real_region_C_default();
 			} else {
@@ -817,7 +817,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.realEvent) {
 				exitSequence_real_region_C();
-				sCInterface.setMyReal(_current.iface.realEventValue);
+				defaultInterface.setMyReal(_current.iface.realEventValue);
 				
 				enterSequence_real_region_D_default();
 			} else {
@@ -842,7 +842,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.stringEvent) {
 				exitSequence_string_region_B();
-				sCInterface.setMyString(_current.iface.stringEventValue);
+				defaultInterface.setMyString(_current.iface.stringEventValue);
 				
 				enterSequence_string_region_C_default();
 			} else {
@@ -858,7 +858,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (try_transition) {
 			if (_current.iface.stringEvent) {
 				exitSequence_string_region_C();
-				sCInterface.setMyString(_current.iface.stringEventValue);
+				defaultInterface.setMyString(_current.iface.stringEventValue);
 				
 				enterSequence_string_region_D_default();
 			} else {

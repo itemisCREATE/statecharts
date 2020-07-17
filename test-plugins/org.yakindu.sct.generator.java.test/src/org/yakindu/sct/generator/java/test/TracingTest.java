@@ -3,7 +3,6 @@ package org.yakindu.sct.generator.java.test;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.yakindu.scr.tracing.TracingImpl;
 import org.yakindu.scr.tracing.TracingStatemachine;
 import org.yakindu.scr.tracing.TracingStatemachine.State;
 

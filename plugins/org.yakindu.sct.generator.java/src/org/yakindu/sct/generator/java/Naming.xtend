@@ -11,33 +11,40 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.base.NamedElement
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.adapter.OriginTracing
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.base.types.Type
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.model.sexec.concepts.ShadowMemberScope
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class Naming {
 
-	@Inject extension JavaNamingService namingService;
-	@Inject StextNameProvider provider;
+	@Inject extension JavaNamingService
 	@Inject extension SExecExtensions
 	@Inject extension OriginTracing
 	@Inject extension ShadowMemberScope
+	@Inject extension GenmodelEntries
+	@Inject extension StextNameProvider
+
+	@Inject GeneratorEntry entry
 	
 	def iStatemachine() {
 		"IStatemachine"
@@ -65,10 +72,6 @@ class Naming {
 	
 	def java(String it) {
 		it + ".java"
-	}
-	
-	def dot(String a, String b) {
-		a + "." + b
 	}
 
 	def asPrivate(String it) {
@@ -107,8 +110,7 @@ class Naming {
 		"onStateExited"
 	}
 
-	def dispatch String statemachineName(String name) {
-		// remove whitespaces;
+	def String statemachineName(String name) {
 		var String newName = name.replace(" ", "")
 		if (name.isKeyword) {
 			return newName + "SM"
@@ -116,81 +118,53 @@ class Naming {
 		return newName
 	}
 
-	def dispatch String statemachineName(ExecutionFlow it) {
-		return name.statemachineName.toFirstUpper()
-	}
-	
-	def dispatch String statemachineName(Statechart it) {
-		return name.statemachineName.toFirstUpper()
+	def statemachineClassName(NamedElement it) {
+		entry.typeName ?: name.statemachineName
 	}
 
-	def statemachineClassName(ExecutionFlow it) {
-		statemachineName + "Statemachine"
-	}
-	
-	def statemachineClassName(Statechart it) {
-		statemachineName + "Statemachine"
-	}
-
-	def statemachineInterfaceName(ExecutionFlow it) {
-		"I" + statemachineClassName
-	}
-	
-	def statemachineInterfaceName(Statechart it) {
+	def statemachineInterfaceName(NamedElement it) {
 		"I" + statemachineClassName
 	}
 
-	def dispatch identifier(Property it) {
-		escaped.asIdentifier
-	}
-
-	def dispatch identifier(Event it) {
-		escaped.asIdentifier
-	}
-	
-	def dispatch identifier(Method it){
-		'''«shortName»'''
-	}
-	
-	def dispatch identifier(Operation it) {
-		name
-	}
-	
-	def dispatch identifier(Enumerator it) {
-		name
-	}
-	
-	def dispatch identifier(Declaration it){
-		'''«shortName»'''
-	}
+	def dispatch identifier(Property it) { escaped.asIdentifier }
+	def dispatch identifier(Event it) { escaped.asIdentifier }
+	def dispatch identifier(Method it) { shortName }
+	def dispatch identifier(Operation it) { name }
+	def dispatch identifier(Enumerator it) { name }
+	def dispatch identifier(Declaration it){ shortName }
 
 	def String getValueIdentifier(Event it) {
 		name.asIdentifier + "Value"
 	}
 	
 	def String getInterfaceImplName(InterfaceScope it) {
-		getInterfaceName() + "Impl";
+		interfaceName + "Impl"
 	}
 
 	def String getInterfaceListenerName(InterfaceScope it) {
-		interfaceName + "Listener";
+		interfaceName + "Listener"
 	}
 
 	def String getInterfaceOperationCallbackName(InterfaceScope it) {
 		interfaceName + "OperationCallback"
 	}
 
-	def private String fullQualifiedStateName(String name) {
-		name.substring(name.indexOf(".") + 1).replace(".", "_")
-	}
-
-	def dispatch String stateName(State state) {
-		val String name = provider.getFullyQualifiedName(state).toString();
-		name.fullQualifiedStateName
+	def dispatch String stateName(RegularState state) {
+		val statechart = state.getContainerOfType(Statechart)
+		val statechartFqn = statechart.fullyQualifiedName
+		val stateFqn = state.fullyQualifiedName
+		
+		val trimmedFqn = stateFqn.skipFirst(statechartFqn.segmentCount)
+		return trimmedFqn.segments.join("_").toUpperCase
 	}
 
 	def dispatch String stateName(ExecutionState it) {
-		name.fullQualifiedStateName
+		val state = sourceElement as RegularState
+		state.stateName
+	}
+	
+	def String getNullStateName() {
+		"$NULLSTATE$"
 	}
 
 	def asName(String it) {
@@ -226,7 +200,7 @@ class Naming {
 	}
 
 	def String setter(Property it) {
-		methodName("set", "");
+		methodName("set", "")
 	}
 	
 	def String assign(Property it) {
@@ -241,10 +215,6 @@ class Naming {
 		}
 
 		return methodName + suffix
-	}
-
-	def String getNullStateName() {
-		"$NullState$";
 	}
 
 	def functionName(Step it) { shortName }
@@ -268,6 +238,20 @@ class Naming {
 
 	protected def dispatch String className(ExecutionFlow it) {
 		statemachineClassName
+	}
+	
+	def String getInterfaceName(InterfaceScope it) {
+		if (name.nullOrEmpty)
+			return "Interface"
+		else
+			return "Interface" + name.toFirstUpper()
+	}
+	
+	def String getInterfaceVariableName(InterfaceScope it) {
+		if (name.nullOrEmpty)
+			"defaultInterface"
+		else
+			interfaceName.asEscapedIdentifier
 	}
 	
 }

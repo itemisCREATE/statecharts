@@ -1,0 +1,27 @@
+GeneratorModel for yakindu::c {
+	statechart eventbuffers.InternalEventLifeCycleUnbuffered {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "InternalEventLifeCycleUnbuffered"
+		}
+		feature IdentifierSettings {
+			moduleName =  "InternalEventLifeCycleUnbuffered" 
+			maxIdentifierLength = 31
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+		feature OutEventAPI {
+			getters = true
+			observables = false
+		}
+	}
+}

@@ -62,6 +62,7 @@ public class TypedDeclarationImpl extends DeclarationImpl implements TypedDeclar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getType() {
 		Type type = basicGetType();
 		return type != null && type.eIsProxy() ? (Type)eResolveProxy((InternalEObject)type) : type;
@@ -83,6 +84,7 @@ public class TypedDeclarationImpl extends DeclarationImpl implements TypedDeclar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeSpecifier getTypeSpecifier() {
 		return typeSpecifier;
 	}
@@ -107,6 +109,7 @@ public class TypedDeclarationImpl extends DeclarationImpl implements TypedDeclar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeSpecifier(TypeSpecifier newTypeSpecifier) {
 		if (newTypeSpecifier != typeSpecifier) {
 			NotificationChain msgs = null;

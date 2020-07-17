@@ -1,0 +1,23 @@
+GeneratorModel for yakindu::c {
+	statechart supersteps.SuperStepOnEnter {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "SuperStepOnEnter"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+		feature OutEventAPI {
+			getters = true
+			observables = false
+		}
+	}
+}

@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -190,23 +191,7 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 				generatorDescriptor.get().getLibraryIDs(), value.getParameter().getFeatureType().getLibrary());
 		injector.injectMembers(provider);
 		IStatus status = provider.validateParameterValue(value);
-		createMarker(status);
-	}
-
-	private void createMarker(IStatus status) {
-		switch (status.getSeverity()) {
-		case IStatus.ERROR: {
-			if (status instanceof ErrorCodeStatus) {
-				super.error(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-						((ErrorCodeStatus) status).getErrorCode());
-			}else {
-				super.error(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
-			}
-			break;
-		}
-		case IStatus.WARNING:
-			super.warning(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
-		}
+		createMarker(status, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 	}
 
 	@Check
@@ -329,8 +314,24 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 				generatorDescriptor.get().getLibraryIDs(), configuration.getType().getLibrary());
 		injector.injectMembers(provider);
 		IStatus status = provider.validateConfiguration(configuration);
-		if (status.getSeverity() == IStatus.ERROR) {
-			super.error(status.getMessage(), SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
+		createMarker(status, SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
+	}
+	
+	@Check
+	public void checkGeneratorEntry(GeneratorEntry entry) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(entry);
+
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
+		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
+		for (ILibraryDescriptor libDesc : libraryDescriptors) {
+			IDefaultFeatureValueProvider valueProvider = libDesc.createFeatureValueProvider(injector);
+			IStatus status = valueProvider.validateGeneratorEntry(entry);
+			createMarker(status, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
 		}
 	}
 
@@ -438,5 +439,20 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 				return (FeatureTypeLibrary) new ResourceSetImpl().getResource(from.getURI(), true).getContents().get(0);
 			}
 		};
+	}
+	
+	private void createMarker(IStatus status, EStructuralFeature feature) {
+		switch (status.getSeverity()) {
+		case IStatus.ERROR: {
+			if (status instanceof ErrorCodeStatus) {
+				super.error(status.getMessage(), feature, ((ErrorCodeStatus) status).getErrorCode());
+			} else {
+				super.error(status.getMessage(), feature);
+			}
+			break;
+		}
+		case IStatus.WARNING:
+			super.warning(status.getMessage(), feature);
+		}
 	}
 }

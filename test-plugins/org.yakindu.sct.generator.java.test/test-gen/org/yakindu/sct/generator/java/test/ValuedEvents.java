@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.valuedevents.ValuedEventsStatemachine;
-import org.yakindu.scr.valuedevents.ValuedEventsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.valuedevents.ValuedEventsStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ValuedEvents
@@ -47,10 +47,10 @@ public class ValuedEvents {
 		statemachine.raiseRealEvent(20l);
 		statemachine.raiseStringEvent("tool");
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.integer_region_D));
-		assertTrue(statemachine.isStateActive(State.string_region_D));
-		assertTrue(statemachine.isStateActive(State.boolean_region_D));
-		assertTrue(statemachine.isStateActive(State.real_region_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.INTEGER_REGION_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.STRING_REGION_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.BOOLEAN_REGION_D));
+		assertTrue(statemachine.isStateActive(ValuedEventsStatemachine.State.REAL_REGION_D));
 		assertTrue(statemachine.getMyInt() == 23l);
 		assertTrue(statemachine.getMyBool() == false);
 		assertTrue(statemachine.getMyReal() == 20l);

@@ -3,22 +3,22 @@ package org.yakindu.scr.operations;
 
 
 public class OperationsStatemachine implements IOperationsStatemachine {
-	protected class SCIInterface1Impl implements SCIInterface1 {
+	protected class InterfaceInterface1Impl implements InterfaceInterface1 {
 	
-		private SCIInterface1OperationCallback operationCallback;
+		private InterfaceInterface1OperationCallback operationCallback;
 		
-		public void setSCIInterface1OperationCallback(
-				SCIInterface1OperationCallback operationCallback) {
+		public void setInterfaceInterface1OperationCallback(
+				InterfaceInterface1OperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 	}
 	
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
-		private SCInterfaceOperationCallback operationCallback;
+		private InterfaceOperationCallback operationCallback;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setInterfaceOperationCallback(
+				InterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private boolean ev;
@@ -30,24 +30,24 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean ev;
 	}
 	private static class OperationsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCIInterface1Impl sCIInterface1;
+	protected InterfaceInterface1Impl interfaceInterface1;
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_B,
-		main_region_C,
-		main_region_D,
-		main_region_A,
-		$NullState$
+		MAIN_REGION_B,
+		MAIN_REGION_C,
+		MAIN_REGION_D,
+		MAIN_REGION_A,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -78,8 +78,8 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		this.isExecuting = value;
 	}
 	public OperationsStatemachine() {
-		sCIInterface1 = new SCIInterface1Impl();
-		sCInterface = new SCInterfaceImpl();
+		interfaceInterface1 = new InterfaceInterface1Impl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
@@ -87,16 +87,16 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		if (this.sCIInterface1.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCIInterface1 must be set.");
+		if (this.interfaceInterface1.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface InterfaceInterface1 must be set.");
 		}
 		
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		if (this.defaultInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface Interface must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -140,20 +140,20 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_B:
+			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
-			case main_region_C:
+			case MAIN_REGION_C:
 				main_region_C_react(true);
 				break;
-			case main_region_D:
+			case MAIN_REGION_D:
 				main_region_D_react(true);
 				break;
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -164,7 +164,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -176,12 +176,12 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.ev = sCInterface.ev;
-		sCInterface.ev = false;
+		_current.iface.ev = defaultInterface.ev;
+		defaultInterface.ev = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.ev = false;
+		defaultInterface.ev = false;
 	}
 	
 	/**
@@ -190,25 +190,25 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_B:
-			return stateVector[0] == State.main_region_B;
-		case main_region_C:
-			return stateVector[0] == State.main_region_C;
-		case main_region_D:
-			return stateVector[0] == State.main_region_D;
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
+		case MAIN_REGION_C:
+			return stateVector[0] == State.MAIN_REGION_C;
+		case MAIN_REGION_D:
+			return stateVector[0] == State.MAIN_REGION_D;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
 		default:
 			return false;
 		}
 	}
 	
-	public SCIInterface1 getSCIInterface1() {
-		return sCIInterface1;
+	public InterfaceInterface1 getInterfaceInterface1() {
+		return interfaceInterface1;
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void setInternalOperationCallback(
@@ -217,7 +217,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 	
 	public void raiseEv() {
-		sCInterface.raiseEv();
+		defaultInterface.raiseEv();
 	}
 	
 	/* Entry action for state 'B'. */
@@ -241,67 +241,67 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCIInterface1.operationCallback.interfaceOperation1();
+		interfaceInterface1.operationCallback.interfaceOperation1();
 		
-		sCIInterface1.operationCallback.interfaceOperation2(4);
+		interfaceInterface1.operationCallback.interfaceOperation2(4);
 		
-		sCIInterface1.operationCallback.interfaceOperation3();
+		interfaceInterface1.operationCallback.interfaceOperation3();
 		
-		sCIInterface1.operationCallback.interfaceOperation3a(1.0);
+		interfaceInterface1.operationCallback.interfaceOperation3a(1.0);
 		
-		sCIInterface1.operationCallback.interfaceOperation4();
+		interfaceInterface1.operationCallback.interfaceOperation4();
 		
-		sCIInterface1.operationCallback.interfaceOperation4a(5);
+		interfaceInterface1.operationCallback.interfaceOperation4a(5);
 		
-		sCIInterface1.operationCallback.interfaceOperation5();
+		interfaceInterface1.operationCallback.interfaceOperation5();
 		
-		sCIInterface1.operationCallback.interfaceOperation5a("");
+		interfaceInterface1.operationCallback.interfaceOperation5a("");
 	}
 	
 	/* Entry action for state 'D'. */
 	private void entryAction_main_region_D() {
-		sCInterface.operationCallback.unnamedInterfaceOperation1();
+		defaultInterface.operationCallback.unnamedInterfaceOperation1();
 		
-		sCInterface.operationCallback.unnamedInterfaceOperation2(4);
+		defaultInterface.operationCallback.unnamedInterfaceOperation2(4);
 		
-		sCInterface.operationCallback.unnamedOperation3();
+		defaultInterface.operationCallback.unnamedOperation3();
 		
-		sCInterface.operationCallback.unnamedOperation3a(1.0);
+		defaultInterface.operationCallback.unnamedOperation3a(1.0);
 		
-		sCInterface.operationCallback.unnamedOperation4();
+		defaultInterface.operationCallback.unnamedOperation4();
 		
-		sCInterface.operationCallback.unnamedOperation4a(5);
+		defaultInterface.operationCallback.unnamedOperation4a(5);
 		
-		sCInterface.operationCallback.unnamedOperation5();
+		defaultInterface.operationCallback.unnamedOperation5();
 		
-		sCInterface.operationCallback.unnamedOperation5a("");
+		defaultInterface.operationCallback.unnamedOperation5a("");
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		entryAction_main_region_B();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		entryAction_main_region_C();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_C;
+		stateVector[0] = State.MAIN_REGION_C;
 	}
 	
 	/* 'default' enter sequence for state D */
 	private void enterSequence_main_region_D_default() {
 		entryAction_main_region_D();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_D;
+		stateVector[0] = State.MAIN_REGION_D;
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -312,40 +312,40 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state D */
 	private void exitSequence_main_region_D() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
-		case main_region_C:
+		case MAIN_REGION_C:
 			exitSequence_main_region_C();
 			break;
-		case main_region_D:
+		case MAIN_REGION_D:
 			exitSequence_main_region_D();
 			break;
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
 		default:
@@ -367,7 +367,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((_current.iface.ev) && (sCInterface.operationCallback.alwaysTrue()))) {
+				if (((_current.iface.ev) && (defaultInterface.operationCallback.alwaysTrue()))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {

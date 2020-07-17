@@ -1,0 +1,77 @@
+GeneratorModel for sctunit::java {
+
+	test InternalEventLifeCycleBuffered {
+
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			typeName = "InternalEventLifeCycleBufferedStatemachine"
+			libraryTargetFolder = "src-gen"
+		}
+		
+	}
+
+	test InternalEventLifeCycleUnbuffered {
+
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			typeName = "InternalEventLifeCycleUnbufferedStatemachine"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+
+	test InEventLifeCycleBuffered {
+
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			typeName = "InEventLifeCycleBufferedStatemachine"
+			libraryTargetFolder = "src-gen"
+		}
+		
+	}
+	
+	test InEventLifeCycleUnbuffered {
+
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			typeName = "InEventLifeCycleUnbufferedStatemachine"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+
+}

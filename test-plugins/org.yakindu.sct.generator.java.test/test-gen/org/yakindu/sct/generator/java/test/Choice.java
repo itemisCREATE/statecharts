@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.choice.ChoiceStatemachine;
-import org.yakindu.scr.choice.ChoiceStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.choice.ChoiceStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for Choice
@@ -40,48 +40,48 @@ public class Choice {
 	@Test
 	public void elseChoiceUsingNonDefaultTransition() {
 		initForEventE(true);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_C));
 	}
 	
 	@Test
 	public void elseChoiceUsingDefaultTransition() {
 		initForEventE(false);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_B));
 	}
 	
 	@Test
 	public void defaultChoiceUsingNonDefaultTransition() {
 		initForEventG(true);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_C));
 	}
 	
 	@Test
 	public void defaultChoiceUsingDefaultTransition() {
 		initForEventG(false);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_B));
 	}
 	
 	@Test
 	public void uncheckedChoiceUsingNonDefaultTransition() {
 		initForEventF(true);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_C));
 	}
 	
 	@Test
 	public void uncheckedChoiceUsingDefaultTransition() {
 		initForEventF(false);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_B));
 	}
 	
 	@Test
 	public void alwaysTrueTransitionInChoice() {
 		initForEventH(true);
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_C));
 	}
 	
 	public void initForEventE(boolean valueForC) {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
@@ -89,7 +89,7 @@ public class Choice {
 	
 	public void initForEventF(boolean valueForC) {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
@@ -97,7 +97,7 @@ public class Choice {
 	
 	public void initForEventG(boolean valueForC) {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseG();
 		timer.cycleLeap(1l);
@@ -105,7 +105,7 @@ public class Choice {
 	
 	public void initForEventH(boolean valueForC) {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(ChoiceStatemachine.State.MAIN_REGION_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseH();
 		timer.cycleLeap(1l);

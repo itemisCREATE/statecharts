@@ -6,7 +6,9 @@ Bundle-Version: 4.0.0.qualifier
 Bundle-Activator: org.yakindu.sct.model.stext.lib.STextLibActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
- org.yakindu.sct.model.sgraph
+ org.yakindu.sct.model.sgraph,
+ org.yakindu.base.expressions.interpreter,
+ com.google.inject
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.model.stext.lib

@@ -12,13 +12,13 @@ package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.types.CLiterals
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.providers.ConstructorProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 class EventDrivenConstructorProvider extends ConstructorProvider {
-	@Inject protected extension EventDrivenPredicate
+	@Inject protected extension GeneratorPredicate
 	@Inject protected extension EventNaming
 	@Inject protected extension CLiterals
 	

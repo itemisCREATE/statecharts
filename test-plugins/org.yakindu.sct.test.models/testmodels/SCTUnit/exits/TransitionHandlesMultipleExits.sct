@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_8J6JIE-0EemT9Ni8leZE5A" specification="namespace exits&#xA;&#xA;@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;&#xA;in event e&#xA;in event f&#xA;in event g&#xA;&#xA;var x : integer = 0" namespace="exits" name="TransitionHandlesMultipleExits">
+  <sgraph:Statechart xmi:id="_8J6JIE-0EemT9Ni8leZE5A" specification="namespace exits&#xA;&#xA;@EventDriven&#xA;@ChildFirstExecution&#xA;&#xA;interface:&#xA;&#x9;in event e&#xA;&#x9;in event f&#xA;&#x9;in event g&#xA;&#x9;var x : integer = 0" namespace="exits" name="TransitionHandlesMultipleExits">
     <regions xmi:id="_8J7-U0-0EemT9Ni8leZE5A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_8J_os0-0EemT9Ni8leZE5A">
         <outgoingTransitions xmi:id="_8KCE8k-0EemT9Ni8leZE5A" target="_8KA21E-0EemT9Ni8leZE5A"/>

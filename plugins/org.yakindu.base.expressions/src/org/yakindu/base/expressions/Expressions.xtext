@@ -103,7 +103,7 @@ ElementReferenceExpression returns types::Expression:
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*
 	)?;
 
-Argument:
+Argument returns types::Argument:
 	(parameter=[types::Parameter] '=')?  value=ConditionalExpression
 ;
 

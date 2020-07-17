@@ -4,8 +4,8 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.eventdrivensuperstep.EventDrivenSuperStepStatemachine;
-import org.yakindu.scr.eventdrivensuperstep.EventDrivenSuperStepStatemachine.State;	
+import org.yakindu.scr.supersteps.EventDrivenSuperStepStatemachine;
+import org.yakindu.scr.supersteps.EventDrivenSuperStepStatemachine.State;
 
 /**
  * Unit TestCase for EventDrivenSuperStep
@@ -33,9 +33,9 @@ public class EventDrivenSuperStep {
 	@Test
 	public void superStepOnInternalEventQueue() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.eventDrivenSuperStep_main_region_A));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.eventDrivenSuperStep_main_region_C));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_C));
 		assertTrue(statemachine.getX() == 17l);
 		statemachine.exit();
 	}
@@ -44,7 +44,7 @@ public class EventDrivenSuperStep {
 	public void superStepIteratesUsingAlwaysTrigger() {
 		statemachine.enter();
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(State.eventDrivenSuperStep_main_region_I));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_I));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}
@@ -52,12 +52,12 @@ public class EventDrivenSuperStep {
 	@Test
 	public void superStepIteratesUsingSameEventAndGuard() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.eventDrivenSuperStep_main_region_A));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
-		assertTrue(statemachine.isStateActive(State.eventDrivenSuperStep_main_region_C));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_C));
 		assertTrue(statemachine.getX() == 17l);
 		statemachine.raiseF();
-		assertTrue(statemachine.isStateActive(State.eventDrivenSuperStep_main_region_I));
+		assertTrue(statemachine.isStateActive(EventDrivenSuperStepStatemachine.State.MAIN_REGION_I));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}

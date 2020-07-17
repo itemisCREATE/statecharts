@@ -19,6 +19,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr.ieq" 
+			typeName = "EventDrivenInternalEventStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -26,10 +27,6 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 		
-		feature EventProcessing {
-			inEventQueue = true
-		}
-
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -51,6 +48,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr.ieq" 
+			typeName = "EventDrivenTriggeredByEventStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -58,10 +56,6 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 		
-		feature EventProcessing {
-			inEventQueue = true
-		}
-
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -85,6 +79,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr.ieq" 
+			typeName = "EventDrivenTriggeredByTimeEventStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -92,10 +87,6 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 		
-		feature EventProcessing {
-			inEventQueue = true
-		}
-
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -117,6 +108,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr.ieq" 
+			typeName = "LocalEventsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -124,10 +116,6 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 		
-		feature EventProcessing {
-			inEventQueue = true
-		}
-
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -149,6 +137,7 @@ GeneratorModel for yakindu::java {
 		
 		feature Naming {
 			basePackage =  "org.yakindu.scr.ieq" 
+			typeName = "EventDrivenOutEventsStatemachine"
 		}
 
 		feature GeneralFeatures {
@@ -156,10 +145,6 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 		
-		feature EventProcessing {
-			inEventQueue = true
-		}
-
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -189,8 +174,5 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 		
-		feature EventProcessing {
-			inEventQueue = true
-		}
 	}
 }

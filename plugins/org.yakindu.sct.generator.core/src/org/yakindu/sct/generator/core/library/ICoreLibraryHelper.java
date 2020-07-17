@@ -82,9 +82,4 @@ public interface ICoreLibraryHelper {
 	
 	boolean getOutEventGettersUsed(GeneratorEntry it);
 	
-	boolean applyInEventQueue(GeneratorEntry it);
-	
-	boolean applyInEventBuffer(GeneratorEntry it);
-
-	boolean applyInternalEventBuffer(GeneratorEntry it);
 }

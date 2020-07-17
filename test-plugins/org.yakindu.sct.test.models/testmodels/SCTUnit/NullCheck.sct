@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="__m1L0Mr5EeOOvYj3llQW6Q" name="NullCheck">
+  <sgraph:Statechart xmi:id="__m1L0Mr5EeOOvYj3llQW6Q" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;" name="NullCheck">
     <regions xmi:id="__m6rYMr5EeOOvYj3llQW6Q" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="__nBZEMr5EeOOvYj3llQW6Q">
         <outgoingTransitions xmi:id="__nG4oMr5EeOOvYj3llQW6Q" target="__nDORMr5EeOOvYj3llQW6Q"/>

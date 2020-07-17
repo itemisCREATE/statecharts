@@ -4,11 +4,11 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.cyclebasedsuperstep.CycleBasedSuperStepStatemachine;
-import org.yakindu.scr.cyclebasedsuperstep.CycleBasedSuperStepStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.supersteps.CycleBasedSuperStepStatemachine;
+import org.yakindu.scr.supersteps.CycleBasedSuperStepStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for CycleBasedSuperStep
@@ -40,10 +40,10 @@ public class CycleBasedSuperStep {
 	@Test
 	public void superStepTakesTwoTransitionsUsingSameEvent() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.cycleBasedSuperStep_main_region_A));
+		assertTrue(statemachine.isStateActive(CycleBasedSuperStepStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.cycleBasedSuperStep_main_region_C));
+		assertTrue(statemachine.isStateActive(CycleBasedSuperStepStatemachine.State.MAIN_REGION_C));
 		statemachine.exit();
 	}
 	
@@ -52,7 +52,7 @@ public class CycleBasedSuperStep {
 		statemachine.enter();
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.cycleBasedSuperStep_main_region_I));
+		assertTrue(statemachine.isStateActive(CycleBasedSuperStepStatemachine.State.MAIN_REGION_I));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}
@@ -60,14 +60,14 @@ public class CycleBasedSuperStep {
 	@Test
 	public void superStepIteratesUsingSameEventAndGuard() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.cycleBasedSuperStep_main_region_A));
+		assertTrue(statemachine.isStateActive(CycleBasedSuperStepStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.cycleBasedSuperStep_main_region_C));
+		assertTrue(statemachine.isStateActive(CycleBasedSuperStepStatemachine.State.MAIN_REGION_C));
 		assertTrue(statemachine.getX() == 42l);
 		statemachine.raiseF();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.cycleBasedSuperStep_main_region_I));
+		assertTrue(statemachine.isStateActive(CycleBasedSuperStepStatemachine.State.MAIN_REGION_I));
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}

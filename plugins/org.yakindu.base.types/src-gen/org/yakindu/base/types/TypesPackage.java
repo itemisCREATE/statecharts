@@ -1812,7 +1812,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__NAME = TYPE__NAME;
+	int ANNOTATION_TYPE__NAME = OPERATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1821,7 +1821,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
+	int ANNOTATION_TYPE__ANNOTATIONS = OPERATION__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -1830,7 +1830,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
+	int ANNOTATION_TYPE__ANNOTATION_INFO = OPERATION__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
@@ -1839,7 +1839,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__META_FEATURES = TYPE__META_FEATURES;
+	int ANNOTATION_TYPE__META_FEATURES = OPERATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1848,7 +1848,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__STATIC = TYPE__STATIC;
+	int ANNOTATION_TYPE__STATIC = OPERATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1857,43 +1857,52 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__ID = TYPE__ID;
+	int ANNOTATION_TYPE__ID = OPERATION__ID;
 
 	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__ABSTRACT = TYPE__ABSTRACT;
+	int ANNOTATION_TYPE__TYPE = OPERATION__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__VISIBLE = TYPE__VISIBLE;
+	int ANNOTATION_TYPE__TYPE_SPECIFIER = OPERATION__TYPE_SPECIFIER;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__SUPER_TYPES = TYPE__SUPER_TYPES;
+	int ANNOTATION_TYPE__TYPE_PARAMETERS = OPERATION__TYPE_PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__PROPERTIES = TYPE_FEATURE_COUNT + 0;
+	int ANNOTATION_TYPE__PARAMETERS = OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Variadic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__VARIADIC = OPERATION__VARIADIC;
 
 	/**
 	 * The feature id for the '<em><b>Targets</b></em>' reference list.
@@ -1902,7 +1911,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__TARGETS = TYPE_FEATURE_COUNT + 1;
+	int ANNOTATION_TYPE__TARGETS = OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Annotation Type</em>' class.
@@ -1911,7 +1920,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+	int ANNOTATION_TYPE_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -1961,6 +1970,43 @@ public interface TypesPackage extends EPackage {
 	int META_COMPOSITE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.ArgumentImpl <em>Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.ArgumentImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getArgument()
+	 * @generated
+	 */
+	int ARGUMENT = 24;
+
+	/**
+	 * The feature id for the '<em><b>Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT__PARAMETER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1968,7 +2014,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 24;
+	int DIRECTION = 25;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -2533,17 +2579,6 @@ public interface TypesPackage extends EPackage {
 	EClass getAnnotationType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.AnnotationType#getProperties <em>Properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Properties</em>'.
-	 * @see org.yakindu.base.types.AnnotationType#getProperties()
-	 * @see #getAnnotationType()
-	 * @generated
-	 */
-	EReference getAnnotationType_Properties();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.AnnotationType#getTargets <em>Targets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2594,6 +2629,38 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMetaComposite_MetaFeatures();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.Argument <em>Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Argument</em>'.
+	 * @see org.yakindu.base.types.Argument
+	 * @generated
+	 */
+	EClass getArgument();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.base.types.Argument#getParameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parameter</em>'.
+	 * @see org.yakindu.base.types.Argument#getParameter()
+	 * @see #getArgument()
+	 * @generated
+	 */
+	EReference getArgument_Parameter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.types.Argument#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.yakindu.base.types.Argument#getValue()
+	 * @see #getArgument()
+	 * @generated
+	 */
+	EReference getArgument_Value();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
@@ -3094,14 +3161,6 @@ public interface TypesPackage extends EPackage {
 		EClass ANNOTATION_TYPE = eINSTANCE.getAnnotationType();
 
 		/**
-		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ANNOTATION_TYPE__PROPERTIES = eINSTANCE.getAnnotationType_Properties();
-
-		/**
 		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3146,6 +3205,32 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference META_COMPOSITE__META_FEATURES = eINSTANCE.getMetaComposite_MetaFeatures();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ArgumentImpl <em>Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.ArgumentImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getArgument()
+		 * @generated
+		 */
+		EClass ARGUMENT = eINSTANCE.getArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARGUMENT__PARAMETER = eINSTANCE.getArgument_Parameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARGUMENT__VALUE = eINSTANCE.getArgument_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.

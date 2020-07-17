@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_O_-jsDkTEeanS76kJ96c-g" specification="namespace declarations&#xA;&#xA;interface:&#xA;// Define events and&#xA;// and variables here&#xA;&#xA;in event e : integer&#xA;&#xA;&#xA;internal:&#xA;&#xA;const B : integer = 1&#xA;const C : integer = 2" namespace="declarations" name="ConstOnlyInternalScope">
+  <sgraph:Statechart xmi:id="_O_-jsDkTEeanS76kJ96c-g" specification="namespace declarations&#xA;&#xA;@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;&#xA;interface:&#xA;// Define events and&#xA;// and variables here&#xA;&#xA;in event e : integer&#xA;&#xA;&#xA;internal:&#xA;&#xA;const B : integer = 1&#xA;const C : integer = 2" namespace="declarations" name="ConstOnlyInternalScope">
     <regions xmi:id="_PAAY4jkTEeanS76kJ96c-g" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PAEDQTkTEeanS76kJ96c-g">
         <outgoingTransitions xmi:id="_PAGfgzkTEeanS76kJ96c-g" target="_PAFRZzkTEeanS76kJ96c-g"/>

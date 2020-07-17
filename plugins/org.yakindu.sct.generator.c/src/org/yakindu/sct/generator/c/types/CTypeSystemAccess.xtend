@@ -20,6 +20,11 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sgraph.util.StatechartUtil
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.base.types.Event
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.c.GeneratorPredicate
+import org.yakindu.sct.model.sexec.extensions.ShadowEventExtensions
 
 /**
  * @author andreas muelder
@@ -28,6 +33,8 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	@Inject protected extension ITypeSystem
 	@Inject protected extension StatechartUtil
+	@Inject protected extension GeneratorPredicate
+	@Inject protected extension ShadowEventExtensions
 	
 	protected static val String ARRAY = "array"
 	protected static val String POINTER = "pointer"
@@ -56,7 +63,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	protected def printBuiltInType(TypeSpecifier typeSpecifier) {
 		if (typeSpecifier.type.name == POINTER) {
-			return '''«getTargetLanguageName(typeSpecifier.typeArguments.head)» *'''
+			return '''«getTargetLanguageName(typeSpecifier.typeArguments.head)»«typeSpecifier.pointerSymbol»'''
 		} else if (typeSpecifier.type.name == ARRAY) {
 			// TODO Array brackets after variable name
 			return '''«typeSpecifier.typeArguments.head.type.name»'''
@@ -69,6 +76,18 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	protected def printType(TypeSpecifier typeSpecifier) {
 		return getTargetLanguageName(typeSpecifier?.type)
+	}
+	
+	def pointerSymbol(TypeSpecifier it) {
+		if (useOutEventObservables) {
+			val event = EcoreUtil2.getContainerOfType(it, Event)
+			if (event !== null) {
+				if (event.direction === Direction.OUT || event.getOutEvent !== null) {
+					return "_pointer"
+				}
+			}
+		}
+		return "*"
 	}
 
 

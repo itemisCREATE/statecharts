@@ -1,0 +1,14 @@
+testclass SuperStepOnEnter for statechart supersteps.SuperStepOnEnter {
+	
+	@Test
+	operation test() {
+		enter
+		
+		assert active(supersteps.SuperStepOnEnter.r1.StateB)
+		
+		// no event handling on enter despite super step semantic
+		assert active(supersteps.SuperStepOnEnter.r2.StateA)
+
+		exit
+	}
+}

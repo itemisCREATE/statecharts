@@ -4,11 +4,11 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.statechartentryandexitactions.StatechartEntryAndExitActionsStatemachine;
-import org.yakindu.scr.statechartentryandexitactions.StatechartEntryAndExitActionsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.statechartactions.StatechartEntryAndExitActions;
+import org.yakindu.scr.statechartactions.StatechartEntryAndExitActions.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for StatechartEntryAndExitActions
@@ -16,13 +16,13 @@ import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
 @SuppressWarnings("all")
 public class StatechartEntryExitActions {
 	
-	private StatechartEntryAndExitActionsStatemachine statemachine;	
+	private StatechartEntryAndExitActions statemachine;	
 	private VirtualTimer timer;
 	
 	
 	@Before
 	public void statechartEntryExitActions_setUp() {
-		statemachine = new StatechartEntryAndExitActionsStatemachine();
+		statemachine = new StatechartEntryAndExitActions();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		

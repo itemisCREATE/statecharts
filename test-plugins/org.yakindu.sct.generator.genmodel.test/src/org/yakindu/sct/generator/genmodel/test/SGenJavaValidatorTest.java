@@ -109,6 +109,14 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	public void checkParameterValue() {
 		// Nothing to test
 	}
+	
+	/**
+	 * @see SGenJavaValidator#checkGeneratorEntry(GeneratorEntry)
+	 */
+	@Test
+	public void checkGeneratorEntry() {
+		// Nothing to test
+	}
 
 	/**
 	 * @see SGenJavaValidator#checkDuplicateElementRef(GeneratorEntry)

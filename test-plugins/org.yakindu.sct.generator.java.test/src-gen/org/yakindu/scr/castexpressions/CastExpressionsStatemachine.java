@@ -3,7 +3,7 @@ package org.yakindu.scr.castexpressions;
 
 
 public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private double realValue;
 		
@@ -27,15 +27,15 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_B,
-		main_region_C,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		MAIN_REGION_C,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -52,19 +52,19 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		this.isExecuting = value;
 	}
 	public CastExpressionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
-		sCInterface.setRealValue((((double) 5)));
+		defaultInterface.setRealValue((((double) 5)));
 		
-		sCInterface.setIntValue((((long) 5.5)));
+		defaultInterface.setIntValue((((long) 5.5)));
 		
 		isExecuting = false;
 	}
@@ -102,17 +102,17 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
-			case main_region_B:
+			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
-			case main_region_C:
+			case MAIN_REGION_C:
 				main_region_C_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -123,7 +123,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -140,65 +140,65 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
-		case main_region_B:
-			return stateVector[0] == State.main_region_B;
-		case main_region_C:
-			return stateVector[0] == State.main_region_C;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
+		case MAIN_REGION_C:
+			return stateVector[0] == State.MAIN_REGION_C;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public double getRealValue() {
-		return sCInterface.getRealValue();
+		return defaultInterface.getRealValue();
 	}
 	
 	public void setRealValue(double value) {
-		sCInterface.setRealValue(value);
+		defaultInterface.setRealValue(value);
 	}
 	
 	public long getIntValue() {
-		return sCInterface.getIntValue();
+		return defaultInterface.getIntValue();
 	}
 	
 	public void setIntValue(long value) {
-		sCInterface.setIntValue(value);
+		defaultInterface.setIntValue(value);
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setRealValue((3 * ((long) 5.5)));
+		defaultInterface.setRealValue((3 * ((long) 5.5)));
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setRealValue(((long) (((sCInterface.realValue * sCInterface.intValue) * 10.1))));
+		defaultInterface.setRealValue(((long) (((defaultInterface.realValue * defaultInterface.intValue) * 10.1))));
 	}
 	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		entryAction_main_region_B();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		entryAction_main_region_C();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_C;
+		stateVector[0] = State.MAIN_REGION_C;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -209,31 +209,31 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
-		case main_region_C:
+		case MAIN_REGION_C:
 			exitSequence_main_region_C();
 			break;
 		default:
@@ -267,7 +267,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 		if (try_transition) {
 			if (react()==false) {
-				if ((((double) ((sCInterface.getRealValue() * 0.1)))>((long) 1.4) && ((long) ((sCInterface.getRealValue() * sCInterface.getIntValue())))<((double) 100))) {
+				if ((((double) ((defaultInterface.getRealValue() * 0.1)))>((long) 1.4) && ((long) ((defaultInterface.getRealValue() * defaultInterface.getIntValue())))<((double) 100))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {

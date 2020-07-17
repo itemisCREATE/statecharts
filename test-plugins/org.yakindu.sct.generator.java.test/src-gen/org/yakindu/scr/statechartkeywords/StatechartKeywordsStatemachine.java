@@ -3,21 +3,21 @@ package org.yakindu.scr.statechartkeywords;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.yakindu.scr.ITimer;
+import org.yakindu.sct.ITimer;
 import org.yakindu.sct.rx.Observable;
 
 public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatemachine {
-	protected class SCIIfImpl implements SCIIf {
+	protected class InterfaceIfImpl implements InterfaceIf {
 	
-		private List<SCIIfListener> listeners = new LinkedList<SCIIfListener>();
+		private List<InterfaceIfListener> listeners = new LinkedList<InterfaceIfListener>();
 		
-		public List<SCIIfListener> getListeners() {
+		public List<InterfaceIfListener> getListeners() {
 			return listeners;
 		}
-		private SCIIfOperationCallback operationCallback;
+		private InterfaceIfOperationCallback operationCallback;
 		
-		public void setSCIIfOperationCallback(
-				SCIIfOperationCallback operationCallback) {
+		public void setInterfaceIfOperationCallback(
+				InterfaceIfOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 		private boolean operationCallbackEvent;
@@ -25,7 +25,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		protected void raiseOperationCallback() {
 			operationCallbackEvent = true;
-			for (SCIIfListener listener : listeners) {
+			for (InterfaceIfListener listener : listeners) {
 				listener.onOperationCallbackRaised();
 			}
 			operationCallbackEventObservable.next(null);
@@ -42,7 +42,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		protected void raiseListeners() {
 			listenersEvent = true;
-			for (SCIIfListener listener : listeners) {
+			for (InterfaceIfListener listener : listeners) {
 				listener.onListenersRaised();
 			}
 			listenersEventObservable.next(null);
@@ -117,13 +117,13 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		private StatechartKeywordsStatemachineInternalEvBuf internal = new StatechartKeywordsStatemachineInternalEvBuf();
 		private StatechartKeywordsStatemachineTimeEventsEvBuf timeEvents = new StatechartKeywordsStatemachineTimeEventsEvBuf();
 	}
-	protected SCIIfImpl sCIIf;
+	protected InterfaceIfImpl interfaceIf;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_Timer,
-		$NullState$
+		MAIN_REGION_TIMER,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -191,14 +191,14 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	}
 	
 	
-	private long sCIIfVariable;
+	private long sCIIf;
 	
-	protected long getSCIIfVariable() {
-		return sCIIfVariable;
+	protected long getSCIIf() {
+		return sCIIf;
 	}
 	
-	protected void setSCIIfVariable(long value) {
-		this.sCIIfVariable = value;
+	protected void setSCIIf(long value) {
+		this.sCIIf = value;
 	}
 	
 	
@@ -215,7 +215,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		this.isExecuting = value;
 	}
 	public StatechartKeywordsStatemachine() {
-		sCIIf = new SCIIfImpl();
+		interfaceIf = new InterfaceIfImpl();
 	}
 	
 	public void init() {
@@ -226,26 +226,26 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		if (this.sCIIf.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCIIf must be set.");
+		if (this.interfaceIf.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface InterfaceIf must be set.");
 		}
 		
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		clearInternalEvents();
 		
-		sCIIf.setTimer(0);
+		interfaceIf.setTimer(0);
 		
-		sCIIf.setIsActive(0);
+		interfaceIf.setIsActive(0);
 		
-		sCIIf.setInit(0);
+		interfaceIf.setInit(0);
 		
-		sCIIf.setEnter(0);
+		interfaceIf.setEnter(0);
 		
-		sCIIf.setRunCycle(0);
+		interfaceIf.setRunCycle(0);
 		
 		setTimerVariable(0);
 		
@@ -257,7 +257,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 		setRunCycle(0);
 		
-		setSCIIfVariable(0);
+		setSCIIf(0);
 		
 		isExecuting = false;
 	}
@@ -307,11 +307,11 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case main_region_Timer:
+				case MAIN_REGION_TIMER:
 					main_region_Timer_react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
@@ -325,7 +325,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -365,8 +365,8 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_Timer:
-			return stateVector[0] == State.main_region_Timer;
+		case MAIN_REGION_TIMER:
+			return stateVector[0] == State.MAIN_REGION_TIMER;
 		default:
 			return false;
 		}
@@ -396,8 +396,8 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		timeEvents[eventID] = true;
 	}
 	
-	public SCIIf getSCIIf() {
-		return sCIIf;
+	public InterfaceIf getInterfaceIf() {
+		return interfaceIf;
 	}
 	
 	private void raiseOperationCallback() {
@@ -416,7 +416,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	/* 'default' enter sequence for state Timer */
 	private void enterSequence_main_region_Timer_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Timer;
+		stateVector[0] = State.MAIN_REGION_TIMER;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -427,13 +427,13 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	/* Default exit sequence for state Timer */
 	private void exitSequence_main_region_Timer() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_Timer:
+		case MAIN_REGION_TIMER:
 			exitSequence_main_region_Timer();
 			break;
 		default:

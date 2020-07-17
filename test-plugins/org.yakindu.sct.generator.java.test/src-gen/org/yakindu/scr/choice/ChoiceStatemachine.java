@@ -3,7 +3,7 @@ package org.yakindu.scr.choice;
 
 
 public class ChoiceStatemachine implements IChoiceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e;
 		
@@ -45,24 +45,24 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e;
 		private boolean f;
 		private boolean g;
 		private boolean h;
 	}
 	private static class ChoiceStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_A,
-		main_region_B,
-		main_region_C,
-		$NullState$
+		MAIN_REGION_A,
+		MAIN_REGION_B,
+		MAIN_REGION_C,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -81,18 +81,18 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		this.isExecuting = value;
 	}
 	public ChoiceStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
 		
-		sCInterface.setC(false);
+		defaultInterface.setC(false);
 		
 		isExecuting = false;
 	}
@@ -131,17 +131,17 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
+			case MAIN_REGION_A:
 				main_region_A_react(true);
 				break;
-			case main_region_B:
+			case MAIN_REGION_B:
 				main_region_B_react(true);
 				break;
-			case main_region_C:
+			case MAIN_REGION_C:
 				main_region_C_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -152,7 +152,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -164,24 +164,24 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e = sCInterface.e;
-		sCInterface.e = false;
+		_current.iface.e = defaultInterface.e;
+		defaultInterface.e = false;
 		
-		_current.iface.f = sCInterface.f;
-		sCInterface.f = false;
+		_current.iface.f = defaultInterface.f;
+		defaultInterface.f = false;
 		
-		_current.iface.g = sCInterface.g;
-		sCInterface.g = false;
+		_current.iface.g = defaultInterface.g;
+		defaultInterface.g = false;
 		
-		_current.iface.h = sCInterface.h;
-		sCInterface.h = false;
+		_current.iface.h = defaultInterface.h;
+		defaultInterface.h = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e = false;
-		sCInterface.f = false;
-		sCInterface.g = false;
-		sCInterface.h = false;
+		defaultInterface.e = false;
+		defaultInterface.f = false;
+		defaultInterface.g = false;
+		defaultInterface.h = false;
 	}
 	
 	/**
@@ -190,59 +190,59 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_A:
-			return stateVector[0] == State.main_region_A;
-		case main_region_B:
-			return stateVector[0] == State.main_region_B;
-		case main_region_C:
-			return stateVector[0] == State.main_region_C;
+		case MAIN_REGION_A:
+			return stateVector[0] == State.MAIN_REGION_A;
+		case MAIN_REGION_B:
+			return stateVector[0] == State.MAIN_REGION_B;
+		case MAIN_REGION_C:
+			return stateVector[0] == State.MAIN_REGION_C;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE() {
-		sCInterface.raiseE();
+		defaultInterface.raiseE();
 	}
 	
 	public void raiseF() {
-		sCInterface.raiseF();
+		defaultInterface.raiseF();
 	}
 	
 	public void raiseG() {
-		sCInterface.raiseG();
+		defaultInterface.raiseG();
 	}
 	
 	public void raiseH() {
-		sCInterface.raiseH();
+		defaultInterface.raiseH();
 	}
 	
 	public boolean getC() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	public void setC(boolean value) {
-		sCInterface.setC(value);
+		defaultInterface.setC(value);
 	}
 	
 	private boolean check_main_region__choice_0_tr1_tr1() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private boolean check_main_region__choice_1_tr0_tr0() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private boolean check_main_region__choice_3_tr1_tr1() {
-		return sCInterface.getC();
+		return defaultInterface.getC();
 	}
 	
 	private void effect_main_region__choice_0_tr1() {
@@ -280,19 +280,19 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		stateVector[0] = State.MAIN_REGION_A;
 	}
 	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_B;
+		stateVector[0] = State.MAIN_REGION_B;
 	}
 	
 	/* 'default' enter sequence for state C */
 	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_C;
+		stateVector[0] = State.MAIN_REGION_C;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -303,31 +303,31 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	/* Default exit sequence for state A */
 	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state B */
 	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state C */
 	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_A:
+		case MAIN_REGION_A:
 			exitSequence_main_region_A();
 			break;
-		case main_region_B:
+		case MAIN_REGION_B:
 			exitSequence_main_region_B();
 			break;
-		case main_region_C:
+		case MAIN_REGION_C:
 			exitSequence_main_region_C();
 			break;
 		default:

@@ -22,9 +22,15 @@ public interface IJavaFeatureConstants {
 
 	public static final String NAMING_FEATURE = "Naming";
 
+	public static final String LIBRARY_PACKAGE = "libraryPackage";
+	public static final String LIBRARY_PACKAGE_DEFAULT = "org.yakindu.sct";
+	
+	public static final String API_PACKAGE = "apiPackage";
+	
 	public static final String BASE_PACKAGE = "basePackage";
-
-	public static final String IMPLEMENTATION_SUFFIX = "implementationSuffix";
+	public static final String BASE_PACKAGE_DEFAULT = "";
+	
+	public static final String TYPE_NAME = "typeName";
 
 	public static final String GENERAL_FEATURES = "GeneralFeatures";
 

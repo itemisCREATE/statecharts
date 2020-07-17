@@ -1,0 +1,47 @@
+/** 
+ * @author axel terfloth
+ */
+testclass InEventLifeCycleBuffered for statechart eventbuffers.InEventLifeCycleBuffered {
+	@Test
+	operation InEventLifeCycleBufferedTest(){
+		 
+		enter
+		 
+		assert active(eventbuffers.InEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InEventLifeCycleBuffered.r2.C)
+		
+		// the raised in event i1 will be buffered
+		raise e
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InEventLifeCycleBuffered.r2.C)
+
+		// and i1 will be consumed in the next cycle		
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InEventLifeCycleBuffered.r2.D)
+		
+		// all events should be processed now and no further 
+		// transition should happen in an 'empty' cycle		
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InEventLifeCycleBuffered.r2.D)
+		
+		// the in event i2 should be buffered and is visible in
+		// low priority region within the next cycle
+		raise f
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycleBuffered.r1.A)
+		assert active(eventbuffers.InEventLifeCycleBuffered.r2.C) 
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycleBuffered.r1.B)
+		assert active(eventbuffers.InEventLifeCycleBuffered.r2.C)
+
+		// all events should be processed now and no further 
+		// transition should happen in an 'empty' cycle		
+		proceed 1 cycle
+		assert active(eventbuffers.InEventLifeCycleBuffered.r1.B)
+		assert active(eventbuffers.InEventLifeCycleBuffered.r2.C)
+		
+	} 
+}

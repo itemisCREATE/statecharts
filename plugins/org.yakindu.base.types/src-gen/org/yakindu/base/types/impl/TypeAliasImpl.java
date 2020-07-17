@@ -99,6 +99,7 @@ public class TypeAliasImpl extends TypedDeclarationImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -108,6 +109,7 @@ public class TypeAliasImpl extends TypedDeclarationImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAbstract(boolean newAbstract) {
 		boolean oldAbstract = abstract_;
 		abstract_ = newAbstract;
@@ -120,6 +122,7 @@ public class TypeAliasImpl extends TypedDeclarationImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isVisible() {
 		return visible;
 	}
@@ -129,6 +132,7 @@ public class TypeAliasImpl extends TypedDeclarationImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVisible(boolean newVisible) {
 		boolean oldVisible = visible;
 		visible = newVisible;
@@ -141,6 +145,7 @@ public class TypeAliasImpl extends TypedDeclarationImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeSpecifier> getSuperTypes() {
 		if (superTypes == null) {
 			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, TypesPackage.TYPE_ALIAS__SUPER_TYPES);

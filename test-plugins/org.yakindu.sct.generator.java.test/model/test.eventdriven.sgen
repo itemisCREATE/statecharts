@@ -13,6 +13,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "EventDrivenInternalEventStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -30,6 +31,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "EventDrivenTriggeredByEventStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -47,6 +49,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "EventDrivenTriggeredByTimeEventStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -63,6 +66,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "LocalEventsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -79,6 +83,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "NoLocalEventsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -94,7 +99,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage = "org.yakindu.scr.eventdrivenoutevents"
+			typeName = "EventDrivenOutEventsStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -110,7 +116,8 @@ GeneratorModel for sctunit::java {
 		}
 		
 		feature StatechartNaming {
-			basePackage = "org.yakindu.scr"
+			basePackage = "org.yakindu.scr.eventdriven"
+			typeName = "EventDrivenStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}

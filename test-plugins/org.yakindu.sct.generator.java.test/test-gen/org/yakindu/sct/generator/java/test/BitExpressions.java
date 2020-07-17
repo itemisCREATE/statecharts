@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine;
-import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for BitExpressions
@@ -40,12 +40,12 @@ public class BitExpressions {
 	@Test
 	public void bitExpressions() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
+		assertTrue(statemachine.isStateActive(BitExpressionsStatemachine.State.MAIN_REGION_STATEA));
 		assertTrue(statemachine.getMyBit1() == 5l);
 		assertTrue(statemachine.getMyBit2() == 7l);
 		statemachine.raiseE1();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_StateB));
+		assertTrue(statemachine.isStateActive(BitExpressionsStatemachine.State.MAIN_REGION_STATEB));
 		assertTrue(statemachine.getLeftBitshift() == 10l);
 		assertTrue(statemachine.getRightBitshift() == 2l);
 		assertTrue(statemachine.getComplementBitshift() == - 6l );

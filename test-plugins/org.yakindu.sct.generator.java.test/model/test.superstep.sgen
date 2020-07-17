@@ -13,6 +13,7 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "CycleBasedSuperStepStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}
@@ -29,6 +30,24 @@ GeneratorModel for sctunit::java {
 		
 		feature StatechartNaming {
 			basePackage = "org.yakindu.scr"
+			typeName = "EventDrivenSuperStepStatemachine"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+	
+	test SuperStepOnEnter {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			typeName = "SuperStepOnEnterStatemachine"
 			libraryTargetFolder = "src-gen"
 		}
 	}

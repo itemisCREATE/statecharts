@@ -1,0 +1,34 @@
+GeneratorModel for yakindu::java {
+
+	// default naming
+	statechart Declarations {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+	}
+	
+	// basePackage & apiPackage & libraryPackage
+	statechart Declarations {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		feature Naming {
+			basePackage = "org.yakindu.scr.naming.base"
+			apiPackage = "org.yakindu.scr.naming.api"
+			libraryPackage = "org.yakindu.scr.naming.lib"
+		}
+	}
+	
+	// typeName
+	statechart Declarations {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		feature Naming {
+			typeName = "CustomName"
+		}
+	}
+}

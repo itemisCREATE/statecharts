@@ -25,8 +25,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 
-import org.yakindu.scr.operations.IOperationsStatemachine.SCIInterface1OperationCallback;
-import org.yakindu.scr.operations.IOperationsStatemachine.SCInterfaceOperationCallback;
+import org.yakindu.scr.operations.IOperationsStatemachine.InterfaceInterface1OperationCallback;
+import org.yakindu.scr.operations.IOperationsStatemachine.InterfaceOperationCallback;
 import org.yakindu.scr.operations.OperationsStatemachine;
 import org.yakindu.scr.operations.IOperationsStatemachine.InternalOperationCallback;
 import org.yakindu.scr.operations.OperationsStatemachine.State;
@@ -38,19 +38,19 @@ public class OperationsTestCustom{
 
 	private OperationsStatemachine statemachine;
 	private InternalOperationCallback internalMock;
-	private SCInterfaceOperationCallback interfaceMock;
-	private SCIInterface1OperationCallback interface2Mock;
+	private InterfaceOperationCallback interfaceMock;
+	private InterfaceInterface1OperationCallback interface2Mock;
 	
 	@Before
 	public void setUp() {
 		internalMock = mock(InternalOperationCallback.class);
-		interfaceMock = mock(SCInterfaceOperationCallback.class);
-		interface2Mock = mock(SCIInterface1OperationCallback.class);
+		interfaceMock = mock(InterfaceOperationCallback.class);
+		interface2Mock = mock(InterfaceInterface1OperationCallback.class);
 		when(interfaceMock.alwaysTrue()).thenReturn(true);
 		statemachine = new OperationsStatemachine();
 		statemachine.setInternalOperationCallback(internalMock);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(interfaceMock);
-		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface2Mock);
+		statemachine.getInterface().setInterfaceOperationCallback(interfaceMock);
+		statemachine.getInterfaceInterface1().setInterfaceInterface1OperationCallback(interface2Mock);
 		statemachine.init();
 	}
 
@@ -62,9 +62,9 @@ public class OperationsTestCustom{
 	@Test
 	public void testOperationsSimpleTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_A));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_B));
 	}
 	
 	@Test
@@ -75,12 +75,12 @@ public class OperationsTestCustom{
 		ArgumentCaptor<String> stringCapture = ArgumentCaptor.forClass(String.class);
 		
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_A));
 		statemachine.runCycle();
 		
 		//State is active
 	    
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_B));
 		
 		//Operations in State B used 
 		
@@ -110,7 +110,7 @@ public class OperationsTestCustom{
 		
 		//State is active
 		
-		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_C));
 		
 		//Operations in State C used
 		
@@ -140,7 +140,7 @@ public class OperationsTestCustom{
 		
 		//State is active
 		
-		assertTrue(statemachine.isStateActive(State.main_region_D));
+		assertTrue(statemachine.isStateActive(State.MAIN_REGION_D));
 		
 		//Operations in State D used
 		

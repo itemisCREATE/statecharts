@@ -6,9 +6,9 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_myState,
-		main_region__final_,
-		$NullState$
+		MAIN_REGION_MYSTATE,
+		MAIN_REGION__FINAL_,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[1];
@@ -30,7 +30,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		
@@ -71,14 +71,14 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		isExecuting = true;
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_myState:
+			case MAIN_REGION_MYSTATE:
 				main_region_myState_react(true);
 				break;
-			case main_region__final_:
+			case MAIN_REGION__FINAL_:
 				main_region__final__react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -89,14 +89,14 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$;
 	}
 	
 	/** 
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.main_region__final_);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_);
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -104,10 +104,10 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_myState:
-			return stateVector[0] == State.main_region_myState;
-		case main_region__final_:
-			return stateVector[0] == State.main_region__final_;
+		case MAIN_REGION_MYSTATE:
+			return stateVector[0] == State.MAIN_REGION_MYSTATE;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
@@ -116,13 +116,13 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	/* 'default' enter sequence for state myState */
 	private void enterSequence_main_region_myState_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_myState;
+		stateVector[0] = State.MAIN_REGION_MYSTATE;
 	}
 	
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region__final_;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -133,22 +133,22 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	/* Default exit sequence for state myState */
 	private void exitSequence_main_region_myState() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for final state. */
 	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_myState:
+		case MAIN_REGION_MYSTATE:
 			exitSequence_main_region_myState();
 			break;
-		case main_region__final_:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:

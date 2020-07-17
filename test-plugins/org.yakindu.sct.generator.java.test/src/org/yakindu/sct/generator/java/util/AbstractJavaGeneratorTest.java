@@ -42,7 +42,7 @@ import com.google.inject.util.Modules;
  */
 public abstract class AbstractJavaGeneratorTest {
 
-	private static final String SRC_GEN = "src-gen";
+	protected static final String SRC_GEN = "src-gen";
 	private static final String TARGET_PROJECT = "targetProject";
 	private static final String CONTENT_TYPE = "statechart";
 	private static final String OUTLET_FEATURE = "Outlet";
@@ -83,7 +83,7 @@ public abstract class AbstractJavaGeneratorTest {
 				.getProject(outletFeatureConfigurationHelper.getTargetProjectValue(entry).getStringValue());
 	}
 
-	private GeneratorEntry createGeneratorEntry(String targetProject, String targetFolder) {
+	protected GeneratorEntry createGeneratorEntry(String targetProject, String targetFolder) {
 		GeneratorEntry entry = SGenFactory.eINSTANCE.createGeneratorEntry();
 		entry.setContentType(CONTENT_TYPE);
 		FeatureConfiguration config = SGenFactory.eINSTANCE.createFeatureConfiguration();

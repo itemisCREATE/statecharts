@@ -40,7 +40,7 @@ class StatemachineFunctionsGenerator {
 	def createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
 			«FOR scope : flow.interfaceScopes»
-			«scope.interfaceName.asEscapedIdentifier» = new «scope.getInterfaceImplName()»();
+			«scope.interfaceVariableName» = new «scope.getInterfaceImplName()»();
 			«ENDFOR»
 		}
 
@@ -53,11 +53,11 @@ class StatemachineFunctionsGenerator {
 				«IF event.direction == Direction::IN»
 					«IF event.hasValue»
 						public «sync»void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
-							«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
+							«scope.interfaceVariableName».raise«event.name.asName»(value);
 						}
 					«ELSE»
 						public «sync»void raise«event.name.asName»() {
-							«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»();
+							«scope.interfaceVariableName».raise«event.name.asName»();
 						}
 					«ENDIF»
 
@@ -65,18 +65,18 @@ class StatemachineFunctionsGenerator {
 				«IF event.direction ==  Direction::OUT»
 					«IF useOutEventGetters»
 						public «sync»boolean isRaised«event.name.asName»() {
-							return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
+							return «scope.interfaceVariableName».isRaised«event.name.asName»();
 						}
 						
 						«IF event.hasValue»
 							public «sync»«event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
-								return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
+								return «scope.interfaceVariableName».get«event.name.asName»Value();
 							}
 							
 						«ENDIF»
 					«ELSEIF useOutEventObservables»
 						public «sync»Observable<«event.eventType»> «event.observableGetterName»() {
-							return «scope.interfaceName.asEscapedIdentifier».«event.observableGetterName»();
+							return «scope.interfaceVariableName».«event.observableGetterName»();
 						}
 						
 					«ENDIF»
@@ -84,12 +84,12 @@ class StatemachineFunctionsGenerator {
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
 				public «sync»«variable.typeSpecifier.targetLanguageName» «variable.getter()» {
-					return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
+					return «scope.interfaceVariableName».«variable.getter()»;
 				}
 				
 				«IF !variable.const && !variable.readonly»
 					public «sync»void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
-						«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
+						«scope.interfaceVariableName».«variable.setter»(value);
 					}
 
 				«ENDIF»
@@ -100,7 +100,7 @@ class StatemachineFunctionsGenerator {
 	def interfaceAccessors(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
 			public «scope.interfaceName» get«scope.interfaceName»() {
-				return «scope.interfaceName.toFirstLower()»;
+				return «scope.interfaceVariableName»;
 			}
 
 		«ENDFOR»

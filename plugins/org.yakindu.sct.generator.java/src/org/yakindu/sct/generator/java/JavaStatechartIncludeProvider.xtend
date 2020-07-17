@@ -13,8 +13,11 @@ import com.google.common.collect.Sets
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Direction
 import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Package
+import org.yakindu.sct.generator.java.util.StringHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
@@ -22,23 +25,16 @@ import org.yakindu.sct.model.sgraph.util.StatechartUtil
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.sct.model.stext.stext.ImportScope
-import org.yakindu.base.types.Event
-import org.yakindu.base.types.Direction
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 
-	@Inject
-	protected IPackageImport2URIMapper includeMapper;
+	@Inject protected IPackageImport2URIMapper includeMapper;
 
-	@Inject
-	protected extension StatechartUtil
-	
-	@Inject
-	protected extension Naming
-
-	@Inject
-	protected extension GenmodelEntries
+	@Inject extension StatechartUtil
+	@Inject extension Naming
+	@Inject extension GenmodelEntries
+	@Inject extension StringHelper
 
 	override Iterable<String> getImports(ExecutionFlow it, GeneratorEntry entry) {
 		val imports = Sets.newHashSet
@@ -46,11 +42,14 @@ class JavaStatechartIncludeProvider extends JavaIncludeProvider {
 			val typesRes = (sourceElement as Statechart).eResource.resourceSet.getResource(p.uri, true);
 			val submachineChart = typesRes.subchart
 			val submachineClass = submachineChart.statemachineClassName
-			val submachineImport = submachineChart.getImplementationPackageName(entry) + "." + submachineClass
-			imports.add(submachineImport)
-			if (submachineChart.scopes.filter(InterfaceScope).exists[declarations.filter(Event).exists[direction == Direction.OUT]]) {
-				val submachineInterface = submachineChart.statemachineInterfaceName
-				imports.add(submachineChart.getImplementationPackageName(entry) + "." + submachineInterface)
+			if (!entry.basePackage.nullOrEmpty) {
+				imports.add(entry.basePackage.dot(submachineClass))
+			}
+			if (!entry.apiPackage.nullOrEmpty) {
+				if (submachineChart.scopes.filter(InterfaceScope).exists[declarations.filter(Event).exists[direction == Direction.OUT]]) {
+					val submachineInterface = submachineChart.statemachineInterfaceName
+					imports.add(entry.apiPackage.dot(submachineInterface))
+				}
 			}
 		}
 		return imports

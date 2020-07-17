@@ -200,8 +200,10 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void resume() {
-		suspended = false;
-		start();
+		if (suspended) {
+			suspended = false;
+			start();
+		}
 	}
 
 	@Override

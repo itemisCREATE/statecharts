@@ -7,6 +7,12 @@ testsuite AllTests {
 	
 	// entries
 	EntryReactionAction,
+	
+	// eventbuffers
+	InEventLifeCycleBuffered,
+	InEventLifeCycleUnbuffered,
+	InternalEventLifeCycleBuffered,
+	InternalEventLifeCycleUnbuffered,
 
 	// eventdriven
 	EventDriven,
@@ -43,6 +49,7 @@ testsuite AllTests {
     // supersteps
     CycleBasedSuperStep,
     EventDrivenSuperStep,
+    SuperStepOnEnter,
 
 	// not grouped
 	AlwaysOncycle,
@@ -77,7 +84,6 @@ testsuite AllTests {
 	HistoryWithoutInitialStep,
 	InEventLifeCycle, 
 	IntegerExpressions, 
-	InternalEventLifeCycle,
 	LocalReactions,
 	LogicalAndTests, 
 	LogicalOrTests,

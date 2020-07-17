@@ -11,15 +11,15 @@
 package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class UsingNamespaceProvider implements ISourceFragment {
 	@Inject extension EventNaming
-	@Inject extension EventDrivenPredicate
+	@Inject extension GeneratorPredicate
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		if(!needsEventNamespace) return ''''''

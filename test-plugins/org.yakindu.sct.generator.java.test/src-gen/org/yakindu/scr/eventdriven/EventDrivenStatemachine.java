@@ -6,13 +6,18 @@ import java.util.Queue;
 import org.yakindu.sct.rx.Observable;
 
 public class EventDrivenStatemachine implements IEventDrivenStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean inEvent;
 		
 		
 		public void raiseInEvent() {
-			inEvent = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					inEvent = true;
+				}
+			});
 			runCycle();
 		}
 		
@@ -22,8 +27,13 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		
 		public void raiseInEventBool(final boolean value) {
-			inEventBoolValue = value;
-			inEventBool = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					inEventBoolValue = value;
+					inEventBool = true;
+				}
+			});
 			runCycle();
 		}
 		protected boolean getInEventBoolValue() {
@@ -124,38 +134,43 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 	}
 	
-	protected class SCINamedIImpl implements SCINamedI {
+	protected class InterfaceNamedIImpl implements InterfaceNamedI {
 	
 		private boolean namedInEvent;
 		
 		
 		public void raiseNamedInEvent() {
-			namedInEvent = true;
+			inEventQueue.add(new Runnable() {
+				@Override
+				public void run() {
+					namedInEvent = true;
+				}
+			});
 			runCycle();
 		}
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
-	protected SCINamedIImpl sCINamedI;
+	protected InterfaceNamedIImpl interfaceNamedI;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		main_region_StateA,
-		main_region_StateB,
-		main_region_StateC,
-		main_region_StateE,
-		main_region_StateE__region0_State1,
-		main_region_StateE__region0_State2,
-		main_region_StateE__region0_State3,
-		main_region_StateE__region1_State1,
-		main_region_StateE__region1_State2,
-		main_region_StateF,
-		main_region_StateD,
-		main_region__final_,
-		$NullState$
+		MAIN_REGION_STATEA,
+		MAIN_REGION_STATEB,
+		MAIN_REGION_STATEC,
+		MAIN_REGION_STATEE,
+		MAIN_REGION_STATEE__REGION0_STATE1,
+		MAIN_REGION_STATEE__REGION0_STATE2,
+		MAIN_REGION_STATEE__REGION0_STATE3,
+		MAIN_REGION_STATEE__REGION1_STATE1,
+		MAIN_REGION_STATEE__REGION1_STATE2,
+		MAIN_REGION_STATEF,
+		MAIN_REGION_STATED,
+		MAIN_REGION__FINAL_,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[2];
@@ -163,6 +178,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	private int nextStateIndex;
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
+	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean locEvent;
 	private boolean e1;
 	private boolean e2;
@@ -177,14 +193,14 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		this.isExecuting = value;
 	}
 	public EventDrivenStatemachine() {
-		sCInterface = new SCInterfaceImpl();
-		sCINamedI = new SCINamedIImpl();
+		defaultInterface = new InterfaceImpl();
+		interfaceNamedI = new InterfaceNamedIImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -231,48 +247,48 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		do { 
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				case main_region_StateA:
+				case MAIN_REGION_STATEA:
 					main_region_StateA_react(true);
 					break;
-				case main_region_StateB:
+				case MAIN_REGION_STATEB:
 					main_region_StateB_react(true);
 					break;
-				case main_region_StateC:
+				case MAIN_REGION_STATEC:
 					main_region_StateC_react(true);
 					break;
-				case main_region_StateE__region0_State1:
+				case MAIN_REGION_STATEE__REGION0_STATE1:
 					main_region_StateE__region0_State1_react(true);
 					break;
-				case main_region_StateE__region0_State2:
+				case MAIN_REGION_STATEE__REGION0_STATE2:
 					main_region_StateE__region0_State2_react(true);
 					break;
-				case main_region_StateE__region0_State3:
+				case MAIN_REGION_STATEE__REGION0_STATE3:
 					main_region_StateE__region0_State3_react(true);
 					break;
-				case main_region_StateE__region1_State1:
+				case MAIN_REGION_STATEE__REGION1_STATE1:
 					main_region_StateE__region1_State1_react(true);
 					break;
-				case main_region_StateE__region1_State2:
+				case MAIN_REGION_STATEE__REGION1_STATE2:
 					main_region_StateE__region1_State2_react(true);
 					break;
-				case main_region_StateF:
+				case MAIN_REGION_STATEF:
 					main_region_StateF_react(true);
 					break;
-				case main_region_StateD:
+				case MAIN_REGION_STATED:
 					main_region_StateD_react(true);
 					break;
-				case main_region__final_:
+				case MAIN_REGION__FINAL_:
 					main_region__final__react(true);
 					break;
 				default:
-					// $NullState$
+					// $NULLSTATE$
 				}
 			}
 			
 			clearInEvents();
 			clearInternalEvents();
 			nextEvent();
-		} while (((((((sCInterface.inEvent || sCInterface.inEventBool) || sCINamedI.namedInEvent) || locEvent) || e1) || e2) || e3));
+		} while (((((((defaultInterface.inEvent || defaultInterface.inEventBool) || interfaceNamedI.namedInEvent) || locEvent) || e1) || e2) || e3));
 		
 		isExecuting = false;
 	}
@@ -281,27 +297,27 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$;
 	}
 	
 	/** 
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return (stateVector[0] == State.main_region__final_) && (stateVector[1] == State.$NullState$);
+		return (stateVector[0] == State.MAIN_REGION__FINAL_) && (stateVector[1] == State.$NULLSTATE$);
 	}
 	private void clearOutEvents() {
-		sCInterface.outEvent = false;
-		sCInterface.running = false;
-		sCInterface.oe1 = false;
-		sCInterface.oe2 = false;
-		sCInterface.oe3 = false;
+		defaultInterface.outEvent = false;
+		defaultInterface.running = false;
+		defaultInterface.oe1 = false;
+		defaultInterface.oe2 = false;
+		defaultInterface.oe3 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.inEvent = false;
-		sCInterface.inEventBool = false;
-		sCINamedI.namedInEvent = false;
+		defaultInterface.inEvent = false;
+		defaultInterface.inEventBool = false;
+		interfaceNamedI.namedInEvent = false;
 	}
 	
 	private void clearInternalEvents() {
@@ -316,6 +332,10 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			internalEventQueue.poll().run();
 			return;
 		}
+		if(!inEventQueue.isEmpty()) {
+			inEventQueue.poll().run();
+			return;
+		}
 	}
 	/**
 	* Returns true if the given state is currently active otherwise false.
@@ -323,42 +343,42 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case main_region_StateA:
-			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
-		case main_region_StateC:
-			return stateVector[0] == State.main_region_StateC;
-		case main_region_StateE:
+		case MAIN_REGION_STATEA:
+			return stateVector[0] == State.MAIN_REGION_STATEA;
+		case MAIN_REGION_STATEB:
+			return stateVector[0] == State.MAIN_REGION_STATEB;
+		case MAIN_REGION_STATEC:
+			return stateVector[0] == State.MAIN_REGION_STATEC;
+		case MAIN_REGION_STATEE:
 			return stateVector[0].ordinal() >= State.
-					main_region_StateE.ordinal()&& stateVector[0].ordinal() <= State.main_region_StateE__region1_State2.ordinal();
-		case main_region_StateE__region0_State1:
-			return stateVector[0] == State.main_region_StateE__region0_State1;
-		case main_region_StateE__region0_State2:
-			return stateVector[0] == State.main_region_StateE__region0_State2;
-		case main_region_StateE__region0_State3:
-			return stateVector[0] == State.main_region_StateE__region0_State3;
-		case main_region_StateE__region1_State1:
-			return stateVector[1] == State.main_region_StateE__region1_State1;
-		case main_region_StateE__region1_State2:
-			return stateVector[1] == State.main_region_StateE__region1_State2;
-		case main_region_StateF:
-			return stateVector[0] == State.main_region_StateF;
-		case main_region_StateD:
-			return stateVector[0] == State.main_region_StateD;
-		case main_region__final_:
-			return stateVector[0] == State.main_region__final_;
+					MAIN_REGION_STATEE.ordinal()&& stateVector[0].ordinal() <= State.MAIN_REGION_STATEE__REGION1_STATE2.ordinal();
+		case MAIN_REGION_STATEE__REGION0_STATE1:
+			return stateVector[0] == State.MAIN_REGION_STATEE__REGION0_STATE1;
+		case MAIN_REGION_STATEE__REGION0_STATE2:
+			return stateVector[0] == State.MAIN_REGION_STATEE__REGION0_STATE2;
+		case MAIN_REGION_STATEE__REGION0_STATE3:
+			return stateVector[0] == State.MAIN_REGION_STATEE__REGION0_STATE3;
+		case MAIN_REGION_STATEE__REGION1_STATE1:
+			return stateVector[1] == State.MAIN_REGION_STATEE__REGION1_STATE1;
+		case MAIN_REGION_STATEE__REGION1_STATE2:
+			return stateVector[1] == State.MAIN_REGION_STATEE__REGION1_STATE2;
+		case MAIN_REGION_STATEF:
+			return stateVector[0] == State.MAIN_REGION_STATEF;
+		case MAIN_REGION_STATED:
+			return stateVector[0] == State.MAIN_REGION_STATED;
+		case MAIN_REGION__FINAL_:
+			return stateVector[0] == State.MAIN_REGION__FINAL_;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
-	public SCINamedI getSCINamedI() {
-		return sCINamedI;
+	public InterfaceNamedI getInterfaceNamedI() {
+		return interfaceNamedI;
 	}
 	
 	private void raiseLocEvent() {
@@ -398,46 +418,46 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	}
 	
 	public void raiseInEvent() {
-		sCInterface.raiseInEvent();
+		defaultInterface.raiseInEvent();
 	}
 	
 	public void raiseInEventBool(boolean value) {
-		sCInterface.raiseInEventBool(value);
+		defaultInterface.raiseInEventBool(value);
 	}
 	
 	public boolean isRaisedOutEvent() {
-		return sCInterface.isRaisedOutEvent();
+		return defaultInterface.isRaisedOutEvent();
 	}
 	
 	public boolean isRaisedRunning() {
-		return sCInterface.isRaisedRunning();
+		return defaultInterface.isRaisedRunning();
 	}
 	
 	public boolean isRaisedOe1() {
-		return sCInterface.isRaisedOe1();
+		return defaultInterface.isRaisedOe1();
 	}
 	
 	public boolean isRaisedOe2() {
-		return sCInterface.isRaisedOe2();
+		return defaultInterface.isRaisedOe2();
 	}
 	
 	public boolean isRaisedOe3() {
-		return sCInterface.isRaisedOe3();
+		return defaultInterface.isRaisedOe3();
 	}
 	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.raiseRunning();
+		defaultInterface.raiseRunning();
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.raiseOe1();
+		defaultInterface.raiseOe1();
 	}
 	
 	/* Entry action for state 'StateC'. */
 	private void entryAction_main_region_StateC() {
-		sCInterface.raiseOe2();
+		defaultInterface.raiseOe2();
 	}
 	
 	/* Entry action for state 'State3'. */
@@ -457,28 +477,28 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	
 	/* Entry action for state 'StateD'. */
 	private void entryAction_main_region_StateD() {
-		sCInterface.raiseOe3();
+		defaultInterface.raiseOe3();
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		entryAction_main_region_StateA();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.MAIN_REGION_STATEA;
 	}
 	
 	/* 'default' enter sequence for state StateB */
 	private void enterSequence_main_region_StateB_default() {
 		entryAction_main_region_StateB();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.MAIN_REGION_STATEB;
 	}
 	
 	/* 'default' enter sequence for state StateC */
 	private void enterSequence_main_region_StateC_default() {
 		entryAction_main_region_StateC();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateC;
+		stateVector[0] = State.MAIN_REGION_STATEC;
 	}
 	
 	/* 'default' enter sequence for state StateE */
@@ -490,53 +510,53 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* 'default' enter sequence for state State1 */
 	private void enterSequence_main_region_StateE__region0_State1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateE__region0_State1;
+		stateVector[0] = State.MAIN_REGION_STATEE__REGION0_STATE1;
 	}
 	
 	/* 'default' enter sequence for state State2 */
 	private void enterSequence_main_region_StateE__region0_State2_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateE__region0_State2;
+		stateVector[0] = State.MAIN_REGION_STATEE__REGION0_STATE2;
 	}
 	
 	/* 'default' enter sequence for state State3 */
 	private void enterSequence_main_region_StateE__region0_State3_default() {
 		entryAction_main_region_StateE__region0_State3();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateE__region0_State3;
+		stateVector[0] = State.MAIN_REGION_STATEE__REGION0_STATE3;
 	}
 	
 	/* 'default' enter sequence for state State1 */
 	private void enterSequence_main_region_StateE__region1_State1_default() {
 		entryAction_main_region_StateE__region1_State1();
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_StateE__region1_State1;
+		stateVector[1] = State.MAIN_REGION_STATEE__REGION1_STATE1;
 	}
 	
 	/* 'default' enter sequence for state State2 */
 	private void enterSequence_main_region_StateE__region1_State2_default() {
 		entryAction_main_region_StateE__region1_State2();
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_StateE__region1_State2;
+		stateVector[1] = State.MAIN_REGION_STATEE__REGION1_STATE2;
 	}
 	
 	/* 'default' enter sequence for state StateF */
 	private void enterSequence_main_region_StateF_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateF;
+		stateVector[0] = State.MAIN_REGION_STATEF;
 	}
 	
 	/* 'default' enter sequence for state StateD */
 	private void enterSequence_main_region_StateD_default() {
 		entryAction_main_region_StateD();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateD;
+		stateVector[0] = State.MAIN_REGION_STATED;
 	}
 	
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region__final_;
+		stateVector[0] = State.MAIN_REGION__FINAL_;
 	}
 	
 	/* 'default' enter sequence for region main region */
@@ -557,19 +577,19 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateB */
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateC */
 	private void exitSequence_main_region_StateC() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateE */
@@ -581,79 +601,79 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* Default exit sequence for state State1 */
 	private void exitSequence_main_region_StateE__region0_State1() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State2 */
 	private void exitSequence_main_region_StateE__region0_State2() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State3 */
 	private void exitSequence_main_region_StateE__region0_State3() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State1 */
 	private void exitSequence_main_region_StateE__region1_State1() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state State2 */
 	private void exitSequence_main_region_StateE__region1_State2() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateF */
 	private void exitSequence_main_region_StateF() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state StateD */
 	private void exitSequence_main_region_StateD() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for final state. */
 	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_StateA:
+		case MAIN_REGION_STATEA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB:
+		case MAIN_REGION_STATEB:
 			exitSequence_main_region_StateB();
 			break;
-		case main_region_StateC:
+		case MAIN_REGION_STATEC:
 			exitSequence_main_region_StateC();
 			break;
-		case main_region_StateE__region0_State1:
+		case MAIN_REGION_STATEE__REGION0_STATE1:
 			exitSequence_main_region_StateE__region0_State1();
 			break;
-		case main_region_StateE__region0_State2:
+		case MAIN_REGION_STATEE__REGION0_STATE2:
 			exitSequence_main_region_StateE__region0_State2();
 			break;
-		case main_region_StateE__region0_State3:
+		case MAIN_REGION_STATEE__REGION0_STATE3:
 			exitSequence_main_region_StateE__region0_State3();
 			break;
-		case main_region_StateF:
+		case MAIN_REGION_STATEF:
 			exitSequence_main_region_StateF();
 			break;
-		case main_region_StateD:
+		case MAIN_REGION_STATED:
 			exitSequence_main_region_StateD();
 			break;
-		case main_region__final_:
+		case MAIN_REGION__FINAL_:
 			exitSequence_main_region__final_();
 			break;
 		default:
@@ -661,10 +681,10 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		}
 		
 		switch (stateVector[1]) {
-		case main_region_StateE__region1_State1:
+		case MAIN_REGION_STATEE__REGION1_STATE1:
 			exitSequence_main_region_StateE__region1_State1();
 			break;
-		case main_region_StateE__region1_State2:
+		case MAIN_REGION_STATEE__REGION1_STATE2:
 			exitSequence_main_region_StateE__region1_State2();
 			break;
 		default:
@@ -675,13 +695,13 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* Default exit sequence for region  */
 	private void exitSequence_main_region_StateE__region0() {
 		switch (stateVector[0]) {
-		case main_region_StateE__region0_State1:
+		case MAIN_REGION_STATEE__REGION0_STATE1:
 			exitSequence_main_region_StateE__region0_State1();
 			break;
-		case main_region_StateE__region0_State2:
+		case MAIN_REGION_STATEE__REGION0_STATE2:
 			exitSequence_main_region_StateE__region0_State2();
 			break;
-		case main_region_StateE__region0_State3:
+		case MAIN_REGION_STATEE__REGION0_STATE3:
 			exitSequence_main_region_StateE__region0_State3();
 			break;
 		default:
@@ -692,10 +712,10 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 	/* Default exit sequence for region  */
 	private void exitSequence_main_region_StateE__region1() {
 		switch (stateVector[1]) {
-		case main_region_StateE__region1_State1:
+		case MAIN_REGION_STATEE__REGION1_STATE1:
 			exitSequence_main_region_StateE__region1_State1();
 			break;
-		case main_region_StateE__region1_State2:
+		case MAIN_REGION_STATEE__REGION1_STATE2:
 			exitSequence_main_region_StateE__region1_State2();
 			break;
 		default:
@@ -736,7 +756,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.inEvent) {
+			if (defaultInterface.inEvent) {
 				raiseE1();
 				
 				raiseE2();
@@ -825,7 +845,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			if (sCInterface.inEvent) {
+			if (defaultInterface.inEvent) {
 				raiseE1();
 			}
 		}
@@ -871,7 +891,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCINamedI.namedInEvent) {
+				if (interfaceNamedI.namedInEvent) {
 					exitSequence_main_region_StateF();
 					enterSequence_main_region__final__default();
 				} else {
@@ -887,7 +907,7 @@ public class EventDrivenStatemachine implements IEventDrivenStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((sCInterface.inEventBool) && (sCInterface.getInEventBoolValue()==true))) {
+				if (((defaultInterface.inEventBool) && (defaultInterface.getInEventBoolValue()==true))) {
 					exitSequence_main_region_StateD();
 					enterSequence_main_region_StateE_default();
 				} else {

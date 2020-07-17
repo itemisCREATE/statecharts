@@ -3,7 +3,7 @@ package org.yakindu.scr.stextkeywordsinstatesandregions;
 
 
 public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywordsInStatesAndRegionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
+	protected class InterfaceImpl implements Interface {
 	
 		private boolean e1;
 		
@@ -21,58 +21,58 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		
 	}
 	
-	private static class SCInterfaceEvBuf {
+	private static class InterfaceEvBuf {
 		private boolean e1;
 		private boolean e2;
 	}
 	private static class STextKeywordsInStatesAndRegionsStatemachineEvBuf {
-		private SCInterfaceEvBuf iface = new SCInterfaceEvBuf();
+		private InterfaceEvBuf iface = new InterfaceEvBuf();
 	}
-	protected SCInterfaceImpl sCInterface;
+	protected InterfaceImpl defaultInterface;
 	
 	private boolean initialized = false;
 	
 	public enum State {
-		default_namespace,
-		operation_interface,
-		operation_internal,
-		namespace_event,
-		namespace_local,
-		local_in,
-		local_out,
-		interface_var,
-		interface_readonly,
-		internal_external,
-		internal_operation,
-		event_default,
-		event_else,
-		in_entry,
-		in_exit,
-		out_always,
-		out_oncycle,
-		var_raise,
-		var_valueof,
-		readonly_active,
-		readonly_namespace,
-		external_interface,
-		external_internal,
-		else_event,
-		else_local,
-		entry_in,
-		entry_out,
-		exit_var,
-		exit_readonly,
-		always_external,
-		always_operation,
-		oncycle_default,
-		oncycle_else,
-		raise_entry,
-		raise_exit,
-		valueof_always,
-		valueof_oncycle,
-		active_raise,
-		active_valueof,
-		$NullState$
+		DEFAULT_NAMESPACE,
+		OPERATION_INTERFACE,
+		OPERATION_INTERNAL,
+		NAMESPACE_EVENT,
+		NAMESPACE_LOCAL,
+		LOCAL_IN,
+		LOCAL_OUT,
+		INTERFACE_VAR,
+		INTERFACE_READONLY,
+		INTERNAL_EXTERNAL,
+		INTERNAL_OPERATION,
+		EVENT_DEFAULT,
+		EVENT_ELSE,
+		IN_ENTRY,
+		IN_EXIT,
+		OUT_ALWAYS,
+		OUT_ONCYCLE,
+		VAR_RAISE,
+		VAR_VALUEOF,
+		READONLY_ACTIVE,
+		READONLY_NAMESPACE,
+		EXTERNAL_INTERFACE,
+		EXTERNAL_INTERNAL,
+		ELSE_EVENT,
+		ELSE_LOCAL,
+		ENTRY_IN,
+		ENTRY_OUT,
+		EXIT_VAR,
+		EXIT_READONLY,
+		ALWAYS_EXTERNAL,
+		ALWAYS_OPERATION,
+		ONCYCLE_DEFAULT,
+		ONCYCLE_ELSE,
+		RAISE_ENTRY,
+		RAISE_EXIT,
+		VALUEOF_ALWAYS,
+		VALUEOF_ONCYCLE,
+		ACTIVE_RAISE,
+		ACTIVE_VALUEOF,
+		$NULLSTATE$
 	};
 	
 	private final State[] stateVector = new State[20];
@@ -91,13 +91,13 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		this.isExecuting = value;
 	}
 	public STextKeywordsInStatesAndRegionsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		defaultInterface = new InterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
 		for (int i = 0; i < 20; i++) {
-			stateVector[i] = State.$NullState$;
+			stateVector[i] = State.$NULLSTATE$;
 		}
 		
 		clearInEvents();
@@ -178,125 +178,125 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		swapInEvents();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case default_namespace:
+			case DEFAULT_NAMESPACE:
 				default_namespace_react(true);
 				break;
-			case operation_interface:
+			case OPERATION_INTERFACE:
 				operation_interface_react(true);
 				break;
-			case operation_internal:
+			case OPERATION_INTERNAL:
 				operation_internal_react(true);
 				break;
-			case namespace_event:
+			case NAMESPACE_EVENT:
 				namespace_event_react(true);
 				break;
-			case namespace_local:
+			case NAMESPACE_LOCAL:
 				namespace_local_react(true);
 				break;
-			case local_in:
+			case LOCAL_IN:
 				local_in_react(true);
 				break;
-			case local_out:
+			case LOCAL_OUT:
 				local_out_react(true);
 				break;
-			case interface_var:
+			case INTERFACE_VAR:
 				interface_var_react(true);
 				break;
-			case interface_readonly:
+			case INTERFACE_READONLY:
 				interface_readonly_react(true);
 				break;
-			case internal_external:
+			case INTERNAL_EXTERNAL:
 				internal_external_react(true);
 				break;
-			case internal_operation:
+			case INTERNAL_OPERATION:
 				internal_operation_react(true);
 				break;
-			case event_default:
+			case EVENT_DEFAULT:
 				event_default_react(true);
 				break;
-			case event_else:
+			case EVENT_ELSE:
 				event_else_react(true);
 				break;
-			case in_entry:
+			case IN_ENTRY:
 				in_entry_react(true);
 				break;
-			case in_exit:
+			case IN_EXIT:
 				in_exit_react(true);
 				break;
-			case out_always:
+			case OUT_ALWAYS:
 				out_always_react(true);
 				break;
-			case out_oncycle:
+			case OUT_ONCYCLE:
 				out_oncycle_react(true);
 				break;
-			case var_raise:
+			case VAR_RAISE:
 				var_raise_react(true);
 				break;
-			case var_valueof:
+			case VAR_VALUEOF:
 				var_valueof_react(true);
 				break;
-			case readonly_active:
+			case READONLY_ACTIVE:
 				readonly_active_react(true);
 				break;
-			case readonly_namespace:
+			case READONLY_NAMESPACE:
 				readonly_namespace_react(true);
 				break;
-			case external_interface:
+			case EXTERNAL_INTERFACE:
 				external_interface_react(true);
 				break;
-			case external_internal:
+			case EXTERNAL_INTERNAL:
 				external_internal_react(true);
 				break;
-			case else_event:
+			case ELSE_EVENT:
 				else_event_react(true);
 				break;
-			case else_local:
+			case ELSE_LOCAL:
 				else_local_react(true);
 				break;
-			case entry_in:
+			case ENTRY_IN:
 				entry_in_react(true);
 				break;
-			case entry_out:
+			case ENTRY_OUT:
 				entry_out_react(true);
 				break;
-			case exit_var:
+			case EXIT_VAR:
 				exit_var_react(true);
 				break;
-			case exit_readonly:
+			case EXIT_READONLY:
 				exit_readonly_react(true);
 				break;
-			case always_external:
+			case ALWAYS_EXTERNAL:
 				always_external_react(true);
 				break;
-			case always_operation:
+			case ALWAYS_OPERATION:
 				always_operation_react(true);
 				break;
-			case oncycle_default:
+			case ONCYCLE_DEFAULT:
 				oncycle_default_react(true);
 				break;
-			case oncycle_else:
+			case ONCYCLE_ELSE:
 				oncycle_else_react(true);
 				break;
-			case raise_entry:
+			case RAISE_ENTRY:
 				raise_entry_react(true);
 				break;
-			case raise_exit:
+			case RAISE_EXIT:
 				raise_exit_react(true);
 				break;
-			case valueof_always:
+			case VALUEOF_ALWAYS:
 				valueof_always_react(true);
 				break;
-			case valueof_oncycle:
+			case VALUEOF_ONCYCLE:
 				valueof_oncycle_react(true);
 				break;
-			case active_raise:
+			case ACTIVE_RAISE:
 				active_raise_react(true);
 				break;
-			case active_valueof:
+			case ACTIVE_VALUEOF:
 				active_valueof_react(true);
 				break;
 			default:
-				// $NullState$
+				// $NULLSTATE$
 			}
 		}
 		
@@ -307,7 +307,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$||stateVector[3] != State.$NullState$||stateVector[4] != State.$NullState$||stateVector[5] != State.$NullState$||stateVector[6] != State.$NullState$||stateVector[7] != State.$NullState$||stateVector[8] != State.$NullState$||stateVector[9] != State.$NullState$||stateVector[10] != State.$NullState$||stateVector[11] != State.$NullState$||stateVector[12] != State.$NullState$||stateVector[13] != State.$NullState$||stateVector[14] != State.$NullState$||stateVector[15] != State.$NullState$||stateVector[16] != State.$NullState$||stateVector[17] != State.$NullState$||stateVector[18] != State.$NullState$||stateVector[19] != State.$NullState$;
+		return stateVector[0] != State.$NULLSTATE$||stateVector[1] != State.$NULLSTATE$||stateVector[2] != State.$NULLSTATE$||stateVector[3] != State.$NULLSTATE$||stateVector[4] != State.$NULLSTATE$||stateVector[5] != State.$NULLSTATE$||stateVector[6] != State.$NULLSTATE$||stateVector[7] != State.$NULLSTATE$||stateVector[8] != State.$NULLSTATE$||stateVector[9] != State.$NULLSTATE$||stateVector[10] != State.$NULLSTATE$||stateVector[11] != State.$NULLSTATE$||stateVector[12] != State.$NULLSTATE$||stateVector[13] != State.$NULLSTATE$||stateVector[14] != State.$NULLSTATE$||stateVector[15] != State.$NULLSTATE$||stateVector[16] != State.$NULLSTATE$||stateVector[17] != State.$NULLSTATE$||stateVector[18] != State.$NULLSTATE$||stateVector[19] != State.$NULLSTATE$;
 	}
 	
 	/** 
@@ -319,16 +319,16 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		return false;
 	}
 	private void swapInEvents() {
-		_current.iface.e1 = sCInterface.e1;
-		sCInterface.e1 = false;
+		_current.iface.e1 = defaultInterface.e1;
+		defaultInterface.e1 = false;
 		
-		_current.iface.e2 = sCInterface.e2;
-		sCInterface.e2 = false;
+		_current.iface.e2 = defaultInterface.e2;
+		defaultInterface.e2 = false;
 	}
 	
 	private void clearInEvents() {
-		sCInterface.e1 = false;
-		sCInterface.e2 = false;
+		defaultInterface.e1 = false;
+		defaultInterface.e2 = false;
 	}
 	
 	/**
@@ -337,333 +337,333 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case default_namespace:
-			return stateVector[0] == State.default_namespace;
-		case operation_interface:
-			return stateVector[1] == State.operation_interface;
-		case operation_internal:
-			return stateVector[1] == State.operation_internal;
-		case namespace_event:
-			return stateVector[2] == State.namespace_event;
-		case namespace_local:
-			return stateVector[2] == State.namespace_local;
-		case local_in:
-			return stateVector[3] == State.local_in;
-		case local_out:
-			return stateVector[3] == State.local_out;
-		case interface_var:
-			return stateVector[4] == State.interface_var;
-		case interface_readonly:
-			return stateVector[4] == State.interface_readonly;
-		case internal_external:
-			return stateVector[5] == State.internal_external;
-		case internal_operation:
-			return stateVector[5] == State.internal_operation;
-		case event_default:
-			return stateVector[6] == State.event_default;
-		case event_else:
-			return stateVector[6] == State.event_else;
-		case in_entry:
-			return stateVector[7] == State.in_entry;
-		case in_exit:
-			return stateVector[7] == State.in_exit;
-		case out_always:
-			return stateVector[8] == State.out_always;
-		case out_oncycle:
-			return stateVector[8] == State.out_oncycle;
-		case var_raise:
-			return stateVector[9] == State.var_raise;
-		case var_valueof:
-			return stateVector[9] == State.var_valueof;
-		case readonly_active:
-			return stateVector[10] == State.readonly_active;
-		case readonly_namespace:
-			return stateVector[10] == State.readonly_namespace;
-		case external_interface:
-			return stateVector[11] == State.external_interface;
-		case external_internal:
-			return stateVector[11] == State.external_internal;
-		case else_event:
-			return stateVector[12] == State.else_event;
-		case else_local:
-			return stateVector[12] == State.else_local;
-		case entry_in:
-			return stateVector[13] == State.entry_in;
-		case entry_out:
-			return stateVector[13] == State.entry_out;
-		case exit_var:
-			return stateVector[14] == State.exit_var;
-		case exit_readonly:
-			return stateVector[14] == State.exit_readonly;
-		case always_external:
-			return stateVector[15] == State.always_external;
-		case always_operation:
-			return stateVector[15] == State.always_operation;
-		case oncycle_default:
-			return stateVector[16] == State.oncycle_default;
-		case oncycle_else:
-			return stateVector[16] == State.oncycle_else;
-		case raise_entry:
-			return stateVector[17] == State.raise_entry;
-		case raise_exit:
-			return stateVector[17] == State.raise_exit;
-		case valueof_always:
-			return stateVector[18] == State.valueof_always;
-		case valueof_oncycle:
-			return stateVector[18] == State.valueof_oncycle;
-		case active_raise:
-			return stateVector[19] == State.active_raise;
-		case active_valueof:
-			return stateVector[19] == State.active_valueof;
+		case DEFAULT_NAMESPACE:
+			return stateVector[0] == State.DEFAULT_NAMESPACE;
+		case OPERATION_INTERFACE:
+			return stateVector[1] == State.OPERATION_INTERFACE;
+		case OPERATION_INTERNAL:
+			return stateVector[1] == State.OPERATION_INTERNAL;
+		case NAMESPACE_EVENT:
+			return stateVector[2] == State.NAMESPACE_EVENT;
+		case NAMESPACE_LOCAL:
+			return stateVector[2] == State.NAMESPACE_LOCAL;
+		case LOCAL_IN:
+			return stateVector[3] == State.LOCAL_IN;
+		case LOCAL_OUT:
+			return stateVector[3] == State.LOCAL_OUT;
+		case INTERFACE_VAR:
+			return stateVector[4] == State.INTERFACE_VAR;
+		case INTERFACE_READONLY:
+			return stateVector[4] == State.INTERFACE_READONLY;
+		case INTERNAL_EXTERNAL:
+			return stateVector[5] == State.INTERNAL_EXTERNAL;
+		case INTERNAL_OPERATION:
+			return stateVector[5] == State.INTERNAL_OPERATION;
+		case EVENT_DEFAULT:
+			return stateVector[6] == State.EVENT_DEFAULT;
+		case EVENT_ELSE:
+			return stateVector[6] == State.EVENT_ELSE;
+		case IN_ENTRY:
+			return stateVector[7] == State.IN_ENTRY;
+		case IN_EXIT:
+			return stateVector[7] == State.IN_EXIT;
+		case OUT_ALWAYS:
+			return stateVector[8] == State.OUT_ALWAYS;
+		case OUT_ONCYCLE:
+			return stateVector[8] == State.OUT_ONCYCLE;
+		case VAR_RAISE:
+			return stateVector[9] == State.VAR_RAISE;
+		case VAR_VALUEOF:
+			return stateVector[9] == State.VAR_VALUEOF;
+		case READONLY_ACTIVE:
+			return stateVector[10] == State.READONLY_ACTIVE;
+		case READONLY_NAMESPACE:
+			return stateVector[10] == State.READONLY_NAMESPACE;
+		case EXTERNAL_INTERFACE:
+			return stateVector[11] == State.EXTERNAL_INTERFACE;
+		case EXTERNAL_INTERNAL:
+			return stateVector[11] == State.EXTERNAL_INTERNAL;
+		case ELSE_EVENT:
+			return stateVector[12] == State.ELSE_EVENT;
+		case ELSE_LOCAL:
+			return stateVector[12] == State.ELSE_LOCAL;
+		case ENTRY_IN:
+			return stateVector[13] == State.ENTRY_IN;
+		case ENTRY_OUT:
+			return stateVector[13] == State.ENTRY_OUT;
+		case EXIT_VAR:
+			return stateVector[14] == State.EXIT_VAR;
+		case EXIT_READONLY:
+			return stateVector[14] == State.EXIT_READONLY;
+		case ALWAYS_EXTERNAL:
+			return stateVector[15] == State.ALWAYS_EXTERNAL;
+		case ALWAYS_OPERATION:
+			return stateVector[15] == State.ALWAYS_OPERATION;
+		case ONCYCLE_DEFAULT:
+			return stateVector[16] == State.ONCYCLE_DEFAULT;
+		case ONCYCLE_ELSE:
+			return stateVector[16] == State.ONCYCLE_ELSE;
+		case RAISE_ENTRY:
+			return stateVector[17] == State.RAISE_ENTRY;
+		case RAISE_EXIT:
+			return stateVector[17] == State.RAISE_EXIT;
+		case VALUEOF_ALWAYS:
+			return stateVector[18] == State.VALUEOF_ALWAYS;
+		case VALUEOF_ONCYCLE:
+			return stateVector[18] == State.VALUEOF_ONCYCLE;
+		case ACTIVE_RAISE:
+			return stateVector[19] == State.ACTIVE_RAISE;
+		case ACTIVE_VALUEOF:
+			return stateVector[19] == State.ACTIVE_VALUEOF;
 		default:
 			return false;
 		}
 	}
 	
-	public SCInterface getSCInterface() {
-		return sCInterface;
+	public Interface getInterface() {
+		return defaultInterface;
 	}
 	
 	public void raiseE1() {
-		sCInterface.raiseE1();
+		defaultInterface.raiseE1();
 	}
 	
 	public void raiseE2() {
-		sCInterface.raiseE2();
+		defaultInterface.raiseE2();
 	}
 	
 	/* 'default' enter sequence for state namespace */
 	private void enterSequence_default_namespace_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.default_namespace;
+		stateVector[0] = State.DEFAULT_NAMESPACE;
 	}
 	
 	/* 'default' enter sequence for state interface */
 	private void enterSequence_operation_interface_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.operation_interface;
+		stateVector[1] = State.OPERATION_INTERFACE;
 	}
 	
 	/* 'default' enter sequence for state internal */
 	private void enterSequence_operation_internal_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.operation_internal;
+		stateVector[1] = State.OPERATION_INTERNAL;
 	}
 	
 	/* 'default' enter sequence for state event */
 	private void enterSequence_namespace_event_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.namespace_event;
+		stateVector[2] = State.NAMESPACE_EVENT;
 	}
 	
 	/* 'default' enter sequence for state local */
 	private void enterSequence_namespace_local_default() {
 		nextStateIndex = 2;
-		stateVector[2] = State.namespace_local;
+		stateVector[2] = State.NAMESPACE_LOCAL;
 	}
 	
 	/* 'default' enter sequence for state in */
 	private void enterSequence_local_in_default() {
 		nextStateIndex = 3;
-		stateVector[3] = State.local_in;
+		stateVector[3] = State.LOCAL_IN;
 	}
 	
 	/* 'default' enter sequence for state out */
 	private void enterSequence_local_out_default() {
 		nextStateIndex = 3;
-		stateVector[3] = State.local_out;
+		stateVector[3] = State.LOCAL_OUT;
 	}
 	
 	/* 'default' enter sequence for state var */
 	private void enterSequence_interface_var_default() {
 		nextStateIndex = 4;
-		stateVector[4] = State.interface_var;
+		stateVector[4] = State.INTERFACE_VAR;
 	}
 	
 	/* 'default' enter sequence for state readonly */
 	private void enterSequence_interface_readonly_default() {
 		nextStateIndex = 4;
-		stateVector[4] = State.interface_readonly;
+		stateVector[4] = State.INTERFACE_READONLY;
 	}
 	
 	/* 'default' enter sequence for state external */
 	private void enterSequence_internal_external_default() {
 		nextStateIndex = 5;
-		stateVector[5] = State.internal_external;
+		stateVector[5] = State.INTERNAL_EXTERNAL;
 	}
 	
 	/* 'default' enter sequence for state operation */
 	private void enterSequence_internal_operation_default() {
 		nextStateIndex = 5;
-		stateVector[5] = State.internal_operation;
+		stateVector[5] = State.INTERNAL_OPERATION;
 	}
 	
 	/* 'default' enter sequence for state default */
 	private void enterSequence_event_default_default() {
 		nextStateIndex = 6;
-		stateVector[6] = State.event_default;
+		stateVector[6] = State.EVENT_DEFAULT;
 	}
 	
 	/* 'default' enter sequence for state else */
 	private void enterSequence_event_else_default() {
 		nextStateIndex = 6;
-		stateVector[6] = State.event_else;
+		stateVector[6] = State.EVENT_ELSE;
 	}
 	
 	/* 'default' enter sequence for state entry */
 	private void enterSequence_in_entry_default() {
 		nextStateIndex = 7;
-		stateVector[7] = State.in_entry;
+		stateVector[7] = State.IN_ENTRY;
 	}
 	
 	/* 'default' enter sequence for state exit */
 	private void enterSequence_in_exit_default() {
 		nextStateIndex = 7;
-		stateVector[7] = State.in_exit;
+		stateVector[7] = State.IN_EXIT;
 	}
 	
 	/* 'default' enter sequence for state always */
 	private void enterSequence_out_always_default() {
 		nextStateIndex = 8;
-		stateVector[8] = State.out_always;
+		stateVector[8] = State.OUT_ALWAYS;
 	}
 	
 	/* 'default' enter sequence for state oncycle */
 	private void enterSequence_out_oncycle_default() {
 		nextStateIndex = 8;
-		stateVector[8] = State.out_oncycle;
+		stateVector[8] = State.OUT_ONCYCLE;
 	}
 	
 	/* 'default' enter sequence for state raise */
 	private void enterSequence_var_raise_default() {
 		nextStateIndex = 9;
-		stateVector[9] = State.var_raise;
+		stateVector[9] = State.VAR_RAISE;
 	}
 	
 	/* 'default' enter sequence for state valueof */
 	private void enterSequence_var_valueof_default() {
 		nextStateIndex = 9;
-		stateVector[9] = State.var_valueof;
+		stateVector[9] = State.VAR_VALUEOF;
 	}
 	
 	/* 'default' enter sequence for state active */
 	private void enterSequence_readonly_active_default() {
 		nextStateIndex = 10;
-		stateVector[10] = State.readonly_active;
+		stateVector[10] = State.READONLY_ACTIVE;
 	}
 	
 	/* 'default' enter sequence for state namespace */
 	private void enterSequence_readonly_namespace_default() {
 		nextStateIndex = 10;
-		stateVector[10] = State.readonly_namespace;
+		stateVector[10] = State.READONLY_NAMESPACE;
 	}
 	
 	/* 'default' enter sequence for state interface */
 	private void enterSequence_external_interface_default() {
 		nextStateIndex = 11;
-		stateVector[11] = State.external_interface;
+		stateVector[11] = State.EXTERNAL_INTERFACE;
 	}
 	
 	/* 'default' enter sequence for state internal */
 	private void enterSequence_external_internal_default() {
 		nextStateIndex = 11;
-		stateVector[11] = State.external_internal;
+		stateVector[11] = State.EXTERNAL_INTERNAL;
 	}
 	
 	/* 'default' enter sequence for state event */
 	private void enterSequence_else_event_default() {
 		nextStateIndex = 12;
-		stateVector[12] = State.else_event;
+		stateVector[12] = State.ELSE_EVENT;
 	}
 	
 	/* 'default' enter sequence for state local */
 	private void enterSequence_else_local_default() {
 		nextStateIndex = 12;
-		stateVector[12] = State.else_local;
+		stateVector[12] = State.ELSE_LOCAL;
 	}
 	
 	/* 'default' enter sequence for state in */
 	private void enterSequence_entry_in_default() {
 		nextStateIndex = 13;
-		stateVector[13] = State.entry_in;
+		stateVector[13] = State.ENTRY_IN;
 	}
 	
 	/* 'default' enter sequence for state out */
 	private void enterSequence_entry_out_default() {
 		nextStateIndex = 13;
-		stateVector[13] = State.entry_out;
+		stateVector[13] = State.ENTRY_OUT;
 	}
 	
 	/* 'default' enter sequence for state var */
 	private void enterSequence_exit_var_default() {
 		nextStateIndex = 14;
-		stateVector[14] = State.exit_var;
+		stateVector[14] = State.EXIT_VAR;
 	}
 	
 	/* 'default' enter sequence for state readonly */
 	private void enterSequence_exit_readonly_default() {
 		nextStateIndex = 14;
-		stateVector[14] = State.exit_readonly;
+		stateVector[14] = State.EXIT_READONLY;
 	}
 	
 	/* 'default' enter sequence for state external */
 	private void enterSequence_always_external_default() {
 		nextStateIndex = 15;
-		stateVector[15] = State.always_external;
+		stateVector[15] = State.ALWAYS_EXTERNAL;
 	}
 	
 	/* 'default' enter sequence for state operation */
 	private void enterSequence_always_operation_default() {
 		nextStateIndex = 15;
-		stateVector[15] = State.always_operation;
+		stateVector[15] = State.ALWAYS_OPERATION;
 	}
 	
 	/* 'default' enter sequence for state default */
 	private void enterSequence_oncycle_default_default() {
 		nextStateIndex = 16;
-		stateVector[16] = State.oncycle_default;
+		stateVector[16] = State.ONCYCLE_DEFAULT;
 	}
 	
 	/* 'default' enter sequence for state else */
 	private void enterSequence_oncycle_else_default() {
 		nextStateIndex = 16;
-		stateVector[16] = State.oncycle_else;
+		stateVector[16] = State.ONCYCLE_ELSE;
 	}
 	
 	/* 'default' enter sequence for state entry */
 	private void enterSequence_raise_entry_default() {
 		nextStateIndex = 17;
-		stateVector[17] = State.raise_entry;
+		stateVector[17] = State.RAISE_ENTRY;
 	}
 	
 	/* 'default' enter sequence for state exit */
 	private void enterSequence_raise_exit_default() {
 		nextStateIndex = 17;
-		stateVector[17] = State.raise_exit;
+		stateVector[17] = State.RAISE_EXIT;
 	}
 	
 	/* 'default' enter sequence for state always */
 	private void enterSequence_valueof_always_default() {
 		nextStateIndex = 18;
-		stateVector[18] = State.valueof_always;
+		stateVector[18] = State.VALUEOF_ALWAYS;
 	}
 	
 	/* 'default' enter sequence for state oncycle */
 	private void enterSequence_valueof_oncycle_default() {
 		nextStateIndex = 18;
-		stateVector[18] = State.valueof_oncycle;
+		stateVector[18] = State.VALUEOF_ONCYCLE;
 	}
 	
 	/* 'default' enter sequence for state raise */
 	private void enterSequence_active_raise_default() {
 		nextStateIndex = 19;
-		stateVector[19] = State.active_raise;
+		stateVector[19] = State.ACTIVE_RAISE;
 	}
 	
 	/* 'default' enter sequence for state valueof */
 	private void enterSequence_active_valueof_default() {
 		nextStateIndex = 19;
-		stateVector[19] = State.active_valueof;
+		stateVector[19] = State.ACTIVE_VALUEOF;
 	}
 	
 	/* 'default' enter sequence for region default */
@@ -769,241 +769,241 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for state namespace */
 	private void exitSequence_default_namespace() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state interface */
 	private void exitSequence_operation_interface() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state internal */
 	private void exitSequence_operation_internal() {
 		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
+		stateVector[1] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state event */
 	private void exitSequence_namespace_event() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state local */
 	private void exitSequence_namespace_local() {
 		nextStateIndex = 2;
-		stateVector[2] = State.$NullState$;
+		stateVector[2] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state in */
 	private void exitSequence_local_in() {
 		nextStateIndex = 3;
-		stateVector[3] = State.$NullState$;
+		stateVector[3] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state out */
 	private void exitSequence_local_out() {
 		nextStateIndex = 3;
-		stateVector[3] = State.$NullState$;
+		stateVector[3] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state var */
 	private void exitSequence_interface_var() {
 		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
+		stateVector[4] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state readonly */
 	private void exitSequence_interface_readonly() {
 		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
+		stateVector[4] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state external */
 	private void exitSequence_internal_external() {
 		nextStateIndex = 5;
-		stateVector[5] = State.$NullState$;
+		stateVector[5] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state operation */
 	private void exitSequence_internal_operation() {
 		nextStateIndex = 5;
-		stateVector[5] = State.$NullState$;
+		stateVector[5] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state default */
 	private void exitSequence_event_default() {
 		nextStateIndex = 6;
-		stateVector[6] = State.$NullState$;
+		stateVector[6] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state else */
 	private void exitSequence_event_else() {
 		nextStateIndex = 6;
-		stateVector[6] = State.$NullState$;
+		stateVector[6] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state entry */
 	private void exitSequence_in_entry() {
 		nextStateIndex = 7;
-		stateVector[7] = State.$NullState$;
+		stateVector[7] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state exit */
 	private void exitSequence_in_exit() {
 		nextStateIndex = 7;
-		stateVector[7] = State.$NullState$;
+		stateVector[7] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state always */
 	private void exitSequence_out_always() {
 		nextStateIndex = 8;
-		stateVector[8] = State.$NullState$;
+		stateVector[8] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state oncycle */
 	private void exitSequence_out_oncycle() {
 		nextStateIndex = 8;
-		stateVector[8] = State.$NullState$;
+		stateVector[8] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state raise */
 	private void exitSequence_var_raise() {
 		nextStateIndex = 9;
-		stateVector[9] = State.$NullState$;
+		stateVector[9] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state valueof */
 	private void exitSequence_var_valueof() {
 		nextStateIndex = 9;
-		stateVector[9] = State.$NullState$;
+		stateVector[9] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state active */
 	private void exitSequence_readonly_active() {
 		nextStateIndex = 10;
-		stateVector[10] = State.$NullState$;
+		stateVector[10] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state namespace */
 	private void exitSequence_readonly_namespace() {
 		nextStateIndex = 10;
-		stateVector[10] = State.$NullState$;
+		stateVector[10] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state interface */
 	private void exitSequence_external_interface() {
 		nextStateIndex = 11;
-		stateVector[11] = State.$NullState$;
+		stateVector[11] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state internal */
 	private void exitSequence_external_internal() {
 		nextStateIndex = 11;
-		stateVector[11] = State.$NullState$;
+		stateVector[11] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state event */
 	private void exitSequence_else_event() {
 		nextStateIndex = 12;
-		stateVector[12] = State.$NullState$;
+		stateVector[12] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state local */
 	private void exitSequence_else_local() {
 		nextStateIndex = 12;
-		stateVector[12] = State.$NullState$;
+		stateVector[12] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state in */
 	private void exitSequence_entry_in() {
 		nextStateIndex = 13;
-		stateVector[13] = State.$NullState$;
+		stateVector[13] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state out */
 	private void exitSequence_entry_out() {
 		nextStateIndex = 13;
-		stateVector[13] = State.$NullState$;
+		stateVector[13] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state var */
 	private void exitSequence_exit_var() {
 		nextStateIndex = 14;
-		stateVector[14] = State.$NullState$;
+		stateVector[14] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state readonly */
 	private void exitSequence_exit_readonly() {
 		nextStateIndex = 14;
-		stateVector[14] = State.$NullState$;
+		stateVector[14] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state external */
 	private void exitSequence_always_external() {
 		nextStateIndex = 15;
-		stateVector[15] = State.$NullState$;
+		stateVector[15] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state operation */
 	private void exitSequence_always_operation() {
 		nextStateIndex = 15;
-		stateVector[15] = State.$NullState$;
+		stateVector[15] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state default */
 	private void exitSequence_oncycle_default() {
 		nextStateIndex = 16;
-		stateVector[16] = State.$NullState$;
+		stateVector[16] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state else */
 	private void exitSequence_oncycle_else() {
 		nextStateIndex = 16;
-		stateVector[16] = State.$NullState$;
+		stateVector[16] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state entry */
 	private void exitSequence_raise_entry() {
 		nextStateIndex = 17;
-		stateVector[17] = State.$NullState$;
+		stateVector[17] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state exit */
 	private void exitSequence_raise_exit() {
 		nextStateIndex = 17;
-		stateVector[17] = State.$NullState$;
+		stateVector[17] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state always */
 	private void exitSequence_valueof_always() {
 		nextStateIndex = 18;
-		stateVector[18] = State.$NullState$;
+		stateVector[18] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state oncycle */
 	private void exitSequence_valueof_oncycle() {
 		nextStateIndex = 18;
-		stateVector[18] = State.$NullState$;
+		stateVector[18] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state raise */
 	private void exitSequence_active_raise() {
 		nextStateIndex = 19;
-		stateVector[19] = State.$NullState$;
+		stateVector[19] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for state valueof */
 	private void exitSequence_active_valueof() {
 		nextStateIndex = 19;
-		stateVector[19] = State.$NullState$;
+		stateVector[19] = State.$NULLSTATE$;
 	}
 	
 	/* Default exit sequence for region default */
 	private void exitSequence_default() {
 		switch (stateVector[0]) {
-		case default_namespace:
+		case DEFAULT_NAMESPACE:
 			exitSequence_default_namespace();
 			break;
 		default:
@@ -1014,10 +1014,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region operation */
 	private void exitSequence_operation() {
 		switch (stateVector[1]) {
-		case operation_interface:
+		case OPERATION_INTERFACE:
 			exitSequence_operation_interface();
 			break;
-		case operation_internal:
+		case OPERATION_INTERNAL:
 			exitSequence_operation_internal();
 			break;
 		default:
@@ -1028,10 +1028,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region namespace */
 	private void exitSequence_namespace() {
 		switch (stateVector[2]) {
-		case namespace_event:
+		case NAMESPACE_EVENT:
 			exitSequence_namespace_event();
 			break;
-		case namespace_local:
+		case NAMESPACE_LOCAL:
 			exitSequence_namespace_local();
 			break;
 		default:
@@ -1042,10 +1042,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region local */
 	private void exitSequence_local() {
 		switch (stateVector[3]) {
-		case local_in:
+		case LOCAL_IN:
 			exitSequence_local_in();
 			break;
-		case local_out:
+		case LOCAL_OUT:
 			exitSequence_local_out();
 			break;
 		default:
@@ -1056,10 +1056,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region interface */
 	private void exitSequence_interface() {
 		switch (stateVector[4]) {
-		case interface_var:
+		case INTERFACE_VAR:
 			exitSequence_interface_var();
 			break;
-		case interface_readonly:
+		case INTERFACE_READONLY:
 			exitSequence_interface_readonly();
 			break;
 		default:
@@ -1070,10 +1070,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region internal */
 	private void exitSequence_internal() {
 		switch (stateVector[5]) {
-		case internal_external:
+		case INTERNAL_EXTERNAL:
 			exitSequence_internal_external();
 			break;
-		case internal_operation:
+		case INTERNAL_OPERATION:
 			exitSequence_internal_operation();
 			break;
 		default:
@@ -1084,10 +1084,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region event */
 	private void exitSequence_event() {
 		switch (stateVector[6]) {
-		case event_default:
+		case EVENT_DEFAULT:
 			exitSequence_event_default();
 			break;
-		case event_else:
+		case EVENT_ELSE:
 			exitSequence_event_else();
 			break;
 		default:
@@ -1098,10 +1098,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region in */
 	private void exitSequence_in() {
 		switch (stateVector[7]) {
-		case in_entry:
+		case IN_ENTRY:
 			exitSequence_in_entry();
 			break;
-		case in_exit:
+		case IN_EXIT:
 			exitSequence_in_exit();
 			break;
 		default:
@@ -1112,10 +1112,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region out */
 	private void exitSequence_out() {
 		switch (stateVector[8]) {
-		case out_always:
+		case OUT_ALWAYS:
 			exitSequence_out_always();
 			break;
-		case out_oncycle:
+		case OUT_ONCYCLE:
 			exitSequence_out_oncycle();
 			break;
 		default:
@@ -1126,10 +1126,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region var */
 	private void exitSequence_var() {
 		switch (stateVector[9]) {
-		case var_raise:
+		case VAR_RAISE:
 			exitSequence_var_raise();
 			break;
-		case var_valueof:
+		case VAR_VALUEOF:
 			exitSequence_var_valueof();
 			break;
 		default:
@@ -1140,10 +1140,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region readonly */
 	private void exitSequence_readonly() {
 		switch (stateVector[10]) {
-		case readonly_active:
+		case READONLY_ACTIVE:
 			exitSequence_readonly_active();
 			break;
-		case readonly_namespace:
+		case READONLY_NAMESPACE:
 			exitSequence_readonly_namespace();
 			break;
 		default:
@@ -1154,10 +1154,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region external */
 	private void exitSequence_external() {
 		switch (stateVector[11]) {
-		case external_interface:
+		case EXTERNAL_INTERFACE:
 			exitSequence_external_interface();
 			break;
-		case external_internal:
+		case EXTERNAL_INTERNAL:
 			exitSequence_external_internal();
 			break;
 		default:
@@ -1168,10 +1168,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region else */
 	private void exitSequence_else() {
 		switch (stateVector[12]) {
-		case else_event:
+		case ELSE_EVENT:
 			exitSequence_else_event();
 			break;
-		case else_local:
+		case ELSE_LOCAL:
 			exitSequence_else_local();
 			break;
 		default:
@@ -1182,10 +1182,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region entry */
 	private void exitSequence_entry() {
 		switch (stateVector[13]) {
-		case entry_in:
+		case ENTRY_IN:
 			exitSequence_entry_in();
 			break;
-		case entry_out:
+		case ENTRY_OUT:
 			exitSequence_entry_out();
 			break;
 		default:
@@ -1196,10 +1196,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region exit */
 	private void exitSequence_exit() {
 		switch (stateVector[14]) {
-		case exit_var:
+		case EXIT_VAR:
 			exitSequence_exit_var();
 			break;
-		case exit_readonly:
+		case EXIT_READONLY:
 			exitSequence_exit_readonly();
 			break;
 		default:
@@ -1210,10 +1210,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region always */
 	private void exitSequence_always() {
 		switch (stateVector[15]) {
-		case always_external:
+		case ALWAYS_EXTERNAL:
 			exitSequence_always_external();
 			break;
-		case always_operation:
+		case ALWAYS_OPERATION:
 			exitSequence_always_operation();
 			break;
 		default:
@@ -1224,10 +1224,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region oncycle */
 	private void exitSequence_oncycle() {
 		switch (stateVector[16]) {
-		case oncycle_default:
+		case ONCYCLE_DEFAULT:
 			exitSequence_oncycle_default();
 			break;
-		case oncycle_else:
+		case ONCYCLE_ELSE:
 			exitSequence_oncycle_else();
 			break;
 		default:
@@ -1238,10 +1238,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region raise */
 	private void exitSequence_raise() {
 		switch (stateVector[17]) {
-		case raise_entry:
+		case RAISE_ENTRY:
 			exitSequence_raise_entry();
 			break;
-		case raise_exit:
+		case RAISE_EXIT:
 			exitSequence_raise_exit();
 			break;
 		default:
@@ -1252,10 +1252,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region valueof */
 	private void exitSequence_valueof() {
 		switch (stateVector[18]) {
-		case valueof_always:
+		case VALUEOF_ALWAYS:
 			exitSequence_valueof_always();
 			break;
-		case valueof_oncycle:
+		case VALUEOF_ONCYCLE:
 			exitSequence_valueof_oncycle();
 			break;
 		default:
@@ -1266,10 +1266,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	/* Default exit sequence for region active */
 	private void exitSequence_active() {
 		switch (stateVector[19]) {
-		case active_raise:
+		case ACTIVE_RAISE:
 			exitSequence_active_raise();
 			break;
-		case active_valueof:
+		case ACTIVE_VALUEOF:
 			exitSequence_active_valueof();
 			break;
 		default:
@@ -1396,7 +1396,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.default_namespace)))) {
+			if (((_current.iface.e1) && (isStateActive(State.DEFAULT_NAMESPACE)))) {
 				exitSequence_operation_interface();
 				enterSequence_operation_internal_default();
 			} else {
@@ -1419,7 +1419,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.operation_internal)))) {
+			if (((_current.iface.e2) && (isStateActive(State.OPERATION_INTERNAL)))) {
 				exitSequence_namespace_event();
 				enterSequence_namespace_local_default();
 			} else {
@@ -1442,7 +1442,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.namespace_local)))) {
+			if (((_current.iface.e1) && (isStateActive(State.NAMESPACE_LOCAL)))) {
 				exitSequence_local_in();
 				enterSequence_local_out_default();
 			} else {
@@ -1465,7 +1465,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.local_out)))) {
+			if (((_current.iface.e2) && (isStateActive(State.LOCAL_OUT)))) {
 				exitSequence_interface_var();
 				enterSequence_interface_readonly_default();
 			} else {
@@ -1488,7 +1488,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.interface_readonly)))) {
+			if (((_current.iface.e1) && (isStateActive(State.INTERFACE_READONLY)))) {
 				exitSequence_internal_external();
 				enterSequence_internal_operation_default();
 			} else {
@@ -1511,7 +1511,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.internal_operation)))) {
+			if (((_current.iface.e2) && (isStateActive(State.INTERNAL_OPERATION)))) {
 				exitSequence_event_default();
 				enterSequence_event_else_default();
 			} else {
@@ -1534,7 +1534,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.event_else)))) {
+			if (((_current.iface.e1) && (isStateActive(State.EVENT_ELSE)))) {
 				exitSequence_in_entry();
 				enterSequence_in_exit_default();
 			} else {
@@ -1557,7 +1557,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.in_exit)))) {
+			if (((_current.iface.e2) && (isStateActive(State.IN_EXIT)))) {
 				exitSequence_out_always();
 				enterSequence_out_oncycle_default();
 			} else {
@@ -1580,7 +1580,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.out_oncycle)))) {
+			if (((_current.iface.e1) && (isStateActive(State.OUT_ONCYCLE)))) {
 				exitSequence_var_raise();
 				enterSequence_var_valueof_default();
 			} else {
@@ -1603,7 +1603,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.var_valueof)))) {
+			if (((_current.iface.e2) && (isStateActive(State.VAR_VALUEOF)))) {
 				exitSequence_readonly_active();
 				enterSequence_readonly_namespace_default();
 			} else {
@@ -1626,7 +1626,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.readonly_namespace)))) {
+			if (((_current.iface.e1) && (isStateActive(State.READONLY_NAMESPACE)))) {
 				exitSequence_external_interface();
 				enterSequence_external_internal_default();
 			} else {
@@ -1649,7 +1649,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.external_internal)))) {
+			if (((_current.iface.e2) && (isStateActive(State.EXTERNAL_INTERNAL)))) {
 				exitSequence_else_event();
 				enterSequence_else_local_default();
 			} else {
@@ -1672,7 +1672,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.else_local)))) {
+			if (((_current.iface.e1) && (isStateActive(State.ELSE_LOCAL)))) {
 				exitSequence_entry_in();
 				enterSequence_entry_out_default();
 			} else {
@@ -1695,7 +1695,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.entry_out)))) {
+			if (((_current.iface.e2) && (isStateActive(State.ENTRY_OUT)))) {
 				exitSequence_exit_var();
 				enterSequence_exit_readonly_default();
 			} else {
@@ -1718,7 +1718,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.exit_readonly)))) {
+			if (((_current.iface.e1) && (isStateActive(State.EXIT_READONLY)))) {
 				exitSequence_always_external();
 				enterSequence_always_operation_default();
 			} else {
@@ -1741,7 +1741,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.always_operation)))) {
+			if (((_current.iface.e2) && (isStateActive(State.ALWAYS_OPERATION)))) {
 				exitSequence_oncycle_default();
 				enterSequence_oncycle_else_default();
 			} else {
@@ -1764,7 +1764,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.oncycle_else)))) {
+			if (((_current.iface.e1) && (isStateActive(State.ONCYCLE_ELSE)))) {
 				exitSequence_raise_entry();
 				enterSequence_raise_exit_default();
 			} else {
@@ -1787,7 +1787,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e2) && (isStateActive(State.raise_exit)))) {
+			if (((_current.iface.e2) && (isStateActive(State.RAISE_EXIT)))) {
 				exitSequence_valueof_always();
 				enterSequence_valueof_oncycle_default();
 			} else {
@@ -1810,7 +1810,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (((_current.iface.e1) && (isStateActive(State.valueof_oncycle)))) {
+			if (((_current.iface.e1) && (isStateActive(State.VALUEOF_ONCYCLE)))) {
 				exitSequence_active_raise();
 				enterSequence_active_valueof_default();
 			} else {

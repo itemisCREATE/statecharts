@@ -28,18 +28,18 @@ class ITimerCallback {
 		if (entry.skipLibraryFiles) {
 			return
 		}
-		val fileName = entry.basePackagePath + '/' + iTimerCallback.java
+		val fileName = entry.libraryPackage.toPath + '/' + iTimerCallback.java
 		fsa.generateFile(fileName, entry.libraryOutputConfig, content(entry))
 	}
 	
 	def content(GeneratorEntry entry) {
-		content(entry.licenseText, entry.basePackageName)
+		content(entry.licenseText, entry.libraryPackage)
 	}
 	
-	def content(String licenseText, String basePackageName) {
+	def content(String licenseText, String pkg) {
 		'''
 			«licenseText»
-			package «basePackageName»;
+			package «pkg»;
 			
 			/**
 			* Interface for state machines which use timed event triggers.

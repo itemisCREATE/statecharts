@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
+import com.google.inject.Singleton
 
 /**
  * This class defines the general concept of the runCycle method which implements 
@@ -24,6 +25,7 @@ import org.yakindu.sct.model.sexec.extensions.SexecBuilder
  * 
  * @author aterfloth
  */
+@Singleton
 class RunCycleMethod {
 	
 	@Inject extension ExecutionGuard
@@ -38,7 +40,7 @@ class RunCycleMethod {
 	public static val MICRO_STEP = StateMachineBehaviorConcept.CONCEPT_NAME_PREFIX + "microStep"
 	
 	def defineFeatures (ExecutionFlow it) {
-		defineRunCycle	
+		defineRunCycle
 	}
 			
 	def defineRunCycle(ExecutionFlow it) {
@@ -52,7 +54,7 @@ class RunCycleMethod {
 					_traceBeginRunCycle,
 					_eventProcessing(
 						_superStepLoop(
-							_microStep	
+							_microStep
 						)
 					),
 					_traceEndRunCycle
@@ -61,15 +63,24 @@ class RunCycleMethod {
 			m.body.comment = "Performs a 'run to completion' step."
 		]
 	}
-
+	
 	def Step _microStep(ExecutionFlow it) {
-		_conceptSequence(MICRO_STEP)
+		if (appliesSuperStep)
+			defineMicroStep._call.toStep
+		else
+			_conceptSequence(MICRO_STEP)
+	}
+
+	def private create m : _method("microStep") defineMicroStep(ExecutionFlow it) {
+		m._type(_void)
+		m._body(
+			_conceptSequence(MICRO_STEP)
+		)
+		features += m
 	}
 		
 	def Method runCycle(ExecutionFlow it) {
 		features.filter( typeof(Method) ).filter( m | m.name == "runCycle").head
 	}
-	
-
 	
 }

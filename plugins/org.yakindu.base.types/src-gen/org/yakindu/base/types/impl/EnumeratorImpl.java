@@ -66,6 +66,7 @@ public class EnumeratorImpl extends TypedDeclarationImpl implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnumerationType getOwningEnumeration() {
 		if (eContainerFeatureID() != TypesPackage.ENUMERATOR__OWNING_ENUMERATION) return null;
 		return (EnumerationType)eInternalContainer();
@@ -86,6 +87,7 @@ public class EnumeratorImpl extends TypedDeclarationImpl implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningEnumeration(EnumerationType newOwningEnumeration) {
 		if (newOwningEnumeration != eInternalContainer() || (eContainerFeatureID() != TypesPackage.ENUMERATOR__OWNING_ENUMERATION && newOwningEnumeration != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningEnumeration))

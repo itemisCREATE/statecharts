@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_0Png4KimEeG5WeGhg2moBQ" specification="&#xA;interface :&#xA;&#x9;in event e : void&#xA;&#x9;in event f : void&#xA;&#x9;in event jc&#xA;&#x9;in event jd&#xA;&#x9;&#xA;&#x9;var x : integer = 0" name="SyncJoin">
+  <sgraph:Statechart xmi:id="_0Png4KimEeG5WeGhg2moBQ" specification="@CycleBased(200)&#xA;@SuperSteps(no)&#xA;&#xA;interface :&#xA;&#x9;in event e : void&#xA;&#x9;in event f : void&#xA;&#x9;in event jc&#xA;&#x9;in event jd&#xA;&#x9;&#xA;&#x9;var x : integer = 0" name="SyncJoin">
     <regions xmi:id="_0PovAqimEeG5WeGhg2moBQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_0PtngaimEeG5WeGhg2moBQ">
         <outgoingTransitions xmi:id="_0PwDw6imEeG5WeGhg2moBQ" target="_tiWiMKinEeG5WeGhg2moBQ"/>
@@ -200,7 +200,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PtAcqimEeG5WeGhg2moBQ"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_0PqkMaimEeG5WeGhg2moBQ" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PtngKimEeG5WeGhg2moBQ" x="152" y="10" width="497" height="411"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PtngKimEeG5WeGhg2moBQ" x="165" y="10" width="497" height="411"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_0Px486imEeG5WeGhg2moBQ" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_0Px49aimEeG5WeGhg2moBQ" type="StatechartName">
@@ -210,7 +210,7 @@
       <children xsi:type="notation:Shape" xmi:id="_0PygAqimEeG5WeGhg2moBQ" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PygA6imEeG5WeGhg2moBQ"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PygBKimEeG5WeGhg2moBQ" x="10" y="10" width="143" height="411"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PygBKimEeG5WeGhg2moBQ" x="10" y="10" width="156" height="411"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_qVmTgKjBEeG5WeGhg2moBQ" type="Note" fontName="Verdana" description="A  join allows the synchonzation from a state configuration into another state configuration that substitutes the previos state configuration. When states C2 and D2 is active and enevts e and f were raised than a transition to A occurs." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
       <children xsi:type="notation:BasicDecorationNode" xmi:id="_qVm6kKjBEeG5WeGhg2moBQ" type="DiagramName">

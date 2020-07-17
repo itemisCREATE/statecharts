@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_Wsw4sCfYEeSpK_WCONv8UQ" specification="interface:&#xD;&#xA;&#xD;&#xA;var realValue : real = (5 as real)&#xD;&#xA;var intValue : integer = (5.5 as integer)" name="CastExpressions">
+  <sgraph:Statechart xmi:id="_Wsw4sCfYEeSpK_WCONv8UQ" specification="@CycleBased(200)&#xD;&#xA;@SuperSteps(no)&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;&#xD;&#xA;var realValue : real = (5 as real)&#xD;&#xA;var intValue : integer = (5.5 as integer)" name="CastExpressions">
     <regions xmi:id="_WsxfwifYEeSpK_WCONv8UQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_Ws1xMSfYEeSpK_WCONv8UQ">
         <outgoingTransitions xmi:id="_Ws3mYyfYEeSpK_WCONv8UQ" target="_Ws2YRyfYEeSpK_WCONv8UQ"/>

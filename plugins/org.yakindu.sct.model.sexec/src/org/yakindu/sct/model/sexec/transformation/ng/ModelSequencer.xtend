@@ -119,9 +119,9 @@ class ModelSequencer implements IModelSequencer {
 		
 		eventProcessing.defineFeatures(ef)
 		executionGuard.defineFeatures(ef)
+		superStep.defineFeatures(ef)
 		enterMethod.defineFeatures(ef)
 		exitMethod.defineFeatures(ef)
-		superStep.defineFeatures(ef)
 		runCycleMethod.defineFeatures(ef)
 
 

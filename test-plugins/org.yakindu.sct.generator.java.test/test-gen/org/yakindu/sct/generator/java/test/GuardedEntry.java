@@ -5,10 +5,10 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guardedentry.GuardedEntryStatemachine;
-import org.yakindu.scr.guardedentry.GuardedEntryStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.guardedentry.GuardedEntryStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for GuardedEntry
@@ -41,7 +41,7 @@ public class GuardedEntry {
 	public void entryNotTakenOnStatechartEnter() {
 		assertTrue(statemachine.getGuard() == false);
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getDone() == false);
 	}
 	
@@ -49,7 +49,7 @@ public class GuardedEntry {
 	public void entryTakenOnStatechartEnter() {
 		statemachine.setGuard(true);
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 		assertTrue(statemachine.getDone() == true);
 	}
 	
@@ -67,14 +67,14 @@ public class GuardedEntry {
 	
 	public void initEntryInTransition(boolean guardVar, boolean doneVar) {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_B));
 		statemachine.setGuard(guardVar);
 		statemachine.setDone(doneVar);
 		statemachine.raiseE();
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(GuardedEntryStatemachine.State.MAIN_REGION_A));
 	}
 }

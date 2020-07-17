@@ -11,17 +11,17 @@ import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine;
-import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for StatechartKeywords
  */
 @SuppressWarnings("all")
 public class StatemachineKeywords {
-	SCIIfOperationCallback ifMock;
+	InterfaceIfOperationCallback ifMock;
 	InternalOperationCallback internalMock;
 	
 	private StatechartKeywordsStatemachine statemachine;	
@@ -34,8 +34,8 @@ public class StatemachineKeywords {
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		statemachine.setTimer(timer);
-		ifMock = mock(SCIIfOperationCallback.class);
-		statemachine.getSCIIf().setSCIIfOperationCallback(ifMock);
+		ifMock = mock(InterfaceIfOperationCallback.class);
+		statemachine.getInterfaceIf().setInterfaceIfOperationCallback(ifMock);
 		internalMock = mock(InternalOperationCallback.class);
 		statemachine.setInternalOperationCallback(internalMock);
 		
@@ -45,7 +45,7 @@ public class StatemachineKeywords {
 
 	@After
 	public void statemachineKeywords_tearDown() {
-		statemachine.getSCIIf().setSCIIfOperationCallback(null);
+		statemachine.getInterfaceIf().setInterfaceIfOperationCallback(null);
 		statemachine.setInternalOperationCallback(null);
 		statemachine = null;
 		
@@ -55,6 +55,6 @@ public class StatemachineKeywords {
 	@Test
 	public void statemachineKeywords() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_Timer));
+		assertTrue(statemachine.isStateActive(StatechartKeywordsStatemachine.State.MAIN_REGION_TIMER));
 	}
 }

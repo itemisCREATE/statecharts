@@ -9,21 +9,22 @@
  */
 package org.yakindu.sct.generator.core.library.impl
 
+import org.eclipse.core.runtime.Path
+import org.yakindu.sct.generator.core.library.ICoreLibraryConstants
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.model.sgen.FeatureParameterValue
+import org.yakindu.sct.model.sgen.GeneratorEntry
+
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.DEBUG_FEATURE
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.DEBUG_FEATURE_DUMP_SEXEC
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_API_TARGET_FOLDER
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_SKIP_LIBRARY_FILES
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_FOLDER
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT
-import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_SKIP_LIBRARY_FILES
-import org.eclipse.core.runtime.Path
-import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
-import org.yakindu.sct.model.sgen.FeatureParameterValue
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.core.library.ICoreLibraryConstants
 
-/** 
+/**  
  * @author Johannes Dicks - Initial contribution and API
  */
 class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
@@ -74,55 +75,24 @@ class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 			OUTLET_FEATURE_SKIP_LIBRARY_FILES)
 		return if(skipLibraryFiles === null) false else skipLibraryFiles.getBooleanValue()
 	}
-	
+
 	def private getOutEventAPIFeature(GeneratorEntry it) {
 		getFeatureConfiguration(ICoreLibraryConstants::FEATURE_OUT_EVENT_API)
 	}
-	
-		
+
 	override getOutEventObservablesUsed(GeneratorEntry it) {
 		val parameter = getOutEventAPIFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_OUT_EVENT_OBSERVABLES)
-		if(parameter !== null) {
+		if (parameter !== null) {
 			return parameter.booleanValue
 		}
 		true
 	}
-	
+
 	override getOutEventGettersUsed(GeneratorEntry it) {
 		val parameter = getOutEventAPIFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_OUT_EVENT_GETTERS)
-		if(parameter !== null) {
+		if (parameter !== null) {
 			return parameter.booleanValue
 		}
 		false
 	}
-
-
-	def private getEventProcessingFeature(GeneratorEntry it) {
-		getFeatureConfiguration(ICoreLibraryConstants::FEATURE_EVENT_PROCESSING)
-	}
-	
-	override applyInEventBuffer(GeneratorEntry it) {
-		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_IN_EVENT_BUFFER)
-		if(parameter !== null) {
-			return parameter.booleanValue
-		}
-		true
-	}
-	
-	override applyInEventQueue(GeneratorEntry it) {
-		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_IN_EVENT_QUEUE)
-		if(parameter !== null) {
-			return parameter.booleanValue
-		}
-		false
-	}
-	
-	override applyInternalEventBuffer(GeneratorEntry it) {
-		val parameter = eventProcessingFeature?.getParameterValue(ICoreLibraryConstants::PARAMETER_INTERNAL_EVENT_BUFFER)
-		if(parameter !== null) {
-			return parameter.booleanValue
-		}
-		true
-	}
-	
 }

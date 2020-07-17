@@ -12,13 +12,14 @@ package org.yakindu.base.expressions.scoping
 
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Annotation
+import org.yakindu.base.types.Argument
 import org.yakindu.base.types.Operation
-import org.yakindu.base.expressions.expressions.Argument
-import org.eclipse.xtext.scoping.IScope
 
 /**
  * 
@@ -26,9 +27,14 @@ import org.eclipse.xtext.scoping.IScope
  * 
  */
 class ExpressionsScopeProvider extends AbstractDeclarativeScopeProvider {
-
+	
 	def scope_Argument_parameter(Argument object, EReference ref) {
 		var parameters = object?.eContainer?.operation?.parameters
+		return if(parameters !== null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
+	}
+
+	def scope_Argument_parameter(Annotation object, EReference ref) {
+		var parameters = object?.operation?.parameters
 		return if(parameters !== null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
 	}
 
@@ -54,6 +60,11 @@ class ExpressionsScopeProvider extends AbstractDeclarativeScopeProvider {
 			feature as Operation
 		else
 			null
+	}
+	
+	def dispatch getOperation(Annotation op)
+	{
+		op.type
 	}
 
 	def dispatch getOperation(EObject object) {

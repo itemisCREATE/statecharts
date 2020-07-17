@@ -85,7 +85,7 @@ public class TypeValidator {
 		if (varResult == null || valueResult == null || isNullOnComplexType(varResult, valueResult)) {
 			return;
 		}
-		
+		 
 		if (registry.isAny(varResult.getType())) {
 			return;
 		}

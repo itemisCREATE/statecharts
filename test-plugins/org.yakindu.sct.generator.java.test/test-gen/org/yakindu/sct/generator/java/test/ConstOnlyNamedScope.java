@@ -4,11 +4,11 @@ package org.yakindu.sct.generator.java.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.yakindu.scr.constonlynamedscope.ConstOnlyNamedScopeStatemachine;
-import org.yakindu.scr.constonlynamedscope.ConstOnlyNamedScopeStatemachine.State;	
-import org.yakindu.scr.VirtualTimer;
-import org.yakindu.scr.VirtualTimer.VirtualTimeTask;
-import org.yakindu.scr.VirtualTimer.CycleTimeEventTask;
+import org.yakindu.scr.declarations.ConstOnlyNamedScopeStatemachine;
+import org.yakindu.scr.declarations.ConstOnlyNamedScopeStatemachine.State;
+import org.yakindu.sct.VirtualTimer;
+import org.yakindu.sct.VirtualTimer.VirtualTimeTask;
+import org.yakindu.sct.VirtualTimer.CycleTimeEventTask;
 
 /**
  * Unit TestCase for ConstOnlyNamedScope
@@ -40,7 +40,7 @@ public class ConstOnlyNamedScope {
 	@Test
 	public void statechartEntry() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.constOnlyNamedScope_main_region_A));
+		assertTrue(statemachine.isStateActive(ConstOnlyNamedScopeStatemachine.State.MAIN_REGION_A));
 	}
 	
 	@Test
@@ -48,6 +48,6 @@ public class ConstOnlyNamedScope {
 		statemachine.enter();
 		statemachine.raiseE(1l);
 		timer.cycleLeap(1l);
-		assertTrue(statemachine.isStateActive(State.constOnlyNamedScope_main_region_B));
+		assertTrue(statemachine.isStateActive(ConstOnlyNamedScopeStatemachine.State.MAIN_REGION_B));
 	}
 }

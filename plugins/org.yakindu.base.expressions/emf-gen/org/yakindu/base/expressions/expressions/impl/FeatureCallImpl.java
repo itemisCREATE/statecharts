@@ -16,10 +16,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
-import org.yakindu.base.expressions.expressions.util.ArgumentSorter;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.util.ArgumentSorter;
 
 /**
  * <!-- begin-user-doc -->
