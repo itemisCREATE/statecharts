@@ -70,8 +70,10 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» *buffer, «INT_TYPE» capacity);
 			static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
 			static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
-			static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
 			static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
+		«ENDIF»
+		«IF needsQueues && hasEvents»
+			static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
 		«ENDIF»
 		«IF hasQueuedEventsWithoutValue»
 			static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name);
@@ -196,26 +198,27 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				}
 				return event;
 			}
-			
-			static «BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev)
-			{
-				if(«eventQueueSizeFunction»(eq) == eq->capacity) {
-					return «FALSE_LITERAL»;
-				}
-				else {
-					eq->events[eq->push_index] = ev;
-					
-					if(eq->push_index < eq->capacity - 1) {
-						eq->push_index++;
+			«IF hasEvents»
+				static «BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev)
+				{
+					if(«eventQueueSizeFunction»(eq) == eq->capacity) {
+						return «FALSE_LITERAL»;
 					}
 					else {
-						eq->push_index = 0;
+						eq->events[eq->push_index] = ev;
+						
+						if(eq->push_index < eq->capacity - 1) {
+							eq->push_index++;
+						}
+						else {
+							eq->push_index = 0;
+						}
+						eq->size++;
+						
+						return «TRUE_LITERAL»;
 					}
-					eq->size++;
-					
-					return «TRUE_LITERAL»;
 				}
-			}
+			«ENDIF»
 		'''
 	}
 	
