@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ */
+
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
@@ -19,9 +29,28 @@ import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.Time
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.base.expressions.interpreter.base.InterpreterException
 
+/**
+ * Interpreter implementation for execution flow models which provides the interpreter facade.
+ * 
+ * TODO: The implementation is prepared to execute multiple instances. 
+ * 		 Nevertheless the setup currently assumes a single instance.
+ * 		 This should be changed in the next step.
+ * 
+ * 
+ * @author axel terfloth
+ */
 class SexecInterpreter extends SRuntimeInterpreter {
 
+	public static final String INIT = "init"
+	public static final String ENTER = "enter"
+	public static final String EXIT = "exit"
+	public static final String RUN_CYCLE = "runCycle"
+	public static final String IS_ACTIVE = "isActive"
+	public static final String IS_STATE_ACTIVE = "isStateActive"
+	public static final String IS_FINAL = "isFinal"
+	
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
 	protected extension StextFactory stextFactory = StextFactory.eINSTANCE
 
@@ -29,37 +58,43 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	@Inject protected extension Injector injector
 	@Inject @Accessors protected ITimeTaskScheduler timingService
 	
-	
+		
 	protected IInterpreter.Execution execution 	
 
 
 	static class ExecutionFlowInstanceDelegateAdapter extends AdapterImpl {
 		@Accessors
-		ExecutionFlowInstanceDelegate instance
+		ExecutionFlowInstance instance
 
 		override isAdapterForType(Object type) {
 			return type == ExecutionFlowInstanceDelegateAdapter
 		}
 
 	}
-
+	
+	
 	@Inject new(SexecExecution exec) {
 		this.heap = createExecutionContext // TODO : tidy up context creation ...
 		this.execution = exec
 		this.execution.executionContext = this
 	}
 	
-	def newInstance(ExecutionFlow flow) {
+	
+	override newInstance(Object type) {
+		type.createNewInstance
+	}
+	
+	protected def dispatch Object createNewInstance(Object type) {
+		throw new InterpreterException('''Don't know how to create new instance of type «type?.class.name» ! ''')
+	}
+	
+	protected def dispatch Object createNewInstance(ExecutionFlow flow) {
 		val instance = heap
 		contextInitializer.initialize(heap, flow)
 
-//		val instance = contextInitializer.newInstance(flow) => [
-//			name = flow.name + "#"+ (heap.slots.size + 1)	
-//			heap.slots += it
-//		]		
 		instance.eAdapters += new ExecutionFlowInstanceDelegateAdapter() => [
 			
-			instance = new ExecutionFlowInstanceDelegate => [
+			instance = new ExecutionFlowInstance => [
 				it.injectMembers
 				it.setUp(instance, flow, this)
 			]
@@ -69,23 +104,38 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	
 	
 	
-	
 	override void prepareExecution(Object program) {
 		execution.provideExecution(program)
 	}
 	
 	
 
-	def _invoke(CompositeSlot receiver, String operation, Object... args) {
-		
-		process("_invoke_(" + operation + ")", [
-			args.forEach[ pushValue ]
-			receiver.delegate.provideExecution(operation)
-		])
-				
+	override invokeOperation(Object receiver, String operation, Object... args) {		
+		receiver.doInvoke(operation, args)
 	}
 
-	def _raise(ExecutionEvent e, Object value) {
+
+	protected def dispatch Object doInvoke(Object receiver, String operation, Object... args) {
+		throw new InterpreterException('''Don't know how to invoke operation for receiver of type «receiver?.class.name» ! ''')
+	}
+	
+	protected def dispatch Object doInvoke(CompositeSlot receiver, String operation, Object... args) {
+		process("_invoke_(" + operation + ")", [
+			args.forEach[ pushValue ]
+			receiver.instance.provideExecution(operation)
+		])				
+	}
+
+
+	override void raiseEvent(Object e, Object value) {
+		doRaise(e, value)
+	}
+	
+	def dispatch void doRaise(Object e, Object value) {
+		throw new InterpreterException('''Don't know how to raise event of type «e?.class.name» ! ''')
+	}
+	
+	def dispatch void doRaise(ExecutionEvent e, Object value) {
 		
 		process("_raise_(" + e.name + ")", [
 			_execute("raise " + e.name, [
@@ -96,7 +146,7 @@ class SexecInterpreter extends SRuntimeInterpreter {
 
 	override _requestExecution(Object program, Execution requester) {
 		if (requester === this.execution) {
-			SELF?.delegate?.provideExecution(program)
+			SELF?.instance?.provideExecution(program)
 		} else {
 			this.execution.provideExecution(program)
 		}
@@ -114,20 +164,16 @@ class SexecInterpreter extends SRuntimeInterpreter {
 	}
 
 
-	def IInterpreter.Instance instance(EObject it) {
-		eContainer?.delegate as Instance 
+	def dispatch IInterpreter.Instance instance(EObject it) {
+		eContainer?.instance
 	}
 
-	def dispatch IInterpreter.Execution delegate(EObject it) {
-		eContainer?.delegate
-	}
-
-	def dispatch IInterpreter.Execution delegate(CompositeSlot it) {
-		val del = it.getExistingAdapter(ExecutionFlowInstanceDelegateAdapter)
-		if(del !== null) 
-			(del as ExecutionFlowInstanceDelegateAdapter).instance as IInterpreter.Execution 
+	def dispatch IInterpreter.Instance instance(CompositeSlot it) {
+		val inst = it.getExistingAdapter(ExecutionFlowInstanceDelegateAdapter)
+		if(inst !== null) 
+			(inst as ExecutionFlowInstanceDelegateAdapter).instance as IInterpreter.Instance 
 		else 
-			eContainer?.delegate
+			eContainer?.instance
 	}
 
 	override setValue(Object slot, Object value) {
@@ -195,13 +241,12 @@ class SexecInterpreter extends SRuntimeInterpreter {
 		var Object resolvedSlot = slot.slots.findFirst[s|s.name == symbol]
 		if(resolvedSlot !== null) return resolvedSlot
 
-		val delegate = slot.delegate
-		if (delegate !== null && delegate instanceof IInterpreter.Resolver) {
-			resolvedSlot = (delegate as IInterpreter.Resolver).resolve(slot, symbol)
+		val inst = slot.instance
+		if (inst !== null && inst instanceof IInterpreter.Resolver) {
+			resolvedSlot = (inst as IInterpreter.Resolver).resolve(slot, symbol)
 		}
 		if(resolvedSlot !== null) return resolvedSlot
 
-		// TODO extract getThis or rename to self
 		val selfSlot = slot.slots.findFirst[s|s.name == BaseExecution.SELF_NAME]
 		if (selfSlot !== null) {
 			val SELF = selfSlot.value

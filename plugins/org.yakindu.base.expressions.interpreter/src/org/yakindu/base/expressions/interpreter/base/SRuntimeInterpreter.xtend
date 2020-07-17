@@ -1,3 +1,12 @@
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.base.expressions.interpreter.base
 
 import java.util.ArrayDeque
@@ -12,6 +21,12 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
 
+/**
+ * Implements the core interpreter engine based on sruntime concepts.
+ * It implements the actual processing loop for executions.
+ * 
+ * @author axel terfloth
+ */
 abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control, IInterpreter.Context {
 
 	protected extension SRuntimeFactory runtimeFactory = SRuntimeFactory.eINSTANCE
@@ -20,13 +35,13 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	protected ExecutionContext heap
 	protected List<Promise> nextExecutions = new LinkedList<Promise>
 	
-	protected boolean debug = true
+	protected boolean debug = false
 
 	protected boolean suspended = false
 	protected boolean isProcessing = false
 	
 	protected int frameCount = 0
-	static protected int instructionCount = 0
+	protected int instructionCount = 0
 
 	@Data static class EventInstance {
 
@@ -38,7 +53,6 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 			this.value = value
 		}
 	}
-
 
 	def getHeap(){
 		return heap
@@ -58,7 +72,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 		program.prepareExecution
 		process				// TODO process may be suspended and resumed
 			
-		return stack.peek // TODO clear stack ... 
+		return stack.peek 
 	}
 	
 	
@@ -74,7 +88,6 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 	}
 	
 	def void process() {
-//		logDebug["--- START ---"]
 		
 		activateNexteExecutions
 		while ( currentFrame !== null ) {
@@ -104,7 +117,7 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 				stack.clear
 				nextExecutions.clear
 				frameCount = 0	
-//				instructionCount = 0			
+				instructionCount = 0			
 			}
 			
 			enterCall('''process<«name»>''')

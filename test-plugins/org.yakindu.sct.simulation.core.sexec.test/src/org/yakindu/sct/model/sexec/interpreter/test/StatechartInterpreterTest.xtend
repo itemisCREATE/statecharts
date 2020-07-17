@@ -53,7 +53,7 @@ class StatechartInterpreterTest {
 	
 		val stateMachine = interpreter.newInstance(flow)
 		
-		stateMachine._invoke("init")
+		stateMachine.invokeOperation("init")
 		
 		assertTrue(interpreter.heap.slots.contains(stateMachine))
 		assertEquals(42L, resolve(stateMachine, "value").value)
@@ -64,14 +64,14 @@ class StatechartInterpreterTest {
 	
 		val stateMachine = interpreter.newInstance(flow)
 		
-		stateMachine._invoke("init")
-		stateMachine._invoke("enter")
+		stateMachine.invokeOperation("init")
+		stateMachine.invokeOperation("enter")
 
 		assertTrue(interpreter.heap.slots.contains(stateMachine))
 		assertEquals(0L, resolve(stateMachine, "value").value)
 		assertEquals(3.14, resolve(stateMachine, "pi").value)				
 		
-		stateMachine._invoke("runCycle")
+		stateMachine.invokeOperation("runCycle")
 		
 	}
 
@@ -79,9 +79,9 @@ class StatechartInterpreterTest {
 	
 		val stateMachine = interpreter.newInstance(flow)
 		
-		stateMachine._invoke("init")
-		stateMachine._invoke("enter")
-		stateMachine._invoke("runCycle")
+		stateMachine.invokeOperation("init")
+		stateMachine.invokeOperation("enter")
+		stateMachine.invokeOperation("runCycle")
 
 		assertTrue(interpreter.heap.slots.contains(stateMachine))
 		assertEquals(0L, resolve(stateMachine, "value").value)

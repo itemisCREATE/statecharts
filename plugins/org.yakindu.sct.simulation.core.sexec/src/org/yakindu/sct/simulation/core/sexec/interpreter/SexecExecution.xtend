@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ */
+ 
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
@@ -24,6 +34,13 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
+/**
+ * Provides executions for elements (steps) defined by sexec.
+ * This implementation handles all steps which are not related to 
+ * the concept of state machines. All those relates to states etc. are delegated.
+ * 
+ * @author axel terfloth
+ */
 class SexecExecution extends StextExecution  {
 	
 
@@ -128,7 +145,6 @@ class SexecExecution extends StextExecution  {
 			_unschedule(it.timeEvent.name)
 		])		
 	}
-	
 
 	override dispatch void execution(NamedElement item, ElementReferenceExpression context){	
 		val refParent = item.eContainer
@@ -145,7 +161,6 @@ class SexecExecution extends StextExecution  {
 	}
 	
 	
-
 	def dispatch void executionCall(Method it) {
 		_delegate				
 	}

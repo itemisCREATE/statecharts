@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ */
+ 
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
@@ -5,29 +15,32 @@ import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.SexecFactory
-import org.yakindu.sct.model.sexec.Trace
-import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
 
+import static org.yakindu.sct.simulation.core.sexec.interpreter.SexecInterpreter.*
+
+/**
+ * Adapts an SexecInterpreter to the legacy IExecutionFlowInterpreter and IEventRaiser interfaces
+ * 
+ * The implementation delegates all provided methods to an SexecInterpreter instance. It cares about 
+ * deactivating and reactivating EventDrivenCycleAdapter during processing and also intercepts the 
+ * timer service for the same purpose.
+ * 
+ * @author axel terfloth
+ */
 @Singleton
 class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser {
 	
-	
 	@Inject protected extension SexecInterpreter interpreter
+	@Inject protected ITimeTaskScheduler timingService
 
-	protected CompositeSlot stateMachine
-	
-	@Inject(optional=true)
-	ITraceStepInterpreter traceInterpreter
-	
-	
-	TimerTaskSchedulerAdapter timeTaskSchedulerAdapter
-	
-	(()=>Object)=>Object executeWithoutContextAdapter = [ f | 
+	protected ExecutionFlow flow
+	protected Object stateMachine
+	protected SexecInterpreterAdapter.TimerTaskSchedulerInterceptor timeTaskSchedulerAdapter
+	protected (()=>Object)=>Object executeWithoutContextAdapter = [ f | 
 
 			val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext,
 				EventDrivenCycleAdapter) as EventDrivenCycleAdapter
@@ -43,21 +56,13 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	]
 	
 
-	@Inject protected ITimeTaskScheduler timingService
-
-	protected ExecutionFlow flow
-
-	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
-	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
-
-	
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
 	}
 
 	override initialize(ExecutionFlow flow, ExecutionContext context, boolean useInternalEventQueue) {
 
-		timeTaskSchedulerAdapter = new TimerTaskSchedulerAdapter
+		timeTaskSchedulerAdapter = new TimerTaskSchedulerInterceptor
 		timeTaskSchedulerAdapter.timeTaskAdapter = [ task |
 			executeWithoutContextAdapter.apply([ 
 				task.run 
@@ -71,7 +76,7 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 		
 		this.flow = flow
 		
-		stateMachine = interpreter.newInstance(flow)
+		stateMachine = flow.newInstance
 
 		init		
 	}
@@ -84,20 +89,20 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	def init() {
 		
 		execute([	
-			stateMachine._invoke("init")				
+			stateMachine.invokeOperation(INIT)				
 		])
 	}
 	
 	override enter() {
 		execute([	
-			stateMachine._invoke("enter")
+			stateMachine.invokeOperation(ENTER)
 		])
 	}
 
 	override exit() {
 		
 		execute([
-			stateMachine._invoke("exit")		
+			stateMachine.invokeOperation(EXIT)		
 		])
 	}
 
@@ -105,25 +110,28 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 	override runCycle() {
 		
 		execute([
-			stateMachine._invoke("runCycle")
+			stateMachine.invokeOperation(RUN_CYCLE)
 		])
 						
 	}
 
 	override raise(ExecutionEvent ev, Object value) {
-		execute([ ev._raise(value) ])
-	}
+		execute([ 
+			ev.raiseEvent(value) 
+			return null
+		])
+	} 
 
 	override boolean isActive() {
-		execute([ stateMachine._invoke("isActive") ]) == true
+		execute([ stateMachine.invokeOperation(IS_ACTIVE) ]) == true
 	}
 	
 	override boolean isFinal() {
-		execute([ stateMachine._invoke("isFinal") ]) == true
+		execute([ stateMachine.invokeOperation(IS_FINAL) ]) == true
 	}
 	
 	override isStateActive(String stateName) {
-		execute([ stateMachine._invoke("isStateActive", stateName) ]) == true
+		execute([ stateMachine.invokeOperation(IS_STATE_ACTIVE, stateName) ]) == true
 	}
 
 	override tearDown() {}
@@ -136,7 +144,10 @@ class SexecInterpreterAdapter implements IExecutionFlowInterpreter, IEventRaiser
 		executeWithoutContextAdapter.apply(action)
 	} 
 		
-	protected static class TimerTaskSchedulerAdapter implements ITimeTaskScheduler {
+	/**
+	 * Used to intercept the communication between interpreter and timer service.
+	 */
+	protected static class TimerTaskSchedulerInterceptor implements ITimeTaskScheduler {
 		
 		@Accessors protected ITimeTaskScheduler original
 		@Accessors protected (Runnable)=>void timeTaskAdapter

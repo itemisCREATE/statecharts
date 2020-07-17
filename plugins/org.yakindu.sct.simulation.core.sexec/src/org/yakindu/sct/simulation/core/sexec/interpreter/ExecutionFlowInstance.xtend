@@ -1,3 +1,12 @@
+/**
+ * Copyright (c) 2020 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.common.collect.Sets
@@ -17,10 +26,11 @@ import org.yakindu.base.expressions.interpreter.base.SRuntimeInterpreter.EventIn
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.TypeBuilder
+import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
@@ -36,6 +46,7 @@ import org.yakindu.sct.model.sexec.concepts.ExitMethod
 import org.yakindu.sct.model.sexec.concepts.InitializedCheck
 import org.yakindu.sct.model.sexec.concepts.RunCycleMethod
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
@@ -46,13 +57,13 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import org.yakindu.base.types.typesystem.GenericTypeSystem
-import java.lang.invoke.VolatileCallSite
-import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.base.types.TypeBuilder
-import org.yakindu.base.types.typesystem.ITypeValueProvider
 
-class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterpreter.Resolver, IInterpreter.Instance {
+/**
+ * This instance implementation cares about the execution of an ExecutionFlow which defines the type of the instance.
+ * 
+ * @author axel terfloth
+ */
+class ExecutionFlowInstance extends BaseExecution implements IInterpreter.Instance {
 	
 	protected CompositeSlot instance
 	protected ExecutionFlow type
@@ -71,6 +82,7 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 	@Inject(optional=true) protected Set<IOperationExecutor> operationExecutors = Sets.newHashSet
 	@Inject protected extension TypeBuilder
 	@Inject protected extension ITypeValueProvider
+	@Inject protected extension SExecExtensions
 	
 	
 	def void setUp(CompositeSlot instance, ExecutionFlow type, IInterpreter.Context context) {
@@ -136,9 +148,6 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 			activeStateConfiguration = newArrayOfSize(type.stateVector.size)
 			activeStateIndex = 0
 			historyStateConfiguration = newHashMap()		
-
-			//	this.useInternalEventQueue = useInternalEventQueue
-			//	useInEventQueue = (flow.sourceElement as Statechart).isEventDriven
 
 			_executeNamedSequence( type.staticInitSequence )
 			_executeNamedSequence( type.initSequence )			
@@ -270,11 +279,6 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 
 	def protected void microStep() {
 
-//		if (traceInterpreter !== null ) {
-//			_execute("@microStep(trace begin)") [
-//				traceInterpreter?.evaluate(SexecFactory.eINSTANCE.createTraceBeginRunCycle, executionContext)
-//			]			
-//		}
 		_execute("@microStep(init)",[
 			activeStateIndex = 0
 			// TODO : check if neccessary
@@ -291,11 +295,6 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 				}
 			])
 		}
-//		if (traceInterpreter !== null ) {
-//			_execute("@microStep(trace end)") [
-//				traceInterpreter?.evaluate(SexecFactory.eINSTANCE.createTraceEndRunCycle, executionContext)
-//			]			
-//		}		
 	}
 	
 	
@@ -332,14 +331,6 @@ class ExecutionFlowInstanceDelegate extends BaseExecution implements IInterprete
 		])		
 	}
 		
-
-	// TODO remove and use sexecexteion instead
-	
-	def Method reactMethod(ExecutionNode it) {
-		features.filter( typeof(Method) ).filter( m | m.name == "react").head
-	}
-	
-
 	/** TODO: DIRTY HACK - remove activeStates from ExecutionContext */
 	def protected executionContext(){
 		return EcoreUtil2.getContainerOfType(instance, ExecutionContext)	
