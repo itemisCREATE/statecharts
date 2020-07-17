@@ -97,9 +97,17 @@ class GeneratorPredicate {
 	def hasQueuedEventsWithValue(ExecutionFlow it) {
 		!queuedEventsWithValue.empty
 	}
+	
+	def hasQueuedEventsWithoutValue(ExecutionFlow it){
+		!queuedEventsWithoutValue.empty
+	}
 
 	def getQueuedEventsWithValue(ExecutionFlow it) {
 		queuedEvents.filter[hasValue]
+	}
+	
+	def getQueuedEventsWithoutValue(ExecutionFlow it) {
+		queuedEvents.filter[!hasValue]
 	}
 
 	def dispatch Statechart getStatechart(ExecutionFlow it) {
