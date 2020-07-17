@@ -5,7 +5,6 @@ import java.util.List
 import java.util.Map
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.base.NamedElement
-import org.yakindu.base.expressions.expressions.Argument
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
@@ -31,7 +30,6 @@ import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
-import org.yakindu.base.expressions.expressions.util.ArgumentSorter
 import org.yakindu.base.expressions.interpreter.CoreFunction
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
@@ -43,6 +41,8 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
+import org.yakindu.base.types.Argument
+import org.yakindu.base.types.util.ArgumentSorter
 
 class ExpressionExecution extends BaseExecution {
 	
