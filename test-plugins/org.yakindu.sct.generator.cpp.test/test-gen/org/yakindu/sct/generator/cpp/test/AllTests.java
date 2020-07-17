@@ -34,7 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TransitionHandlesMultipleExists.class,
 	TriggerExpressionPrecedenceTest.class,
 	StatechartEntryExitActions.class,
-	//CycleBasedSuperStepTest.class, //FIXME
+	CycleBasedSuperStepTest.class,
 	EventDrivenSuperStepTest.class,
 	SuperStepOnEnterTest.class,
 	AlwaysOncycleTest.class,
