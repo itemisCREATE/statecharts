@@ -28,6 +28,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Direction
 
 /**
  * Execution context initializer which recursively builds composite slots for variables with complex types.
@@ -54,13 +56,13 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 	 * Do not use <code>create</code> here because properties within complex types are the same for multiple variables 
 	 * of same complex type
 	 */
-	def dispatch ExecutionSlot transform(Property prop) {
+	override dispatch ExecutionSlot transform(Property prop) {
 		val slot = createExecutionSlotFor(prop)
 		slot.writable = slot.writable && !prop.const
 		slot
 	}
 
-	def dispatch ExecutionSlot transform(Operation op) {
+	override dispatch ExecutionSlot transform(Operation op) {
 		val slot = createExecutionSlotFor(op)
 		slot
 	}
@@ -119,6 +121,15 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		createExecutionVariable => [
 			it.type = type
 			it.init(element)
+		]
+	}
+
+	def protected dispatch ExecutionSlot transformByType(Type type, Event element,
+		InferenceResult inferenceResult) {
+		createExecutionEvent => [
+			it.type = type
+			it.init(element)
+			it.direction = Direction.get(element.direction.value)
 		]
 	}
 

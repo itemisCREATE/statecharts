@@ -35,6 +35,7 @@ import org.yakindu.sct.model.sruntime.SRuntimePackage;
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionSlotImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionSlotImpl#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionSlotImpl#isWritable <em>Writable</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionSlotImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionSlotImpl#getType <em>Type</em>}</li>
  * </ul>
  *
@@ -100,6 +101,26 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * @ordered
 	 */
 	protected boolean writable = WRITABLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -205,6 +226,29 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * @generated
 	 */
 	@Override
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVisible(boolean newVisible) {
+		boolean oldVisible = visible;
+		visible = newVisible;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_SLOT__VISIBLE, oldVisible, visible));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -253,6 +297,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return getFqName();
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				return isWritable();
+			case SRuntimePackage.EXECUTION_SLOT__VISIBLE:
+				return isVisible();
 			case SRuntimePackage.EXECUTION_SLOT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
@@ -276,6 +322,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				setWritable((Boolean)newValue);
+				return;
+			case SRuntimePackage.EXECUTION_SLOT__VISIBLE:
+				setVisible((Boolean)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__TYPE:
 				setType((Type)newValue);
@@ -301,6 +350,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				setWritable(WRITABLE_EDEFAULT);
 				return;
+			case SRuntimePackage.EXECUTION_SLOT__VISIBLE:
+				setVisible(VISIBLE_EDEFAULT);
+				return;
 			case SRuntimePackage.EXECUTION_SLOT__TYPE:
 				setType((Type)null);
 				return;
@@ -322,6 +374,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return FQ_NAME_EDEFAULT == null ? fqName != null : !FQ_NAME_EDEFAULT.equals(fqName);
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				return writable != WRITABLE_EDEFAULT;
+			case SRuntimePackage.EXECUTION_SLOT__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
 			case SRuntimePackage.EXECUTION_SLOT__TYPE:
 				return type != null;
 		}
@@ -344,6 +398,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 		result.append(fqName);
 		result.append(", writable: ");
 		result.append(writable);
+		result.append(", visible: ");
+		result.append(visible);
 		result.append(')');
 		return result.toString();
 	}

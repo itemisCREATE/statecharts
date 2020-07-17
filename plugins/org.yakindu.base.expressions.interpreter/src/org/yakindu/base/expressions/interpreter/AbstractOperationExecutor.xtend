@@ -44,9 +44,13 @@ abstract class AbstractOperationExecutor implements IOperationExecutor {
 
 	def dispatch EObject getOwner(ArgumentExpression it) {}
 
-	def executeArguments(List<Argument> arguments, ExecutionContext context, Operation operation) {
-		val orderedExpressions = ArgumentSorter.getOrderedExpressions(arguments, operation)
-		orderedExpressions.map(it|evaluate(context)).toArray
+	def provideArguments(List<Object> argumentValues, List<Argument> arguments, ExecutionContext context, Operation operation) {
+		if ( argumentValues === null ) {
+			val orderedExpressions = ArgumentSorter.getOrderedExpressions(arguments, operation)
+			orderedExpressions.map(it|evaluate(context)).toArray			
+		} else {
+			argumentValues.toArray
+		}
 	}
 
 }

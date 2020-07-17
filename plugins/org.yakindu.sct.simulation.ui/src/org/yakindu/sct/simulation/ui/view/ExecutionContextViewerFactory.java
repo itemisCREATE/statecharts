@@ -52,7 +52,7 @@ public class ExecutionContextViewerFactory {
 		viewer.getTree().setLinesVisible(true);
 		ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
 		viewer.setContentProvider(contentProvider);
-		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter()});
+		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter(), new VisibleViewerFilter()});
     
 		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		nameColumn.getColumn().setText("Name");

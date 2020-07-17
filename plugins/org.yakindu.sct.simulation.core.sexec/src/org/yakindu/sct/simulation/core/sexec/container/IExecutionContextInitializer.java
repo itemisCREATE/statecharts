@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.sexec.container;
 
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionVariable;
@@ -33,4 +34,6 @@ public interface IExecutionContextInitializer {
 	 */
 	public void initialize(ExecutionContext context, ExecutionFlow flow);
 
+	public CompositeSlot newInstance(ExecutionFlow flow);
 }
+

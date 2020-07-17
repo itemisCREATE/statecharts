@@ -77,7 +77,7 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 			}
 
 			if (!context.isSnapshot()) {
-				contextInitializer.initialize(context, flow);
+//				contextInitializer.initialize(context, flow);
 			}
 			interpreter.initialize(flow, context, useInternalEventQueue());
 		} catch (Exception ex) {

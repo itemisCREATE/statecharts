@@ -76,7 +76,7 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected void initInterpreter(ExecutionFlow flow, boolean useInternalEventQueue) {
-		initializer.initialize(context, flow);
+		// initializer.initialize(context, flow);
 		interpreter.initialize(flow, context, useInternalEventQueue);
 		this.flow = flow;
 		if (flow.getSourceElement() instanceof Statechart) {
@@ -156,6 +156,8 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected void raiseEvent(String eventName, Object value) {
+		
+		
 		if (isEventDriven()) {
 			ExecutionEvent event = context().getEvent(eventName);
 			event.setValue(value);

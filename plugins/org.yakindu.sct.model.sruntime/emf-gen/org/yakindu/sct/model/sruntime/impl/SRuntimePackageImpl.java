@@ -299,8 +299,18 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * @generated
 	 */
 	@Override
+	public EAttribute getExecutionSlot_Visible() {
+		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getExecutionSlot_Type() {
-		return (EReference)executionSlotEClass.getEStructuralFeatures().get(3);
+		return (EReference)executionSlotEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -417,6 +427,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__VALUE);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__FQ_NAME);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__WRITABLE);
+		createEAttribute(executionSlotEClass, EXECUTION_SLOT__VISIBLE);
 		createEReference(executionSlotEClass, EXECUTION_SLOT__TYPE);
 
 		executionVariableEClass = createEClass(EXECUTION_VARIABLE);
@@ -513,6 +524,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		initEAttribute(getExecutionSlot_Value(), this.getJavaObject(), "value", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_FqName(), theEcorePackage.getEString(), "fqName", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_Writable(), theEcorePackage.getEBoolean(), "writable", "true", 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecutionSlot_Visible(), theEcorePackage.getEBoolean(), "visible", "true", 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionSlot_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionVariableEClass, ExecutionVariable.class, "ExecutionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

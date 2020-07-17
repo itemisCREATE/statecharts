@@ -16,7 +16,10 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.typesystem.ITypeValueProvider
@@ -30,12 +33,12 @@ import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * 
@@ -53,14 +56,29 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	extension SRuntimeFactory = SRuntimeFactory.eINSTANCE
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
-		flow.scopes.forEach[context.slots += transform]
+		flow.define(context)
 	}
+	
 
 	def create it : createCompositeSlot importSlot(ExecutionFlow flow) {
 		it => [
 			name = "imports"
 		]
 	}
+
+	override CompositeSlot newInstance(ExecutionFlow flow) {
+		createCompositeSlot => [
+			flow.define(it)		
+		]
+	}
+
+	def define(ExecutionFlow flow, CompositeSlot instance) {
+		flow.scopes.forEach[instance.slots += transform]
+		flow.features.forEach[instance.slots += transform => [
+			visible = true
+		]]	
+	}
+
 
 	def dispatch ExecutionSlot transform(ImportScope scope) {
 
@@ -127,8 +145,12 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			scope.declarations.forEach[decl|slots += decl.transform]
 		]
 	}
+	
+	def dispatch ExecutionSlot transform(VariableDefinition it){
+		(it as Property)._transform()
+	}
 
-	def dispatch ExecutionSlot transform(VariableDefinition variable) {
+	def dispatch ExecutionSlot transform(Property variable) {
 		createExecutionVariable => [
 			name = variable.fullyQualifiedName.lastSegment
 			fqName = variable.fullyQualifiedName.toString
@@ -137,8 +159,12 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			writable = !variable.const
 		]
 	}
+	
+	def dispatch ExecutionSlot transform(EventDefinition it){
+		(it as Event)._transform()
+	}	
 
-	def dispatch ExecutionSlot transform(EventDefinition event) {
+	def dispatch ExecutionSlot transform(Event event) {
 		createExecutionEvent => [
 			name = event.fullyQualifiedName.lastSegment
 			fqName = event.fullyQualifiedName.toString
@@ -147,8 +173,12 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			direction = Direction.get(event.direction.value)
 		]
 	}
+	
+	def dispatch ExecutionSlot transform(OperationDefinition it){
+		(it as Operation)._transform()
+	}
 
-	def dispatch ExecutionSlot transform(OperationDefinition op) {
+	def dispatch ExecutionSlot transform(Operation op) {
 		createExecutionOperation => [
 			name = op.fullyQualifiedName.lastSegment
 			fqName = op.fullyQualifiedName.toString
@@ -163,6 +193,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			fqName = event.fullyQualifiedName.toString
 			type = getType(ITypeSystem.INTEGER)
 			value = type.defaultValue
+			direction = Direction.IN
 		]
 	}
 }

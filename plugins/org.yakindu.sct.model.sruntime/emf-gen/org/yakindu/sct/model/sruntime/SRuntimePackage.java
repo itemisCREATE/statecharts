@@ -114,13 +114,22 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_CONTEXT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__VISIBLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_CONTEXT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -129,7 +138,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SLOTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_CONTEXT__SLOTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Active States</b></em>' reference list.
@@ -138,7 +147,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__ACTIVE_STATES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_CONTEXT__ACTIVE_STATES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Executed Elements</b></em>' reference list.
@@ -147,7 +156,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__EXECUTED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_CONTEXT__EXECUTED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Suspended Elements</b></em>' reference list.
@@ -156,7 +165,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Context Fqn</b></em>' attribute.
@@ -165,7 +174,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__CONTEXT_FQN = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int EXECUTION_CONTEXT__CONTEXT_FQN = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Snapshot</b></em>' attribute.
@@ -174,7 +183,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Execution Context</em>' class.
@@ -183,7 +192,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sruntime.impl.ExecutionSlotImpl <em>Execution Slot</em>}' class.
@@ -232,13 +241,22 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_SLOT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SLOT__VISIBLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SLOT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_SLOT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Execution Slot</em>' class.
@@ -247,7 +265,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SLOT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_SLOT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sruntime.impl.ExecutionEventImpl <em>Execution Event</em>}' class.
@@ -294,6 +312,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_EVENT__WRITABLE = EXECUTION_SLOT__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_EVENT__VISIBLE = EXECUTION_SLOT__VISIBLE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -378,6 +405,15 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_VARIABLE__WRITABLE = EXECUTION_SLOT__WRITABLE;
 
 	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_VARIABLE__VISIBLE = EXECUTION_SLOT__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -440,6 +476,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_SLOT__WRITABLE = EXECUTION_SLOT__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_SLOT__VISIBLE = EXECUTION_SLOT__VISIBLE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -513,6 +558,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE_SLOT__WRITABLE = COMPOSITE_SLOT__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__VISIBLE = COMPOSITE_SLOT__VISIBLE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -595,6 +649,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_OPERATION__WRITABLE = EXECUTION_VARIABLE__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_OPERATION__VISIBLE = EXECUTION_VARIABLE__VISIBLE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -764,6 +827,17 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getExecutionSlot_Writable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sruntime.ExecutionSlot#isVisible <em>Visible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visible</em>'.
+	 * @see org.yakindu.sct.model.sruntime.ExecutionSlot#isVisible()
+	 * @see #getExecutionSlot()
+	 * @generated
+	 */
+	EAttribute getExecutionSlot_Visible();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sruntime.ExecutionSlot#getType <em>Type</em>}'.
@@ -980,6 +1054,14 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXECUTION_SLOT__WRITABLE = eINSTANCE.getExecutionSlot_Writable();
+
+		/**
+		 * The meta object literal for the '<em><b>Visible</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXECUTION_SLOT__VISIBLE = eINSTANCE.getExecutionSlot_Visible();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.

@@ -26,6 +26,7 @@ import org.yakindu.base.types.Type;
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionSlot#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionSlot#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionSlot#isWritable <em>Writable</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionSlot#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.ExecutionSlot#getType <em>Type</em>}</li>
  * </ul>
  *
@@ -112,6 +113,29 @@ public interface ExecutionSlot extends NamedElement {
 	 * @generated
 	 */
 	void setWritable(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Visible</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visible</em>' attribute.
+	 * @see #setVisible(boolean)
+	 * @see org.yakindu.sct.model.sruntime.SRuntimePackage#getExecutionSlot_Visible()
+	 * @model default="true" unique="false"
+	 * @generated
+	 */
+	boolean isVisible();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sruntime.ExecutionSlot#isVisible <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visible</em>' attribute.
+	 * @see #isVisible()
+	 * @generated
+	 */
+	void setVisible(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.

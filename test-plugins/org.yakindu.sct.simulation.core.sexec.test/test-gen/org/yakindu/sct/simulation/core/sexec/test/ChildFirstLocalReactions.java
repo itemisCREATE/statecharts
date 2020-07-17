@@ -98,7 +98,6 @@ public class ChildFirstLocalReactions extends AbstractExecutionFlowTest {
 		raiseEvent("doSelfTransition");
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("aaa_local") == 1l);
 		assertTrue(getInteger("aa_local") == 2l);
 		assertTrue(getInteger("a_local") == 0l);
 		assertTrue(getInteger("sm_local") == 3l);

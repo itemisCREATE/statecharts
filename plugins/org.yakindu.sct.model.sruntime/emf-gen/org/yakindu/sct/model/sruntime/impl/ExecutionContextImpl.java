@@ -55,6 +55,7 @@ import org.yakindu.sct.model.sruntime.SRuntimePackage;
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#isWritable <em>Writable</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getSlots <em>Slots</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl#getActiveStates <em>Active States</em>}</li>
@@ -126,6 +127,26 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * @ordered
 	 */
 	protected boolean writable = WRITABLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -303,6 +324,29 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		writable = newWritable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_CONTEXT__WRITABLE, oldWritable, writable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVisible(boolean newVisible) {
+		boolean oldVisible = visible;
+		visible = newVisible;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_CONTEXT__VISIBLE, oldVisible, visible));
 	}
 
 	/**
@@ -619,6 +663,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return getFqName();
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				return isWritable();
+			case SRuntimePackage.EXECUTION_CONTEXT__VISIBLE:
+				return isVisible();
 			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
@@ -655,6 +701,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				setWritable((Boolean)newValue);
+				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__VISIBLE:
+				setVisible((Boolean)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
 				setType((Type)newValue);
@@ -702,6 +751,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				setWritable(WRITABLE_EDEFAULT);
 				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__VISIBLE:
+				setVisible(VISIBLE_EDEFAULT);
+				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
 				setType((Type)null);
 				return;
@@ -741,6 +793,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return FQ_NAME_EDEFAULT == null ? fqName != null : !FQ_NAME_EDEFAULT.equals(fqName);
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				return writable != WRITABLE_EDEFAULT;
+			case SRuntimePackage.EXECUTION_CONTEXT__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
 			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
 				return type != null;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
@@ -771,6 +825,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				case SRuntimePackage.EXECUTION_CONTEXT__VALUE: return SRuntimePackage.EXECUTION_SLOT__VALUE;
 				case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME: return SRuntimePackage.EXECUTION_SLOT__FQ_NAME;
 				case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE: return SRuntimePackage.EXECUTION_SLOT__WRITABLE;
+				case SRuntimePackage.EXECUTION_CONTEXT__VISIBLE: return SRuntimePackage.EXECUTION_SLOT__VISIBLE;
 				case SRuntimePackage.EXECUTION_CONTEXT__TYPE: return SRuntimePackage.EXECUTION_SLOT__TYPE;
 				default: return -1;
 			}
@@ -796,6 +851,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				case SRuntimePackage.EXECUTION_SLOT__VALUE: return SRuntimePackage.EXECUTION_CONTEXT__VALUE;
 				case SRuntimePackage.EXECUTION_SLOT__FQ_NAME: return SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME;
 				case SRuntimePackage.EXECUTION_SLOT__WRITABLE: return SRuntimePackage.EXECUTION_CONTEXT__WRITABLE;
+				case SRuntimePackage.EXECUTION_SLOT__VISIBLE: return SRuntimePackage.EXECUTION_CONTEXT__VISIBLE;
 				case SRuntimePackage.EXECUTION_SLOT__TYPE: return SRuntimePackage.EXECUTION_CONTEXT__TYPE;
 				default: return -1;
 			}
@@ -825,6 +881,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		result.append(fqName);
 		result.append(", writable: ");
 		result.append(writable);
+		result.append(", visible: ");
+		result.append(visible);
 		result.append(", contextFqn: ");
 		result.append(contextFqn);
 		result.append(", snapshot: ");
