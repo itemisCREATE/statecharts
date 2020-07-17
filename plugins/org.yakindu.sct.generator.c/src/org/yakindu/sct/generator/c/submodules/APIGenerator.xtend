@@ -124,6 +124,8 @@ class APIGenerator {
 			
 			«_clearInEvents.code»
 			«_clearInternalEvents.code»
+			«_swapIncomingEvents.code»
+			«_swapInternalEvents.code»
 			«_clearOutEvents.code»
 
 			«IF useOutEventObservables»
