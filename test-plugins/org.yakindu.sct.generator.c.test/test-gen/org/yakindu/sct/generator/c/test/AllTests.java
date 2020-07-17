@@ -17,11 +17,11 @@ import org.junit.runners.Suite.SuiteClasses;
 	EventDrivenTest.class,
 	EventDrivenInternalEventTest.class,
 	EventDrivenTriggeredByEventTest.class,
-	//EventDrivenTriggeredByTimeEventTest.class,<-- FIXME Unused function
+	EventDrivenTriggeredByTimeEventTest.class,
 	LocalEventsTest.class,
 	NoLocalEventsTest.class,
 	OutEventVisibilityEventDrivenTest.class,
-	//OutEventWithPayloadTest.class,<-- FIXME Unused function
+	OutEventWithPayloadTest.class,
 	ChildFirstExecutionHierarchyTest.class,
 	ChildFirstLocalReactionsTest.class,
 	ChildFirstOrthogonalReactionsTest.class,
@@ -34,7 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TransitionHandlesMultipleExists.class,
 	TriggerExpressionPrecedenceTest.class,
 	StatechartEntryExitActions.class,
-	//CycleBasedSuperStepTest.class, //FIXME
+	CycleBasedSuperStepTest.class,
 	EventDrivenSuperStepTest.class,
 	SuperStepOnEnterTest.class,
 	AlwaysOncycleTest.class,
