@@ -17,11 +17,11 @@ import org.junit.runners.Suite.SuiteClasses;
 	EventDrivenTest.class,
 	EventDrivenInternalEventTest.class,
 	EventDrivenTriggeredByEventTest.class,
-	//EventDrivenTriggeredByTimeEventTest.class,<-- FIXME Unused function
+	EventDrivenTriggeredByTimeEventTest.class,
 	LocalEventsTest.class,
 	NoLocalEventsTest.class,
 	OutEventVisibilityEventDrivenTest.class,
-	//OutEventWithPayloadTest.class,<-- FIXME Unused function
+	OutEventWithPayloadTest.class,
 	ChildFirstExecutionHierarchyTest.class,
 	ChildFirstLocalReactionsTest.class,
 	ChildFirstOrthogonalReactionsTest.class,

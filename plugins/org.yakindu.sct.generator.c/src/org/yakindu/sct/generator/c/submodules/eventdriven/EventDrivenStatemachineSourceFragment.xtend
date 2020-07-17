@@ -38,7 +38,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	@Inject extension GeneratorPredicate
 	
 	override implementations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) '''
-		«IF needsQueues»
+		«IF hasQueuedEventsWithoutValue»
 		«eventQueueFunctions»
 		
 		«eventInit»
@@ -70,6 +70,8 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
 			static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
 			static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
+		«ENDIF»
+		«IF hasQueuedEventsWithoutValue»
 			static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
 			static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name);
 		«ENDIF»
