@@ -22,6 +22,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl;
@@ -31,6 +32,7 @@ import org.yakindu.sct.simulation.core.sexec.container.ComplexTypeAwareContextIn
 import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
+import org.yakindu.sct.simulation.core.sexec.container.SimulationFlowConfiguration;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
@@ -77,6 +79,10 @@ public class GenericSimulationModule extends AbstractGenericModule {
 
 	public Class<? extends IModelSequencer> bindIModelSequencer() {
 		return ModelSequencer.class;
+	}
+	
+	public Class<? extends IFlowConfiguration> bindIFlowConfiguration() {
+		return SimulationFlowConfiguration.class;
 	}
 	
 	public Class<? extends INamingService> bindINamingService(){
