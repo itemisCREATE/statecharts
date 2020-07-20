@@ -136,14 +136,20 @@ class ExpressionExecution extends BaseExecution {
 	}
 	
 	def dispatch void execution(NamedElement item, ElementReferenceExpression context){	
-		_return ('''revolve «item.symbol»''', [
+		_return ('''resolve «item.symbol»''', [
 			resolve(null, item.symbol)
+		])
+	}
+	
+	def dispatch void execution(Enumerator item, ArgumentExpression context){	
+		_return('''resolve «item.symbol»''', [
+			item.literalValue as long
 		])
 	}
 	
 	def dispatch void execution(NamedElement item, FeatureCall context){	
 		context.owner._exec
-		_return ('''revolve «item.symbol»''', [
+		_return ('''resolve «item.symbol»''', [
 			popValue.resolve(item.symbol)
 		])
 	}
@@ -343,6 +349,10 @@ class ExpressionExecution extends BaseExecution {
 	def protected dispatch Object typeCast(Enumerator value, Type type) {
 		if(ts.isSuperType(type, value.owningEnumeration)) return value
 		throw new IllegalArgumentException("Invalid cast from Enumerator to " + type.name)
+	}
+	
+	def protected dispatch Object typeCast(Object value, Type type) {
+		value
 	}
 
 	

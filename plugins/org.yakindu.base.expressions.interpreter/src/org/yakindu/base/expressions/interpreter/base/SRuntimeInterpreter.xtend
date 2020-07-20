@@ -255,7 +255,6 @@ abstract class SRuntimeInterpreter implements IInterpreter, IInterpreter.Control
 		
 	}
 	
-	
 	override  defineVariable(String name, Object value) {
 		_variable(name, value) => [
 			localScope.slots.add(it)
