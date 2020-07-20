@@ -31,7 +31,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
-import org.yakindu.base.types.typesystem.GenericTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 
 import com.google.common.base.Predicate;
 import com.google.common.cache.Cache;
@@ -50,6 +50,8 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
+	@Inject
+	private ITypeSystem typeSystem;
 
 	protected abstract Set<URI> getLibraries(Resource context);
 
@@ -91,7 +93,7 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 	protected Iterable<IEObjectDescription> getDescriptions(Resource context, URI uri) {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		ResourceSet set = new ResourceSetImpl();
-		set.getResources().add(GenericTypeSystem.getInstance().getResource());
+		set.getResources().add(typeSystem.getResource());
 		Resource resource = set.getResource(uri, true);
 		EcoreUtil.resolveAll(set);
 		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);

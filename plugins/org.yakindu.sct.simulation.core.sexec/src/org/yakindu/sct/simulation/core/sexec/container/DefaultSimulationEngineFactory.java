@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
@@ -77,9 +76,7 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 			IDomain domain = DomainRegistry.getDomain(statechart);
 			Injector injector = domain.getInjector(IDomain.FEATURE_SIMULATION);
 			ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
-			if (typeSystem instanceof AbstractTypeSystem) {
-				set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
-			}
+			set.getResources().add(typeSystem.getResource());
 			EcoreUtil.resolveAll(resource);
 			ExecutionContext result = (ExecutionContext) resource.getContents().get(0);
 			result.setSnapshot(true);
