@@ -374,7 +374,7 @@ class ExecutionFlowInstance extends BaseExecution implements IInterpreter.Instan
 						result = it.type?.defaultValue
 					} 
 				} else {
-					throw new UnsupportedOperationException('''No operation executor for «it.name» ''')				
+					result = it.type?.defaultValue
 		
 				}
 				
