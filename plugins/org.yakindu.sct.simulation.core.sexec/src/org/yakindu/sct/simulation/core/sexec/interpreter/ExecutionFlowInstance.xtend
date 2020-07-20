@@ -364,7 +364,7 @@ class ExecutionFlowInstance extends BaseExecution implements IInterpreter.Instan
 			val paramValues = new ArrayList<Object>
 			parameters.forEach[paramValues.add(popValue)]
 			enterCall(name)
-	
+			paramValues.reverse
 			_execute[
 				var Object result = null
 				val executor = operationExecutors.findFirst[canExecute(caller, executionContext)]
