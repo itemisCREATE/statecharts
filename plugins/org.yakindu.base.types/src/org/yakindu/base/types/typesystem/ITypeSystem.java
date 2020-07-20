@@ -13,6 +13,7 @@ package org.yakindu.base.types.typesystem;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
@@ -78,5 +79,7 @@ public interface ITypeSystem {
 	boolean isVoid(Type type);
 
 	boolean isAny(Type type);
+	
+	Resource getResource();
 	
 }
