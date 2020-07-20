@@ -231,7 +231,7 @@ public class GTestHelper {
 				.compiler(getCompilerCommand())
 				.sources(sourceFiles)
 				.mainLib(getMainLib())
-				.wPedantic()
+				//.wPedantic() //FIXME
 			 	.wAll()				
 			 	.wExtra()
 			 	.wConversion()
