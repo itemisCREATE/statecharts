@@ -30,10 +30,9 @@ import org.yakindu.sct.generator.core.submodules.lifecycle.MicroStepCode;
 import org.yakindu.sct.generator.core.submodules.lifecycle.TraceCode;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
-import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
-import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
@@ -47,7 +46,6 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 	public void configure(GeneratorEntry entry, Binder binder) {
 		binder.bind(IFlowConfiguration.class).to(CFlowConfiguration.class);
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
-		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);

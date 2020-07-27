@@ -11,18 +11,14 @@
 package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.StateVector
-import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
-import java.util.List
-
-
 
 class StateVectorBuilder {
 	
@@ -116,16 +112,5 @@ class StateVectorBuilder {
 		return 1
 	}
 
-	def dispatch StateVector stateVector(Vertex v) {
-		null	
-	}
-	
-	def dispatch StateVector stateVector(RegularState s) {
-		s.create.stateVector	
-	}
-	
-	def dispatch StateVector stateVector(Choice choice) {
-		choice.parentRegion.create.stateVector	
-	}
 	
 }

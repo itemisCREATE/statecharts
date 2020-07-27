@@ -44,37 +44,6 @@ class ReactionBuilder {
 	@Inject extension BehaviorMapping behaviorMapping
 	@Inject extension StatechartAnnotations
 	
-	def defineStatechartReaction(ExecutionFlow flow, Statechart sc) {
-		val sequence = sexec.factory.createSequence
-		sequence.name = "react"
-		sequence.comment = 'The reactions of statechart '+sc.name
-		
-		val leafStates = sc.allRegularStates.filter(s|s.leaf)
-		val sSwitch = sexec.factory.createStateSwitch
-		sequence.steps += sSwitch
-		for (leaf : leafStates.map(s|s.create)) {
-			val sCase = sexec.factory.createStateCase
-			sCase.state = leaf
-			sCase.step = leaf.reactSequence.newCall
-			sSwitch.cases += sCase
-		}
-		
-		flow.reactSequence = sequence
-		return flow
-	}
-
-	def defineRegularStateReactions(ExecutionFlow flow, Statechart sc) {
-		
-		val states = sc.allRegularStates
-		
-		states.filter(typeof(State)).filter(s | s.simple).forEach(s | defineCycle(s))
-		states.filter(typeof(FinalState)).forEach(s | defineCycle(s))
-		
-
-		return flow
-	}
-	
-
 	def definePseudoStateReactions(ExecutionFlow flow, Statechart sc) {
 		
 		sc.allChoices().forEach( choice | choice.defineReaction() )
@@ -182,72 +151,6 @@ class ReactionBuilder {
 	def protected hasNoTrigger(Transition t) {
 		return t.trigger === null && !(t.target instanceof Synchronization)
 	}
-
-	def alwaysTrue(Check check) {
-		if (check !== null && check.condition instanceof PrimitiveValueExpression) {
-			val pve = (check.condition as PrimitiveValueExpression)
-			return ( pve.value instanceof BoolLiteral && ( pve.value as BoolLiteral ).value )
-		} 
-		
-		return false
-	}
-
-
-	def Sequence defineCycle(RegularState state) {
-	
-		val execState = state.create
-		
-		val shouldExecuteParent = if (! state.statechart.childFirstExecution) 
-								[StateVector sv | sv.offset == execState.stateVector.offset]
-							else
-								[StateVector sv | sv.last == execState.impactVector.last]
-								
-		val parents = state.parentStates.map(p|p.create).filter(p| p == execState || shouldExecuteParent.apply(p.impactVector) ) 
-		
-		var parentNodes = parents.map(p|p as ExecutionNode).toList
-		
-		if ( shouldExecuteParent.apply( execState.flow.stateVector) )
-			parentNodes += EcoreUtil2::getRootContainer(execState) as ExecutionNode
-
-
-		if (state.statechart.childFirstExecution) parentNodes = parentNodes.reverse
-		
-		if (state.statechart.interleaveLocalReactions) {
-
-			execState.reactSequence = parentNodes.fold(null, [r, s | {
-				s.createReactionSequence(s.createLocalReactionSequence(r))
-			}])
-			
-		} else {
-			
-			val localReactSequence = parentNodes.fold(null, [ r, s | s.createLocalReactionSequence(r)])			
-			execState.reactSequence = parentNodes.fold(localReactSequence, [r, s | { s.createReactionSequence(r) }])		
-		}
-		
-		execState.reactSequence.name = 'react'
-		execState.reactSequence.comment = 'The reactions of state ' + state.name + '.'
-		
-		return execState.reactSequence
-	}	
-
-
-	def Sequence createLocalReactionSequence(ExecutionNode state, Step localStep) {	
-		val localReactions = state.reactions.filter(r | ! r.transition ).toList
-		var localSteps = sexec.factory.createSequence
-		localSteps.steps.addAll(localReactions.map(lr | {
-				var ifStep = sexec.factory.createIf
-				ifStep.check = lr.check.newRef		
-				ifStep.thenStep = lr.effect.newCall
-				ifStep
-		}))
-
-		if (localStep !== null) localSteps.steps += localStep
-		
-//		if (localSteps.steps.empty) return null		
-//		else 
-		return localSteps
-	}
-
 
 	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
 		val cycle = sexec.factory.createSequence

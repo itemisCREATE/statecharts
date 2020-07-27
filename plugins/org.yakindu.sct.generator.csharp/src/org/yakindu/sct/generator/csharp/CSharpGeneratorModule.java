@@ -10,15 +10,14 @@
  */
 package org.yakindu.sct.generator.csharp;
 
-import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.csharp.types.CSharpTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
-import org.yakindu.sct.model.sgen.GeneratorEntry;
-import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
 
@@ -36,6 +35,5 @@ public class CSharpGeneratorModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CSharpNamingService.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
-		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 	}
 }

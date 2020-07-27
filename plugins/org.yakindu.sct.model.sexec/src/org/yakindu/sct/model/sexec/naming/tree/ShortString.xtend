@@ -183,11 +183,6 @@ class ShortString {
 		}
 	}
 
-	def protected boolean isLowercaseVocal(int i) {
-		var c = originalString.charAt(i);
-		return isLowercaseVocal(c);
-	}
-
 	def protected boolean isLowercaseVocal(char c) {
 		val s = c.toString();
 		return (s == "a" || s == "e" || s == "i" || s == "o" || s == "u");

@@ -67,33 +67,8 @@ class SexecExtensions {
 		return save
 	}
 
-	def dispatch List<ExecutionState> collectLeafStates(ExecutionState state, List<ExecutionState> leafStates) {
-		if ( state.isLeaf ) 
-			leafStates += state
-		else {
-			for ( r : state.subScopes ) {
-				r.collectLeafStates(leafStates)
-			}
-		}
-		return leafStates	
-	}
-	
-	 
-		
-	def dispatch List<ExecutionState> collectLeafStates(ExecutionRegion region, List<ExecutionState> leafStates) {
-		for ( r : region.subScopes ) {
-			r.collectLeafStates(leafStates)
-		}
-		
-		return leafStates	
-	}
-	
 	def last(StateVector sv) {
 		sv.offset + sv.size -1
-	}
-	
-	def first(StateVector sv) {
-		sv.offset
 	}
 	
 	/**

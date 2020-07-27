@@ -22,8 +22,8 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.config.IFlowConfiguration;
-import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
@@ -33,7 +33,6 @@ import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFa
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.container.SimulationFlowConfiguration;
-import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;

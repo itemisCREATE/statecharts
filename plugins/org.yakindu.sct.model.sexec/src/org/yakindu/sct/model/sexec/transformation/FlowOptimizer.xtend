@@ -35,13 +35,12 @@ import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.concepts.StateMachineBehaviorConcept
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgraph.SGraphFactory
-import org.yakindu.sct.model.stext.stext.StextFactory
 
 class FlowOptimizer {
 	
 	@Inject extension SExecExtensions sexec
 	@Inject extension StateMachineBehaviorConcept concept
+	SexecFactory sexecFactory =  SexecFactory.eINSTANCE
 	
 	boolean _inlineReactions        def inlineReactions(boolean b)      {_inlineReactions = b}
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}
@@ -272,17 +271,6 @@ class FlowOptimizer {
 		state
 	}
 	
-	
-	// INLINE ENTRY AND EXIT ACTIONS
-
-	def inlineEntryAndExitActions(ExecutionFlow flow) {
-		flow.states.forEach( state | state.entryAction.inline )
-		flow.states.forEach( state | state.exitAction.inline )
-	}
-		
-	
-
-
 	// GENERIC STEP INLINING
 	
 	def inline(Step step) {
@@ -430,11 +418,5 @@ class FlowOptimizer {
 		
 		_copy
 	}	
-	
-
-	//--------- UTILS ---------------
-	def sexecFactory() { SexecFactory::eINSTANCE }
-	def sgraphFactory() { SGraphFactory::eINSTANCE }
-	def stextFactory() { StextFactory::eINSTANCE }
 
 }

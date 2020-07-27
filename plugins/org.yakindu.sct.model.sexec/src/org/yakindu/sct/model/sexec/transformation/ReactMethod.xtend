@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Expression

@@ -62,20 +62,4 @@ class DefaultFlowConfiguration implements IFlowConfiguration {
 	override applyIncomingEventQueue() {
 		isEventDriven && _applyIncomingEventQueue
 	}
-	
-	@Singleton
-	static class AllFeaturesDisabled extends DefaultFlowConfiguration {
-		
-		override void defineConfigurationForStatechart(Statechart sc) {
-			
-			super.defineConfigurationForStatechart(sc)
-			
-			_applyIncomingEventBuffer = false
-			_applyInternalEventBuffer = false
-			_applyOutgoingEventBuffer = false
-			_applyIncomingEventQueue = false
-		}
-
-	}
-	
 }

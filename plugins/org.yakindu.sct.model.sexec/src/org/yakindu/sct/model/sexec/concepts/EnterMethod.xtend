@@ -13,7 +13,6 @@ package org.yakindu.sct.model.sexec.concepts
 import com.google.inject.Inject
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
@@ -65,10 +64,4 @@ class EnterMethod {
 	def Step _traceEnter(ExecutionFlow it) {
 		_conceptSequence(TRACE_ENTER)	
 	}
-	
-	
-	def Method enter(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == ENTER).head
-	}
-	
 }

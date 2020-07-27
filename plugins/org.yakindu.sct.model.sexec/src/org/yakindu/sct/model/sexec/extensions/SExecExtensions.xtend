@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sexec.extensions
 
 import com.google.inject.Inject
 import java.util.ArrayList
+import java.util.LinkedList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
@@ -21,10 +22,10 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.adapter.OriginTracing
-import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -45,8 +46,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.Event
-import java.util.LinkedList
 
 class SExecExtensions {
 	@Inject extension OriginTracing
@@ -143,14 +142,6 @@ class SExecExtensions {
 		false;
 	}
 	
-	/**
-	 * @deprecated use {@link #hasInternalScope(ExecutionFlow) hasInternalScope} instead
-	 */
-	@Deprecated
-	def boolean hasLocalScope(ExecutionFlow it) {
-		hasInternalScope
-	}
-	
 	def boolean hasInternalScope(ExecutionFlow it) {
 		internalScope !== null;
 	}
@@ -221,10 +212,6 @@ class SExecExtensions {
 		scopes.map[outgoingEvents].flatten
 	}
 	
-	def hasIncomingEvents(Scope it) {
-		!incomingEvents.empty
-	}
-	
 	def hasInEvents(ExecutionFlow it) {
 		!getIncomingEvents.empty
 	}
@@ -233,10 +220,6 @@ class SExecExtensions {
 		!incomingEvents.filter[hasValue].empty
 	}
 	
-	def hasIncomingEventsWithValue(ExecutionFlow it) {
-		!interfaces.filter[hasIncomingEventsWithValue].empty
-	}
-		
 	def List<EventDefinition> getIncomingEvents(Scope it) {
 		declarations.filter(EventDefinition).filter[isInEvent].toList
 	}
@@ -367,11 +350,6 @@ class SExecExtensions {
 	}
 
 
-	/* Returns the function Sequence which contains the Call.*/
-	def callerFunction(Call it) {
-		return it.ownerFunction
-	}
-	
 	def dispatch Sequence ownerFunction(Sequence it){
 		if ( (eContainer instanceof ExecutionNode) || (eContainer instanceof ExecutionScope) || (eContainer instanceof Reaction))  {
 			return it	
@@ -439,15 +417,6 @@ class SExecExtensions {
 	 */
 	def isCalled(Step it) { it !== null && caller.size > 0 }
 	
-	
-	/**
-	 * Returns a list of all steps that are called. 
-	 */
-	def List<Sequence> called(List<Sequence> it) {
-		filter( s | s.called ).toList
-	}
-	
-	 
 	def List<Step> enterSequenceFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
 		funcs.addAll(enterSequences.reachable) 
@@ -537,15 +506,6 @@ class SExecExtensions {
 	def dispatch isReactSequence(EObject it, Step s) { false }
 	
 	def isCheckFunction(Step it) { it instanceof Check }
-	
-	
-	
-	/**
-	 * Returns a step that mathes the given name.
-	 */
-	def Sequence byName(List<Sequence>steps, String name) {
-		steps.filter(s | name.trim == s.name.trim ).head
-	}
 
 	/**
 	 * Returns the default step that is the step without name or the name 'default'.

@@ -11,13 +11,11 @@
 package org.yakindu.sct.model.sexec.concepts
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.concepts.ExecutionGuard
 import org.yakindu.sct.model.sexec.extensions.SexecBuilder
-import com.google.inject.Singleton
 
 /**
  * This class defines the general concept of the runCycle method which implements 
@@ -77,10 +75,6 @@ class RunCycleMethod {
 			_conceptSequence(MICRO_STEP)
 		)
 		features += m
-	}
-		
-	def Method runCycle(ExecutionFlow it) {
-		features.filter( typeof(Method) ).filter( m | m.name == "runCycle").head
 	}
 	
 }

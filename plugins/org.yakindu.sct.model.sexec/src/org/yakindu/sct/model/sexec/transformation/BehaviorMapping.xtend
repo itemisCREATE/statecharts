@@ -35,6 +35,8 @@ import org.yakindu.sct.model.sexec.ExecutionSynchronization
 import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SexecBuilder
+import org.yakindu.sct.model.sexec.transformation.ReactMethod
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.sgraph.Entry
@@ -70,6 +72,8 @@ class BehaviorMapping {
 	@Inject extension TraceExtensions trace
 	@Inject extension SequenceBuilder sb
 	@Inject extension StatechartAnnotations sa
+	@Inject extension ReactMethod rm
+	@Inject extension SexecBuilder sexecBuilder
 	
 	@Inject protected extension ExpressionBuilder exprBuilder
 
@@ -444,40 +448,6 @@ class BehaviorMapping {
 	}
 
 	
-	def Sequence mapToEffect(Transition t, Reaction r) {
-		val sequence = sexec.factory.createSequence 
-
-		// define exit behavior of transition
-		
-		if (trace.addTraceSteps) {
-			sequence.steps.add(t.create.newTraceReactionWillFire)	
-		}
-		
-		// first process the exit behavior of orthogonal states that has to be performed before source exit
-		val topExitState = t.exitStates.last
-		if (topExitState !== null) {
-			val exitSequence = topExitState.create.exitSequence
-			if (exitSequence !== null) {
-				sequence.steps.add(exitSequence.newCall)
-			}
-		}
-
-		// map transition actions
-		if (t.effect !== null) sequence.steps.add(t.effect.mapEffect)	
-		if (trace.addTraceSteps) { 
-			sequence.steps += r.newTraceReactionFired
-		}
-		
-
-		// define entry behavior of the transition
-		
-		sequence.steps.addAll( mapToStateConfigurationEnterSequence( newArrayList(t) ).steps )
-		
-		
-		
-		return sequence
-	}
-	
 	/**
 	 * Creates a compound effect that can consist of multiple transitions.
 	 */
@@ -533,7 +503,6 @@ class BehaviorMapping {
 
 		val execRegion = region.create
 		
-		var List<ExecutionNode> parentNodes = new ArrayList<ExecutionNode>()
 		val shouldExecuteParent = 
 			if (! region.statechart.childFirstExecution) 
 				[ExecutionScope parentScope, ExecutionScope execScope | false ]
@@ -541,26 +510,17 @@ class BehaviorMapping {
 				[ExecutionScope parentScope, ExecutionScope execScope | 
 					parentScope === execScope || parentScope.impactVector.last == execScope.impactVector.last
 				]
-		 
 		
-		if (region.parentStates.head !== null) {
-			val state = region.parentStates.head
-			val execState = state.create
-									
-			val parents = state.parentStates.map(p|p.create).filter(p| shouldExecuteParent.apply(p, execRegion) )
-			
-			parentNodes.addAll(parents.map(p|p as ExecutionNode))			
-			if ( shouldExecuteParent.apply( flow, execState) )
-				parentNodes += flow
-		} else {
-			if ( shouldExecuteParent.apply( flow, execRegion) )
-				parentNodes += flow
-		}
+		val parent = if (region.parentStates.head !== null) {
+						region.parentStates.head.create
+					} else {
+						flow
+					}
 
-			
-		if (region.statechart.childFirstExecution) parentNodes = parentNodes.reverse		
-		
-		parentNodes.fold(null, [ r, s | s.createLocalReactionSequence(r)])
+
+		if (shouldExecuteParent.apply(parent, execRegion)) {
+			parent.callReact(_false)._statement
+		}
 	}
 
 	
@@ -815,18 +775,9 @@ class BehaviorMapping {
 	}
 	
 
-	def firstState(Iterable<EObject> it) {
-		filter( typeof(State) ).head	
-	} 
-	
 	def firstRegion(Iterable<EObject> it) {
 		filter( typeof(Region) ).head			
 	}
-	
-	def State leastCommonAncesterState(State a, State b) {
-		commonAncestors(a,b).firstState
-	}
-	
 	
 	def dispatch Expression buildCondition (Trigger t) { null }
 

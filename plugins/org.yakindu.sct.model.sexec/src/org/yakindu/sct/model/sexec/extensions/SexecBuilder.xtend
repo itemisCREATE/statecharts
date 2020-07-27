@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
-import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
@@ -64,14 +63,6 @@ class SexecBuilder {
 		steps.add(step)
 		return steps
 	}
-
-//	def _equals(Expression left, Expression right) {
-//		createLogicalRelationExpression => [ eq |
-//			eq.operator = RelationalOperator.EQUALS;
-//			eq.leftOperand = left
-//			eq.rightOperand = right
-//		]
-//	}
 
 	def _assign(Property prop, Expression value) {
 		createStatement => [
@@ -213,11 +204,6 @@ class SexecBuilder {
 		createReturn => [value = exp]
 	}
 
-//	def _type(TypedElement it, String typeName) {
-//		typeSpecifier = createTypeSpecifier => [
-//					type = typeSystem.getType(typeName);
-//				]
-//	}
 	def _param(Operation it, String pName, String typeName) {
 
 		parameters.add(TypesFactory.eINSTANCE.createParameter => [
@@ -227,15 +213,6 @@ class SexecBuilder {
 
 		return it
 	}
-	
-	
-//	def _variable(String name, String typeName) {
-//		TypesFactory.eINSTANCE.createProperty => [ prop |
-//			prop.name = name
-//			prop._type(typeName)
-//		]	
-//	}
-	
 
 	def _call(Step callee) {
 		createCall => [step = callee]

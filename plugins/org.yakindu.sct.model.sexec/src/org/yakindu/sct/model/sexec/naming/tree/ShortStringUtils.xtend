@@ -26,10 +26,6 @@ class ShortStringUtils {
 		list.map[shortenedSize].reduce[a, b|a + b]
 	}
 	
-	def int getMaxLength(List<List<ShortString>> names) {
-		return names.map[getLength].max
-	}
-	
 	def String join(List<ShortString> name) {
 		val sb = new StringBuilder
 
