@@ -31,7 +31,7 @@ public class ExamplesPreferenceInitializer extends AbstractPreferenceInitializer
 		getPreferenceStore().setDefault(ExamplesPreferenceConstants.STORAGE_LOCATION,
 				property + File.separator + EXAMPLES);
 		getPreferenceStore().setDefault(ExamplesPreferenceConstants.REMOTE_LOCATION, "https://github.com/Yakindu/examples");
-		getPreferenceStore().setDefault(ExamplesPreferenceConstants.REMOTE_BRANCH, "release");
+		getPreferenceStore().setDefault(ExamplesPreferenceConstants.REMOTE_BRANCH, "release4");
 	}
 
 	protected IPreferenceStore getPreferenceStore() {
