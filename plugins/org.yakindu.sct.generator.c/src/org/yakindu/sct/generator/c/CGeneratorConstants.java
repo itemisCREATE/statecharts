@@ -30,7 +30,6 @@ public abstract class CGeneratorConstants {
 	public static final String EVENT_TYPE = "sc_eventid";
 	public static final String INTPTR_TYPE = "sc_intptr_t";
 	public static final String OBSERVABLE_TYPE = "sc_observable";
-	public static final String OBSERVER_TYPE = "sc_observer";
 	public static final String SINGLE_SUBSCRIPTION_OBSERVER_TYPE = "sc_single_subscription_observer";
 	public static final String OBSERVER_NEXT_FP_TYPE = "sc_observer_next_fp";
 		
@@ -40,8 +39,6 @@ public abstract class CGeneratorConstants {
 	/*
 	 * FUNCTIONS
 	 */
-	public static final String CLEAR_IN_EVENTS = "clearInEvents";
-	public static final String CLEAR_OUT_EVENTS = "clearOutEvents";
 	public static final String RAISE_TIME_EVENT = "raiseTimeEvent";
 	public static final String IS_STATE_ACTIVE = "isStateActive";
 	public static final String IS_ACTIVE = "isActive";
@@ -60,7 +57,6 @@ public abstract class CGeneratorConstants {
 	 */
 	public static final String STATEVECTOR = "stateConfVector";
 	public static final String STATEVECTOR_POS = "stateConfVectorPosition";
-	public static final String STATEVECTOR_CHANGED = "stateConfVectorChanged";
 	public static final String HISTORYVECTOR = "historyVector";
 	public static final String HANDLE = "handle";
 

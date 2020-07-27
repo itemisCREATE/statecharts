@@ -142,9 +142,6 @@ class EventCode implements org.yakindu.sct.generator.core.submodules.lifecycle.E
 	
 	def eventObservableSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»«event.eventType»* «event.asObservableGetter»(«scHandleDecl»)'''
 	
-	def eventObserverNextSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.OBSERVABLE_TYPE»«event.eventType»* «event.asObservableGetter»(«scHandleDecl»)'''
-	
-	
 	override eventClearCode(ExecutionFlow flow, Expression event) '''
 		«event.code» = «FALSE_LITERAL»;
 	'''

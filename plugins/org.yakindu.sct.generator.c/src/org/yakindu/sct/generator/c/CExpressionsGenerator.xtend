@@ -246,9 +246,6 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) {code}
 	
-	
-	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «TRUE_LITERAL» : «FALSE_LITERAL»'''
-	
 	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
 	
 	override dispatch CharSequence code(StringLiteral it) '''(«STRING_TYPE») «super._code(it)»'''

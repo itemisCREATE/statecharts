@@ -37,7 +37,6 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	protected Runnable queueWorker;
 
-	protected boolean canceled;
 	protected boolean suspended;
 	protected boolean terminated;
 

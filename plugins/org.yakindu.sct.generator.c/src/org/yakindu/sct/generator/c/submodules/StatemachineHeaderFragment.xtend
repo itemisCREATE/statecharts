@@ -173,14 +173,6 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		
 		'''
 		
-		/**
-	 * @Deprecated use {@link #includes(ExecutionFlow, ArtifactLocationProvider)} instead
-	 */
-	@Deprecated
-	def includes(ExecutionFlow it) {
-		includes(it, defaultConfigs)
-	}
-
 	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«FOR provider : includeProviders»

@@ -8,7 +8,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.GeneratorPredicate {
 	@Inject protected GenmodelEntries entries
 	@Inject protected extension SExecExtensions
-		
+
 	def userAllocatesInQueue(ExecutionFlow it) {
 		needsInEventQueue && entries.getQueueAllocatedByUser(entry)
 	}
@@ -16,13 +16,8 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	def userAllocatesInternalQueue(ExecutionFlow it) {
 		needsInternalEventQueue && entries.getQueueAllocatedByUser(entry)
 	}
-	
+
 	def needsValueUnion(ExecutionFlow it) {
 		hasQueuedEventsWithValue
 	}
-	
-	def needsClearOutEventsFunction() {
-		useOutEventGetters
-	}
-	
 }

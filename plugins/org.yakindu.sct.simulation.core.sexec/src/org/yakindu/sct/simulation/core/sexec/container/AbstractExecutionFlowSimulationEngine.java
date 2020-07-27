@@ -43,16 +43,11 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	@Inject
 	protected ExecutionContext context;
 	@Inject
-	private IExecutionContextInitializer contextInitializer;
-	@Inject
 	private IModelSequencer sequencer;
 	@Inject
 	protected IExecutionFlowInterpreter interpreter;
 	@Inject
 	protected ITimeTaskScheduler timeTaskScheduler;
-
-	protected boolean terminated = false;
-	protected boolean suspended = false;
 
 	private Statechart statechart;
 
@@ -97,7 +92,6 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 
 	public void suspend() {
 		try {
-			suspended = true;
 			timeTaskScheduler.suspend();
 		} catch (Exception ex) {
 			handleException(ex);
@@ -107,7 +101,6 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	public void resume() {
 		try {
 			context.getSuspendedElements().clear();
-			suspended = false;
 			timeTaskScheduler.resume();
 		} catch (Exception ex) {
 			handleException(ex);
@@ -116,7 +109,6 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 
 	public void terminate() {
 		try {
-			terminated = true;
 			timeTaskScheduler.terminate();
 		} catch (Exception ex) {
 			handleException(ex);

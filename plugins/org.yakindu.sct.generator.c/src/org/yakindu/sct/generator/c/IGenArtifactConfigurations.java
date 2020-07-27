@@ -55,10 +55,6 @@ public interface IGenArtifactConfigurations {
 		
 		private boolean skip;
 
-		public GenArtifactConfiguration(String name, String outputConfigName, IContentTemplate contentTemplate) {
-			this(name, outputConfigName, contentTemplate, false);
-		}
-		
 		public GenArtifactConfiguration(String name, String outputConfigName, IContentTemplate contentTemplate, boolean skip) {
 			this.name = name;
 			this.outputName = outputConfigName;

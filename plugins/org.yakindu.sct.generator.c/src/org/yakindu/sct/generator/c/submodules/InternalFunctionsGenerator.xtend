@@ -73,10 +73,6 @@ class InternalFunctionsGenerator {
 			static void «e.observerCallbackFctID»(«scHandleDecl»«IF e.hasValue», «e.typeSpecifier.targetLanguageName» value«ENDIF»);
 		«ENDFOR»
 	'''
-
-	
-	def <T> NOOUT(T p) ''''''
-	
 	
 	def defines(ExecutionFlow it) '''
 		#ifndef SC_UNUSED

@@ -54,22 +54,15 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import org.yakindu.base.types.TypeSpecifier
 
 class Naming {
+
 	@Inject @Named("Separator") protected String sep;
-
 	@Inject protected extension SExecExtensions
-	
 	@Inject protected extension SgraphExtensions
-
 	@Inject protected extension ICodegenTypeSystemAccess
-
 	@Inject protected StextNameProvider provider
-	
 	@Inject GeneratorEntry entry
-
 	@Inject protected extension INamingService
-	
 	@Inject extension GenmodelEntries
-	
 	@Inject extension StatechartUtil
 	@Inject extension GeneratorPredicate
 	@Inject extension OriginTracing
@@ -77,11 +70,6 @@ class Naming {
 	@Inject protected extension ShadowMemberScope
 	@Inject protected extension EventNaming
 	
-	
-	def getFullyQualifiedName(State state) {
-		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
-	}
-
 	def module(ExecutionFlow it) {
 		if (entry.moduleName.nullOrEmpty) {
 			return name.asIdentifier.toFirstUpper
@@ -100,18 +88,10 @@ class Naming {
 		it + "Required"
 	}
 
-	def timerModule(ExecutionFlow it) {
-		'sc_timer'
-	}
-
 	def typesModule(ExecutionFlow it) {
 		TYPES_MODULE
 	}
 
-	def timerType(ExecutionFlow it) {
-		'SCTimer'
-	}
-	
 	def statesEnumType(ExecutionFlow it) {
 		containerType + 'States'
 	}
@@ -226,14 +206,6 @@ class Naming {
 			sep = "_"
 		}
 		return sep
-	}
-
-	def clearInEventsFctID(ExecutionFlow it) {
-		CLEAR_IN_EVENTS
-	}
-
-	def clearOutEventsFctID(ExecutionFlow it) {
-		CLEAR_OUT_EVENTS
 	}
 
 	def dispatch String null_state(ExecutionFlow it) {
@@ -629,14 +601,6 @@ class Naming {
 	
 	def metaModule(ExecutionFlow it) {
 		it.module + META_MODULE
-	}
-	
-	def metaPrefix(ExecutionFlow it) {
-		META_MODULE + separator
-	}
-	
-	def metaSuffix(ExecutionFlow it) {
-		separator + META_MODULE
 	}
 	
 	def tracingPrefix(ExecutionFlow it){
