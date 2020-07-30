@@ -9,7 +9,7 @@ The YAKINDU Statechart Tools Professional Edition comes with a _Deep C/C++ Integ
 
 Making your self-defined C/C++ types, structs, and unions available in your YAKINDU statecharts saves you a lot of time and hassle that would otherwise be needed to map data from your C-type variables to statechart variables and vice versa.
 
-The follwoing screencast gives an overview of the _Deep C/C++ Integration_ feature:
+The following screencast gives an overview of the _Deep C/C++ Integration_ feature:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8IxI_7xMpFY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe> 
 
