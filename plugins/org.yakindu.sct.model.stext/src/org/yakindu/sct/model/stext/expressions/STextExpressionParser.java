@@ -14,6 +14,7 @@ import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -35,6 +36,7 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.stext.resource.StextResource;
+import org.yakindu.sct.model.stext.scoping.STextLibraryGlobalScopeProvider;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 
@@ -93,12 +95,15 @@ public class STextExpressionParser implements IExpressionParser {
 	public EObject parseExpression(String expression, String ruleName, String specification) {
 		StextResource resource = getResource();
 		resource.setURI(URI.createPlatformResourceURI(getUri(), true));
+		
+		// add parsed expression
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
 		IParseResult result = parser.parse(parserRule, new StringReader(expression));
 		EObject rootASTElement = result.getRootASTElement();
 		resource.getContents().add(rootASTElement);
-		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
+		
+		// add statechart
 		Statechart sc = SGraphFactory.eINSTANCE.createStatechart();
 		sc.setDomainID(domainId);
 		sc.setName("sc");
@@ -106,7 +111,13 @@ public class STextExpressionParser implements IExpressionParser {
 			sc.setSpecification(specification);
 		}
 		resource.getContents().add(sc);
+		
+		// add stext library contents
+		Resource stextLib = new ResourceSetImpl().getResource(STextLibraryGlobalScopeProvider.STEXT_LIB, true);
+		resource.getContents().add(stextLib.getContents().get(0));
+		
 		resource.getLinkingDiagnostics().clear();
+		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
 		linker.linkModel(sc, diagnosticsConsumer);
 		linker.linkModel(rootASTElement, diagnosticsConsumer);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
