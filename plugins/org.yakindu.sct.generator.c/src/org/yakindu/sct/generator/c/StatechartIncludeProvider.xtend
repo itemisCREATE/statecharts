@@ -17,10 +17,12 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.generator.c.extensions.Naming
 
 class StatechartIncludeProvider implements IncludeProvider {
 	@Inject IPackageImport2URIMapper includeMapper;
 	@Inject extension SgraphExtensions
+	@Inject extension Naming
 
 	override getIncludes(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		val List<CharSequence> sctImports = newArrayList
@@ -29,10 +31,17 @@ class StatechartIncludeProvider implements IncludeProvider {
 			val resource = set.getResource(import.fileURI, true)
 			val submachine = resource.contents.filter(Statechart).head
 			if(submachine instanceof Statechart) {
-				sctImports += '''#include "«submachine.name.toFirstUpper»«IF submachine.hasOperations»Required«ENDIF».h"'''
+				sctImports += submachine.submachineInclude
 			}
 		]
 		return sctImports
+	}
+	
+	protected def submachineInclude(Statechart submachine) {
+		if (submachine.hasOperations)
+			'''#include "«submachine.module.client.h»"'''
+		else
+			'''#include "«submachine.module.h»"'''
 	}
 
 	protected def getPackageImports(ExecutionFlow flow) {

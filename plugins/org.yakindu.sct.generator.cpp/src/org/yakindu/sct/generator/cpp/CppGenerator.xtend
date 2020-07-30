@@ -17,6 +17,7 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfigu
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.generator.cpp.files.RxCppHeader
 import org.yakindu.sct.generator.cpp.files.StatemachineHeader
 import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
 import org.yakindu.sct.generator.cpp.files.StatemachineInterface
@@ -27,11 +28,8 @@ import org.yakindu.sct.generator.cpp.files.Types
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
-import org.yakindu.sct.generator.cpp.files.RxCppHeader
 
 /**
  * This is the CPP code generators main class. 
@@ -89,13 +87,6 @@ class CppGenerator implements IExecutionFlowGenerator {
 		if(entry.outEventObservablesUsed && flow.hasOutgoingEvents) {
 			locations.configure(rxcModule.h, entry.libraryOutput, rxcpp, getSkipLibraryFiles(entry))
 		}
-	}
-
-	def isEventDriven(ExecutionFlow it) {
-		val statechart = sourceElement as Statechart
-
-		val eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION)
-		return eventDrivenAnnotation !== null
 	}
 
 	def protected getHeaderOutput(GeneratorEntry entry) {
