@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
 
-# YAKINDU Statechart Tools
+# YAKINDU Statechart Tools 3.x
 
 [Visit our website here](https://www.itemis.com/en/yakindu/state-machine/ "YAKINDU Statechart Tools website")
 
