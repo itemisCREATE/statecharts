@@ -123,7 +123,7 @@ For configuring the code generation process, YAKINDU Statechart Tools uses a tex
 
 To create a generator model using the wizard, proceed as follows:
 
-# In the _project explorer_ view, right-click on your project. The context meu opens.
+# In the _project explorer_ view, right-click on your project. The context menu opens.
 # In the context menu, select _New → Code generator model_.
 # The _New YAKINDU SGen model_ wizard opens.
 # Select an appropriate folder and specify the filename of your SGen model. The filename must have the extension _.sgen_.
@@ -132,7 +132,7 @@ To create a generator model using the wizard, proceed as follows:
 # Check the statechart(s) to generate code from.
 # Click on _Finish_.
 
-!images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and statecharts)!
+!images/sgen_generator.png(Selecting code generator and statecharts)!
 
 p=. Selecting code generator and statecharts
 
@@ -314,7 +314,7 @@ GeneratorModel for yakindu::java {
         }
 
         feature GeneralFeatures {
-            TimerService = generateTimerServce
+            TimerService = generateTimerService
         }
 
     }
@@ -329,12 +329,12 @@ h4(#codegen_built-in_variables). Built-in variables
 
 There are several built-in read-only variables which can be used in expressions in generator models:
 
-* _SCTVERSION_ (String): the current version of YAKINDU Statechart Tools, for example, "3.4.0"
-* _TIMESTAMP_ (String): the current date and time as a localized string, for example "11.12.2017 17:08:14"
-* _USER_ (String): the name of the current user who started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@)
+* _SCTVERSION_ (String): the current version of YAKINDU Statechart Tools, for example, "3.4.0".
+* _TIMESTAMP_ (String): the current date and time as a localized string, for example "11.12.2017 17:08:14".
+* _USER_ (String): the name of the current user who started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@).
 * _HOSTNAME_ (String): the host name of the machine on which YAKINDU Statechart Tools is running.
-* _SHA256_ (String): The hash of the referenced file (for example, the statechart file).
-* _SCTFILE_ (String): Path to the statechart file relative to the workspace.
+* _SHA256_ (String): the hash of the referenced file (for example, the statechart file).
+* _SCTFILE_ (String): path to the statechart file relative to the workspace.
 
 bq. *Please note:* Neither _USER_ nor _HOSTNAME_ should be used for any security-related tasks. Especially the username can be spoofed easily, if anyone wanted to.
 
@@ -347,4 +347,4 @@ For example, the command to call the headless generator might look like this:
 
 bc. scc -m myGenmodel.sct -v version=2.0;isBeta=false
 
-The name/value pairs specified by the @-v@ option would override the corresponding default values of the properties in the generator model. In this case, the properties _version_ and _isBeta_ would be set to the values "2.0" and "false", respectively. The variables _projectName_ and _generateTimerServce_ would maintain their default values as specified in the SGen file.
+The name/value pairs specified by the @-v@ option would override the corresponding default values of the properties in the generator model. In this case, the properties _version_ and _isBeta_ would be set to the values "2.0" and "false", respectively. The variables _projectName_ and _generateTimerService_ would maintain their default values as specified in the SGen file.
