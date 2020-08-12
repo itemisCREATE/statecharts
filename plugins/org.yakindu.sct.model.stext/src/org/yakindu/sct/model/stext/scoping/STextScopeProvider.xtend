@@ -188,7 +188,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 	def protected IScope addScopeForComplexType(ComplexType type, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
 		var scope = parentScope
-		scope = Scopes.scopeFor(type.getAllFeatures().filter[!isStatic], scope)
+		scope = Scopes.scopeFor(type.getAllFeatures(), scope)
 		scope = new FilteringScope(scope, predicate)
 		return scope
 	}
