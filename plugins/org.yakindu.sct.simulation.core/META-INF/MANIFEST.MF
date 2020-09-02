@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sruntime;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
- org.eclipse.xtend.lib.macro
+ org.eclipse.xtend.lib.macro,
+ org.apache.commons.lang
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core,

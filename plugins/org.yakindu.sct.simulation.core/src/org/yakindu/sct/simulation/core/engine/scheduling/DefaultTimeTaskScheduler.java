@@ -16,7 +16,8 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.google.common.base.Stopwatch;
+import org.apache.commons.lang.time.StopWatch;
+
 import com.google.inject.Singleton;
 
 /**
@@ -40,6 +41,7 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	protected boolean canceled;
 	protected boolean suspended;
 	protected boolean terminated;
+	private StopWatch watch;
 
 	public DefaultTimeTaskScheduler() {
 		tasks = new PriorityQueue<TimeTask>();
@@ -71,6 +73,7 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void timeLeap(long ms) {
+		watch = null;
 		stopTime = currentTime + ms;
 		processTasks();
 	}
@@ -79,14 +82,12 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 		TimeTask nextTask = tasks.peek();
 		if (nextTask != null) {
 			long timeToNextEvent = nextTask.getNextExecutionTime() - currentTime;
-			Stopwatch watch = Stopwatch.createStarted();
 			try {
 				lock.lock();
-				if (!topLevelElementCondition.await(timeToNextEvent, TimeUnit.MILLISECONDS)) {
-					timeLeap(timeToNextEvent);
-				} else {
-					timeLeap(watch.elapsed(TimeUnit.MILLISECONDS));
-				}
+				watch = new StopWatch();
+				watch.start();
+				topLevelElementCondition.await(timeToNextEvent, TimeUnit.MILLISECONDS);
+				timeLeap(watch != null ? watch.getTime() : 0);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally {
@@ -128,15 +129,19 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	}
 
 	protected void schedulePeriodicalTask(TimeTask task, long interval, long period) {
-		scheduleInternal(task, currentTime + interval, period);
+		scheduleInternal(task, interval, period);
 	}
 
 	protected void scheduleTask(TimeTask task, long interval) {
-		scheduleInternal(task, currentTime + interval, -1);
+		scheduleInternal(task, interval, -1);
+	}
+	
+	protected long computeNextExecutionTime(long interval) {
+		return currentTime + interval + (watch != null ? watch.getTime() : 0);
 	}
 
 	protected void scheduleInternal(TimeTask task, long time, long period) {
-		task.setNextExecutionTime(time);
+		task.setNextExecutionTime(computeNextExecutionTime(time));
 		task.period = period;
 		task.scheduleOrder = scheduleCount;
 		scheduleCount++;
@@ -170,10 +175,10 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 			if (executionTime <= stopTime) {
 				currentTime = task.getNextExecutionTime();
 				task = tasks.poll();
-				task.run();
 				if (task.period > -1) {
 					schedulePeriodicalTask(task, task.period, task.period);
 				}
+				task.run();
 			} else {
 				currentTime = stopTime;
 				processTasks = false;
@@ -195,13 +200,24 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void suspend() {
+		if (watch != null) {
+			watch.suspend();
+		}
+		lock.lock();
+		topLevelElementCondition.signal();
+		lock.unlock();
 		suspended = true;
 	}
 
 	@Override
 	public void resume() {
-		suspended = false;
-		start();
+		if (suspended) {
+			suspended = false;
+			if (watch != null) {
+				watch.resume();
+			}
+			start();
+		}
 	}
 
 	@Override
