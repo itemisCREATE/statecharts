@@ -61,6 +61,6 @@ before_install:
 - sh -e /etc/init.d/xvfb start - sleep 10
 script:
 - cd releng/org.yakindu.sct.releng
-- mvn clean verify -P$TARGET,tests
+- mvn clean verify -P$TARGET,tests -Dtycho.disableP2Mirrors=true
 # Display ccache usage statistics
 - ccache -s
