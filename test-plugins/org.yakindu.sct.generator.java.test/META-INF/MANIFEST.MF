@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Java Generator Tests
 Bundle-SymbolicName: org.yakindu.sct.generator.java.test
-Bundle-Version: 3.5.12.qualifier
+Bundle-Version: 3.5.13.qualifier
 Require-Bundle: org.yakindu.sct.test.models,
  org.yakindu.sct.generator.java,
  org.junit,

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Expressions Interpreter
 Bundle-SymbolicName: org.yakindu.base.expressions.interpreter
-Bundle-Version: 3.5.12.qualifier
+Bundle-Version: 3.5.13.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.yakindu.base.types;visibility:=reexport,

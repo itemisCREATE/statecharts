@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Base Types Tests
 Bundle-SymbolicName: org.yakindu.base.types.test
-Bundle-Version: 3.5.12.qualifier
+Bundle-Version: 3.5.13.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.base.types,
