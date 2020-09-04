@@ -84,7 +84,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	
 	def dispatch Scope create r : stextFactory.createImportScope  createScope(ImportScope scope) {}
 	
-	def dispatch Scope create r : stextFactory.createInternalScope  createScope(Scope scope) {}
+	def dispatch Scope createScope(Scope scope) { createInternalScope }
+	def Scope create r : stextFactory.createInternalScope  createInternalScope() {}
 	
 	def Scope create r : sgraph.factory.createScope timeEventScope(ExecutionFlow flow) {
 		flow.scopes.add(r);
