@@ -10,7 +10,6 @@ h2(#release_notes_3.5.13). YAKINDU Statechart Tools  3.5.13 (Sep 04, 2020)
 This is mainly a bugfix release, containing the following:
 
 * Fixed an issue in the C code generator that produced unreachable code in some cases.
-* Fixed an issue in the C code generator that produced operation names missing the name of the interface in which they are defined.
 * Fixed an issue in the C code generator when multiple internal blocks were used in the statechart definition section.
 * Fixed an issue in all code generators which produced non-compilable code when composite states without inner states were used.
 * Fixed an issue when accessing static class members in C++ domain statecharts.
