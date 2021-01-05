@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
+Note 2021-01-05: This repository is **read only**. [Since version 4.0](https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/release_notes "release notes"), the development takes place in a private repository. Licences are [available here](https://www.itemis.com/en/yakindu/state-machine/licenses "licences"), students can obtain free licences via the [github developer pack](https://info.itemis.com/en/yakindu/state-machine/github-pack "github developer pack"). If you have any bug reports or questions [contact us](https://info.itemis.com/en/yakindu/state-machine/contact "contact").
 
 # YAKINDU Statechart Tools 3.x
 
